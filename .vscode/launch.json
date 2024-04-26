@@ -2,10 +2,10 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Project",
+      "name": "tad",
       "type": "debugpy",
       "request": "launch",
-      "module": "python_project",
+      "module": "tad",
       "justMyCode": false,
       "args": []
     },
@@ -16,7 +16,7 @@
       "module": "pytest",
       "cwd": "${workspaceFolder}",
       "justMyCode": false,
-      "args": [],
+      "args": []
     }
   ]
 }

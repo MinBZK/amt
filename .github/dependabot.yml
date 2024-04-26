@@ -8,8 +8,11 @@ updates:
       time: "08:00"
       timezone: "Europe/Amsterdam"
     labels:
-      - "github-actions"
       - "dependencies"
+    groups:
+      allgithubactions:
+        patterns:
+        - "*"
 
   - package-ecosystem: "pip"
     directory: "/"
@@ -19,8 +22,11 @@ updates:
       time: "08:00"
       timezone: "Europe/Amsterdam"
     labels:
-      - "pip"
       - "dependencies"
+    groups:
+      allpip:
+        patterns:
+        - "*"
 
   - package-ecosystem: "devcontainers"
     directory: "/"
@@ -30,5 +36,8 @@ updates:
       time: "08:00"
       timezone: "Europe/Amsterdam"
     labels:
-      - "devcontainers"
       - "dependencies"
+    groups:
+      alldevcontainers:
+        patterns:
+        - "*"

@@ -1,0 +1,12 @@
+scan-ref: .
+scan-type: fs
+exit-code: 1
+severity:
+  - HIGH
+  - CRITICAL
+
+scan:
+  scanners: vuln
+
+vulnerability:
+  ignore-unfixed: true

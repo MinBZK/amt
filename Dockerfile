@@ -4,8 +4,7 @@ FROM  --platform=$BUILDPLATFORM python:${PYTHON_VERSION} as project-base
 
 LABEL maintainer=ai-validatie@minbzk.nl \
       organization=MinBZK \
-      license=EUPL-1.2 \
-      io.docker.minbzk.name=python-project-template
+      license=EUPL-1.2
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
@@ -37,14 +36,15 @@ FROM development AS lint
 
 RUN ruff check
 RUN ruff format --check
+RUN pyright
 
 FROM development AS test
-RUN coverage run --rcfile ./pyproject.toml -m pytest ./tests
-RUN coverage report --fail-under 95
+RUN coverage run -m pytest ./tests
+RUN coverage report
 
 FROM project-base as production
 
-COPY ./python_project /app/python_project
+COPY ./tad /app/tad
 
 # change this to a usefull command
-CMD ["python", "-m", "python_project" ]
+CMD ["python", "-m", "tad" ]

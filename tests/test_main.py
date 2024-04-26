@@ -1,10 +1,10 @@
 import subprocess
 
-from python_project import __main__
+from tad import __main__
 
 
 def test_main_process():
-    completed_process = subprocess.run(["python", "-m", "python_project"], capture_output=True, text=True)
+    completed_process = subprocess.run(args=["-m", "tad"], executable="python", capture_output=True, text=True)
     assert completed_process.returncode == 0
 
 

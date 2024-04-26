@@ -7,7 +7,6 @@ def main() -> int:
     # implement argument parsing
 
     # read config directory
-
     return 0
 
 

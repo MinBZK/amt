@@ -1,33 +1,19 @@
-# Python Project Template
+# Transparency for Algorithm Decision making (TAD)
 
-## Description
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/minbzk/tad/ci.yml)
+![Codecov (with branch)](https://img.shields.io/codecov/c/github/minbzk/tad/main)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/minbzk/tad/total)
+![GitHub License](https://img.shields.io/github/license/minbzk/tad)
+![GitHub Release](https://img.shields.io/github/v/release/minbzk/tad)
 
-This is a template repository that can be used for Python 3.11 projects and uses the Poetry package manager. By default this project sets up the following:
+TAD is a modern tool to apply technical and non-technical tests for an AI model.
 
-* Devcontainers for VSCode users
-* Github community health files
-* Github Dependabot
-* VSCode configs
-* Some scripts to adhere to programming standards
-* A editorconfig file so editors enforce formatting
-* A default .gitgignore
-* A default pre-commit-config
-* A EUPL v1.2 Licence
-* A basic Docker setup
-* publiccode.yml
+Note: The main branch may be in an unstable or even broken state during development. Please use releases instead of the main branch.
 
-## How to use this template repository
+## How to contribute
 
-When creating a new Repository select this template repository as the base.
+See [contributing docs](CONTRIBUTING.md)
 
-After the repository is created make sure to change the following (we may need to consider copier to automate this):
+## How to build and run TAD
 
-* change the owners in the the .github/CODEOWNERS
-* run a global rename command where you rename new_name to your project name
-  * macos: `find . -type f -not -path "./.git/*" -exec  sed -i '' "s/python_project/new_name/g" {} \;`
-  * linux: `find . -type f -not -path "./.git/*" -exec  sed -i "s/python_project/new_name/g" {} \;`
-* rename the python_project/ folder to your project name
-* change author and name in pyproject.toml
-* change labels in Dockerfile to appropriate values
-* Verify the License used
-* Change publiccode.yml to your needs
+See [build docs](BUILD.md)

@@ -8,11 +8,17 @@ categories:
 description:
   en:
     features:
-      - Python Template
-    genericName: python_project
+      - AI
+      - Validation
+      - Transparency
+      - Algorithm
+    genericName: tad
     longDescription: |
-      This a an example python template project.
-    shortDescription: Python Template project
+      TAD is a modern tool to apply technical and non-technical tests for an AI model.
+
+      TAD is a tool for Transparency Algorithm Decision making.
+
+    shortDescription: TAD is a tool for Transparency Algorithm Decision making
 developmentStatus: concept
 legal:
   license: EUPL-1.2
@@ -23,10 +29,11 @@ localisation:
 maintenance:
   contacts:
     - name: AI Validatie
+      email: ai-validatie@minbzk.nl
   type: community
-name: python_project
+name: tad
 platforms:
   - web
 releaseDate: '2024-04-25'
 softwareType: standalone/web
-url: 'https://github.com/MinBZK/python-project-template'
+url: 'https://github.com/MinBZK/tad'

@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# poetry build
+dist/
 
 # Unit test / coverage reports
 .coverage
@@ -22,6 +24,5 @@ __pypackages__/
 # ruff linter
 .ruff_cache/
 
-
-
-
+#mypyr
+.mypy_cache/
