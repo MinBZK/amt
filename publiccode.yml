@@ -1,0 +1,32 @@
+# This repository adheres to the publiccode.yml standard by including this
+# metadata file that makes public software easily discoverable.
+# More info at https://github.com/italia/publiccode.yml
+
+publiccodeYmlVersion: '0.2'
+categories:
+  - it-development
+description:
+  en:
+    features:
+      - Python Template
+    genericName: python_project
+    longDescription: |
+      This a an example python template project.
+    shortDescription: Python Template project
+developmentStatus: concept
+legal:
+  license: EUPL-1.2
+localisation:
+  availableLanguages:
+    - en
+  localisationReady: false
+maintenance:
+  contacts:
+    - name: AI Validatie
+  type: community
+name: python_project
+platforms:
+  - web
+releaseDate: '2024-04-25'
+softwareType: standalone/web
+url: 'https://github.com/MinBZK/python-project-template'

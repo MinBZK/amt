@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "ms-python.python",
+    "editorconfig.editorconfig",
+    "streetsidesoftware.code-spell-checker",
+    "redhat.vscode-yaml",
+    "charliermarsh.ruff",
+    "github.vscode-github-actions"
+  ]
+}

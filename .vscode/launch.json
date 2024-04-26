@@ -1,0 +1,22 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Project",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "python_project",
+      "justMyCode": false,
+      "args": []
+    },
+    {
+      "name": "Project: tests",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "cwd": "${workspaceFolder}",
+      "justMyCode": false,
+      "args": [],
+    }
+  ]
+}

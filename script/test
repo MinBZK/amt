@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+coverage run -m pytest $@
+if [ $? -ne 0 ]; then
+    echo "Test failed"
+    exit 1
+fi
+
+coverage report
+
+pyright $@
+if [ $? -ne 0 ]; then
+    echo "Typecheck failed"
+    exit 1
+fi

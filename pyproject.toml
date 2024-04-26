@@ -1,0 +1,55 @@
+[tool.poetry]
+name = "python_project"
+version = "0.1.0"
+description = ""
+authors = ["ai-validation-team <ai-validation@minibzk.nl>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.1.1"
+coverage = "^7.5.0"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.4.0"
+pre-commit = "^3.7.0"
+pyright = "^1.1.360"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+# Ruff settings: https://docs.astral.sh/ruff/configuration/
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["I", "SIM", "B", "UP", "F", "E"]
+
+fixable = ["ALL"]
+
+[tool.pyright]
+pythonVersion = "3.11"
+typeCheckingMode = "strict"
+reportMissingImports = true
+reportMissingTypeStubs = true
+
+[tool.coverage.run]
+branch = true
+command_line = "-m pytest ./tests"
+
+[tool.coverage.report]
+fail_under = 95
+
+[tool.coverage.html]
+directory = "htmlcov"
+title = "python_project"
+
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests"
+]

@@ -1,0 +1,59 @@
+name: Bug Report
+description: Let us know about an unexpected error, a crash, or an incorrect behavior.
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+       # Thank you for opening an issue.
+
+        ## Filing a bug report
+
+        To fix problems, we need clear reproduction cases. Please fill in the bug report as exact as possible to help us resolve the issue.
+
+  - type: textarea
+    id: version
+    attributes:
+      label: Version
+      description: Specify the version of the software that you use
+      placeholder: 0.1.0
+      value:
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What should have happened?
+      placeholder: What should have happened?
+      value:
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+      placeholder: What actually happened?
+      value:
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: |
+        Are there anything atypical about your situation that we should know?
+      placeholder: Additional context...
+      value:
+    validations:
+      required: false
+
+
+  - type: markdown
+    attributes:
+      value: |
+        **Note:** If the submit button is disabled and you have filled out all required fields, please check that you did not forget a **Title** for the issue.
