@@ -22,6 +22,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.10"
+fastapi = {extras = ["all"], version = "^0.110.3"}
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.1.1"
@@ -59,7 +60,7 @@ fixable = ["ALL"]
 task-tags = ["TODO"]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/**.py" = ["S101"]
+"tad/tests/**.py" = ["S101"]
 
 [tool.ruff.lint.mccabe]
 max-complexity = 8
@@ -72,9 +73,8 @@ reportMissingTypeStubs = true
 
 [tool.coverage.run]
 branch = true
-command_line = "-m pytest ./tests"
+command_line = "-m pytest"
 relative_files = true
-
 
 [tool.coverage.report]
 fail_under = 95

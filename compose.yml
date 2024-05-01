@@ -1,4 +1,28 @@
 services:
   tad:
-    build: .
+    build:
+      context: ./tad
     image: ghcr.io/minbzk/tad:latest
+    restart: unless-stopped
+    depends_on:
+      - db
+    env_file:
+      - .env
+
+  db:
+    image: postgres:12
+    restart: unless-stopped
+    volumes:
+      - app-db-data:/var/lib/postgresql/data/pgdata
+    env_file:
+      - .env
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD?Variable not set}
+      - POSTGRES_USER=${POSTGRES_USER?Variable not set}
+      - POSTGRES_DB=${POSTGRES_DB?Variable not set}
+
+#TODO(berry): Traefik
+
+volumes:
+  app-db-data:
