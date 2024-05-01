@@ -2,12 +2,16 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "tad",
+      "name": "tad - fastapi",
       "type": "debugpy",
       "request": "launch",
-      "module": "tad",
+      "module": "uvicorn",
       "justMyCode": false,
-      "args": []
+      "args": ["main:app"],
+      "cwd": "${workspaceFolder}/tad/",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
     },
     {
       "name": "Project: tests",

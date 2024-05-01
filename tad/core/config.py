@@ -41,24 +41,41 @@ class Settings(BaseSettings):
 
     PROJECT_NAME: str = "TAD"
 
-    SQLALCHEMY_SCHEME: str = "postgresql+psycopg"
+    #SQLALCHEMY_SCHEME: str = "postgresql+psycopg"
+    SQLALCHEMY_SCHEME: str = "sqlite"
+
     POSTGRES_SERVER: str = "db"
     POSTGRES_PORT: int = 5432
     POSTGRES_USER: str = "postgres"
     POSTGRES_PASSWORD: str
     POSTGRES_DB: str = "tad"
 
+    SQLITE_FILE: str = "/tmp/database"
+
+
     @computed_field  # type: ignore[misc]
     @property
-    def SQLALCHEMY_DATABASE_URI(self) -> PostgresDsn:
-        return MultiHostUrl.build(
+    def SQLALCHEMY_DATABASE_URI(self) -> str:
+
+        if self.SQLALCHEMY_SCHEME == "sqlite":
+            return str(MultiHostUrl.build(
+                scheme=self.SQLALCHEMY_SCHEME,
+                host="",
+                path=self.SQLITE_FILE
+            ))
+
+
+        return str(MultiHostUrl.build(
             scheme=self.SQLALCHEMY_SCHEME,
             username=self.POSTGRES_USER,
             password=self.POSTGRES_PASSWORD,
             host=self.POSTGRES_SERVER,
             port=self.POSTGRES_PORT,
             path=self.POSTGRES_DB,
-        )
+        ))
+
+
+
 
     def _check_default_secret(self, var_name: str, value: str | None) -> None:
         if value == "changethis":

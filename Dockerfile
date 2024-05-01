@@ -3,8 +3,8 @@ ARG PYTHON_VERSION=3.11.7-slim
 FROM  --platform=$BUILDPLATFORM python:${PYTHON_VERSION} AS project-base
 
 LABEL maintainer=ai-validatie@minbzk.nl \
-      organization=MinBZK \
-      license=EUPL-1.2
+    organization=MinBZK \
+    license=EUPL-1.2
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
@@ -51,5 +51,12 @@ USER tad
 
 COPY --chown=root:root --chmod=755 ./tad /app/tad
 
+EXPOSE 8000
+RUN poetry install
+
+ENV PYTHONPATH=/app/
+WORKDIR /app/tad/
+
 # change this to a usefull command
-CMD ["python", "-m", "tad" ]
+CMD ["python", "-m", "uvicorn", "main:app" ]
+

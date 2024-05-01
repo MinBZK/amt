@@ -41,7 +41,7 @@
       "label": "PyTest",
       "detail": "test all code",
       "type": "shell",
-      "command": "coverage run -m pytest ./tests",
+      "command": "coverage run -m pytest ./tad/tests",
       "group": {
         "kind": "test",
         "isDefault": true

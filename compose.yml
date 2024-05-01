@@ -1,13 +1,14 @@
 services:
   tad:
-    build:
-      context: ./tad
+    build: .
     image: ghcr.io/minbzk/tad:latest
     restart: unless-stopped
     depends_on:
       - db
     env_file:
       - .env
+    ports:
+      - 8001:8000
 
   db:
     image: postgres:12

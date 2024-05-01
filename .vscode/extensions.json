@@ -5,6 +5,6 @@
     "streetsidesoftware.code-spell-checker",
     "redhat.vscode-yaml",
     "charliermarsh.ruff",
-    "github.vscode-github-actions"
+    "github.vscode-github-actions",
   ]
 }
