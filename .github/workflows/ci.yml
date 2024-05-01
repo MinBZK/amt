@@ -43,12 +43,6 @@ jobs:
       - name: run pyright
         run: poetry run pyright
 
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
   security:
     runs-on: ubuntu-latest
     steps:
@@ -128,6 +122,17 @@ jobs:
           path: htmlcov/
           if-no-files-found: error
           overwrite: true
+
+
+      - name: run coverage xml
+        run: poetry run coverage xml
+
+      - name: SonarCloud Scan
+        if: matrix.python-version == '3.11'
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
 
   build:
