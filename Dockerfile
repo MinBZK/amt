@@ -29,7 +29,10 @@ ENV PATH="/app/.venv/bin:$PATH"
 
 FROM project-base AS development
 
-COPY . .
+COPY ./tad/ ./tad/
+COPY ./tests/ ./tests/
+COPY ./script/ ./script/
+COPY ./README.md ./README.md
 RUN poetry install
 
 FROM development AS lint
@@ -44,7 +47,9 @@ RUN coverage report
 
 FROM project-base AS production
 
-COPY ./tad /app/tad
+USER tad
+
+COPY --chown=root:root --chmod=755 ./tad /app/tad
 
 # change this to a usefull command
 CMD ["python", "-m", "tad" ]
