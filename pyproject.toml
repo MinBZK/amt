@@ -73,6 +73,8 @@ reportMissingTypeStubs = true
 [tool.coverage.run]
 branch = true
 command_line = "-m pytest ./tests"
+relative_files = true
+
 
 [tool.coverage.report]
 fail_under = 95
