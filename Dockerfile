@@ -1,6 +1,6 @@
 ARG PYTHON_VERSION=3.11.7-slim
 
-FROM  --platform=$BUILDPLATFORM python:${PYTHON_VERSION} as project-base
+FROM  --platform=$BUILDPLATFORM python:${PYTHON_VERSION} AS project-base
 
 LABEL maintainer=ai-validatie@minbzk.nl \
       organization=MinBZK \
@@ -27,7 +27,7 @@ COPY ./poetry.lock ./pyproject.toml ./
 RUN poetry install --without dev,test
 ENV PATH="/app/.venv/bin:$PATH"
 
-FROM project-base as development
+FROM project-base AS development
 
 COPY . .
 RUN poetry install
@@ -42,7 +42,7 @@ FROM development AS test
 RUN coverage run -m pytest ./tests
 RUN coverage report
 
-FROM project-base as production
+FROM project-base AS production
 
 COPY ./tad /app/tad
 
