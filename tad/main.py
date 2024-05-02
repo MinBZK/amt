@@ -21,6 +21,7 @@ if settings.BACKEND_CORS_ORIGINS:
         allow_headers=["*"],
     )
 
+
 @app.get("/")
 async def root():
     init_db()

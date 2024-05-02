@@ -59,4 +59,3 @@ WORKDIR /app/tad/
 
 # change this to a usefull command
 CMD ["python", "-m", "uvicorn", "main:app" ]
-
