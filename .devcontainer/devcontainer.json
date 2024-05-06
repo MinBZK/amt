@@ -8,8 +8,9 @@
   },
   "remoteUser": "root",
   "features": {
-    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
+  "forwardPorts": [8000,8080],
   "postCreateCommand": ".devcontainer/postCreateCommand.sh",
   "customizations": {
     "vscode": {

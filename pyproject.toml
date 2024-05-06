@@ -86,5 +86,5 @@ title = "tad"
 
 [tool.pytest.ini_options]
 testpaths = [
-    "tests"
+    "tad/tests"
 ]

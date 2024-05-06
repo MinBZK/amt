@@ -22,11 +22,11 @@ def get_url():
         file = os.getenv("SQLITE_FILE", "./database")
         return f"{scheme}://{file}"
 
-    user = os.getenv("POSTGRES_USER", "postgres")
-    password = os.getenv("POSTGRES_PASSWORD", "")
-    server = os.getenv("POSTGRES_SERVER", "db")
-    port = os.getenv("POSTGRES_PORT", "5432")
-    db = os.getenv("POSTGRES_DB", "tad")
+    user = os.getenv("APP_DATABASE_USER", "postgres")
+    password = os.getenv("APP_DATABASE_PASSWORD", "")
+    server = os.getenv("APP_DATABASE_SERVER", "db")
+    port = os.getenv("APP_DATABASE_PORT", "5432")
+    db = os.getenv("APP_DATABASE_DB", "tad")
     return f"{scheme}://{user}:{password}@{server}:{port}/{db}"
 
 

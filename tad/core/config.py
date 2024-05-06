@@ -40,16 +40,13 @@ class Settings(BaseSettings):
 
     PROJECT_NAME: str = "TAD"
 
-    if ENVIRONMENT == "local":
-        SQLALCHEMY_SCHEME: str = "sqlite"
-    else:
-        SQLALCHEMY_SCHEME: str = "postgresql+psycopg"
+    SQLALCHEMY_SCHEME: str = "sqlite"
 
-    POSTGRES_SERVER: str = "db"
-    POSTGRES_PORT: int = 5432
-    POSTGRES_USER: str = "postgres"
-    POSTGRES_PASSWORD: str
-    POSTGRES_DB: str = "tad"
+    APP_DATABASE_SERVER: str = "db"
+    APP_DATABASE_PORT: int = 5432
+    APP_DATABASE_USER: str = "tad"
+    APP_DATABASE_PASSWORD: str
+    APP_DATABASE_DB: str = "tad"
 
     SQLITE_FILE: str = "./database"
 
@@ -62,11 +59,11 @@ class Settings(BaseSettings):
         return str(
             MultiHostUrl.build(
                 scheme=self.SQLALCHEMY_SCHEME,
-                username=self.POSTGRES_USER,
-                password=self.POSTGRES_PASSWORD,
-                host=self.POSTGRES_SERVER,
-                port=self.POSTGRES_PORT,
-                path=self.POSTGRES_DB,
+                username=self.APP_DATABASE_USER,
+                password=self.APP_DATABASE_PASSWORD,
+                host=self.APP_DATABASE_SERVER,
+                port=self.APP_DATABASE_PORT,
+                path=self.APP_DATABASE_DB,
             )
         )
 
@@ -83,7 +80,7 @@ class Settings(BaseSettings):
     @model_validator(mode="after")
     def _enforce_non_default_secrets(self) -> Self:
         self._check_default_secret("SECRET_KEY", self.SECRET_KEY)
-        self._check_default_secret("POSTGRES_PASSWORD", self.POSTGRES_PASSWORD)
+        self._check_default_secret("APP_DATABASE_PASSWORD", self.APP_DATABASE_PASSWORD)
 
         return self
 
