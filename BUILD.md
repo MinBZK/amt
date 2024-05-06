@@ -20,7 +20,7 @@ poetry install
 When poetry is done installing all dependencies you can start using the tool.
 
 ```shell
-poetry run python -m tad
+poetry run python -m uvicorn tad.main:app
 ```
 
 ## Building TAD with Containers

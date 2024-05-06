@@ -16,7 +16,7 @@ ENV PYTHONUNBUFFERED=1 \
     POETRY_HOME='/usr/local'
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl \
+    curl libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
 RUN  curl -sSL https://install.python-poetry.org | python3 -
@@ -51,11 +51,8 @@ USER tad
 
 COPY --chown=root:root --chmod=755 ./tad /app/tad
 
-EXPOSE 8000
-RUN poetry install
-
 ENV PYTHONPATH=/app/
-WORKDIR /app/tad/
+WORKDIR /app/
 
 # change this to a usefull command
-CMD ["python", "-m", "uvicorn", "main:app" ]
+CMD ["python", "-m", "uvicorn", "--host", "0.0.0.0", "tad.main:app" ]

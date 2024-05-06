@@ -1,12 +1,9 @@
 import logging
 
 from fastapi import FastAPI
-from sqlmodel import Session, select
 from starlette.middleware.cors import CORSMiddleware
 
 from tad.core.config import settings
-from tad.core.db import engine, init_db
-from tad.models import Hero
 
 logger = logging.getLogger(__name__)
 
@@ -24,10 +21,4 @@ if settings.BACKEND_CORS_ORIGINS:
 
 @app.get("/")
 async def root():
-    init_db()
-    # with Session(engine) as session:
-    #     statement = select(UserBase).where(UserBase.full_name == "Spider-Boy")
-    #     hero = session.exec(statement).first()
-    #     print(hero)
-
     return {"message": "Hello World"}

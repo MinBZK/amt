@@ -7,6 +7,9 @@
     "POETRY_VIRTUALENVS_CREATE": "false"
   },
   "remoteUser": "root",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+  },
   "postCreateCommand": ".devcontainer/postCreateCommand.sh",
   "customizations": {
     "vscode": {

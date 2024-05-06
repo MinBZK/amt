@@ -5,7 +5,6 @@ from typing import Annotated, Any, Literal, Self
 from pydantic import (
     AnyUrl,
     BeforeValidator,
-    PostgresDsn,
     computed_field,
     model_validator,
 )
@@ -41,8 +40,10 @@ class Settings(BaseSettings):
 
     PROJECT_NAME: str = "TAD"
 
-    # SQLALCHEMY_SCHEME: str = "postgresql+psycopg"
-    SQLALCHEMY_SCHEME: str = "sqlite"
+    if ENVIRONMENT == "local":
+        SQLALCHEMY_SCHEME: str = "sqlite"
+    else:
+        SQLALCHEMY_SCHEME: str = "postgresql+psycopg"
 
     POSTGRES_SERVER: str = "db"
     POSTGRES_PORT: int = 5432
@@ -50,7 +51,7 @@ class Settings(BaseSettings):
     POSTGRES_PASSWORD: str
     POSTGRES_DB: str = "tad"
 
-    SQLITE_FILE: str = "/tmp/database"
+    SQLITE_FILE: str = "./database"
 
     @computed_field  # type: ignore[misc]
     @property
