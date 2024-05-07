@@ -50,4 +50,16 @@ For testing, linting and other feature we use several tools. You can look up the
 
 ## Devcontainers
 
-[VSCode](https://code.visualstudio.com/) has great support for devcontainers. If your editor has support for devcontainers you can also use them to start the devcontainer. Devcontaines offer a great standardized environments for development.
+[VSCode](https://code.visualstudio.com/) has great support for devcontainers. If your editor has support for devcontainers you can also use them to start the devcontainer. Devcontaines offer great standardized environments for development.
+
+## Updating dependencies
+
+Use poetry to update all python project dependencies
+```shell
+poetry update
+```
+
+Use pre-commit to update all hooks
+```shell
+pre-commit autoupdate
+```
