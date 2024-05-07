@@ -1,12 +1,27 @@
 [tool.poetry]
-name = "python_project"
+name = "tad"
 version = "0.1.0"
 description = ""
-authors = ["ai-validation-team <ai-validation@minibzk.nl>"]
+authors = ["ai-validatie-team <ai-validatie@minbzk.nl>"]
 readme = "README.md"
+license = "EUPL-1.2"
+repository = "https://github.com/MinBZK/tad"
+keywords = ["AI", "Validation", "Transparency", "Algorithm"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Framework :: FastAPI",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Typing :: Typed"
+]
+packages = [
+    { include = "tad" }
+]
+
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.1.1"
@@ -16,6 +31,14 @@ coverage = "^7.5.0"
 ruff = "^0.4.2"
 pre-commit = "^3.7.0"
 pyright = "^1.1.360"
+cyclonedx-bom = "^4.4.2"
+pip-licenses = "^4.4.0"
+
+[tool.poetry.scripts]
+tad = 'tad.__main__:main'
+
+[tool.poetry.urls]
+"Issue Tracker" = "https://github.com/MinBZK/tad/issues"
 
 [build-system]
 requires = ["poetry-core"]
@@ -25,11 +48,21 @@ build-backend = "poetry.core.masonry.api"
 [tool.ruff]
 line-length = 120
 target-version = "py311"
+src = ["./tad"]
+
+[tool.ruff.format]
+line-ending = "lf"
 
 [tool.ruff.lint]
-select = ["I", "SIM", "B", "UP", "F", "E"]
-
+select = ["I", "SIM", "B", "UP", "F", "E", "S", "C90", "DTZ", "LOG", "PIE", "PT", "ERA", "W", "C", "TRY", "RUF"]
 fixable = ["ALL"]
+task-tags = ["TODO"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**.py" = ["S101"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 8
 
 [tool.pyright]
 pythonVersion = "3.11"
@@ -40,13 +73,15 @@ reportMissingTypeStubs = true
 [tool.coverage.run]
 branch = true
 command_line = "-m pytest ./tests"
+relative_files = true
+
 
 [tool.coverage.report]
 fail_under = 95
 
 [tool.coverage.html]
 directory = "htmlcov"
-title = "python_project"
+title = "tad"
 
 
 [tool.pytest.ini_options]

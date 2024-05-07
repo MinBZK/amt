@@ -16,14 +16,17 @@
         "streetsidesoftware.code-spell-checker",
         "redhat.vscode-yaml",
         "charliermarsh.ruff",
-        "github.vscode-github-actions"
+        "github.vscode-github-actions",
+        "mhutchie.git-graph"
       ],
       "settings": {
         "editor.formatOnPaste": false,
         "editor.formatOnSave": true,
         "editor.formatOnType": true,
+        "editor.renderWhitespace": "boundary",
         "files.trimTrailingWhitespace": true,
         "terminal.integrated.inheritEnv": true,
+        "debug.toolBarLocation": "commandCenter",
         "terminal.integrated.profiles.linux": {
           "zsh": {
             "path": "/usr/bin/zsh"

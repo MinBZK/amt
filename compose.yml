@@ -1,0 +1,4 @@
+services:
+  tad:
+    build: .
+    image: ghcr.io/minbzk/tad:latest

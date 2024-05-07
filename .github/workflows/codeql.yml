@@ -8,7 +8,7 @@ on:
 
 jobs:
   analyze:
-    name: Analyze (${{ matrix.language }})
+    name: Analyze (python)
     runs-on: 'ubuntu-latest'
     timeout-minutes: 360
     permissions:
@@ -16,23 +16,17 @@ jobs:
       packages: read
       actions: read
       contents: read
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-        - language: python
-          build-mode: none
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-      
+
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v3
       with:
-        languages: ${{ matrix.language }}
-        build-mode: ${{ matrix.build-mode }}
+        languages: python
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
       with:
-        category: "/language:${{matrix.language}}"
+        category: "/language:python"

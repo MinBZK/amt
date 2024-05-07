@@ -7,8 +7,9 @@ on:
 jobs:
   stale:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
-      contents: write # only for delete-branch option
+      contents: write
       issues: write
       pull-requests: write
     steps:

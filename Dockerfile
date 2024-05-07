@@ -1,11 +1,10 @@
 ARG PYTHON_VERSION=3.11.7-slim
 
-FROM  --platform=$BUILDPLATFORM python:${PYTHON_VERSION} as project-base
+FROM  --platform=$BUILDPLATFORM python:${PYTHON_VERSION} AS project-base
 
 LABEL maintainer=ai-validatie@minbzk.nl \
       organization=MinBZK \
-      license=EUPL-1.2 \
-      io.docker.minbzk.name=python-project-template
+      license=EUPL-1.2
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
@@ -28,23 +27,29 @@ COPY ./poetry.lock ./pyproject.toml ./
 RUN poetry install --without dev,test
 ENV PATH="/app/.venv/bin:$PATH"
 
-FROM project-base as development
+FROM project-base AS development
 
-COPY . .
+COPY ./tad/ ./tad/
+COPY ./tests/ ./tests/
+COPY ./script/ ./script/
+COPY ./README.md ./README.md
 RUN poetry install
 
 FROM development AS lint
 
 RUN ruff check
 RUN ruff format --check
+RUN pyright
 
 FROM development AS test
-RUN coverage run --rcfile ./pyproject.toml -m pytest ./tests
-RUN coverage report --fail-under 95
+RUN coverage run -m pytest ./tests
+RUN coverage report
 
-FROM project-base as production
+FROM project-base AS production
 
-COPY ./python_project /app/python_project
+USER tad
+
+COPY --chown=root:root --chmod=755 ./tad /app/tad
 
 # change this to a usefull command
-CMD ["python", "-m", "python_project" ]
+CMD ["python", "-m", "tad" ]
