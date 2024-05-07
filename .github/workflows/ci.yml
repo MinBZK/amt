@@ -37,10 +37,10 @@ jobs:
       - name: run ruff
         run: poetry run ruff check --output-format=github
 
-      - name: run format
+      - name: Run format
         run: poetry run ruff format --check
 
-      - name: run pyright
+      - name: Run pyright
         run: poetry run pyright
 
   security:
@@ -63,7 +63,7 @@ jobs:
       - name: Generate SBOM
         run: poetry run cyclonedx-py poetry > sbom.json
 
-      - name: Generace licenses file
+      - name: Generate licenses file
         run: |
           poetry run pip-licenses  --order=license --format=json --with-description > licenses.txt
 
@@ -107,7 +107,7 @@ jobs:
       - name: Install dependencies
         run: poetry install
 
-      - name: run pytest
+      - name: Run pytest
         run: poetry run coverage run -m pytest
 
       - name: run coverage report
@@ -124,7 +124,6 @@ jobs:
           path: htmlcov/
           if-no-files-found: error
           overwrite: true
-
 
       - name: run coverage xml
         run: poetry run coverage xml

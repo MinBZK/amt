@@ -1,4 +1,4 @@
-# Transparency for Algorithm Decision making (TAD)
+# Transparency of Algorithmic Decision making (TAD)
 
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/minbzk/tad/ci.yml)
 ![Codecov (with branch)](https://img.shields.io/codecov/c/github/minbzk/tad/main)

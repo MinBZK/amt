@@ -9,7 +9,7 @@ There are several ways to build and run TAD.
 
 Poetry is a Python package and dependency manager. Before you can install Poetry you first need to install Python. Please follow [these](https://github.com/pyenv/pyenv?tab=readme-ov-file#installation) instructions.
 
-Once you have python available you can install poetry. See [here](https://python-poetry.org/docs/#installation).
+Once you have Python available you can install Poetry. See [here](https://python-poetry.org/docs/#installation).
 
 Once you have Poetry and Python installed you can start installing the dependencies with the following shell command.
 

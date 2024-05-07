@@ -2,7 +2,7 @@
 # metadata file that makes public software easily discoverable.
 # More info at https://github.com/italia/publiccode.yml
 
-publiccodeYmlVersion: '0.2'
+publiccodeYmlVersion: "0.2"
 categories:
   - it-development
 description:
@@ -14,7 +14,7 @@ description:
       - Algorithm
     genericName: tad
     longDescription: |
-TAD is the acronym for Transparency of Algorithmic Decision making. The goal is to make algorithmic systems more transparant. It achieves this by generating standardized reports. These reports consist of both technical aspects as well as descriptive information about the system and regulatory assessments. For both the system and the model the lifecycle is important, so this is incorporated in both the tool as well as the reports. The definition for an algorithm is derived from the Algoritmeregister.
+      TAD is the acronym for Transparency of Algorithmic Decision making. The goal is to make algorithmic systems more transparant. It achieves this by generating standardized reports. These reports consist of both technical aspects as well as descriptive information about the system and regulatory assessments. For both the system and the model the lifecycle is important, so this is incorporated in both the tool as well as the reports. The definition for an algorithm is derived from the Algoritmeregister.
 
       link: https://minbzk.github.io/ai-validation/Projects/TAD/
 
@@ -34,6 +34,6 @@ maintenance:
 name: tad
 platforms:
   - web
-releaseDate: '2024-04-25'
+releaseDate: "2024-04-25"
 softwareType: standalone/web
-url: 'https://github.com/MinBZK/tad'
+url: "https://github.com/MinBZK/tad"
