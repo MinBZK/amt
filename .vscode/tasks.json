@@ -41,7 +41,7 @@
       "label": "Code Coverage",
       "detail": "Generate code coverage report.",
       "type": "shell",
-      "command": "poetry run coverage report",
+      "command": "poetry run coverage report && poetry run coverage html && poetry run coverage lcov",
       "group": "test",
       "presentation": {
         "reveal": "always",
