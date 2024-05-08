@@ -5,6 +5,7 @@
 ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/minbzk/tad/total)
 ![GitHub License](https://img.shields.io/github/license/minbzk/tad)
 ![GitHub Release](https://img.shields.io/github/v/release/minbzk/tad)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ai-validation-team_tad&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ai-validation-team_tad)
 
 TAD is a modern tool to apply technical and non-technical tests for an AI model.
 
