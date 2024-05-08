@@ -1,6 +1,6 @@
 import secrets
 import warnings
-from typing import Annotated, Any, Literal, Self
+from typing import Annotated, Any, Literal, TypeVar
 
 from pydantic import (
     AnyUrl,
@@ -12,6 +12,9 @@ from pydantic_core import MultiHostUrl
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from tad.core.exceptions import SettingsError
+
+# Self type is not available in Python 3.10 so create our own with TypeVar
+SelfSettings = TypeVar("SelfSettings", bound="Settings")
 
 
 def parse_cors(v: Any) -> list[str] | str:
@@ -81,14 +84,14 @@ class Settings(BaseSettings):
                 raise SettingsError(message)
 
     @model_validator(mode="after")
-    def _enforce_non_default_secrets(self) -> Self:
+    def _enforce_non_default_secrets(self: SelfSettings) -> SelfSettings:
         self._check_default_secret("SECRET_KEY", self.SECRET_KEY)
         self._check_default_secret("APP_DATABASE_PASSWORD", self.APP_DATABASE_PASSWORD)
 
         return self
 
     @model_validator(mode="after")
-    def _enforce_database_rules(self) -> Self:
+    def _enforce_database_rules(self: SelfSettings) -> SelfSettings:
         if self.ENVIRONMENT != "local" and self.APP_DATABASE_SCHEME == "sqlite":
             raise SettingsError("SQLite is not supported in production")  # noqa: TRY003
         return self

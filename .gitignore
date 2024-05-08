@@ -27,3 +27,6 @@ __pypackages__/
 
 #mypyr
 .mypy_cache/
+
+# macos
+.DS_Store

@@ -6,9 +6,8 @@ from fastapi.testclient import TestClient
 
 from tad.main import app
 
+
 # todo(berry): add database fixtures
-
-
 @pytest.fixture(scope="module")
 def client() -> Generator[TestClient, None, None]:
     with TestClient(app, raise_server_exceptions=True) as c:
