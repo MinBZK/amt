@@ -4,7 +4,10 @@ FROM  --platform=$BUILDPLATFORM python:${PYTHON_VERSION} AS project-base
 
 LABEL maintainer=ai-validatie@minbzk.nl \
     organization=MinBZK \
-    license=EUPL-1.2
+    license=EUPL-1.2 \
+    org.opencontainers.image.description="Transparency of Algorithmic Decision making" \
+    org.opencontainers.image.source=https://github.com/MinBZK/tad \
+    org.opencontainers.image.licenses=EUPL-1.2
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
