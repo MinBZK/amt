@@ -22,14 +22,19 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.10"
-fastapi = {extras = ["all"], version = "^0.110.3"}
+fastapi = "^0.110.3"
 sqlmodel = "^0.0.18"
-psycopg = "^3.1.18"
+psycopg = {extras = ["binary"], version = "^3.1.18"}
 alembic = "^1.13.1"
+pydantic = "^2.7.1"
+jinja2 = "^3.1.4"
+pydantic-settings = "^2.2.1"
+granian = {extras = ["reload"], version = "^1.3.1"}
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.1.1"
 coverage = "^7.5.1"
+httpx = "^0.27.0"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.4.3"
@@ -49,7 +54,7 @@ build-backend = "poetry.core.masonry.api"
 [tool.ruff]
 line-length = 120
 target-version = "py311"
-src = ["./tad"]
+src = ["tad"]
 
 [tool.ruff.format]
 line-ending = "lf"
@@ -70,6 +75,7 @@ pythonVersion = "3.11"
 typeCheckingMode = "strict"
 reportMissingImports = true
 reportMissingTypeStubs = true
+reportUnnecessaryIsInstance = false
 
 [tool.coverage.run]
 branch = true
@@ -87,4 +93,7 @@ title = "tad"
 [tool.pytest.ini_options]
 testpaths = [
     "tad/tests"
+]
+filterwarnings = [
+    "ignore::UserWarning"
 ]
