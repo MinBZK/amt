@@ -16,12 +16,14 @@
     "vscode": {
       "extensions": [
         "ms-python.python",
+        "ms-python.vscode-pylance",
         "editorconfig.editorconfig",
         "streetsidesoftware.code-spell-checker",
         "redhat.vscode-yaml",
         "charliermarsh.ruff",
         "github.vscode-github-actions",
-        "mhutchie.git-graph"
+        "mhutchie.git-graph",
+        "markis.code-coverage"
       ],
       "settings": {
         "editor.formatOnPaste": false,
@@ -39,7 +41,10 @@
         "terminal.integrated.defaultProfile.linux": "zsh",
         "[python]": {
           "editor.defaultFormatter": "charliermarsh.ruff"
-        }
+        },
+        "python.languageServer": "Pylance",
+        "python.analysis.typeCheckingMode": "strict",
+        "markiscodecoverage.searchCriteria": "coverage.lcov"
       }
     }
   }
