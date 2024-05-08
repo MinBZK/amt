@@ -58,10 +58,8 @@ class DataMasker:
                 else:
                     masked_set.add(item)
             return masked_set
-        elif isinstance(data, str):
+        else:
             for keyword in self.keywords:
                 if keyword in data.lower():
                     return self.mask_value
             return data
-        else:
-            raise TypeError("Unsupported data type. Function supports dict, list, or set.")  # noqa: TRY003
