@@ -14,10 +14,22 @@
       "problemMatcher": []
     },
     {
-      "label": "Ruff",
-      "detail": "format and lint code.",
+      "label": "Ruff lint",
+      "detail": "lint code.",
       "type": "shell",
-      "command": "poetry run ruff format && poetry run ruff check",
+      "command": "poetry run ruff check --fix",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Ruff format",
+      "detail": "format code.",
+      "type": "shell",
+      "command": "poetry run ruff format",
       "group": "test",
       "presentation": {
         "reveal": "always",

@@ -5,9 +5,9 @@
       "name": "tad - fastapi",
       "type": "debugpy",
       "request": "launch",
-      "module": "uvicorn",
-      "justMyCode": false,
-      "args": ["main:app"],
+      "module": "granian",
+      "justMyCode": true,
+      "args": ["--interface","asgi","main:app", "--reload"],
       "cwd": "${workspaceFolder}/tad/",
       "env": {
         "PYTHONPATH": "${workspaceFolder}"
@@ -19,7 +19,7 @@
       "request": "launch",
       "module": "pytest",
       "cwd": "${workspaceFolder}",
-      "justMyCode": false,
+      "justMyCode": true,
       "args": []
     }
   ]
