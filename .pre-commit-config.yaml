@@ -8,7 +8,6 @@ repos:
       - id: trailing-whitespace
       - id: check-yaml
       - id: check-json
-      - id: check-toml
       - id: check-added-large-files
       - id: check-merge-conflict
       - id: check-toml
