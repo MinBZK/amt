@@ -1,0 +1,20 @@
+name: "Clean up package versions"
+on:
+  schedule:
+    - cron: "0 4 * * *"
+  workflow_dispatch:
+
+jobs:
+  clenaup-package-versions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      packages: write
+    steps:
+      - uses: actions/delete-package-versions@v5
+        with:
+          package-name: 'tad'
+          package-type: 'container'
+          min-versions-to-keep: 0
+          ignore-versions: 'main'
+          delete-only-untagged-versions: true
