@@ -55,4 +55,4 @@ ENV PYTHONPATH=/app/
 WORKDIR /app/
 
 # change this to a usefull command
-CMD ["python", "-m", "uvicorn", "--host", "0.0.0.0", "tad.main:app" ]
+CMD ["python", "-m", "granian", "--host", "0.0.0.0","--interface","asgi","tad.main:app" ]
