@@ -10,7 +10,8 @@ if [ $? -ne 0 ]; then
 fi
 
 coverage report
-
+coverage html
+coverage lcov
 pyright $@
 if [ $? -ne 0 ]; then
     echo "Typecheck failed"
