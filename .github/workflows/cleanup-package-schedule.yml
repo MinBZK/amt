@@ -1,11 +1,11 @@
-name: "Clean up package versions"
+name: cleanup-package-schedule
 on:
   schedule:
     - cron: "0 4 * * *"
   workflow_dispatch:
 
 jobs:
-  clenaup-package-versions:
+  cleanup-package-versions:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
