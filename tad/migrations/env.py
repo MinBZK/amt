@@ -9,17 +9,18 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-from tad.models import SQLModel  # noqa
+# todo(berry): automaticly import all models
+from tad.models.hero import Hero  # noqa
 
-target_metadata = SQLModel.metadata
+target_metadata = [Hero.metadata]
 
 
 def get_url():
     scheme = os.getenv("SQLALCHEMY_SCHEME", "sqlite")
 
     if scheme == "sqlite":
-        file = os.getenv("SQLITE_FILE", "./database")
-        return f"{scheme}://{file}"
+        file = os.getenv("SQLITE_FILE", "/database")
+        return f"{scheme}:///{file}"
 
     user = os.getenv("APP_DATABASE_USER", "postgres")
     password = os.getenv("APP_DATABASE_PASSWORD", "")

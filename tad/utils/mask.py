@@ -1,21 +1,21 @@
 from typing import Any
 
 
-class DataMasker:
+class Mask:
     def __init__(self, mask_value: str = "***MASKED***", mask_keywords: list[str] | None = None):
         if mask_keywords is None:
             mask_keywords = []
         self.mask_value = mask_value
 
         # default keywords to mask
-        self.keywords: list[str] = ["password", "secret", "database_uri"]
+        self.keywords: list[str] = ["password", "secret"]
         self.keywords.extend(mask_keywords or [])
 
-    def mask_data(  # noqa: C901
+    def secrets(  # noqa: C901ß
         self, data: str | list[Any] | dict[Any, Any] | set[Any]
     ) -> str | list[Any] | dict[Any, Any] | set[Any]:
         if isinstance(data, dict):
-            masked_dict: dict[str | int, str | int] = {}
+            masked_dict: dict[Any, Any] = {}
             for key, value in data.items():
                 if isinstance(key, str):
                     for keyword in self.keywords:
@@ -29,8 +29,8 @@ class DataMasker:
             return masked_dict
 
         elif isinstance(data, list):
-            masked_list: list[str | int] = []
-            item: str | int
+            masked_list: list[Any] = []
+            item: Any
             for item in data:
                 if isinstance(item, str):
                     for keyword in self.keywords:
@@ -44,9 +44,9 @@ class DataMasker:
 
             return masked_list
         elif isinstance(data, set):
-            masked_set: set[str | int] = set()
+            masked_set: set[Any] = set()
 
-            item: str | int
+            item: Any
             for item in data:
                 if isinstance(item, str):
                     for keyword in self.keywords:

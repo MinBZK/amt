@@ -23,6 +23,22 @@ When poetry is done installing all dependencies you can start using the tool.
 poetry run python -m uvicorn tad.main:app
 ```
 
+## Database
+
+We support most SQL database types. You can use the variable `APP_DATABASE_SCHEME` to change the database. The default scheme is sqlite.
+
+If you change the `models` at tad/models of the application you can generate a new migration file
+```shell
+alembic revision --autogenerate -m "a message"
+```
+
+Please make sure you check the auto generated file in tad/migrations/
+
+to upgrade to the latest version of the database schema use
+```shell
+alembic upgrade head
+```
+
 ## Building TAD with Containers
 
 Containers allows to package software, make it portable, and isolated. Before you can run a container you first need a container runtime. There are several available, but al lot of users use [docker desktop](https://www.docker.com/products/docker-desktop/).
