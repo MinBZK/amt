@@ -45,17 +45,26 @@ RUN ruff format --check
 RUN pyright
 
 FROM development AS test
-RUN coverage run -m pytest ./tests
+RUN coverage run -m pytest
 RUN coverage report
 
 FROM project-base AS production
 
+RUN groupadd tad && \
+    adduser --uid 100 --system --ingroup tad tad
+
+#todo(berry): create log folder so permissions can be set to root:root
+# currenlt problem is that i could not get the logger to accept a path in the filerotate handler
+RUN chown tad:tad /app/
+
 USER tad
 
 COPY --chown=root:root --chmod=755 ./tad /app/tad
+COPY --chown=root:root --chmod=755 alembic.ini /app/alembic.ini
+COPY --chown=root:root --chmod=755 .env /app/.env
+COPY --chown=root:root --chmod=755 LICENSE /app/LICENSE
 
 ENV PYTHONPATH=/app/
 WORKDIR /app/
 
-# change this to a usefull command
 CMD ["python", "-m", "granian", "--host", "0.0.0.0","--interface","asgi","tad.main:app" ]
