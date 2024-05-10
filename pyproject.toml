@@ -54,7 +54,7 @@ build-backend = "poetry.core.masonry.api"
 [tool.ruff]
 line-length = 120
 target-version = "py311"
-src = ["tad"]
+src = ["tad","tests"]
 
 [tool.ruff.format]
 line-ending = "lf"
@@ -65,7 +65,7 @@ fixable = ["ALL"]
 task-tags = ["TODO"]
 
 [tool.ruff.lint.per-file-ignores]
-"tad/tests/**.py" = ["S101"]
+"tests/**.py" = ["S101"]
 
 [tool.ruff.lint.mccabe]
 max-complexity = 8
@@ -80,7 +80,7 @@ reportUnnecessaryIsInstance = false
 [tool.coverage.run]
 branch = true
 command_line = "-m pytest"
-relative_files = true
+relative_files = true # needed for sonarcloud code coverage
 
 [tool.coverage.report]
 fail_under = 95
@@ -92,7 +92,7 @@ title = "tad"
 
 [tool.pytest.ini_options]
 testpaths = [
-    "tad/tests"
+    "tests"
 ]
 filterwarnings = [
     "ignore::UserWarning"

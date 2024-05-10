@@ -2,7 +2,7 @@ services:
   tad:
     build:
       context: .
-      dockerfile: tad/Dockerfile
+      dockerfile: Dockerfile
     image: ghcr.io/minbzk/tad:latest
     restart: unless-stopped
     depends_on:
