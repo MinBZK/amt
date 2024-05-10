@@ -1,8 +1,8 @@
 """Added hero test table
 
-Revision ID: 17f5b05e9ec3
+Revision ID: a1d47bd833f8
 Revises:
-Create Date: 2024-05-10 13:57:16.989570
+Create Date: 2024-05-10 14:00:32.948932
 
 """
 
@@ -13,7 +13,7 @@ import sqlmodel.sql.sqltypes
 from alembic import op
 
 # revision identifiers, used by Alembic.
-revision: str = "17f5b05e9ec3"
+revision: str = "a1d47bd833f8"
 down_revision: str | None = None
 branch_labels: str | Sequence[str] | None = None
 depends_on: str | Sequence[str] | None = None
