@@ -30,3 +30,6 @@ __pypackages__/
 
 # macos
 .DS_Store
+
+# tad tool
+tad.log*
