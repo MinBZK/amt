@@ -4,7 +4,8 @@
   "containerEnv": {
     "DEVCONTAINER": "1",
     "PYTHONASYNCIODEBUG": "1",
-    "POETRY_VIRTUALENVS_CREATE": "false"
+    "POETRY_VIRTUALENVS_CREATE": "false",
+    "PYTHONPATH": "/workspaces/tad/"
   },
   "remoteUser": "root",
   "features": {
@@ -16,7 +17,6 @@
     "vscode": {
       "extensions": [
         "ms-python.python",
-        "ms-python.vscode-pylance",
         "editorconfig.editorconfig",
         "streetsidesoftware.code-spell-checker",
         "redhat.vscode-yaml",
@@ -42,7 +42,6 @@
         "[python]": {
           "editor.defaultFormatter": "charliermarsh.ruff"
         },
-        "python.languageServer": "Pylance",
         "python.analysis.typeCheckingMode": "strict",
         "markiscodecoverage.searchCriteria": "coverage.lcov"
       }
