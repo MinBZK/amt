@@ -7,8 +7,8 @@
       "request": "launch",
       "module": "granian",
       "justMyCode": true,
-      "args": ["--interface","asgi","main:app", "--reload"],
-      "cwd": "${workspaceFolder}/tad/",
+      "args": ["--interface","asgi","tad.main:app", "--reload"],
+      "cwd": "${workspaceFolder}/",
       "env": {
         "PYTHONPATH": "${workspaceFolder}"
       }
