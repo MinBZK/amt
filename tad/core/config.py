@@ -1,10 +1,8 @@
 import secrets
 import warnings
-from typing import Annotated, Any, Literal, TypeVar
+from typing import Any, TypeVar
 
 from pydantic import (
-    AnyUrl,
-    BeforeValidator,
     computed_field,
     model_validator,
 )
@@ -12,17 +10,10 @@ from pydantic_core import MultiHostUrl
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from tad.core.exceptions import SettingsError
+from tad.core.types import DatabaseSchemaType, EnvironmentType, LoggingLevelType
 
 # Self type is not available in Python 3.10 so create our own with TypeVar
 SelfSettings = TypeVar("SelfSettings", bound="Settings")
-
-
-def parse_cors(v: Any) -> list[str] | str:
-    if isinstance(v, str) and not v.startswith("["):
-        return [i.strip() for i in v.split(",")]
-    elif isinstance(v, list | str):
-        return v
-    raise ValueError(v)
 
 
 class Settings(BaseSettings):
@@ -31,7 +22,7 @@ class Settings(BaseSettings):
     SECRET_KEY: str = secrets.token_urlsafe(32)
 
     DOMAIN: str = "localhost"
-    ENVIRONMENT: Literal["local", "staging", "production"] = "local"
+    ENVIRONMENT: EnvironmentType = "local"
 
     @computed_field  # type: ignore[misc]
     @property
@@ -40,16 +31,18 @@ class Settings(BaseSettings):
             return f"http://{self.DOMAIN}"
         return f"https://{self.DOMAIN}"
 
-    BACKEND_CORS_ORIGINS: Annotated[list[AnyUrl] | str, BeforeValidator(parse_cors)] = []
     VERSION: str = "0.1.0"
 
-    LOGGING_LEVEL: Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"] = "INFO"
+    LOGGING_LEVEL: LoggingLevelType = "INFO"
+    LOGGING_CONFIG: dict[str, Any] | None = None
 
     PROJECT_NAME: str = "TAD"
     PROJECT_DESCRIPTION: str = "Transparency of Algorithmic Decision making"
 
+    STATIC_DIR: str = "tad/static"
+
     # todo(berry): create submodel for database settings
-    APP_DATABASE_SCHEME: Literal["sqlite", "postgresql", "mysql", "oracle"] = "sqlite"
+    APP_DATABASE_SCHEME: DatabaseSchemaType = "sqlite"
     APP_DATABASE_SERVER: str = "db"
     APP_DATABASE_PORT: int = 5432
     APP_DATABASE_USER: str = "tad"
