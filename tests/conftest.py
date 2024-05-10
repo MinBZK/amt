@@ -3,7 +3,6 @@ from collections.abc import Generator
 
 import pytest
 from fastapi.testclient import TestClient
-
 from tad.main import app
 
 
@@ -16,9 +15,9 @@ def client() -> Generator[TestClient, None, None]:
 
 
 @pytest.fixture(autouse=True)
-def setup_basic_environmental_variables() -> Generator[None, None, None]:  # noqa: PT004
+def setup_basic_environmental_variables(monkeypatch: pytest.MonkeyPatch) -> Generator[None, None, None]:  # noqa: PT004
     original_environ = dict(os.environ)
-    os.environ["APP_DATABASE_PASSWORD"] = "changethis"  # noqa: S105
+    monkeypatch.setenv("APP_DATABASE_PASSWORD", "changethis")
     yield
     os.environ.clear()
     os.environ.update(original_environ)

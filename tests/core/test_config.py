@@ -1,7 +1,6 @@
 import os
 
 import pytest
-from pydantic import AnyUrl
 from tad.core.config import Settings
 from tad.core.exceptions import SettingsError
 
@@ -12,7 +11,6 @@ def test_default_settings():
     assert settings.DOMAIN == "localhost"
     assert settings.ENVIRONMENT == "local"
     assert settings.server_host == "http://localhost"
-    assert [] == settings.BACKEND_CORS_ORIGINS
     assert settings.VERSION == "0.1.0"
     assert settings.LOGGING_LEVEL == "INFO"
     assert settings.PROJECT_NAME == "TAD"
@@ -30,7 +28,6 @@ def test_environment_settings():
     os.environ["DOMAIN"] = "google.com"
     os.environ["ENVIRONMENT"] = "production"
     os.environ["PROJECT_NAME"] = "TAD2"
-    os.environ["BACKEND_CORS_ORIGINS"] = "http://google.com,https://google.com"
     os.environ["SECRET_KEY"] = "mysecret"  # noqa: S105
     os.environ["APP_DATABASE_SCHEME"] = "postgresql"
     os.environ["APP_DATABASE_USER"] = "tad2"
@@ -42,7 +39,6 @@ def test_environment_settings():
     assert settings.DOMAIN == "google.com"
     assert settings.ENVIRONMENT == "production"
     assert settings.server_host == "https://google.com"
-    assert [AnyUrl("http://google.com"), AnyUrl("https://google.com")] == settings.BACKEND_CORS_ORIGINS
     assert settings.VERSION == "0.1.0"
     assert settings.LOGGING_LEVEL == "INFO"
     assert settings.PROJECT_NAME == "TAD2"
@@ -55,20 +51,6 @@ def test_environment_settings():
     assert settings.APP_DATABASE_DB == "tad2"
     assert settings.SQLITE_FILE == "//./database"
     assert settings.SQLALCHEMY_DATABASE_URI == "postgresql://tad2:mypassword@db:5432/tad2"
-
-
-def test_environment_settings_cors_list():
-    os.environ["BACKEND_CORS_ORIGINS"] = "[http://google.com,https://google.com]"
-
-    settings = Settings(_env_file="nonexisitingfile")  # type: ignore
-
-    assert settings.BACKEND_CORS_ORIGINS == "[http://google.com,https://google.com]"
-
-
-def test_environment_settings_cors_error():
-    os.environ["BACKEND_CORS_ORIGINS"] = "1234"
-    with pytest.raises(ValueError, match="1234"):
-        _settings = Settings(_env_file="nonexisitingfile")  # type: ignore
 
 
 def test_environment_settings_production_sqlite_error():
