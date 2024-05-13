@@ -23,7 +23,8 @@
         "charliermarsh.ruff",
         "github.vscode-github-actions",
         "mhutchie.git-graph",
-        "markis.code-coverage"
+        "markis.code-coverage",
+        "qwtel.sqlite-viewer"
       ],
       "settings": {
         "editor.formatOnPaste": false,
