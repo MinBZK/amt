@@ -9,7 +9,8 @@ services:
       db:
         condition: service_healthy
     env_file:
-      - .env
+      - path: .env
+        required: true
     environment:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:?Variable not set}
     ports:
@@ -22,7 +23,8 @@ services:
       - app-db-data:/var/lib/postgresql/data/pgdata
       - ./database/:/docker-entrypoint-initdb.d/:cached
     env_file:
-      - .env
+      - path: .env
+        required: true
     environment:
       - PGDATA=/var/lib/postgresql/data/pgdata
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:?Variable not set}
@@ -38,7 +40,7 @@ services:
     ports:
       - 8080:8080
     environment:
-      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL:-berry.hartog@minbzk.nl}
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL:-tad@minbzk.nl}
       - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD:?Variable not set}
       - PGADMIN_LISTEN_PORT=${PGADMIN_LISTEN_PORT:-8080}
     depends_on:

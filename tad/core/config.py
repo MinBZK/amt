@@ -1,5 +1,5 @@
+import logging
 import secrets
-import warnings
 from typing import Any, TypeVar
 
 from pydantic import (
@@ -18,7 +18,10 @@ SelfSettings = TypeVar("SelfSettings", bound="Settings")
 
 class Settings(BaseSettings):
     # todo(berry): investigate yaml, toml or json file support for SettingsConfigDict
-    model_config = SettingsConfigDict(env_file=".env", env_ignore_empty=True, extra="ignore")
+    # todo(berry): investigate multiple .env files support for SettingsConfigDict
+    model_config = SettingsConfigDict(
+        env_file=(".env", ".env.test", ".env.prod"), env_ignore_empty=True, extra="ignore"
+    )
     SECRET_KEY: str = secrets.token_urlsafe(32)
 
     DOMAIN: str = "localhost"
@@ -43,23 +46,33 @@ class Settings(BaseSettings):
 
     # todo(berry): create submodel for database settings
     APP_DATABASE_SCHEME: DatabaseSchemaType = "sqlite"
+    APP_DATABASE_DRIVER: str | None = None
+
     APP_DATABASE_SERVER: str = "db"
     APP_DATABASE_PORT: int = 5432
     APP_DATABASE_USER: str = "tad"
-    APP_DATABASE_PASSWORD: str
+    APP_DATABASE_PASSWORD: str | None = None
     APP_DATABASE_DB: str = "tad"
 
-    SQLITE_FILE: str = "//./database"
+    APP_DATABASE_FILE: str = "database.sqlite3"
 
     @computed_field  # type: ignore[misc]
     @property
     def SQLALCHEMY_DATABASE_URI(self) -> str:
+        logging.info(f"test: {self.APP_DATABASE_SCHEME}")
+
         if self.APP_DATABASE_SCHEME == "sqlite":
-            return str(MultiHostUrl.build(scheme=self.APP_DATABASE_SCHEME, host="", path=self.SQLITE_FILE))
+            return str(MultiHostUrl.build(scheme=self.APP_DATABASE_SCHEME, host="", path=self.APP_DATABASE_FILE))
+
+        scheme: str = (
+            f"{self.APP_DATABASE_SCHEME}+{self.APP_DATABASE_DRIVER}"
+            if isinstance(self.APP_DATABASE_DRIVER, str)
+            else self.APP_DATABASE_SCHEME
+        )
 
         return str(
             MultiHostUrl.build(
-                scheme=self.APP_DATABASE_SCHEME,
+                scheme=scheme,
                 username=self.APP_DATABASE_USER,
                 password=self.APP_DATABASE_PASSWORD,
                 host=self.APP_DATABASE_SERVER,
@@ -67,21 +80,6 @@ class Settings(BaseSettings):
                 path=self.APP_DATABASE_DB,
             )
         )
-
-    def _check_default_secret(self, var_name: str, value: str | None) -> None:
-        if value == "changethis":
-            message = f'The value of {var_name} is "changethis", ' "for security, please change it"
-            if self.ENVIRONMENT == "local":
-                warnings.warn(message, stacklevel=1)
-            else:
-                raise SettingsError(message)
-
-    @model_validator(mode="after")
-    def _enforce_non_default_secrets(self: SelfSettings) -> SelfSettings:
-        self._check_default_secret("SECRET_KEY", self.SECRET_KEY)
-        self._check_default_secret("APP_DATABASE_PASSWORD", self.APP_DATABASE_PASSWORD)
-
-        return self
 
     @model_validator(mode="after")
     def _enforce_database_rules(self: SelfSettings) -> SelfSettings:

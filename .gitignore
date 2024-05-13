@@ -33,3 +33,4 @@ __pypackages__/
 
 # tad tool
 tad.log*
+database.sqlite3

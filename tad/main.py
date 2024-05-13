@@ -10,6 +10,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from tad.api.main import api_router
 from tad.core.config import settings
+from tad.core.db import check_db
 from tad.core.exception_handlers import (
     http_exception_handler as tad_http_exception_handler,
 )
@@ -32,6 +33,7 @@ async def lifespan(app: FastAPI):
     logger.info(f"Starting {settings.PROJECT_NAME} version {settings.VERSION}")
     logger.info(f"Settings: {mask.secrets(settings.model_dump())}")
     # todo(berry): setup database connection
+    await check_db()
     yield
     logger.info(f"Stopping application {settings.PROJECT_NAME} version {settings.VERSION}")
     logging.shutdown()
