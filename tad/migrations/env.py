@@ -3,26 +3,25 @@ from logging.config import fileConfig
 
 from alembic import context
 from sqlalchemy import engine_from_config, pool
+from sqlmodel import SQLModel
+from tad.models import *  # noqa
 
 config = context.config
 
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-# todo(berry): automaticly import all models
-from tad.models.hero import Hero  # noqa
-
-target_metadata = [Hero.metadata]
+target_metadata = SQLModel.metadata
 
 
 def get_url():
-    scheme = os.getenv("SQLALCHEMY_SCHEME", "sqlite")
+    scheme = os.getenv("APP_DATABASE_SCHEME", "sqlite")
 
     if scheme == "sqlite":
-        file = os.getenv("SQLITE_FILE", "/database")
+        file = os.getenv("APP_DATABASE__FILE", "/database")
         return f"{scheme}:///{file}"
 
-    user = os.getenv("APP_DATABASE_USER", "postgres")
+    user = os.getenv("APP_DATABASE_USER", "tad")
     password = os.getenv("APP_DATABASE_PASSWORD", "")
     server = os.getenv("APP_DATABASE_SERVER", "db")
     port = os.getenv("APP_DATABASE_PORT", "5432")
