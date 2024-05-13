@@ -11,7 +11,8 @@
       "cwd": "${workspaceFolder}/",
       "env": {
         "PYTHONPATH": "${workspaceFolder}"
-      }
+      },
+      "envFile": "${workspaceFolder}/.env.test"
     },
     {
       "name": "Project: tests",
