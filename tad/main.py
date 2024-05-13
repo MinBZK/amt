@@ -26,14 +26,14 @@ from tad.utils.mask import Mask
 
 configure_logging(settings.LOGGING_LEVEL, settings.LOGGING_CONFIG)
 
-from .routers import cards, pages
+from .routers import pages, tasks
 
 logger = logging.getLogger(__name__)
 mask = Mask(mask_keywords=["database_uri"])
 
 app = FastAPI(title=settings.PROJECT_NAME)
 app.mount("/static", StaticFiles(directory="tad/site/static"), name="static")
-app.include_router(cards.router)
+app.include_router(tasks.router)
 app.include_router(pages.router)
 
 # todo(berry): move lifespan to own file
