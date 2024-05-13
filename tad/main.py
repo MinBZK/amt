@@ -7,9 +7,6 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.exceptions import HTTPException as StarletteHTTPException
-from fastapi import FastAPI
-from fastapi.staticfiles import StaticFiles
-from starlette.middleware.cors import CORSMiddleware
 
 from tad.api.main import api_router
 from tad.core.config import settings
@@ -24,17 +21,14 @@ from tad.core.log import configure_logging
 from tad.middleware.route_logging import RequestLoggingMiddleware
 from tad.utils.mask import Mask
 
+from .routers import pages, tasks
+
 configure_logging(settings.LOGGING_LEVEL, settings.LOGGING_CONFIG)
 
-from .routers import pages, tasks
 
 logger = logging.getLogger(__name__)
 mask = Mask(mask_keywords=["database_uri"])
 
-app = FastAPI(title=settings.PROJECT_NAME)
-app.mount("/static", StaticFiles(directory="tad/site/static"), name="static")
-app.include_router(tasks.router)
-app.include_router(pages.router)
 
 # todo(berry): move lifespan to own file
 @asynccontextmanager
@@ -61,8 +55,9 @@ app = FastAPI(
 )
 
 app.add_middleware(RequestLoggingMiddleware)
-
-app.mount("/static", StaticFiles(directory=settings.STATIC_DIR), name="static")
+app.mount("/static", StaticFiles(directory="tad/site/static"), name="static")
+app.include_router(tasks.router)
+app.include_router(pages.router)
 
 
 @app.exception_handler(StarletteHTTPException)
