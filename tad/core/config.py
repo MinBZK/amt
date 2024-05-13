@@ -43,6 +43,7 @@ class Settings(BaseSettings):
     PROJECT_DESCRIPTION: str = "Transparency of Algorithmic Decision making"
 
     STATIC_DIR: str = "tad/static"
+    TEMPLATE_DIR: str = "tad/templates"
 
     # todo(berry): create submodel for database settings
     APP_DATABASE_SCHEME: DatabaseSchemaType = "sqlite"
