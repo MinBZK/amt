@@ -1,10 +1,8 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Form
+from fastapi import APIRouter, Form, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-
-from jinja2 import Environment, FileSystemLoader
 
 from tad.services.tasks_service import TasksService
 
@@ -25,6 +23,7 @@ async def test():
 # TODO this is an ugly work-around, we need a JSON object instead
 @router.post("/move", response_class=HTMLResponse)
 async def move_task(
+    request: Request,
     taskId: Annotated[int, Form()],
     statusId: Annotated[int, Form()],
     previousSiblingId: int | None = Form(None),
