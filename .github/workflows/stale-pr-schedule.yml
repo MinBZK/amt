@@ -1,4 +1,4 @@
-name: stale-shedule
+name: stale-schedule
 on:
   schedule:
     - cron: "0 4 * * *"
