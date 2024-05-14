@@ -18,7 +18,7 @@ def get_url():
     scheme = os.getenv("APP_DATABASE_SCHEME", "sqlite")
 
     if scheme == "sqlite":
-        file = os.getenv("APP_DATABASE__FILE", "/database")
+        file = os.getenv("APP_DATABASE_FILE", "database.sqlite3")
         return f"{scheme}:///{file}"
 
     user = os.getenv("APP_DATABASE_USER", "tad")
