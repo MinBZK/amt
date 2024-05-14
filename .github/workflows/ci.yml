@@ -172,7 +172,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./tad/Dockerfile
+          file: ./Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -182,7 +182,7 @@ jobs:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: ${{ steps.meta.outputs.tags }}
+          image-ref: ${{ steps.meta.outputs.tags[0] }}
           trivy-config: trivy.yaml
           scan-type: image
           exit-code: 0
