@@ -52,10 +52,11 @@
     </nav>
 </header>
 <div class="container" >
-    <form id="cardMovedForm" hx-post="/cards/move" hx-ext="json-enc" hx-trigger="cardmoved" hx-target="#board" class="">
-        <input id="fromList" type="hidden" name="from" value="board">
-        <input id="toList" type="hidden" name="to" value="board">
-        <input id="movedCard" type="hidden" name="movedCard" value="">
+    <form id="cardMovedForm" hx-post="/tasks/move" hx-ext="json-enc" hx-trigger="cardmoved" hx-swap="outerHTML" hx-target="#board" class="">
+        <input type="hidden" name="taskId" value="">
+        <input type="hidden" name="statusId" value="">
+        <input type="hidden" name="previousSiblingId" value="">
+        <input type="hidden" name="nextSiblingId" value="">
     </form>
     <h1 class="margin-bottom--large">Project X</h1>
     <div class="section group">

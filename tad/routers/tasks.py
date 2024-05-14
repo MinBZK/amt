@@ -20,9 +20,19 @@ async def test():
     return [{"username": "Rick"}, {"username": "Morty"}]
 
 
-# TODO this is an ugly work-around, we need a JSON object instead
 @router.post("/move", response_class=HTMLResponse)
-async def move_task(
+async def move_task(request: Request):
+    json = await request.json()
+    print(json)
+    task = tasks_service.move_task(
+        int(json["taskId"]), int(json["statusId"]), json["previousSiblingId"], json["nextSiblingId"]
+    )
+    return templates.TemplateResponse(request=request, name="task.jinja", context={"task": task})
+
+
+# TODO this is an ugly work-around, we need a JSON object instead
+@router.post("/move-form", response_class=HTMLResponse)
+async def move_task_form(
     request: Request,
     taskId: Annotated[int, Form()],
     statusId: Annotated[int, Form()],

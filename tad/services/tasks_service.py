@@ -42,6 +42,7 @@ class TasksService:
         return next(task for task in self._tasks if task.id == task_id)
 
     def _get_status_by_id(self, status_id: int) -> Status:
+        print(status_id)
         return next(status for status in self._statuses if status.id == status_id)
 
     def get_statuses(self) -> []:
@@ -78,14 +79,14 @@ class TasksService:
         if not previous_sibling_id and not next_sibling_id:
             task.sort_order = 10
         elif previous_sibling_id and next_sibling_id:
-            previous_task = self.get_task(previous_sibling_id)
-            next_task = self.get_task(next_sibling_id)
+            previous_task = self.get_task(int(previous_sibling_id))
+            next_task = self.get_task(int(next_sibling_id))
             new_sort_order = previous_task.sort_order + ((next_task.sort_order - previous_task.sort_order) / 2)
             task.sort_order = new_sort_order
         elif previous_sibling_id and not next_sibling_id:
-            previous_task = self.get_task(previous_sibling_id)
+            previous_task = self.get_task(int(previous_sibling_id))
             task.sort_order = previous_task.sort_order + 10
         elif not previous_sibling_id and next_sibling_id:
-            next_task = self.get_task(next_sibling_id)
+            next_task = self.get_task(int(next_sibling_id))
             task.sort_order = next_task.sort_order / 2
         return task
