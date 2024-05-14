@@ -2,6 +2,8 @@ from typing import Annotated
 
 from fastapi import APIRouter, Form
 from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+
 from jinja2 import Environment, FileSystemLoader
 
 from tad.services.tasks_service import TasksService
@@ -12,7 +14,7 @@ router = APIRouter(
 )
 
 tasks_service = TasksService()
-env = Environment(loader=FileSystemLoader("tad/site/templates"), autoescape=True)
+templates = Jinja2Templates(directory="tad/site/templates")
 
 
 @router.get("/")
@@ -29,6 +31,4 @@ async def move_task(
     nextSiblingId: int | None = Form(None),
 ):
     task = tasks_service.move_task(taskId, statusId, previousSiblingId, nextSiblingId)
-    index_template = env.get_template("task.jinja")
-    template_data = {"task": task}
-    return index_template.render(template_data)
+    return templates.TemplateResponse(request=request, name="task.jinja", context={"task": task})
