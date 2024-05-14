@@ -1,3 +1,6 @@
+from sqlmodel import Session
+
+from tad.core.db import engine
 from tad.models.status import Status
 from tad.models.task import Task
 from tad.models.user import User
@@ -9,10 +12,6 @@ class TasksService:
     _tasks = list[Task]
 
     # make sure this is a singleton class, this may not be needed?
-    def __new__(cls):
-        if cls._self is None:
-            cls._self = super().__new__(cls)
-        return cls._self
 
     def __init__(self):
         # this is dummy data to get started, this should be retrieved from the database
@@ -89,4 +88,9 @@ class TasksService:
         elif not previous_sibling_id and next_sibling_id:
             next_task = self.get_task(int(next_sibling_id))
             task.sort_order = next_task.sort_order / 2
+
+        with Session(engine) as session:
+            session.add(task)
+            session.commit()
+
         return task

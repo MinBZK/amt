@@ -1,7 +1,7 @@
-from pydantic import BaseModel
+from sqlmodel import Field, SQLModel
 
 
-class Status(BaseModel):
-    id: int
+class Status(SQLModel, table=True):
+    id: int = Field(default=None, primary_key=True)
     name: str
     sort_order: float
