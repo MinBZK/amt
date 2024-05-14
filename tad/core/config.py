@@ -42,7 +42,7 @@ class Settings(BaseSettings):
     PROJECT_NAME: str = "TAD"
     PROJECT_DESCRIPTION: str = "Transparency of Algorithmic Decision making"
 
-    STATIC_DIR: str = "tad/static"
+    STATIC_DIR: str = "tad/site/static"
     TEMPLATE_DIR: str = "tad/templates"
 
     # todo(berry): create submodel for database settings

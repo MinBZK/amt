@@ -55,7 +55,7 @@ app = FastAPI(
 )
 
 app.add_middleware(RequestLoggingMiddleware)
-app.mount("/static", StaticFiles(directory="tad/site/static"), name="static")
+app.mount("/static", StaticFiles(directory=settings.STATIC_DIR), name="static")
 app.include_router(tasks.router)
 app.include_router(pages.router)
 
