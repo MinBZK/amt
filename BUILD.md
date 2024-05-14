@@ -20,7 +20,7 @@ poetry install
 When poetry is done installing all dependencies you can start using the tool.
 
 ```shell
-poetry run python -m uvicorn tad.main:app
+poetry run python -m granian --interface  asgi tad.main:app
 ```
 
 ## Database
