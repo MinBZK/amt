@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+set -e
+set -x
+
 coverage run -m pytest $@
 if [ $? -ne 0 ]; then
     echo "Test failed"
@@ -7,7 +10,8 @@ if [ $? -ne 0 ]; then
 fi
 
 coverage report
-
+coverage html
+coverage lcov
 pyright $@
 if [ $? -ne 0 ]; then
     echo "Typecheck failed"

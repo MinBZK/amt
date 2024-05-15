@@ -1,12 +1,9 @@
-import subprocess
-
-from tad import __main__
+from fastapi.testclient import TestClient
 
 
-def test_main_process():
-    completed_process = subprocess.run(args=["-m", "tad"], executable="python", capture_output=True, text=True)
-    assert completed_process.returncode == 0
-
-
-def test_main_function():
-    assert __main__.main() == 0
+def test_get_non_exisiting(client: TestClient) -> None:
+    response = client.get(
+        "/pathdoesnotexist/",
+    )
+    assert response.status_code == 404
+    assert response.headers["content-type"] == "text/html; charset=utf-8"

@@ -1,4 +1,4 @@
-name: "Close stale"
+name: stale-schedule
 on:
   schedule:
     - cron: "0 4 * * *"

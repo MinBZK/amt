@@ -2,12 +2,17 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "tad",
+      "name": "tad - fastapi",
       "type": "debugpy",
       "request": "launch",
-      "module": "tad",
-      "justMyCode": false,
-      "args": []
+      "module": "granian",
+      "justMyCode": true,
+      "args": ["--interface","asgi","tad.main:app", "--reload"],
+      "cwd": "${workspaceFolder}/",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      },
+      "envFile": "${workspaceFolder}/.env.test"
     },
     {
       "name": "Project: tests",
@@ -15,7 +20,7 @@
       "request": "launch",
       "module": "pytest",
       "cwd": "${workspaceFolder}",
-      "justMyCode": false,
+      "justMyCode": true,
       "args": []
     }
   ]

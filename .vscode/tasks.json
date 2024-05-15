@@ -5,7 +5,7 @@
       "label": "PyRight",
       "detail": "typecheck code.",
       "type": "shell",
-      "command": "pyright",
+      "command": "poetry run pyright",
       "group": "test",
       "presentation": {
         "reveal": "always",
@@ -14,10 +14,22 @@
       "problemMatcher": []
     },
     {
-      "label": "Ruff",
-      "detail": "format and lint code.",
+      "label": "Ruff lint",
+      "detail": "lint code.",
       "type": "shell",
-      "command": "ruff format && ruff check",
+      "command": "poetry run ruff check --fix",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Ruff format",
+      "detail": "format code.",
+      "type": "shell",
+      "command": "poetry run ruff format",
       "group": "test",
       "presentation": {
         "reveal": "always",
@@ -29,7 +41,7 @@
       "label": "Code Coverage",
       "detail": "Generate code coverage report.",
       "type": "shell",
-      "command": "coverage report --fail-under 95",
+      "command": "poetry run coverage report && poetry run coverage html && poetry run coverage lcov",
       "group": "test",
       "presentation": {
         "reveal": "always",
@@ -41,7 +53,7 @@
       "label": "PyTest",
       "detail": "test all code",
       "type": "shell",
-      "command": "coverage run -m pytest ./tests",
+      "command": "poetry run coverage run -m pytest",
       "group": {
         "kind": "test",
         "isDefault": true

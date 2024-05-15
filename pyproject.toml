@@ -22,20 +22,26 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.10"
+fastapi = "^0.110.3"
+sqlmodel = "^0.0.18"
+alembic = "^1.13.1"
+pydantic = "^2.7.1"
+jinja2 = "^3.1.4"
+pydantic-settings = "^2.2.1"
+granian = {extras = ["reload"], version = "^1.3.1"}
+psycopg2-binary = "^2.9.9"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.1.1"
-coverage = "^7.5.0"
+coverage = "^7.5.1"
+httpx = "^0.27.0"
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.4.2"
+ruff = "^0.4.3"
 pre-commit = "^3.7.0"
-pyright = "^1.1.360"
+pyright = "^1.1.361"
 cyclonedx-bom = "^4.4.2"
 pip-licenses = "^4.4.0"
-
-[tool.poetry.scripts]
-tad = 'tad.__main__:main'
 
 [tool.poetry.urls]
 "Issue Tracker" = "https://github.com/MinBZK/tad/issues"
@@ -48,7 +54,7 @@ build-backend = "poetry.core.masonry.api"
 [tool.ruff]
 line-length = 120
 target-version = "py311"
-src = ["./tad"]
+src = ["tad","tests"]
 
 [tool.ruff.format]
 line-ending = "lf"
@@ -69,11 +75,18 @@ pythonVersion = "3.11"
 typeCheckingMode = "strict"
 reportMissingImports = true
 reportMissingTypeStubs = true
+reportUnnecessaryIsInstance = false
+exclude = [
+    "tad/migrations"
+]
 
 [tool.coverage.run]
 branch = true
-command_line = "-m pytest ./tests"
-relative_files = true
+command_line = "-m pytest"
+relative_files = true # needed for sonarcloud code coverage
+omit = [
+    "tests/*"
+]
 
 
 [tool.coverage.report]
@@ -87,4 +100,8 @@ title = "tad"
 [tool.pytest.ini_options]
 testpaths = [
     "tests"
+]
+addopts = "--strict-markers"
+filterwarnings = [
+    "ignore::UserWarning"
 ]

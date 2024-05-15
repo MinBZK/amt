@@ -1,10 +1,14 @@
 {
   "recommendations": [
     "ms-python.python",
+    "ms-python.vscode-pylance",
     "editorconfig.editorconfig",
     "streetsidesoftware.code-spell-checker",
     "redhat.vscode-yaml",
     "charliermarsh.ruff",
-    "github.vscode-github-actions"
+    "github.vscode-github-actions",
+    "mhutchie.git-graph",
+    "markis.code-coverage",
+    "qwtel.sqlite-viewer"
   ]
 }

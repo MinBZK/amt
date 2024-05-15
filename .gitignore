@@ -11,6 +11,7 @@ dist/
 .coverage.*
 coverage.xml
 htmlcov/
+coverage.lcov
 
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
 __pypackages__/
@@ -26,3 +27,10 @@ __pypackages__/
 
 #mypyr
 .mypy_cache/
+
+# macos
+.DS_Store
+
+# tad tool
+tad.log*
+database.sqlite3

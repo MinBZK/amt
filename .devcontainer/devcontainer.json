@@ -4,9 +4,14 @@
   "containerEnv": {
     "DEVCONTAINER": "1",
     "PYTHONASYNCIODEBUG": "1",
-    "POETRY_VIRTUALENVS_CREATE": "false"
+    "POETRY_VIRTUALENVS_CREATE": "false",
+    "PYTHONPATH": "/workspaces/tad/"
   },
   "remoteUser": "root",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "forwardPorts": [8000,8080],
   "postCreateCommand": ".devcontainer/postCreateCommand.sh",
   "customizations": {
     "vscode": {
@@ -17,7 +22,9 @@
         "redhat.vscode-yaml",
         "charliermarsh.ruff",
         "github.vscode-github-actions",
-        "mhutchie.git-graph"
+        "mhutchie.git-graph",
+        "markis.code-coverage",
+        "qwtel.sqlite-viewer"
       ],
       "settings": {
         "editor.formatOnPaste": false,
@@ -35,7 +42,9 @@
         "terminal.integrated.defaultProfile.linux": "zsh",
         "[python]": {
           "editor.defaultFormatter": "charliermarsh.ruff"
-        }
+        },
+        "python.analysis.typeCheckingMode": "strict",
+        "markiscodecoverage.searchCriteria": "coverage.lcov"
       }
     }
   }
