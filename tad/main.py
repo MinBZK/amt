@@ -18,10 +18,11 @@ from tad.core.exception_handlers import (
     validation_exception_handler as tad_validation_exception_handler,
 )
 from tad.core.log import configure_logging
-from tad.middleware.route_logging import RequestLoggingMiddleware
+from tad.repositories.tasks import TasksRepository
 from tad.utils.mask import Mask
 
-from .routers import pages, tasks
+from .middleware.route_logging import RequestLoggingMiddleware
+from .repositories.statuses import StatusesRepository
 
 configure_logging(settings.LOGGING_LEVEL, settings.LOGGING_CONFIG)
 
@@ -56,8 +57,6 @@ app = FastAPI(
 
 app.add_middleware(RequestLoggingMiddleware)
 app.mount("/static", StaticFiles(directory=settings.STATIC_DIR), name="static")
-app.include_router(tasks.router)
-app.include_router(pages.router)
 
 
 @app.exception_handler(StarletteHTTPException)
@@ -71,3 +70,8 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 
 
 app.include_router(api_router)
+
+tasks_repository = TasksRepository()
+statuses_repository = StatusesRepository()
+
+logger.info("Hallo ik ben een logger")

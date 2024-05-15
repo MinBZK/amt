@@ -15,6 +15,11 @@ from tad.core.types import DatabaseSchemaType, EnvironmentType, LoggingLevelType
 # Self type is not available in Python 3.10 so create our own with TypeVar
 SelfSettings = TypeVar("SelfSettings", bound="Settings")
 
+logger = logging.getLogger(__name__)
+
+print("My name is " + __name__)
+logger.info("Hallo ik ben een logOOOOOOOOger")
+
 
 class Settings(BaseSettings):
     # todo(berry): investigate yaml, toml or json file support for SettingsConfigDict
@@ -42,7 +47,7 @@ class Settings(BaseSettings):
     PROJECT_NAME: str = "TAD"
     PROJECT_DESCRIPTION: str = "Transparency of Algorithmic Decision making"
 
-    STATIC_DIR: str = "tad/site/static"
+    STATIC_DIR: str = "tad/site/static/"
     TEMPLATE_DIR: str = "tad/templates"
 
     # todo(berry): create submodel for database settings

@@ -18,10 +18,10 @@
 <head>
     <title>{{ page_title }}</title>
     <!-- TODO: decide if all files should be local, and if so, how to do versions management -->
-    <script type="text/javascript" src="/static/js/sortable.js"></script>
-    <script type="text/javascript" src="/static/js/hyperscript.min.js"></script>
+    <script type="text/javascript" src="/static/js/vendor/sortable.js"></script>
+    <script type="text/javascript" src="/static/js/vendor/hyperscript.min.js"></script>
     <script type="text/javascript" src="/static/js/tad.js"></script>
-    <script type="text/javascript" src="/static/js/htmx.min.js"></script>
+    <script type="text/javascript" src="/static/js/vendor/htmx.min.js"></script>
     <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/json-enc.js"></script>
     <link rel="stylesheet" href="/static/css/html5reset.css"/>
     <link rel="stylesheet" href="/static/css/col.css"/>
@@ -61,7 +61,7 @@
     <h1 class="margin-bottom--large">Project X</h1>
     <div class="section group">
     <!-- _="on end put event.from.id into #fromList.value put event.to.id into #toList.value put event.item.id into #movedCard.value then send cardmoved to #cardMovedForm" -->
-        {% for status in tasks_service.get_statuses() %}
+        {% for status in statuses_service.get_statuses() %}
             {{ render_task_column(status) }}
         {% endfor %}
 {#        <div class="col span_1_of_4">#}
