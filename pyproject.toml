@@ -28,8 +28,8 @@ alembic = "^1.13.1"
 pydantic = "^2.7.1"
 jinja2 = "^3.1.4"
 pydantic-settings = "^2.2.1"
-granian = {extras = ["reload"], version = "^1.3.1"}
 psycopg2-binary = "^2.9.9"
+uvicorn = {extras = ["standard"], version = "^0.29.0"}
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.1.1"

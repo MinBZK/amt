@@ -33,8 +33,6 @@ services:
       - SECRET_KEY=${SECRET_KEY:?Variable not set}
     healthcheck:
       test: ["CMD", "pg_isready", "-q", "-d", "tad", "-U", "tad"]
-      start_period: 3s
-
 
   db-admin:
     image: dpage/pgadmin4:8.6
@@ -50,7 +48,6 @@ services:
         condition: service_healthy
     healthcheck:
       test: ["CMD", "wget", "-O", "-", "http://localhost:8080/misc/ping"]
-
 
 #TODO(berry): Traefik
 

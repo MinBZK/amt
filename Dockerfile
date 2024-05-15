@@ -67,4 +67,4 @@ COPY --chown=root:root --chmod=755 LICENSE /app/LICENSE
 ENV PYTHONPATH=/app/
 WORKDIR /app/
 
-CMD ["python", "-m", "granian", "--host", "0.0.0.0","--interface","asgi","tad.main:app" ]
+CMD ["python", "-m", "uvicorn", "--host", "0.0.0.0", "tad.main:app", "--log-level", "warning" ]
