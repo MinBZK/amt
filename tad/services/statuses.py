@@ -10,8 +10,8 @@ class StatusesService(metaclass=Singleton):
     __statuses_repository = StatusesRepository()
 
     def __init__(self):
+        logger.info("Statuses service initialized")
         # TODO find out why logging is not visible
-        print("I am created, hello world")
 
     def get_status(self, status_id):
         return self.__statuses_repository.find_by_id(status_id)

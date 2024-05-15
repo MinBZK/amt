@@ -18,8 +18,6 @@ async def test():
 @router.post("/move", response_class=HTMLResponse)
 async def move_task(request: Request):
     json = await request.json()
-
-    print(json)
     task = tasks_service.move_task(
         int(json["taskId"]), int(json["statusId"]), json["previousSiblingId"], json["nextSiblingId"]
     )

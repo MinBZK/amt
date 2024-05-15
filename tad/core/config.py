@@ -17,9 +17,6 @@ SelfSettings = TypeVar("SelfSettings", bound="Settings")
 
 logger = logging.getLogger(__name__)
 
-print("My name is " + __name__)
-logger.info("Hallo ik ben een logOOOOOOOOger")
-
 
 class Settings(BaseSettings):
     # todo(berry): investigate yaml, toml or json file support for SettingsConfigDict
