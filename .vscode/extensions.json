@@ -9,6 +9,7 @@
     "github.vscode-github-actions",
     "mhutchie.git-graph",
     "markis.code-coverage",
-    "qwtel.sqlite-viewer"
+    "qwtel.sqlite-viewer",
+    "ms-vsliveshare.vsliveshare"
   ]
 }
