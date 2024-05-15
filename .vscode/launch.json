@@ -6,8 +6,8 @@
       "type": "debugpy",
       "request": "launch",
       "module": "uvicorn",
-      "justMyCode": true,
-      "args": ["tad.main:app"],
+      "justMyCode": false,
+      "args": [ "--log-level", "warning" ,"tad.main:app"],
       "cwd": "${workspaceFolder}/",
       "env": {
         "PYTHONPATH": "${workspaceFolder}"
