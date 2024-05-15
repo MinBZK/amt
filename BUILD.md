@@ -20,7 +20,7 @@ poetry install
 When poetry is done installing all dependencies you can start using the tool.
 
 ```shell
-poetry run python -m granian --interface  asgi tad.main:app
+poetry run python -m uvicorn tad.main:app --log-level warning
 ```
 
 ## Database
@@ -28,6 +28,7 @@ poetry run python -m granian --interface  asgi tad.main:app
 We support most SQL database types. You can use the variable `APP_DATABASE_SCHEME` to change the database. The default scheme is sqlite.
 
 If you change the `models` at tad/models of the application you can generate a new migration file
+
 ```shell
 alembic revision --autogenerate -m "a message"
 ```
@@ -35,6 +36,7 @@ alembic revision --autogenerate -m "a message"
 Please make sure you check the auto generated file in tad/migrations/
 
 to upgrade to the latest version of the database schema use
+
 ```shell
 alembic upgrade head
 ```
@@ -71,11 +73,13 @@ For testing, linting and other feature we use several tools. You can look up the
 ## Updating dependencies
 
 Use poetry to update all python project dependencies
+
 ```shell
 poetry update
 ```
 
 Use pre-commit to update all hooks
+
 ```shell
 pre-commit autoupdate
 ```
