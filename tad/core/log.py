@@ -10,7 +10,7 @@ LOGGING_BACKUP_COUNT = 5
 
 LOGGING_CONFIG = {
     "version": 1,
-    "disable_existing_loggers": False,
+    "disable_existing_loggers": True,
     "formatters": {
         "generic": {
             "()": "logging.Formatter",
@@ -30,7 +30,7 @@ LOGGING_CONFIG = {
         },
     },
     "loggers": {
-        "tad": {"handlers": ["console", "file"], "level": "DEBUG", "propagate": True},
+        "tad": {"handlers": ["console", "file"], "level": "DEBUG", "propagate": False},
     },
 }
 
