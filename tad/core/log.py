@@ -10,7 +10,7 @@ LOGGING_BACKUP_COUNT = 5
 
 LOGGING_CONFIG = {
     "version": 1,
-    "disable_existing_loggers": True,
+    "disable_existing_loggers": False,
     "formatters": {
         "generic": {
             "()": "logging.Formatter",
