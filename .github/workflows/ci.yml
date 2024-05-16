@@ -48,42 +48,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install poetry
-        run: pipx install poetry
-
-      - name: Set up Python ${{ env.PYTHON_VERSION }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ env.PYTHON_VERSION }}
-          cache: "poetry"
-
-      - name: Install dependencies
-        run: poetry install
-
-      - name: Generate SBOM
-        run: poetry run cyclonedx-py poetry --without test,dev > sbom.json
-
-      - name: Generate licenses file
-        run: |
-          poetry run pip-licenses  --order=license --format=json --with-description > licenses.txt
-
-      - name: Upload SBOM and licenses
-        uses: actions/upload-artifact@v4
-        with:
-          name: sbom-licenses-${{ github.sha }}.json
-          path: |
-            sbom.json
-            licenses.txt
-          if-no-files-found: error
-          overwrite: true
-
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          scan-type: 'fs'
-          scan-ref: '.'
           trivy-config: trivy.yaml
-
+          scan-type: fs
+          scan-ref: '.'
   test:
     runs-on: ubuntu-latest
     strategy:
@@ -186,11 +156,10 @@ jobs:
           annotations: ${{ steps.meta.outputs.annotations }}
           platforms: linux/amd64,linux/arm64,darwin/amd64
 
-      - name: Run Trivy vulnerability scanner
+      - name: Run Trivy vulnerability scanner sarif
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: ${{ steps.meta.outputs.tags }}
-          trivy-config: trivy.yaml
           scan-type: image
           exit-code: 0
           format: 'sarif'
@@ -203,6 +172,41 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: 'trivy-results.sarif'
+
+      - name: Run Trivy SBOM
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ steps.meta.outputs.tags }}
+          scan-type: image
+          exit-code: 0
+          format: 'cyclonedx'
+          output: 'trivy-sbom.json'
+          list-all-pkgs: "true"
+        env:
+          TRIVY_USERNAME: ${{ github.actor }}
+          TRIVY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run Trivy license scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ steps.meta.outputs.tags }}
+          scan-type: image
+          scanners: 'license'
+          exit-code: 0
+          output: 'trivy-license.json'
+        env:
+          TRIVY_USERNAME: ${{ github.actor }}
+          TRIVY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload SBOM & License
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom-licence-${{ github.sha }}.json
+          path: |
+            trivy-sbom.json
+            trivy-license.json
+          if-no-files-found: error
+          overwrite: true
 
   notifyMattermost:
     runs-on: ubuntu-latest

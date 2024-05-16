@@ -1,12 +1,17 @@
-scan-ref: .
-scan-type: fs
+timeout: 10m
 exit-code: 1
 severity:
   - HIGH
   - CRITICAL
 
 scan:
-  scanners: vuln
+  scanners:
+    - vuln
+    - misconfig
+    - secret
 
 vulnerability:
+  type:
+    - library
+    - os
   ignore-unfixed: true
