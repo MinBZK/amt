@@ -48,6 +48,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install poetry
+        run: pipx install poetry
+
+      - name: Set up Python ${{ env.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: "poetry"
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: check licenses used by project in pyproject.toml
+        run: poetry run liccheck -s pyproject.toml
+
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
