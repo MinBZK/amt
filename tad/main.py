@@ -71,7 +71,5 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 
 app.include_router(api_router)
 
-tasks_repository = TasksRepository()
-statuses_repository = StatusesRepository()
-
-logger.info("Hallo ik ben een logger")
+TasksRepository().create_example_tasks()
+StatusesRepository().create_example_statuses()
