@@ -18,11 +18,9 @@ from tad.core.exception_handlers import (
     validation_exception_handler as tad_validation_exception_handler,
 )
 from tad.core.log import configure_logging
-from tad.repositories.tasks import TasksRepository
 from tad.utils.mask import Mask
 
 from .middleware.route_logging import RequestLoggingMiddleware
-from .repositories.statuses import StatusesRepository
 
 configure_logging(settings.LOGGING_LEVEL, settings.LOGGING_CONFIG)
 
@@ -71,5 +69,4 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 
 app.include_router(api_router)
 
-TasksRepository().create_example_tasks()
-StatusesRepository().create_example_statuses()
+# todo (robbert) add init code for example tasks and statuses

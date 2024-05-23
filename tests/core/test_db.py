@@ -6,7 +6,7 @@ from tad.core.db import check_db
 
 
 @pytest.mark.skip(reason="not working yet")
-async def test_check_dabase():
+async def test_check_database():
     mock_session = Mock(spec=Session)
 
     with patch("sqlmodel.Session", return_value=mock_session):

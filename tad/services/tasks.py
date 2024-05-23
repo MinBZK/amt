@@ -1,4 +1,7 @@
 import logging
+from typing import Annotated
+
+from fastapi import Depends
 
 from tad.models.task import Task
 from tad.models.user import User
@@ -9,17 +12,22 @@ logger = logging.getLogger(__name__)
 
 
 class TasksService:
-    @staticmethod
-    def get_tasks(status_id):
-        return TasksRepository.find_by_status_id(status_id)
+    def __init__(
+        self,
+        statuses_service: Annotated[StatusesService, Depends(StatusesService)],
+        repository: Annotated[TasksRepository, Depends(TasksRepository)],
+    ):
+        self.repository = repository
+        self.statuses_service = statuses_service
 
-    @staticmethod
-    def assign_task(task: Task, user: User) -> Task:
+    def get_tasks(self, status_id):
+        return self.repository.find_by_status_id(status_id)
+
+    def assign_task(self, task: Task, user: User) -> Task:
         task.user_id = user.id
-        return TasksRepository.save(task)
+        return self.repository.save(task)
 
-    @staticmethod
-    def move_task(task_id: int, status_id: int, previous_sibling_id: int, next_sibling_id: int) -> Task:
+    def move_task(self, task_id: int, status_id: int, previous_sibling_id: int, next_sibling_id: int) -> Task:
         """
         Updates the task with the given task_id
         :param task_id: the id of the task
@@ -28,8 +36,8 @@ class TasksService:
         :param next_sibling_id: the id of the next sibling of the task
         :return: the updated task
         """
-        status = StatusesService.get_status(status_id)
-        task = TasksRepository.find_by_id(task_id)
+        status = self.statuses_service.get_status(status_id)
+        task = self.repository.find_by_id(task_id)
 
         if status.name == "done":
             # TODO implement logic for done
@@ -46,17 +54,17 @@ class TasksService:
         if not previous_sibling_id and not next_sibling_id:
             task.sort_order = 10
         elif previous_sibling_id and next_sibling_id:
-            previous_task = TasksRepository().find_by_id(int(previous_sibling_id))
-            next_task = TasksRepository().find_by_id(int(next_sibling_id))
+            previous_task = self.repository.find_by_id(int(previous_sibling_id))
+            next_task = self.repository.find_by_id(int(next_sibling_id))
             new_sort_order = previous_task.sort_order + ((next_task.sort_order - previous_task.sort_order) / 2)
             task.sort_order = new_sort_order
         elif previous_sibling_id and not next_sibling_id:
-            previous_task = TasksRepository().find_by_id(int(previous_sibling_id))
+            previous_task = self.repository.find_by_id(int(previous_sibling_id))
             task.sort_order = previous_task.sort_order + 10
         elif not previous_sibling_id and next_sibling_id:
-            next_task = TasksRepository().find_by_id(int(next_sibling_id))
+            next_task = self.repository.find_by_id(int(next_sibling_id))
             task.sort_order = next_task.sort_order / 2
 
-        task = TasksRepository().save(task)
+        task = self.repository.save(task)
 
         return task

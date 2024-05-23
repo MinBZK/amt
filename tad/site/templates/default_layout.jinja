@@ -23,6 +23,7 @@
     <script type="text/javascript" src="/static/js/tad.js"></script>
     <script type="text/javascript" src="/static/js/vendor/htmx.min.js"></script>
     <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/json-enc.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/response-targets.js"></script>
     <link rel="stylesheet" href="/static/css/html5reset.css"/>
     <link rel="stylesheet" href="/static/css/col.css"/>
     <link rel="stylesheet" href="/static/css/2cols.css"/>
@@ -51,14 +52,17 @@
     <nav class="header_nav">
     </nav>
 </header>
-<div class="container" >
-    <form id="cardMovedForm" hx-post="/tasks/move" hx-ext="json-enc" hx-trigger="cardmoved" hx-swap="outerHTML" hx-target="#board" class="">
+<div class="container" hx-ext="response-targets">
+    <form id="cardMovedForm" hx-post="/tasks/move" hx-target-5*="#errorContainer" hx-ext="json-enc" hx-trigger="cardmoved" hx-swap="outerHTML" hx-target="#board" class="">
         <input type="hidden" name="taskId" value="">
         <input type="hidden" name="statusId" value="">
         <input type="hidden" name="previousSiblingId" value="">
         <input type="hidden" name="nextSiblingId" value="">
     </form>
     <h1 class="margin-bottom--large">Project X</h1>
+    <div id="errorContainer">
+
+    </div>
     <div class="section group">
     <!-- _="on end put event.from.id into #fromList.value put event.to.id into #toList.value put event.item.id into #movedCard.value then send cardmoved to #cardMovedForm" -->
         {% for status in statuses_service.get_statuses() %}

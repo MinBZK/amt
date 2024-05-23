@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse
 
-from tad.api.deps import templates
+from tad.repositories.deps import templates
 
 router = APIRouter()
 

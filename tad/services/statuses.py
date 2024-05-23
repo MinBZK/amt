@@ -1,4 +1,7 @@
 import logging
+from typing import Annotated
+
+from fastapi import Depends
 
 from tad.repositories.statuses import StatusesRepository
 
@@ -6,10 +9,11 @@ logger = logging.getLogger(__name__)
 
 
 class StatusesService:
-    @staticmethod
-    def get_status(status_id):
-        return StatusesRepository.find_by_id(status_id)
+    def __init__(self, repository: Annotated[StatusesRepository, Depends(StatusesRepository)]):
+        self.repository = repository
 
-    @staticmethod
-    def get_statuses() -> []:
-        return StatusesRepository.find_all()
+    def get_status(self, status_id):
+        return self.repository.find_by_id(status_id)
+
+    def get_statuses(self) -> []:
+        return self.repository.find_all()
