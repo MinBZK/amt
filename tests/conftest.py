@@ -12,7 +12,7 @@ from tad.services.statuses import StatusesService
 from tad.services.tasks import TasksService
 
 
-def pytest_sessionstart(session):
+def pytest_configure():
     """
     Called after the Session object has been created and
     before performing collection and entering the run test loop.
@@ -20,6 +20,7 @@ def pytest_sessionstart(session):
     # todo (robbert) creating an in memory database does not work right, tables seem to get lost?
     settings.APP_DATABASE_FILE = "database.sqlite3.test"  # set to none so we'll use an in memory database
     # todo (robbert) this seems to be the only way to get the right session object (but I am not sure why)
+    SQLModel.metadata.create_all(get_engine())
     with Session(get_engine()) as session:
         tasks_repository = TasksRepository(session=session)
         statuses_repository = StatusesRepository(session=session)
@@ -33,6 +34,5 @@ def pytest_sessionstart(session):
 @pytest.fixture(scope="module")
 def client() -> Generator[TestClient, None, None]:
     with TestClient(app, raise_server_exceptions=True) as c:
-        SQLModel.metadata.create_all(get_engine())
         c.timeout = 5
         yield c
