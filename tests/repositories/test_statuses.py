@@ -37,7 +37,6 @@ def test_save_failed(get_session: Session):
     status: Status = Status(id=1, name="test", sort_order=10)
     status_repository.save(status)
     status: Status = Status(id=1, name="test has duplicate id", sort_order=10)
-    # todo (robbert) find out the correct exception to catch
     with pytest.raises(RepositoryError):
         status_repository.save(status)
 
