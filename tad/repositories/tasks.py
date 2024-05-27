@@ -33,16 +33,16 @@ class TasksRepository:
         """Returns all the tasks from the repository."""
         return self.session.exec(select(Task)).all()
 
-    def find_by_status_id(self, status_id) -> Sequence[Task]:
+    def find_by_status_id(self, status_id: int) -> Sequence[Task]:
         statement = select(Task).where(Task.status_id == status_id).order_by(Task.sort_order)
         return self.session.exec(statement).all()
 
-    def save(self, task) -> Task:
+    def save(self, task: Task) -> Task:
         self.session.add(task)
         self.session.commit()
         self.session.refresh(task)
         return task
 
-    def find_by_id(self, task_id) -> Task:
+    def find_by_id(self, task_id: int) -> Task:
         statement = select(Task).where(Task.id == task_id)
         return self.session.exec(statement).one()

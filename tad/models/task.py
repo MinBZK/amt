@@ -25,6 +25,6 @@ class MoveTask(BaseModel):
     @field_validator("id", "status_id", "previous_sibling_id", "next_sibling_id")
     @classmethod
     def check_is_int(cls, value: str, info: ValidationInfo) -> str:
-        if value is not None and isinstance(value, str) and value.isdigit():
+        if isinstance(value, str) and value.isdigit():
             assert value.isdigit(), f"{info.field_name} must be an integer"  # noqa: S101
         return value

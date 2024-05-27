@@ -1,4 +1,5 @@
 import logging
+from collections.abc import Sequence
 from typing import Annotated
 
 from fastapi import Depends
@@ -20,7 +21,7 @@ class TasksService:
         self.repository = repository
         self.statuses_service = statuses_service
 
-    def get_tasks(self, status_id):
+    def get_tasks(self, status_id: int) -> Sequence[Task]:
         return self.repository.find_by_status_id(status_id)
 
     def assign_task(self, task: Task, user: User) -> Task:

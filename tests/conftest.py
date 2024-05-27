@@ -1,15 +1,52 @@
 from collections.abc import Generator
+from multiprocessing import Process
+from time import sleep
+from typing import Any
 
 import pytest
+import uvicorn
 from fastapi.testclient import TestClient
-from sqlmodel import Session, SQLModel
+from playwright.sync_api import sync_playwright
+from sqlmodel import Session
 from tad.core.config import settings
 from tad.core.db import get_engine
 from tad.main import app
-from tad.repositories.statuses import StatusesRepository
-from tad.repositories.tasks import TasksRepository
-from tad.services.statuses import StatusesService
-from tad.services.tasks import TasksService
+
+
+def run_server():
+    settings.APP_DATABASE_FILE = "database.sqlite3.test"
+    uvicorn.run(app, host="127.0.0.1", port=8000)
+
+
+def wait_for_server_ready(url: str, timeout: int = 30):
+    with sync_playwright() as p:
+        browser = p.chromium.launch()
+        page = browser.new_page()
+        for _ in range(timeout):
+            try:
+                page.goto(url)
+                browser.close()
+                return True  # noqa
+            except Exception as e:
+                print(e)
+                sleep(1)
+        browser.close()
+        raise Exception(f"Server at {url} did not become ready within {timeout} seconds")  # noqa: TRY003 TRY002
+
+
+@pytest.fixture(scope="module")
+def _start_server():
+    process = Process(target=run_server)
+    process.start()
+    wait_for_server_ready("http://127.0.0.1:8000")
+    yield
+    process.terminate()
+
+
+@pytest.fixture(scope="session")
+def get_session() -> Generator[Session, Any, Any]:
+    with Session(get_engine()) as session:
+        yield session
 
 
 def pytest_configure():
@@ -19,16 +56,6 @@ def pytest_configure():
     """
     # todo (robbert) creating an in memory database does not work right, tables seem to get lost?
     settings.APP_DATABASE_FILE = "database.sqlite3.test"  # set to none so we'll use an in memory database
-    # todo (robbert) this seems to be the only way to get the right session object (but I am not sure why)
-    SQLModel.metadata.create_all(get_engine())
-    with Session(get_engine()) as session:
-        tasks_repository = TasksRepository(session=session)
-        statuses_repository = StatusesRepository(session=session)
-        statuses_service = StatusesService(repository=statuses_repository)
-        tasks_service = TasksService(statuses_service=statuses_service, repository=tasks_repository)
-        tasks_service.get_tasks(1)  # noop to test all object creations
-        statuses_repository.create_example_statuses()
-        tasks_repository.create_example_tasks()
 
 
 @pytest.fixture(scope="module")
