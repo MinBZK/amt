@@ -8,6 +8,7 @@ from tad.models.task import Task
 from tad.models.user import User
 from tad.repositories.tasks import TasksRepository
 from tad.services.statuses import StatusesService
+from tad.services.system_cards import SystemCards
 
 logger = logging.getLogger(__name__)
 
@@ -17,9 +18,11 @@ class TasksService:
         self,
         statuses_service: Annotated[StatusesService, Depends(StatusesService)],
         repository: Annotated[TasksRepository, Depends(TasksRepository)],
+        system_cards_service: Annotated[SystemCards, Depends(SystemCards)],
     ):
         self.repository = repository
         self.statuses_service = statuses_service
+        self.system_cards_service = system_cards_service
 
     def get_tasks(self, status_id: int) -> Sequence[Task]:
         return self.repository.find_by_status_id(status_id)
@@ -43,8 +46,7 @@ class TasksService:
         task = self.repository.find_by_id(task_id)
 
         if status.name == "done":
-            # TODO implement logic for done
-            logging.warning("Task is done, we need to update a system card")
+            self.system_cards_service.update()
 
         # assign the task to the current user
         if status.name == "in_progress":
