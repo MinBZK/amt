@@ -34,11 +34,12 @@ def wait_for_server_ready(url: str, timeout: int = 30):
 
 
 @pytest.fixture(scope="module")
-def _start_server():
+def start_server():
     process = Process(target=run_server)
     process.start()
-    wait_for_server_ready("http://127.0.0.1:8000")
-    yield
+    server_address = "http://127.0.0.1:8000"
+    wait_for_server_ready(server_address)
+    yield server_address
     process.terminate()
 
 

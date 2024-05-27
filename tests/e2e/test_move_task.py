@@ -1,11 +1,9 @@
-import pytest
 from playwright.sync_api import expect, sync_playwright
 
 from tests.database_test_utils import init_db
 
 
-@pytest.mark.usefixtures("_start_server")
-def test_move_task_to_column() -> None:
+def test_move_task_to_column(start_server) -> None:
     """
     Test moving a task in the browser to another column and verify that after a reload
     it is in the right column.
@@ -22,10 +20,12 @@ def test_move_task_to_column() -> None:
         ]
     )
 
+    server_address = start_server
+
     with sync_playwright() as p:
         browser = p.chromium.launch()
         page = browser.new_page()
-        page.goto("http://127.0.0.1:8000/pages/")
+        page.goto(server_address + "/pages/")
 
         expect(page.locator("#column-1 #card-1")).to_be_visible()
         expect(page.locator("#column-3")).to_be_visible()
@@ -43,8 +43,7 @@ def test_move_task_to_column() -> None:
         browser.close()
 
 
-@pytest.mark.usefixtures("_start_server")
-def test_move_task_order_in_same_column() -> None:
+def test_move_task_order_in_same_column(start_server) -> None:
     """
     Test moving a task in the browser below another task and verify that after a reload
     it is in the right position in the column.
@@ -61,7 +60,10 @@ def test_move_task_order_in_same_column() -> None:
     with sync_playwright() as p:
         browser = p.chromium.launch()
         page = browser.new_page()
-        page.goto("http://127.0.0.1:8000/pages/")
+
+        server_address = start_server
+
+        page.goto(server_address + "/pages/")
 
         expect(page.locator("#column-1 #card-1")).to_be_visible()
         expect(page.locator("#column-1")).to_be_visible()
