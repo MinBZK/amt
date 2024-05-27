@@ -5,6 +5,9 @@ from sqlalchemy.engine.result import ScalarResult, TupleResult
 from sqlmodel import Session, SQLModel
 from tad.core.db import get_engine
 
+# todo (robbert) it seems pytest runs all methods in the tests folder,
+#  this should be moved or marked as helper functions
+
 
 def enrich_with_default_values(specification: dict[str, Any]) -> dict[str, Any]:
     """
