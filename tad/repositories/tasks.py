@@ -35,10 +35,7 @@ class TasksRepository:
         :return: a list of tasks in the repository for the given status_id
         """
         statement = select(Task).where(Task.status_id == status_id).order_by(Task.sort_order)
-        try:
-            return self.session.exec(statement).all()
-        except NoResultFound as e:
-            raise RepositoryError from e
+        return self.session.exec(statement).all()
 
     def save(self, task: Task) -> Task:
         """

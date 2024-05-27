@@ -18,6 +18,7 @@ def enrich_with_default_values(specification: dict[str, Any]) -> dict[str, Any]:
         default_specification["title"] = "Test task " + str(specification["id"])
         default_specification["description"] = "Test task description " + str(specification["id"])
         default_specification["sort_order"] = specification["id"]
+        default_specification["status_id"] = 1
     elif specification["table"] == "status":
         default_specification["name"] = "Status " + str(specification["id"])
         default_specification["sort_order"] = specification["id"]
