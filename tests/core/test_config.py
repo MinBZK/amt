@@ -14,7 +14,8 @@ def test_default_settings():
     assert settings.PROJECT_NAME == "TAD"
     assert settings.PROJECT_DESCRIPTION == "Transparency of Algorithmic Decision making"
     assert settings.APP_DATABASE_SCHEME == "sqlite"
-    assert settings.SQLALCHEMY_DATABASE_URI == "sqlite:///database.sqlite3"
+    # todo (robbert) we change the database for the test and use the default config
+    assert settings.SQLALCHEMY_DATABASE_URI == "sqlite:///database.sqlite3.test"
 
 
 def test_environment_settings(monkeypatch: pytest.MonkeyPatch):

@@ -1,8 +1,18 @@
 from fastapi.testclient import TestClient
 from tad.models.task import MoveTask
 
+from tests.database_test_utils import init_db
+
 
 def test_post_move_task(client: TestClient) -> None:
+    init_db(
+        [
+            {"table": "status", "id": 2},
+            {"table": "task", "id": 1, "status_id": 2},
+            {"table": "task", "id": 2, "status_id": 2},
+            {"table": "task", "id": 3, "status_id": 2},
+        ]
+    )
     move_task: MoveTask = MoveTask(taskId="2", statusId="2", previousSiblingId="1", nextSiblingId="3")
     response = client.post("/tasks/move", json=move_task.model_dump(by_alias=True))
     assert response.status_code == 200

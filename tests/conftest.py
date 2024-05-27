@@ -1,7 +1,6 @@
 from collections.abc import Generator
 from multiprocessing import Process
 from time import sleep
-from typing import Any
 
 import pytest
 import uvicorn
@@ -27,8 +26,8 @@ def wait_for_server_ready(url: str, timeout: int = 30):
                 page.goto(url)
                 browser.close()
                 return True  # noqa
-            except Exception as e:
-                print(e)
+            # todo (robbert) find out what exception to catch
+            except Exception:
                 sleep(1)
         browser.close()
         raise Exception(f"Server at {url} did not become ready within {timeout} seconds")  # noqa: TRY003 TRY002
@@ -44,7 +43,7 @@ def _start_server():
 
 
 @pytest.fixture(scope="session")
-def get_session() -> Generator[Session, Any, Any]:
+def get_session() -> Session:
     with Session(get_engine()) as session:
         yield session
 

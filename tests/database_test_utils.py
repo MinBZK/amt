@@ -1,6 +1,7 @@
 from typing import Any
 
 from sqlalchemy import text
+from sqlalchemy.engine.result import ScalarResult, TupleResult
 from sqlmodel import Session, SQLModel
 from tad.core.db import get_engine
 
@@ -20,7 +21,7 @@ def enrich_with_default_values(specification: dict[str, Any]) -> dict[str, Any]:
     elif specification["table"] == "status":
         default_specification["name"] = "Status " + str(specification["id"])
         default_specification["sort_order"] = specification["id"]
-    return specification | default_specification
+    return default_specification | specification
 
 
 def fix_missing_relations(specification: dict[str, Any]) -> None:
@@ -38,12 +39,11 @@ def fix_missing_relations(specification: dict[str, Any]) -> None:
             create_db_entries([status_specification])
 
 
-def item_exists(specification: dict[str, Any]) -> bool:
+def get_items(specification: dict[str, Any]) -> TupleResult | ScalarResult:
     """
-    Check if an item exists in the database with the table and id given
-    in the dictionary
+    Create a query based on the dictionary specification and return the result
     :param specification: a dictionary with a table specification
-    :return: True if the item exists in the database, False otherwise
+    :return: the results of the query
     """
     values = ", ".join(
         key + "=" + str(val) if str(val).isnumeric() else str("'" + val + "'")
@@ -51,10 +51,20 @@ def item_exists(specification: dict[str, Any]) -> bool:
         if key != "table"
     )
     table = specification["table"]
-    statement = f"SELECT COUNT(*) FROM {table} WHERE {values}"  # noqa S608
+    statement = f"SELECT * FROM {table} WHERE {values}"  # noqa S608
     with Session(get_engine()) as session:
-        result = session.exec(text(statement)).first()
-    return result[0] != 0
+        return session.exec(text(statement)).all()
+
+
+def item_exists(specification: dict[str, Any]) -> bool:
+    """
+    Check if an item exists in the database with the table and id given
+    in the dictionary
+    :param specification: a dictionary with a table specification
+    :return: True if the item exists in the database, False otherwise
+    """
+    result = get_items(specification)
+    return len(result) != 0
 
 
 def create_db_entries(specifications: list[dict[str, Any]]) -> None:
@@ -84,7 +94,7 @@ def create_db_entries(specifications: list[dict[str, Any]]) -> None:
                 session.commit()
 
 
-def init_db(specifications: list[dict[str, Any]]) -> None:
+def init_db(specifications=None) -> None:
     """
     Drop all database tables and create them. Then fill the database with the
     entries from the array of dictionaries with table specifications.
@@ -100,6 +110,8 @@ def init_db(specifications: list[dict[str, Any]]) -> None:
     :param specifications: an array of dictionaries with table specifications
     :return: None
     """
+    if specifications is None:
+        specifications = []
     SQLModel.metadata.drop_all(get_engine())
     SQLModel.metadata.create_all(get_engine())
     create_db_entries(specifications)
