@@ -26,10 +26,7 @@ class StatusesRepository:
         Returns a list of all statuses in the repository.
         :return: the list of all statuses
         """
-        try:
-            return self.session.exec(select(Status)).all()
-        except NoResultFound as e:
-            raise RepositoryError from e
+        return self.session.exec(select(Status)).all()
 
     def save(self, status: Status) -> Status:
         """

@@ -20,6 +20,13 @@ def test_find_all(get_session: Session):
     assert len(results) == 2
 
 
+def test_find_all_no_results(get_session: Session):
+    init_db()
+    status_repository: StatusesRepository = StatusesRepository(get_session)
+    results = status_repository.find_all()
+    assert len(results) == 0
+
+
 def test_save(get_session: Session):
     init_db()
     status_repository: StatusesRepository = StatusesRepository(get_session)

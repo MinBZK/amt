@@ -26,10 +26,7 @@ class TasksRepository:
         Returns all tasks in the repository.
         :return: all tasks in the repository
         """
-        try:
-            return self.session.exec(select(Task)).all()
-        except NoResultFound as e:
-            raise RepositoryError from e
+        return self.session.exec(select(Task)).all()
 
     def find_by_status_id(self, status_id: int) -> Sequence[Task]:
         """
