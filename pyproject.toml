@@ -66,6 +66,7 @@ line-ending = "lf"
 select = ["I", "SIM", "B", "UP", "F", "E", "S", "C90", "DTZ", "LOG", "PIE", "PT", "ERA", "W", "C", "TRY", "RUF"]
 fixable = ["ALL"]
 task-tags = ["TODO"]
+ignore = ["TRY003"]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**.py" = ["S101"]
