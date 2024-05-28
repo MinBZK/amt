@@ -1,13 +1,18 @@
 from abc import ABC, abstractmethod
 from typing import Dict
+from pathlib import Path
 
 from yaml import dump
 
 
 class Writer(ABC):
-    def __init__(self, data: Dict, location: str):
+    def __init__(self, data: Dict, location: str, filename: str) -> None:
         self.data = data
         self.location = location
+        if not filename.endswith(".yaml"):
+            raise ValueError("Filename must end with .yaml")
+        self.filename = filename
+
 
     @abstractmethod
     def write(self) -> None:
@@ -16,7 +21,7 @@ class Writer(ABC):
 
 class FileSystemWriter(Writer):
     def write(self):
-        with open(self.location, "w") as f:
+        with open(Path(self.location) / self.filename, "w") as f:
             dump(self.data, f, default_flow_style=False, sort_keys=False)
 
 
