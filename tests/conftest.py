@@ -24,23 +24,13 @@ def run_server():
 
 
 def wait_for_server_ready(url: str, timeout: int = 30):
-    with sync_playwright() as p:
-        browser = p.chromium.launch()
-        page = browser.new_page()
-        for _ in range(timeout):
-            try:
-                page.goto(url)
-                browser.close()
-                return True  # noqa
-            # todo (robbert) find out what exception to catch
-            except Exception:
-                sleep(1)
-        browser.close()
-        raise Exception(f"Server at {url} did not become ready within {timeout} seconds")  # noqa: TRY003 TRY002
+    # todo we can not use playwright because it gives async errors, so we need another
+    #  wait to check the server for being up
+    sleep(5)
 
 
 @pytest.fixture(scope="module")
-def start_server():
+def server():
     # todo (robbert) use a better way to get the test database in the app configuration
     os.environ["APP_DATABASE_FILE"] = "database.sqlite3.test"
     process = Process(target=run_server)
@@ -74,3 +64,18 @@ def client() -> Generator[TestClient, None, None]:
     with TestClient(app, raise_server_exceptions=True) as c:
         c.timeout = 5
         yield c
+
+
+@pytest.fixture(scope="session")
+def playwright():
+    with sync_playwright() as p:
+        yield p
+
+
+@pytest.fixture(params=["chromium", "firefox", "webkit"])
+def browser(playwright, request):
+    browser = getattr(playwright, request.param).launch(headless=True)
+    context = browser.new_context()
+    page = context.new_page()
+    yield page
+    browser.close()

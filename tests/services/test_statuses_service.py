@@ -8,7 +8,7 @@ from tad.services.statuses import StatusesService
 
 class MockStatusesRepository:
     def __init__(self):
-        print("you found me")
+        pass
 
     def find_by_id(self, status_id: int) -> Status:
         return Status(id=status_id)

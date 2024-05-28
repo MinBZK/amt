@@ -23,7 +23,6 @@ async def move_task(
     :return: a HTMLResponse object, in this case the html code of the card that was moved
     """
     try:
-        print("hello I am here", flush=True)
         task = tasks_service.move_task(
             convert_to_int_if_is_int(move_task.id),
             convert_to_int_if_is_int(move_task.status_id),
@@ -33,7 +32,6 @@ async def move_task(
         # todo(Robbert) add error handling for input error or task error handling
         return templates.TemplateResponse(request=request, name="task.jinja", context={"task": task})
     except Exception:
-        print("All is broken", flush=True)
         return templates.TemplateResponse(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, request=request, name="error.jinja"
         )
