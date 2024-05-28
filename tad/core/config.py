@@ -57,7 +57,7 @@ class Settings(BaseSettings):
     APP_DATABASE_PASSWORD: str | None = None
     APP_DATABASE_DB: str = "tad"
 
-    APP_DATABASE_FILE: str = "database.sqlite3.test"
+    APP_DATABASE_FILE: str = "database.sqlite3"
 
     @computed_field  # type: ignore[misc]
     @property

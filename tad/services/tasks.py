@@ -55,17 +55,15 @@ class TasksService:
         if not previous_sibling_id and not next_sibling_id:
             task.sort_order = 10
         elif previous_sibling_id and next_sibling_id:
-            previous_task = self.repository.find_by_id(int(previous_sibling_id))
-            next_task = self.repository.find_by_id(int(next_sibling_id))
+            previous_task = self.repository.find_by_id(previous_sibling_id)
+            next_task = self.repository.find_by_id(next_sibling_id)
             new_sort_order = previous_task.sort_order + ((next_task.sort_order - previous_task.sort_order) / 2)
             task.sort_order = new_sort_order
         elif previous_sibling_id and not next_sibling_id:
-            previous_task = self.repository.find_by_id(int(previous_sibling_id))
+            previous_task = self.repository.find_by_id(previous_sibling_id)
             task.sort_order = previous_task.sort_order + 10
         elif not previous_sibling_id and next_sibling_id:
-            next_task = self.repository.find_by_id(int(next_sibling_id))
+            next_task = self.repository.find_by_id(next_sibling_id)
             task.sort_order = next_task.sort_order / 2
 
-        task = self.repository.save(task)
-
-        return task
+        return self.repository.save(task)

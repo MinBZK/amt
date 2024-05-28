@@ -1,3 +1,4 @@
+import os
 from collections.abc import Generator
 from multiprocessing import Process
 from time import sleep
@@ -12,9 +13,14 @@ from tad.core.db import get_engine
 from tad.main import app
 
 
+class TestSettings:
+    HTTP_SERVER_SCHEME: str = "http://"
+    HTTP_SERVER_HOST: str = "127.0.0.1"
+    HTTP_SERVER_PORT: int = 8000
+
+
 def run_server():
-    settings.APP_DATABASE_FILE = "database.sqlite3.test"
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host=TestSettings.HTTP_SERVER_HOST, port=TestSettings.HTTP_SERVER_PORT)
 
 
 def wait_for_server_ready(url: str, timeout: int = 30):
@@ -35,12 +41,17 @@ def wait_for_server_ready(url: str, timeout: int = 30):
 
 @pytest.fixture(scope="module")
 def start_server():
+    # todo (robbert) use a better way to get the test database in the app configuration
+    os.environ["APP_DATABASE_FILE"] = "database.sqlite3.test"
     process = Process(target=run_server)
     process.start()
-    server_address = "http://127.0.0.1:8000"
+    server_address = (
+        TestSettings.HTTP_SERVER_SCHEME + TestSettings.HTTP_SERVER_HOST + ":" + str(TestSettings.HTTP_SERVER_PORT)
+    )
     wait_for_server_ready(server_address)
     yield server_address
     process.terminate()
+    del os.environ["APP_DATABASE_FILE"]
 
 
 @pytest.fixture(scope="session")
