@@ -8,7 +8,7 @@ class WriteService(ABC):
     def __init__(self, location: str, filename: str) -> None:
         self.location = location
         if not filename.endswith(".yaml"):
-            raise ValueError(f"Filename {filename} must end with .yaml instead of .{filename.split('.')[-1]}")  # noqa: TRY003
+            raise ValueError(f"Filename {filename} must end with .yaml instead of .{filename.split('.')[-1]}")
         self.filename = filename
 
     @abstractmethod
