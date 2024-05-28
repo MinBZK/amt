@@ -1,10 +1,11 @@
 import os
 from logging.config import fileConfig
 
-from alembic import context
 from sqlalchemy import engine_from_config, pool
 from sqlmodel import SQLModel
 from tad.models import *  # noqa
+
+from alembic import context
 
 config = context.config
 
