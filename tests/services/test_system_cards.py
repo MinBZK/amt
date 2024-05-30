@@ -2,21 +2,21 @@ import pytest
 from tad.services.system_card import SystemCardService
 
 
-@pytest.mark.skip(reason="This is an initialisation function for the tests")
-def init():
+@pytest.fixture()
+def setup():
     system_card_service = SystemCardService()
     return system_card_service
 
 
-def test_get_system_card():
-    system_card_service = init()
+def test_get_system_card(setup):
+    system_card_service = setup
     expected = {}
 
     assert system_card_service.get_system_card() == expected
 
 
-def test_system_card_update():
-    system_card_service = init()
+def test_system_card_update(setup):
+    system_card_service = setup
     expected = {"title": "IAMA 1.1"}
     system_card_service.update("IAMA 1.1")
 

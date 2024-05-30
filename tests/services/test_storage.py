@@ -6,32 +6,28 @@ from tad.services.storage import FileSystemWriteService
 from yaml import safe_load
 
 
-@pytest.mark.skip(reason="This is an initialisation function for the tests")
-def init():
+@pytest.fixture()
+def setup_and_teardown():
     filename = "test.yaml"
     location = "./tests/data"
-    return filename, location
-
-
-@pytest.fixture(autouse=True)
-def _cleanup_test_yaml() -> None:
-    _, location = init()
     loc_path = Path(location)
     Path.mkdir(loc_path, exist_ok=True)
-    yield
+
+    yield filename, location
+
     shutil.rmtree(loc_path)
 
 
-def test_file_system_writer_empty_yaml():
-    filename, location = init()
+def test_file_system_writer_empty_yaml(setup_and_teardown):
+    filename, location = setup_and_teardown
     file_system_writer = FileSystemWriteService(location, filename)
     file_system_writer.write({})
 
     assert Path.is_file(Path(location) / filename), True
 
 
-def test_file_system_writer_yaml_with_content():
-    filename, location = init()
+def test_file_system_writer_yaml_with_content(setup_and_teardown):
+    filename, location = setup_and_teardown
     data = {"test": "test"}
     file_system_writer = FileSystemWriteService(location, filename)
     file_system_writer.write(data)
@@ -40,11 +36,12 @@ def test_file_system_writer_yaml_with_content():
         assert safe_load(f) == data, True
 
 
-def test_abstract_writer_non_yaml_filename():
-    _, location = init()
+def test_abstract_writer_non_yaml_filename(setup_and_teardown):
+    _, location = setup_and_teardown
     filename = "test.csv"
-    with pytest.raises(ValueError,
-                       match=f"Filename {filename} must end with .yaml instead of .{filename.split('.')[-1]}"):
+    with pytest.raises(
+        ValueError, match=f"Filename {filename} must end with .yaml instead of .{filename.split('.')[-1]}"
+    ):
         FileSystemWriteService(location, filename)
 
 
