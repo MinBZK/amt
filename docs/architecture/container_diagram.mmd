@@ -1,31 +1,30 @@
 C4Container
     title Container diagram for the Algorithm Management Toolkit System
+    Person(user0, "User", "A user of the the Algorithm Management Toolkit")
     System(Repository, "Repository", "External repository where the System Card will be stored")
+    System(InstrumentRegister, "Instrument Register", "Contains information about how to execute instruments and measures")
+
     Boundary(b0, "Algorithm Management Toolkit") {
 
         Container(FrontEnd, "Front End", "htmx, jinja2", "Provides user interface for projects <br/> and tasks")
         Container(API, "API Application", "Python, FastAPI", "Provides the project and task management <br/> functionality via HTTPS.")
         Container(Business Logic, "Business Logic", "TODO", "TODO")
         Container(State, "System State", "", "Provides the state of the <br/>Algorithm Management Toolkit")
-        Container(Queue, "Task Queue", "Celery, Redis", "Asynchronously manages and <br/>executes tasks")
-        SystemDb(Db, "Database")
         Container(CLI, "CLI", "TODO", "CLI to execute measures <br/> and instruments")
         Container(Tasks, "Tasks", "Python library", "Library containing executable tasks <br/> which are measures and instruments")
-
-
-
+        Container(Queue, "Task Queue", "Celery, Redis", "Asynchronously manages and <br/>executes tasks")
+        SystemDb(Db, "Database")
     }
 
-    Person(user0, "User", "A user of the the Algorithm Management Toolkit")
 
     Rel(user0, CLI, "Executes tasks locally from", "Command line")
-    UpdateRelStyle(user0, CLI, $offsetY="-380", $offsetX="190")
+    UpdateRelStyle(user0, CLI, $offsetY="-170", $offsetX="-170")
 
     Rel(user0, FrontEnd, "Visits Algorithm Management Toolkit webpage", "HTTPS")
-    UpdateRelStyle(user0, FrontEnd, $offsetY="-60", $offsetX="-180")
+    UpdateRelStyle(user0, FrontEnd, $offsetY="-60", $offsetX="10")
 
     Rel(Queue, Tasks, "Get tasks")
-    UpdateRelStyle(FrontEnd, API, $offsetY="30", $offsetX="-50")
+    UpdateRelStyle(Queue, Tasks, $offsetY="10", $offsetX="-30")
 
     Rel(CLI, Tasks, "Imports tasks from")
     UpdateRelStyle(CLI, Tasks, $offsetY="-20", $offsetX="-48")
@@ -33,26 +32,34 @@ C4Container
     Rel(FrontEnd, API, "Makes API calls to", "HTTPS, WebSocket")
     UpdateRelStyle(FrontEnd, API, $offsetY="30", $offsetX="-50")
 
-    Rel(State, Db, "Reads form and <br/>writes to", "TODO")
-    UpdateRelStyle(State, Db, $offsetY="-20", $offsetX="5")
+    Rel(State, Db, "Reads form and <br/>writes to", "")
+    UpdateRelStyle(State, Db, $offsetY="-15", $offsetX="20")
 
-    Rel(Business Logic, Db, "Reads form and <br/>writes to", "TODO")
-    UpdateRelStyle(Business Logic, Db, $offsetY="-20", $offsetX="-140")
+    Rel(Business Logic, Db, "Reads form and <br/>writes to", "")
+    UpdateRelStyle(Business Logic, Db, $offsetY="-20", $offsetX="-20")
 
-    Rel(Business Logic, Queue, "TODO", "TODO")
-    UpdateRelStyle(Business Logic, Queue, $offsetY="-15", $offsetX="-50")
+    Rel(Business Logic, InstrumentRegister, "Gets instructions on how to execute tasks and <br/> store results", "")
+    UpdateRelStyle(Business Logic, InstrumentRegister, $offsetY="-50", $offsetX="20")
 
-    Rel(Queue, Business Logic, "TODO", "TODO")
-    UpdateRelStyle(Business Logic, Queue, $offsetY="-15", $offsetX="-50")
+    Rel(Business Logic, Queue, "Ask for task execution", "")
+    UpdateRelStyle(Business Logic, Queue, $offsetY="-15", $offsetX="-130")
 
-    Rel(Business Logic, Repository, "Writes System Card", "TODO")
-    UpdateRelStyle(Business Logic, Repository, $offsetY="-150", $offsetX="-110")
+    Rel(Queue, Business Logic, "Gives task result", "")
+    UpdateRelStyle(Queue, Business Logic, $offsetY="-15", $offsetX="10")
 
-    Rel(API, Business Logic, "TODO", "TODO")
-    UpdateRelStyle(Business Logic, Repository, $offsetY="-150", $offsetX="-110")
+    Rel(Business Logic, Repository, "Writes System Card", "")
+    UpdateRelStyle(Business Logic, Repository, $offsetY="-50", $offsetX="-130")
 
-    Rel(Business Logic, API, "TODO", "TODO")
-    UpdateRelStyle(Business Logic, Repository, $offsetY="-150", $offsetX="-110")
+    Rel(API, Business Logic, "Forwards instructions", "")
+    UpdateRelStyle(API, Business Logic, $offsetY="-40", $offsetX="-50")
 
+    Rel(Business Logic, API, "Returns results", "")
+    UpdateRelStyle(Business Logic, API, $offsetY="20", $offsetX="-40")
 
-    UpdateLayoutConfig($c4ShapeInRow="2", $c4BoundaryInRow="1")
+    Rel(Business Logic, State, "Updates state", "")
+    UpdateRelStyle(Business Logic, State, $offsetY="-30", $offsetX="-30")
+
+    Rel(State, Business Logic, "Gets state", "")
+    UpdateRelStyle(State, Business Logic, $offsetY="20", $offsetX="-30")
+
+    UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="1")
