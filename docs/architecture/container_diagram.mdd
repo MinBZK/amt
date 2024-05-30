@@ -1,0 +1,58 @@
+C4Container
+    title Container diagram for the Algorithm Management Toolkit System
+    System(Repository, "Repository", "External repository where the System Card will be stored")
+    Boundary(b0, "Algorithm Management Toolkit") {
+
+        Container(FrontEnd, "Front End", "htmx, jinja2", "Provides user interface for projects <br/> and tasks")
+        Container(API, "API Application", "Python, FastAPI", "Provides the project and task management <br/> functionality via HTTPS.")
+        Container(Business Logic, "Business Logic", "TODO", "TODO")
+        Container(State, "System State", "", "Provides the state of the <br/>Algorithm Management Toolkit")
+        Container(Queue, "Task Queue", "Celery, Redis", "Asynchronously manages and <br/>executes tasks")
+        SystemDb(Db, "Database")
+        Container(CLI, "CLI", "TODO", "CLI to execute measures <br/> and instruments")
+        Container(Tasks, "Tasks", "Python library", "Library containing executable tasks <br/> which are measures and instruments")
+
+
+
+    }
+
+    Person(user0, "User", "A user of the the Algorithm Management Toolkit")
+
+    Rel(user0, CLI, "Executes tasks locally from", "Command line")
+    UpdateRelStyle(user0, CLI, $offsetY="-380", $offsetX="190")
+
+    Rel(user0, FrontEnd, "Visits Algorithm Management Toolkit webpage", "HTTPS")
+    UpdateRelStyle(user0, FrontEnd, $offsetY="-60", $offsetX="-180")
+
+    Rel(Queue, Tasks, "Get tasks")
+    UpdateRelStyle(FrontEnd, API, $offsetY="30", $offsetX="-50")
+
+    Rel(CLI, Tasks, "Imports tasks from")
+    UpdateRelStyle(CLI, Tasks, $offsetY="-20", $offsetX="-48")
+
+    Rel(FrontEnd, API, "Makes API calls to", "HTTPS, WebSocket")
+    UpdateRelStyle(FrontEnd, API, $offsetY="30", $offsetX="-50")
+
+    Rel(State, Db, "Reads form and <br/>writes to", "TODO")
+    UpdateRelStyle(State, Db, $offsetY="-20", $offsetX="5")
+
+    Rel(Business Logic, Db, "Reads form and <br/>writes to", "TODO")
+    UpdateRelStyle(Business Logic, Db, $offsetY="-20", $offsetX="-140")
+
+    Rel(Business Logic, Queue, "TODO", "TODO")
+    UpdateRelStyle(Business Logic, Queue, $offsetY="-15", $offsetX="-50")
+
+    Rel(Queue, Business Logic, "TODO", "TODO")
+    UpdateRelStyle(Business Logic, Queue, $offsetY="-15", $offsetX="-50")
+
+    Rel(Business Logic, Repository, "Writes System Card", "TODO")
+    UpdateRelStyle(Business Logic, Repository, $offsetY="-150", $offsetX="-110")
+
+    Rel(API, Business Logic, "TODO", "TODO")
+    UpdateRelStyle(Business Logic, Repository, $offsetY="-150", $offsetX="-110")
+
+    Rel(Business Logic, API, "TODO", "TODO")
+    UpdateRelStyle(Business Logic, Repository, $offsetY="-150", $offsetX="-110")
+
+
+    UpdateLayoutConfig($c4ShapeInRow="2", $c4BoundaryInRow="1")
