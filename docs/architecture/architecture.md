@@ -1,0 +1,37 @@
+# Algorithm Management Toolkit Architecture
+
+This document contains architectural decisions related to the Algorithm Managment Toolkit.
+
+```mermaid
+C4Context
+    title System Context diagram for Algorithm Management Toolkit
+    Boundary(b0, "Government of the Netherlands") {
+        System(Algoritmekader, "Algoritmekader", "Defines measures and instruments")
+        System(TAD, "Algorithm Management Toolkit", "Provides the execution of measures and instruments")
+        System(InstrumentRegister, "Instrument Register", "Contains information about how to execute instruments and measures")
+        System(Repository, "Repository", "Contains a System Card with filled in measures and instruments")
+    }
+
+    Person(user0, "User", "User wants to comply with regulations and required
+    ethical frameworks")
+
+
+    Rel(Algoritmekader, TAD, "Passes required measures and instruments")
+    UpdateRelStyle(Algoritmekader, TAD, $offsetY="50", $offsetX="-150")
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
+
+    Rel(TAD, Repository, "Writes results to a System Card")
+    UpdateRelStyle(TAD, Repository, $offsetY="15", $offsetX="0")
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
+
+    Rel(InstrumentRegister, TAD, "Specifies instructions on how to execute instruments and measures")
+    UpdateRelStyle(InstrumentRegister, TAD, $offsetY="50", $offsetX="-40")
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
+
+
+    Rel(user0, Algoritmekader, "Selects which measures and instruments need to be exectued")
+    UpdateRelStyle(user0, Algoritmekader, $offsetY="-30", $offsetX="-320")
+
+    Rel(user0, TAD, "Executes the required measures and instruments")
+    UpdateRelStyle(user0, TAD, $offsetY="-30", $offsetX="-30")
+```
