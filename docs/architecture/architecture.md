@@ -10,7 +10,7 @@ of this Algorithm Management Toolkit.
 ### Example
 Suppose a data science team is working on an ML-algorithm. A team member visits the Algoritmekader
 website and sees that among other things an IAMA is a required to be performed. The user selects
-the IAMA task from the Algoritmekader and is forwarded to the Algoritme Management Toolkit. Here
+the IAMA task from the Algoritmekader and is forwarded to the Algorithm Management Toolkit. Here
 the user can login and import the IAMA task. The Algorithm Management Toolkit imports the instructions
 on how to execute an IAMA and how to store the results from the Instrument Register. Now the user can
 perform the IAMA from within the Algorithm Management Toolkit. Relevant stakeholders can also login
@@ -53,7 +53,7 @@ C4Context
     UpdateRelStyle(user0, TAD, $offsetY="-30", $offsetX="-30")
 ```
 
-## Container Context of the Algorithm Management Toolkit System
+## Container Diagram of the Algorithm Management Toolkit System
 ```mermaid
 C4Container
     title Container diagram for the Algorithm Management Toolkit System
@@ -65,7 +65,7 @@ C4Container
 
         Container(FrontEnd, "Front End", "htmx, jinja2", "Provides user interface for projects <br/> and tasks")
         Container(API, "API Application", "Python, FastAPI", "Provides the project and task management <br/> functionality via HTTPS.")
-        Container(Business Logic, "Business Logic", "TODO", "TODO")
+        Container(Business Logic, "Business Logic", "Python", "Core logic of the <br/> Algorithm Management Toolkit")
         Container(State, "System State", "", "Provides the state of the <br/>Algorithm Management Toolkit")
         Container(CLI, "CLI", "TODO", "CLI to execute measures <br/> and instruments")
         Container(Tasks, "Tasks", "Python library", "Library containing executable tasks <br/> which are measures and instruments")
@@ -86,7 +86,13 @@ C4Container
     Rel(CLI, Tasks, "Imports tasks from")
     UpdateRelStyle(CLI, Tasks, $offsetY="-20", $offsetX="-48")
 
-    Rel(FrontEnd, API, "Makes API calls to", "HTTPS, WebSocket")
+    Rel(Tasks, API, "Sends live update","websocket")
+    UpdateRelStyle(Tasks, API, $offsetY="-20", $offsetX="-100")
+
+    Rel(API, FrontEnd, "Sends live update","websocket")
+    UpdateRelStyle(API, FrontEnd, $offsetY="-40", $offsetX="-50")
+
+    Rel(FrontEnd, API, "Makes API calls to", "HTTPS")
     UpdateRelStyle(FrontEnd, API, $offsetY="30", $offsetX="-50")
 
     Rel(State, Db, "Reads form and <br/>writes to", "")
@@ -108,16 +114,19 @@ C4Container
     UpdateRelStyle(Business Logic, Repository, $offsetY="-50", $offsetX="-130")
 
     Rel(API, Business Logic, "Forwards instructions", "")
-    UpdateRelStyle(API, Business Logic, $offsetY="-40", $offsetX="-50")
+    UpdateRelStyle(API, Business Logic, $offsetY="40", $offsetX="-50")
 
     Rel(Business Logic, API, "Returns results", "")
     UpdateRelStyle(Business Logic, API, $offsetY="20", $offsetX="-40")
 
     Rel(Business Logic, State, "Updates state", "")
-    UpdateRelStyle(Business Logic, State, $offsetY="-30", $offsetX="-30")
+    UpdateRelStyle(Business Logic, State, $offsetY="30", $offsetX="-30")
 
     Rel(State, Business Logic, "Gets state", "")
     UpdateRelStyle(State, Business Logic, $offsetY="20", $offsetX="-30")
+
+    Rel(API, State, "Sends heartbeat", "HTTPS")
+    UpdateRelStyle(API, State, $offsetY="-30", $offsetX="-200")
 
     UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="1")
 ```
