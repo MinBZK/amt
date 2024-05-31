@@ -54,6 +54,8 @@ C4Context
 ```
 
 ## Container Diagram of the Algorithm Management Toolkit System
+Below is a context diagram of the Algorithm Management Toolkit, with some additional remarks about
+its components.
 ```mermaid
 C4Container
     title Container diagram for the Algorithm Management Toolkit System
@@ -130,3 +132,19 @@ C4Container
 
     UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="1")
 ```
+
+### Tasks
+The `Task` library of the system contains executable tasks that implement the measures and
+instruments from the Instrument Register (which are specified in the Algoritmekader). There exists
+a one-to-one correspondence between measures and instruments in the Instrument Register and the `task`'s
+within the `Task` library. Each `task` within the `Tasks` library implements exactly one measure or
+instrument from the Instrument Register and each such `task` knows to which measure or instrument
+it corresponds to.
+
+
+TODO: As per the information in the ticket tasks should run in a Docker container. How can we visualise
+this in the above drawing? Probably we do not want that the CLI runs tasks within a container, because
+it makes more sense to import tasks directly from the tasks library.
+
+#### Implementation of a task
+TODO: Can we use AIVerify's implemenations for technical tests?
