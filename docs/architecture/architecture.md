@@ -2,6 +2,23 @@
 
 This document contains architectural decisions related to the Algorithm Managment Toolkit.
 
+## System Context
+The Algorithm Management Toolkit is an application that users can use to complete requirements
+that are specified by the algoritmekader. The diagram below sketches the broader system context
+of this Algorithm Management Toolkit.
+
+### Example
+Suppose a data science team is working on an ML-algorithm. A team member visits the Algoritmekader
+website and sees that among other things an IAMA is a required to be performed. The user selects
+the IAMA task from the Algoritmekader and is forwarded to the Algoritme Management Toolkit. Here
+the user can login and import the IAMA task. The Algorithm Management Toolkit imports the instructions
+on how to execute an IAMA and how to store the results from the Instrument Register. Now the user can
+perform the IAMA from within the Algorithm Management Toolkit. Relevant stakeholders can also login
+to the project page of the Algorithm Management Toolkit to answer questions from the IAMA. Relevant
+discussions can be captured within the toolkit as well. Upon completion the IAMA results are written
+to an Assessment Card within a System Card to a user specified location, usually a remote repository
+where the source code of the algorithm resides.
+
 ```mermaid
 C4Context
     title System Context diagram for Algorithm Management Toolkit
@@ -34,4 +51,73 @@ C4Context
 
     Rel(user0, TAD, "Executes the required measures and instruments")
     UpdateRelStyle(user0, TAD, $offsetY="-30", $offsetX="-30")
+```
+
+## Container Context of the Algorithm Management Toolkit System
+```mermaid
+C4Container
+    title Container diagram for the Algorithm Management Toolkit System
+    Person(user0, "User", "A user of the the Algorithm Management Toolkit")
+    System(Repository, "Repository", "External repository where the System Card will be stored")
+    System(InstrumentRegister, "Instrument Register", "Contains information about how to execute instruments and measures")
+
+    Boundary(b0, "Algorithm Management Toolkit") {
+
+        Container(FrontEnd, "Front End", "htmx, jinja2", "Provides user interface for projects <br/> and tasks")
+        Container(API, "API Application", "Python, FastAPI", "Provides the project and task management <br/> functionality via HTTPS.")
+        Container(Business Logic, "Business Logic", "TODO", "TODO")
+        Container(State, "System State", "", "Provides the state of the <br/>Algorithm Management Toolkit")
+        Container(CLI, "CLI", "TODO", "CLI to execute measures <br/> and instruments")
+        Container(Tasks, "Tasks", "Python library", "Library containing executable tasks <br/> which are measures and instruments")
+        Container(Queue, "Task Queue", "Celery, Redis", "Asynchronously manages and <br/>executes tasks")
+        SystemDb(Db, "Database")
+    }
+
+
+    Rel(user0, CLI, "Executes tasks locally from", "Command line")
+    UpdateRelStyle(user0, CLI, $offsetY="-170", $offsetX="-170")
+
+    Rel(user0, FrontEnd, "Visits Algorithm Management Toolkit webpage", "HTTPS")
+    UpdateRelStyle(user0, FrontEnd, $offsetY="-60", $offsetX="10")
+
+    Rel(Queue, Tasks, "Get tasks")
+    UpdateRelStyle(Queue, Tasks, $offsetY="10", $offsetX="-30")
+
+    Rel(CLI, Tasks, "Imports tasks from")
+    UpdateRelStyle(CLI, Tasks, $offsetY="-20", $offsetX="-48")
+
+    Rel(FrontEnd, API, "Makes API calls to", "HTTPS, WebSocket")
+    UpdateRelStyle(FrontEnd, API, $offsetY="30", $offsetX="-50")
+
+    Rel(State, Db, "Reads form and <br/>writes to", "")
+    UpdateRelStyle(State, Db, $offsetY="-15", $offsetX="20")
+
+    Rel(Business Logic, Db, "Reads form and <br/>writes to", "")
+    UpdateRelStyle(Business Logic, Db, $offsetY="-20", $offsetX="-20")
+
+    Rel(Business Logic, InstrumentRegister, "Gets instructions on how to execute tasks and <br/> store results", "")
+    UpdateRelStyle(Business Logic, InstrumentRegister, $offsetY="-50", $offsetX="20")
+
+    Rel(Business Logic, Queue, "Ask for task execution", "")
+    UpdateRelStyle(Business Logic, Queue, $offsetY="-15", $offsetX="-130")
+
+    Rel(Queue, Business Logic, "Gives task result", "")
+    UpdateRelStyle(Queue, Business Logic, $offsetY="-15", $offsetX="10")
+
+    Rel(Business Logic, Repository, "Writes System Card", "")
+    UpdateRelStyle(Business Logic, Repository, $offsetY="-50", $offsetX="-130")
+
+    Rel(API, Business Logic, "Forwards instructions", "")
+    UpdateRelStyle(API, Business Logic, $offsetY="-40", $offsetX="-50")
+
+    Rel(Business Logic, API, "Returns results", "")
+    UpdateRelStyle(Business Logic, API, $offsetY="20", $offsetX="-40")
+
+    Rel(Business Logic, State, "Updates state", "")
+    UpdateRelStyle(Business Logic, State, $offsetY="-30", $offsetX="-30")
+
+    Rel(State, Business Logic, "Gets state", "")
+    UpdateRelStyle(State, Business Logic, $offsetY="20", $offsetX="-30")
+
+    UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="1")
 ```
