@@ -18,10 +18,12 @@ from tad.core.exception_handlers import (
     validation_exception_handler as tad_validation_exception_handler,
 )
 from tad.core.log import configure_logging
-from tad.middleware.route_logging import RequestLoggingMiddleware
 from tad.utils.mask import Mask
 
+from .middleware.route_logging import RequestLoggingMiddleware
+
 configure_logging(settings.LOGGING_LEVEL, settings.LOGGING_CONFIG)
+
 
 logger = logging.getLogger(__name__)
 mask = Mask(mask_keywords=["database_uri"])
@@ -52,7 +54,6 @@ app = FastAPI(
 )
 
 app.add_middleware(RequestLoggingMiddleware)
-
 app.mount("/static", StaticFiles(directory=settings.STATIC_DIR), name="static")
 
 
@@ -67,3 +68,5 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 
 
 app.include_router(api_router)
+
+# todo (robbert) add init code for example tasks and statuses
