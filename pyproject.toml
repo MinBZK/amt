@@ -114,5 +114,8 @@ authorized_licenses = [
     "Python Software Foundation",
     "MIT",
     "Apache Software",
-    "GNU Library or Lesser General Public License (LGPL)"
+    "GNU Library or Lesser General Public License (LGPL)",
+    "Mozilla Public License 2.0 (MPL 2.0)",
+    "The Unlicense (Unlicense)",
+    "ISC License (ISCL)"
 ]
