@@ -1,0 +1,9 @@
+<div class="progress_card_container" id="card-{{ task.id }}" data-id="{{ task.id }}">
+    <h4 class="margin-bottom--extra-small">{{ task.title }}</h4>
+    <div>{{ task.description }}</div>
+    {% if task.user_id %}
+        <div class="progress_card_assignees_container">
+            <img class="progress_card_assignees_image" src="/static/images/img_avatar.png" alt="Assigned to Avatar"/>
+        </div>
+    {% endif %}
+</div>

@@ -27,6 +27,7 @@ __pypackages__/
 
 #mypyr
 .mypy_cache/
+/.idea/
 
 # macos
 .DS_Store

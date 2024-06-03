@@ -1,0 +1,90 @@
+{% macro render_task_card(task) -%}
+    {% include "task.jinja" %}
+{%- endmacro -%}
+
+{% macro render_task_column(status) -%}
+    <div class="col span_1_of_4">
+        <h3 class="text-center-horizontal margin-bottom--small">{{ status.name }}</h3>
+        <div class="progress_cards_container sortable" data-id="{{ status.id }}" id="column-{{ status.id }}">
+            {% for task in tasks_service.get_tasks(status.id) %}
+                {{ render_task_card(task) }}
+            {% endfor %}
+        </div>
+    </div>
+{% endmacro -%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ page_title }}</title>
+    <!-- TODO: decide if all files should be local, and if so, how to do versions management -->
+    <script type="text/javascript" src="/static/vendor/sortable/js/sortable.js"></script>
+    <script type="text/javascript" src="/static/vendor/htmx/js/hyperscript.min.js"></script>
+    <script type="text/javascript" src="/static/js/tad.js"></script>
+    <script type="text/javascript" src="/static/vendor/htmx/js/htmx.min.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/json-enc.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/response-targets.js"></script>
+    <link rel="stylesheet" href="/static/css/html5reset.css"/>
+    <link rel="stylesheet" href="/static/css/col.css"/>
+    <link rel="stylesheet" href="/static/css/2cols.css"/>
+    <link rel="stylesheet" href="/static/css/3cols.css"/>
+    <link rel="stylesheet" href="/static/css/4cols.css"/>
+    <link rel="stylesheet" href="/static/css/5cols.css"/>
+    <link rel="stylesheet" href="/static/css/6cols.css"/>
+    <link rel="stylesheet" href="/static/css/7cols.css"/>
+    <link rel="stylesheet" href="/static/css/8cols.css"/>
+    <link rel="stylesheet" href="/static/css/9cols.css"/>
+    <link rel="stylesheet" href="/static/css/10cols.css"/>
+    <link rel="stylesheet" href="/static/css/11cols.css"/>
+    <link rel="stylesheet" href="/static/css/12cols.css"/>
+    <link rel="stylesheet" href="/static/css/layout.css"/>
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <div class="header_logo_container">
+            <img class="header_logo_image" src="/static/images/logo.svg"/>
+            <div class="header_subtitle_container">
+                <span>Transparency of Algorithmic Decision making (TAD)</span>
+            </div>
+        </div>
+    </div>
+    <nav class="header_nav">
+    </nav>
+</header>
+<div class="container" hx-ext="response-targets">
+    <form id="cardMovedForm" hx-post="/tasks/move" hx-target-5*="#errorContainer" hx-ext="json-enc" hx-trigger="cardmoved" hx-swap="outerHTML" hx-target="#board" class="">
+        <input type="hidden" name="taskId" value="">
+        <input type="hidden" name="statusId" value="">
+        <input type="hidden" name="previousSiblingId" value="">
+        <input type="hidden" name="nextSiblingId" value="">
+    </form>
+    <h1 class="margin-bottom--large">Project X</h1>
+    <div id="errorContainer">
+
+    </div>
+    <div class="section group">
+    <!-- _="on end put event.from.id into #fromList.value put event.to.id into #toList.value put event.item.id into #movedCard.value then send cardmoved to #cardMovedForm" -->
+        {% for status in statuses_service.get_statuses() %}
+            {{ render_task_column(status) }}
+        {% endfor %}
+{#        <div class="col span_1_of_4">#}
+{#            <h3 class="text-center-horizontal margin-bottom--small">In progress</h3>#}
+{#            <div class="progress_cards_container" id="column-in-progress">#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="col span_1_of_4">#}
+{#            <h3 class="text-center-horizontal margin-bottom--small">Review</h3>#}
+{#            <div class="progress_cards_container">#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="col span_1_of_4">#}
+{#            <h3 class="text-center-horizontal margin-bottom--small">Done</h3>#}
+{#            <div class="progress_cards_container">#}
+{#            </div>#}
+{#        </div>#}
+    </div>
+</div>
+
+</body>
+</html>
