@@ -3,6 +3,7 @@
 This document contains architectural decisions related to the Algorithm Managment Toolkit.
 
 ## System Context
+
 The Algorithm Management Toolkit is an application that users can use to complete requirements
 that are specified by the algoritmekader. The diagram below sketches the broader system context
 of this Algorithm Management Toolkit.
@@ -18,6 +19,7 @@ to the project page of the Algorithm Management Toolkit to answer questions from
 discussions can be captured within the toolkit as well. Upon completion the IAMA results are written
 to an Assessment Card within a System Card to a user specified location, usually a remote repository
 where the source code of the algorithm resides.
+
 
 ```mermaid
 C4Context
@@ -52,99 +54,116 @@ C4Context
     Rel(user0, TAD, "Executes the required measures and instruments")
     UpdateRelStyle(user0, TAD, $offsetY="-30", $offsetX="-30")
 ```
-
 ## Container Diagram of the Algorithm Management Toolkit System
 Below is a context diagram of the Algorithm Management Toolkit, with some additional remarks about
 its components.
 ```mermaid
+
 C4Container
     title Container diagram for the Algorithm Management Toolkit System
-    Person(user0, "User", "A user of the the Algorithm Management Toolkit")
-    System(Repository, "Repository", "External repository where the System Card will be stored")
-    System(InstrumentRegister, "Instrument Register", "Contains information about how to execute instruments and measures")
+    Person(user0, "User")
 
-    Boundary(b0, "Algorithm Management Toolkit") {
 
-        Container(FrontEnd, "Front End", "htmx, jinja2", "Provides user interface for projects <br/> and tasks")
-        Container(API, "API Application", "Python, FastAPI", "Provides the project and task management <br/> functionality via HTTPS.")
-        Container(Business Logic, "Business Logic", "Python", "Core logic of the <br/> Algorithm Management Toolkit")
-        Container(State, "System State", "", "Provides the state of the <br/>Algorithm Management Toolkit")
-        Container(CLI, "CLI", "TODO", "CLI to execute measures <br/> and instruments")
-        Container(Tasks, "Tasks", "Python library", "Library containing executable tasks <br/> which are measures and instruments")
-        Container(Queue, "Task Queue", "Celery, Redis", "Asynchronously manages and <br/>executes tasks")
-        SystemDb(Db, "Database")
+Boundary(b0, "Local") {
+        Container_Ext(CLI, "CLI", "Command Line", "CLI to execute measures <br/> and instruments")
+        Container_Ext(Tasks, "Tasks", "Python library", "Library containing executable tasks <br/> which are measures and instruments")
+        System_Ext(InstrumentRegister, "Instrument Register",  "Contains information about <br/>how to execute instruments and measures")
+
     }
 
 
-    Rel(user0, CLI, "Executes tasks locally from", "Command line")
-    UpdateRelStyle(user0, CLI, $offsetY="-170", $offsetX="-170")
 
-    Rel(user0, FrontEnd, "Visits Algorithm Management Toolkit webpage", "HTTPS")
-    UpdateRelStyle(user0, FrontEnd, $offsetY="-60", $offsetX="10")
+ Boundary(b1, "Algorithm Management Toolkit") {
+        Container(FrontEnd, "Front End", "htmx, jinja2", "Provides user interface for projects <br/> and tasks")
+        Container(Backend, "Back End", "FastAPI, Python","Includes the API application, <br/>business logic and system state")
+        ComponentDb(Db, "Database")
+        ContainerQueue(Message queue, "Message queue", "Redis")
+        Component(Workers, "Workers", "Celery")
 
-    Rel(Queue, Tasks, "Get tasks")
-    UpdateRelStyle(Queue, Tasks, $offsetY="10", $offsetX="-30")
+    }
 
-    Rel(CLI, Tasks, "Imports tasks from")
-    UpdateRelStyle(CLI, Tasks, $offsetY="-20", $offsetX="-48")
 
-    Rel(Tasks, API, "Sends live update","websocket")
-    UpdateRelStyle(Tasks, API, $offsetY="-20", $offsetX="-100")
 
-    Rel(API, FrontEnd, "Sends live update","websocket")
-    UpdateRelStyle(API, FrontEnd, $offsetY="-40", $offsetX="-50")
+Boundary(b2, "External"){
+    System_Ext(Repository, "Repository", "External repository where the <br/> System Card will be stored")
 
-    Rel(FrontEnd, API, "Makes API calls to", "HTTPS")
-    UpdateRelStyle(FrontEnd, API, $offsetY="30", $offsetX="-50")
+}
 
-    Rel(State, Db, "Reads form and <br/>writes to", "")
-    UpdateRelStyle(State, Db, $offsetY="-15", $offsetX="20")
+UpdateLayoutConfig($c4ShapeInRow="1", $c4BoundaryInRow="4")
 
-    Rel(Business Logic, Db, "Reads form and <br/>writes to", "")
-    UpdateRelStyle(Business Logic, Db, $offsetY="-20", $offsetX="-20")
+Rel(user0, CLI, "Executes tasks locally <br/>from", "Command line")
+UpdateRelStyle(user0, CLI, $offsetY="-40", $offsetX="-140")
 
-    Rel(Business Logic, InstrumentRegister, "Gets instructions on how to execute tasks and <br/> store results", "")
-    UpdateRelStyle(Business Logic, InstrumentRegister, $offsetY="-50", $offsetX="20")
+Rel(user0, FrontEnd, "Visits Algorithm Management<br/> Toolkit webpage", "HTTPS")
+UpdateRelStyle(user0, FrontEnd, $offsetY="-40", $offsetX="-70")
 
-    Rel(Business Logic, Queue, "Ask for task execution", "")
-    UpdateRelStyle(Business Logic, Queue, $offsetY="-15", $offsetX="-130")
+Rel(CLI, Tasks, "Imports tasks from")
+UpdateRelStyle(CLI, Tasks, $offsetY="-5", $offsetX="-120")
 
-    Rel(Queue, Business Logic, "Gives task result", "")
-    UpdateRelStyle(Queue, Business Logic, $offsetY="-15", $offsetX="10")
+BiRel(FrontEnd, Backend, "Front End makes API calls, <br/> Back End sends live updates", "HTTPS, websocket")
+UpdateRelStyle(FrontEnd, Backend, $offsetY="-10", $offsetX="-165")
 
-    Rel(Business Logic, Repository, "Writes System Card", "")
-    UpdateRelStyle(Business Logic, Repository, $offsetY="-50", $offsetX="-130")
 
-    Rel(API, Business Logic, "Forwards instructions", "")
-    UpdateRelStyle(API, Business Logic, $offsetY="40", $offsetX="-50")
+BiRel(Backend, Db, "Reads from and <br/>writes to", "")
+UpdateRelStyle(Backend, Db, $offsetY="-10", $offsetX="10")
 
-    Rel(Business Logic, API, "Returns results", "")
-    UpdateRelStyle(Business Logic, API, $offsetY="20", $offsetX="-40")
+BiRel(Backend, Message queue, "Submits tasks, <br/>gets results")
+UpdateRelStyle(Backend, Message queue, $offsetY="80", $offsetX="15")
 
-    Rel(Business Logic, State, "Updates state", "")
-    UpdateRelStyle(Business Logic, State, $offsetY="30", $offsetX="-30")
 
-    Rel(State, Business Logic, "Gets state", "")
-    UpdateRelStyle(State, Business Logic, $offsetY="20", $offsetX="-30")
+BiRel(Message queue, Workers, "Accepts tasks, <br/> writes progress")
+UpdateRelStyle(Message queue, Workers, $offsetY="0", $offsetX="10")
 
-    Rel(API, State, "Sends heartbeat", "HTTPS")
-    UpdateRelStyle(API, State, $offsetY="-30", $offsetX="-200")
 
-    UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="1")
+Rel(Backend, Repository, "Writes System Card to", "")
+UpdateRelStyle(Backend, Repository, $offsetY="20", $offsetX="-40")
+
+Rel(Workers, Tasks, "Imports tasks <br/>from")
+UpdateRelStyle(Workers, Tasks, $offsetY="160", $offsetX="60")
+
+Rel(Tasks, InstrumentRegister, "Imports instructions from", "")
+UpdateRelStyle(Tasks, InstrumentRegister, $offsetY="10", $offsetX="-150")
+
 ```
 
-### Tasks
-The `Task` library of the system contains executable tasks that implement the measures and
-instruments from the Instrument Register (which are specified in the Algoritmekader). There exists
-a one-to-one correspondence between measures and instruments in the Instrument Register and the `task`'s
-within the `Task` library. Each `task` within the `Tasks` library implements exactly one measure or
-instrument from the Instrument Register and each such `task` knows to which measure or instrument
-it corresponds to.
+### Walkthrough
+Suppose a user wants to perform a specific task from the Algoritmekader. To execute this task, the user has 2 options.
+
+The first option is to execute the task locally by using the command line interface tool (CLI). The CLI tool imports the task from a Python library named `Tasks`. This library contains executable tasks that implement the measures and instruments from the `Instrument Register` (which are specified in the Algoritmekader). Instructions on how to perform these tasks are imported from the Instrument Register. There exists a one-to-one correspondence between measures and instruments in the `Instrument Register` and the task's within the `Tasks` library.
+
+The second option is to use the Algorithm Management Toolkit (AMT). The user starts by visiting the Algorithm Management Toolkit website. Here, the user encounters a front end interface showing a planning board for projects and tasks. This planning board contains 3 columns: ‘To do’,  ‘Doing’ and ‘Done’. When a user drags a task from ’To do’ to ‘Doing’, the front end makes an API call to the back end of the AMT.
+
+The backend consists of three components, showed in the component diagram at the end of this page.
+1. An API application, which provides the project and tasks management functionality via HTTPS.
+2. The business logic, which is the core logic of the AMT.
+3. A system state, which provides the state of the AMT.
+
+When receiving an API call, the API application forwards the instruction to the business logic. The business logic, in turn, updates the system state and submits the task to the Redis message queue. The message queue stores the task messages until a Celery worker is ready to process a specific task. When a Celery worker is available, it uses the task library to execute the task. After the task is completed by the worker, the result is sent back to the business logic via the message queue. The business logic now sends an update to the system state and writes the result to the database. Finally, the business logic writes a System Card to an external repository.
+
+Meanwhile, the API application sends regular heartbeats to the system state to check for updates. The system state receives updates from the business logic and checks for updates by reading from the database. When a state is updated (for example, a task is "done" or "failed with error X"), the business logic returns this to the API application. Using a websocket, the API application sends live updates back to the front end, to make sure the planning board stays up to date.
+
+## Component diagram of the back end of the Algorithm Management Toolkit
+Below is a component diagram of the back end of the Algorithm Management Toolkit, with some additional remarks about its components.
+```mermaid
+C4Component
+    title Component diagram for the back end of the Algorithm Management Toolkit System
+
+ Boundary(b2, "Back End") {
+        Container(State, "System State", "", "Provides the state of the <br/>Algorithm Management Toolkit")
+        Container(Business Logic, "Business Logic", "Python", "Core logic of the <br/> Algorithm Management Toolkit")
+        Container(API, "API Application", "Python, FastAPI", "Provides the project and task management <br/> functionality via HTTPS.")
+    }
 
 
-TODO: As per the information in the ticket tasks should run in a Docker container. How can we visualise
-this in the above drawing? Probably we do not want that the CLI runs tasks within a container, because
-it makes more sense to import tasks directly from the tasks library.
 
-#### Implementation of a task
-TODO: Can we use AIVerify's implemenations for technical tests?
+BiRel(API, Business Logic, "Forwards instructions, <br/> returns results", "")
+UpdateRelStyle(API, Business Logic, $offsetY="-20", $offsetX="-110")
+
+BiRel(State, Business Logic, "Gets / updates <br/>state", "")
+UpdateRelStyle(State, Business Logic, $offsetY="-25", $offsetX="-35")
+
+Rel(API, State, "Sends heartbeat", "HTTPS")
+UpdateRelStyle(API, State, $offsetY="-10", $offsetX="-100")
+
+UpdateLayoutConfig($c4ShapeInRow="2", $c4BoundaryInRow="3")
+```
