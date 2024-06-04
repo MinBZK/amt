@@ -1,23 +1,23 @@
 import pytest
-from tad.services.system_card import SystemCardService
+from tad.models.system_card import SystemCard
 
 
 @pytest.fixture()
 def setup():
-    system_card_service = SystemCardService()
-    return system_card_service
+    system_card = SystemCard()
+    return system_card
 
 
 def test_get_system_card(setup):
-    system_card_service = setup
-    expected = {}
+    system_card = setup
+    expected = {"title": None}
 
-    assert system_card_service.get_system_card() == expected
+    assert system_card.dict() == expected
 
 
 def test_system_card_update(setup):
-    system_card_service = setup
+    system_card = setup
     expected = {"title": "IAMA 1.1"}
-    system_card_service.update("IAMA 1.1")
+    system_card.title = "IAMA 1.1"
 
-    assert system_card_service.get_system_card() == expected
+    assert system_card.dict() == expected

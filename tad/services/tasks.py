@@ -4,12 +4,12 @@ from typing import Annotated
 
 from fastapi import Depends
 
+from tad.models.system_card import SystemCard
 from tad.models.task import Task
 from tad.models.user import User
 from tad.repositories.tasks import TasksRepository
 from tad.services.statuses import StatusesService
-from tad.services.storage import FileSystemWriteService
-from tad.services.system_card import SystemCardService
+from tad.services.storage import WriterFactory
 
 logger = logging.getLogger(__name__)
 
@@ -19,15 +19,13 @@ class TasksService:
         self,
         statuses_service: Annotated[StatusesService, Depends(StatusesService)],
         repository: Annotated[TasksRepository, Depends(TasksRepository)],
-        system_card_service: Annotated[SystemCardService, Depends(SystemCardService)],
-        storage_service: Annotated[FileSystemWriteService, Depends(FileSystemWriteService)],
     ):
         self.repository = repository
         self.statuses_service = statuses_service
-        self.system_card_service = system_card_service
-        location = "./tests/data"
-        filename = "system_card.yaml"
-        self.storage_service = storage_service.__init__(location, filename)  # TODO is this okay @robbert?
+        self.storage_writer = WriterFactory.get_writer(
+            writer_type="file", location="./tests/data", filename="system_card.yaml"
+        )
+        self.system_card = SystemCard()
 
     def get_tasks(self, status_id: int) -> Sequence[Task]:
         return self.repository.find_by_status_id(status_id)
@@ -51,9 +49,8 @@ class TasksService:
         task = self.repository.find_by_id(task_id)
 
         if status.name == "done":
-            updated_system_card = self.system_card_service.update(task.title)
-            # TODO: change with task.conclusion if datamodel is changed
-            self.storage_service.write(updated_system_card)
+            self.system_card.title = task.title
+            self.storage_writer.write(self.system_card.dict())
 
         # assign the task to the current user
         if status.name == "in_progress":
