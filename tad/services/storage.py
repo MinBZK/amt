@@ -4,19 +4,7 @@ from pathlib import Path
 from yaml import dump
 
 
-class WriterFactory(ABC):
-    @staticmethod
-    def get_writer(writer_type: str = "file", **kwargs):
-        match writer_type:
-            case "file":
-                return FileSystemWriteService(location=kwargs["location"], filename=kwargs["filename"])
-            case "s3":
-                return S3WriteService(kwargs)
-            case "git":
-                return GitWriteService(kwargs)
-            case _:
-                raise ValueError(f"Unknown writer type: {writer_type}")
-
+class Writer(ABC):
     @abstractmethod
     def write(self, data: dict) -> None:
         pass
@@ -26,7 +14,23 @@ class WriterFactory(ABC):
         pass
 
 
-class FileSystemWriteService(WriterFactory):
+class WriterFactory:
+    @staticmethod
+    def get_writer(writer_type: str = "file", **kwargs):
+        match writer_type:
+            case "file":
+                if not all(k in kwargs for k in ("location", "filename")):
+                    raise KeyError("The `location` or `filename` variables are not provided as input for get_writer()")
+                return FileSystemWriteService(location=kwargs["location"], filename=kwargs["filename"])
+            case "s3":
+                return S3WriteService(kwargs)
+            case "git":
+                return GitWriteService(kwargs)
+            case _:
+                raise ValueError(f"Unknown writer type: {writer_type}")
+
+
+class FileSystemWriteService(Writer):
     def __init__(self, location: str = "./tests/data", filename: str = "system_card.yaml") -> None:
         self.location = location
         if not filename.endswith(".yaml"):
@@ -46,7 +50,7 @@ class FileSystemWriteService(WriterFactory):
         """
 
 
-class GitWriteService(WriterFactory):
+class GitWriteService(Writer):
     def __init__(self, kwargs):
         raise NotImplementedError
 
@@ -57,7 +61,7 @@ class GitWriteService(WriterFactory):
         raise NotImplementedError
 
 
-class S3WriteService(WriterFactory):
+class S3WriteService(Writer):
     def __init__(self, kwargs):
         raise NotImplementedError
 
