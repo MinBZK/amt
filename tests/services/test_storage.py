@@ -1,4 +1,3 @@
-import shutil
 from pathlib import Path
 
 import pytest
@@ -8,15 +7,9 @@ from yaml import safe_load
 
 
 @pytest.fixture()
-def setup_and_teardown():
+def setup_and_teardown(tmp_path):
     filename = "test.yaml"
-    location = "./tests/data"
-    loc_path = Path(location)
-    Path.mkdir(loc_path, exist_ok=True)
-
-    yield filename, location
-
-    shutil.rmtree(loc_path)
+    return filename, tmp_path.absolute()
 
 
 def test_file_system_writer_empty_yaml(setup_and_teardown):
