@@ -52,8 +52,11 @@ class TasksService:
             self.system_card.title = task.title
             self.storage_writer.write(self.system_card.model_dump())
 
+        if not isinstance(status.id, int):
+            raise TypeError("status_id must be an integer")  # pragma: no cover
+
         # assign the task to the current user
-        if status.name == "in_progress":
+        if status.id > 1:
             task.user_id = 1
 
         # update the status for the task (this may not be needed if the status has not changed)

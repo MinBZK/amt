@@ -61,10 +61,13 @@ USER tad
 
 COPY --chown=root:root --chmod=755 ./tad /app/tad
 COPY --chown=root:root --chmod=755 alembic.ini /app/alembic.ini
-COPY --chown=root:root --chmod=755 .env /app/.env
+COPY --chown=root:root --chmod=755 prod.env /app/.env
 COPY --chown=root:root --chmod=755 LICENSE /app/LICENSE
+COPY --chown=tad:tad --chmod=755 docker-entrypoint.sh /app/docker-entrypoint.sh
 
 ENV PYTHONPATH=/app/
 WORKDIR /app/
 
-CMD ["python", "-m", "uvicorn", "--host", "0.0.0.0", "tad.main:app", "--log-level", "warning" ]
+ENV PATH="/app/:$PATH"
+
+CMD [ "docker-entrypoint.sh" ]

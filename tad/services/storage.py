@@ -17,18 +17,18 @@ class Writer(ABC):
 
 class WriterFactory:
     @staticmethod
-    def get_writer(writer_type: str = "file", **kwargs: str) -> Writer:
+    def get_writer(writer_type: str = "file", **kwargs: Any) -> Writer:
         match writer_type:
             case "file":
                 if not all(k in kwargs for k in ("location", "filename")):
                     raise KeyError("The `location` or `filename` variables are not provided as input for get_writer()")
-                return FileSystemWriteService(location=str(kwargs["location"]), filename=str(kwargs["filename"]))
+                return FileSystemWriteService(location=Path(kwargs["location"]), filename=str(kwargs["filename"]))
             case _:
                 raise ValueError(f"Unknown writer type: {writer_type}")
 
 
 class FileSystemWriteService(Writer):
-    def __init__(self, location: str = "./tests/data", filename: str = "system_card.yaml") -> None:
+    def __init__(self, location: str | Path = "./tests/data", filename: str = "system_card.yaml") -> None:
         self.location = location
         if not filename.endswith(".yaml"):
             raise ValueError(f"Filename {filename} must end with .yaml instead of .{filename.split('.')[-1]}")

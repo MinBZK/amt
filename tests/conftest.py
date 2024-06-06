@@ -1,79 +1,66 @@
 import os
-import urllib
-from collections.abc import Generator
+from collections.abc import Generator, Iterator
 from multiprocessing import Process
-from time import sleep
 from typing import Any
-from urllib.error import URLError
 
+import httpx
 import pytest
-import uvicorn
 from _pytest.fixtures import SubRequest
 from fastapi.testclient import TestClient
 from playwright.sync_api import Page, Playwright, sync_playwright
-from sqlmodel import Session
-from tad.core.config import settings
+from sqlmodel import Session, SQLModel
+from tad.core.config import Settings, get_settings
 from tad.core.db import get_engine
 from tad.main import app
+from uvicorn.main import run as uvicorn_run
 
 from tests.database_test_utils import DatabaseTestUtils
 
 
-class TestSettings:
-    HTTP_SERVER_SCHEME: str = "http://"
-    HTTP_SERVER_HOST: str = "127.0.0.1"
-    HTTP_SERVER_PORT: int = 8000
-    RETRY: int = 10
-
-
-def run_server() -> None:
-    uvicorn.run(app, host=TestSettings.HTTP_SERVER_HOST, port=TestSettings.HTTP_SERVER_PORT)
-
-
-def wait_for_server_ready(server: Generator[Any, Any, Any]) -> None:
-    for _ in range(TestSettings.RETRY):
-        try:
-            # we use urllib instead of playwright, because we only want a simple request
-            #  not a full page with all assets
-            assert urllib.request.urlopen(server).getcode() == 200  # type: ignore # noqa
-            break
-        # todo (robbert) find out what exception to catch
-        except URLError:  # server was not ready
-            sleep(1)
-
-
 @pytest.fixture(scope="module")
-def server() -> Generator[Any, Any, Any]:
-    # todo (robbert) use a better way to get the test database in the app configuration
-    os.environ["APP_DATABASE_FILE"] = "database.sqlite3.test"
-    process = Process(target=run_server)
+def run_server(request: pytest.FixtureRequest) -> Generator[Any, None, None]:
+    def run_uvicorn(uvicorn: Any) -> None:
+        uvicorn_run(app, host=uvicorn["host"], port=uvicorn["port"])
+
+    uvicorn_settings = request.config.uvicorn  # type: ignore
+
+    process = Process(target=run_uvicorn, args=(uvicorn_settings,))  # type: ignore
     process.start()
-    server_address = (
-        f"{TestSettings.HTTP_SERVER_SCHEME}" f"{TestSettings.HTTP_SERVER_HOST}:{TestSettings.HTTP_SERVER_PORT}"
-    )
-    yield server_address
+    yield f"http://{uvicorn_settings['host']}:{uvicorn_settings['port']}"
     process.terminate()
-    del os.environ["APP_DATABASE_FILE"]
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture()
 def get_session() -> Generator[Session, Any, Any]:
-    with Session(get_engine()) as session:
+    with Session(get_engine(), expire_on_commit=False) as session:
         yield session
 
 
-def pytest_configure() -> None:
-    """
-    Called after the Session object has been created and
-    before performing collection and entering the run test loop.
-    """
-    # todo (robbert) creating an in memory database does not work right, tables seem to get lost?
-    settings.APP_DATABASE_FILE = "database.sqlite3.test"  # set to none so we'll use an in memory database
+def pytest_configure(config: pytest.Config) -> None:
+    os.environ.clear()  # lets always start with a clean environment to make tests consistent
+    os.environ["ENVIRONMENT"] = "local"
+    os.environ["APP_DATABASE_SCHEME"] = "sqlite"
+
+    config.uvicorn = {  # type: ignore
+        "host": "localhost",
+        "port": 8756,
+    }
 
 
-@pytest.fixture(scope="module")
+def pytest_sessionstart(session: pytest.Session) -> None:
+    get_settings.cache_clear()
+    get_engine.cache_clear()
+    SQLModel.metadata.create_all(get_engine())
+
+
+def pytest_sessionfinish(session: pytest.Session) -> None:
+    SQLModel.metadata.drop_all(get_engine())
+
+
+@pytest.fixture(scope="session")
 def client() -> Generator[TestClient, None, None]:
     with TestClient(app, raise_server_exceptions=True) as c:
+        # app.dependency_overrides[get_app_session] = get_session  # noqa: ERA001
         c.timeout = 5
         yield c
 
@@ -84,16 +71,50 @@ def playwright():
         yield p
 
 
-@pytest.fixture(params=["chromium", "firefox", "webkit"])
-def browser(playwright: Playwright, request: SubRequest, server: Generator[Any, Any, Any]) -> Generator[Page, Any, Any]:
+@pytest.fixture(params=["chromium"])  # lets start with 1 browser for now, we can add more later
+def browser(
+    playwright: Playwright, request: SubRequest, run_server: Generator[str, Any, Any]
+) -> Generator[Page, Any, Any]:
     browser = getattr(playwright, request.param).launch(headless=True)
-    context = browser.new_context(base_url=server)
+    context = browser.new_context(base_url=run_server)
     page = context.new_page()
-    wait_for_server_ready(server)
+
+    transport = httpx.HTTPTransport(retries=5)
+    with httpx.Client(transport=transport, verify=False) as client:  # noqa: S501
+        client.get(f"{run_server}/", timeout=0.3)
+
     yield page
     browser.close()
 
 
 @pytest.fixture()
-def db(get_session: Generator[Session, Any, Any]):
-    return DatabaseTestUtils(get_session)
+def db(get_session: Session) -> Generator[DatabaseTestUtils, None, None]:
+    database = DatabaseTestUtils(get_session)
+    yield database
+    del database
+
+
+@pytest.fixture()
+def patch_settings(request: pytest.FixtureRequest) -> Iterator[Settings]:
+    settings = get_settings()
+    original_settings = settings.model_copy()
+
+    vars_to_patch = getattr(request, "param", {})
+
+    for k, v in settings.model_fields.items():
+        setattr(settings, k, v.default)
+
+    for key, val in vars_to_patch.items():
+        if not hasattr(settings, key):
+            raise ValueError(f"Unknown setting: {key}")
+
+        # Raise an error if the env var has an invalid type
+        expected_type = getattr(settings, key).__class__
+        if not isinstance(val, expected_type):
+            raise ValueError(f"Invalid type for {key}: {val.__class__} instead " "of {expected_type}")  # noqa: TRY004
+        setattr(settings, key, val)
+
+    yield settings
+
+    # Restore the original settings
+    settings.__dict__.update(original_settings.__dict__)

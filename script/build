@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -x
+
+docker build . -t ghcr.io/minbzk/tad:latest "$@"
