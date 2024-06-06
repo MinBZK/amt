@@ -30,6 +30,7 @@ jinja2 = "^3.1.4"
 pydantic-settings = "^2.2.1"
 psycopg2-binary = "^2.9.9"
 uvicorn = {extras = ["standard"], version = "^0.30.1"}
+pyyaml = "^6.0.1"
 
 
 [tool.poetry.group.test.dependencies]
@@ -66,6 +67,7 @@ line-ending = "lf"
 select = ["I", "SIM", "B", "UP", "F", "E", "S", "C90", "DTZ", "LOG", "PIE", "PT", "ERA", "W", "C", "TRY", "RUF"]
 fixable = ["ALL"]
 task-tags = ["TODO"]
+ignore = ["TRY003"]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**.py" = ["S101"]

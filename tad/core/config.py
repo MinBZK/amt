@@ -85,7 +85,7 @@ class Settings(BaseSettings):
     @model_validator(mode="after")
     def _enforce_database_rules(self: SelfSettings) -> SelfSettings:
         if self.ENVIRONMENT != "local" and self.APP_DATABASE_SCHEME == "sqlite":
-            raise SettingsError("SQLite is not supported in production")  # noqa: TRY003
+            raise SettingsError("SQLite is not supported in production")
         return self
 
 
