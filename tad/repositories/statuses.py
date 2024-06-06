@@ -34,13 +34,28 @@ class StatusesRepository:
         :param status: the status to store
         :return: the updated status after storing
         """
-        self.session.add(status)
         try:
+            self.session.add(status)
             self.session.commit()
+            self.session.refresh(status)
         except Exception as e:
             self.session.rollback()
             raise RepositoryError from e
         return status
+
+    def delete(self, status: Status) -> None:
+        """
+        Deletes the given status in the repository.
+        :param status: the status to store
+        :return: the updated status after storing
+        """
+        try:
+            self.session.delete(status)
+            self.session.commit()
+        except Exception as e:
+            self.session.rollback()
+            raise RepositoryError from e
+        return None
 
     def find_by_id(self, status_id: int) -> Status:
         """

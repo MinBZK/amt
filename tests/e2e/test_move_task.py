@@ -1,5 +1,6 @@
 from playwright.sync_api import Page, expect
 
+from tests.constants import all_statusses, default_task
 from tests.database_test_utils import DatabaseTestUtils
 
 
@@ -10,15 +11,9 @@ def test_move_task_to_column(browser: Page, db: DatabaseTestUtils) -> None:
     :param start_server: the start server fixture
     :return: None
     """
-    db.init(
-        [
-            {"table": "status", "id": 1},
-            {"table": "status", "id": 2},
-            {"table": "status", "id": 3},
-            {"table": "status", "id": 4},
-            {"table": "task", "id": 1, "status_id": 1},
-        ]
-    )
+    all_status = all_statusses()
+    db.given([*all_status])
+    db.given([default_task(status_id=all_status[0].id)])
 
     browser.goto("/pages/")
 
@@ -42,13 +37,14 @@ def test_move_task_order_in_same_column(browser: Page, db: DatabaseTestUtils) ->
     it is in the right position in the column.
     :return: None
     """
-    db.init(
-        [
-            {"table": "task", "id": 1, "status_id": 1},
-            {"table": "task", "id": 2, "status_id": 1},
-            {"table": "task", "id": 3, "status_id": 1},
-        ]
-    )
+    all_status = [*all_statusses()]
+    db.given([*all_status])
+
+    task1 = default_task(status_id=all_status[0].id)
+    task2 = default_task(status_id=all_status[0].id)
+    task3 = default_task(status_id=all_status[0].id)
+
+    db.given([task1, task2, task3])
 
     browser.goto("/pages/")
 

@@ -5,12 +5,11 @@ from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from tad.api.main import api_router
-from tad.core.config import settings
-from tad.core.db import check_db
+from tad.core.config import PROJECT_DESCRIPTION, PROJECT_NAME, VERSION, get_settings
+from tad.core.db import check_db, init_db
 from tad.core.exception_handlers import (
     http_exception_handler as tad_http_exception_handler,
 )
@@ -22,39 +21,38 @@ from tad.utils.mask import Mask
 
 from .middleware.route_logging import RequestLoggingMiddleware
 
-configure_logging(settings.LOGGING_LEVEL, settings.LOGGING_CONFIG)
-
+configure_logging(get_settings().LOGGING_LEVEL, get_settings().LOGGING_CONFIG)
 
 logger = logging.getLogger(__name__)
-mask = Mask(mask_keywords=["database_uri"])
 
 
 # todo(berry): move lifespan to own file
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    logger.info(f"Starting {settings.PROJECT_NAME} version {settings.VERSION}")
-    logger.info(f"Settings: {mask.secrets(settings.model_dump())}")
-    # todo(berry): setup database connection
-    await check_db()
+    mask = Mask(mask_keywords=["database_uri"])
+    check_db()
+    init_db()
+    logger.info(f"Starting {PROJECT_NAME} version {VERSION}")
+    logger.info(f"Settings: {mask.secrets(get_settings().model_dump())}")
     yield
-    logger.info(f"Stopping application {settings.PROJECT_NAME} version {settings.VERSION}")
+    logger.info(f"Stopping application {PROJECT_NAME} version {VERSION}")
     logging.shutdown()
 
 
-templates = Jinja2Templates(directory="templates")
-
+# todo(berry): Create factor for FastAPI app
 app = FastAPI(
     lifespan=lifespan,
-    title=settings.PROJECT_NAME,
-    summary=settings.PROJECT_DESCRIPTION,
-    version=settings.VERSION,
+    title=PROJECT_NAME,
+    summary=PROJECT_DESCRIPTION,
+    version=VERSION,
     openapi_url=None,
     default_response_class=HTMLResponse,
     redirect_slashes=False,
+    debug=get_settings().DEBUG,
 )
 
 app.add_middleware(RequestLoggingMiddleware)
-app.mount("/static", StaticFiles(directory=settings.STATIC_DIR), name="static")
+app.mount("/static", StaticFiles(directory="tad/site/static/"), name="static")
 
 
 @app.exception_handler(StarletteHTTPException)
@@ -68,5 +66,3 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 
 
 app.include_router(api_router)
-
-# todo (robbert) add init code for example tasks and statuses

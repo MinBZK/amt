@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, Request
 from fastapi.responses import HTMLResponse
 
-from tad.api.routes.deps import templates
+from tad.api.deps import templates
 from tad.services.statuses import StatusesService
 from tad.services.tasks import TasksService
 

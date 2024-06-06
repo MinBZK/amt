@@ -1,16 +1,13 @@
 from fastapi.testclient import TestClient
 
+from tests.constants import all_statusses, default_task
 from tests.database_test_utils import DatabaseTestUtils
 
 
 def test_post_task_move(client: TestClient, db: DatabaseTestUtils) -> None:
-    db.init(
-        [
-            {"table": "status", "id": 1},
-            {"table": "task", "id": 1, "status_id": 1},
-            {"table": "task", "id": 2, "status_id": 1},
-        ]
-    )
+    db.given([*all_statusses()])
+    db.given([default_task(), default_task(), default_task()])
+
     response = client.patch(
         "/tasks/", json={"taskId": "1", "statusId": "1", "previousSiblingId": "2", "nextSiblingId": "-1"}
     )
@@ -19,8 +16,7 @@ def test_post_task_move(client: TestClient, db: DatabaseTestUtils) -> None:
     assert b'id="card-1"' in response.content
 
 
-def test_task_move_error(client: TestClient, db: DatabaseTestUtils) -> None:
-    db.init()
+def test_task_move_error(client: TestClient) -> None:
     response = client.patch(
         "/tasks/", json={"taskId": "1", "statusId": "1", "previousSiblingId": "2", "nextSiblingId": "-1"}
     )

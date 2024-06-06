@@ -9,10 +9,10 @@ services:
       db:
         condition: service_healthy
     env_file:
-      - path: .env
+      - path: prod.env
         required: true
     environment:
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:?Variable not set}
+      - ENVIRONMENT=demo
     ports:
       - 8000:8000
     healthcheck:
@@ -25,12 +25,10 @@ services:
       - app-db-data:/var/lib/postgresql/data/pgdata
       - ./database/:/docker-entrypoint-initdb.d/:cached
     env_file:
-      - path: .env
+      - path: prod.env
         required: true
     environment:
       - PGDATA=/var/lib/postgresql/data/pgdata
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:?Variable not set}
-      - SECRET_KEY=${SECRET_KEY:?Variable not set}
     healthcheck:
       test: ["CMD", "pg_isready", "-q", "-d", "tad", "-U", "tad"]
 
@@ -40,16 +38,15 @@ services:
     ports:
       - 8080:8080
     environment:
-      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL:-tad@minbzk.nl}
-      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD:?Variable not set}
       - PGADMIN_LISTEN_PORT=${PGADMIN_LISTEN_PORT:-8080}
+    env_file:
+      - path: prod.env
+        required: true
     depends_on:
       db:
         condition: service_healthy
     healthcheck:
       test: ["CMD", "wget", "-O", "-", "http://localhost:8080/misc/ping"]
-
-#TODO(berry): Traefik
 
 volumes:
   app-db-data:

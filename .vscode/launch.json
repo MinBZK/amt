@@ -7,12 +7,19 @@
       "request": "launch",
       "module": "uvicorn",
       "justMyCode": false,
-      "args": [ "--log-level", "warning" ,"tad.main:app"],
+      "args": [
+        "--log-level",
+        "warning",
+        "tad.main:app"
+      ],
       "cwd": "${workspaceFolder}/",
       "env": {
-        "PYTHONPATH": "${workspaceFolder}"
-      },
-      "envFile": "${workspaceFolder}/.env.test"
+        "PYTHONPATH": "${workspaceFolder}",
+        "DEBUG": "True",
+        "AUTO_CREATE_SCHEMA": "True",
+        "ENVIRONMENT": "demo",
+        "LOGGING_LEVEL": "DEBUG"
+      }
     },
     {
       "name": "Project: tests",
@@ -20,7 +27,7 @@
       "request": "launch",
       "module": "pytest",
       "cwd": "${workspaceFolder}",
-      "justMyCode": true,
+      "justMyCode": false,
       "args": []
     }
   ]

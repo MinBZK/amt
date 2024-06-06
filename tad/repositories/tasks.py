@@ -53,6 +53,20 @@ class TasksRepository:
             raise RepositoryError from e
         return task
 
+    def delete(self, task: Task) -> None:
+        """
+        Deletes the given task in the repository or throws a RepositoryException
+        :param task: the task to store
+        :return: the updated task after storing
+        """
+        try:
+            self.session.delete(task)
+            self.session.commit()
+        except Exception as e:
+            self.session.rollback()
+            raise RepositoryError from e
+        return None
+
     def find_by_id(self, task_id: int) -> Task:
         """
         Returns the task with the given id.
