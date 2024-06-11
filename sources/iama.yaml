@@ -1,0 +1,654 @@
+systemcard_path: .assessments[]               # append iama.yaml to 'assessments' list in system card
+schema_version: 1.1.0
+
+instrument:
+  name: "Impact Assessment Mensenrechten en Algoritmes (IAMA)"
+  description: "Het IAMA helpt om de risico's voor mensenrechten bij het gebruik van algoritmen in kaart te brengen en maatregelen te nemen om deze aan te pakken."
+  urn: "urn:nl:aivt:ir:1.0"
+  language: "nl"
+  owners:
+    - organization: ""
+      name: ""
+      email: ""
+      role: ""
+  date: ""
+  url: "https://www.rijksoverheid.nl/documenten/rapporten/2021/02/25/impact-assessment-mensenrechten-en-algoritmes"
+
+template: &systemcard_template                  # anchor for all fields belonging to answer
+  question: "$QUESTION"
+  answer: "$ANSWER"
+  remarks: "$REMARKS"
+  timestamp: "$TIMESTAMP"
+  authors:
+    - name: "$AUTHOR.NAME"
+      email: "$AUTHOR.EMAIL"
+      role: "$AUTHOR.ROLE"
+
+tasks: # each question can be seen as a separate task
+  - question: "Licht uw voorstel voor het gebruik/de inzet van een algoritme toe. Wat is de aanleiding hiervoor geweest? Voor welk probleem moet het algoritme een oplossing bieden?"
+    urn: "urn:nl:aivt:ir:1.0:1.1.1"
+    labels:
+      - key: topic
+        value: "Aanleiding en probleemdefinitie"
+    type: "open_question"
+    suggested_roles: [ "Behoeftesteller", "Gemandateerd verantwoordelijke(n)", "Projectleider", "Domeinspecialist", "Gebruiker" ] #suggested roles in IAMA are coupled to roles that are described in the Algoritmekader
+    lifecycle: [ "Probleemanalyse" ]            # one or more out of 8 options from AK lifecycle: https://minbzk.github.io/Algoritmekader/levenscyclus/
+    links: [ { "text": "DPIA vraag 1" } ]       # optional: list with links to other tasks / instruments (for example: is this question also asked in the DPIA?)
+    requirements: [ ]                           # optional: what are the requirements for this task? (for example: upload dataset)
+    template: *systemcard_template
+  - question: "Wat is het doel dat bereikt dient te worden met de inzet van het algoritme? Wat is hierbij het hoofddoel en wat zijn subdoelen?"
+    urn: "urn:nl:aivt:ir:1.0:1.2.1"
+    labels:
+      - key: topic
+        value: "Doelstelling"
+    type: "open_question"
+    suggested_roles: [ "Behoeftesteller", "Gemandateerd verantwoordelijke(n)", "Projectleider", "Gebruiker" ]
+    lifecycle: [ "Probleemanalyse" ]
+    links: [ { "text": "DPIA vraag 4" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Wat zijn de publieke waarden die de inzet van het algoritme ingeven? Indien meerdere publieke waarden de inzet van het algoritme ingeven, kan daar een rangschikking in aangebracht worden?"
+    urn: "urn:nl:aivt:ir:1.0:1.3.1"
+    labels:
+      - key: topic
+        value: "Publieke waarden"
+    type: "open_question"
+    suggested_roles: [ "Behoeftesteller", "Gemandateerd verantwoordelijke(n)", "Jurist", "Gebruiker" ]
+    lifecycle: [ "Probleemanalyse" ]
+    links: [ ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Wat zijn de publieke waarden die mogelijk in het gedrang komen door de inzet van het algoritme?"
+    urn: "urn:nl:aivt:ir:1.0:1.3.2"
+    labels:
+      - key: topic
+        value: "Publieke waarden"
+    type: "open_question"
+    suggested_roles: [ "Behoeftesteller", "Gemandateerd verantwoordelijke(n)", "Jurist", "Gebruiker" ]
+    lifecycle: [ "Probleemanalyse" ]
+    links: [ ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Wat is de wettelijke grondslag van de inzet van dit algoritme en van de beoogde besluiten die genomen zullen worden op basis van dit algoritme?"
+    urn: "urn:nl:aivt:ir:1.0:1.4.1"
+    labels:
+      - key: topic
+        value: "Wettelijke grondslag"
+    type: "open_question"
+    suggested_roles: [ "Behoeftesteller", "Gemandateerd verantwoordelijke(n)", "Jurist" ]
+    lifecycle: [ "Probleemanalyse" ]
+    links: [ { "text": "DPIA vraag 11" }, { "text": "DPIA vraag 12" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Welke partijen en personen zijn er bij de ontwikkeling/het gebruik/het onderhoud van het algoritme betrokken?"
+    urn: "urn:nl:aivt:ir:1.0:1.5.1"
+    labels:
+      - key: topic
+        value: "Betrokkenen en verantwoordelijkheden"
+    type: "open_question"
+    suggested_roles: [ "Behoeftesteller", "Gemandateerd verantwoordelijke(n)", "Projectleider", "Security officer" ]
+    lifecycle: [ "Probleemanalyse", "Ontwerp" ]
+    links: [ { "text": "DPIA vraag 5" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Hoe zijn de verantwoordelijkheden belegd ten aanzien van de ontwikkeling en de inzet van het algoritme, ook nadat het algoritme eenmaal is afgerond?"
+    urn: "urn:nl:aivt:ir:1.0:1.5.2"
+    labels:
+      - key: topic
+        value: "Betrokkenen en verantwoordelijkheden"
+    type: "open_question"
+    suggested_roles: [ "Behoeftesteller", "Gemandateerd verantwoordelijke(n)", "Projectleider", "Security officer" ]
+    lifecycle: [ "Probleemanalyse", "Ontwerp", "Monitoren", "Beheer" ]
+    links: [ { "text": "DPIA vraag 5" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Wie is eindverantwoordelijk voor het algoritme?"
+    urn: "urn:nl:aivt:ir:1.0:1.5.3"
+    labels:
+      - key: topic
+        value: "Betrokkenen en verantwoordelijkheden"
+    type: "open_question"
+    suggested_roles: [ "Behoeftesteller", "Gemandateerd verantwoordelijke(n)", "Projectleider", "Security officer" ]
+    lifecycle: [ "Probleemanalyse", "Monitoren", "Beheer" ]
+    links: [ { "text": "DPIA vraag 5" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Wat voor type algoritme wordt gebruikt, of wat voor type algoritme gaat ontwikkeld worden?"
+    urn: "urn:nl:aivt:ir:1.0:2A.1.1"
+    labels:
+      - key: topic
+        value: "Inschatting: type algoritme"
+    type: "open_question"
+    suggested_roles: [ "Aanbieder", "Data scientist", "Data engineer", "Projectleider" ]
+    lifecycle: [ "Ontwerp", "Ontwikkelen" ]
+    links: [ { "text": "DPIA vraag 8" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Wat voor type data gaat gebruikt worden als input voor het algoritme en uit welke bronnen is de data afkomstig?"
+    urn: "urn:nl:aivt:ir:1.0:2A.2.1"
+    labels:
+      - key: topic
+        value: "Databronnen en kwaliteit"
+    type: "open_question"
+    suggested_roles: [ "Aanbieder", "Data scientist", "Data engineer" ]
+    lifecycle: [ "Ontwerp", "Dataverkenning en -preparatie" ]
+    links: [ { "text": "DPIA vraag 2" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Is de kwaliteit en betrouwbaarheid van de data voldoende voor de beoogde datatoepassing? Leg uit."
+    urn: "urn:nl:aivt:ir:1.0:2.A.2.2"
+    labels:
+      - key: topic
+        value: "Databronnen en kwaliteit"
+    type: "open_question"
+    suggested_roles: [ "Aanbieder", "Data scientist", "Data engineer" ]
+    lifecycle: [ "Dataverkenning en -preparatie" ]
+    links: [ { "text": "DPIA vraag 16" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Welke aannames en bias liggen in de data besloten en hoe wordt de invloed daarvan op de output van het algoritme gecorrigeerd of anderszins ondervangen of gemitigeerd?"
+    urn: "urn:nl:aivt:ir:1.0:2A.3.1"
+    labels:
+      - key: topic
+        value: "Bias/aannames in de data"
+    type: "open_question"
+    suggested_roles: [ "Aanbieder", "Data scientist", "Data engineer" ]
+    lifecycle: [ "Dataverkenning en -preparatie", "Ontwikkelen" ]
+    links: [ { "text": "DPIA vraag 16" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Indien gebruik wordt gemaakt van trainingsdata: is de data representatief voor de context waarin het algoritme ingezet gaat worden?"
+    urn: "urn:nl:aivt:ir:1.0:2A.3.2"
+    labels:
+      - key: topic
+        value: "Bias/aannames in de data"
+    type: "open_question"
+    suggested_roles: [ "Aanbieder", "Data scientist", "Data engineer" ]
+    lifecycle: [ "Dataverkenning en -preparatie", "Ontwikkelen" ]
+    links: [ { "text": "DPIA vraag 16" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Is de data voldoende beveiligd? Maak hierin onderscheid tussen de inputdata en de outputdata."
+    urn: "urn:nl:aivt:ir:1.0:2A.4.1"
+    labels:
+      - key: topic
+        value: "Beveiliging en archivering"
+    type: "open_question"
+    suggested_roles: [ "Aanbieder", "Data scientist", "Data engineer" ]
+    lifecycle: [ "Dataverkenning en -preparatie", "Ontwikkelen" ]
+    links: [ { "text": "DPIA vraag 17" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Is er controle op de toegang tot de data? Maak hierin onderscheid tussen de inputdata en de outputdata."
+    urn: "urn:nl:aivt:ir:1.0:2A.4.2"
+    labels:
+      - key: topic
+        value: "Beveiliging en archivering"
+    type: "open_question"
+    suggested_roles: [ "Aanbieder", "Data scientist", "Data engineer" ]
+    lifecycle: [ "Dataverkenning en -preparatie", "Ontwikkelen" ]
+    links: [ { "text": "DPIA vraag 17" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Hoe worden relevante regels over archivering in acht genomen, zoals die in de Archiefwet zijn vastgelegd?"
+    urn: "urn:nl:aivt:ir:1.0:2A.4.3"
+    labels:
+      - key: topic
+        value: "Beveiliging en archivering"
+    type: "open_question"
+    suggested_roles: [ "Aanbieder", "Data scientist", "Data engineer" ]
+    lifecycle: [ "Dataverkenning en -preparatie" ]
+    links: [ { "text": "DPIA vraag 10" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Type algoritme: wat voor soort algoritme wordt gebruikt of gaat worden gebruikt? Hoe werkt het? Onderscheid tussen: A) Een niet-zelflerend algoritme, waarin de mens de regels specificeert die de computer moet volgen, B) Een zelflerend algoritme, waarin de machine zelf leert over de patronen in de data (machine learning)"
+    urn: "urn:nl:aivt:ir:1.0:2B.1.1"
+    labels:
+      - key: topic
+        value: "Type algoritme"
+    type: "open_question"
+    suggested_roles: [ "Data scientist", "Projectleider", "Aanbieder" ]
+    lifecycle: [ "Ontwerp", "Ontwikkelen" ]
+    links: [ { "text": "DPIA vraag 8" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Waarom wordt voor dit type algoritme gekozen?"
+    urn: "urn:nl:aivt:ir:1.0:2B.1.2"
+    labels:
+      - key: topic
+        value: "Type algoritme"
+    type: "open_question"
+    suggested_roles: [ "Data scientist", "Projectleider", "Aanbieder" ]
+    lifecycle: [ "Ontwerp", "Ontwikkelen" ]
+    links: [ { "text": "DPIA vraag 8" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Waarom is dit type algoritme het meest geschikt om de bij vraag 1.2 geformuleerde doelstellingen te bereiken?"
+    urn: "urn:nl:aivt:ir:1.0:2B.1.3"
+    labels:
+      - key: topic
+        value: "Type algoritme"
+    type: "open_question"
+    suggested_roles: [ "Data scientist", "Projectleider", "Aanbieder" ]
+    lifecycle: [ "Ontwerp", "Ontwikkelen" ]
+    links: [ { "text": "DPIA vraag 8" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Welke alternatieven zijn er en waarom zijn die minder passend of bruikbaar?"
+    urn: "urn:nl:aivt:ir:1.0:2B.1.4"
+    labels:
+      - key: topic
+        value: "Type algoritme"
+    type: "open_question"
+    suggested_roles: [ "Data scientist", "Projectleider", "Aanbieder" ]
+    lifecycle: [ "Ontwerp" ]
+    links: [ { "text": "DPIA vraag 8" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Indien het algoritme is ontwikkeld door een externe partij: zijn er heldere afspraken gemaakt over eigenaarschap en beheer van het algoritme? Wat zijn die afspraken?"
+    urn: "urn:nl:aivt:ir:1.0:2B.2.1"
+    labels:
+      - key: topic
+        value: "Eigenaarschap en controle"
+    type: "open_question"
+    suggested_roles: [ "Aanbieder", "Projectleider", "Jurist" ]
+    lifecycle: [ "Ontwerp", "Monitoren", "Beheer" ]
+    links: [ { "text": "DPIA vraag 5" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Wat is de accuraatheid van het algoritme, en op basis van welke evaluatiecriteria is deze accuraatheid bepaald?"
+    urn: "urn:nl:aivt:ir:1.0:2B.3.1"
+    labels:
+      - key: topic
+        value: "Accuraatheid algoritme"
+    type: "open_question"
+    suggested_roles: [ "Data scientist", "Aanbieder", "Domeinspecialist" ]
+    lifecycle: [ "Verificatie", "Validatie" ]
+    links: [ { "text": "DPIA vraag 16" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Is de mate van accuraatheid (vraag 2B.3.1) acceptabel voor de manier waarop het algoritme ingezet zal worden?"
+    urn: "urn:nl:aivt:ir:1.0:2B.3.2"
+    labels:
+      - key: topic
+        value: "Accuraatheid algoritme"
+    type: "open_question"
+    suggested_roles: [ "Data scientist", "Aanbieder", "Domeinspecialist" ]
+    lifecycle: [ "Verificatie", "Validatie" ]
+    links: [ { "text": "DPIA vraag 16" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Hoe wordt het algoritme getest?"
+    urn: "urn:nl:aivt:ir:1.0:2B.3.3"
+    labels:
+      - key: topic
+        value: "Accuraatheid algoritme"
+    type: "open_question"
+    suggested_roles: [ "Data scientist", "Aanbieder", "Domeinspecialist" ]
+    lifecycle: [ "Verificatie", "Validatie", "Implementatie" ]
+    links: [ { "text": "DPIA vraag 16" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Welke maatregelen kunnen worden getroffen om de risicos van reproductie of zelfs versterking van biases tegen te gaan (bijv. andere sampling- strategie, feature modification, ...)?"
+    urn: "urn:nl:aivt:ir:1.0:2B.3.4"
+    labels:
+      - key: topic
+        value: "Accuraatheid algoritme"
+    type: "open_question"
+    suggested_roles: [ "Data scientist", "Aanbieder", "Domeinspecialist" ]
+    lifecycle: [ "Ontwikkelen", "Verificatie", "Validatie" ]
+    links: [ { "text": "DPIA vraag 16" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Welke aannames liggen ten grondslag aan de selectie en weging van de indicatoren? Zijn die aannames terecht? Waarom wel/niet?"
+    urn: "urn:nl:aivt:ir:1.0:2B.3.5"
+    labels:
+      - key: topic
+        value: "Accuraatheid algoritme"
+    type: "open_question"
+    suggested_roles: [ "Data scientist", "Aanbieder", "Domeinspecialist" ]
+    lifecycle: [ "Ontwikkelen" ]
+    links: [ { "text": "DPIA vraag 16" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Hoe vaak/erg zit het algoritme ernaast? (bijv. in termen van aantal false positives, false negatives, R-squared, ...)"
+    urn: "urn:nl:aivt:ir:1.0:2B.3.6"
+    labels:
+      - key: topic
+        value: "Accuraatheid algoritme"
+    type: "open_question"
+    suggested_roles: [ "Data scientist", "Aanbieder", "Domeinspecialist" ]
+    lifecycle: [ "Verificatie", "Validatie" ]
+    links: [ { "text": "DPIA vraag 16" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Is het duidelijk wat het algoritme doet, hoe het dit doet, en op basis waarvan (welke data) het dit doet? Leg uit."
+    urn: "urn:nl:aivt:ir:1.0:2B.4.1"
+    labels:
+      - key: topic
+        value: "Transparantie en uitlegbaarheid"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Data scientist", "Aanbieder", "Communicatieadviseur", "Jurist", "Ethicus" ]
+    lifecycle: [ "Ontwikkelen", "Verificatie", "Validatie" ]
+    links: [ { "text": "DPIA vraag 15" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Voor welke personen en groepen binnen en buiten de eigen organisatie wordt de werking van het algoritme transparant gemaakt en hoe gebeurt dit?"
+    urn: "urn:nl:aivt:ir:1.0:2B.4.2"
+    labels:
+      - key: topic
+        value: "Transparantie en uitlegbaarheid"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Data scientist", "Aanbieder", "Communicatieadviseur", "Jurist", "Ethicus" ]
+    lifecycle: [ "Ontwerp", "Ontwikkelen", "Verificatie", "Validatie", "Monitoren", "Beheer" ]
+    links: [ { "text": "DPIA vraag 15" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Voor welke doelgroepen moet het algoritme uitlegbaar zijn?"
+    urn: "urn:nl:aivt:ir:1.0:2B.4.3"
+    labels:
+      - key: topic
+        value: "Transparantie en uitlegbaarheid"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Data scientist", "Aanbieder", "Communicatieadviseur", "Jurist", "Ethicus" ]
+    lifecycle: [ "Ontwerp", "Ontwikkelen" ]
+    links: [ { "text": "DPIA vraag 15" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Kan de werking van het algoritme voor de bij vraag 2B.4.3 geïdentificeerde doelgroepen op een voldoende begrijpelijke manier worden uitgelegd?"
+    urn: "urn:nl:aivt:ir:1.0:2B.4.4"
+    labels:
+      - key: topic
+        value: "Transparantie en uitlegbaarheid"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Data scientist", "Aanbieder", "Communicatieadviseur", "Jurist", "Ethicus" ]
+    lifecycle: [ "Ontwikkelen", "Verificatie", "Validatie" ]
+    links: [ { "text": "DPIA vraag 15" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Wat gebeurt er met de uitkomsten van het algoritme? Welke beslissingen worden daarop gebaseerd?"
+    urn: "urn:nl:aivt:ir:1.0:3.1.1"
+    labels:
+      - key: topic
+        value: "Beslissingen op basis van output algoritme"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Domeinspecialist", "Security officer", "Ethicus", "Jurist", "Aanbieder" ]
+    lifecycle: [ "Ontwerp", "Implementatie", "Monitoren", "Beheer" ]
+    links: [ ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Welke rol spelen mensen bij het nemen van beslissingen op basis van de output van het algoritme ('human in the loop') en hoe worden zij in staat gesteld om die rol te spelen?"
+    urn: "urn:nl:aivt:ir:1.0:3.2.1"
+    labels:
+      - key: topic
+        value: "De rol van de mens in de beslissing"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Data scientist", "Ethicus" ]
+    lifecycle: [ "Ontwerp", "Implementatie", "Monitoren", "Beheer" ]
+    links: [ ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Is er nu en in de toekomst voldoende gekwalificeerd personeel aanwezig om het algoritme te beheren, te herzien en aan te passen indien gewenst/nodig?"
+    urn: "urn:nl:aivt:ir:1.0:3.2.2"
+    labels:
+      - key: topic
+        value: "De rol van de mens in de beslissing"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Data scientist", "Ethicus" ]
+    lifecycle: [ "Ontwerp", "Implementatie", "Monitoren", "Beheer" ]
+    links: [ ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Wat zullen de effecten zijn van de inzet van het algoritme voor burgers en hoe wordt rekening gehouden met de 'menselijke maat' bij het nemen van beslissingen op basis van de output van het algoritme?"
+    urn: "urn:nl:aivt:ir:1.0:3.3.1"
+    labels:
+      - key: topic
+        value: "Effecten van het algoritme"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Data scientist", "Ethicus", "Aanbieder", "Gebruiker" ]
+    lifecycle: [ "Probleemanalyse", "Ontwerp", "Implementatie", "Monitoren", "Beheer" ]
+    links: [ { "text": "DPIA vraag 16" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Welke risico's voor stigmatiserende, discriminerende of anderszins schadelijke of nadelige effecten zijn er voor de burger en hoe zullen die worden bestreden of gemitigeerd?"
+    urn: "urn:nl:aivt:ir:1.0:3.3.2"
+    labels:
+      - key: topic
+        value: "Effecten van het algoritme"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Data scientist", "Ethicus", "Aanbieder", "Gebruiker" ]
+    lifecycle: [ "Probleemanalyse", "Ontwerp", "Ontwikkelen", "Implementatie" ]
+    links: [ { "text": "DPIA vraag 16" }, { "text": "DPIA vraag 17" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: Hoe zullen de verwachte effecten bijdragen aan de oplossing van het probleem dat de aanleiding is voor de ontwikkeling/inzet van het algoritme (zie vraag 1.1) en het bereiken van de daarbij gestelde doelen (zie vraag 1.2)?
+    urn: "urn:nl:aivt:ir:1.0:3.3.3"
+    labels:
+      - key: topic
+        value: "Effecten van het algoritme"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Data scientist", "Ethicus", "Aanbieder", "Gebruiker" ]
+    lifecycle: [ "Probleemanalyse" ]
+    links: [ ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: Hoe verhouden de verwachte effecten zich tot de waarden die worden gediend (zie vraag 1.3)? Welke risico's zijn er dat bepaalde waarden onder druk komen te staan en hoe wordt daarmee dan omgegaan?
+    urn: "urn:nl:aivt:ir:1.0:3.3.4"
+    labels:
+      - key: topic
+        value: "Effecten van het algoritme"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Data scientist", "Ethicus", "Aanbieder", "Gebruiker" ]
+    lifecycle: [ "Probleemanalyse" ]
+    links: [ ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Via welke procedures zullen beslissingen op basis van het algoritme worden genomen?"
+    urn: "urn:nl:aivt:ir:1.0:3.4.1"
+    labels:
+      - key: topic
+        value: "Procedures"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Data scientist", "Ethicus", "Jurist" ]
+    lifecycle: [ "Ontwerp", "Implementatie", "Monitoren", "Beheer" ]
+    links: [ ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Hoe worden verschillende relevante actoren (bestuurlijke en politiek verantwoordelijken, burgers) bij de besluitvorming betrokken?"
+    urn: "urn:nl:aivt:ir:1.0:3.4.2"
+    labels:
+      - key: topic
+        value: "Procedures"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Data scientist", "Ethicus", "Jurist" ]
+    lifecycle: [ "Ontwerp", "Implementatie", "Monitoren", "Beheer" ]
+    links: [ ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Hoe wordt gegarandeerd dat in deze procedures wordt voldaan aan de eisen van goed en behoorlijk bestuur en - waar nodig - rechtsbescherming? Hebben burgers een effectieve mogelijkheid om een klacht in te dienen of bezwaar te maken? Zo ja, op welke manier?"
+    urn: "urn:nl:aivt:ir:1.0:3.4.3"
+    labels:
+      - key: topic
+        value: "Procedures"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Data scientist", "Ethicus", "Jurist" ]
+    lifecycle: [ "Ontwerp", "Implementatie", "Monitoren", "Beheer" ]
+    links: [ ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Tijd/periode: wanneer gaat het algoritme ingezet worden? Hoe lang is de periode dat het ingezet wordt?"
+    urn: "urn:nl:aivt:ir:1.0:3.5.1"
+    labels:
+      - key: topic
+        value: "Context"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Data scientist", "Ethicus" ]
+    lifecycle: [ "Ontwerp", "Implementatie", "Monitoren", "Beheer" ]
+    links: [ ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Plaats: waar vindt inzet van het algoritme plaats? Is dat in een bepaald geografisch gebied, is dat bij een bepaalde groep personen of dossiers?"
+    urn: "urn:nl:aivt:ir:1.0:3.5.2"
+    labels:
+      - key: topic
+        value: "Context"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Data scientist", "Ethicus" ]
+    lifecycle: [ "Ontwerp", "Implementatie", "Monitoren", "Beheer" ]
+    links: [ ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Kan het algoritme ook nog worden ingezet als contextfactoren veranderen of als het algoritme gebruikt wordt in een andere context dan waarvoor het is ontwikkeld?"
+    urn: "urn:nl:aivt:ir:1.0:3.5.3"
+    labels:
+      - key: topic
+        value: "Context"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Data scientist", "Ethicus" ]
+    lifecycle: [ "Ontwerp", "Implementatie", "Monitoren", "Beheer" ]
+    links: [ ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Hoe open kunt u zijn over de werking van het algoritme in het licht van de doelstellingen en context van de inzet ervan?"
+    urn: "urn:nl:aivt:ir:1.0:3.6.1"
+    labels:
+      - key: topic
+        value: "Communicatie"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Behoeftesteller", "Gemandateerd verantwoordelijke(n)", "Ethicus" ]
+    lifecycle: [ "Ontwerp", "Implementatie", "Monitoren", "Beheer" ]
+    links: [ { "text": "DPIA vraag 15" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Op welke manier beoogt u te communiceren over de inzet van het algoritme?"
+    urn: "urn:nl:aivt:ir:1.0:3.6.2"
+    labels:
+      - key: topic
+        value: "Communicatie"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Behoeftesteller", "Gemandateerd verantwoordelijke(n)", "Ethicus" ]
+    lifecycle: [ "Ontwerp", "Implementatie", "Monitoren", "Beheer" ]
+    links: [ { "text": "DPIA vraag 15" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Wordt de output van het algoritme gevisualiseerd, bijvoorbeeld in een tabel, grafiek of dashboard? Zo ja: is de vorm van visualisatie of weergave een correcte representatie van de output van het algoritme? Is de visualisatie makkelijk te lezen voor verschillende gebruikersgroepen?"
+    urn: "urn:nl:aivt:ir:1.0:3.6.3"
+    labels:
+      - key: topic
+        value: "Communicatie"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Behoeftesteller", "Gemandateerd verantwoordelijke(n)", "Ethicus" ]
+    lifecycle: [ "Verificatie", "Validatie", "Implementatie", "Monitoren", "Beheer" ]
+    links: [ { "text": "DPIA vraag 15" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Is voorzien in goede instrumenten voor evaluatie, auditing en borging van het algoritme?"
+    urn: "urn:nl:aivt:ir:1.0:3.7.1"
+    labels:
+      - key: topic
+        value: "Evaluatie, auditing en borging"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Behoeftesteller", "Gemandateerd verantwoordelijke(n)", "Data scientist" ]
+    lifecycle: [ "Verificatie", "Validatie", "Implementatie", "Monitoren", "Beheer" ]
+    links: [ ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Zijn er voldoende mogelijkheden om rekenschap en verantwoording af te leggen over het algoritme?"
+    urn: "urn:nl:aivt:ir:1.0:3.7.2"
+    labels:
+      - key: topic
+        value: "Evaluatie, auditing en borging"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Behoeftesteller", "Gemandateerd verantwoordelijke(n)", "Data scientist" ]
+    lifecycle: [ "Ontwerp", "Implementatie", "Monitoren", "Beheer" ]
+    links: [ ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Welke mogelijkheden zijn er voor auditors en toezichthouders om (formele) consequenties te verbinden aan de inzet van een algoritme door de overheid (bijv. terugkoppeling van bevindingen, doen van aanbevelingen, budgettaire consequenties, ...)"
+    urn: "urn:nl:aivt:ir:1.0:3.7.3"
+    labels:
+      - key: topic
+        value: "Evaluatie, auditing en borging"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Behoeftesteller", "Gemandateerd verantwoordelijke(n)", "Data scientist" ]
+    lifecycle: [ "Implementatie", "Monitoren", "Beheer" ]
+    links: [ ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Wordt er een grondrecht geraakt door het in te zetten algoritme?"
+    urn: "urn:nl:aivt:ir:1.0:4.1.1"
+    labels:
+      - key: topic
+        value: "Grondrecht"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Domeinspecialist", "Jurist" ]
+    lifecycle: [ "Probleemanalyse" ]
+    links: [ { "text": "DPIA vraag 16" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Zijn er specifieke wettelijke bepalingen of richtsnoeren van toepassing op de grondrechteninbreuk?"
+    urn: "urn:nl:aivt:ir:1.0:4.2.1"
+    labels:
+      - key: topic
+        value: "Specifieke wetgeving en richtsnoeren"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Domeinspecialist", "Jurist" ]
+    lifecycle: [ "Probleemanalyse" ]
+    links: [ { "text": "DPIA vraag 9" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Hoe zwaar wordt een grondrecht geraakt door het algoritme?"
+    urn: "urn:nl:aivt:ir:1.0:4.3.1"
+    labels:
+      - key: topic
+        value: "Zwaartebepaling"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Domeinspecialist", "Jurist" ]
+    lifecycle: [ "Probleemanalyse" ]
+    links: [ { "text": "DPIA vraag 16" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Welke doelen worden met inzet van het algoritme nagestreefd? Kijk hierbij naar uw antwoord op vraag 1.2"
+    urn: "urn:nl:aivt:ir:1.0:4.4.1"
+    labels:
+      - key: topic
+        value: "Doelstellingen"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Domeinspecialist", "Jurist" ]
+    lifecycle: [ "Probleemanalyse" ]
+    links: [ ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Vormt het in te zetten algoritme een doeltreffend middel om de gestelde doelen te realiseren? Leg uit."
+    urn: "urn:nl:aivt:ir:1.0:4.5.1"
+    labels:
+      - key: topic
+        value: "Doeltreffendheid/effectiviteit/geschiktheid"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Domeinspecialist", "Jurist" ]
+    lifecycle: [ "Probleemanalyse" ]
+    links: [ { "text": "DPIA vraag 14" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Is inzet van dit specifieke algoritme noodzakelijk om dit doel te bereiken en zijn er geen andere of mitigerende maatregelen beschikbaar om dit te doen? Leg uit."
+    urn: "urn:nl:aivt:ir:1.0:4.6.1"
+    labels:
+      - key: topic
+        value: "Noodzakelijkheid/subsidiariteit"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Domeinspecialist", "Jurist" ]
+    lifecycle: [ "Probleemanalyse" ]
+    links: [ { "text": "DPIA vraag 14" } ]
+    requirements: [ ]
+    template: *systemcard_template
+  - question: "Levert inzet van het algoritme een redelijk evenwicht op tussen de te realiseren doelen en de grondrechten die worden geraakt, en waarom is dat zo?"
+    urn: "urn:nl:aivt:ir:1.0:4.7.1"
+    labels:
+      - key: topic
+        value: "Belangenafweging/proportionaliteit"
+    type: "open_question"
+    suggested_roles: [ "Projectleider", "Domeinspecialist", "Jurist" ]
+    lifecycle: [ "Probleemanalyse" ]
+    links: [ { "text": "DPIA vraag 14" } ]
+    requirements: [ ]
+    template: *systemcard_template
