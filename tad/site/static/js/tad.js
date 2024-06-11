@@ -1,5 +1,8 @@
-window.onload = function () {
+window.onload = function() {
+  bindTaskColumns();
+}
 
+function bindTaskColumns() {
   const columns = document.getElementsByClassName("progress_cards_container");
   for (let i = 0; i < columns.length; i++) {
     new Sortable(columns[i], { //NOSONAR
@@ -18,5 +21,11 @@ window.onload = function () {
         htmx.trigger("#cardMovedForm", "cardmoved");
       }
     });
+  }
+}
+
+if (!window.closePopup) {
+  window.closePopup = function() {
+    console.log("I am a placeholder")
   }
 }

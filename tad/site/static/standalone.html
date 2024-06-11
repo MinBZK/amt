@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ page_title }}</title>
+  <!-- TODO: decide if all files should be local, and if so, how to do versions management -->
+  <script type="text/javascript" src="/static/vendor/sortable/js/sortable.js"></script>
+  <script type="text/javascript" src="/static/vendor/htmx/js/hyperscript.min.js"></script>
+  <script type="text/javascript" src="/static/js/tad.js"></script>
+  <script src="/static/vendor/htmx/js/1.9.12.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/json-enc.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/response-targets.js"></script>
+  <link rel="stylesheet" href="/static/css/html5reset.css"/>
+  <link rel="stylesheet" href="/static/css/col.css"/>
+  <link rel="stylesheet" href="/static/css/2cols.css"/>
+  <link rel="stylesheet" href="/static/css/3cols.css"/>
+  <link rel="stylesheet" href="/static/css/4cols.css"/>
+  <link rel="stylesheet" href="/static/css/5cols.css"/>
+  <link rel="stylesheet" href="/static/css/6cols.css"/>
+  <link rel="stylesheet" href="/static/css/7cols.css"/>
+  <link rel="stylesheet" href="/static/css/8cols.css"/>
+  <link rel="stylesheet" href="/static/css/9cols.css"/>
+  <link rel="stylesheet" href="/static/css/10cols.css"/>
+  <link rel="stylesheet" href="/static/css/11cols.css"/>
+  <link rel="stylesheet" href="/static/css/12cols.css"/>
+  <link rel="stylesheet" href="/static/css/layout.css"/>
+</head>
+<body class="tad-standalone">
+  <div id="bodyContainer" hx-get="/form" hx-trigger="load"></div>
+</body>
+</html>

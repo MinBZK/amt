@@ -1,0 +1,25 @@
+{% macro render_task_card(task) -%}
+    {% include "task.jinja" %}
+{%- endmacro -%}
+
+{% macro render_task_column(status) -%}
+    <div class="col span_1_of_4">
+        <h3 class="text-center-horizontal margin-bottom--small">{{ status.name }}</h3>
+        <div class="progress_cards_container sortable" data-id="{{ status.id }}" id="column-{{ status.id }}">
+            {% for task in tasks_service.get_tasks(status.id) %}
+                {{ render_task_card(task) }}
+            {% endfor %}
+        </div>
+    </div>
+{% endmacro -%}
+
+{% macro render_task_columns() -%}
+    {% for status in statuses_service.get_statuses() %}
+        {{ render_task_column(status) }}
+    {% endfor %}
+{%  endmacro %}
+
+{{ render_task_columns() }}
+<script>
+    bindTaskColumns();
+</script>

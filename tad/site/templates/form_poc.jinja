@@ -1,0 +1,60 @@
+<div class="progress_cards_container" style="padding: 2em;">
+    <form method="get" action="/statuses">
+        <div style="margin-top: 1em; margin-bottom: 1em">
+            {{ question }}
+        </div>
+        {% if question_type == "open" %}
+        <label >
+            <textarea cols="100" rows="10" placeholder="This is a placeholder" style="padding: 1em; margin-bottom: 1em; margin-top: 1em"></textarea>
+        </label>
+        {% elif question_type == "choice" %}
+            <fieldset style="border: 1px solid black; padding: 1em; margin-top: 1em; margin-bottom: 1em">
+                <legend>Select a maintenance drone:</legend>
+                <div>
+                    <input type="radio" id="huey" name="drone" value="huey" checked />
+                    <label for="huey">Huey</label>
+                </div>
+                <div>
+                    <input type="radio" id="dewey" name="drone" value="dewey" />
+                    <label for="dewey">Dewey</label>
+                </div>
+                <div>
+                    <input type="radio" id="louie" name="drone" value="louie" />
+                    <label for="louie">Louie</label>
+                </div>
+            </fieldset>
+        {% elif question_type == "multiple" %}
+            <fieldset style="border: 1px solid black; padding: 1em; margin-top: 1em; margin-bottom: 1em">
+                <legend>Select an option:</legend>
+                <div>
+                    <input type="checkbox" id="huey" name="drone1" value="huey" />
+                    <label for="huey">Huey</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="dewey" name="drone2" value="dewey" />
+                    <label for="dewey">Dewey</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="louie" name="drone3" value="louie" />
+                    <label for="louie">Louie</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="louie" name="drone3" value="louie" />
+                    <label for="louie">Louie</label>
+                </div>
+            </fieldset>
+        {% endif %}
+        <div>
+            <button hx-get="http://localhost:8000/statuses" hx-swap="innerHTML" hx-trigger="click"
+                    hx-target="#bodyContainer">Back</button>
+
+            <button hx-post="http://localhost:8000/form" hx-swap="innerHTML" hx-trigger="click"
+                    hx-target="#bodyContainer">Next</button>
+
+            <button onclick="closePopup(); return false;">Close</button>
+        </div>
+{#        <div>#}
+{#            {{ metadata | tojson }}#}
+{#        </div>#}
+    </form>
+</div>

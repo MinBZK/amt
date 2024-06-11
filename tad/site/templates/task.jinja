@@ -6,4 +6,8 @@
             <img class="progress_card_assignees_image" src="/static/images/img_avatar.png" alt="Assigned to Avatar"/>
         </div>
     {% endif %}
+    <form hx-post="/form" hx-swap="innerHTML" hx-trigger="click" hx-target="#bodyContainer">
+        <input type="hidden" name="id" value="{{ task.id }}">
+        <input type="submit" value="Open"/>
+    </form>
 </div>
