@@ -1,5 +1,6 @@
 name: deploy
 
+
 on:
   push:
     branches:
@@ -17,6 +18,10 @@ on:
         options:
           - stag
           - prod
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -55,7 +60,6 @@ jobs:
               echo "Variable is empty. Failing the workflow."
               exit 1
             fi
-
 
       - name: Print deploy hash and environment
         run: |
