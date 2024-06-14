@@ -45,7 +45,9 @@
           "editor.defaultFormatter": "charliermarsh.ruff"
         },
         "python.analysis.typeCheckingMode": "strict",
-        "markiscodecoverage.searchCriteria": "coverage.lcov"
+        "markiscodecoverage.searchCriteria": "coverage.lcov",
+        "remote.autoForwardPorts": false,
+        "remote.restoreForwardedPorts": false
       }
     }
   }
