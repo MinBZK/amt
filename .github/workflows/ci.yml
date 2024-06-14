@@ -10,6 +10,10 @@ on:
     branches:
       - 'main'
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   REGISTRY: ghcr.io
   POETRY_CACHE_DIR: ~/.cache/pypoetry

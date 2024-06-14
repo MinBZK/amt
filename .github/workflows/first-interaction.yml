@@ -2,6 +2,9 @@ name: first-interaction
 
 on: [pull_request, issues]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
 jobs:
   greeting:
     runs-on: ubuntu-latest
