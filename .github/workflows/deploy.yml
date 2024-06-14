@@ -6,18 +6,19 @@ on:
     branches:
       - main
   workflow_dispatch:
-    inputs:
-      image_tag:
-        description: 'Docker image tag to deploy'
-        required: true
-        default: 'main'
-      environment:
-        description: 'Environment to deploy to'
-        required: true
-        default: 'stag'
-        options:
-          - stag
-          - prod
+      inputs:
+        image_tag:
+          description: 'Docker image tag to deploy'
+          required: true
+          default: 'main'
+        environment:
+          description: 'Environment to deploy too'
+          required: true
+          default: 'sandbox'
+          type: choice
+          options:
+            - sandbox
+            - production
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -27,13 +28,26 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+        with:
+          path: 'source/tad/'
+
+      - name: get commit hash
+        id: get_commit_hash
+        run: |
+          cd source/tad/
+          echo "commit_hash=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+
       - name: Get GHCR package hash
         id: get_package_hash
         run: |
           if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
-             gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /orgs/MinBZK/packages/container/tad/versions | jq '.[] | select(.metadata.container.tags | contains(["${{ inputs.image_tag }}"])) | .name' >> "$GITHUB_OUTPUT"
+            container_id=$(gh api --paginate -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /orgs/MinBZK/packages/container/tad/versions | jq -r '.[] | select(.metadata.container.tags | contains(["${{ inputs.image_tag }}"])) | .name')
+            echo "container_id=$container_id" >> "$GITHUB_OUTPUT"
           else
-             gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /orgs/MinBZK/packages/container/tad/versions | jq '.[] | select(.metadata.container.tags | contains(["main"])) | .name' >> "$GITHUB_OUTPUT"
+            container_id=$(gh api --paginate -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /orgs/MinBZK/packages/container/tad/versions | jq -r '.[] | select(.metadata.container.tags | contains(["main"])) | .name')
+            echo "container_id=$container_id" >> "$GITHUB_OUTPUT"
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -42,41 +56,51 @@ jobs:
         id: get_deploy_env
         run: |
           if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
-              if [ "${{ inputs.environment }}" == "prod" ]; then
-                  echo "production" >> "$GITHUB_OUTPUT"
-              else
-                  echo "staging" >> "$GITHUB_OUTPUT"
-              fi
-             echo "" >> "$GITHUB_OUTPUT"
+              echo "env=${{ inputs.environment }}" >> "$GITHUB_OUTPUT"
           else
-             echo "staging" >> "$GITHUB_OUTPUT"
+             echo "env=sandbox" >> "$GITHUB_OUTPUT"
           fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Print deploy hash and environment
+        run: |
+           echo "Container ID: ${{ steps.get_package_hash.outputs.container_id }}"
+           echo "Overlay: ${{ steps.get_deploy_env.outputs.env }}"
+           echo "Version:  ${{ inputs.image_tag || 'main' }}"
+           echo "Actor: ${{ github.actor}}"
+           echo "Commit: ${{ steps.get_commit_hash.outputs.commit_hash }}"
 
       - name: check correct name
         run: |
-            if [ -z "${{steps.get_package_hash.outputs}}" ]; then
+            if [ -z "${{steps.get_package_hash.outputs.container_id}}" ]; then
               echo "Variable is empty. Failing the workflow."
               exit 1
             fi
 
-      - name: Print deploy hash and environment
-        run: |
-           echo ${{ steps.get_package_hash.outputs }}
-           echo ${{ steps.get_deploy_env.outputs }}
-
       - uses: actions/checkout@v4
         with:
-          repository: '${{ github.server_url }}/minbzk/ai-validation-infra'
-          ssh-key: ${{ secrets.DEPLOY_KEY }}
+          repository: 'minbzk/ai-validation-infra'
           ref: main
-          path: ai-validation-infra
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
 
       - name: Make changes to the file
         run: |
-          cd ai-validation-infra
-          sed -i 's/newTag: .*$/newTag: ${{ steps.get_package_hash.outputs }}/g' apps/tad/overlays/${{ steps.get_deploy_env.outputs }}/kustomization.yaml
-          git add apps/tad/overlays/${{ steps.get_deploy_env.outputs }}/kustomization.yaml
-          git commit -m "Update apps/tad/overlays/${{ steps.get_deploy_env.outputs }}/kustomization.yaml"
-          git push
+          sed -i 's/newTag: .*$/newTag: ${{inputs.image_tag || 'main' }}@${{ steps.get_package_hash.outputs.container_id }}/g' apps/tad/overlays/${{ steps.get_deploy_env.outputs.env }}/kustomization.yaml
+          sed -i 's/commithash: .*$/commithash: ${{ steps.get_commit_hash.outputs.commit_hash }}/g' apps/tad/overlays/${{ steps.get_deploy_env.outputs.env }}/kustomization.yaml
+          sed -i 's|minbzk.github.io/version: .*$|minbzk.github.io/version: ${{ inputs.image_tag || 'main' }} }|g' apps/tad/overlays/${{ steps.get_deploy_env.outputs.env }}/kustomization.yaml
+          git add apps/tad/overlays/${{ steps.get_deploy_env.outputs.env }}/kustomization.yaml
+
+      - name: show changes
+        run: git diff --staged
+
+      - name: push changes
+        run: |
+          git commit -m "Update tad overlay ${{ steps.get_deploy_env.outputs.env }} tag ${{ steps.get_package_hash.outputs.container_id }} by actor ${{ github.actor}}"
+          git push --force-with-lease
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
