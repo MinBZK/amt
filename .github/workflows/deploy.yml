@@ -92,7 +92,7 @@ jobs:
         run: |
           sed -i 's/newTag: .*$/newTag: ${{inputs.image_tag || 'main' }}@${{ steps.get_package_hash.outputs.container_id }}/g' apps/tad/overlays/${{ steps.get_deploy_env.outputs.env }}/kustomization.yaml
           sed -i 's/commithash: .*$/commithash: ${{ steps.get_commit_hash.outputs.commit_hash }}/g' apps/tad/overlays/${{ steps.get_deploy_env.outputs.env }}/kustomization.yaml
-          sed -i 's|minbzk.github.io/version: .*$|minbzk.github.io/version: ${{ inputs.image_tag || 'main' }} }|g' apps/tad/overlays/${{ steps.get_deploy_env.outputs.env }}/kustomization.yaml
+          sed -i 's|minbzk.github.io/version: .*$|minbzk.github.io/version: ${{ inputs.image_tag || 'main' }}|g' apps/tad/overlays/${{ steps.get_deploy_env.outputs.env }}/kustomization.yaml
           git add apps/tad/overlays/${{ steps.get_deploy_env.outputs.env }}/kustomization.yaml
 
       - name: show changes
