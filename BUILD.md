@@ -57,6 +57,10 @@ To run the application you use this command:
 docker compose up
 ```
 
+## Language support
+
+We use babel for translations and a custom yaml for dynamic translations. Babel does not support Frysian, so we added a custom piece of code to support this. To generate, update or compile the language files, use the script in ./script/translate.
+
 ## Testing, Linting etc
 
 For testing, linting and other feature we use several tools. You can look up the documentation on how to use these:

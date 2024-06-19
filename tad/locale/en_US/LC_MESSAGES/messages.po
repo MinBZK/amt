@@ -1,0 +1,31 @@
+# English (United States) translations for PROJECT.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2024-06-24 10:53+0200\n"
+"PO-Revision-Date: 2024-06-24 09:48+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en_US\n"
+"Language-Team: en_US <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.15.0\n"
+
+#: tad/site/templates/default_layout.jinja:19
+msgid "Transparency of Algorithmic Decision making (TAD)"
+msgstr ""
+
+#: tad/site/templates/default_layout.jinja:49
+msgid "Transparency of Algorithmic Decision making"
+msgstr ""
+
+#: tad/site/templates/default_layout.jinja:55
+msgid "Language"
+msgstr ""
