@@ -24,22 +24,6 @@ def test_logging_tad_module(caplog: pytest.LogCaptureFixture):
     assert caplog.records[0].message == message
 
 
-def test_logging_root(caplog: pytest.LogCaptureFixture):
-    configure_logging()
-
-    logger = logging.getLogger("")
-
-    message = "This is a test log message"
-    logger.debug(message)
-    logger.info(message)
-    logger.warning(message)  # defaults to warning
-    logger.error(message)
-    logger.critical(message)
-
-    assert len(caplog.records) == 3
-    assert caplog.records[0].message == message
-
-
 def test_logging_submodule(caplog: pytest.LogCaptureFixture):
     config = {"loggers": {"tad": {"propagate": True}}}
 

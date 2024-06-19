@@ -30,7 +30,7 @@ LOGGING_CONFIG = {
         },
     },
     "loggers": {
-        "tad": {"handlers": ["console", "file"], "level": "DEBUG", "propagate": False},
+        "": {"handlers": ["console", "file"], "level": "DEBUG", "propagate": False},
     },
 }
 

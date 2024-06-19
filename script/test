@@ -3,8 +3,8 @@
 set -e
 set -x
 
-coverage run -m pytest $@
-if [ $? -ne 0 ]; then
+
+if ! coverage run -m pytest "$@" ; then
     echo "Test failed"
     exit 1
 fi
@@ -12,8 +12,8 @@ fi
 coverage report
 coverage html
 coverage lcov
-pyright $@
-if [ $? -ne 0 ]; then
+
+if ! pyright; then
     echo "Typecheck failed"
     exit 1
 fi
