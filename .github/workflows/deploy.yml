@@ -58,7 +58,7 @@ jobs:
           if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
               echo "env=${{ inputs.environment }}" >> "$GITHUB_OUTPUT"
           else
-             echo "env=sandbox" >> "$GITHUB_OUTPUT"
+             echo "env=production" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Print deploy hash and environment
