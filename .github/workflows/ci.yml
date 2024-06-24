@@ -259,6 +259,8 @@ jobs:
         run: |
           echo "tags: ${{ steps.meta.outputs.tags }}"
 
+      - uses: actions/checkout@v4
+
       - name: Trigger deployment
         run: |
           gh workflow run deploy.yml -f image_tag=${{ steps.meta.outputs.tags }} -f environment=production
