@@ -207,10 +207,20 @@ jobs:
         with:
           sarif_file: 'trivy-results.sarif'
 
+      - name: Extract metadata for Docker
+        id: meta2
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} #TODO(berry): fix on git labels multiple tags
+          flavor: |
+            latest=false
+        env:
+          DOCKER_METADATA_ANNOTATIONS_LEVELS: manifest,index
+
       - name: Run Trivy SBOM
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: ${{ steps.meta.outputs.tags }}
+          image-ref: ${{ steps.meta2.outputs.tags }}
           scan-type: image
           exit-code: 0
           format: 'cyclonedx'
@@ -223,7 +233,7 @@ jobs:
       - name: Run Trivy license scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: ${{ steps.meta.outputs.tags }}
+          image-ref: ${{ steps.meta2.outputs.tags }}
           scan-type: image
           scanners: 'license'
           exit-code: 0
@@ -254,6 +264,8 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: "" # make empty to get the correct tag
+          flavor: |
+            latest=false
 
       - name: print metadata
         run: |
