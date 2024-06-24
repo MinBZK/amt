@@ -243,6 +243,28 @@ jobs:
           if-no-files-found: error
           overwrite: true
 
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build]
+    if: ${{ github.event_name == 'push' }}
+    permissions:
+      actions: write
+    steps:
+      - name: Extract metadata for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        env:
+          DOCKER_METADATA_ANNOTATIONS_LEVELS: manifest,index
+
+      - name: Trigger deployment
+        run: |
+          gh workflow run deploy.yml -f image_tag=${{ steps.meta.outputs.tags }} -f environment=production
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
   notifyMattermost:
     runs-on: ubuntu-latest
     needs: [lint, security, test, build ]
