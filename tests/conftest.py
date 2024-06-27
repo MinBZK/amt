@@ -21,7 +21,7 @@ def run_uvicorn(uvicorn: Any) -> None:
     uvicorn_run(app, host=uvicorn["host"], port=uvicorn["port"])
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="session")
 def run_server(request: pytest.FixtureRequest) -> Generator[Any, None, None]:
     uvicorn_settings = request.config.uvicorn  # type: ignore
 

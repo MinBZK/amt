@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+if [ "$#" -ne 1 ]
+then
+
+    echo "Usage: ./translate command"
+    echo "command is init (caution: only needed once, it creates empty translation files), update, compile"
+    exit 1
+fi
+
+if [ "$1" = "compile" ]
+then
+    ./script/pybabel-for-tad compile -d tad/locale
+elif [ "$1" = "init" ]
+then
+    ./script/pybabel-for-tad extract -F babel-mapping.ini . -o tad/locale/base.pot
+    ./script/pybabel-for-tad init -l en_US -i tad/locale/base.pot -d tad/locale
+    ./script/pybabel-for-tad init -l nl_NL -i tad/locale/base.pot -d tad/locale
+    ./script/pybabel-for-tad init -l nl_FY -i tad/locale/base.pot -d tad/locale
+elif [ "$1" = "update" ]
+then
+    ./script/pybabel-for-tad extract -F babel-mapping.ini . -o tad/locale/base.pot
+    ./script/pybabel-for-tad update -i tad/locale/base.pot -d tad/locale
+else
+    echo "Unknown command"
+    exit 1
+fi
