@@ -23,6 +23,13 @@ When poetry is done installing all dependencies you can start using the tool.
 poetry run python -m uvicorn tad.main:app --log-level warning
 ```
 
+### Suggested development ENVIRONMENT settings
+To use a demo environment during local development, you can use the following environment options.
+```shell
+export ENVIRONMENT=demo AUTO_CREATE_SCHEMA=true
+```
+
+
 ## Database
 
 We support most SQL database types. You can use the variable `APP_DATABASE_SCHEME` to change the database. The default scheme is sqlite.
