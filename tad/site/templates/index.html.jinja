@@ -1,0 +1,37 @@
+{% extends 'layouts/base.html.jinja' %}
+{% import 'macros/render.html.jinja' as render %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/css/col.css"/>
+    <link rel="stylesheet" href="/static/css/2cols.css"/>
+    <link rel="stylesheet" href="/static/css/3cols.css"/>
+    <link rel="stylesheet" href="/static/css/4cols.css"/>
+    <link rel="stylesheet" href="/static/css/5cols.css"/>
+    <link rel="stylesheet" href="/static/css/6cols.css"/>
+    <link rel="stylesheet" href="/static/css/7cols.css"/>
+    <link rel="stylesheet" href="/static/css/8cols.css"/>
+    <link rel="stylesheet" href="/static/css/9cols.css"/>
+    <link rel="stylesheet" href="/static/css/10cols.css"/>
+    <link rel="stylesheet" href="/static/css/11cols.css"/>
+    <link rel="stylesheet" href="/static/css/12cols.css"/>
+{% endblock %}
+
+{% block content %}
+<div class="container" hx-ext="response-targets">
+    <form id="cardMovedForm" hx-patch="/tasks/" hx-target-5*="#errorContainer" hx-ext="json-enc" hx-trigger="cardmoved" hx-swap="outerHTML" hx-target="#board" class="">
+        <input type="hidden" name="taskId" value="">
+        <input type="hidden" name="statusId" value="">
+        <input type="hidden" name="previousSiblingId" value="">
+        <input type="hidden" name="nextSiblingId" value="">
+    </form>
+    <h1 class="margin-bottom--large">Project X</h1>
+        <div id="errorContainer">
+        </div>
+        <div class="section group">
+            {% for status in statuses_service.get_statuses() %}
+                {{ render.column(status, translations, tasks_service) }}
+            {% endfor %}
+        </div>
+</div>
+{% endblock %}

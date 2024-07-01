@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-06-24 10:53+0200\n"
-"PO-Revision-Date: 2024-06-24 09:48+0200\n"
+"POT-Creation-Date: 2024-07-03 11:56+0200\n"
+"PO-Revision-Date: 2024-07-02 11:05+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_FY\n"
 "Language-Team: nl_FY <LL@li.org>\n"
@@ -18,14 +18,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.15.0\n"
 
-#: tad/site/templates/default_layout.jinja:19
-msgid "Transparency of Algorithmic Decision making (TAD)"
-msgstr "Transparânsje fan algoritmyske beslútfoarming (TAD)"
-
-#: tad/site/templates/default_layout.jinja:49
+#: tad/site/templates/default_header.html.jinja:6
 msgid "Transparency of Algorithmic Decision making"
-msgstr "Transparânsje fan algoritmyske beslútfoarming"
+msgstr ""
 
-#: tad/site/templates/default_layout.jinja:55
+#: tad/site/templates/default_header.html.jinja:12
 msgid "Language"
-msgstr "Taal"
+msgstr ""
+
+#: tad/site/templates/layouts/base.html.jinja:10
+msgid "Transparency of Algorithmic Decision making (TAD)"
+msgstr ""
+
+#~ msgid "Transparency of Algorithmic Decision making (TAD)"
+#~ msgstr "Transparânsje fan algoritmyske beslútfoarming (TAD)"
+
+#~ msgid "Transparency of Algorithmic Decision making"
+#~ msgstr "Transparânsje fan algoritmyske beslútfoarming"
+
+#~ msgid "Language"
+#~ msgstr "Taal"

@@ -34,8 +34,8 @@ async def move_task(
             moved_task.next_sibling_id,
         )
         # todo(Robbert) add error handling for input error or task error handling
-        return templates.TemplateResponse(request=request, name="task.jinja", context={"task": task})
+        return templates.TemplateResponse(request=request, name="task.html.jinja", context={"task": task})
     except Exception:
         return templates.TemplateResponse(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, request=request, name="error.jinja"
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, request=request, name="error.html.jinja"
         )
