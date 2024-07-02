@@ -9,6 +9,9 @@ on:
 jobs:
   delete_old_images:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: 'Delete untagged images'
         if: github.event_name == 'schedule'
