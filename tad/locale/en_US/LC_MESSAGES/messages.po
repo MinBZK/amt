@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-07-03 11:56+0200\n"
+"POT-Creation-Date: 2024-07-16 21:53+0000\n"
 "PO-Revision-Date: 2024-07-02 11:20+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -18,23 +18,34 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.15.0\n"
 
-#: tad/site/templates/default_header.html.jinja:6
+#: tad/site/templates/default_header.html.j2:6
 msgid "Transparency of Algorithmic Decision making"
 msgstr ""
 
-#: tad/site/templates/default_header.html.jinja:12
+#: tad/site/templates/default_header.html.j2:12
 msgid "Language"
 msgstr ""
 
-#: tad/site/templates/layouts/base.html.jinja:10
+#: tad/site/templates/layouts/base.html.j2:7
 msgid "Transparency of Algorithmic Decision making (TAD)"
 msgstr ""
 
-#~ msgid "Transparency of Algorithmic Decision making (TAD)"
-#~ msgstr ""
+#: tad/site/templates/pages/404.html.j2:5
+msgid "Not found"
+msgstr ""
 
-#~ msgid "Transparency of Algorithmic Decision making"
-#~ msgstr ""
+#: tad/site/templates/projects/new.html.j2:4
+msgid "New Project"
+msgstr ""
 
-#~ msgid "Language"
-#~ msgstr ""
+#: tad/site/templates/projects/new.html.j2:7
+msgid "Project name"
+msgstr ""
+
+#: tad/site/templates/projects/new.html.j2:10
+msgid "Selected Instruments"
+msgstr ""
+
+#: tad/site/templates/projects/new.html.j2:18
+msgid "Create Project"
+msgstr ""

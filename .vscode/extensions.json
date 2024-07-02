@@ -10,6 +10,7 @@
     "mhutchie.git-graph",
     "markis.code-coverage",
     "qwtel.sqlite-viewer",
-    "ms-vsliveshare.vsliveshare"
+    "ms-vsliveshare.vsliveshare",
+    "wholroyd.jinja"
   ]
 }

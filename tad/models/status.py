@@ -1,4 +1,4 @@
-from sqlmodel import Field, SQLModel  # type: ignore
+from sqlmodel import Field, SQLModel  # pyright: ignore [reportUnknownVariableType]
 
 
 class Status(SQLModel, table=True):

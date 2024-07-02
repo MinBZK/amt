@@ -10,6 +10,9 @@
       "args": [
         "--log-level",
         "warning",
+        "--reload",
+        "--port",
+        "8000",
         "tad.main:app"
       ],
       "cwd": "${workspaceFolder}/",

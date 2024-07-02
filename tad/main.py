@@ -1,4 +1,5 @@
 import logging
+from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
@@ -28,7 +29,7 @@ logger = logging.getLogger(__name__)
 
 # todo(berry): move lifespan to own file
 @asynccontextmanager
-async def lifespan(app: FastAPI):
+async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     mask = Mask(mask_keywords=["database_uri"])
     check_db()
     init_db()

@@ -2,7 +2,7 @@ from typing import Any
 
 
 class Mask:
-    def __init__(self, mask_value: str = "***MASKED***", mask_keywords: list[str] | None = None):
+    def __init__(self, mask_value: str = "***MASKED***", mask_keywords: list[str] | None = None) -> None:
         if mask_keywords is None:
             mask_keywords = []
         self.mask_value = mask_value

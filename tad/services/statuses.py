@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 
 class StatusesService:
-    def __init__(self, repository: Annotated[StatusesRepository, Depends(StatusesRepository)]):
+    def __init__(self, repository: Annotated[StatusesRepository, Depends(StatusesRepository)]) -> None:
         self.repository = repository
 
     def get_status(self, status_id: int) -> Status:

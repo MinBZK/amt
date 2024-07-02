@@ -18,7 +18,7 @@ class StatusesRepository:
     The StatusRepository provides access to the repository layer.
     """
 
-    def __init__(self, session: Annotated[Session, Depends(get_session)]):
+    def __init__(self, session: Annotated[Session, Depends(get_session)]) -> None:
         self.session = session
 
     def find_all(self) -> Sequence[Status]:
@@ -26,7 +26,7 @@ class StatusesRepository:
         Returns a list of all statuses in the repository ordered by sort order.
         :return: the list of all statuses
         """
-        return self.session.exec(select(Status).order_by(Status.sort_order)).all()  # type: ignore
+        return self.session.exec(select(Status).order_by(Status.sort_order)).all()  # pyright: ignore [reportUnknownMemberType, reportCallIssue, reportUnknownVariableType, reportArgumentType]
 
     def save(self, status: Status) -> Status:
         """

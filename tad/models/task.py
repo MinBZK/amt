@@ -1,4 +1,4 @@
-from sqlmodel import Field as SQLField  # type: ignore
+from sqlmodel import Field as SQLField  # pyright: ignore [reportUnknownVariableType]
 from sqlmodel import SQLModel
 
 

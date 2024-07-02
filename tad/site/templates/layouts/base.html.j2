@@ -1,41 +1,30 @@
 <!DOCTYPE html>
 <html lang="{{ language }}">
 <head>
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-
-    <!-- Site title -->
     <title>
         {% block title %}
             {% trans %}Transparency of Algorithmic Decision making (TAD){% endtrans %}
         {% endblock %}
     </title>
-
-    <!-- TODO: decide if all files should be local, and if so, how to do versions management -->
-    <!-- Scripts -->
     {% block scripts %}
     <script type="text/javascript" src="/static/vendor/sortable/js/sortable.js"></script>
     <script type="text/javascript" src="/static/vendor/htmx/js/hyperscript.min.js"></script>
-    <script type="text/javascript" src="/static/js/tad.js"></script>
     <script type="text/javascript" src="/static/vendor/htmx/js/1.9.12.min.js"></script>
-    <script src="/static/vendor/htmx/js/json-enc.js"></script>
-    <script src="/static/vendor/htmx/js/response-targets.js"></script>
+    <script type="text/javascript" src="/static/vendor/htmx/js/json-enc.js"></script>
+    <script type="text/javascript" src="/static/vendor/htmx/js/response-targets.js"></script>
+    <script type="text/javascript" src="/static/js/tad.js"></script>
     {% endblock %}
-
-    <!-- Style sheets -->
     {% block styles %}
     <link rel="stylesheet" href="/static/css/html5reset.css"/>
     <link rel="stylesheet" href="/static/css/layout.css"/>
     {% endblock %}
 </head>
-
-<body>
-    <!-- Header -->
+<body hx-ext="response-targets">
     {% block header %}
-        {% include 'default_header.html.jinja' %}
+        {% include 'default_header.html.j2' %}
     {% endblock %}
-
-    <!-- Contents -->
     {% block content %}{% endblock %}
+    {% block scripts_body %}{% endblock %}
 </body>
 </html>

@@ -13,20 +13,21 @@ logger = logging.getLogger(__name__)
 
 @lru_cache(maxsize=8)
 def get_engine() -> Engine:
+    settings = get_settings()
     connect_args = (
-        {"check_same_thread": False, "isolation_level": None} if get_settings().APP_DATABASE_SCHEME == "sqlite" else {}
+        {"check_same_thread": False, "isolation_level": None} if settings.APP_DATABASE_SCHEME == "sqlite" else {}
     )
-    poolclass = StaticPool if get_settings().APP_DATABASE_SCHEME == "sqlite" else QueuePool
+    poolclass = StaticPool if settings.APP_DATABASE_SCHEME == "sqlite" else QueuePool
 
     return create_engine(
-        str(get_settings().SQLALCHEMY_DATABASE_URI),
+        settings.SQLALCHEMY_DATABASE_URI,  # pyright: ignore [reportArgumentType]
         connect_args=connect_args,
         poolclass=poolclass,
-        echo=get_settings().SQLALCHEMY_ECHO,
+        echo=settings.SQLALCHEMY_ECHO,
     )
 
 
-def check_db():
+def check_db() -> None:
     logger.info("Checking database connection")
     with Session(get_engine()) as session:
         session.exec(select(1))
@@ -34,7 +35,7 @@ def check_db():
     logger.info("Finish Checking database connection")
 
 
-def remove_old_demo_objects(session: Session):
+def remove_old_demo_objects(session: Session) -> None:
     task = session.exec(select(Task).where(Task.title == "First task")).first()
     if task:
         session.delete(task)
@@ -48,7 +49,7 @@ def remove_old_demo_objects(session: Session):
     session.commit()
 
 
-def init_db():
+def init_db() -> None:
     logger.info("Initializing database")
 
     if get_settings().AUTO_CREATE_SCHEMA:

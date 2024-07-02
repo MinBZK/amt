@@ -48,7 +48,7 @@ def test_logging_config(caplog: pytest.LogCaptureFixture, monkeypatch: pytest.Mo
         '{"loggers": { "tad": {  "propagate": "True" }},"formatters": { "generic": {  "fmt": "{name}: {message}"}}}',
     )
 
-    settings = Settings()  # type: ignore
+    settings = Settings()
 
     configure_logging(config=settings.LOGGING_CONFIG)
 
@@ -71,7 +71,7 @@ def test_logging_loglevel(caplog: pytest.LogCaptureFixture):
 
     os.environ["LOGGING_LEVEL"] = "ERROR"
 
-    settings = Settings()  # type: ignore
+    settings = Settings()
 
     configure_logging(config=config, level=settings.LOGGING_LEVEL)
 

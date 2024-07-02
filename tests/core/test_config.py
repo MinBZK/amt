@@ -4,7 +4,7 @@ from tad.core.exceptions import SettingsError
 
 
 def test_default_settings():
-    settings = Settings(_env_file=None)  # type: ignore
+    settings = Settings(_env_file=None)  # pyright: ignore [reportCallIssue]
 
     assert settings.ENVIRONMENT == "local"
     assert settings.LOGGING_LEVEL == "INFO"
@@ -22,7 +22,7 @@ def test_environment_settings(monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setenv("APP_DATABASE_USER", "tad2")
     monkeypatch.setenv("APP_DATABASE_DB", "tad2")
     monkeypatch.setenv("APP_DATABASE_PASSWORD", "mypassword")
-    settings = Settings(_env_file=None)  # type: ignore
+    settings = Settings(_env_file=None)  # pyright: ignore [reportCallIssue]
 
     assert settings.SECRET_KEY == "mysecret"  # noqa: S105
     assert settings.ENVIRONMENT == "production"
@@ -39,9 +39,9 @@ def test_environment_settings_production_sqlite_error(monkeypatch: pytest.Monkey
     monkeypatch.setenv("ENVIRONMENT", "production")
     monkeypatch.setenv("APP_DATABASE_SCHEME", "sqlite")
     with pytest.raises(SettingsError) as e:
-        _settings = Settings(_env_file=None)  # type: ignore
+        _settings = Settings(_env_file=None)  # pyright: ignore [reportCallIssue]
 
-    assert e.value.message == "APP_DATABASE_SCHEME=SQLITE is not supported in production"
+    assert e.value.message == "Settings error for options APP_DATABASE_SCHEME"
 
 
 def test_environment_settings_production_debug_error(monkeypatch: pytest.MonkeyPatch):
@@ -49,9 +49,9 @@ def test_environment_settings_production_debug_error(monkeypatch: pytest.MonkeyP
     monkeypatch.setenv("DEBUG", "True")
     monkeypatch.setenv("APP_DATABASE_SCHEME", "postgresql")
     with pytest.raises(SettingsError) as e:
-        _settings = Settings(_env_file=None)  # type: ignore
+        _settings = Settings(_env_file=None)  # pyright: ignore [reportCallIssue]
 
-    assert e.value.message == "DEBUG=True is not supported in production"
+    assert e.value.message == "Settings error for options DEBUG"
 
 
 def test_environment_settings_production_autocreate_error(monkeypatch: pytest.MonkeyPatch):
@@ -59,6 +59,6 @@ def test_environment_settings_production_autocreate_error(monkeypatch: pytest.Mo
     monkeypatch.setenv("AUTO_CREATE_SCHEMA", "True")
     monkeypatch.setenv("APP_DATABASE_SCHEME", "postgresql")
     with pytest.raises(SettingsError) as e:
-        _settings = Settings(_env_file=None)  # type: ignore
+        _settings = Settings(_env_file=None)  # pyright: ignore [reportCallIssue]
 
-    assert e.value.message == "AUTO_CREATE_SCHEMA=True is not supported in production"
+    assert e.value.message == "Settings error for options AUTO_CREATE_SCHEMA"

@@ -1,6 +1,7 @@
 import logging
 import secrets
 from functools import lru_cache
+from pathlib import Path
 from typing import Any, TypeVar
 
 from pydantic import (
@@ -34,6 +35,8 @@ class Settings(BaseSettings):
     DEBUG: bool = False
     AUTO_CREATE_SCHEMA: bool = False
 
+    CARD_DIR: Path = Path("/tmp/")  # TODO(berry): create better location for model cards  # noqa: S108
+
     # todo(berry): create submodel for database settings
     APP_DATABASE_SCHEME: DatabaseSchemaType = "sqlite"
     APP_DATABASE_DRIVER: str | None = None
@@ -48,13 +51,11 @@ class Settings(BaseSettings):
 
     model_config = SettingsConfigDict(extra="ignore")
 
-    @computed_field  # type: ignore[misc]
-    @property
+    @computed_field
     def SQLALCHEMY_ECHO(self) -> bool:
         return self.DEBUG
 
-    @computed_field  # type: ignore[misc]
-    @property
+    @computed_field
     def SQLALCHEMY_DATABASE_URI(self) -> str:
         scheme: str = (
             f"{self.APP_DATABASE_SCHEME}+{self.APP_DATABASE_DRIVER}"
@@ -79,19 +80,19 @@ class Settings(BaseSettings):
     @model_validator(mode="after")
     def _enforce_database_rules(self: SelfSettings) -> SelfSettings:
         if self.ENVIRONMENT == "production" and self.APP_DATABASE_SCHEME == "sqlite":
-            raise SettingsError("APP_DATABASE_SCHEME=SQLITE is not supported in production")
+            raise SettingsError("APP_DATABASE_SCHEME")
         return self
 
     @model_validator(mode="after")
     def _enforce_debug_rules(self: SelfSettings) -> SelfSettings:
         if self.ENVIRONMENT == "production" and self.DEBUG:
-            raise SettingsError("DEBUG=True is not supported in production")
+            raise SettingsError("DEBUG")
         return self
 
     @model_validator(mode="after")
     def _enforce_autocreate_rules(self: SelfSettings) -> SelfSettings:
         if self.ENVIRONMENT == "production" and self.AUTO_CREATE_SCHEMA:
-            raise SettingsError("AUTO_CREATE_SCHEMA=True is not supported in production")
+            raise SettingsError("AUTO_CREATE_SCHEMA")
         return self
 
 
