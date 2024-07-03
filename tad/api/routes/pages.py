@@ -21,4 +21,4 @@ async def default_layout(
         "tasks_service": tasks_service,
         "statuses_service": status_service,
     }
-    return templates.TemplateResponse(request=request, name="default_layout.jinja", context=context)
+    return templates.TemplateResponse(request=request, name="index.html.jinja", context=context)
