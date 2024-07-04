@@ -1,3 +1,4 @@
+console.log("Starting TAD")
 window.onload = function () {
 
   const columns = document.getElementsByClassName("progress_cards_container");
@@ -19,6 +20,8 @@ window.onload = function () {
       }
     });
   }
+
+  console.log("TAD loaded successfully")
 }
 
 function setCookie(cookieName, cookieValue, expirationDays) {

@@ -1,6 +1,7 @@
 import os
 from collections.abc import Generator, Iterator
 from multiprocessing import Process
+from time import sleep
 from typing import Any
 
 import httpx
@@ -11,6 +12,7 @@ from playwright.sync_api import Page, Playwright, sync_playwright
 from sqlmodel import Session, SQLModel
 from tad.core.config import Settings, get_settings
 from tad.core.db import get_engine
+from tad.core.exceptions import TADError
 from tad.main import app
 from uvicorn.main import run as uvicorn_run
 
@@ -22,13 +24,17 @@ def run_uvicorn(uvicorn: Any) -> None:
 
 
 @pytest.fixture(scope="session")
-def run_server(request: pytest.FixtureRequest) -> Generator[Any, None, None]:
-    uvicorn_settings = request.config.uvicorn  # type: ignore
-
-    process = Process(target=run_uvicorn, args=(uvicorn_settings,))  # type: ignore
-    process.start()
-    yield f"http://{uvicorn_settings['host']}:{uvicorn_settings['port']}"
-    process.terminate()
+def get_server(request: pytest.FixtureRequest, command_line_args: dict[str, str]) -> Generator[Any, None, None]:
+    if command_line_args["server"]:
+        print("COMMAND LINE")
+        yield command_line_args["server"]
+    else:
+        print("UVICORN")
+        uvicorn_settings = request.config.uvicorn  # type: ignore
+        process = Process(target=run_uvicorn, args=(uvicorn_settings,))  # type: ignore
+        process.start()
+        yield f"http://{uvicorn_settings['host']}:{uvicorn_settings['port']}"
+        process.terminate()
 
 
 @pytest.fixture()
@@ -73,19 +79,44 @@ def playwright():
 
 
 @pytest.fixture(params=["chromium"])  # lets start with 1 browser for now, we can add more later
-def browser(
-    playwright: Playwright, request: SubRequest, run_server: Generator[str, Any, Any]
-) -> Generator[Page, Any, Any]:
+def browser(playwright: Playwright, request: SubRequest, get_server: str) -> Generator[Page, Any, Any]:
     browser = getattr(playwright, request.param).launch(headless=True)
-    context = browser.new_context(base_url=run_server)
+    context = browser.new_context(base_url=get_server)
     page = context.new_page()
 
-    transport = httpx.HTTPTransport(retries=5, local_address="127.0.0.1")
+    transport = httpx.HTTPTransport(retries=5, local_address="0.0.0.0")  # noqa: S104
     with httpx.Client(transport=transport, verify=False) as client:  # noqa: S501
-        client.get(f"{run_server}/", timeout=0.8)
+        client.get(f"{get_server}/", timeout=2)
 
     yield page
     browser.close()
+
+
+def pytest_addoption(parser: pytest.Parser):
+    parser.addoption("--server", action="store")
+    parser.addoption("--tad-version", action="store", default="0.1.0")
+
+
+@pytest.fixture(scope="session")
+def command_line_args(request: SubRequest) -> dict[str, Any]:
+    return {"server": request.config.getoption("--server"), "version": request.config.getoption("--tad-version")}
+
+
+@pytest.fixture(scope="session")
+def validate_version(command_line_args: dict[str, str], get_server: str) -> str:
+    transport = httpx.HTTPTransport(retries=10, local_address="0.0.0.0")  # noqa: S104
+    response_version = "Unknown"
+    for _x in range(10):
+        with httpx.Client(transport=transport, verify=False) as client:  # noqa: S501
+            response = client.get(f"{get_server}/health/ready", timeout=5)
+            response_version = response.json()["version"]
+            if response_version == command_line_args["version"]:
+                print("All is ok, we carry on")
+                return response_version
+            sleep(6)
+    raise TestError(
+        f"Server is running version {response_version} instead of expected version {command_line_args['version']}"
+    )
 
 
 @pytest.fixture()
@@ -119,3 +150,10 @@ def patch_settings(request: pytest.FixtureRequest) -> Iterator[Settings]:
 
     # Restore the original settings
     settings.__dict__.update(original_settings.__dict__)
+
+
+class TestError(TADError):
+    def __init__(self, message: str = "Test error"):
+        self.message: str = message
+        exception_name: str = self.__class__.__name__
+        super().__init__(f"{exception_name}: {self.message}")

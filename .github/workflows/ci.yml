@@ -296,3 +296,37 @@ jobs:
             ${{ github.repository }} failed build @here :unamused:
             :rotating_light: [Pipeline](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) failed :fire:
           MATTERMOST_USERNAME: ${{ github.triggering_actor }}
+
+  verify:
+    needs: [build]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install poetry
+        run: pipx install poetry
+
+      - name: Set up Python ${{ env.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: "poetry"
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Install Playwright browsers
+        run: poetry run playwright install --with-deps
+
+      # todo we probably want to determine the version once and store it in a reusable place (env?)
+      - name: get commit hash
+        id: get_commit_hash
+        run: |
+          echo "commit_hash=$(git describe --tags)" >> "$GITHUB_OUTPUT"
+
+
+      - name: Run pytest
+        # staging: https://tad.stag.apps.digilab.network
+        # production: https://tad.prd.apps.digilab.network/
+        run: poetry run pytest tests/deployment_validation --server=https://tad.stag.apps.digilab.network --tad-version=${{ steps.get_commit_hash.outputs.commit_hash }}
