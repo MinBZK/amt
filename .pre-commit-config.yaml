@@ -9,7 +9,6 @@ repos:
       - id: trailing-whitespace
       - id: check-yaml
       - id: check-json
-
       - id: check-added-large-files
       - id: check-merge-conflict
       - id: check-toml
@@ -19,7 +18,14 @@ repos:
     hooks:
       - id: ruff
       - id: ruff-format
-
+  - repo: local
+    hooks:
+      - id: check-modified-migrations
+        name: check-modified-migrations
+        entry: sh -c '! git diff --cached --name-only --diff-filter=MD | grep ^tad/migrations/versions'
+        language: system
+        pass_filenames: false
+        always_run: true
 ci:
   autofix_prs: false
   autofix_commit_msg: "Auto fix pre-commit.com hooks"
