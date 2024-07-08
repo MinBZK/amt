@@ -81,8 +81,8 @@ def browser(
     page = context.new_page()
 
     transport = httpx.HTTPTransport(retries=5, local_address="127.0.0.1")
-    with httpx.Client(transport=transport, verify=False) as client:  # noqa: S501
-        client.get(f"{run_server}/", timeout=0.8)
+    with httpx.Client(transport=transport, verify=False, timeout=0.8) as client:  # noqa: S501
+        client.get(f"{run_server}/")
 
     yield page
     browser.close()
