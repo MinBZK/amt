@@ -2,11 +2,11 @@ from collections.abc import Generator
 from unittest.mock import MagicMock, Mock
 
 import pytest
+from amt.schema.project import ProjectNew
+from amt.schema.system_card import SystemCard
+from amt.services.instruments import InstrumentsService
+from amt.services.storage import FileSystemStorageService
 from fastapi.testclient import TestClient
-from tad.schema.project import ProjectNew
-from tad.schema.system_card import SystemCard
-from tad.services.instruments import InstrumentsService
-from tad.services.storage import FileSystemStorageService
 
 from tests.constants import default_instrument
 

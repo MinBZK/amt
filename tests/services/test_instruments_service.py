@@ -1,7 +1,7 @@
 import pytest
+from amt.core.exceptions import InstrumentError
+from amt.services.instruments import InstrumentsService
 from pytest_httpx import HTTPXMock
-from tad.core.exceptions import InstrumentError
-from tad.services.instruments import InstrumentsService
 from tests.constants import GITHUB_CONTENT_PAYLOAD, GITHUB_LIST_PAYLOAD
 
 # TODO(berry): made payloads to a better location

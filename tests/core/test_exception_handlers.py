@@ -1,9 +1,9 @@
 import pytest
+from amt.server import app
 from fastapi import status
 from fastapi.exceptions import HTTPException, RequestValidationError
 from fastapi.responses import HTMLResponse
 from fastapi.testclient import TestClient
-from tad.server import app
 
 
 @pytest.fixture()

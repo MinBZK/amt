@@ -1,9 +1,9 @@
 services:
-  tad:
+  amt:
     build:
       context: .
       dockerfile: Dockerfile
-    image: ghcr.io/minbzk/tad:latest
+    image: ghcr.io/minbzk/amt:latest
     restart: unless-stopped
     depends_on:
       db:
@@ -30,7 +30,7 @@ services:
     environment:
       - PGDATA=/var/lib/postgresql/data/pgdata
     healthcheck:
-      test: ["CMD", "pg_isready", "-q", "-d", "tad", "-U", "tad"]
+      test: ["CMD", "pg_isready", "-q", "-d", "amt", "-U", "amt"]
 
   db-admin:
     image: dpage/pgadmin4:8.6

@@ -1,4 +1,4 @@
-from tad.schema.project import ProjectNew
+from amt.schema.project import ProjectNew
 
 
 def test_project_schema_create_new():

@@ -7,5 +7,5 @@ def test_static_css(client: TestClient) -> None:
 
 
 def test_static_js(client: TestClient) -> None:
-    response = client.get("/static/js/tad.js")
+    response = client.get("/static/js/amt.js")
     assert response.status_code == 200

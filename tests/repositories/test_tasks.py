@@ -1,7 +1,7 @@
 import pytest
-from tad.core.exceptions import RepositoryError
-from tad.models import Task
-from tad.repositories.tasks import TasksRepository
+from amt.core.exceptions import RepositoryError
+from amt.models import Task
+from amt.repositories.tasks import TasksRepository
 from tests.constants import all_statusses, default_task
 from tests.database_test_utils import DatabaseTestUtils
 

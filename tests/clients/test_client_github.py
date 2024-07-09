@@ -1,8 +1,8 @@
 import pytest
+from amt.clients.github import GitHubClient
+from amt.schema.github import RepositoryContent
 from httpx import HTTPStatusError
 from pytest_httpx import HTTPXMock
-from tad.clients.github import GitHubClient
-from tad.schema.github import RepositoryContent
 
 
 def test_get_content(httpx_mock: HTTPXMock):

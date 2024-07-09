@@ -1,11 +1,11 @@
 [tool.poetry]
-name = "tad"
+name = "amt"
 version = "0.1.0"
 description = ""
 authors = ["ai-validatie-team <ai-validatie@minbzk.nl>"]
 readme = "README.md"
 license = "EUPL-1.2"
-repository = "https://github.com/MinBZK/tad"
+repository = "https://github.com/MinBZK/amt"
 keywords = ["AI", "Validation", "Transparency", "Algorithm"]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -16,7 +16,7 @@ classifiers = [
     "Typing :: Typed"
 ]
 packages = [
-    { include = "tad" }
+    { include = "amt" }
 ]
 
 
@@ -54,7 +54,7 @@ types-pyyaml = "^6.0.12.20240311"
 
 
 [tool.poetry.urls]
-"Issue Tracker" = "https://github.com/MinBZK/tad/issues"
+"Issue Tracker" = "https://github.com/MinBZK/amt/issues"
 
 [build-system]
 requires = ["poetry-core"]
@@ -64,7 +64,8 @@ build-backend = "poetry.core.masonry.api"
 [tool.ruff]
 line-length = 120
 target-version = "py311"
-src = ["tad","tests"]
+src = ["amt","tests"]
+exclude = ["amt/migrations"]
 
 [tool.ruff.format]
 line-ending = "lf"
@@ -88,7 +89,7 @@ reportMissingImports = true
 reportMissingTypeStubs = true
 reportUnnecessaryIsInstance = false
 exclude = [
-    "tad/migrations",
+    "amt/migrations",
     ".venv"
 ]
 
@@ -106,7 +107,7 @@ fail_under = 95
 
 [tool.coverage.html]
 directory = "htmlcov"
-title = "tad"
+title = "amt"
 
 
 [tool.pytest.ini_options]

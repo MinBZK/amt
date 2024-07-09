@@ -1,6 +1,6 @@
+from amt.models import Project, Status, Task, User
+from amt.schema.instrument import Instrument, InstrumentTask, Owner
 from fastapi import Request
-from tad.models import Project, Status, Task, User
-from tad.schema.instrument import Instrument, InstrumentTask, Owner
 
 
 def default_status():

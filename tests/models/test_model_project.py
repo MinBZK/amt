@@ -1,8 +1,8 @@
 from pathlib import Path
 
 import pytest
+from amt.models.project import Project
 from pydantic import ValidationError
-from tad.models.project import Project
 
 
 def test_model_basic_project():

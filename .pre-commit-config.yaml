@@ -5,7 +5,7 @@ repos:
     rev: v4.6.0
     hooks:
       - id: end-of-file-fixer
-        exclude: ^tad/static/vendor/.*
+        exclude: ^amt/static/vendor/.*
       - id: trailing-whitespace
       - id: check-yaml
         exclude: example/
@@ -23,7 +23,7 @@ repos:
     hooks:
       - id: check-modified-migrations
         name: check-modified-migrations
-        entry: sh -c '! git diff --cached --name-only --diff-filter=MD | grep ^tad/migrations/versions'
+        entry: sh -c '! git diff --cached --name-only --diff-filter=MD | grep ^amt/migrations/versions'
         language: system
         pass_filenames: false
         always_run: true

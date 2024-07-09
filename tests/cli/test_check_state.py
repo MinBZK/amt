@@ -4,9 +4,8 @@ from typing import Any
 from unittest.mock import Mock
 
 import pytest
-from click.testing import CliRunner
-from tad.cli import check_state
-from tad.cli.check_state import (
+from amt.cli import check_state
+from amt.cli.check_state import (
     get_all_next_tasks,
     get_first_lifecycle_idx,
     get_instrument_result_from_system_card,
@@ -15,12 +14,13 @@ from tad.cli.check_state import (
     get_task_timestamp_from_assessment_card,
     get_tasks_by_priority,
 )
-from tad.core.exceptions import InstrumentError
-from tad.schema.assessment_card import AssessmentCard
-from tad.schema.instrument import InstrumentTask
-from tad.schema.system_card import SystemCard
-from tad.services.instruments import InstrumentsService
-from tad.services.storage import FileSystemStorageService, StorageFactory
+from amt.core.exceptions import InstrumentError
+from amt.schema.assessment_card import AssessmentCard
+from amt.schema.instrument import InstrumentTask
+from amt.schema.system_card import SystemCard
+from amt.services.instruments import InstrumentsService
+from amt.services.storage import FileSystemStorageService, StorageFactory
+from click.testing import CliRunner
 from tests.constants import default_instrument
 from yaml import YAMLError
 

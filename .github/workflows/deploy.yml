@@ -27,7 +27,7 @@ jobs:
       - name: Get GHCR package hash
         id: get_package_hash
         run: |
-            container_id=$(gh api --paginate -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /orgs/MinBZK/packages/container/tad/versions | jq -r '.[] | select(.metadata.container.tags | contains(["${{ inputs.image_tag }}"])) | .name')
+            container_id=$(gh api --paginate -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /orgs/MinBZK/packages/container/amt/versions | jq -r '.[] | select(.metadata.container.tags | contains(["${{ inputs.image_tag }}"])) | .name')
             echo "container_id=$container_id" >> "$GITHUB_OUTPUT"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -53,16 +53,16 @@ jobs:
 
       - name: Make changes to the file
         run: |
-          sed -i 's/newTag: .*$/newTag: ${{inputs.image_tag  }}@${{ steps.get_package_hash.outputs.container_id }}/g' apps/tad/overlays/${{ inputs.environment }}/kustomization.yaml
-          sed -i 's|minbzk.github.io/version: .*$|minbzk.github.io/version: ${{ inputs.image_tag }}|g' apps/tad/overlays/${{ inputs.environment }}/kustomization.yaml
-          git add apps/tad/overlays/${{ inputs.environment }}/kustomization.yaml
+          sed -i 's/newTag: .*$/newTag: ${{inputs.image_tag  }}@${{ steps.get_package_hash.outputs.container_id }}/g' apps/amt/overlays/${{ inputs.environment }}/kustomization.yaml
+          sed -i 's|minbzk.github.io/version: .*$|minbzk.github.io/version: ${{ inputs.image_tag }}|g' apps/amt/overlays/${{ inputs.environment }}/kustomization.yaml
+          git add apps/amt/overlays/${{ inputs.environment }}/kustomization.yaml
 
       - name: show changes
         run: git diff --staged
 
       - name: push changes
         run: |
-          git commit -m "Update tad overlay ${{ inputs.environment }} tag ${{ steps.get_package_hash.outputs.container_id }}"
+          git commit -m "Update amt overlay ${{ inputs.environment }} tag ${{ steps.get_package_hash.outputs.container_id }}"
           git push --force-with-lease
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}

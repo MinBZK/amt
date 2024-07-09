@@ -1,4 +1,4 @@
-from tad.models.user import User
+from amt.models.user import User
 
 
 def test_model_basic_user():

@@ -1,7 +1,7 @@
 import pytest
-from tad.core.exceptions import RepositoryError
-from tad.models import Status
-from tad.repositories.statuses import StatusesRepository
+from amt.core.exceptions import RepositoryError
+from amt.models import Status
+from amt.repositories.statuses import StatusesRepository
 from tests.constants import in_progress_status, todo_status
 from tests.database_test_utils import DatabaseTestUtils
 

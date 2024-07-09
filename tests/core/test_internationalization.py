@@ -2,9 +2,7 @@ import datetime
 from unittest.mock import Mock
 
 import pytest
-from babel.support import Translations
-from fastapi import Request
-from tad.core.internationalization import (
+from amt.core.internationalization import (
     format_datetime,
     get_dynamic_field_translations,
     get_requested_language,
@@ -12,6 +10,8 @@ from tad.core.internationalization import (
     get_translation,
     supported_translations,
 )
+from babel.support import Translations
+from fastapi import Request
 
 
 def test_get_supported_translations():

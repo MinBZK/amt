@@ -1,4 +1,4 @@
-from tad.models.status import Status
+from amt.models.status import Status
 
 
 def test_model_basic_status():

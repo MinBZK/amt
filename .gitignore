@@ -33,8 +33,8 @@ pytestdebug.log
 # macos
 .DS_Store
 
-# tad tool
-tad.log*
+# amt tool
+amt.log*
 database.sqlite3
 output/
 

@@ -12,13 +12,13 @@ description:
       - Validation
       - Transparency
       - Algorithm
-    genericName: tad
+    genericName: amt
     longDescription: |
-      TAD is the acronym for Transparency of Algorithmic Decision making. The goal is to make algorithmic systems more transparant. It achieves this by generating standardized reports. These reports consist of both technical aspects as well as descriptive information about the system and regulatory assessments. For both the system and the model the lifecycle is important, so this is incorporated in both the tool as well as the reports. The definition for an algorithm is derived from the Algoritmeregister.
+      AMT is the acronym for Algorithm Management Toolkit. The goal is to make algorithmic systems more transparent. It achieves this by generating standardized reports. These reports consist of both technical aspects as well as descriptive information about the system and regulatory assessments. For both the system and the model the lifecycle is important, so this is incorporated in both the tool as well as the reports. The definition for an algorithm is derived from the Algoritmeregister.
 
-      link: https://minbzk.github.io/ai-validation/Projects/TAD/
+      link: https://minbzk.github.io/ai-validation/Projects/AMT/
 
-    shortDescription: TAD is a tool for Transparency Algorithm Decision making
+    shortDescription: AMT is a toolkit for Managing Algorithmic systems
 developmentStatus: concept
 legal:
   license: EUPL-1.2
@@ -31,9 +31,9 @@ maintenance:
     - name: AI Validatie
       email: ai-validatie@minbzk.nl
   type: community
-name: tad
+name: amt
 platforms:
   - web
 releaseDate: "2024-04-25"
 softwareType: standalone/web
-url: "https://github.com/MinBZK/tad"
+url: "https://github.com/MinBZK/amt"

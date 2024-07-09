@@ -5,7 +5,7 @@
     "DEVCONTAINER": "1",
     "PYTHONASYNCIODEBUG": "1",
     "POETRY_VIRTUALENVS_CREATE": "false",
-    "PYTHONPATH": "/workspaces/tad/"
+    "PYTHONPATH": "/workspaces/amt/"
   },
   "remoteUser": "root",
   "features": {

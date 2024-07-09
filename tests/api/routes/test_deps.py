@@ -1,9 +1,9 @@
 from unittest.mock import Mock
 
+from amt.api.deps import custom_context_processor
+from amt.core.config import VERSION
+from amt.core.internationalization import supported_translations
 from fastapi import Request
-from tad.api.deps import custom_context_processor
-from tad.core.config import VERSION
-from tad.core.internationalization import supported_translations
 
 
 def test_custom_context_processor():

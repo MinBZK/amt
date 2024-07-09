@@ -154,7 +154,7 @@ jobs:
 
       - name: Make changes to project to inject commit hash
         run: |
-          sed -i 's/VERSION: str = .*$/VERSION: str = "${{ steps.get_commit_hash.outputs.commit_hash }}"/g' tad/core/config.py
+          sed -i 's/VERSION: str = .*$/VERSION: str = "${{ steps.get_commit_hash.outputs.commit_hash }}"/g' amt/core/config.py
 
       - name: Log in to the Container registry
         uses: docker/login-action@v3

@@ -3,9 +3,9 @@ from typing import Any
 from unittest.mock import patch
 
 import pytest
-from tad.models import Status
-from tad.repositories.statuses import StatusesRepository
-from tad.services.statuses import StatusesService
+from amt.models import Status
+from amt.repositories.statuses import StatusesRepository
+from amt.services.statuses import StatusesService
 
 
 class MockStatusesRepository:
@@ -21,7 +21,7 @@ class MockStatusesRepository:
 
 @pytest.fixture(scope="module")
 def mock_statuses_repository() -> Generator[MockStatusesRepository, Any, Any]:
-    with patch("tad.services.statuses.StatusesRepository"):
+    with patch("amt.services.statuses.StatusesRepository"):
         mock_statuses_repository = MockStatusesRepository()
         yield mock_statuses_repository
 

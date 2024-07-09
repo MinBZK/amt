@@ -1,5 +1,5 @@
+from amt.schema.task import MovedTask
 from fastapi.testclient import TestClient
-from tad.schema.task import MovedTask
 
 from tests.constants import all_statusses, default_task
 from tests.database_test_utils import DatabaseTestUtils

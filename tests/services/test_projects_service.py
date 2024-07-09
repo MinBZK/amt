@@ -1,10 +1,10 @@
 from pathlib import Path
 from unittest.mock import Mock
 
-from tad.models.project import Project
-from tad.repositories.projects import ProjectsRepository
-from tad.schema.project import ProjectNew
-from tad.services.projects import ProjectsService
+from amt.models.project import Project
+from amt.repositories.projects import ProjectsRepository
+from amt.schema.project import ProjectNew
+from amt.services.projects import ProjectsService
 
 
 def test_get_project():

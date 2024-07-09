@@ -2,11 +2,11 @@ from collections.abc import Sequence
 from unittest.mock import patch
 
 import pytest
-from tad.models import Status, Task, User
-from tad.repositories.statuses import StatusesRepository
-from tad.repositories.tasks import TasksRepository
-from tad.services.statuses import StatusesService
-from tad.services.tasks import TasksService
+from amt.models import Status, Task, User
+from amt.repositories.statuses import StatusesRepository
+from amt.repositories.tasks import TasksRepository
+from amt.services.statuses import StatusesService
+from amt.services.tasks import TasksService
 
 
 class MockStatusesRepository:
@@ -53,14 +53,14 @@ class MockTasksRepository:
 
 @pytest.fixture(scope="module")
 def mock_tasks_repository():
-    with patch("tad.services.tasks.TasksRepository"):
+    with patch("amt.services.tasks.TasksRepository"):
         mock_tasks_repository = MockTasksRepository()
         yield mock_tasks_repository
 
 
 @pytest.fixture(scope="module")
 def mock_statuses_repository():
-    with patch("tad.services.statuses.StatusesRepository"):
+    with patch("amt.services.statuses.StatusesRepository"):
         mock_statuses_repository = MockStatusesRepository()
         yield mock_statuses_repository
 

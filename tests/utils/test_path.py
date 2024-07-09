@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from tad.utils.path import is_safe_path
+from amt.utils.path import is_safe_path
 
 
 def test_utils_path_is_safe_path():

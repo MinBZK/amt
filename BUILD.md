@@ -1,13 +1,13 @@
-# Buiding TAD
+# Buiding AMT
 
-There are several ways to build and run TAD.
+There are several ways to build and run AMT.
 
 1. Poetry
 2. Container
 
-## Building TAD with Poetry
+## Building AMT with Poetry
 
-Poetry is a Python package and dependency manager. Before you can install Poetry you first need to install Python. Please follow [these](https://github.com/pyenv/pyenv?tab=readme-ov-file#installation) instructions.
+Poetry is a Python package and dependency manager. Before you can install Poetry you first need to install Python. Please follow [these](https://github.com/pyenv/pyenv?amt=readme-ov-file#installation) instructions.
 
 Once you have Python available you can install Poetry. See [here](https://python-poetry.org/docs/#installation).
 
@@ -20,7 +20,7 @@ poetry install
 When poetry is done installing all dependencies you can start using the tool.
 
 ```shell
-poetry run python -m uvicorn tad.main:app --log-level warning
+poetry run python -m uvicorn amt.main:app --log-level warning
 ```
 
 ### Suggested development ENVIRONMENT settings
@@ -34,13 +34,13 @@ export ENVIRONMENT=demo AUTO_CREATE_SCHEMA=true
 
 We support most SQL database types. You can use the variable `APP_DATABASE_SCHEME` to change the database. The default scheme is sqlite.
 
-If you change the `models` at tad/models of the application you can generate a new migration file
+If you change the `models` at amt/models of the application you can generate a new migration file
 
 ```shell
 alembic revision --autogenerate -m "a message"
 ```
 
-Please make sure you check the auto generated file in tad/migrations/
+Please make sure you check the auto generated file in amt/migrations/
 
 to upgrade to the latest version of the database schema use
 
@@ -48,7 +48,7 @@ to upgrade to the latest version of the database schema use
 alembic upgrade head
 ```
 
-## Building TAD with Containers
+## Building AMT with Containers
 
 Containers allows to package software, make it portable, and isolated. Before you can run a container you first need a container runtime. There are several available, but al lot of users use [docker desktop](https://www.docker.com/products/docker-desktop/).
 

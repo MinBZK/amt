@@ -1,4 +1,4 @@
-from tad.models.task import Task
+from amt.models.task import Task
 
 
 def test_model_basic_task():

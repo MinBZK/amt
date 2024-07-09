@@ -1,6 +1,6 @@
 import pytest
-from tad.core.exceptions import RepositoryError
-from tad.repositories.projects import ProjectsRepository
+from amt.core.exceptions import RepositoryError
+from amt.repositories.projects import ProjectsRepository
 from tests.constants import default_project
 from tests.database_test_utils import DatabaseTestUtils
 

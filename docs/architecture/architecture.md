@@ -1,6 +1,6 @@
 # Algorithm Management Toolkit Architecture
 
-This document contains architectural decisions related to the Algorithm Managment Toolkit.
+This document contains architectural decisions related to the Algorithm Management Toolkit.
 
 ## System Context
 
@@ -28,7 +28,7 @@ C4Context
     title System Context diagram for Algorithm Management Toolkit
     Boundary(b0, "Government of the Netherlands") {
         System_Ext(Algoritmekader, "Algoritmekader", "Defines measures and instruments")
-        System(TAD, "Algorithm Management Toolkit", "Provides the execution of measures and instruments")
+        System(AMT, "Algorithm Management Toolkit", "Provides the execution of measures and instruments")
         System_Ext(Repository, "Repository", "Contains a System Card with filled in measures and instruments")
         System_Ext(InstrumentRegister, "Instrument Register", "Contains information about how to execute instruments and measures")
         System_Ext(Algoritmeregister, "Algoritmeregister", "Contains descriptions of algorithms")
@@ -39,16 +39,16 @@ C4Context
     ethical frameworks")
 
 
-    Rel(Algoritmekader, TAD, "Passes required measures and instruments")
-    UpdateRelStyle(Algoritmekader, TAD, $offsetY="50", $offsetX="-150")
+    Rel(Algoritmekader, AMT, "Passes required measures and instruments")
+    UpdateRelStyle(Algoritmekader, AMT, $offsetY="50", $offsetX="-150")
 
-    Rel(TAD, Repository, "Writes results to <br/>a System Card")
-    UpdateRelStyle(TAD, Repository, $offsetY="10", $offsetX="30")
+    Rel(AMT, Repository, "Writes results to <br/>a System Card")
+    UpdateRelStyle(AMT, Repository, $offsetY="10", $offsetX="30")
 
 
 
-    Rel(InstrumentRegister, TAD, "Specifies instructions on how <br/>to execute instruments and measures")
-    UpdateRelStyle(InstrumentRegister, TAD, $offsetY="10", $offsetX="80")
+    Rel(InstrumentRegister, AMT, "Specifies instructions on how <br/>to execute instruments and measures")
+    UpdateRelStyle(InstrumentRegister, AMT, $offsetY="10", $offsetX="80")
 
     Rel(Repository, Algoritmeregister, "Algorithm can be <br/> uploaded in register")
     UpdateRelStyle(Repository, Algoritmeregister, $offsetY="10", $offsetX="20")
@@ -60,8 +60,8 @@ C4Context
     Rel(user0, Algoritmekader, "Selects which measures <br/>and instruments need to be exectued")
     UpdateRelStyle(user0, Algoritmekader, $offsetY="-30", $offsetX="-200")
 
-    Rel(user0, TAD, "Executes the required <br/>measures and instruments")
-    UpdateRelStyle(user0, TAD, $offsetY="-30", $offsetX="-30")
+    Rel(user0, AMT, "Executes the required <br/>measures and instruments")
+    UpdateRelStyle(user0, AMT, $offsetY="-30", $offsetX="-30")
 
     UpdateLayoutConfig($c4ShapeInRow="2", $c4BoundaryInRow="2")
 ```

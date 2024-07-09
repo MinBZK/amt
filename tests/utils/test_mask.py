@@ -1,4 +1,4 @@
-from tad.utils.mask import Mask
+from amt.utils.mask import Mask
 
 
 def test_mask_dict():

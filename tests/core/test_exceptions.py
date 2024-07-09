@@ -1,7 +1,7 @@
 from pathlib import Path
 
 import pytest
-from tad.core.exceptions import InstrumentError, SettingsError, UnsafeFileError
+from amt.core.exceptions import InstrumentError, SettingsError, UnsafeFileError
 
 
 def test_settings_error():

@@ -1,7 +1,7 @@
 from typing import Any
 
 import pytest
-from tad.schema.system_card import SystemCard
+from amt.schema.system_card import SystemCard
 
 
 @pytest.fixture()

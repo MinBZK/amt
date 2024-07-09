@@ -1,13 +1,13 @@
-# Transparency of Algorithmic Decision making (TAD)
+# Algorithm Management Toolkit (AMT)
 
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/minbzk/tad/ci.yml?label=tests)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=MinBZK_tad&metric=coverage)](https://sonarcloud.io/summary/new_code?id=MinBZK_tad)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=MinBZK_tad&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=MinBZK_tad)
-![GitHub Release](https://img.shields.io/github/v/release/minbzk/tad?include_prereleases&sort=semver)
-![GitHub License](https://img.shields.io/github/license/minbzk/tad)
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=MinBZK_tad&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=MinBZK_tad)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/minbzk/amt/ci.yml?label=tests)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=MinBZK_amt&metric=coverage)](https://sonarcloud.io/summary/new_code?id=MinBZK_amt)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=MinBZK_amt&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=MinBZK_amt)
+![GitHub Release](https://img.shields.io/github/v/release/minbzk/amt?include_prereleases&sort=semver)
+![GitHub License](https://img.shields.io/github/license/minbzk/amt)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=MinBZK_amt&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=MinBZK_amt)
 
-TAD is a modern tool to apply technical and non-technical tests for an AI model.
+AMT is a modern tool to apply technical and non-technical tests for an AI model.
 
 Note: The main branch may be in an unstable or even broken state during development. Please use releases instead of the main branch.
 
@@ -15,7 +15,7 @@ Note: The main branch may be in an unstable or even broken state during developm
 
 See [contributing docs](CONTRIBUTING.md)
 
-## How to build and run TAD
+## How to build and run AMT
 
 See [build docs](BUILD.md)
 

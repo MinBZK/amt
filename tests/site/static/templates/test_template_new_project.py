@@ -1,4 +1,4 @@
-from tad.api.deps import templates
+from amt.api.deps import templates
 from tests.constants import default_fastapi_request
 
 

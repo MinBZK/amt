@@ -1,8 +1,8 @@
+from amt.models import Task
 from jinja2 import Environment, FileSystemLoader
-from tad.models import Task
 
 # loading the environment
-env = Environment(loader=FileSystemLoader("tad/site/templates/"), autoescape=True)
+env = Environment(loader=FileSystemLoader("amt/site/templates/"), autoescape=True)
 
 
 def test_template_rendering():

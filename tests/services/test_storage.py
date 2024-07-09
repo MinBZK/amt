@@ -1,8 +1,8 @@
 from pathlib import Path
 
 import pytest
-from tad.schema.system_card import SystemCard
-from tad.services.storage import StorageFactory
+from amt.schema.system_card import SystemCard
+from amt.services.storage import StorageFactory
 from yaml import safe_load
 
 

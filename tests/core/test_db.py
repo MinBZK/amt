@@ -1,11 +1,10 @@
 import logging
 from unittest.mock import MagicMock
 
+import amt.core.db as testdb
 import pytest
-import tad.core.db as testdb
-from sqlmodel import Session, SQLModel, select
-from tad.core.config import Settings
-from tad.core.db import (
+from amt.core.config import Settings
+from amt.core.db import (
     add_demo_statuses,
     add_demo_tasks,
     add_demo_users,
@@ -13,7 +12,8 @@ from tad.core.db import (
     init_db,
     remove_old_demo_objects,
 )
-from tad.models import Status, Task, User
+from amt.models import Status, Task, User
+from sqlmodel import Session, SQLModel, select
 
 from tests.constants import (
     default_status,

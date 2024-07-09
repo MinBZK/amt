@@ -6,7 +6,7 @@ LABEL maintainer=ai-validatie@minbzk.nl \
     organization=MinBZK \
     license=EUPL-1.2 \
     org.opencontainers.image.description="Transparency of Algorithmic Decision making" \
-    org.opencontainers.image.source=https://github.com/MinBZK/tad \
+    org.opencontainers.image.source=https://github.com/MinBZK/amt \
     org.opencontainers.image.licenses=EUPL-1.2
 
 ENV PYTHONUNBUFFERED=1 \
@@ -32,7 +32,7 @@ ENV PATH="/app/.venv/bin:$PATH"
 
 FROM project-base AS development
 
-COPY ./tad/ ./tad/
+COPY amt/ ./amt/
 COPY ./tests/ ./tests/
 COPY ./script/ ./script/
 COPY ./README.md ./README.md
@@ -50,20 +50,20 @@ RUN coverage report
 
 FROM project-base AS production
 
-RUN groupadd tad && \
-    adduser --uid 100 --system --ingroup tad tad
+RUN groupadd amt && \
+    adduser --uid 100 --system --ingroup amt amt
 
 #todo(berry): create log folder so permissions can be set to root:root
 # currenlt problem is that i could not get the logger to accept a path in the filerotate handler
-RUN chown tad:tad /app/
+RUN chown amt:amt /app/
 
-USER tad
+USER amt
 
-COPY --chown=root:root --chmod=755 ./tad /app/tad
+COPY --chown=root:root --chmod=755 amt /app/amt
 COPY --chown=root:root --chmod=755 alembic.ini /app/alembic.ini
 COPY --chown=root:root --chmod=755 prod.env /app/.env
 COPY --chown=root:root --chmod=755 LICENSE /app/LICENSE
-COPY --chown=tad:tad --chmod=755 docker-entrypoint.sh /app/docker-entrypoint.sh
+COPY --chown=amt:amt --chmod=755 docker-entrypoint.sh /app/docker-entrypoint.sh
 
 ENV PYTHONPATH=/app/
 WORKDIR /app/

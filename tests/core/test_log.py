@@ -2,16 +2,16 @@ import logging
 import os
 
 import pytest
-from tad.core.config import Settings
-from tad.core.log import configure_logging
+from amt.core.config import Settings
+from amt.core.log import configure_logging
 
 
-def test_logging_tad_module(caplog: pytest.LogCaptureFixture):
-    config = {"loggers": {"tad": {"propagate": True}}}
+def test_logging_amt_module(caplog: pytest.LogCaptureFixture):
+    config = {"loggers": {"amt": {"propagate": True}}}
 
     configure_logging(config=config)
 
-    logger = logging.getLogger("tad")
+    logger = logging.getLogger("amt")
 
     message = "This is a test log message"
     logger.debug(message)  # defaults to INFO level so debug is not printed
@@ -25,11 +25,11 @@ def test_logging_tad_module(caplog: pytest.LogCaptureFixture):
 
 
 def test_logging_submodule(caplog: pytest.LogCaptureFixture):
-    config = {"loggers": {"tad": {"propagate": True}}}
+    config = {"loggers": {"amt": {"propagate": True}}}
 
     configure_logging(config=config)
 
-    logger = logging.getLogger("tad.main")
+    logger = logging.getLogger("amt.main")
 
     message = "This is a test log message"
     logger.debug(message)
@@ -45,14 +45,14 @@ def test_logging_submodule(caplog: pytest.LogCaptureFixture):
 def test_logging_config(caplog: pytest.LogCaptureFixture, monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setenv(
         "LOGGING_CONFIG",
-        '{"loggers": { "tad": {  "propagate": "True" }},"formatters": { "generic": {  "fmt": "{name}: {message}"}}}',
+        '{"loggers": { "amt": {  "propagate": "True" }},"formatters": { "generic": {  "fmt": "{name}: {message}"}}}',
     )
 
     settings = Settings()
 
     configure_logging(config=settings.LOGGING_CONFIG)
 
-    logger = logging.getLogger("tad")
+    logger = logging.getLogger("amt")
 
     message = "This is a test log message with other formatting"
     logger.debug(message)
@@ -65,7 +65,7 @@ def test_logging_config(caplog: pytest.LogCaptureFixture, monkeypatch: pytest.Mo
 
 
 def test_logging_loglevel(caplog: pytest.LogCaptureFixture):
-    config = {"loggers": {"tad": {"propagate": True}}}
+    config = {"loggers": {"amt": {"propagate": True}}}
 
     configure_logging(config=config)
 
@@ -75,7 +75,7 @@ def test_logging_loglevel(caplog: pytest.LogCaptureFixture):
 
     configure_logging(config=config, level=settings.LOGGING_LEVEL)
 
-    logger = logging.getLogger("tad.main")
+    logger = logging.getLogger("amt.main")
 
     message = "This is a test log message with different logging level"
     logger.debug(message)
