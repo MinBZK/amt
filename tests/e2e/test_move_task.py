@@ -17,17 +17,17 @@ def test_move_task_to_column(browser: Page, db: DatabaseTestUtils) -> None:
 
     browser.goto("/pages/")
 
-    expect(browser.locator("#column-1 #card-1")).to_be_visible()
+    expect(browser.locator("#column-1 #card-container-1")).to_be_visible()
     expect(browser.locator("#column-3")).to_be_visible()
 
     # todo (Robbert) action below is performed twice, because once does not work, we need find out why and fix it
-    browser.locator("#card-1").drag_to(browser.locator("#column-3"))
-    browser.locator("#card-1").drag_to(browser.locator("#column-3"))
+    browser.locator("#card-container-1").drag_to(browser.locator("#column-3"))
+    browser.locator("#card-container-1").drag_to(browser.locator("#column-3"))
 
     browser.reload()
 
-    card = browser.locator("#column-3 #card-1")
-    expect(card).to_have_id("card-1")
+    card = browser.locator("#column-3 #card-container-1")
+    expect(card).to_have_id("card-container-1")
     expect(card).to_be_visible()
 
 
@@ -48,11 +48,11 @@ def test_move_task_order_in_same_column(browser: Page, db: DatabaseTestUtils) ->
 
     browser.goto("/pages/")
 
-    expect(browser.locator("#column-1 #card-1")).to_be_visible()
+    expect(browser.locator("#column-1 #card-container-1")).to_be_visible()
     expect(browser.locator("#column-1")).to_be_visible()
 
     # todo (robbert) code below doesn't do what it should do, card is not moved
-    task = browser.locator("#card-1")
+    task = browser.locator("#card-container-1")
     task.hover()
     browser.mouse.down()
     browser.mouse.move(0, 50)
@@ -62,6 +62,6 @@ def test_move_task_order_in_same_column(browser: Page, db: DatabaseTestUtils) ->
 
     tasks_in_column = browser.locator("#column-1").locator(".progress_card_container").all()
     # todo (robbert) this order should be changed if code above works correctly
-    expect(tasks_in_column[0]).to_have_id("card-1")
-    expect(tasks_in_column[1]).to_have_id("card-2")
-    expect(tasks_in_column[2]).to_have_id("card-3")
+    expect(tasks_in_column[0]).to_have_id("card-container-1")
+    expect(tasks_in_column[1]).to_have_id("card-container-2")
+    expect(tasks_in_column[2]).to_have_id("card-container-3")
