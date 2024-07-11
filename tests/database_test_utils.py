@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from sqlmodel import Session, SQLModel
+from sqlmodel import Session, SQLModel, select
 from tad.core.db import get_engine
 
 
@@ -29,3 +29,6 @@ class DatabaseTestUtils:
 
     def get_session(self) -> Session:
         return self.session
+
+    def exists(self, model: type[SQLModel], model_field: str, field_value: str | int) -> SQLModel | None:
+        return self.get_session().exec(select(model).where(model_field == field_value)).one() is not None  # type: ignore
