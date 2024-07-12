@@ -40,9 +40,9 @@ def test_move_task_order_in_same_column(browser: Page, db: DatabaseTestUtils) ->
     all_status = [*all_statusses()]
     db.given([*all_status])
 
-    task1 = default_task(status_id=all_status[0].id)
-    task2 = default_task(status_id=all_status[0].id)
-    task3 = default_task(status_id=all_status[0].id)
+    task1 = default_task(title="Task 1", status_id=all_status[0].id, sort_order=10)
+    task2 = default_task(title="Task 2", status_id=all_status[0].id, sort_order=20)
+    task3 = default_task(title="Task 3", status_id=all_status[0].id, sort_order=30)
 
     db.given([task1, task2, task3])
 
@@ -51,17 +51,16 @@ def test_move_task_order_in_same_column(browser: Page, db: DatabaseTestUtils) ->
     expect(browser.locator("#column-1 #card-1")).to_be_visible()
     expect(browser.locator("#column-1")).to_be_visible()
 
-    # todo (robbert) code below doesn't do what it should do, card is not moved
-    task = browser.locator("#card-1")
-    task.hover()
+    browser.locator("#card-1").hover()
     browser.mouse.down()
-    browser.mouse.move(0, 50)
+    # todo (robbert): find out who browser.mouse.move() is not working, we use a locator now instead
+    browser.locator("#card-container-2").hover()
+    browser.screenshot(full_page=True, path="screenshot2.png")
     browser.mouse.up()
-    # https://playwright.dev/docs/input
+
     browser.reload()
 
     tasks_in_column = browser.locator("#column-1").locator(".progress_card_container").all()
-    # todo (robbert) this order should be changed if code above works correctly
-    expect(tasks_in_column[0]).to_have_id("card-1")
-    expect(tasks_in_column[1]).to_have_id("card-2")
+    expect(tasks_in_column[0]).to_have_id("card-2")
+    expect(tasks_in_column[1]).to_have_id("card-1")
     expect(tasks_in_column[2]).to_have_id("card-3")
