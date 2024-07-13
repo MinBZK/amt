@@ -3,7 +3,7 @@ from functools import lru_cache
 
 from sqlalchemy.engine import Engine
 from sqlalchemy.pool import QueuePool, StaticPool
-from sqlmodel import Session, SQLModel, create_engine, select
+from sqlmodel import Session, SQLModel, create_engine, select, update
 
 from tad.core.config import get_settings
 from tad.models import Status, Task, User
@@ -35,15 +35,16 @@ def check_db():
 
 
 def remove_old_demo_objects(session: Session):
-    user = session.exec(select(User).where(User.name == "Robbert")).first()
-    if user:
-        session.delete(user)
-    status = session.exec(select(Status).where(Status.name == "Todo")).first()
-    if status:
-        session.delete(status)
     task = session.exec(select(Task).where(Task.title == "First task")).first()
     if task:
         session.delete(task)
+    session.exec(update(Task).values(status_id=None, user_id=None))  # type: ignore
+    user = session.exec(select(User).where(User.name == "Robbert")).first()
+    if user:
+        session.delete(user)
+    status = session.exec(select(Status).where(Status.name == "todo")).first()
+    if status:
+        session.delete(status)
     session.commit()
 
 
@@ -87,6 +88,7 @@ def add_demo_tasks(session: Session, status: Status | None, number_of_tasks: int
                     status_id=status.id,
                 )
             )
+    session.exec(update(Task).values(status_id=status.id))  # type: ignore
     session.commit()
 
 

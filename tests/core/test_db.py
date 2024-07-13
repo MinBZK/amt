@@ -67,7 +67,7 @@ def test_remove_old_demo_objects(db: DatabaseTestUtils):
     db_session.delete = MagicMock()
 
     user = User(name="Robbert", avatar=None)
-    status = Status(name="Todo", sort_order=1)
+    status = Status(name="todo", sort_order=1)
     task = Task(title="First task", description="This is the first task", sort_order=1, status_id=status.id)
     db.given([user, status, task])
 
