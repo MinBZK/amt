@@ -4,7 +4,7 @@ set -e
 set -x
 
 
-if ! coverage run -m pytest "$@" ; then
+if ! poetry run coverage run -m pytest "$@" ; then
     echo "Test failed"
     exit 1
 fi
