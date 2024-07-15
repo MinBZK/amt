@@ -11,12 +11,7 @@ class DatabaseTestUtils:
         self.models: list[BaseModel] = []
 
     def __del__(self):
-        for model in self.models:
-            try:
-                self.session.delete(model)
-                self.session.commit()
-            except Exception:  # noqa: S110
-                pass
+        pass
 
     def given(self, models: list[BaseModel]) -> None:
         self.models.extend(models)
