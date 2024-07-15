@@ -51,13 +51,13 @@ def test_warning_get_dynamic_field_translations(caplog: pytest.LogCaptureFixture
 
 def test_get_translation(caplog: pytest.LogCaptureFixture):
     translation = get_translation("en")
-    assert type(translation) == Translations
+    assert type(translation) is Translations
 
 
 def test_warning_get_translation(caplog: pytest.LogCaptureFixture):
     translation = get_translation("ar")
     assert caplog.records[0].message == "Requested translation does not exist: ar, using fallback en"
-    assert type(translation) == Translations
+    assert type(translation) is Translations
 
 
 def test_format_datetime():
