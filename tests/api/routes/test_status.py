@@ -14,7 +14,7 @@ def test_post_move_task(client: TestClient, db: DatabaseTestUtils) -> None:
     response = client.patch("/tasks/", json=move_task.model_dump(by_alias=True))
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b'class="progress_card_container"' in response.content
+    assert b'id="card-content-' in response.content
 
 
 def test_post_move_task_no_siblings(client: TestClient, db: DatabaseTestUtils) -> None:
@@ -26,4 +26,4 @@ def test_post_move_task_no_siblings(client: TestClient, db: DatabaseTestUtils) -
 
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b'class="progress_card_container"' in response.content
+    assert b'id="card-content-' in response.content
