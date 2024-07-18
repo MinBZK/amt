@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="{{ language }}">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="icon" type="image/x-icon" href="{{ url_for_cache('static', path='favicon.ico') }}">
     <title>
         {% block title %}
-            {% trans %}Algorithmic Management Toolkit (AMT){% endtrans %}
+        {% trans %}Algorithmic Management Toolkit (AMT){% endtrans %}
         {% endblock %}
     </title>
     {% block scripts %}
@@ -20,11 +24,17 @@
     <link rel="stylesheet" href="{{ url_for_cache('static', path='css/layout.css') }}"/>
     {% endblock %}
 </head>
+
 <body hx-ext="response-targets">
     {% block header %}
-        {% include 'default_header.html.j2' %}
+    {% include 'header.html.j2' %}
     {% endblock %}
-    {% block content %}{% endblock %}
-    {% block scripts_body %}{% endblock %}
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    {% block footer %}
+    {% include 'footer.html.j2' %}
+    {% endblock %}
 </body>
+
 </html>

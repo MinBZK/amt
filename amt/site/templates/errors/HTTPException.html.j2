@@ -1,7 +1,5 @@
 {% extends 'layouts/base.html.j2' %}
 
 {% block content %}
-<div>
-    <h2>{% trans %}Not found{% endtrans %}</h2>
-</div>
+{% include 'errors/_HTTPException.html.j2' %}
 {% endblock %}

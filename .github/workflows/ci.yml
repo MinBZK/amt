@@ -38,9 +38,6 @@ jobs:
       - name: Install dependencies
         run: poetry install
 
-      - name: Install Playwright browsers
-        run: poetry run playwright install --with-deps
-
       - name: run ruff
         run: poetry run ruff check --output-format=github
 
@@ -107,6 +104,15 @@ jobs:
 
       - name: Run pytest
         run: poetry run coverage run -m pytest
+
+      - name: Upload playwright tracing
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-${{ github.sha }}
+          path: test-results/
+          if-no-files-found: error
+          overwrite: true
 
       - name: run coverage report
         run: poetry run coverage report

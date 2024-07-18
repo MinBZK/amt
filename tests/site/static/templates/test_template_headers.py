@@ -7,7 +7,9 @@ def test_template_caching():
     request = default_fastapi_request()
 
     # when
-    response = templates.TemplateResponse(request, "error.html.j2", headers={"Content-Language": "This is a test"})
+    response = templates.TemplateResponse(
+        request, "errors/error.html.j2", headers={"Content-Language": "This is a test"}
+    )
 
     # then
     assert response.headers["Content-Language"] == "This is a test"

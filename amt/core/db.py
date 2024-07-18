@@ -1,8 +1,6 @@
 import logging
-from functools import lru_cache
 
 from sqlalchemy.engine import Engine
-from sqlalchemy.pool import QueuePool, StaticPool
 from sqlmodel import Session, SQLModel, create_engine, select, update
 
 from amt.core.config import get_settings
@@ -11,18 +9,13 @@ from amt.models import Status, Task, User
 logger = logging.getLogger(__name__)
 
 
-@lru_cache(maxsize=8)
 def get_engine() -> Engine:
     settings = get_settings()
-    connect_args = (
-        {"check_same_thread": False, "isolation_level": None} if settings.APP_DATABASE_SCHEME == "sqlite" else {}
-    )
-    poolclass = StaticPool if settings.APP_DATABASE_SCHEME == "sqlite" else QueuePool
+    connect_args = {"check_same_thread": False} if settings.APP_DATABASE_SCHEME == "sqlite" else {}
 
     return create_engine(
         settings.SQLALCHEMY_DATABASE_URI,  # pyright: ignore [reportArgumentType]
         connect_args=connect_args,
-        poolclass=poolclass,
         echo=settings.SQLALCHEMY_ECHO,
     )
 
@@ -52,11 +45,11 @@ def remove_old_demo_objects(session: Session) -> None:
 def init_db() -> None:
     logger.info("Initializing database")
 
-    if get_settings().AUTO_CREATE_SCHEMA:
+    if get_settings().AUTO_CREATE_SCHEMA:  # pragma: no cover
         logger.info("Creating database schema")
         SQLModel.metadata.create_all(get_engine())
 
-    with Session(get_engine()) as session:
+    with Session(get_engine()) as session:  # pragma: no cover
         if get_settings().ENVIRONMENT == "demo":
             logger.info("Creating demo data")
             remove_old_demo_objects(session)

@@ -21,6 +21,20 @@ def init_instruments() -> Generator[None, None, None]:  # noqa: PT004
     InstrumentsService.fetch_instruments = origin
 
 
+def test_projects_get_root(client: TestClient) -> None:
+    response = client.get("/projects/")
+
+    assert response.status_code == 200
+    assert b'<ul class="project-list">' in response.content
+
+
+def test_projects_get_root_htmx(client: TestClient) -> None:
+    response = client.get("/projects/", headers={"HX-Request": "true"})
+
+    assert response.status_code == 200
+    assert b'<ul class="project-list">' not in response.content
+
+
 def test_get_new_projects(client: TestClient, init_instruments: Generator[None, None, None]) -> None:
     # when
     response = client.get("/projects/new")

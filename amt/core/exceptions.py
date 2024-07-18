@@ -44,3 +44,17 @@ class UnsafeFileError(AMTHTTPException):
         self.message: str = f"Unsafe file error for file {file}"
         exception_name: str = self.__class__.__name__
         super().__init__(status.HTTP_400_BAD_REQUEST, f"{exception_name}: {self.message}")
+
+
+class RepositoryNoResultFound(AMTHTTPException):
+    def __init__(self, message: str = "No entity found") -> None:
+        self.message: str = message
+        exception_name: str = self.__class__.__name__
+        super().__init__(status.HTTP_204_NO_CONTENT, f"{exception_name}: {self.message}")
+
+
+class NotFound(AMTHTTPException):
+    def __init__(self, message: str = "Not found") -> None:
+        self.message: str = message
+        exception_name: str = self.__class__.__name__
+        super().__init__(status.HTTP_404_NOT_FOUND, f"{exception_name}: {self.message}")

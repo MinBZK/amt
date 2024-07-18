@@ -16,7 +16,7 @@ def in_progress_status() -> Status:
 
 
 def in_review_status() -> Status:
-    return Status(name="in_review", sort_order=3)
+    return Status(name="review", sort_order=3)
 
 
 def done_status() -> Status:

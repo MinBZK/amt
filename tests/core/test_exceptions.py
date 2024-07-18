@@ -1,7 +1,7 @@
 from pathlib import Path
 
 import pytest
-from amt.core.exceptions import InstrumentError, SettingsError, UnsafeFileError
+from amt.core.exceptions import InstrumentError, RepositoryNoResultFound, SettingsError, UnsafeFileError
 
 
 def test_settings_error():
@@ -24,3 +24,10 @@ def test_unsafefile_error():
         raise UnsafeFileError(test)
 
     assert exc_info.value.message == f"Unsafe file error for file {test}"
+
+
+def test_RepositoryNoResultFound():
+    with pytest.raises(RepositoryNoResultFound) as exc_info:
+        raise RepositoryNoResultFound()
+
+    assert exc_info.value.message == "No entity found"

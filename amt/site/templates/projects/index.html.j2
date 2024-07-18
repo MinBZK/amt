@@ -1,0 +1,10 @@
+{% extends 'layouts/base.html.j2' %}
+
+{% block content %}
+<h1 class="margin-bottom--large">{% trans %}Projects{% endtrans %}</h1>
+<ul class="project-list">
+    {% include 'projects/_list.html.j2' %}
+</ul>
+
+<div id="errorContainer"></div>
+{% endblock %}

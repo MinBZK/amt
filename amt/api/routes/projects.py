@@ -1,7 +1,7 @@
 import logging
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends, Query, Request
 from fastapi.responses import HTMLResponse
 
 from amt.api.deps import templates
@@ -11,6 +11,24 @@ from amt.services.projects import ProjectsService
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
+
+
+@router.get("/")
+async def get_root(
+    request: Request,
+    projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
+    skip: int = Query(0, ge=0),
+    limit: int = Query(100, ge=1),
+) -> HTMLResponse:
+    projects = projects_service.paginate(skip=skip, limit=limit)
+    next = skip + limit
+
+    if request.state.htmx:
+        return templates.TemplateResponse(request, "projects/_list.html.j2", {"projects": projects, "next": next})
+
+    return templates.TemplateResponse(
+        request, "projects/index.html.j2", {"projects": projects, "next": next, "limit": limit}
+    )
 
 
 @router.get("/new")

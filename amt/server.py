@@ -20,6 +20,7 @@ from amt.core.log import configure_logging
 from amt.utils.mask import Mask
 
 from .api.http_browser_caching import static_files
+from .middleware.htmx import HTMXMiddleware
 from .middleware.route_logging import RequestLoggingMiddleware
 
 configure_logging(get_settings().LOGGING_LEVEL, get_settings().LOGGING_CONFIG)
@@ -40,30 +41,34 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     logging.shutdown()
 
 
-# todo(berry): Create factor for FastAPI app
-app = FastAPI(
-    lifespan=lifespan,
-    title=PROJECT_NAME,
-    summary=PROJECT_DESCRIPTION,
-    version=VERSION,
-    openapi_url=None,
-    default_response_class=HTMLResponse,
-    redirect_slashes=False,
-    debug=get_settings().DEBUG,
-)
+def create_app() -> FastAPI:
+    app = FastAPI(
+        lifespan=lifespan,
+        title=PROJECT_NAME,
+        summary=PROJECT_DESCRIPTION,
+        version=VERSION,
+        openapi_url=None,
+        default_response_class=HTMLResponse,
+        redirect_slashes=False,
+        debug=get_settings().DEBUG,
+    )
 
-app.add_middleware(RequestLoggingMiddleware)
-app.mount("/static", static_files, name="static")
+    app.add_middleware(RequestLoggingMiddleware)
+    app.add_middleware(HTMXMiddleware)
+
+    app.mount("/static", static_files, name="static")
+
+    @app.exception_handler(StarletteHTTPException)
+    async def http_exception_handler(request: Request, exc: StarletteHTTPException) -> HTMLResponse:  # type: ignore
+        return await amt_http_exception_handler(request, exc)
+
+    @app.exception_handler(RequestValidationError)
+    async def validation_exception_handler(request: Request, exc: RequestValidationError) -> HTMLResponse:  # type: ignore
+        return await amt_validation_exception_handler(request, exc)
+
+    app.include_router(api_router)
+
+    return app
 
 
-@app.exception_handler(StarletteHTTPException)
-async def http_exception_handler(request: Request, exc: StarletteHTTPException) -> HTMLResponse:
-    return await amt_http_exception_handler(request, exc)
-
-
-@app.exception_handler(RequestValidationError)
-async def validation_exception_handler(request: Request, exc: RequestValidationError) -> HTMLResponse:
-    return await amt_validation_exception_handler(request, exc)
-
-
-app.include_router(api_router)
+app = create_app()

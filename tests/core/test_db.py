@@ -1,19 +1,17 @@
 import logging
+from pathlib import Path
 from unittest.mock import MagicMock
 
-import amt.core.db as testdb
 import pytest
-from amt.core.config import Settings
 from amt.core.db import (
     add_demo_statuses,
     add_demo_tasks,
     add_demo_users,
     check_db,
-    init_db,
     remove_old_demo_objects,
 )
 from amt.models import Status, Task, User
-from sqlmodel import Session, SQLModel, select
+from sqlmodel import Session, select
 
 from tests.constants import (
     default_status,
@@ -25,7 +23,9 @@ from tests.database_test_utils import DatabaseTestUtils
 logger = logging.getLogger(__name__)
 
 
-def test_check_database():
+def test_check_database(monkeypatch: pytest.MonkeyPatch, tmp_path: Path):
+    database_file = tmp_path / "database.sqlite3"
+    monkeypatch.setenv("APP_DATABASE_FILE", str(database_file))
     org_exec = Session.exec
     Session.exec = MagicMock()
     check_db()
@@ -33,32 +33,6 @@ def test_check_database():
     assert Session.exec.call_args is not None
     assert str(select(1)) == str(Session.exec.call_args.args[0])
     Session.exec = org_exec
-
-
-@pytest.mark.parametrize(
-    "patch_settings",
-    [
-        ({"ENVIRONMENT": "demo", "AUTO_CREATE_SCHEMA": True}),
-        ({"ENVIRONMENT": "demo", "AUTO_CREATE_SCHEMA": False}),
-        ({"ENVIRONMENT": "production"}),
-    ],
-    indirect=True,
-)
-def test_init_database(patch_settings: Settings):
-    remove_old_demo_objects_orig = testdb.remove_old_demo_objects
-    testdb.remove_old_demo_objects = MagicMock()
-    create_all_orig = SQLModel.metadata.create_all
-    SQLModel.metadata.create_all = MagicMock()
-
-    init_db()
-
-    if patch_settings.ENVIRONMENT == "demo":
-        assert testdb.remove_old_demo_objects.called
-    if patch_settings.AUTO_CREATE_SCHEMA is True:
-        assert SQLModel.metadata.create_all.called
-
-    testdb.remove_old_demo_objects = remove_old_demo_objects_orig
-    SQLModel.metadata.create_all = create_all_orig
 
 
 def test_remove_old_demo_objects(db: DatabaseTestUtils):
