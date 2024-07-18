@@ -1,7 +1,7 @@
 from pathlib import Path
 
 import pytest
-from tad.models.system_card import SystemCard
+from tad.schema.system_card import SystemCard
 from tad.services.storage import WriterFactory
 from yaml import safe_load
 
@@ -26,7 +26,7 @@ def test_file_system_writer_no_location_variable(setup_and_teardown: tuple[str, 
     with pytest.raises(
         KeyError, match="The `location` or `filename` variables are not provided as input for get_writer()"
     ):
-        WriterFactory.get_writer(writer_type="file", filename=filename)
+        WriterFactory.get_writer(writer_type="file", filename=filename)  # pyright: ignore [reportCallIssue]
 
 
 def test_file_system_writer_no_filename_variable(setup_and_teardown: tuple[str, Path]) -> None:
@@ -34,7 +34,7 @@ def test_file_system_writer_no_filename_variable(setup_and_teardown: tuple[str, 
     with pytest.raises(
         KeyError, match="The `location` or `filename` variables are not provided as input for get_writer()"
     ):
-        WriterFactory.get_writer(writer_type="file", location=location)
+        WriterFactory.get_writer(writer_type="file", location=location)  # pyright: ignore [reportCallIssue]
 
 
 def test_file_system_writer_yaml_with_content(setup_and_teardown: tuple[str, Path]) -> None:
@@ -62,7 +62,7 @@ def test_file_system_writer_yaml_with_content_in_dir(setup_and_teardown: tuple[s
 def test_file_system_writer_with_system_card(setup_and_teardown: tuple[str, Path]) -> None:
     filename, location = setup_and_teardown
     data = SystemCard()
-    data.title = "test"
+    data.name = "test"
     data_dict = data.model_dump()
 
     storage_writer = WriterFactory.get_writer(writer_type="file", location=location, filename=filename)
@@ -84,4 +84,4 @@ def test_abstract_writer_non_yaml_filename(setup_and_teardown: tuple[str, Path])
 def test_not_valid_writer_type() -> None:
     writer_type = "kafka"
     with pytest.raises(ValueError, match=f"Unknown writer type: {writer_type}"):
-        WriterFactory.get_writer(writer_type=writer_type)
+        WriterFactory.get_writer(writer_type=writer_type)  # pyright: ignore [reportCallIssue]

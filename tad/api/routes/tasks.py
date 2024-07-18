@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, Request, status
+from fastapi import APIRouter, Depends, Request
 from fastapi.responses import HTMLResponse
 
 from tad.api.deps import templates
@@ -21,21 +21,15 @@ async def move_task(
     :param moved_task: the move task object
     :return: a HTMLResponse object, in this case the html code of the card that was moved
     """
-    try:
-        # because htmx form always sends a value and siblings are optional, we use -1 for None and convert it here
-        if moved_task.next_sibling_id == -1:
-            moved_task.next_sibling_id = None
-        if moved_task.previous_sibling_id == -1:
-            moved_task.previous_sibling_id = None
-        task = tasks_service.move_task(
-            moved_task.id,
-            moved_task.status_id,
-            moved_task.previous_sibling_id,
-            moved_task.next_sibling_id,
-        )
-        # todo(Robbert) add error handling for input error or task error handling
-        return templates.TemplateResponse(request=request, name="task.html.jinja", context={"task": task})
-    except Exception:
-        return templates.TemplateResponse(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, request=request, name="error.html.jinja"
-        )
+    # because htmx form always sends a value and siblings are optional, we use -1 for None and convert it here
+    if moved_task.next_sibling_id == -1:
+        moved_task.next_sibling_id = None
+    if moved_task.previous_sibling_id == -1:
+        moved_task.previous_sibling_id = None
+    task = tasks_service.move_task(
+        moved_task.id,
+        moved_task.status_id,
+        moved_task.previous_sibling_id,
+        moved_task.next_sibling_id,
+    )
+    return templates.TemplateResponse(request, "task.html.j2", {"task": task})

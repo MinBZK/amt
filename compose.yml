@@ -14,7 +14,7 @@ services:
     environment:
       - ENVIRONMENT=demo
     ports:
-      - 8000:8000
+      - 8070:8000
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:8000/health/live || exit 1"]
 

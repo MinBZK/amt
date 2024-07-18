@@ -2,12 +2,13 @@
 
 import re
 import sys
+from typing import Any
 
 from babel.core import get_global
 from babel.messages.frontend import main
 
 
-def hack_babel(custom_locales: dict):
+def hack_babel(custom_locales: dict[str, str]) -> None:
     """Hack Babel core to make it support custom locale names.
     Copied from https://github.com/python-babel/babel/issues/454
 
@@ -20,7 +21,7 @@ def hack_babel(custom_locales: dict):
     # This database is pickle-loaded from a .dat file and cached, so we only have to do it once.
     db = get_global("likely_subtags")
     for custom_name in custom_locales:
-        db[custom_name] = custom_name
+        db[custom_name] = custom_name  # pyright: ignore [reportIndexIssue]
 
     # Also, monkey-patch the exists() and load() functions that load locale data from 'babel/locale-data'
     import babel.localedata
@@ -31,12 +32,12 @@ def hack_babel(custom_locales: dict):
     # Make sure we do not patch twice
     if o_exists.__module__ != __name__:
         # Definitions
-        def exists(name):
+        def exists(name: str) -> bool:
             # Convert custom names to normalized names
             name = custom_locales.get(name, name)
             return o_exists(name)
 
-        def load(name, merge_inherited=True):
+        def load(name: str, merge_inherited: bool = True) -> dict[str, Any]:
             # Convert custom names to normalized names
             name = custom_locales.get(name, name)
             return o_load(name, merge_inherited)

@@ -15,10 +15,10 @@ async def default_layout(
     request: Request,
     status_service: Annotated[StatusesService, Depends(StatusesService)],
     tasks_service: Annotated[TasksService, Depends(TasksService)],
-):
+) -> HTMLResponse:
     context = {
         "page_title": "This is the page title",
         "tasks_service": tasks_service,
         "statuses_service": status_service,
     }
-    return templates.TemplateResponse(request=request, name="index.html.jinja", context=context)
+    return templates.TemplateResponse(request, "pages/index.html.j2", context)

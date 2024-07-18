@@ -4,10 +4,10 @@ from typing import Annotated
 
 from fastapi import Depends
 
-from tad.models.system_card import SystemCard
 from tad.models.task import Task
 from tad.models.user import User
 from tad.repositories.tasks import TasksRepository
+from tad.schema.system_card import SystemCard
 from tad.services.statuses import StatusesService
 from tad.services.storage import WriterFactory
 
@@ -19,7 +19,7 @@ class TasksService:
         self,
         statuses_service: Annotated[StatusesService, Depends(StatusesService)],
         repository: Annotated[TasksRepository, Depends(TasksRepository)],
-    ):
+    ) -> None:
         self.repository = repository
         self.statuses_service = statuses_service
         self.storage_writer = WriterFactory.get_writer(
@@ -49,7 +49,7 @@ class TasksService:
         task = self.repository.find_by_id(task_id)
 
         if status.name == "done":
-            self.system_card.title = task.title
+            self.system_card.name = task.title
             self.storage_writer.write(self.system_card.model_dump())
 
         if not isinstance(status.id, int):

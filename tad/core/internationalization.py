@@ -22,7 +22,7 @@ def get_dynamic_field_translations(lang: str) -> dict[str, str]:
         return yaml.safe_load(stream)
 
 
-def get_supported_translation(lang: str):
+def get_supported_translation(lang: str) -> str:
     if lang not in supported_translations:
         logger.warning("Requested translation does not exist: %s, using fallback %s", lang, _default_language_fallback)
         lang = _default_language_fallback

@@ -9,7 +9,7 @@ from tad.services.statuses import StatusesService
 
 
 class MockStatusesRepository:
-    def __init__(self):
+    def __init__(self) -> None:
         pass
 
     def find_by_id(self, status_id: int) -> Status:

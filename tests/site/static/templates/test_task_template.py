@@ -7,7 +7,7 @@ env = Environment(loader=FileSystemLoader("tad/site/templates/"), autoescape=Tru
 
 def test_template_rendering():
     task = Task(id=1, title="Test Task", description="Test Description", sort_order=1)
-    result = env.get_template(name="task.html.jinja").render(task=task)
+    result = env.get_template(name="task.html.j2").render(task=task)
     expected_result = """
     <div id="card-content-1" data-id="1">
       <h4 class="margin-bottom--extra-small">Test Task</h4>

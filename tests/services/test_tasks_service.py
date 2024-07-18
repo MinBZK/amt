@@ -10,7 +10,7 @@ from tad.services.tasks import TasksService
 
 
 class MockStatusesRepository:
-    def __init__(self):
+    def __init__(self) -> None:
         self._statuses: list[Status] = []
         self.reset()
 
@@ -26,7 +26,7 @@ class MockStatusesRepository:
 
 
 class MockTasksRepository:
-    def __init__(self):
+    def __init__(self) -> None:
         self._tasks: list[Task] = []
         self.reset()
 

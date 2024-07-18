@@ -18,7 +18,7 @@ class TasksRepository:
     The TasksRepository provides access to the repository layer.
     """
 
-    def __init__(self, session: Annotated[Session, Depends(get_session)]):
+    def __init__(self, session: Annotated[Session, Depends(get_session)]) -> None:
         self.session = session
 
     def find_all(self) -> Sequence[Task]:
@@ -35,7 +35,7 @@ class TasksRepository:
         :return: a list of tasks in the repository for the given status_id
         """
         # todo (Robbert): we 'type ignore' Task.sort_order because it works correctly, but pyright does not agree
-        statement = select(Task).where(Task.status_id == status_id).order_by(Task.sort_order)  # type: ignore
+        statement = select(Task).where(Task.status_id == status_id).order_by(Task.sort_order)  # pyright: ignore [reportUnknownMemberType, reportCallIssue, reportUnknownVariableType, reportArgumentType]
         return self.session.exec(statement).all()
 
     def save(self, task: Task) -> Task:

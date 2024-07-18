@@ -3,11 +3,13 @@ import typing
 from os import PathLike
 
 from fastapi import Request
+from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from jinja2 import Environment
-from starlette.templating import _TemplateResponse  # type: ignore
+from jinja2 import Environment, StrictUndefined, Undefined
+from starlette.background import BackgroundTask
+from starlette.templating import _TemplateResponse  # pyright: ignore [reportPrivateUsage]
 
-from tad.core.config import VERSION
+from tad.core.config import VERSION, get_settings
 from tad.core.internationalization import (
     format_datetime,
     get_dynamic_field_translations,
@@ -30,24 +32,48 @@ def custom_context_processor(request: Request) -> dict[str, str | list[str] | di
     }
 
 
+def get_undefined_behaviour() -> type[Undefined]:
+    return StrictUndefined if get_settings().DEBUG else Undefined
+
+
 # we use a custom override so we can add the translation per request, which is parsed in the Request object in kwargs
 class LocaleJinja2Templates(Jinja2Templates):
     def _create_env(
         self,
         directory: str | PathLike[typing.AnyStr] | typing.Sequence[str | PathLike[typing.AnyStr]],
-        **env_options: typing.Any,
+        **env_options: typing.Any,  # noqa: ANN401
     ) -> Environment:
-        env: Environment = super()._create_env(directory, **env_options)  # type: ignore
-        env.add_extension("jinja2.ext.i18n")  # type: ignore
-        return env  # type: ignore
+        env: Environment = super()._create_env(directory, **env_options)  # pyright: ignore [reportUnknownMemberType, reportUnknownVariableType]
+        env.add_extension("jinja2.ext.i18n")  # pyright: ignore [reportUnknownMemberType]
+        return env  # pyright: ignore [reportUnknownVariableType]
 
-    def TemplateResponse(self, *args: typing.Any, **kwargs: typing.Any) -> _TemplateResponse:
-        content_language = get_supported_translation(get_requested_language(kwargs["request"]))
+    def TemplateResponse(  # pyright: ignore [reportIncompatibleMethodOverride]
+        self,
+        request: Request,
+        name: str,
+        context: dict[str, typing.Any] | None = None,
+        status_code: int = 200,
+        headers: dict[str, str] | None = None,
+        media_type: str | None = None,
+        background: BackgroundTask | None = None,
+    ) -> _TemplateResponse:
+        content_language = get_supported_translation(get_requested_language(request))
         translations = get_translation(content_language)
-        kwargs["headers"] = {"Content-Language": ",".join(supported_translations)}
-        self.env.install_gettext_translations(translations, newstyle=True)  # type: ignore
-        return super().TemplateResponse(*args, **kwargs)
+        if headers is not None and "Content-Language" not in headers:
+            headers["Content-Language"] = ",".join(supported_translations)
+        self.env.install_gettext_translations(translations, newstyle=True)  # pyright: ignore [reportUnknownMemberType]
+
+        if context is None:
+            context = {}
+
+        return super().TemplateResponse(request, name, context, status_code, headers, media_type, background)
+
+    def Redirect(self, request: Request, url: str) -> HTMLResponse:
+        headers = {"HX-Redirect": url}
+        return self.TemplateResponse(request, "redirect.html.j2", headers=headers)
 
 
-templates = LocaleJinja2Templates(directory="tad/site/templates/", context_processors=[custom_context_processor])
-templates.env.filters["format_datetime"] = format_datetime  # type: ignore
+templates = LocaleJinja2Templates(
+    directory="tad/site/templates/", context_processors=[custom_context_processor], undefined=get_undefined_behaviour()
+)
+templates.env.filters["format_datetime"] = format_datetime  # pyright: ignore [reportUnknownMemberType]

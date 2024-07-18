@@ -22,4 +22,4 @@ def test_task_move_error(client: TestClient, db: DatabaseTestUtils) -> None:
     )
     assert response.status_code == 500
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"This is an error message" in response.content
+    assert b"RepositoryError: Repository error" in response.content

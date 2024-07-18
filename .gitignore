@@ -21,6 +21,7 @@ __pypackages__/
 
 # pytest
 .pytest_cache/
+pytestdebug.log
 
 # ruff linter
 .ruff_cache/
@@ -36,3 +37,7 @@ __pypackages__/
 tad.log*
 database.sqlite3
 output/
+
+
+# ignore playwright
+test-results/

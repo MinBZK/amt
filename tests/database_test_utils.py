@@ -10,7 +10,7 @@ class DatabaseTestUtils:
         self.session: Session = session
         self.models: list[BaseModel] = []
 
-    def __del__(self):
+    def __del__(self) -> None:
         pass
 
     def given(self, models: list[BaseModel]) -> None:

@@ -1,13 +1,12 @@
 import os
-from collections.abc import Generator, Iterator
+from collections.abc import Callable, Generator, Iterator
 from multiprocessing import Process
 from typing import Any
 
 import httpx
 import pytest
-from _pytest.fixtures import SubRequest
 from fastapi.testclient import TestClient
-from playwright.sync_api import Page, Playwright, sync_playwright
+from playwright.sync_api import Browser
 from sqlmodel import Session, SQLModel
 from tad.core.config import Settings, get_settings
 from tad.core.db import get_engine
@@ -17,17 +16,15 @@ from uvicorn.main import run as uvicorn_run
 from tests.database_test_utils import DatabaseTestUtils
 
 
-def run_uvicorn(uvicorn: Any) -> None:
-    uvicorn_run(app, host=uvicorn["host"], port=uvicorn["port"])
+def run_uvicorn(host: str = "127.0.0.1", port: int = 3462) -> None:
+    uvicorn_run(app, host=host, port=port)
 
 
 @pytest.fixture(scope="session")
-def run_server(request: pytest.FixtureRequest) -> Generator[Any, None, None]:
-    uvicorn_settings = request.config.uvicorn  # type: ignore
-
-    process = Process(target=run_uvicorn, args=(uvicorn_settings,))  # type: ignore
+def run_server() -> Generator[Any, None, None]:
+    process = Process(target=run_uvicorn)
     process.start()
-    yield f"http://{uvicorn_settings['host']}:{uvicorn_settings['port']}"
+    yield "http://127.0.0.1:3462"
     process.terminate()
 
 
@@ -41,11 +38,6 @@ def pytest_configure(config: pytest.Config) -> None:
     os.environ.clear()  # lets always start with a clean environment to make tests consistent
     os.environ["ENVIRONMENT"] = "local"
     os.environ["APP_DATABASE_SCHEME"] = "sqlite"
-
-    config.uvicorn = {  # type: ignore
-        "host": "127.0.0.1",
-        "port": 8756,
-    }
 
 
 def pytest_sessionstart(session: pytest.Session) -> None:
@@ -66,25 +58,26 @@ def client() -> Generator[TestClient, None, None]:
         yield c
 
 
+@pytest.fixture()
+def anyio_backend():
+    return "asyncio"
+
+
 @pytest.fixture(scope="session")
-def playwright():
-    with sync_playwright() as p:
-        yield p
+def browser_context_args(browser_context_args: dict[str, Any]) -> dict[str, Any]:
+    return {**browser_context_args, "base_url": "http://127.0.0.1:3462"}
 
 
-@pytest.fixture(params=["chromium"])  # lets start with 1 browser for now, we can add more later
+@pytest.fixture(scope="session")
 def browser(
-    playwright: Playwright, request: SubRequest, run_server: Generator[str, Any, Any]
-) -> Generator[Page, Any, Any]:
-    browser = getattr(playwright, request.param).launch(headless=True)
-    context = browser.new_context(base_url=run_server)
-    page = context.new_page()
-
-    transport = httpx.HTTPTransport(retries=5, local_address="127.0.0.1")
-    with httpx.Client(transport=transport, verify=False, timeout=0.8) as client:  # noqa: S501
+    launch_browser: Callable[[], Browser], run_server: Generator[str, None, None]
+) -> Generator[Browser, None, None]:
+    transport = httpx.HTTPTransport(retries=10, local_address="127.0.0.1")
+    with httpx.Client(transport=transport, verify=False, timeout=1.0) as client:  # noqa: S501
         client.get(f"{run_server}/")
 
-    yield page
+    browser = launch_browser()
+    yield browser
     browser.close()
 
 

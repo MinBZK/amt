@@ -11,7 +11,10 @@
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
-  "forwardPorts": [8000,8080],
+  "forwardPorts": [
+    8000,
+    8080
+  ],
   "postCreateCommand": ".devcontainer/postCreateCommand.sh",
   "customizations": {
     "vscode": {
@@ -25,7 +28,8 @@
         "mhutchie.git-graph",
         "markis.code-coverage",
         "qwtel.sqlite-viewer",
-        "ms-vsliveshare.vsliveshare"
+        "ms-vsliveshare.vsliveshare",
+        "wholroyd.jinja"
       ],
       "settings": {
         "editor.formatOnPaste": false,
