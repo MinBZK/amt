@@ -102,6 +102,9 @@ jobs:
       - name: Install Playwright browsers
         run: poetry run playwright install --with-deps
 
+      - name: test migrations for sqlite
+        run: poetry run alembic upgrade head
+
       - name: Run pytest
         run: poetry run coverage run -m pytest
 
