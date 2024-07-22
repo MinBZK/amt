@@ -24,10 +24,11 @@ class InstrumentsService:
         # assume yaml
         data = yaml.safe_load(bytes_data)
 
-        if "instrument" not in data:
-            raise InstrumentError()
+        if "urn" not in data:
+            # todo: this is now an HTTP error, while a service can also be used from another context
+            raise InstrumentError("Key 'urn' not found in instrument.")
 
-        return Instrument(**data["instrument"])
+        return Instrument(**data)
 
     def fetch_instruments(self) -> list[Instrument]:
         content_list = self.fetch_github_content_list()

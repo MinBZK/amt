@@ -6,7 +6,7 @@ from fastapi.testclient import TestClient
 from tad.schema.project import ProjectNew
 from tad.schema.system_card import SystemCard
 from tad.services.instruments import InstrumentsService
-from tad.services.storage import FileSystemWriteService
+from tad.services.storage import FileSystemStorageService
 
 from tests.constants import default_instrument
 
@@ -62,8 +62,8 @@ def test_post_new_projects(client: TestClient) -> None:
 
 def test_post_new_projects_write_system_card(client: TestClient) -> None:
     # Given
-    origin = FileSystemWriteService.write
-    FileSystemWriteService.write = MagicMock()
+    origin = FileSystemStorageService.write
+    FileSystemStorageService.write = MagicMock()
     project_new = ProjectNew(name="name1")
     system_card = SystemCard(name=project_new.name, selected_instruments=[])
 
@@ -71,5 +71,5 @@ def test_post_new_projects_write_system_card(client: TestClient) -> None:
     client.post("/projects/new", json=project_new.model_dump())
 
     # then
-    FileSystemWriteService.write.assert_called_with(system_card.model_dump())
-    FileSystemWriteService.write = origin
+    FileSystemStorageService.write.assert_called_with(system_card.model_dump())
+    FileSystemStorageService.write = origin

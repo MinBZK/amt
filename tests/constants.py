@@ -1,6 +1,6 @@
 from fastapi import Request
 from tad.models import Project, Status, Task, User
-from tad.schema.instrument import Instrument, Owner
+from tad.schema.instrument import Instrument, InstrumentTask, Owner
 
 
 def default_status():
@@ -47,8 +47,11 @@ def default_instrument(
     owners: list[Owner] = [],  # noqa: B006
     date: str = "1-1-1970",
     url: str = "https://1.com.html",
+    tasks: list[InstrumentTask] = [],  # noqa: B006
 ) -> Instrument:
-    return Instrument(urn=urn, description=description, name=name, language=language, owners=owners, date=date, url=url)
+    return Instrument(
+        urn=urn, description=description, name=name, language=language, owners=owners, date=date, url=url, tasks=tasks
+    )
 
 
 def default_task(
@@ -86,16 +89,16 @@ GITHUB_CONTENT_PAYLOAD = """
 systemcard_path: .assessments[]
 schema_version: 1.1.0
 
-instrument:
-  name: "Impact Assessment Mensenrechten en Algoritmes (IAMA)"
-  description: "Het IAMA helpt om de risico's voor mensenrechten bij het gebruik van algoritmen in kaart te brengen en maatregelen te nemen om deze aan te pakken."
-  urn: "urn:nl:aivt:ir:iama:1.0"
-  language: "nl"
-  owners:
-    - organization: ""
-      name: ""
-      email: ""
-      role: ""
-  date: ""
-  url: "https://www.rijksoverheid.nl/documenten/rapporten/2021/02/25/impact-assessment-mensenrechten-en-algoritmes"
+name: "Impact Assessment Mensenrechten en Algoritmes (IAMA)"
+description: "Het IAMA helpt om de risico's voor mensenrechten bij het gebruik van algoritmen in kaart te brengen en maatregelen te nemen om deze aan te pakken."
+urn: "urn:nl:aivt:ir:iama:1.0"
+language: "nl"
+owners:
+- organization: ""
+  name: ""
+  email: ""
+  role: ""
+date: ""
+url: "https://www.rijksoverheid.nl/documenten/rapporten/2021/02/25/impact-assessment-mensenrechten-en-algoritmes"
+tasks: []
 """  # noqa: E501

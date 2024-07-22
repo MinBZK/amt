@@ -8,6 +8,7 @@ repos:
         exclude: ^tad/static/vendor/.*
       - id: trailing-whitespace
       - id: check-yaml
+        exclude: example/
       - id: check-json
       - id: check-added-large-files
       - id: check-merge-conflict

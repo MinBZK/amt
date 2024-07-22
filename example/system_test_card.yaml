@@ -1,0 +1,35 @@
+version: "0.1a2"
+name: "Zoeken naar mogelijke registraties van vreemdelingen"
+upl: ""
+owners:
+  - oin: "00000003273808340000"
+    organization: "Ministerie van Justitie en Veiligheid"
+    name: "John Doe"
+    email: "johndoe@email.com"
+    role: "Data Scientist"
+description: "Algoritme dat het mogelijk maakt om fonetisch (gegevens schrijven zoals ze klinken) te zoeken op persoonsgegevens van vreemdelingen die geregistreerd zijn in de Basisvoorziening Vreemdelingen (BVV)."
+labels:
+  - name: "label_1"
+    value: "value_1"
+  - name: "label_2"
+    value: "value_2"
+status: "production"
+publication_category: "other_algorithms"
+begin_date: "2003-05-1"
+goal_and_impact: "Providing assistance in investigating whether foreign nationals in contact with the Dutch government have previously been registered in the Basisvoorziening Vreemdelingen. The Basisvoorziening Vreemdelingen is the central information system used by the organisations working together in the migration chain. The system contains basic data on foreigners and is maintained by the chain partners in the migration chain. Searching whether someone is already registered can prevent people from being registered multiple times. The algorithm to search phonetically can be applied if a person is not found based on fingerprints, or if foreigners do not have an identity document."
+considerations: "The algorithm can be used to search for data of persons whose details are not well known. This can lead to better identification of foreigners. By entering data as it sounds, the algorithm is used to find the possible correct spelling of the data. This will help an employee if the language or letters do not match the Dutch alphabet. Use of this algorithm can prevent duplicate registrations."
+risk_management: "The algorithm is tested annually to see if the results given are sufficiently correct according to the agreements made (number of results shown, degree of similarity). This is done by the organisations using the algorithm and by the administrator. The operation of the algorithm can only be modified by the supplier. New versions are released regularly."
+human_intervention: "The algorithm is only used to support staff at organisations to establish the identity of a foreign national. This is done at the Police, Royal Military Police, Immigration and Naturalisation Service, Foreign Affairs. The algorithm can provide a list of candidates, but the employee always remains responsible for using this data himself. This may result in a registration being reused, or a new registration being made."
+legal_base:
+  - name: "Aliens Act 2000"
+    link: "https://wetten.overheid.nl/BWBR0011823/2024-01-01"
+used_data: "The database only contains personal data of aliens registered in the Basic Immigration Facility. These include name data, birth data and nationalities. The data usually come from Police, Marechaussee, Immigration and Naturalisation Service or Foreign Affairs, but may also come from municipalities."
+technical_design: "When foreigners' data are registered or changed in the BMS, they are also immediately placed in the phonetic search system. The algorithm provides options for convenient searching in this. Depending on the search query, the way the data are consulted is determined. A maximum number of search results can also be specified. For each search result, the degree of similarity is shown."
+external_providers:
+  - "Human Inference (part of the Data Agency)"
+references:
+  - "reference_1"
+  - "reference_2"
+
+assessments:
+  - !include assessments/iama.yaml

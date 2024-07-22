@@ -10,7 +10,7 @@ from playwright.sync_api import Browser
 from sqlmodel import Session, SQLModel
 from tad.core.config import Settings, get_settings
 from tad.core.db import get_engine
-from tad.main import app
+from tad.server import app
 from uvicorn.main import run as uvicorn_run
 
 from tests.database_test_utils import DatabaseTestUtils

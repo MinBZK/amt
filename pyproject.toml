@@ -33,6 +33,8 @@ uvicorn = {extras = ["standard"], version = "^0.30.3"}
 pyyaml = "^6.0.1"
 babel = "^2.15.0"
 httpx = "^0.27.0"
+pyyaml-include = "^2.1"
+click = "^8.1.7"
 
 
 [tool.poetry.group.test.dependencies]
@@ -126,6 +128,7 @@ authorized_licenses = [
     "Artistic",
     "BSD",
     "GNU General Public License v2 or later (GPLv2+)",
+    "GNU General Public License v3 or later (GPLv3+)",
     "GNU General Public License (GPL)",
     "GNU Library or Lesser General Public License (LGPL)",
     "MIT",

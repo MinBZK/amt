@@ -9,7 +9,7 @@ from tad.models.user import User
 from tad.repositories.tasks import TasksRepository
 from tad.schema.system_card import SystemCard
 from tad.services.statuses import StatusesService
-from tad.services.storage import WriterFactory
+from tad.services.storage import StorageFactory
 
 logger = logging.getLogger(__name__)
 
@@ -22,9 +22,7 @@ class TasksService:
     ) -> None:
         self.repository = repository
         self.statuses_service = statuses_service
-        self.storage_writer = WriterFactory.get_writer(
-            writer_type="file", location="./output", filename="system_card.yaml"
-        )
+        self.storage_writer = StorageFactory.init(storage_type="file", location="./output", filename="system_card.yaml")
         self.system_card = SystemCard()
 
     def get_tasks(self, status_id: int) -> Sequence[Task]:

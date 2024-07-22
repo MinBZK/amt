@@ -48,4 +48,4 @@ if [ -z $DATABASE_MIGRATE ]; then
 fi
 
 echo "Starting server"
-python -m uvicorn --host "$HOST" tad.main:app --port "$PORT" --log-level "$LOGLEVEL"
+python -m uvicorn --host "$HOST" tad.server:app --port "$PORT" --log-level "$LOGLEVEL"
