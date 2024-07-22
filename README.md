@@ -18,3 +18,15 @@ See [contributing docs](CONTRIBUTING.md)
 ## How to build and run TAD
 
 See [build docs](BUILD.md)
+
+## How to run the CLI
+
+The check-state can be executed to see what tasks are waiting to be done.
+
+It requires 2 parameters. The first parameter is a list of instrument urns joined by a comma without
+spaces. The second parameter is the location of the system card.
+
+An example command:
+```shell
+./check-state urn:nl:aivt:ir:td:1.0 urn:nl:aivt:ir:iama:1.0 example/system_test_card.yaml
+```

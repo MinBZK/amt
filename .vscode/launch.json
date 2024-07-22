@@ -13,7 +13,7 @@
         "--reload",
         "--port",
         "8000",
-        "tad.main:app"
+        "tad.server:app"
       ],
       "cwd": "${workspaceFolder}/",
       "env": {

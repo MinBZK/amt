@@ -9,7 +9,7 @@ from tad.repositories.projects import ProjectsRepository
 from tad.schema.instrument import InstrumentBase
 from tad.schema.project import ProjectNew
 from tad.schema.system_card import SystemCard
-from tad.services.storage import WriterFactory
+from tad.services.storage import Storage, StorageFactory
 
 logger = logging.getLogger(__name__)
 
@@ -43,8 +43,8 @@ class ProjectsService:
         ]
         system_card = SystemCard(name=project_new.name, selected_instruments=instruments)
 
-        storage_writer = WriterFactory.get_writer(
-            writer_type="file", location=system_card_file.parent, filename=system_card_file.name
+        storage_writer: Storage = StorageFactory.init(
+            storage_type="file", location=system_card_file.parent, filename=system_card_file.name
         )
         storage_writer.write(system_card.model_dump())
 

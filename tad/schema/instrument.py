@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class Owner(BaseModel):
@@ -6,6 +6,12 @@ class Owner(BaseModel):
     name: str
     email: str
     role: str
+
+
+class InstrumentTask(BaseModel):
+    question: str
+    urn: str
+    lifecycle: list[str]
 
 
 class InstrumentBase(BaseModel):
@@ -19,3 +25,4 @@ class Instrument(InstrumentBase):
     owners: list[Owner]
     date: str
     url: str
+    tasks: list[InstrumentTask] = Field(default=[])
