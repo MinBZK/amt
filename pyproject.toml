@@ -23,20 +23,20 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.10"
 fastapi = "^0.111.1"
-sqlmodel = "^0.0.19"
+sqlmodel = "^0.0.21"
 alembic = "^1.13.2"
 pydantic = "^2.8.2"
 jinja2 = "^3.1.4"
 pydantic-settings = "^2.3.3"
 psycopg2-binary = "^2.9.9"
-uvicorn = {extras = ["standard"], version = "^0.30.1"}
+uvicorn = {extras = ["standard"], version = "^0.30.3"}
 pyyaml = "^6.0.1"
 babel = "^2.15.0"
 httpx = "^0.27.0"
 
 
 [tool.poetry.group.test.dependencies]
-pytest = "^8.2.1"
+pytest = "^8.3.1"
 coverage = "^7.6.0"
 httpx = "^0.27.0"
 playwright = "^1.45.0"
@@ -44,9 +44,9 @@ pytest-playwright = "^0.5.1"
 pytest-httpx = "^0.30.0"
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.5.2"
+ruff = "^0.5.4"
 pre-commit = "^3.7.0"
-pyright = "^1.1.371"
+pyright = "^1.1.372"
 liccheck = "^0.9.2"
 types-pyyaml = "^6.0.12.20240311"
 
