@@ -4,9 +4,11 @@ from typing import Annotated
 
 from fastapi import Depends
 
+from amt.models.project import Project
 from amt.models.task import Task
 from amt.models.user import User
 from amt.repositories.tasks import TasksRepository
+from amt.schema.instrument import InstrumentTask
 from amt.schema.system_card import SystemCard
 from amt.services.statuses import StatusesService
 from amt.services.storage import StorageFactory
@@ -28,9 +30,25 @@ class TasksService:
     def get_tasks(self, status_id: int) -> Sequence[Task]:
         return self.repository.find_by_status_id(status_id)
 
+    def get_tasks_for_project(self, project_id: int, status_id: int) -> Sequence[Task]:
+        return self.repository.find_by_project_id_and_status_id(project_id, status_id)
+
     def assign_task(self, task: Task, user: User) -> Task:
         task.user_id = user.id
         return self.repository.save(task)
+
+    def create_instrument_tasks(self, tasks: Sequence[InstrumentTask], project: Project) -> None:
+        # TODO: (Christopher) At this moment a status has to be retrieved from the DB. In the future
+        #       we will have static statuses, so this will need to change.
+        status = self.statuses_service.get_status_by_name("todo")
+        self.repository.save_all(
+            [
+                # TODO: (Christopher) The ticket does not specify what to do when question type is not an
+                # open questions, hence for now all titles will be set to task.question.
+                Task(title=task.question, description="", project_id=project.id, status_id=status.id, sort_order=idx)
+                for idx, task in enumerate(tasks)
+            ]
+        )
 
     def move_task(
         self, task_id: int, status_id: int, previous_sibling_id: int | None = None, next_sibling_id: int | None = None

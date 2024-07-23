@@ -17,5 +17,8 @@ class StatusesService:
     def get_status(self, status_id: int) -> Status:
         return self.repository.find_by_id(status_id)
 
+    def get_status_by_name(self, status_name: str) -> Status:
+        return self.repository.find_by_name(status_name)
+
     def get_statuses(self) -> Sequence[Status]:
         return self.repository.find_all()

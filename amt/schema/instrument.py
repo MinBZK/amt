@@ -11,6 +11,7 @@ class Owner(BaseModel):
 class InstrumentTask(BaseModel):
     question: str
     urn: str
+    type: list[str] = Field(default=[])
     lifecycle: list[str]
 
 

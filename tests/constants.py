@@ -4,7 +4,7 @@ from fastapi import Request
 
 
 def default_status():
-    return Status(name="Todo", sort_order=1)
+    return Status(name="todo", sort_order=1)
 
 
 def todo_status() -> Status:
@@ -12,15 +12,15 @@ def todo_status() -> Status:
 
 
 def in_progress_status() -> Status:
-    return Status(name="In progress", sort_order=2)
+    return Status(name="in_progress", sort_order=2)
 
 
 def in_review_status() -> Status:
-    return Status(name="In review", sort_order=3)
+    return Status(name="in_review", sort_order=3)
 
 
 def done_status() -> Status:
-    return Status(name="Done", sort_order=4)
+    return Status(name="done", sort_order=4)
 
 
 def all_statusses() -> list[Status]:
@@ -60,8 +60,16 @@ def default_task(
     sort_order: float = 1.0,
     status_id: int | None = None,
     user_id: int | None = None,
+    project_id: int | None = None,
 ) -> Task:
-    return Task(title=title, description=description, sort_order=sort_order, status_id=status_id, user_id=user_id)
+    return Task(
+        title=title,
+        description=description,
+        sort_order=sort_order,
+        status_id=status_id,
+        user_id=user_id,
+        project_id=project_id,
+    )
 
 
 GITHUB_LIST_PAYLOAD = """

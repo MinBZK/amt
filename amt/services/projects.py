@@ -9,14 +9,23 @@ from amt.repositories.projects import ProjectsRepository
 from amt.schema.instrument import InstrumentBase
 from amt.schema.project import ProjectNew
 from amt.schema.system_card import SystemCard
+from amt.services.instruments import InstrumentsService
 from amt.services.storage import Storage, StorageFactory
+from amt.services.tasks import TasksService
 
 logger = logging.getLogger(__name__)
 
 
 class ProjectsService:
-    def __init__(self, repository: Annotated[ProjectsRepository, Depends(ProjectsRepository)]) -> None:
+    def __init__(
+        self,
+        repository: Annotated[ProjectsRepository, Depends(ProjectsRepository)],
+        task_service: Annotated[TasksService, Depends(TasksService)],
+        instrument_service: Annotated[InstrumentsService, Depends(InstrumentsService)],
+    ) -> None:
         self.repository = repository
+        self.instrument_service = instrument_service
+        self.task_service = task_service
 
     def get(self, project_id: int) -> Project | None:
         project = None
@@ -47,6 +56,10 @@ class ProjectsService:
             storage_type="file", location=system_card_file.parent, filename=system_card_file.name
         )
         storage_writer.write(system_card.model_dump())
+
+        selected_instruments = self.instrument_service.fetch_instruments(project_new.instruments)  # type: ignore
+        for instrument in selected_instruments:
+            self.task_service.create_instrument_tasks(instrument.tasks, project)
 
         return project
 

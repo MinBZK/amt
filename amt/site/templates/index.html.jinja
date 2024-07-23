@@ -36,7 +36,7 @@
         </div>
         <div class="section group">
             {% for status in statuses_service.get_statuses() %}
-                {{ render.column(status, translations, tasks_service) }}
+                {{ render.column(project, status, translations, tasks_service) }}
             {% endfor %}
         </div>
 </div>

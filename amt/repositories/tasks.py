@@ -4,7 +4,7 @@ from typing import Annotated
 
 from fastapi import Depends
 from sqlalchemy.exc import NoResultFound
-from sqlmodel import Session, select
+from sqlmodel import Session, and_, select
 
 from amt.core.exceptions import RepositoryError
 from amt.models import Task
@@ -38,6 +38,20 @@ class TasksRepository:
         statement = select(Task).where(Task.status_id == status_id).order_by(Task.sort_order)  # pyright: ignore [reportUnknownMemberType, reportCallIssue, reportUnknownVariableType, reportArgumentType]
         return self.session.exec(statement).all()
 
+    def find_by_project_id_and_status_id(self, project_id: int, status_id: int) -> Sequence[Task]:
+        """
+        Returns all tasks in the repository for the given project_id.
+        :param project_id: the project_id to filter on
+        :return: a list of tasks in the repository for the given project_id
+        """
+        # todo (Robbert): we 'type ignore' Task.sort_order because it works correctly, but pyright does not agree
+        statement = (
+            select(Task)
+            .where(and_(Task.status_id == status_id, Task.project_id == project_id))
+            .order_by(Task.sort_order)  # pyright: ignore [reportUnknownMemberType, reportCallIssue, reportUnknownVariableType, reportArgumentType]
+        )
+        return self.session.exec(statement).all()
+
     def save(self, task: Task) -> Task:
         """
         Stores the given task in the repository or throws a RepositoryException
@@ -52,6 +66,19 @@ class TasksRepository:
             self.session.rollback()
             raise RepositoryError from e
         return task
+
+    def save_all(self, tasks: Sequence[Task]) -> None:
+        """
+        Stores the given tasks in the repository or throws a RepositoryException
+        :param tasks: the tasks to store
+        :return: the updated tasks after storing
+        """
+        try:
+            self.session.add_all(tasks)
+            self.session.commit()
+        except Exception as e:
+            self.session.rollback()
+            raise RepositoryError from e
 
     def delete(self, task: Task) -> None:
         """

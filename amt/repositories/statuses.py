@@ -68,3 +68,15 @@ class StatusesRepository:
             return self.session.exec(statement).one()
         except NoResultFound as e:
             raise RepositoryError from e
+
+    def find_by_name(self, status_name: str) -> Status:
+        """
+        Returns the status with the given name or an exception if the name does not exist.
+        :param status_name: the name of the status
+        :return: the status with the given name or an exception
+        """
+        try:
+            statement = select(Status).where(Status.name == status_name)
+            return self.session.exec(statement).one()
+        except NoResultFound as e:
+            raise RepositoryError from e
