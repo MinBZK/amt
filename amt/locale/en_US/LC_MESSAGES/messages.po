@@ -19,7 +19,7 @@ msgstr ""
 "Generated-By: Babel 2.15.0\n"
 
 #: tad/site/templates/default_header.html.j2:6
-msgid "Transparency of Algorithmic Decision making"
+msgid "Algorithmic Management Toolkit"
 msgstr ""
 
 #: tad/site/templates/default_header.html.j2:12
@@ -27,7 +27,7 @@ msgid "Language"
 msgstr ""
 
 #: tad/site/templates/layouts/base.html.j2:7
-msgid "Transparency of Algorithmic Decision making (TAD)"
+msgid "Algorithmic Management Toolkit (AMT)"
 msgstr ""
 
 #: tad/site/templates/pages/404.html.j2:5
