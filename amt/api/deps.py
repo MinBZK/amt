@@ -9,6 +9,7 @@ from jinja2 import Environment, StrictUndefined, Undefined
 from starlette.background import BackgroundTask
 from starlette.templating import _TemplateResponse  # pyright: ignore [reportPrivateUsage]
 
+from amt.api.http_browser_caching import url_for_cache
 from amt.core.config import VERSION, get_settings
 from amt.core.internationalization import (
     format_datetime,
@@ -59,7 +60,10 @@ class LocaleJinja2Templates(Jinja2Templates):
     ) -> _TemplateResponse:
         content_language = get_supported_translation(get_requested_language(request))
         translations = get_translation(content_language)
-        if headers is not None and "Content-Language" not in headers:
+        if headers is None:
+            headers = {}
+        headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
+        if "Content-Language" not in headers:
             headers["Content-Language"] = ",".join(supported_translations)
         self.env.install_gettext_translations(translations, newstyle=True)  # pyright: ignore [reportUnknownMemberType]
 
@@ -77,3 +81,4 @@ templates = LocaleJinja2Templates(
     directory="amt/site/templates/", context_processors=[custom_context_processor], undefined=get_undefined_behaviour()
 )
 templates.env.filters["format_datetime"] = format_datetime  # pyright: ignore [reportUnknownMemberType]
+templates.env.globals.update(url_for_cache=url_for_cache)  # pyright: ignore [reportUnknownMemberType]
