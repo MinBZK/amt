@@ -29,6 +29,31 @@ def test_fetch_instruments(httpx_mock: HTTPXMock):
     assert len(result) == 1
 
 
+def test_fetch_instruments_with_urns(httpx_mock: HTTPXMock):
+    # given
+    instruments_service = InstrumentsService()
+    httpx_mock.add_response(
+        url="https://api.github.com/repos/MinBZK/instrument-registry/contents/instruments?ref=main",
+        content=GITHUB_LIST_PAYLOAD.encode(),
+        headers={"X-RateLimit-Remaining": "7", "X-RateLimit-Reset": "200000000", "Content-Type": "application/json"},
+    )
+
+    httpx_mock.add_response(
+        url="https://raw.githubusercontent.com/MinBZK/instrument-registry/main/instruments/iama.yaml",
+        content=GITHUB_CONTENT_PAYLOAD.encode(),
+        headers={"X-RateLimit-Remaining": "7", "X-RateLimit-Reset": "200000000", "content-type": "text/plain"},
+    )
+
+    urn = "urn:nl:aivt:ir:iama:1.0"
+
+    # when
+    result = instruments_service.fetch_instruments([urn])
+
+    # then
+    assert len(result) == 1
+    assert result[0].urn == urn
+
+
 def test_fetch_instruments_invalid(httpx_mock: HTTPXMock):
     # given
     instruments_service = InstrumentsService()

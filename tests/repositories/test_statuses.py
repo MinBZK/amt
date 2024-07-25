@@ -81,3 +81,19 @@ def test_find_by_id_failed(db: DatabaseTestUtils):
     status_repository: StatusesRepository = StatusesRepository(db.get_session())
     with pytest.raises(RepositoryError):
         status_repository.find_by_id(1)
+
+
+def test_find_by_name(db: DatabaseTestUtils):
+    status = todo_status()
+    db.given([status])
+
+    status_repository: StatusesRepository = StatusesRepository(db.get_session())
+    result: Status = status_repository.find_by_name(status.name)
+    assert result.id == 1
+    assert result.name == status.name
+
+
+def test_find_by_name_failed(db: DatabaseTestUtils):
+    status_repository: StatusesRepository = StatusesRepository(db.get_session())
+    with pytest.raises(RepositoryError):
+        status_repository.find_by_name("test")

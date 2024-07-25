@@ -14,7 +14,7 @@ class AMTValidationException(ValidationException):
 
 class AMTError(RuntimeError):
     """
-    A generic, Tad-specific error.
+    A generic, AMT-specific error.
     """
 
 

@@ -1,4 +1,5 @@
 import logging
+from collections.abc import Sequence
 
 import yaml
 
@@ -30,14 +31,16 @@ class InstrumentsService:
 
         return Instrument(**data)
 
-    def fetch_instruments(self) -> list[Instrument]:
+    def fetch_instruments(self, urns: Sequence[str] | None = None) -> list[Instrument]:
         content_list = self.fetch_github_content_list()
 
         instruments: list[Instrument] = []
 
         for content in content_list.root:  # TODO(Berry): fix root field
             instrument = self.fetch_github_content(str(content.download_url))
-            instruments.append(instrument)
+            if urns is None:
+                instruments.append(instrument)
+            else:
+                if instrument.urn in set(urns):
+                    instruments.append(instrument)
         return instruments
-
-    #
