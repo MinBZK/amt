@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-07-16 21:53+0000\n"
+"POT-Creation-Date: 2024-07-26 10:33+0200\n"
 "PO-Revision-Date: 2024-07-02 11:05+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_FY\n"
@@ -18,34 +18,71 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.15.0\n"
 
-#: tad/site/templates/default_header.html.j2:6
+#: amt/site/templates/header.html.j2:4
 msgid "Algorithm Management Toolkit"
-msgstr "Algoritme Behear Toolkit"
+msgstr ""
 
-#: tad/site/templates/default_header.html.j2:12
+#: amt/site/templates/header.html.j2:10
+msgid "New project"
+msgstr ""
+
+#: amt/site/templates/header.html.j2:11
+#: amt/site/templates/projects/index.html.j2:4
+msgid "Projects"
+msgstr ""
+
+#: amt/site/templates/header.html.j2:16
 msgid "Language"
-msgstr "Taal"
+msgstr ""
 
-#: tad/site/templates/layouts/base.html.j2:7
+#: amt/site/templates/errors/_RequestValidation.html.j2:1
+msgid "Request Validation Error"
+msgstr ""
+
+#: amt/site/templates/errors/error.html.j2:4
+msgid "An error occured"
+msgstr ""
+
+#: amt/site/templates/layouts/base.html.j2:11
 msgid "Algorithmic Management Toolkit (AMT)"
-msgstr "Algoritme Behear Toolkit (AMT)"
+msgstr ""
 
-#: tad/site/templates/pages/404.html.j2:5
-msgid "Not found"
-msgstr "Niet gevonden"
-
-#: tad/site/templates/projects/new.html.j2:4
+#: amt/site/templates/projects/new.html.j2:4
 msgid "New Project"
-msgstr "Nieuw Project"
+msgstr ""
 
-#: tad/site/templates/projects/new.html.j2:7
+#: amt/site/templates/projects/new.html.j2:7
 msgid "Project name"
-msgstr "Project naam"
+msgstr ""
 
-#: tad/site/templates/projects/new.html.j2:10
+#: amt/site/templates/projects/new.html.j2:10
 msgid "Selected Instruments"
-msgstr "Kies instrument"
+msgstr ""
 
-#: tad/site/templates/projects/new.html.j2:18
+#: amt/site/templates/projects/new.html.j2:18
 msgid "Create Project"
-msgstr "Maak project"
+msgstr ""
+
+#~ msgid "Algorithm Management Toolkit"
+#~ msgstr "Algoritme Behear Toolkit"
+
+#~ msgid "Language"
+#~ msgstr "Taal"
+
+#~ msgid "Algorithmic Management Toolkit (AMT)"
+#~ msgstr "Algoritme Behear Toolkit (AMT)"
+
+#~ msgid "Not found"
+#~ msgstr "Niet gevonden"
+
+#~ msgid "New Project"
+#~ msgstr "Nieuw Project"
+
+#~ msgid "Project name"
+#~ msgstr "Project naam"
+
+#~ msgid "Selected Instruments"
+#~ msgstr "Kies instrument"
+
+#~ msgid "Create Project"
+#~ msgstr "Maak project"

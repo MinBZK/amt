@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-07-16 21:53+0000\n"
+"POT-Creation-Date: 2024-07-26 10:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,34 +17,47 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.15.0\n"
 
-#: tad/site/templates/default_header.html.j2:6
-msgid "Transparency of Algorithmic Decision making"
+#: amt/site/templates/header.html.j2:4
+msgid "Algorithm Management Toolkit"
 msgstr ""
 
-#: tad/site/templates/default_header.html.j2:12
+#: amt/site/templates/header.html.j2:10
+msgid "New project"
+msgstr ""
+
+#: amt/site/templates/header.html.j2:11
+#: amt/site/templates/projects/index.html.j2:4
+msgid "Projects"
+msgstr ""
+
+#: amt/site/templates/header.html.j2:16
 msgid "Language"
 msgstr ""
 
-#: tad/site/templates/layouts/base.html.j2:7
-msgid "Transparency of Algorithmic Decision making (TAD)"
+#: amt/site/templates/errors/_RequestValidation.html.j2:1
+msgid "Request Validation Error"
 msgstr ""
 
-#: tad/site/templates/pages/404.html.j2:5
-msgid "Not found"
+#: amt/site/templates/errors/error.html.j2:4
+msgid "An error occured"
 msgstr ""
 
-#: tad/site/templates/projects/new.html.j2:4
+#: amt/site/templates/layouts/base.html.j2:11
+msgid "Algorithmic Management Toolkit (AMT)"
+msgstr ""
+
+#: amt/site/templates/projects/new.html.j2:4
 msgid "New Project"
 msgstr ""
 
-#: tad/site/templates/projects/new.html.j2:7
+#: amt/site/templates/projects/new.html.j2:7
 msgid "Project name"
 msgstr ""
 
-#: tad/site/templates/projects/new.html.j2:10
+#: amt/site/templates/projects/new.html.j2:10
 msgid "Selected Instruments"
 msgstr ""
 
-#: tad/site/templates/projects/new.html.j2:18
+#: amt/site/templates/projects/new.html.j2:18
 msgid "Create Project"
 msgstr ""

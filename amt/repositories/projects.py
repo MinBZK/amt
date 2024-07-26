@@ -6,7 +6,7 @@ from fastapi import Depends
 from sqlalchemy.exc import NoResultFound, SQLAlchemyError
 from sqlmodel import Session, select
 
-from amt.core.exceptions import RepositoryError
+from amt.core.exceptions import RepositoryError, RepositoryNoResultFound
 from amt.models import Project
 from amt.repositories.deps import get_session
 
@@ -51,3 +51,10 @@ class ProjectsRepository:
             return self.session.exec(statement).one()
         except NoResultFound as e:
             raise RepositoryError from e
+
+    def paginate(self, skip: int, limit: int) -> list[Project]:
+        try:
+            statement = select(Project).order_by(Project.name).offset(skip).limit(limit)
+            return list(self.session.exec(statement).all())
+        except Exception as e:
+            raise RepositoryNoResultFound from e

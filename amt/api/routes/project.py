@@ -5,6 +5,7 @@ from fastapi import APIRouter, Depends, Request
 from fastapi.responses import HTMLResponse
 
 from amt.api.deps import templates
+from amt.core.exceptions import NotFound
 from amt.services.projects import ProjectsService
 from amt.services.statuses import StatusesService
 from amt.services.tasks import TasksService
@@ -30,6 +31,6 @@ async def get_root(
     }
 
     if not project:
-        return templates.TemplateResponse(request, "pages/404.html.j2")
+        raise NotFound()
 
     return templates.TemplateResponse(request, "pages/index.html.j2", context)

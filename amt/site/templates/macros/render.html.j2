@@ -2,22 +2,22 @@
 <div class="col span_1_of_4">
     <h3 class="text-center-horizontal margin-bottom--small">{{ translations[status.name] }}</h3>
     <div class="progress_cards_container sortable" data-id="{{ status.id }}" id="column-{{ status.id }}">
-        {% if project and project.id %}
-        {% for task in tasks_service.get_tasks_for_project(project.id, status.id) %}
-        {{ render_task_card_full(task) }}
-        {% endfor %}
+        {% if project is defined %}
+            {% for task in tasks_service.get_tasks_for_project(project.id, status.id) %}
+                {{ render_task_card_full(task) }}
+            {% endfor %}
         {% else %}
-        {% for task in tasks_service.get_tasks(status.id) %}
-        {{ render_task_card_full(task) }}
-        {% endfor %}
+            {% for task in tasks_service.get_tasks(status.id) %}
+                {{ render_task_card_full(task) }}
+            {% endfor %}
         {% endif %}
     </div>
 </div>
 {% endmacro -%}
 
 {% macro render_task_card_full(task) -%}
-<div class="progress_card_container" data-target-id="card-content-{{ task.id }}" id="card-container-{{ task.id }}"
-    data-id="{{ task.id }}">
+<div draggable="true" class="progress_card_container" data-target-id="card-content-{{ task.id }}"
+    id="card-container-{{ task.id }}" data-id="{{ task.id }}">
     {{ render_task_card_content(task) }}
 </div>
 {% endmacro %}

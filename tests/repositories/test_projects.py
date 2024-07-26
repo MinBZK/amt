@@ -1,5 +1,5 @@
 import pytest
-from amt.core.exceptions import RepositoryError
+from amt.core.exceptions import RepositoryError, RepositoryNoResultFound
 from amt.repositories.projects import ProjectsRepository
 from tests.constants import default_project
 from tests.database_test_utils import DatabaseTestUtils
@@ -79,3 +79,29 @@ def test_find_by_id_failed(db: DatabaseTestUtils):
     project_repository = ProjectsRepository(db.get_session())
     with pytest.raises(RepositoryError):
         project_repository.find_by_id(1)
+
+
+def test_paginate(db: DatabaseTestUtils):
+    db.given([default_project()])
+    project_repository = ProjectsRepository(db.get_session())
+
+    result = project_repository.paginate(skip=0, limit=3)
+
+    assert len(result) == 1
+
+
+def test_paginate_more(db: DatabaseTestUtils):
+    db.given([default_project(), default_project(), default_project(), default_project()])
+    project_repository = ProjectsRepository(db.get_session())
+
+    result = project_repository.paginate(skip=0, limit=3)
+
+    assert len(result) == 3
+
+
+def test_paginate_not_found(db: DatabaseTestUtils):
+    db.given([default_project()])
+    project_repository = ProjectsRepository(db.get_session())
+
+    with pytest.raises(RepositoryNoResultFound):
+        project_repository.paginate(skip="a", limit=3)  # type: ignore

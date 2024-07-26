@@ -7,8 +7,8 @@ def test_tempate_error():
     request = default_fastapi_request()
 
     # when
-    response = templates.TemplateResponse(request, "error.html.j2")
+    response = templates.TemplateResponse(request, "errors/error.html.j2")
 
     # then
     assert response.headers["Content-Type"] == "text/html; charset=utf-8"
-    assert b"This is an error message" in response.body
+    assert b"An error occured" in response.body

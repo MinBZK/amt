@@ -1,5 +1,4 @@
 import logging
-import os
 
 import pytest
 from amt.core.config import Settings
@@ -64,12 +63,12 @@ def test_logging_config(caplog: pytest.LogCaptureFixture, monkeypatch: pytest.Mo
     assert len(caplog.records) == 4
 
 
-def test_logging_loglevel(caplog: pytest.LogCaptureFixture):
+def test_logging_loglevel(caplog: pytest.LogCaptureFixture, monkeypatch: pytest.MonkeyPatch):
     config = {"loggers": {"amt": {"propagate": True}}}
 
     configure_logging(config=config)
 
-    os.environ["LOGGING_LEVEL"] = "ERROR"
+    monkeypatch.setenv("LOGGING_LEVEL", "ERROR")
 
     settings = Settings()
 

@@ -1,22 +1,19 @@
 from time import sleep
 
+import pytest
 from playwright.sync_api import Page, expect
-from tests.constants import all_statusses, default_task
-from tests.database_test_utils import DatabaseTestUtils
 
 
-def test_duplicate_task(page: Page, db: DatabaseTestUtils) -> None:
+@pytest.mark.slow()
+def test_e2e_duplicate_task(page: Page) -> None:
     """
     When a task is dragged while being updated, an error occurred in the browser
     resulting in visual duplicates of the card being dragged.
     This test captured that behaviour.
     """
 
-    all_status = all_statusses()
-    db.given([*all_status])
-    db.given([default_task(status_id=all_status[0].id)])
-
     page.goto("/pages/")
+    cards_begin = page.locator(".progress_card_container").all()
 
     expect(page.locator("#column-1 #card-container-1")).to_be_visible()
     expect(page.locator("#column-3")).to_be_visible()
@@ -31,7 +28,9 @@ def test_duplicate_task(page: Page, db: DatabaseTestUtils) -> None:
     page.mouse.down()
     page.locator("#column-3").hover()
     page.evaluate('htmx.trigger("#cardMovedForm", "cardmoved")')
-    sleep(1)
+    sleep(0.5)
     page.mouse.up()
     cards = page.locator(".progress_card_container").all()
-    assert len(cards) == 1
+    assert len(cards) == len(cards_begin)
+    sleep(0.5)
+    page.drag_and_drop("#card-container-1", "#column-1", target_position={"x": 50, "y": 50})

@@ -1,6 +1,5 @@
 import logging
 import secrets
-from functools import lru_cache
 from pathlib import Path
 from typing import Any, TypeVar
 
@@ -96,9 +95,5 @@ class Settings(BaseSettings):
         return self
 
 
-# TODO(berry): make it a function with lrucache
-
-
-@lru_cache(maxsize=8)
 def get_settings() -> Settings:
     return Settings()
