@@ -7,7 +7,7 @@ class Task(SQLModel, table=True):
     title: str
     description: str
     sort_order: float
-    status_id: int | None = SQLField(default=None, foreign_key="status.id")
+    status_id: int | None = SQLField(default=None)
     user_id: int | None = SQLField(default=None, foreign_key="user.id")
     # TODO: (Christopher) SQLModel does not allow to give the below restraint an name
     #       which is needed for alembic. This results in changing the migration file

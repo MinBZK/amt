@@ -1,5 +1,6 @@
 {% extends 'layouts/base.html.j2' %}
-{% import 'macros/render.html.j2' as render %}
+{# disable macro caching, see // https://jinja.palletsprojects.com/en/3.0.x/templates/#import-context-behavior #}
+{% import 'macros/render.html.j2' as render with context %}
 
 {% block styles %}
     {{ super() }}
@@ -35,7 +36,7 @@
         <div id="errorContainer">
         </div>
         <div class="section group">
-            {% for status in statuses_service.get_statuses() %}
+            {% for status in statuses %}
                 {{ render.column(project, status, translations, tasks_service) }}
             {% endfor %}
         </div>

@@ -1,30 +1,6 @@
-from amt.models import Project, Status, Task, User
+from amt.models import Project, Task, User
 from amt.schema.instrument import Instrument, InstrumentTask, Owner
 from fastapi import Request
-
-
-def default_status():
-    return Status(name="todo", sort_order=1)
-
-
-def todo_status() -> Status:
-    return default_status()
-
-
-def in_progress_status() -> Status:
-    return Status(name="in_progress", sort_order=2)
-
-
-def in_review_status() -> Status:
-    return Status(name="review", sort_order=3)
-
-
-def done_status() -> Status:
-    return Status(name="done", sort_order=4)
-
-
-def all_statusses() -> list[Status]:
-    return [todo_status(), in_progress_status(), in_review_status(), done_status()]
 
 
 def default_user(name: str = "default user", avatar: str | None = None) -> User:

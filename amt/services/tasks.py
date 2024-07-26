@@ -4,13 +4,13 @@ from typing import Annotated
 
 from fastapi import Depends
 
+from amt.enums.status import Status
 from amt.models.project import Project
 from amt.models.task import Task
 from amt.models.user import User
 from amt.repositories.tasks import TasksRepository
 from amt.schema.instrument import InstrumentTask
 from amt.schema.system_card import SystemCard
-from amt.services.statuses import StatusesService
 from amt.services.storage import StorageFactory
 
 logger = logging.getLogger(__name__)
@@ -19,11 +19,9 @@ logger = logging.getLogger(__name__)
 class TasksService:
     def __init__(
         self,
-        statuses_service: Annotated[StatusesService, Depends(StatusesService)],
         repository: Annotated[TasksRepository, Depends(TasksRepository)],
     ) -> None:
         self.repository = repository
-        self.statuses_service = statuses_service
         self.storage_writer = StorageFactory.init(storage_type="file", location="./output", filename="system_card.yaml")
         self.system_card = SystemCard()
 
@@ -40,12 +38,12 @@ class TasksService:
     def create_instrument_tasks(self, tasks: Sequence[InstrumentTask], project: Project) -> None:
         # TODO: (Christopher) At this moment a status has to be retrieved from the DB. In the future
         #       we will have static statuses, so this will need to change.
-        status = self.statuses_service.get_status_by_name("todo")
+        status = Status.TODO
         self.repository.save_all(
             [
                 # TODO: (Christopher) The ticket does not specify what to do when question type is not an
                 # open questions, hence for now all titles will be set to task.question.
-                Task(title=task.question, description="", project_id=project.id, status_id=status.id, sort_order=idx)
+                Task(title=task.question, description="", project_id=project.id, status_id=status, sort_order=idx)
                 for idx, task in enumerate(tasks)
             ]
         )
@@ -61,18 +59,17 @@ class TasksService:
         :param next_sibling_id: the id of the next sibling of the task or None
         :return: the updated task
         """
-        status = self.statuses_service.get_status(status_id)
         task = self.repository.find_by_id(task_id)
 
-        if status.name == "done":
+        if status_id == Status.DONE:
             self.system_card.name = task.title
             self.storage_writer.write(self.system_card.model_dump())
 
-        if not isinstance(status.id, int):
+        if not isinstance(status_id, int):
             raise TypeError("status_id must be an integer")  # pragma: no cover
 
         # assign the task to the current user
-        if status.id > 1:
+        if status_id > 1:
             task.user_id = 1
 
         # update the status for the task (this may not be needed if the status has not changed)

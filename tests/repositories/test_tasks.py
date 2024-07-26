@@ -1,13 +1,13 @@
 import pytest
 from amt.core.exceptions import RepositoryError
+from amt.enums.status import Status
 from amt.models import Task
 from amt.repositories.tasks import TasksRepository
-from tests.constants import all_statusses, default_task
+from tests.constants import default_task
 from tests.database_test_utils import DatabaseTestUtils
 
 
 def test_find_all(db: DatabaseTestUtils):
-    db.given([*all_statusses()])
     db.given([default_task(), default_task()])
 
     tasks_repository: TasksRepository = TasksRepository(db.get_session())
@@ -101,7 +101,6 @@ def test_delete_failed(db: DatabaseTestUtils):
 
 
 def test_find_by_id(db: DatabaseTestUtils):
-    db.given([*all_statusses()])
     task = default_task()
     db.given([task])
 
@@ -118,9 +117,7 @@ def test_find_by_id_failed(db: DatabaseTestUtils):
 
 
 def test_find_by_status_id(db: DatabaseTestUtils):
-    all_status = [*all_statusses()]
-    db.given([*all_status])
-    task = default_task(status_id=all_status[0].id)
+    task = default_task(status_id=Status.TODO)
     db.given([task, default_task()])
 
     tasks_repository: TasksRepository = TasksRepository(db.get_session())
@@ -130,9 +127,7 @@ def test_find_by_status_id(db: DatabaseTestUtils):
 
 
 def test_find_by_project_id_and_status_id(db: DatabaseTestUtils):
-    all_status = [*all_statusses()]
-    db.given([*all_status])
-    task = default_task(status_id=all_status[0].id, project_id=1)
+    task = default_task(status_id=Status.TODO, project_id=1)
     db.given([task, default_task()])
 
     tasks_repository: TasksRepository = TasksRepository(db.get_session())

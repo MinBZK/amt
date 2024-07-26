@@ -4,20 +4,16 @@ from unittest.mock import MagicMock
 
 import pytest
 from amt.core.db import (
-    add_demo_statuses,
     add_demo_tasks,
     add_demo_users,
     check_db,
     remove_old_demo_objects,
 )
-from amt.models import Status, Task, User
+from amt.enums.status import Status
+from amt.models import Task, User
 from sqlmodel import Session, select
 
-from tests.constants import (
-    default_status,
-    default_task,
-    default_user,
-)
+from tests.constants import default_task, default_user
 from tests.database_test_utils import DatabaseTestUtils
 
 logger = logging.getLogger(__name__)
@@ -41,12 +37,11 @@ def test_remove_old_demo_objects(db: DatabaseTestUtils):
     db_session.delete = MagicMock()
 
     user = User(name="Robbert", avatar=None)
-    status = Status(name="todo", sort_order=1)
-    task = Task(title="First task", description="This is the first task", sort_order=1, status_id=status.id)
-    db.given([user, status, task])
+    task = Task(title="First task", description="This is the first task", sort_order=1, status_id=Status.TODO)
+    db.given([user, task])
 
     remove_old_demo_objects(db.get_session())
-    assert db_session.delete.call_count == 3
+    assert db_session.delete.call_count == 2
 
     db.get_session().delete = org_delete
 
@@ -82,26 +77,8 @@ def test_add_demo_user_nothing_to_add(db: DatabaseTestUtils):
     db.get_session().add = orig_add
 
 
-def test_add_demo_status(db: DatabaseTestUtils):
-    add_demo_statuses(db.get_session(), [default_status().name])
-    assert db.exists(Status, Status.name, default_status().name)
-
-
-def test_add_demo_status_nothing_to_add(db: DatabaseTestUtils):
-    db.given([default_status()])
-
-    orig_add = db.get_session().add
-    db_session = db.get_session()
-    db_session.add = MagicMock()
-
-    add_demo_statuses(db.get_session(), [default_status().name])
-
-    assert db_session.add.call_count == 0
-    db.get_session().add = orig_add
-
-
 def test_add_demo_tasks(db: DatabaseTestUtils):
-    add_demo_tasks(db.get_session(), default_status(), 3)
+    add_demo_tasks(db.get_session(), Status.TODO, 3)
     assert db.exists(Task, Task.title, "Example task 1")
     assert db.exists(Task, Task.title, "Example task 2")
     assert db.exists(Task, Task.title, "Example task 3")
@@ -120,16 +97,6 @@ def test_add_demo_tasks_nothing_to_add(db: DatabaseTestUtils):
     db_session = db.get_session()
     db_session.add = MagicMock()
 
-    add_demo_tasks(db.get_session(), default_status(), 3)
-    assert db_session.add.call_count == 0
-    db.get_session().add = orig_add
-
-
-def test_add_demo_tasks_no_status(db: DatabaseTestUtils):
-    orig_add = db.get_session().add
-    db_session = db.get_session()
-    db_session.add = MagicMock()
-
-    add_demo_tasks(db.get_session(), None, 3)
+    add_demo_tasks(db.get_session(), Status.TODO, 3)
     assert db_session.add.call_count == 0
     db.get_session().add = orig_add

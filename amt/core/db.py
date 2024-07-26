@@ -4,7 +4,8 @@ from sqlalchemy.engine import Engine
 from sqlmodel import Session, SQLModel, create_engine, select, update
 
 from amt.core.config import get_settings
-from amt.models import Status, Task, User
+from amt.enums.status import Status
+from amt.models import Task, User
 
 logger = logging.getLogger(__name__)
 
@@ -36,9 +37,6 @@ def remove_old_demo_objects(session: Session) -> None:
     user = session.exec(select(User).where(User.name == "Robbert")).first()
     if user:
         session.delete(user)
-    status = session.exec(select(Status).where(Status.name == "todo")).first()
-    if status:
-        session.delete(status)
     session.commit()
 
 
@@ -54,8 +52,7 @@ def init_db() -> None:
             logger.info("Creating demo data")
             remove_old_demo_objects(session)
             add_demo_users(session, ["default user"])
-            demo_statuses = add_demo_statuses(session, ["todo", "review", "in_progress", "done"])
-            add_demo_tasks(session, demo_statuses[0], 3)
+            add_demo_tasks(session, Status.TODO, 3)
     logger.info("Finished initializing database")
 
 
@@ -67,34 +64,13 @@ def add_demo_users(session: Session, user_names: list[str]) -> None:
     session.commit()
 
 
-def add_demo_tasks(session: Session, status: Status | None, number_of_tasks: int) -> None:
-    if status is None:
-        return
+def add_demo_tasks(session: Session, status: Status, number_of_tasks: int) -> None:
     for index in range(1, number_of_tasks + 1):
         title = "Example task " + str(index)
         task = session.exec(select(Task).where(Task.title == title)).first()
         if not task:
             session.add(
-                Task(
-                    title=title,
-                    description="Example description " + str(index),
-                    sort_order=index,
-                    status_id=status.id,
-                )
+                Task(title=title, description="Example description " + str(index), sort_order=index, status_id=status)
             )
-    session.exec(update(Task).values(status_id=status.id))  # type: ignore
+    session.exec(update(Task).values(status_id=status))  # type: ignore
     session.commit()
-
-
-def add_demo_statuses(session: Session, statuses: list[str]) -> list[Status]:
-    return_statuses: list[Status] = []
-    for index, status_name in enumerate(statuses):
-        status = session.exec(select(Status).where(Status.name == status_name)).first()
-        if not status:
-            status = Status(name=status_name, sort_order=index + 1)
-            session.add(status)
-        return_statuses.append(status)
-    session.commit()
-    for return_status in return_statuses:
-        session.refresh(return_status)
-    return return_statuses
