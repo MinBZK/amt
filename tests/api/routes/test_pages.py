@@ -1,13 +1,9 @@
 from fastapi.testclient import TestClient
 
-from tests.constants import all_statusses, default_task
 from tests.database_test_utils import DatabaseTestUtils
 
 
 def test_get_main_page(client: TestClient, db: DatabaseTestUtils) -> None:
-    # given
-    db.given([*all_statusses(), default_task()])
-
     # when
     response = client.get("/pages/")
 

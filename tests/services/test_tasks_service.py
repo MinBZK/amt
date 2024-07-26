@@ -3,32 +3,11 @@ from pathlib import Path
 from unittest.mock import patch
 
 import pytest
-from amt.models import Status, Task, User
+from amt.models import Task, User
 from amt.models.project import Project
-from amt.repositories.statuses import StatusesRepository
 from amt.repositories.tasks import TasksRepository
 from amt.schema.instrument import InstrumentTask
-from amt.services.statuses import StatusesService
 from amt.services.tasks import TasksService
-
-
-class MockStatusesRepository:
-    def __init__(self) -> None:
-        self._statuses: list[Status] = []
-        self.reset()
-
-    def reset(self):
-        self._statuses.clear()
-        self._statuses.append(Status(id=1, name="todo", sort_order=1))
-        self._statuses.append(Status(id=2, name="in_progress", sort_order=1))
-        self._statuses.append(Status(id=3, name="review", sort_order=1))
-        self._statuses.append(Status(id=4, name="done", sort_order=1))
-
-    def find_by_id(self, status_id: int) -> Status:
-        return next(filter(lambda x: x.id == status_id, self._statuses))
-
-    def find_by_name(self, status_name: str) -> Status:
-        return next(filter(lambda x: x.name == status_name, self._statuses))
 
 
 class MockTasksRepository:
@@ -86,16 +65,8 @@ def mock_tasks_repository():
 
 
 @pytest.fixture(scope="module")
-def mock_statuses_repository():
-    with patch("amt.services.statuses.StatusesRepository"):
-        mock_statuses_repository = MockStatusesRepository()
-        yield mock_statuses_repository
-
-
-@pytest.fixture(scope="module")
-def tasks_service_with_mock(mock_tasks_repository: TasksRepository, mock_statuses_repository: StatusesRepository):
-    statuses_service = StatusesService(mock_statuses_repository)
-    tasks_service = TasksService(statuses_service, mock_tasks_repository)
+def tasks_service_with_mock(mock_tasks_repository: TasksRepository):
+    tasks_service = TasksService(mock_tasks_repository)
     return tasks_service
 
 

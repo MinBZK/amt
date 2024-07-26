@@ -1,11 +1,10 @@
 from fastapi.testclient import TestClient
 
-from tests.constants import all_statusses, default_task
+from tests.constants import default_task
 from tests.database_test_utils import DatabaseTestUtils
 
 
 def test_post_task_move(client: TestClient, db: DatabaseTestUtils) -> None:
-    db.given([*all_statusses()])
     db.given([default_task(), default_task(), default_task()])
 
     response = client.patch(

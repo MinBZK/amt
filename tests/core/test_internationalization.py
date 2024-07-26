@@ -33,11 +33,10 @@ def test_get_all_dynamic_field_translations() -> None:
 
 def test_get_lengths_dynamic_field_translations() -> None:
     yaml_en = get_dynamic_field_translations("en")
-    assert len(yaml_en) == 4
+    assert yaml_en is None
     yaml_nl = get_dynamic_field_translations("nl")
-    assert len(yaml_nl) == 4
+    assert yaml_nl is None
     yaml_fy = get_dynamic_field_translations("fy")
-    assert len(yaml_fy) == 6
     assert len(yaml_fy["weekdays"]) == 7
     assert len(yaml_fy["months"]) == 12
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-07-26 10:33+0200\n"
-"PO-Revision-Date: 2024-07-02 11:20+0200\n"
+"POT-Creation-Date: 2024-07-26 13:53+0200\n"
+"PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_NL\n"
 "Language-Team: nl_NL <LL@li.org>\n"
@@ -20,69 +20,65 @@ msgstr ""
 
 #: amt/site/templates/header.html.j2:4
 msgid "Algorithm Management Toolkit"
-msgstr ""
+msgstr "Algoritme Management Toolkit"
 
 #: amt/site/templates/header.html.j2:10
 msgid "New project"
-msgstr ""
+msgstr "Nieuw project"
 
 #: amt/site/templates/header.html.j2:11
 #: amt/site/templates/projects/index.html.j2:4
 msgid "Projects"
-msgstr ""
+msgstr "Projecten"
 
 #: amt/site/templates/header.html.j2:16
 msgid "Language"
-msgstr ""
+msgstr "Taal"
 
 #: amt/site/templates/errors/_RequestValidation.html.j2:1
 msgid "Request Validation Error"
-msgstr ""
+msgstr "Aanvraag Validatie Fout"
 
 #: amt/site/templates/errors/error.html.j2:4
 msgid "An error occured"
-msgstr ""
+msgstr "Er is is een fout opgetreden"
 
 #: amt/site/templates/layouts/base.html.j2:11
 msgid "Algorithmic Management Toolkit (AMT)"
-msgstr ""
+msgstr "Algoritme Management Toolkit (AMT)"
+
+#: amt/site/templates/macros/render.html.j2:6
+msgid "Todo"
+msgstr "Te doen"
+
+#: amt/site/templates/macros/render.html.j2:8
+msgid "Doing"
+msgstr "Onderhanden"
+
+#: amt/site/templates/macros/render.html.j2:10
+msgid "Reviewing"
+msgstr "Beoordelen"
+
+#: amt/site/templates/macros/render.html.j2:12
+msgid "Done"
+msgstr "Afgerond"
+
+#: amt/site/templates/macros/render.html.j2:14
+msgid "Unknown"
+msgstr "Onbekend"
 
 #: amt/site/templates/projects/new.html.j2:4
 msgid "New Project"
-msgstr ""
+msgstr "Nieuw project"
 
 #: amt/site/templates/projects/new.html.j2:7
 msgid "Project name"
-msgstr ""
+msgstr "Project naam"
 
 #: amt/site/templates/projects/new.html.j2:10
 msgid "Selected Instruments"
-msgstr ""
+msgstr "Geselecteerde instrumenten"
 
 #: amt/site/templates/projects/new.html.j2:18
 msgid "Create Project"
-msgstr ""
-
-#~ msgid "Algorithm Management Toolkit"
-#~ msgstr "Algoritme Management Toolkit"
-
-#~ msgid "Language"
-#~ msgstr "Taal"
-
-#~ msgid "Algorithmic Management Toolkit (AMT)"
-#~ msgstr "Algoritme Management Toolkit (AMT)"
-
-#~ msgid "Not found"
-#~ msgstr "Niet gevonden"
-
-#~ msgid "New Project"
-#~ msgstr "Nieuw Project"
-
-#~ msgid "Project name"
-#~ msgstr "Project naam"
-
-#~ msgid "Selected Instruments"
-#~ msgstr "Kies instrument"
-
-#~ msgid "Create Project"
-#~ msgstr "Maak project"
+msgstr "Maak project"

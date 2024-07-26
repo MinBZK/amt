@@ -68,6 +68,20 @@ docker compose up
 
 We use babel for translations and a custom yaml for dynamic translations. Babel does not support Frysian, so we added a custom piece of code to support this. To generate, update or compile the language files, use the script in ./script/translate.
 
+### Known quirks
+
+When running the script/translate update command, Python may give the error
+
+```
+ValueError: Unknown extraction method 'jinja2'
+```
+
+The solution for this error, is to upgrade/install the setuptools:
+```
+pip install --upgrade setuptools
+```
+
+
 ## Testing, Linting etc
 
 For testing, linting and other feature we use several tools. You can look up the documentation on how to use these:

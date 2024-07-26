@@ -1,12 +1,11 @@
 from amt.schema.task import MovedTask
 from fastapi.testclient import TestClient
 
-from tests.constants import all_statusses, default_task
+from tests.constants import default_task
 from tests.database_test_utils import DatabaseTestUtils
 
 
 def test_post_move_task(client: TestClient, db: DatabaseTestUtils) -> None:
-    db.given([*all_statusses()])
     db.given([default_task(), default_task(), default_task()])
 
     move_task: MovedTask = MovedTask(taskId=2, statusId=2, previousSiblingId=1, nextSiblingId=3)
@@ -18,7 +17,6 @@ def test_post_move_task(client: TestClient, db: DatabaseTestUtils) -> None:
 
 
 def test_post_move_task_no_siblings(client: TestClient, db: DatabaseTestUtils) -> None:
-    db.given([*all_statusses()])
     db.given([default_task(), default_task(), default_task()])
 
     move_task: MovedTask = MovedTask(taskId=2, statusId=1, previousSiblingId=-1, nextSiblingId=-1)

@@ -1,7 +1,3 @@
-todo: Dwaan
-review: Resinsje
-in_progress: Dwaande
-done: Dien
 # please note we have custom translations for weekdays and months because babel does not support Frysian
 weekdays: # note, the order corresponds to the weekdays (number) used by date formatting
   - snein
