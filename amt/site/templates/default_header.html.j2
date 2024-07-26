@@ -1,7 +1,7 @@
 <header class="header">
     <div class="container">
         <div class="header_logo_container">
-            <img class="header_logo_image" src="/static/images/logo.svg"/>
+            <img class="header_logo_image" src="{{ url_for_cache('static', path='images/logo.svg') }}"/>
             <div class="header_subtitle_container">
                 <span>{% trans %}Algorithm Management Toolkit{% endtrans %} ({{ version }})</span>
             </div>

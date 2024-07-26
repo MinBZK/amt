@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="{{ language }}">
 <head>
-    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="{{ url_for_cache('static', path='favicon.ico') }}">
     <title>
         {% block title %}
             {% trans %}Algorithmic Management Toolkit (AMT){% endtrans %}
         {% endblock %}
     </title>
     {% block scripts %}
-    <script type="text/javascript" src="/static/vendor/sortable/js/sortable.js"></script>
-    <script type="text/javascript" src="/static/vendor/htmx/js/hyperscript.min.js"></script>
-    <script type="text/javascript" src="/static/vendor/htmx/js/1.9.12.min.js"></script>
-    <script type="text/javascript" src="/static/vendor/htmx/js/json-enc.js"></script>
-    <script type="text/javascript" src="/static/vendor/htmx/js/response-targets.js"></script>
-    <script type="text/javascript" src="/static/js/amt.js"></script>
+    <script type="text/javascript" src="{{ url_for_cache('static', path='vendor/sortable/js/sortable.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for_cache('static', path='vendor/htmx/js/hyperscript.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for_cache('static', path='vendor/htmx/js/1.9.12.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for_cache('static', path='vendor/htmx/js/json-enc.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for_cache('static', path='vendor/htmx/js/response-targets.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for_cache('static', path='js/amt.js') }}"></script>
     {% endblock %}
     {% block styles %}
-    <link rel="stylesheet" href="/static/css/html5reset.css"/>
-    <link rel="stylesheet" href="/static/css/layout.css"/>
+    <link rel="stylesheet" href="{{ url_for_cache('static', path='css/html5reset.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for_cache('static', path='css/layout.css') }}"/>
     {% endblock %}
 </head>
 <body hx-ext="response-targets">

@@ -5,7 +5,6 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import HTMLResponse
-from fastapi.staticfiles import StaticFiles
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from amt.api.main import api_router
@@ -20,6 +19,7 @@ from amt.core.exception_handlers import (
 from amt.core.log import configure_logging
 from amt.utils.mask import Mask
 
+from .api.http_browser_caching import static_files
 from .middleware.route_logging import RequestLoggingMiddleware
 
 configure_logging(get_settings().LOGGING_LEVEL, get_settings().LOGGING_CONFIG)
@@ -53,7 +53,7 @@ app = FastAPI(
 )
 
 app.add_middleware(RequestLoggingMiddleware)
-app.mount("/static", StaticFiles(directory="amt/site/static/"), name="static")
+app.mount("/static", static_files, name="static")
 
 
 @app.exception_handler(StarletteHTTPException)
