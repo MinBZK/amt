@@ -37,8 +37,8 @@ async def get_new(
     instrument_service: Annotated[InstrumentsService, Depends(InstrumentsService)],
 ) -> HTMLResponse:
     instruments = instrument_service.fetch_instruments()
-
-    return templates.TemplateResponse(request, "projects/new.html.j2", {"instruments": instruments})
+    response = templates.TemplateResponse(request, "projects/new.html.j2", {"instruments": instruments})
+    return response
 
 
 @router.post("/new", response_class=HTMLResponse)
@@ -48,5 +48,5 @@ async def post_new(
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
 ) -> HTMLResponse:
     project = projects_service.create(project_new)
-
-    return templates.Redirect(request, f"/project/{project.id}")
+    response = templates.Redirect(request, f"/project/{project.id}")
+    return response

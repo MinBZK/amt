@@ -1,3 +1,4 @@
+import logging
 import typing
 
 from starlette.middleware.base import BaseHTTPMiddleware
@@ -5,6 +6,8 @@ from starlette.requests import Request
 from starlette.responses import Response
 
 RequestResponseEndpoint = typing.Callable[[Request], typing.Awaitable[Response]]
+
+logger = logging.getLogger(__name__)
 
 
 class HTMXMiddleware(BaseHTTPMiddleware):

@@ -3,6 +3,7 @@ import logging
 from fastapi import Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import HTMLResponse
+from fastapi_csrf_protect.exceptions import CsrfProtectError  # type: ignore
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from amt.api.deps import templates
@@ -44,4 +45,23 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 
     return templates.TemplateResponse(
         request, "errors/RequestValidation.html.j2", {"message": messages}, status_code=status.HTTP_400_BAD_REQUEST
+    )
+
+
+async def csrf_protect_exception_handler(request: Request, exc: CsrfProtectError) -> HTMLResponse:
+    logger.debug(f"csrf_protect_exception_handler: {exc.status_code} - {exc.message}")
+
+    if request.state.htmx:
+        return templates.TemplateResponse(
+            request,
+            "errors/_CsrfProtectError.html.j2",
+            {"status_code": exc.status_code, "message": exc.message},
+            status_code=exc.status_code,
+        )
+
+    return templates.TemplateResponse(
+        request,
+        "errors/CsrfProtectError.html.j2",
+        {"status_code": exc.status_code, "message": exc.message},
+        status_code=exc.status_code,
     )

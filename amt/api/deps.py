@@ -69,7 +69,7 @@ class LocaleJinja2Templates(Jinja2Templates):
 
         if context is None:
             context = {}
-
+        context["csrftoken"] = request.state.csrftoken
         return super().TemplateResponse(request, name, context, status_code, headers, media_type, background)
 
     def Redirect(self, request: Request, url: str) -> HTMLResponse:

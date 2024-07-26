@@ -4,6 +4,7 @@ from collections.abc import Callable, Generator
 from multiprocessing import Process
 from pathlib import Path
 from typing import Any
+from unittest.mock import AsyncMock
 
 import httpx
 import pytest
@@ -11,6 +12,7 @@ import uvicorn
 from amt.models import *  # noqa
 from amt.server import create_app
 from fastapi.testclient import TestClient
+from fastapi_csrf_protect import CsrfProtect  # type: ignore
 from playwright.sync_api import Browser
 from sqlmodel import Session, SQLModel, create_engine
 
@@ -80,7 +82,9 @@ def client(db: DatabaseTestUtils, monkeypatch: pytest.MonkeyPatch) -> Generator[
 
     with TestClient(app, raise_server_exceptions=True) as c:
         app.dependency_overrides[get_session] = db.get_session
+
         c.timeout = 5
+
         yield c
 
 
@@ -110,3 +114,11 @@ def db(tmp_path: Path) -> Generator[DatabaseTestUtils, None, None]:
 
     with Session(engine, expire_on_commit=False) as session:
         yield DatabaseTestUtils(session, database_file)
+
+
+@pytest.fixture()
+def mock_csrf() -> Generator[None, None, None]:  # noqa: PT004
+    original = CsrfProtect.validate_csrf
+    CsrfProtect.validate_csrf = AsyncMock()
+    yield
+    CsrfProtect.validate_csrf = original

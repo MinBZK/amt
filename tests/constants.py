@@ -12,7 +12,9 @@ def default_project(name: str = "default project", model_card: str = "/tmp/1.yam
 
 
 def default_fastapi_request() -> Request:
-    return Request(scope={"type": "http", "http_version": "1.1", "method": "GET", "headers": []})
+    request = Request(scope={"type": "http", "http_version": "1.1", "method": "GET", "headers": []})
+    request.state.csrftoken = ""
+    return request
 
 
 def default_instrument(

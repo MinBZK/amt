@@ -7,6 +7,7 @@ from amt.schema.system_card import SystemCard
 from amt.services.instruments import InstrumentsService
 from amt.services.storage import FileSystemStorageService
 from fastapi.testclient import TestClient
+from fastapi_csrf_protect import CsrfProtect  # type: ignore # noqa
 
 from tests.constants import default_instrument
 
@@ -52,9 +53,10 @@ def test_get_new_projects(client: TestClient, init_instruments: Generator[None, 
     )
 
 
-def test_post_new_projects_bad_request(client: TestClient) -> None:
+def test_post_new_projects_bad_request(client: TestClient, mock_csrf: Generator[None, None, None]) -> None:
     # when
-    response = client.post("/projects/new", json={})
+    client.cookies["fastapi-csrf-token"] = "1"
+    response = client.post("/projects/new", json={}, headers={"X-CSRF-Token": "1"})
 
     # then
     assert response.status_code == 400
@@ -62,11 +64,12 @@ def test_post_new_projects_bad_request(client: TestClient) -> None:
     assert b"name: Field required" in response.content
 
 
-def test_post_new_projects(client: TestClient) -> None:
+def test_post_new_projects(client: TestClient, mock_csrf: Generator[None, None, None]) -> None:
+    client.cookies["fastapi-csrf-token"] = "1"
     new_project = ProjectNew(name="default project")
 
     # when
-    response = client.post("/projects/new", json=new_project.model_dump())
+    response = client.post("/projects/new", json=new_project.model_dump(), headers={"X-CSRF-Token": "1"})
 
     # then
     assert response.status_code == 200
@@ -74,15 +77,16 @@ def test_post_new_projects(client: TestClient) -> None:
     assert response.headers["HX-Redirect"] == "/project/1"
 
 
-def test_post_new_projects_write_system_card(client: TestClient) -> None:
+def test_post_new_projects_write_system_card(client: TestClient, mock_csrf: Generator[None, None, None]) -> None:
     # Given
+    client.cookies["fastapi-csrf-token"] = "1"
     origin = FileSystemStorageService.write
     FileSystemStorageService.write = MagicMock()
     project_new = ProjectNew(name="name1")
     system_card = SystemCard(name=project_new.name, selected_instruments=[])
 
     # when
-    client.post("/projects/new", json=project_new.model_dump())
+    client.post("/projects/new", json=project_new.model_dump(), headers={"X-CSRF-Token": "1"})
 
     # then
     FileSystemStorageService.write.assert_called_with(system_card.model_dump())
