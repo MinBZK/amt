@@ -39,18 +39,18 @@ python-ulid = "^2.7.0"
 
 
 [tool.poetry.group.test.dependencies]
-pytest = "^8.3.1"
+pytest = "^8.3.2"
 coverage = "^7.6.0"
 playwright = "^1.45.0"
 pytest-playwright = "^0.5.1"
 pytest-httpx = "^0.30.0"
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.5.4"
-pre-commit = "^3.7.0"
-pyright = "^1.1.372"
+ruff = "^0.5.5"
+pre-commit = "^3.8.0"
+pyright = "^1.1.373"
 liccheck = "^0.9.2"
-types-pyyaml = "^6.0.12.20240311"
+types-pyyaml = "^6.0.12.20240724"
 
 
 [tool.poetry.urls]
