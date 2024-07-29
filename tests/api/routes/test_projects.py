@@ -64,7 +64,9 @@ def test_post_new_projects_bad_request(client: TestClient, mock_csrf: Generator[
     assert b"name: Field required" in response.content
 
 
-def test_post_new_projects(client: TestClient, mock_csrf: Generator[None, None, None]) -> None:
+def test_post_new_projects(
+    client: TestClient, mock_csrf: Generator[None, None, None], init_instruments: Generator[None, None, None]
+) -> None:
     client.cookies["fastapi-csrf-token"] = "1"
     new_project = ProjectNew(name="default project")
 
@@ -77,7 +79,9 @@ def test_post_new_projects(client: TestClient, mock_csrf: Generator[None, None, 
     assert response.headers["HX-Redirect"] == "/project/1"
 
 
-def test_post_new_projects_write_system_card(client: TestClient, mock_csrf: Generator[None, None, None]) -> None:
+def test_post_new_projects_write_system_card(
+    client: TestClient, mock_csrf: Generator[None, None, None], init_instruments: Generator[None, None, None]
+) -> None:
     # Given
     client.cookies["fastapi-csrf-token"] = "1"
     origin = FileSystemStorageService.write

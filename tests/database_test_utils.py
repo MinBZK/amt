@@ -11,11 +11,9 @@ class DatabaseTestUtils:
     def __init__(self, session: Session, database_file: Path | None = None) -> None:
         self.session: Session = session
         self.database_file: Path | None = database_file
-        self.models: list[BaseModel] = []
 
     def given(self, models: list[BaseModel]) -> None:
         session = self.get_session()
-        self.models.extend(models)
         session.add_all(models)
 
         session.commit()

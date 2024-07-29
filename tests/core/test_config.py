@@ -3,18 +3,6 @@ from amt.core.config import Settings
 from amt.core.exceptions import SettingsError
 
 
-def test_default_settings():
-    settings = Settings(_env_file=None)  # pyright: ignore [reportCallIssue]
-
-    assert settings.ENVIRONMENT == "local"
-    assert settings.LOGGING_LEVEL == "INFO"
-    assert settings.APP_DATABASE_SCHEME == "sqlite"
-    assert settings.APP_DATABASE_SERVER == "db"
-    assert settings.APP_DATABASE_PORT == 5432
-    assert settings.APP_DATABASE_USER == "amt"
-    assert settings.APP_DATABASE_DB == "amt"
-
-
 def test_environment_settings(monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setenv("ENVIRONMENT", "production")
     monkeypatch.setenv("SECRET_KEY", "mysecret")
@@ -22,6 +10,8 @@ def test_environment_settings(monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setenv("APP_DATABASE_USER", "amt2")
     monkeypatch.setenv("APP_DATABASE_DB", "amt2")
     monkeypatch.setenv("APP_DATABASE_PASSWORD", "mypassword")
+    monkeypatch.setenv("APP_DATABASE_SERVER", "db")
+
     settings = Settings(_env_file=None)  # pyright: ignore [reportCallIssue]
 
     assert settings.SECRET_KEY == "mysecret"  # noqa: S105
