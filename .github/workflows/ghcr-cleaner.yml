@@ -5,6 +5,9 @@ on:
   pull_request:
     types:
       - closed
+  push:
+    branches:
+      - main
 
 jobs:
   delete_old_images:
@@ -20,7 +23,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 'Clean up development images'
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && (github.event.action == 'closed' || github.event.pull_request.merged == true)
         uses: dataaxiom/ghcr-cleanup-action@v1
         with:
           tags: 'pr-${{github.event.pull_request.number}}'
