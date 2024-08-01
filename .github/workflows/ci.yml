@@ -17,6 +17,7 @@ concurrency:
 env:
   REGISTRY: ghcr.io
   POETRY_CACHE_DIR: ~/.cache/pypoetry
+  PIPX_BIN_DIR: /usr/local/bin
   IMAGE_NAME: ${{ github.repository }}
   PYTHON_VERSION: "3.11"
 
@@ -123,7 +124,7 @@ jobs:
           poetry run alembic upgrade head
 
       - name: Run pytest
-        run: poetry run coverage run -m pytest
+        run: TZ=UTC poetry run coverage run -m pytest
 
       - name: Upload playwright tracing
         if: failure()
