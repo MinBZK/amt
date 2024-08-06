@@ -15,6 +15,7 @@ from amt.core.types import DatabaseSchemaType, EnvironmentType, LoggingLevelType
 
 logger = logging.getLogger(__name__)
 
+
 # Self type is not available in Python 3.10 so create our own with TypeVar
 SelfSettings = TypeVar("SelfSettings", bound="Settings")
 
@@ -49,6 +50,12 @@ class Settings(BaseSettings):
     APP_DATABASE_FILE: str = "/database.sqlite3"
 
     model_config = SettingsConfigDict(extra="ignore")
+
+    # FastAPI CSRF Protect Settings
+    CSRF_PROTECT_SECRET_KEY: str = secrets.token_urlsafe(32)
+    CSRF_TOKEN_LOCATION: str = "header"
+    CSRF_TOKEN_KEY: str = "csrf-token"
+    CSRF_COOKIE_SAMESITE: str = "strict"
 
     @computed_field
     def SQLALCHEMY_ECHO(self) -> bool:

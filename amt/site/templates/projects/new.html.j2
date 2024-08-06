@@ -3,7 +3,7 @@
 {% block content %}
     <h1 class="margin-bottom--large">{% trans %}New Project{% endtrans %}</h1>
 
-    <form hx-ext="json-enc" hx-post="/projects/new" hx-target-error="#errorContainer" hx-swap="innerHTML" method="post">
+    <form hx-ext="json-enc" hx-post="/projects/new" hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}' hx-target-error="#errorContainer" hx-swap="innerHTML" method="post">
         {% trans %}Project name{% endtrans %} <input type="text" id="name" name="name">
 
         <fieldset>

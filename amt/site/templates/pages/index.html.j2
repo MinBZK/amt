@@ -20,7 +20,7 @@
 
 {% block content %}
 <div class="container">
-    <form id="cardMovedForm" hx-patch="/tasks/" hx-ext="json-enc" hx-target-5*="#errorContainer"  hx-trigger="cardmoved" hx-swap="outerHTML" hx-target="#board" class="">
+    <form id="cardMovedForm" hx-patch="/tasks/" hx-ext="json-enc" hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}' hx-target-5*="#errorContainer"  hx-trigger="cardmoved" hx-swap="outerHTML" hx-target="#board" class="">
         <input type="hidden" name="taskId" value="">
         <input type="hidden" name="statusId" value="">
         <input type="hidden" name="previousSiblingId" value="">

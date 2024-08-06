@@ -20,6 +20,7 @@ from amt.core.log import configure_logging
 from amt.utils.mask import Mask
 
 from .api.http_browser_caching import static_files
+from .middleware.csrf import CSRFMiddleware, CSRFMiddlewareExceptionHandler
 from .middleware.htmx import HTMXMiddleware
 from .middleware.route_logging import RequestLoggingMiddleware
 
@@ -54,6 +55,8 @@ def create_app() -> FastAPI:
     )
 
     app.add_middleware(RequestLoggingMiddleware)
+    app.add_middleware(CSRFMiddleware)
+    app.add_middleware(CSRFMiddlewareExceptionHandler)
     app.add_middleware(HTMXMiddleware)
 
     app.mount("/static", static_files, name="static")
