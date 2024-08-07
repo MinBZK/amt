@@ -1,0 +1,10 @@
+services:
+  amt-test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: test
+    image: ghcr.io/minbzk/amt-test:latest
+    env_file:
+      - path: prod.env
+        required: true

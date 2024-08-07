@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -e
+set -x
+
+cp -f compose.test.yml compose.override.yml
+
+if ! docker compose build ; then
+    echo "Failed building container"
+    rm -f compose.override.yml
+    exit 1
+fi
+
+docker compose up -d
+docker compose run amt-test poetry run pytest -m 'not slow' --db postgresql
+rm -f compose.override.yml

@@ -73,7 +73,24 @@ jobs:
           trivy-config: trivy.yaml
           scan-type: fs
           scan-ref: '.'
-  test:
+
+  test-compose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: mv compose.test.yml compose.override.yml
+      - run: docker compose build
+      - run: docker compose down -v --remove-orphans
+      - run: docker compose up -d
+      - name: test app
+        run: docker compose run amt-test poetry run pytest -m 'not slow' --db postgresql
+      - name: db downgrade test
+        run: docker compose exec -T amt alembic downgrade -1
+      - name: db upgrade test
+        run: docker compose exec -T amt alembic upgrade head
+      - run: docker compose down -v --remove-orphans
+
+  test-local:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -144,7 +161,7 @@ jobs:
 
 
   build:
-    needs: test
+    needs: [test-local, test-compose]
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -296,7 +313,7 @@ jobs:
 
   notifyMattermost:
     runs-on: ubuntu-latest
-    needs: [lint, security, test, build ]
+    needs: [lint, security, test-local, test-compose, build ]
     if: ${{ always() && contains(needs.*.result, 'failure') }}
     steps:
       - uses: mattermost/action-mattermost-notify@master

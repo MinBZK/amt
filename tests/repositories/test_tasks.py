@@ -3,7 +3,7 @@ from amt.core.exceptions import RepositoryError
 from amt.enums.status import Status
 from amt.models import Task
 from amt.repositories.tasks import TasksRepository
-from tests.constants import default_task
+from tests.constants import default_project, default_task
 from tests.database_test_utils import DatabaseTestUtils
 
 
@@ -70,7 +70,7 @@ def test_save_all_failed(db: DatabaseTestUtils):
     tasks_repository.delete(task)  # cleanup
 
 
-def test_delete(db: DatabaseTestUtils):
+def test_delete_task(db: DatabaseTestUtils):
     tasks_repository: TasksRepository = TasksRepository(db.get_session())
     task: Task = Task(id=1, title="Test title", description="Test description", sort_order=10)
 
@@ -127,6 +127,7 @@ def test_find_by_status_id(db: DatabaseTestUtils):
 
 
 def test_find_by_project_id_and_status_id(db: DatabaseTestUtils):
+    db.given([default_project()])
     task = default_task(status_id=Status.TODO, project_id=1)
     db.given([task, default_task()])
 

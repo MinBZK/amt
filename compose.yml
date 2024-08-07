@@ -5,6 +5,8 @@ services:
       dockerfile: Dockerfile
     image: ghcr.io/minbzk/amt:latest
     restart: unless-stopped
+    volumes:
+      - ./amt:/app/amt/:cached
     depends_on:
       db:
         condition: service_healthy

@@ -45,8 +45,9 @@ RUN ruff format --check
 RUN pyright
 
 FROM development AS test
-RUN coverage run -m pytest
-RUN coverage report
+
+COPY ./example/ ./example/
+# RUN poetry run playwright install --with-deps
 
 FROM project-base AS production
 

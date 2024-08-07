@@ -41,7 +41,7 @@ def test_request_validation_exception_handler_htmx(client: TestClient):
     assert response.headers["content-type"] == "text/html; charset=utf-8"
 
 
-def test_request_csrf_protect_exception_handler_invalid_token_in_header_htmx(client: TestClient):
+def test_request_csrf_protect_exception_handler_invalid_token(client: TestClient):
     data = client.get("/projects/new")
     new_project = ProjectNew(name="default project")
     response = client.post(
