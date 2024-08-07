@@ -1,7 +1,11 @@
-from sqlmodel import Field, SQLModel  # pyright: ignore [reportUnknownVariableType]
+from sqlalchemy.orm import Mapped, mapped_column
+
+from amt.models.base import Base
 
 
-class User(SQLModel, table=True):
-    id: int = Field(default=None, primary_key=True)
-    name: str
-    avatar: str | None
+class User(Base):
+    __tablename__ = "user"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str]
+    avatar: Mapped[str | None] = mapped_column(default=None)

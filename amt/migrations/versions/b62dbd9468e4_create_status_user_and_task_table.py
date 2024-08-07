@@ -9,7 +9,6 @@ Create Date: 2024-06-06 09:18:14.989874
 from collections.abc import Sequence
 
 import sqlalchemy as sa
-import sqlmodel.sql.sqltypes
 from alembic import op
 
 # revision identifiers, used by Alembic.
@@ -24,7 +23,7 @@ def upgrade() -> None:
     status = op.create_table(
         "status",
         sa.Column("id", sa.Integer(), nullable=False),
-        sa.Column("name", sqlmodel.sql.sqltypes.AutoString(), nullable=False),
+        sa.Column("name", sa.String(255), nullable=False),
         sa.Column("sort_order", sa.Float(), nullable=False),
         sa.PrimaryKeyConstraint("id"),
     )
@@ -32,15 +31,15 @@ def upgrade() -> None:
     op.create_table(
         "user",
         sa.Column("id", sa.Integer(), nullable=False),
-        sa.Column("name", sqlmodel.sql.sqltypes.AutoString(), nullable=False),
-        sa.Column("avatar", sqlmodel.sql.sqltypes.AutoString(), nullable=True),
+        sa.Column("name", sa.String(255), nullable=False),
+        sa.Column("avatar", sa.String(255), nullable=True),
         sa.PrimaryKeyConstraint("id"),
     )
     op.create_table(
         "task",
         sa.Column("id", sa.Integer(), nullable=False),
-        sa.Column("title", sqlmodel.sql.sqltypes.AutoString(), nullable=False),
-        sa.Column("description", sqlmodel.sql.sqltypes.AutoString(), nullable=False),
+        sa.Column("title", sa.String(255), nullable=False),
+        sa.Column("description", sa.String(255), nullable=False),
         sa.Column("sort_order", sa.Float(), nullable=False),
         sa.Column("status_id", sa.Integer(), nullable=True),
         sa.Column("user_id", sa.Integer(), nullable=True),

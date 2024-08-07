@@ -3,9 +3,9 @@ from collections.abc import Sequence
 from typing import Annotated
 
 from fastapi import Depends
-from sqlalchemy import func
+from sqlalchemy import func, select
 from sqlalchemy.exc import NoResultFound, SQLAlchemyError
-from sqlmodel import Session, select
+from sqlalchemy.orm import Session
 
 from amt.core.exceptions import RepositoryError, RepositoryNoResultFound
 from amt.models import Project
@@ -19,7 +19,7 @@ class ProjectsRepository:
         self.session = session
 
     def find_all(self) -> Sequence[Project]:
-        return self.session.exec(select(Project)).all()
+        return self.session.execute(select(Project)).scalars().all()
 
     def delete(self, project: Project) -> None:
         """
@@ -41,7 +41,6 @@ class ProjectsRepository:
             self.session.commit()
             self.session.refresh(project)
         except SQLAlchemyError as e:
-            logger.debug(f"Error saving project: {project}")
             self.session.rollback()
             raise RepositoryError from e
         return project
@@ -49,13 +48,13 @@ class ProjectsRepository:
     def find_by_id(self, project_id: int) -> Project:
         try:
             statement = select(Project).where(Project.id == project_id)
-            return self.session.exec(statement).one()
+            return self.session.execute(statement).scalars().one()
         except NoResultFound as e:
             raise RepositoryError from e
 
     def paginate(self, skip: int, limit: int) -> list[Project]:
         try:
             statement = select(Project).order_by(func.lower(Project.name)).offset(skip).limit(limit)
-            return list(self.session.exec(statement).all())
+            return list(self.session.execute(statement).scalars())
         except Exception as e:
             raise RepositoryNoResultFound from e

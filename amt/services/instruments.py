@@ -32,6 +32,7 @@ class InstrumentsService:
         return Instrument(**data)
 
     def fetch_instruments(self, urns: Sequence[str] | None = None) -> list[Instrument]:
+        # todo (Robbert): we 'type ignore' Task.sort_order because it works correctly, but pyright does not agree
         content_list = self.fetch_github_content_list()
 
         instruments: list[Instrument] = []

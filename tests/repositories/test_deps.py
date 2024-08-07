@@ -1,5 +1,5 @@
 from amt.repositories.deps import get_session
-from sqlmodel import Session
+from sqlalchemy.orm import Session
 
 
 def test_get_session():

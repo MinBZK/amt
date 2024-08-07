@@ -3,8 +3,9 @@ from collections.abc import Sequence
 from typing import Annotated
 
 from fastapi import Depends
+from sqlalchemy import and_, select
 from sqlalchemy.exc import NoResultFound
-from sqlmodel import Session, and_, select
+from sqlalchemy.orm import Session
 
 from amt.core.exceptions import RepositoryError
 from amt.models import Task
@@ -26,7 +27,7 @@ class TasksRepository:
         Returns all tasks in the repository.
         :return: all tasks in the repository
         """
-        return self.session.exec(select(Task)).all()
+        return self.session.execute(select(Task)).scalars().all()
 
     def find_by_status_id(self, status_id: int) -> Sequence[Task]:
         """
@@ -34,9 +35,8 @@ class TasksRepository:
         :param status_id: the status_id to filter on
         :return: a list of tasks in the repository for the given status_id
         """
-        # todo (Robbert): we 'type ignore' Task.sort_order because it works correctly, but pyright does not agree
-        statement = select(Task).where(Task.status_id == status_id).order_by(Task.sort_order)  # pyright: ignore [reportUnknownMemberType, reportCallIssue, reportUnknownVariableType, reportArgumentType]
-        return self.session.exec(statement).all()
+        statement = select(Task).where(Task.status_id == status_id).order_by(Task.sort_order)
+        return self.session.execute(statement).scalars().all()
 
     def find_by_project_id_and_status_id(self, project_id: int, status_id: int) -> Sequence[Task]:
         """
@@ -44,13 +44,12 @@ class TasksRepository:
         :param project_id: the project_id to filter on
         :return: a list of tasks in the repository for the given project_id
         """
-        # todo (Robbert): we 'type ignore' Task.sort_order because it works correctly, but pyright does not agree
         statement = (
             select(Task)
             .where(and_(Task.status_id == status_id, Task.project_id == project_id))
-            .order_by(Task.sort_order)  # pyright: ignore [reportUnknownMemberType, reportCallIssue, reportUnknownVariableType, reportArgumentType]
+            .order_by(Task.sort_order)
         )
-        return self.session.exec(statement).all()
+        return self.session.execute(statement).scalars().all()
 
     def save(self, task: Task) -> Task:
         """
@@ -102,6 +101,6 @@ class TasksRepository:
         """
         statement = select(Task).where(Task.id == task_id)
         try:
-            return self.session.exec(statement).one()
+            return self.session.execute(statement).scalars().one()
         except NoResultFound as e:
             raise RepositoryError from e

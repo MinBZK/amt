@@ -1,6 +1,6 @@
 from amt.enums.status import Status
 from amt.models import Project
-from sqlmodel import Session
+from sqlalchemy.orm import Session
 
 from tests.constants import default_project, default_task, default_user
 from tests.database_test_utils import DatabaseTestUtils

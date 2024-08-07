@@ -9,7 +9,6 @@ Create Date: 2024-07-26 08:41:52.338277
 from collections.abc import Sequence
 
 import sqlalchemy as sa
-import sqlmodel.sql.sqltypes
 from alembic import op
 
 # revision identifiers, used by Alembic.
@@ -45,7 +44,7 @@ def downgrade() -> None:
     op.create_table(
         "status",
         sa.Column("id", sa.Integer(), nullable=False),
-        sa.Column("name", sqlmodel.sql.sqltypes.AutoString(), nullable=False),
+        sa.Column("name", sa.String(255), nullable=False),
         sa.Column("sort_order", sa.Float(), nullable=False),
         sa.PrimaryKeyConstraint("id"),
     )
