@@ -23,6 +23,7 @@ from .api.http_browser_caching import static_files
 from .middleware.csrf import CSRFMiddleware, CSRFMiddlewareExceptionHandler
 from .middleware.htmx import HTMXMiddleware
 from .middleware.route_logging import RequestLoggingMiddleware
+from .middleware.security import SecurityMiddleware
 
 configure_logging(get_settings().LOGGING_LEVEL, get_settings().LOGGING_CONFIG)
 
@@ -57,6 +58,7 @@ def create_app() -> FastAPI:
     app.add_middleware(CSRFMiddleware)
     app.add_middleware(CSRFMiddlewareExceptionHandler)
     app.add_middleware(HTMXMiddleware)
+    app.add_middleware(SecurityMiddleware)
 
     app.mount("/static", static_files, name="static")
 
