@@ -99,6 +99,26 @@ def test_paginate_more(db: DatabaseTestUtils):
     assert len(result) == 3
 
 
+def test_paginate_capitalize(db: DatabaseTestUtils):
+    db.given(
+        [
+            default_project(name="Project1"),
+            default_project(name="bbb"),
+            default_project(name="Aaa"),
+            default_project(name="aba"),
+        ]
+    )
+    project_repository = ProjectsRepository(db.get_session())
+
+    result = project_repository.paginate(skip=0, limit=4)
+
+    assert len(result) == 4
+    assert result[0].name == "Aaa"
+    assert result[1].name == "aba"
+    assert result[2].name == "bbb"
+    assert result[3].name == "Project1"
+
+
 def test_paginate_not_found(db: DatabaseTestUtils):
     db.given([default_project()])
     project_repository = ProjectsRepository(db.get_session())

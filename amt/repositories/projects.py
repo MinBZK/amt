@@ -3,6 +3,7 @@ from collections.abc import Sequence
 from typing import Annotated
 
 from fastapi import Depends
+from sqlalchemy import func
 from sqlalchemy.exc import NoResultFound, SQLAlchemyError
 from sqlmodel import Session, select
 
@@ -54,7 +55,7 @@ class ProjectsRepository:
 
     def paginate(self, skip: int, limit: int) -> list[Project]:
         try:
-            statement = select(Project).order_by(Project.name).offset(skip).limit(limit)
+            statement = select(Project).order_by(func.lower(Project.name)).offset(skip).limit(limit)
             return list(self.session.exec(statement).all())
         except Exception as e:
             raise RepositoryNoResultFound from e
