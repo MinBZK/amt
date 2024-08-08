@@ -8,7 +8,7 @@ def test_e2e_create_project(page: Page):
 
     page.fill("#name", "My new project")
 
-    impact_assesment = page.get_by_label("Impact Assessment")
+    impact_assesment = page.get_by_label("AI Impact Assessment (AIIA)")
 
     expect(impact_assesment).not_to_be_checked()
 
@@ -36,7 +36,7 @@ def test_e2e_create_project_with_tasks(page: Page):
 
     page.fill("#name", "My new filled project")
 
-    impact_assesment = page.get_by_label("Impact Assessment")
+    impact_assesment = page.get_by_label("AI Impact Assessment (AIIA)")
 
     expect(impact_assesment).not_to_be_checked()
 
@@ -46,7 +46,7 @@ def test_e2e_create_project_with_tasks(page: Page):
     button.click()
 
     expect(page.get_by_role("heading", name="My new filled project")).to_be_visible()
-    card_1 = page.get_by_text("Licht uw voorstel voor het gebruik/de inzet van een algoritme toe.")
+    card_1 = page.get_by_text("Geef een korte beschrijving van het beoogde AI-systeem")
     expect(card_1).to_be_visible()
-    card_2 = page.get_by_text("Wat is het doel dat bereikt dient te worden met de inzet van het algoritme?")
+    card_2 = page.get_by_text("Waarom is er voor de huidige techniek gekozen?")
     expect(card_2).to_be_visible()
