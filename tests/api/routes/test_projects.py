@@ -29,6 +29,13 @@ def test_projects_get_root(client: TestClient) -> None:
     assert b'<ul class="project-list">' in response.content
 
 
+def test_projects_get_root_missing_slash(client: TestClient) -> None:
+    response = client.get("/projects")
+
+    assert response.status_code == 200
+    assert b'<ul class="project-list">' in response.content
+
+
 def test_projects_get_root_htmx(client: TestClient) -> None:
     response = client.get("/projects/", headers={"HX-Request": "true"})
 
