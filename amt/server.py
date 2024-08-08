@@ -50,7 +50,6 @@ def create_app() -> FastAPI:
         version=VERSION,
         openapi_url=None,
         default_response_class=HTMLResponse,
-        redirect_slashes=False,
         debug=get_settings().DEBUG,
     )
 
