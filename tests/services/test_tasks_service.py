@@ -130,7 +130,6 @@ def test_move_task(tasks_service_with_mock: TasksService, mock_tasks_repository:
     mock_tasks_repository.find_by_id(1).sort_order = 0
     tasks_service_with_mock.move_task(1, 2)
     assert mock_tasks_repository.find_by_id(1).sort_order == 10
-    assert mock_tasks_repository.find_by_id(1).user_id == 1
 
     # test moving to todo
     mock_tasks_repository.reset()

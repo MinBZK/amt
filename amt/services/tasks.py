@@ -68,10 +68,6 @@ class TasksService:
         if not isinstance(status_id, int):
             raise TypeError("status_id must be an integer")  # pragma: no cover
 
-        # assign the task to the current user
-        if status_id > 1:
-            task.user_id = 1
-
         # update the status for the task (this may not be needed if the status has not changed)
         task.status_id = status_id
 

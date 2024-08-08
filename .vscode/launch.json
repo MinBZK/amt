@@ -20,7 +20,7 @@
         "PYTHONPATH": "${workspaceFolder}",
         "DEBUG": "True",
         "AUTO_CREATE_SCHEMA": "True",
-        "ENVIRONMENT": "demo",
+        "ENVIRONMENT": "local",
         "LOGGING_LEVEL": "DEBUG"
       }
     },

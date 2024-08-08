@@ -14,7 +14,7 @@ services:
       - path: prod.env
         required: true
     environment:
-      - ENVIRONMENT=demo
+      - ENVIRONMENT=local
     ports:
       - 8070:8000
     healthcheck:

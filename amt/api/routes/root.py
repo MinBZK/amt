@@ -10,4 +10,4 @@ logger = logging.getLogger(__name__)
 
 @router.get("/")
 async def base() -> RedirectResponse:
-    return RedirectResponse("/pages/")
+    return RedirectResponse("/projects/")

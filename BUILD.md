@@ -24,9 +24,9 @@ poetry run python -m uvicorn amt.main:app --log-level warning
 ```
 
 ### Suggested development ENVIRONMENT settings
-To use a demo environment during local development, you can use the following environment options.
+To use a development environment during local development, you can use the following environment options.
 ```shell
-export ENVIRONMENT=demo AUTO_CREATE_SCHEMA=true
+export AUTO_CREATE_SCHEMA=true
 ```
 
 
