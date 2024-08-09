@@ -10,13 +10,13 @@ from unittest.mock import AsyncMock
 import httpx
 import pytest
 import uvicorn
-from amt.models import *  # noqa
+from amt.models.base import Base
 from amt.server import create_app
 from fastapi.testclient import TestClient
 from fastapi_csrf_protect import CsrfProtect  # type: ignore
 from playwright.sync_api import Browser
-from sqlalchemy import text
-from sqlmodel import Session, SQLModel, create_engine
+from sqlalchemy import create_engine, text
+from sqlalchemy.orm import Session
 
 from tests.database_e2e_setup import setup_database_e2e
 from tests.database_test_utils import DatabaseTestUtils
@@ -43,7 +43,8 @@ def setup_db_and_server(
         engine = create_engine(get_db_uri())
     else:
         engine = create_engine(f"sqlite:///{database_file}", connect_args={"check_same_thread": False})
-    SQLModel.metadata.create_all(engine)
+    metadata = Base.metadata
+    metadata.create_all(engine)
 
     with Session(engine, expire_on_commit=False) as session:
         setup_database_e2e(session)
@@ -52,7 +53,7 @@ def setup_db_and_server(
     process.start()
     yield "http://127.0.0.1:3462"
     process.terminate()
-    SQLModel.metadata.drop_all(engine)
+    metadata.drop_all(engine)
 
 
 def pytest_configure(config: pytest.Config) -> None:
@@ -177,7 +178,7 @@ def db(
         engine = create_engine(url)
     else:
         engine = create_engine(f"sqlite:///{database_file}", connect_args={"check_same_thread": False})
-    SQLModel.metadata.create_all(engine)
+    Base.metadata.create_all(engine)
 
     with Session(engine, expire_on_commit=False) as session:
         yield DatabaseTestUtils(session, database_file)

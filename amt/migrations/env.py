@@ -4,14 +4,14 @@ from logging.config import fileConfig
 from alembic import context
 from amt.models import *  # noqa
 from sqlalchemy import engine_from_config, pool
-from sqlmodel import SQLModel
+from sqlalchemy.schema import MetaData
 
 config = context.config
 
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-target_metadata = SQLModel.metadata
+target_metadata = MetaData()
 
 
 def get_url() -> str:

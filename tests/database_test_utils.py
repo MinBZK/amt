@@ -1,8 +1,9 @@
 import logging
 from pathlib import Path
 
-from pydantic import BaseModel
-from sqlmodel import Session, SQLModel, select
+from amt.models.base import Base
+from sqlalchemy import select
+from sqlalchemy.orm import Session
 
 logger = logging.getLogger(__name__)
 
@@ -12,7 +13,7 @@ class DatabaseTestUtils:
         self.session: Session = session
         self.database_file: Path | None = database_file
 
-    def given(self, models: list[BaseModel]) -> None:
+    def given(self, models: list[Base]) -> None:
         session = self.get_session()
         session.add_all(models)
 
@@ -27,5 +28,5 @@ class DatabaseTestUtils:
     def get_database_file(self) -> Path | None:
         return self.database_file
 
-    def exists(self, model: type[SQLModel], model_field: str, field_value: str | int) -> SQLModel | None:
-        return self.get_session().exec(select(model).where(model_field == field_value)).one() is not None  # type: ignore
+    def exists(self, model: type[Base], model_field: str, field_value: str | int) -> Base | None:
+        return self.get_session().execute(select(model).where(model_field == field_value)).one() is not None  # type: ignore

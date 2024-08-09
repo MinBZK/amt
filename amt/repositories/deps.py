@@ -1,6 +1,6 @@
 from collections.abc import Generator
 
-from sqlmodel import Session
+from sqlalchemy.orm import Session
 
 from amt.core.db import get_engine
 

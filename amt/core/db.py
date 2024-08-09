@@ -1,9 +1,11 @@
 import logging
 
+from sqlalchemy import create_engine, select
 from sqlalchemy.engine import Engine
-from sqlmodel import Session, SQLModel, create_engine, select
+from sqlalchemy.orm import Session
 
 from amt.core.config import get_settings
+from amt.models.base import Base
 
 logger = logging.getLogger(__name__)
 
@@ -22,7 +24,7 @@ def get_engine() -> Engine:
 def check_db() -> None:
     logger.info("Checking database connection")
     with Session(get_engine()) as session:
-        session.exec(select(1))
+        session.execute(select(1))
 
     logger.info("Finish Checking database connection")
 
@@ -32,6 +34,6 @@ def init_db() -> None:
 
     if get_settings().AUTO_CREATE_SCHEMA:  # pragma: no cover
         logger.info("Creating database schema")
-        SQLModel.metadata.create_all(get_engine())
+        Base.metadata.create_all(get_engine())
 
     logger.info("Finished initializing database")

@@ -21,6 +21,7 @@ async def get_root(
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
     tasks_service: Annotated[TasksService, Depends(TasksService)],
 ) -> HTMLResponse:
+    logger.info(f"getting project with id {project_id}")
     project = projects_service.get(project_id)
 
     context = {
