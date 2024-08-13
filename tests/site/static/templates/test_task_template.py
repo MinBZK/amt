@@ -18,6 +18,6 @@ def test_template_rendering():
     """
     # todo (robbert) there is probably a better way to clean results than replacing newlines and spaces
     #  and we probably would want a function for it
-    cleaned_results = result.body.decode().replace("\n", "").replace(" ", "")
-    cleaned_expected_result = expected_result.replace("\n", "").replace(" ", "")
+    cleaned_results: str = result.body.decode().replace("\n", "").replace(" ", "")  # pyright: ignore [reportUnknownMemberType, reportUnknownVariableType, reportAttributeAccessIssue]
+    cleaned_expected_result: str = expected_result.replace("\n", "").replace(" ", "")
     assert cleaned_results == cleaned_expected_result

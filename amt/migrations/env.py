@@ -6,12 +6,14 @@ from amt.models import *  # noqa
 from sqlalchemy import engine_from_config, pool
 from sqlalchemy.schema import MetaData
 
+from amt.models.base import Base
+
 config = context.config
 
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-target_metadata = MetaData()
+target_metadata = Base.metadata
 
 
 def get_url() -> str:

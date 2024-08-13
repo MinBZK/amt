@@ -44,7 +44,7 @@ class LocaleJinja2Templates(Jinja2Templates):
         directory: str | PathLike[typing.AnyStr] | typing.Sequence[str | PathLike[typing.AnyStr]],
         **env_options: typing.Any,  # noqa: ANN401
     ) -> Environment:
-        env: Environment = super()._create_env(directory, **env_options)  # pyright: ignore [reportUnknownMemberType, reportUnknownVariableType]
+        env: Environment = super()._create_env(directory, **env_options)  # pyright: ignore [reportUnknownMemberType, reportUnknownVariableType, reportArgumentType]
         env.add_extension("jinja2.ext.i18n")  # pyright: ignore [reportUnknownMemberType]
         return env  # pyright: ignore [reportUnknownVariableType]
 
