@@ -20,7 +20,7 @@ poetry install
 When poetry is done installing all dependencies you can start using the tool.
 
 ```shell
-poetry run python -m uvicorn amt.main:app --log-level warning
+poetry run python -m uvicorn amt.server:app --log-level warning
 ```
 
 ### Suggested development ENVIRONMENT settings
