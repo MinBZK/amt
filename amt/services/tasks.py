@@ -43,7 +43,9 @@ class TasksService:
             [
                 # TODO: (Christopher) The ticket does not specify what to do when question type is not an
                 # open questions, hence for now all titles will be set to task.question.
-                Task(title=task.question, description="", project_id=project.id, status_id=status, sort_order=idx)
+                Task(
+                    title=task.question[:1024], description="", project_id=project.id, status_id=status, sort_order=idx
+                )
                 for idx, task in enumerate(tasks)
             ]
         )

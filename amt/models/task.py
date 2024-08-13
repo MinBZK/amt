@@ -1,4 +1,4 @@
-from sqlalchemy import ForeignKey
+from sqlalchemy import ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from amt.models.base import Base
@@ -8,7 +8,7 @@ class Task(Base):
     __tablename__ = "task"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    title: Mapped[str]
+    title: Mapped[str] = mapped_column(String(length=1024))
     description: Mapped[str]
     sort_order: Mapped[float]
     status_id: Mapped[int | None] = mapped_column(default=None)
