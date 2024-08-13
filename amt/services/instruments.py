@@ -3,7 +3,7 @@ from collections.abc import Sequence
 
 import yaml
 
-from amt.clients.github import GitHubClient
+from amt.clients.clients import get_client
 from amt.core.exceptions import InstrumentError
 from amt.schema.github import RepositoryContent
 from amt.schema.instrument import Instrument
@@ -12,11 +12,11 @@ logger = logging.getLogger(__name__)
 
 
 class InstrumentsService:
-    def __init__(self) -> None:
-        self.client = GitHubClient()
+    def __init__(self, repo_type: str = "github_pages") -> None:
+        self.client = get_client(repo_type)
 
-    def fetch_github_content_list(self, folder: str = "instruments") -> RepositoryContent:
-        response = self.client.list_content(folder=folder)
+    def fetch_github_content_list(self) -> RepositoryContent:
+        response = self.client.list_content()
         return RepositoryContent.model_validate(response)
 
     def fetch_github_content(self, url: str) -> Instrument:

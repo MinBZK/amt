@@ -1,20 +1,20 @@
-from pydantic import BaseModel, HttpUrl, RootModel
+from pydantic import BaseModel, Field, HttpUrl, RootModel
 
 
 class Links(BaseModel):
     self: HttpUrl
-    git: HttpUrl
-    html: HttpUrl
+    git: HttpUrl | None = Field(default=None)
+    html: HttpUrl | None = Field(default=None)
 
 
 class ContentItem(BaseModel):
     name: str
     path: str
-    sha: str
+    sha: str | None = Field(default=None)
     size: int
-    url: HttpUrl
-    html_url: HttpUrl
-    git_url: HttpUrl
+    url: HttpUrl | None = Field(default=None)
+    html_url: HttpUrl | None = Field(default=None)
+    git_url: HttpUrl | None = Field(default=None)
     download_url: HttpUrl
     type: str
     _links: Links
