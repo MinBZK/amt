@@ -19,15 +19,18 @@ async def get_root(
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
     skip: int = Query(0, ge=0),
     limit: int = Query(100, ge=1),
+    search: str = Query(""),
 ) -> HTMLResponse:
-    projects = projects_service.paginate(skip=skip, limit=limit)
+    projects = projects_service.paginate(skip=skip, limit=limit, search=search)
     next = skip + limit
 
     if request.state.htmx:
-        return templates.TemplateResponse(request, "projects/_list.html.j2", {"projects": projects, "next": next})
+        return templates.TemplateResponse(
+            request, "projects/_list.html.j2", {"projects": projects, "next": next, "search": search}
+        )
 
     return templates.TemplateResponse(
-        request, "projects/index.html.j2", {"projects": projects, "next": next, "limit": limit}
+        request, "projects/index.html.j2", {"projects": projects, "next": next, "limit": limit, "search": search}
     )
 
 

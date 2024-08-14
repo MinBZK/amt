@@ -24,14 +24,12 @@ class Client(ABC):
         """
         This method should implement getting the content of an instrument from given URL.
         """
-        ...
 
     @abstractmethod
     def list_content(self, url: str = "") -> RepositoryContent:
         """
         This method should implement getting list of instruments from given URL.
         """
-        ...
 
     def _get(self, url: str) -> httpx.Response:
         """

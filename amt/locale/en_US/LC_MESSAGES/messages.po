@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-07-26 13:53+0200\n"
+"POT-Creation-Date: 2024-08-15 15:18+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.15.0\n"
+"Generated-By: Babel 2.16.0\n"
 
 #: amt/site/templates/header.html.j2:4
 msgid "Algorithm Management Toolkit"
@@ -65,6 +65,10 @@ msgstr ""
 
 #: amt/site/templates/macros/render.html.j2:14
 msgid "Unknown"
+msgstr ""
+
+#: amt/site/templates/projects/index.html.j2:11
+msgid "Find project..."
 msgstr ""
 
 #: amt/site/templates/projects/new.html.j2:4

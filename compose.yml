@@ -33,6 +33,8 @@ services:
       - PGDATA=/var/lib/postgresql/data/pgdata
     healthcheck:
       test: ["CMD", "pg_isready", "-q", "-d", "amt", "-U", "amt"]
+    ports:
+      - 5432:5432
 
   db-admin:
     image: dpage/pgadmin4:8.6

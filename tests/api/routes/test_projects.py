@@ -26,21 +26,21 @@ def test_projects_get_root(client: TestClient) -> None:
     response = client.get("/projects/")
 
     assert response.status_code == 200
-    assert b'<ul class="project-list">' in response.content
+    assert b'<ul class="project-list" id="project-search-results">' in response.content
 
 
 def test_projects_get_root_missing_slash(client: TestClient) -> None:
     response = client.get("/projects")
 
     assert response.status_code == 200
-    assert b'<ul class="project-list">' in response.content
+    assert b'<ul class="project-list" id="project-search-results">' in response.content
 
 
 def test_projects_get_root_htmx(client: TestClient) -> None:
     response = client.get("/projects/", headers={"HX-Request": "true"})
 
     assert response.status_code == 200
-    assert b'<ul class="project-list">' not in response.content
+    assert b'<ul class="project-list" id="project-search-results">' not in response.content
 
 
 def test_get_new_projects(client: TestClient, init_instruments: Generator[None, None, None]) -> None:

@@ -2,5 +2,5 @@
 <li><a href="/project/{{ project.id }}">{{ project.name }}</a></li>
 {% endfor %}
 {% if projects|length > 0 %}
-<li hx-get="/projects/?skip={{next}}" hx-swap="outerHTML" hx-trigger="revealed">More</li>
+<li hx-get="/projects/?skip={{ next }}&search={{ search }}" hx-swap="outerHTML" hx-trigger="revealed">More</li>
 {% endif %}

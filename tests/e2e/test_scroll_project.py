@@ -6,15 +6,15 @@ from playwright.sync_api import Page
 def test_e2e_scroll_projects(page: Page) -> None:
     page.goto("/projects/")
 
-    project_links = page.locator(".project-list > li", has_text="default project").count()
+    project_links = page.locator(".project-list > li").count()
 
-    assert 90 <= project_links <= 100
+    assert 90 <= project_links <= 101
 
-    with page.expect_response("/projects/?skip=100", timeout=3000) as response_info:
+    with page.expect_response("/projects/?skip=100&search=", timeout=3000) as response_info:
         page.get_by_text("More").scroll_into_view_if_needed()
 
     response = response_info.value
     assert response.status == 200
 
-    project_links = page.locator(".project-list > li", has_text="default project").count()
+    project_links = page.locator(".project-list > li").count()
     assert project_links > 100

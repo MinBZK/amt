@@ -1,5 +1,5 @@
 import pytest
-from amt.core.exceptions import RepositoryError, RepositoryNoResultFound
+from amt.core.exceptions import RepositoryError
 from amt.repositories.projects import ProjectsRepository
 from tests.constants import default_project
 from tests.database_test_utils import DatabaseTestUtils
@@ -85,7 +85,7 @@ def test_paginate(db: DatabaseTestUtils):
     db.given([default_project()])
     project_repository = ProjectsRepository(db.get_session())
 
-    result = project_repository.paginate(skip=0, limit=3)
+    result = project_repository.paginate(skip=0, limit=3, search="")
 
     assert len(result) == 1
 
@@ -94,7 +94,7 @@ def test_paginate_more(db: DatabaseTestUtils):
     db.given([default_project(), default_project(), default_project(), default_project()])
     project_repository = ProjectsRepository(db.get_session())
 
-    result = project_repository.paginate(skip=0, limit=3)
+    result = project_repository.paginate(skip=0, limit=3, search="")
 
     assert len(result) == 3
 
@@ -110,7 +110,7 @@ def test_paginate_capitalize(db: DatabaseTestUtils):
     )
     project_repository = ProjectsRepository(db.get_session())
 
-    result = project_repository.paginate(skip=0, limit=4)
+    result = project_repository.paginate(skip=0, limit=4, search="")
 
     assert len(result) == 4
     assert result[0].name == "Aaa"
@@ -119,9 +119,50 @@ def test_paginate_capitalize(db: DatabaseTestUtils):
     assert result[3].name == "Project1"
 
 
-def test_paginate_not_found(db: DatabaseTestUtils):
+def test_search(db: DatabaseTestUtils):
+    db.given(
+        [
+            default_project(name="Project1"),
+            default_project(name="bbb"),
+            default_project(name="Aaa"),
+            default_project(name="aba"),
+        ]
+    )
+    project_repository = ProjectsRepository(db.get_session())
+
+    result = project_repository.paginate(skip=0, limit=4, search="bbb")
+
+    assert len(result) == 1
+    assert result[0].name == "bbb"
+
+
+def test_search_multiple(db: DatabaseTestUtils):
+    db.given(
+        [
+            default_project(name="Project1"),
+            default_project(name="bbb"),
+            default_project(name="Aaa"),
+            default_project(name="aba"),
+        ]
+    )
+    project_repository = ProjectsRepository(db.get_session())
+
+    result = project_repository.paginate(skip=0, limit=4, search="A")
+
+    assert len(result) == 2
+    assert result[0].name == "Aaa"
+    assert result[1].name == "aba"
+
+
+def test_search_no_results(db: DatabaseTestUtils):
+    project_repository = ProjectsRepository(db.get_session())
+    result = project_repository.paginate(skip=0, limit=4, search="A")
+    assert len(result) == 0
+
+
+def test_raises_exception(db: DatabaseTestUtils):
     db.given([default_project()])
     project_repository = ProjectsRepository(db.get_session())
 
-    with pytest.raises(RepositoryNoResultFound):
-        project_repository.paginate(skip="a", limit=3)  # type: ignore
+    with pytest.raises(RepositoryError):
+        project_repository.paginate(skip="a", limit=3, search="")  # type: ignore
