@@ -76,6 +76,7 @@ class TasksRepository:
             self.session.add_all(tasks)
             self.session.commit()
         except Exception as e:
+            logger.exception("Could not store tasks")
             self.session.rollback()
             raise RepositoryError from e
 
