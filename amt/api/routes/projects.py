@@ -26,7 +26,7 @@ async def get_root(
 
     if request.state.htmx:
         return templates.TemplateResponse(
-            request, "projects/_list.html.j2", {"projects": projects, "next": next, "search": search}
+            request, "projects/_list.html.j2", {"projects": projects, "next": next, "search": search, "limit": limit}
         )
 
     return templates.TemplateResponse(

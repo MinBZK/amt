@@ -1,6 +1,7 @@
 {% for project in projects %}
-<li><a href="/project/{{ project.id }}">{{ project.name }}</a></li>
+    {% if loop.last and projects|length == limit  %}
+        <li data-marker="last-element" hx-get="/projects/?skip={{ next }}&search={{ search }}" hx-swap="afterend" hx-trigger="revealed"><a href="/project/{{ project.id }}">{{ project.name }}</a></li>
+    {% else %}
+        <li><a href="/project/{{ project.id }}">{{ project.name }}</a></li>
+    {% endif %}
 {% endfor %}
-{% if projects|length > 0 %}
-<li hx-get="/projects/?skip={{ next }}&search={{ search }}" hx-swap="outerHTML" hx-trigger="revealed">More</li>
-{% endif %}
