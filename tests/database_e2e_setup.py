@@ -18,7 +18,7 @@ def setup_database_e2e(session: Session) -> None:
     db_e2e.given([task1, task2, task3])
 
     projects: list[Project] = []
-    for _ in range(120):
-        projects.append(default_project())
+    for idx in range(120):
+        projects.append(default_project(name=f"Project {idx}"))
 
     db_e2e.given([*projects])

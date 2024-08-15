@@ -63,8 +63,8 @@ class ProjectsService:
 
         return project
 
-    def paginate(self, skip: int, limit: int) -> list[Project]:
-        return self.repository.paginate(skip=skip, limit=limit)
+    def paginate(self, skip: int, limit: int, search: str) -> list[Project]:
+        return self.repository.paginate(skip=skip, limit=limit, search=search)
 
     def update(self, project: Project) -> Project:
         return self.repository.save(project)

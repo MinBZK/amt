@@ -37,6 +37,7 @@ click = "^8.1.7"
 python-ulid = "^2.7.0"
 fastapi-csrf-protect = "^0.3.4"
 sqlalchemy = "^2.0.32"
+sqlalchemy-utils = "^0.41.2"
 
 
 [tool.poetry.group.test.dependencies]

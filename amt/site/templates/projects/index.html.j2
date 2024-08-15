@@ -2,7 +2,27 @@
 
 {% block content %}
 <h1 class="margin-bottom--large">{% trans %}Projects{% endtrans %}</h1>
-<ul class="project-list">
+
+<form>
+    <label>
+    <input
+        size="100"
+        type="search"
+        placeholder="{% trans %}Find project...{% endtrans %}"
+        name="search"
+        hx-get="/projects/?skip=0"
+        hx-trigger="input changed delay:500ms, search"
+        hx-target="#project-search-results"
+        hx-indicator=".htmx-indicator"
+        hx-swap="innerHTML"
+        autocomplete="false"
+        id="project-search-input"
+    />
+</label>
+<input type="reset" value="X" style="position: relative; margin-left: -30px" />
+</form>
+
+<ul class="project-list" id="project-search-results">
     {% include 'projects/_list.html.j2' %}
 </ul>
 
