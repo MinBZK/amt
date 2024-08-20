@@ -2,7 +2,7 @@ import pytest
 from playwright.sync_api import Page, expect
 
 
-@pytest.mark.slow()
+@pytest.mark.slow
 def test_e2e_move_task_to_column(page: Page) -> None:
     """
     Test moving a task in the browser to another column and verify that after a reload
@@ -33,7 +33,7 @@ def test_e2e_move_task_to_column(page: Page) -> None:
     page.drag_and_drop("#card-container-1", "#column-1", target_position={"x": 50, "y": 50})
 
 
-@pytest.mark.slow()
+@pytest.mark.slow
 def test_e2e_move_task_order_in_same_column(page: Page) -> None:
     """
     Test moving a task in the page below another task and verify that after a reload

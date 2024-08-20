@@ -87,7 +87,7 @@ def pytest_collection_modifyitems(session: pytest.Session, config: pytest.Config
     items[:] = tests + e2e_tests
 
 
-@pytest.fixture()
+@pytest.fixture
 def client(db: DatabaseTestUtils, monkeypatch: pytest.MonkeyPatch) -> Generator[TestClient, None, None]:
     # overwrite db url
     monkeypatch.setenv("APP_DATABASE_FILE", "/" + str(db.get_database_file()))
@@ -165,7 +165,7 @@ def generate_db_name(request: pytest.FixtureRequest) -> str:
     return sanitized_name
 
 
-@pytest.fixture()
+@pytest.fixture
 def db(
     tmp_path: Path, request: pytest.FixtureRequest, monkeypatch: pytest.MonkeyPatch
 ) -> Generator[DatabaseTestUtils, None, None]:
@@ -184,7 +184,7 @@ def db(
         yield DatabaseTestUtils(session, database_file)
 
 
-@pytest.fixture()
+@pytest.fixture
 def mock_csrf() -> Generator[None, None, None]:  # noqa: PT004
     original = CsrfProtect.validate_csrf
     CsrfProtect.validate_csrf = AsyncMock()

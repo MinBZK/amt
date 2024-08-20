@@ -4,7 +4,7 @@ import pytest
 from playwright.sync_api import Page, expect
 
 
-@pytest.mark.slow()
+@pytest.mark.slow
 def test_e2e_duplicate_task(page: Page) -> None:
     """
     When a task is dragged while being updated, an error occurred in the browser
