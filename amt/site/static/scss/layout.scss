@@ -1,38 +1,35 @@
 @font-face {
     font-family: "Rijksoverheid Sans";
-    src: url(../fonts/ROsanswebtextregular.woff) format("opentype");
+    src: url("../fonts/ROsanswebtextregular.woff") format("opentype");
     font-style: normal;
     font-weight: 400;
 }
 
 @font-face {
     font-family: "Rijksoverheid Sans";
-    src: url(../fonts/ROsanswebtextitalic.woff) format("opentype");
+    src: url("../fonts/ROsanswebtextitalic.woff") format("opentype");
     font-style: italic;
     font-weight: 400;
 }
 
 @font-face {
     font-family: "Rijksoverheid Sans";
-    src: url(../fonts/ROsanswebtextbold.woff) format("opentype");
+    src: url("../fonts/ROsanswebtextbold.woff") format("opentype");
     font-weight: 700;
     font-style: normal;
 }
 
 :root {
-    --clr-neutral-800: hsl(234, 29%, 20%);
-    --clr-neutral-700: hsl(235, 18%, 26%);
-    --clr-neutral-200: hsl(231, 7%, 60%);
-    --clr-neutral-100: hsl(0, 0%, 100%);
-
-    --clr-accent-600: hsl(211, 69%, 27%);
-    --clr-accent-400: hsl(203, 100%, 39%);
-    --clr-accent-200: hsl(203, 63.8%, 81.6%);
-
+    --clr-neutral-800: hsl(234deg 29% 20%);
+    --clr-neutral-700: hsl(235deg 18% 26%);
+    --clr-neutral-200: hsl(231deg 7% 60%);
+    --clr-neutral-100: hsl(0deg 0% 100%);
+    --clr-accent-600: hsl(211deg 69% 27%);
+    --clr-accent-400: hsl(203deg 100% 39%);
+    --clr-accent-200: hsl(203deg 63.8% 81.6%);
     --ff-base: "Rijksoverheid Sans", sans-serif;
     --fw-regular: 400;
     --fw-bold: 700;
-
     --fs-300: 0.825rem;
     --fs-400: 1rem;
     --fs-900: 2.5rem;
@@ -49,12 +46,10 @@ body {
     font-family: var(--ff-base);
     font-size: var(--fs-400);
     font-weight: var(--fw-regular);
-
     color: var(--clr-neutral-800);
     line-height: 1.5;
     min-height: 100vh;
     min-height: 100svh;
-
     background-color: var(--clr-neutral-100);
     display: flex;
     flex-direction: column;
@@ -72,7 +67,7 @@ footer {
     border-block-start-color: var(--clr-accent-200);
     border-block-start-style: solid;
     border-block-start-width: 0.5rem;
-    background-color: rgb(0, 123, 199);
+    background-color: hsl(203deg 100% 39%);
     height: 2rem;
 }
 
@@ -88,7 +83,7 @@ footer {
     text-decoration: none;
 }
 
-.header_top {
+.header-top {
     padding-inline: 0.75em;
     padding-block: 0.5em;
     color: var(--clr-accent-600);
@@ -97,17 +92,23 @@ footer {
     white-space: nowrap;
 }
 
-.header_logo_image {
+.header-logo-image {
     aspect-ratio: 1 / 1;
     max-width: 180px;
     display: block;
 }
 
-.language_selection {
+.language-selection {
     margin-inline-end: clamp(1rem, 2vw, 4rem);
 }
 
-.header_nav {
+/* Add an empty line before the rule */
+.project-list a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.header-nav {
     background-color: var(--clr-accent-400);
     height: 50px;
     color: var(--clr-neutral-100);
@@ -117,18 +118,18 @@ footer {
     justify-content: flex-end;
 }
 
-.header_nav > div {
+.header-nav > div {
     align-self: center;
 }
 
-.header_nav a {
+.header-nav a {
     border-block-end: 0.1em solid;
     border-block-end-color: var(--clr-accent-200);
     border-block-end-style: dashed;
     padding-block: 0.2em;
 }
 
-.header_nav a:hover {
+.header-nav a:hover {
     color: var(--clr-accent-600);
     background-color: var(--clr-accent-200);
     flex-grow: 1;
@@ -136,50 +137,50 @@ footer {
     border-radius: 0.5em;
 }
 
-.header_nav_container ul {
+.header-nav-container ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: clamp(1rem, 2vw, 4rem);
 }
 
-.margin-bottom--large {
+.margin-bottom-large {
     margin-bottom: 1em;
 }
 
-.margin-bottom--small {
+.margin-bottom-small {
     margin-bottom: 0.5em;
 }
 
-.margin-bottom--extra-small {
+.margin-bottom-extra-small {
     margin-bottom: 0.25em;
 }
 
-.progress_cards_container {
+.progress-cards-container {
     min-height: 30em;
-    background-color: rgb(229, 241, 249);
+    background-color: rgb(229 241 249);
     border-radius: 10px;
     margin: 0 0.5em;
     overflow: hidden;
 }
 
-.progress_card_container {
+.progress-card-container {
     margin: 0.5em;
-    border: 1px solid rgb(21, 66, 115);
+    border: 1px solid rgb(21 66 115);
     padding: 0.5em;
     border-radius: 10px;
-    background-color: #ffffff;
-    box-shadow: rgba(00, 00, 00, 0.12) 0 3px 6px 0;
+    background-color: #fff;
+    box-shadow: rgba(0 0 0 / 12%) 0 3px 6px 0;
     cursor: move;
     user-select: none;
 }
 
-.progress_card_assignees_container {
+.progress-card-assignees-container {
     display: flex;
     justify-content: flex-end;
 }
 
-.progress_card_assignees_image {
+.progress-card-assignees-image {
     border-radius: 50%;
     height: 35px;
 }
@@ -195,8 +196,4 @@ footer {
 .project-list li {
     list-style-type: none;
     white-space: nowrap;
-}
-.project-list a {
-    text-decoration: none;
-    color: inherit;
 }

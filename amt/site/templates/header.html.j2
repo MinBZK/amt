@@ -1,10 +1,10 @@
 <header class="header">
-    <div class="header_top">
-        <a href="/"></a><img class="header_logo_image" src="{{ url_for_cache('static', path='images/logo.svg') }}"/></a>
+    <div class="header-top">
+        <a href="/"></a><img class="header-logo-image" src="{{ url_for_cache('static', path='images/logo.svg') }}" /></a>
         <span>{% trans %}Algorithm Management Toolkit{% endtrans %} ({{ version }})</span>
     </div>
-    <div class="header_nav">
-        <div class="header_nav_container">
+    <div class="header-nav">
+        <div class="header-nav-container">
             <nav>
                 <ul>
                     <li><a href="/projects/new">{% trans %}New project{% endtrans %}</a></li>
@@ -12,7 +12,7 @@
                 </ul>
             </nav>
         </div>
-        <div class="language_selection">
+        <div class="language-selection">
             <span>{% trans %}Language{% endtrans %}:</span>
 
             {% for available_translation in available_translations %}

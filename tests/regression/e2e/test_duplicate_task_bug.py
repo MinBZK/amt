@@ -13,7 +13,7 @@ def test_e2e_duplicate_task(page: Page) -> None:
     """
 
     page.goto("/pages/")
-    cards_begin = page.locator(".progress_card_container").all()
+    cards_begin = page.locator(".progress-card-container").all()
 
     expect(page.locator("#column-1 #card-container-1")).to_be_visible()
     expect(page.locator("#column-3")).to_be_visible()
@@ -30,7 +30,7 @@ def test_e2e_duplicate_task(page: Page) -> None:
     page.evaluate('htmx.trigger("#cardMovedForm", "cardmoved")')
     sleep(0.5)
     page.mouse.up()
-    cards = page.locator(".progress_card_container").all()
+    cards = page.locator(".progress-card-container").all()
     assert len(cards) == len(cards_begin)
     sleep(0.5)
     page.drag_and_drop("#card-container-1", "#column-1", target_position={"x": 50, "y": 50})

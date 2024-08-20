@@ -3,15 +3,15 @@
 set -x
 
 # python version manager
-if [ python3 -v ]; then
-  echo "Python3 is already installed"
+if python3 --version; then
+    echo "Python3 is already installed"
 else
     echo "Please install python3"
     exit 1
 fi
 
 # install python package manager
-if [ poetry --version ]; then
+if poetry --version; then
     echo "poetry is already installed"
 else
     echo "installing poetry"
@@ -20,7 +20,7 @@ fi
 
 
 # node version manager
-if [ node -v ]; then
+if node -v; then
   echo "Node is already installed"
 else
   echo "Installing Node"

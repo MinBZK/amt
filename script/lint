@@ -3,3 +3,4 @@
 set -x
 
 ruff check --fix "$@"
+npm run lint --fix

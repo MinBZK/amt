@@ -3,3 +3,4 @@
 set -x
 
 ruff format "$@"
+npm run prettier

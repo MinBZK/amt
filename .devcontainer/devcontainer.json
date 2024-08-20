@@ -29,7 +29,9 @@
         "ms-vsliveshare.vsliveshare",
         "wholroyd.jinja",
         "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode"
+        "esbenp.prettier-vscode",
+        "stylelint.vscode-stylelint",
+        "pranaygp.vscode-css-peek"
       ],
       "settings": {
         "editor.formatOnPaste": false,

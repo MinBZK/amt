@@ -10,7 +10,7 @@ def test_e2e_change_language(page: Page):
                 return cookie
         return None
 
-    page.goto("/pages/")
+    page.goto("/")
 
     # Upon opening make sure no cookie is set.
     lang_cookie = get_lang_cookie(page)

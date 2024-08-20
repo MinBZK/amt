@@ -27,9 +27,21 @@
     },
     {
       "label": "Ruff format",
-      "detail": "format code.",
+      "detail": "format code ruff.",
       "type": "shell",
       "command": "poetry run ruff format",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "prettier",
+      "detail": "format code prettier.",
+      "type": "shell",
+      "command": "npm run prettier",
       "group": "test",
       "presentation": {
         "reveal": "always",
@@ -51,12 +63,26 @@
     },
     {
       "label": "PyTest",
-      "detail": "test all code",
+      "detail": "test all backend code",
       "type": "shell",
       "command": "poetry run coverage run -m pytest",
       "group": {
         "kind": "test",
         "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "npm test",
+      "detail": "test all frontend code",
+      "type": "shell",
+      "command": "npm run test",
+      "group": {
+        "kind": "test"
       },
       "presentation": {
         "reveal": "always",

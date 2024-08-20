@@ -5,9 +5,15 @@ set -x
 
 
 if ! poetry run coverage run -m pytest "$@" ; then
-    echo "Test failed"
+    echo "pytest test failed"
     exit 1
 fi
+
+if ! npm run test ; then
+    echo "jest test failed"
+    exit 1
+fi
+
 
 coverage report
 coverage html

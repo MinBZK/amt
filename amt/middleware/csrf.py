@@ -40,8 +40,10 @@ class CSRFMiddleware(BaseHTTPMiddleware):
 
     async def dispatch(self, request: Request, call_next: RequestResponseEndpoint) -> Response:
         signed_token = ""
+
         if self._include_request(request):
             request.state.csrftoken = ""
+
             if request.method in self.safe_methods:
                 csrf_token, signed_token = self.csrf_protect.generate_csrf_tokens()
                 logger.debug(f"generating tokens: csrf_token={csrf_token}, signed_token={signed_token}")
