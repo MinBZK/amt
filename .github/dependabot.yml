@@ -41,3 +41,17 @@ updates:
       alldevcontainers:
         patterns:
         - "*"
+
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "08:00"
+      timezone: "Europe/Amsterdam"
+    labels:
+      - "dependencies"
+    groups:
+      allnpm:
+        patterns:
+        - "*"

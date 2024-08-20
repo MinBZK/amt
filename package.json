@@ -1,0 +1,44 @@
+{
+  "name": "amt",
+  "version": "1.0.0",
+  "description": "Algorithm Management Toolkit",
+  "main": "index.js",
+  "scripts": {
+    "test": "",
+    "tsc": "tsc",
+    "start": "webpack --watch",
+    "build": "webpack --config webpack.config.prod.js",
+    "prettier": "prettier . --write",
+    "prettier:check": "prettier . --check",
+    "lint": "eslint amt/site/static/ts/",
+    "prepare": "husky"
+  },
+  "author": "",
+  "license": "EUPL-1.2",
+  "devDependencies": {
+    "@eslint/js": "^9.9.0",
+    "@types/hyperscript": "^0.0.7",
+    "@types/sortablejs": "^1.15.8",
+    "clean-webpack-plugin": "^4.0.0",
+    "eslint": "^9.9.0",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.9.0",
+    "husky": "^9.1.4",
+    "jest": "^29.7.0",
+    "lint-staged": "^15.2.9",
+    "prettier": "3.3.3",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.2.0",
+    "webpack": "^5.93.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "htmx.org": "^1.9.12",
+    "hyperscript": "^2.0.2",
+    "sortablejs": "^1.15.2"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  }
+}

@@ -9,7 +9,8 @@
   },
   "remoteUser": "root",
   "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/node:1": {}
   },
   "forwardPorts": [
     8000,
@@ -29,7 +30,9 @@
         "markis.code-coverage",
         "qwtel.sqlite-viewer",
         "ms-vsliveshare.vsliveshare",
-        "wholroyd.jinja"
+        "wholroyd.jinja",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
       ],
       "settings": {
         "editor.formatOnPaste": false,

@@ -1,0 +1,6 @@
+# Ignore artifacts:
+amt/site/static/js
+
+webpack.config.js
+webpack.config.prod.js
+tsconfig.json

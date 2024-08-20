@@ -41,3 +41,10 @@ output/
 
 # ignore playwright
 test-results/
+
+# ignore npm
+node_modules/
+
+
+# ignore tsc generated files
+amt/site/static/js/*
