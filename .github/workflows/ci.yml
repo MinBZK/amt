@@ -17,6 +17,7 @@ concurrency:
 env:
   REGISTRY: ghcr.io
   POETRY_CACHE_DIR: ~/.cache/pypoetry
+  PIPX_BIN_DIR: /usr/local/bin
   IMAGE_NAME: ${{ github.repository }}
   PYTHON_VERSION: "3.11"
 
@@ -29,7 +30,7 @@ jobs:
       - name: Install poetry
         run: pipx install poetry
 
-      - name: Set up Python ${{ env.python-version }}
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
@@ -55,7 +56,7 @@ jobs:
       - name: Install poetry
         run: pipx install poetry
 
-      - name: Set up Python ${{ env.python-version }}
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
@@ -94,7 +95,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10", "3.11", "3.12"]
+        python-version: ["3.10", "3.11", "3.12"] # When using ACT only use ["3.11"]
 
     steps:
       - uses: actions/checkout@v4
@@ -123,11 +124,11 @@ jobs:
           poetry run alembic upgrade head
 
       - name: Run pytest
-        run: poetry run coverage run -m pytest
+        run: TZ=UTC poetry run coverage run -m pytest
 
       - name: Upload playwright tracing
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: playwright-${{ github.sha }}
           path: test-results/
@@ -142,7 +143,7 @@ jobs:
 
       - name: Upload code coverage report
         if: matrix.python-version == '3.11'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: codecoverage-${{ github.sha }}
           path: htmlcov/
@@ -153,7 +154,7 @@ jobs:
         run: poetry run coverage xml
 
       - name: SonarCloud Scan
-        if: matrix.python-version == '3.11' && github.actor != 'dependabot[bot]'
+        if: matrix.python-version == '3.11' && github.actor != 'dependabot[bot]' && !env.ACT
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
@@ -162,6 +163,7 @@ jobs:
 
   build:
     needs: [test-local, test-compose]
+    if: ${{ !github.event.act }}
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -286,7 +288,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: [build]
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' && !github.event.act}}
     permissions:
       actions: write
     steps:
@@ -314,7 +316,7 @@ jobs:
   notifyMattermost:
     runs-on: ubuntu-latest
     needs: [lint, security, test-local, test-compose, build ]
-    if: ${{ always() && contains(needs.*.result, 'failure') }}
+    if: ${{ always() && contains(needs.*.result, 'failure') && !github.event.act}}
     steps:
       - uses: mattermost/action-mattermost-notify@master
         if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
