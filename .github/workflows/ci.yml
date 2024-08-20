@@ -5,10 +5,10 @@ on:
     branches:
       - main
     tags:
-      - 'v*'
+      - "v*"
   pull_request:
     branches:
-      - 'main'
+      - "main"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -73,7 +73,7 @@ jobs:
         with:
           trivy-config: trivy.yaml
           scan-type: fs
-          scan-ref: '.'
+          scan-ref: "."
 
   test-compose:
     runs-on: ubuntu-latest
@@ -157,9 +157,8 @@ jobs:
         if: matrix.python-version == '3.11' && github.actor != 'dependabot[bot]' && !env.ACT
         uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
 
   build:
     needs: [test-local, test-compose]
@@ -229,8 +228,8 @@ jobs:
           image-ref: ${{ steps.meta.outputs.tags }}
           scan-type: image
           exit-code: 0
-          format: 'sarif'
-          output: 'trivy-results.sarif'
+          format: "sarif"
+          output: "trivy-results.sarif"
         env:
           TRIVY_USERNAME: ${{ github.actor }}
           TRIVY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
@@ -238,7 +237,7 @@ jobs:
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: 'trivy-results.sarif'
+          sarif_file: "trivy-results.sarif"
 
       - name: Extract metadata for Docker
         id: meta2
@@ -256,8 +255,8 @@ jobs:
           image-ref: ${{ steps.meta2.outputs.tags }}
           scan-type: image
           exit-code: 0
-          format: 'cyclonedx'
-          output: 'trivy-sbom.json'
+          format: "cyclonedx"
+          output: "trivy-sbom.json"
           list-all-pkgs: "true"
         env:
           TRIVY_USERNAME: ${{ github.actor }}
@@ -268,9 +267,9 @@ jobs:
         with:
           image-ref: ${{ steps.meta2.outputs.tags }}
           scan-type: image
-          scanners: 'license'
+          scanners: "license"
           exit-code: 0
-          output: 'trivy-license.json'
+          output: "trivy-license.json"
         env:
           TRIVY_USERNAME: ${{ github.actor }}
           TRIVY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
@@ -312,10 +311,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-
   notifyMattermost:
     runs-on: ubuntu-latest
-    needs: [lint, security, test-local, test-compose, build ]
+    eeds: [lint, security, test-local, test-compose, build]
     if: ${{ always() && contains(needs.*.result, 'failure') && !github.event.act}}
     steps:
       - uses: mattermost/action-mattermost-notify@master

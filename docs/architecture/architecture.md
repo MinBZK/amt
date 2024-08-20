@@ -9,6 +9,7 @@ that are specified by the Algoritmekader. The diagram below sketches the broader
 of this Algorithm Management Toolkit.
 
 ### Example
+
 Suppose a data science team is working on an ML-algorithm. A team member visits the Algoritmekader
 website and sees that among other things an IAMA is a required to be performed. The user selects
 the IAMA task from the Algoritmekader and is forwarded to the Algorithm Management Toolkit. Here
@@ -21,7 +22,6 @@ to an Assessment Card within a System Card to a user specified location, usually
 where the source code of the algorithm resides. Using the information of a System Card, an algorithm
 can be published to the Algoritmeregister. Also, algorithms from the Algoritmeregister can be converted
 into System Cards.
-
 
 ```mermaid
 C4Context
@@ -65,9 +65,12 @@ C4Context
 
     UpdateLayoutConfig($c4ShapeInRow="2", $c4BoundaryInRow="2")
 ```
+
 ## Container Diagram of the Algorithm Management Toolkit System
+
 Below is a context diagram of the Algorithm Management Toolkit, with some additional remarks about
 its components.
+
 ```mermaid
 
 C4Container
@@ -138,13 +141,15 @@ UpdateRelStyle(Tasks, InstrumentRegister, $offsetY="10", $offsetX="-150")
 ```
 
 ### Walkthrough
+
 Suppose a user wants to perform a specific task from the Algoritmekader. To execute this task, the user has 2 options.
 
 The first option is to execute the task locally by using the command line interface tool (CLI). The CLI tool imports the task from a Python library named `Tasks`. This library contains executable tasks that implement the measures and instruments from the `Instrument Register` (which are specified in the Algoritmekader). Instructions on how to perform these tasks are imported from the Instrument Register. There exists a one-to-one correspondence between measures and instruments in the `Instrument Register` and the task's within the `Tasks` library.
 
-The second option is to use the Algorithm Management Toolkit (AMT). The user starts by visiting the Algorithm Management Toolkit website. Here, the user encounters a frontend interface showing a planning board for projects and tasks. This planning board contains columns which correspond to the status of a task, like ‘To do’,  ‘Doing’ and ‘Done’. When a user drags a task to another column or re-orders a task, the frontend makes an API call to the backend of the AMT.
+The second option is to use the Algorithm Management Toolkit (AMT). The user starts by visiting the Algorithm Management Toolkit website. Here, the user encounters a frontend interface showing a planning board for projects and tasks. This planning board contains columns which correspond to the status of a task, like ‘To do’, ‘Doing’ and ‘Done’. When a user drags a task to another column or re-orders a task, the frontend makes an API call to the backend of the AMT.
 
 The backend consists of three components, showed in the component diagram at the end of this page.
+
 1. An API application, which provides the project and tasks management functionality via HTTPS.
 2. The business logic, which is the core logic of the AMT.
 3. A system state, which provides the state of the AMT.
@@ -154,7 +159,9 @@ When receiving an API call, the application forwards the instruction to the busi
 Meanwhile, the API application sends regular heartbeats to the system state to check for updates. The system state receives updates from the business logic and checks for updates by reading from the database. When a state is updated (for example, a task is "done" or "failed with error X"), the business logic returns this to the API application. Using a websocket, the API application sends live updates back to the frontend, to make sure the planning board stays up to date.
 
 ## Component diagram of the back end of the Algorithm Management Toolkit
+
 Below is a component diagram of the backend of the Algorithm Management Toolkit, with some additional remarks about its components.
+
 ```mermaid
 C4Component
     title Component diagram for the backend of the Algorithm Management Toolkit System

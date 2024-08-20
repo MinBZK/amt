@@ -24,11 +24,12 @@ poetry run python -m uvicorn amt.server:app --log-level warning
 ```
 
 ### Suggested development ENVIRONMENT settings
+
 To use a development environment during local development, you can use the following environment options.
+
 ```shell
 export AUTO_CREATE_SCHEMA=true
 ```
-
 
 ## Database
 
@@ -77,19 +78,19 @@ ValueError: Unknown extraction method 'jinja2'
 ```
 
 The solution for this error, is to upgrade/install the setuptools:
+
 ```
 pip install --upgrade setuptools
 ```
-
 
 ## Testing, Linting etc
 
 For testing, linting and other feature we use several tools. You can look up the documentation on how to use these:
 
-* [pytest](https://docs.pytest.org/en/)  `poetry run pytest`
-* [ruff](https://docs.astral.sh/ruff/) `poetry run ruff format` or `poetry run ruff check --fix`
-* [coverage](https://coverage.readthedocs.io/en/) `poetry run coverage report`
-* [pyright](https://microsoft.github.io/pyright/#/) `poetry run pyright`
+-   [pytest](https://docs.pytest.org/en/) `poetry run pytest`
+-   [ruff](https://docs.astral.sh/ruff/) `poetry run ruff format` or `poetry run ruff check --fix`
+-   [coverage](https://coverage.readthedocs.io/en/) `poetry run coverage report`
+-   [pyright](https://microsoft.github.io/pyright/#/) `poetry run pyright`
 
 ## Devcontainers
 
