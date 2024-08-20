@@ -25,7 +25,7 @@ from tests.constants import default_instrument
 from yaml import YAMLError
 
 
-@pytest.fixture()
+@pytest.fixture
 def system_card_data() -> dict[str, Any]:
     return {
         "name": "test-system-card",
@@ -40,7 +40,7 @@ def system_card_data() -> dict[str, Any]:
     }
 
 
-@pytest.fixture()
+@pytest.fixture
 def system_card(system_card_data: dict[str, Any]) -> SystemCard:
     system_card = SystemCard(**system_card_data)
     return system_card

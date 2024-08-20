@@ -4,7 +4,7 @@ import pytest
 from amt.schema.system_card import SystemCard
 
 
-@pytest.fixture()
+@pytest.fixture
 def setup() -> SystemCard:
     system_card = SystemCard()
     return system_card

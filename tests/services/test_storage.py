@@ -6,7 +6,7 @@ from amt.services.storage import StorageFactory
 from yaml import safe_load
 
 
-@pytest.fixture()
+@pytest.fixture
 def setup_and_teardown(tmp_path: Path) -> tuple[str, Path]:
     filename = "test.yaml"
     return filename, tmp_path.absolute()

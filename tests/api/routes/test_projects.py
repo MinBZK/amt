@@ -12,7 +12,7 @@ from fastapi_csrf_protect import CsrfProtect  # type: ignore # noqa
 from tests.constants import default_instrument
 
 
-@pytest.fixture()
+@pytest.fixture
 def init_instruments() -> Generator[None, None, None]:  # noqa: PT004
     origin = InstrumentsService.fetch_instruments
     InstrumentsService.fetch_instruments = Mock(

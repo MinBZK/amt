@@ -2,7 +2,7 @@ import pytest
 from playwright.sync_api import Page, expect
 
 
-@pytest.mark.slow()
+@pytest.mark.slow
 def test_e2e_scroll_projects(page: Page) -> None:
     page.goto("/projects/")
 

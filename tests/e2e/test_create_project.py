@@ -2,7 +2,7 @@ import pytest
 from playwright.sync_api import Page, expect
 
 
-@pytest.mark.slow()
+@pytest.mark.slow
 def test_e2e_create_project(page: Page):
     page.goto("/projects/new")
 
@@ -20,7 +20,7 @@ def test_e2e_create_project(page: Page):
     expect(page.get_by_role("heading", name="My new project")).to_be_visible()
 
 
-@pytest.mark.slow()
+@pytest.mark.slow
 def test_e2e_create_project_invalid(page: Page):
     page.goto("/projects/new")
 
@@ -30,7 +30,7 @@ def test_e2e_create_project_invalid(page: Page):
     expect(page.get_by_role("heading", name="Request Validation Error")).to_be_visible()
 
 
-@pytest.mark.slow()
+@pytest.mark.slow
 def test_e2e_create_project_with_tasks(page: Page):
     page.goto("/projects/new")
 
