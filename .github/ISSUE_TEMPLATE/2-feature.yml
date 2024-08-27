@@ -35,13 +35,12 @@ body:
     attributes:
       label: Proposal
       description: |
-          If you have an idea for a way to address the problem via a change to our product features, please describe it below.
-          If you're not sure of some details, don't worry! When we evaluate the feature request we may suggest modifications as necessary to work within the design constraints of OpenTofu Core.
+        If you have an idea for a way to address the problem via a change to our product features, please describe it below.
+        If you're not sure of some details, don't worry! When we evaluate the feature request we may suggest modifications as necessary to work within the design constraints of OpenTofu Core.
       placeholder:
       value:
     validations:
       required: false
-
 
   - type: markdown
     attributes:

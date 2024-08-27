@@ -15,9 +15,13 @@ Note: The main branch may be in an unstable or even broken state during developm
 
 See [contributing docs](CONTRIBUTING.md)
 
-## How to build and run AMT
+## How to build and develop AMT
 
 See [build docs](BUILD.md)
+
+## How to run AMT
+
+See [usage docs](USAGE.md)
 
 ## How to run the CLI
 
@@ -27,6 +31,7 @@ It requires 2 parameters. The first parameter is a list of instrument urns joine
 spaces. The second parameter is the location of the system card.
 
 An example command:
+
 ```shell
 ./check-state urn:nl:aivt:ir:td:1.0 urn:nl:aivt:ir:iama:1.0 example/system_test_card.yaml
 ```
@@ -35,6 +40,7 @@ An example command:
 
 When running the GitHub actions locally you can use [act](https://github.com/nektos/act), to do this run change the
 matrix in the `ci.yml` of the `test-local` job to have only python version 3.11. Then run the following command:
+
 ```shell
 act -W '.github/workflows/ci.yml' -s GITHUB_TOKEN="$(gh auth token)" --artifact-server-path tmp/artifacts -e act_event.json
 ```

@@ -1,7 +1,6 @@
 name: Dependabot & Pre-Commit auto-merge
 on: pull_request
 
-
 jobs:
   automerge-dependabot:
     runs-on: ubuntu-latest

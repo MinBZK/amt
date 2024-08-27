@@ -5,10 +5,10 @@ on:
     branches:
       - main
     tags:
-      - 'v*'
+      - "v*"
   pull_request:
     branches:
-      - 'main'
+      - "main"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -36,8 +36,15 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: "poetry"
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: "npm"
+
       - name: Install dependencies
-        run: poetry install
+        run: |
+          poetry install
+          npm install
 
       - name: run ruff
         run: poetry run ruff check --output-format=github
@@ -47,6 +54,12 @@ jobs:
 
       - name: Run pyright
         run: poetry run pyright
+
+      - name: Run eslint
+        run: npm run lint
+
+      - name: Run prettier
+        run: npm run prettier:check
 
   security:
     runs-on: ubuntu-latest
@@ -73,7 +86,7 @@ jobs:
         with:
           trivy-config: trivy.yaml
           scan-type: fs
-          scan-ref: '.'
+          scan-ref: "."
 
   test-compose:
     runs-on: ubuntu-latest
@@ -83,6 +96,8 @@ jobs:
       - run: docker compose build
       - run: docker compose down -v --remove-orphans
       - run: docker compose up -d
+      - name: test frontend
+        run: docker compose run amt-test npm run test
       - name: test app
         run: docker compose run amt-test poetry run pytest -m 'not slow' --db postgresql
       - name: db downgrade test
@@ -91,7 +106,23 @@ jobs:
         run: docker compose exec -T amt alembic upgrade head
       - run: docker compose down -v --remove-orphans
 
-  test-local:
+  test-local-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm run test
+
+  test-local-backend:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -111,8 +142,15 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: "poetry"
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: "npm"
+
       - name: Install dependencies
-        run: poetry install
+        run: |
+          poetry install
+          npm install
 
       - name: Install Playwright browsers
         run: poetry run playwright install --with-deps
@@ -122,6 +160,10 @@ jobs:
           poetry run alembic upgrade head
           poetry run alembic downgrade -1
           poetry run alembic upgrade head
+
+      - name: Generate required files
+        run: |
+          npm run build
 
       - name: Run pytest
         run: TZ=UTC poetry run coverage run -m pytest
@@ -157,12 +199,11 @@ jobs:
         if: matrix.python-version == '3.11' && github.actor != 'dependabot[bot]' && !env.ACT
         uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-
   build:
-    needs: [test-local, test-compose]
+    needs: [test-local-frontend, test-local-backend, test-compose]
     if: ${{ !github.event.act }}
     runs-on: ubuntu-latest
     permissions:
@@ -229,8 +270,8 @@ jobs:
           image-ref: ${{ steps.meta.outputs.tags }}
           scan-type: image
           exit-code: 0
-          format: 'sarif'
-          output: 'trivy-results.sarif'
+          format: "sarif"
+          output: "trivy-results.sarif"
         env:
           TRIVY_USERNAME: ${{ github.actor }}
           TRIVY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
@@ -238,7 +279,7 @@ jobs:
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: 'trivy-results.sarif'
+          sarif_file: "trivy-results.sarif"
 
       - name: Extract metadata for Docker
         id: meta2
@@ -256,8 +297,8 @@ jobs:
           image-ref: ${{ steps.meta2.outputs.tags }}
           scan-type: image
           exit-code: 0
-          format: 'cyclonedx'
-          output: 'trivy-sbom.json'
+          format: "cyclonedx"
+          output: "trivy-sbom.json"
           list-all-pkgs: "true"
         env:
           TRIVY_USERNAME: ${{ github.actor }}
@@ -268,9 +309,9 @@ jobs:
         with:
           image-ref: ${{ steps.meta2.outputs.tags }}
           scan-type: image
-          scanners: 'license'
+          scanners: "license"
           exit-code: 0
-          output: 'trivy-license.json'
+          output: "trivy-license.json"
         env:
           TRIVY_USERNAME: ${{ github.actor }}
           TRIVY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
@@ -312,11 +353,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-
   notifyMattermost:
     runs-on: ubuntu-latest
-    needs: [lint, security, test-local, test-compose, build ]
-    if: ${{ always() && contains(needs.*.result, 'failure') && !github.event.act}}
+    needs:
+      [
+        lint,
+        security,
+        test-local-backend,
+        test-local-frontend,
+        test-compose,
+        build,
+      ]
+    if: ${{ always() && contains(needs.*.result, 'failure') }}
     steps:
       - uses: mattermost/action-mattermost-notify@master
         if: github.event_name != 'pull_request' || github.event.pull_request.draft == false

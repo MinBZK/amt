@@ -11,6 +11,10 @@
     "markis.code-coverage",
     "qwtel.sqlite-viewer",
     "ms-vsliveshare.vsliveshare",
-    "wholroyd.jinja"
+    "wholroyd.jinja",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "stylelint.vscode-stylelint",
+    "pranaygp.vscode-css-peek"
   ]
 }

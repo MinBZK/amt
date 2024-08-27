@@ -18,5 +18,9 @@ trim_trailing_whitespace = false
 [*.{yml,yaml,json,js,html}]
 indent_size = 2
 
+[*.ts]
+indent_size = 2
+
+
 [LICENSE]
 insert_final_newline = false

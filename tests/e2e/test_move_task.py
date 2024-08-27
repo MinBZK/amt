@@ -59,7 +59,7 @@ def test_e2e_move_task_order_in_same_column(page: Page) -> None:
 
     page.reload()
 
-    tasks_in_column = page.locator("#column-1").locator(".progress_card_container").all()
+    tasks_in_column = page.locator("#column-1").locator(".progress-card-container").all()
 
     expect(tasks_in_column[0]).to_have_id("card-container-2")
     expect(tasks_in_column[1]).to_have_id("card-container-3")

@@ -14,7 +14,7 @@
         {% trans %}Unknown{% endtrans %}
         {% endif %}
     </h3>
-    <div class="progress_cards_container sortable" data-id="{{ status.value }}" id="column-{{ status.value }}">
+    <div class="progress-cards-container sortable" data-id="{{ status.value }}" id="column-{{ status.value }}">
         {% if project is defined %}
             {% for task in tasks_service.get_tasks_for_project(project.id, status) %}
                 {{ render_task_card_full(task) }}
@@ -29,7 +29,7 @@
 {% endmacro -%}
 
 {% macro render_task_card_full(task) -%}
-<div draggable="true" class="progress_card_container" data-target-id="card-content-{{ task.id }}"
+<div draggable="true" class="progress-card-container" data-target-id="card-content-{{ task.id }}"
     id="card-container-{{ task.id }}" data-id="{{ task.id }}">
     {{ render_task_card_content(task) }}
 </div>
@@ -40,8 +40,9 @@
     <h4 class="margin-bottom--extra-small">{{ task.title | truncate(100)}}</h4>
     <div>{{ task.description }}</div>
     {% if task.user_id %}
-    <div class="progress_card_assignees_container">
-        <img class="progress_card_assignees_image" src="{{ url_for_cache('static', path='images/img_avatar.png') }}" alt="Assigned to Avatar" />
+    <div class="progress-card-assignees-container">
+        <img class="progress-card-assignees-image" src="{{ url_for_cache('static', path='images/img_avatar.png') }}"
+            alt="Assigned to Avatar" />
     </div>
     {% endif %}
 </div>

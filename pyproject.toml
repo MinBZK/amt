@@ -92,7 +92,8 @@ reportMissingTypeStubs = true
 reportUnnecessaryIsInstance = false
 exclude = [
     "amt/migrations",
-    ".venv"
+    ".venv",
+    "node_modules"
 ]
 
 [tool.coverage.run]
