@@ -1,38 +1,45 @@
 {% extends 'layouts/base.html.j2' %}
 
 {% block content %}
-<h1 class="margin-bottom-large">{% trans %}Projects{% endtrans %}</h1>
 
-<form>
-    <label>
-    <input
-        size="100"
-        type="search"
-        placeholder="{% trans %}Find project...{% endtrans %}"
-        name="search"
-        hx-get="/projects/?skip=0"
-        hx-trigger="input changed delay:500ms, search"
-        hx-target="#project-search-results"
-        hx-indicator=".htmx-indicator"
-        hx-swap="innerHTML"
-        autocomplete="false"
-        id="project-search-input"
-    />
-</label>
-<input type="reset"
-       value="X"
-       style="position: relative; margin-left: -30px"
-       hx-trigger="click"
-       hx-get="/projects/?skip=0"
-       hx-target="#project-search-results"
-       hx-indicator=".htmx-indicator"
-       hx-swap="innerHTML"
-/>
-</form>
+    <main class="rvo-max-width-layout rvo-max-width-layout--sm">
+        <div class="rvo-content">
 
-<ul class="project-list" id="project-search-results">
-    {% include 'projects/_list.html.j2' %}
-</ul>
+            <h1 class="utrecht-heading-1">{% trans %}Projects{% endtrans %}</h1>
 
-<div id="errorContainer"></div>
+            <form>
+                <label>
+                    <input
+                        size="100"
+                        type="search"
+                        placeholder="{% trans %}Find project...{% endtrans %}"
+                        name="search"
+                        hx-get="/projects/?skip=0"
+                        hx-trigger="input changed delay:500ms, search"
+                        hx-target="#project-search-results"
+                        hx-indicator=".htmx-indicator"
+                        hx-swap="innerHTML"
+                        autocomplete="false"
+                        id="project-search-input"
+                    />
+                </label>
+                <input type="reset"
+                       value="X"
+                       style="position: relative; margin-left: -30px"
+                       hx-trigger="click"
+                       hx-get="/projects/?skip=0"
+                       hx-target="#project-search-results"
+                       hx-indicator=".htmx-indicator"
+                       hx-swap="innerHTML"
+                />
+            </form>
+
+            <ul class="rvo-item-list" id="project-search-results">
+                {% include 'projects/_list.html.j2' %}
+            </ul>
+
+        </div>
+    </main>
+
+    <div id="errorContainer"></div>
 {% endblock %}

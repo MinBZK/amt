@@ -26,36 +26,35 @@ def test_projects_get_root(client: TestClient) -> None:
     response = client.get("/projects/")
 
     assert response.status_code == 200
-    assert b'<ul class="project-list" id="project-search-results">' in response.content
+    assert b'<ul class="rvo-item-list" id="project-search-results">' in response.content
 
 
 def test_projects_get_root_missing_slash(client: TestClient) -> None:
     response = client.get("/projects")
 
     assert response.status_code == 200
-    assert b'<ul class="project-list" id="project-search-results">' in response.content
+    assert b'<ul class="rvo-item-list" id="project-search-results">' in response.content
 
 
 def test_projects_get_root_htmx(client: TestClient) -> None:
     response = client.get("/projects/", headers={"HX-Request": "true"})
 
     assert response.status_code == 200
-    assert b'<ul class="project-list" id="project-search-results">' not in response.content
+    assert b'<ul class="rvo-item-list" id="project-search-results">' not in response.content
 
 
 def test_get_new_projects(client: TestClient, init_instruments: Generator[None, None, None]) -> None:
     # when
     response = client.get("/projects/new")
-
-    # then
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
+
     assert (
-        b'<input type="checkbox" id="urn1" name="instruments" value="urn1" /><label for="urn1">name1</label>'
+        b'<input id="urn1" name="instruments" class="rvo-checkbox__input" type="checkbox" value="urn1" />name1'
         in response.content
     )
     assert (
-        b'<input type="checkbox" id="urn2" name="instruments" value="urn2" /><label for="urn2">name2</label>'
+        b'<input id="urn2" name="instruments" class="rvo-checkbox__input" type="checkbox" value="urn2" />name2'
         in response.content
     )
 

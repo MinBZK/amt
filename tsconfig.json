@@ -101,6 +101,6 @@
     "node_modules"
   ],
   "include": [
-    "amt/site/static/**/*.ts"
+    "amt/site/static/ts/*.ts"
   ]
 }
