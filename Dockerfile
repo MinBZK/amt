@@ -7,7 +7,7 @@ ARG NVM_VERSION
 LABEL maintainer=ai-validatie@minbzk.nl \
     organization=MinBZK \
     license=EUPL-1.2 \
-    org.opencontainers.image.description="Transparency of Algorithmic Decision making" \
+    org.opencontainers.image.description="Algoritm Management Toolkit" \
     org.opencontainers.image.source=https://github.com/MinBZK/amt \
     org.opencontainers.image.licenses=EUPL-1.2
 

@@ -17,19 +17,16 @@
     <% } %>
     <script type="text/javascript" src="{{ url_for_cache('static', path='vendor/htmx/js/json-enc.js') }}"></script>
     <script type="text/javascript" src="{{ url_for_cache('static', path='vendor/htmx/js/response-targets.js') }}"></script>
-
     {% endblock %}
     {% block styles %}
     <link rel="stylesheet" href="{{ url_for_cache('static', path='css/html5reset.css') }}" />
-
     <% for (const css of htmlWebpackPlugin.files.css) { %>
         <link rel="stylesheet" href="{{ url_for_cache('static', path='<%= css.split('/static/')[1] %>') }}">
         <% } %>
-
     {% endblock %}
 </head>
 
-<body hx-ext="response-targets">
+<body hx-ext="response-targets" class="rvo-theme rvo-layout-gap--3xl">
     {% block header %}
     {% include 'header.html.j2' %}
     {% endblock %}

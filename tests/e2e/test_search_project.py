@@ -6,7 +6,7 @@ from playwright.sync_api import Page, expect
 def test_e2e_search_projects(page: Page) -> None:
     page.goto("/projects/")
 
-    project_links = page.locator(".project-list > li").count()
+    project_links = page.locator("#project-search-results > li").count()
 
     assert 90 <= project_links <= 101
 
@@ -24,13 +24,13 @@ def test_e2e_search_projects(page: Page) -> None:
 def test_e2e_search_scroll_projects(page: Page) -> None:
     page.goto("/projects/")
 
-    project_links = page.locator(".project-list > li").count()
+    project_links = page.locator("#project-search-results > li").count()
 
     assert 90 <= project_links <= 101
 
     page.locator("#project-search-input").fill("Project")
 
     with page.expect_request("/projects/?skip=0&search=Project", timeout=3000) as _:
-        project_links = page.locator(".project-list > li").count()
+        project_links = page.locator("#project-search-results > li").count()
         expect(page.get_by_text("Project 100", exact=True)).to_be_visible()
         assert 90 <= project_links <= 101

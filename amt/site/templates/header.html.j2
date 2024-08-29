@@ -1,26 +1,60 @@
 <header class="header">
-    <div class="header-top">
-        <a href="/"></a><img class="header-logo-image" src="{{ url_for_cache('static', path='images/logo.svg') }}" /></a>
-        <span>{% trans %}Algorithm Management Toolkit{% endtrans %} ({{ version }})</span>
+    <div class="rvo-header__logo-wrapper">
+        <div class="rvo-logo rvo-header__logo-img">
+            <div class="rvo-logo__emblem">
+                <img src="/static/dist/@nl-rvo/assets-1.0.0-alpha.360/images/emblem.svg">
+            </div>
+            <div class="rvo-logo__wordmark">
+                <p class="rvo-logo__title">{% trans %}Algorithm Management Toolkit{% endtrans %} ({{ version }})</p>
+            </div>
+        </div>
     </div>
-    <div class="header-nav">
-        <div class="header-nav-container">
-            <nav>
-                <ul>
-                    <li><a href="/projects/new">{% trans %}New project{% endtrans %}</a></li>
-                    <li><a href="/projects/">{% trans %}Projects{% endtrans %}</a></li>
+    <div class="rvo-layout-column rvo-layout-gap--md">
+        <div class="rvo-topnav__background rvo-topnav__background--horizontal-rule">
+            <nav class="rvo-topnav rvo-topnav--md">
+                <ul class="rvo-topnav__list">
+                    <li class="rvo-topnav__item">
+                        <a class="rvo-link rvo-topnav__link rvo-link--logoblauw" href="#">
+              <span
+                  class="utrecht-icon rvo-icon rvo-icon-home rvo-icon--md rvo-icon--wit"
+                  role="img"
+                  aria-label="Home"
+              ></span>
+                            Home
+                        </a>
+                    </li>
+                    <li class="rvo-topnav__item">
+                        <a class="rvo-link rvo-topnav__link rvo-link--logoblauw" href="/projects/">
+              <span
+                  class="utrecht-icon rvo-icon rvo-icon-publicatie rvo-icon--md rvo-icon--wit"
+                  role="img"
+                  aria-label="Publicatie"
+              ></span>
+                            {% trans %}Projects{% endtrans %}
+                        </a>
+                    </li>
+                    <li class="rvo-topnav__item">
+                        <a class="rvo-link rvo-topnav__link rvo-link--logoblauw" href="/projects/new">
+              <span
+                  class="utrecht-icon rvo-icon rvo-icon-plus rvo-icon--md rvo-icon--wit"
+                  role="img"
+                  aria-label="Plus"
+              ></span>
+                            {% trans %}New project{% endtrans %}
+                        </a>
+                    </li>
+                    <li class="rvo-topnav__item rvo-topnav__item--align-right">
+                        <a class="rvo-link rvo-topnav__link rvo-link--logoblauw" href="#">
+              <span
+                  class="utrecht-icon rvo-icon rvo-icon-versleutelen rvo-icon--md rvo-icon--wit"
+                  role="img"
+                  aria-label="Versleutelen"
+              ></span>
+                            Uitloggen
+                        </a>
+                    </li>
                 </ul>
             </nav>
-        </div>
-        <div class="language-selection">
-            <span>{% trans %}Language{% endtrans %}:</span>
-
-            {% for available_translation in available_translations %}
-            <a {% if available_translation==language %}class="selected" {% endif %}
-                id="langselect-{{ available_translation }}"
-                href="javascript:setCookie('lang','{{ available_translation }}',9999); window.location.reload()">{{
-                available_translation }}</a>
-            {% endfor %}
         </div>
     </div>
 </header>

@@ -1,2 +1,60 @@
-<footer>
-</footer>
+<div class="rvo-footer-bg">
+    <footer class="utrecht-page-footer rvo-footer rvo-footer--lg">
+        <div class="rvo-footer-column">
+            <h3 class="utrecht-heading-3 rvo-footer-menu-title">{% trans %}Algorithm Management
+                Toolkit{% endtrans %}</h3>
+            <ul class="rvo-footer-menu">
+                <li class="rvo-footer-menu-item">
+                    <a
+                        class="rvo-link rvo-link--with-icon rvo-link--no-underline"
+                        href="#"
+                    >
+            <span
+                class="utrecht-icon rvo-icon rvo-icon-delta-naar-rechts rvo-icon--sm rvo-icon--wit rvo-link__icon--before"
+                role="img"
+                aria-label="Delta naar rechts"
+            ></span>
+                        Over ons
+                    </a>
+                </li>
+                <li class="rvo-footer-menu-item">
+                    <a
+                        class="rvo-link rvo-link--with-icon rvo-link--no-underline"
+                        href="#"
+                    >
+            <span
+                class="utrecht-icon rvo-icon rvo-icon-delta-naar-rechts rvo-icon--sm rvo-icon--wit rvo-link__icon--before"
+                role="img"
+                aria-label="Delta naar rechts"
+            ></span>
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+
+        <div class="rvo-footer-column">
+            <h3 class="utrecht-heading-3 rvo-footer-menu-title">{% trans %}Language{% endtrans %}</h3>
+            <ul class="rvo-footer-menu">
+                {% for available_translation in available_translations %}
+                    <li class="rvo-footer-menu-item">
+                        <a {% if available_translation == language %}class="selected"{% endif %}
+                           id="langselect-{{ available_translation }}"
+                           class="rvo-link rvo-link--with-icon rvo-link--no-underline"
+                           href="javascript:setCookie('lang', '{{ available_translation }}', 9999); window.location.reload()"
+                        >
+            <span
+                class="utrecht-icon rvo-icon rvo-icon-wereldbol rvo-icon--sm rvo-icon--wit rvo-link__icon--before"
+                role="img"
+                aria-label="Delta naar rechts"
+            ></span>
+                            {{ available_translation }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </footer>
+</div>
