@@ -62,6 +62,7 @@ class TasksRepository:
             self.session.commit()
             self.session.refresh(task)
         except Exception as e:
+            logger.exception("Could not store task")
             self.session.rollback()
             raise RepositoryError from e
         return task
@@ -76,7 +77,7 @@ class TasksRepository:
             self.session.add_all(tasks)
             self.session.commit()
         except Exception as e:
-            logger.exception("Could not store tasks")
+            logger.exception("Could not store all tasks")
             self.session.rollback()
             raise RepositoryError from e
 
@@ -90,6 +91,7 @@ class TasksRepository:
             self.session.delete(task)
             self.session.commit()
         except Exception as e:
+            logger.exception("Could not delete task")
             self.session.rollback()
             raise RepositoryError from e
         return None
@@ -104,4 +106,5 @@ class TasksRepository:
         try:
             return self.session.execute(statement).scalars().one()
         except NoResultFound as e:
+            logger.exception("Task not found")
             raise RepositoryError from e

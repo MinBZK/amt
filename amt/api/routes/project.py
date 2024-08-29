@@ -31,6 +31,7 @@ async def get_root(
     }
 
     if not project:
+        logger.warning(f"project with id {project_id} not found")
         raise NotFound()
 
     return templates.TemplateResponse(request, "pages/index.html.j2", context)

@@ -74,5 +74,6 @@ class CSRFMiddlewareExceptionHandler(BaseHTTPMiddleware):
         try:
             response = await call_next(request)
         except CsrfProtectError as e:
+            logger.warning(f"CsrfProtectError: {e}")
             return await csrf_protect_exception_handler(request, e)
         return response
