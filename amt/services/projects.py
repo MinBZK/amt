@@ -32,6 +32,7 @@ class ProjectsService:
         try:
             project = self.repository.find_by_id(project_id)
         except Exception:
+            logger.exception(f"Project with id {project_id} not found")
             project = None
 
         return project

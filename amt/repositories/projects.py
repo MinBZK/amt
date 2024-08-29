@@ -32,6 +32,7 @@ class ProjectsRepository:
             self.session.delete(project)
             self.session.commit()
         except Exception as e:
+            logger.exception("Error deleting project")
             self.session.rollback()
             raise RepositoryError from e
         return None
@@ -42,6 +43,7 @@ class ProjectsRepository:
             self.session.commit()
             self.session.refresh(project)
         except SQLAlchemyError as e:
+            logger.exception("Error saving project")
             self.session.rollback()
             raise RepositoryError from e
         return project
@@ -51,6 +53,7 @@ class ProjectsRepository:
             statement = select(Project).where(Project.id == project_id)
             return self.session.execute(statement).scalars().one()
         except NoResultFound as e:
+            logger.exception("Project not found")
             raise RepositoryError from e
 
     def paginate(self, skip: int, limit: int, search: str) -> list[Project]:
@@ -61,4 +64,5 @@ class ProjectsRepository:
             statement = statement.order_by(func.lower(Project.name)).offset(skip).limit(limit)
             return list(self.session.execute(statement).scalars())
         except Exception as e:
+            logger.exception("Error paginating projects")
             raise RepositoryError from e

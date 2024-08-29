@@ -27,6 +27,7 @@ class InstrumentsService:
 
         if "urn" not in data:
             # todo: this is now an HTTP error, while a service can also be used from another context
+            logger.exception("Key 'urn' not found in instrument.")
             raise InstrumentError("Key 'urn' not found in instrument.")
 
         return Instrument(**data)

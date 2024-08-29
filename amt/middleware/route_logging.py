@@ -28,7 +28,6 @@ class RequestLoggingMiddleware(BaseHTTPMiddleware):
         masked_request_headers = masker.secrets(dict(request.headers))
         masked_response_headers = masker.secrets(dict(response.headers))
 
-        # todo: add exception handling
         logging_body = {
             "request_id": request_id,
             "request": {
