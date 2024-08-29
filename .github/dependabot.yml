@@ -14,7 +14,7 @@ updates:
         patterns:
           - "*"
     ignore:
-      - dependency-name: "actions/upload-artifact*"
+      - dependency-name: "actions/upload-artifact*" # For the purpose of using ACT
         update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "pip"
