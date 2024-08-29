@@ -52,7 +52,7 @@ def test_e2e_move_task_order_in_same_column(page: Page) -> None:
     expect(card3).to_be_visible()
 
     with page.expect_response("/tasks/") as response_info:
-        card1.drag_to(target=card3)
+        page.drag_and_drop("#card-container-1", "#card-container-3", target_position={"x": 50, "y": 50})
 
     response = response_info.value
     assert response.status == 200
