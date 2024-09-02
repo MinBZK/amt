@@ -64,13 +64,13 @@ module.exports = {
         '@nl-rvo/design-tokens': {
           copy: [
             { from: 'dist/index.css', to: 'index.css' },
-            { from: 'dist/index.js', to: 'index.js' },
+            { from: 'dist/index.js', to: 'index.mjs' },
           ],
           links: [
             'index.css',
           ],
           scripts: [
-            'index.js',
+            'index.mjs',
           ]
         },
         '@nl-rvo/component-library-css': {
