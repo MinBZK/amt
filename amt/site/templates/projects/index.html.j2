@@ -2,44 +2,41 @@
 
 {% block content %}
 
-    <main class="rvo-max-width-layout rvo-max-width-layout--sm">
-        <div class="rvo-content">
-
-            <h1 class="utrecht-heading-1">{% trans %}Projects{% endtrans %}</h1>
-
-            <form>
-                <label>
-                    <input
-                        size="100"
-                        type="search"
-                        placeholder="{% trans %}Find project...{% endtrans %}"
-                        name="search"
-                        hx-get="/projects/?skip=0"
-                        hx-trigger="input changed delay:500ms, search"
-                        hx-target="#project-search-results"
-                        hx-indicator=".htmx-indicator"
-                        hx-swap="innerHTML"
-                        autocomplete="false"
-                        id="project-search-input"
-                    />
-                </label>
-                <input type="reset"
-                       value="X"
-                       style="position: relative; margin-left: -30px"
-                       hx-trigger="click"
-                       hx-get="/projects/?skip=0"
-                       hx-target="#project-search-results"
-                       hx-indicator=".htmx-indicator"
-                       hx-swap="innerHTML"
-                />
-            </form>
-
-            <ul class="rvo-item-list" id="project-search-results">
-                {% include 'projects/_list.html.j2' %}
-            </ul>
-
+<main class="rvo-max-width-layout rvo-max-width-layout--sm">
+    <div class="rvo-content">
+        <h1 class="utrecht-heading-1">{% trans %}Projects{% endtrans %}</h1>
+    </div>
+    <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
+        <div class="rvo-form-layout">
+            <div class="rvo-max-width-layout rvo-max-width-layout--lg rvo-max-width-layout-inline-padding--none">
+                <div class="rvo-inline-form">
+                    <div role="group" aria-labelledby="fieldId-label" class="utrecht-form-field utrecht-form-field--text rvo-form-field">
+                        <input
+                            id="project-search-input"
+                            type="text"
+                            class="utrecht-textbox utrecht-textbox--html-input"
+                            dir="auto"
+                            value=""
+                            placeholder="{% trans %}Find project...{% endtrans %}"
+                            name="search"
+                            hx-get="/projects/?skip=0"
+                            hx-trigger="input changed delay:500ms, focus"
+                            hx-target="#project-search-results"
+                            hx-indicator=".htmx-indicator"
+                            hx-swap="innerHTML"
+                            autocomplete="off"
+                            onfocus="this.value=''"
+                        />
+                    </div>
+                </div>
+            </div>
         </div>
-    </main>
+    </fieldset>
+    <ul class="rvo-item-list" id="project-search-results">
+        {% include 'projects/_list.html.j2' %}
+    </ul>
+</main>
 
-    <div id="errorContainer"></div>
+<div id="errorContainer"></div>
+
 {% endblock %}
