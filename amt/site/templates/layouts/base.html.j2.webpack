@@ -13,7 +13,11 @@
     </title>
     {% block scripts %}
     <% for (const js of htmlWebpackPlugin.files.js) { %>
-        <script type="text/javascript" src="{{ url_for_cache('static', path='<%= js.split('/static/')[1] %>') }}"></script>
+        <% if (js.endsWith(".mjs")) { %>
+          <script type="module" src="{{ url_for_cache('static', path='<%= js.split('/static/')[1] %>') }}"></script>
+        <% } else { %>
+          <script type="text/javascript" src="{{ url_for_cache('static', path='<%= js.split('/static/')[1] %>') }}"></script>
+        <% } %>
     <% } %>
     <script type="text/javascript" src="{{ url_for_cache('static', path='vendor/htmx/js/json-enc.js') }}"></script>
     <script type="text/javascript" src="{{ url_for_cache('static', path='vendor/htmx/js/response-targets.js') }}"></script>
