@@ -1,18 +1,13 @@
 name: Epic
 description: Epics describe larger blocks of work (dutch)
+labels: ["epic"]
 labels: [ ]
 body:
-  - type: markdown
-    attributes:
-      value: |
-        # Thank you for adding an epic
-
   - type: textarea
     id: description
     attributes:
       label: Description
-      description: |
-        Epics are written in Dutch as they serve as intermediary with policy.
+      description: Epics are written in Dutch as they serve as intermediary with policy.
       placeholder:
       value:
     validations:
