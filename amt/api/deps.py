@@ -13,6 +13,7 @@ from amt.api.http_browser_caching import url_for_cache
 from amt.core.config import VERSION, get_settings
 from amt.core.internationalization import (
     format_datetime,
+    format_timedelta,
     get_dynamic_field_translations,
     get_requested_language,
     get_supported_translation,
@@ -86,4 +87,5 @@ templates = LocaleJinja2Templates(
     directory="amt/site/templates/", context_processors=[custom_context_processor], undefined=get_undefined_behaviour()
 )
 templates.env.filters["format_datetime"] = format_datetime  # pyright: ignore [reportUnknownMemberType]
+templates.env.filters["format_timedelta"] = format_timedelta  # pyright: ignore [reportUnknownMemberType]
 templates.env.globals.update(url_for_cache=url_for_cache)  # pyright: ignore [reportUnknownMemberType]

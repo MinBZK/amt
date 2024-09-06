@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-08-15 15:18+0200\n"
+"POT-Creation-Date: 2024-09-16 15:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,21 +17,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: amt/site/templates/header.html.j2:4
+#: amt/site/templates/footer.html.j2:4
+msgid ""
+"Algorithm Management\n"
+"                Toolkit"
+msgstr ""
+
+#: amt/site/templates/footer.html.j2:39
+msgid "Language"
+msgstr ""
+
+#: amt/site/templates/header.html.j2:8
 msgid "Algorithm Management Toolkit"
 msgstr ""
 
-#: amt/site/templates/header.html.j2:10
-msgid "New project"
-msgstr ""
-
-#: amt/site/templates/header.html.j2:11
-#: amt/site/templates/projects/index.html.j2:4
+#: amt/site/templates/header.html.j2:33
+#: amt/site/templates/projects/index.html.j2:7
 msgid "Projects"
 msgstr ""
 
-#: amt/site/templates/header.html.j2:16
-msgid "Language"
+#: amt/site/templates/header.html.j2:43
+msgid "New project"
 msgstr ""
 
 #: amt/site/templates/errors/_RequestValidation.html.j2:1
@@ -66,22 +72,60 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-#: amt/site/templates/projects/index.html.j2:11
-msgid "Find projects..."
+#: amt/site/templates/pages/assessment_card.html.j2:7
+#: amt/site/templates/pages/model_card.html.j2:7
+#: amt/site/templates/pages/system_card.html.j2:7
+msgid "Last updated "
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:4
-msgid "New Project"
+#: amt/site/templates/pages/assessment_card.html.j2:7
+#: amt/site/templates/pages/model_card.html.j2:7
+#: amt/site/templates/pages/system_card.html.j2:7
+msgid "ago"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:7
-msgid "Project name"
+#: amt/site/templates/pages/assessment_card.html.j2:13
+#: amt/site/templates/pages/model_card.html.j2:13
+#: amt/site/templates/pages/model_card.html.j2:36
+#: amt/site/templates/pages/system_card.html.j2:62
+msgid " Attribute "
+msgstr ""
+
+#: amt/site/templates/pages/assessment_card.html.j2:14
+#: amt/site/templates/pages/model_card.html.j2:14
+#: amt/site/templates/pages/model_card.html.j2:37
+#: amt/site/templates/pages/system_card.html.j2:63
+msgid " Value "
+msgstr ""
+
+#: amt/site/templates/pages/assessment_card.html.j2:35
+msgid " Question "
+msgstr ""
+
+#: amt/site/templates/pages/assessment_card.html.j2:36
+msgid " Answer "
+msgstr ""
+
+#: amt/site/templates/projects/index.html.j2:20
+msgid "Find project..."
 msgstr ""
 
 #: amt/site/templates/projects/new.html.j2:10
-msgid "Selected Instruments"
+msgid "Create new project"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:18
+#: amt/site/templates/projects/new.html.j2:25
+msgid "Project name"
+msgstr ""
+
+#: amt/site/templates/projects/new.html.j2:43
+msgid "Instruments"
+msgstr ""
+
+#: amt/site/templates/projects/new.html.j2:48
+msgid "Select 1 or more instruments"
+msgstr ""
+
+#: amt/site/templates/projects/new.html.j2:69
 msgid "Create Project"
 msgstr ""

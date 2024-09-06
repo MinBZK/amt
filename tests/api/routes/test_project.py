@@ -25,3 +25,122 @@ def test_get_unknown_project(client: TestClient) -> None:
     assert response.status_code == 404
     assert response.headers["content-type"] == "text/html; charset=utf-8"
     assert b"NotFound: Not found" in response.content
+
+
+# TODO: Test are now have hard coded URL paths because the system card
+# is fixed for now. Tests need to be refactored and made proper once
+# the actual stored system card in a project is being rendered.
+def test_get_system_card(client: TestClient, db: DatabaseTestUtils) -> None:
+    # given
+    db.given([default_project("testproject1")])
+
+    # when
+    response = client.get("/project/1/system_card")
+
+    # then
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert b"System card" in response.content
+
+
+# TODO: Test are now have hard coded URL paths because the system card
+# is fixed for now. Tests need to be refactored and made proper once
+# the actual stored system card in a project is being rendered.
+def test_get_system_card_unknown_project(client: TestClient) -> None:
+    # when
+    response = client.get("/project/1/system_card")
+
+    # then
+    assert response.status_code == 404
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert b"NotFound: Not found" in response.content
+
+
+# TODO: Test are now have hard coded URL paths because the system card
+# is fixed for now. Tests need to be refactored and made proper once
+# the actual stored system card in a project is being rendered.
+def test_get_assessment_card(client: TestClient, db: DatabaseTestUtils) -> None:
+    # given
+    db.given([default_project("testproject1")])
+
+    # when
+    response = client.get("/project/1/system_card/assessments/iama")
+
+    # then
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert b"Assessment card" in response.content
+
+
+# TODO: Test are now have hard coded URL paths because the system card
+# is fixed for now. Tests need to be refactored and made proper once
+# the actual stored system card in a project is being rendered.
+def test_get_assessment_card_unknown_project(client: TestClient) -> None:
+    # when
+    response = client.get("/project/1/system_card/assessments/iama")
+
+    # then
+    assert response.status_code == 404
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert b"NotFound: Not found" in response.content
+
+
+# TODO: Test are now have hard coded URL paths because the system card
+# is fixed for now. Tests need to be refactored and made proper once
+# the actual stored system card in a project is being rendered.
+def test_get_assessment_card_unknown_assessment(client: TestClient, db: DatabaseTestUtils) -> None:
+    # given
+    db.given([default_project("testproject1")])
+
+    # when
+    response = client.get("/project/1/system_card/assessments/nonexistent")
+
+    # then
+    assert response.status_code == 404
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert b"NotFound: Not found" in response.content
+
+
+# TODO: Test are now have hard coded URL paths because the system card
+# is fixed for now. Tests need to be refactored and made proper once
+# the actual stored system card in a project is being rendered.
+def test_get_model_card(client: TestClient, db: DatabaseTestUtils) -> None:
+    # given
+    db.given([default_project("testproject1")])
+
+    # when
+    response = client.get("/project/1/system_card/models/logres_iris")
+
+    # then
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert b"Model card" in response.content
+
+
+# TODO: Test are now have hard coded URL paths because the system card
+# is fixed for now. Tests need to be refactored and made proper once
+# the actual stored system card in a project is being rendered.
+def test_get_model_card_unknown_project(client: TestClient) -> None:
+    # when
+    response = client.get("/project/1/system_card/models/logres_iris")
+
+    # then
+    assert response.status_code == 404
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert b"NotFound: Not found" in response.content
+
+
+# TODO: Test are now have hard coded URL paths because the system card
+# is fixed for now. Tests need to be refactored and made proper once
+# the actual stored system card in a project is being rendered.
+def test_get_assessment_card_unknown_model_card(client: TestClient, db: DatabaseTestUtils) -> None:
+    # given
+    db.given([default_project("testproject1")])
+
+    # when
+    response = client.get("/project/1/system_card/models/nonexistent")
+
+    # then
+    assert response.status_code == 404
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert b"NotFound: Not found" in response.content

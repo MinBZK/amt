@@ -1,5 +1,5 @@
 import logging
-from datetime import datetime
+from datetime import datetime, timedelta
 from functools import lru_cache
 
 import yaml
@@ -50,6 +50,11 @@ def format_datetime(value: datetime, locale: str, format: str = "medium") -> str
     else:
         format = "dd/MM/y HH:mm"
     return dates.format_datetime(value, format, locale=locale)
+
+
+def format_timedelta(value: timedelta, locale: str = "en_US") -> str:
+    # TODO: (Christopher) make this work
+    return dates.format_timedelta(value, locale=locale)
 
 
 def get_requested_language(request: Request) -> str:

@@ -1,0 +1,387 @@
+provenance:
+  git_commit_hash: 3eb1f1b
+  timestamp: 2024-04-16T16:48:14Z
+  uri: https://github.com/MinBZK/tad-conversion-tool
+  author: John Doe
+name: IAMA
+urn: "urn:nl:aivt:ir:iama:1.0"
+date: "2025-03-25"
+contents:
+  - question: "Licht uw voorstel voor het gebruik/de inzet van een algoritme toe. Wat is de aanleiding hiervoor geweest? Voor welk probleem moet het algoritme een oplossing bieden?"
+    answer: "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: Remark
+    authors:
+      - name: "John Doe"
+      - name: "Jane Doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Wat is het doel dat bereikt dient te worden met de inzet van het algoritme? Wat is hierbij het hoofddoel en wat zijn subdoelen?"
+    answer: "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: Remark
+    authors:
+      - name: "John Doe"
+      - name: "Jane Doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Wat zijn de publieke waarden die de inzet van het algoritme ingeven? Indien meerdere publieke waarden de inzet van het algoritme ingeven, kan daar een rangschikking in aangebracht worden?"
+    answer: "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: Remark
+    authors:
+      - name: "John Doe"
+      - name: "Jane Doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Wat zijn de publieke waarden die mogelijk in het gedrang komen door de inzet van het algoritme?"
+    answer: "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: Remark
+    authors:
+      - name: "John Doe"
+      - name: "Jane Doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Wat is de wettelijke grondslag van de inzet van dit algoritme en van de beoogde besluiten die genomen zullen worden op basis van dit algoritme?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Welke partijen en personen zijn er bij de ontwikkeling/het gebruik/het onderhoud van het algoritme betrokken?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Hoe zijn de verantwoordelijkheden belegd ten aanzien van de ontwikkeling en de inzet van het algoritme, ook nadat het algoritme eenmaal is afgerond?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Wie is eindverantwoordelijk voor het algoritme?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: " Wat voor type algoritme wordt gebruikt, of wat voor type algoritme gaat ontwikkeld worden?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Wat voor type data gaat gebruikt worden als input voor het algoritme en uit welke bronnen is de data afkomstig? Indien geen gebruik wordt gemaakt van inputdata, ga door naar onderwerp 2A.4"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Is de kwaliteit en betrouwbaarheid van de data voldoende voor de beoogde datatoepassing? Leg uit."
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Welke aannames en bias liggen in de data besloten en hoe wordt de invloed daarvan op de output van het algoritme gecorrigeerd of anderszins ondervangen of gemitigeerd (zie ook bijlage 2)?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Indien gebruik wordt gemaakt van trainingsdata: is de data representatief voor de context waarin het algoritme ingezet gaat worden?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Is de data voldoende beveiligd? Maak hierin onderscheid tussen de inputdata en de outputdata."
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Is er controle op de toegang tot de data? Maak hierin onderscheid tussen de inputdata en de outputdata."
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Hoe worden relevante regels over archivering in acht genomen, zoals die in de Archiefwet zijn vastgelegd?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Type algoritme: wat voor soort algoritme wordt gebruikt of gaat worden gebruikt? Hoe werkt het?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Waarom wordt voor dit type algoritme gekozen?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Waarom is dit type algoritme het meest geschikt om de bij vraag 1.2 geformuleerde doelstellingen te bereiken?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Welke alternatieven zijn er en waarom zijn die minder passend of bruikbaar?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Indien het algoritme is ontwikkeld door een externe partij: zijn er heldere afspraken gemaakt over eigenaarschap en beheer van het algoritme? Wat zijn die afspraken?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Welke maatregelen kunnen worden getroffen om de risico’s van reproductie of zelfs versterking van biases tegen te gaan (bijv. andere samplingstrategie, feature modification, ...)?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Welke aannames liggen ten grondslag aan de selectie en weging van de indicatoren? Zijn die aannames terecht? Waarom wel/niet?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Hoe vaak/erg zit het algoritme ernaast? (bijv. in termen van aantal false positives, false negatives, R-squared, ...)"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Is het duidelijk wat het algoritme doet, hoe het dit doet, en op basis waarvan (welke data) het dit doet? Leg uit."
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Voor welke personen en groepen binnen en buiten de eigen organisatie wordt de werking van het algoritme transparant gemaakt en hoe gebeurt dit?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Voor welke doelgroepen moet het algoritme uitlegbaar zijn?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Kan de werking van het algoritme voor de bij vraag B.4.3 geïdentificeerde doelgroepen op een voldoende begrijpelijke manier worden uitgelegd?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Wat gebeurt er met de uitkomsten van het algoritme? Welke beslissingen worden daarop gebaseerd?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Welke rol spelen mensen bij het nemen van beslissingen op basis van de output van het algoritme (‘human in the loop’) en hoe worden zij in staat gesteld om die rol te spelen?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Is er nu en in de toekomst voldoende gekwalificeerd personeel aanwezig om het algoritme te beheren, te herzien en aan te passen indien gewenst/nodig?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Wat zullen de effecten zijn van de inzet van het algoritme voor burgersen hoe wordt rekening gehouden met de ‘menselijke maat’ bij het nemen van beslissingen op basis van de output van het algoritme?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Welke risico’s voor stigmatiserende, discriminerende of anderszins schadelijke of nadelige effecten zijn er voor de burger en hoe zullen die worden bestreden of gemitigeerd?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Hoe zullen de verwachte effecten bijdragen aan de oplossing van het probleem dat de aanleiding is voor de ontwikkeling/inzet van het algoritme (zie vraag 1.1) en het bereiken van de daarbij gestelde doelen (zie vraag 1.2)?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Hoe verhouden de verwachte effecten zich tot de waarden die worden gediend (zie vraag 1.3)? Welke risico’s zijn er dat bepaalde waarden onder druk komen te staan en hoe wordt daarmee dan omgegaan?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Via welke procedures zullen beslissingen op basis van het algoritme worden genomen?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Hoe worden verschillende relevante actoren (bestuurlijke en politiek verantwoordelijken, burgers) bij de besluitvorming betrokken?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Hoe wordt gegarandeerd dat in deze procedures wordt voldaan aan de eisen van goed en behoorlijk bestuur en – waar nodig – rechtsbescherming? Hebben burgers een effectieve mogelijkheid om een klacht in te dienen of bezwaar te maken? Zo ja, op welke manier?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Tijd/periode: wanneer gaat het algoritme ingezet worden? Hoe lang is de periode dat het ingezet wordt?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Plaats: waar vindt inzet van het algoritme plaats? Is dat in een bepaald geografisch gebied, is dat bij een bepaalde groep personen of dossiers?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Kan het algoritme ook nog worden ingezet als contextfactoren veranderen of als het algoritme gebruikt wordt in een andere context dan waarvoor het is ontwikkeld?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Hoe open kunt u zijn over de werking van het algoritme in het licht van de doelstellingen en context van de inzet ervan?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Op welke manier beoogt u te communiceren over de inzet van het algoritme?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Wordt de output van het algoritme gevisualiseerd, bijvoorbeeld in een tabel, grafiek of dashboard? Zo ja: is de vorm van visualisatie of weergave een correcte representatie van de output van het algoritme? Is de visualisatie makkelijk te lezen voor verschillende gebruikersgroepen?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Is voorzien in goede instrumenten voor evaluatie, auditing en borging van het algoritme?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Zijn er voldoende mogelijkheden om rekenschap en verantwoording af te leggen over het algoritme?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Welke mogelijkheden zijn er voor auditors en toezichthouders om (formele) consequenties te verbinden aan de inzet van een algoritme door de overheid (bijv. terugkoppeling van bevindingen, doen van aanbevelingen, budgettaire consequenties, ...)"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Wordt er een grondrecht geraakt door het in te zetten algoritme?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Zijn er specifieke wettelijke bepalingen of richtsnoeren van toepassing op de grondrechteninbreuk?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Hoe zwaar wordt een grondrecht geraakt door het algoritme?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Welke doelen worden met inzet van het algoritme nagestreefd? Kijk hierbij naar uw antwoord op vraag 1.2"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Vormt het in te zetten algoritme een doeltreffend middel om de gestelde doelen te realiseren? Leg uit."
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Is inzet van dit specifieke algoritme noodzakelijk om dit doel te bereiken en zijn er geen andere of mitigerende maatregelen beschikbaar om dit te doen? Leg uit"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
+  - question: "Levert inzet van het algoritme een redelijk evenwicht op tussen de te realiseren doelen en de grondrechten die worden geraakt, en waarom is dat zo?"
+    answer: "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."
+    remarks: remark
+    authors:
+      - name: "john doe"
+      - name: "jane doe"
+    timestamp: "2024-04-17T12:03:23Z"
