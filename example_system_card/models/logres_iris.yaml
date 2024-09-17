@@ -1,0 +1,90 @@
+language:
+  - nl
+name: logres_iris
+license: EUPL-1.2
+tags:
+  - "Iris Flower Classifcation"
+  - "Logistic Regression"
+
+owners:
+  - organization: Ministerie van Binnenlandse Zaken en Koninkrijksrelaties
+    oin: "0000001003214345000"
+    name: John Doe
+    email: johndoe@email.com
+    role: Engineer
+
+model-index:
+  - name: Logistic Regression Iris
+    model: https://github.com/MinBZK/poc-kijkdoos-wasm-models
+    artifacts:
+      - uri: "https://raw.githubusercontent.com/MinBZK/poc-kijkdoos-wasm-models/main/logres_iris/logreg_iris.onnx"
+        type: "onnx"
+        example:
+          - sepal_length: 1
+          - sepal_width: 2
+          - petal_length: 3
+          - petal_width: 4
+    parameters:
+      - name: epochs
+        dtype: int
+        value: "100"
+        labels:
+          - name: "param_label_name"
+            dtype: "param_label_dtype"
+            value: "param_label_value"
+    results:
+      - task:
+          type: tabular-classification
+          name: Classification of Iris Flowers
+        datasets:
+          - type: "https://huggingface.co/datasets/scikit-learn/iris/viewer"
+            name: "Iris Species Dataset"
+            split: "train"
+            features:
+              - "sepal_length"
+              - "sepal_width"
+              - "petal_length"
+              - "petal_width"
+            revision: "5503434ddd753f426f4b38109466949a1217c2bb"
+        metrics:
+          - type: accuracy
+            name: "Training Accuracy"
+            dtype: "float"
+            value: "1.0"
+            labels:
+              - name: "split"
+                type: "metadata"
+                dtype: "string"
+                value: "training"
+        measurements:
+          bar_plots:
+            - type: SHAP
+              name: Mean Absolute Shap Values
+              results:
+                - name: age
+                  value: "2.7313991690892594e-08"
+                - name: gender
+                  value: "2.1010905880210835e-11"
+                - name: income
+                  value: "0.027878870612476556"
+                - name: race
+                  value: "1.9742755605937866e-11"
+                - name: home_ownership
+                  value: "4.98389997821369e-12"
+                - name: prior_count
+                  value: "2.7000142407680143e-08"
+                - name: loan_amount
+                  value: "0.03782010359850043"
+                - name: loan_interests
+                  value: "3.5613580001571624e-12"
+          graph_plots:
+            - type: "partial_dependence"
+              name: "Partial Dependence Plot"
+              results:
+                - class: "1"
+                  feature: "gender"
+                  data:
+                    - x_value: "0"
+                      y_value: "1"
+                    - x_value: "1"
+                      y_value: "1"

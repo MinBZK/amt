@@ -1,0 +1,58 @@
+{% extends 'layouts/base.html.j2' %}
+{% import 'macros/cards.html.j2' as render with context %}
+
+{% block content %}
+<div class="rvo-layout-column rvo-layout-gap--md">
+    <h2 class="utrecht-heading-2 rvo-heading--no-margins">Assessment card</h2>
+    <span class="rvo-text"> {% trans %}Last updated {% endtrans %} {{last_updated | format_timedelta(language)}} {% trans %}ago{% endtrans %}</span>
+
+<div class="rvo-table--responsive">
+  <table class="rvo-table">
+    <thead class="rvo-table-head">
+      <tr class="rvo-table-row">
+        <th scope="col" class="rvo-table-header">{% trans %} Attribute {% endtrans %}</th>
+        <th scope="col" class="rvo-table-header">{% trans %} Value {% endtrans %}</th>
+      </tr>
+    </thead>
+    {% for key, value in assessment_card.items() %}
+    {% if key != "contents" %}
+    <tbody class="rvo-table-body">
+      <tr class="rvo-table-row">
+        <td class="rvo-table-cell"><strong>{{key.capitalize().replace("_", " ")}}</strong></td>
+        <td class="rvo-table-cell"> {{render.render_value(key, value,0)}} </td>
+      </tr>
+    {% endif %}
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<h3 class="utrecht-heading-3">Content</h3>
+<div class="rvo-table--responsive">
+  <table class="rvo-table">
+    <thead class="rvo-table-head">
+      <tr class="rvo-table-row">
+        <th scope="col" class="rvo-table-header">{% trans %} Question {% endtrans %}</th>
+        <th scope="col" class="rvo-table-header">{% trans %} Answer {% endtrans %}</th>
+      </tr>
+    </thead>
+    {% for content in assessment_card["contents"]%}
+    <tbody class="rvo-table-body">
+      <tr class="rvo-table-row">
+        <td class="rvo-table-cell"><strong>{{content["question"]}}</strong></td>
+        <td class="rvo-table-cell">
+        {{content["answer"]}}
+        {% set keys = ["urn", "remarks", "authors", "timestamp"] %}
+        {% set metadata = {} %}
+        {% for key in keys %}
+        {% set _x=metadata.__setitem__(key, content[key])%}
+        {% endfor %}
+        {{ render.render_value("",metadata,0) }}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+</div>
+{% endblock %}

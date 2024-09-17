@@ -1,0 +1,46 @@
+{% macro render_include_path(path) -%}
+    {{ path.urlpath.split("/")[-1].split(".")[0]}}
+{%- endmacro %}
+
+{% macro render_attribute(attribute) -%}
+{{attribute.capitalize().replace("_", " ")}}
+{%- endmacro %}
+
+{% macro render_value(key, value, depth) -%}
+    {% if value.__class__.__name__ == 'dict'%}
+    <div class="{% if depth == 1 %}margin-bottom-large{% endif%}">
+        {% for subkey, subvalue in value.items() %}
+        <strong> {{render_attribute(subkey)}} </strong>: {{render_value(subkey, subvalue, depth+1)}}
+        {% if not loop.last %}<br \>{% endif %}
+        {% endfor %}
+    </div>
+    {% elif value.__class__.__name__ == 'list'%}
+    {% if key == "assessments" %}
+    {% for assessment in value %}
+        {{ assessment["name"] }}
+    {% endfor %}
+    {% elif key == "models" %}
+    {% for model in value %}
+        {{ model["name"] }}
+    {% endfor %}
+    {% else %}
+    <div style="margin-left: {{ depth * 10}}px">
+        {% for item in value %}
+            {{render_value("", item, depth+1)}}
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% else %}
+    {% if key == "uri" or key == "link" or key == "upl"%}
+    <a class="rvo-link rvo-link--normal" href="{{value}}">{{value}}</a>
+    {% elif key == "oin" %}
+    <a class="rvo-link rvo-link--normal" href="{{value}}">https://oinregister.logius.nl/oin-register/{{value}}</a>
+    {% elif key == "email" %}
+    <a class="rvo-link rvo-link--normal" href="mailto:{{value}}">{{value}}</a>
+    {% elif key == "urn" %}
+    <a class="rvo-link rvo-link--normal" href="{{value}}">https://minbzk.github.io/instrument-registry/instruments/urn/{{value}}</a>
+    {% else %}
+    {{ value }}
+    {% endif %}
+    {% endif %}
+{%- endmacro %}

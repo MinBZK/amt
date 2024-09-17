@@ -62,6 +62,7 @@ RUN pyright
 FROM development AS test
 
 COPY ./example/ ./example/
+COPY ./example_system_card/ ./example_system_card/
 RUN npm run build
 
 FROM project-base AS production
