@@ -80,6 +80,7 @@ USER amt
 COPY --chown=root:root --chmod=755 amt /app/amt
 COPY --chown=root:root --chmod=755 alembic.ini /app/alembic.ini
 COPY --chown=root:root --chmod=755 prod.env /app/.env
+COPY --chown=root:root --chmod=755 example_system_card /app/example_system_card
 COPY --chown=root:root --chmod=755 LICENSE /app/LICENSE
 COPY --chown=amt:amt --chmod=755 docker-entrypoint.sh /app/docker-entrypoint.sh
 USER root
