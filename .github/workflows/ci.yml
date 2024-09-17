@@ -372,6 +372,6 @@ jobs:
           MATTERMOST_WEBHOOK_URL: ${{ secrets.MM_WEBHOOK_URL }}
           MATTERMOST_CHANNEL: dev
           TEXT: |
-            ${{ github.repository }} failed build @here :unamused:
-            :rotating_light: [Pipeline](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) failed :fire:
+            ${{ github.repository }} failed build for ${{ github.ref_name }} by ${{ github.actor }}
+            [Pipeline](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) failed :fire:
           MATTERMOST_USERNAME: ${{ github.triggering_actor }}
