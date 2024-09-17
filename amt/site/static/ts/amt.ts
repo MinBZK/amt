@@ -6,7 +6,7 @@ import "../scss/layout.scss";
 
 _hyperscript.browserInit();
 
-window.onload = function () {
+document.addEventListener("DOMContentLoaded", function () {
   // TODO (robbert): we need (better) event handling and displaying of server errors
   document.body.addEventListener("htmx:sendError", function () {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -18,8 +18,8 @@ window.onload = function () {
     "progress-cards-container",
   ) as HTMLCollectionOf<HTMLDivElement>;
   for (const column of columns) {
-    new Sortable(column, {
-      //NOSONAR
+    // prettier-ignore
+    new Sortable(column, { //NOSONAR
       group: "shared", // set both lists to same group
       animation: 150,
       onEnd: function (evt) {
@@ -56,7 +56,7 @@ window.onload = function () {
       },
     });
   }
-};
+});
 
 export function setCookie(
   cookieName: string,
@@ -79,6 +79,20 @@ declare global {
     ) => void;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     htmx: any;
+  }
+}
+
+export function showMobileMenu() {
+  const el: Element | null = document.getElementById("mobile-menu-container");
+  if (el != null) {
+    el.classList.remove("display-none");
+  }
+}
+
+export function hideMobileMenu() {
+  const el: Element | null = document.getElementById("mobile-menu-container");
+  if (el != null) {
+    el.classList.add("display-none");
   }
 }
 

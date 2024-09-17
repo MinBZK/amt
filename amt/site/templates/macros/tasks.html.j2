@@ -1,6 +1,6 @@
 {% macro column(project, status, translations, tasks_service) -%}
-<div class="col span_1_of_4">
-    <h3 class="text-center-horizontal margin-bottom--small">
+<div>
+    <h5 class="utrecht-heading-5">
         {# code below is not nice, sorry, there doesn't seem to be a better way though #}
         {% if status == 1 %}
         {% trans %}Todo{% endtrans %}
@@ -13,7 +13,7 @@
         {% else %}
         {% trans %}Unknown{% endtrans %}
         {% endif %}
-    </h3>
+    </h5>
     <div class="progress-cards-container sortable" data-id="{{ status.value }}" id="column-{{ status.value }}">
         {% if project is defined %}
             {% for task in tasks_service.get_tasks_for_project(project.id, status) %}
@@ -37,7 +37,7 @@
 
 {% macro render_task_card_content(task) -%}
 <div id="card-content-{{ task.id }}" data-id="{{ task.id }}">
-    <h4 class="margin-bottom--extra-small">{{ task.title | truncate(100)}}</h4>
+    <div class="rvo-label--sm">{{ task.title | truncate(100)}}</div>
     <div>{{ task.description }}</div>
     {% if task.user_id %}
     <div class="progress-card-assignees-container">

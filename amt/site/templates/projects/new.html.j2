@@ -1,17 +1,18 @@
 {% extends 'layouts/base.html.j2' %}
 
 {% block content %}
-<div class="rvo-layout-column rvo-layout-gap--lg">
-    <div class="rvo-max-width-layout rvo-max-width-layout--md">
-        <main>
+
+    <div class="rvo-max-width-layout rvo-max-width-layout--md rvo-max-width-layout-inline-padding--none margin-bottom-large">
+
             <div class="rvo-form">
                 <div class="rvo-layout-column rvo-layout-gap--sm">
                     <div class="rvo-form-intro">
-                        <h1 class="utrecht-heading-1">{% trans %}Create new project{% endtrans %}</h1>
+                        <h1 class="utrecht-heading-1">{% trans %}Create a new project{% endtrans %}</h1>
                     </div>
                     <form class="rvo-layout-column rvo-layout-gap--2xl" hx-ext="json-enc" hx-post="/projects/new"
                           hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}' hx-target-error="#errorContainer"
-                          hx-swap="innerHTML" method="post">
+                          hx-swap="innerHTML" method="post"
+                          id="form-new-project">
                         <div class="utrecht-form-fieldset rvo-form-fieldset">
                             <fieldset
                                 class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset"
@@ -22,11 +23,11 @@
                                     class="utrecht-form-field utrecht-form-field--text rvo-form-field"
                                 >
                                     <div class="rvo-form-field__label">
-                                        <label class="rvo-label">{% trans %}Project name{% endtrans %}</label>
+                                        <label class="rvo-label">{% trans %}Project{% endtrans %}</label>
                                     </div>
                                     <input
                                         id="name"
-                                        placeholder="Jouw project naam hier"
+                                        placeholder="{% trans %}Your project name here{% endtrans %}"
                                         name="name"
                                         type="text"
                                         class="utrecht-textbox utrecht-textbox--html-input"
@@ -45,7 +46,7 @@
                                             id="helperTextId"
                                             class="utrecht-form-field-description"
                                         >
-                                            {% trans %}Select 1 or more instruments{% endtrans %}
+                                            {% trans %}Choose one or more instruments{% endtrans %}:
                                         </div>
                                     </div>
                                     {% for instrument in instruments %}
@@ -65,6 +66,7 @@
                             <button
                                 class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
                                 type="submit"
+                                id="button-new-project-create"
                             >
                                 {% trans %}Create Project{% endtrans %}
                             </button>
@@ -73,7 +75,5 @@
                     <div id="errorContainer"></div>
                 </div>
             </div>
-        </main>
     </div>
-</div>
 {% endblock %}

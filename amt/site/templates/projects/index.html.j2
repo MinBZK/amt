@@ -2,15 +2,31 @@
 
 {% block content %}
 
-<main class="rvo-max-width-layout rvo-max-width-layout--sm">
-    <div class="rvo-content">
-        <h1 class="utrecht-heading-1">{% trans %}Projects{% endtrans %}</h1>
-    </div>
-    <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
-        <div class="rvo-form-layout">
-            <div class="rvo-max-width-layout rvo-max-width-layout--lg rvo-max-width-layout-inline-padding--none">
+    <div class="rvo-max-width-layout rvo-max-width-layout--md rvo-max-width-layout-inline-padding--none">
+        <div class="rvo-content">
+
+            <div
+                class="amt-layout-grid rvo-layout-gap--md amt-layout-grid-columns--two"
+            >
+                <div>
+                    <h1 class="utrecht-heading-1">{% trans %}Projects{% endtrans %}</h1>
+                </div>
+                <div style="margin-left: auto">
+                    <a data-navigation="button:/projects/new" href="/projects/new">
+                        <button
+                            class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
+                            type="button"
+                        >{% trans %}New project{% endtrans %}</button>
+                    </a>
+                </div>
+            </div>
+
+            <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
                 <div class="rvo-inline-form">
-                    <div role="group" aria-labelledby="fieldId-label" class="utrecht-form-field utrecht-form-field--text rvo-form-field">
+                    <div role="group" aria-labelledby="fieldId-label"
+                         class="utrecht-form-field utrecht-form-field--text rvo-form-field">
+                        <form id="search-project-form">
+                        <div class="form-input-container">
                         <input
                             id="project-search-input"
                             type="text"
@@ -27,16 +43,27 @@
                             autocomplete="off"
                             onfocus="this.value=''"
                         />
+
+                            <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--lg form-input-clear" role="img" aria-label="Kruis"
+                                   hx-trigger="click"
+                                   hx-get="/projects/?skip=0"
+                                   hx-target="#project-search-results"
+                                   hx-indicator=".htmx-indicator"
+                                   hx-swap="innerHTML"
+                                   onclick="document.getElementById('search-project-form').reset()"
+                            ></span>
+                        </div>
+
+                        </form>
                     </div>
                 </div>
-            </div>
+            </fieldset>
+            <ul class="rvo-item-list" id="project-search-results">
+                {% include 'projects/_list.html.j2' %}
+            </ul>
         </div>
-    </fieldset>
-    <ul class="rvo-item-list" id="project-search-results">
-        {% include 'projects/_list.html.j2' %}
-    </ul>
-</main>
+    </div>
 
-<div id="errorContainer"></div>
+    <div id="errorContainer"></div>
 
 {% endblock %}

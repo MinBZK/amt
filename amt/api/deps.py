@@ -10,10 +10,12 @@ from starlette.background import BackgroundTask
 from starlette.templating import _TemplateResponse  # pyright: ignore [reportPrivateUsage]
 
 from amt.api.http_browser_caching import url_for_cache
+from amt.api.navigation import NavigationItem, get_main_menu
 from amt.core.config import VERSION, get_settings
 from amt.core.internationalization import (
     format_datetime,
     format_timedelta,
+    get_current_translation,
     get_dynamic_field_translations,
     get_requested_language,
     get_supported_translation,
@@ -24,13 +26,15 @@ from amt.core.internationalization import (
 logger = logging.getLogger(__name__)
 
 
-def custom_context_processor(request: Request) -> dict[str, str | list[str] | dict[str, str]]:
+def custom_context_processor(request: Request) -> dict[str, str | list[str] | dict[str, str] | list[NavigationItem]]:
     lang = get_requested_language(request)
+    translations = get_current_translation(request)
     return {
         "version": VERSION,
         "available_translations": list(supported_translations),
         "language": lang,
         "translations": get_dynamic_field_translations(lang),
+        "main_menu_items": get_main_menu(request, translations),
     }
 
 

@@ -1,6 +1,17 @@
+from amt.api.navigation import BaseNavigationItem, DisplayText
 from amt.models import Project, Task, User
 from amt.schema.instrument import Instrument, InstrumentTask, Owner
 from fastapi import Request
+from starlette.datastructures import URL
+
+
+def default_base_navigation_item(
+    url: str = "/default/",
+    custom_display_text: str = "Default item",
+    display_text: DisplayText | None = None,
+    icon: str = "/icons/default.svg",
+) -> BaseNavigationItem:
+    return BaseNavigationItem(display_text=display_text, url=url, custom_display_text=custom_display_text, icon=icon)
 
 
 def default_user(name: str = "default user", avatar: str | None = None) -> User:
@@ -11,9 +22,10 @@ def default_project(name: str = "default project", model_card: str = "/tmp/1.yam
     return Project(name=name, model_card=model_card)
 
 
-def default_fastapi_request() -> Request:
+def default_fastapi_request(url: str = "/") -> Request:
     request = Request(scope={"type": "http", "http_version": "1.1", "method": "GET", "headers": []})
     request.state.csrftoken = ""
+    request._url = URL(url=url)  # pyright: ignore [reportPrivateUsage]
     return request
 
 

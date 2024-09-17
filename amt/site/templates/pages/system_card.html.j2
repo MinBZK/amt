@@ -2,76 +2,76 @@
 {% import 'macros/cards.html.j2' as render with context %}
 
 {% block content %}
-<div class="rvo-layout-column rvo-layout-gap--md">
-    <h2 class="utrecht-heading-2 rvo-heading--no-margins">System card</h2>
-    <span class="rvo-text"> {% trans %}Last updated {% endtrans %} {{last_updated | format_timedelta(language)}} {% trans %}ago{% endtrans %}</span>
+    <div class="rvo-max-width-layout rvo-max-width-layout--md rvo-max-width-layout-inline-padding--none">
 
-<div
-  class="rvo-layout-row rvo-layout-align-items-start rvo-layout-gap--xl"
->
-  {% if system_card["assessments"] %}
-  <div>
-    <h4 class="utrecht-heading-4">Assessment cards</h4>
-    <ul class="rvo-ul rvo-ul--no-margin rvo-ul--none rvo-ul--no-padding">
-          {% for assessment in system_card["assessments"] %}
-          <li>
-          <a
-          class="rvo-link rvo-link--with-icon rvo-link--zwart rvo-link--normal"
-          href="/project/{{project_id}}/system_card/assessments/{{assessment["name"].lower()}}"
-          >
+        <div class="rvo-layout-column rvo-layout-gap--md">
+            <h2 class="utrecht-heading-2 rvo-heading--no-margins">System card</h2>
+            <span class="rvo-text">{% trans %}Last updated{% endtrans %}: {{ last_updated | format_timedelta(language) }} {% trans %}ago{% endtrans %}</span>
+            <div class="rvo-layout-row rvo-layout-align-items-start rvo-layout-gap--xl">
+                {% if system_card["assessments"] %}
+                    <div>
+                        <h4 class="utrecht-heading-4">Assessment cards</h4>
+                        <ul class="rvo-ul rvo-ul--no-margin rvo-ul--none rvo-ul--no-padding">
+                            {% for assessment in system_card["assessments"] %}
+                                <li>
+                                    <a
+                                        class="rvo-link rvo-link--with-icon rvo-link--zwart rvo-link--normal"
+                                        href="/project/{{ project_id }}/system_card/assessments/{{ assessment["name"].lower() }}"
+                                    >
           <span
-            class="utrecht-icon rvo-icon rvo-icon-document-met-lijnen rvo-icon--md rvo-icon--zwart rvo-link__icon--before"
-            role="img"
-            aria-label="Document met lijnen"
+              class="utrecht-icon rvo-icon rvo-icon-document-met-lijnen rvo-icon--md rvo-icon--zwart rvo-link__icon--before"
+              role="img"
+              aria-label="Document met lijnen"
           ></span>
-          {{ assessment["name"] }}
-         </a>
-         </li>
-         {% endfor %}
-      </ul>
-  </div>
-  {% endif %}
-  {% if system_card["models"] %}
-  <div>
-    <h4 class="utrecht-heading-4">Model cards</h4>
-    <ul class="rvo-ul rvo-ul--no-margin rvo-ul--none rvo-ul--no-padding">
-          {% for model in system_card["models"] %}
-          <li>
-          <a
-          class="rvo-link rvo-link--with-icon rvo-link--zwart rvo-link--normal"
-          href="/project/{{project_id}}/system_card/models/{{model["name"].lower()}}"
-          >
-          <span
-            class="utrecht-icon rvo-icon rvo-icon-document-met-lijnen rvo-icon--md rvo-icon--zwart rvo-link__icon--before"
-            role="img"
-            aria-label="Document met lijnen"
-          ></span>
-          {{model["name"]}}
-         </a>
-         </li>
-          {% endfor %}
-      </ul>
-  </div>
-  {% endif %}
-</div>
+                                        {{ assessment["name"] }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                {% if system_card["models"] %}
+                    <div>
+                        <h4 class="utrecht-heading-4">Model cards</h4>
+                        <ul class="rvo-ul rvo-ul--no-margin rvo-ul--none rvo-ul--no-padding">
+                            {% for model in system_card["models"] %}
+                                <li>
+                                    <a
+                                        class="rvo-link rvo-link--with-icon rvo-link--zwart rvo-link--normal"
+                                        href="/project/{{ project_id }}/system_card/models/{{ model["name"].lower() }}"
+                                    >
+                                      <span
+                                          class="utrecht-icon rvo-icon rvo-icon-document-met-lijnen rvo-icon--md rvo-icon--zwart rvo-link__icon--before"
+                                          role="img"
+                                          aria-label="Document met lijnen"
+                                      ></span>
+                                        {{ model["name"] }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
 
-<div class="rvo-table--responsive">
-  <table class="rvo-table">
-    <thead class="rvo-table-head">
-      <tr class="rvo-table-row">
-        <th scope="col" class="rvo-table-header">{% trans %} Attribute {% endtrans %}</th>
-        <th scope="col" class="rvo-table-header">{% trans %} Value {% endtrans %}</th>
-      </tr>
-    </thead>
-    {% for key, value in system_card.items() %}
-    <tbody class="rvo-table-body">
-      <tr class="rvo-table-row">
-        <td class="rvo-table-cell"><strong>{{key.capitalize().replace("_", " ")}}</strong></td>
-        <td class="rvo-table-cell"> {{render.render_value(key, value, 0)}} </td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
-</div>
-</div>
+            <div class="rvo-table--responsive">
+                <table class="rvo-table">
+                    <thead class="rvo-table-head">
+                    <tr class="rvo-table-row">
+                        <th scope="col" class="rvo-table-header">{% trans %}Attribute{% endtrans %}</th>
+                        <th scope="col" class="rvo-table-header">{% trans %}Value{% endtrans %}</th>
+                    </tr>
+                    </thead>
+                    {% for key, value in system_card.items() %}
+                        <tbody class="rvo-table-body">
+                        <tr class="rvo-table-row">
+                            <td class="rvo-table-cell"><strong>{{ key.capitalize().replace("_", " ") }}</strong></td>
+                            <td class="rvo-table-cell"> {{ render.render_value(key, value, 0) }} </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 {% endblock %}

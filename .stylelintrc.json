@@ -3,10 +3,5 @@
   "rules": {
     "declaration-block-no-redundant-longhand-properties": null
   },
-  "ignoreFiles": [
-    "amt/site/static/css/*cols.css",
-    "amt/site/static/css/col.css",
-    "amt/site/static/css/html5reset.css",
-    "htmlcov/*.css"
-  ]
+  "ignoreFiles": ["htmlcov/*.css"]
 }

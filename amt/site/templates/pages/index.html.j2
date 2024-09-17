@@ -1,44 +1,14 @@
 {% extends 'layouts/base.html.j2' %}
-{# disable macro caching, see // https://jinja.palletsprojects.com/en/3.0.x/templates/#import-context-behavior #}
-{% import 'macros/render.html.j2' as render with context %}
 
-{% block styles %}
-    {{ super() }}
-    <link rel="stylesheet" href="{{ url_for_cache('static', path='css/col.css') }} "/>
-    <link rel="stylesheet" href="{{ url_for_cache('static', path='css/2cols.css') }}"/>
-    <link rel="stylesheet" href="{{ url_for_cache('static', path='css/3cols.css') }}"/>
-    <link rel="stylesheet" href="{{ url_for_cache('static', path='css/4cols.css') }}"/>
-    <link rel="stylesheet" href="{{ url_for_cache('static', path='css/5cols.css') }}"/>
-    <link rel="stylesheet" href="{{ url_for_cache('static', path='css/6cols.css') }}"/>
-    <link rel="stylesheet" href="{{ url_for_cache('static', path='css/7cols.css') }}"/>
-    <link rel="stylesheet" href="{{ url_for_cache('static', path='css/8cols.css') }}"/>
-    <link rel="stylesheet" href="{{ url_for_cache('static', path='css/9cols.css') }}"/>
-    <link rel="stylesheet" href="{{ url_for_cache('static', path='css/10cols.css') }}"/>
-    <link rel="stylesheet" href="{{ url_for_cache('static', path='css/11cols.css') }}"/>
-    <link rel="stylesheet" href="{{ url_for_cache('static', path='css/12cols.css') }}"/>
-{% endblock %}
+{% block title %} {% trans %}AMT Placeholder informatie pagina's{% endtrans %} {% endblock %}
 
 {% block content %}
-<div class="container">
-    <form id="cardMovedForm" hx-patch="/tasks/" hx-ext="json-enc" hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}' hx-target-5*="#errorContainer"  hx-trigger="cardmoved" hx-swap="outerHTML" hx-target="#board" class="">
-        <input type="hidden" name="taskId" value="">
-        <input type="hidden" name="statusId" value="">
-        <input type="hidden" name="previousSiblingId" value="">
-        <input type="hidden" name="nextSiblingId" value="">
-    </form>
-    <h1 class="margin-bottom-large">
-        {% if project is defined %}
-            {{ project.name | default('Unknown', true) }}
-        {% else %}
-            Unknown
-        {% endif %}
-    </h1>
-        <div id="errorContainer">
+    <div class="rvo-max-width-layout rvo-max-width-layout--md rvo-max-width-layout-inline-padding--none">
+        <div class="rvo-content">
+            <h1 class="utrecht-heading-1">Pagina's</h1>
+            <p>
+                    Op dit pad / in deze folder komen de informatieve pagina's zoals contact, disclaimer etc.
+            </p>
         </div>
-        <div class="section group">
-            {% for status in statuses %}
-                {{ render.column(project, status, translations, tasks_service) }}
-            {% endfor %}
-        </div>
-</div>
+    </div>
 {% endblock %}

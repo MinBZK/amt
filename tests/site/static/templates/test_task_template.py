@@ -9,11 +9,11 @@ def test_template_rendering():
     request = default_fastapi_request()
 
     task = Task(id=1, title="Test Task", description="Test Description", sort_order=1)
-    result = templates.TemplateResponse(request, "task.html.j2", context={"task": task})
+    result = templates.TemplateResponse(request, "parts/task.html.j2", context={"task": task})
     expected_result = """
     <div id="card-content-1" data-id="1">
-      <h4 class="margin-bottom--extra-small">Test Task</h4>
-      <div>Test Description</div>
+      <div class="rvo-label--sm">TestTask</div>
+      <div>TestDescription</div>
     </div>
     """
     # todo (robbert) there is probably a better way to clean results than replacing newlines and spaces

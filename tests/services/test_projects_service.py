@@ -27,9 +27,6 @@ def test_get_project():
     # When
     project = projects_service.get(project_id)
 
-    if project is None:
-        raise AssertionError()
-
     # Then
     assert project.id == project_id
     assert project.name == project_name
