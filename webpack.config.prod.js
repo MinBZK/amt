@@ -3,6 +3,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackDeployPlugin = require("html-webpack-deploy-plugin");
+const ReplaceInFileWebpackPlugin = require("replace-in-file-webpack-plugin")
 
 module.exports = {
   mode: 'production',
@@ -11,7 +12,8 @@ module.exports = {
     filename: 'amt.[contenthash].js',
     path: path.resolve(__dirname, 'amt/site/static/dist'),
     clean: true,
-    publicPath: '/static/dist/'
+    publicPath: '/static/dist/',
+    library: 'amt',
   },
   devtool: 'source-map',
   module: {
@@ -51,6 +53,7 @@ module.exports = {
     }),
     new HtmlWebpackDeployPlugin({
       usePackagesPath: false,
+      getPackagePath: (packageName, packageVersion, packagePath) => path.join(packageName, packagePath),
       packages: {
         '@nl-rvo/assets': {
           copy: [
@@ -90,5 +93,14 @@ module.exports = {
       filename: "[name].[contenthash].css",
       chunkFilename: "[id].css",
     }),
+    // to make CSS variables work, we replace the url with the full path
+    new ReplaceInFileWebpackPlugin([{
+      dir: 'amt/site/static/dist/@nl-rvo/assets/icons/',
+      files: ['index.css'],
+      rules: [{
+        search: /url\("/ig,
+        replace: 'url("/static/dist/@nl-rvo/assets/icons/'
+      }]
+    }])
   ]
 };

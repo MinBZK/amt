@@ -25,7 +25,7 @@ async def http_exception_handler(request: Request, exc: StarletteHTTPException) 
     return templates.TemplateResponse(
         request,
         "errors/HTTPException.html.j2",
-        {"status_code": exc.status_code, "status_message": exc.detail},
+        {"status_code": exc.status_code, "status_message": exc.detail, "breadcrumbs": []},
         status_code=exc.status_code,
     )
 

@@ -11,4 +11,4 @@ def test_tempate_error():
 
     # then
     assert response.headers["Content-Type"] == "text/html; charset=utf-8"
-    assert b"An error occured" in response.body
+    assert b"An error occurred" in response.body

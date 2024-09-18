@@ -35,6 +35,10 @@ def get_translation(lang: str) -> NullTranslations:
     return Translations.load("amt/locale", locales=_translations_to_locale[lang])
 
 
+def get_current_translation(request: Request) -> NullTranslations:
+    return get_translation(get_supported_translation(get_requested_language(request)))
+
+
 def format_datetime(value: datetime, locale: str, format: str = "medium") -> str:
     if format == "full" and locale == "fy":
         weekday = get_dynamic_field_translations("fy")["weekdays"][int(datetime.date(value).strftime("%w"))]

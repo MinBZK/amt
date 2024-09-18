@@ -27,15 +27,8 @@ class ProjectsService:
         self.instrument_service = instrument_service
         self.task_service = task_service
 
-    def get(self, project_id: int) -> Project | None:
-        project = None
-        try:
-            project = self.repository.find_by_id(project_id)
-        except Exception:
-            logger.exception(f"Project with id {project_id} not found")
-            project = None
-
-        return project
+    def get(self, project_id: int) -> Project:
+        return self.repository.find_by_id(project_id)
 
     def create(self, project_new: ProjectNew) -> Project:
         project = Project(name=project_new.name)

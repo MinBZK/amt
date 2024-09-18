@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 
-from tests.constants import default_project
+from tests.constants import default_project, default_task
 from tests.database_test_utils import DatabaseTestUtils
 
 
@@ -25,6 +25,19 @@ def test_get_unknown_project(client: TestClient) -> None:
     assert response.status_code == 404
     assert response.headers["content-type"] == "text/html; charset=utf-8"
     assert b"NotFound: Not found" in response.content
+
+
+def test_get_project_tasks(client: TestClient, db: DatabaseTestUtils) -> None:
+    # given
+    db.given([default_project("testproject1"), default_task(project_id=1, status_id=1)])
+
+    # when
+    response = client.get("/project/1/tasks")
+
+    # then
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert b"Default Task" in response.content
 
 
 # TODO: Test are now have hard coded URL paths because the system card

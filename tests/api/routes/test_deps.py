@@ -10,7 +10,7 @@ def test_custom_context_processor():
     request: Request = Mock()
     request.cookies.get.return_value = "nl"
     result = custom_context_processor(request)
-    assert list(result.keys()) == ["version", "available_translations", "language", "translations"]
+    assert list(result.keys()) == ["version", "available_translations", "language", "translations", "main_menu_items"]
     assert result["version"] == VERSION
     assert result["available_translations"] == list(supported_translations)
     assert result["language"] == "nl"

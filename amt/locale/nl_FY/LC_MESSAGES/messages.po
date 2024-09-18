@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-09-16 15:00+0200\n"
+"POT-Creation-Date: 2024-09-18 11:47+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_FY\n"
@@ -18,27 +18,40 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: amt/site/templates/footer.html.j2:4
-msgid ""
-"Algorithm Management\n"
-"                Toolkit"
+#: amt/api/navigation.py:39
+msgid "Home"
 msgstr ""
 
-#: amt/site/templates/footer.html.j2:39
-msgid "Language"
-msgstr ""
-
-#: amt/site/templates/header.html.j2:8
-msgid "Algorithm Management Toolkit"
-msgstr ""
-
-#: amt/site/templates/header.html.j2:33
-#: amt/site/templates/projects/index.html.j2:7
+#: amt/api/navigation.py:40 amt/site/templates/projects/index.html.j2:12
 msgid "Projects"
 msgstr ""
 
-#: amt/site/templates/header.html.j2:43
-msgid "New project"
+#: amt/api/navigation.py:41
+msgid "Overview"
+msgstr ""
+
+#: amt/api/navigation.py:42 amt/site/templates/projects/tasks.html.j2:8
+msgid "Tasks"
+msgstr ""
+
+#: amt/api/navigation.py:43
+msgid "New"
+msgstr ""
+
+#: amt/api/navigation.py:44
+msgid "System card"
+msgstr ""
+
+#: amt/api/navigation.py:45
+msgid "Assessment card"
+msgstr ""
+
+#: amt/api/navigation.py:46
+msgid "Model card"
+msgstr ""
+
+#: amt/api/navigation.py:47
+msgid "Details"
 msgstr ""
 
 #: amt/site/templates/errors/_RequestValidation.html.j2:1
@@ -46,99 +59,127 @@ msgid "Request Validation Error"
 msgstr ""
 
 #: amt/site/templates/errors/error.html.j2:4
-msgid "An error occured"
+msgid "An error occurred"
 msgstr ""
 
-#: amt/site/templates/layouts/base.html.j2:11
+#: amt/site/templates/layouts/base.html.j2:1
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr ""
 
-#: amt/site/templates/macros/render.html.j2:6
+#: amt/site/templates/macros/tasks.html.j2:6
 msgid "Todo"
 msgstr "Dwaan"
 
-#: amt/site/templates/macros/render.html.j2:8
+#: amt/site/templates/macros/tasks.html.j2:8
 msgid "Doing"
 msgstr "Dwaande"
 
-#: amt/site/templates/macros/render.html.j2:10
+#: amt/site/templates/macros/tasks.html.j2:10
 msgid "Reviewing"
 msgstr "Resinsje"
 
-#: amt/site/templates/macros/render.html.j2:12
+#: amt/site/templates/macros/tasks.html.j2:12
 msgid "Done"
 msgstr "Dien"
 
-#: amt/site/templates/macros/render.html.j2:14
+#: amt/site/templates/macros/tasks.html.j2:14
 msgid "Unknown"
 msgstr ""
 
-#: amt/site/templates/pages/assessment_card.html.j2:7
-#: amt/site/templates/pages/model_card.html.j2:7
-#: amt/site/templates/pages/system_card.html.j2:7
-msgid "Last updated "
+#: amt/site/templates/pages/assessment_card.html.j2:9
+#: amt/site/templates/pages/model_card.html.j2:8
+#: amt/site/templates/pages/system_card.html.j2:9
+msgid "Last updated"
 msgstr ""
 
-#: amt/site/templates/pages/assessment_card.html.j2:7
-#: amt/site/templates/pages/model_card.html.j2:7
-#: amt/site/templates/pages/system_card.html.j2:7
+#: amt/site/templates/pages/assessment_card.html.j2:9
+#: amt/site/templates/pages/model_card.html.j2:8
+#: amt/site/templates/pages/system_card.html.j2:9
 msgid "ago"
 msgstr ""
 
-#: amt/site/templates/pages/assessment_card.html.j2:13
-#: amt/site/templates/pages/model_card.html.j2:13
-#: amt/site/templates/pages/model_card.html.j2:36
-#: amt/site/templates/pages/system_card.html.j2:62
-msgid " Attribute "
-msgstr ""
-
-#: amt/site/templates/pages/assessment_card.html.j2:14
+#: amt/site/templates/pages/assessment_card.html.j2:15
 #: amt/site/templates/pages/model_card.html.j2:14
-#: amt/site/templates/pages/model_card.html.j2:37
-#: amt/site/templates/pages/system_card.html.j2:63
-msgid " Value "
+#: amt/site/templates/pages/model_card.html.j2:38
+#: amt/site/templates/pages/system_card.html.j2:61
+msgid "Attribute"
 msgstr ""
 
-#: amt/site/templates/pages/assessment_card.html.j2:35
-msgid " Question "
+#: amt/site/templates/pages/assessment_card.html.j2:16
+#: amt/site/templates/pages/model_card.html.j2:15
+#: amt/site/templates/pages/model_card.html.j2:39
+#: amt/site/templates/pages/system_card.html.j2:62
+msgid "Value"
 msgstr ""
 
-#: amt/site/templates/pages/assessment_card.html.j2:36
-msgid " Answer "
+#: amt/site/templates/pages/assessment_card.html.j2:38
+msgid "Question"
 msgstr ""
 
-#: amt/site/templates/projects/index.html.j2:20
+#: amt/site/templates/pages/assessment_card.html.j2:39
+msgid "Answer"
+msgstr ""
+
+#: amt/site/templates/pages/index.html.j2:3
+msgid "AMT Placeholder informatie pagina's"
+msgstr ""
+
+#: amt/site/templates/parts/footer.html.j2:4
+#: amt/site/templates/parts/header.html.j2:8
+msgid "Algorithm Management Toolkit"
+msgstr ""
+
+#: amt/site/templates/parts/footer.html.j2:15
+msgid "About us"
+msgstr ""
+
+#: amt/site/templates/parts/footer.html.j2:27
+msgid "Contact"
+msgstr ""
+
+#: amt/site/templates/parts/header.html.j2:8
+msgid "version"
+msgstr ""
+
+#: amt/site/templates/parts/header.html.j2:70
+#: amt/site/templates/parts/header.html.j2:107
+msgid "Language"
+msgstr ""
+
+#: amt/site/templates/projects/index.html.j2:19
+#, fuzzy
+msgid "New project"
+msgstr "Fine projekt..."
+
+#: amt/site/templates/projects/index.html.j2:36
 msgid "Find project..."
 msgstr "Fine projekt..."
 
 #: amt/site/templates/projects/new.html.j2:10
-msgid "Create new project"
+#, fuzzy
+msgid "Create a new project"
+msgstr "Fine projekt..."
+
+#: amt/site/templates/projects/new.html.j2:26
+#, fuzzy
+msgid "Project"
+msgstr "Fine projekt..."
+
+#: amt/site/templates/projects/new.html.j2:30
+msgid "Your project name here"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:25
-msgid "Project name"
-msgstr ""
-
-#: amt/site/templates/projects/new.html.j2:43
+#: amt/site/templates/projects/new.html.j2:44
 msgid "Instruments"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:48
-msgid "Select 1 or more instruments"
+#: amt/site/templates/projects/new.html.j2:49
+msgid "Choose one or more instruments"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:69
+#: amt/site/templates/projects/new.html.j2:71
 msgid "Create Project"
 msgstr ""
 
-#~ msgid "New Project"
-#~ msgstr ""
-
-#~ msgid "Selected Instruments"
-#~ msgstr ""
-
-#~ msgid " Last updated "
-#~ msgstr ""
-
-#~ msgid " ago "
+#~ msgid "Your projectname here"
 #~ msgstr ""

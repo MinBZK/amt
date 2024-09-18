@@ -32,4 +32,4 @@ async def move_task(
         moved_task.previous_sibling_id,
         moved_task.next_sibling_id,
     )
-    return templates.TemplateResponse(request, "task.html.j2", {"task": task})
+    return templates.TemplateResponse(request, "parts/task.html.j2", {"task": task})

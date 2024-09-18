@@ -7,7 +7,7 @@
     "test": "jest",
     "typecheck": "tsc --noEmit",
     "stylecheck": "npx stylelint '**/*.scss'",
-    "start": "webpack --watch",
+    "start": "webpack --watch --mode=development",
     "build": "webpack --config webpack.config.prod.js",
     "prettier": "prettier . --write",
     "prettier:check": "prettier . --check",
@@ -34,6 +34,7 @@
     "mini-css-extract-plugin": "^2.9.1",
     "prettier": "3.3.3",
     "sass": "^1.78.0",
+    "replace-in-file-webpack-plugin": "^1.0.6",
     "sass-loader": "^16.0.1",
     "style-loader": "^4.0.0",
     "stylelint": "^16.9.0",
@@ -51,6 +52,7 @@
     "@nl-rvo/design-tokens": "1.0.0-alpha.407",
     "htmx.org": "^1.9.12",
     "hyperscript.org": "^0.9.12",
+    "reset-css": "^5.0.2",
     "sortablejs": "^1.15.3"
   },
   "lint-staged": {

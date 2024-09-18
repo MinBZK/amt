@@ -1,35 +1,16 @@
-:root {
-    --clr-neutral-800: hsl(234deg 29% 20%);
-    --clr-neutral-700: hsl(235deg 18% 26%);
-    --clr-neutral-200: hsl(231deg 7% 60%);
-    --clr-neutral-100: hsl(0deg 0% 100%);
-    --clr-accent-600: hsl(211deg 69% 27%);
-    --clr-accent-400: hsl(203deg 100% 39%);
-    --clr-accent-200: hsl(203deg 63.8% 81.6%);
-    --ff-base: "RijksoverheidSansWebText", sans-serif;
-    --fw-regular: 400;
-    --fw-bold: 700;
-    --fs-300: 0.825rem;
-    --fs-400: 1rem;
-    --fs-900: 2.5rem;
+@import url("../../../../node_modules/reset-css/sass/_reset.scss");
+
+.language-selection {
+    margin-inline-end: clamp(1rem, 2vw, 4rem);
 }
 
-/* Box sizing rules */
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
+/* we combine the body and main styles to create a layout in which the main (content) block always fills up the remaining space
+  this results in a 'full page' view with a footer which 'sticks' to the end of the viewport of the browser
+*/
 
 body {
-    font-family: var(--ff-base);
-    font-size: var(--fs-400);
-    font-weight: var(--fw-regular);
-    color: var(--clr-neutral-800);
-    line-height: 1.5;
     min-height: 100vh;
-    min-height: 100svh;
-    background-color: var(--clr-neutral-100);
+    background-color: #fff;
     display: flex;
     flex-direction: column;
 }
@@ -38,21 +19,32 @@ main {
     flex-grow: 1;
     flex-shrink: 0;
     flex-basis: auto;
-    margin-inline: clamp(1rem, 2vw, 4rem);
 }
 
-.language-selection {
-    margin-inline-end: clamp(1rem, 2vw, 4rem);
+/* to avoid text sticking to the left/right margin, we add padding on smaller display */
+@media only screen and (width <= calc(912px + 1em)) {
+    /* can not use css vars in media queries */
+    .rvo-max-width-layout {
+        padding: 0 0.5em;
+    }
 }
 
-/* Add an empty line before the rule */
-.project-list a {
-    text-decoration: none;
-    color: inherit;
+/* class below is missing in NL design output so we add it here it adds the most basic styling for font and colors */
+.rvo-theme {
+    background-color: var(--utrecht-document-background-color);
+    color: var(--utrecht-document-color);
+    font-family: var(--utrecht-document-font-family);
+    font-size: var(--utrecht-document-font-size);
+    font-weight: var(--utrecht-document-font-weight);
+    line-height: var(--utrecht-document-line-height);
 }
 
 .margin-bottom-large {
     margin-bottom: 1em;
+}
+
+.margin-top-large {
+    margin-top: 1em;
 }
 
 .margin-bottom-small {
@@ -65,15 +57,16 @@ main {
 
 .progress-cards-container {
     min-height: 30em;
-    background-color: rgb(229 241 249);
+    background-color: var(--rvo-color-hemelblauw-150);
     border-radius: 10px;
-    margin: 0 0.5em;
     overflow: hidden;
+    height: calc(100% - 30px); /* todo (robbert): this is a display hack */
 }
 
 .progress-card-container {
     margin: 0.5em;
-    border: 1px solid rgb(21 66 115);
+    border: 1px solid;
+    border-color: var(--rvo-color-hemelblauw);
     padding: 0.5em;
     border-radius: 10px;
     background-color: #fff;
@@ -100,7 +93,62 @@ main {
     display: inline-block;
 }
 
-.project-list li {
-    list-style-type: none;
-    white-space: nowrap;
+.navbar-fixed {
+    top: 0;
+    z-index: 100;
+    position: sticky;
+    background: #fff;
+}
+
+.form-input-container {
+    position: relative;
+}
+
+.form-input-container .form-input-clear {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+}
+
+/* remove input clear button in certain browsers */
+[type="search"]::-webkit-search-cancel-button,
+[type="search"]::-webkit-search-decoration {
+    appearance: none;
+}
+
+.display-none {
+    display: none;
+}
+
+#amt-main-menu-mobile {
+    @media only screen and (width <= 912px) {
+        display: flex;
+    }
+
+    @media only screen and (width > 912px) {
+        display: none;
+    }
+}
+
+#amt-main-menu-desktop,
+#amt-sub-menu-desktop {
+    @media only screen and (width <= 912px) {
+        display: none;
+    }
+
+    @media only screen and (width > 912px) {
+        display: block;
+    }
+}
+
+.amt-layout-grid {
+    display: grid;
+
+    /* ROOS only has responsive grid, but here we want a fixed grid */
+    /* stylelint-disable selector-class-pattern */
+    &.amt-layout-grid-columns--two {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    /* stylelint-enable */
 }

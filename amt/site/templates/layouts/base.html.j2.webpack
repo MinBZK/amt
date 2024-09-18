@@ -23,22 +23,21 @@
     <script type="text/javascript" src="{{ url_for_cache('static', path='vendor/htmx/js/response-targets.js') }}"></script>
     {% endblock %}
     {% block styles %}
-    <link rel="stylesheet" href="{{ url_for_cache('static', path='css/html5reset.css') }}" />
     <% for (const css of htmlWebpackPlugin.files.css) { %>
         <link rel="stylesheet" href="{{ url_for_cache('static', path='<%= css.split('/static/')[1] %>') }}">
         <% } %>
     {% endblock %}
 </head>
 
-<body hx-ext="response-targets" class="rvo-theme rvo-layout-gap--3xl">
+<body hx-ext="response-targets" class="rvo-theme">
     {% block header %}
-    {% include 'header.html.j2' %}
+    {% include 'parts/header.html.j2' %}
     {% endblock %}
     <main>
         {% block content %}{% endblock %}
     </main>
     {% block footer %}
-    {% include 'footer.html.j2' %}
+    {% include 'parts/footer.html.j2' %}
     {% endblock %}
 </body>
 

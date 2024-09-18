@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-09-16 15:00+0200\n"
+"POT-Creation-Date: 2024-09-18 11:47+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_NL\n"
@@ -18,128 +18,162 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: amt/site/templates/footer.html.j2:4
-#, fuzzy
-msgid ""
-"Algorithm Management\n"
-"                Toolkit"
-msgstr "Algoritme Management Toolkit"
+#: amt/api/navigation.py:39
+msgid "Home"
+msgstr "Start"
 
-#: amt/site/templates/footer.html.j2:39
-msgid "Language"
-msgstr "Taal"
-
-#: amt/site/templates/header.html.j2:8
-msgid "Algorithm Management Toolkit"
-msgstr "Algoritme Management Toolkit"
-
-#: amt/site/templates/header.html.j2:33
-#: amt/site/templates/projects/index.html.j2:7
+#: amt/api/navigation.py:40 amt/site/templates/projects/index.html.j2:12
 msgid "Projects"
 msgstr "Projecten"
 
-#: amt/site/templates/header.html.j2:43
-msgid "New project"
-msgstr "Nieuw project"
+#: amt/api/navigation.py:41
+msgid "Overview"
+msgstr "Overzicht"
+
+#: amt/api/navigation.py:42 amt/site/templates/projects/tasks.html.j2:8
+msgid "Tasks"
+msgstr "Taken"
+
+#: amt/api/navigation.py:43
+msgid "New"
+msgstr "Nieuw"
+
+#: amt/api/navigation.py:44
+msgid "System card"
+msgstr ""
+
+#: amt/api/navigation.py:45
+msgid "Assessment card"
+msgstr ""
+
+#: amt/api/navigation.py:46
+msgid "Model card"
+msgstr ""
+
+#: amt/api/navigation.py:47
+msgid "Details"
+msgstr ""
 
 #: amt/site/templates/errors/_RequestValidation.html.j2:1
 msgid "Request Validation Error"
 msgstr "Aanvraag Validatie Fout"
 
 #: amt/site/templates/errors/error.html.j2:4
-msgid "An error occured"
+msgid "An error occurred"
 msgstr "Er is is een fout opgetreden"
 
-#: amt/site/templates/layouts/base.html.j2:11
+#: amt/site/templates/layouts/base.html.j2:1
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr "Algoritme Management Toolkit (AMT)"
 
-#: amt/site/templates/macros/render.html.j2:6
+#: amt/site/templates/macros/tasks.html.j2:6
 msgid "Todo"
 msgstr "Te doen"
 
-#: amt/site/templates/macros/render.html.j2:8
+#: amt/site/templates/macros/tasks.html.j2:8
 msgid "Doing"
 msgstr "Onderhanden"
 
-#: amt/site/templates/macros/render.html.j2:10
+#: amt/site/templates/macros/tasks.html.j2:10
 msgid "Reviewing"
 msgstr "Beoordelen"
 
-#: amt/site/templates/macros/render.html.j2:12
+#: amt/site/templates/macros/tasks.html.j2:12
 msgid "Done"
 msgstr "Afgerond"
 
-#: amt/site/templates/macros/render.html.j2:14
+#: amt/site/templates/macros/tasks.html.j2:14
 msgid "Unknown"
 msgstr "Onbekend"
 
-#: amt/site/templates/pages/assessment_card.html.j2:7
-#: amt/site/templates/pages/model_card.html.j2:7
-#: amt/site/templates/pages/system_card.html.j2:7
-msgid "Last updated "
+#: amt/site/templates/pages/assessment_card.html.j2:9
+#: amt/site/templates/pages/model_card.html.j2:8
+#: amt/site/templates/pages/system_card.html.j2:9
+msgid "Last updated"
 msgstr "Laatst bijgewerkt"
 
-#: amt/site/templates/pages/assessment_card.html.j2:7
-#: amt/site/templates/pages/model_card.html.j2:7
-#: amt/site/templates/pages/system_card.html.j2:7
+#: amt/site/templates/pages/assessment_card.html.j2:9
+#: amt/site/templates/pages/model_card.html.j2:8
+#: amt/site/templates/pages/system_card.html.j2:9
 msgid "ago"
 msgstr "geleden"
 
-#: amt/site/templates/pages/assessment_card.html.j2:13
-#: amt/site/templates/pages/model_card.html.j2:13
-#: amt/site/templates/pages/model_card.html.j2:36
-#: amt/site/templates/pages/system_card.html.j2:62
-msgid " Attribute "
+#: amt/site/templates/pages/assessment_card.html.j2:15
+#: amt/site/templates/pages/model_card.html.j2:14
+#: amt/site/templates/pages/model_card.html.j2:38
+#: amt/site/templates/pages/system_card.html.j2:61
+msgid "Attribute"
 msgstr "Attribuut"
 
-#: amt/site/templates/pages/assessment_card.html.j2:14
-#: amt/site/templates/pages/model_card.html.j2:14
-#: amt/site/templates/pages/model_card.html.j2:37
-#: amt/site/templates/pages/system_card.html.j2:63
-msgid " Value "
+#: amt/site/templates/pages/assessment_card.html.j2:16
+#: amt/site/templates/pages/model_card.html.j2:15
+#: amt/site/templates/pages/model_card.html.j2:39
+#: amt/site/templates/pages/system_card.html.j2:62
+msgid "Value"
 msgstr "Waarde"
 
-#: amt/site/templates/pages/assessment_card.html.j2:35
-msgid " Question "
+#: amt/site/templates/pages/assessment_card.html.j2:38
+msgid "Question"
 msgstr "Vraag"
 
-#: amt/site/templates/pages/assessment_card.html.j2:36
-msgid " Answer "
+#: amt/site/templates/pages/assessment_card.html.j2:39
+msgid "Answer"
 msgstr "Antwoord"
 
-#: amt/site/templates/projects/index.html.j2:20
+#: amt/site/templates/pages/index.html.j2:3
+msgid "AMT Placeholder informatie pagina's"
+msgstr ""
+
+#: amt/site/templates/parts/footer.html.j2:4
+#: amt/site/templates/parts/header.html.j2:8
+msgid "Algorithm Management Toolkit"
+msgstr "Algoritme Management Toolkit"
+
+#: amt/site/templates/parts/footer.html.j2:15
+msgid "About us"
+msgstr "Over ons"
+
+#: amt/site/templates/parts/footer.html.j2:27
+msgid "Contact"
+msgstr "Contact"
+
+#: amt/site/templates/parts/header.html.j2:8
+msgid "version"
+msgstr "versie"
+
+#: amt/site/templates/parts/header.html.j2:70
+#: amt/site/templates/parts/header.html.j2:107
+msgid "Language"
+msgstr "Taal"
+
+#: amt/site/templates/projects/index.html.j2:19
+msgid "New project"
+msgstr "Nieuw project"
+
+#: amt/site/templates/projects/index.html.j2:36
 msgid "Find project..."
 msgstr "Zoek project..."
 
 #: amt/site/templates/projects/new.html.j2:10
-#, fuzzy
-msgid "Create new project"
-msgstr "Maak project"
+msgid "Create a new project"
+msgstr "Maak een nieuw project"
 
-#: amt/site/templates/projects/new.html.j2:25
-msgid "Project name"
-msgstr "Project naam"
+#: amt/site/templates/projects/new.html.j2:26
+msgid "Project"
+msgstr "Project"
 
-#: amt/site/templates/projects/new.html.j2:43
-#, fuzzy
+#: amt/site/templates/projects/new.html.j2:30
+msgid "Your project name here"
+msgstr "Jouw projectnaam hier"
+
+#: amt/site/templates/projects/new.html.j2:44
 msgid "Instruments"
-msgstr "Geselecteerde instrumenten"
+msgstr "Instrumenten"
 
-#: amt/site/templates/projects/new.html.j2:48
-#, fuzzy
-msgid "Select 1 or more instruments"
-msgstr "Geselecteerde instrumenten"
+#: amt/site/templates/projects/new.html.j2:49
+msgid "Choose one or more instruments"
+msgstr "Kies één of meerdere instrumenten"
 
-#: amt/site/templates/projects/new.html.j2:69
+#: amt/site/templates/projects/new.html.j2:71
 msgid "Create Project"
 msgstr "Maak project"
-
-#~ msgid "New Project"
-#~ msgstr "Nieuw project"
-
-#~ msgid " Last updated "
-#~ msgstr ""
-
-#~ msgid " ago "
-#~ msgstr ""

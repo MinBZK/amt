@@ -19,7 +19,7 @@ def test_url_for_cache_not_local():
 
 
 def test_url_for_cache_file_not_found():
-    with pytest.raises(ValueError, match="Static file not found."):
+    with pytest.raises(ValueError, match="Static file this/does/not/exist not found."):
         http_browser_caching.url_for_cache("static", path="this/does/not/exist")
 
 

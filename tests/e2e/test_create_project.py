@@ -14,17 +14,17 @@ def test_e2e_create_project(page: Page):
 
     impact_assesment.check()
 
-    button = page.get_by_role("button", name="Create Project")
+    button = page.locator("#button-new-project-create")
     button.click()
 
-    expect(page.get_by_role("heading", name="My new project")).to_be_visible()
+    expect(page.get_by_text("My new project")).to_be_visible()
 
 
 @pytest.mark.slow
 def test_e2e_create_project_invalid(page: Page):
     page.goto("/projects/new")
 
-    button = page.get_by_role("button", name="Create Project")
+    button = page.locator("#button-new-project-create")
     button.click()
 
     expect(page.get_by_role("heading", name="Request Validation Error")).to_be_visible()
@@ -42,10 +42,10 @@ def test_e2e_create_project_with_tasks(page: Page):
 
     impact_assesment.check()
 
-    button = page.get_by_role("button", name="Create Project")
+    button = page.locator("#button-new-project-create")
     button.click()
 
-    expect(page.get_by_role("heading", name="My new filled project")).to_be_visible()
+    expect(page.get_by_text("My new filled project")).to_be_visible()
     card_1 = page.get_by_text("Geef een korte beschrijving van het beoogde AI-systeem")
     expect(card_1).to_be_visible()
     card_2 = page.get_by_text("Waarom is er voor de huidige techniek gekozen?")

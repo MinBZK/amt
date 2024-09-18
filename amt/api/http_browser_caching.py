@@ -72,7 +72,7 @@ def url_for_cache(name: str, /, **path_params: str) -> str:
     resolved_url_path: str = "/" + name + "/" + url_parts.path  # type: ignore
     _, stat_result = static_files.lookup_path(url_parts.path)  # type: ignore
     if not stat_result:
-        raise ValueError("Static file not found.")
+        raise ValueError(f"Static file {url_parts.path} not found.")  # type: ignore
 
     etag_base = str(stat_result.st_mtime) + "-" + str(stat_result.st_size)
     etag = f"{md5_hexdigest(etag_base.encode(), usedforsecurity=False)}"

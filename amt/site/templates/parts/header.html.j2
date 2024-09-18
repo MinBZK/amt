@@ -1,0 +1,175 @@
+<header class="header">
+    <div class="rvo-header__logo-wrapper">
+        <div class="rvo-logo rvo-header__logo-img">
+            <div class="rvo-logo__emblem">
+                <img src="/static/dist/@nl-rvo/assets/images/emblem.svg">
+            </div>
+            <div class="rvo-logo__wordmark">
+                <p class="rvo-logo__title">{% trans %}Algorithm Management Toolkit{% endtrans %}<br/>{% trans %}version{% endtrans %} {{ version }}</p>
+            </div>
+        </div>
+    </div>
+</header>
+<div
+    id="amt-main-menu-mobile"
+    class="rvo-mobile-menu rvo-mobile-menu--md rvo-mobile-menu--open rvo-mobile-menu--horizontal-rule navbar-fixed"
+    aria-expanded="true"
+>
+    <button class="utrecht-button rvo-mobile-menu__toggle" type="button"
+            onclick="amt.showMobileMenu()"
+    >
+    <span
+        class="utrecht-icon rvo-icon rvo-icon-menu rvo-icon--md rvo-icon--hemelblauw rvo-mobile-menu__open-icon"
+        role="img"
+        aria-label="Menu"
+    ></span>
+        Menu
+    </button>
+    <div id="mobile-menu-container" class="display-none rvo-topnav__background">
+        <nav class="rvo-topnav rvo-topnav--md">
+      <span
+          class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--md rvo-icon--hemelblauw rvo-mobile-menu__close-icon"
+          role="img"
+          aria-label="Kruis"
+          onclick="amt.hideMobileMenu()"
+      ></span>
+            <ul class="rvo-topnav__list rvo-topnav__list--vertical">
+
+                {% for menu_item in main_menu_items %}
+                    <li class="rvo-topnav__item {% if menu_item.active %}rvo-topnav__item--active{% endif %}">
+                        <a data-navigation="mobile-main-menu:{{ menu_item.get_url() }}" class="rvo-link rvo-topnav__link rvo-link--logoblauw" href="{{ menu_item.get_url() }}">
+                          <span
+                              class="utrecht-icon rvo-icon {{ menu_item.icon }} rvo-icon--md rvo-icon--wit"
+                              role="img"
+                              aria-label="{{ menu_item.display_text }}"
+                          ></span>
+                            {{ menu_item.display_text }}
+                        </a>
+                    </li>
+                    {% if sub_menu_items is defined and menu_item.active %}
+                        {% for menu_item in sub_menu_items %}
+                            <li class="rvo-topnav__item rvo-topnav__item--sub {% if menu_item.active %}rvo-topnav__item--active{% endif %}">
+                                <a data-navigation="mobile-sub-menu:{{ menu_item.get_url() }}" class="rvo-link rvo-topnav__link rvo-link--logoblauw" href="{{ menu_item.get_url() }}">
+                                    {{ menu_item.display_text }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+
+                {% endfor %}
+
+                {% for available_translation in available_translations %}
+                    <li class="rvo-topnav__item">
+                        <a class="rvo-link rvo-topnav__link rvo-link--logoblauw {% if available_translation == language %} selected {% endif %}"
+                           id="mobile-langselect-{{ available_translation }}"
+                           href="javascript:setCookie('lang', '{{ available_translation }}', 9999); window.location.reload()"
+                        >
+                                <span
+                                    class="utrecht-icon rvo-icon rvo-icon-wereldbol rvo-icon--sm rvo-icon--wit rvo-link__icon--before"
+                                    role="img"
+                                    aria-label="{% trans %}Language{% endtrans %} {{ available_translation }}"
+                                ></span>
+                            {{ available_translation }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<div id="amt-main-menu-desktop" class="rvo-topnav__background rvo-topnav__background--horizontal-rule navbar-fixed">
+    <div class="rvo-max-width-layout rvo-max-width-layout--md rvo-max-width-layout-inline-padding--none">
+        <nav class="rvo-topnav rvo-topnav--md">
+            <ul class="rvo-topnav__list">
+                {% for menu_item in main_menu_items %}
+                    <li class="rvo-topnav__item {% if menu_item.active %}rvo-topnav__item--active{% endif %}">
+                        <a data-navigation="main-menu:{{ menu_item.get_url() }}" class="rvo-link rvo-topnav__link rvo-link--logoblauw" href="{{ menu_item.get_url() }}">
+                          <span
+                              class="utrecht-icon rvo-icon {{ menu_item.icon }} rvo-icon--md rvo-icon--wit"
+                              role="img"
+                              aria-label="{{ menu_item.display_text }}"
+                          ></span>
+                            {{ menu_item.display_text }}
+                        </a>
+                    </li>
+                {% endfor %}
+
+                <li class="rvo-topnav__item rvo-topnav__item--align-right" style="display: inline-flex">
+                    {% for available_translation in available_translations %}
+                        <a class="rvo-link rvo-topnav__link rvo-link--logoblauw {% if available_translation == language %} selected {% endif %}"
+                           id="langselect-{{ available_translation }}"
+                           href="javascript:setCookie('lang', '{{ available_translation }}', 9999); window.location.reload()"
+                        >
+                            <span
+                                class="utrecht-icon rvo-icon rvo-icon-wereldbol rvo-icon--sm rvo-icon--wit rvo-link__icon--before"
+                                role="img"
+                                aria-label="{% trans %}Language{% endtrans %} {{ available_translation }}"
+                            ></span>
+                            {{ available_translation }}
+                        </a>
+                    {% endfor %}
+                </li>
+
+            </ul>
+        </nav>
+    </div>
+</div>
+{% if sub_menu_items is defined %}
+    <div id="amt-sub-menu-desktop" class="rvo-topnav__background rvo-topnav__background--horizontal-rule rvo-topnav--sub">
+        <div class="rvo-max-width-layout rvo-max-width-layout--md rvo-max-width-layout-inline-padding--none">
+            <nav class="rvo-topnav rvo-topnav--md">
+                <ul class="rvo-topnav__list">
+                    {% for menu_item in sub_menu_items %}
+                        <li class="rvo-topnav__item {% if menu_item.active %}rvo-topnav__item--active{% endif %}">
+                            <a data-navigation="sub-menu:{{ menu_item.get_url() }}" class="rvo-link rvo-topnav__link rvo-link--logoblauw" href="{{ menu_item.get_url() }}">
+                                {{ menu_item.display_text }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+{% endif %}
+
+{% if breadcrumbs is defined %}
+    <div> <!-- container needed to keep breadcrumbs from aligning in the center -->
+        <div
+            class="rvo-max-width-layout rvo-max-width-layout--md rvo-max-width-layout-inline-padding--none margin-top-large margin-bottom-large">
+            <ol class="rvo-breadcrumbs rvo-breadcrumbs--md">
+                {% for breadcrumb in breadcrumbs %}
+                    {% if loop.first %}
+                        <li class="rvo-breadcrumbs-item">
+                            <a data-navigation="breadcrumb:{{ breadcrumb.get_url() }}" class="rvo-link rvo-link--no-underline" href="{{ breadcrumb.get_url() }}">
+                                {{ breadcrumb.display_text }}
+                            </a>
+                        </li>
+                    {% elif loop.last %}
+                        <li class="rvo-breadcrumbs-item">
+                        <span class="rvo-breadcrumb-current-page">
+                            <span
+                                class="utrecht-icon rvo-icon rvo-icon-delta-naar-rechts rvo-icon--xs rvo-icon--hemelblauw"
+                                role="img"
+                                aria-label="Delta naar rechts"
+                            ></span>
+                            {{ breadcrumb.display_text }}
+                        </span>
+                        </li>
+                    {% else %}
+                        <li class="rvo-breadcrumbs-item">
+                            <a data-navigation="breadcrumb:{{ breadcrumb.get_url() }}" class="rvo-link rvo-link--no-underline" href="{{ breadcrumb.get_url() }}">
+                          <span
+                              class="utrecht-icon rvo-icon rvo-icon-delta-naar-rechts rvo-icon--xs rvo-icon--hemelblauw"
+                              role="img"
+                              aria-label="Delta naar rechts"
+                          ></span>
+                                {{ breadcrumb.display_text }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+{% endif %}

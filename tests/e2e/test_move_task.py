@@ -11,9 +11,9 @@ def test_e2e_move_task_to_column(page: Page) -> None:
     :return: None
     """
 
-    page.goto("/pages/")
+    page.goto("/project/1/tasks")
 
-    card = page.get_by_role("heading", name="task1")
+    card = page.get_by_text("task1")
     expect(card).to_be_visible()
 
     expect(page.locator("#column-1")).to_be_visible()
@@ -41,7 +41,7 @@ def test_e2e_move_task_order_in_same_column(page: Page) -> None:
     :return: None
     """
 
-    page.goto("/pages/")
+    page.goto("/project/1/tasks")
 
     card1 = page.get_by_text("task1")
     card2 = page.get_by_text("task2")
