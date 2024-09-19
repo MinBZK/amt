@@ -34,11 +34,11 @@
     {% if key == "uri" or key == "link" or key == "upl"%}
     <a class="rvo-link rvo-link--normal" href="{{value}}">{{value}}</a>
     {% elif key == "oin" %}
-    <a class="rvo-link rvo-link--normal" href="{{value}}">https://oinregister.logius.nl/oin-register/{{value}}</a>
+    <a class="rvo-link rvo-link--normal" href="https://oinregister.logius.nl/oin-register/{{value}}">{{value}}</a>
     {% elif key == "email" %}
     <a class="rvo-link rvo-link--normal" href="mailto:{{value}}">{{value}}</a>
     {% elif key == "urn" %}
-    <a class="rvo-link rvo-link--normal" href="{{value}}">https://minbzk.github.io/instrument-registry/instruments/urn/{{value}}</a>
+    <a class="rvo-link rvo-link--normal" href="https://minbzk.github.io/instrument-registry/instruments/urn/{{value}}">{{value}}</a>
     {% else %}
     {{ value }}
     {% endif %}
