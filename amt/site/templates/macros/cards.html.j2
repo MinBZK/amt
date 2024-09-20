@@ -10,7 +10,9 @@
     {% if value.__class__.__name__ == 'dict'%}
     <div class="{% if depth == 1 %}margin-bottom-large{% endif%}">
         {% for subkey, subvalue in value.items() %}
-        <strong> {{render_attribute(subkey)}} </strong>: {{render_value(subkey, subvalue, depth+1)}}
+        {% if subvalue %}
+        <strong>{{render_attribute(subkey)}}</strong>: {{render_value(subkey, subvalue, depth+1)}}
+        {% endif %}
         {% if not loop.last %}<br \>{% endif %}
         {% endfor %}
     </div>
