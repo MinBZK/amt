@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-09-24 16:54+0200\n"
+"POT-Creation-Date: 2024-09-25 10:12+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -17,6 +17,30 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
+
+#: amt/api/ai_act_profile.py:24
+msgid "Type"
+msgstr ""
+
+#: amt/api/ai_act_profile.py:26
+msgid "Is the application open source?"
+msgstr ""
+
+#: amt/api/ai_act_profile.py:28
+msgid "Publication Category"
+msgstr ""
+
+#: amt/api/ai_act_profile.py:30
+msgid "Is there a systemic risk?"
+msgstr ""
+
+#: amt/api/ai_act_profile.py:32
+msgid "Is there a transparency obligation?"
+msgstr ""
+
+#: amt/api/ai_act_profile.py:34
+msgid "Role"
+msgstr ""
 
 #: amt/api/navigation.py:39
 msgid "Home"
@@ -162,27 +186,59 @@ msgstr ""
 msgid "Find project..."
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:10
+#: amt/site/templates/projects/new.html.j2:7
 msgid "Create a new project"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:26
+#: amt/site/templates/projects/new.html.j2:23
 msgid "Project"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:30
+#: amt/site/templates/projects/new.html.j2:26
 msgid "Your project name here"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:44
+#: amt/site/templates/projects/new.html.j2:35
+msgid "AI Act Profile"
+msgstr ""
+
+#: amt/site/templates/projects/new.html.j2:37
+msgid ""
+"The AI Act profile provides insight into, among other things, the type of"
+" AI system and the associated obligations from the European AI Act."
+msgstr ""
+
+#: amt/site/templates/projects/new.html.j2:39
+msgid "The AI Act decision tree "
+msgstr ""
+
+#: amt/site/templates/projects/new.html.j2:40
+msgid "helps you determine the value of these fields."
+msgstr ""
+
+#: amt/site/templates/projects/new.html.j2:73
+msgid "Yes"
+msgstr ""
+
+#: amt/site/templates/projects/new.html.j2:83
+msgid "No"
+msgstr ""
+
+#: amt/site/templates/projects/new.html.j2:90
 msgid "Instruments"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:49
+#: amt/site/templates/projects/new.html.j2:92
+msgid ""
+"Overview of instruments for the responsible development, deployment, "
+"assessment and monitoring of algorithms and AI-systems"
+msgstr ""
+
+#: amt/site/templates/projects/new.html.j2:100
 msgid "Choose one or more instruments"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:71
+#: amt/site/templates/projects/new.html.j2:114
 msgid "Create Project"
 msgstr ""
 
@@ -283,4 +339,19 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Lastupdated "
+#~ msgstr ""
+
+#~ msgid "To find your AI Act Profile you can use the"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "The AI Act profile provides insight "
+#~ "into, among other things, the type "
+#~ "of AI system and the associated "
+#~ "obligations from the European AI Act."
+#~ "\n"
+#~ "                        The"
+#~ msgstr ""
+
+#~ msgid "AI Act decision tree "
 #~ msgstr ""

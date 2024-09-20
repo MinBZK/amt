@@ -49,7 +49,16 @@ def test_create_project():
     projects_service.instrument_service.fetch_instruments.return_value = [default_instrument()]  # type: ignore
 
     # When
-    project_new = ProjectNew(name=project_name, instruments=[])
+    project_new = ProjectNew(
+        name=project_name,
+        instruments=[],
+        type="project_type",
+        open_source="project_open_source",
+        publication_category="project_publication_category",
+        systemic_risk="project_systemic_risk",
+        transparency_obligations="project_transparency_obligations",
+        role="projet_role",
+    )
     project = projects_service.create(project_new)
 
     # Then

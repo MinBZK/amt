@@ -14,6 +14,15 @@ def test_e2e_create_project(page: Page):
 
     impact_assesment.check()
 
+    button = page.locator("#transparantieverplichtingen")
+    button.click()
+
+    button = page.locator("#open-source")
+    button.click()
+
+    button = page.locator("#systeemrisico")
+    button.click()
+
     button = page.locator("#button-new-project-create")
     button.click()
 
@@ -23,6 +32,15 @@ def test_e2e_create_project(page: Page):
 @pytest.mark.slow
 def test_e2e_create_project_invalid(page: Page):
     page.goto("/projects/new")
+
+    button = page.locator("#transparantieverplichtingen")
+    button.click()
+
+    button = page.locator("#open-source")
+    button.click()
+
+    button = page.locator("#systeemrisico")
+    button.click()
 
     button = page.locator("#button-new-project-create")
     button.click()
@@ -41,6 +59,15 @@ def test_e2e_create_project_with_tasks(page: Page):
     expect(impact_assesment).not_to_be_checked()
 
     impact_assesment.check()
+
+    button = page.locator("#transparantieverplichtingen")
+    button.click()
+
+    button = page.locator("#open-source")
+    button.click()
+
+    button = page.locator("#systeemrisico")
+    button.click()
 
     button = page.locator("#button-new-project-create")
     button.click()

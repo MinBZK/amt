@@ -8,6 +8,12 @@ class ProjectBase(BaseModel):
 
 class ProjectNew(ProjectBase):
     instruments: list[str] | str = []
+    type: str = Field(default=None)
+    open_source: str = Field(default=None)
+    publication_category: str = Field(default=None)
+    systemic_risk: str = Field(default=None)
+    transparency_obligations: str = Field(default=None)
+    role: str = Field(default=None)
 
     @field_validator("instruments")
     def ensure_list(cls, v: list[str] | str) -> list[str]:

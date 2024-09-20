@@ -4,6 +4,7 @@ from typing import Annotated, Any
 from fastapi import APIRouter, Depends, Query, Request
 from fastapi.responses import HTMLResponse
 
+from amt.api.ai_act_profile import get_ai_act_profile_selector
 from amt.api.deps import templates
 from amt.api.navigation import Navigation, resolve_base_navigation_items, resolve_sub_menu
 from amt.schema.project import ProjectNew
@@ -53,8 +54,11 @@ async def get_new(
     sub_menu_items = resolve_sub_menu([Navigation.PROJECTS_OVERVIEW], request)  # pyright: ignore [reportUnusedVariable] # noqa
     breadcrumbs = resolve_base_navigation_items([Navigation.PROJECTS_ROOT, Navigation.PROJECT_NEW], request)
 
+    ai_act_profile = get_ai_act_profile_selector(request)
+
     context: dict[str, Any] = {
         "instruments": instrument_service.fetch_instruments(),
+        "ai_act_profile": ai_act_profile,
         "breadcrumbs": breadcrumbs,
         "sub_menu_items": {},  # sub_menu_items disabled for now,
     }

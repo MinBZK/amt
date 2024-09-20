@@ -13,8 +13,9 @@ def setup() -> SystemCard:
 def test_get_system_card(setup: SystemCard) -> None:
     system_card = setup
     expected: dict[str, str | list[Any] | None] = {
+        "schema_version": "0.1a10",
         "name": None,
-        "schema_version": "0.1a6",
+        "ai_act_profile": None,
         "selected_instruments": [],
         "assessments": [],
     }
@@ -25,8 +26,8 @@ def test_get_system_card(setup: SystemCard) -> None:
 def test_system_card_update(setup: SystemCard) -> None:
     system_card = setup
     expected: dict[str, str | list[Any] | None] = {
+        "schema_version": "0.1a10",
         "name": "IAMA 1.1",
-        "schema_version": "0.1a6",
         "selected_instruments": [],
         "assessments": [],
     }
