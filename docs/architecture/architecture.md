@@ -14,7 +14,7 @@ Suppose a data science team is working on an ML-algorithm. A team member visits 
 website and sees that among other things an IAMA is a required to be performed. The user selects
 the IAMA task from the Algoritmekader and is forwarded to the Algorithm Management Toolkit. Here
 the user can login and import the IAMA task. The Algorithm Management Toolkit imports the instructions
-on how to execute an IAMA and how to store the results from the Instrument Register. Now the user can
+on how to execute an IAMA and how to store the results from the Task Registry. Now the user can
 perform the IAMA from within the Algorithm Management Toolkit. Relevant stakeholders can also login
 to the project page of the Algorithm Management Toolkit to answer questions from the IAMA. Relevant
 discussions can be captured within the toolkit as well. Upon completion the IAMA results are written
@@ -30,7 +30,7 @@ C4Context
         System_Ext(Algoritmekader, "Algoritmekader", "Defines measures and instruments")
         System(AMT, "Algorithm Management Toolkit", "Provides the execution of measures and instruments")
         System_Ext(Repository, "Repository", "Contains a System Card with filled in measures and instruments")
-        System_Ext(InstrumentRegister, "Instrument Register", "Contains information about how to execute instruments and measures")
+        System_Ext(TaskRegistry, "Task Registry", "Contains information about how to execute instruments and measures")
         System_Ext(Algoritmeregister, "Algoritmeregister", "Contains descriptions of algorithms")
 
     }
@@ -47,8 +47,8 @@ C4Context
 
 
 
-    Rel(InstrumentRegister, AMT, "Specifies instructions on how <br/>to execute instruments and measures")
-    UpdateRelStyle(InstrumentRegister, AMT, $offsetY="10", $offsetX="80")
+    Rel(TaskRegistry, AMT, "Specifies instructions on how <br/>to execute instruments and measures")
+    UpdateRelStyle(TaskRegistry, AMT, $offsetY="10", $offsetX="80")
 
     Rel(Repository, Algoritmeregister, "Algorithm can be <br/> uploaded in register")
     UpdateRelStyle(Repository, Algoritmeregister, $offsetY="10", $offsetX="20")
@@ -81,7 +81,7 @@ C4Container
 Boundary(b0, "Local") {
         Container_Ext(CLI, "CLI", "Command Line", "CLI to execute measures <br/> and instruments")
         Container_Ext(Tasks, "Tasks", "Python library", "Library containing executable tasks <br/> which are measures and instruments")
-        System_Ext(InstrumentRegister, "Instrument Register",  "Contains information about <br/>how to execute instruments and measures")
+        System_Ext(TaskRegistry, "Task Registry",  "Contains information about <br/>how to execute instruments and measures")
 
     }
 
@@ -135,8 +135,8 @@ UpdateRelStyle(Backend, Repository, $offsetY="20", $offsetX="-40")
 Rel(Workers, Tasks, "Imports tasks <br/>from")
 UpdateRelStyle(Workers, Tasks, $offsetY="160", $offsetX="60")
 
-Rel(Tasks, InstrumentRegister, "Imports instructions from", "")
-UpdateRelStyle(Tasks, InstrumentRegister, $offsetY="10", $offsetX="-150")
+Rel(Tasks, TaskRegistry, "Imports instructions from", "")
+UpdateRelStyle(Tasks, TaskRegistry, $offsetY="10", $offsetX="-150")
 
 ```
 
@@ -144,7 +144,7 @@ UpdateRelStyle(Tasks, InstrumentRegister, $offsetY="10", $offsetX="-150")
 
 Suppose a user wants to perform a specific task from the Algoritmekader. To execute this task, the user has 2 options.
 
-The first option is to execute the task locally by using the command line interface tool (CLI). The CLI tool imports the task from a Python library named `Tasks`. This library contains executable tasks that implement the measures and instruments from the `Instrument Register` (which are specified in the Algoritmekader). Instructions on how to perform these tasks are imported from the Instrument Register. There exists a one-to-one correspondence between measures and instruments in the `Instrument Register` and the task's within the `Tasks` library.
+The first option is to execute the task locally by using the command line interface tool (CLI). The CLI tool imports the task from a Python library named `Tasks`. This library contains executable tasks that implement the measures and instruments from the `Task Registry` (which are specified in the Algoritmekader). Instructions on how to perform these measures, requirements, and instruments which are imported as individual tasks from the Task Registry.
 
 The second option is to use the Algorithm Management Toolkit (AMT). The user starts by visiting the Algorithm Management Toolkit website. Here, the user encounters a frontend interface showing a planning board for projects and tasks. This planning board contains columns which correspond to the status of a task, like ‘To do’, ‘Doing’ and ‘Done’. When a user drags a task to another column or re-orders a task, the frontend makes an API call to the backend of the AMT.
 

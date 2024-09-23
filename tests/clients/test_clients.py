@@ -28,7 +28,7 @@ def test_get_content_github(httpx_mock: HTTPXMock):
 
 def test_list_content_github(httpx_mock: HTTPXMock):
     # given
-    url = "https://api.github.com/repos/MinBZK/instrument-registry/contents/?ref=main"
+    url = "https://api.github.com/repos/MinBZK/task-registry/contents/?ref=main"
     github_client = get_client("github")
     repository_content = RepositoryContent(root=[])
 
@@ -78,7 +78,7 @@ def test_get_content_github_pages(httpx_mock: HTTPXMock):
 
 def test_list_content_github_pages(httpx_mock: HTTPXMock):
     # given
-    url = "https://minbzk.github.io/instrument-registry/index.json"
+    url = "https://minbzk.github.io/task-registry/index.json"
     github_client = get_client("github_pages")
     repository_content = RepositoryContent(root=[])
     input = {"entries": repository_content.model_dump()}
