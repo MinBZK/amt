@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-09-18 11:47+0200\n"
+"POT-Creation-Date: 2024-09-24 16:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,6 +53,14 @@ msgstr ""
 msgid "Details"
 msgstr ""
 
+#: amt/site/templates/errors/_HTTPException404.html.j2:1
+msgid "Page not found"
+msgstr ""
+
+#: amt/site/templates/errors/_HTTPException404.html.j2:3
+msgid "The page or file you requested is not found. Please check the URL."
+msgstr ""
+
 #: amt/site/templates/errors/_RequestValidation.html.j2:1
 msgid "Request Validation Error"
 msgstr ""
@@ -61,7 +69,7 @@ msgstr ""
 msgid "An error occurred"
 msgstr ""
 
-#: amt/site/templates/layouts/base.html.j2:1
+#: amt/site/templates/layouts/base.html.j2:11
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr ""
 
