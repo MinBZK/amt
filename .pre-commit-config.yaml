@@ -38,7 +38,22 @@ repos:
         language: system
         pass_filenames: false
         always_run: true
+  - repo: local
+    hooks:
+      - id: husky-run-pre-commit-lint
+        name: husky-lint
+        language: system
+        entry: .husky/pre-commit-lint
+        pass_filenames: false
+        always_run: true
+      - id: husky-run-pre-commit-prettier
+        name: husky-prettier
+        language: system
+        entry: .husky/pre-commit-prettier
+        pass_filenames: false
+        always_run: true
 ci:
   autofix_prs: false
   autofix_commit_msg: "Auto fix pre-commit.com hooks"
   autoupdate_commit_msg: "Update .pre-commit-config.yaml"
+  skip: [husky-run-pre-commit-lint, husky-run-pre-commit-prettier]

@@ -46,14 +46,8 @@ jobs:
           poetry install
           npm install
 
-      - name: Run pyright
+      - name: Run pyright # There is no official pyright pre-commit hook
         run: poetry run pyright
-
-      - name: Run eslint
-        run: npm run lint
-
-      - name: Run prettier
-        run: npm run prettier:check
 
   security:
     runs-on: ubuntu-latest
