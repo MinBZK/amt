@@ -57,7 +57,7 @@ def test_create_project():
         publication_category="project_publication_category",
         systemic_risk="project_systemic_risk",
         transparency_obligations="project_transparency_obligations",
-        role="projet_role",
+        role="project_role",
     )
     project = projects_service.create(project_new)
 
