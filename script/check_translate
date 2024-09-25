@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+# This script is inteded to be used as a pre-commit hook.
+# It checks whether Babel translations are updated and compiled, i.e.
+# it will fail when there are translations tags present in the source
+# files, but are not present in the .po files.
+
+set -o nounset
+set -o pipefail
+if [[ "${TRACE-0}" == "1" ]]; then
+    set -o xtrace
+fi
+
+# pre-commit will fail if files are edited, so we need to create
+# a temporary directory, such that we can update to .po files.
+TEMP_DIR=$(mktemp -d)
+mkdir -p ${TEMP_DIR}/amt/locale
+trap 'rm -rf "$TEMP_DIR"' EXIT
+
+strip_po () {
+    tail -n +21 "$1"
+}
+
+difference () {
+    d=$(diff <(echo "$1") <(echo "$2"))
+    if [[ "${d}" != "" ]];
+        then
+            echo "Translations not up to date."
+            exit 1
+    fi
+}
+
+contains_fuzzy () {
+    if [[ "$1" == *"#, fuzzy"* ]]; then
+          echo "Found a fuzzy translation."
+          exit 1
+    fi
+}
+
+main () {
+    en_po="amt/locale/en_US/LC_MESSAGES/messages.po"
+    nl_po="amt/locale/nl_NL/LC_MESSAGES/messages.po"
+
+    old_en_po=$(strip_po "${en_po}")
+    old_nl_po=$(strip_po "${nl_po}")
+
+    contains_fuzzy "${old_en_po}"
+    contains_fuzzy "${old_nl_po}"
+
+    cp -r amt/locale/* ${TEMP_DIR}/amt/locale/
+    ./script/pybabel-for-amt extract -F babel-mapping.ini . -o "${TEMP_DIR}/amt/locale/base.pot" > /dev/null 2>&1
+    ./script/pybabel-for-amt update -i "${TEMP_DIR}/amt/locale/base.pot" -d "${TEMP_DIR}/amt/locale" > /dev/null 2>&1
+
+    new_en_po=$(strip_po ${TEMP_DIR}/"${en_po}")
+    new_nl_po=$(strip_po ${TEMP_DIR}/"${nl_po}")
+
+    difference "${old_en_po}" "${new_en_po}"
+    difference "${old_nl_po}" "${new_nl_po}"
+
+}
+
+main

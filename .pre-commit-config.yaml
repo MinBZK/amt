@@ -5,7 +5,7 @@ repos:
     rev: v4.6.0
     hooks:
       - id: end-of-file-fixer
-        exclude: ^amt/static/vendor/.*
+        exclude: "^amt/static/vendor/.*|amt/locale/.*"
       - id: trailing-whitespace
       - id: check-yaml
         exclude: ^(example|example_system_card)/
@@ -25,6 +25,14 @@ repos:
       - id: check-modified-migrations
         name: check-modified-migrations
         entry: sh -c '! git diff --cached --name-only --diff-filter=MD | grep ^amt/migrations/versions'
+        language: system
+        pass_filenames: false
+        always_run: true
+  - repo: local
+    hooks:
+      - id: check-translate
+        name: check-translate
+        entry: ./script/check_translate
         language: system
         pass_filenames: false
         always_run: true
