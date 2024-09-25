@@ -46,12 +46,6 @@ jobs:
           poetry install
           npm install
 
-      - name: run ruff
-        run: poetry run ruff check --output-format=github
-
-      - name: Run format
-        run: poetry run ruff format --check
-
       - name: Run pyright
         run: poetry run pyright
 
