@@ -24,7 +24,7 @@ def test_get_unknown_project(client: TestClient) -> None:
     # then
     assert response.status_code == 404
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"NotFound: Not found" in response.content
+    assert b"Page not found" in response.content
 
 
 def test_get_project_tasks(client: TestClient, db: DatabaseTestUtils) -> None:
@@ -66,7 +66,7 @@ def test_get_system_card_unknown_project(client: TestClient) -> None:
     # then
     assert response.status_code == 404
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"NotFound: Not found" in response.content
+    assert b"Page not found" in response.content
 
 
 # TODO: Test are now have hard coded URL paths because the system card
@@ -95,7 +95,7 @@ def test_get_assessment_card_unknown_project(client: TestClient) -> None:
     # then
     assert response.status_code == 404
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"NotFound: Not found" in response.content
+    assert b"Page not found" in response.content
 
 
 # TODO: Test are now have hard coded URL paths because the system card
@@ -111,7 +111,7 @@ def test_get_assessment_card_unknown_assessment(client: TestClient, db: Database
     # then
     assert response.status_code == 404
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"NotFound: Not found" in response.content
+    assert b"Page not found" in response.content
 
 
 # TODO: Test are now have hard coded URL paths because the system card
@@ -140,7 +140,7 @@ def test_get_model_card_unknown_project(client: TestClient) -> None:
     # then
     assert response.status_code == 404
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"NotFound: Not found" in response.content
+    assert b"Page not found" in response.content
 
 
 # TODO: Test are now have hard coded URL paths because the system card
@@ -156,4 +156,4 @@ def test_get_assessment_card_unknown_model_card(client: TestClient, db: Database
     # then
     assert response.status_code == 404
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"NotFound: Not found" in response.content
+    assert b"Page not found" in response.content

@@ -1,5 +1,12 @@
 {% extends 'layouts/base.html.j2' %}
 
 {% block content %}
-{% include 'errors/_HTTPException.html.j2' %}
+<div class="rvo-max-width-layout rvo-max-width-layout--md rvo-max-width-layout-inline-padding--none margin-bottom-large">
+
+    {% if status_code == 404 %}
+        {% include 'errors/_HTTPException404.html.j2' %}
+    {% else %}
+        {% include 'errors/_HTTPException.html.j2' %}
+    {% endif %}
+</div>
 {% endblock %}
