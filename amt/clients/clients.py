@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 class Client(ABC):
     """
     Abstract class which is used to set up HTTP clients that retrieve instruments from the
-    instrument register.
+    task registry.
     """
 
     @abstractmethod
@@ -57,7 +57,7 @@ class GitHubPagesClient(Client):
     def get_content(self, url: str) -> bytes:
         return super()._get(url).content
 
-    def list_content(self, url: str = "https://minbzk.github.io/instrument-registry/index.json") -> RepositoryContent:
+    def list_content(self, url: str = "https://minbzk.github.io/task-registry/index.json") -> RepositoryContent:
         response = super()._get(url)
         return RepositoryContent.model_validate(response.json()["entries"])
 
@@ -73,7 +73,7 @@ class GitHubClient(Client):
 
     def list_content(
         self,
-        url: str = "https://api.github.com/repos/MinBZK/instrument-registry/contents/instruments?ref=main",
+        url: str = "https://api.github.com/repos/MinBZK/task-registry/contents/instruments?ref=main",
     ) -> RepositoryContent:
         response = super()._get(url)
         return RepositoryContent.model_validate(response.json())

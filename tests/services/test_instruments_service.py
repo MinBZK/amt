@@ -11,13 +11,13 @@ def test_fetch_instruments(httpx_mock: HTTPXMock):
     # given
     instruments_service = InstrumentsService("github")
     httpx_mock.add_response(
-        url="https://api.github.com/repos/MinBZK/instrument-registry/contents/instruments?ref=main",
+        url="https://api.github.com/repos/MinBZK/task-registry/contents/instruments?ref=main",
         content=GITHUB_LIST_PAYLOAD.encode(),
         headers={"X-RateLimit-Remaining": "7", "X-RateLimit-Reset": "200000000", "Content-Type": "application/json"},
     )
 
     httpx_mock.add_response(
-        url="https://raw.githubusercontent.com/MinBZK/instrument-registry/main/instruments/iama.yaml",
+        url="https://raw.githubusercontent.com/MinBZK/task-registry/main/instruments/iama.yaml",
         content=GITHUB_CONTENT_PAYLOAD.encode(),
         headers={"X-RateLimit-Remaining": "7", "X-RateLimit-Reset": "200000000", "content-type": "text/plain"},
     )
@@ -33,13 +33,13 @@ def test_fetch_instruments_with_urns(httpx_mock: HTTPXMock):
     # given
     instruments_service = InstrumentsService("github")
     httpx_mock.add_response(
-        url="https://api.github.com/repos/MinBZK/instrument-registry/contents/instruments?ref=main",
+        url="https://api.github.com/repos/MinBZK/task-registry/contents/instruments?ref=main",
         content=GITHUB_LIST_PAYLOAD.encode(),
         headers={"X-RateLimit-Remaining": "7", "X-RateLimit-Reset": "200000000", "Content-Type": "application/json"},
     )
 
     httpx_mock.add_response(
-        url="https://raw.githubusercontent.com/MinBZK/instrument-registry/main/instruments/iama.yaml",
+        url="https://raw.githubusercontent.com/MinBZK/task-registry/main/instruments/iama.yaml",
         content=GITHUB_CONTENT_PAYLOAD.encode(),
         headers={"X-RateLimit-Remaining": "7", "X-RateLimit-Reset": "200000000", "content-type": "text/plain"},
     )
@@ -58,14 +58,14 @@ def test_fetch_instruments_invalid(httpx_mock: HTTPXMock):
     # given
     instruments_service = InstrumentsService("github")
     httpx_mock.add_response(
-        url="https://api.github.com/repos/MinBZK/instrument-registry/contents/instruments?ref=main",
+        url="https://api.github.com/repos/MinBZK/task-registry/contents/instruments?ref=main",
         content=GITHUB_LIST_PAYLOAD.encode(),
         headers={"X-RateLimit-Remaining": "7", "X-RateLimit-Reset": "200000000", "Content-Type": "application/json"},
     )
 
     # when
     httpx_mock.add_response(
-        url="https://raw.githubusercontent.com/MinBZK/instrument-registry/main/instruments/iama.yaml",
+        url="https://raw.githubusercontent.com/MinBZK/task-registry/main/instruments/iama.yaml",
         content=b"test: 1",
         headers={"X-RateLimit-Remaining": "7", "X-RateLimit-Reset": "200000000", "content-type": "text/plain"},
     )

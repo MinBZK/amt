@@ -69,15 +69,15 @@ GITHUB_LIST_PAYLOAD = """
     "path": "instruments/iama.yaml",
     "sha": "50cf187eaea995ba848d93f1799fd34d4af8036b",
     "size": 30319,
-    "url": "https://api.github.com/repos/MinBZK/instrument-registry/contents/instruments/iama.yaml?ref=main",
-    "html_url": "https://github.com/MinBZK/instrument-registry/blob/main/instruments/iama.yaml",
-    "git_url": "https://api.github.com/repos/MinBZK/instrument-registry/git/blobs/50cf187eaea995ba848d93f1799fd34d4af8036b",
-    "download_url": "https://raw.githubusercontent.com/MinBZK/instrument-registry/main/instruments/iama.yaml",
+    "url": "https://api.github.com/repos/MinBZK/task-registry/contents/instruments/iama.yaml?ref=main",
+    "html_url": "https://github.com/MinBZK/task-registry/blob/main/instruments/iama.yaml",
+    "git_url": "https://api.github.com/repos/MinBZK/task-registry/git/blobs/50cf187eaea995ba848d93f1799fd34d4af8036b",
+    "download_url": "https://raw.githubusercontent.com/MinBZK/task-registry/main/instruments/iama.yaml",
     "type": "file",
     "_links": {
-      "self": "https://api.github.com/repos/MinBZK/instrument-registry/contents/instruments/iama.yaml?ref=main",
-      "git": "https://api.github.com/repos/MinBZK/instrument-registry/git/blobs/50cf187eaea995ba848d93f1799fd34d4af8036b",
-      "html": "https://github.com/MinBZK/instrument-registry/blob/main/instruments/iama.yaml"
+      "self": "https://api.github.com/repos/MinBZK/task-registry/contents/instruments/iama.yaml?ref=main",
+      "git": "https://api.github.com/repos/MinBZK/task-registry/git/blobs/50cf187eaea995ba848d93f1799fd34d4af8036b",
+      "html": "https://github.com/MinBZK/task-registry/blob/main/instruments/iama.yaml"
     }
   }
   ]
