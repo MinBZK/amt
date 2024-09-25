@@ -19,7 +19,9 @@ repos:
     rev: v0.6.9
     hooks:
       - id: ruff
+        args: [--config, pyproject.toml]
       - id: ruff-format
+        args: [--config, pyproject.toml]
   - repo: local
     hooks:
       - id: check-modified-migrations
