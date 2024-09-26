@@ -266,4 +266,14 @@ main {
     100% {
         transform: scale(0.9);
     }
+
+.amt-widget-title {
+    color: var(--rvo-color-hemelblauw);
+    font-weight: bold;
+}
+
+.rvo-card {
+    /* Overwrite the border of rvo-card to remove the hover function */
+    border: var(--rvo-card-outline-border-width) solid
+        var(--rvo-card-outline-border-color);
 }
