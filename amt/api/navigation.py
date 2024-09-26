@@ -27,7 +27,7 @@ class DisplayText(Enum):
     TASKS = "tasks"
     NEW = "new"
     SYSTEMCARD = "systemcard"
-    ASSESSMENTCARD = "assesmentcard"
+    ASSESSMENTCARD = "assessmentcard"
     MODELCARD = "modelcard"
     DETAILS = "details"
 
