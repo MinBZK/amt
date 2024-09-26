@@ -8,7 +8,7 @@ from amt.api.navigation import (
     get_main_menu,
     get_translation,
     resolve_base_navigation_items,
-    resolve_sub_menu,
+    resolve_navigation_items,
     sort_by_path_length,
 )
 from amt.core import internationalization
@@ -78,7 +78,7 @@ def test_get_sub_menu():
     request: Request = default_fastapi_request(url="/a/bb/")
     request.state.path_variables = {"project_id": 1}
 
-    sub_menu = resolve_sub_menu([item1, item2, item3, item4, item5], request)
+    sub_menu = resolve_navigation_items([item1, item2, item3, item4, item5], request)
     # assert right item is active
     assert sub_menu[1].active is True
 

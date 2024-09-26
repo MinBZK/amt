@@ -10,7 +10,7 @@ from amt.api.navigation import (
     BaseNavigationItem,
     Navigation,
     resolve_base_navigation_items,
-    resolve_sub_menu,
+    resolve_navigation_items,
 )
 from amt.core.exceptions import AMTNotFound, AMTRepositoryError
 from amt.enums.status import Status
@@ -33,6 +33,16 @@ def get_project_or_error(project_id: int, projects_service: ProjectsService, req
         raise AMTNotFound from e
     return project
 
+def get_project_details_tabs(project, request):
+    return resolve_navigation_items([
+        Navigation.PROJECT_SYSTEM_INFO,
+        Navigation.PROJECT_SYSTEM_ALGORITHM_DETAILS,
+        Navigation.PROJECT_REQUIREMENTS,
+        Navigation.PROJECT_DATA_CARD,
+        Navigation.PROJECT_MODEL_CARD,
+        Navigation.PROJECT_TASKS,
+        Navigation.PROJECT_SYSTEM_INSTRUMENTS
+    ], request)
 
 def get_projects_submenu_items() -> list[BaseNavigationItem]:
     return [
@@ -42,7 +52,7 @@ def get_projects_submenu_items() -> list[BaseNavigationItem]:
     ]
 
 
-@router.get("/{project_id}/tasks")
+@router.get("/{project_id}/details/tasks")
 async def get_tasks(
     request: Request,
     project_id: int,
@@ -51,7 +61,7 @@ async def get_tasks(
 ) -> HTMLResponse:
     project = get_project_or_error(project_id, projects_service, request)
 
-    sub_menu_items = resolve_sub_menu(get_projects_submenu_items(), request)
+    tab_items = get_project_details_tabs(project, request)
 
     breadcrumbs = resolve_base_navigation_items(
         [
@@ -67,19 +77,17 @@ async def get_tasks(
         "statuses": Status,
         "project": project,
         "breadcrumbs": breadcrumbs,
-        "sub_menu_items": sub_menu_items,
+        "tab_items": tab_items
     }
 
     return templates.TemplateResponse(request, "projects/tasks.html.j2", context)
 
 
-@router.get("/{project_id}")
+@router.get("/{project_id}/details")
 async def get_project_details(
     request: Request, project_id: int, projects_service: Annotated[ProjectsService, Depends(ProjectsService)]
 ) -> HTMLResponse:
     project = get_project_or_error(project_id, projects_service, request)
-
-    sub_menu_items = resolve_sub_menu(get_projects_submenu_items(), request)
 
     breadcrumbs = resolve_base_navigation_items(
         [
@@ -90,7 +98,12 @@ async def get_project_details(
         request,
     )
 
-    context = {"project": project, "breadcrumbs": breadcrumbs, "sub_menu_items": sub_menu_items}
+    tab_items = get_project_details_tabs(project, request)
+
+    context = {"project": project,
+               "breadcrumbs": breadcrumbs,
+               "tab_items": tab_items
+               }
 
     return templates.TemplateResponse(request, "projects/details.html.j2", context)
 
@@ -100,7 +113,7 @@ async def get_project_details(
 # that the same system card is rendered for all project ID's. This is due to the fact
 # that the logical process flow of a system card is not complete.
 # !!!
-@router.get("/{project_id}/system_card")
+@router.get("/{project_id}/details/system_card")
 async def get_system_card(
     request: Request,
     project_id: int,
@@ -108,7 +121,7 @@ async def get_system_card(
 ) -> HTMLResponse:
     project = get_project_or_error(project_id, projects_service, request)
 
-    sub_menu_items = resolve_sub_menu(get_projects_submenu_items(), request)
+    tab_items = get_project_details_tabs(project, request)
 
     breadcrumbs = resolve_base_navigation_items(
         [
@@ -129,8 +142,9 @@ async def get_system_card(
     context = {
         "system_card": system_card_data,
         "last_updated": last_modified_at(filepath),
+        "project": project,
         "project_id": project.id,
-        "sub_menu_items": sub_menu_items,
+        "tab_items": tab_items,
         "breadcrumbs": breadcrumbs,
     }
 
@@ -142,7 +156,7 @@ async def get_system_card(
 # that the same system card is rendered for all project ID's. This is due to the fact
 # that the logical process flow of a system card is not complete.
 # !!!
-@router.get("/{project_id}/system_card/assessments/{assessment_card}")
+@router.get("/{project_id}/details/system_card/assessments/{assessment_card}")
 async def get_assessment_card(
     request: Request,
     project_id: int,
@@ -153,7 +167,7 @@ async def get_assessment_card(
 
     request.state.path_variables.update({"assessment_card": assessment_card})
 
-    sub_menu_items = resolve_sub_menu(get_projects_submenu_items(), request, False)
+    sub_menu_items = resolve_navigation_items(get_projects_submenu_items(), request, False)
 
     breadcrumbs = resolve_base_navigation_items(
         [
@@ -187,7 +201,7 @@ async def get_assessment_card(
 # that the same system card is rendered for all project ID's. This is due to the fact
 # that the logical process flow of a system card is not complete.
 # !!!
-@router.get("/{project_id}/system_card/models/{model_card}")
+@router.get("/{project_id}/details/system_card/models/{model_card}")
 async def get_model_card(
     request: Request,
     project_id: int,
@@ -202,7 +216,7 @@ async def get_model_card(
 
     request.state.path_variables.update({"model_card": model_card})
 
-    sub_menu_items = resolve_sub_menu(get_projects_submenu_items(), request, False)
+    tab_items = get_project_details_tabs(project, request)
 
     breadcrumbs = resolve_base_navigation_items(
         [
@@ -220,8 +234,9 @@ async def get_model_card(
     context = {
         "model_card": model_card_data,
         "last_updated": last_modified_at(filepath),
-        "sub_menu_items": sub_menu_items,
         "breadcrumbs": breadcrumbs,
+        "project": project,
+        "tab_items": tab_items
     }
 
     return templates.TemplateResponse(request, "pages/model_card.html.j2", context)
