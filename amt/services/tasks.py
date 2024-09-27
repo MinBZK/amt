@@ -67,9 +67,6 @@ class TasksService:
             self.system_card.name = task.title
             self.storage_writer.write(self.system_card.model_dump())
 
-        if not isinstance(status_id, int):
-            raise TypeError("status_id must be an integer")  # pragma: no cover
-
         # update the status for the task (this may not be needed if the status has not changed)
         task.status_id = status_id
 

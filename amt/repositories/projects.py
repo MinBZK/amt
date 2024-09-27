@@ -8,7 +8,7 @@ from sqlalchemy.exc import NoResultFound, SQLAlchemyError
 from sqlalchemy.orm import Session
 from sqlalchemy_utils import escape_like  # pyright: ignore[reportMissingTypeStubs, reportUnknownVariableType]
 
-from amt.core.exceptions import RepositoryError
+from amt.core.exceptions import AMTRepositoryError
 from amt.models import Project
 from amt.repositories.deps import get_session
 
@@ -34,7 +34,7 @@ class ProjectsRepository:
         except Exception as e:
             logger.exception("Error deleting project")
             self.session.rollback()
-            raise RepositoryError from e
+            raise AMTRepositoryError from e
         return None
 
     def save(self, project: Project) -> Project:
@@ -45,7 +45,7 @@ class ProjectsRepository:
         except SQLAlchemyError as e:
             logger.exception("Error saving project")
             self.session.rollback()
-            raise RepositoryError from e
+            raise AMTRepositoryError from e
         return project
 
     def find_by_id(self, project_id: int) -> Project:
@@ -54,7 +54,7 @@ class ProjectsRepository:
             return self.session.execute(statement).scalars().one()
         except NoResultFound as e:
             logger.exception("Project not found")
-            raise RepositoryError from e
+            raise AMTRepositoryError from e
 
     def paginate(self, skip: int, limit: int, search: str) -> list[Project]:
         try:
@@ -65,4 +65,4 @@ class ProjectsRepository:
             return list(self.session.execute(statement).scalars())
         except Exception as e:
             logger.exception("Error paginating projects")
-            raise RepositoryError from e
+            raise AMTRepositoryError from e

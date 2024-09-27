@@ -1,3 +1,5 @@
+import pytest
+from amt.core.exceptions import AMTCSRFProtectError
 from amt.schema.project import ProjectNew
 from fastapi import status
 from fastapi.testclient import TestClient
@@ -20,11 +22,10 @@ def test_request_validation_exception_handler(client: TestClient):
 def test_request_csrf_protect_exception_handler_invalid_token_in_header(client: TestClient):
     data = client.get("/projects/new")
     new_project = ProjectNew(name="default project")
-    response = client.post(
-        "/projects/new", json=new_project.model_dump(), headers={"X-CSRF-Token": "1"}, cookies=data.cookies
-    )
-    assert response.status_code == status.HTTP_401_UNAUTHORIZED
-    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    with pytest.raises(AMTCSRFProtectError):
+        _response = client.post(
+            "/projects/new", json=new_project.model_dump(), headers={"X-CSRF-Token": "1"}, cookies=data.cookies
+        )
 
 
 def test_http_exception_handler_htmx(client: TestClient):
@@ -44,15 +45,13 @@ def test_request_validation_exception_handler_htmx(client: TestClient):
 def test_request_csrf_protect_exception_handler_invalid_token(client: TestClient):
     data = client.get("/projects/new")
     new_project = ProjectNew(name="default project")
-    response = client.post(
-        "/projects/new",
-        json=new_project.model_dump(),
-        headers={"HX-Request": "true", "X-CSRF-Token": "1"},
-        cookies=data.cookies,
-    )
-
-    assert response.status_code == status.HTTP_401_UNAUTHORIZED
-    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    with pytest.raises(AMTCSRFProtectError):
+        _response = client.post(
+            "/projects/new",
+            json=new_project.model_dump(),
+            headers={"HX-Request": "true", "X-CSRF-Token": "1"},
+            cookies=data.cookies,
+        )
 
 
 def test_(client: TestClient):

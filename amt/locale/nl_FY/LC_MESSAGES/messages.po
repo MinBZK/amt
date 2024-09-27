@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-04 10:24+0200\n"
+"POT-Creation-Date: 2024-09-30 10:07+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_FY\n"
@@ -24,75 +24,105 @@ msgstr ""
 
 #: amt/api/ai_act_profile.py:25
 msgid "Is the application open source?"
-msgstr ""
+msgstr "Is de applikaasje iepen boarne?"
 
 #: amt/api/ai_act_profile.py:27
 msgid "Publication Category"
-msgstr ""
+msgstr "Publikaasje Category"
 
 #: amt/api/ai_act_profile.py:29
 msgid "Is there a systemic risk?"
-msgstr ""
+msgstr "Is der in systemic risiko?"
 
 #: amt/api/ai_act_profile.py:31
 msgid "Is there a transparency obligation?"
-msgstr ""
+msgstr "is der in ferplichting foar transparânsje"
 
 #: amt/api/ai_act_profile.py:33
 msgid "Role"
-msgstr ""
+msgstr "Rol"
 
 #: amt/api/navigation.py:39
 msgid "Home"
-msgstr ""
+msgstr "thús"
 
 #: amt/api/navigation.py:40 amt/site/templates/projects/index.html.j2:12
 msgid "Projects"
-msgstr ""
+msgstr "Projekten"
 
 #: amt/api/navigation.py:41
 msgid "Overview"
-msgstr ""
+msgstr "Oersicht"
 
 #: amt/api/navigation.py:42 amt/site/templates/projects/tasks.html.j2:8
 msgid "Tasks"
-msgstr ""
+msgstr "Taken"
 
 #: amt/api/navigation.py:43
 msgid "New"
-msgstr ""
+msgstr "Nij"
 
 #: amt/api/navigation.py:44
 msgid "System card"
-msgstr ""
+msgstr "Systeem kaart"
 
 #: amt/api/navigation.py:45
 msgid "Assessment card"
-msgstr ""
+msgstr "Beoardielingskaart"
 
 #: amt/api/navigation.py:46
 msgid "Model card"
-msgstr ""
+msgstr "Modelkaart"
 
 #: amt/api/navigation.py:47
 msgid "Details"
-msgstr ""
+msgstr "Details"
 
-#: amt/site/templates/errors/_HTTPException404.html.j2:1
-msgid "Page not found"
-msgstr ""
+#: amt/core/exceptions.py:20
+msgid ""
+"An error occurred while configuring the options for '{field}'. Please "
+"check the settings and try again."
+msgstr "Der barde in flater by it konfigurearjen fan de opsjes foar '{field}'. Kontrolearje asjebleaft de ynstellings en besykje it nochris."
 
-#: amt/site/templates/errors/_HTTPException404.html.j2:3
-msgid "The page or file you requested is not found. Please check the URL."
-msgstr ""
+#: amt/core/exceptions.py:26
+msgid ""
+"An internal server error occurred while processing your request. Please "
+"try again later."
+msgstr "Der barde in ynterne serverflater by it ferwurkjen fan jo fersyk. Besykje it letter nochris."
 
-#: amt/site/templates/errors/_RequestValidation.html.j2:1
-msgid "Request Validation Error"
-msgstr ""
+#: amt/core/exceptions.py:32
+msgid "An error occurred while processing the instrument. Please try again later."
+msgstr "Der barde in flater by it ferwurkjen fan it ynstrumint. Besykje it letter nochris."
 
-#: amt/site/templates/errors/error.html.j2:4
+#: amt/core/exceptions.py:37
+msgid ""
+"The requested page or resource could not be found. Please check the URL "
+"or query and try again."
+msgstr "De frege side of boarne koe net fûn wurde. Kontrolearje asjebleaft de URL of query en besykje it nochris"
+
+#: amt/core/exceptions.py:43
+msgid "CSRF check failed."
+msgstr "CSRF-kontrôle mislearre."
+
+#: amt/core/exceptions.py:49
+msgid "Only static files are supported."
+msgstr "Allinich statyske bestannen wurde stipe."
+
+#: amt/core/exceptions.py:54
+msgid "Key not correct: {field}"
+msgstr "Key net korrekt: {field}"
+
+#: amt/core/exceptions.py:59
+msgid "Value not correct: {field}"
+msgstr "Wearde net korrekt: {field}"
+
+#: amt/site/templates/errors/Exception.html.j2:6
 msgid "An error occurred"
-msgstr ""
+msgstr "Der barde in flater"
+
+#: amt/site/templates/errors/_Exception.html.j2:1
+msgid "An error occurred. Please try again later"
+msgstr "Der barde in flater. Besykje it letter nochris"
 
 #: amt/site/templates/layouts/base.html.j2:11
 msgid "Algorithmic Management Toolkit (AMT)"
@@ -116,45 +146,45 @@ msgstr "Dien"
 
 #: amt/site/templates/macros/tasks.html.j2:14
 msgid "Unknown"
-msgstr ""
+msgstr "Ûnbekend"
 
 #: amt/site/templates/pages/assessment_card.html.j2:9
 #: amt/site/templates/pages/model_card.html.j2:8
 #: amt/site/templates/pages/system_card.html.j2:9
 msgid "Last updated"
-msgstr ""
+msgstr "Lêst bywurke"
 
 #: amt/site/templates/pages/assessment_card.html.j2:9
 #: amt/site/templates/pages/model_card.html.j2:8
 #: amt/site/templates/pages/system_card.html.j2:9
 msgid "ago"
-msgstr ""
+msgstr "lyn"
 
 #: amt/site/templates/pages/assessment_card.html.j2:15
 #: amt/site/templates/pages/model_card.html.j2:14
 #: amt/site/templates/pages/model_card.html.j2:38
 #: amt/site/templates/pages/system_card.html.j2:61
 msgid "Attribute"
-msgstr ""
+msgstr "Attribute"
 
 #: amt/site/templates/pages/assessment_card.html.j2:16
 #: amt/site/templates/pages/model_card.html.j2:15
 #: amt/site/templates/pages/model_card.html.j2:39
 #: amt/site/templates/pages/system_card.html.j2:62
 msgid "Value"
-msgstr ""
+msgstr "Wearde"
 
 #: amt/site/templates/pages/assessment_card.html.j2:38
 msgid "Question"
-msgstr ""
+msgstr "Fraach"
 
 #: amt/site/templates/pages/assessment_card.html.j2:39
 msgid "Answer"
-msgstr ""
+msgstr "Antwurd"
 
 #: amt/site/templates/pages/index.html.j2:3
 msgid "AMT Placeholder informatie pagina's"
-msgstr ""
+msgstr "AMT Placeholder ynformaasje pagina's"
 
 #: amt/site/templates/parts/footer.html.j2:4
 #: amt/site/templates/parts/header.html.j2:8
@@ -163,20 +193,20 @@ msgstr ""
 
 #: amt/site/templates/parts/footer.html.j2:15
 msgid "About us"
-msgstr ""
+msgstr "Oer ús"
 
 #: amt/site/templates/parts/footer.html.j2:27
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 #: amt/site/templates/parts/header.html.j2:8
 msgid "version"
-msgstr ""
+msgstr "ferzje"
 
 #: amt/site/templates/parts/header.html.j2:70
 #: amt/site/templates/parts/header.html.j2:107
 msgid "Language"
-msgstr ""
+msgstr "Taal"
 
 #: amt/site/templates/projects/index.html.j2:19
 msgid "New project"
@@ -196,49 +226,73 @@ msgstr ""
 
 #: amt/site/templates/projects/new.html.j2:26
 msgid "Your project name here"
-msgstr ""
+msgstr "Jo projektnamme hjir"
 
 #: amt/site/templates/projects/new.html.j2:35
 msgid "AI Act Profile"
-msgstr ""
+msgstr "AI Act profyl"
 
 #: amt/site/templates/projects/new.html.j2:37
 msgid ""
 "The AI Act profile provides insight into, among other things, the type of"
 " AI system and the associated obligations from the European AI Act."
-msgstr ""
+msgstr "It profyl AI Wet jout ynsjoch yn ûnder oare it type KI-systeem en de dêrby hearrende ferplichtings út de Europeeske KI-wet."
 
 #: amt/site/templates/projects/new.html.j2:39
 msgid "The AI Act decision tree "
-msgstr ""
+msgstr "De AI Act beslút beam"
 
 #: amt/site/templates/projects/new.html.j2:40
 msgid "helps you determine the value of these fields."
-msgstr ""
+msgstr "helpt jo de wearde fan dizze fjilden te bepalen."
 
 #: amt/site/templates/projects/new.html.j2:96
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: amt/site/templates/projects/new.html.j2:106
 msgid "No"
-msgstr ""
+msgstr "Nee"
 
 #: amt/site/templates/projects/new.html.j2:113
 msgid "Instruments"
-msgstr ""
+msgstr "Ynstruminten"
 
 #: amt/site/templates/projects/new.html.j2:115
 msgid ""
 "Overview of instruments for the responsible development, deployment, "
-"assessment and monitoring of algorithms and AI-systems."
-msgstr ""
+"assessment and monitoring of algorithms and AI-systems"
+msgstr "Oersjoch fan ynstruminten foar de ferantwurdlike ûntwikkeling, ynset, beoardieling en tafersjoch fan algoritmen en AI-systemen"
 
 #: amt/site/templates/projects/new.html.j2:123
 msgid "Choose one or more instruments"
-msgstr ""
+msgstr "Kies ien of mear ynstruminten"
 
 #: amt/site/templates/projects/new.html.j2:137
 msgid "Create Project"
-msgstr ""
+msgstr "Project oanmeitsje"
 
+#~ msgid "Your projectname here"
+#~ msgstr "Jo projektnamme hjir"
+
+#~ msgid "To find your AI Act Profile you can use the"
+#~ msgstr "Om jo AI Act-profyl te finen kinne jo de"
+
+#~ msgid ""
+#~ "The AI Act profile provides insight "
+#~ "into, among other things, the type "
+#~ "of AI system and the associated "
+#~ "obligations from the European AI Act."
+#~ "\n"
+#~ "                        The"
+#~ msgstr ""
+
+#~ msgid "AI Act decision tree "
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Overview of instruments for the "
+#~ "responsible development, deployment, assessment "
+#~ "and monitoring of algorithms and AI-"
+#~ "systems"
+#~ msgstr ""

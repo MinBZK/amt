@@ -8,7 +8,7 @@ def test_template_caching():
 
     # when
     response = templates.TemplateResponse(
-        request, "errors/error.html.j2", headers={"Content-Language": "This is a test"}
+        request, "errors/Exception.html.j2", headers={"Content-Language": "This is a test"}
     )
 
     # then

@@ -7,7 +7,7 @@ from sqlalchemy import and_, select
 from sqlalchemy.exc import NoResultFound
 from sqlalchemy.orm import Session
 
-from amt.core.exceptions import RepositoryError
+from amt.core.exceptions import AMTRepositoryError
 from amt.models import Task
 from amt.repositories.deps import get_session
 
@@ -64,7 +64,7 @@ class TasksRepository:
         except Exception as e:
             logger.exception("Could not store task")
             self.session.rollback()
-            raise RepositoryError from e
+            raise AMTRepositoryError from e
         return task
 
     def save_all(self, tasks: Sequence[Task]) -> None:
@@ -79,7 +79,7 @@ class TasksRepository:
         except Exception as e:
             logger.exception("Could not store all tasks")
             self.session.rollback()
-            raise RepositoryError from e
+            raise AMTRepositoryError from e
 
     def delete(self, task: Task) -> None:
         """
@@ -93,7 +93,7 @@ class TasksRepository:
         except Exception as e:
             logger.exception("Could not delete task")
             self.session.rollback()
-            raise RepositoryError from e
+            raise AMTRepositoryError from e
         return None
 
     def find_by_id(self, task_id: int) -> Task:
@@ -107,4 +107,4 @@ class TasksRepository:
             return self.session.execute(statement).scalars().one()
         except NoResultFound as e:
             logger.exception("Task not found")
-            raise RepositoryError from e
+            raise AMTRepositoryError from e

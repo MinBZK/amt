@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 from datetime import datetime, timezone
 
 import httpx
+from amt.core.exceptions import AMTNotFound
 from amt.schema.github import RepositoryContent
 
 logger = logging.getLogger(__name__)
@@ -36,7 +37,8 @@ class Client(ABC):
         Private function that performs a GET request to given URL.
         """
         response = self.client.get(url)
-        response.raise_for_status()
+        if response.status_code != 200:
+            raise AMTNotFound()
         return response
 
 
@@ -47,7 +49,7 @@ def get_client(repo_type: str) -> Client:
         case "github":
             return GitHubClient()
         case _:
-            raise ValueError(f"unknown repository type: {repo_type}")
+            raise AMTNotFound()
 
 
 class GitHubPagesClient(Client):

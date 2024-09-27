@@ -7,6 +7,8 @@ import yaml_include
 from typing_extensions import Unpack
 from yaml import dump
 
+from amt.core.exceptions import AMTKeyError, AMTValueError
+
 
 class WriterFactoryArguments(TypedDict):
     location: str | Path
@@ -33,17 +35,17 @@ class StorageFactory:
         match storage_type:
             case "file":
                 if not all(k in kwargs for k in ("location", "filename")):
-                    raise KeyError("The `location` or `filename` variables are not provided as input for init()")
+                    raise AMTKeyError("`location` | `filename`")
                 return FileSystemStorageService(location=Path(kwargs["location"]), filename=str(kwargs["filename"]))
             case _:
-                raise ValueError(f"Unknown storage type: {storage_type}")
+                raise AMTValueError(storage_type)
 
 
 class FileSystemStorageService(Storage):
     def __init__(self, location: Path = Path("./tests/data"), filename: str = "system_card.yaml") -> None:
         self.base_dir = location
         if not filename.endswith(".yaml"):
-            raise ValueError(f"Filename {filename} must end with .yaml instead of .{filename.split('.')[-1]}")
+            raise AMTValueError(filename)
         self.filename = filename
         self.path = self.base_dir / self.filename
 

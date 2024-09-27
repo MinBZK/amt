@@ -29,4 +29,4 @@ def test_task_move_error(client: TestClient, db: DatabaseTestUtils, mock_csrf: G
     )
     assert response.status_code == 500
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"RepositoryError: Repository error" in response.content
+    assert b"An internal server error occurred while processing your request" in response.content

@@ -45,7 +45,7 @@ def test_e2e_create_project_invalid(page: Page):
     button = page.locator("#button-new-project-create")
     button.click()
 
-    expect(page.get_by_role("heading", name="Request Validation Error")).to_be_visible()
+    expect(page.get_by_text("name: String should have at")).to_be_visible()
 
 
 @pytest.mark.slow

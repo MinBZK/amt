@@ -1,5 +1,5 @@
 import pytest
-from amt.core.exceptions import RepositoryError
+from amt.core.exceptions import AMTRepositoryError
 from amt.repositories.projects import ProjectsRepository
 from tests.constants import default_project
 from tests.database_test_utils import DatabaseTestUtils
@@ -53,7 +53,7 @@ def test_save_failed(db: DatabaseTestUtils):
 
     project_repository.save(project)
 
-    with pytest.raises(RepositoryError):
+    with pytest.raises(AMTRepositoryError):
         project_repository.save(project_duplicate)
 
     project_repository.delete(project)  # cleanup
@@ -63,7 +63,7 @@ def test_delete_failed(db: DatabaseTestUtils):
     project_repository = ProjectsRepository(db.get_session())
     project = default_project()
 
-    with pytest.raises(RepositoryError):
+    with pytest.raises(AMTRepositoryError):
         project_repository.delete(project)
 
 
@@ -77,7 +77,7 @@ def test_find_by_id(db: DatabaseTestUtils):
 
 def test_find_by_id_failed(db: DatabaseTestUtils):
     project_repository = ProjectsRepository(db.get_session())
-    with pytest.raises(RepositoryError):
+    with pytest.raises(AMTRepositoryError):
         project_repository.find_by_id(1)
 
 
@@ -164,5 +164,5 @@ def test_raises_exception(db: DatabaseTestUtils):
     db.given([default_project()])
     project_repository = ProjectsRepository(db.get_session())
 
-    with pytest.raises(RepositoryError):
+    with pytest.raises(AMTRepositoryError):
         project_repository.paginate(skip="a", limit=3, search="")  # type: ignore

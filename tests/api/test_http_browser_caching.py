@@ -5,21 +5,22 @@ from unittest.mock import Mock
 
 import pytest
 from amt.api import http_browser_caching
+from amt.core.exceptions import AMTNotFound, AMTOnlyStatic
 from starlette.responses import Response
 
 
 def test_url_for_cache_not_static():
-    with pytest.raises(ValueError, match="Only static files are supported."):
+    with pytest.raises(AMTOnlyStatic, match="Only static files are supported."):
         http_browser_caching.url_for_cache("not-static")
 
 
 def test_url_for_cache_not_local():
-    with pytest.raises(ValueError, match="Only local URLS are supported."):
+    with pytest.raises(AMTOnlyStatic, match="Only static files are supported."):
         http_browser_caching.url_for_cache("static", path="http://this.is.not.local")
 
 
 def test_url_for_cache_file_not_found():
-    with pytest.raises(ValueError, match="Static file this/does/not/exist not found."):
+    with pytest.raises(AMTNotFound, match="The requested page or resource could not be found."):
         http_browser_caching.url_for_cache("static", path="this/does/not/exist")
 
 

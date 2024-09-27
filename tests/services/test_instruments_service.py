@@ -1,5 +1,5 @@
 import pytest
-from amt.core.exceptions import InstrumentError
+from amt.core.exceptions import AMTInstrumentError
 from amt.services.instruments import InstrumentsService
 from pytest_httpx import HTTPXMock
 from tests.constants import GITHUB_CONTENT_PAYLOAD, GITHUB_LIST_PAYLOAD
@@ -71,4 +71,4 @@ def test_fetch_instruments_invalid(httpx_mock: HTTPXMock):
     )
 
     # then
-    pytest.raises(InstrumentError, instruments_service.fetch_instruments)
+    pytest.raises(AMTInstrumentError, instruments_service.fetch_instruments)

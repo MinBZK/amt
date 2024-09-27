@@ -1,6 +1,6 @@
 import pytest
 from amt.core.config import Settings
-from amt.core.exceptions import SettingsError
+from amt.core.exceptions import AMTSettingsError
 
 
 def test_environment_settings(monkeypatch: pytest.MonkeyPatch):
@@ -28,27 +28,36 @@ def test_environment_settings(monkeypatch: pytest.MonkeyPatch):
 def test_environment_settings_production_sqlite_error(monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setenv("ENVIRONMENT", "production")
     monkeypatch.setenv("APP_DATABASE_SCHEME", "sqlite")
-    with pytest.raises(SettingsError) as e:
+    with pytest.raises(AMTSettingsError) as e:
         _settings = Settings(_env_file=None)  # pyright: ignore [reportCallIssue]
 
-    assert e.value.message == "Settings error for options APP_DATABASE_SCHEME"
+    assert (
+        e.value.detail
+        == "An error occurred while configuring the options for 'APP_DATABASE_SCHEME'. Please check the settings and try again."  # noqa: E501
+    )
 
 
 def test_environment_settings_production_debug_error(monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setenv("ENVIRONMENT", "production")
     monkeypatch.setenv("DEBUG", "True")
     monkeypatch.setenv("APP_DATABASE_SCHEME", "postgresql")
-    with pytest.raises(SettingsError) as e:
+    with pytest.raises(AMTSettingsError) as e:
         _settings = Settings(_env_file=None)  # pyright: ignore [reportCallIssue]
 
-    assert e.value.message == "Settings error for options DEBUG"
+    assert (
+        e.value.detail
+        == "An error occurred while configuring the options for 'DEBUG'. Please check the settings and try again."
+    )
 
 
 def test_environment_settings_production_autocreate_error(monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setenv("ENVIRONMENT", "production")
     monkeypatch.setenv("AUTO_CREATE_SCHEMA", "True")
     monkeypatch.setenv("APP_DATABASE_SCHEME", "postgresql")
-    with pytest.raises(SettingsError) as e:
+    with pytest.raises(AMTSettingsError) as e:
         _settings = Settings(_env_file=None)  # pyright: ignore [reportCallIssue]
 
-    assert e.value.message == "Settings error for options AUTO_CREATE_SCHEMA"
+    assert (
+        e.value.detail
+        == "An error occurred while configuring the options for 'AUTO_CREATE_SCHEMA'. Please check the settings and try again."  # noqa: E501
+    )

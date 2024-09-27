@@ -11,6 +11,8 @@ from starlette.responses import Response
 from starlette.staticfiles import StaticFiles
 from starlette.types import Scope
 
+from amt.core.exceptions import AMTNotFound, AMTOnlyStatic
+
 
 class StaticFilesCache(StaticFiles):
     def __init__(
@@ -62,17 +64,17 @@ class URLComponents(NamedTuple):
 @lru_cache(maxsize=1000)
 def url_for_cache(name: str, /, **path_params: str) -> str:
     if name != "static":
-        raise ValueError("Only static files are supported.")
+        raise AMTOnlyStatic()
 
     url_parts: ParseResult = urllib.parse.urlparse(path_params["path"])  # type: ignore
     if url_parts.scheme or url_parts.hostname:  # type: ignore
-        raise ValueError("Only local URLS are supported.")
+        raise AMTOnlyStatic()
 
     query_list: dict[str, str] = dict(x.split("=") for x in url_parts.query.split("&")) if url_parts.query else {}  # type: ignore
     resolved_url_path: str = "/" + name + "/" + url_parts.path  # type: ignore
     _, stat_result = static_files.lookup_path(url_parts.path)  # type: ignore
     if not stat_result:
-        raise ValueError(f"Static file {url_parts.path} not found.")  # type: ignore
+        raise AMTNotFound()
 
     etag_base = str(stat_result.st_mtime) + "-" + str(stat_result.st_size)
     etag = f"{md5_hexdigest(etag_base.encode(), usedforsecurity=False)}"

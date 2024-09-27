@@ -1,5 +1,5 @@
 import pytest
-from amt.core.exceptions import RepositoryError
+from amt.core.exceptions import AMTRepositoryError
 from amt.enums.status import Status
 from amt.models import Task
 from amt.repositories.tasks import TasksRepository
@@ -64,7 +64,7 @@ def test_save_all_failed(db: DatabaseTestUtils):
     task: Task = Task(id=1, title="Test title", description="Test description", sort_order=10)
     tasks_repository.save_all([task])
     task_duplicate: Task = Task(id=1, title="Test title duplicate", description="Test description", sort_order=10)
-    with pytest.raises(RepositoryError):
+    with pytest.raises(AMTRepositoryError):
         tasks_repository.save_all([task_duplicate])
 
     tasks_repository.delete(task)  # cleanup
@@ -87,7 +87,7 @@ def test_save_failed(db: DatabaseTestUtils):
     task: Task = Task(id=1, title="Test title", description="Test description", sort_order=10)
     tasks_repository.save(task)
     task_duplicate: Task = Task(id=1, title="Test title duplicate", description="Test description", sort_order=10)
-    with pytest.raises(RepositoryError):
+    with pytest.raises(AMTRepositoryError):
         tasks_repository.save(task_duplicate)
 
     tasks_repository.delete(task)  # cleanup
@@ -96,7 +96,7 @@ def test_save_failed(db: DatabaseTestUtils):
 def test_delete_failed(db: DatabaseTestUtils):
     tasks_repository: TasksRepository = TasksRepository(db.get_session())
     task: Task = Task(id=1, title="Test title", description="Test description", sort_order=10)
-    with pytest.raises(RepositoryError):
+    with pytest.raises(AMTRepositoryError):
         tasks_repository.delete(task)
 
 
@@ -112,7 +112,7 @@ def test_find_by_id(db: DatabaseTestUtils):
 
 def test_find_by_id_failed(db: DatabaseTestUtils):
     tasks_repository: TasksRepository = TasksRepository(db.get_session())
-    with pytest.raises(RepositoryError):
+    with pytest.raises(AMTRepositoryError):
         tasks_repository.find_by_id(1)
 
 

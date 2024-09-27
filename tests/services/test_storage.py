@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import pytest
+from amt.core.exceptions import AMTKeyError, AMTValueError
 from amt.schema.system_card import SystemCard
 from amt.services.storage import StorageFactory
 from yaml import safe_load
@@ -23,13 +24,13 @@ def test_file_system_writer_empty_yaml(setup_and_teardown: tuple[str, Path]) -> 
 
 def test_file_system_writer_no_location_variable(setup_and_teardown: tuple[str, Path]) -> None:
     filename, _ = setup_and_teardown
-    with pytest.raises(KeyError, match="The `location` or `filename` variables are not provided as input for init()"):
+    with pytest.raises(AMTKeyError, match="Key not correct"):
         StorageFactory.init(storage_type="file", filename=filename)  # pyright: ignore [reportCallIssue]
 
 
 def test_file_system_writer_no_filename_variable(setup_and_teardown: tuple[str, Path]) -> None:
     _, location = setup_and_teardown
-    with pytest.raises(KeyError, match="The `location` or `filename` variables are not provided as input for init()"):
+    with pytest.raises(AMTKeyError, match="Key not correct"):
         StorageFactory.init(storage_type="file", location=location)  # pyright: ignore [reportCallIssue]
 
 
@@ -71,15 +72,13 @@ def test_file_system_writer_with_system_card(setup_and_teardown: tuple[str, Path
 def test_abstract_writer_non_yaml_filename(setup_and_teardown: tuple[str, Path]) -> None:
     _, location = setup_and_teardown
     filename = "test.csv"
-    with pytest.raises(
-        ValueError, match=f"Filename {filename} must end with .yaml instead of .{filename.split('.')[-1]}"
-    ):
+    with pytest.raises(AMTValueError, match="Value not correct"):
         StorageFactory.init(storage_type="file", location=location, filename=filename)
 
 
 def test_not_valid_writer_type() -> None:
     writer_type = "kafka"
-    with pytest.raises(ValueError, match=f"Unknown storage type: {writer_type}"):
+    with pytest.raises(AMTValueError, match="Value not correct"):
         StorageFactory.init(storage_type=writer_type)  # pyright: ignore [reportCallIssue]
 
 

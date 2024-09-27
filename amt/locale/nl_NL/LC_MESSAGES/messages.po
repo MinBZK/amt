@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-04 10:24+0200\n"
+"POT-Creation-Date: 2024-09-30 10:07+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_NL\n"
@@ -64,37 +64,65 @@ msgstr "Nieuw"
 
 #: amt/api/navigation.py:44
 msgid "System card"
-msgstr ""
+msgstr "Systeemkaart"
 
 #: amt/api/navigation.py:45
 msgid "Assessment card"
-msgstr ""
+msgstr "Beoordelingskaart"
 
 #: amt/api/navigation.py:46
 msgid "Model card"
-msgstr ""
+msgstr "Model kaart"
 
 #: amt/api/navigation.py:47
 msgid "Details"
-msgstr ""
+msgstr "Details"
 
-#: amt/site/templates/errors/_HTTPException404.html.j2:1
-msgid "Page not found"
-msgstr "Pagina niet gevonden"
+#: amt/core/exceptions.py:20
+msgid ""
+"An error occurred while configuring the options for '{field}'. Please "
+"check the settings and try again."
+msgstr "Er is een fout opgetreden bij het configureren van de opties voor '{field}'. Controleer de instellingen en probeer het opnieuw."
 
-#: amt/site/templates/errors/_HTTPException404.html.j2:3
-msgid "The page or file you requested is not found. Please check the URL."
-msgstr ""
-"De pagina die u wilde zien of het bestand dat u wilde bekijken is niet "
-"gevonden. Controleer de URL."
+#: amt/core/exceptions.py:28
+msgid ""
+"An internal server error occurred while processing your request. Please "
+"try again later."
+msgstr "Er is een fout opgetreden. Probeer het later opnieuw."
 
-#: amt/site/templates/errors/_RequestValidation.html.j2:1
-msgid "Request Validation Error"
-msgstr "Aanvraag Validatie Fout"
+#: amt/core/exceptions.py:32
+msgid "An error occurred while processing the instrument. Please try again later."
+msgstr "Er is een fout opgetreden tijdens het verwerken van het instrument. Probeer het later opnieuw."
 
-#: amt/site/templates/errors/error.html.j2:4
+#: amt/core/exceptions.py:37
+msgid ""
+"The requested page or resource could not be found. Please check the URL "
+"or query and try again."
+msgstr "De gevraagde pagina of bron kon niet worden gevonden. Controleer de URL of query en probeer het opnieuw."
+
+#: amt/core/exceptions.py:43
+msgid "CSRF check failed."
+msgstr "CSRF-controle mislukt."
+
+#: amt/core/exceptions.py:49
+msgid "Only static files are supported."
+msgstr "Alleen statische bestanden worden ondersteund."
+
+#: amt/core/exceptions.py:54
+msgid "Key not correct: {field}"
+msgstr "Sleutel niet correct: {field}"
+
+#: amt/core/exceptions.py:59
+msgid "Value not correct: {field}"
+msgstr "Waarde is niet correct: {field}"
+
+#: amt/site/templates/errors/Exception.html.j2:6
 msgid "An error occurred"
-msgstr "Er is is een fout opgetreden"
+msgstr "Er is een fout opgetreden"
+
+#: amt/site/templates/errors/_Exception.html.j2:1
+msgid "An error occurred. Please try again later"
+msgstr "Er is een fout opgetreden. Probeer het later opnieuw."
 
 #: amt/site/templates/layouts/base.html.j2:11
 msgid "Algorithmic Management Toolkit (AMT)"
@@ -156,7 +184,7 @@ msgstr "Antwoord"
 
 #: amt/site/templates/pages/index.html.j2:3
 msgid "AMT Placeholder informatie pagina's"
-msgstr ""
+msgstr "AMT Placeholder informatie pagina's"
 
 #: amt/site/templates/parts/footer.html.j2:4
 #: amt/site/templates/parts/header.html.j2:8
@@ -249,3 +277,11 @@ msgstr "Kies één of meerdere instrumenten"
 msgid "Create Project"
 msgstr "Maak project"
 
+#~ msgid "To find your AI Act Profile you can use the"
+#~ msgstr "Om het AI Verordening Profiel te bepalen kunt gebruik maken van de"
+
+#~ msgid "The page or file you requested is not found. Please check the URL."
+#~ msgstr ""
+#~ "De pagina die u wilde zien of "
+#~ "het bestand dat u wilde bekijken "
+#~ "is niet gevonden. Controleer de URL."

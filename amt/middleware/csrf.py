@@ -9,7 +9,7 @@ from starlette.responses import Response
 from starlette.types import ASGIApp
 
 from amt.core.csrf import get_csrf_config  # type: ignore # noqa
-from amt.core.exception_handlers import csrf_protect_exception_handler
+from amt.core.exceptions import AMTCSRFProtectError
 
 RequestResponseEndpoint = typing.Callable[[Request], typing.Awaitable[Response]]
 
@@ -74,6 +74,5 @@ class CSRFMiddlewareExceptionHandler(BaseHTTPMiddleware):
         try:
             response = await call_next(request)
         except CsrfProtectError as e:
-            logger.warning(f"CsrfProtectError: {e}")
-            return await csrf_protect_exception_handler(request, e)
+            raise AMTCSRFProtectError() from e
         return response
