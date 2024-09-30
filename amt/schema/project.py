@@ -13,8 +13,8 @@ class ProjectNew(ProjectBase):
     publication_category: str = Field(default=None)
     systemic_risk: str = Field(default=None)
     transparency_obligations: str = Field(default=None)
-    role: str = Field(default=None)
+    role: list[str] | str = []
 
-    @field_validator("instruments")
+    @field_validator("instruments", "role")
     def ensure_list(cls, v: list[str] | str) -> list[str]:
         return v if isinstance(v, list) else [v]

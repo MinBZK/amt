@@ -50,14 +50,17 @@ class SelectAiProfileItem:
 
 
 class AiActProfileSelector:
+    radio_select: list[SelectAiProfileItem] | None
     multiple_select: list[SelectAiProfileItem] | None
     binary_select: list[SelectAiProfileItem] | None
 
     def __init__(
         self,
+        radio_select: list[SelectAiProfileItem] | None = None,
         multiple_select: list[SelectAiProfileItem] | None = None,
         binary_select: list[SelectAiProfileItem] | None = None,
     ) -> None:
+        self.radio_select = radio_select
         self.multiple_select = multiple_select
         self.binary_select = binary_select
 
@@ -68,7 +71,7 @@ def get_ai_act_profile_selector(request: Request) -> AiActProfileSelector:
         "AI-systeem voor algemene doeleinden",
         "AI-model voor algemene doeleinden",
     )
-    role_options = ("aanbieder", "gebruiksverantwoordelijke", "aanbieder + gebruiksverantwoordelijke")
+    role_options = ("aanbieder", "gebruiksverantwoordelijke")
     publication_category_options = (
         "impactvol algoritme",
         "niet-impactvol algoritme",
@@ -83,10 +86,12 @@ def get_ai_act_profile_selector(request: Request) -> AiActProfileSelector:
     translations = get_current_translation(request)
 
     return AiActProfileSelector(
-        multiple_select=[
+        radio_select=[
             SelectAiProfileItem(AiActProfileItem.TYPE, type_options, translations),
-            SelectAiProfileItem(AiActProfileItem.ROLE, role_options, translations),
             SelectAiProfileItem(AiActProfileItem.PUBLICATION_CATEGORY, publication_category_options, translations),
+        ],
+        multiple_select=[
+            SelectAiProfileItem(AiActProfileItem.ROLE, role_options, translations),
         ],
         binary_select=[
             SelectAiProfileItem(

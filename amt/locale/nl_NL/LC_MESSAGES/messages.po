@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-09-25 10:12+0200\n"
+"POT-Creation-Date: 2024-10-01 15:02+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_NL\n"
@@ -18,27 +18,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: amt/api/ai_act_profile.py:24
+#: amt/api/ai_act_profile.py:23
 msgid "Type"
 msgstr "Type AI toepassing"
 
-#: amt/api/ai_act_profile.py:26
+#: amt/api/ai_act_profile.py:25
 msgid "Is the application open source?"
 msgstr "Is de applicatie open source?"
 
-#: amt/api/ai_act_profile.py:28
+#: amt/api/ai_act_profile.py:27
 msgid "Publication Category"
 msgstr "Publicatiecategorie"
 
-#: amt/api/ai_act_profile.py:30
+#: amt/api/ai_act_profile.py:29
 msgid "Is there a systemic risk?"
 msgstr "Is er sprake van systematisch risico?"
 
-#: amt/api/ai_act_profile.py:32
+#: amt/api/ai_act_profile.py:31
 msgid "Is there a transparency obligation?"
 msgstr "Zijn er transparantieverplichtingen?"
 
-#: amt/api/ai_act_profile.py:34
+#: amt/api/ai_act_profile.py:33
 msgid "Role"
 msgstr "Rol"
 
@@ -193,8 +193,8 @@ msgid "Create a new project"
 msgstr "Maak een nieuw project"
 
 #: amt/site/templates/projects/new.html.j2:23
-msgid "Project"
-msgstr "Project"
+msgid "Project name"
+msgstr "Project naam"
 
 #: amt/site/templates/projects/new.html.j2:26
 msgid "Your project name here"
@@ -221,31 +221,31 @@ msgstr "De AI Verordening beslisboom"
 msgid "helps you determine the value of these fields."
 msgstr "is een hulpmiddel om de waardes van deze velden te bepalen."
 
-#: amt/site/templates/projects/new.html.j2:73
+#: amt/site/templates/projects/new.html.j2:96
 msgid "Yes"
 msgstr "Ja"
 
-#: amt/site/templates/projects/new.html.j2:83
+#: amt/site/templates/projects/new.html.j2:106
 msgid "No"
 msgstr "Nee"
 
-#: amt/site/templates/projects/new.html.j2:90
+#: amt/site/templates/projects/new.html.j2:113
 msgid "Instruments"
 msgstr "Instrumenten"
 
-#: amt/site/templates/projects/new.html.j2:92
+#: amt/site/templates/projects/new.html.j2:115
 msgid ""
 "Overview of instruments for the responsible development, deployment, "
-"assessment and monitoring of algorithms and AI-systems"
+"assessment and monitoring of algorithms and AI-systems."
 msgstr ""
 "Overzicht van aanbevolen insturment voor het verantwoord ontwikkelen, "
 "gebruiken,beoordelen en monitren van algoritmes en AI-systemen."
 
-#: amt/site/templates/projects/new.html.j2:100
+#: amt/site/templates/projects/new.html.j2:123
 msgid "Choose one or more instruments"
 msgstr "Kies één of meerdere instrumenten"
 
-#: amt/site/templates/projects/new.html.j2:114
+#: amt/site/templates/projects/new.html.j2:137
 msgid "Create Project"
 msgstr "Maak project"
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-09-25 10:12+0200\n"
+"POT-Creation-Date: 2024-10-01 15:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,27 +17,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: amt/api/ai_act_profile.py:24
+#: amt/api/ai_act_profile.py:23
 msgid "Type"
 msgstr ""
 
-#: amt/api/ai_act_profile.py:26
+#: amt/api/ai_act_profile.py:25
 msgid "Is the application open source?"
 msgstr ""
 
-#: amt/api/ai_act_profile.py:28
+#: amt/api/ai_act_profile.py:27
 msgid "Publication Category"
 msgstr ""
 
-#: amt/api/ai_act_profile.py:30
+#: amt/api/ai_act_profile.py:29
 msgid "Is there a systemic risk?"
 msgstr ""
 
-#: amt/api/ai_act_profile.py:32
+#: amt/api/ai_act_profile.py:31
 msgid "Is there a transparency obligation?"
 msgstr ""
 
-#: amt/api/ai_act_profile.py:34
+#: amt/api/ai_act_profile.py:33
 msgid "Role"
 msgstr ""
 
@@ -190,7 +190,7 @@ msgid "Create a new project"
 msgstr ""
 
 #: amt/site/templates/projects/new.html.j2:23
-msgid "Project"
+msgid "Project name"
 msgstr ""
 
 #: amt/site/templates/projects/new.html.j2:26
@@ -215,28 +215,28 @@ msgstr ""
 msgid "helps you determine the value of these fields."
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:73
+#: amt/site/templates/projects/new.html.j2:96
 msgid "Yes"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:83
+#: amt/site/templates/projects/new.html.j2:106
 msgid "No"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:90
+#: amt/site/templates/projects/new.html.j2:113
 msgid "Instruments"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:92
+#: amt/site/templates/projects/new.html.j2:115
 msgid ""
 "Overview of instruments for the responsible development, deployment, "
-"assessment and monitoring of algorithms and AI-systems"
+"assessment and monitoring of algorithms and AI-systems."
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:100
+#: amt/site/templates/projects/new.html.j2:123
 msgid "Choose one or more instruments"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:114
+#: amt/site/templates/projects/new.html.j2:137
 msgid "Create Project"
 msgstr ""

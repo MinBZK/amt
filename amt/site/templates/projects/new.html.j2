@@ -20,7 +20,7 @@
                                  aria-labelledby="fieldId-label"
                                  class="utrecht-form-field utrecht-form-field--text rvo-form-field">
                                 <div class="rvo-form-field__label">
-                                    <label class="rvo-label">{% trans %}Project{% endtrans %}</label>
+                                    <label class="rvo-label rvo-label--required">{% trans %}Project name{% endtrans %}</label>
                                 </div>
                                 <input id="name"
                                        placeholder="{% trans %}Your project name here{% endtrans %}"
@@ -41,21 +41,44 @@
                     </p>
                     <div class="utrecht-form-fieldset rvo-form-fieldset">
                         <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
-                            {% for item in ai_act_profile.multiple_select %}
-                                <div role="group"
+                            {% for item in ai_act_profile.radio_select %}
+                            <div role="group"
                                      aria-labelledby="fieldId-label"
                                      class="utrecht-form-field utrecht-form-field--text rvo-form-field">
                                     <div class="rvo-form-field__label">
                                         <label class="rvo-label">{{ item.display_name }}</label>
                                     </div>
-                                    <div class="rvo-select-wrapper">
-                                        <select name="{{ item.target_name }}"
-                                                class="utrecht-select utrecht-select--html-select">
-                                            {% for option in item.options %}<option>{{ option }}</option>{% endfor %}
-                                        </select>
+                                    {% for option in item.options %}
+                                    <div class="rvo-radio-button__group">
+                                        <label class="rvo-radio-button" for="{{ option }}">
+                                            <input id="{{ option }}"
+                                                   name="{{ item.target_name }}"
+                                                   value="{{ option }}"
+                                                   type="radio"
+                                                   class="utrecht-radio-button" />
+                                            {{ option }}
+                                        </label>
                                     </div>
-                                </div>
+                                    {% endfor %}
+                            </div>
                             {% endfor %}
+
+                            {% for item in ai_act_profile.multiple_select %}
+                            <div role="group"
+                                 aria-labelledby="fieldId-label"
+                                 class="utrecht-form-field utrecht-form-field--text rvo-form-field">
+                                <div class="rvo-form-field__label">
+                                    <label class="rvo-label">{{ item.display_name }}</label>
+                                </div>
+                                {% for option in item.options %}
+                                    <div class="rvo-checkbox__group">
+                                        <label class="rvo-checkbox rvo-checkbox--not-checked"
+                                               for="{{ option }}">
+                                            <input id="{{ option }}" name="{{ item.target_name }}" class="rvo-checkbox__input" type="checkbox" value="{{ option }}" />{{ option }}</label> </div>
+                                {% endfor %}
+                            </div>
+                            {% endfor %}
+
                             {% for item in ai_act_profile.binary_select %}
                                 <div role="group"
                                      aria-labelledby="fieldId-label"
@@ -89,7 +112,7 @@
                     </fieldset>
                     <h2 class="utrecht-heading-2 rvo-heading--no-margins">{% trans %}Instruments{% endtrans %}</h2>
                     <p class="rvo-text rvo-text--no-margins">
-                        {% trans %}Overview of instruments for the responsible development, deployment, assessment and monitoring of algorithms and AI-systems{% endtrans %}
+                        {% trans %}Overview of instruments for the responsible development, deployment, assessment and monitoring of algorithms and AI-systems.{% endtrans %}
                     </p>
                     <div class="utrecht-form-fieldset rvo-form-fieldset">
                         <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
