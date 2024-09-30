@@ -34,9 +34,9 @@ class CSRFMiddleware(BaseHTTPMiddleware):
         HTMX or GET requests that fetch static pages becauses this will result in multiple tokens
         which make validation impossible due to the asynchronisity of the requests.
         """
-        is_not_static: bool = "static" not in request.url.path
+        is_not_static_and_asset: bool = "static" not in request.url.path and "assets" not in request.url.path
         is_not_htmx: bool = request.state.htmx == "False"
-        return is_not_static or is_not_htmx
+        return is_not_static_and_asset or is_not_htmx  # or is_not_assets
 
     async def dispatch(self, request: Request, call_next: RequestResponseEndpoint) -> Response:
         signed_token = ""

@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
     new Sortable(column, { //NOSONAR
       group: "shared", // set both lists to same group
       animation: 150,
-      onEnd: function (evt) {
+      onEnd: function(evt) {
         if (evt.oldIndex !== evt.newIndex || evt.from !== evt.to) {
           const previousSiblingId = evt.item.previousElementSibling
             ? evt.item.previousElementSibling.getAttribute("data-id")
@@ -98,3 +98,53 @@ export function hideMobileMenu() {
 
 window.setCookie = setCookie;
 window.htmx = htmx;
+
+export function openModal() {
+  const el: Element | null = document.getElementById("decision-tree-modal");
+  if (el != null) {
+    el.classList.remove("display-none");
+  }
+}
+
+class AiActProfile {
+  constructor(
+    public type: string[],
+    public publication_category: string[],
+    public transparency_obligations: string[],
+    public systemic_risk: string[],
+    public role: string[],
+    public open_source: string[],
+  ) {}
+}
+
+export function closeModal() {
+  // Do not show modal.
+  const el: Element | null = document.getElementById("decision-tree-modal");
+  if (el != null) {
+    el.classList.add("display-none");
+  }
+
+  // Get decision tree state from local store.
+  const decision_tree_state = localStorage?.getItem("labelsbycategory");
+
+  if (decision_tree_state != null) {
+    // Parse decision tree state into AiActProfile object.
+    const aiActProfileRaw = JSON.parse(decision_tree_state);
+    const aiActProfile: AiActProfile = new AiActProfile(
+      aiActProfileRaw["Soort toepassing"],
+      aiActProfileRaw["Publicatiecategorie"],
+      aiActProfileRaw["Transparantieverplichtingen"],
+      aiActProfileRaw["Systeemrisico"],
+      aiActProfileRaw["Rol"],
+      aiActProfileRaw["Open-source"],
+    );
+
+    // Select the correct entries.
+    Object.entries(aiActProfile).forEach(([category, el_ids]) => {
+      el_ids.forEach((el_id: string) => {
+        const element = document.getElementById(`${category}-${el_id}`);
+        element?.click();
+      });
+    });
+  }
+}

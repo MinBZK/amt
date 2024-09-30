@@ -14,13 +14,13 @@ def test_e2e_create_project(page: Page):
 
     impact_assesment.check()
 
-    button = page.locator("#transparantieverplichtingen")
+    button = page.locator("#transparency_obligations-transparantieverplichtingen")
     button.click()
 
-    button = page.locator("#open-source")
+    button = page.locator("#open_source-open-source")
     button.click()
 
-    button = page.locator("#systeemrisico")
+    button = page.locator("#systemic_risk-systeemrisico")
     button.click()
 
     button = page.locator("#button-new-project-create")
@@ -33,13 +33,13 @@ def test_e2e_create_project(page: Page):
 def test_e2e_create_project_invalid(page: Page):
     page.goto("/projects/new")
 
-    button = page.locator("#transparantieverplichtingen")
+    button = page.locator("#transparency_obligations-transparantieverplichtingen")
     button.click()
 
-    button = page.locator("#open-source")
+    button = page.locator("#open_source-open-source")
     button.click()
 
-    button = page.locator("#systeemrisico")
+    button = page.locator("#systemic_risk-systeemrisico")
     button.click()
 
     button = page.locator("#button-new-project-create")
@@ -60,13 +60,13 @@ def test_e2e_create_project_with_tasks(page: Page):
 
     impact_assesment.check()
 
-    button = page.locator("#transparantieverplichtingen")
+    button = page.locator("#transparency_obligations-transparantieverplichtingen")
     button.click()
 
-    button = page.locator("#open-source")
+    button = page.locator("#open_source-open-source")
     button.click()
 
-    button = page.locator("#systeemrisico")
+    button = page.locator("#systemic_risk-systeemrisico")
     button.click()
 
     button = page.locator("#button-new-project-create")

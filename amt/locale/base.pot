@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-09-30 10:07+0200\n"
+"POT-Creation-Date: 2024-10-07 11:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -83,35 +83,35 @@ msgid ""
 "check the settings and try again."
 msgstr ""
 
-#: amt/core/exceptions.py:26
+#: amt/core/exceptions.py:28
 msgid ""
 "An internal server error occurred while processing your request. Please "
 "try again later."
 msgstr ""
 
-#: amt/core/exceptions.py:32
+#: amt/core/exceptions.py:34
 msgid "An error occurred while processing the instrument. Please try again later."
 msgstr ""
 
-#: amt/core/exceptions.py:37
+#: amt/core/exceptions.py:40
 msgid ""
 "The requested page or resource could not be found. Please check the URL "
 "or query and try again."
 msgstr ""
 
-#: amt/core/exceptions.py:43
+#: amt/core/exceptions.py:48
 msgid "CSRF check failed."
 msgstr ""
 
-#: amt/core/exceptions.py:49
+#: amt/core/exceptions.py:54
 msgid "Only static files are supported."
 msgstr ""
 
-#: amt/core/exceptions.py:54
+#: amt/core/exceptions.py:60
 msgid "Key not correct: {field}"
 msgstr ""
 
-#: amt/core/exceptions.py:59
+#: amt/core/exceptions.py:66
 msgid "Value not correct: {field}"
 msgstr ""
 
@@ -234,40 +234,39 @@ msgstr ""
 #: amt/site/templates/projects/new.html.j2:37
 msgid ""
 "The AI Act profile provides insight into, among other things, the type of"
-" AI system and the associated obligations from the European AI Act."
+" AI system and the associated obligations from the European AI Act. If "
+"you already know the type of AI system you can fill in the below fields. "
+"Otherwise, you can find your AI Act Profile with the AI Act Decision "
+"tree."
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:39
-msgid "The AI Act decision tree "
+#: amt/site/templates/projects/new.html.j2:43
+msgid "Find your AI Act profile"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:40
-msgid "helps you determine the value of these fields."
-msgstr ""
-
-#: amt/site/templates/projects/new.html.j2:96
+#: amt/site/templates/projects/new.html.j2:100
 msgid "Yes"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:106
+#: amt/site/templates/projects/new.html.j2:110
 msgid "No"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:113
+#: amt/site/templates/projects/new.html.j2:117
 msgid "Instruments"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:115
+#: amt/site/templates/projects/new.html.j2:119
 msgid ""
 "Overview of instruments for the responsible development, deployment, "
 "assessment and monitoring of algorithms and AI-systems."
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:123
+#: amt/site/templates/projects/new.html.j2:127
 msgid "Choose one or more instruments"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:137
+#: amt/site/templates/projects/new.html.j2:141
 msgid "Create Project"
 msgstr ""
 

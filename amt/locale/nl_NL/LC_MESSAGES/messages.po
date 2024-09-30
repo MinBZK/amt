@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-09-30 10:07+0200\n"
+"POT-Creation-Date: 2024-10-07 11:34+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_NL\n"
@@ -82,7 +82,9 @@ msgstr "Details"
 msgid ""
 "An error occurred while configuring the options for '{field}'. Please "
 "check the settings and try again."
-msgstr "Er is een fout opgetreden bij het configureren van de opties voor '{field}'. Controleer de instellingen en probeer het opnieuw."
+msgstr ""
+"Er is een fout opgetreden bij het configureren van de opties voor "
+"'{field}'. Controleer de instellingen en probeer het opnieuw."
 
 #: amt/core/exceptions.py:28
 msgid ""
@@ -90,29 +92,33 @@ msgid ""
 "try again later."
 msgstr "Er is een fout opgetreden. Probeer het later opnieuw."
 
-#: amt/core/exceptions.py:32
+#: amt/core/exceptions.py:34
 msgid "An error occurred while processing the instrument. Please try again later."
-msgstr "Er is een fout opgetreden tijdens het verwerken van het instrument. Probeer het later opnieuw."
+msgstr ""
+"Er is een fout opgetreden tijdens het verwerken van het instrument. "
+"Probeer het later opnieuw."
 
-#: amt/core/exceptions.py:37
+#: amt/core/exceptions.py:40
 msgid ""
 "The requested page or resource could not be found. Please check the URL "
 "or query and try again."
-msgstr "De gevraagde pagina of bron kon niet worden gevonden. Controleer de URL of query en probeer het opnieuw."
+msgstr ""
+"De gevraagde pagina of bron kon niet worden gevonden. Controleer de URL "
+"of query en probeer het opnieuw."
 
-#: amt/core/exceptions.py:43
+#: amt/core/exceptions.py:48
 msgid "CSRF check failed."
 msgstr "CSRF-controle mislukt."
 
-#: amt/core/exceptions.py:49
+#: amt/core/exceptions.py:54
 msgid "Only static files are supported."
 msgstr "Alleen statische bestanden worden ondersteund."
 
-#: amt/core/exceptions.py:54
+#: amt/core/exceptions.py:60
 msgid "Key not correct: {field}"
 msgstr "Sleutel niet correct: {field}"
 
-#: amt/core/exceptions.py:59
+#: amt/core/exceptions.py:66
 msgid "Value not correct: {field}"
 msgstr "Waarde is niet correct: {field}"
 
@@ -235,33 +241,32 @@ msgstr "AI Verordening Profiel"
 #: amt/site/templates/projects/new.html.j2:37
 msgid ""
 "The AI Act profile provides insight into, among other things, the type of"
-" AI system and the associated obligations from the European AI Act."
+" AI system and the associated obligations from the European AI Act. If "
+"you already know the type of AI system you can fill in the below fields. "
+"Otherwise, you can find your AI Act Profile with the AI Act Decision "
+"tree."
 msgstr ""
 "Het profiel van je toepassing, gebasseerd op de AI Act, geeft inzicht in "
 "onder andere het type AI systeem, de regelgeving die van toepassing is en"
 " de risicocategorie."
 
-#: amt/site/templates/projects/new.html.j2:39
-msgid "The AI Act decision tree "
-msgstr "De AI Verordening beslisboom"
+#: amt/site/templates/projects/new.html.j2:43
+msgid "Find your AI Act profile"
+msgstr "Vind uw AI Act profiel"
 
-#: amt/site/templates/projects/new.html.j2:40
-msgid "helps you determine the value of these fields."
-msgstr "is een hulpmiddel om de waardes van deze velden te bepalen."
-
-#: amt/site/templates/projects/new.html.j2:96
+#: amt/site/templates/projects/new.html.j2:100
 msgid "Yes"
 msgstr "Ja"
 
-#: amt/site/templates/projects/new.html.j2:106
+#: amt/site/templates/projects/new.html.j2:110
 msgid "No"
 msgstr "Nee"
 
-#: amt/site/templates/projects/new.html.j2:113
+#: amt/site/templates/projects/new.html.j2:117
 msgid "Instruments"
 msgstr "Instrumenten"
 
-#: amt/site/templates/projects/new.html.j2:115
+#: amt/site/templates/projects/new.html.j2:119
 msgid ""
 "Overview of instruments for the responsible development, deployment, "
 "assessment and monitoring of algorithms and AI-systems."
@@ -269,19 +274,17 @@ msgstr ""
 "Overzicht van aanbevolen insturment voor het verantwoord ontwikkelen, "
 "gebruiken,beoordelen en monitren van algoritmes en AI-systemen."
 
-#: amt/site/templates/projects/new.html.j2:123
+#: amt/site/templates/projects/new.html.j2:127
 msgid "Choose one or more instruments"
 msgstr "Kies één of meerdere instrumenten"
 
-#: amt/site/templates/projects/new.html.j2:137
+#: amt/site/templates/projects/new.html.j2:141
 msgid "Create Project"
 msgstr "Maak project"
 
-#~ msgid "To find your AI Act Profile you can use the"
-#~ msgstr "Om het AI Verordening Profiel te bepalen kunt gebruik maken van de"
+#~ msgid "The AI Act decision tree "
+#~ msgstr "De AI Verordening beslisboom"
 
-#~ msgid "The page or file you requested is not found. Please check the URL."
-#~ msgstr ""
-#~ "De pagina die u wilde zien of "
-#~ "het bestand dat u wilde bekijken "
-#~ "is niet gevonden. Controleer de URL."
+#~ msgid "helps you determine the value of these fields."
+#~ msgstr "is een hulpmiddel om de waardes van deze velden te bepalen."
+

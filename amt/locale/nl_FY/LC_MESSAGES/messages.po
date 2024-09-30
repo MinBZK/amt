@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-09-30 10:07+0200\n"
+"POT-Creation-Date: 2024-10-07 11:34+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_FY\n"
@@ -82,37 +82,45 @@ msgstr "Details"
 msgid ""
 "An error occurred while configuring the options for '{field}'. Please "
 "check the settings and try again."
-msgstr "Der barde in flater by it konfigurearjen fan de opsjes foar '{field}'. Kontrolearje asjebleaft de ynstellings en besykje it nochris."
+msgstr ""
+"Der barde in flater by it konfigurearjen fan de opsjes foar '{field}'. "
+"Kontrolearje asjebleaft de ynstellings en besykje it nochris."
 
-#: amt/core/exceptions.py:26
+#: amt/core/exceptions.py:28
 msgid ""
 "An internal server error occurred while processing your request. Please "
 "try again later."
-msgstr "Der barde in ynterne serverflater by it ferwurkjen fan jo fersyk. Besykje it letter nochris."
+msgstr ""
+"Der barde in ynterne serverflater by it ferwurkjen fan jo fersyk. Besykje"
+" it letter nochris."
 
-#: amt/core/exceptions.py:32
+#: amt/core/exceptions.py:34
 msgid "An error occurred while processing the instrument. Please try again later."
-msgstr "Der barde in flater by it ferwurkjen fan it ynstrumint. Besykje it letter nochris."
+msgstr ""
+"Der barde in flater by it ferwurkjen fan it ynstrumint. Besykje it letter"
+" nochris."
 
-#: amt/core/exceptions.py:37
+#: amt/core/exceptions.py:40
 msgid ""
 "The requested page or resource could not be found. Please check the URL "
 "or query and try again."
-msgstr "De frege side of boarne koe net fûn wurde. Kontrolearje asjebleaft de URL of query en besykje it nochris"
+msgstr ""
+"De frege side of boarne koe net fûn wurde. Kontrolearje asjebleaft de URL"
+" of query en besykje it nochris"
 
-#: amt/core/exceptions.py:43
+#: amt/core/exceptions.py:48
 msgid "CSRF check failed."
 msgstr "CSRF-kontrôle mislearre."
 
-#: amt/core/exceptions.py:49
+#: amt/core/exceptions.py:54
 msgid "Only static files are supported."
 msgstr "Allinich statyske bestannen wurde stipe."
 
-#: amt/core/exceptions.py:54
+#: amt/core/exceptions.py:60
 msgid "Key not correct: {field}"
 msgstr "Key net korrekt: {field}"
 
-#: amt/core/exceptions.py:59
+#: amt/core/exceptions.py:66
 msgid "Value not correct: {field}"
 msgstr "Wearde net korrekt: {field}"
 
@@ -235,40 +243,43 @@ msgstr "AI Act profyl"
 #: amt/site/templates/projects/new.html.j2:37
 msgid ""
 "The AI Act profile provides insight into, among other things, the type of"
-" AI system and the associated obligations from the European AI Act."
-msgstr "It profyl AI Wet jout ynsjoch yn ûnder oare it type KI-systeem en de dêrby hearrende ferplichtings út de Europeeske KI-wet."
+" AI system and the associated obligations from the European AI Act. If "
+"you already know the type of AI system you can fill in the below fields. "
+"Otherwise, you can find your AI Act Profile with the AI Act Decision "
+"tree."
+msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:39
-msgid "The AI Act decision tree "
-msgstr "De AI Act beslút beam"
+#: amt/site/templates/projects/new.html.j2:43
+#, fuzzy
+msgid "Find your AI Act profile"
+msgstr "AI Act profyl"
 
-#: amt/site/templates/projects/new.html.j2:40
-msgid "helps you determine the value of these fields."
-msgstr "helpt jo de wearde fan dizze fjilden te bepalen."
-
-#: amt/site/templates/projects/new.html.j2:96
+#: amt/site/templates/projects/new.html.j2:100
 msgid "Yes"
 msgstr "Ja"
 
-#: amt/site/templates/projects/new.html.j2:106
+#: amt/site/templates/projects/new.html.j2:110
 msgid "No"
 msgstr "Nee"
 
-#: amt/site/templates/projects/new.html.j2:113
+#: amt/site/templates/projects/new.html.j2:117
 msgid "Instruments"
 msgstr "Ynstruminten"
 
-#: amt/site/templates/projects/new.html.j2:115
+#: amt/site/templates/projects/new.html.j2:119
+#, fuzzy
 msgid ""
 "Overview of instruments for the responsible development, deployment, "
-"assessment and monitoring of algorithms and AI-systems"
-msgstr "Oersjoch fan ynstruminten foar de ferantwurdlike ûntwikkeling, ynset, beoardieling en tafersjoch fan algoritmen en AI-systemen"
+"assessment and monitoring of algorithms and AI-systems."
+msgstr ""
+"Oersjoch fan ynstruminten foar de ferantwurdlike ûntwikkeling, ynset, "
+"beoardieling en tafersjoch fan algoritmen en AI-systemen"
 
-#: amt/site/templates/projects/new.html.j2:123
+#: amt/site/templates/projects/new.html.j2:127
 msgid "Choose one or more instruments"
 msgstr "Kies ien of mear ynstruminten"
 
-#: amt/site/templates/projects/new.html.j2:137
+#: amt/site/templates/projects/new.html.j2:141
 msgid "Create Project"
 msgstr "Project oanmeitsje"
 
@@ -296,3 +307,10 @@ msgstr "Project oanmeitsje"
 #~ "and monitoring of algorithms and AI-"
 #~ "systems"
 #~ msgstr ""
+
+#~ msgid "The AI Act decision tree "
+#~ msgstr "De AI Act beslút beam"
+
+#~ msgid "helps you determine the value of these fields."
+#~ msgstr "helpt jo de wearde fan dizze fjilden te bepalen."
+
