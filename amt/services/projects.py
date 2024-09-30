@@ -8,7 +8,7 @@ from amt.models import Project
 from amt.repositories.projects import ProjectsRepository
 from amt.schema.instrument import InstrumentBase
 from amt.schema.project import ProjectNew
-from amt.schema.system_card import SystemCard
+from amt.schema.system_card import AiActProfile, SystemCard
 from amt.services.instruments import InstrumentsService
 from amt.services.storage import Storage, StorageFactory
 from amt.services.tasks import TasksService
@@ -44,7 +44,17 @@ class ProjectsService:
         instruments: list[InstrumentBase] = [
             InstrumentBase(urn=instrument_urn) for instrument_urn in project_new.instruments
         ]
-        system_card = SystemCard(name=project_new.name, selected_instruments=instruments)
+
+        ai_act_profile = AiActProfile(
+            type=project_new.type,
+            open_source=project_new.open_source,
+            publication_category=project_new.publication_category,
+            systemic_risk=project_new.systemic_risk,
+            transparency_obligations=project_new.transparency_obligations,
+            role=project_new.role,
+        )
+
+        system_card = SystemCard(name=project_new.name, ai_act_profile=ai_act_profile, selected_instruments=instruments)
 
         storage_writer: Storage = StorageFactory.init(
             storage_type="file", location=system_card_file.parent, filename=system_card_file.name

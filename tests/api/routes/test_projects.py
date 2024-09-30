@@ -2,6 +2,7 @@ from collections.abc import Generator
 from unittest.mock import MagicMock, Mock
 
 import pytest
+from amt.schema.ai_act_profile import AiActProfile
 from amt.schema.project import ProjectNew
 from amt.schema.system_card import SystemCard
 from amt.services.instruments import InstrumentsService
@@ -74,7 +75,15 @@ def test_post_new_projects(
     client: TestClient, mock_csrf: Generator[None, None, None], init_instruments: Generator[None, None, None]
 ) -> None:
     client.cookies["fastapi-csrf-token"] = "1"
-    new_project = ProjectNew(name="default project")
+    new_project = ProjectNew(
+        name="default project",
+        type="AI-systeem",
+        open_source="open-source",
+        publication_category="hoog-risico AI",
+        systemic_risk="systeemrisico",
+        transparency_obligations="transparantieverplichtingen",
+        role="aanbieder",
+    )
 
     # when
     response = client.post("/projects/new", json=new_project.model_dump(), headers={"X-CSRF-Token": "1"})
@@ -92,8 +101,26 @@ def test_post_new_projects_write_system_card(
     client.cookies["fastapi-csrf-token"] = "1"
     origin = FileSystemStorageService.write
     FileSystemStorageService.write = MagicMock()
-    project_new = ProjectNew(name="name1")
-    system_card = SystemCard(name=project_new.name, selected_instruments=[])
+    project_new = ProjectNew(
+        name="name1",
+        type="AI-systeem",
+        open_source="open-source",
+        publication_category="hoog-risico AI",
+        systemic_risk="systeemrisico",
+        transparency_obligations="transparantieverplichtingen",
+        role="aanbieder",
+    )
+
+    ai_act_profile = AiActProfile(
+        type=project_new.type,
+        open_source=project_new.open_source,
+        publication_category=project_new.publication_category,
+        systemic_risk=project_new.systemic_risk,
+        transparency_obligations=project_new.transparency_obligations,
+        role=project_new.role,
+    )
+
+    system_card = SystemCard(name=project_new.name, selected_instruments=[], ai_act_profile=ai_act_profile)
 
     # when
     client.post("/projects/new", json=project_new.model_dump(), headers={"X-CSRF-Token": "1"})
