@@ -3,9 +3,9 @@
  * Copyright (c) 2021 Community for NL Design System
  */
 
+/* stylelint-disable selector-class-pattern */
 .rvo-tabs__item {
     list-style: none;
-
 
     .rvo-tabs__item-link {
         font-weight: var(--rvo-tabs-font-weight);
@@ -16,11 +16,10 @@
     }
 }
 
-@media (min-width: 600px) {
+@media (width >= 600px) {
     .rvo-tabs {
-        //display: inline-flex;
         &::after {
-            content: '';
+            content: "";
             width: 100%;
             display: block;
             z-index: -1;
@@ -30,12 +29,15 @@
             position: absolute;
             bottom: -1px;
         }
+
         display: flex;
         flex-direction: row;
         align-items: stretch;
         position: relative;
+
         li.rvo-tabs__item {
             white-space: nowrap;
+
             &::before {
                 display: none;
             }
@@ -53,9 +55,15 @@
                 text-decoration: none;
 
                 &:hover {
-                    border-bottom-color: var(--rvo-tabs-hover-border-bottom-color);
-                    border-bottom-style: var(--rvo-tabs-hover-border-bottom-style);
-                    border-bottom-width: var(--rvo-tabs-hover-border-bottom-width);
+                    border-bottom-color: var(
+                        --rvo-tabs-hover-border-bottom-color
+                    );
+                    border-bottom-style: var(
+                        --rvo-tabs-hover-border-bottom-style
+                    );
+                    border-bottom-width: var(
+                        --rvo-tabs-hover-border-bottom-width
+                    );
                 }
             }
 
@@ -73,6 +81,7 @@
         }
     }
 }
+/* stylelint-enable selector-class-pattern */
 
 .rvo-theme {
     --rvo-tabs-active-border-bottom-style: solid;
