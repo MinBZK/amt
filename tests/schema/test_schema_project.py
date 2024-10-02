@@ -10,7 +10,7 @@ def test_project_schema_create_new():
         publication_category="hoog-risico AI",
         systemic_risk="systeemrisico",
         transparency_obligations="transparantieverplichtingen",
-        role="aanbieder",
+        role=["aanbieder", "gebruiksverantwoordelijke"],
     )
     assert project_new.name == "Project Name"
     assert project_new.instruments == ["urn:instrument:1", "urn:instrument:2"]
@@ -19,7 +19,7 @@ def test_project_schema_create_new():
     assert project_new.publication_category == "hoog-risico AI"
     assert project_new.systemic_risk == "systeemrisico"
     assert project_new.transparency_obligations == "transparantieverplichtingen"
-    assert project_new.role == "aanbieder"
+    assert project_new.role == ["aanbieder", "gebruiksverantwoordelijke"]
 
 
 def test_project_schema_create_new_one_instrument():
@@ -40,4 +40,4 @@ def test_project_schema_create_new_one_instrument():
     assert project_new.publication_category == "hoog-risico AI"
     assert project_new.systemic_risk == "systeemrisico"
     assert project_new.transparency_obligations == "transparantieverplichtingen"
-    assert project_new.role == "aanbieder"
+    assert project_new.role == ["aanbieder"]
