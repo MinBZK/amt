@@ -116,7 +116,7 @@ class Navigation:
     )
     PROJECT_DATA_CARD = BaseNavigationItem(
         display_text=DisplayText.DATA,
-        url="/project/{project_id}/details/system_data"
+        url="/project/{project_id}/details/system_card/data"
     )
     PROJECT_MODEL_CARD = BaseNavigationItem(
         display_text=DisplayText.MODELCARD,

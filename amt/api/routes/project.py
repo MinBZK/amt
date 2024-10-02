@@ -157,6 +157,108 @@ async def get_system_card(
 
     return templates.TemplateResponse(request, "pages/system_card.html.j2", context)
 
+# !!!
+# Implementation of this endpoint is for now independent of the project ID, meaning
+# that the same system card is rendered for all project ID's. This is due to the fact
+# that the logical process flow of a system card is not complete.
+# !!!
+@router.get("/{project_id}/details/system_card/requirements")
+async def get_system_card(
+    request: Request,
+    project_id: int,
+    projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
+) -> HTMLResponse:
+    project = get_project_or_error(project_id, projects_service, request)
+
+    tab_items = get_project_details_tabs(project, request)
+
+    breadcrumbs = resolve_base_navigation_items(
+        [
+            Navigation.PROJECTS_ROOT,
+            BaseNavigationItem(custom_display_text=project.name, url="/project/{project_id}/system_card"),
+            Navigation.PROJECT_SYSTEM_CARD,
+        ],
+        request,
+    )
+
+    context = {
+        "project": project,
+        "project_id": project.id,
+        "tab_items": tab_items,
+        "breadcrumbs": breadcrumbs,
+    }
+
+    return templates.TemplateResponse(request, "projects/details_requirements.html.j2", context)
+
+
+# !!!
+# Implementation of this endpoint is for now independent of the project ID, meaning
+# that the same system card is rendered for all project ID's. This is due to the fact
+# that the logical process flow of a system card is not complete.
+# !!!
+@router.get("/{project_id}/details/system_card/data")
+async def get_system_card(
+    request: Request,
+    project_id: int,
+    projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
+) -> HTMLResponse:
+    project = get_project_or_error(project_id, projects_service, request)
+
+    tab_items = get_project_details_tabs(project, request)
+
+    breadcrumbs = resolve_base_navigation_items(
+        [
+            Navigation.PROJECTS_ROOT,
+            BaseNavigationItem(custom_display_text=project.name, url="/project/{project_id}/system_card"),
+            Navigation.PROJECT_SYSTEM_CARD,
+        ],
+        request,
+    )
+
+    context = {
+        "project": project,
+        "project_id": project.id,
+        "tab_items": tab_items,
+        "breadcrumbs": breadcrumbs,
+    }
+
+    return templates.TemplateResponse(request, "projects/details_data.html.j2", context)
+
+
+
+# !!!
+# Implementation of this endpoint is for now independent of the project ID, meaning
+# that the same system card is rendered for all project ID's. This is due to the fact
+# that the logical process flow of a system card is not complete.
+# !!!
+@router.get("/{project_id}/details/system_card/instruments")
+async def get_system_card(
+    request: Request,
+    project_id: int,
+    projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
+) -> HTMLResponse:
+    project = get_project_or_error(project_id, projects_service, request)
+
+    tab_items = get_project_details_tabs(project, request)
+
+    breadcrumbs = resolve_base_navigation_items(
+        [
+            Navigation.PROJECTS_ROOT,
+            BaseNavigationItem(custom_display_text=project.name, url="/project/{project_id}/system_card"),
+            Navigation.PROJECT_SYSTEM_CARD,
+        ],
+        request,
+    )
+
+    context = {
+        "project": project,
+        "project_id": project.id,
+        "tab_items": tab_items,
+        "breadcrumbs": breadcrumbs,
+    }
+
+    return templates.TemplateResponse(request, "projects/details_instruments.html.j2", context)
+
 
 # !!!
 # Implementation of this endpoint is for now independent of the project ID, meaning
