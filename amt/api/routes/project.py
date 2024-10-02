@@ -97,15 +97,22 @@ async def get_project_details(
         ],
         request,
     )
+    # TODO: This now loads an example system card independent of the project ID.
+    filepath = Path("example_system_card/system_card.yaml")
+    file_system_storage_service = StorageFactory.init(
+        storage_type="file" , location=filepath.parent , filename=filepath.name
+    )
+    system_card_data = file_system_storage_service.read()
 
     tab_items = get_project_details_tabs(project, request)
 
-    context = {"project": project,
+    context = {"system_card": system_card_data,
+               "project": project,
                "breadcrumbs": breadcrumbs,
                "tab_items": tab_items
                }
 
-    return templates.TemplateResponse(request, "projects/details.html.j2", context)
+    return templates.TemplateResponse(request, "projects/details_info.html.j2", context)
 
 
 # !!!

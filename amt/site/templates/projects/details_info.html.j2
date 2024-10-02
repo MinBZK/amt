@@ -1,0 +1,42 @@
+{% extends 'projects/details_base.html.j2' %}
+
+{% block title %} {% trans %}AMT Placeholder informatie pagina's{% endtrans %} {% endblock %}
+
+{% block detail_content %}
+
+    <div class="rvo-table--responsive rvo-alert--padding-md">
+        <table class="rvo-table">
+            <tbody class="rvo-table-body">
+            <tr class="rvo-table-row">
+                <td class="rvo-table-cell">Omschrijving</td>
+                <td class="rvo-table-cell">{{ system_card.description }}</td>
+            </tr>
+            <tr class="rvo-table-row">
+                <td class="rvo-table-cell">Repository</td>
+                <td class="rvo-table-cell"><a href={{ system_card.provenance.uri }}>{{ system_card.provenance.uri }}</a></td>
+            </tr>
+            <tr class="rvo-table-row rvo-max-width-layout--sm">
+                <td class="rvo-table-cell">Project code</td>
+                <td class="rvo-table-cell">NL-AI-VALIDATIE-383672821-PI234</td>
+            </tr>
+            <tr class="rvo-table-row">
+                <td class="rvo-table-cell">Levenscyclus</td>
+                <td class="rvo-table-cell"><a class="rvo-tag rvo-tag--active rvo-tag--default rvo-tag--success"><span
+    class="utrecht-icon rvo-icon rvo-icon-bevestiging rvo-icon--lg"
+    role="img"
+    aria-label="Bevestiging"
+  ></span>{{ system_card.status }}</a></td>
+            </tr>
+            <tr class="rvo-table-row">
+                <td class="rvo-table-cell">Labels</td>
+                <td class="rvo-table-cell">
+                {% for label in system_card.labels %}
+                    <a class="rvo-tag rvo-tag--active rvo-tag--default rvo-tag--info">{{ label.value }}</a>
+                {% endfor %}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

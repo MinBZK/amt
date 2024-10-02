@@ -277,3 +277,7 @@ main {
     border: var(--rvo-card-outline-border-width) solid
         var(--rvo-card-outline-border-color);
 }
+
+.rvo-table-row td:first-child {
+    width: 20%;
+}
