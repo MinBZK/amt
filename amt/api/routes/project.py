@@ -1,6 +1,6 @@
 import logging
 from pathlib import Path
-from typing import Annotated
+from typing import Annotated , Any
 
 from fastapi import APIRouter, Depends, Request
 from fastapi.responses import HTMLResponse
@@ -15,6 +15,8 @@ from amt.api.navigation import (
 from amt.core.exceptions import AMTNotFound, AMTRepositoryError
 from amt.enums.status import Status
 from amt.models import Project
+from amt.schema.system_card import SystemCard
+from amt.services.instruments_state import InstrumentStateService
 from amt.services.projects import ProjectsService
 from amt.services.storage import StorageFactory
 from amt.services.tasks import TasksService
@@ -23,6 +25,18 @@ from amt.utils.storage import get_include_content, last_modified_at
 router = APIRouter()
 logger = logging.getLogger(__name__)
 
+def get_system_card_data() -> SystemCard:
+    # TODO: This now loads an example system card independent of the project ID.
+    path = Path("example_system_card/system_card.yaml")
+    system_card: Any = StorageFactory.init(storage_type="file" , location=path.parent , filename=path.name).read()
+    return SystemCard(**system_card)
+
+
+def get_instrument_state() -> dict:
+    system_card_data = get_system_card_data()
+    instrument_state = InstrumentStateService(system_card_data)
+    return {"count_0": instrument_state.get_amount_completed_instruments() ,
+           "count_1": instrument_state.get_amount_total_instruments()}
 
 def get_project_or_error(project_id: int, projects_service: ProjectsService, request: Request) -> Project:
     try:
@@ -60,7 +74,7 @@ async def get_tasks(
     tasks_service: Annotated[TasksService, Depends(TasksService)],
 ) -> HTMLResponse:
     project = get_project_or_error(project_id, projects_service, request)
-
+    instrument_state = get_instrument_state()
     tab_items = get_project_details_tabs(project, request)
 
     breadcrumbs = resolve_base_navigation_items(
@@ -73,6 +87,7 @@ async def get_tasks(
     )
 
     context = {
+        "instrument_state": instrument_state,
         "tasks_service": tasks_service,
         "statuses": Status,
         "project": project,
@@ -97,16 +112,14 @@ async def get_project_details(
         ],
         request,
     )
-    # TODO: This now loads an example system card independent of the project ID.
-    filepath = Path("example_system_card/system_card.yaml")
-    file_system_storage_service = StorageFactory.init(
-        storage_type="file" , location=filepath.parent , filename=filepath.name
-    )
-    system_card_data = file_system_storage_service.read()
+
+    system_card_data = get_system_card_data()
+    instrument_state = get_instrument_state()
 
     tab_items = get_project_details_tabs(project, request)
 
     context = {"system_card": system_card_data,
+               "instrument_state": instrument_state,
                "project": project,
                "breadcrumbs": breadcrumbs,
                "tab_items": tab_items
@@ -127,6 +140,7 @@ async def get_system_card(
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
 ) -> HTMLResponse:
     project = get_project_or_error(project_id, projects_service, request)
+    instrument_state = get_instrument_state()
 
     tab_items = get_project_details_tabs(project, request)
 
@@ -148,6 +162,7 @@ async def get_system_card(
 
     context = {
         "system_card": system_card_data,
+        "instrument_state": instrument_state,
         "last_updated": last_modified_at(filepath),
         "project": project,
         "project_id": project.id,
@@ -169,6 +184,7 @@ async def get_system_card(
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
 ) -> HTMLResponse:
     project = get_project_or_error(project_id, projects_service, request)
+    instrument_state = get_instrument_state()
 
     tab_items = get_project_details_tabs(project, request)
 
@@ -182,6 +198,7 @@ async def get_system_card(
     )
 
     context = {
+        "instrument_state": instrument_state,
         "project": project,
         "project_id": project.id,
         "tab_items": tab_items,
@@ -203,6 +220,7 @@ async def get_system_card(
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
 ) -> HTMLResponse:
     project = get_project_or_error(project_id, projects_service, request)
+    instrument_state = get_instrument_state()
 
     tab_items = get_project_details_tabs(project, request)
 
@@ -216,6 +234,7 @@ async def get_system_card(
     )
 
     context = {
+        "instrument_state": instrument_state,
         "project": project,
         "project_id": project.id,
         "tab_items": tab_items,
@@ -238,6 +257,7 @@ async def get_system_card(
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
 ) -> HTMLResponse:
     project = get_project_or_error(project_id, projects_service, request)
+    instrument_state = get_instrument_state()
 
     tab_items = get_project_details_tabs(project, request)
 
@@ -251,6 +271,7 @@ async def get_system_card(
     )
 
     context = {
+        "instrument_state": instrument_state,
         "project": project,
         "project_id": project.id,
         "tab_items": tab_items,
@@ -273,6 +294,7 @@ async def get_assessment_card(
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
 ) -> HTMLResponse:
     project = get_project_or_error(project_id, projects_service, request)
+    instrument_state = get_instrument_state()
 
     request.state.path_variables.update({"assessment_card": assessment_card})
 
@@ -296,6 +318,7 @@ async def get_assessment_card(
         raise AMTNotFound()
 
     context = {
+        "instrument_state": instrument_state,
         "assessment_card": assessment_card_data,
         "last_updated": last_modified_at(filepath),
         "sub_menu_items": sub_menu_items,
@@ -318,10 +341,11 @@ async def get_model_card(
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
 ) -> HTMLResponse:
     project = get_project_or_error(project_id, projects_service, request)
+    model_card_data = get_system_card_data()
+    instrument_state = get_instrument_state()
 
     # TODO: This now loads an example system card independent of the project ID.
     filepath = Path("example_system_card/system_card.yaml")
-    model_card_data = get_include_content(filepath.parent, filepath.name, "models", model_card)
 
     request.state.path_variables.update({"model_card": model_card})
 
@@ -341,6 +365,7 @@ async def get_model_card(
         raise AMTNotFound()
 
     context = {
+        "instrument_state": instrument_state,
         "model_card": model_card_data,
         "last_updated": last_modified_at(filepath),
         "breadcrumbs": breadcrumbs,
