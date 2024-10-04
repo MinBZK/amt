@@ -22,7 +22,7 @@ def system_card_data_with_instruments() -> dict[str, Any]:
         "schema_version": "0.0.0",
         "instruments": [
             {"urn": "urn:nl:aivt:ir:iama:1.0"},
-            {"urn": "urn:nl:aivt:ir:aiia:1.0"}
+            {"urn": "urn:nl:aivt:ir:aiia:1.0"},
         ],
         "assessments": [
             {
@@ -170,7 +170,7 @@ def test_find_next_tasks_for_instrument_correct_lifecycle(system_card: SystemCar
 def test_get_state_per_instrument(system_card: SystemCard):
     instrument_state_service = InstrumentStateService(system_card)
     res = instrument_state_service.get_state_per_instrument()
-    assert {'urn:nl:aivt:ir:aiia:1.0': 1, 'urn:nl:aivt:ir:iama:1.0': 1} == res
+    assert [{'urn': 'urn:nl:aivt:ir:aiia:1.0', 'count': 1, 'name': 'AI Impact Assessment (AIIA)'}, {'urn': 'urn:nl:aivt:ir:iama:1.0', 'count': 1, 'name': 'Impact Assessment Mensenrechten en Algoritmes (IAMA)'}] == res
 
 
 def test_get_amount_completed_instruments(system_card: SystemCard):

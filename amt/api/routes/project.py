@@ -180,7 +180,7 @@ async def get_system_card(
 # that the logical process flow of a system card is not complete.
 # !!!
 @router.get("/{project_id}/details/system_card/requirements")
-async def get_system_card(
+async def get_system_card_requirements(
     request: Request,
     project_id: int,
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
@@ -216,7 +216,7 @@ async def get_system_card(
 # that the logical process flow of a system card is not complete.
 # !!!
 @router.get("/{project_id}/details/system_card/data")
-async def get_system_card(
+async def get_system_card_data_page(
     request: Request,
     project_id: int,
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
@@ -253,7 +253,7 @@ async def get_system_card(
 # that the logical process flow of a system card is not complete.
 # !!!
 @router.get("/{project_id}/details/system_card/instruments")
-async def get_system_card(
+async def get_system_card_instruments(
     request: Request,
     project_id: int,
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],

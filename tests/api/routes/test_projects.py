@@ -91,7 +91,7 @@ def test_post_new_projects(
     # then
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert response.headers["HX-Redirect"] == "/project/1/tasks"
+    assert response.headers["HX-Redirect"] == "/project/1/details/tasks"
 
 
 def test_post_new_projects_write_system_card(
