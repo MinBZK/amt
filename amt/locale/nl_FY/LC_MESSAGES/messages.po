@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-01 15:02+0200\n"
+"POT-Creation-Date: 2024-10-04 10:24+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_FY\n"
@@ -179,23 +179,20 @@ msgid "Language"
 msgstr ""
 
 #: amt/site/templates/projects/index.html.j2:19
-#, fuzzy
 msgid "New project"
-msgstr "Fine projekt..."
+msgstr ""
 
 #: amt/site/templates/projects/index.html.j2:36
 msgid "Find project..."
-msgstr "Fine projekt..."
+msgstr ""
 
 #: amt/site/templates/projects/new.html.j2:7
-#, fuzzy
 msgid "Create a new project"
-msgstr "Fine projekt..."
+msgstr ""
 
 #: amt/site/templates/projects/new.html.j2:23
-#, fuzzy
 msgid "Project name"
-msgstr "Fine projekt..."
+msgstr ""
 
 #: amt/site/templates/projects/new.html.j2:26
 msgid "Your project name here"
@@ -245,27 +242,3 @@ msgstr ""
 msgid "Create Project"
 msgstr ""
 
-#~ msgid "Your projectname here"
-#~ msgstr ""
-
-#~ msgid "To find your AI Act Profile you can use the"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "The AI Act profile provides insight "
-#~ "into, among other things, the type "
-#~ "of AI system and the associated "
-#~ "obligations from the European AI Act."
-#~ "\n"
-#~ "                        The"
-#~ msgstr ""
-
-#~ msgid "AI Act decision tree "
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Overview of instruments for the "
-#~ "responsible development, deployment, assessment "
-#~ "and monitoring of algorithms and AI-"
-#~ "systems"
-#~ msgstr ""
