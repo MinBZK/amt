@@ -15,7 +15,8 @@
                     <div class="rvo-layout-row" style="display: flex; justify-content: space-between;">
                         <h5 class="amt-widget-title rvo-link--with-icon"><span
                             class="utrecht-icon rvo-icon rvo-icon-vinkje rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
-                            role="img" aria-label=""></span>Voldoet het algoritme aan de vereisten?</h5>
+                            role="img" aria-label=""></span>{% trans %}Voldoet het algoritme aan de
+                            vereisten?{% endtrans %}</h5>
                         <a class="rvo-text--subtle rvo-text--bold">7/8 voldaan</a>
                     </div>
                     <ul class="rvo-item-list">
@@ -71,48 +72,40 @@
                     <div class="rvo-layout-row" style="display: flex; justify-content: space-between;">
                         <h5 class="amt-widget-title rvo-link--with-icon"><span
                             class="utrecht-icon rvo-icon rvo-icon-permanent-beta rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
-                            role="img" aria-label=""></span>Welke instrumenten zijn uitgevoerd?</h5>
-                        <a class="rvo-text--bold rvo-text--subtle">{{ instrument_state.count_0 }}/ {{ instrument_state.count_1 }} uitgevoerd</a>
+                            role="img" aria-label=""></span>{% trans %}Welke instrumenten zijn uitgevoerd?{% endtrans %}
+                        </h5>
+                        <a class="rvo-text--bold rvo-text--subtle">{{ instrument_state.count_0 }}/{{ instrument_state.count_1 }}
+                            {% trans %}uitgevoerd{% endtrans %}</a>
                     </div>
+
+
+                    <!-- Instruments widgets -->
                     <ul class="rvo-item-list">
-                        <li class="rvo-item-list__item">
-                            <div class="rvo-layout-row rvo-layout-gap--sm"
-                                 style="display: flex; justify-content: space-between;">
-                                <div class="rvo-layout-row rvo-layout-gap--sm">
-
-                                    <div class="rvo-status-indicator rvo-status-indicator--oranje"></div>
-                                    <a class="rvo-link rvo-link--no-underline rvo-link--zwart" href="#">
-                                        AI Impact Assessment (AIIA)
-                                    </a>
+                        {% for instrument in instrument_state.instrument_states %}
+                            {# Only show the first 3 elements of the instruments_state#}
+                            {% if loop.index <= 3 %}
+                            <li class="rvo-item-list__item">
+                                <div class="rvo-layout-row rvo-layout-gap--sm"
+                                     style="display: flex; justify-content: space-between;">
+                                    <div class="rvo-layout-row rvo-layout-gap--sm">
+                                        {% if instrument.count == 1 %}
+                                            <div class="rvo-status-indicator rvo-status-indicator--oranje"></div>
+                                        {% else %}
+                                            <div class="rvo-status-indicator rvo-status-indicator--groen"></div>
+                                        {% endif %}
+                                        <a class="rvo-link rvo-link--no-underline rvo-link--zwart" href="#">
+                                            {{ instrument.name }}
+                                        </a>
+                                    </div>
+                                    {% if instrument.count == 1 %}
+                                        <a class="rvo-text--subtle">{% trans %}Te doen{% endtrans %}</a>
+                                    {% else %}
+                                        <a class="rvo-text--subtle">{% trans %}Uitgevoerd{% endtrans %}</a>
+                                    {% endif %}
                                 </div>
-
-                                <a class="rvo-text--subtle">Te doen</a>
-                            </div>
-                        </li>
-                        <li class="rvo-item-list__item">
-                            <div class="rvo-layout-row rvo-layout-gap--sm"
-                                 style="display: flex; justify-content: space-between;">
-                                <div class="rvo-layout-row rvo-layout-gap--sm">
-                                    <div class="rvo-status-indicator rvo-status-indicator--oranje"></div>
-                                    <a class="rvo-link rvo-link--no-underline rvo-link--zwart" href="#">
-                                        Impact Assessment Mensenrechten en Algoritmes
-                                    </a>
-                                </div>
-                                <a class="rvo-text--subtle">Uitgevoerd</a>
-                            </div>
-                        </li>
-                        <li class="rvo-item-list__item">
-                            <div class="rvo-layout-row rvo-layout-gap--sm"
-                                 style="display: flex; justify-content: space-between;">
-                                <div class="rvo-layout-row rvo-layout-gap--sm">
-                                    <div class="rvo-status-indicator rvo-status-indicator--groen"></div>
-                                    <a class="rvo-link rvo-link--no-underline rvo-link--zwart" href="#">
-                                        Technische documentatie voor hoog risico systemen
-                                    </a>
-                                </div>
-                                <a class="rvo-text--subtle">Uitgevoerd</a>
-                            </div>
-                        </li>
+                            </li>
+                            {% endif %}
+                        {% endfor %}
                     </ul>
                     <a class="margin-top-large rvo-link rvo-link--normal rvo-link--with-icon" href="#">
   <span
@@ -120,7 +113,7 @@
       role="img"
       aria-label="Home"
   ></span>
-                        Ga naar alle instrumenten
+                        {% trans %}Ga naar alle instrumenten{% endtrans %}
                     </a>
                 </div>
             </div>

@@ -35,7 +35,9 @@ def get_system_card_data() -> SystemCard:
 def get_instrument_state() -> dict:
     system_card_data = get_system_card_data()
     instrument_state = InstrumentStateService(system_card_data)
-    return {"count_0": instrument_state.get_amount_completed_instruments() ,
+    instrument_states = instrument_state.get_state_per_instrument()
+    return {"instrument_states": instrument_states,
+            "count_0": instrument_state.get_amount_completed_instruments() ,
            "count_1": instrument_state.get_amount_total_instruments()}
 
 def get_project_or_error(project_id: int, projects_service: ProjectsService, request: Request) -> Project:
@@ -341,12 +343,11 @@ async def get_model_card(
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
 ) -> HTMLResponse:
     project = get_project_or_error(project_id, projects_service, request)
-    model_card_data = get_system_card_data()
     instrument_state = get_instrument_state()
 
     # TODO: This now loads an example system card independent of the project ID.
     filepath = Path("example_system_card/system_card.yaml")
-
+    model_card_data = get_include_content(filepath.parent , filepath.name , "models" , model_card)
     request.state.path_variables.update({"model_card": model_card})
 
     tab_items = get_project_details_tabs(project, request)

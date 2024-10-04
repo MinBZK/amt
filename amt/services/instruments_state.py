@@ -94,9 +94,9 @@ def get_all_next_tasks(instruments: dict[str, Instrument], system_card: SystemCa
 class InstrumentStateService:
     def __init__(self, system_card : SystemCard) -> None:
         self.system_card = system_card
-        self.instrument_state = {}
+        self.instrument_states = []
 
-    def get_state_per_instrument(self) -> dict[str, int]:
+    def get_state_per_instrument(self) -> list[dict[str, int]]:
         urns = [instrument.urn for instrument in self.system_card.instruments]
         instruments = InstrumentsService().fetch_instruments(urns)
         # refactor this data structure in 3 lines below (also change in get_all_next_tasks + check_state.py)
@@ -105,31 +105,31 @@ class InstrumentStateService:
             instruments_dict[instrument.urn] = instrument
         next_tasks = get_all_next_tasks(instruments_dict, self.system_card)
 
-        instrument_state = {}
-        for tasks_per_instrument in next_tasks:
-            instrument_state[tasks_per_instrument["instrument_urn"]] = 0
+        instrument_states = []
+        for idx, tasks_per_instrument in enumerate(next_tasks):
+            instrument_state = {"urn": tasks_per_instrument["instrument_urn"] , "count": 0}
             for idx , lifecycle in enumerate(all_lifecycles):
                 for task in tasks_per_instrument["tasks_per_lifecycle"][idx]:
                     if task is not None:
-                        instrument_state[tasks_per_instrument["instrument_urn"]] += 1
+                        instrument_state["count"] += 1
                         break # If a task has been found which is not completed yet break out of the loop
-
-        for instrument in instrument_state:
-            if instrument_state[instrument] > 0:
-                instrument_state[instrument] = 1
+            if instrument_state["count"] > 0:
+                instrument_state["count"] = 1
+            instrument_state["name"] = instruments_dict[tasks_per_instrument["instrument_urn"] ].name
+            instrument_states.append(instrument_state)
 
         # Returns dictionary with instrument urns with value 0 or 1, if 1 then the instrument is not completed yet
         # Otherwise the instrument is completed as there are not any tasks left.
-        self.instrument_state = instrument_state
-        return instrument_state
+        self.instrument_states = instrument_states
+        return instrument_states
 
 
     def get_amount_completed_instruments(self) -> int:
         count_completed = 0
-        for instrument_urn, status in self.instrument_state.items():
-            if status == 0:
+        for instrument_state in self.instrument_states:
+            if instrument_state["count"] == 0:
                 count_completed += 1
         return count_completed
 
     def get_amount_total_instruments(self) -> int:
-        return len(self.instrument_state.keys())
+        return len(self.instrument_states)
