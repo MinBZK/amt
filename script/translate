@@ -10,17 +10,17 @@ fi
 
 if [ "$1" = "compile" ]
 then
-    ./script/pybabel-for-amt compile -d amt/locale
+    pybabel compile -d amt/locale
 elif [ "$1" = "init" ]
 then
-    ./script/pybabel-for-amt extract -F babel-mapping.ini . -o amt/locale/base.pot
-    ./script/pybabel-for-amt init -l en_US -i amt/locale/base.pot -d amt/locale
-    ./script/pybabel-for-amt init -l nl_NL -i amt/locale/base.pot -d amt/locale
-    ./script/pybabel-for-amt init -l nl_FY -i amt/locale/base.pot -d amt/locale
+    pybabel extract -F babel-mapping.ini . -o amt/locale/base.pot
+    pybabel init -l en_US -i amt/locale/base.pot -d amt/locale
+    pybabel init -l nl_NL -i amt/locale/base.pot -d amt/locale
+    pybabel init -l nl_FY -i amt/locale/base.pot -d amt/locale
 elif [ "$1" = "update" ]
 then
-    ./script/pybabel-for-amt extract -F babel-mapping.ini . -o amt/locale/base.pot
-    ./script/pybabel-for-amt update -i amt/locale/base.pot -d amt/locale
+    pybabel extract -F babel-mapping.ini . -o amt/locale/base.pot
+    pybabel update -i amt/locale/base.pot -d amt/locale
 else
     echo "Unknown command"
     exit 1

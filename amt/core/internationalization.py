@@ -10,9 +10,7 @@ from starlette.requests import Request
 logger = logging.getLogger(__name__)
 
 _default_language_fallback = "en"
-supported_translations: tuple[str, ...] = ("en", "nl", "fy")
-# babel does not support Frysian, to be able to load the right MO file, we need to 'map' it ourselves
-_translations_to_locale: dict[str, str] = {"en": "en", "nl": "nl", "fy": "nl_FY"}
+supported_translations: tuple[str, ...] = ("en", "nl")
 
 
 @lru_cache(maxsize=len(supported_translations))
@@ -32,7 +30,7 @@ def get_supported_translation(lang: str) -> str:
 @lru_cache(maxsize=len(supported_translations))
 def get_translation(lang: str) -> NullTranslations:
     lang = get_supported_translation(lang)
-    return Translations.load("amt/locale", locales=_translations_to_locale[lang])
+    return Translations.load("amt/locale", locales=lang)
 
 
 def get_current_translation(request: Request) -> NullTranslations:
@@ -40,14 +38,7 @@ def get_current_translation(request: Request) -> NullTranslations:
 
 
 def format_datetime(value: datetime, locale: str, format: str = "medium") -> str:
-    if format == "full" and locale == "fy":
-        weekday = get_dynamic_field_translations("fy")["weekdays"][int(datetime.date(value).strftime("%w"))]
-        month = get_dynamic_field_translations("fy")["months"][int(datetime.date(value).strftime("%-m")) - 1]
-        return value.strftime(f"{weekday}, %-d {month} %Y %H:%M")
-    elif format == "medium" and locale == "fy":
-        weekday = get_dynamic_field_translations("fy")["weekdays"][int(datetime.date(value).strftime("%w"))]
-        return value.strftime(f"{weekday} %d-%m-%Y %H:%M")
-    elif format == "full":
+    if format == "full":
         format = "EEEE, d MMMM y HH:mm"
     elif format == "medium":
         format = "EE dd/MM/y HH:mm"
@@ -61,6 +52,13 @@ def format_timedelta(value: timedelta, locale: str = "en_US") -> str:
     return dates.format_timedelta(value, locale=locale)
 
 
+def get_browser_language_or_default(request: Request) -> str:
+    # See https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language
+    languages = request.headers.get("Accept-Language", _default_language_fallback)
+    return "nl" if languages.split(",")[0] in {"nl", "nl_NL"} else "en"
+
+
 def get_requested_language(request: Request) -> str:
-    # todo (robbert): nice to have, default support based on accept lang of browser
-    return request.cookies.get("lang", _default_language_fallback)
+    lang = get_browser_language_or_default(request)
+
+    return request.cookies.get("lang", lang)

@@ -32,8 +32,9 @@ repos:
     hooks:
       - id: check-translate
         name: check-translate
+        additional_dependencies: [polib, babel, jinja2]
         entry: ./script/check_translate
-        language: system
+        language: python
         pass_filenames: false
         always_run: true
 ci:
