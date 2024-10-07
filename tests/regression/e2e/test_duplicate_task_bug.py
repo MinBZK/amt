@@ -12,7 +12,7 @@ def test_e2e_duplicate_task(page: Page) -> None:
     This test captured that behaviour.
     """
 
-    page.goto("/project/1/tasks")
+    page.goto("/project/1/details/tasks")
     cards_begin = page.locator(".progress-card-container").all()
 
     expect(page.locator("#column-1 #card-container-1")).to_be_visible()

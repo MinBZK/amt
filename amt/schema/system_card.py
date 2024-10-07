@@ -1,3 +1,5 @@
+from typing import Any
+
 from pydantic import (
     BaseModel,
     Field,  # pyright: ignore [reportUnknownMemberType]
@@ -12,9 +14,9 @@ class SystemCard(BaseModel):
     schema_version: str = Field(default="0.1a10")
     name: str = Field(default=None)
     ai_act_profile: AiActProfile = Field(default=None)
-    provenance: dict = Field(default={})
+    provenance: dict[str, Any] = Field(default={})
     description: str = Field(default=None)
-    labels: list = Field(default=[])
+    labels: list[dict[str, Any]] = Field(default=[])
     status: str = Field(default=None)
     instruments: list[InstrumentBase] = Field(default=[])
     assessments: list[AssessmentCard] = Field(default=[])

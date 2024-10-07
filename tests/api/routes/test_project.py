@@ -148,7 +148,7 @@ def test_get_assessment_card_unknown_model_card(client: TestClient, db: Database
 
 def test_get_project_details(client: TestClient, db: DatabaseTestUtils) -> None:
     # given
-    db.given([default_project("testproject1") , default_task(project_id=1 , status_id=1)])
+    db.given([default_project("testproject1"), default_task(project_id=1, status_id=1)])
 
     # when
     response = client.get("/project/1/details")
@@ -161,7 +161,7 @@ def test_get_project_details(client: TestClient, db: DatabaseTestUtils) -> None:
 
 def test_get_system_card_requirements(client: TestClient, db: DatabaseTestUtils) -> None:
     # given
-    db.given([default_project("testproject1") , default_task(project_id=1 , status_id=1)])
+    db.given([default_project("testproject1"), default_task(project_id=1, status_id=1)])
 
     # when
     response = client.get("/project/1/details/system_card/requirements")
@@ -174,7 +174,7 @@ def test_get_system_card_requirements(client: TestClient, db: DatabaseTestUtils)
 
 def test_get_system_card_data_page(client: TestClient, db: DatabaseTestUtils) -> None:
     # given
-    db.given([default_project("testproject1") , default_task(project_id=1 , status_id=1)])
+    db.given([default_project("testproject1"), default_task(project_id=1, status_id=1)])
 
     # when
     response = client.get("/project/1/details/system_card/data")
@@ -187,7 +187,7 @@ def test_get_system_card_data_page(client: TestClient, db: DatabaseTestUtils) ->
 
 def test_get_system_card_instruments(client: TestClient, db: DatabaseTestUtils) -> None:
     # given
-    db.given([default_project("testproject1") , default_task(project_id=1 , status_id=1)])
+    db.given([default_project("testproject1"), default_task(project_id=1, status_id=1)])
 
     # when
     response = client.get("/project/1/details/system_card/instruments")
@@ -196,4 +196,3 @@ def test_get_system_card_instruments(client: TestClient, db: DatabaseTestUtils) 
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
     assert b"To be implemented" in response.content
-

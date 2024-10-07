@@ -1,6 +1,7 @@
+# pyright: reportUnknownArgumentType=false, reportAttributeAccessIssue=false, reportUnknownMemberType=false
 import logging
 from collections import defaultdict
-from datetime import datetime , timezone
+from datetime import datetime, timezone
 from typing import Any
 
 from amt.schema.assessment_card import AssessmentCard
@@ -22,6 +23,7 @@ all_lifecycles = (
     "Validatie",
     "Implementatie",
 )
+
 
 def get_first_lifecycle_idx(lifecycles: list[str]) -> int | None:
     """
@@ -92,7 +94,7 @@ def get_all_next_tasks(instruments: dict[str, Instrument], system_card: SystemCa
 
 
 class InstrumentStateService:
-    def __init__(self, system_card : SystemCard) -> None:
+    def __init__(self, system_card: SystemCard) -> None:
         self.system_card = system_card
         self.instrument_states = []
 
@@ -104,7 +106,7 @@ class InstrumentStateService:
         instruments = InstrumentsService().fetch_instruments(urns)
         # TODO: refactor this data structure in 3 lines below (also change in get_all_next_tasks + check_state.py)
         instruments_dict = {}
-        instrument_states = {}
+        instrument_states: dict[str, Any] = {}
         for instrument in instruments:
             instruments_dict[instrument.urn] = instrument
             instrument_states[instrument.urn] = {"in_progress": 0, "name": instrument.name}
@@ -112,23 +114,22 @@ class InstrumentStateService:
         # When there are no tasks left for a specific instrument it will not show up in the next_tasks
 
         for urn in urns:
-            if urn not in instrument_states.keys():
+            if urn not in instrument_states:
                 instrument_states[urn] = {"in_progress": 0, "name": "URN not found in Task Registry."}
 
         for tasks_per_instrument in next_tasks:
             urn = tasks_per_instrument["instrument_urn"]
-            instrument_state = instrument_states[urn]
-            instrument_state['in_progress'] = 1
+            instrument_state: dict[str, Any] = instrument_states.get(urn, {"urn": urn})
+            instrument_state["in_progress"] = 1
             instrument_states[urn] = instrument_state
 
-        instrument_state_list = []
+        instrument_state_list: list[dict[str, Any]] = []
         for instrument_urn, instrument_dict in instrument_states.items():
             instrument_dict["urn"] = instrument_urn
             instrument_state_list.append(instrument_dict)
 
         self.instrument_states = instrument_state_list
         return instrument_state_list
-
 
     def get_amount_completed_instruments(self) -> int:
         count_completed = 0

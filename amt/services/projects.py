@@ -54,7 +54,7 @@ class ProjectsService:
             role=project_new.role,
         )
 
-        system_card = SystemCard(name=project_new.name, ai_act_profile=ai_act_profile, selected_instruments=instruments)
+        system_card = SystemCard(name=project_new.name, ai_act_profile=ai_act_profile, instruments=instruments)
 
         storage_writer: Storage = StorageFactory.init(
             storage_type="file", location=system_card_file.parent, filename=system_card_file.name

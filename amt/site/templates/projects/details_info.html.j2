@@ -1,6 +1,6 @@
 {% extends 'projects/details_base.html.j2' %}
 
-{% block title %} {% trans %}AMT Placeholder informatie pagina's{% endtrans %} {% endblock %}
+{% block title %} {% trans %}AMT Placeholder information page{% endtrans %} {% endblock %}
 
 {% block detail_content %}
 
@@ -8,7 +8,7 @@
         <table class="rvo-table">
             <tbody class="rvo-table-body">
             <tr class="rvo-table-row">
-                <td class="rvo-table-cell">{% trans %}Omschrijving{% endtrans %}</td>
+                <td class="rvo-table-cell">{% trans %}Description{% endtrans %}</td>
                 <td class="rvo-table-cell">{{ system_card.description }}</td>
             </tr>
             <tr class="rvo-table-row">
@@ -21,7 +21,7 @@
                 <td class="rvo-table-cell">NL-AI-VALIDATIE-383672821-PI234</td>
             </tr>
             <tr class="rvo-table-row">
-                <td class="rvo-table-cell">{% trans %}Levenscyclus{% endtrans %}</td>
+                <td class="rvo-table-cell">{% trans %}Lifecyle{% endtrans %}</td>
                 <td class="rvo-table-cell">
 
                     <div
@@ -38,7 +38,7 @@
                 </td>
             </tr>
             <tr class="rvo-table-row">
-                <td class="rvo-table-cell">Labels</td>
+                <td class="rvo-table-cell">{% trans %}Labels{% endtrans %}</td>
                 <td class="rvo-table-cell">
                     {% for label in system_card.labels %}
                         <a class="rvo-tag rvo-tag--active rvo-tag--default rvo-tag--info">{{ label.value }}</a>

@@ -16,7 +16,11 @@ def test_get_system_card(setup: SystemCard) -> None:
         "schema_version": "0.1a10",
         "name": None,
         "ai_act_profile": None,
-        "selected_instruments": [],
+        "provenance": {},  # pyright: ignore [reportAssignmentType]
+        "description": None,
+        "labels": [],
+        "status": None,
+        "instruments": [],
         "assessments": [],
     }
 
@@ -28,9 +32,10 @@ def test_system_card_update(setup: SystemCard) -> None:
     expected: dict[str, str | list[Any] | None] = {
         "schema_version": "0.1a10",
         "name": "IAMA 1.1",
-        "selected_instruments": [],
+        "provenance": {},  # pyright: ignore [reportAssignmentType]
+        "labels": [],
+        "instruments": [],
         "assessments": [],
     }
     system_card.name = "IAMA 1.1"
-
     assert system_card.model_dump(exclude_none=True) == expected

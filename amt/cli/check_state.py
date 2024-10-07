@@ -9,17 +9,20 @@ import yaml
 from amt.schema.instrument import Instrument
 from amt.schema.system_card import SystemCard
 from amt.services.instruments import InstrumentsService
-from amt.services.instruments_state import  get_all_next_tasks, all_lifecycles
+from amt.services.instruments_state import all_lifecycles, get_all_next_tasks
 from amt.services.storage import StorageFactory
 
 logger = logging.getLogger(__name__)
+
 
 def get_system_card(path: Path) -> SystemCard:
     system_card: Any = StorageFactory.init(storage_type="file", location=path.parent, filename=path.name).read()
     return SystemCard(**system_card)
 
+
 def get_requested_instruments(all_instruments: list[Instrument], urns: list[str]) -> dict[str, Instrument]:
     return {instrument.urn: instrument for instrument in all_instruments if instrument.urn in urns}
+
 
 @click.command()
 @click.argument("urns", nargs=-1)
@@ -29,8 +32,8 @@ def get_tasks_by_priority(urns: list[str], system_card_path: Path) -> None:
         system_card = get_system_card(system_card_path)
         instruments_service = InstrumentsService()
         all_instruments = instruments_service.fetch_instruments()
-        instruments = get_requested_instruments(all_instruments , urns)
-        next_tasks = get_all_next_tasks(instruments , system_card)
+        instruments = get_requested_instruments(all_instruments, urns)
+        next_tasks = get_all_next_tasks(instruments, system_card)
 
         for idx, lifecycle in enumerate(all_lifecycles):
             click.echo("=" * 40)

@@ -1,13 +1,11 @@
+# pyright: reportUnknownMemberType=false, reportUnknownVariableType=false, reportAttributeAccessIssue=false
 from pathlib import Path
 from typing import Any
 from unittest.mock import Mock
 
-import pytest
-
 import amt.services.instruments_state
-from amt.cli.check_state import (
-    get_tasks_by_priority, get_requested_instruments
-)
+import pytest
+from amt.cli.check_state import get_requested_instruments, get_tasks_by_priority
 from amt.core.exceptions import AMTInstrumentError
 from amt.schema.instrument import InstrumentTask
 from amt.schema.system_card import SystemCard
@@ -50,6 +48,7 @@ def test_get_system_card(system_card: SystemCard, system_card_data: dict[str, An
 
     StorageFactory.init = init_orig
 
+
 def test_get_requested_instruments():
     instrument0 = default_instrument(urn="instrument0")
     instrument1 = default_instrument(urn="instrument1")
@@ -57,6 +56,7 @@ def test_get_requested_instruments():
     all_instruments_cards = [instrument0, instrument1, instrument2]
     expected = {"instrument0": instrument0, "instrument2": instrument2}
     assert expected == get_requested_instruments(all_instruments_cards, ["instrument0", "instrument2"])
+
 
 def test_cli(capsys: pytest.CaptureFixture[str], system_card: SystemCard):
     fetch_instruments_orig = InstrumentsService.fetch_instruments

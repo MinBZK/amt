@@ -2,7 +2,7 @@ import pytest
 from playwright.sync_api import Page, expect
 
 
-@pytest.mark.slow()
+@pytest.mark.slow
 def test_e2e_create_project(page: Page):
     page.goto("/projects/new")
 
@@ -26,10 +26,10 @@ def test_e2e_create_project(page: Page):
     button = page.locator("#button-new-project-create")
     button.click()
 
-    expect(page.get_by_text("My new project")).to_be_visible()
+    expect(page.get_by_text("My new project").first).to_be_visible()
 
 
-@pytest.mark.slow()
+@pytest.mark.slow
 def test_e2e_create_project_invalid(page: Page):
     page.goto("/projects/new")
 
@@ -48,7 +48,7 @@ def test_e2e_create_project_invalid(page: Page):
     expect(page.get_by_text("name: String should have at")).to_be_visible()
 
 
-@pytest.mark.slow()
+@pytest.mark.slow
 def test_e2e_create_project_with_tasks(page: Page):
     page.goto("/projects/new")
 
@@ -72,7 +72,7 @@ def test_e2e_create_project_with_tasks(page: Page):
     button = page.locator("#button-new-project-create")
     button.click()
 
-    expect(page.get_by_text("My new filled project")).to_be_visible()
+    expect(page.get_by_text("My new filled project").first).to_be_visible()
     card_1 = page.get_by_text("Geef een korte beschrijving van het beoogde AI-systeem")
     expect(card_1).to_be_visible()
     card_2 = page.get_by_text("Waarom is er voor de huidige techniek gekozen?")

@@ -1,6 +1,6 @@
 {% extends 'layouts/base.html.j2' %}
 
-{% block title %} {% trans %}AMT Placeholder informatie pagina's{% endtrans %} {% endblock %}
+{% block title %} {% trans %}AMT Placeholder information page{% endtrans %} {% endblock %}
 
 {% block content %}
 
@@ -15,9 +15,8 @@
                     <div class="rvo-layout-row" style="display: flex; justify-content: space-between;">
                         <h5 class="amt-widget-title rvo-link--with-icon"><span
                             class="utrecht-icon rvo-icon rvo-icon-vinkje rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
-                            role="img" aria-label=""></span>{% trans %}Voldoet het algoritme aan de
-                            vereisten?{% endtrans %}</h5>
-                        <a class="rvo-text--subtle rvo-text--bold">7/8 voldaan</a>
+                            role="img" aria-label=""></span>{% trans %}Does the algorithm meet the requirements?{% endtrans %}</h5>
+                        <a class="rvo-text--subtle rvo-text--bold">7/8 done</a>
                     </div>
                     <ul class="rvo-item-list">
                         <li class="rvo-item-list__item">
@@ -31,7 +30,7 @@
                                     </a>
                                 </div>
 
-                                <a class="rvo-text--subtle">Te doen</a>
+                                <a class="rvo-text--subtle">To do</a>
                             </div>
                         </li>
                         <li class="rvo-item-list__item">
@@ -43,7 +42,7 @@
                                         Transparantie in ontwerp voor hoog-risico AI
                                     </a>
                                 </div>
-                                <a class="rvo-text--subtle">Voldaan</a>
+                                <a class="rvo-text--subtle">Done</a>
                             </div>
                         </li>
                         <li class="rvo-item-list__item">
@@ -55,7 +54,7 @@
                                         Beoordeling van grondrechten
                                     </a>
                                 </div>
-                                <a class="rvo-text--subtle">Voldaan</a>
+                                <a class="rvo-text--subtle">Done</a>
                             </div>
                         </li>
                     </ul>
@@ -65,17 +64,17 @@
       role="img"
       aria-label="Home"
   ></span>
-                        {% trans %}Ga naar alle vereisten{% endtrans %}
+                        {% trans %}Go to all requirements{% endtrans %}
                     </a>
                 </div>
                 <div class="rvo-card rvo-card--padding-md">
                     <div class="rvo-layout-row" style="display: flex; justify-content: space-between;">
                         <h5 class="amt-widget-title rvo-link--with-icon"><span
                             class="utrecht-icon rvo-icon rvo-icon-permanent-beta rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
-                            role="img" aria-label=""></span>{% trans %}Welke instrumenten zijn uitgevoerd?{% endtrans %}
+                            role="img" aria-label=""></span>{% trans %}Which instruments are executed?{% endtrans %}
                         </h5>
                         <a class="rvo-text--bold rvo-text--subtle">{{ instrument_state.count_0 }}/{{ instrument_state.count_1 }}
-                            {% trans %}uitgevoerd{% endtrans %}</a>
+                            {% trans %}done{% endtrans %}</a>
                     </div>
 
 
@@ -88,7 +87,7 @@
                                 <div class="rvo-layout-row rvo-layout-gap--sm"
                                      style="display: flex; justify-content: space-between;">
                                     <div class="rvo-layout-row rvo-layout-gap--sm">
-                                        {% if instrument.count == 1 %}
+                                        {% if instrument.in_progress == 1 %}
                                             <div class="rvo-status-indicator rvo-status-indicator--oranje"></div>
                                         {% else %}
                                             <div class="rvo-status-indicator rvo-status-indicator--groen"></div>
@@ -97,10 +96,10 @@
                                             {{ instrument.name }}
                                         </a>
                                     </div>
-                                    {% if instrument.count == 1 %}
-                                        <a class="rvo-text--subtle">{% trans %}Te doen{% endtrans %}</a>
+                                    {% if instrument.in_progress == 1 %}
+                                        <a class="rvo-text--subtle">{% trans %}To do{% endtrans %}</a>
                                     {% else %}
-                                        <a class="rvo-text--subtle">{% trans %}Uitgevoerd{% endtrans %}</a>
+                                        <a class="rvo-text--subtle">{% trans %}Done{% endtrans %}</a>
                                     {% endif %}
                                 </div>
                             </li>
@@ -113,7 +112,7 @@
       role="img"
       aria-label="Home"
   ></span>
-                        {% trans %}Ga naar alle instrumenten{% endtrans %}
+                        {% trans %}Go to all instruments{% endtrans %}
                     </a>
                 </div>
             </div>
