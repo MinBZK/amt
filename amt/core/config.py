@@ -10,7 +10,7 @@ from pydantic import (
 from pydantic_core import MultiHostUrl
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-from amt.core.exceptions import SettingsError
+from amt.core.exceptions import AMTSettingsError
 from amt.core.types import DatabaseSchemaType, EnvironmentType, LoggingLevelType
 
 logger = logging.getLogger(__name__)
@@ -86,19 +86,19 @@ class Settings(BaseSettings):
     @model_validator(mode="after")
     def _enforce_database_rules(self: SelfSettings) -> SelfSettings:
         if self.ENVIRONMENT == "production" and self.APP_DATABASE_SCHEME == "sqlite":
-            raise SettingsError("APP_DATABASE_SCHEME")
+            raise AMTSettingsError("APP_DATABASE_SCHEME")
         return self
 
     @model_validator(mode="after")
     def _enforce_debug_rules(self: SelfSettings) -> SelfSettings:
         if self.ENVIRONMENT == "production" and self.DEBUG:
-            raise SettingsError("DEBUG")
+            raise AMTSettingsError("DEBUG")
         return self
 
     @model_validator(mode="after")
     def _enforce_autocreate_rules(self: SelfSettings) -> SelfSettings:
         if self.ENVIRONMENT == "production" and self.AUTO_CREATE_SCHEMA:
-            raise SettingsError("AUTO_CREATE_SCHEMA")
+            raise AMTSettingsError("AUTO_CREATE_SCHEMA")
         return self
 
 

@@ -1,60 +1,67 @@
-from pathlib import Path
+from gettext import gettext as _
 
+from babel.support import NullTranslations
 from fastapi import status
-from fastapi.exceptions import HTTPException, ValidationException
+from fastapi.exceptions import HTTPException
 
 
 class AMTHTTPException(HTTPException):
-    pass
+    def getmessage(self, translations: NullTranslations) -> str:
+        return translations.gettext(self.detail)
 
 
-class AMTValidationException(ValidationException):
-    pass
+class AMTError(Exception):
+    def getmessage(self, translations: NullTranslations) -> str:
+        return translations.gettext(self.detail)  # type: ignore
 
 
-class AMTError(RuntimeError):
-    """
-    A generic, AMT-specific error.
-    """
-
-
-class SettingsError(AMTError):
+class AMTSettingsError(AMTError):
     def __init__(self, field: str) -> None:
-        self.message: str = f"Settings error for options {field}"
-        exception_name: str = self.__class__.__name__
-        super().__init__(f"{exception_name}: {self.message}")
+        self.detail: str = _(
+            "An error occurred while configuring the options for '{field}'. Please check the settings and try again."
+        ).format(field=field)
+        super().__init__(self.detail)
 
 
-class RepositoryError(AMTHTTPException):
-    def __init__(self, message: str = "Repository error") -> None:
-        self.message: str = message
-        exception_name: str = self.__class__.__name__
-        super().__init__(status.HTTP_500_INTERNAL_SERVER_ERROR, f"{exception_name}: {self.message}")
+class AMTRepositoryError(AMTHTTPException):
+    def __init__(self, detail: str | None = "Repository error") -> None:
+        self.detail: str = _("An internal server error occurred while processing your request. Please try again later.")
+        super().__init__(status.HTTP_500_INTERNAL_SERVER_ERROR, self.detail)
 
 
-class InstrumentError(AMTHTTPException):
-    def __init__(self, message: str = "Instrument error") -> None:
-        self.message: str = message
-        exception_name: str = self.__class__.__name__
-        super().__init__(status.HTTP_501_NOT_IMPLEMENTED, f"{exception_name}: {self.message}")
+class AMTInstrumentError(AMTHTTPException):
+    def __init__(self) -> None:
+        self.detail: str = _("An error occurred while processing the instrument. Please try again later.")
+        super().__init__(status.HTTP_501_NOT_IMPLEMENTED, self.detail)
 
 
-class UnsafeFileError(AMTHTTPException):
-    def __init__(self, file: Path) -> None:
-        self.message: str = f"Unsafe file error for file {file}"
-        exception_name: str = self.__class__.__name__
-        super().__init__(status.HTTP_400_BAD_REQUEST, f"{exception_name}: {self.message}")
+class AMTNotFound(AMTHTTPException):
+    def __init__(self) -> None:
+        self.detail: str = _(
+            "The requested page or resource could not be found. Please check the URL or query and try again."
+        )
+        super().__init__(status.HTTP_404_NOT_FOUND, self.detail)
 
 
-class RepositoryNoResultFound(AMTHTTPException):
-    def __init__(self, message: str = "No entity found") -> None:
-        self.message: str = message
-        exception_name: str = self.__class__.__name__
-        super().__init__(status.HTTP_204_NO_CONTENT, f"{exception_name}: {self.message}")
+class AMTCSRFProtectError(AMTHTTPException):
+    def __init__(self) -> None:
+        self.detail: str = _("CSRF check failed.")
+        super().__init__(status.HTTP_401_UNAUTHORIZED, self.detail)
 
 
-class NotFound(AMTHTTPException):
-    def __init__(self, message: str = "Not found") -> None:
-        self.message: str = message
-        exception_name: str = self.__class__.__name__
-        super().__init__(status.HTTP_404_NOT_FOUND, f"{exception_name}: {self.message}")
+class AMTOnlyStatic(AMTHTTPException):
+    def __init__(self) -> None:
+        self.detail: str = _("Only static files are supported.")
+        super().__init__(status.HTTP_400_BAD_REQUEST, self.detail)
+
+
+class AMTKeyError(AMTHTTPException):
+    def __init__(self, field: str) -> None:
+        self.detail: str = _("Key not correct: {field}").format(field=field)
+        super().__init__(status.HTTP_400_BAD_REQUEST, self.detail)
+
+
+class AMTValueError(AMTHTTPException):
+    def __init__(self, field: str) -> None:
+        self.detail: str = _("Value not correct: {field}").format(field=field)
+        super().__init__(status.HTTP_400_BAD_REQUEST, self.detail)

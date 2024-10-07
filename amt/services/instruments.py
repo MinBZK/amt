@@ -4,7 +4,7 @@ from collections.abc import Sequence
 import yaml
 
 from amt.clients.clients import get_client
-from amt.core.exceptions import InstrumentError
+from amt.core.exceptions import AMTInstrumentError
 from amt.schema.github import RepositoryContent
 from amt.schema.instrument import Instrument
 
@@ -28,7 +28,7 @@ class InstrumentsService:
         if "urn" not in data:
             # todo: this is now an HTTP error, while a service can also be used from another context
             logger.exception("Key 'urn' not found in instrument.")
-            raise InstrumentError("Key 'urn' not found in instrument.")
+            raise AMTInstrumentError()
 
         return Instrument(**data)
 

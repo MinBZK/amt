@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-04 10:24+0200\n"
+"POT-Creation-Date: 2024-09-30 10:07+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -78,20 +78,50 @@ msgstr ""
 msgid "Details"
 msgstr ""
 
-#: amt/site/templates/errors/_HTTPException404.html.j2:1
-msgid "Page not found"
+#: amt/core/exceptions.py:20
+msgid ""
+"An error occurred while configuring the options for '{field}'. Please "
+"check the settings and try again."
 msgstr ""
 
-#: amt/site/templates/errors/_HTTPException404.html.j2:3
-msgid "The page or file you requested is not found. Please check the URL."
+#: amt/core/exceptions.py:26
+msgid ""
+"An internal server error occurred while processing your request. Please "
+"try again later."
 msgstr ""
 
-#: amt/site/templates/errors/_RequestValidation.html.j2:1
-msgid "Request Validation Error"
+#: amt/core/exceptions.py:32
+msgid "An error occurred while processing the instrument. Please try again later."
 msgstr ""
 
-#: amt/site/templates/errors/error.html.j2:4
+#: amt/core/exceptions.py:37
+msgid ""
+"The requested page or resource could not be found. Please check the URL "
+"or query and try again."
+msgstr ""
+
+#: amt/core/exceptions.py:43
+msgid "CSRF check failed."
+msgstr ""
+
+#: amt/core/exceptions.py:49
+msgid "Only static files are supported."
+msgstr ""
+
+#: amt/core/exceptions.py:54
+msgid "Key not correct: {field}"
+msgstr ""
+
+#: amt/core/exceptions.py:59
+msgid "Value not correct: {field}"
+msgstr ""
+
+#: amt/site/templates/errors/Exception.html.j2:6
 msgid "An error occurred"
+msgstr ""
+
+#: amt/site/templates/errors/_Exception.html.j2:1
+msgid "An error occurred. Please try again later"
 msgstr ""
 
 #: amt/site/templates/layouts/base.html.j2:11

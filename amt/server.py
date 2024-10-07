@@ -10,12 +10,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 from amt.api.main import api_router
 from amt.core.config import PROJECT_DESCRIPTION, PROJECT_NAME, VERSION, get_settings
 from amt.core.db import check_db, init_db
-from amt.core.exception_handlers import (
-    http_exception_handler as amt_http_exception_handler,
-)
-from amt.core.exception_handlers import (
-    validation_exception_handler as amt_validation_exception_handler,
-)
+from amt.core.exception_handlers import general_exception_handler as amt_general_exception_handler
 from amt.core.log import configure_logging
 from amt.utils.mask import Mask
 
@@ -63,12 +58,16 @@ def create_app() -> FastAPI:
     app.mount("/static", static_files, name="static")
 
     @app.exception_handler(StarletteHTTPException)
-    async def http_exception_handler(request: Request, exc: StarletteHTTPException) -> HTMLResponse:  # type: ignore
-        return await amt_http_exception_handler(request, exc)
+    async def HTTPException_exception_handler(request: Request, exc: Exception) -> HTMLResponse:  # type: ignore
+        return await amt_general_exception_handler(request, exc)
 
     @app.exception_handler(RequestValidationError)
-    async def validation_exception_handler(request: Request, exc: RequestValidationError) -> HTMLResponse:  # type: ignore
-        return await amt_validation_exception_handler(request, exc)
+    async def request_validation_exception_handler(request: Request, exc: Exception) -> HTMLResponse:  # type: ignore
+        return await amt_general_exception_handler(request, exc)
+
+    @app.exception_handler(Exception)
+    async def general_exception_handler(request: Request, exc: Exception) -> HTMLResponse:  # type: ignore
+        return await amt_general_exception_handler(request, exc)
 
     app.include_router(api_router)
 

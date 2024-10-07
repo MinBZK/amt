@@ -14,7 +14,7 @@ from amt.cli.check_state import (
     get_task_timestamp_from_assessment_card,
     get_tasks_by_priority,
 )
-from amt.core.exceptions import InstrumentError
+from amt.core.exceptions import AMTInstrumentError
 from amt.schema.assessment_card import AssessmentCard
 from amt.schema.instrument import InstrumentTask
 from amt.schema.system_card import SystemCard
@@ -220,12 +220,12 @@ def test_cli(capsys: pytest.CaptureFixture[str], system_card: SystemCard):
 
 def test_cli_with_exception(capsys: pytest.CaptureFixture[str], system_card: SystemCard):
     fetch_instruments_orig = InstrumentsService.fetch_instruments
-    InstrumentsService.fetch_instruments = Mock(side_effect=InstrumentError("Test error message"))
+    InstrumentsService.fetch_instruments = Mock(side_effect=AMTInstrumentError())
     runner = CliRunner()
     # workaround for https://github.com/pallets/click/issues/824
     with capsys.disabled() as _:
         result = runner.invoke(get_tasks_by_priority, ["urn:instrument:assessment", "example/system_test_card.yaml"])  # type: ignore
-        assert "Test error message" in result.output
+        assert "Sorry, an error occurre" in result.output
     InstrumentsService.fetch_instruments = fetch_instruments_orig
 
 

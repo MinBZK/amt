@@ -12,7 +12,7 @@ from amt.api.navigation import (
     resolve_base_navigation_items,
     resolve_sub_menu,
 )
-from amt.core.exceptions import NotFound, RepositoryError
+from amt.core.exceptions import AMTNotFound, AMTRepositoryError
 from amt.enums.status import Status
 from amt.models import Project
 from amt.services.projects import ProjectsService
@@ -29,8 +29,8 @@ def get_project_or_error(project_id: int, projects_service: ProjectsService, req
         logger.debug(f"getting project with id {project_id}")
         project = projects_service.get(project_id)
         request.state.path_variables = {"project_id": project_id}
-    except RepositoryError as e:
-        raise NotFound from e
+    except AMTRepositoryError as e:
+        raise AMTNotFound from e
     return project
 
 
@@ -170,7 +170,7 @@ async def get_assessment_card(
 
     if not assessment_card_data:
         logger.warning("assessment card not found")
-        raise NotFound()
+        raise AMTNotFound()
 
     context = {
         "assessment_card": assessment_card_data,
@@ -215,7 +215,7 @@ async def get_model_card(
 
     if not model_card_data:
         logger.warning("model card not found")
-        raise NotFound()
+        raise AMTNotFound()
 
     context = {
         "model_card": model_card_data,

@@ -1,12 +1,12 @@
 import pytest
 from amt.clients.clients import get_client
+from amt.core.exceptions import AMTNotFound
 from amt.schema.github import RepositoryContent
-from httpx import HTTPStatusError
 from pytest_httpx import HTTPXMock
 
 
 def test_get_client_unknown_client():
-    with pytest.raises(ValueError, match="unknown repository type: unknown_client"):
+    with pytest.raises(AMTNotFound, match="The requested page or resource could not be found."):
         get_client("unknown_client")
 
 
@@ -54,11 +54,11 @@ def test_github_ratelimit_exceeded(httpx_mock: HTTPXMock):
     github_client = get_client("github")
 
     # when
-    with pytest.raises(HTTPStatusError) as exc_info:
+    with pytest.raises(AMTNotFound) as exc_info:
         github_client.get_content("https://api.github.com/stuff/123")
 
     # then
-    assert "Client error '403 Forbidden'" in str(exc_info.value)
+    assert "The requested page or resource could not be found" in str(exc_info.value)
 
 
 def test_get_content_github_pages(httpx_mock: HTTPXMock):
