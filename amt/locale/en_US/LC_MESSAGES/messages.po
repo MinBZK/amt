@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-07 11:34+0200\n"
+"POT-Creation-Date: 2024-10-07 13:30+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -42,40 +42,64 @@ msgstr ""
 msgid "Role"
 msgstr ""
 
-#: amt/api/navigation.py:39
+#: amt/api/navigation.py:45
 msgid "Home"
 msgstr ""
 
-#: amt/api/navigation.py:40 amt/site/templates/projects/index.html.j2:12
+#: amt/api/navigation.py:46 amt/site/templates/projects/index.html.j2:12
 msgid "Projects"
 msgstr ""
 
-#: amt/api/navigation.py:41
+#: amt/api/navigation.py:47
 msgid "Overview"
 msgstr ""
 
-#: amt/api/navigation.py:42 amt/site/templates/projects/tasks.html.j2:8
+#: amt/api/navigation.py:48
 msgid "Tasks"
 msgstr ""
 
-#: amt/api/navigation.py:43
+#: amt/api/navigation.py:49
 msgid "New"
 msgstr ""
 
-#: amt/api/navigation.py:44
+#: amt/api/navigation.py:50
 msgid "System card"
 msgstr ""
 
-#: amt/api/navigation.py:45
+#: amt/api/navigation.py:51
 msgid "Assessment card"
 msgstr ""
 
-#: amt/api/navigation.py:46
+#: amt/api/navigation.py:52
 msgid "Model card"
 msgstr ""
 
-#: amt/api/navigation.py:47
+#: amt/api/navigation.py:53
 msgid "Details"
+msgstr ""
+
+#: amt/api/navigation.py:54
+msgid "Info"
+msgstr ""
+
+#: amt/api/navigation.py:55
+msgid "Algorithm details"
+msgstr ""
+
+#: amt/api/navigation.py:56
+msgid "Requirements"
+msgstr ""
+
+#: amt/api/navigation.py:57
+msgid "Data"
+msgstr ""
+
+#: amt/api/navigation.py:58
+msgid "Model"
+msgstr ""
+
+#: amt/api/navigation.py:59 amt/site/templates/projects/new.html.j2:117
+msgid "Instruments"
 msgstr ""
 
 #: amt/core/exceptions.py:20
@@ -128,49 +152,49 @@ msgstr ""
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr ""
 
-#: amt/site/templates/macros/tasks.html.j2:6
+#: amt/site/templates/macros/tasks.html.j2:14
 msgid "Todo"
 msgstr ""
 
-#: amt/site/templates/macros/tasks.html.j2:8
+#: amt/site/templates/macros/tasks.html.j2:25
 msgid "Doing"
 msgstr ""
 
-#: amt/site/templates/macros/tasks.html.j2:10
+#: amt/site/templates/macros/tasks.html.j2:36
 msgid "Reviewing"
 msgstr ""
 
-#: amt/site/templates/macros/tasks.html.j2:12
+#: amt/site/templates/macros/tasks.html.j2:47
 msgid "Done"
 msgstr ""
 
-#: amt/site/templates/macros/tasks.html.j2:14
+#: amt/site/templates/macros/tasks.html.j2:51
 msgid "Unknown"
 msgstr ""
 
 #: amt/site/templates/pages/assessment_card.html.j2:9
-#: amt/site/templates/pages/model_card.html.j2:8
-#: amt/site/templates/pages/system_card.html.j2:9
+#: amt/site/templates/pages/model_card.html.j2:7
+#: amt/site/templates/pages/system_card.html.j2:6
 msgid "Last updated"
 msgstr ""
 
 #: amt/site/templates/pages/assessment_card.html.j2:9
 #: amt/site/templates/pages/model_card.html.j2:8
-#: amt/site/templates/pages/system_card.html.j2:9
+#: amt/site/templates/pages/system_card.html.j2:7
 msgid "ago"
 msgstr ""
 
 #: amt/site/templates/pages/assessment_card.html.j2:15
 #: amt/site/templates/pages/model_card.html.j2:14
 #: amt/site/templates/pages/model_card.html.j2:38
-#: amt/site/templates/pages/system_card.html.j2:61
+#: amt/site/templates/pages/system_card.html.j2:59
 msgid "Attribute"
 msgstr ""
 
 #: amt/site/templates/pages/assessment_card.html.j2:16
 #: amt/site/templates/pages/model_card.html.j2:15
 #: amt/site/templates/pages/model_card.html.j2:39
-#: amt/site/templates/pages/system_card.html.j2:62
+#: amt/site/templates/pages/system_card.html.j2:60
 msgid "Value"
 msgstr ""
 
@@ -183,6 +207,11 @@ msgid "Answer"
 msgstr ""
 
 #: amt/site/templates/pages/index.html.j2:3
+#: amt/site/templates/projects/details_base.html.j2:3
+#: amt/site/templates/projects/details_data.html.j2:3
+#: amt/site/templates/projects/details_info.html.j2:3
+#: amt/site/templates/projects/details_instruments.html.j2:3
+#: amt/site/templates/projects/details_requirements.html.j2:3
 msgid "AMT Placeholder informatie pagina's"
 msgstr ""
 
@@ -207,6 +236,53 @@ msgstr ""
 #: amt/site/templates/parts/header.html.j2:107
 msgid "Language"
 msgstr ""
+
+#: amt/site/templates/projects/details_base.html.j2:18
+msgid ""
+"Voldoet het algoritme aan de\n"
+"                            vereisten?"
+msgstr "Does the algorithm meet the requirements?"
+
+#: amt/site/templates/projects/details_base.html.j2:68
+#, fuzzy
+msgid "Ga naar alle vereisten"
+msgstr "Go to all requirements"
+
+#: amt/site/templates/projects/details_base.html.j2:75
+msgid "Welke instrumenten zijn uitgevoerd?"
+msgstr "Which instruments are executed?"
+
+#: amt/site/templates/projects/details_base.html.j2:78
+msgid "uitgevoerd"
+msgstr "done"
+
+#: amt/site/templates/projects/details_base.html.j2:101
+msgid "Te doen"
+msgstr "To do"
+
+#: amt/site/templates/projects/details_base.html.j2:103
+msgid "Uitgevoerd"
+msgstr "Done"
+
+#: amt/site/templates/projects/details_base.html.j2:116
+msgid "Ga naar alle instrumenten"
+msgstr "Go to all instruments"
+
+#: amt/site/templates/projects/details_info.html.j2:11
+msgid "Omschrijving"
+msgstr "Description"
+
+#: amt/site/templates/projects/details_info.html.j2:15
+msgid "Repository"
+msgstr "Repository"
+
+#: amt/site/templates/projects/details_info.html.j2:20
+msgid "Project code"
+msgstr "Project code"
+
+#: amt/site/templates/projects/details_info.html.j2:24
+msgid "Levenscyclus"
+msgstr "Lifecycle"
 
 #: amt/site/templates/projects/index.html.j2:19
 msgid "New project"
@@ -253,10 +329,6 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:117
-msgid "Instruments"
-msgstr ""
-
 #: amt/site/templates/projects/new.html.j2:119
 msgid ""
 "Overview of instruments for the responsible development, deployment, "
@@ -271,16 +343,6 @@ msgstr ""
 msgid "Create Project"
 msgstr ""
 
-#~ msgid ""
-#~ "The AI Act profile provides insight "
-#~ "into, among other things, the type "
-#~ "of AI system and the associated "
-#~ "obligations from the European AI Act."
-#~ msgstr ""
-
-#~ msgid "The AI Act decision tree "
-#~ msgstr ""
-
-#~ msgid "helps you determine the value of these fields."
+#~ msgid "Page not found"
 #~ msgstr ""
 
