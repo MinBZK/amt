@@ -78,10 +78,16 @@ def get_ai_act_profile_selector(request: Request) -> AiActProfileSelector:
         "hoog-risico AI",
         "geen hoog-risico AI",
         "verboden AI",
+        "uitzondering van toepassing",
+        "niet van toepassing",
+    )
+    systemic_risk_options = ("systeemrisico", "geen systeemrisico", "niet van toepassing")
+    transparency_obligations_options = (
+        "transparantieverplichtingen",
+        "geen transparantieverplichtingen",
+        "niet van toepassing",
     )
     open_source_options = ("open-source", "geen open-source")
-    systemic_risk_options = ("systeemrisico", "geen systeemrisico")
-    transparency_obligations_options = ("transparantieverplichtingen", "geen transparantieverplichtingen")
 
     translations = get_current_translation(request)
 
@@ -89,15 +95,15 @@ def get_ai_act_profile_selector(request: Request) -> AiActProfileSelector:
         radio_select=[
             SelectAiProfileItem(AiActProfileItem.TYPE, type_options, translations),
             SelectAiProfileItem(AiActProfileItem.PUBLICATION_CATEGORY, publication_category_options, translations),
+            SelectAiProfileItem(
+                AiActProfileItem.TRANSPARENCY_OBLIGATIONS, transparency_obligations_options, translations
+            ),
+            SelectAiProfileItem(AiActProfileItem.SYSTEMIC_RISK, systemic_risk_options, translations),
         ],
         multiple_select=[
             SelectAiProfileItem(AiActProfileItem.ROLE, role_options, translations),
         ],
         binary_select=[
-            SelectAiProfileItem(
-                AiActProfileItem.TRANSPARENCY_OBLIGATIONS, transparency_obligations_options, translations
-            ),
             SelectAiProfileItem(AiActProfileItem.OPEN_SOURCE, open_source_options, translations),
-            SelectAiProfileItem(AiActProfileItem.SYSTEMIC_RISK, systemic_risk_options, translations),
         ],
     )
