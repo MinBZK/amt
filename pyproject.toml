@@ -21,7 +21,7 @@ packages = [
 
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.12"
 fastapi = "^0.115.0"
 alembic = "^1.13.2"
 pydantic = "^2.9.2"
@@ -39,6 +39,7 @@ fastapi-csrf-protect = "^0.3.4"
 sqlalchemy = "^2.0.35"
 sqlalchemy-utils = "^0.41.2"
 djlint = "^1.35.2"
+liccheck = "^0.9.2"
 
 
 [tool.poetry.group.test.dependencies]
@@ -53,6 +54,7 @@ ruff = "^0.6.7"
 pre-commit = "^3.8.0"
 pyright = "^1.1.381"
 liccheck = "^0.9.2"
+setuptools = "^75.1.0"
 types-pyyaml = "^6.0.12.20240917"
 
 
@@ -66,7 +68,7 @@ build-backend = "poetry.core.masonry.api"
 # Ruff settings: https://docs.astral.sh/ruff/configuration/
 [tool.ruff]
 line-length = 120
-target-version = "py311"
+target-version = "py312"
 src = ["amt","tests"]
 exclude = ["amt/migrations"]
 
@@ -86,7 +88,7 @@ ignore = ["TRY003", "ANN101"]
 max-complexity = 8
 
 [tool.pyright]
-pythonVersion = "3.11"
+pythonVersion = "3.12"
 typeCheckingMode = "strict"
 reportMissingImports = true
 reportMissingTypeStubs = true
