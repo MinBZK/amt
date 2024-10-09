@@ -8,11 +8,11 @@ def test_e2e_create_project(page: Page):
 
     page.fill("#name", "My new project")
 
-    impact_assesment = page.get_by_label("AI Impact Assessment (AIIA)")
+    impact_assessment = page.get_by_label("AI Impact Assessment (AIIA)")
 
-    expect(impact_assesment).not_to_be_checked()
+    expect(impact_assessment).not_to_be_checked()
 
-    impact_assesment.check()
+    impact_assessment.check()
 
     button = page.locator("#transparency_obligations-transparantieverplichtingen")
     button.click()
@@ -26,7 +26,7 @@ def test_e2e_create_project(page: Page):
     button = page.locator("#button-new-project-create")
     button.click()
 
-    expect(page.get_by_text("My new project")).to_be_visible()
+    expect(page.get_by_text("My new project").first).to_be_visible()
 
 
 @pytest.mark.slow
@@ -54,11 +54,11 @@ def test_e2e_create_project_with_tasks(page: Page):
 
     page.fill("#name", "My new filled project")
 
-    impact_assesment = page.get_by_label("AI Impact Assessment (AIIA)")
+    impact_assessment = page.get_by_label("AI Impact Assessment (AIIA)")
 
-    expect(impact_assesment).not_to_be_checked()
+    expect(impact_assessment).not_to_be_checked()
 
-    impact_assesment.check()
+    impact_assessment.check()
 
     button = page.locator("#transparency_obligations-transparantieverplichtingen")
     button.click()
@@ -72,7 +72,7 @@ def test_e2e_create_project_with_tasks(page: Page):
     button = page.locator("#button-new-project-create")
     button.click()
 
-    expect(page.get_by_text("My new filled project")).to_be_visible()
+    expect(page.get_by_text("My new filled project").first).to_be_visible()
     card_1 = page.get_by_text("Geef een korte beschrijving van het beoogde AI-systeem")
     expect(card_1).to_be_visible()
     card_2 = page.get_by_text("Waarom is er voor de huidige techniek gekozen?")

@@ -57,7 +57,7 @@ main {
 
 .progress-cards-container {
     min-height: 30em;
-    background-color: var(--rvo-color-hemelblauw-150);
+    background-color: var(--rvo-color-lichtblauw-150);
     border-radius: 10px;
     overflow: hidden;
     height: calc(100% - 30px); /* todo (robbert): this is a display hack */
@@ -66,11 +66,11 @@ main {
 .progress-card-container {
     margin: 0.5em;
     border: 1px solid;
-    border-color: var(--rvo-color-hemelblauw);
+    filter: drop-shadow(0 4px 4px rgb(115 142 171 / 50%));
+    border-color: var(--rvo-color-wit);
     padding: 0.5em;
     border-radius: 10px;
-    background-color: #fff;
-    box-shadow: rgba(0 0 0 / 12%) 0 3px 6px 0;
+    background-color: var(--rvo-color-wit);
     cursor: move;
     user-select: none;
 }
@@ -266,4 +266,19 @@ main {
     100% {
         transform: scale(0.9);
     }
+}
+
+.amt-widget-title {
+    color: var(--rvo-color-hemelblauw);
+    font-weight: bold;
+}
+
+.rvo-card {
+    /* Overwrite the border of rvo-card to remove the hover function */
+    border: var(--rvo-card-outline-border-width) solid
+        var(--rvo-card-outline-border-color);
+}
+
+.rvo-table-row td:first-child {
+    width: 20%;
 }

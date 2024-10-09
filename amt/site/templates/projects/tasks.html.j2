@@ -1,13 +1,11 @@
-{% extends 'layouts/base.html.j2' %}
+{% extends 'projects/details_base.html.j2' %}
 
 {# disable macro caching, see // https://jinja.palletsprojects.com/en/3.0.x/templates/#import-context-behavior #}
 {% import 'macros/tasks.html.j2' as render with context %}
 
-{% block content %}
-    <div class="rvo-max-width-layout rvo-max-width-layout--md rvo-max-width-layout-inline-padding--none">
-    <h1 class="utrecht-heading-1">{% trans %}Tasks{% endtrans %}</h1>
-    <div class="container">
-        <form id="cardMovedForm" hx-patch="/tasks/" hx-ext="json-enc" hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}' hx-target-5*="#errorContainer"  hx-trigger="cardmoved" hx-swap="outerHTML" hx-target="#board" class="">
+{% block detail_content %}
+    <div class="container margin-top-large">
+        <form id="cardMovedForm" hx-patch="/project/move_task" hx-ext="json-enc" hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}' hx-target-5*="#errorContainer"  hx-trigger="cardmoved" hx-swap="outerHTML" hx-target="#board" class="">
             <input type="hidden" name="taskId" value="">
             <input type="hidden" name="statusId" value="">
             <input type="hidden" name="previousSiblingId" value="">
@@ -22,6 +20,5 @@
             {% endfor %}
             </div>
         </div>
-    </div>
     </div>
 {% endblock %}
