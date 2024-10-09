@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-09 15:43+0200\n"
+"POT-Creation-Date: 2024-10-09 19:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -97,7 +97,7 @@ msgstr ""
 msgid "Model"
 msgstr ""
 
-#: amt/api/navigation.py:59 amt/site/templates/projects/new.html.j2:117
+#: amt/api/navigation.py:59 amt/site/templates/projects/new.html.j2:114
 msgid "Instruments"
 msgstr ""
 
@@ -147,10 +147,6 @@ msgstr ""
 msgid "An error occurred. Please try again later"
 msgstr ""
 
-#: amt/site/templates/layouts/base.html.j2:11
-msgid "Algorithmic Management Toolkit (AMT)"
-msgstr ""
-
 #: amt/site/templates/macros/tasks.html.j2:14
 msgid "Todo"
 msgstr ""
@@ -164,6 +160,9 @@ msgid "Reviewing"
 msgstr ""
 
 #: amt/site/templates/macros/tasks.html.j2:47
+#: amt/site/templates/projects/details_base.html.j2:19
+#: amt/site/templates/projects/details_base.html.j2:45
+#: amt/site/templates/projects/details_base.html.j2:77
 #: amt/site/templates/projects/details_base.html.j2:102
 msgid "Done"
 msgstr ""
@@ -244,20 +243,17 @@ msgstr ""
 msgid "Does the algorithm meet the requirements?"
 msgstr ""
 
+#: amt/site/templates/projects/details_base.html.j2:33
+#: amt/site/templates/projects/details_base.html.j2:100
+msgid "To do"
+msgstr ""
+
 #: amt/site/templates/projects/details_base.html.j2:67
 msgid "Go to all requirements"
 msgstr ""
 
 #: amt/site/templates/projects/details_base.html.j2:74
 msgid "Which instruments are executed?"
-msgstr ""
-
-#: amt/site/templates/projects/details_base.html.j2:77
-msgid "done"
-msgstr ""
-
-#: amt/site/templates/projects/details_base.html.j2:100
-msgid "To do"
 msgstr ""
 
 #: amt/site/templates/projects/details_base.html.j2:115
@@ -317,29 +313,29 @@ msgid ""
 "tree."
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:43
+#: amt/site/templates/projects/new.html.j2:42
 msgid "Find your AI Act profile"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:100
+#: amt/site/templates/projects/new.html.j2:97
 msgid "Yes"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:110
+#: amt/site/templates/projects/new.html.j2:107
 msgid "No"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:119
+#: amt/site/templates/projects/new.html.j2:116
 msgid ""
 "Overview of instruments for the responsible development, deployment, "
 "assessment and monitoring of algorithms and AI-systems."
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:127
+#: amt/site/templates/projects/new.html.j2:124
 msgid "Choose one or more instruments"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:141
+#: amt/site/templates/projects/new.html.j2:138
 msgid "Create Project"
 msgstr ""
 
