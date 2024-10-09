@@ -27,6 +27,7 @@ logger = logging.getLogger(__name__)
 def run_server_uvicorn(database_file: Path, host: str = "127.0.0.1", port: int = 3462) -> None:
     os.environ["APP_DATABASE_FILE"] = "/" + str(database_file)
     os.environ["AUTO_CREATE_SCHEMA"] = "true"
+    os.environ["DISABLE_AUTH"] = "true"
     logger.info(os.environ["APP_DATABASE_FILE"])
     app = create_app()
     uvicorn.run(app, host=host, port=port)
@@ -54,6 +55,14 @@ def setup_db_and_server(
     yield "http://127.0.0.1:3462"
     process.terminate()
     metadata.drop_all(engine)
+
+
+@pytest.fixture(autouse=True)
+def disable_auth(request: pytest.FixtureRequest, monkeypatch: pytest.MonkeyPatch) -> None:  # noqa: PT004
+    marker = request.node.get_closest_marker("enable_auth")  # type: ignore
+    if not marker:
+        monkeypatch.setenv("DISABLE_AUTH", "true")
+    return
 
 
 def pytest_configure(config: pytest.Config) -> None:

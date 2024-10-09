@@ -182,6 +182,10 @@ msgstr "Sleutel niet correct: {field}"
 msgid "Value not correct: {field}"
 msgstr "Waarde is niet correct: {field}"
 
+#: amt/core/exceptions.py:72
+msgid "Failed to authorize, please login and try again."
+msgstr "Autoriseren is mislukt. Meld u aan en probeer het opnieuw."
+
 #: amt/site/templates/errors/Exception.html.j2:6
 msgid "An error occurred"
 msgstr "Er is een fout opgetreden"
@@ -273,10 +277,20 @@ msgstr "Contact"
 msgid "version"
 msgstr "versie"
 
-#: amt/site/templates/parts/header.html.j2:70
-#: amt/site/templates/parts/header.html.j2:107
+#: amt/site/templates/parts/header.html.j2:72
+#: amt/site/templates/parts/header.html.j2:128
 msgid "Language"
 msgstr "Taal"
+
+#: amt/site/templates/parts/header.html.j2:83
+#: amt/site/templates/parts/header.html.j2:137
+msgid "Login"
+msgstr "Inloggen"
+
+#: amt/site/templates/parts/header.html.j2:90
+#: amt/site/templates/parts/header.html.j2:143
+msgid "Logout"
+msgstr "Uitloggen"
 
 #: amt/site/templates/projects/details_base.html.j2:3
 #: amt/site/templates/projects/details_data.html.j2:3
