@@ -18,7 +18,7 @@ mkdir -p ${TEMP_DIR}/amt/locale
 trap 'rm -rf "$TEMP_DIR"' EXIT
 
 strip_po () {
-    tail -n +20 "$1"
+    tail -n +21 "$1"
 }
 
 difference () {
@@ -26,28 +26,26 @@ difference () {
     if [[ "${d}" != "" ]];
         then
             echo "Translations not up to date."
-            echo "DIFFERENCE:"
-            echo "${d}"
-            echo ""
-            echo "NEW:"
-            echo "$2"
             exit 1
     fi
 }
 
 main () {
-    base="amt/locale/base.pot"
+    en_po="amt/locale/en_US/LC_MESSAGES/messages.po"
     nl_po="amt/locale/nl_NL/LC_MESSAGES/messages.po"
 
-    old_base=$(strip_po "${base}")
+    old_en_po=$(strip_po "${en_po}")
+    old_nl_po=$(strip_po "${nl_po}")
 
     cp -r amt/locale/* ${TEMP_DIR}/amt/locale/
     pybabel extract -F babel-mapping.ini . -o "${TEMP_DIR}/amt/locale/base.pot" > /dev/null 2>&1
-    #pybabel update -i "${TEMP_DIR}/amt/locale/base.pot" -d "${TEMP_DIR}/amt/locale" > /dev/null 2>&1
+    pybabel update -i "${TEMP_DIR}/amt/locale/base.pot" -d "${TEMP_DIR}/amt/locale" > /dev/null 2>&1
 
-    new_base=$(strip_po ${TEMP_DIR}/"${base}")
+    new_en_po=$(strip_po ${TEMP_DIR}/"${en_po}")
+    new_nl_po=$(strip_po ${TEMP_DIR}/"${nl_po}")
 
-    difference "${old_base}" "${new_base}"
+    difference "${old_en_po}" "${new_en_po}"
+    difference "${old_nl_po}" "${new_nl_po}"
 
     ./script/check_invalid_translations --filenames "${nl_po}"
 }
