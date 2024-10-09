@@ -1,0 +1,105 @@
+/**
+ * @license EUPL-1.2
+ * Copyright (c) 2021 Community for NL Design System
+ */
+
+/* stylelint-disable selector-class-pattern */
+.rvo-tabs__item {
+    list-style: none;
+
+    .rvo-tabs__item-link {
+        font-weight: var(--rvo-tabs-font-weight);
+    }
+
+    .rvo-tabs__item-link--active {
+        font-weight: var(--rvo-tabs-active-font-weight);
+    }
+}
+
+@media (width >= 600px) {
+    .rvo-tabs {
+        &::after {
+            content: "";
+            width: 100%;
+            display: block;
+            z-index: -1;
+            border-bottom-color: var(--rvo-tabs-border-bottom-color);
+            border-bottom-style: var(--rvo-tabs-border-bottom-style);
+            border-bottom-width: var(--rvo-tabs-border-bottom-width);
+            position: absolute;
+            bottom: -1px;
+        }
+
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        position: relative;
+
+        li.rvo-tabs__item {
+            white-space: nowrap;
+
+            &::before {
+                display: none;
+            }
+
+            .rvo-tabs__item-link {
+                border-bottom-color: var(--rvo-tabs-border-bottom-color);
+                border-bottom-style: var(--rvo-tabs-border-bottom-style);
+                border-bottom-width: var(--rvo-tabs-border-bottom-width);
+                color: var(--rvo-tabs-color);
+                margin-block-end: -1px;
+                padding-block-end: var(--rvo-tabs-padding-block-end);
+                padding-block-start: var(--rvo-tabs-padding-block-start);
+                padding-inline-end: var(--rvo-tabs-padding-inline-end);
+                padding-inline-start: var(--rvo-tabs-padding-inline-start);
+                text-decoration: none;
+
+                &:hover {
+                    border-bottom-color: var(
+                        --rvo-tabs-hover-border-bottom-color
+                    );
+                    border-bottom-style: var(
+                        --rvo-tabs-hover-border-bottom-style
+                    );
+                    border-bottom-width: var(
+                        --rvo-tabs-hover-border-bottom-width
+                    );
+                }
+            }
+
+            .rvo-tabs__item-link--active {
+                border-bottom-color: var(--rvo-tabs-active-border-bottom-color);
+                border-bottom-style: var(--rvo-tabs-active-border-bottom-style);
+                border-bottom-width: var(--rvo-tabs-active-border-bottom-width);
+                color: var(--rvo-tabs-active-color);
+                font-weight: var(--rvo-tabs-active-font-weight);
+
+                &:hover {
+                    color: var(--rvo-tabs-active-hover-color);
+                }
+            }
+        }
+    }
+}
+/* stylelint-enable selector-class-pattern */
+
+.rvo-theme {
+    --rvo-tabs-active-border-bottom-style: solid;
+    --rvo-tabs-hover-border-bottom-style: solid;
+    --rvo-tabs-border-bottom-style: solid;
+    --rvo-tabs-active-hover-color: var(--rvo-color-grijs-700);
+    --rvo-tabs-active-font-weight: var(--rvo-font-weight-bold);
+    --rvo-tabs-active-color: var(--rvo-color-hemelblauw);
+    --rvo-tabs-active-border-bottom-width: var(--rvo-size-3xs);
+    --rvo-tabs-active-border-bottom-color: var(--rvo-color-hemelblauw);
+    --rvo-tabs-hover-border-bottom-width: var(--rvo-size-3xs);
+    --rvo-tabs-hover-border-bottom-color: var(--rvo-color-zwart);
+    --rvo-tabs-font-weight: var(--rvo-font-weight-normal);
+    --rvo-tabs-padding-inline-end: var(--rvo-space-md);
+    --rvo-tabs-padding-inline-start: var(--rvo-space-md);
+    --rvo-tabs-padding-block-end: var(--rvo-space-xs);
+    --rvo-tabs-padding-block-start: var(--rvo-space-xs);
+    --rvo-tabs-color: var(--rvo-color-grijs-800);
+    --rvo-tabs-border-bottom-width: var(--rvo-size-3xs);
+    --rvo-tabs-border-bottom-color: var(--rvo-color-grijs-300);
+}

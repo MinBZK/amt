@@ -15,13 +15,19 @@ class DisplayText(Enum):
     all labels.
     """
 
+    REQUIREMENTS = "requirements"
+    INSTRUMENTS = "instruments"
+    MODEL = "model"
+    DATA = "data"
+    ALGORITHM_DETAILS = "algorithm_details"
+    INFO = "info"
     HOME = "home"
     PROJECTS = "projects"
     OVERVIEW = "overview"
     TASKS = "tasks"
     NEW = "new"
     SYSTEMCARD = "systemcard"
-    ASSESSMENTCARD = "assesmentcard"
+    ASSESSMENTCARD = "assessmentcard"
     MODELCARD = "modelcard"
     DETAILS = "details"
 
@@ -45,6 +51,12 @@ def get_translation(key: DisplayText, translations: NullTranslations) -> str:
         DisplayText.ASSESSMENTCARD: _("Assessment card"),
         DisplayText.MODELCARD: _("Model card"),
         DisplayText.DETAILS: _("Details"),
+        DisplayText.INFO: _("Info"),
+        DisplayText.ALGORITHM_DETAILS: _("Algorithm details"),
+        DisplayText.REQUIREMENTS: _("Requirements"),
+        DisplayText.DATA: _("Data"),
+        DisplayText.MODEL: _("Model"),
+        DisplayText.INSTRUMENTS: _("Instruments"),
     }
     return keys[key]
 
@@ -83,17 +95,33 @@ class Navigation:
         display_text=DisplayText.PROJECTS, url=["/projects/", "/project/"], icon="rvo-icon-publicatie"
     )
     PROJECTS_OVERVIEW = BaseNavigationItem(display_text=DisplayText.OVERVIEW, url="/projects/")
-    PROJECT_TASKS = BaseNavigationItem(display_text=DisplayText.TASKS, url="/project/{project_id}/tasks")
-    PROJECT_DETAILS = BaseNavigationItem(display_text=DisplayText.DETAILS, url="/project/{project_id}/system_card")
+    PROJECT_TASKS = BaseNavigationItem(display_text=DisplayText.TASKS, url="/project/{project_id}/details/tasks")
+    PROJECT_DETAILS = BaseNavigationItem(
+        display_text=DisplayText.DETAILS, url="/project/{project_id}/details/system_card"
+    )
     PROJECT_NEW = BaseNavigationItem(display_text=DisplayText.NEW, url="/projects/new")
+    PROJECT_SYSTEM_INFO = BaseNavigationItem(display_text=DisplayText.INFO, url="/project/{project_id}/details")
+    PROJECT_SYSTEM_ALGORITHM_DETAILS = BaseNavigationItem(
+        display_text=DisplayText.ALGORITHM_DETAILS, url="/project/{project_id}/details/system_card"
+    )
     PROJECT_SYSTEM_CARD = BaseNavigationItem(
-        display_text=DisplayText.SYSTEMCARD, url="/project/{project_id}/system_card"
+        display_text=DisplayText.SYSTEMCARD, url="/project/{project_id}/details/system_card"
+    )
+    PROJECT_DATA_CARD = BaseNavigationItem(
+        display_text=DisplayText.DATA, url="/project/{project_id}/details/system_card/data"
     )
     PROJECT_MODEL_CARD = BaseNavigationItem(
-        display_text=DisplayText.MODELCARD, url="/project/{project_id}/system_card/models/{model_card}"
+        display_text=DisplayText.MODELCARD, url="/project/{project_id}/details/system_card/models/{model_card}"
     )
     PROJECT_ASSESSMENT_CARD = BaseNavigationItem(
-        display_text=DisplayText.ASSESSMENTCARD, url="/project/{project_id}/system_card/assessment/{assessment_card}"
+        display_text=DisplayText.ASSESSMENTCARD,
+        url="/project/{project_id}/details/system_card/assessment/{assessment_card}",
+    )
+    PROJECT_REQUIREMENTS = BaseNavigationItem(
+        display_text=DisplayText.REQUIREMENTS, url="/project/{project_id}/details/system_card/requirements"
+    )
+    PROJECT_SYSTEM_INSTRUMENTS = BaseNavigationItem(
+        display_text=DisplayText.INSTRUMENTS, url="/project/{project_id}/details/system_card/instruments"
     )
 
 
@@ -191,7 +219,7 @@ def resolve_base_navigation_items(
     return navigation_items
 
 
-def resolve_sub_menu(
+def resolve_navigation_items(
     base_sub_menu_items: list[BaseNavigationItem], request: Request, exact_match: bool = True
 ) -> list[NavigationItem]:
     """

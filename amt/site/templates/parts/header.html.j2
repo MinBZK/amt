@@ -141,7 +141,7 @@
                 {% for breadcrumb in breadcrumbs %}
                     {% if loop.first %}
                         <li class="rvo-breadcrumbs-item">
-                            <a data-navigation="breadcrumb:{{ breadcrumb.get_url() }}" class="rvo-link rvo-link--no-underline" href="{{ breadcrumb.get_url() }}">
+                            <a data-navigation="breadcrumb:{{ breadcrumb.get_url() }}" class="rvo-link rvo-link--normal rvo-link--no-underline" href="{{ breadcrumb.get_url() }}">
                                 {{ breadcrumb.display_text }}
                             </a>
                         </li>
@@ -158,7 +158,7 @@
                         </li>
                     {% else %}
                         <li class="rvo-breadcrumbs-item">
-                            <a data-navigation="breadcrumb:{{ breadcrumb.get_url() }}" class="rvo-link rvo-link--no-underline" href="{{ breadcrumb.get_url() }}">
+                            <a data-navigation="breadcrumb:{{ breadcrumb.get_url() }}" class="rvo-link rvo-link--normal rvo-link--no-underline" href="{{ breadcrumb.get_url() }}">
                           <span
                               class="utrecht-icon rvo-icon rvo-icon-delta-naar-rechts rvo-icon--xs rvo-icon--hemelblauw"
                               role="img"

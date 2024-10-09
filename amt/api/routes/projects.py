@@ -6,7 +6,7 @@ from fastapi.responses import HTMLResponse
 
 from amt.api.ai_act_profile import get_ai_act_profile_selector
 from amt.api.deps import templates
-from amt.api.navigation import Navigation, resolve_base_navigation_items, resolve_sub_menu
+from amt.api.navigation import Navigation, resolve_base_navigation_items, resolve_navigation_items
 from amt.schema.project import ProjectNew
 from amt.services.instruments import InstrumentsService
 from amt.services.projects import ProjectsService
@@ -26,7 +26,7 @@ async def get_root(
     projects = projects_service.paginate(skip=skip, limit=limit, search=search)
     next = skip + limit
 
-    sub_menu_items = resolve_sub_menu([Navigation.PROJECTS_OVERVIEW], request)  # pyright: ignore [reportUnusedVariable] # noqa
+    sub_menu_items = resolve_navigation_items([Navigation.PROJECTS_OVERVIEW], request)  # pyright: ignore [reportUnusedVariable] # noqa
     breadcrumbs = resolve_base_navigation_items([Navigation.PROJECTS_ROOT, Navigation.PROJECTS_OVERVIEW], request)
 
     context: dict[str, Any] = {
@@ -51,7 +51,7 @@ async def get_new(
     request: Request,
     instrument_service: Annotated[InstrumentsService, Depends(InstrumentsService)],
 ) -> HTMLResponse:
-    sub_menu_items = resolve_sub_menu([Navigation.PROJECTS_OVERVIEW], request)  # pyright: ignore [reportUnusedVariable] # noqa
+    sub_menu_items = resolve_navigation_items([Navigation.PROJECTS_OVERVIEW], request)  # pyright: ignore [reportUnusedVariable] # noqa
     breadcrumbs = resolve_base_navigation_items([Navigation.PROJECTS_ROOT, Navigation.PROJECT_NEW], request)
 
     ai_act_profile = get_ai_act_profile_selector(request)
@@ -74,5 +74,5 @@ async def post_new(
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
 ) -> HTMLResponse:
     project = projects_service.create(project_new)
-    response = templates.Redirect(request, f"/project/{project.id}/tasks")
+    response = templates.Redirect(request, f"/project/{project.id}/details/tasks")
     return response

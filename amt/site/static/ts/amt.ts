@@ -2,6 +2,7 @@ import Sortable from "sortablejs";
 import htmx from "htmx.org";
 import _hyperscript from "hyperscript.org";
 
+import "../scss/tabs.scss";
 import "../scss/layout.scss";
 
 _hyperscript.browserInit();

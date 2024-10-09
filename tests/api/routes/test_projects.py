@@ -91,7 +91,7 @@ def test_post_new_projects(
     # then
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert response.headers["HX-Redirect"] == "/project/1/tasks"
+    assert response.headers["HX-Redirect"] == "/project/1/details/tasks"
 
 
 def test_post_new_projects_write_system_card(
@@ -120,7 +120,7 @@ def test_post_new_projects_write_system_card(
         role=project_new.role,
     )
 
-    system_card = SystemCard(name=project_new.name, selected_instruments=[], ai_act_profile=ai_act_profile)
+    system_card = SystemCard(name=project_new.name, instruments=[], ai_act_profile=ai_act_profile)
 
     # when
     client.post("/projects/new", json=project_new.model_dump(), headers={"X-CSRF-Token": "1"})
