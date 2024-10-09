@@ -1,10 +1,9 @@
 from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import Any, TypedDict
+from typing import Any, TypedDict, Unpack
 
 import yaml
 import yaml_include
-from typing_extensions import Unpack
 from yaml import dump
 
 from amt.core.exceptions import AMTKeyError, AMTValueError
