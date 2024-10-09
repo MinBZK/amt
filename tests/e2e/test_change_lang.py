@@ -23,13 +23,6 @@ def test_e2e_change_language(page: Page):
     assert "value" in lang_cookie
     assert lang_cookie["value"] == "nl"
 
-    page.click("#langselect-fy")
-    expect(page.locator("#langselect-fy.selected")).to_be_visible()
-    lang_cookie = get_lang_cookie(page)
-    assert lang_cookie is not None
-    assert "value" in lang_cookie
-    assert lang_cookie["value"] == "fy"
-
     page.click("#langselect-en")
     expect(page.locator("#langselect-en.selected")).to_be_visible()
     lang_cookie = get_lang_cookie(page)

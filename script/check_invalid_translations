@@ -1,0 +1,45 @@
+#!/usr/bin/env python
+
+import argparse
+import sys
+from pathlib import Path
+
+import polib
+
+
+def has_untranslated_entries(path: Path) -> int:
+    pofile = polib.pofile(str(path))
+    untranslated = pofile.untranslated_entries()
+    if len(untranslated) > 0:
+        for entry in untranslated:
+            print(f"Found untranslated entries in {path}", file=sys.stderr)
+            print(entry, file=sys.stderr)
+            return 1
+    return 0
+
+
+def has_fuzzy_entries(path: Path) -> int:
+    pofile = polib.pofile(str(path))
+    fuzzy = pofile.fuzzy_entries()
+    if len(fuzzy) > 0:
+        for entry in fuzzy:
+            print(f"Found fuzzy entries in {path}", file=sys.stderr)
+            print(entry, file=sys.stderr)
+            return 1
+    return 0
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--filenames", type=str, nargs="*")
+    args = parser.parse_args()
+    for arg in args.filenames:
+        if has_untranslated_entries(arg):
+            return 1
+        if has_fuzzy_entries(arg):
+            return 1
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
