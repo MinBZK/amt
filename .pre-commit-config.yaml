@@ -1,5 +1,5 @@
 default_language_version:
-  python: python3.11
+  python: python3.12
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
@@ -34,8 +34,9 @@ repos:
     hooks:
       - id: check-translate
         name: check-translate
+        additional_dependencies: [polib]
         entry: ./script/check_translate
-        language: system
+        language: python
         pass_filenames: false
         always_run: true
   - repo: local

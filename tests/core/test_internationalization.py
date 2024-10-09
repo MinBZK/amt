@@ -26,7 +26,7 @@ def test_fallback_get_supported_translations(caplog: pytest.LogCaptureFixture):
 
 
 def test_get_all_dynamic_field_translations() -> None:
-    assert len(supported_translations) == 3
+    assert len(supported_translations) == 2
     for translation in supported_translations:
         get_dynamic_field_translations(translation)
 
@@ -36,9 +36,6 @@ def test_get_lengths_dynamic_field_translations() -> None:
     assert yaml_en is None
     yaml_nl = get_dynamic_field_translations("nl")
     assert yaml_nl is None
-    yaml_fy = get_dynamic_field_translations("fy")
-    assert len(yaml_fy["weekdays"]) == 7
-    assert len(yaml_fy["months"]) == 12
 
 
 def test_warning_get_dynamic_field_translations(caplog: pytest.LogCaptureFixture) -> None:
@@ -61,8 +58,6 @@ def test_warning_get_translation(caplog: pytest.LogCaptureFixture):
 
 def test_format_datetime():
     date = datetime.datetime(2020, 1, 2, 12, 13, 14, 0, None)  # noqa
-    assert format_datetime(date, "fy", "full") == "tongersdei, 2 jannewaris 2020 12:13"
-    assert format_datetime(date, "fy", "medium") == "tongersdei 02-01-2020 12:13"
     assert format_datetime(date, "en", "full") == "Thursday, 2 January 2020 12:13"
     assert format_datetime(date, "en", "medium") == "Thu 02/01/2020 12:13"
     assert format_datetime(date, "nl", "full") == "donderdag, 2 januari 2020 12:13"
@@ -74,10 +69,12 @@ def test_format_datetime():
 def test_get_requested_language():
     request: Request = Mock()
     request.cookies.get.return_value = "nl"
+    request.headers.get.return_value = "nl"
     assert get_requested_language(request) == "nl"
 
 
 def test_fallback_get_requested_language():
     request: Request = Mock()
+    request.headers.get.return_value = "en"
     request.cookies = {}
     assert get_requested_language(request) == "en"
