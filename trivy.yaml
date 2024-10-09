@@ -10,8 +10,8 @@ scan:
     - misconfig
     - secret
 
-vulnerability:
-  type:
+pkg:
+  types:
     - library
     - os
   ignore-unfixed: true

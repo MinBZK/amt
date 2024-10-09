@@ -19,7 +19,7 @@ env:
   POETRY_CACHE_DIR: ~/.cache/pypoetry
   PIPX_BIN_DIR: /usr/local/bin
   IMAGE_NAME: ${{ github.repository }}
-  PYTHON_VERSION: "3.11"
+  PYTHON_VERSION: "3.12"
 
 jobs:
   lint:
@@ -126,7 +126,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10", "3.11", "3.12"] # When using ACT only use ["3.11"]
+        python-version: ["3.12"] # When using ACT only use ["3.12"]
 
     steps:
       - uses: actions/checkout@v4
@@ -184,7 +184,7 @@ jobs:
         run: poetry run coverage html
 
       - name: Upload code coverage report
-        if: matrix.python-version == '3.11'
+        if: matrix.python-version == '3.12'
         uses: actions/upload-artifact@v3
         with:
           name: codecoverage-${{ github.sha }}
@@ -196,7 +196,7 @@ jobs:
         run: poetry run coverage xml
 
       - name: SonarCloud Scan
-        if: matrix.python-version == '3.11' && github.actor != 'dependabot[bot]' && !env.ACT
+        if: matrix.python-version == '3.12' && github.actor != 'dependabot[bot]' && !env.ACT
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any

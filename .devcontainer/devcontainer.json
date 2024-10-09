@@ -1,6 +1,6 @@
 {
   "name": "Project Dev",
-  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
   "containerEnv": {
     "DEVCONTAINER": "1",
     "PYTHONASYNCIODEBUG": "1",
