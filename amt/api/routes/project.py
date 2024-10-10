@@ -6,6 +6,7 @@ from fastapi import APIRouter, Depends, Request
 from fastapi.responses import HTMLResponse
 
 from amt.api.deps import templates
+from amt.api.lifecycles import get_lifecycle
 from amt.api.navigation import (
     BaseNavigationItem,
     Navigation,
@@ -161,6 +162,7 @@ async def get_project_details(
     tab_items = get_project_details_tabs(request)
 
     context = {
+        "lifecycle": get_lifecycle(project.lifecycle, request),
         "system_card": system_card_data,
         "instrument_state": instrument_state,
         "project": project,
