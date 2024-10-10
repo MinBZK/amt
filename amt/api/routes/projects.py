@@ -6,6 +6,7 @@ from fastapi.responses import HTMLResponse
 
 from amt.api.ai_act_profile import get_ai_act_profile_selector
 from amt.api.deps import templates
+from amt.api.lifecycles import get_lifecycles
 from amt.api.navigation import Navigation, resolve_base_navigation_items, resolve_navigation_items
 from amt.schema.project import ProjectNew
 from amt.services.instruments import InstrumentsService
@@ -61,6 +62,7 @@ async def get_new(
         "ai_act_profile": ai_act_profile,
         "breadcrumbs": breadcrumbs,
         "sub_menu_items": {},  # sub_menu_items disabled for now,
+        "lifecycles": get_lifecycles(request),
     }
 
     response = templates.TemplateResponse(request, "projects/new.html.j2", context)

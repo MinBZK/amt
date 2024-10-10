@@ -14,6 +14,7 @@ def test_get_project():
     # Given
     project_id = 1
     project_name = "Project 1"
+    project_lifecycle = "development"
     project_model_card = "model_card_path"
     projects_service = ProjectsService(
         repository=Mock(spec=ProjectsRepository),
@@ -21,7 +22,7 @@ def test_get_project():
         instrument_service=Mock(spec=InstrumentsService),
     )
     projects_service.repository.find_by_id.return_value = Project(  # type: ignore
-        id=project_id, name=project_name, model_card=project_model_card
+        id=project_id, name=project_name, lifecycle=project_lifecycle, model_card=project_model_card
     )
 
     # When
@@ -30,6 +31,7 @@ def test_get_project():
     # Then
     assert project.id == project_id
     assert project.name == project_name
+    assert project.lifecycle == project_lifecycle
     assert project.model_card == project_model_card
     projects_service.repository.find_by_id.assert_called_once_with(project_id)  # type: ignore
 
@@ -37,6 +39,7 @@ def test_get_project():
 def test_create_project():
     project_id = 1
     project_name = "Project 1"
+    project_lifecycle = "development"
     project_model_card = Path("model_card_path")
     projects_service = ProjectsService(
         repository=Mock(spec=ProjectsRepository),
@@ -44,13 +47,14 @@ def test_create_project():
         instrument_service=Mock(spec=InstrumentsService),
     )
     projects_service.repository.save.return_value = Project(  # type: ignore
-        id=project_id, name=project_name, model_card=str(project_model_card)
+        id=project_id, name=project_name, lifecycle=project_lifecycle, model_card=str(project_model_card)
     )
     projects_service.instrument_service.fetch_instruments.return_value = [default_instrument()]  # type: ignore
 
     # When
     project_new = ProjectNew(
         name=project_name,
+        lifecycle=project_lifecycle,
         instruments=[],
         type="project_type",
         open_source="project_open_source",
@@ -64,4 +68,5 @@ def test_create_project():
     # Then
     assert project.id == project_id
     assert project.name == project_name
+    assert project.lifecycle == project_lifecycle
     projects_service.repository.save.assert_called()  # type: ignore

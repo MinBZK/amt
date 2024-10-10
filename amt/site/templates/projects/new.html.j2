@@ -30,6 +30,26 @@
                                        dir="auto"
                                        value="" />
                             </div>
+                            <div role="group"
+                                     aria-labelledby="fieldId-label"
+                                     class="utrecht-form-field utrecht-form-field--text rvo-form-field">
+                                    <div class="rvo-form-field__label">
+                                    <label class="rvo-label rvo-label--required">{% trans %}Lifecycle{% endtrans %}</label>
+                                    <p>{% trans %}Select the lifecycle your project is currently in{% endtrans %}. {% trans %}Read{% endtrans %} <a class="rvo-link" href="https://minbzk.github.io/Algoritmekader/levenscyclus/" target="_blank">{% trans %}Algorithm Framework on lifecycles{% endtrans %}</a> {% trans %}for background information{% endtrans %}.</p>
+                                </div>
+                                {% for lifecycle in lifecycles %}
+                                    <div class="rvo-radio-button__group">
+                                        <label class="rvo-radio-button" for="{{ lifecycle.id }}">
+                                            <input id="{{ lifecycle.id }}"
+                                                   name="lifecycle"
+                                                   value="{{ lifecycle.id }}"
+                                                   type="radio"
+                                                   class="utrecht-radio-button" />
+                                            {{ lifecycle.name }}
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div>
                         </fieldset>
                     </div>
                     <h2 class="utrecht-heading-2 rvo-heading--no-margins">{% trans %}AI Act Profile{% endtrans %}</h2>
