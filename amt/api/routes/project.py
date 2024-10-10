@@ -241,12 +241,20 @@ async def get_system_card_requirements(
         request,
     )
 
+    # TODO: This now loads an example system card independent of the project ID.
+    filepath = Path("example_system_card/system_card.yaml")
+    file_system_storage_service = StorageFactory.init(
+        storage_type="file" , location=filepath.parent , filename=filepath.name
+    )
+    system_card_data = file_system_storage_service.read()
+
     context = {
         "instrument_state": instrument_state,
         "project": project,
         "project_id": project.id,
         "tab_items": tab_items,
         "breadcrumbs": breadcrumbs,
+        "requirements": system_card_data['requirements']
     }
 
     return templates.TemplateResponse(request, "projects/details_requirements.html.j2", context)

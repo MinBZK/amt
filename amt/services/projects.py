@@ -11,7 +11,7 @@ from amt.schema.project import ProjectNew
 from amt.schema.system_card import AiActProfile, SystemCard
 from amt.services.instruments import InstrumentsService
 from amt.services.storage import Storage, StorageFactory
-from amt.services.task_registry import TaskRegistryService
+from amt.services.task_registry import get_requirements_and_measures
 from amt.services.tasks import TasksService
 
 logger = logging.getLogger(__name__)
@@ -55,8 +55,7 @@ class ProjectsService:
             role=project_new.role,
         )
 
-        task_registry_service = TaskRegistryService()
-        requirements, measures = task_registry_service.get_requirements_and_measures(ai_act_profile)
+        requirements, measures = get_requirements_and_measures(ai_act_profile)
 
         system_card = SystemCard(
             name=project_new.name,
