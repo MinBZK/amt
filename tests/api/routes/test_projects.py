@@ -80,9 +80,9 @@ def test_post_new_projects(
         type="AI-systeem",
         open_source="open-source",
         publication_category="hoog-risico AI",
-        systemic_risk="systeemrisico",
-        transparency_obligations="transparantieverplichtingen",
-        role="aanbieder",
+        systemic_risk="geen systeemrisico",
+        transparency_obligations="geen transparantieverplichtingen",
+        role="gebruiksverantwoordelijke",
     )
 
     # when
@@ -106,9 +106,9 @@ def test_post_new_projects_write_system_card(
         type="AI-systeem",
         open_source="open-source",
         publication_category="hoog-risico AI",
-        systemic_risk="systeemrisico",
-        transparency_obligations="transparantieverplichtingen",
-        role="aanbieder",
+        systemic_risk="geen systeemrisico",
+        transparency_obligations="geen transparantieverplichtingen",
+        role="gebruiksverantwoordelijke",
     )
 
     ai_act_profile = AiActProfile(
