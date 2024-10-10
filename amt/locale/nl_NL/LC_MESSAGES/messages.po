@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-09 19:49+0200\n"
+"POT-Creation-Date: 2024-10-10 11:00+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_NL\n"
@@ -153,6 +153,10 @@ msgstr "Er is een fout opgetreden"
 #: amt/site/templates/errors/_Exception.html.j2:1
 msgid "An error occurred. Please try again later"
 msgstr "Er is een fout opgetreden. Probeer het later opnieuw."
+
+#: amt/site/templates/layouts/base.html.j2:11
+msgid "Algorithmic Management Toolkit (AMT)"
+msgstr "Algoritme Management Toolkit (AMT)"
 
 #: amt/site/templates/macros/tasks.html.j2:14
 msgid "Todo"
@@ -340,8 +344,8 @@ msgid ""
 "Overview of instruments for the responsible development, deployment, "
 "assessment and monitoring of algorithms and AI-systems."
 msgstr ""
-"Overzicht van aanbevolen insturment voor het verantwoord ontwikkelen, "
-"gebruiken,beoordelen en monitren van algoritmes en AI-systemen."
+"Overzicht van aanbevolen instrument voor het verantwoord ontwikkelen, "
+"gebruiken, beoordelen en monitoren van algoritmes en AI-systemen."
 
 #: amt/site/templates/projects/new.html.j2:124
 msgid "Choose one or more instruments"
@@ -350,6 +354,10 @@ msgstr "Kies één of meerdere instrumenten"
 #: amt/site/templates/projects/new.html.j2:138
 msgid "Create Project"
 msgstr "Maak project"
+
+#: amt/site/templates/projects/new.html.j2:152
+msgid "Copy results and close"
+msgstr "Resultaten overnemen en sluiten"
 
 #~ msgid "TEST"
 #~ msgstr ""

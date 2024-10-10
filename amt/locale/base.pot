@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-09 19:49+0200\n"
+"POT-Creation-Date: 2024-10-10 11:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -145,6 +145,10 @@ msgstr ""
 
 #: amt/site/templates/errors/_Exception.html.j2:1
 msgid "An error occurred. Please try again later"
+msgstr ""
+
+#: amt/site/templates/layouts/base.html.j2:11
+msgid "Algorithmic Management Toolkit (AMT)"
 msgstr ""
 
 #: amt/site/templates/macros/tasks.html.j2:14
@@ -337,5 +341,9 @@ msgstr ""
 
 #: amt/site/templates/projects/new.html.j2:138
 msgid "Create Project"
+msgstr ""
+
+#: amt/site/templates/projects/new.html.j2:152
+msgid "Copy results and close"
 msgstr ""
 
