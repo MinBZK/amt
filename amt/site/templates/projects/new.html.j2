@@ -144,19 +144,16 @@
     </div>
 </div>
 
-                        <div id="decision-tree-modal" class="minbzk-modal display-none">
-                            <div class="modal-underlay" onclick="amt.closeModal()"></div>
-                            <div class="modal-content">
-                                <p class="utrecht-button-group">
-                                    <button id="close-decision-tree-modal-button" type="button" class="flex utrecht-button utrecht-button--secondary-action rvo-layout-row rvo-layout-gap--md utrecht-button--rvo-md rvo-link--no-underline utrecht-button-group__align-right"
-                                    onclick="amt.closeModal()">
-                                        <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--md rvo-icon--zwart"
-                                            role="img"></span>
-                                    </button>
-                                <div id="app">
-                                        <script src="https://unpkg.com/ai-act-decision-tree@1.1.2/index.js"></script>
-                                </div>
-                                </p>
-                            </div>
-                        </div>
+<div id="decision-tree-modal" class="minbzk-modal display-none">
+    <div class="modal-underlay" onclick="amt.closeModal()"></div>
+    <div class="modal-content">
+        <p class="utrecht-button-group">
+            <button id="close-decision-tree-modal-button" type="button" class="flex utrecht-button utrecht-button--secondary-action rvo-layout-row rvo-layout-gap--md utrecht-button--rvo-md rvo-link--no-underline utrecht-button-group__align-right"
+            onclick="amt.closeModalSave()">{% trans %}Copy results and close{% endtrans %}</button>
+        <div id="app">
+                <script src="https://unpkg.com/ai-act-decision-tree@1.1.2/index.js"></script>
+        </div>
+        </p>
+    </div>
+</div>
 {% endblock content %}
