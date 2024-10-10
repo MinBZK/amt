@@ -4,8 +4,8 @@
 
 {% block detail_content %}
 
-    {% for requirement in requirements %}
 <div class="rvo-accordion">
+{% for requirement in requirements %}
   <details class="rvo-accordion__item">
     <summary class="rvo-accordion__item-summary">
       <h3
@@ -21,109 +21,16 @@
           role="img"
           aria-label="Delta omhoog"
         ></span>
-        Accordion item 1
+        {{ requirement.name }}
       </h3>
       <span class="rvo-accordion-teaser">Teaser for accordion item 1</span>
     </summary>
-    <div class="rvo-accordion__content">Item content</div>
+    <div class="rvo-accordion__content">
+        {{ requirement.description }}
+    </div>
   </details>
-  <details class="rvo-accordion__item">
-    <summary class="rvo-accordion__item-summary">
-      <h3
-        class="utrecht-heading-3 rvo-accordion__item-title rvo-heading--no-margins rvo-heading--mixed"
-      >
-        <span
-          class="utrecht-icon rvo-icon rvo-icon-delta-omlaag rvo-icon--md rvo-icon--hemelblauw rvo-accordion__item-icon--closed"
-          role="img"
-          aria-label="Delta omlaag"
-        ></span>
-        <span
-          class="utrecht-icon rvo-icon rvo-icon-delta-omhoog rvo-icon--md rvo-icon--hemelblauw rvo-accordion__item-icon--open"
-          role="img"
-          aria-label="Delta omhoog"
-        ></span>
-        Accordion item 2
-      </h3>
-      <span class="rvo-accordion-teaser">Teaser for accordion item 2</span>
-    </summary>
-    <div class="rvo-accordion__content">Item content</div>
-  </details>
-  <details class="rvo-accordion__item">
-    <summary class="rvo-accordion__item-summary">
-      <h3
-        class="utrecht-heading-3 rvo-accordion__item-title rvo-heading--no-margins rvo-heading--mixed"
-      >
-        <span
-          class="utrecht-icon rvo-icon rvo-icon-delta-omlaag rvo-icon--md rvo-icon--hemelblauw rvo-accordion__item-icon--closed"
-          role="img"
-          aria-label="Delta omlaag"
-        ></span>
-        <span
-          class="utrecht-icon rvo-icon rvo-icon-delta-omhoog rvo-icon--md rvo-icon--hemelblauw rvo-accordion__item-icon--open"
-          role="img"
-          aria-label="Delta omhoog"
-        ></span>
-        Accordion item 3
-      </h3>
-      <span class="rvo-accordion-teaser">Teaser for accordion item 3</span>
-    </summary>
-    <div class="rvo-accordion__content">Item content</div>
-  </details>
-  <details class="rvo-accordion__item">
-    <summary class="rvo-accordion__item-summary">
-      <h3
-        class="utrecht-heading-3 rvo-accordion__item-title rvo-heading--no-margins rvo-heading--mixed"
-      >
-        <span
-          class="utrecht-icon rvo-icon rvo-icon-delta-omlaag rvo-icon--md rvo-icon--hemelblauw rvo-accordion__item-icon--closed"
-          role="img"
-          aria-label="Delta omlaag"
-        ></span>
-        <span
-          class="utrecht-icon rvo-icon rvo-icon-delta-omhoog rvo-icon--md rvo-icon--hemelblauw rvo-accordion__item-icon--open"
-          role="img"
-          aria-label="Delta omhoog"
-        ></span>
-        Accordion item 4
-      </h3>
-      <span class="rvo-accordion-teaser">Teaser for accordion item 4</span>
-    </summary>
-    <div class="rvo-accordion__content">Item content</div>
-  </details>
-  <details class="rvo-accordion__item">
-    <summary class="rvo-accordion__item-summary">
-      <h3
-        class="utrecht-heading-3 rvo-accordion__item-title rvo-heading--no-margins rvo-heading--mixed"
-      >
-        <span
-          class="utrecht-icon rvo-icon rvo-icon-delta-omlaag rvo-icon--md rvo-icon--hemelblauw rvo-accordion__item-icon--closed"
-          role="img"
-          aria-label="Delta omlaag"
-        ></span>
-        <span
-          class="utrecht-icon rvo-icon rvo-icon-delta-omhoog rvo-icon--md rvo-icon--hemelblauw rvo-accordion__item-icon--open"
-          role="img"
-          aria-label="Delta omhoog"
-        ></span>
-        Accordion item 5
-      </h3>
-      <span class="rvo-accordion-teaser">Teaser for accordion item 5</span>
-    </summary>
-    <div class="rvo-accordion__content">Item content</div>
-  </details>
+{% endfor %}
 </div>
 
-{#                    <li role="presentation" class="rvo-tabs__item">#}
-{#                        <a data-navigation="tab:{{ tab_item.get_url() }}"#}
-{#                           class="rvo-link rvo-tabs__item-link rvo-link--no-underline {% if tab_item.active %}rvo-tabs__item-link--active rvo-link--active{% else %}rvo-link--normal{% endif %}"#}
-{#                           role="tab"#}
-{#                           aria-selected="true"#}
-{#                           href="{{ tab_item.get_url() }}"#}
-{#                        >#}
-{#                            {{ tab_item.display_text }}#}
-{#                        </a>#}
-{#                    </li>#}
-
-                {% endfor %}
 
 {% endblock %}

@@ -21,6 +21,7 @@ from amt.schema.task import MovedTask
 from amt.services.instruments_state import InstrumentStateService
 from amt.services.projects import ProjectsService
 from amt.services.storage import StorageFactory
+from amt.services.task_registry import fetch_requirements
 from amt.services.tasks import TasksService
 from amt.utils.storage import get_include_content, last_modified_at
 
@@ -244,9 +245,10 @@ async def get_system_card_requirements(
     # TODO: This now loads an example system card independent of the project ID.
     filepath = Path("example_system_card/system_card.yaml")
     file_system_storage_service = StorageFactory.init(
-        storage_type="file" , location=filepath.parent , filename=filepath.name
+        storage_type="file", location=filepath.parent, filename=filepath.name
     )
-    system_card_data = file_system_storage_service.read()
+    system_card_data: Any = file_system_storage_service.read()
+    requirements = fetch_requirements([requirement["urn"] for requirement in system_card_data["requirements"]])
 
     context = {
         "instrument_state": instrument_state,
@@ -254,7 +256,7 @@ async def get_system_card_requirements(
         "project_id": project.id,
         "tab_items": tab_items,
         "breadcrumbs": breadcrumbs,
-        "requirements": system_card_data['requirements']
+        "requirements": requirements,
     }
 
     return templates.TemplateResponse(request, "projects/details_requirements.html.j2", context)
