@@ -11,6 +11,7 @@ from starlette.templating import _TemplateResponse  # pyright: ignore [reportPri
 
 from amt.api.http_browser_caching import url_for_cache
 from amt.api.navigation import NavigationItem, get_main_menu
+from amt.core.authorization import get_user
 from amt.core.config import VERSION, get_settings
 from amt.core.internationalization import (
     format_datetime,
@@ -26,7 +27,9 @@ from amt.core.internationalization import (
 logger = logging.getLogger(__name__)
 
 
-def custom_context_processor(request: Request) -> dict[str, str | list[str] | dict[str, str] | list[NavigationItem]]:
+def custom_context_processor(
+    request: Request,
+) -> dict[str, str | None | list[str] | dict[str, str] | list[NavigationItem]]:
     lang = get_requested_language(request)
     translations = get_current_translation(request)
     return {
@@ -35,6 +38,7 @@ def custom_context_processor(request: Request) -> dict[str, str | list[str] | di
         "language": lang,
         "translations": get_dynamic_field_translations(lang),
         "main_menu_items": get_main_menu(request, translations),
+        "user": get_user(request),
     }
 
 

@@ -58,21 +58,39 @@
 
                 {% endfor %}
 
+                <li class="rvo-topnav__item">
                 {% for available_translation in available_translations %}
-                    <li class="rvo-topnav__item">
-                        <a class="rvo-link rvo-topnav__link rvo-link--logoblauw {% if available_translation == language %} selected {% endif %}"
+                    {% if available_translation != language %}
+
+                    <a class="rvo-link rvo-topnav__link rvo-link--logoblauw"
                            id="mobile-langselect-{{ available_translation }}"
                            href="javascript:setCookie('lang', '{{ available_translation }}', 9999); window.location.reload()"
                         >
                                 <span
-                                    class="utrecht-icon rvo-icon rvo-icon-wereldbol rvo-icon--sm rvo-icon--wit rvo-link__icon--before"
+                                    class="utrecht-icon rvo-icon rvo-icon-wereldbol rvo-icon--sm rvo-link__icon--before"
                                     role="img"
                                     aria-label="{% trans %}Language{% endtrans %} {{ available_translation }}"
                                 ></span>
                             {{ available_translation }}
                         </a>
-                    </li>
-                {% endfor %}
+                        {% endif %}
+                        {% endfor %}
+                </li>
+                {% if not user %}
+                <li class="rvo-topnav__item">
+                    <a class="rvo-link rvo-topnav__link rvo-link--logoblauw" href="/auth/login">
+                        <span class="utrecht-icon rvo-icon rvo-icon-user rvo-icon--sm rvo-link__icon--before" role="img"
+                            aria-label="User"></span> {%trans %}Login{%endtrans %}
+                    </a>
+                </li>
+                {% else %}
+                <li class="rvo-topnav__item">
+                    <a class="rvo-link rvo-topnav__link rvo-link--logoblauw" href="/auth/logout">
+                        <span class="utrecht-icon rvo-icon rvo-icon-user rvo-icon--sm rvo-link__icon--before" role="img"
+                            aria-label="User"></span> {%trans %}Logout{%endtrans %}
+                    </a>
+                </li>
+                {% endif %}
             </ul>
         </nav>
     </div>
@@ -97,7 +115,10 @@
 
                 <li class="rvo-topnav__item rvo-topnav__item--align-right" style="display: inline-flex">
                     {% for available_translation in available_translations %}
-                        <a class="rvo-link rvo-topnav__link rvo-link--logoblauw {% if available_translation == language %} selected {% endif %}"
+                    {% if available_translation != language %}
+
+
+                    <a class="rvo-link rvo-topnav__link rvo-link--logoblauw"
                            id="langselect-{{ available_translation }}"
                            href="javascript:setCookie('lang', '{{ available_translation }}', 9999); window.location.reload()"
                         >
@@ -108,9 +129,21 @@
                             ></span>
                             {{ available_translation }}
                         </a>
+                        {% endif %}
                     {% endfor %}
+                    {% if not user %}
+                    <a class="rvo-link rvo-topnav__link rvo-link--logoblauw" href="/auth/login">
+                        <span class="utrecht-icon rvo-icon rvo-icon-user rvo-icon--md rvo-icon--wit" role="img" aria-label="User"></span>
+                        {% trans %}Login{%endtrans %}
+                    </a>
+                    {% else %}
+                    <a class="rvo-link rvo-topnav__link rvo-link--logoblauw" href="/auth/logout">
+                        <span class="utrecht-icon rvo-icon rvo-icon-versleutelen rvo-icon--md rvo-icon--wit" role="img"
+                            aria-label="User"></span>
+                        {% trans %}Logout{%endtrans %}
+                    </a>
+                    {% endif %}
                 </li>
-
             </ul>
         </nav>
     </div>

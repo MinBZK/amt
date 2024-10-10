@@ -2,10 +2,12 @@ import logging
 from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
 
+from authlib.integrations.starlette_client import OAuth  # type: ignore
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import HTMLResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
+from starlette.middleware.sessions import SessionMiddleware
 
 from amt.api.main import api_router
 from amt.core.config import PROJECT_DESCRIPTION, PROJECT_NAME, VERSION, get_settings
@@ -15,6 +17,7 @@ from amt.core.log import configure_logging
 from amt.utils.mask import Mask
 
 from .api.http_browser_caching import static_files
+from .middleware.authorization import AuthorizationMiddleware
 from .middleware.csrf import CSRFMiddleware, CSRFMiddlewareExceptionHandler
 from .middleware.htmx import HTMXMiddleware
 from .middleware.route_logging import RequestLoggingMiddleware
@@ -49,11 +52,24 @@ def create_app() -> FastAPI:
         debug=get_settings().DEBUG,
     )
 
+    app.add_middleware(AuthorizationMiddleware)
+    app.add_middleware(SessionMiddleware, secret_key=get_settings().SECRET_KEY)
     app.add_middleware(RequestLoggingMiddleware)
     app.add_middleware(CSRFMiddleware)
     app.add_middleware(CSRFMiddlewareExceptionHandler)
     app.add_middleware(HTMXMiddleware)
     app.add_middleware(SecurityMiddleware)
+
+    oauth = OAuth()
+    app.state.oauth = oauth
+
+    oauth.register(  # type: ignore
+        name="keycloak",
+        client_id=get_settings().OIDC_CLIENT_ID,
+        client_secret=get_settings().OIDC_CLIENT_SECRET,
+        server_metadata_url=get_settings().OIDC_DISCOVERY_URL,
+        client_kwargs={"scope": "openid profile email"},
+    )
 
     app.mount("/static", static_files, name="static")
 
