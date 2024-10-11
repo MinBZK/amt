@@ -4,6 +4,7 @@ from pydantic.functional_validators import field_validator
 
 class ProjectBase(BaseModel):
     name: str = Field(min_length=3, max_length=255)
+    lifecycle: str = Field()
 
 
 class ProjectNew(ProjectBase):
