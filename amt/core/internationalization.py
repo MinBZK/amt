@@ -37,7 +37,7 @@ def get_current_translation(request: Request) -> NullTranslations:
     return get_translation(get_supported_translation(get_requested_language(request)))
 
 
-def format_datetime(value: datetime, locale: str, format: str = "medium") -> str:
+def format_datetime(value: datetime, locale: str, format: str = "full") -> str:
     if format == "full":
         format = "EEEE, d MMMM y HH:mm"
     elif format == "medium":
