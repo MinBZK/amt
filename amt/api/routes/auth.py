@@ -4,7 +4,7 @@ from authlib.integrations.starlette_client import OAuth, OAuthError  # type: ign
 from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse, RedirectResponse, Response
 
-from amt.core.authorization import get_user, no_authorization
+from amt.core.authorization import get_user
 from amt.core.exceptions import AMTAuthorizationError
 
 router = APIRouter()
@@ -12,7 +12,6 @@ logger = logging.getLogger(__name__)
 
 
 @router.get("/login")
-@no_authorization
 async def login(request: Request) -> HTMLResponse:  # pragma: no cover
     oauth: OAuth = request.app.state.oauth
     redirect_uri = request.url_for("auth_callback")
@@ -20,7 +19,6 @@ async def login(request: Request) -> HTMLResponse:  # pragma: no cover
 
 
 @router.get("/logout")
-@no_authorization
 async def logout(request: Request) -> RedirectResponse:  # pragma: no cover
     user = get_user(request)
     id_token = request.session.get("id_token", None)
@@ -41,7 +39,6 @@ async def logout(request: Request) -> RedirectResponse:  # pragma: no cover
 
 
 @router.get("/callback", response_class=Response)
-@no_authorization
 async def auth_callback(request: Request) -> Response:  # pragma: no cover
     oauth: OAuth = request.app.state.oauth
     try:
