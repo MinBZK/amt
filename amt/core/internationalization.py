@@ -1,5 +1,5 @@
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from functools import lru_cache
 
 import yaml
@@ -50,6 +50,12 @@ def format_datetime(value: datetime, locale: str, format: str = "medium") -> str
 def format_timedelta(value: timedelta, locale: str = "en_US") -> str:
     # TODO: (Christopher) make this work
     return dates.format_timedelta(value, locale=locale)
+
+
+def time_ago(value: datetime, locale: str) -> str:
+    if value.tzinfo is None:
+        value = value.replace(tzinfo=timezone.utc)  # noqa: UP017
+    return format_timedelta(datetime.now(tz=timezone.utc) - value, locale=locale)  # noqa: UP017
 
 
 def get_browser_language_or_default(request: Request) -> str:

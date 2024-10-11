@@ -23,7 +23,7 @@ from amt.services.instruments_state import InstrumentStateService
 from amt.services.projects import ProjectsService
 from amt.services.storage import StorageFactory
 from amt.services.tasks import TasksService
-from amt.utils.storage import get_include_content, last_modified_at
+from amt.utils.storage import get_include_content
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -209,7 +209,7 @@ async def get_system_card(
     context = {
         "system_card": system_card_data,
         "instrument_state": instrument_state,
-        "last_updated": last_modified_at(filepath),
+        "last_edited": project.last_edited,
         "project": project,
         "project_id": project.id,
         "tab_items": tab_items,
@@ -366,7 +366,7 @@ async def get_assessment_card(
     context = {
         "instrument_state": instrument_state,
         "assessment_card": assessment_card_data,
-        "last_updated": last_modified_at(filepath),
+        "last_edited": project.last_edited,
         "sub_menu_items": sub_menu_items,
         "breadcrumbs": breadcrumbs,
     }
@@ -412,7 +412,7 @@ async def get_model_card(
     context = {
         "instrument_state": instrument_state,
         "model_card": model_card_data,
-        "last_updated": last_modified_at(filepath),
+        "last_edited": project.last_edited,
         "breadcrumbs": breadcrumbs,
         "project": project,
         "tab_items": tab_items,

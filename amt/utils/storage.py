@@ -1,16 +1,10 @@
 import logging
-from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
 from amt.services.storage import StorageFactory
 
 logger = logging.getLogger(__name__)
-
-
-def last_modified_at(file: Path) -> timedelta:
-    modify_time = file.stat().st_mtime
-    return datetime.now(tz=timezone.utc) - datetime.fromtimestamp(modify_time, tz=timezone.utc)  # noqa: UP017
 
 
 def get_include_content(base_dir: Path, system_card: str, include_name: str, search_key: str) -> dict[str, Any] | None:
