@@ -71,3 +71,9 @@ class AMTAuthorizationError(AMTHTTPException):
     def __init__(self) -> None:
         self.detail: str = _("Failed to authorize, please login and try again.")
         super().__init__(status.HTTP_401_UNAUTHORIZED, self.detail)
+
+
+class AMTAuthorizationFlowError(AMTHTTPException):
+    def __init__(self) -> None:
+        self.detail: str = _("Something went wrong during the authorization flow. Please try again later.")
+        super().__init__(status.HTTP_401_UNAUTHORIZED, self.detail)
