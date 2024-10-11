@@ -142,6 +142,12 @@
                             aria-label="User"></span>
                         {% trans %}Logout{%endtrans %}
                     </a>
+                    <a class="rvo-link rvo-topnav__link rvo-link--logoblauw" href="#">
+                        <img width="24" height="24"
+                            src="https://gravatar.com/avatar/{{user['email_hash']}}?r=g&s=48&d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/{{user['name_encoded']}}/48"
+                            alt="User icon">
+                        {{ user['name'] }}
+                    </a>
                     {% endif %}
                 </li>
             </ul>

@@ -1,0 +1,17 @@
+{% extends 'layouts/base.html.j2' %}
+
+{% block content %}
+<div class="rvo-max-width-layout rvo-max-width-layout--md rvo-max-width-layout-inline-padding--none">
+    <div class="rvo-content">
+        <h1 class="utrecht-heading-1  rvo-layout-row rvo-layout-gap--sm">{% trans %}Not logged in{% endtrans %}</h1>
+        <p>
+            {% trans %}Please login to view this page{% endtrans %}. <a
+                class="rvo-link rvo-link--with-icon rvo-link--no-underline" href="/auth/login">
+                <span
+                    class="utrecht-icon rvo-icon rvo-icon-externe-link rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
+                    role="img" aria-label="Externe link"></span> {% trans %}Login{% endtrans %}
+            </a> </p>
+    </div>
+</div>
+
+{% endblock %}

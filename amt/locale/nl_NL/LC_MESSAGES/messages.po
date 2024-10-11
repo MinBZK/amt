@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-11 17:18+0200\n"
+"POT-Creation-Date: 2024-10-11 19:45+0000\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_NL\n"
@@ -186,6 +186,26 @@ msgstr "Waarde is niet correct: {field}"
 msgid "Failed to authorize, please login and try again."
 msgstr "Autoriseren is mislukt. Meld u aan en probeer het opnieuw."
 
+#: amt/core/exceptions.py:78
+msgid ""
+"Something went wrong during the authorization flow. Please try again "
+"later."
+msgstr "Er is iets fout gegaan tijdens de autorisatiestroom. Probeer het later opnieuw"
+
+#: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:6
+msgid "Not logged in"
+msgstr "Niet ingelogd"
+
+#: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:8
+msgid "Please login to view this page"
+msgstr "Meld u aan om deze pagina te bekijken"
+
+#: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:12
+#: amt/site/templates/parts/header.html.j2:83
+#: amt/site/templates/parts/header.html.j2:137
+msgid "Login"
+msgstr "Inloggen"
+
 #: amt/site/templates/errors/Exception.html.j2:6
 msgid "An error occurred"
 msgstr "Er is een fout opgetreden"
@@ -282,11 +302,6 @@ msgstr "versie"
 #: amt/site/templates/parts/header.html.j2:128
 msgid "Language"
 msgstr "Taal"
-
-#: amt/site/templates/parts/header.html.j2:83
-#: amt/site/templates/parts/header.html.j2:137
-msgid "Login"
-msgstr "Inloggen"
 
 #: amt/site/templates/parts/header.html.j2:90
 #: amt/site/templates/parts/header.html.j2:143

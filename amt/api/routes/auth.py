@@ -1,11 +1,13 @@
+import hashlib
 import logging
+from urllib.parse import quote_plus
 
 from authlib.integrations.starlette_client import OAuth, OAuthError  # type: ignore
 from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse, RedirectResponse, Response
 
 from amt.core.authorization import get_user
-from amt.core.exceptions import AMTAuthorizationError
+from amt.core.exceptions import AMTAuthorizationFlowError
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -44,9 +46,17 @@ async def auth_callback(request: Request) -> Response:  # pragma: no cover
     try:
         token = await oauth.keycloak.authorize_access_token(request)  # type: ignore
     except OAuthError as error:
-        raise AMTAuthorizationError() from error
+        raise AMTAuthorizationFlowError() from error
 
-    user: dict = token.get("userinfo")  # type: ignore
+    user: dict[str, str | int | bool] = token.get("userinfo")  # type: ignore
+    if "email" in user and isinstance(user["email"], str):
+        email: str = str(user["email"]).strip().lower()  # type: ignore
+        user["email_hash"] = hashlib.sha256(email.encode()).hexdigest()
+
+    if "name" in user and isinstance(user["name"], str):
+        name: str = str(user["name"]).strip().lower()  # type: ignore
+        user["name_encoded"] = quote_plus(name)
+
     if user:
         request.session["user"] = dict(user)  # type: ignore
         request.session["id_token"] = token["id_token"]  # type: ignore
