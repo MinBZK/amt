@@ -22,6 +22,7 @@ from amt.core.internationalization import (
     get_supported_translation,
     get_translation,
     supported_translations,
+    time_ago,
 )
 
 logger = logging.getLogger(__name__)
@@ -96,4 +97,5 @@ templates = LocaleJinja2Templates(
 )
 templates.env.filters["format_datetime"] = format_datetime  # pyright: ignore [reportUnknownMemberType]
 templates.env.filters["format_timedelta"] = format_timedelta  # pyright: ignore [reportUnknownMemberType]
+templates.env.filters["time_ago"] = time_ago  # pyright: ignore [reportUnknownMemberType]
 templates.env.globals.update(url_for_cache=url_for_cache)  # pyright: ignore [reportUnknownMemberType]

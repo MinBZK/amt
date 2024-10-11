@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-11 16:14+0200\n"
+"POT-Creation-Date: 2024-10-11 17:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -218,6 +218,7 @@ msgstr ""
 #: amt/site/templates/pages/assessment_card.html.j2:9
 #: amt/site/templates/pages/model_card.html.j2:7
 #: amt/site/templates/pages/system_card.html.j2:6
+#: amt/site/templates/projects/details_info.html.j2:33
 msgid "Last updated"
 msgstr ""
 
@@ -330,7 +331,7 @@ msgstr ""
 msgid "Lifecyle"
 msgstr ""
 
-#: amt/site/templates/projects/details_info.html.j2:41
+#: amt/site/templates/projects/details_info.html.j2:37
 msgid "Labels"
 msgstr ""
 

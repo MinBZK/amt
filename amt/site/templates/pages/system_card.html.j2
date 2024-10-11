@@ -3,7 +3,7 @@
 
 {% block detail_content %}
 
-    <span class="rvo-text">{% trans %}Last updated{% endtrans %}: {{ last_updated | format_timedelta(language) }}
+    <span class="rvo-text">{% trans %}Last updated{% endtrans %}: {{ last_edited | time_ago(language) }}
         {% trans %}ago{% endtrans %}</span>
     <div class="rvo-layout-row rvo-layout-align-items-start rvo-layout-gap--xl">
         {% if system_card["assessments"] %}

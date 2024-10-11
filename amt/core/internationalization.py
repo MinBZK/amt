@@ -1,5 +1,5 @@
 import logging
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 from functools import lru_cache
 
 import yaml
@@ -37,7 +37,7 @@ def get_current_translation(request: Request) -> NullTranslations:
     return get_translation(get_supported_translation(get_requested_language(request)))
 
 
-def format_datetime(value: datetime, locale: str, format: str = "medium") -> str:
+def format_datetime(value: datetime, locale: str, format: str = "full") -> str:
     if format == "full":
         format = "EEEE, d MMMM y HH:mm"
     elif format == "medium":
@@ -50,6 +50,12 @@ def format_datetime(value: datetime, locale: str, format: str = "medium") -> str
 def format_timedelta(value: timedelta, locale: str = "en_US") -> str:
     # TODO: (Christopher) make this work
     return dates.format_timedelta(value, locale=locale)
+
+
+def time_ago(value: datetime, locale: str) -> str:
+    if value.tzinfo is None:
+        value = value.replace(tzinfo=UTC)
+    return format_timedelta(datetime.now(tz=UTC) - value, locale=locale)
 
 
 def get_browser_language_or_default(request: Request) -> str:

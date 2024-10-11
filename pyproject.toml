@@ -49,6 +49,8 @@ coverage = "^7.6.1"
 playwright = "^1.47.0"
 pytest-playwright = "^0.5.2"
 pytest-httpx = "^0.31.1"
+freezegun = "^1.5.1"
+
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.6.7"
