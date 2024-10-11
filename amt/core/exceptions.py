@@ -65,3 +65,9 @@ class AMTValueError(AMTHTTPException):
     def __init__(self, field: str) -> None:
         self.detail: str = _("Value not correct: {field}").format(field=field)
         super().__init__(status.HTTP_400_BAD_REQUEST, self.detail)
+
+
+class AMTAuthorizationError(AMTHTTPException):
+    def __init__(self) -> None:
+        self.detail: str = _("Failed to authorize, please login and try again.")
+        super().__init__(status.HTTP_401_UNAUTHORIZED, self.detail)

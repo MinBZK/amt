@@ -4,7 +4,7 @@
 {% block detail_content %}
     <div class="rvo-layout-column rvo-layout-gap--md">
         <h2 class="utrecht-heading-2 rvo-heading--no-margins">Model card</h2>
-        <span class="rvo-text">{% trans %}Last updated{% endtrans %}: {{ last_updated | format_timedelta(language) }}
+        <span class="rvo-text">{% trans %}Last updated{% endtrans %}: {{ last_edited | time_ago(language) }}
             {% trans %}ago{% endtrans %}</span>
 
         <div class="rvo-table--responsive">

@@ -1,4 +1,4 @@
-import datetime
+from datetime import UTC, datetime, timedelta, timezone
 from unittest.mock import Mock
 
 import pytest
@@ -9,9 +9,11 @@ from amt.core.internationalization import (
     get_supported_translation,
     get_translation,
     supported_translations,
+    time_ago,
 )
 from babel.support import Translations
 from fastapi import Request
+from freezegun import freeze_time
 
 
 def test_get_supported_translations():
@@ -57,13 +59,32 @@ def test_warning_get_translation(caplog: pytest.LogCaptureFixture):
 
 
 def test_format_datetime():
-    date = datetime.datetime(2020, 1, 2, 12, 13, 14, 0, None)  # noqa
+    date = datetime(2020, 1, 2, 12, 13, 14, 0, tzinfo=UTC)
     assert format_datetime(date, "en", "full") == "Thursday, 2 January 2020 12:13"
     assert format_datetime(date, "en", "medium") == "Thu 02/01/2020 12:13"
     assert format_datetime(date, "nl", "full") == "donderdag, 2 januari 2020 12:13"
     assert format_datetime(date, "nl", "medium") == "do 02/01/2020 12:13"
     assert format_datetime(date, "en", "other") == "02/01/2020 12:13"
     assert format_datetime(date, "nl", "other") == "02/01/2020 12:13"
+
+
+def test_time_ago():
+    cases = [
+        (timedelta(seconds=30), "en", "30 seconds"),
+        (timedelta(minutes=5), "en", "5 minutes"),
+        (timedelta(hours=2), "en", "2 hours"),
+        (timedelta(days=1), "en", "1 day"),
+        (timedelta(weeks=2), "en", "2 weeks"),
+        (timedelta(days=45), "en", "2 months"),
+        (timedelta(days=365), "en", "1 year"),
+        (timedelta(minutes=5), "nl", "5 minuten"),
+        (timedelta(hours=10), "nl", "10 uur"),
+    ]
+    for delta, locale, expected in cases:
+        with freeze_time("2024-11-11 12:00:00"):
+            now = datetime.now(tz=timezone.utc)  # noqa: UP017
+            past_date = now - delta
+            assert time_ago(past_date, locale) == expected
 
 
 def test_get_requested_language():

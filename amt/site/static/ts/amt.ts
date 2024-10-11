@@ -124,6 +124,10 @@ export function closeModal() {
   if (el != null) {
     el.classList.add("display-none");
   }
+}
+
+export function closeModalSave() {
+  closeModal();
 
   // Get decision tree state from local store.
   const decision_tree_state = localStorage?.getItem("labelsbycategory");

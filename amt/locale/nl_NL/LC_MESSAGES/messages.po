@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-09 15:43+0200\n"
+"POT-Creation-Date: 2024-10-11 17:18+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_NL\n"
@@ -41,6 +41,42 @@ msgstr "Zijn er transparantieverplichtingen?"
 #: amt/api/ai_act_profile.py:33
 msgid "Role"
 msgstr "Rol"
+
+#: amt/api/lifecycles.py:39
+msgid "Organizational Responsibilities"
+msgstr "Organisatieverantwoordelijkheden"
+
+#: amt/api/lifecycles.py:40
+msgid "Problem Analysis"
+msgstr "Probleemanalyse"
+
+#: amt/api/lifecycles.py:41
+msgid "Design"
+msgstr "Ontwerpen"
+
+#: amt/api/lifecycles.py:42
+msgid "Data Exploration and Preparation"
+msgstr "Dataverkenning en datapreparatie"
+
+#: amt/api/lifecycles.py:43
+msgid "Development"
+msgstr "Ontwikkelen"
+
+#: amt/api/lifecycles.py:44
+msgid "Verification and Validation"
+msgstr "Verficatie en validatie"
+
+#: amt/api/lifecycles.py:45
+msgid "Implementation"
+msgstr "Implementeren"
+
+#: amt/api/lifecycles.py:46
+msgid "Monitoring and Management"
+msgstr "Monitoring en beheer"
+
+#: amt/api/lifecycles.py:47
+msgid "Phasing Out"
+msgstr "Uitfaseren"
 
 #: amt/api/navigation.py:45
 msgid "Home"
@@ -88,7 +124,7 @@ msgstr "Algoritme details"
 
 #: amt/api/navigation.py:56
 msgid "Requirements"
-msgstr "Instrumenten"
+msgstr "Vereisten"
 
 #: amt/api/navigation.py:57
 msgid "Data"
@@ -98,7 +134,7 @@ msgstr "Data"
 msgid "Model"
 msgstr "Model"
 
-#: amt/api/navigation.py:59 amt/site/templates/projects/new.html.j2:117
+#: amt/api/navigation.py:59 amt/site/templates/projects/new.html.j2:138
 msgid "Instruments"
 msgstr "Instrumenten"
 
@@ -146,6 +182,10 @@ msgstr "Sleutel niet correct: {field}"
 msgid "Value not correct: {field}"
 msgstr "Waarde is niet correct: {field}"
 
+#: amt/core/exceptions.py:72
+msgid "Failed to authorize, please login and try again."
+msgstr "Autoriseren is mislukt. Meld u aan en probeer het opnieuw."
+
 #: amt/site/templates/errors/Exception.html.j2:6
 msgid "An error occurred"
 msgstr "Er is een fout opgetreden"
@@ -171,6 +211,9 @@ msgid "Reviewing"
 msgstr "Beoordelen"
 
 #: amt/site/templates/macros/tasks.html.j2:47
+#: amt/site/templates/projects/details_base.html.j2:19
+#: amt/site/templates/projects/details_base.html.j2:45
+#: amt/site/templates/projects/details_base.html.j2:77
 #: amt/site/templates/projects/details_base.html.j2:102
 msgid "Done"
 msgstr "Afgerond"
@@ -182,6 +225,7 @@ msgstr "Onbekend"
 #: amt/site/templates/pages/assessment_card.html.j2:9
 #: amt/site/templates/pages/model_card.html.j2:7
 #: amt/site/templates/pages/system_card.html.j2:6
+#: amt/site/templates/projects/details_info.html.j2:33
 msgid "Last updated"
 msgstr "Laatst bijgewerkt"
 
@@ -234,10 +278,20 @@ msgstr "Contact"
 msgid "version"
 msgstr "versie"
 
-#: amt/site/templates/parts/header.html.j2:70
-#: amt/site/templates/parts/header.html.j2:107
+#: amt/site/templates/parts/header.html.j2:72
+#: amt/site/templates/parts/header.html.j2:128
 msgid "Language"
 msgstr "Taal"
+
+#: amt/site/templates/parts/header.html.j2:83
+#: amt/site/templates/parts/header.html.j2:137
+msgid "Login"
+msgstr "Inloggen"
+
+#: amt/site/templates/parts/header.html.j2:90
+#: amt/site/templates/parts/header.html.j2:143
+msgid "Logout"
+msgstr "Uitloggen"
 
 #: amt/site/templates/projects/details_base.html.j2:3
 #: amt/site/templates/projects/details_data.html.j2:3
@@ -251,21 +305,18 @@ msgstr "AMT Placeholder informatie pagina's"
 msgid "Does the algorithm meet the requirements?"
 msgstr "Voldoet het algoritme aan alle vereisten?"
 
-#: amt/site/templates/projects/details_base.html.j2:67
-msgid "Go to all requirements"
-msgstr "ga naar alle vereisten"
-
-#: amt/site/templates/projects/details_base.html.j2:74
-msgid "Which instruments are executed?"
-msgstr "Welke instrumeten zijn uitgevoerd?"
-
-#: amt/site/templates/projects/details_base.html.j2:77
-msgid "done"
-msgstr "voldaan"
-
+#: amt/site/templates/projects/details_base.html.j2:33
 #: amt/site/templates/projects/details_base.html.j2:100
 msgid "To do"
 msgstr "Te doen"
+
+#: amt/site/templates/projects/details_base.html.j2:67
+msgid "Go to all requirements"
+msgstr "Ga naar alle vereisten"
+
+#: amt/site/templates/projects/details_base.html.j2:74
+msgid "Which instruments are executed?"
+msgstr "Welke instrumenten zijn uitgevoerd?"
 
 #: amt/site/templates/projects/details_base.html.j2:115
 msgid "Go to all instruments"
@@ -287,7 +338,7 @@ msgstr "Project"
 msgid "Lifecyle"
 msgstr "Levenscyclus"
 
-#: amt/site/templates/projects/details_info.html.j2:41
+#: amt/site/templates/projects/details_info.html.j2:37
 msgid "Labels"
 msgstr "Labels"
 
@@ -311,11 +362,27 @@ msgstr "Project naam"
 msgid "Your project name here"
 msgstr "Jouw projectnaam hier"
 
-#: amt/site/templates/projects/new.html.j2:35
+#: amt/site/templates/projects/new.html.j2:37
+msgid "Lifecycle"
+msgstr "Levenscyclus"
+
+#: amt/site/templates/projects/new.html.j2:39
+msgid "Select the lifecycle your project is currently in."
+msgstr "Selecteer de levenscyclus waarin uw project zich momenteel bevindt."
+
+#: amt/site/templates/projects/new.html.j2:40
+msgid "For more information on lifecycle, read the"
+msgstr "Lees voor meer meer informatie over levenscyclus het"
+
+#: amt/site/templates/projects/new.html.j2:41
+msgid "Algorithm Framework"
+msgstr "Algoritmekader"
+
+#: amt/site/templates/projects/new.html.j2:59
 msgid "AI Act Profile"
 msgstr "AI Verordening Profiel"
 
-#: amt/site/templates/projects/new.html.j2:37
+#: amt/site/templates/projects/new.html.j2:61
 msgid ""
 "The AI Act profile provides insight into, among other things, the type of"
 " AI system and the associated obligations from the European AI Act. If "
@@ -323,38 +390,39 @@ msgid ""
 "Otherwise, you can find your AI Act Profile with the AI Act Decision "
 "tree."
 msgstr ""
-"Het profiel van je toepassing, gebasseerd op de AI Act, geeft inzicht in "
+"Het profiel van je toepassing, gebaseerd op de AI Act, geeft inzicht in "
 "onder andere het type AI systeem, de regelgeving die van toepassing is en"
 " de risicocategorie."
 
-#: amt/site/templates/projects/new.html.j2:43
+#: amt/site/templates/projects/new.html.j2:66
 msgid "Find your AI Act profile"
 msgstr "Vind uw AI Act profiel"
 
-#: amt/site/templates/projects/new.html.j2:100
+#: amt/site/templates/projects/new.html.j2:121
 msgid "Yes"
 msgstr "Ja"
 
-#: amt/site/templates/projects/new.html.j2:110
+#: amt/site/templates/projects/new.html.j2:131
 msgid "No"
 msgstr "Nee"
 
-#: amt/site/templates/projects/new.html.j2:119
+#: amt/site/templates/projects/new.html.j2:140
 msgid ""
 "Overview of instruments for the responsible development, deployment, "
 "assessment and monitoring of algorithms and AI-systems."
 msgstr ""
-"Overzicht van aanbevolen insturment voor het verantwoord ontwikkelen, "
-"gebruiken,beoordelen en monitren van algoritmes en AI-systemen."
+"Overzicht van aanbevolen instrument voor het verantwoord ontwikkelen, "
+"gebruiken, beoordelen en monitoren van algoritmes en AI-systemen."
 
-#: amt/site/templates/projects/new.html.j2:127
+#: amt/site/templates/projects/new.html.j2:148
 msgid "Choose one or more instruments"
 msgstr "Kies één of meerdere instrumenten"
 
-#: amt/site/templates/projects/new.html.j2:141
+#: amt/site/templates/projects/new.html.j2:162
 msgid "Create Project"
 msgstr "Maak project"
 
-#~ msgid "TEST"
-#~ msgstr ""
+#: amt/site/templates/projects/new.html.j2:176
+msgid "Copy results and close"
+msgstr "Resultaten overnemen en sluiten"
 

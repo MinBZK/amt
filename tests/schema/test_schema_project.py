@@ -4,6 +4,7 @@ from amt.schema.project import ProjectNew
 def test_project_schema_create_new():
     project_new = ProjectNew(
         name="Project Name",
+        lifecycle="DATA_EXPLORATION_AND_PREPARATION",
         instruments=["urn:instrument:1", "urn:instrument:2"],
         type="AI-systeem",
         open_source="open-source",
@@ -25,6 +26,7 @@ def test_project_schema_create_new():
 def test_project_schema_create_new_one_instrument():
     project_new = ProjectNew(
         name="Project Name",
+        lifecycle="DATA_EXPLORATION_AND_PREPARATION",
         instruments="urn:instrument:1",
         type="AI-systeem",
         open_source="open-source",

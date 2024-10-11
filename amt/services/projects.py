@@ -31,7 +31,7 @@ class ProjectsService:
         return self.repository.find_by_id(project_id)
 
     def create(self, project_new: ProjectNew) -> Project:
-        project = Project(name=project_new.name)
+        project = Project(name=project_new.name, lifecycle=project_new.lifecycle)
 
         self.repository.save(project)
 

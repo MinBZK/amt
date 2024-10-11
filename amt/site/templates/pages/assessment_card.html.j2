@@ -6,7 +6,7 @@
 
         <div class="rvo-layout-column rvo-layout-gap--md">
             <h2 class="utrecht-heading-2 rvo-heading--no-margins">Assessment card</h2>
-            <span class="rvo-text">{% trans %}Last updated{% endtrans %}: {{ last_updated | format_timedelta(language) }} {% trans %}ago{% endtrans %}</span>
+            <span class="rvo-text">{% trans %}Last updated{% endtrans %}: {{ last_edited | time_ago(language) }} {% trans %}ago{% endtrans %}</span>
 
             <div class="rvo-table--responsive">
                 <table class="rvo-table">
