@@ -163,6 +163,7 @@ async def get_project_details(
 
     context = {
         "lifecycle": get_lifecycle(project.lifecycle, request),
+        "last_edited": project.last_edited,
         "system_card": system_card_data,
         "instrument_state": instrument_state,
         "project": project,
