@@ -35,7 +35,11 @@
                                      class="utrecht-form-field utrecht-form-field--text rvo-form-field">
                                     <div class="rvo-form-field__label">
                                     <label class="rvo-label rvo-label--required">{% trans %}Lifecycle{% endtrans %}</label>
-                                    <p>{% trans %}Select the lifecycle your project is currently in{% endtrans %}. {% trans %}Read{% endtrans %} <a class="rvo-link" href="https://minbzk.github.io/Algoritmekader/levenscyclus/" target="_blank">{% trans %}Algorithm Framework on lifecycles{% endtrans %}</a> {% trans %}for background information{% endtrans %}.</p>
+                                    <p>
+                                      {% trans %}Select the lifecycle your project is currently in.{% endtrans %}
+                                      {% trans %}For more information on lifecycle, read the{% endtrans %}
+                                      <a class="rvo-link" href="https://minbzk.github.io/Algoritmekader/levenscyclus/" target="_blank">{% trans %}Algorithm Framework{% endtrans %}</a>.
+                                    </p>
                                 </div>
                                 {% for lifecycle in lifecycles %}
                                     <div class="rvo-radio-button__group">
