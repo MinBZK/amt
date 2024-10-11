@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-10 21:27+0200\n"
+"POT-Creation-Date: 2024-10-11 16:12+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_NL\n"
@@ -134,7 +134,7 @@ msgstr "Data"
 msgid "Model"
 msgstr "Model"
 
-#: amt/api/navigation.py:59 amt/site/templates/projects/new.html.j2:134
+#: amt/api/navigation.py:59 amt/site/templates/projects/new.html.j2:138
 msgid "Instruments"
 msgstr "Instrumenten"
 
@@ -365,27 +365,23 @@ msgstr "Jouw projectnaam hier"
 msgid "Lifecycle"
 msgstr "Levenscyclus"
 
-#: amt/site/templates/projects/new.html.j2:38
-msgid "Select the lifecycle your project is currently in"
-msgstr "Selecteer de levenscyclus van je project"
+#: amt/site/templates/projects/new.html.j2:39
+msgid "Select the lifecycle your project is currently in."
+msgstr "Selecteer de levenscyclus waarin uw project zich momenteel bevindt."
 
-#: amt/site/templates/projects/new.html.j2:38
-msgid "Read"
-msgstr "Lees"
+#: amt/site/templates/projects/new.html.j2:40
+msgid "For more information on lifecycle, read the"
+msgstr "Lees voor meer meer informatie over levenscyclus het"
 
-#: amt/site/templates/projects/new.html.j2:38
-msgid "Algorithm Framework on lifecycles"
-msgstr "Algoritmekader over levenscyclus"
+#: amt/site/templates/projects/new.html.j2:41
+msgid "Algorithm Framework"
+msgstr "Algoritmekader"
 
-#: amt/site/templates/projects/new.html.j2:38
-msgid "for background information"
-msgstr "voor achtergrond informatie"
-
-#: amt/site/templates/projects/new.html.j2:55
+#: amt/site/templates/projects/new.html.j2:59
 msgid "AI Act Profile"
 msgstr "AI Verordening Profiel"
 
-#: amt/site/templates/projects/new.html.j2:57
+#: amt/site/templates/projects/new.html.j2:61
 msgid ""
 "The AI Act profile provides insight into, among other things, the type of"
 " AI system and the associated obligations from the European AI Act. If "
@@ -397,19 +393,19 @@ msgstr ""
 "onder andere het type AI systeem, de regelgeving die van toepassing is en"
 " de risicocategorie."
 
-#: amt/site/templates/projects/new.html.j2:62
+#: amt/site/templates/projects/new.html.j2:66
 msgid "Find your AI Act profile"
 msgstr "Vind uw AI Act profiel"
 
-#: amt/site/templates/projects/new.html.j2:117
+#: amt/site/templates/projects/new.html.j2:121
 msgid "Yes"
 msgstr "Ja"
 
-#: amt/site/templates/projects/new.html.j2:127
+#: amt/site/templates/projects/new.html.j2:131
 msgid "No"
 msgstr "Nee"
 
-#: amt/site/templates/projects/new.html.j2:136
+#: amt/site/templates/projects/new.html.j2:140
 msgid ""
 "Overview of instruments for the responsible development, deployment, "
 "assessment and monitoring of algorithms and AI-systems."
@@ -417,15 +413,15 @@ msgstr ""
 "Overzicht van aanbevolen instrument voor het verantwoord ontwikkelen, "
 "gebruiken, beoordelen en monitoren van algoritmes en AI-systemen."
 
-#: amt/site/templates/projects/new.html.j2:144
+#: amt/site/templates/projects/new.html.j2:148
 msgid "Choose one or more instruments"
 msgstr "Kies één of meerdere instrumenten"
 
-#: amt/site/templates/projects/new.html.j2:158
+#: amt/site/templates/projects/new.html.j2:162
 msgid "Create Project"
 msgstr "Maak project"
 
-#: amt/site/templates/projects/new.html.j2:172
+#: amt/site/templates/projects/new.html.j2:176
 msgid "Copy results and close"
 msgstr "Resultaten overnemen en sluiten"
 
