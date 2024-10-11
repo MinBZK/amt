@@ -35,6 +35,11 @@ class Settings(BaseSettings):
     DEBUG: bool = False
     AUTO_CREATE_SCHEMA: bool = False
 
+    ISSUER: str = "https://keycloak.apps.digilab.network/realms/algoritmes"
+    OIDC_CLIENT_ID: str | None = None
+    OIDC_CLIENT_SECRET: str | None = None
+    OIDC_DISCOVERY_URL: str = "https://keycloak.apps.digilab.network/realms/algoritmes/.well-known/openid-configuration"
+
     CARD_DIR: Path = Path("/tmp/")  # TODO(berry): create better location for model cards  # noqa: S108
 
     # todo(berry): create submodel for database settings
