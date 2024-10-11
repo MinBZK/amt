@@ -77,6 +77,7 @@ def test_post_new_projects(
     client.cookies["fastapi-csrf-token"] = "1"
     new_project = ProjectNew(
         name="default project",
+        lifecycle="DESIGN",
         type="AI-systeem",
         open_source="open-source",
         publication_category="hoog-risico AI",
@@ -103,6 +104,7 @@ def test_post_new_projects_write_system_card(
     FileSystemStorageService.write = MagicMock()
     project_new = ProjectNew(
         name="name1",
+        lifecycle="DESIGN",
         type="AI-systeem",
         open_source="open-source",
         publication_category="hoog-risico AI",

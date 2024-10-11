@@ -21,7 +21,7 @@ def test_request_validation_exception_handler(client: TestClient):
 
 def test_request_csrf_protect_exception_handler_invalid_token_in_header(client: TestClient):
     data = client.get("/projects/new")
-    new_project = ProjectNew(name="default project")
+    new_project = ProjectNew(name="default project", lifecycle="DATA_EXPLORATION_AND_PREPARATION")
     with pytest.raises(AMTCSRFProtectError):
         _response = client.post(
             "/projects/new", json=new_project.model_dump(), headers={"X-CSRF-Token": "1"}, cookies=data.cookies
@@ -44,7 +44,7 @@ def test_request_validation_exception_handler_htmx(client: TestClient):
 
 def test_request_csrf_protect_exception_handler_invalid_token(client: TestClient):
     data = client.get("/projects/new")
-    new_project = ProjectNew(name="default project")
+    new_project = ProjectNew(name="default project", lifecycle="DATA_EXPLORATION_AND_PREPARATION")
     with pytest.raises(AMTCSRFProtectError):
         _response = client.post(
             "/projects/new",

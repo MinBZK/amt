@@ -8,6 +8,9 @@ def test_e2e_create_project(page: Page):
 
     page.fill("#name", "My new project")
 
+    button = page.locator("#lifecycle-DATA_EXPLORATION_AND_PREPARATION")
+    button.click()
+
     impact_assessment = page.get_by_label("AI Impact Assessment (AIIA)")
 
     expect(impact_assessment).not_to_be_checked()
@@ -53,6 +56,9 @@ def test_e2e_create_project_with_tasks(page: Page):
     page.goto("/projects/new")
 
     page.fill("#name", "My new filled project")
+
+    button = page.locator("#lifecycle-DATA_EXPLORATION_AND_PREPARATION")
+    button.click()
 
     impact_assessment = page.get_by_label("AI Impact Assessment (AIIA)")
 
