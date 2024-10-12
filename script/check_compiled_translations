@@ -1,0 +1,43 @@
+#!/bin/bash
+
+print_color() {
+    local color_code=$1
+    local text=$2
+    echo -e "\033[${color_code}m${text}\033[0m"
+}
+
+exit_code=0
+
+print_color "1;34" "Checking compiled translations..."
+echo
+
+for po_file in $(git diff --cached --name-only --diff-filter=ACMR -- "*.po"); do
+    mo_file="${po_file%.po}.mo"
+    echo "Checking: $po_file"
+
+    if [ ! -f "$mo_file" ]; then
+        print_color "1;31" "❌ Error: .mo file missing: $mo_file"
+        exit_code=1
+    elif ! git ls-files --error-unmatch "$mo_file" &>/dev/null; then
+        print_color "1;31" "❌ Error: .mo file not tracked by Git: $mo_file"
+        exit_code=1
+    elif ! git diff --quiet --cached "$mo_file"; then
+        print_color "1;32" "✅ .mo file is staged along with .po file: $mo_file"
+    else
+        print_color "1;31" "❌ Error: .po file changed but .mo file not updated: $mo_file"
+        exit_code=1
+    fi
+    echo
+done
+
+if [ $exit_code -ne 0 ]; then
+    print_color "1;33" "To fix these issues, run:"
+    echo
+    print_color "1;36" "    script/translate compile"
+    print_color "1;36" "    git add path/to/changed/file.mo"
+    echo
+else
+    print_color "1;32" "All compiled translations are up to date and staged."
+fi
+
+exit $exit_code
