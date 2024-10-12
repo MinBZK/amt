@@ -22,6 +22,10 @@ repos:
         args: [--config, pyproject.toml]
       - id: ruff-format
         args: [--config, pyproject.toml]
+  - repo: https://github.com/djlint/djLint
+    rev: v1.35.2
+    hooks:
+      - id: djlint-reformat-jinja
   - repo: local
     hooks:
       - id: check-modified-migrations
@@ -39,6 +43,13 @@ repos:
         language: python
         pass_filenames: false
         always_run: true
+  - repo: local
+    hooks:
+      - id: check-translate-compiled
+        name: check-translate-compiled
+        entry: ./script/check_compiled_translations
+        language: system
+        files: \.po$
   - repo: local
     hooks:
       - id: husky-run-pre-commit-lint

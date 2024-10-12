@@ -2,5 +2,6 @@
 
 set -x
 
-ruff format "$@"
-npm run prettier
+pre-commit run --all-files ruff-format
+pre-commit run --all-files husky-run-pre-commit-prettier
+pre-commit run --all-files djlint-reformat-jinja

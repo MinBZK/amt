@@ -31,14 +31,16 @@
                                        value="" />
                             </div>
                             <div role="group"
-                                     aria-labelledby="fieldId-label"
-                                     class="utrecht-form-field utrecht-form-field--text rvo-form-field">
-                                    <div class="rvo-form-field__label">
+                                 aria-labelledby="fieldId-label"
+                                 class="utrecht-form-field utrecht-form-field--text rvo-form-field">
+                                <div class="rvo-form-field__label">
                                     <label class="rvo-label rvo-label--required">{% trans %}Lifecycle{% endtrans %}</label>
                                     <p>
-                                      {% trans %}Select the lifecycle your project is currently in.{% endtrans %}
-                                      {% trans %}For more information on lifecycle, read the{% endtrans %}
-                                      <a class="rvo-link" href="https://minbzk.github.io/Algoritmekader/levenscyclus/" target="_blank">{% trans %}Algorithm Framework{% endtrans %}</a>.
+                                        {% trans %}Select the lifecycle your project is currently in.{% endtrans %}
+                                        {% trans %}For more information on lifecycle, read the{% endtrans %}
+                                        <a class="rvo-link"
+                                           href="https://minbzk.github.io/Algoritmekader/levenscyclus/"
+                                           target="_blank">{% trans %}Algorithm Framework{% endtrans %}</a>.
                                     </p>
                                 </div>
                                 {% for lifecycle in lifecycles %}
@@ -59,51 +61,56 @@
                     <h2 class="utrecht-heading-2 rvo-heading--no-margins">{% trans %}AI Act Profile{% endtrans %}</h2>
                     <p class="rvo-text rvo-text--no-margins">
                         {% trans %}The AI Act profile provides insight into, among other things, the type of AI system and the associated obligations from the European AI Act. If you already know the type of AI system you can fill in the below fields. Otherwise, you can find your AI Act Profile with the AI Act Decision tree.{% endtrans %}
-
                     </p>
                     <div class="utrecht-form-fieldset rvo-form-fieldset">
-                        <button id="decision-tree-modal-button" class="utrecht-button utrecht-button--secondary-action utrecht-button--rvo-md utrecht-button-group__align-right" onclick="amt.openModal()" type="button" style="float: right;">
-                        {% trans %}Find your AI Act profile{% endtrans %}
-                        </button>
+                        <button id="decision-tree-modal-button"
+                                class="utrecht-button utrecht-button--secondary-action utrecht-button--rvo-md utrecht-button-group__align-right"
+                                onclick="amt.openModal()"
+                                type="button"
+                                style="float: right">{% trans %}Find your AI Act profile{% endtrans %}</button>
                         <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
                             {% for item in ai_act_profile.radio_select %}
-                            <div role="group"
+                                <div role="group"
                                      aria-labelledby="fieldId-label"
                                      class="utrecht-form-field utrecht-form-field--text rvo-form-field">
                                     <div class="rvo-form-field__label">
                                         <label class="rvo-label">{{ item.display_name }}</label>
                                     </div>
                                     {% for option in item.options %}
-                                    <div class="rvo-radio-button__group">
-                                        <label class="rvo-radio-button" for="{{ option }}">
-                                            <input id="{{ item.target_name }}-{{ option }}"
-                                                   name="{{ item.target_name }}"
-                                                   value="{{ option }}"
-                                                   type="radio"
-                                                   class="utrecht-radio-button" />
-                                            {{ option }}
-                                        </label>
-                                    </div>
+                                        <div class="rvo-radio-button__group">
+                                            <label class="rvo-radio-button" for="{{ option }}">
+                                                <input id="{{ item.target_name }}-{{ option }}"
+                                                       name="{{ item.target_name }}"
+                                                       value="{{ option }}"
+                                                       type="radio"
+                                                       class="utrecht-radio-button" />
+                                                {{ option }}
+                                            </label>
+                                        </div>
                                     {% endfor %}
-                            </div>
-                            {% endfor %}
-
-                            {% for item in ai_act_profile.multiple_select %}
-                            <div role="group"
-                                 aria-labelledby="fieldId-label"
-                                 class="utrecht-form-field utrecht-form-field--text rvo-form-field">
-                                <div class="rvo-form-field__label">
-                                    <label class="rvo-label">{{ item.display_name }}</label>
                                 </div>
-                                {% for option in item.options %}
-                                    <div class="rvo-checkbox__group">
-                                        <label class="rvo-checkbox rvo-checkbox--not-checked"
-                                               for="{{ option }}">
-                                            <input id="{{ item.target_name }}-{{ option }}" name="{{ item.target_name }}" class="rvo-checkbox__input" type="checkbox" value="{{ option }}" />{{ option }}</label> </div>
-                                {% endfor %}
-                            </div>
                             {% endfor %}
-
+                            {% for item in ai_act_profile.multiple_select %}
+                                <div role="group"
+                                     aria-labelledby="fieldId-label"
+                                     class="utrecht-form-field utrecht-form-field--text rvo-form-field">
+                                    <div class="rvo-form-field__label">
+                                        <label class="rvo-label">{{ item.display_name }}</label>
+                                    </div>
+                                    {% for option in item.options %}
+                                        <div class="rvo-checkbox__group">
+                                            <label class="rvo-checkbox rvo-checkbox--not-checked" for="{{ option }}">
+                                                <input id="{{ item.target_name }}-{{ option }}"
+                                                       name="{{ item.target_name }}"
+                                                       class="rvo-checkbox__input"
+                                                       type="checkbox"
+                                                       value="{{ option }}" />
+                                                {{ option }}
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
                             {% for item in ai_act_profile.binary_select %}
                                 <div role="group"
                                      aria-labelledby="fieldId-label"
@@ -151,7 +158,14 @@
                                     <div class="rvo-checkbox__group">
                                         <label class="rvo-checkbox rvo-checkbox--not-checked"
                                                for="{{ instrument.urn }}">
-                                            <input id="{{ instrument.urn }}" name="instruments" class="rvo-checkbox__input" type="checkbox" value="{{ instrument.urn }}" />{{ instrument.name }}</label> </div>
+                                            <input id="{{ instrument.urn }}"
+                                                   name="instruments"
+                                                   class="rvo-checkbox__input"
+                                                   type="checkbox"
+                                                   value="{{ instrument.urn }}" />
+                                            {{ instrument.name }}
+                                        </label>
+                                    </div>
                                 {% endfor %}
                             </div>
                         </fieldset>
@@ -167,16 +181,17 @@
         </div>
     </div>
 </div>
-
 <div id="decision-tree-modal" class="minbzk-modal display-none">
     <div class="modal-underlay" onclick="amt.closeModal()"></div>
     <div class="modal-content">
         <p class="utrecht-button-group">
-            <button id="close-decision-tree-modal-button" type="button" class="flex utrecht-button utrecht-button--secondary-action rvo-layout-row rvo-layout-gap--md utrecht-button--rvo-md rvo-link--no-underline utrecht-button-group__align-right"
-            onclick="amt.closeModalSave()">{% trans %}Copy results and close{% endtrans %}</button>
-        <div id="app">
+            <button id="close-decision-tree-modal-button"
+                    type="button"
+                    class="flex utrecht-button utrecht-button--secondary-action rvo-layout-row rvo-layout-gap--md utrecht-button--rvo-md rvo-link--no-underline utrecht-button-group__align-right"
+                    onclick="amt.closeModalSave()">{% trans %}Copy results and close{% endtrans %}</button>
+            <div id="app">
                 <script src="https://unpkg.com/ai-act-decision-tree@1.1.2/index.js"></script>
-        </div>
+            </div>
         </p>
     </div>
 </div>
