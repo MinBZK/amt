@@ -41,6 +41,13 @@ repos:
         always_run: true
   - repo: local
     hooks:
+      - id: check-translate-compiled
+        name: check-translate-compiled
+        entry: ./script/check_compiled_translations
+        language: system
+        files: \.po$
+  - repo: local
+    hooks:
       - id: husky-run-pre-commit-lint
         name: husky-lint
         language: system
