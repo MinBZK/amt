@@ -1,7 +1,17 @@
 {% for project in projects %}
     {% if loop.last and projects|length == limit %}
-        <li class="rvo-item-list__item" data-marker="last-element" hx-get="/projects/?skip={{ next }}&search={{ search }}" hx-swap="afterend" hx-trigger="revealed"><a class="rvo-link rvo-link--no-underline rvo-link--zwart" href="/project/{{ project.id }}">{{ project.name }}</a></li>
+        <li class="rvo-item-list__item"
+            data-marker="last-element"
+            hx-get="/projects/?skip={{ next }}&search={{ search }}"
+            hx-swap="afterend"
+            hx-trigger="revealed">
+            <a class="rvo-link rvo-link--no-underline rvo-link--zwart"
+               href="/project/{{ project.id }}">{{ project.name }}</a>
+        </li>
     {% else %}
-        <li class="rvo-item-list__item"><a class="rvo-link rvo-link--no-underline rvo-link--zwart" href="/project/{{ project.id }}/details/">{{ project.name }}</a></li>
+        <li class="rvo-item-list__item">
+            <a class="rvo-link rvo-link--no-underline rvo-link--zwart"
+               href="/project/{{ project.id }}/details/">{{ project.name }}</a>
+        </li>
     {% endif %}
 {% endfor %}

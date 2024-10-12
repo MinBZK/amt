@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-12 08:01+0200\n"
+"POT-Creation-Date: 2024-10-12 09:04+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -82,7 +82,7 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: amt/api/navigation.py:46 amt/site/templates/projects/index.html.j2:12
+#: amt/api/navigation.py:46 amt/site/templates/projects/index.html.j2:7
 msgid "Projects"
 msgstr ""
 
@@ -134,7 +134,7 @@ msgstr ""
 msgid "Model"
 msgstr ""
 
-#: amt/api/navigation.py:59 amt/site/templates/projects/new.html.j2:138
+#: amt/api/navigation.py:59 amt/site/templates/projects/new.html.j2:145
 msgid "Instruments"
 msgstr ""
 
@@ -186,25 +186,25 @@ msgid ""
 "later."
 msgstr ""
 
-#: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:6
+#: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:5
 msgid "Not logged in"
 msgstr ""
 
-#: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:8
+#: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:7
 msgid "Please login to view this page"
 msgstr ""
 
-#: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:12
-#: amt/site/templates/parts/header.html.j2:83
-#: amt/site/templates/parts/header.html.j2:137
+#: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:11
+#: amt/site/templates/parts/header.html.j2:77
+#: amt/site/templates/parts/header.html.j2:131
 msgid "Login"
 msgstr ""
 
-#: amt/site/templates/errors/Exception.html.j2:6
+#: amt/site/templates/errors/Exception.html.j2:5
 msgid "An error occurred"
 msgstr ""
 
-#: amt/site/templates/errors/_Exception.html.j2:1
+#: amt/site/templates/errors/_Exception.html.j2:5
 msgid "An error occurred. Please try again later"
 msgstr ""
 
@@ -212,62 +212,62 @@ msgstr ""
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr ""
 
-#: amt/site/templates/macros/tasks.html.j2:14
+#: amt/site/templates/macros/tasks.html.j2:11
 msgid "Todo"
 msgstr ""
 
-#: amt/site/templates/macros/tasks.html.j2:25
+#: amt/site/templates/macros/tasks.html.j2:18
 msgid "Doing"
 msgstr ""
 
-#: amt/site/templates/macros/tasks.html.j2:36
+#: amt/site/templates/macros/tasks.html.j2:25
 msgid "Reviewing"
 msgstr ""
 
-#: amt/site/templates/macros/tasks.html.j2:47
-#: amt/site/templates/projects/details_base.html.j2:19
-#: amt/site/templates/projects/details_base.html.j2:45
-#: amt/site/templates/projects/details_base.html.j2:77
-#: amt/site/templates/projects/details_base.html.j2:102
+#: amt/site/templates/macros/tasks.html.j2:32
+#: amt/site/templates/projects/details_base.html.j2:21
+#: amt/site/templates/projects/details_base.html.j2:43
+#: amt/site/templates/projects/details_base.html.j2:76
+#: amt/site/templates/projects/details_base.html.j2:98
 msgid "Done"
 msgstr ""
 
-#: amt/site/templates/macros/tasks.html.j2:51
+#: amt/site/templates/macros/tasks.html.j2:35
 msgid "Unknown"
 msgstr ""
 
-#: amt/site/templates/pages/assessment_card.html.j2:9
-#: amt/site/templates/pages/model_card.html.j2:7
-#: amt/site/templates/pages/system_card.html.j2:6
-#: amt/site/templates/projects/details_info.html.j2:33
+#: amt/site/templates/pages/assessment_card.html.j2:7
+#: amt/site/templates/pages/model_card.html.j2:6
+#: amt/site/templates/pages/system_card.html.j2:4
+#: amt/site/templates/projects/details_info.html.j2:35
 msgid "Last updated"
 msgstr ""
 
-#: amt/site/templates/pages/assessment_card.html.j2:9
-#: amt/site/templates/pages/model_card.html.j2:8
-#: amt/site/templates/pages/system_card.html.j2:7
+#: amt/site/templates/pages/assessment_card.html.j2:7
+#: amt/site/templates/pages/model_card.html.j2:7
+#: amt/site/templates/pages/system_card.html.j2:5
 msgid "ago"
 msgstr ""
 
-#: amt/site/templates/pages/assessment_card.html.j2:15
-#: amt/site/templates/pages/model_card.html.j2:14
-#: amt/site/templates/pages/model_card.html.j2:38
-#: amt/site/templates/pages/system_card.html.j2:59
+#: amt/site/templates/pages/assessment_card.html.j2:12
+#: amt/site/templates/pages/model_card.html.j2:12
+#: amt/site/templates/pages/model_card.html.j2:36
+#: amt/site/templates/pages/system_card.html.j2:48
 msgid "Attribute"
 msgstr ""
 
-#: amt/site/templates/pages/assessment_card.html.j2:16
-#: amt/site/templates/pages/model_card.html.j2:15
-#: amt/site/templates/pages/model_card.html.j2:39
-#: amt/site/templates/pages/system_card.html.j2:60
+#: amt/site/templates/pages/assessment_card.html.j2:13
+#: amt/site/templates/pages/model_card.html.j2:13
+#: amt/site/templates/pages/model_card.html.j2:37
+#: amt/site/templates/pages/system_card.html.j2:49
 msgid "Value"
 msgstr ""
 
-#: amt/site/templates/pages/assessment_card.html.j2:38
+#: amt/site/templates/pages/assessment_card.html.j2:35
 msgid "Question"
 msgstr ""
 
-#: amt/site/templates/pages/assessment_card.html.j2:39
+#: amt/site/templates/pages/assessment_card.html.j2:36
 msgid "Answer"
 msgstr ""
 
@@ -276,29 +276,29 @@ msgid "AMT Placeholder informatie pagina's"
 msgstr ""
 
 #: amt/site/templates/parts/footer.html.j2:4
-#: amt/site/templates/parts/header.html.j2:8
+#: amt/site/templates/parts/header.html.j2:9
 msgid "Algorithm Management Toolkit"
 msgstr ""
 
-#: amt/site/templates/parts/footer.html.j2:15
+#: amt/site/templates/parts/footer.html.j2:10
 msgid "About us"
 msgstr ""
 
-#: amt/site/templates/parts/footer.html.j2:27
+#: amt/site/templates/parts/footer.html.j2:17
 msgid "Contact"
 msgstr ""
 
-#: amt/site/templates/parts/header.html.j2:8
+#: amt/site/templates/parts/header.html.j2:11
 msgid "version"
 msgstr ""
 
-#: amt/site/templates/parts/header.html.j2:72
-#: amt/site/templates/parts/header.html.j2:128
+#: amt/site/templates/parts/header.html.j2:65
+#: amt/site/templates/parts/header.html.j2:120
 msgid "Language"
 msgstr ""
 
-#: amt/site/templates/parts/header.html.j2:90
-#: amt/site/templates/parts/header.html.j2:143
+#: amt/site/templates/parts/header.html.j2:86
+#: amt/site/templates/parts/header.html.j2:139
 msgid "Logout"
 msgstr ""
 
@@ -310,32 +310,32 @@ msgstr ""
 msgid "AMT Placeholder information page"
 msgstr ""
 
-#: amt/site/templates/projects/details_base.html.j2:18
+#: amt/site/templates/projects/details_base.html.j2:19
 msgid "Does the algorithm meet the requirements?"
 msgstr ""
 
-#: amt/site/templates/projects/details_base.html.j2:33
-#: amt/site/templates/projects/details_base.html.j2:100
+#: amt/site/templates/projects/details_base.html.j2:32
+#: amt/site/templates/projects/details_base.html.j2:96
 msgid "To do"
 msgstr ""
 
-#: amt/site/templates/projects/details_base.html.j2:67
+#: amt/site/templates/projects/details_base.html.j2:63
 msgid "Go to all requirements"
 msgstr ""
 
-#: amt/site/templates/projects/details_base.html.j2:74
+#: amt/site/templates/projects/details_base.html.j2:73
 msgid "Which instruments are executed?"
 msgstr ""
 
-#: amt/site/templates/projects/details_base.html.j2:115
+#: amt/site/templates/projects/details_base.html.j2:110
 msgid "Go to all instruments"
 msgstr ""
 
-#: amt/site/templates/projects/details_info.html.j2:11
+#: amt/site/templates/projects/details_info.html.j2:10
 msgid "Description"
 msgstr ""
 
-#: amt/site/templates/projects/details_info.html.j2:15
+#: amt/site/templates/projects/details_info.html.j2:14
 msgid "Repository"
 msgstr ""
 
@@ -347,15 +347,15 @@ msgstr ""
 msgid "Lifecyle"
 msgstr ""
 
-#: amt/site/templates/projects/details_info.html.j2:37
+#: amt/site/templates/projects/details_info.html.j2:39
 msgid "Labels"
 msgstr ""
 
-#: amt/site/templates/projects/index.html.j2:19
+#: amt/site/templates/projects/index.html.j2:12
 msgid "New project"
 msgstr ""
 
-#: amt/site/templates/projects/index.html.j2:36
+#: amt/site/templates/projects/index.html.j2:28
 msgid "Find project..."
 msgstr ""
 
@@ -383,15 +383,15 @@ msgstr ""
 msgid "For more information on lifecycle, read the"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:41
+#: amt/site/templates/projects/new.html.j2:43
 msgid "Algorithm Framework"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:59
+#: amt/site/templates/projects/new.html.j2:61
 msgid "AI Act Profile"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:61
+#: amt/site/templates/projects/new.html.j2:63
 msgid ""
 "The AI Act profile provides insight into, among other things, the type of"
 " AI system and the associated obligations from the European AI Act. If "
@@ -400,33 +400,33 @@ msgid ""
 "tree."
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:66
+#: amt/site/templates/projects/new.html.j2:70
 msgid "Find your AI Act profile"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:121
+#: amt/site/templates/projects/new.html.j2:128
 msgid "Yes"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:131
+#: amt/site/templates/projects/new.html.j2:138
 msgid "No"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:140
+#: amt/site/templates/projects/new.html.j2:147
 msgid ""
 "Overview of instruments for the responsible development, deployment, "
 "assessment and monitoring of algorithms and AI-systems."
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:148
+#: amt/site/templates/projects/new.html.j2:155
 msgid "Choose one or more instruments"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:162
+#: amt/site/templates/projects/new.html.j2:176
 msgid "Create Project"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:176
+#: amt/site/templates/projects/new.html.j2:191
 msgid "Copy results and close"
 msgstr ""
 

@@ -5,73 +5,54 @@
             {# code below is not nice, sorry, there doesn't seem to be a better way though #}
             {% if status == 1 %}
                 <div class="rvo-layout-row rvo-max-width-layout-inline-padding--sm">
-                <span
-                    class="utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--lg"
-                    role="img"
-                    aria-label="todo-icon"
-                ></span>
-                    <a class="rvo-max-width-layout-inline-padding--sm">
-                        {% trans %}Todo{% endtrans %}
-                    </a>
+                    <span class="utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--lg"
+                          role="img"
+                          aria-label="todo-icon"></span>
+                    <a class="rvo-max-width-layout-inline-padding--sm">{% trans %}Todo{% endtrans %}</a>
                 </div>
             {% elif status == 2 %}
                 <div class="rvo-layout-row rvo-max-width-layout-inline-padding--sm">
-                <span
-                    class="utrecht-icon rvo-icon rvo-icon-refresh rvo-icon--lg"
-                    role="img"
-                    aria-label="doing-icon"
-                ></span>
-                    <a class="rvo-max-width-layout-inline-padding--sm">
-                        {% trans %}Doing{% endtrans %}
-                    </a>
+                    <span class="utrecht-icon rvo-icon rvo-icon-refresh rvo-icon--lg"
+                          role="img"
+                          aria-label="doing-icon"></span>
+                    <a class="rvo-max-width-layout-inline-padding--sm">{% trans %}Doing{% endtrans %}</a>
                 </div>
             {% elif status == 3 %}
                 <div class="rvo-layout-row rvo-max-width-layout-inline-padding--sm">
-                <span
-                    class="utrecht-icon rvo-icon rvo-icon-let-op-met-loep rvo-icon--lg"
-                    role="img"
-                    aria-label="reviewing-icon"
-                ></span>
-                    <a class="rvo-max-width-layout-inline-padding--sm">
-                        {% trans %}Reviewing{% endtrans %}
-                    </a>
+                    <span class="utrecht-icon rvo-icon rvo-icon-let-op-met-loep rvo-icon--lg"
+                          role="img"
+                          aria-label="reviewing-icon"></span>
+                    <a class="rvo-max-width-layout-inline-padding--sm">{% trans %}Reviewing{% endtrans %}</a>
                 </div>
             {% elif status == 4 %}
                 <div class="rvo-layout-row rvo-max-width-layout-inline-padding--sm">
-                <span
-                    class="utrecht-icon rvo-icon rvo-icon-vinkje rvo-icon--lg"
-                    role="img"
-                    aria-label="reviewing-icon"
-                ></span>
-                    <a class="rvo-max-width-layout-inline-padding--sm">
-                        {% trans %}Done{% endtrans %}
-                    </a>
+                    <span class="utrecht-icon rvo-icon rvo-icon-vinkje rvo-icon--lg"
+                          role="img"
+                          aria-label="reviewing-icon"></span>
+                    <a class="rvo-max-width-layout-inline-padding--sm">{% trans %}Done{% endtrans %}</a>
                 </div>
             {% else %}
                 {% trans %}Unknown{% endtrans %}
             {% endif %}
         </h5>
-        <div class="progress-cards-container sortable" data-id="{{ status.value }}" id="column-{{ status.value }}">
+        <div class="progress-cards-container sortable"
+             data-id="{{ status.value }}"
+             id="column-{{ status.value }}">
             {% if project is defined %}
-                {% for task in tasks_service.get_tasks_for_project(project.id, status) %}
-                    {{ render_task_card_full(task) }}
-                {% endfor %}
+                {% for task in tasks_service.get_tasks_for_project(project.id, status) %}{{ render_task_card_full(task) }}{% endfor %}
             {% else %}
-                {% for task in tasks_service.get_tasks(status) %}
-                    {{ render_task_card_full(task) }}
-                {% endfor %}
+                {% for task in tasks_service.get_tasks(status) %}{{ render_task_card_full(task) }}{% endfor %}
             {% endif %}
         </div>
     </div>
 {% endmacro -%}
-
 {% macro render_task_card_full(task) -%}
-    <div draggable="true" class="progress-card-container" data-target-id="card-content-{{ task.id }}"
-         id="card-container-{{ task.id }}" data-id="{{ task.id }}">
-        {{ render_task_card_content(task) }}
-    </div>
+    <div draggable="true"
+         class="progress-card-container"
+         data-target-id="card-content-{{ task.id }}"
+         id="card-container-{{ task.id }}"
+         data-id="{{ task.id }}">{{ render_task_card_content(task) }}</div>
 {% endmacro %}
-
 {% macro render_task_card_content(task) -%}
     <div id="card-content-{{ task.id }}" data-id="{{ task.id }}">
         <div class="rvo-label--sm">{{ task.title | truncate(100) }}</div>

@@ -1,10 +1,8 @@
 {% extends 'projects/details_base.html.j2' %}
 {% import 'macros/cards.html.j2' as render with context %}
-
 {% block detail_content %}
-
     <span class="rvo-text">{% trans %}Last updated{% endtrans %}: {{ last_edited | time_ago(language) }}
-        {% trans %}ago{% endtrans %}</span>
+    {% trans %}ago{% endtrans %}</span>
     <div class="rvo-layout-row rvo-layout-align-items-start rvo-layout-gap--xl">
         {% if system_card["assessments"] %}
             <div>
@@ -12,15 +10,11 @@
                 <ul class="rvo-ul rvo-ul--no-margin rvo-ul--none rvo-ul--no-padding">
                     {% for assessment in system_card["assessments"] %}
                         <li>
-                            <a
-                                class="rvo-link rvo-link--with-icon rvo-link--zwart rvo-link--normal"
-                                href="/project/{{ project_id }}/details/system_card/assessments/{{ assessment["name"].lower() }}"
-                            >
-          <span
-              class="utrecht-icon rvo-icon rvo-icon-document-met-lijnen rvo-icon--md rvo-icon--zwart rvo-link__icon--before"
-              role="img"
-              aria-label="Document met lijnen"
-          ></span>
+                            <a class="rvo-link rvo-link--with-icon rvo-link--zwart rvo-link--normal"
+                               href="/project/{{ project_id }}/details/system_card/assessments/{{ assessment["name"].lower() }}">
+                                <span class="utrecht-icon rvo-icon rvo-icon-document-met-lijnen rvo-icon--md rvo-icon--zwart rvo-link__icon--before"
+                                      role="img"
+                                      aria-label="Document met lijnen"></span>
                                 {{ assessment["name"] }}
                             </a>
                         </li>
@@ -34,15 +28,11 @@
                 <ul class="rvo-ul rvo-ul--no-margin rvo-ul--none rvo-ul--no-padding">
                     {% for model in system_card["models"] %}
                         <li>
-                            <a
-                                class="rvo-link rvo-link--with-icon rvo-link--zwart rvo-link--normal"
-                                href="/project/{{ project_id }}/details/system_card/models/{{ model["name"].lower() }}"
-                            >
-                                      <span
-                                          class="utrecht-icon rvo-icon rvo-icon-document-met-lijnen rvo-icon--md rvo-icon--zwart rvo-link__icon--before"
-                                          role="img"
-                                          aria-label="Document met lijnen"
-                                      ></span>
+                            <a class="rvo-link rvo-link--with-icon rvo-link--zwart rvo-link--normal"
+                               href="/project/{{ project_id }}/details/system_card/models/{{ model["name"].lower() }}">
+                                <span class="utrecht-icon rvo-icon rvo-icon-document-met-lijnen rvo-icon--md rvo-icon--zwart rvo-link__icon--before"
+                                      role="img"
+                                      aria-label="Document met lijnen"></span>
                                 {{ model["name"] }}
                             </a>
                         </li>
@@ -51,22 +41,23 @@
             </div>
         {% endif %}
     </div>
-
     <div class="rvo-table--responsive">
         <table class="rvo-table">
             <thead class="rvo-table-head">
-            <tr class="rvo-table-row">
-                <th scope="col" class="rvo-table-header">{% trans %}Attribute{% endtrans %}</th>
-                <th scope="col" class="rvo-table-header">{% trans %}Value{% endtrans %}</th>
-            </tr>
+                <tr class="rvo-table-row">
+                    <th scope="col" class="rvo-table-header">{% trans %}Attribute{% endtrans %}</th>
+                    <th scope="col" class="rvo-table-header">{% trans %}Value{% endtrans %}</th>
+                </tr>
             </thead>
             {% for key, value in system_card.items() %}
                 <tbody class="rvo-table-body">
-                <tr class="rvo-table-row">
-                    <td class="rvo-table-cell"><strong>{{ key.capitalize().replace("_", " ") }}</strong></td>
-                    <td class="rvo-table-cell"> {{ render.render_value(key, value, 0) }} </td>
-                </tr>
-            {% endfor %}
+                    <tr class="rvo-table-row">
+                        <td class="rvo-table-cell">
+                            <strong>{{ key.capitalize().replace("_", " ") }}</strong>
+                        </td>
+                        <td class="rvo-table-cell">{{ render.render_value(key, value, 0) }}</td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

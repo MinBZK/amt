@@ -1,155 +1,135 @@
 {% extends 'layouts/base.html.j2' %}
-
-{% block title %} {% trans %}AMT Placeholder information page{% endtrans %} {% endblock %}
-
+{% block title %}
+    {% trans %}AMT Placeholder information page{% endtrans %}
+{% endblock %}
 {% block content %}
-
     <div class="rvo-max-width-layout rvo-max-width-layout--md rvo-max-width-layout-inline-padding--none">
         <div class="rvo-content">
             <h1 class="utrecht-heading-1">{{ project.name }}</h1>
         </div>
-
         <div class="rvo-layout-grid-container">
             <div class="rvo-layout-grid rvo-layout-gap--sm rvo-layout-grid-columns--two rvo-layout-grid-layout--1fr">
                 <div class="rvo-card rvo-card--padding-md">
-                    <div class="rvo-layout-row" style="display: flex; justify-content: space-between;">
-                        <h5 class="amt-widget-title rvo-link--with-icon"><span
-                            class="utrecht-icon rvo-icon rvo-icon-vinkje rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
-                            role="img" aria-label=""></span>{% trans %}Does the algorithm meet the requirements?{% endtrans %}</h5>
+                    <div class="rvo-layout-row"
+                         style="display: flex;
+                                justify-content: space-between">
+                        <h5 class="amt-widget-title rvo-link--with-icon">
+                            <span class="utrecht-icon rvo-icon rvo-icon-vinkje rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
+                                  role="img"
+                                  aria-label=""></span>{% trans %}Does the algorithm meet the requirements?{% endtrans %}
+                        </h5>
                         <a class="rvo-text--subtle rvo-text--bold">7/8 {% trans %}Done{% endtrans %}</a>
                     </div>
                     <ul class="rvo-item-list">
                         <li class="rvo-item-list__item">
                             <div class="rvo-layout-row rvo-layout-gap--sm"
-                                 style="display: flex; justify-content: space-between;">
+                                 style="display: flex;
+                                        justify-content: space-between">
                                 <div class="rvo-layout-row rvo-layout-gap--sm">
-
                                     <div class="rvo-status-indicator rvo-status-indicator--oranje"></div>
-                                    <a class="rvo-link rvo-link--no-underline rvo-link--zwart" href="#">
-                                        Corrigerende maatregelen voor non-conforme AI
-                                    </a>
+                                    <a class="rvo-link rvo-link--no-underline rvo-link--zwart" href="#">Corrigerende maatregelen voor non-conforme AI</a>
                                 </div>
-
                                 <a class="rvo-text--subtle">{% trans %}To do{% endtrans %}</a>
                             </div>
                         </li>
                         <li class="rvo-item-list__item">
                             <div class="rvo-layout-row rvo-layout-gap--sm"
-                                 style="display: flex; justify-content: space-between;">
+                                 style="display: flex;
+                                        justify-content: space-between">
                                 <div class="rvo-layout-row rvo-layout-gap--sm">
                                     <div class="rvo-status-indicator rvo-status-indicator--groen"></div>
-                                    <a class="rvo-link rvo-link--no-underline rvo-link--zwart" href="#">
-                                        Transparantie in ontwerp voor hoog-risico AI
-                                    </a>
+                                    <a class="rvo-link rvo-link--no-underline rvo-link--zwart" href="#">Transparantie in ontwerp voor hoog-risico AI</a>
                                 </div>
                                 <a class="rvo-text--subtle">{% trans %}Done{% endtrans %}</a>
                             </div>
                         </li>
                         <li class="rvo-item-list__item">
                             <div class="rvo-layout-row rvo-layout-gap--sm"
-                                 style="display: flex; justify-content: space-between;">
+                                 style="display: flex;
+                                        justify-content: space-between">
                                 <div class="rvo-layout-row rvo-layout-gap--sm">
                                     <div class="rvo-status-indicator rvo-status-indicator--groen"></div>
-                                    <a class="rvo-link rvo-link--no-underline rvo-link--zwart" href="#">
-                                        Beoordeling van grondrechten
-                                    </a>
+                                    <a class="rvo-link rvo-link--no-underline rvo-link--zwart" href="#">Beoordeling van grondrechten</a>
                                 </div>
                                 <a class="rvo-text--subtle">Done</a>
                             </div>
                         </li>
                     </ul>
-                    <a class="margin-top-large rvo-link rvo-link--normal rvo-link--with-icon" href="#">
-  <span
-      class="utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
-      role="img"
-      aria-label="Home"
-  ></span>
+                    <a class="margin-top-large rvo-link rvo-link--normal rvo-link--with-icon"
+                       href="#">
+                        <span class="utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
+                              role="img"
+                              aria-label="Home"></span>
                         {% trans %}Go to all requirements{% endtrans %}
                     </a>
                 </div>
                 <div class="rvo-card rvo-card--padding-md">
-                    <div class="rvo-layout-row" style="display: flex; justify-content: space-between;">
-                        <h5 class="amt-widget-title rvo-link--with-icon"><span
-                            class="utrecht-icon rvo-icon rvo-icon-permanent-beta rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
-                            role="img" aria-label=""></span>{% trans %}Which instruments are executed?{% endtrans %}
+                    <div class="rvo-layout-row"
+                         style="display: flex;
+                                justify-content: space-between">
+                        <h5 class="amt-widget-title rvo-link--with-icon">
+                            <span class="utrecht-icon rvo-icon rvo-icon-permanent-beta rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
+                                  role="img"
+                                  aria-label=""></span>{% trans %}Which instruments are executed?{% endtrans %}
                         </h5>
                         <a class="rvo-text--bold rvo-text--subtle">{{ instrument_state.count_0 }}/{{ instrument_state.count_1 }}
-                            {% trans %}Done{% endtrans %}</a>
+                        {% trans %}Done{% endtrans %}</a>
                     </div>
-
-
                     <!-- Instruments widgets -->
                     <ul class="rvo-item-list">
                         {% for instrument in instrument_state.instrument_states %}
                             {# Only show the first 3 elements of the instruments_state#}
                             {% if loop.index <= 3 %}
-                            <li class="rvo-item-list__item">
-                                <div class="rvo-layout-row rvo-layout-gap--sm"
-                                     style="display: flex; justify-content: space-between;">
-                                    <div class="rvo-layout-row rvo-layout-gap--sm">
+                                <li class="rvo-item-list__item">
+                                    <div class="rvo-layout-row rvo-layout-gap--sm"
+                                         style="display: flex;
+                                                justify-content: space-between">
+                                        <div class="rvo-layout-row rvo-layout-gap--sm">
+                                            {% if instrument.in_progress == 1 %}
+                                                <div class="rvo-status-indicator rvo-status-indicator--oranje"></div>
+                                            {% else %}
+                                                <div class="rvo-status-indicator rvo-status-indicator--groen"></div>
+                                            {% endif %}
+                                            <a class="rvo-link rvo-link--no-underline rvo-link--zwart" href="#">{{ instrument.name }}</a>
+                                        </div>
                                         {% if instrument.in_progress == 1 %}
-                                            <div class="rvo-status-indicator rvo-status-indicator--oranje"></div>
+                                            <a class="rvo-text--subtle">{% trans %}To do{% endtrans %}</a>
                                         {% else %}
-                                            <div class="rvo-status-indicator rvo-status-indicator--groen"></div>
+                                            <a class="rvo-text--subtle">{% trans %}Done{% endtrans %}</a>
                                         {% endif %}
-                                        <a class="rvo-link rvo-link--no-underline rvo-link--zwart" href="#">
-                                            {{ instrument.name }}
-                                        </a>
                                     </div>
-                                    {% if instrument.in_progress == 1 %}
-                                        <a class="rvo-text--subtle">{% trans %}To do{% endtrans %}</a>
-                                    {% else %}
-                                        <a class="rvo-text--subtle">{% trans %}Done{% endtrans %}</a>
-                                    {% endif %}
-                                </div>
-                            </li>
+                                </li>
                             {% endif %}
                         {% endfor %}
                     </ul>
-                    <a class="margin-top-large rvo-link rvo-link--normal rvo-link--with-icon" href="#">
-  <span
-      class="utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
-      role="img"
-      aria-label="Home"
-  ></span>
+                    <a class="margin-top-large rvo-link rvo-link--normal rvo-link--with-icon"
+                       href="#">
+                        <span class="utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
+                              role="img"
+                              aria-label="Home"></span>
                         {% trans %}Go to all instruments{% endtrans %}
                     </a>
                 </div>
             </div>
         </div>
-
         <!-- tabs container -->
         <div class="margin-top-large">
-            <ul
-                class="rvo-tabs rvo-ul rvo-ul--no-margin rvo-ul--no-padding rvo-ul--icon rvo-ul--icon-option-2"
+            <ul class="rvo-tabs rvo-ul rvo-ul--no-margin rvo-ul--no-padding rvo-ul--icon rvo-ul--icon-option-2"
                 role="tablist"
-                aria-label="Tabs"
-            >
-
+                aria-label="Tabs">
                 {% for tab_item in tab_items %}
                     <li role="presentation" class="rvo-tabs__item">
                         <a data-navigation="tab:{{ tab_item.get_url() }}"
                            class="rvo-link rvo-tabs__item-link rvo-link--no-underline {% if tab_item.active %}rvo-tabs__item-link--active rvo-link--active{% else %}rvo-link--normal{% endif %}"
                            role="tab"
                            aria-selected="true"
-                           href="{{ tab_item.get_url() }}"
-                        >
-                            {{ tab_item.display_text }}
-                        </a>
+                           href="{{ tab_item.get_url() }}">{{ tab_item.display_text }}</a>
                     </li>
-
                 {% endfor %}
-
             </ul>
         </div>
-
         <div class="margin-top-large">
-
-            {% block detail_content %}
-                Placeholder
-            {% endblock %}
+            {% block detail_content %}Placeholder{% endblock %}
         </div>
-
     </div>
-
 {% endblock %}
