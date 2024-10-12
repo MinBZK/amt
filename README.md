@@ -7,9 +7,12 @@
 ![GitHub License](https://img.shields.io/github/license/minbzk/amt)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=MinBZK_amt&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=MinBZK_amt)
 
-AMT is a modern tool to apply technical and non-technical tests for an AI model.
+AMT is a modern tool for bookkeeping of algorithmic systems (AI or not) and to apply technical and non-technical tests
+for algorithms.
 
-Note: The main branch may be in an unstable or even broken state during development. Please use releases instead of the main branch.
+A demo of the tool is deployed here: https://amt.prd.apps.digilab.network.
+
+The tool is built by the [AI Validation Team](https://minbzk.github.io/ai-validation/).
 
 ## How to contribute
 
@@ -33,13 +36,13 @@ spaces. The second parameter is the location of the system card.
 An example command:
 
 ```shell
-./check-state urn:nl:aivt:ir:td:1.0 urn:nl:aivt:ir:iama:1.0 example/system_test_card.yaml
+./check-state urn:nl:aivt:ir:td:1.0,urn:nl:aivt:ir:iama:1.0 example/system_test_card.yaml
 ```
 
 ### For developers
 
 When running the GitHub actions locally you can use [act](https://github.com/nektos/act), to do this run change the
-matrix in the `ci.yml` of the `test-local` job to have only python version 3.11. Then run the following command:
+matrix in the `ci.yml` of the `test-local` job to have only python version 3.12. Then run the following command:
 
 ```shell
 act -W '.github/workflows/ci.yml' -s GITHUB_TOKEN="$(gh auth token)" --artifact-server-path tmp/artifacts -e act_event.json

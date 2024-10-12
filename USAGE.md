@@ -4,14 +4,17 @@ This document describes how you can use AMT without building it.
 
 ## Using AMT
 
-To use AMT without building we recommend the pre-build docker images on [github](https://github.com/MinBZK/amt/pkgs/container/amt).
+To use AMT without building we recommend the pre-build docker images
+on [github](https://github.com/MinBZK/amt/pkgs/container/amt).
 
 You can deploy AMT to kubernetes or run the container locally using docker compose.
 
 -   Example [kubernetes](https://github.com/MinBZK/ai-validation-infra/tree/main/apps/amt)
 -   Example [docker compose](./compose.yml)
 
-To run amt locally create a compose.yml file and install [docker desktop](https://www.docker.com/products/docker-desktop/). Once you have install docker you can run the following command in the directory where you created the compose.yml
+To run amt locally create a compose.yml file and
+install [docker desktop](https://www.docker.com/products/docker-desktop/). Once you have install docker you can run the
+following command in the directory where you created the compose.yml
 
 ```bash
 docker compose up
@@ -69,7 +72,8 @@ it is possible to run AMT with the following databases:
 -   MariaDB
 -   Oracle
 
-We recommend using postgresql for production grade deployments because that one is tested in our CI/CD. By default AMT will use SQLite which will create a local database within the AMT container.
+We recommend using postgresql for production grade deployments because that one is tested in our CI/CD. By default AMT
+will use SQLite which will create a local database within the AMT container.
 
 See [Options](#Option) on how to configure a database
 
@@ -79,13 +83,15 @@ AMT supports detailed logging that gives you control on what to log.
 
 See [Options](#Option) for the logging options.
 
-Currently AMT uses the logging config as defined [here](https://github.com/MinBZK/amt/blob/main/amt/core/log.py). youi can append or change the config byu setting the LOGGING_CONFIG environmental variable.
+Currently AMT uses the logging config as defined [here](https://github.com/MinBZK/amt/blob/main/amt/core/log.py). youi
+can append or change the config byu setting the LOGGING_CONFIG environmental variable.
 
 ```shell
 export LOGGING_CONFIG='{"loggers": { "amt": {  "propagate": "True" }},"formatters": { "generic": {  "fmt": "{name}: {message}"}}}'
 ```
 
-For more info on how to set logging see the python [logging.config](https://docs.python.org/3/library/logging.config.html) library
+For more info on how to set logging see the
+python [logging.config](https://docs.python.org/3/library/logging.config.html) library
 
 ## Options
 
