@@ -17,16 +17,32 @@ TEMP_DIR=$(mktemp -d)
 mkdir -p ${TEMP_DIR}/amt/locale
 trap 'rm -rf "$TEMP_DIR"' EXIT
 
-strip_po () {
-    tail -n +21 "$1"
+print_color() {
+    local color_code=$1
+    local text=$2
+    echo -e "\033[${color_code}m${text}\033[0m"
 }
 
-difference () {
+strip_po() {
+    tail -n +21 "$1" | awk '{
+        if ($1 == "#:") {
+            # Remove the last colon and any following digits to ignore changes in just line numbers
+            sub(/:[0-9]+$/, "", $0)
+        }
+        print $0
+    }'
+}
+
+difference() {
     d=$(diff <(echo "$1") <(echo "$2"))
-    if [[ "${d}" != "" ]];
-        then
-            echo "Translations not up to date."
-            exit 1
+    if [[ "${d}" != "" ]]; then
+        print_color "1;31" "❌ Translations not up to date."
+        echo
+        print_color "1;33" "Run:"
+        echo
+        print_color "1;36" "    script/translate update"
+        echo
+        exit 1
     fi
 }
 
