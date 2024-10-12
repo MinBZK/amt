@@ -49,14 +49,15 @@ def test_get_new_projects(client: TestClient, init_instruments: Generator[None, 
     response = client.get("/projects/new")
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
+    content = " ".join(response.content.decode().split())
 
     assert (
-        b'<input id="urn1" name="instruments" class="rvo-checkbox__input" type="checkbox" value="urn1" />name1'
-        in response.content
+        '<input id="urn1" name="instruments" class="rvo-checkbox__input" type="checkbox" value="urn1" /> name1'
+        in content
     )
     assert (
-        b'<input id="urn2" name="instruments" class="rvo-checkbox__input" type="checkbox" value="urn2" />name2'
-        in response.content
+        '<input id="urn2" name="instruments" class="rvo-checkbox__input" type="checkbox" value="urn2" /> name2'
+        in content
     )
 
 
