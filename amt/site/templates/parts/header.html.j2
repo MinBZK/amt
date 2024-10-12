@@ -5,11 +5,34 @@
                 <img src="/static/dist/@nl-rvo/assets/images/emblem.svg">
             </div>
             <div class="rvo-logo__wordmark">
-                <p class="rvo-logo__title">
-                    {% trans %}Algorithm Management Toolkit{% endtrans %}
-                    <br />
-                    {% trans %}version{% endtrans %} {{ version }}
-                </p>
+                <p class="rvo-logo__title">{% trans %}Algorithm Management Toolkit{% endtrans %}</p>
+                <div class="rvo-tag rvo-tag--with-icon rvo-tag--active rvo-tag--warning"
+                     style="padding-left: 12px;
+                            padding-right: 12px">
+                    <span class="utrecht-icon rvo-icon rvo-icon-waarschuwing rvo-icon--lg"
+                          role="img"
+                          aria-label="Waarschuwing"></span>
+                    <div class="utrecht-alert--warning utrecht-paragraph">
+                        <details class="rvo-expandable-text rvo-expandable-text--subtle">
+                            <summary class="rvo-expandable-text__summary">{% trans %}Beta version{% endtrans %}</summary>
+                            <div class="rvo-expandable-text__details"
+                                 style="margin-left: -38px;
+                                        margin-top: 10px;
+                                        padding: 16px;
+                                        border-radius: 5px;
+                                        background-color: var(--rvo-alert-warning-background-color);
+                                        width: 220px;
+                                        z-index: 1000;
+                                        position:absolute">
+                                <div target="_self" class="rvo-tag rvo-tag--default">{% trans %}version{% endtrans %} {{ version }}</div>
+                                <p>
+                                    {% trans %}This website is under development. All versions are created in an open manner.{% endtrans %}
+                                    <a class="rvo-link" href="https://github.com/MinBZK/amt">{% trans %}Everyone is welcome to make comments and suggestions.{% endtrans %}</a>
+                                </p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
