@@ -64,6 +64,7 @@ class TasksService:
         task = self.repository.find_by_id(task_id)
 
         if status_id == Status.DONE:
+            # TODO: This seems off, tasks should be written to the correct location in the system card.
             self.system_card.name = task.title
             self.storage_writer.write(self.system_card.model_dump())
 

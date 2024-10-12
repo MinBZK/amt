@@ -1,9 +1,9 @@
-from pathlib import Path
 from unittest.mock import Mock
 
 from amt.models.project import Project
 from amt.repositories.projects import ProjectsRepository
 from amt.schema.project import ProjectNew
+from amt.schema.system_card import SystemCard
 from amt.services.instruments import InstrumentsService
 from amt.services.projects import ProjectsService
 from amt.services.tasks import TasksService
@@ -15,14 +15,13 @@ def test_get_project():
     project_id = 1
     project_name = "Project 1"
     project_lifecycle = "development"
-    project_model_card = "model_card_path"
     projects_service = ProjectsService(
         repository=Mock(spec=ProjectsRepository),
         task_service=Mock(spec=TasksService),
         instrument_service=Mock(spec=InstrumentsService),
     )
     projects_service.repository.find_by_id.return_value = Project(  # type: ignore
-        id=project_id, name=project_name, lifecycle=project_lifecycle, model_card=project_model_card
+        id=project_id, name=project_name, lifecycle=project_lifecycle
     )
 
     # When
@@ -32,7 +31,6 @@ def test_get_project():
     assert project.id == project_id
     assert project.name == project_name
     assert project.lifecycle == project_lifecycle
-    assert project.model_card == project_model_card
     projects_service.repository.find_by_id.assert_called_once_with(project_id)  # type: ignore
 
 
@@ -40,14 +38,15 @@ def test_create_project():
     project_id = 1
     project_name = "Project 1"
     project_lifecycle = "development"
-    project_model_card = Path("model_card_path")
+    system_card = SystemCard(name=project_name)
+
     projects_service = ProjectsService(
         repository=Mock(spec=ProjectsRepository),
         task_service=Mock(spec=TasksService),
         instrument_service=Mock(spec=InstrumentsService),
     )
     projects_service.repository.save.return_value = Project(  # type: ignore
-        id=project_id, name=project_name, lifecycle=project_lifecycle, model_card=str(project_model_card)
+        id=project_id, name=project_name, lifecycle=project_lifecycle, system_card=system_card
     )
     projects_service.instrument_service.fetch_instruments.return_value = [default_instrument()]  # type: ignore
 
