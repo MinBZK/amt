@@ -66,6 +66,7 @@ def test_model_systemcard_equal():
 
     # then
     assert project.system_card != system_card
+    assert project.system_card != {}
 
 
 def test_model_systemcard_from_json():
@@ -77,3 +78,14 @@ def test_model_systemcard_from_json():
 
     # then
     assert project.system_card == SystemCard(name="Test System Card")
+
+
+def test_model_systemcard_none():
+    # given
+    project = Project(name="Test Project")
+
+    # when
+    project.system_card = None
+
+    # then
+    assert project.system_card == SystemCard()
