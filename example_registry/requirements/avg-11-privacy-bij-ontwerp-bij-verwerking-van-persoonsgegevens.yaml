@@ -1,0 +1,37 @@
+systemcard_path: .systemcard.requirements[]
+schema_version: 1.1.0
+name: Privacy door ontwerp
+description: Privacy en gegevensbescherming door goed ontwerp en door standaardinstellingen
+explanation: "Gegevensbescherming door ontwerp en standaardinstellingen houdt in dat\
+  \ privacy- en gegevensbescherming vanaf het begin worden ge\xEFntegreerd in de ontwikkeling\
+  \ van systemen en processen (ook wel privacy-by-design genoemd).\nDoor al bij het\
+  \ ontwerp rekening te houden met privacyaspecten en door standaardinstellingen die\
+  \ privacy bevorderen, wordt de bescherming van persoonsgegevens versterkt.\nHierbij\
+  \ kan worden gedacht een het pseudonimiseren van persoonsgegevens of dataminimalisatie.\n\
+  Deze aanpak zorgt ervoor dat privacy-overwegingen een integraal onderdeel zijn van\
+  \ alle aspecten van gegevensverwerking en draagt bij aan het vertrouwen van individuen\
+  \ in de veilige omgang met hun gegevens.\nDit is eveneens van toepassing als persoonsgegevens\
+  \ worden verwerkt bij het ontwikkelen en gebruiken van algoritmes en AI."
+urn: urn:nl:ak:ver:avg-11
+language: nl
+owners:
+- organization: Algoritmekader
+  name: ''
+  email: ''
+  role: ''
+date: ''
+url: https://minbzk.github.io/Algoritmekader/vereisten/avg-11-privacy-bij-ontwerp-bij-verwerking-van-persoonsgegevens/index.html
+subject: ["privacy-en-gegevensbescherming", "data"]
+lifecycle: ["ontwerp", "dataverkenning-en-datapreparatie", "ontwikkelen", "implementatie"]
+links: [urn:nl:ak:mtr:gov:01]
+ai_risk_profile: []
+always_applicable: 1
+template: &systemcard_requirements_template
+  requirement: $REQUIREMENT
+  remarks: $REMARKS
+  status: $STATUS
+  timestamp: $TIMESTAMP
+  authors:
+  - name: $AUTHOR.NAME
+    email: $AUTHOR.EMAIL
+    role: $AUTHOR.ROLE

@@ -8,6 +8,8 @@ from pydantic import (
 from amt.schema.ai_act_profile import AiActProfile
 from amt.schema.assessment_card import AssessmentCard
 from amt.schema.instrument import InstrumentBase
+from amt.schema.measure import MeasureTask
+from amt.schema.requirement import RequirementTask
 
 
 class SystemCard(BaseModel):
@@ -19,4 +21,6 @@ class SystemCard(BaseModel):
     labels: list[dict[str, Any]] = Field(default=[])
     status: str = Field(default=None)
     instruments: list[InstrumentBase] = Field(default=[])
+    requirements: list[RequirementTask] = Field(default=[])
+    measures: list[MeasureTask] = Field(default=[])
     assessments: list[AssessmentCard] = Field(default=[])

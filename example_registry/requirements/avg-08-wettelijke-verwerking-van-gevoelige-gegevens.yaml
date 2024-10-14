@@ -1,0 +1,40 @@
+systemcard_path: .systemcard.requirements[]
+schema_version: 1.1.0
+name: "Wettelijke uitzondering nodig voor verwerken bijzondere categorie\xEBn persoonsgegevens"
+description: "Bijzondere categorie\xEBn van persoonsgegevens mogen alleen worden verwerkt\
+  \ op basis van een wettelijke uitzondering."
+explanation: "Persoonsgegevens die door hun aard bijzonder gevoelig zijn wat betreft\
+  \ de grondrechten en fundamentele vrijheden, verdienen specifieke bescherming.\n\
+  Dit komt doordat de context van de verwerking ervan significante risico's kan meebrengen\
+  \ voor de grondrechten en de fundamentele vrijheden.\nDenk hierbij aan persoonsgegevens\
+  \ als ras, ethnische afkomst, politieke opvattingen of religieuze of levenschouwelijke\
+  \ overtuigingen.\n\n\nBijzondere categorie\xEBn persoonsgegevens mogen alleen worden\
+  \ verwerkt als er hier een wettelijke uitzondering voor is ([artikel\n9 AVG](https://eur-lex.europa.eu/legal-content/NL/TXT/HTML/?uri=CELEX:32016R0679#d1e2043-1-1)\
+  \ en [artikel 30 UAVG](https://wetten.overheid.nl/jci1.3:c:BWBR0040940&hoofdstuk=3&paragraaf=3.1&artikel=30&z=2021-07-01&g=2021-07-01)).\n\
+  Deze vereiste is ook van toepassing bij het ontwikkelen en gebruiken van algoritmes\
+  \ of AI-systemen en stelt daarmee beperkingen aan het mogen verwerken van deze categorie\xEB\
+  n persoonsgegevens, bv. ten behoeve van trainingsdata of het genereren van de beoogde\
+  \ output."
+urn: urn:nl:ak:ver:avg-08
+language: nl
+owners:
+- organization: Algoritmekader
+  name: ''
+  email: ''
+  role: ''
+date: ''
+url: https://minbzk.github.io/Algoritmekader/vereisten/avg-08-wettelijke-verwerking-van-gevoelige-gegevens/index.html
+subject: ["privacy-en-gegevensbescherming", "fundamentele-rechten"]
+lifecycle: ["ontwerp", "dataverkenning-en-datapreparatie"]
+links: []
+ai_risk_profile: []
+always_applicable: 1
+template: &systemcard_requirements_template
+  requirement: $REQUIREMENT
+  remarks: $REMARKS
+  status: $STATUS
+  timestamp: $TIMESTAMP
+  authors:
+  - name: $AUTHOR.NAME
+    email: $AUTHOR.EMAIL
+    role: $AUTHOR.ROLE

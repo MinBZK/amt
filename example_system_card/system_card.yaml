@@ -67,6 +67,9 @@ user_interface:
     link: system_user_interface_uri
     snapshot: system_user_interface_snapshot_uri
 
+measures: !include measures/measures.yaml
+requirements: !include requirements/requirements.yaml
+
 models:
   - !include models/logres_iris.yaml
 

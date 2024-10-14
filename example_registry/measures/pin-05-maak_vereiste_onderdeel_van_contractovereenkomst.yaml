@@ -1,0 +1,86 @@
+systemcard_path: .systemcard.measures[]
+schema_version: 1.1.0
+name: Maak de vereiste onderdeel van de contractovereenkomst
+description: Maak de vereiste onderdeel van de contractovereenkomst
+explanation: 'Door de vereiste onderdeel te nemen van de contractovereenkomst, zijn deze voorwaarden
+  voor opdrachtgever richting aanbieder/opdrachtnemer afdwingbaar. Het is van belang
+  dat bij de behoeftestelling een afweging wordt gemaakt in hoeverre de betreffende
+  vereiste van toepassing is.'
+urn: urn:nl:ak:mtr:pin:05
+language: nl
+owners:
+  - organization: Algoritmekader
+    name: ''
+    email: ''
+    role: ''
+date: ''
+subject: ["publieke-inkoop"]
+suggested_role: ["behoeftesteller", "data-scientist", "privacy-officer", "security-officer", "inkoopadviseur", "contractbeheerder", "aanbestedingsjurist"]
+lifecycle: ["ontwerp", "ontwikkelen"]
+links: [
+  urn:nl:ak:ver:aia-02,
+  urn:nl:ak:ver:aia-03,
+  urn:nl:ak:ver:aia-04,
+  urn:nl:ak:ver:aia-05,
+  urn:nl:ak:ver:aia-06,
+  urn:nl:ak:ver:aia-07,
+  urn:nl:ak:ver:aia-08,
+  urn:nl:ak:ver:aia-09,
+  urn:nl:ak:ver:aia-10,
+  urn:nl:ak:ver:aia-11,
+  urn:nl:ak:ver:aia-12,
+  urn:nl:ak:ver:aia-13,
+  urn:nl:ak:ver:aia-14,
+  urn:nl:ak:ver:aia-15,
+  urn:nl:ak:ver:aia-16,
+  urn:nl:ak:ver:aia-17,
+  urn:nl:ak:ver:aia-18,
+  urn:nl:ak:ver:aia-19,
+  urn:nl:ak:ver:aia-20,
+  urn:nl:ak:ver:aia-21,
+  urn:nl:ak:ver:aia-28,
+  urn:nl:ak:ver:aia-29,
+  urn:nl:ak:ver:aia-30,
+  urn:nl:ak:ver:aia-31,
+  urn:nl:ak:ver:aia-32,
+  urn:nl:ak:ver:aia-33,
+  urn:nl:ak:ver:aia-34,
+  urn:nl:ak:ver:aia-35,
+  urn:nl:ak:ver:aia-36,
+  urn:nl:ak:ver:aia-37,
+  urn:nl:ak:ver:aia-38,
+  urn:nl:ak:ver:aia-39,
+  urn:nl:ak:ver:bzk-01,
+  urn:nl:ak:ver:arc-01,
+  urn:nl:ak:ver:aut-01,
+  urn:nl:ak:ver:avg-01,
+  urn:nl:ak:ver:avg-02,
+  urn:nl:ak:ver:avg-03,
+  urn:nl:ak:ver:avg-04,
+  urn:nl:ak:ver:avg-05,
+  urn:nl:ak:ver:avg-06,
+  urn:nl:ak:ver:avg-07,
+  urn:nl:ak:ver:avg-08,
+  urn:nl:ak:ver:avg-09,
+  urn:nl:ak:ver:avg-10,
+  urn:nl:ak:ver:avg-11,
+  urn:nl:ak:ver:avg-12,
+  urn:nl:ak:ver:avg-13,
+  urn:nl:ak:ver:awb-01,
+  urn:nl:ak:ver:awb-02,
+  urn:nl:ak:ver:bio-01,
+  urn:nl:ak:ver:dat-01,
+  urn:nl:ak:ver:grw-01,
+  urn:nl:ak:ver:grw-02,
+  urn:nl:ak:ver:woo-01
+]
+template: &systemcard_measures_template
+  requirement: $MEASURE
+  value: $VALUE
+  remarks: $REMARKS
+  status: $STATUS
+  timestamp: $TIMESTAMP
+  authors:
+    - name: $AUTHOR.NAME
+      email: $AUTHOR.EMAIL
+      role: $AUTHOR.ROLE

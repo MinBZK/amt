@@ -75,6 +75,15 @@ async def post_new(
     project_new: ProjectNew,
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
 ) -> HTMLResponse:
+    # TODO: FOR DEMO 18 OCT
+    # Override AI Act Profile for demo purposes to values:
+    project_new.type = "AI-systeem"
+    project_new.publication_category = "hoog-risico AI"
+    project_new.transparency_obligations = "geen transparantieverplichtingen"
+    project_new.role = "gebruiksverantwoordelijke"
+    project_new.systemic_risk = "geen systeemrisico"
+    project_new.open_source = "open-source"
+
     project = projects_service.create(project_new)
     response = templates.Redirect(request, f"/project/{project.id}/details/tasks")
     return response

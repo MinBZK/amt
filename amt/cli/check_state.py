@@ -9,7 +9,7 @@ import yaml
 from amt.schema.instrument import Instrument
 from amt.schema.system_card import SystemCard
 from amt.services.instruments import InstrumentsService
-from amt.services.instruments_state import all_lifecycles, get_all_next_tasks
+from amt.services.instruments_and_requirements_state import all_lifecycles, get_all_next_tasks
 from amt.services.storage import StorageFactory
 
 logger = logging.getLogger(__name__)

@@ -1,0 +1,40 @@
+systemcard_path: .systemcard.requirements[]
+schema_version: 1.1.0
+name: Verwerking van persoonsgegevens moet rechtmatig plaatsvinden
+description: De verwerking van persoonsgegevens moet rechtmatig plaatsvinden.
+explanation: "De verwerking van persoonsgegevens moet rechtmatig plaatsvinden, wat\
+  \ betekent dat de verwerking gebaseerd moet zijn op \xE9\xE9n van de wettelijke\
+  \ grondslagen die zijn geformuleerd in artikel 6 Algemene Verordening Gegevensbescherming.\n\
+  Persoonsgegevens mogen alleen worden verzameld voor specifieke, duidelijk omschreven\
+  \ en gerechtvaardigde doeleinden.\nHet is niet toegestaan om deze gegevens verder\
+  \ te verwerken op een manier die niet verenigbaar is met deze oorspronkelijke doeleinden.\n\
+  \nBij het verwerken van persoonsgegevens ten behoeve van de ontwikkeling en gebruik\
+  \ van algoritmes en AI moet worden onderzocht of dit kan worden gebaseerd op \xE9\
+  \xE9n van de verwerkingsgrondslagen.\nHet is van belang dat wordt uitgewerkt welke\
+  \ persoonsgegevens waarvoor worden verwerkt en op basis van welke grondslag.\nHierbij\
+  \ kan worden gedacht aan persoonsgegevens ten behoeve van trainingsdata, voor het\
+  \ genereren van output of, indien (juridisch) mogelijk, voor het uitvoeren van een\
+  \ onderzoek naar onbewuste vooringenomenheid."
+urn: urn:nl:ak:ver:avg-01
+language: nl
+owners:
+- organization: Algoritmekader
+  name: ''
+  email: ''
+  role: ''
+date: ''
+url: https://minbzk.github.io/Algoritmekader/vereisten/avg-01-persoonsgegevens-worden-rechtmatig-verwerkt/index.html
+subject: ["privacy-en-gegevensbescherming"]
+lifecycle: ["probleemanalyse", "ontwerp", "dataverkenning-en-datapreparatie"]
+links: []
+ai_risk_profile: []
+always_applicable: 1
+template: &systemcard_requirements_template
+  requirement: $REQUIREMENT
+  remarks: $REMARKS
+  status: $STATUS
+  timestamp: $TIMESTAMP
+  authors:
+  - name: $AUTHOR.NAME
+    email: $AUTHOR.EMAIL
+    role: $AUTHOR.ROLE

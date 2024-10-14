@@ -1,0 +1,49 @@
+systemcard_path: .systemcard.requirements[]
+schema_version: 1.1.0
+name: Gebruiksverantwoordelijken monitoren werking hoog risico AI-systeem
+description: Gebruiksverantwoordelijken monitoren de werking van het AI-systeem met
+  een hoog risico op basis van de gebruiksaanwijzingen en stellen in voorkomend geval
+  de aanbieders in kennis overeenkomstig artikel 72 AI Verordening
+explanation: "Gebruiksverantwoordelijken moeten de werking van hoog risico AI-systemen\
+  \ monitoren.\nDit is van belang om passende maatregelen te kunnen treffen als het\
+  \ systeem onbedoeld anders gaat functioneren.\n \nWanneer gebruiksverantwoordelijken\
+  \ redenen hebben om aan te nemen dat het gebruik overeenkomstig de gebruiksaanwijzingen\
+  \ ertoe kan leiden dat dat AI-systeem een risico vormt in de zin van artikel 79,\
+  \ lid 1, stellen zij de aanbieder of distributeur en de betreffende markttoezichtautoriteit\
+  \ hiervan zonder onnodige vertraging in kennis en onderbreken zij het gebruik van\
+  \ dat systeem.\nWanneer gebruiksverantwoordelijke een ernstig incident vaststellen,\
+  \ stellen zij ook onmiddellijk eerst de aanbieder hiervan in kennis, en vervolgens\
+  \ de importeur of distributeur en de betreffende markttoezichtautoriteiten van dat\
+  \ incident.\nWanneer de gebruiksverantwoordelijke de aanbieder niet kan bereiken,\
+  \ is artikel 73 mutatis mutandis van toepassing.\nDeze verplichting geldt niet voor\
+  \ gevoelige operationele gegevens van gebruiksverantwoordelijke van AI-systemen\
+  \ die de hoedanigheid van rechtshandhavingsinstanties hebben.\n\nVoor gebruiksverantwoordelijke\
+  \ die in de hoedanigheid van financi\xEBle instellingen onderworpen zijn aan eisen\
+  \ met betrekking tot hun interne governance, regelingen of processen uit hoofde\
+  \ van het Unierecht inzake financi\xEBle diensten, wordt de monitoringsverplichting\
+  \ overeenkomstig de eerste alinea geacht te zijn vervuld door te voldoen aan de\
+  \ regels inzake interne governance, regelingen of processen en -mechanismen uit\
+  \ hoofde van het desbetreffende recht inzake financi\xEBle diensten."
+urn: urn:nl:ak:ver:aia-24
+language: nl
+owners:
+- organization: Algoritmekader
+  name: ''
+  email: ''
+  role: ''
+date: ''
+url: https://minbzk.github.io/Algoritmekader/vereisten/aia-24-gebruiksverantwoordelijken-monitoren-werking/index.html
+subject: ["governance", "menselijke-controle"]
+lifecycle: ["monitoring-en-beheer"]
+links: [urn:nl:ak:mtr:gov:02]
+ai_risk_profile: ["AI-systeem", "AI-systeem voor algemene doeleinden", "hoog-risico AI", "gebruiksverantwoordelijke"]
+always_applicable: 0
+template: &systemcard_requirements_template
+  requirement: $REQUIREMENT
+  remarks: $REMARKS
+  status: $STATUS
+  timestamp: $TIMESTAMP
+  authors:
+  - name: $AUTHOR.NAME
+    email: $AUTHOR.EMAIL
+    role: $AUTHOR.ROLE

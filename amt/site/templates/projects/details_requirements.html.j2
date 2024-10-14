@@ -2,4 +2,37 @@
 {% block title %}
     {% trans %}AMT Placeholder information page{% endtrans %}
 {% endblock %}
-{% block detail_content %}<div>To be implemented</div>{% endblock %}
+{% block detail_content %}
+    <div class="rvo-accordion">
+        {% for (requirement, measures) in requirements_and_measures %}
+            <details class="rvo-accordion__item">
+                <summary class="rvo-accordion__item-summary">
+                    <h3 class="utrecht-heading-3 rvo-accordion__item-title rvo-heading--no-margins rvo-heading--mixed">
+                        <span class="utrecht-icon rvo-icon rvo-icon-delta-omlaag rvo-icon--md rvo-icon--hemelblauw rvo-accordion__item-icon--closed"
+                              role="img"
+                              aria-label="Delta omlaag"></span>
+                        <span class="utrecht-icon rvo-icon rvo-icon-delta-omhoog rvo-icon--md rvo-icon--hemelblauw rvo-accordion__item-icon--open"
+                              role="img"
+                              aria-label="Delta omhoog"></span>
+                        {{ requirement.name }}
+                    </h3>
+                    <span class="rvo-accordion-teaser">
+                        <div class="rvo-layout-row rvo-layout-gap--sm">
+                            <div class="rvo-status-indicator rvo-status-indicator--oranje"></div>
+                            0 / {{ measures | length }} {% trans %}measures executed{% endtrans %}
+                        </div>
+                    </span>
+                </summary>
+                {% for measure in measures %}
+                    <div class="rvo-accordion__content">
+                        <div class="rvo-layout-row rvo-layout-gap--sm">
+                            <div class="rvo-status-indicator rvo-status-indicator--oranje"></div>
+                            <h4 class="utrecht-heading-4 rvo-heading--no-margins">{{ measure.name }}</h4>
+                        </div>
+                        <p class="rvo-text rvo-text--no-margins">{{ measure.description }}</p>
+                    </div>
+                {% endfor %}
+            </details>
+        {% endfor %}
+    </div>
+{% endblock %}

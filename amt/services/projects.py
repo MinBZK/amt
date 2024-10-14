@@ -9,6 +9,7 @@ from amt.schema.instrument import InstrumentBase
 from amt.schema.project import ProjectNew
 from amt.schema.system_card import AiActProfile, SystemCard
 from amt.services.instruments import InstrumentsService
+from amt.services.task_registry import get_requirements_and_measures
 from amt.services.tasks import TasksService
 
 logger = logging.getLogger(__name__)
@@ -42,7 +43,15 @@ class ProjectsService:
             role=project_new.role,
         )
 
-        system_card = SystemCard(name=project_new.name, ai_act_profile=ai_act_profile, instruments=instruments)
+        requirements, measures = get_requirements_and_measures(ai_act_profile)
+
+        system_card = SystemCard(
+            name=project_new.name,
+            ai_act_profile=ai_act_profile,
+            instruments=instruments,
+            requirements=requirements,
+            measures=measures,
+        )
 
         project = Project(name=project_new.name, lifecycle=project_new.lifecycle, system_card=system_card)
         project = self.update(project)

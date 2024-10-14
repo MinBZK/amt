@@ -6,6 +6,7 @@ from typing import Any
 
 from amt.schema.assessment_card import AssessmentCard
 from amt.schema.instrument import Instrument, InstrumentTask
+from amt.schema.requirement import Requirement
 from amt.schema.system_card import SystemCard
 from amt.services.instruments import InstrumentsService
 
@@ -91,6 +92,34 @@ def get_all_next_tasks(instruments: dict[str, Instrument], system_card: SystemCa
         next_tasks_per_instruments.append(get_next_tasks_per_instrument(instrument, instrument_result_from_system_card))
     next_tasks_per_instruments = sorted(next_tasks_per_instruments, key=lambda i: i["last_modified_date"], reverse=True)
     return next_tasks_per_instruments
+
+
+class RequirementsStateService:
+    def __init__(self, system_card: SystemCard) -> None:
+        self.system_card = system_card
+        self.requirements_state = []
+
+    def get_requirements_state(self, requirements: list[Requirement]) -> list[dict[str, Any]]:
+        requirements_mapping = {}
+        for requirement in requirements:
+            requirements_mapping[requirement.urn] = requirement.name
+
+        saved_requirements = self.system_card.requirements
+        for requirement in saved_requirements:
+            urn = requirement.urn
+            self.requirements_state.append({"name": requirements_mapping[urn], "state": requirement.state})
+        return self.requirements_state
+
+    def get_amount_total_requirements(self) -> int:
+        return len(self.system_card.requirements)
+
+    def get_amount_completed_requirements(self) -> int:
+        requirements = self.system_card.requirements
+        completed_count = 0
+        for requirement in requirements:
+            if requirement.state == "done":
+                completed_count += 1
+        return completed_count
 
 
 class InstrumentStateService:

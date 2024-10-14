@@ -1,0 +1,40 @@
+systemcard_path: .systemcard.requirements[]
+schema_version: 1.1.0
+name: Informeren werknemers
+description: 'Voordat een AI-systeem met een hoog risico op de werkplek in gebruik
+  wordt gesteld of wordt gebruikt, delen gebruiksverantwoordelijken die werkgever
+  zijn werknemersvertegenwoordigers en de betrokken werknemers mee dat zij zullen
+  worden onderworpen aan het gebruik van het AI-systeem met een hoog risico.
+
+  Deze informatie wordt, indien van toepassing, verstrekt in overeenstemming met de
+  in het Unie- en nationaal recht vastgelegde regels en procedures en de praktijk
+  inzake informatie van werknemers en hun vertegenwoordigers.'
+explanation: 'Dit vereiste benadrukt het belang van het informeren van werknemersvertegenwoordigers
+  en betrokken werknemers over de inzet van een hoog risico AI-systeem op de werkplaats.
+
+  Dit dient voorafgaand aan de inzet van het systeem plaats te vinden.
+
+  De gebruiksverantwoordelijke als werknemer dient hier zorg voor te dragen.'
+urn: urn:nl:ak:ver:aia-26
+language: nl
+owners:
+- organization: Algoritmekader
+  name: ''
+  email: ''
+  role: ''
+date: ''
+url: https://minbzk.github.io/Algoritmekader/vereisten/aia-26-informeren-werknemers/index.html
+subject: ["governance"]
+lifecycle: ["implementatie", "ontwerp"]
+links: []
+ai_risk_profile: ["AI-systeem", "AI-systeem voor algemene doeleinden", "hoog-risico AI", "gebruiksverantwoordelijke"]
+always_applicable: 0
+template: &systemcard_requirements_template
+  requirement: $REQUIREMENT
+  remarks: $REMARKS
+  status: $STATUS
+  timestamp: $TIMESTAMP
+  authors:
+  - name: $AUTHOR.NAME
+    email: $AUTHOR.EMAIL
+    role: $AUTHOR.ROLE
