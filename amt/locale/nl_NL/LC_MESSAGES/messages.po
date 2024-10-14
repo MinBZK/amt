@@ -86,7 +86,7 @@ msgstr "Start"
 msgid "Projects"
 msgstr "Projecten"
 
-#: amt/api/navigation.py:47
+#: amt/api/navigation.py:47 amt/site/templates/auth/profile.html.j2:10
 msgid "Overview"
 msgstr "Overzicht"
 
@@ -194,6 +194,32 @@ msgstr ""
 "Er is iets fout gegaan tijdens de autorisatiestroom. Probeer het later "
 "opnieuw"
 
+#: amt/site/templates/auth/profile.html.j2:10
+msgid "of"
+msgstr "van"
+
+#: amt/site/templates/auth/profile.html.j2:18
+msgid "Logout"
+msgstr "Uitloggen"
+
+#: amt/site/templates/auth/profile.html.j2:30
+msgid "Edit image"
+msgstr "Afbeelding aanpassen"
+
+#: amt/site/templates/auth/profile.html.j2:34
+msgid "Name"
+msgstr "Naam"
+
+#: amt/site/templates/auth/profile.html.j2:37
+msgid "Email"
+msgstr "Email"
+
+#: amt/site/templates/auth/profile.html.j2:40
+#: amt/site/templates/parts/header.html.j2:92
+#: amt/site/templates/parts/header.html.j2:151
+msgid "Language"
+msgstr "Taal"
+
 #: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:5
 msgid "Not logged in"
 msgstr "Niet ingelogd"
@@ -203,8 +229,9 @@ msgid "Please login to view this page"
 msgstr "Meld u aan om deze pagina te bekijken"
 
 #: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:11
-#: amt/site/templates/parts/header.html.j2:100
-#: amt/site/templates/parts/header.html.j2:154
+#: amt/site/templates/pages/landingpage.html.j2:16
+#: amt/site/templates/parts/header.html.j2:103
+#: amt/site/templates/parts/header.html.j2:161
 msgid "Login"
 msgstr "Inloggen"
 
@@ -283,6 +310,7 @@ msgstr "Antwoord"
 msgid "AMT Placeholder informatie pagina's"
 msgstr "AMT Placeholder informatie pagina's"
 
+#: amt/site/templates/pages/landingpage.html.j2:12
 #: amt/site/templates/parts/footer.html.j2:4
 #: amt/site/templates/parts/header.html.j2:8
 msgid "Algorithm Management Toolkit"
@@ -313,16 +341,6 @@ msgstr "Deze website is in ontwikkeling. Alle versies ontstaan op een open manie
 #: amt/site/templates/parts/header.html.j2:30
 msgid "Everyone is welcome to make comments and suggestions."
 msgstr "Iedereen mag opmerkingen en suggesties doen."
-
-#: amt/site/templates/parts/header.html.j2:88
-#: amt/site/templates/parts/header.html.j2:143
-msgid "Language"
-msgstr "Taal"
-
-#: amt/site/templates/parts/header.html.j2:109
-#: amt/site/templates/parts/header.html.j2:162
-msgid "Logout"
-msgstr "Uitloggen"
 
 #: amt/site/templates/projects/details_base.html.j2:3
 #: amt/site/templates/projects/details_data.html.j2:3
@@ -460,4 +478,7 @@ msgstr "Maak project"
 #: amt/site/templates/projects/new.html.j2:191
 msgid "Copy results and close"
 msgstr "Resultaten overnemen en sluiten"
+
+#~ msgid "Algortime Management Toolkit"
+#~ msgstr "Algoritme Management Toolkit"
 

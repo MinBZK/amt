@@ -1,0 +1,65 @@
+{% extends 'layouts/base.html.j2' %}
+{% block content %}
+    {% set language_mappings = {"nl": "Nederlands", "en": "English"} %}
+    <div class="rvo-max-width-layout rvo-max-width-layout--md rvo-max-width-layout-inline-padding--none">
+        <div class="rvo-content" style="margin-block-start: 3em;">
+            <div class="profile-header-container"
+                 style="display: flex;
+                        justify-content: space-between">
+                <h1 class="utrecht-heading-1 rvo-heading--no-margins rvo-heading--mixed --rvo-space-sm">
+                    <strong>{% trans %}Overview{% endtrans %}</strong> {% trans %}of{% endtrans %} {{ user['name'] }}
+                </h1>
+                <a href="/auth/logout">
+                    <button class="utrecht-button utrecht-button--secondary-action utrecht-button--rvo-md"
+                            type="button">
+                        <span class="utrecht-icon rvo-icon rvo-icon-versleutelen rvo-icon--md rvo-icon--hemelblauw"
+                              role="img"
+                              aria-label="Logout"></span>
+                        {% trans %}Logout{% endtrans %}
+                    </button>
+                </a>
+            </div>
+            <div style="position: relative">
+                <img style="display: block"
+                     width="128"
+                     height="128"
+                     src="https://gravatar.com/avatar/{{ user['email_hash'] }}?r=g&s=256&d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/{{ user['name_encoded'] }}/256"
+                     alt="User icon">
+                <a href="https://gravatar.com/"
+                   target="_blank"
+                   class="rvo-link rvo-link--with-icon rvo-link--no-underline">{% trans %}Edit image{% endtrans %}</a>
+            </div>
+            <ul class="rvo-item-list" style="margin-block-start: 1em;">
+                <li class="rvo-item-list__item">
+                    <strong style="width: 12em; display: inline-block">{% trans %}Name{% endtrans %}</strong>{{ user['name'] }}
+                </li>
+                <li class="rvo-item-list__item">
+                    <strong style="width: 12em; display: inline-block">{% trans %}Email{% endtrans %}</strong>{{ user['email'] }}
+                </li>
+                <li class="rvo-item-list__item">
+                    <!-- <strong style="width: 12em; display: inline-block"></strong>{{ language_mappings.get(user['locale']) }} -->
+                    <div role="group"
+                         aria-labelledby="language-label"
+                         class="utrecht-form-field utrecht-form-field--text rvo-form-field">
+                        <div class="rvo-form-field__label">
+                            <label class="rvo-label"
+                                   id="language-label"
+                                   for="language"
+                                   style="width: 12em;
+                                          display: inline-block">{% trans %}Language{% endtrans %}</label>
+                        </div>
+                        <div class="rvo-select-wrapper">
+                            <select id="language"
+                                    class="utrecht-select utrecht-select--html-select"
+                                    aria-describedby="{% trans %}Select language{% endtrans %}"
+                                    onchange="javascript:setCookie('lang', this.value, 9999); window.location.reload()">
+                                <option value="nl" {% if user['locale'] == 'nl' %}selected=""{% endif %}>Nederlands</option>
+                                <option value="en" {% if user['locale'] == 'en' %}selected=""{% endif %}>English</option>
+                            </select>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

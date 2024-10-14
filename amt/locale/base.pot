@@ -85,7 +85,7 @@ msgstr ""
 msgid "Projects"
 msgstr ""
 
-#: amt/api/navigation.py:47
+#: amt/api/navigation.py:47 amt/site/templates/auth/profile.html.j2:10
 msgid "Overview"
 msgstr ""
 
@@ -185,6 +185,32 @@ msgid ""
 "later."
 msgstr ""
 
+#: amt/site/templates/auth/profile.html.j2:10
+msgid "of"
+msgstr ""
+
+#: amt/site/templates/auth/profile.html.j2:18
+msgid "Logout"
+msgstr ""
+
+#: amt/site/templates/auth/profile.html.j2:30
+msgid "Edit image"
+msgstr ""
+
+#: amt/site/templates/auth/profile.html.j2:34
+msgid "Name"
+msgstr ""
+
+#: amt/site/templates/auth/profile.html.j2:37
+msgid "Email"
+msgstr ""
+
+#: amt/site/templates/auth/profile.html.j2:40
+#: amt/site/templates/parts/header.html.j2:92
+#: amt/site/templates/parts/header.html.j2:151
+msgid "Language"
+msgstr ""
+
 #: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:5
 msgid "Not logged in"
 msgstr ""
@@ -194,8 +220,9 @@ msgid "Please login to view this page"
 msgstr ""
 
 #: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:11
-#: amt/site/templates/parts/header.html.j2:100
-#: amt/site/templates/parts/header.html.j2:154
+#: amt/site/templates/pages/landingpage.html.j2:16
+#: amt/site/templates/parts/header.html.j2:103
+#: amt/site/templates/parts/header.html.j2:161
 msgid "Login"
 msgstr ""
 
@@ -274,6 +301,7 @@ msgstr ""
 msgid "AMT Placeholder informatie pagina's"
 msgstr ""
 
+#: amt/site/templates/pages/landingpage.html.j2:12
 #: amt/site/templates/parts/footer.html.j2:4
 #: amt/site/templates/parts/header.html.j2:8
 msgid "Algorithm Management Toolkit"
@@ -303,16 +331,6 @@ msgstr ""
 
 #: amt/site/templates/parts/header.html.j2:30
 msgid "Everyone is welcome to make comments and suggestions."
-msgstr ""
-
-#: amt/site/templates/parts/header.html.j2:88
-#: amt/site/templates/parts/header.html.j2:143
-msgid "Language"
-msgstr ""
-
-#: amt/site/templates/parts/header.html.j2:109
-#: amt/site/templates/parts/header.html.j2:162
-msgid "Logout"
 msgstr ""
 
 #: amt/site/templates/projects/details_base.html.j2:3

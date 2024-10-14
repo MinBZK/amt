@@ -90,7 +90,6 @@ class BaseNavigationItem:
 
 
 class Navigation:
-    HOMEPAGE = BaseNavigationItem(display_text=DisplayText.HOME, url="/", icon="rvo-icon-home")
     PROJECTS_ROOT = BaseNavigationItem(
         display_text=DisplayText.PROJECTS, url=["/projects/", "/project/"], icon="rvo-icon-publicatie"
     )
@@ -236,7 +235,6 @@ def resolve_navigation_items(
 def get_main_menu(request: Request, translations: NullTranslations) -> list[NavigationItem]:
     # main menu items are the same for all pages
     main_menu_items = [
-        NavigationItem(Navigation.HOMEPAGE, translations=translations),
         NavigationItem(Navigation.PROJECTS_ROOT, translations=translations),
     ]
 

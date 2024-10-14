@@ -6,6 +6,7 @@ from authlib.integrations.starlette_client import OAuth, OAuthError  # type: ign
 from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse, RedirectResponse, Response
 
+from amt.api.deps import templates
 from amt.core.authorization import get_user
 from amt.core.exceptions import AMTAuthorizationFlowError
 
@@ -60,4 +61,11 @@ async def auth_callback(request: Request) -> Response:  # pragma: no cover
     if user:
         request.session["user"] = dict(user)  # type: ignore
         request.session["id_token"] = token["id_token"]  # type: ignore
-    return RedirectResponse(url="/")
+    return RedirectResponse(url="/projects/")
+
+
+@router.get("/profile", response_class=Response)
+async def auth_profile(request: Request) -> HTMLResponse:
+    user = get_user(request)
+
+    return templates.TemplateResponse(request, "auth/profile.html.j2", {"user": user})
