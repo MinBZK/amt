@@ -1,5 +1,4 @@
 from collections.abc import Sequence
-from pathlib import Path
 from unittest.mock import patch
 
 import pytest
@@ -92,8 +91,7 @@ def test_create_instrument_tasks(tasks_service_with_mock: TasksService, mock_tas
 
     project_id = 1
     project_name = "Project 1"
-    project_model_card = Path("model_card_path")
-    project = Project(id=project_id, name=project_name, model_card=str(project_model_card))
+    project = Project(id=project_id, name=project_name)
 
     # When
     mock_tasks_repository.clear()

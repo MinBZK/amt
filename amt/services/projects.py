@@ -3,14 +3,12 @@ from typing import Annotated
 
 from fastapi import Depends
 
-from amt.core.config import get_settings
 from amt.models import Project
 from amt.repositories.projects import ProjectsRepository
 from amt.schema.instrument import InstrumentBase
 from amt.schema.project import ProjectNew
 from amt.schema.system_card import AiActProfile, SystemCard
 from amt.services.instruments import InstrumentsService
-from amt.services.storage import Storage, StorageFactory
 from amt.services.tasks import TasksService
 
 logger = logging.getLogger(__name__)
@@ -31,16 +29,6 @@ class ProjectsService:
         return self.repository.find_by_id(project_id)
 
     def create(self, project_new: ProjectNew) -> Project:
-        project = Project(name=project_new.name, lifecycle=project_new.lifecycle)
-
-        self.repository.save(project)
-
-        system_card_file = get_settings().CARD_DIR / f"{project.id}_system.yaml"
-
-        project.model_card = str(system_card_file)
-
-        project = self.update(project)
-
         instruments: list[InstrumentBase] = [
             InstrumentBase(urn=instrument_urn) for instrument_urn in project_new.instruments
         ]
@@ -56,10 +44,8 @@ class ProjectsService:
 
         system_card = SystemCard(name=project_new.name, ai_act_profile=ai_act_profile, instruments=instruments)
 
-        storage_writer: Storage = StorageFactory.init(
-            storage_type="file", location=system_card_file.parent, filename=system_card_file.name
-        )
-        storage_writer.write(system_card.model_dump())
+        project = Project(name=project_new.name, lifecycle=project_new.lifecycle, system_card=system_card)
+        project = self.update(project)
 
         selected_instruments = self.instrument_service.fetch_instruments(project_new.instruments)  # type: ignore
         for instrument in selected_instruments:
