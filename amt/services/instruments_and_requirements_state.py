@@ -1,4 +1,4 @@
-# pyright: reportUnknownArgumentType=false, reportAttributeAccessIssue=false, reportUnknownMemberType=false
+# pyright: reportUnknownVariableType=false, reportUnknownArgumentType=false, reportAttributeAccessIssue=false, reportUnknownMemberType=false
 import logging
 from collections import defaultdict
 from datetime import datetime, timezone
