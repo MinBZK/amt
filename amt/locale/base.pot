@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-12 09:04+0200\n"
+"POT-Creation-Date: 2024-10-12 21:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -194,8 +194,8 @@ msgid "Please login to view this page"
 msgstr ""
 
 #: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:11
-#: amt/site/templates/parts/header.html.j2:77
-#: amt/site/templates/parts/header.html.j2:131
+#: amt/site/templates/parts/header.html.j2:100
+#: amt/site/templates/parts/header.html.j2:154
 msgid "Login"
 msgstr ""
 
@@ -275,7 +275,7 @@ msgid "AMT Placeholder informatie pagina's"
 msgstr ""
 
 #: amt/site/templates/parts/footer.html.j2:4
-#: amt/site/templates/parts/header.html.j2:9
+#: amt/site/templates/parts/header.html.j2:8
 msgid "Algorithm Management Toolkit"
 msgstr ""
 
@@ -287,17 +287,31 @@ msgstr ""
 msgid "Contact"
 msgstr ""
 
-#: amt/site/templates/parts/header.html.j2:11
+#: amt/site/templates/parts/header.html.j2:17
+msgid "Beta version"
+msgstr ""
+
+#: amt/site/templates/parts/header.html.j2:27
 msgid "version"
 msgstr ""
 
-#: amt/site/templates/parts/header.html.j2:65
-#: amt/site/templates/parts/header.html.j2:120
+#: amt/site/templates/parts/header.html.j2:29
+msgid ""
+"This website is under development. All versions are created in an open "
+"manner."
+msgstr ""
+
+#: amt/site/templates/parts/header.html.j2:30
+msgid "Everyone is welcome to make comments and suggestions."
+msgstr ""
+
+#: amt/site/templates/parts/header.html.j2:88
+#: amt/site/templates/parts/header.html.j2:143
 msgid "Language"
 msgstr ""
 
-#: amt/site/templates/parts/header.html.j2:86
-#: amt/site/templates/parts/header.html.j2:139
+#: amt/site/templates/parts/header.html.j2:109
+#: amt/site/templates/parts/header.html.j2:162
 msgid "Logout"
 msgstr ""
 
