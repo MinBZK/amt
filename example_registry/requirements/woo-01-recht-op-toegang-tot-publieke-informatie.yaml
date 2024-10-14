@@ -46,7 +46,17 @@ date: ''
 url: https://minbzk.github.io/Algoritmekader/vereisten/woo-01-recht-op-toegang-tot-publieke-informatie/index.html
 subject: ["transparantie"]
 lifecycle: []
-links: []
+links: [
+    "urn:nl:ak:mtr:pin-01",
+    "urn:nl:ak:mtr:pin-02",
+    "urn:nl:ak:mtr:pin-03",
+    "urn:nl:ak:mtr:pin-04",
+    "urn:nl:ak:mtr:pin-05",
+    "urn:nl:ak:mtr:pin-06",
+    "urn:nl:ak:mtr:pin-07",
+    "urn:nl:ak:mtr:pin-08",
+    "urn:nl:ak:mtr:pin-09"
+]
 ai_risk_profile: []
 always_applicable: 1
 template: &systemcard_requirements_template

@@ -1,0 +1,43 @@
+systemcard_path: .systemcard.measures[]
+schema_version: 1.1.0
+name: Tref (technische) maatregelen waarmee het gebruik van het algoritme of AI-systeem
+  kan worden stopgezet.
+description: Tref (technische) maatregelen waarmee het gebruik van het algoritme of AI-systeem
+  kan worden stopgezet.
+explanation: "- Er moet in\
+  \ een proces zijn beschreven wanneer het gebruik van algoritmes en AI-systemen moet\
+  \ worden stopgezet.\n- Het is van belang dat bij het ontwerp van algoritmes en AI-systemen\
+  \ er rekening wordt gehouden met dat het werkproces ook zonder het algoritme of\
+  \ AI-systeem kan worden uitgevoerd.\n- Als blijkt dat het algoritme of AI-systeem\
+  \ ongewenst functioneert, dan moeten (technische) maatregelen zijn getroffen waarmee\
+  \ het gebruik daadwerkelijk kan worden stopgezet. Denk hierbij aan een stopknop\
+  \ en werkinstructies hoe het gebruik kan worden be\xEBindigd.\n- Maak aantoonbaar\
+  \ dat deze maatregelen zijn getroffen.\n- De proceseigenaar of een menselijk toezichthouder\
+  \ moet in staat zijn om het algoritme of AI-systeem op elk moment te kunnen be\xEB\
+  indigen.\n- Het stopzetten van het gebruik van een algoritme mag niet tot gevolg\
+  \ hebben dat betrokkenen niet meer kunnen achterhalen hoe besluiten tot stand zijn\
+  \ gekomen of dat gevolgen niet meer kunnen worden gecorrigeerd als dat noodzakelijk\
+  \ is."
+urn: urn:nl:ak:mtr:gov-05
+language: nl
+owners:
+- organization: Algoritmekader
+  name: ''
+  email: ''
+  role: ''
+date: ''
+url: https://minbzk.github.io/Algoritmekader/maatregelen/stopzetten_gebruik/index.html
+subject: ["governance"]
+suggested_roles: ["proceseigenaar", "beleidsmedewerker", "data engineer", "data scientist", "informatiebeheerder", "privacy-officer", "security officer", "ethicus", "inkoopadviseur", "contractbeheerder"]
+lifecycle: ["ontwerp", "dataverkenning-en-datapreparatie", "ontwikkelen", "verificatie-en-validatie", "implementatie", "monitoring-en-beheer", "uitfaseren"]
+links: ["urn:nl:ak:ver:awb-01", "urn:nl:ak:ver:aia-11", "urn:nl:ak:ver:grw-01", "urn:nl:ak:ver:aia-29", "urn:nl:ak:ver:grw-02", "urn:nl:ak:ver:aut-01", "urn:nl:ak:ver:aia-19", "urn:nl:ak:ver:aia-09", "urn:nl:ak:ver:avg-04", "urn:nl:ak:ver:aia-23", "urn:nl:ak:ver:aia-24", "urn:nl:ak:ver:avg-05", "urn:nl:ak:ver:aia-19"]
+template: &systemcard_measures_template
+  requirement: $MEASURE
+  value: $VALUE
+  remarks: $REMARKS
+  status: $STATUS
+  timestamp: $TIMESTAMP
+  authors:
+  - name: $AUTHOR.NAME
+    email: $AUTHOR.EMAIL
+    role: $AUTHOR.ROLE

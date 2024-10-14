@@ -1,0 +1,28 @@
+systemcard_path: .systemcard.measures[]
+schema_version: 1.1.0
+name: "Voer een Project Startarchitectuur (PSA) uit als algoritmes of AI-systemen worden ontwikkeld of ingekocht."
+description: "Voer een Project Startarchitectuur (PSA) uit als algoritmes of AI-systemen worden ontwikkeld of ingekocht."
+explanation: "- Een Project Startarchitectuur (PSA) is een hulpmiddel dat bij een project wordt ingezet om veranderingen van A naar Beter te faciliteren.\n- De PSA richt zich daarbij op de kaders die op een project van toepassing zijn en wat de oplossing bijdraagt aan het realiseren van de gewenste, toekomstige architectuur, wat de implicaties zullen zijn voor bestaande voorzieningen en waar het project zal afwijken van bestaande beelden.\n- Met de PSA wordt een concreet en doelgericht ICT-architectuurkader opgesteld, waarbinnen het project moet worden uitgevoerd.\n- De PSA maakt concreet wat architectuur voor een project betekent.\n- Door een PSA uit te voeren ontstaan inzichten hoe het betreffende algoritme of AI-systeem zo optimaal mogelijk onderdeel kan worden gemaakt van het bestaande applicatielandschap, waarmee bijvoorbeeld kan worden voorkomen dat het algoritme of AI-systeem na verloop van tijd geen input meer kan ontvangen door onverwachte wijzigingen in systemen.\n- Onderwerpen als privacy, informatiebeheer en beheer worden hierin ook globaal meegenomen."
+urn: urn:nl:ak:mtr:pgb-07
+language: nl
+owners:
+- organization: Algoritmekader
+  name: ''
+  email: ''
+  role: ''
+date: ''
+url: https://minbzk.github.io/Algoritmekader/maatregelen/voer_een_project_startarchitectuur_uit/index.html
+subject: ["privacy-en-gegevensbescherming"]
+suggested_roles: ["proceseigenaar", "informatie analist", "data engineer", "privacy-officer", "security officer", "inkoopadviseur", "architect"]
+lifecycle: ["ontwerp", "ontwikkelen", "verificatie-en-validatie", "implementatie"]
+links: ["urn:nl:ak:ver:aia-10", "urn:nl:ak:ver:awb-01", "urn:nl:ak:ver:avg-11"]
+template: &systemcard_measures_template
+  requirement: $MEASURE
+  value: $VALUE
+  remarks: $REMARKS
+  status: $STATUS
+  timestamp: $TIMESTAMP
+  authors:
+  - name: $AUTHOR.NAME
+    email: $AUTHOR.EMAIL
+    role: $AUTHOR.ROLE

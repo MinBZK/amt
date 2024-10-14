@@ -11,11 +11,21 @@ owners:
     role: ""
 date: ""
 url: "https://minbzk.github.io/Algoritmekader/vereisten/aia-07-automatische-logregistratie/index.html"
-suggested_roles: [ "Aanbieder", "Gebruiksverantwoordelijke" ]
+suggested_roles: [ "aanbieder", "gebruiksverantwoordelijke" ]
 lifecycle: [ "ontwikkelen", "monitoring-en-beheer" ]
 subject: ["governance", "technische-robuustheid-en-veiligheid"]
-links: [urn:nl:ak:mtr:pin:01, urn:nl:ak:mtr:pin:02, urn:nl:ak:mtr:pin:04, urn:nl:ak:mtr:pin:05, urn:nl:ak:mtr:pin:06, urn:nl:ak:mtr:pin:07,
-  urn:nl:ak:mtr:pin:09, urn:nl:ak:mtr:gov:01, urn:nl:ak:mtr:gov:02, urn:nl:ak:mtr:gov:03]
+links: [
+    "urn:nl:ak:mtr:pin-01",
+    "urn:nl:ak:mtr:pin-02",
+    "urn:nl:ak:mtr:pin-04",
+    "urn:nl:ak:mtr:pin-05",
+    "urn:nl:ak:mtr:pin-06",
+    "urn:nl:ak:mtr:pin-07",
+    "urn:nl:ak:mtr:pin-09",
+    "urn:nl:ak:mtr:gov-01",
+    "urn:nl:ak:mtr:gov-02",
+    "urn:nl:ak:mtr:gov-03"
+]
 ai_risk_profile: ["AI-systeem", "AI-systeem voor algemene doeleinden", "hoog-risico AI"]
 always_applicable: 0
 template: &systemcard_requirements_template

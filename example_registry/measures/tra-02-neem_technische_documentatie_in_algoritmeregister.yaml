@@ -1,0 +1,28 @@
+systemcard_path: .systemcard.measures[]
+schema_version: 1.1.0
+name: "Neem technische documentatie op in het algoritmeregister"
+description: "Neem technische documentatie op in het algoritmeregister"
+explanation: "Met het opstellen van technische documentatie over algoritmes en AI-systemen wordt belangrijke informatie vastgelegd die moet worden opgenomen of kan worden opgenomen in het Algoritmeregister. De Handreiking Algoritmeregister en de [Publicatiestandaard van het register](https://algoritmes.pleio.nl/attachment/entity/a47f2708-48bd-4a10-8893-ab24ac8c7207) kan worden geraadpleegd om te bepalen of en welke informatie van een algoritme of AI-systeem moet worden gepubliceerd. Door dit goed af te stemmen kan hergebruik worden gemaakt van al gedocumenteerde informatie."
+urn: urn:nl:ak:mtr:tra-02
+language: nl
+owners:
+- organization: Algoritmekader
+  name: ''
+  email: ''
+  role: ''
+date: ''
+url: https://minbzk.github.io/Algoritmekader/maatregelen/neem_technische_documentatie_in_algoritmeregister/index.html
+subject: ["transparantie"]
+suggested_roles: ["proceseigenaar", "privacy-officer", "data scientist", "data engineer", "beleidsmedewerker"]
+lifecycle: ["ontwikkelen", "verificatie-en-validatie", "implementatie", "monitoring-en-beheer"]
+links: ["urn:nl:ak:ver:bzk-01"]
+template: &systemcard_measures_template
+  requirement: $MEASURE
+  value: $VALUE
+  remarks: $REMARKS
+  status: $STATUS
+  timestamp: $TIMESTAMP
+  authors:
+  - name: $AUTHOR.NAME
+    email: $AUTHOR.EMAIL
+    role: $AUTHOR.ROLE

@@ -23,7 +23,28 @@ date: ''
 url: https://minbzk.github.io/Algoritmekader/vereisten/aut-01-auteursrechten.md/index.html
 subject: ["data", "governance"]
 lifecycle: ["dataverkenning-en-datapreparatie", "ontwerp"]
-links: [urn:nl:ak:mtr:gov:02]
+links: [
+    "urn:nl:ak:mtr:pin-12",
+    "urn:nl:ak:mtr:pin-01",
+    "urn:nl:ak:mtr:pin-01",
+    "urn:nl:ak:mtr:pin-15",
+    "urn:nl:ak:mtr:dat-01",
+    "urn:nl:ak:mtr:pin-02",
+    "urn:nl:ak:mtr:pin-16",
+    "urn:nl:ak:mtr:pin-17",
+    "urn:nl:ak:mtr:pin-18",
+    "urn:nl:ak:mtr:pin-03",
+    "urn:nl:ak:mtr:pin-04",
+    "urn:nl:ak:mtr:pin-05",
+    "urn:nl:ak:mtr:pin-07",
+    "urn:nl:ak:mtr:pin-08",
+    "urn:nl:ak:mtr:pin-19",
+    "urn:nl:ak:mtr:gov-02",
+    "urn:nl:ak:mtr:pin-20",
+    "urn:nl:ak:mtr:pin-21",
+    "urn:nl:ak:mtr:gov-05",
+    "urn:nl:ak:mtr:pin-09"
+]
 ai_risk_profile: []
 always_applicable: 1
 template: &systemcard_requirements_template

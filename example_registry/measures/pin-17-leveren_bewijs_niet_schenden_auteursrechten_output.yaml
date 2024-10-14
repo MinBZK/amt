@@ -1,0 +1,32 @@
+systemcard_path: .systemcard.measures[]
+schema_version: 1.1.0
+name: Bewijs laten leveren dat auteursrechten niet worden geschonden met de output
+description: Maak het al dan niet kunnen leveren van bewijs door een aanbieder dat
+  auteursrechten niet worden geschonden door de output een vast onderdeel van de wedstrijd/inkoop/beoordeelingsmatrix
+  als ook de vaste beoordeling.
+explanation: "Laat de aanbieder(s) uitleggen en (aantoonbaar) onderbouwen of de output\
+  \ van een algoritme een (potentiële) inbreuk maakt op auteursrechten.\nMaak een\
+  \ jurist onderdeel van de beoordeling hiervan."
+urn: urn:nl:ak:mtr:pin-17
+language: nl
+owners:
+- organization: Algoritmekader
+  name: ''
+  email: ''
+  role: ''
+date: ''
+url: https://minbzk.github.io/Algoritmekader/maatregelen/leveren_bewijs_niet_schenden_auteursrechten_output/index.html
+subject: ["publieke-inkoop"]
+suggested_roles: ["proceseigenaar", "behoeftesteller", "inkoopadviseur", "contractbeheerder", "aanbestedingsjurist", "gemandateerd verantwoordelijke(n)"]
+lifecycle: ["ontwerp", "monitoring-en-beheer"]
+links: ["urn:nl:ak:ver:aut-01"]
+template: &systemcard_measures_template
+  requirement: $MEASURE
+  value: $VALUE
+  remarks: $REMARKS
+  status: $STATUS
+  timestamp: $TIMESTAMP
+  authors:
+  - name: $AUTHOR.NAME
+    email: $AUTHOR.EMAIL
+    role: $AUTHOR.ROLE

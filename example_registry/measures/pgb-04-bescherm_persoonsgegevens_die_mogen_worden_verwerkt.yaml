@@ -1,0 +1,28 @@
+systemcard_path: .systemcard.measures[]
+schema_version: 1.1.0
+name: Bescherm persoonsgegevens die mogen worden verwerkt voor het ontwikkelen en gebruiken van algoritmes en AI-systemen.
+description: Pas maatregelen toe als pseudonimiseren, anonimisering of aggregeren van persoonsgegevens toe bij het verwerken van de data.
+explanation: '- Als is vastgesteld welke persoonsgegevens mogen worden verwerkt voor het ontwikkelen en gebruiken van algoritmes en AI-systemen, moet worden nagegaan of er maatregelen kunnen worden getroffen om deze te beschermen.\n\n- Hierbij kan worden gedacht aan het pseudonomiseren, anonimiseren of aggregeren van persoonsgegevens.\n\n- Het bepalen of persoonsgegevens mogen worden verwerkt voor algoritmes en AI-systemen moet worden bekeken in samenhang met maatregelen die kunnen worden getroffen om deze gegevens te beschermen.'
+urn: urn:nl:ak:mtr:pgb-04
+language: nl
+owners:
+- organization: Algoritmekader
+  name: ''
+  email: ''
+  role: ''
+date: ''
+url: https://minbzk.github.io/Algoritmekader/maatregelen/bescherm_persoonsgegevens_die_mogen_worden_verwerkt/index.html
+subject: ["privacy-en-gegevensbescherming", "technische-robuustheid-en-veiligheid"]
+suggested_roles: ["proceseigenaar", "aanbieder", "data scientist", "data engineer", "security officer", "privacy-officer"]
+lifecycle: ["ontwerp", "dataverkenning-en-datapreparatie", "ontwikkelen"]
+links: ["urn:nl:ak:ver:avg-03", "urn:nl:ak:ver:avg-12"]
+template: &systemcard_measures_template
+  requirement: $MEASURE
+  value: $VALUE
+  remarks: $REMARKS
+  status: $STATUS
+  timestamp: $TIMESTAMP
+  authors:
+  - name: $AUTHOR.NAME
+    email: $AUTHOR.EMAIL
+    role: $AUTHOR.ROLE

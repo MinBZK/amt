@@ -23,7 +23,17 @@ date: ''
 url: https://minbzk.github.io/Algoritmekader/vereisten/avg-03-minimale-verwerking-van-persoonsgegevens/index.html
 subject: ["privacy-en-gegevensbescherming"]
 lifecycle: ["ontwerp", "dataverkenning-en-datapreparatie", "ontwikkelen"]
-links: []
+links: [
+    "urn:nl:ak:mtr:pgb-04",
+    "urn:nl:ak:mtr:pin-01",
+    "urn:nl:ak:mtr:pin-02",
+    "urn:nl:ak:mtr:pin-03",
+    "urn:nl:ak:mtr:pin-04",
+    "urn:nl:ak:mtr:pin-05",
+    "urn:nl:ak:mtr:pin-07",
+    "urn:nl:ak:mtr:pin-08",
+    "urn:nl:ak:mtr:pin-09"
+]
 ai_risk_profile: []
 always_applicable: 1
 template: &systemcard_requirements_template

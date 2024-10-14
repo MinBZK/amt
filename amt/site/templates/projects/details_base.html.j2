@@ -1,6 +1,12 @@
 {% extends 'layouts/base.html.j2' %}
 {% block title %}{{ project.name }} | AMT{% endblock %}
 {% block content %}
+    <div id="measure-modal" class="minbzk-modal display-none">
+        <div class="modal-underlay" onclick="amt.closeModal('measure-modal')"></div>
+        <div class="modal-content rvo-layout-column rvo-layout-gap--md">
+            <div id="dynamic-modal-content"></div>
+        </div>
+    </div>
     <div class="rvo-max-width-layout rvo-max-width-layout--md rvo-max-width-layout-inline-padding--none">
         <div class="rvo-content">
             <h1 class="utrecht-heading-1">{{ project.name }}</h1>
@@ -17,7 +23,8 @@
                                   role="img"
                                   aria-label=""></span>{% trans %}Does the algorithm meet the requirements?{% endtrans %}
                         </h5>
-                        <a class="rvo-text--subtle rvo-text--bold">{{ requirements_state.count_0 }}/{{ requirements_state.count_1 }} {% trans %}Done{% endtrans %}</a>
+                        <a class="rvo-text--subtle rvo-text--bold">{{ requirements_state.count_0 }}/{{ requirements_state.count_1 }}
+                        {% trans %}Done{% endtrans %}</a>
                     </div>
                     <ul class="rvo-item-list">
                         {% for requirement in requirements_state.states %}
@@ -27,8 +34,10 @@
                                     <div class="rvo-layout-row rvo-layout-gap--sm"
                                          style="display: flex;
                                                 justify-content: space-between">
-                                        <div class="rvo-layout-row rvo-layout-gap--sm">
+                                        <div class="rvo-layout-row rvo-layout-gap--sm rvo-layout-align-items-start">
                                             {% if requirement.state == "to do" %}
+                                                <div class="rvo-status-indicator rvo-status-indicator--hemelblauw"></div>
+                                            {% elif requirement.state == "in progress" %}
                                                 <div class="rvo-status-indicator rvo-status-indicator--oranje"></div>
                                             {% else %}
                                                 <div class="rvo-status-indicator rvo-status-indicator--groen"></div>
@@ -37,6 +46,8 @@
                                         </div>
                                         {% if requirement.state == "to do" %}
                                             <a class="rvo-text--subtle">{% trans %}To do{% endtrans %}</a>
+                                        {% elif requirement.state == "in progress" %}
+                                            <a class="rvo-text--subtle">{% trans %}In progress{% endtrans %}</a>
                                         {% else %}
                                             <a class="rvo-text--subtle">{% trans %}Done{% endtrans %}</a>
                                         {% endif %}
@@ -75,7 +86,7 @@
                                     <div class="rvo-layout-row rvo-layout-gap--sm"
                                          style="display: flex;
                                                 justify-content: space-between">
-                                        <div class="rvo-layout-row rvo-layout-gap--sm">
+                                        <div class="rvo-layout-row rvo-layout-gap--sm rvo-layout-align-items-start">
                                             {% if instrument.in_progress == 1 %}
                                                 <div class="rvo-status-indicator rvo-status-indicator--oranje"></div>
                                             {% else %}

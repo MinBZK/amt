@@ -26,7 +26,7 @@ date: ''
 url: https://minbzk.github.io/Algoritmekader/vereisten/grw-01-fundamentele-rechten/index.html
 subject: ["fundamentele-rechten", "bias-en-non-discriminatie"]
 lifecycle: ["probleemanalyse", "ontwerp", "verificatie-en-validatie", "monitoring-en-beheer"]
-links: [urn:nl:ak:mtr:gov:01]
+links: ["urn:nl:ak:mtr:gov-01", "urn:nl:ak:mtr:gov-02"]
 ai_risk_profile: []
 always_applicable: 1
 template: &systemcard_requirements_template

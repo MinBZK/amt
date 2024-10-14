@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class MeasureBase(BaseModel):
@@ -12,5 +12,11 @@ class MeasureTask(MeasureBase):
 
 
 class Measure(MeasureBase):
+    name: str
+    description: str
+    links: list[str] = Field(default=[])
+
+
+class ExtendedMeasureTask(MeasureTask):
     name: str
     description: str

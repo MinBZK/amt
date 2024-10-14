@@ -23,7 +23,7 @@ date: ''
 url: https://minbzk.github.io/Algoritmekader/vereisten/bzk-01-algoritmeregister/index.html
 subject: ["transparantie"]
 lifecycle: ["implementatie", "monitoring-en-beheer"]
-links: []
+links: ["urn:nl:ak:mtr:pin-01", "urn:nl:ak:mtr:pin-02", "urn:nl:ak:mtr:pin-04", "urn:nl:ak:mtr:pin-05", "urn:nl:ak:mtr:pin-07", "urn:nl:ak:mtr:pin-09", "urn:nl:ak:mtr:tra-01", "urn:nl:ak:mtr:tra-02"]
 ai_risk_profile: ["AI-systeem",  "AI-systeem voor algemene doeleinden", "impactvol algoritme", "Hoog-risico AI"]
 always_applicable: 0
 template: &systemcard_requirements_template

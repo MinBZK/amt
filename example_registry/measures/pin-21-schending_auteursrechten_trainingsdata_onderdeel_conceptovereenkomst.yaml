@@ -1,0 +1,39 @@
+systemcard_path: .systemcard.measures[]
+schema_version: 1.1.0
+name: Garantie in conceptovereenkomst dat auteursrechten niet worden geschonden met de trainingsdata
+description: Neem in de conceptovereenkomst op dat de aanbieder garandeert dat auteursrechten
+  met de verwerkte of te verwerken trainingsdata niet zullen worden geschonden en
+  deze dit gedurende de ontwikkeling en levensduur actief bewaakt.
+explanation: 'Laat de aanbieder die actieve bewaking in zijn aanbieding omschrijven
+  en neem het op in de beoordeling.
+
+  Voor zover van toepassing, laat deze omschrijving helder onderscheid maken in bewaking
+  tijdens ontwikkeling (richting aan de maker), selectie (richting aan de koper),
+  gebruik (richting aan de gebruiker/exploitant) en/of de output (richting aan het
+  algoritme/AI-systeem).
+
+  Dit kan aanvullend als specialis op bijvoorbeeld voorwaarden die in de ARBIT of
+  ARVODI zijn opgenomen.'
+urn: urn:nl:ak:mtr:pin-21
+language: nl
+owners:
+- organization: Algoritmekader
+  name: ''
+  email: ''
+  role: ''
+date: ''
+url: https://minbzk.github.io/Algoritmekader/maatregelen/schending_auteursrechten_trainingsdata_onderdeel_conceptovereenkomst/index.html
+subject: ["publieke-inkoop"]
+suggested_roles: ["proceseigenaar", "behoeftesteller", "inkoopadviseur", "aanbestedingsjurist", "contractbeheerder"]
+lifecycle: ["ontwerp", "monitoring-en-beheer"]
+links: ["urn:nl:ak:ver:aut-01"]
+template: &systemcard_measures_template
+  requirement: $MEASURE
+  value: $VALUE
+  remarks: $REMARKS
+  status: $STATUS
+  timestamp: $TIMESTAMP
+  authors:
+  - name: $AUTHOR.NAME
+    email: $AUTHOR.EMAIL
+    role: $AUTHOR.ROLE

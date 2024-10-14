@@ -21,7 +21,20 @@ date: ''
 url: https://minbzk.github.io/Algoritmekader/vereisten/arc-01-archiefwet.md/index.html
 subject: ["technische-robuustheid-en-veiligheid", "governance", "data", "privacy-en-gegevensbescherming"]
 lifecycle: ["uitfaseren", "monitoring-en-beheer", "ontwikkelen"]
-links: []
+links: [
+    "urn:nl:ak:mtr:gov-07",
+    "urn:nl:ak:mtr:gov-08",
+    "urn:nl:ak:mtr:gov-09",
+    "urn:nl:ak:mtr:gov-10",
+    "urn:nl:ak:mtr:pgb-01",
+    "urn:nl:ak:mtr:pin-01",
+    "urn:nl:ak:mtr:pin-02",
+    "urn:nl:ak:mtr:pin-04",
+    "urn:nl:ak:mtr:pin-05",
+    "urn:nl:ak:mtr:pin-07",
+    "urn:nl:ak:mtr:pin-09",
+    "urn:nl:ak:mtr:pin-11"
+]
 ai_risk_profile: []
 always_applicable: 1
 template: &systemcard_requirements_template

@@ -24,7 +24,19 @@ date: ''
 url: https://minbzk.github.io/Algoritmekader/vereisten/avg-10-recht-op-niet-geautomatiseerde-besluitvorming/index.html
 subject: ["privacy-en-gegevensbescherming"]
 lifecycle: ["ontwerp", "ontwikkelen", "monitoring-en-beheer"]
-links: []
+links: [
+    "urn:nl:ak:mtr:pin-23",
+    "urn:nl:ak:mtr:pin-01",
+    "urn:nl:ak:mtr:pin-02",
+    "urn:nl:ak:mtr:pin-03",
+    "urn:nl:ak:mtr:pin-04",
+    "urn:nl:ak:mtr:pin-05",
+    "urn:nl:ak:mtr:pin-07",
+    "urn:nl:ak:mtr:gov-06",
+    "urn:nl:ak:mtr:gov-12",
+    "urn:nl:ak:mtr:pin-08",
+    "urn:nl:ak:mtr:pin-09"
+]
 ai_risk_profile: []
 always_applicable: 1
 template: &systemcard_requirements_template

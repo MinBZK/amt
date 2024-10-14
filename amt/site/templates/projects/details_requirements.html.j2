@@ -1,9 +1,9 @@
 {% extends 'projects/details_base.html.j2' %}
 {% block detail_content %}
     <div class="rvo-accordion">
-        {% for (requirement, measures) in requirements_and_measures %}
+        {% for (requirement, completed_measures_count, measures) in requirements_and_measures %}
             <details class="rvo-accordion__item">
-                <summary class="rvo-accordion__item-summary">
+                <summary class="rvo-accordion__item-summary margin-bottom-large">
                     <h3 class="utrecht-heading-3 rvo-accordion__item-title rvo-heading--no-margins rvo-heading--mixed">
                         <span class="utrecht-icon rvo-icon rvo-icon-delta-omlaag rvo-icon--md rvo-icon--hemelblauw rvo-accordion__item-icon--closed"
                               role="img"
@@ -15,18 +15,46 @@
                     </h3>
                     <span class="rvo-accordion-teaser">
                         <div class="rvo-layout-row rvo-layout-gap--sm">
-                            <div class="rvo-status-indicator rvo-status-indicator--oranje"></div>
-                            0 / {{ measures | length }} {% trans %}measures executed{% endtrans %}
+                            {% if completed_measures_count == 0 %}
+                                <div class="rvo-status-indicator rvo-status-indicator--hemelblauw"></div>
+                            {% elif completed_measures_count < measures | length %}
+                                <div class="rvo-status-indicator rvo-status-indicator--oranje"></div>
+                            {% else %}
+                                <div class="rvo-status-indicator rvo-status-indicator--groen"></div>
+                            {% endif %}
+                            {{ completed_measures_count }} / {{ measures | length }} {% trans %}measures executed{% endtrans %}
                         </div>
                     </span>
                 </summary>
                 {% for measure in measures %}
                     <div class="rvo-accordion__content">
-                        <div class="rvo-layout-row rvo-layout-gap--sm">
-                            <div class="rvo-status-indicator rvo-status-indicator--oranje"></div>
-                            <h4 class="utrecht-heading-4 rvo-heading--no-margins">{{ measure.name }}</h4>
+                        <div class="rvo-layout-row rvo-layout-gap--sm rvo-layout-align-items-start rvo-layout-margin-horizontal--xl">
+                            {% if measure.state == "to do" %}
+                                <div class="rvo-status-indicator rvo-status-indicator--hemelblauw"></div>
+                            {% elif measure.state == "in progress" %}
+                                <div class="rvo-status-indicator rvo-status-indicator--oranje"></div>
+                            {% elif measure.state == "done" %}
+                                <div class="rvo-status-indicator rvo-status-indicator--groen"></div>
+                            {% else %}
+                                {# This should not happen, red could be for overdue.#}
+                                <div class="rvo-status-indicator rvo-status-indicator--rood"></div>
+                            {% endif %}
+                            <div class="rvo-layout-column">
+                                <h4 class="utrecht-heading-4 rvo-heading--no-margins">{{ loop.index }}. {{ measure.name }}</h4>
+                                <p class="rvo-text">{{ measure.value }}</p>
+                                <a class="rvo-link rvo-link--normal rvo-link--with-icon"
+                                   hx-trigger="click"
+                                   hx-target="#dynamic-modal-content"
+                                   hx-get="/project/{{ project_id }}/measure/{{ measure.urn }}"
+                                   hx-swap="innerHTML"
+                                   onclick="amt.openModal('measure-modal')">
+                                    <span class="utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
+                                          role="img"
+                                          aria-label="Home"></span>
+                                    {% trans %}Edit measure{% endtrans %}
+                                </a>
+                            </div>
                         </div>
-                        <p class="rvo-text rvo-text--no-margins">{{ measure.description }}</p>
                     </div>
                 {% endfor %}
             </details>

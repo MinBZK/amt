@@ -1,0 +1,28 @@
+systemcard_path: .systemcard.measures[]
+schema_version: 1.1.0
+name: "Zorg ervoor dat logbestanden worden gecreëerd waarin informatie wordt geregistreerd over gebruikersactiviteiten, uitzonderingen en informatiebeveiligingsgebeurtenissen"
+description: "Zorg ervoor dat logbestanden worden gecreëerd waarin informatie wordt geregistreerd over gebruikersactiviteiten, uitzonderingen en informatiebeveiligingsgebeurtenissen"
+explanation: "- Met logbestanden is te achterhalen wanneer en door wie er (ongewenste) aanpassingen zijn gedaan (audit trail).\n- Loginformatie moet worden gegenereerd, bewaard, gemonitord en toegankelijk worden gemaakt.\n- Logbestanden bevatten vaak gebeurtenissen die gebruikersactiviteiten, uitzonderingen en informatiebeveiligingsgebeurtenissen registreren.\n- Bedenk wat deze informatie betekent in de context van de werking van het algoritme of algoritmisch systeem.\n- Stel vast welke informatie bij het ontwikkelen en gebruiken van algoritmes en AI-systemen relevant is om te loggen.\n- Log behalve het aanpassen van gegevens ook het uitlezen van gegevens waar dat relevant is. Bijvoorbeeld als persoonsgegevens worden opgevraagd.\n- Logs dienen periodiek (of doorlopend) gecontroleerd te worden op relevante incidenten."
+urn: urn:nl:ak:mtr:gov-04
+language: nl
+owners:
+- organization: Algoritmekader
+  name: ''
+  email: ''
+  role: ''
+date: ''
+url: https://minbzk.github.io/Algoritmekader/maatregelen/logging/index.html
+subject: ["technische-robuustheid-en-veiligheid", "governance", "transparantie", "menselijke-controle"]
+suggested_roles: ["projectleider", "informatiebeheerder", "security officer", "archiefdeskundige"]
+lifecycle: ["ontwerp", "dataverkenning-en-datapreparatie", "ontwikkelen", "verificatie-en-validatie", "implementatie", "monitoring-en-beheer"]
+links: ["urn:nl:ak:ver:bio-01", "urn:nl:ak:ver:aia-07", "urn:nl:ak:ver:aia-13"]
+template: &systemcard_measures_template
+  requirement: $MEASURE
+  value: $VALUE
+  remarks: $REMARKS
+  status: $STATUS
+  timestamp: $TIMESTAMP
+  authors:
+  - name: $AUTHOR.NAME
+    email: $AUTHOR.EMAIL
+    role: $AUTHOR.ROLE

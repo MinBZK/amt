@@ -66,4 +66,6 @@ class ProjectsService:
         return self.repository.paginate(skip=skip, limit=limit, search=search)
 
     def update(self, project: Project) -> Project:
+        # TODO: Is this the right place to sync system cards: system_card and system_card_json?
+        project.sync_system_card()
         return self.repository.save(project)

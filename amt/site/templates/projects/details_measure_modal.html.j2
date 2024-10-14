@@ -1,0 +1,89 @@
+<div class="rvo-layout-column rvo-layout-gap--xl">
+    <h1 class="utrecht-heading-1 rvo-heading--no-margins">{{ measure.name }}</h1>
+    <div class="rvo-layout-column rvo-layout-gap--md">
+        <div class="rvo-layout-column rvo-layout-gap--xs">
+            <form hx-ext="json-enc"
+                  hx-post="/project/{{ project_id }}/measure/{{ measure.urn }}"
+                  hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
+                  hx-target-error="#errorContainer"
+                  hx-swap="innerHTML"
+                  method="post"
+                  class="rvo-layout-column rvo-layout-gap--md">
+                <div class="utrecht-form-fieldset rvo-form-fieldset">
+                    <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
+                        {#   Description #}
+                        <div role="group"
+                             aria-labelledby="fieldId-label"
+                             class="utrecht-form-field utrecht-form-field--text rvo-form-field">
+                            <div class="rvo-form-field__label">
+                                <label class="rvo-label" id="fieldId-label" for="fieldId">{% trans %}Description{% endtrans %}</label>
+                                <div class="utrecht-form-field-description">{{ measure.description }}</div>
+                            </div>
+                            <div class="rvo-layout-row">
+                                <span class="utrecht-icon rvo-icon rvo-icon-info rvo-icon--xl rvo-status-icon-info"
+                                      role="img"
+                                      aria-label="Info"></span>
+                                <a href="https://minbzk.github.io/Algoritmekader/"
+                                   class="rvo-link utrecht-link">
+                                    {% trans %}Read more on the algoritmekader{% endtrans %}
+                                </a>
+                            </div>
+                        </div>
+                        {#  Status#}
+                        <div role="group"
+                             aria-labelledby="fieldId-label"
+                             class="utrecht-form-field utrecht-form-field--text rvo-form-field">
+                            <div class="rvo-form-field__label">
+                                <label class="rvo-label" id="fieldId-label" for="fieldId">{% trans %}Status{% endtrans %}</label>
+                            </div>
+                            <div class="rvo-select-wrapper utrecht-textbox--small">
+                                <select id="field"
+                                        name="measure_state"
+                                        class="utrecht-select utrecht-select--html-select">
+                                    {% if measure_state == "to do" %}
+                                        <option value="to do" selected="selected">{% trans %}to do{% endtrans %}</option>
+                                    {% else %}
+                                        <option value="to do">{% trans %}to do{% endtrans %}</option>
+                                    {% endif %}
+                                    {% if measure_state == "in progress" %}
+                                        <option value="in progress" selected="selected">{% trans %}in progress{% endtrans %}</option>
+                                    {% else %}
+                                        <option value="in progress">{% trans %}in progress{% endtrans %}</option>
+                                    {% endif %}
+                                    {% if measure_state == "done" %}
+                                        <option value="done" selected="selected">{% trans %}done{% endtrans %}</option>
+                                    {% else %}
+                                        <option value="done">{% trans %}done{% endtrans %}</option>
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+                        {# Implementation#}
+                        <div role="group"
+                             aria-labelledby="fieldId-label"
+                             class="utrecht-form-field utrecht-form-field--text rvo-form-field">
+                            <div class="rvo-form-field__label">
+                                <label class="rvo-label" id="fieldId-label" for="fieldId">{% trans %}Implementation{% endtrans %}</label>
+                            </div>
+                            <textarea id="field"
+                                      placeholder="{% trans %}Describe how the measure has been implemented, including challenges and solutions.{% endtrans %}"
+                                      class="utrecht-textarea utrecht-textarea--html-textarea utrecht-textarea--large"
+                                      dir="auto"
+                                      name="measure_value">{{ measure_value }}</textarea>
+                        </div>
+                    </fieldset>
+                </div>
+                <p class="utrecht-button-group">
+                    <button id="save-measure-edit"
+                            type="submit"
+                            class="flex utrecht-button utrecht-button--primary-action rvo-layout-row rvo-layout-gap--md utrecht-button--rvo-md rvo-link--no-underline utrecht-button-group__align-left"
+                            onclick="amt.closeModal('measure-modal')">{% trans %}Save{% endtrans %}</button>
+                    <button id="close-measure-edit"
+                            type="button"
+                            class="flex utrecht-button utrecht-button--secondary-action rvo-layout-row rvo-layout-gap--md utrecht-button--rvo-md rvo-link--no-underline utrecht-button-group__align-left"
+                            onclick="amt.closeModal('measure-modal')">{% trans %}Cancel{% endtrans %}</button>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>

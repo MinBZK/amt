@@ -30,7 +30,7 @@ date: ''
 url: https://minbzk.github.io/Algoritmekader/vereisten/awb-01-zorgvuldigheidsbeginsel/index.html
 subject: ["governance"]
 lifecycle: ["organisatieverantwoordelijkheden"]
-links: [urn:nl:ak:mtr:gov:01, urn:nl:ak:mtr:gov:02, urn:nl:ak:mtr:gov:03]
+links: ["urn:nl:ak:mtr:gov-01", "urn:nl:ak:mtr:gov-02", "urn:nl:ak:mtr:gov-03"]
 ai_risk_profile: []
 always_applicable: 1
 template: &systemcard_requirements_template
