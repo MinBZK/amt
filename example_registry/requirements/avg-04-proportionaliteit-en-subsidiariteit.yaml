@@ -1,0 +1,39 @@
+systemcard_path: .systemcard.requirements[]
+schema_version: 1.1.0
+name: Proportionaliteit en subsidiariteit
+description: Gegevensverwerking moet in verhouding staan tot het beoogde doel en persoonsgegevens
+  mogen alleen verwerkt worden als er geen minder ingrijpende manier is om het doel
+  te bereiken. Voor zover het gaat om de verwerking van persoonsgegevens moet dit
+  vereiste aantoonbaar zijn.
+explanation: "Proportionaliteit vereist dat de impact van gegevensverwerking op de\
+  \ persoonlijke levenssfeer voor de toepassing van een algoritme of AI en voor het\
+  \ genereren van de benodigde output in balans is met het beoogde doel.\nSubsidiariteit\
+  \ vereist dat persoonsgegevens alleen moeten worden verwerkt als dit de minst inbreukmakende\
+  \ manier is om het doel te bereiken. \nDeze principes waarborgen dat de privacy\
+  \ van individuen wordt gerespecteerd en dat gegevensverwerking niet verder gaat\
+  \ dan noodzakelijk is voor legitieme doeleinden.\nHet is van belang om deze principes\
+  \ te hanteren om te bepalen of en in welke vorm een algoritmes en AI moet toegepast\
+  \ en om tot een passende mate van gegevensverwerking te komen om het doel te bereiken."
+urn: urn:nl:ak:ver:avg-04
+language: nl
+owners:
+- organization: Algoritmekader
+  name: ''
+  email: ''
+  role: ''
+date: ''
+url: https://minbzk.github.io/Algoritmekader/vereisten/avg-04-proportionaliteit-en-subsidiariteit/index.html
+subject: ["governance", "privacy-en-gegevensbescherming"]
+lifecycle: ["organisatieverantwoordelijkheden"]
+links: [urn:nl:ak:mtr:gov:02]
+ai_risk_profile: []
+always_applicable: 1
+template: &systemcard_requirements_template
+  requirement: $REQUIREMENT
+  remarks: $REMARKS
+  status: $STATUS
+  timestamp: $TIMESTAMP
+  authors:
+  - name: $AUTHOR.NAME
+    email: $AUTHOR.EMAIL
+    role: $AUTHOR.ROLE

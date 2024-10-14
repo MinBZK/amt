@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import Any
 from unittest.mock import Mock
 
-import amt.services.instruments_state
+import amt.services.instruments_and_requirements_state
 import pytest
 from amt.cli.check_state import get_requested_instruments, get_tasks_by_priority
 from amt.core.exceptions import AMTInstrumentError

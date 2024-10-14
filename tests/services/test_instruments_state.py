@@ -5,7 +5,7 @@ import pytest
 from amt.schema.assessment_card import AssessmentCard
 from amt.schema.instrument import InstrumentTask
 from amt.schema.system_card import SystemCard
-from amt.services.instruments_state import (
+from amt.services.instruments_and_requirements_state import (
     InstrumentStateService,
     get_all_next_tasks,
     get_first_lifecycle_idx,

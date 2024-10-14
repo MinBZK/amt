@@ -1,0 +1,55 @@
+systemcard_path: .systemcard.requirements[]
+schema_version: 1.1.0
+name: Een DPIA is verplicht bij hoog risico voor de rechten en vrijheden van natuurlijke
+  personen
+description: Een gegevensbeschermingseffectbeoordeling (DPIA) is verplicht, indien
+  een verwerking van persoonsgegevens waarschijnlijk een hoog risico inhoudt voor
+  de rechten en vrijheden van natuurlijke personen.
+explanation: "Een Gegevensbeschermingseffectbeoordeling (GEB) of Data Protection Impact\
+  \ Assessment (DPIA) is verplicht wanneer de verwerking van persoonsgegevens waarschijnlijk\
+  \ een hoog risico met zich meebrengt voor de rechten en vrijheden van natuurlijke\
+  \ personen. \nDeze beoordeling identificeert en beperkt potenti\xEBle risico's en\
+  \ zorgt ervoor dat passende maatregelen worden genomen om de privacy van individuen\
+  \ te beschermen. \nDeze verplichting draagt bij aan een zorgvuldige en verantwoorde\
+  \ omgang met persoonsgegevens in AI-systemen en algoritmes, waardoor de privacy\
+  \ van individuen wordt gewaarborgd.\n\nLet op: de DPIA verplichting is niet gebaseerd\
+  \ op de hoog-risico criteria uit de AI-act. Volgens [Besluit lijst verwerkingen\
+  \ persoonsgegevens waarvoor een gegevensbeschermingseffectbeoordeling (DPIA) verplicht\
+  \ is, Autoriteit Persoonsgegevens](https://wetten.overheid.nl/BWBR0042812/2019-11-27)\
+  \ moet voor het uitvoeren van een DPIA in ieder geval uitgegaan worden van een hoog\
+  \ risico als er sprake is van \xE9\xE9n van de volgende voorwaarden:\n\n 1. Evaluatie\
+  \ of scoretoekenning\n 2. Geautomatiseerde besluitvorming met rechtsgevolg of vergelijkbaar\
+  \ wezenlijk gevolg\n 3. Stelselmatige monitoring\n 4. Gevoelige gegevens of gegevens\
+  \ van zeer persoonlijke aard\n 5. Op grote schaal verwerkte gegevens\n 6. Matching\
+  \ of samenvoeging van datasets\n 7. Gegevens met betrekking tot kwetsbare betrokkenen\n\
+  \ 8. Innovatief gebruik of innovatieve toepassing van nieuwe technologische of organisatorische\
+  \ oplossingen\n 9. de situatie waarin als gevolg van de verwerking zelf \"betrokkenen\
+  \ [...] een recht niet kunnen uitoefenen of geen beroep kunnen doen op een dienst\
+  \ of een overeenkomst\";\n\nHet is mogelijk dat algoritmes die niet aan \xE9\xE9\
+  n of meer van deze eigenschappen voldoen toch voor een potentieel hoog risico zorgen.\
+  \ \n\nGebruiksverantwoordelijken van AI-systemen met een hoog risico gebruiken die\
+  \ informatie op grond van artikel 13 AI Verordening om hun verplichting na te komen\
+  \ om een gegevensbeschermingseffectbeoordeling uit te voeren."
+urn: urn:nl:ak:ver:avg-13
+language: nl
+owners:
+- organization: Algoritmekader
+  name: ''
+  email: ''
+  role: ''
+date: ''
+url: https://minbzk.github.io/Algoritmekader/vereisten/avg-13-dpia-verplicht/index.html
+subject: ["privacy-en-gegevensbescherming"]
+lifecycle: ["ontwerp", "dataverkenning-en-datapreparatie", "ontwikkelen", "verificatie-en-validatie"]
+links: []
+ai_risk_profile: ["AI-systeem", "AI-systeem voor algemene doeleinden", "hoog-risico AI"]
+always_applicable: 0
+template:
+  requirement: $REQUIREMENT
+  remarks: $REMARKS
+  status: $STATUS
+  timestamp: $TIMESTAMP
+  authors:
+  - name: $AUTHOR.NAME
+    email: $AUTHOR.EMAIL
+    role: $AUTHOR.ROLE

@@ -1,0 +1,50 @@
+systemcard_path: .systemcard.requirements[]
+schema_version: 1.1.0
+name: Verplicht risicobeheersysteem voor hoog-risico AI
+description: Voor AI-systemen met een hoog risico wordt een systeem voor risicobeheer
+  vastgesteld, uitgevoerd, gedocumenteerd en in stand gehouden.
+explanation: "Het systeem voor risicobeheer moet bestaan uit een tijdens de gehele\
+  \ levensduur van een AI-systeem met een hoog risico doorlopend en gepland iteratief\
+  \ proces.\nDit proces moet gericht zijn op het vaststellen en beperken van de relevante\
+  \ risico\u2019s van AI-systemen voor de gezondheid, veiligheid en grondrechten.\n\
+  Het systeem voor risicobeheer moet periodiek worden ge\xEBvalueerd en geactualiseerd\
+  \ om de blijvende doeltreffendheid ervan te waarborgen, alsook de motivering en\
+  \ de documentatie van eventuele significante besluiten en maatregelen die op grond\
+  \ van de AI-verordening zijn genomen.\n\n\nDit proces moet ervoor zorgen dat de\
+  \ aanbieder de risico\u2019s of negatieve effecten vaststelt en risicobeperkende\
+  \ maatregelen uitvoert voor de bekende en de redelijkerwijs te voorziene risico\u2019\
+  s van AI-systemen voor de gezondheid, veiligheid en grondrechten.\nHierin moeten\
+  \ ook maatregelen zitten voor redelijkerwijs te voorzien misbruik, met inbegrip\
+  \ van de mogelijke risico\u2019s die voortvloeien uit de wisselwerking tussen het\
+  \ AI-systeem en de omgeving waarin het werkt.\nHet systeem voor risicobeheer moet\
+  \ de passendste risicobeheersmaatregelen vaststellen.\nBij het vaststellen van de\
+  \ passendste risicobeheersmaatregelen moet de aanbieder de gemaakte keuzes documenteren\
+  \ en toelichten en, in voorkomend geval, deskundigen en externe belanghebbenden\
+  \ betrekken.\nBij het vaststellen van het redelijkerwijs te voorzien misbruik van\
+  \ AI-systemen met een hoog risico moet de aanbieder aandacht hebben voor het gebruik\
+  \ van AI-systemen waarvan, hoewel zij niet rechtstreeks onder het beoogde doel vallen\
+  \ en niet in de gebruiksinstructies worden vermeld, mag worden verwacht dat zij\
+  \ kunnen voortvloeien uit gemakkelijk voorspelbaar menselijk gedrag."
+urn: urn:nl:ak:ver:aia-03
+language: nl
+owners:
+- organization: Algoritmekader
+  name: ''
+  email: ''
+  role: ''
+date: ''
+url: https://minbzk.github.io/Algoritmekader/vereisten/aia-03-risicobeheersysteem/index.html
+subject: ["governance"]
+lifecycle: []
+links: [urn:nl:ak:mtr:gov:01]
+ai_risk_profile: ["AI-systeem", "AI-systeem voor algemene doeleinden", "hoog-risico AI"]
+always_applicable: 0
+template: &systemcard_requirements_template
+  requirement: $REQUIREMENT
+  remarks: $REMARKS
+  status: $STATUS
+  timestamp: $TIMESTAMP
+  authors:
+  - name: $AUTHOR.NAME
+    email: $AUTHOR.EMAIL
+    role: $AUTHOR.ROLE

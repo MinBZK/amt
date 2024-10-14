@@ -1,0 +1,38 @@
+systemcard_path: .systemcard.requirements[]
+schema_version: 1.1.0
+name: Recht op niet geautomatiseerde besluitvorming
+description: Betrokkenen hebben het recht om niet onderworpen te worden aan een enkel
+  op geautomatiseerde verwerking, waaronder proflering, gebaseerd besluit, wanneer
+  dit rechtsgevolgen heeft voor hen of het hen anderszins in aanzienlijke mate treft.
+explanation: "Mensen hebben het recht om niet onderworpen te worden aan beslissingen\
+  \ die uitsluitend gebaseerd zijn op geautomatiseerde verwerking, zoals profilering,\
+  \ als dit aanzienlijke gevolgen voor hen heeft of hen op een andere manier aanzienlijk\
+  \ be\xEFnvloedt.\nDit recht biedt bescherming tegen mogelijke negatieve effecten\
+  \ van volledig geautomatiseerde besluitvormingssystemen, en waarborgt dat individuen\
+  \ kunnen rekenen op menselijke tussenkomst en beoordeling bij belangrijke beslissingen\
+  \ die hen kunnen treffen.\nUitgangspunt is dat voor elk individueel geval een zorgvuldige\
+  \ beoordeling van de kenmerken en omstandigheden plaatsvindt voordat een besluit\
+  \ wordt genomen."
+urn: urn:nl:ak:ver:avg-10
+language: nl
+owners:
+- organization: Algoritmekader
+  name: ''
+  email: ''
+  role: ''
+date: ''
+url: https://minbzk.github.io/Algoritmekader/vereisten/avg-10-recht-op-niet-geautomatiseerde-besluitvorming/index.html
+subject: ["privacy-en-gegevensbescherming"]
+lifecycle: ["ontwerp", "ontwikkelen", "monitoring-en-beheer"]
+links: []
+ai_risk_profile: []
+always_applicable: 1
+template: &systemcard_requirements_template
+  requirement: $REQUIREMENT
+  remarks: $REMARKS
+  status: $STATUS
+  timestamp: $TIMESTAMP
+  authors:
+  - name: $AUTHOR.NAME
+    email: $AUTHOR.EMAIL
+    role: $AUTHOR.ROLE

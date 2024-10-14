@@ -6,3 +6,4 @@ webpack.config.prod.js
 tsconfig.json
 
 amt/site/static/vendor/
+example_registry/

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-12 21:16+0200\n"
+"POT-Creation-Date: 2024-10-14 12:11+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -225,10 +225,10 @@ msgid "Reviewing"
 msgstr ""
 
 #: amt/site/templates/macros/tasks.html.j2:32
-#: amt/site/templates/projects/details_base.html.j2:21
+#: amt/site/templates/projects/details_base.html.j2:22
 #: amt/site/templates/projects/details_base.html.j2:43
-#: amt/site/templates/projects/details_base.html.j2:76
-#: amt/site/templates/projects/details_base.html.j2:98
+#: amt/site/templates/projects/details_base.html.j2:69
+#: amt/site/templates/projects/details_base.html.j2:91
 msgid "Done"
 msgstr ""
 
@@ -324,24 +324,24 @@ msgstr ""
 msgid "AMT Placeholder information page"
 msgstr ""
 
-#: amt/site/templates/projects/details_base.html.j2:19
+#: amt/site/templates/projects/details_base.html.j2:20
 msgid "Does the algorithm meet the requirements?"
 msgstr ""
 
-#: amt/site/templates/projects/details_base.html.j2:32
-#: amt/site/templates/projects/details_base.html.j2:96
+#: amt/site/templates/projects/details_base.html.j2:41
+#: amt/site/templates/projects/details_base.html.j2:89
 msgid "To do"
 msgstr ""
 
-#: amt/site/templates/projects/details_base.html.j2:63
+#: amt/site/templates/projects/details_base.html.j2:55
 msgid "Go to all requirements"
 msgstr ""
 
-#: amt/site/templates/projects/details_base.html.j2:73
+#: amt/site/templates/projects/details_base.html.j2:66
 msgid "Which instruments are executed?"
 msgstr ""
 
-#: amt/site/templates/projects/details_base.html.j2:110
+#: amt/site/templates/projects/details_base.html.j2:103
 msgid "Go to all instruments"
 msgstr ""
 
@@ -363,6 +363,10 @@ msgstr ""
 
 #: amt/site/templates/projects/details_info.html.j2:39
 msgid "Labels"
+msgstr ""
+
+#: amt/site/templates/projects/details_requirements.html.j2:22
+msgid "measures executed"
 msgstr ""
 
 #: amt/site/templates/projects/index.html.j2:12

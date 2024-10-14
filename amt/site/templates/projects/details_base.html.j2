@@ -7,6 +7,7 @@
         <div class="rvo-content">
             <h1 class="utrecht-heading-1">{{ project.name }}</h1>
         </div>
+        <!-- Requirements Widget -->
         <div class="rvo-layout-grid-container">
             <div class="rvo-layout-grid rvo-layout-gap--sm rvo-layout-grid-columns--two rvo-layout-grid-layout--1fr">
                 <div class="rvo-card rvo-card--padding-md">
@@ -18,51 +19,43 @@
                                   role="img"
                                   aria-label=""></span>{% trans %}Does the algorithm meet the requirements?{% endtrans %}
                         </h5>
-                        <a class="rvo-text--subtle rvo-text--bold">7/8 {% trans %}Done{% endtrans %}</a>
+                        <a class="rvo-text--subtle rvo-text--bold">{{ requirements_state.count_0 }}/{{ requirements_state.count_1 }} {% trans %}Done{% endtrans %}</a>
                     </div>
                     <ul class="rvo-item-list">
-                        <li class="rvo-item-list__item">
-                            <div class="rvo-layout-row rvo-layout-gap--sm"
-                                 style="display: flex;
-                                        justify-content: space-between">
-                                <div class="rvo-layout-row rvo-layout-gap--sm">
-                                    <div class="rvo-status-indicator rvo-status-indicator--oranje"></div>
-                                    <a class="rvo-link rvo-link--no-underline rvo-link--zwart" href="#">Corrigerende maatregelen voor non-conforme AI</a>
-                                </div>
-                                <a class="rvo-text--subtle">{% trans %}To do{% endtrans %}</a>
-                            </div>
-                        </li>
-                        <li class="rvo-item-list__item">
-                            <div class="rvo-layout-row rvo-layout-gap--sm"
-                                 style="display: flex;
-                                        justify-content: space-between">
-                                <div class="rvo-layout-row rvo-layout-gap--sm">
-                                    <div class="rvo-status-indicator rvo-status-indicator--groen"></div>
-                                    <a class="rvo-link rvo-link--no-underline rvo-link--zwart" href="#">Transparantie in ontwerp voor hoog-risico AI</a>
-                                </div>
-                                <a class="rvo-text--subtle">{% trans %}Done{% endtrans %}</a>
-                            </div>
-                        </li>
-                        <li class="rvo-item-list__item">
-                            <div class="rvo-layout-row rvo-layout-gap--sm"
-                                 style="display: flex;
-                                        justify-content: space-between">
-                                <div class="rvo-layout-row rvo-layout-gap--sm">
-                                    <div class="rvo-status-indicator rvo-status-indicator--groen"></div>
-                                    <a class="rvo-link rvo-link--no-underline rvo-link--zwart" href="#">Beoordeling van grondrechten</a>
-                                </div>
-                                <a class="rvo-text--subtle">Done</a>
-                            </div>
-                        </li>
+                        {% for requirement in requirements_state.states %}
+                            {# Only show the first 3 elements of the instruments_state#}
+                            {% if loop.index <= 3 %}
+                                <li class="rvo-item-list__item">
+                                    <div class="rvo-layout-row rvo-layout-gap--sm"
+                                         style="display: flex;
+                                                justify-content: space-between">
+                                        <div class="rvo-layout-row rvo-layout-gap--sm">
+                                            {% if requirement.state == "to do" %}
+                                                <div class="rvo-status-indicator rvo-status-indicator--oranje"></div>
+                                            {% else %}
+                                                <div class="rvo-status-indicator rvo-status-indicator--groen"></div>
+                                            {% endif %}
+                                            <a class="rvo-link rvo-link--no-underline rvo-link--zwart" href="#">{{ requirement.name }}</a>
+                                        </div>
+                                        {% if requirement.state == "to do" %}
+                                            <a class="rvo-text--subtle">{% trans %}To do{% endtrans %}</a>
+                                        {% else %}
+                                            <a class="rvo-text--subtle">{% trans %}Done{% endtrans %}</a>
+                                        {% endif %}
+                                    </div>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
                     </ul>
                     <a class="margin-top-large rvo-link rvo-link--normal rvo-link--with-icon"
-                       href="#">
+                       href="/project/{{ project_id }}/details/system_card/requirements">
                         <span class="utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
                               role="img"
                               aria-label="Home"></span>
                         {% trans %}Go to all requirements{% endtrans %}
                     </a>
                 </div>
+                <!-- Instrument Widget -->
                 <div class="rvo-card rvo-card--padding-md">
                     <div class="rvo-layout-row"
                          style="display: flex;

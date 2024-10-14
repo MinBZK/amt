@@ -9,6 +9,7 @@ from amt.schema.ai_act_profile import AiActProfile
 from amt.schema.project import ProjectNew
 from amt.schema.system_card import SystemCard
 from amt.services.instruments import InstrumentsService
+from amt.services.task_registry import get_requirements_and_measures
 from fastapi.testclient import TestClient
 from fastapi_csrf_protect import CsrfProtect  # type: ignore # noqa
 
@@ -85,9 +86,9 @@ def test_post_new_projects(
         type="AI-systeem",
         open_source="open-source",
         publication_category="hoog-risico AI",
-        systemic_risk="systeemrisico",
-        transparency_obligations="transparantieverplichtingen",
-        role="aanbieder",
+        systemic_risk="geen systeemrisico",
+        transparency_obligations="geen transparantieverplichtingen",
+        role="gebruiksverantwoordelijke",
     )
 
     # when
@@ -115,9 +116,9 @@ def test_post_new_projects_write_system_card(
         type="AI-systeem",
         open_source="open-source",
         publication_category="hoog-risico AI",
-        systemic_risk="systeemrisico",
-        transparency_obligations="transparantieverplichtingen",
-        role="aanbieder",
+        systemic_risk="geen systeemrisico",
+        transparency_obligations="geen transparantieverplichtingen",
+        role="gebruiksverantwoordelijke",
     )
 
     ai_act_profile = AiActProfile(
@@ -129,7 +130,17 @@ def test_post_new_projects_write_system_card(
         role=project_new.role,
     )
 
-    system_card = SystemCard(name=project_new.name, instruments=[], ai_act_profile=ai_act_profile)
+    # This should be refactored; this is here because for the demo of 18 oct the requirements and
+    # measures are hardcoded
+    requirements, measures = get_requirements_and_measures(ai_act_profile)
+
+    system_card = SystemCard(
+        name=project_new.name,
+        instruments=[],
+        ai_act_profile=ai_act_profile,
+        requirements=requirements,
+        measures=measures,
+    )
 
     # when
     client.post("/projects/new", json=project_new.model_dump(), headers={"X-CSRF-Token": "1"})

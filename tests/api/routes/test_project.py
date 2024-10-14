@@ -169,7 +169,7 @@ def test_get_system_card_requirements(client: TestClient, db: DatabaseTestUtils)
     # then
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"To be implemented" in response.content
+    assert b"0" in response.content
 
 
 def test_get_system_card_data_page(client: TestClient, db: DatabaseTestUtils) -> None:

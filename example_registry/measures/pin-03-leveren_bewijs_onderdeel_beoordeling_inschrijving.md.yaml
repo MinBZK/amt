@@ -1,0 +1,32 @@
+systemcard_path: .systemcard.measures[]
+schema_version: 1.1.0
+name: Maak het leveren van bewijs voor het voldoen aan de vereiste onderdeel van de
+  beoordeling van een inschrijving
+description: Maak het leveren van bewijs voor het voldoen aan de vereiste onderdeel van de
+  beoordeling van een inschrijving
+explanation: 'Door de inschrijver/aanbieder bewijs te laten leveren dat deze voldoet aan de vereiste,
+  kan worden beoordeeld door opdrachtgever in hoeverre daadwerkelijk wordt voldaan
+  aan deze vereiste. Op deze manier worden inschrijvers/aanbieders aangespoord om
+  te motiveren wat zij hebben gedaan om te voldoen aan de vereiste.'
+urn: urn:nl:ak:mtr:pin:03
+language: nl
+owners:
+- organization: Algoritmekader
+  name: ''
+  email: ''
+  role: ''
+date: ''
+subject: ["publieke-inkoop"]
+suggested_role: ["proceseigenaar", "behoeftesteller", "data-scientist", "ethicus", "privacy-officer", "security-officer", "inkoopadviseur", "contractbeheerder", "aanbestedingsjurist"]
+lifecycle: ["ontwerp", "ontwikkelen"]
+links: ["urn:nl:ak:ver:aia-28", "urn:nl:ak:ver:aut-01", "urn:nl:ak:ver:dat-01", "urn:nl:ak:ver:aia-04", "urn:nl:ak:ver:aia-01", "urn:nl:ak:ver:aia-18", "urn:nl:ak:ver:avg-08", "urn:nl:ak:ver:grw-01", "urn:nl:ak:ver:aia-11", "urn:nl:ak:ver:aia-05", "urn:nl:ak:ver:aia-29", "urn:nl:ak:ver:grw-02", "urn:nl:ak:ver:avg-03", "urn:nl:ak:ver:avg-11", "urn:nl:ak:ver:avg-10", "urn:nl:ak:ver:aia-03", "urn:nl:ak:ver:aia-09", "urn:nl:ak:ver:aia-08", "urn:nl:ak:ver:avg-07", "urn:nl:ak:ver:aia-19", "urn:nl:ak:ver:aia-20", "urn:nl:ak:ver:woo-01"]
+template:
+  requirement: $MEASURE
+  value: $VALUE
+  remarks: $REMARKS
+  status: $STATUS
+  timestamp: $TIMESTAMP
+  authors:
+  - name: $AUTHOR.NAME
+    email: $AUTHOR.EMAIL
+    role: $AUTHOR.ROLE

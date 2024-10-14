@@ -1,3 +1,4 @@
+import functools
 import logging
 from pathlib import Path
 from typing import Annotated, Any
@@ -19,9 +20,10 @@ from amt.enums.status import Status
 from amt.models import Project
 from amt.schema.system_card import SystemCard
 from amt.schema.task import MovedTask
-from amt.services.instruments_state import InstrumentStateService
+from amt.services.instruments_and_requirements_state import InstrumentStateService, RequirementsStateService
 from amt.services.projects import ProjectsService
 from amt.services.storage import StorageFactory
+from amt.services.task_registry import fetch_measures, fetch_requirements
 from amt.services.tasks import TasksService
 from amt.utils.storage import get_include_content
 
@@ -36,6 +38,7 @@ def get_system_card_data() -> SystemCard:
     return SystemCard(**system_card)
 
 
+@functools.lru_cache
 def get_instrument_state() -> dict[str, Any]:
     system_card_data = get_system_card_data()
     instrument_state = InstrumentStateService(system_card_data)
@@ -44,6 +47,18 @@ def get_instrument_state() -> dict[str, Any]:
         "instrument_states": instrument_states,
         "count_0": instrument_state.get_amount_completed_instruments(),
         "count_1": instrument_state.get_amount_total_instruments(),
+    }
+
+
+def get_requirements_state(system_card: SystemCard) -> dict[str, Any]:
+    requirements = fetch_requirements([requirement.urn for requirement in system_card.requirements])
+    requirements_state_service = RequirementsStateService(system_card)
+    requirements_state = requirements_state_service.get_requirements_state(requirements)
+
+    return {
+        "states": requirements_state,
+        "count_0": requirements_state_service.get_amount_completed_requirements(),
+        "count_1": requirements_state_service.get_amount_total_requirements(),
     }
 
 
@@ -88,6 +103,7 @@ async def get_tasks(
 ) -> HTMLResponse:
     project = get_project_or_error(project_id, projects_service, request)
     instrument_state = get_instrument_state()
+    requirements_state = get_requirements_state(project.system_card)
     tab_items = get_project_details_tabs(request)
 
     breadcrumbs = resolve_base_navigation_items(
@@ -101,9 +117,11 @@ async def get_tasks(
 
     context = {
         "instrument_state": instrument_state,
+        "requirements_state": requirements_state,
         "tasks_service": tasks_service,
         "statuses": Status,
         "project": project,
+        "project_id": project.id,
         "breadcrumbs": breadcrumbs,
         "tab_items": tab_items,
     }
@@ -158,6 +176,7 @@ async def get_project_details(
 
     system_card_data = get_system_card_data()
     instrument_state = get_instrument_state()
+    requirements_state = get_requirements_state(project.system_card)
 
     tab_items = get_project_details_tabs(request)
 
@@ -166,7 +185,9 @@ async def get_project_details(
         "last_edited": project.last_edited,
         "system_card": system_card_data,
         "instrument_state": instrument_state,
+        "requirements_state": requirements_state,
         "project": project,
+        "project_id": project.id,
         "breadcrumbs": breadcrumbs,
         "tab_items": tab_items,
     }
@@ -187,6 +208,7 @@ async def get_system_card(
 ) -> HTMLResponse:
     project = get_project_or_error(project_id, projects_service, request)
     instrument_state = get_instrument_state()
+    requirements_state = get_requirements_state(project.system_card)
 
     tab_items = get_project_details_tabs(request)
 
@@ -209,6 +231,7 @@ async def get_system_card(
     context = {
         "system_card": system_card_data,
         "instrument_state": instrument_state,
+        "requirements_state": requirements_state,
         "last_edited": project.last_edited,
         "project": project,
         "project_id": project.id,
@@ -232,7 +255,8 @@ async def get_system_card_requirements(
 ) -> HTMLResponse:
     project = get_project_or_error(project_id, projects_service, request)
     instrument_state = get_instrument_state()
-
+    requirements_state = get_requirements_state(project.system_card)
+    # TODO: This tab is fairly slow, fix in later releases
     tab_items = get_project_details_tabs(request)
 
     breadcrumbs = resolve_base_navigation_items(
@@ -244,12 +268,23 @@ async def get_system_card_requirements(
         request,
     )
 
+    # TODO: This is only for the demo of 18 Oct. In reality one would load the requirements from the requirement
+    # field in the system card, but one would load the AI Act Profile and determine the requirements from
+    # the labels in this field.
+    system_card = project.system_card
+    requirements = fetch_requirements([requirement.urn for requirement in system_card.requirements])
+
+    # Get measures that correspond to the requirements.
+    requirements_and_measures = [(requirement, fetch_measures(requirement.links)) for requirement in requirements]
+
     context = {
         "instrument_state": instrument_state,
+        "requirements_state": requirements_state,
         "project": project,
         "project_id": project.id,
         "tab_items": tab_items,
         "breadcrumbs": breadcrumbs,
+        "requirements_and_measures": requirements_and_measures,
     }
 
     return templates.TemplateResponse(request, "projects/details_requirements.html.j2", context)
@@ -268,6 +303,7 @@ async def get_system_card_data_page(
 ) -> HTMLResponse:
     project = get_project_or_error(project_id, projects_service, request)
     instrument_state = get_instrument_state()
+    requirements_state = get_requirements_state(project.system_card)
 
     tab_items = get_project_details_tabs(request)
 
@@ -282,6 +318,7 @@ async def get_system_card_data_page(
 
     context = {
         "instrument_state": instrument_state,
+        "requirements_state": requirements_state,
         "project": project,
         "project_id": project.id,
         "tab_items": tab_items,
@@ -304,6 +341,7 @@ async def get_system_card_instruments(
 ) -> HTMLResponse:
     project = get_project_or_error(project_id, projects_service, request)
     instrument_state = get_instrument_state()
+    requirements_state = get_requirements_state(project.system_card)
 
     tab_items = get_project_details_tabs(request)
 
@@ -318,6 +356,7 @@ async def get_system_card_instruments(
 
     context = {
         "instrument_state": instrument_state,
+        "requirements_state": requirements_state,
         "project": project,
         "project_id": project.id,
         "tab_items": tab_items,
@@ -341,6 +380,7 @@ async def get_assessment_card(
 ) -> HTMLResponse:
     project = get_project_or_error(project_id, projects_service, request)
     instrument_state = get_instrument_state()
+    requirements_state = get_requirements_state(project.system_card)
 
     request.state.path_variables.update({"assessment_card": assessment_card})
 
@@ -365,6 +405,7 @@ async def get_assessment_card(
 
     context = {
         "instrument_state": instrument_state,
+        "requirements_state": requirements_state,
         "assessment_card": assessment_card_data,
         "last_edited": project.last_edited,
         "sub_menu_items": sub_menu_items,
@@ -388,6 +429,7 @@ async def get_model_card(
 ) -> HTMLResponse:
     project = get_project_or_error(project_id, projects_service, request)
     instrument_state = get_instrument_state()
+    requirements_state = get_requirements_state(project.system_card)
 
     # TODO: This now loads an example system card independent of the project ID.
     filepath = Path("example_system_card/system_card.yaml")
@@ -411,10 +453,12 @@ async def get_model_card(
 
     context = {
         "instrument_state": instrument_state,
+        "requirements_state": requirements_state,
         "model_card": model_card_data,
         "last_edited": project.last_edited,
         "breadcrumbs": breadcrumbs,
         "project": project,
+        "project_id": project.id,
         "tab_items": tab_items,
     }
 

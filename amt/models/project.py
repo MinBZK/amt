@@ -47,6 +47,9 @@ class Project(Base):
 
     @property
     def system_card(self) -> ProjectSystemCard:
+        if not hasattr(self, "_system_card"):
+            self._system_card: ProjectSystemCard | None = None
+
         if self._system_card is None:
             if self.system_card_json:
                 self._system_card = ProjectSystemCard(self, **self.system_card_json)
