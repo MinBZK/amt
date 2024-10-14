@@ -112,12 +112,11 @@ def test_get_main_menu():
     main_menu = get_main_menu(default_fastapi_request(url="/project/"), internationalization.get_translation("en"))
 
     # assert right item is active
-    assert len(main_menu) == 2
-    assert main_menu[0].active is False
-    assert main_menu[1].active is True
+    assert len(main_menu) == 1
+    assert main_menu[0].active is True
 
     # assert display text is correct
-    assert main_menu[0].display_text == "Home"
+    assert main_menu[0].display_text == "Projects"
 
 
 def test_mark_active_navigation_item():

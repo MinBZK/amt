@@ -3,10 +3,9 @@ import typing
 
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
-from starlette.responses import Response
+from starlette.responses import RedirectResponse, Response
 
 from amt.core.authorization import get_user
-from amt.core.exceptions import AMTAuthorizationError
 
 RequestResponseEndpoint = typing.Callable[[Request], typing.Awaitable[Response]]
 
@@ -30,4 +29,4 @@ class AuthorizationMiddleware(BaseHTTPMiddleware):
         if auth_disable:
             return response
 
-        raise AMTAuthorizationError()
+        return RedirectResponse(url="/")
