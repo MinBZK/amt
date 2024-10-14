@@ -1,16 +1,19 @@
 from collections.abc import Generator
-from unittest.mock import MagicMock, Mock
+from typing import cast
+from unittest.mock import Mock
 
 import pytest
+from amt.models import Project
+from amt.models.base import Base
 from amt.schema.ai_act_profile import AiActProfile
 from amt.schema.project import ProjectNew
 from amt.schema.system_card import SystemCard
 from amt.services.instruments import InstrumentsService
-from amt.services.storage import FileSystemStorageService
 from fastapi.testclient import TestClient
 from fastapi_csrf_protect import CsrfProtect  # type: ignore # noqa
 
 from tests.constants import default_instrument
+from tests.database_test_utils import DatabaseTestUtils
 
 
 @pytest.fixture
@@ -97,14 +100,17 @@ def test_post_new_projects(
 
 
 def test_post_new_projects_write_system_card(
-    client: TestClient, mock_csrf: Generator[None, None, None], init_instruments: Generator[None, None, None]
+    client: TestClient,
+    mock_csrf: Generator[None, None, None],
+    init_instruments: Generator[None, None, None],
+    db: DatabaseTestUtils,
 ) -> None:
     # Given
     client.cookies["fastapi-csrf-token"] = "1"
-    origin = FileSystemStorageService.write
-    FileSystemStorageService.write = MagicMock()
+
+    name = "name1"
     project_new = ProjectNew(
-        name="name1",
+        name=name,
         lifecycle="DESIGN",
         type="AI-systeem",
         open_source="open-source",
@@ -129,5 +135,6 @@ def test_post_new_projects_write_system_card(
     client.post("/projects/new", json=project_new.model_dump(), headers={"X-CSRF-Token": "1"})
 
     # then
-    FileSystemStorageService.write.assert_called_with(system_card.model_dump())
-    FileSystemStorageService.write = origin
+    base_projects: list[Base] = db.get(Project, "name", name)
+    projects: list[Project] = cast(list[Project], base_projects)
+    assert any(project.system_card == system_card for project in projects if project.system_card is not None)

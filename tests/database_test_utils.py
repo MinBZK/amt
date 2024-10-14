@@ -30,3 +30,11 @@ class DatabaseTestUtils:
 
     def exists(self, model: type[Base], model_field: str, field_value: str | int) -> Base | None:
         return self.get_session().execute(select(model).where(model_field == field_value)).one() is not None  # type: ignore
+
+    def get(self, model: type[Base], model_field: str, field_value: str | int) -> list[Base]:
+        try:
+            query = select(model).where(getattr(model, model_field) == field_value)
+            result = self.get_session().execute(query)
+            return list(result.scalars().all())
+        except AttributeError as err:
+            raise ValueError(f"Field '{model_field}' does not exist in model {model.__name__}") from err

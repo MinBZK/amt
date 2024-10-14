@@ -18,8 +18,8 @@ def default_user(name: str = "default user", avatar: str | None = None) -> User:
     return User(name=name, avatar=avatar)
 
 
-def default_project(name: str = "default project", model_card: str = "/tmp/1.yaml") -> Project:  # noqa: S108
-    return Project(name=name, model_card=model_card)
+def default_project(name: str = "default project") -> Project:
+    return Project(name=name)
 
 
 def default_fastapi_request(url: str = "/") -> Request:
