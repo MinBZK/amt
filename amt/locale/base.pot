@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-16 13:31+0200\n"
+"POT-Creation-Date: 2024-10-16 14:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -231,8 +230,8 @@ msgid "Email"
 msgstr ""
 
 #: amt/site/templates/auth/profile.html.j2:49
-#: amt/site/templates/parts/header.html.j2:92
-#: amt/site/templates/parts/header.html.j2:151
+#: amt/site/templates/parts/header.html.j2:76
+#: amt/site/templates/parts/header.html.j2:135
 msgid "Language"
 msgstr ""
 
@@ -250,8 +249,8 @@ msgstr ""
 
 #: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:11
 #: amt/site/templates/pages/landingpage.html.j2:17
-#: amt/site/templates/parts/header.html.j2:103
-#: amt/site/templates/parts/header.html.j2:161
+#: amt/site/templates/parts/header.html.j2:87
+#: amt/site/templates/parts/header.html.j2:145
 msgid "Login"
 msgstr ""
 
@@ -333,7 +332,7 @@ msgstr ""
 
 #: amt/site/templates/pages/landingpage.html.j2:12
 #: amt/site/templates/parts/footer.html.j2:4
-#: amt/site/templates/parts/header.html.j2:8
+#: amt/site/templates/parts/header.html.j2:19
 msgid "Algorithm Management Toolkit"
 msgstr ""
 
@@ -376,22 +375,14 @@ msgstr ""
 msgid "Contact"
 msgstr ""
 
-#: amt/site/templates/parts/header.html.j2:17
-msgid "Beta version"
+#: amt/site/templates/parts/header.html.j2:7
+msgid "Beta Version"
 msgstr ""
 
-#: amt/site/templates/parts/header.html.j2:27
-msgid "version"
-msgstr ""
-
-#: amt/site/templates/parts/header.html.j2:29
+#: amt/site/templates/parts/header.html.j2:7
 msgid ""
 "This website is under development. All versions are created in an open "
 "manner."
-msgstr ""
-
-#: amt/site/templates/parts/header.html.j2:30
-msgid "Everyone is welcome to make comments and suggestions."
 msgstr ""
 
 #: amt/site/templates/parts/project_search.html.j2:9
