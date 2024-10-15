@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-14 12:11+0200\n"
+"POT-Creation-Date: 2024-10-15 08:45+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_NL\n"
@@ -214,11 +214,15 @@ msgstr "Naam"
 msgid "Email"
 msgstr "Email"
 
-#: amt/site/templates/auth/profile.html.j2:40
+#: amt/site/templates/auth/profile.html.j2:49
 #: amt/site/templates/parts/header.html.j2:92
 #: amt/site/templates/parts/header.html.j2:151
 msgid "Language"
 msgstr "Taal"
+
+#: amt/site/templates/auth/profile.html.j2:54
+msgid "Select language"
+msgstr "Selecteer taal"
 
 #: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:5
 msgid "Not logged in"
@@ -229,7 +233,7 @@ msgid "Please login to view this page"
 msgstr "Meld u aan om deze pagina te bekijken"
 
 #: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:11
-#: amt/site/templates/pages/landingpage.html.j2:16
+#: amt/site/templates/pages/landingpage.html.j2:17
 #: amt/site/templates/parts/header.html.j2:103
 #: amt/site/templates/parts/header.html.j2:161
 msgid "Login"
@@ -260,10 +264,10 @@ msgid "Reviewing"
 msgstr "Beoordelen"
 
 #: amt/site/templates/macros/tasks.html.j2:32
-#: amt/site/templates/projects/details_base.html.j2:22
-#: amt/site/templates/projects/details_base.html.j2:43
-#: amt/site/templates/projects/details_base.html.j2:69
-#: amt/site/templates/projects/details_base.html.j2:91
+#: amt/site/templates/projects/details_base.html.j2:20
+#: amt/site/templates/projects/details_base.html.j2:41
+#: amt/site/templates/projects/details_base.html.j2:67
+#: amt/site/templates/projects/details_base.html.j2:89
 msgid "Done"
 msgstr "Afgerond"
 
@@ -274,7 +278,7 @@ msgstr "Onbekend"
 #: amt/site/templates/pages/assessment_card.html.j2:7
 #: amt/site/templates/pages/model_card.html.j2:6
 #: amt/site/templates/pages/system_card.html.j2:4
-#: amt/site/templates/projects/details_info.html.j2:35
+#: amt/site/templates/projects/details_info.html.j2:32
 msgid "Last updated"
 msgstr "Laatst bijgewerkt"
 
@@ -342,56 +346,53 @@ msgstr "Deze website is in ontwikkeling. Alle versies ontstaan op een open manie
 msgid "Everyone is welcome to make comments and suggestions."
 msgstr "Iedereen mag opmerkingen en suggesties doen."
 
-#: amt/site/templates/projects/details_base.html.j2:3
-#: amt/site/templates/projects/details_data.html.j2:3
-#: amt/site/templates/projects/details_info.html.j2:3
-#: amt/site/templates/projects/details_instruments.html.j2:3
-#: amt/site/templates/projects/details_requirements.html.j2:3
-msgid "AMT Placeholder information page"
-msgstr "AMT Placeholder informatie pagina's"
-
-#: amt/site/templates/projects/details_base.html.j2:20
+#: amt/site/templates/projects/details_base.html.j2:18
 msgid "Does the algorithm meet the requirements?"
-msgstr "Voldoet het algoritme aan alle vereisten?"
+msgstr "Voldoet het algoritme aan de vereisten?"
 
-#: amt/site/templates/projects/details_base.html.j2:41
-#: amt/site/templates/projects/details_base.html.j2:89
+#: amt/site/templates/projects/details_base.html.j2:39
+#: amt/site/templates/projects/details_base.html.j2:87
 msgid "To do"
 msgstr "Te doen"
 
-#: amt/site/templates/projects/details_base.html.j2:55
+#: amt/site/templates/projects/details_base.html.j2:53
 msgid "Go to all requirements"
-msgstr "Ga naar alle vereisten"
+msgstr "Ga naar alle Vereisten"
 
-#: amt/site/templates/projects/details_base.html.j2:66
+#: amt/site/templates/projects/details_base.html.j2:64
 msgid "Which instruments are executed?"
 msgstr "Welke instrumenten zijn uitgevoerd?"
 
-#: amt/site/templates/projects/details_base.html.j2:103
+#: amt/site/templates/projects/details_base.html.j2:101
 msgid "Go to all instruments"
-msgstr "Ga naar alle instrumenten"
+msgstr "Ga naar all instrumenten"
 
-#: amt/site/templates/projects/details_info.html.j2:10
+#: amt/site/templates/projects/details_data.html.j2:3
+#: amt/site/templates/projects/details_instruments.html.j2:3
+msgid "To be implemented"
+msgstr "Nog te implementeren"
+
+#: amt/site/templates/projects/details_info.html.j2:7
 msgid "Description"
 msgstr "Omschrijving"
 
-#: amt/site/templates/projects/details_info.html.j2:14
+#: amt/site/templates/projects/details_info.html.j2:11
 msgid "Repository"
 msgstr "Repository"
 
-#: amt/site/templates/projects/details_info.html.j2:20
+#: amt/site/templates/projects/details_info.html.j2:17
 msgid "Project code"
 msgstr "Project"
 
-#: amt/site/templates/projects/details_info.html.j2:24
+#: amt/site/templates/projects/details_info.html.j2:21
 msgid "Lifecyle"
 msgstr "Levenscyclus"
 
-#: amt/site/templates/projects/details_info.html.j2:39
+#: amt/site/templates/projects/details_info.html.j2:36
 msgid "Labels"
 msgstr "Labels"
 
-#: amt/site/templates/projects/details_requirements.html.j2:22
+#: amt/site/templates/projects/details_requirements.html.j2:19
 msgid "measures executed"
 msgstr "maatregelen uitgevoerd"
 
@@ -478,7 +479,4 @@ msgstr "Maak project"
 #: amt/site/templates/projects/new.html.j2:191
 msgid "Copy results and close"
 msgstr "Resultaten overnemen en sluiten"
-
-#~ msgid "Algortime Management Toolkit"
-#~ msgstr "Algoritme Management Toolkit"
 
