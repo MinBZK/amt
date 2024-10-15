@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-14 12:11+0200\n"
+"POT-Creation-Date: 2024-10-15 08:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -205,10 +205,14 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: amt/site/templates/auth/profile.html.j2:40
+#: amt/site/templates/auth/profile.html.j2:49
 #: amt/site/templates/parts/header.html.j2:92
 #: amt/site/templates/parts/header.html.j2:151
 msgid "Language"
+msgstr ""
+
+#: amt/site/templates/auth/profile.html.j2:54
+msgid "Select language"
 msgstr ""
 
 #: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:5
@@ -220,7 +224,7 @@ msgid "Please login to view this page"
 msgstr ""
 
 #: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:11
-#: amt/site/templates/pages/landingpage.html.j2:16
+#: amt/site/templates/pages/landingpage.html.j2:17
 #: amt/site/templates/parts/header.html.j2:103
 #: amt/site/templates/parts/header.html.j2:161
 msgid "Login"
@@ -251,10 +255,10 @@ msgid "Reviewing"
 msgstr ""
 
 #: amt/site/templates/macros/tasks.html.j2:32
-#: amt/site/templates/projects/details_base.html.j2:22
-#: amt/site/templates/projects/details_base.html.j2:43
-#: amt/site/templates/projects/details_base.html.j2:69
-#: amt/site/templates/projects/details_base.html.j2:91
+#: amt/site/templates/projects/details_base.html.j2:20
+#: amt/site/templates/projects/details_base.html.j2:41
+#: amt/site/templates/projects/details_base.html.j2:67
+#: amt/site/templates/projects/details_base.html.j2:89
 msgid "Done"
 msgstr ""
 
@@ -265,7 +269,7 @@ msgstr ""
 #: amt/site/templates/pages/assessment_card.html.j2:7
 #: amt/site/templates/pages/model_card.html.j2:6
 #: amt/site/templates/pages/system_card.html.j2:4
-#: amt/site/templates/projects/details_info.html.j2:35
+#: amt/site/templates/projects/details_info.html.j2:32
 msgid "Last updated"
 msgstr ""
 
@@ -333,56 +337,53 @@ msgstr ""
 msgid "Everyone is welcome to make comments and suggestions."
 msgstr ""
 
-#: amt/site/templates/projects/details_base.html.j2:3
-#: amt/site/templates/projects/details_data.html.j2:3
-#: amt/site/templates/projects/details_info.html.j2:3
-#: amt/site/templates/projects/details_instruments.html.j2:3
-#: amt/site/templates/projects/details_requirements.html.j2:3
-msgid "AMT Placeholder information page"
-msgstr ""
-
-#: amt/site/templates/projects/details_base.html.j2:20
+#: amt/site/templates/projects/details_base.html.j2:18
 msgid "Does the algorithm meet the requirements?"
 msgstr ""
 
-#: amt/site/templates/projects/details_base.html.j2:41
-#: amt/site/templates/projects/details_base.html.j2:89
+#: amt/site/templates/projects/details_base.html.j2:39
+#: amt/site/templates/projects/details_base.html.j2:87
 msgid "To do"
 msgstr ""
 
-#: amt/site/templates/projects/details_base.html.j2:55
+#: amt/site/templates/projects/details_base.html.j2:53
 msgid "Go to all requirements"
 msgstr ""
 
-#: amt/site/templates/projects/details_base.html.j2:66
+#: amt/site/templates/projects/details_base.html.j2:64
 msgid "Which instruments are executed?"
 msgstr ""
 
-#: amt/site/templates/projects/details_base.html.j2:103
+#: amt/site/templates/projects/details_base.html.j2:101
 msgid "Go to all instruments"
 msgstr ""
 
-#: amt/site/templates/projects/details_info.html.j2:10
+#: amt/site/templates/projects/details_data.html.j2:3
+#: amt/site/templates/projects/details_instruments.html.j2:3
+msgid "To be implemented"
+msgstr ""
+
+#: amt/site/templates/projects/details_info.html.j2:7
 msgid "Description"
 msgstr ""
 
-#: amt/site/templates/projects/details_info.html.j2:14
+#: amt/site/templates/projects/details_info.html.j2:11
 msgid "Repository"
 msgstr ""
 
-#: amt/site/templates/projects/details_info.html.j2:20
+#: amt/site/templates/projects/details_info.html.j2:17
 msgid "Project code"
 msgstr ""
 
-#: amt/site/templates/projects/details_info.html.j2:24
+#: amt/site/templates/projects/details_info.html.j2:21
 msgid "Lifecyle"
 msgstr ""
 
-#: amt/site/templates/projects/details_info.html.j2:39
+#: amt/site/templates/projects/details_info.html.j2:36
 msgid "Labels"
 msgstr ""
 
-#: amt/site/templates/projects/details_requirements.html.j2:22
+#: amt/site/templates/projects/details_requirements.html.j2:19
 msgid "measures executed"
 msgstr ""
 
