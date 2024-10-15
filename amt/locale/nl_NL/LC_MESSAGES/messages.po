@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-15 08:45+0200\n"
+"POT-Creation-Date: 2024-10-15 20:42+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_NL\n"
@@ -371,6 +371,42 @@ msgstr "Ga naar all instrumenten"
 #: amt/site/templates/projects/details_instruments.html.j2:3
 msgid "To be implemented"
 msgstr "Nog te implementeren"
+
+#: amt/site/templates/projects/details_inference.html.j2:7
+msgid "Sepal length:"
+msgstr "Kelkbladlengte:"
+
+#: amt/site/templates/projects/details_inference.html.j2:16
+msgid "Sepal width:"
+msgstr "Kelkbladbreedte:"
+
+#: amt/site/templates/projects/details_inference.html.j2:25
+msgid "Petal length:"
+msgstr "Kroonbladlengte:"
+
+#: amt/site/templates/projects/details_inference.html.j2:34
+msgid "Petal width:"
+msgstr "Kroonbladbreedte:"
+
+#: amt/site/templates/projects/details_inference.html.j2:47
+msgid "Run inference"
+msgstr "Voer inferentie uit"
+
+#: amt/site/templates/projects/details_inference.html.j2:51
+msgid "Output"
+msgstr "Uitvoer"
+
+#: amt/site/templates/projects/details_inference.html.j2:53
+msgid "Undefined"
+msgstr "Ongedefinieerd"
+
+#: amt/site/templates/projects/details_inference.html.j2:57
+msgid "Output Probabilities"
+msgstr "Uitvoerwaarschijnlijkheden"
+
+#: amt/site/templates/projects/details_inference.html.j2:116
+msgid "Failed to run inference: "
+msgstr "Inferentie uitvoeren mislukt: "
 
 #: amt/site/templates/projects/details_info.html.j2:7
 msgid "Description"

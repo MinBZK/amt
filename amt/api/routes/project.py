@@ -77,6 +77,7 @@ def get_project_details_tabs(request: Request) -> list[NavigationItem]:
         [
             Navigation.PROJECT_SYSTEM_INFO,
             Navigation.PROJECT_SYSTEM_ALGORITHM_DETAILS,
+            Navigation.PROJECT_MODEL,
             Navigation.PROJECT_REQUIREMENTS,
             Navigation.PROJECT_DATA_CARD,
             Navigation.PROJECT_TASKS,
@@ -240,6 +241,42 @@ async def get_system_card(
     }
 
     return templates.TemplateResponse(request, "pages/system_card.html.j2", context)
+
+
+@router.get("/{project_id}/details/model/inference")
+async def get_project_inference(
+    request: Request, project_id: int, projects_service: Annotated[ProjectsService, Depends(ProjectsService)]
+) -> HTMLResponse:
+    project = get_project_or_error(project_id, projects_service, request)
+
+    breadcrumbs = resolve_base_navigation_items(
+        [
+            Navigation.PROJECTS_ROOT,
+            BaseNavigationItem(custom_display_text=project.name, url="/project/{project_id}/details/model/inference"),
+            Navigation.PROJECT_MODEL,
+        ],
+        request,
+    )
+
+    system_card_data = get_system_card_data()
+    instrument_state = get_instrument_state()
+    requirements_state = get_requirements_state(project.system_card)
+
+    tab_items = get_project_details_tabs(request)
+
+    context = {
+        "lifecycle": get_lifecycle(project.lifecycle, request),
+        "last_edited": project.last_edited,
+        "system_card": system_card_data,
+        "instrument_state": instrument_state,
+        "requirements_state": requirements_state,
+        "project": project,
+        "project_id": project.id,
+        "breadcrumbs": breadcrumbs,
+        "tab_items": tab_items,
+    }
+
+    return templates.TemplateResponse(request, "projects/details_inference.html.j2", context)
 
 
 # !!!

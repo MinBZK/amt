@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-15 08:45+0200\n"
+"POT-Creation-Date: 2024-10-15 20:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -361,6 +361,42 @@ msgstr ""
 #: amt/site/templates/projects/details_data.html.j2:3
 #: amt/site/templates/projects/details_instruments.html.j2:3
 msgid "To be implemented"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:7
+msgid "Sepal length:"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:16
+msgid "Sepal width:"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:25
+msgid "Petal length:"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:34
+msgid "Petal width:"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:47
+msgid "Run inference"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:51
+msgid "Output"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:53
+msgid "Undefined"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:57
+msgid "Output Probabilities"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:116
+msgid "Failed to run inference: "
 msgstr ""
 
 #: amt/site/templates/projects/details_info.html.j2:7

@@ -98,6 +98,9 @@ class Navigation:
     PROJECT_DETAILS = BaseNavigationItem(
         display_text=DisplayText.DETAILS, url="/project/{project_id}/details/system_card"
     )
+    PROJECT_MODEL = BaseNavigationItem(
+        display_text=DisplayText.MODEL, url="/project/{project_id}/details/model/inference"
+    )
     PROJECT_NEW = BaseNavigationItem(display_text=DisplayText.NEW, url="/projects/new")
     PROJECT_SYSTEM_INFO = BaseNavigationItem(display_text=DisplayText.INFO, url="/project/{project_id}/details")
     PROJECT_SYSTEM_ALGORITHM_DETAILS = BaseNavigationItem(

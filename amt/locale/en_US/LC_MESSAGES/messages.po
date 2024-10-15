@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-15 08:45+0200\n"
+"POT-Creation-Date: 2024-10-15 20:42+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -364,6 +364,42 @@ msgstr ""
 msgid "To be implemented"
 msgstr ""
 
+#: amt/site/templates/projects/details_inference.html.j2:7
+msgid "Sepal length:"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:16
+msgid "Sepal width:"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:25
+msgid "Petal length:"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:34
+msgid "Petal width:"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:47
+msgid "Run inference"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:51
+msgid "Output"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:53
+msgid "Undefined"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:57
+msgid "Output Probabilities"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:116
+msgid "Failed to run inference: "
+msgstr ""
+
 #: amt/site/templates/projects/details_info.html.j2:7
 msgid "Description"
 msgstr ""
@@ -466,4 +502,10 @@ msgstr ""
 #: amt/site/templates/projects/new.html.j2:191
 msgid "Copy results and close"
 msgstr ""
+
+#~ msgid "Algortime Management Toolkit"
+#~ msgstr ""
+
+#~ msgid "Inference"
+#~ msgstr ""
 

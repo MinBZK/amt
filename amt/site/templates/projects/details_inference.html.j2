@@ -1,0 +1,124 @@
+{% extends 'projects/details_base.html.j2' %}
+{% block detail_content %}
+    <div class="rvo-table--responsive rvo-alert--padding-md">
+        <table class="rvo-table">
+            <tbody class="rvo-table-body">
+                <tr class="rvo-table-row">
+                    <td class="rvo-table-cell">{% trans %}Sepal length:{% endtrans %}</td>
+                    <td class="rvo-table-cell">
+                        <input type="text"
+                               id="input.sepal_length"
+                               class="rvo-form-field__input"
+                               value="1" />
+                    </td>
+                </tr>
+                <tr class="rvo-table-row">
+                    <td class="rvo-table-cell">{% trans %}Sepal width:{% endtrans %}</td>
+                    <td class="rvo-table-cell">
+                        <input type="text"
+                               id="input.sepal_width"
+                               class="rvo-form-field__input"
+                               value="2" />
+                    </td>
+                </tr>
+                <tr class="rvo-table-row">
+                    <td class="rvo-table-cell">{% trans %}Petal length:{% endtrans %}</td>
+                    <td class="rvo-table-cell">
+                        <input type="text"
+                               id="input.petal_length"
+                               class="rvo-form-field__input"
+                               value="3" />
+                    </td>
+                </tr>
+                <tr class="rvo-table-row">
+                    <td class="rvo-table-cell">{% trans %}Petal width:{% endtrans %}</td>
+                    <td class="rvo-table-cell">
+                        <input type="text"
+                               id="input.petal_width"
+                               class="rvo-form-field__input"
+                               value="4" />
+                    </td>
+                </tr>
+                <tr class="rvo-table-row">
+                    <td class="rvo-table-cell"></td>
+                    <td class="rvo-table-cell">
+                        <button id="runInference"
+                                class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
+                                type="button">{% trans %}Run inference{% endtrans %}</button>
+                    </td>
+                </tr>
+                <tr class="rvo-table-row rvo-text--bold">
+                    <td class="rvo-table-cell">{% trans %}Output{% endtrans %}</td>
+                    <td class="rvo-table-cell">
+                        <span id="label" class="rvo-tag rvo-tag--success">{% trans %}Undefined{% endtrans %}</span>
+                    </td>
+                </tr>
+                <tr class="rvo-table-row rvo-text--subtle">
+                    <td class="rvo-table-cell">{% trans %}Output Probabilities{% endtrans %}</td>
+                    <td class="rvo-table-cell">
+                        <div class="rvo-card__content" id="outputContainer"></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="error" class="rvo-alert rvo-alert--warning" style="display: none"></div>
+    <script type="module">
+        import * as ort from "https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/esm/ort.min.js";
+        ort.env.wasm.wasmPaths = "https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/";
+
+        async function runInference() {
+            try {
+                const modelUrl = 'https://raw.githubusercontent.com/MinBZK/poc-kijkdoos-wasm-models/main/logres_iris/logreg_iris.onnx';
+                const session = await ort.InferenceSession.create(modelUrl);
+
+                const inputValues = [
+                    parseFloat(document.getElementById('input.sepal_length').value),
+                    parseFloat(document.getElementById('input.sepal_width').value),
+                    parseFloat(document.getElementById('input.petal_length').value),
+                    parseFloat(document.getElementById('input.petal_width').value)
+                ];
+
+                const tensor = new ort.Tensor('float32', inputValues, [1, 4]);
+                const feeds = { float_input: tensor };
+                const results = await session.run(feeds);
+
+                console.log('Raw results:', results);
+
+                const outputContainer = document.getElementById('outputContainer');
+                outputContainer.innerHTML = '';
+
+                // Handle different possible output structures
+                let probabilities;
+                if (results.probabilities && results.probabilities.data) {
+                    probabilities = results.probabilities.data;
+                } else if (results.output && results.output.data) {
+                    probabilities = results.output.data;
+                } else {
+                    // If we can't find probabilities, let's display whatever we got
+                    probabilities = Object.values(results)[0].data;
+                }
+
+                probabilities.forEach((probability, index) => {
+                    const div = document.createElement('div');
+                    div.textContent = `Class ${index}: ${probability.toFixed(2)}`;
+                    outputContainer.appendChild(div);
+                });
+
+                const outputLabel = document.getElementById('label');
+                // Set the label to the class with the highest probability
+                const maxProbIndex = probabilities.indexOf(Math.max(...probabilities));
+                outputLabel.textContent = `Class ${maxProbIndex}`;
+
+                document.getElementById('error').style.display = 'none';
+            } catch (e) {
+                const errorElement = document.getElementById('error');
+                errorElement.textContent = `{% trans %}Failed to run inference: {% endtrans %}${e}`;
+                errorElement.style.display = 'block';
+                console.error('Failed to run inference:', e);
+            }
+        }
+
+        document.getElementById('runInference').addEventListener('click', runInference);
+    </script>
+{% endblock %}
