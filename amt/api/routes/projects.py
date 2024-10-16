@@ -127,5 +127,5 @@ async def post_new(
     project_new.open_source = "open-source"
 
     project = projects_service.create(project_new)
-    response = templates.Redirect(request, f"/project/{project.id}/details/tasks")
+    response = templates.Redirect(request, f"/algorithm-system/{project.id}/details/tasks")
     return response

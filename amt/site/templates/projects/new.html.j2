@@ -4,11 +4,11 @@
         <div class="rvo-form">
             <div class="rvo-layout-column rvo-layout-gap--sm">
                 <div class="rvo-form-intro">
-                    <h1 class="utrecht-heading-1">{% trans %}Create a new project{% endtrans %}</h1>
+                    <h1 class="utrecht-heading-1">{% trans %}Create a Algorithm System{% endtrans %}</h1>
                 </div>
                 <form class="rvo-layout-column rvo-layout-gap--sm"
                       hx-ext="json-enc"
-                      hx-post="/projects/new"
+                      hx-post="/algorithm-systems/new"
                       hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
                       hx-target-error="#errorContainer"
                       hx-swap="innerHTML"
@@ -20,10 +20,10 @@
                                  aria-labelledby="fieldId-label"
                                  class="utrecht-form-field utrecht-form-field--text rvo-form-field">
                                 <div class="rvo-form-field__label">
-                                    <label class="rvo-label rvo-label--required">{% trans %}Project name{% endtrans %}</label>
+                                    <label class="rvo-label rvo-label--required">{% trans %}Algorithm System name{% endtrans %}</label>
                                 </div>
                                 <input id="name"
-                                       placeholder="{% trans %}Your project name here{% endtrans %}"
+                                       placeholder="{% trans %}Your algorithm system name here{% endtrans %}"
                                        name="name"
                                        type="text"
                                        class="utrecht-textbox utrecht-textbox--html-input"
@@ -36,7 +36,7 @@
                                 <div class="rvo-form-field__label">
                                     <label class="rvo-label rvo-label--required">{% trans %}Lifecycle{% endtrans %}</label>
                                     <p>
-                                        {% trans %}Select the lifecycle your project is currently in.{% endtrans %}
+                                        {% trans %}Select the lifecycle your algorithm system is currently in.{% endtrans %}
                                         {% trans %}For more information on lifecycle, read the{% endtrans %}
                                         <a class="rvo-link"
                                            href="https://minbzk.github.io/Algoritmekader/levenscyclus/"
@@ -173,7 +173,9 @@
                     <p class="utrecht-button-group">
                         <button class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
                                 type="submit"
-                                id="button-new-project-create">{% trans %}Create Project{% endtrans %}</button>
+                                id="button-new-project-create">
+                            {% trans %}Create Algorithm System{% endtrans %}
+                        </button>
                     </p>
                 </form>
                 <div id="errorContainer"></div>

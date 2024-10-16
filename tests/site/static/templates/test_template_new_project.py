@@ -12,4 +12,4 @@ def test_tempate_projects_new():
 
     # then
     assert response.headers["Content-Type"] == "text/html; charset=utf-8"
-    assert b"Create Project" in response.body
+    assert b"Create Algorithm System" in response.body

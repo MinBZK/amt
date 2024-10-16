@@ -12,7 +12,7 @@ def test_e2e_move_task_to_column(page: Page) -> None:
     :return: None
     """
 
-    page.goto("/project/1/details/tasks")
+    page.goto("/algorithm-system/1/details/tasks")
 
     card = page.get_by_text("task1")
     expect(card).to_be_visible()

@@ -28,21 +28,21 @@ def init_instruments() -> Generator[None, None, None]:  # noqa: PT004
 
 
 def test_projects_get_root(client: TestClient) -> None:
-    response = client.get("/projects/")
+    response = client.get("/algorithm-systems/")
 
     assert response.status_code == 200
     assert b'<div id="project-search-results">' in response.content
 
 
 def test_projects_get_root_missing_slash(client: TestClient) -> None:
-    response = client.get("/projects")
+    response = client.get("/algorithm-systems")
 
     assert response.status_code == 200
     assert b'<div id="project-search-results">' in response.content
 
 
 def test_projects_get_root_htmx(client: TestClient) -> None:
-    response = client.get("/projects/", headers={"HX-Request": "true"})
+    response = client.get("/algorithm-systems/", headers={"HX-Request": "true"})
 
     assert response.status_code == 200
     assert b'<table id="search-results-table" class="rvo-table margin-top-large">' not in response.content
@@ -50,7 +50,7 @@ def test_projects_get_root_htmx(client: TestClient) -> None:
 
 def test_get_new_projects(client: TestClient, init_instruments: Generator[None, None, None]) -> None:
     # when
-    response = client.get("/projects/new")
+    response = client.get("/algorithm-systems/new")
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
     content = " ".join(response.content.decode().split())
@@ -68,7 +68,7 @@ def test_get_new_projects(client: TestClient, init_instruments: Generator[None, 
 def test_post_new_projects_bad_request(client: TestClient, mock_csrf: Generator[None, None, None]) -> None:
     # when
     client.cookies["fastapi-csrf-token"] = "1"
-    response = client.post("/projects/new", json={}, headers={"X-CSRF-Token": "1"})
+    response = client.post("/algorithm-systems/new", json={}, headers={"X-CSRF-Token": "1"})
 
     # then
     assert response.status_code == 400
@@ -92,12 +92,12 @@ def test_post_new_projects(
     )
 
     # when
-    response = client.post("/projects/new", json=new_project.model_dump(), headers={"X-CSRF-Token": "1"})
+    response = client.post("/algorithm-systems/new", json=new_project.model_dump(), headers={"X-CSRF-Token": "1"})
 
     # then
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert response.headers["HX-Redirect"] == "/project/1/details/tasks"
+    assert response.headers["HX-Redirect"] == "/algorithm-system/1/details/tasks"
 
 
 def test_post_new_projects_write_system_card(
@@ -143,7 +143,7 @@ def test_post_new_projects_write_system_card(
     )
 
     # when
-    client.post("/projects/new", json=project_new.model_dump(), headers={"X-CSRF-Token": "1"})
+    client.post("/algorithm-systems/new", json=project_new.model_dump(), headers={"X-CSRF-Token": "1"})
 
     # then
     base_projects: list[Base] = db.get(Project, "name", name)

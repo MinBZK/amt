@@ -3,7 +3,7 @@
     <div class="rvo-layout-column rvo-layout-gap--md">
         <div class="rvo-layout-column rvo-layout-gap--xs">
             <form hx-ext="json-enc"
-                  hx-post="/project/{{ project_id }}/measure/{{ measure.urn }}"
+                  hx-post="/algorithm-system/{{ project_id }}/measure/{{ measure.urn }}"
                   hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
                   hx-target-error="#errorContainer"
                   hx-swap="innerHTML"

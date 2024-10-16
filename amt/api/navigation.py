@@ -22,7 +22,7 @@ class DisplayText(Enum):
     ALGORITHM_DETAILS = "algorithm_details"
     INFO = "info"
     HOME = "home"
-    PROJECTS = "projects"
+    PROJECTS = "algorithm systems"
     OVERVIEW = "overview"
     TASKS = "tasks"
     NEW = "new"
@@ -43,7 +43,7 @@ def get_translation(key: DisplayText, translations: NullTranslations) -> str:
     # translations are determined at runtime, which is why we use the dictionary below
     keys = {
         DisplayText.HOME: _("Home"),
-        DisplayText.PROJECTS: _("Projects"),
+        DisplayText.PROJECTS: _("Algorithm systems"),
         DisplayText.OVERVIEW: _("Overview"),
         DisplayText.TASKS: _("Tasks"),
         DisplayText.NEW: _("New"),
@@ -91,39 +91,43 @@ class BaseNavigationItem:
 
 class Navigation:
     PROJECTS_ROOT = BaseNavigationItem(
-        display_text=DisplayText.PROJECTS, url=["/projects/", "/project/"], icon="rvo-icon-publicatie"
+        display_text=DisplayText.PROJECTS, url=["/algorithm-systems/", "/algorithm-system/"], icon="rvo-icon-publicatie"
     )
-    PROJECTS_OVERVIEW = BaseNavigationItem(display_text=DisplayText.OVERVIEW, url="/projects/")
-    PROJECT_TASKS = BaseNavigationItem(display_text=DisplayText.TASKS, url="/project/{project_id}/details/tasks")
+    PROJECTS_OVERVIEW = BaseNavigationItem(display_text=DisplayText.OVERVIEW, url="/algorithm-systems/")
+    PROJECT_TASKS = BaseNavigationItem(
+        display_text=DisplayText.TASKS, url="/algorithm-system/{project_id}/details/tasks"
+    )
     PROJECT_DETAILS = BaseNavigationItem(
-        display_text=DisplayText.DETAILS, url="/project/{project_id}/details/system_card"
+        display_text=DisplayText.DETAILS, url="/algorithm-system/{project_id}/details/system_card"
     )
     PROJECT_MODEL = BaseNavigationItem(
-        display_text=DisplayText.MODEL, url="/project/{project_id}/details/model/inference"
+        display_text=DisplayText.MODEL, url="/algorithm-system/{project_id}/details/model/inference"
     )
-    PROJECT_NEW = BaseNavigationItem(display_text=DisplayText.NEW, url="/projects/new")
-    PROJECT_SYSTEM_INFO = BaseNavigationItem(display_text=DisplayText.INFO, url="/project/{project_id}/details")
+    PROJECT_NEW = BaseNavigationItem(display_text=DisplayText.NEW, url="/algorithm-systems/new")
+    PROJECT_SYSTEM_INFO = BaseNavigationItem(
+        display_text=DisplayText.INFO, url="/algorithm-system/{project_id}/details"
+    )
     PROJECT_SYSTEM_ALGORITHM_DETAILS = BaseNavigationItem(
-        display_text=DisplayText.ALGORITHM_DETAILS, url="/project/{project_id}/details/system_card"
+        display_text=DisplayText.ALGORITHM_DETAILS, url="/algorithm-system/{project_id}/details/system_card"
     )
     PROJECT_SYSTEM_CARD = BaseNavigationItem(
-        display_text=DisplayText.SYSTEMCARD, url="/project/{project_id}/details/system_card"
+        display_text=DisplayText.SYSTEMCARD, url="/algorithm-system/{project_id}/details/system_card"
     )
     PROJECT_DATA_CARD = BaseNavigationItem(
-        display_text=DisplayText.DATA, url="/project/{project_id}/details/system_card/data"
+        display_text=DisplayText.DATA, url="/algorithm-system/{project_id}/details/system_card/data"
     )
     PROJECT_MODEL_CARD = BaseNavigationItem(
-        display_text=DisplayText.MODELCARD, url="/project/{project_id}/details/system_card/models/{model_card}"
+        display_text=DisplayText.MODELCARD, url="/algorithm-system/{project_id}/details/system_card/models/{model_card}"
     )
     PROJECT_ASSESSMENT_CARD = BaseNavigationItem(
         display_text=DisplayText.ASSESSMENTCARD,
-        url="/project/{project_id}/details/system_card/assessment/{assessment_card}",
+        url="/algorithm-system/{project_id}/details/system_card/assessment/{assessment_card}",
     )
     PROJECT_REQUIREMENTS = BaseNavigationItem(
-        display_text=DisplayText.REQUIREMENTS, url="/project/{project_id}/details/system_card/requirements"
+        display_text=DisplayText.REQUIREMENTS, url="/algorithm-system/{project_id}/details/system_card/requirements"
     )
     PROJECT_SYSTEM_INSTRUMENTS = BaseNavigationItem(
-        display_text=DisplayText.INSTRUMENTS, url="/project/{project_id}/details/system_card/instruments"
+        display_text=DisplayText.INSTRUMENTS, url="/algorithm-system/{project_id}/details/system_card/instruments"
     )
 
 
