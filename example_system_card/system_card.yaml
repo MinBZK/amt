@@ -2,9 +2,9 @@ version: "0.1a10"
 provenance:
   git_commit_hash: 3eb1f1b
   timestamp: 2024-10-15T16:48:14Z
-  uri: https://github.com/Municipality-of-Rotterdam
+  uri: https://github.com/Oirschot/woz
   author: Wouter Beek
-name: "Berekening van alimentatie"
+name: "Waarderen WOZ-objecten"
 instruments:
   - urn: "urn:nl:aivt:tr:iama:1.0"
     version: "1.0"
@@ -15,49 +15,47 @@ instruments:
   - urn: "urn:nl:aivt:tr:dpia:1.0"
     version: "1.0"
     required: True
-upl: "https://standaarden.overheid.nl/owms/terms/alimentatieInning"
+upl: "https://standaarden.overheid.nl/owms/terms/woz-beschikking"
 owners:
   - oin: "00000003273808340000"
-    organization: "Gemeente Rotterdam - Terugvordering en Verhaal"
-    name: "Jet Winkels"
-    email: "TenV.wi@rotterdam.nl"
-    role: "Product Owner"
+    organization: "Gemeente Oirschot - Directie Belastingen, afdeling Waarderen, Heffen en Toezicht"
+    name: "Piet van Haaren"
+    email: "p.vanhaaren@oirschot.nl"
+    role: "Manager WOZ beschikking"
   - oin: "00000003273808340000"
-    organization: "Gemeente Rotterdam - Team WOO"
-    name: "Dirk de Vriesch"
-    email: "wooteam@rotterdam.nl"
-    role: "WOO Manager"
-description: "Met een berekening bepalen we de hoogte van de verplichte bijdrage aan de kosten van het dagelijks leven van een bijstandsgerechtigde ouder en/of kinderen. Hierbij houden we rekening met de situatie."
+    organization: "Gemeente Oirschot"
+    name: "Ellen Rokven"
+    email: "info@oirschot.nl"
+    role: "Medewerkster Klantcontactcentrum"
+description: "Het bepalen en fiatteren van de WOZ-waarde."
 labels:
-  - name: "Sociale Zekerheid"
-    value: "Ondersteunt bijstandsregels en alimentatieberekeningen."
-  - name: "Financiële Beoordeling"
-    value: "Evaluatie van de financiële situatie van betrokkenen."
-  - name: "Juridische Naleving"
-    value: "Voldoet aan alle relevante wetgeving en richtlijnen."
-status: "production"
+  - name:
+    value:
+  - name:
+    value:
+status: "ontwikkeling"
 publication_category: "Hoog-risico AI"
-begin_date: "1990-01-01"
-goal_and_impact: "Bijstand is altijd aanvullend op inkomensbronnen, waaronder ook alimentatie. Met het berekenen van alimentatie, kan de gemeente het inkomen aanvullen tot bijstandsniveau. Er wordt een bijdrage berekend en opgelegd. Consequenties hiervan voor een burger kan zijn dat men een onderhoudsbijdrage moet gaan betalen."
-considerations: "De algoritmetoepassing zorgt voor een borging van gelijkheid door gebruik te maken van een tool die met dezelfde invoer altijd tot dezelfde uitkomst komt en up-to-date is met de vastgestelde richtlijn."
-risk_management: "De risico's zitten in de invoer en de omgang met de uitkomsten van de rekentool. Vaak zijn de gegevens van het moment van uit elkaar gaan niet beschikbaar, en wordt er gerekend met de huidige situatie."
-human_intervention: "Invoer van data in INA programma wordt gecontroleerd door kwaliteitsmedewerkers. "
+begin_date: "2023-10-01"
+goal_and_impact: "Automatisering van de werkprocessen; de applicatie ondersteunt in het taxatieproces ten behoeve van de uitvoering van de wet WOZ."
+considerations: "Bij het bepalen van de WOZ-waarde worden de marktontwikkelingen nauwkeurig geanalyseerd en verwerkt in een taxatiemodel. Dit model zorgt ervoor dat de WOZ-waarde van een groot aantal woningen efficiënt kan worden berekend. De berekende modelwaarden worden vervolgens gecontroleerd door een taxateur en door statistische tests, zoals ratio-analyses. Het streven is om de WOZ-waarden zo dicht mogelijk bij de marktwaarde te laten aansluiten, binnen een toegestane bandbreedte."
+risk_management: "Transactieruis en afwijkende ratio’s worden beheerst door het gebruik van meerdere verkoopprijzen en de voortdurende aanpassing van het taxatiemodel, om fouten in de waardebepaling te minimaliseren."
+human_intervention: "Na berekening van de modelwaarde wordt deze gecontroleerd door een taxateur, die waar nodig aanpassingen maakt op basis van specifieke kenmerken van het object​."
 legal_base:
-  - name: "Participatiewet"
-    link: "https://wetten.overheid.nl/BWBR0015703/2024-07-01"
-used_data: "Inkomensgegevens, NAW gegevens van onderhoudsplichtige en kinderen"
-technical_design:
-  "Als u scheidt van uw partner, dan kan het nodig zijn om afspraken te maken over de alimentatie. Dat kan bijvoorbeeld als de ene partner een baan heeft en de ander niet. Alimentatie is bedoeld voor levensonderhoud, zoals boodschappen, huur en zo meer meer, zodat de partner een eigen leven kan leiden. Alimentatie kan ook bedoeld zijn voor het onderhoud van kinderen.
-  Krijgt u bijstand van de gemeente? Dan is uw partner verplicht u geld te geven voor de kosten van levensonderhoud. Het kan dan zijn dat u hiervoor geen alimentatie heeft afgesproken of dat een rechter die heeft opgelegd. In dat geval wil de gemeente weten hoeveel geld u krijgt voor uzelf of het onderhoud van uw kinderen. Krijgt u geld voor onderhoud, dan kan het zijn dat de gemeente uw bijstandsuitkering verlaagt. U krijgt dan minder geld.
-  Om te weten hoeveel geld u krijgt van uw ex-partner, gebruikt de gemeente een instrument op de computer. Dat instrument heet INA. Is bekend hoeveel onderhoudsgeld u krijgt, dan kan de gemeente uw bijstandsuitkering aanpassen. Het algoritme van INA houdt daarbij rekening met uw inkomen, het aantal en de leeftijd van kinderen, en of u bijvoorbeeld veel of weinig huur of hypotheek moet betalen.
-  Verandert er iets aan uw situatie? Dan moet u dit zelf aan de gemeente doorgeven. De gemeente berekent dan opnieuw de hoogte van uw bijstand."
+  - name: "Wet waardering onroerende zaken"
+    link: "https://wetten.overheid.nl/BWBR0007119/2024-01-01/0"
+  - name: "Wet herwaardering proceskostenvergoedingen WOZ en bpm"
+    link: "https://wetten.overheid.nl/BWBR0049132/2024-01-01/0"
+used_data: "WOZ-waarde: grootte, bouwjaar, adres, type objecten en bijgebouwen"
+technical_design: "De iObjecten-WOZ/WOZ Raadplegen is een computermodel dat grote hoeveelheden gegevens verwerkt om voor elk object een modelwaarde te berekenen, met correcties voor objectkenmerken zoals grootte en ligging​."
 external_providers:
-  - "Sdu - INA Personen en Familierecht"
+  - "Civision Pink Roccade"
 references:
-  - "INA personen-en familierecht"
-  - "Algoritmeregister Rotterdam"
+  - name: "Civision Pink Roccade"
+    link: "https://www.pinkroccadelocalgovernment.nl/beleidsterreinen/ruimte-omgeving/iobjecten/woz-raadplegen/?bu=1250"
+  - name: "Algoritmeregister Overheid.nl"
+    link: "https://algoritmes.overheid.nl/nl/algoritme/wozwaarde-uitrekenen-gemeente-oirschot/12626742#algemeneInformatie"
 interaction_details:
-  - "Met de INA alimentatierekentool kunt u snel in overzichtelijke stappen complexe situaties berekenen. Bovendien kunt u ook eenvoudig onder andere de draagkrachtvergelijking, de berekening en verdeling kosten van de kinderen en een jusvergelijking maken. In INA vindt u links naar relevante vakinformatie welke u ondersteunen bij het maken van een alimentatie berekening."
+  - "Met iObjecten-WOZ/WOZ Raadplegen doorzoek, raadpleeg én vergelijk je heel eenvoudig WOZ-objecten, sluimerende objecten en WOZ-waarden."
 version_requirements:
   - v0.1a0
 deployment_variants:
@@ -70,10 +68,11 @@ hardware_requirements:
 product_markings:
   - Algemene gebruiksvoorwaarden
   - Privacyverklaring
+  - ISO
 user_interface:
-  - description: "De gebruikersinterface is ontworpen om intuïtief en gebruiksvriendelijk te zijn. Gebruikers kunnen eenvoudig hun inkomen, uitgaven, en andere relevante gegevens invoeren."
-    link: https://portal.ina-pfr.nl/ina-online-alimentatie-rekentool/
-    snapshot: https://portal.ina-pfr.nl/ina-online-alimentatie-rekentool/
+  - description: "Een intuïtieve gebruikersinterface waarmee WOZ-objecten op een efficiënte, betrouwbare en transparante wijze worden gewaardeerd."
+    link: "https://www.pinkroccadelocalgovernment.nl/beleidsterreinen/ruimte-omgeving/iobjecten/woz-raadplegen/?bu=1250"
+    snapshot: "https://www.pinkroccadelocalgovernment.nl/beleidsterreinen/ruimte-omgeving/iobjecten/woz-raadplegen/?bu=1250"
 
 measures: !include measures/measures.yaml
 requirements: !include requirements/requirements.yaml
