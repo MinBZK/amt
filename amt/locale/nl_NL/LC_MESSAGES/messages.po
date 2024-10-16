@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-15 20:42+0200\n"
+"POT-Creation-Date: 2024-10-16 08:58+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_NL\n"
@@ -373,40 +373,60 @@ msgid "To be implemented"
 msgstr "Nog te implementeren"
 
 #: amt/site/templates/projects/details_inference.html.j2:7
-msgid "Sepal length:"
-msgstr "Kelkbladlengte:"
+msgid "Floor area (m²):"
+msgstr "Vloeroppervlakte (m²):"
 
 #: amt/site/templates/projects/details_inference.html.j2:16
-msgid "Sepal width:"
-msgstr "Kelkbladbreedte:"
+msgid "Plot size (m²):"
+msgstr "Perceelgrootte (m²):"
 
 #: amt/site/templates/projects/details_inference.html.j2:25
-msgid "Petal length:"
-msgstr "Kroonbladlengte:"
+msgid "Building year:"
+msgstr "Bouwjaar:"
 
 #: amt/site/templates/projects/details_inference.html.j2:34
-msgid "Petal width:"
-msgstr "Kroonbladbreedte:"
+msgid "Object type:"
+msgstr "Objecttype:"
 
-#: amt/site/templates/projects/details_inference.html.j2:47
-msgid "Run inference"
-msgstr "Voer inferentie uit"
+#: amt/site/templates/projects/details_inference.html.j2:43
+msgid "Number of annexes:"
+msgstr "Aantal bijgebouwen:"
 
-#: amt/site/templates/projects/details_inference.html.j2:51
-msgid "Output"
-msgstr "Uitvoer"
+#: amt/site/templates/projects/details_inference.html.j2:52
+msgid "Neighborhood code:"
+msgstr "Buurtcode:"
 
-#: amt/site/templates/projects/details_inference.html.j2:53
+#: amt/site/templates/projects/details_inference.html.j2:61
+msgid "Quality rating:"
+msgstr "Kwaliteitsbeoordeling:"
+
+#: amt/site/templates/projects/details_inference.html.j2:73
+msgid "Maintenance rating:"
+msgstr "Onderhoudsbeoordeling:"
+
+#: amt/site/templates/projects/details_inference.html.j2:85
+msgid "Amenities rating:"
+msgstr "Voorzieningenbeoordeling:"
+
+#: amt/site/templates/projects/details_inference.html.j2:97
+msgid "Location rating:"
+msgstr "Locatiebeoordeling:"
+
+#: amt/site/templates/projects/details_inference.html.j2:113
+msgid "Estimate WOZ Value"
+msgstr "WOZ-waarde schatten"
+
+#: amt/site/templates/projects/details_inference.html.j2:117
+msgid "Estimated WOZ Value"
+msgstr "Geschatte WOZ-waarde"
+
+#: amt/site/templates/projects/details_inference.html.j2:119
 msgid "Undefined"
 msgstr "Ongedefinieerd"
 
-#: amt/site/templates/projects/details_inference.html.j2:57
-msgid "Output Probabilities"
-msgstr "Uitvoerwaarschijnlijkheden"
-
-#: amt/site/templates/projects/details_inference.html.j2:116
-msgid "Failed to run inference: "
-msgstr "Inferentie uitvoeren mislukt: "
+#: amt/site/templates/projects/details_inference.html.j2:175
+msgid "Failed to estimate WOZ value: "
+msgstr "Fout bij het schatten van de WOZ-waarde: "
 
 #: amt/site/templates/projects/details_info.html.j2:7
 msgid "Description"
