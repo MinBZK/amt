@@ -255,7 +255,7 @@ jobs:
       - name: Run Trivy vulnerability scanner sarif
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: ${{ steps.meta.outputs.tags }}
+          image-ref: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
           scan-type: image
           exit-code: 0
           format: "sarif"
@@ -269,20 +269,10 @@ jobs:
         with:
           sarif_file: "trivy-results.sarif"
 
-      - name: Extract metadata for Docker
-        id: meta2
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} #TODO(berry): fix on git labels multiple tags
-          flavor: |
-            latest=false
-        env:
-          DOCKER_METADATA_ANNOTATIONS_LEVELS: manifest,index
-
       - name: Run Trivy SBOM
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: ${{ steps.meta2.outputs.tags }}
+          image-ref: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
           scan-type: image
           exit-code: 0
           format: "cyclonedx"
@@ -295,7 +285,7 @@ jobs:
       - name: Run Trivy license scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: ${{ steps.meta2.outputs.tags }}
+          image-ref: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
           scan-type: image
           scanners: "license"
           exit-code: 0
@@ -337,7 +327,7 @@ jobs:
 
       - name: Trigger deployment
         run: |
-          gh workflow run deploy.yml -f image_tag=${{ steps.meta.outputs.tags }} -f environment=production
+          gh workflow run deploy.yml -f image_tag=${{ fromJSON(steps.meta.outputs.json).tags[0] }} -f environment=production
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
