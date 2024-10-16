@@ -3,11 +3,12 @@
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-16 14:08+0200\n"
+"POT-Creation-Date: 2024-10-16 14:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,40 +41,40 @@ msgstr ""
 msgid "Role"
 msgstr ""
 
-#: amt/api/lifecycles.py:39
+#: amt/api/lifecycles.py:43
 msgid "Organizational Responsibilities"
 msgstr ""
 
-#: amt/api/lifecycles.py:40
+#: amt/api/lifecycles.py:44
 msgid "Problem Analysis"
 msgstr ""
 
-#: amt/api/lifecycles.py:41
+#: amt/api/lifecycles.py:45
 msgid "Design"
 msgstr ""
 
-#: amt/api/lifecycles.py:42
+#: amt/api/lifecycles.py:46
 msgid "Data Exploration and Preparation"
 msgstr ""
 
-#: amt/api/lifecycles.py:43
+#: amt/api/lifecycles.py:47
 msgid "Development"
 msgstr ""
 
-#: amt/api/lifecycles.py:44
+#: amt/api/lifecycles.py:48
 msgid "Verification and Validation"
 msgstr ""
 
-#: amt/api/lifecycles.py:45
+#: amt/api/lifecycles.py:49
 #: amt/site/templates/projects/details_measure_modal.html.j2:66
 msgid "Implementation"
 msgstr ""
 
-#: amt/api/lifecycles.py:46
+#: amt/api/lifecycles.py:50
 msgid "Monitoring and Management"
 msgstr ""
 
-#: amt/api/lifecycles.py:47
+#: amt/api/lifecycles.py:51
 msgid "Phasing Out"
 msgstr ""
 
@@ -262,7 +263,7 @@ msgstr ""
 msgid "An error occurred. Please try again later"
 msgstr ""
 
-#: amt/site/templates/layouts/base.html.j2:11
+#: amt/site/templates/layouts/base.html.j2:1
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr ""
 
@@ -293,7 +294,7 @@ msgstr ""
 #: amt/site/templates/pages/assessment_card.html.j2:7
 #: amt/site/templates/pages/model_card.html.j2:6
 #: amt/site/templates/pages/system_card.html.j2:4
-#: amt/site/templates/parts/filter_list.html.j2:67
+#: amt/site/templates/parts/filter_list.html.j2:111
 #: amt/site/templates/projects/details_info.html.j2:32
 msgid "Last updated"
 msgstr ""
@@ -336,34 +337,34 @@ msgstr ""
 msgid "Algorithm Management Toolkit"
 msgstr ""
 
-#: amt/site/templates/parts/filter_list.html.j2:16
+#: amt/site/templates/parts/filter_list.html.j2:18
 msgid " ago"
 msgstr ""
 
-#: amt/site/templates/parts/filter_list.html.j2:25
+#: amt/site/templates/parts/filter_list.html.j2:51
 msgid "result"
 msgstr ""
 
-#: amt/site/templates/parts/filter_list.html.j2:26
+#: amt/site/templates/parts/filter_list.html.j2:52
 msgid "results"
 msgstr ""
 
-#: amt/site/templates/parts/filter_list.html.j2:28
+#: amt/site/templates/parts/filter_list.html.j2:54
 msgid "for"
 msgstr ""
 
-#: amt/site/templates/parts/filter_list.html.j2:58
+#: amt/site/templates/parts/filter_list.html.j2:84
 msgid ""
 "No Algorithm system match your selected filters. Try adjusting your "
 "filters or clearing them to see more\n"
 "            algorithm systems."
 msgstr ""
 
-#: amt/site/templates/parts/filter_list.html.j2:65
+#: amt/site/templates/parts/filter_list.html.j2:103
 msgid "Algorithm system name"
 msgstr ""
 
-#: amt/site/templates/parts/filter_list.html.j2:66
+#: amt/site/templates/parts/filter_list.html.j2:107
 msgid "Phase"
 msgstr ""
 

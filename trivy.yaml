@@ -16,4 +16,5 @@ pkg:
     - os
   ignore-unfixed: true
 
-repository: public.ecr.aws/aquasecurity/trivy-db:2
+db:
+  repository: public.ecr.aws/aquasecurity/trivy-db:2

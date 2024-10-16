@@ -16,6 +16,20 @@ from amt.repositories.deps import get_session
 logger = logging.getLogger(__name__)
 
 
+def sort_by_phase(project: Project) -> int:
+    if project.lifecycle:
+        return project.lifecycle.index
+    else:
+        return -1
+
+
+def sort_by_phase_reversed(project: Project) -> int:
+    if project.lifecycle:
+        return -project.lifecycle.index
+    else:
+        return 1
+
+
 class ProjectsRepository:
     def __init__(self, session: Annotated[Session, Depends(get_session)]) -> None:
         self.session = session
@@ -57,7 +71,9 @@ class ProjectsRepository:
             logger.exception("Project not found")
             raise AMTRepositoryError from e
 
-    def paginate(self, skip: int, limit: int, search: str, filters: dict[str, str]) -> list[Project]:
+    def paginate(  # noqa
+        self, skip: int, limit: int, search: str, filters: dict[str, str], sort: dict[str, str]
+    ) -> list[Project]:
         try:
             statement = select(Project)
             if search != "":
@@ -74,8 +90,27 @@ class ProjectsRepository:
                             )
                         case _:
                             raise TypeError("Unknown filter type")  # noqa
-            statement = statement.order_by(func.lower(Project.name)).offset(skip).limit(limit)
-            return list(self.session.execute(statement).scalars())
+            if sort:
+                if "name" in sort and sort["name"] == "ascending":
+                    statement = statement.order_by(func.lower(Project.name).asc())
+                elif "name" in sort and sort["name"] == "descending":
+                    statement = statement.order_by(func.lower(Project.name).desc())
+                elif "last_update" in sort and sort["last_update"] == "ascending":
+                    statement = statement.order_by(Project.last_edited.asc())
+                elif "last_update" in sort and sort["last_update"] == "descending":
+                    statement = statement.order_by(Project.last_edited.desc())
+            else:
+                statement = statement.order_by(func.lower(Project.name))
+            statement = statement.offset(skip).limit(limit)
+            result = list(self.session.execute(statement).scalars())
+            # todo: the good way to do sorting is to use an enum field (or any int field)
+            #  in the database so we can sort on that
+            if result and sort and "phase" in sort:
+                if sort["phase"] == "ascending":
+                    result = sorted(result, key=sort_by_phase)
+                else:
+                    result = sorted(result, key=sort_by_phase_reversed)
+            return result  # noqa
         except Exception as e:
             logger.exception("Error paginating projects")
             raise AMTRepositoryError from e

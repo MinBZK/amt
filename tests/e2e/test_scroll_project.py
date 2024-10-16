@@ -4,7 +4,7 @@ from playwright.sync_api import Page, expect
 
 @pytest.mark.slow
 def test_e2e_scroll_projects(page: Page) -> None:
-    page.goto("/algorithm-systems/")
+    page.goto("/algorithm-systems/?limit=100")
 
     project_links = page.locator("#search-results-table tr").count() - 1
 
