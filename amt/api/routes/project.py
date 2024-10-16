@@ -114,7 +114,9 @@ async def get_tasks(
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.PROJECTS_ROOT,
-            BaseNavigationItem(custom_display_text=project.name, url="/project/{project_id}/details/system_card"),
+            BaseNavigationItem(
+                custom_display_text=project.name, url="/algorithm-system/{project_id}/details/system_card"
+            ),
             Navigation.PROJECT_TASKS,
         ],
         request,
@@ -173,7 +175,9 @@ async def get_project_details(
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.PROJECTS_ROOT,
-            BaseNavigationItem(custom_display_text=project.name, url="/project/{project_id}/details/system_card"),
+            BaseNavigationItem(
+                custom_display_text=project.name, url="/algorithm-system/{project_id}/details/system_card"
+            ),
             Navigation.PROJECT_DETAILS,
         ],
         request,
@@ -220,7 +224,9 @@ async def get_system_card(
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.PROJECTS_ROOT,
-            BaseNavigationItem(custom_display_text=project.name, url="/project/{project_id}/details/system_card"),
+            BaseNavigationItem(
+                custom_display_text=project.name, url="/algorithm-system/{project_id}/details/system_card"
+            ),
             Navigation.PROJECT_SYSTEM_CARD,
         ],
         request,
@@ -256,7 +262,9 @@ async def get_project_inference(
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.PROJECTS_ROOT,
-            BaseNavigationItem(custom_display_text=project.name, url="/project/{project_id}/details/model/inference"),
+            BaseNavigationItem(
+                custom_display_text=project.name, url="/algorithm-system/{project_id}/details/model/inference"
+            ),
             Navigation.PROJECT_MODEL,
         ],
         request,
@@ -303,7 +311,9 @@ async def get_system_card_requirements(
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.PROJECTS_ROOT,
-            BaseNavigationItem(custom_display_text=project.name, url="/project/{project_id}/details/system_card"),
+            BaseNavigationItem(
+                custom_display_text=project.name, url="/algorithm-system/{project_id}/details/system_card"
+            ),
             Navigation.PROJECT_SYSTEM_CARD,
         ],
         request,
@@ -441,7 +451,7 @@ async def update_measure_value(
 
     projects_service.update(project)
     # TODO: FIX THIS!! The page now reloads at the top, which is annoying
-    return templates.Redirect(request, f"/project/{project_id}/details/system_card/requirements")
+    return templates.Redirect(request, f"/algorithm-system/{project_id}/details/system_card/requirements")
 
 
 # !!!
@@ -464,7 +474,9 @@ async def get_system_card_data_page(
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.PROJECTS_ROOT,
-            BaseNavigationItem(custom_display_text=project.name, url="/project/{project_id}/details/system_card"),
+            BaseNavigationItem(
+                custom_display_text=project.name, url="/algorithm-system/{project_id}/details/system_card"
+            ),
             Navigation.PROJECT_SYSTEM_CARD,
         ],
         request,
@@ -502,7 +514,9 @@ async def get_system_card_instruments(
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.PROJECTS_ROOT,
-            BaseNavigationItem(custom_display_text=project.name, url="/project/{project_id}/details/system_card"),
+            BaseNavigationItem(
+                custom_display_text=project.name, url="/algorithm-system/{project_id}/details/system_card"
+            ),
             Navigation.PROJECT_SYSTEM_CARD,
         ],
         request,
@@ -543,7 +557,9 @@ async def get_assessment_card(
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.PROJECTS_ROOT,
-            BaseNavigationItem(custom_display_text=project.name, url="/project/{project_id}/details/system_card"),
+            BaseNavigationItem(
+                custom_display_text=project.name, url="/algorithm-system/{project_id}/details/system_card"
+            ),
             Navigation.PROJECT_ASSESSMENT_CARD,
         ],
         request,
@@ -595,7 +611,9 @@ async def get_model_card(
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.PROJECTS_ROOT,
-            BaseNavigationItem(custom_display_text=project.name, url="/project/{project_id}/details/system_card"),
+            BaseNavigationItem(
+                custom_display_text=project.name, url="/algorithm-system/{project_id}/details/system_card"
+            ),
             Navigation.PROJECT_MODEL_CARD,
         ],
         request,
