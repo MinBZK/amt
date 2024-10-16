@@ -36,7 +36,16 @@
                     <td class="rvo-table-cell">{% trans %}Labels{% endtrans %}</td>
                     <td class="rvo-table-cell">
                         {% for label in system_card.labels %}
-                            <a class="rvo-tag rvo-tag--active rvo-tag--default rvo-tag--info">{{ label.value }}</a>
+                            <a class="rvo-tag rvo-tag--active rvo-tag--default rvo-tag--info">{{ label.name }}</a>
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr class="rvo-table-row">
+                    <td class="rvo-table-cell">{% trans %}References{% endtrans %}</td>
+                    <td class="rvo-table-cell">
+                        {% for reference in system_card.references %}
+                            <a href={{ reference.link }}>{{ reference.name }}</a>
+                            {% if not loop.last %}<br \>{% endif %}
                         {% endfor %}
                     </td>
                 </tr>

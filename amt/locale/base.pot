@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-16 10:41+0200\n"
+"POT-Creation-Date: 2024-10-16 11:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -263,7 +263,7 @@ msgstr ""
 msgid "An error occurred. Please try again later"
 msgstr ""
 
-#: amt/site/templates/layouts/base.html.j2:1
+#: amt/site/templates/layouts/base.html.j2:11
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr ""
 
@@ -515,6 +515,10 @@ msgstr ""
 
 #: amt/site/templates/projects/details_info.html.j2:36
 msgid "Labels"
+msgstr ""
+
+#: amt/site/templates/projects/details_info.html.j2:44
+msgid "References"
 msgstr ""
 
 #: amt/site/templates/projects/details_measure_modal.html.j2:28
