@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-16 13:26+0200\n"
+"POT-Creation-Date: 2024-10-16 13:31+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_NL\n"
@@ -368,8 +368,8 @@ msgid ""
 "filters or clearing them to see more\n"
 "            algorithm systems."
 msgstr ""
-"Er zijn geen Algoritme systemen die overeen komen met de geselecteerde filters. "
-"Pas de filters aan of verwijder ze om meer projecten te zien."
+"Er zijn geen Algoritme systemen die overeen komen met de geselecteerde "
+"filters. Pas de filters aan of verwijder ze om meer projecten te zien."
 
 #: amt/site/templates/parts/filter_list.html.j2:65
 msgid "Algorithm system name"
@@ -419,11 +419,11 @@ msgstr "Vind algoritme systeem..."
 
 #: amt/site/templates/parts/project_search.html.j2:49
 msgid "Select lifecycle"
-msgstr "Levenscyclus"
+msgstr "Selecteer levenscyclus"
 
 #: amt/site/templates/parts/project_search.html.j2:60
 msgid "Select publication category"
-msgstr "Publicatiecategorie"
+msgstr "Selecteer publicatiecategorie"
 
 #: amt/site/templates/projects/details_base.html.j2:24
 msgid "Does the algorithm meet the requirements?"
