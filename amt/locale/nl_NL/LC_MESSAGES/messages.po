@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-16 13:31+0200\n"
+"POT-Creation-Date: 2024-10-16 14:08+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_NL\n"
@@ -240,8 +240,8 @@ msgid "Email"
 msgstr "Email"
 
 #: amt/site/templates/auth/profile.html.j2:49
-#: amt/site/templates/parts/header.html.j2:92
-#: amt/site/templates/parts/header.html.j2:151
+#: amt/site/templates/parts/header.html.j2:76
+#: amt/site/templates/parts/header.html.j2:135
 msgid "Language"
 msgstr "Taal"
 
@@ -259,8 +259,8 @@ msgstr "Meld u aan om deze pagina te bekijken"
 
 #: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:11
 #: amt/site/templates/pages/landingpage.html.j2:17
-#: amt/site/templates/parts/header.html.j2:103
-#: amt/site/templates/parts/header.html.j2:161
+#: amt/site/templates/parts/header.html.j2:87
+#: amt/site/templates/parts/header.html.j2:145
 msgid "Login"
 msgstr "Inloggen"
 
@@ -342,7 +342,7 @@ msgstr "AMT Placeholder informatie pagina's"
 
 #: amt/site/templates/pages/landingpage.html.j2:12
 #: amt/site/templates/parts/footer.html.j2:4
-#: amt/site/templates/parts/header.html.j2:8
+#: amt/site/templates/parts/header.html.j2:19
 msgid "Algorithm Management Toolkit"
 msgstr "Algoritme Management Toolkit"
 
@@ -387,23 +387,15 @@ msgstr "Over ons"
 msgid "Contact"
 msgstr "Contact"
 
-#: amt/site/templates/parts/header.html.j2:17
-msgid "Beta version"
+#: amt/site/templates/parts/header.html.j2:7
+msgid "Beta Version"
 msgstr "Bètaversie"
 
-#: amt/site/templates/parts/header.html.j2:27
-msgid "version"
-msgstr "versie"
-
-#: amt/site/templates/parts/header.html.j2:29
+#: amt/site/templates/parts/header.html.j2:7
 msgid ""
 "This website is under development. All versions are created in an open "
 "manner."
 msgstr "Deze website is in ontwikkeling. Alle versies ontstaan op een open manier."
-
-#: amt/site/templates/parts/header.html.j2:30
-msgid "Everyone is welcome to make comments and suggestions."
-msgstr "Iedereen mag opmerkingen en suggesties doen."
 
 #: amt/site/templates/parts/project_search.html.j2:9
 msgid "Algorithm Systems"
@@ -679,4 +671,7 @@ msgstr "Resultaten overnemen en sluiten"
 
 #~ msgid "Create Project"
 #~ msgstr "Maak project"
+
+#~ msgid "Everyone is welcome to make comments and suggestions."
+#~ msgstr "Iedereen mag opmerkingen en suggesties doen."
 
