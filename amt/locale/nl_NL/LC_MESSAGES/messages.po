@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-16 09:55+0200\n"
+"POT-Creation-Date: 2024-10-16 10:41+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_NL\n"
@@ -18,27 +18,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: amt/api/ai_act_profile.py:23
+#: amt/api/ai_act_profile.py:24
 msgid "Type"
 msgstr "Type AI toepassing"
 
-#: amt/api/ai_act_profile.py:25
+#: amt/api/ai_act_profile.py:26
 msgid "Is the application open source?"
 msgstr "Is de applicatie open source?"
 
-#: amt/api/ai_act_profile.py:27
+#: amt/api/ai_act_profile.py:28
 msgid "Publication Category"
 msgstr "Publicatiecategorie"
 
-#: amt/api/ai_act_profile.py:29
+#: amt/api/ai_act_profile.py:30
 msgid "Is there a systemic risk?"
 msgstr "Is er sprake van systematisch risico?"
 
-#: amt/api/ai_act_profile.py:31
+#: amt/api/ai_act_profile.py:32
 msgid "Is there a transparency obligation?"
 msgstr "Zijn er transparantieverplichtingen?"
 
-#: amt/api/ai_act_profile.py:33
+#: amt/api/ai_act_profile.py:34
 msgid "Role"
 msgstr "Rol"
 
@@ -83,7 +83,7 @@ msgstr "Uitfaseren"
 msgid "Home"
 msgstr "Start"
 
-#: amt/api/navigation.py:46 amt/site/templates/projects/index.html.j2:7
+#: amt/api/navigation.py:46 amt/site/templates/parts/project_search.html.j2:9
 msgid "Projects"
 msgstr "Projecten"
 
@@ -138,6 +138,30 @@ msgstr "Model"
 #: amt/api/navigation.py:59 amt/site/templates/projects/new.html.j2:145
 msgid "Instruments"
 msgstr "Instrumenten"
+
+#: amt/api/publication_category.py:36
+msgid "Impactful algorithm"
+msgstr "Impactvol algoritme"
+
+#: amt/api/publication_category.py:37
+msgid "Non-impactful algorithm"
+msgstr "Niet-impactvol algoritme"
+
+#: amt/api/publication_category.py:38
+msgid "High-risk AI"
+msgstr "Hoog-risico AI"
+
+#: amt/api/publication_category.py:39
+msgid "No high-risk AI"
+msgstr "Geen hoog-risico AI"
+
+#: amt/api/publication_category.py:40
+msgid "Forbidden AI"
+msgstr "Verboden AI"
+
+#: amt/api/publication_category.py:41
+msgid "Exception of application"
+msgstr "Uitzondering van toepassing"
 
 #: amt/core/exceptions.py:20
 msgid ""
@@ -248,7 +272,7 @@ msgstr "Er is een fout opgetreden"
 msgid "An error occurred. Please try again later"
 msgstr "Er is een fout opgetreden. Probeer het later opnieuw."
 
-#: amt/site/templates/layouts/base.html.j2:11
+#: amt/site/templates/layouts/base.html.j2:1
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr "Algoritme Management Toolkit (AMT)"
 
@@ -279,6 +303,7 @@ msgstr "Onbekend"
 #: amt/site/templates/pages/assessment_card.html.j2:7
 #: amt/site/templates/pages/model_card.html.j2:6
 #: amt/site/templates/pages/system_card.html.j2:4
+#: amt/site/templates/parts/filter_list.html.j2:66
 #: amt/site/templates/projects/details_info.html.j2:32
 msgid "Last updated"
 msgstr "Laatst bijgewerkt"
@@ -321,6 +346,39 @@ msgstr "AMT Placeholder informatie pagina's"
 msgid "Algorithm Management Toolkit"
 msgstr "Algoritme Management Toolkit"
 
+#: amt/site/templates/parts/filter_list.html.j2:16
+msgid " ago"
+msgstr "geleden"
+
+#: amt/site/templates/parts/filter_list.html.j2:25
+msgid "result"
+msgstr "resultaat"
+
+#: amt/site/templates/parts/filter_list.html.j2:26
+msgid "results"
+msgstr "resultaten"
+
+#: amt/site/templates/parts/filter_list.html.j2:28
+msgid "for"
+msgstr "voor"
+
+#: amt/site/templates/parts/filter_list.html.j2:58
+msgid ""
+"No projects match your selected filters. Try adjusting your filters or "
+"clearing them to see more projects."
+msgstr ""
+"Er zijn geen projecten die overeen komen met de geselecteerde filters. "
+"Pas de filters aan of verwijder ze om meer projecten te zien."
+
+#: amt/site/templates/parts/filter_list.html.j2:64
+#: amt/site/templates/projects/new.html.j2:23
+msgid "Project name"
+msgstr "Project naam"
+
+#: amt/site/templates/parts/filter_list.html.j2:65
+msgid "Phase"
+msgstr "Fase"
+
 #: amt/site/templates/parts/footer.html.j2:10
 msgid "About us"
 msgstr "Over ons"
@@ -346,6 +404,22 @@ msgstr "Deze website is in ontwikkeling. Alle versies ontstaan op een open manie
 #: amt/site/templates/parts/header.html.j2:30
 msgid "Everyone is welcome to make comments and suggestions."
 msgstr "Iedereen mag opmerkingen en suggesties doen."
+
+#: amt/site/templates/parts/project_search.html.j2:14
+msgid "New project"
+msgstr "Nieuw project"
+
+#: amt/site/templates/parts/project_search.html.j2:29
+msgid "Find project..."
+msgstr "Zoek project..."
+
+#: amt/site/templates/parts/project_search.html.j2:48
+msgid "Select lifecycle"
+msgstr "Levenscyclus"
+
+#: amt/site/templates/parts/project_search.html.j2:59
+msgid "Select publication category"
+msgstr "Publicatiecategorie"
 
 #: amt/site/templates/projects/details_base.html.j2:24
 msgid "Does the algorithm meet the requirements?"
@@ -501,21 +575,9 @@ msgstr "maatregelen uitgevoerd"
 msgid "Edit measure"
 msgstr "Maatregel aanpassen"
 
-#: amt/site/templates/projects/index.html.j2:12
-msgid "New project"
-msgstr "Nieuw project"
-
-#: amt/site/templates/projects/index.html.j2:28
-msgid "Find project..."
-msgstr "Zoek project..."
-
 #: amt/site/templates/projects/new.html.j2:7
 msgid "Create a new project"
 msgstr "Maak een nieuw project"
-
-#: amt/site/templates/projects/new.html.j2:23
-msgid "Project name"
-msgstr "Project naam"
 
 #: amt/site/templates/projects/new.html.j2:26
 msgid "Your project name here"

@@ -1,5 +1,6 @@
 import pytest
 from amt.core.exceptions import AMTRepositoryError
+from amt.models import Project
 from amt.repositories.projects import ProjectsRepository
 from tests.constants import default_project
 from tests.database_test_utils import DatabaseTestUtils
@@ -85,7 +86,7 @@ def test_paginate(db: DatabaseTestUtils):
     db.given([default_project()])
     project_repository = ProjectsRepository(db.get_session())
 
-    result = project_repository.paginate(skip=0, limit=3, search="")
+    result: list[Project] = project_repository.paginate(skip=0, limit=3, search="", filters={})
 
     assert len(result) == 1
 
@@ -94,7 +95,7 @@ def test_paginate_more(db: DatabaseTestUtils):
     db.given([default_project(), default_project(), default_project(), default_project()])
     project_repository = ProjectsRepository(db.get_session())
 
-    result = project_repository.paginate(skip=0, limit=3, search="")
+    result: list[Project] = project_repository.paginate(skip=0, limit=3, search="", filters={})
 
     assert len(result) == 3
 
@@ -110,7 +111,7 @@ def test_paginate_capitalize(db: DatabaseTestUtils):
     )
     project_repository = ProjectsRepository(db.get_session())
 
-    result = project_repository.paginate(skip=0, limit=4, search="")
+    result: list[Project] = project_repository.paginate(skip=0, limit=4, search="", filters={})
 
     assert len(result) == 4
     assert result[0].name == "Aaa"
@@ -130,7 +131,7 @@ def test_search(db: DatabaseTestUtils):
     )
     project_repository = ProjectsRepository(db.get_session())
 
-    result = project_repository.paginate(skip=0, limit=4, search="bbb")
+    result: list[Project] = project_repository.paginate(skip=0, limit=4, search="bbb", filters={})
 
     assert len(result) == 1
     assert result[0].name == "bbb"
@@ -147,7 +148,7 @@ def test_search_multiple(db: DatabaseTestUtils):
     )
     project_repository = ProjectsRepository(db.get_session())
 
-    result = project_repository.paginate(skip=0, limit=4, search="A")
+    result: list[Project] = project_repository.paginate(skip=0, limit=4, search="A", filters={})
 
     assert len(result) == 2
     assert result[0].name == "Aaa"
@@ -156,7 +157,7 @@ def test_search_multiple(db: DatabaseTestUtils):
 
 def test_search_no_results(db: DatabaseTestUtils):
     project_repository = ProjectsRepository(db.get_session())
-    result = project_repository.paginate(skip=0, limit=4, search="A")
+    result: list[Project] = project_repository.paginate(skip=0, limit=4, search="A", filters={})
     assert len(result) == 0
 
 
@@ -165,4 +166,4 @@ def test_raises_exception(db: DatabaseTestUtils):
     project_repository = ProjectsRepository(db.get_session())
 
     with pytest.raises(AMTRepositoryError):
-        project_repository.paginate(skip="a", limit=3, search="")  # type: ignore
+        project_repository.paginate(skip="a", limit=3, search="", filters={})  # type: ignore

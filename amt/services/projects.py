@@ -62,8 +62,8 @@ class ProjectsService:
 
         return project
 
-    def paginate(self, skip: int, limit: int, search: str) -> list[Project]:
-        return self.repository.paginate(skip=skip, limit=limit, search=search)
+    def paginate(self, skip: int, limit: int, search: str, filters: dict[str, str]) -> list[Project]:
+        return self.repository.paginate(skip=skip, limit=limit, search=search, filters=filters)
 
     def update(self, project: Project) -> Project:
         # TODO: Is this the right place to sync system cards: system_card and system_card_json?
