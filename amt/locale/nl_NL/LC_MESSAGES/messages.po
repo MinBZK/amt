@@ -369,7 +369,7 @@ msgid ""
 "            algorithm systems."
 msgstr ""
 "Er zijn geen Algoritme systemen die overeen komen met de geselecteerde "
-"filters. Pas de filters aan of verwijder ze om meer projecten te zien."
+"filters. Pas de filters aan of verwijder ze om meer algortime systemen te zien."
 
 #: amt/site/templates/parts/filter_list.html.j2:65
 msgid "Algorithm system name"
@@ -585,7 +585,7 @@ msgstr "Algoritmekader"
 
 #: amt/site/templates/projects/new.html.j2:26
 msgid "Your algorithm system name here"
-msgstr "Jouw projectnaam hier"
+msgstr "Jouw algoritme systeem naam hier"
 
 #: amt/site/templates/projects/new.html.j2:37
 msgid "Lifecycle"
@@ -593,7 +593,7 @@ msgstr "Levenscyclus"
 
 #: amt/site/templates/projects/new.html.j2:39
 msgid "Select the lifecycle your algorithm system is currently in."
-msgstr "Selecteer de levenscyclus waarin uw project zich momenteel bevindt."
+msgstr "Selecteer de levenscyclus waarin uw algortime systeem zich momenteel bevindt."
 
 #: amt/site/templates/projects/new.html.j2:40
 msgid "For more information on lifecycle, read the"
@@ -650,28 +650,4 @@ msgstr "Creëer Algoritme Systeem"
 #: amt/site/templates/projects/new.html.j2:195
 msgid "Copy results and close"
 msgstr "Resultaten overnemen en sluiten"
-
-#~ msgid "Projects"
-#~ msgstr "Projecten"
-
-#~ msgid "Project name"
-#~ msgstr "Project naam"
-
-#~ msgid "New project"
-#~ msgstr "Nieuw project"
-
-#~ msgid "Find project..."
-#~ msgstr "Zoek project..."
-
-#~ msgid "Project code"
-#~ msgstr "Project"
-
-#~ msgid "Create a new project"
-#~ msgstr "Maak een nieuw project"
-
-#~ msgid "Create Project"
-#~ msgstr "Maak project"
-
-#~ msgid "Everyone is welcome to make comments and suggestions."
-#~ msgstr "Iedereen mag opmerkingen en suggesties doen."
 
