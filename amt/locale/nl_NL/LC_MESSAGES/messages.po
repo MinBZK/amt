@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-16 14:46+0200\n"
+"POT-Creation-Date: 2024-10-16 14:09+0000\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_NL\n"
@@ -272,7 +272,7 @@ msgstr "Er is een fout opgetreden"
 msgid "An error occurred. Please try again later"
 msgstr "Er is een fout opgetreden. Probeer het later opnieuw."
 
-#: amt/site/templates/layouts/base.html.j2:1
+#: amt/site/templates/layouts/base.html.j2:11
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr "Algoritme Management Toolkit (AMT)"
 
@@ -303,7 +303,7 @@ msgstr "Onbekend"
 #: amt/site/templates/pages/assessment_card.html.j2:7
 #: amt/site/templates/pages/model_card.html.j2:6
 #: amt/site/templates/pages/system_card.html.j2:4
-#: amt/site/templates/parts/filter_list.html.j2:111
+#: amt/site/templates/parts/filter_list.html.j2:103
 #: amt/site/templates/projects/details_info.html.j2:32
 msgid "Last updated"
 msgstr "Laatst bijgewerkt"
@@ -346,23 +346,64 @@ msgstr "AMT Placeholder informatie pagina's"
 msgid "Algorithm Management Toolkit"
 msgstr "Algoritme Management Toolkit"
 
-#: amt/site/templates/parts/filter_list.html.j2:18
+#: amt/site/templates/pages/landingpage.html.j2:22
+msgid "Grip on algorithms with the Algorithm Management Toolkit"
+msgstr "Grip op algoritmes met de Algoritme Management Toolkit"
+
+#: amt/site/templates/pages/landingpage.html.j2:24
+msgid "The AI Validation team"
+msgstr "Het AI Validatie team"
+
+#: amt/site/templates/pages/landingpage.html.j2:25
+msgid ""
+" has developed the Algorithm Management Toolkit on behalf of the Ministry"
+" of Interior Affairs.\n"
+"                    This toolkit offers organizations a standardized way "
+"to develop, validate, manage, control and publish algorithms.\n"
+"                    In collaboration with (international) partners, it "
+"ensures uniformity, transparency and reproducibility."
+msgstr ""
+"heeft het Algoritme Management Toolkit ontwikkeld in opdracht van het "
+"Ministerie van Binnenlandse Zaken.\n"
+"                    Deze toolkit biedt organisaties een "
+"gestandaardiseerde manier om algoritmes te ontwikkelen, valideren, "
+"beheren, controleren en publiceren.\n"
+"                    In samenwerking met (internationale) partners zorgt "
+"het voor uniformiteit, transparantie en reproduceerbaarheid."
+
+#: amt/site/templates/pages/landingpage.html.j2:31
+msgid "Log in"
+msgstr "Inloggen"
+
+#: amt/site/templates/pages/landingpage.html.j2:31
+msgid "or"
+msgstr "voor"
+
+#: amt/site/templates/pages/landingpage.html.j2:32
+msgid "contact us"
+msgstr "neem contact op"
+
+#: amt/site/templates/pages/landingpage.html.j2:33
+msgid "for more information on how the toolkit can support your organization."
+msgstr "voor meer informatie over hoe de toolkit uw organisatie kan ondersteunen."
+
+#: amt/site/templates/parts/filter_list.html.j2:12
 msgid " ago"
 msgstr "geleden"
 
-#: amt/site/templates/parts/filter_list.html.j2:51
+#: amt/site/templates/parts/filter_list.html.j2:44
 msgid "result"
 msgstr "resultaat"
 
-#: amt/site/templates/parts/filter_list.html.j2:52
+#: amt/site/templates/parts/filter_list.html.j2:45
 msgid "results"
 msgstr "resultaten"
 
-#: amt/site/templates/parts/filter_list.html.j2:54
+#: amt/site/templates/parts/filter_list.html.j2:47
 msgid "for"
 msgstr "voor"
 
-#: amt/site/templates/parts/filter_list.html.j2:84
+#: amt/site/templates/parts/filter_list.html.j2:77
 msgid ""
 "No Algorithm system match your selected filters. Try adjusting your "
 "filters or clearing them to see more\n"
@@ -372,11 +413,11 @@ msgstr ""
 "filters. Pas de filters aan of verwijder ze om meer algortime systemen te"
 " zien."
 
-#: amt/site/templates/parts/filter_list.html.j2:103
+#: amt/site/templates/parts/filter_list.html.j2:95
 msgid "Algorithm system name"
 msgstr "Algoritme systeem naam"
 
-#: amt/site/templates/parts/filter_list.html.j2:107
+#: amt/site/templates/parts/filter_list.html.j2:99
 msgid "Phase"
 msgstr "Fase"
 
