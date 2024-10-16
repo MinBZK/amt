@@ -13,19 +13,25 @@
                     <br>
                     {% if not user %}
                         <a href="/auth/login"
-                           class="utrecht-button utrecht-button--secondary-action utrecht-button--rvo-md rvo-hero__subtitle rvo-link--no-underline"
+                           class="utrecht-button utrecht-button--secondary-action utrecht-button--rvo-md rvo-link--no-underline"
                            type="button">{% trans %}Login{% endtrans %}</a>
                     {% endif %}
                 </h1>
             </div>
             <div class="rvo-max-width-layout rvo-max-width-layout--md"
                  style="padding: 1.5em">
-                <h3 class="utrecht-heading-3">lorem ipsum dolor sit amet</h3>
+                <h3 class="utrecht-heading-3">{% trans %}Grip on algorithms with the Algorithm Management Toolkit{% endtrans %}</h3>
                 <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Praesentium, minus quia fuga temporibus aspernatur optio doloribus nisi iusto, provident dolore velit ratione quam dicta pariatur consequuntur, ipsa reprehenderit accusantium in.
+                    <a href="https://minbzk.github.io/ai-validation/" class="rvo-link">{% trans %}The AI Validation team{% endtrans %}</a>
+                    {% trans %} has developed the Algorithm Management Toolkit on behalf of the Ministry of Interior Affairs.
+                    This toolkit offers organizations a standardized way to develop, validate, manage, control and publish algorithms.
+                    In collaboration with (international) partners, it ensures uniformity, transparency and reproducibility.{% endtrans %}
                 </p>
-                <p style="margin-block-start: 1.5em">
-                    A, ipsa distinctio molestias exercitationem corporis eum ea molestiae temporibus sequi doloremque amet officia ullam dolore earum! Illum dolores ipsa necessitatibus excepturi ex reprehenderit ad cupiditate. Aperiam rerum esse id?
+                <br>
+                <p>
+                    <a href="/auth/login" class="rvo-link">{% trans %}Log in{% endtrans %}</a> {% trans %}or{% endtrans %}
+                    <a href="mailto:ai-validatie@minbzk.nl" class="rvo-link">{% trans %}contact us{% endtrans %}</a>
+                    {% trans %}for more information on how the toolkit can support your organization.{% endtrans %}
                 </p>
             </div>
         </div>

@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-16 14:46+0200\n"
+"POT-Creation-Date: 2024-10-16 14:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -263,7 +262,7 @@ msgstr ""
 msgid "An error occurred. Please try again later"
 msgstr ""
 
-#: amt/site/templates/layouts/base.html.j2:1
+#: amt/site/templates/layouts/base.html.j2:11
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr ""
 
@@ -294,7 +293,7 @@ msgstr ""
 #: amt/site/templates/pages/assessment_card.html.j2:7
 #: amt/site/templates/pages/model_card.html.j2:6
 #: amt/site/templates/pages/system_card.html.j2:4
-#: amt/site/templates/parts/filter_list.html.j2:111
+#: amt/site/templates/parts/filter_list.html.j2:103
 #: amt/site/templates/projects/details_info.html.j2:32
 msgid "Last updated"
 msgstr ""
@@ -337,34 +336,68 @@ msgstr ""
 msgid "Algorithm Management Toolkit"
 msgstr ""
 
-#: amt/site/templates/parts/filter_list.html.j2:18
+#: amt/site/templates/pages/landingpage.html.j2:22
+msgid "Grip on algorithms with the Algorithm Management Toolkit"
+msgstr ""
+
+#: amt/site/templates/pages/landingpage.html.j2:24
+msgid "The AI Validation team"
+msgstr ""
+
+#: amt/site/templates/pages/landingpage.html.j2:25
+msgid ""
+" has developed the Algorithm Management Toolkit on behalf of the Ministry"
+" of Interior Affairs.\n"
+"                    This toolkit offers organizations a standardized way "
+"to develop, validate, manage, control and publish algorithms.\n"
+"                    In collaboration with (international) partners, it "
+"ensures uniformity, transparency and reproducibility."
+msgstr ""
+
+#: amt/site/templates/pages/landingpage.html.j2:31
+msgid "Log in"
+msgstr ""
+
+#: amt/site/templates/pages/landingpage.html.j2:31
+msgid "or"
+msgstr ""
+
+#: amt/site/templates/pages/landingpage.html.j2:32
+msgid "contact us"
+msgstr ""
+
+#: amt/site/templates/pages/landingpage.html.j2:33
+msgid "for more information on how the toolkit can support your organization."
+msgstr ""
+
+#: amt/site/templates/parts/filter_list.html.j2:12
 msgid " ago"
 msgstr ""
 
-#: amt/site/templates/parts/filter_list.html.j2:51
+#: amt/site/templates/parts/filter_list.html.j2:44
 msgid "result"
 msgstr ""
 
-#: amt/site/templates/parts/filter_list.html.j2:52
+#: amt/site/templates/parts/filter_list.html.j2:45
 msgid "results"
 msgstr ""
 
-#: amt/site/templates/parts/filter_list.html.j2:54
+#: amt/site/templates/parts/filter_list.html.j2:47
 msgid "for"
 msgstr ""
 
-#: amt/site/templates/parts/filter_list.html.j2:84
+#: amt/site/templates/parts/filter_list.html.j2:77
 msgid ""
 "No Algorithm system match your selected filters. Try adjusting your "
 "filters or clearing them to see more\n"
 "            algorithm systems."
 msgstr ""
 
-#: amt/site/templates/parts/filter_list.html.j2:103
+#: amt/site/templates/parts/filter_list.html.j2:95
 msgid "Algorithm system name"
 msgstr ""
 
-#: amt/site/templates/parts/filter_list.html.j2:107
+#: amt/site/templates/parts/filter_list.html.j2:99
 msgid "Phase"
 msgstr ""
 
