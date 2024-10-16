@@ -24,6 +24,7 @@ def test_get_system_card(setup: SystemCard) -> None:
         "assessments": [],
         "requirements": [],
         "measures": [],
+        "references": [],
     }
 
     assert system_card.model_dump() == expected
@@ -40,6 +41,7 @@ def test_system_card_update(setup: SystemCard) -> None:
         "assessments": [],
         "requirements": [],
         "measures": [],
+        "references": [],
     }
     system_card.name = "IAMA 1.1"
     assert system_card.model_dump(exclude_none=True) == expected
