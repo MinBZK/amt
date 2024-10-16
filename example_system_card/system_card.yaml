@@ -82,5 +82,4 @@ models:
 
 assessments:
   - !include assessments/iama.yaml
-  - !include assessments/dpia.yaml
   - !include assessments/aiia.yaml
