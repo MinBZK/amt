@@ -1,71 +1,77 @@
-version: "0.1a9"
+version: "0.1a10"
 provenance:
   git_commit_hash: 3eb1f1b
-  timestamp: 2024-04-16T16:48:14Z
-  uri: https://github.com/MinBZK/tad-conversion-tool
-  author: John Doe
-name: "Zoeken naar mogelijke registraties van vreemdelingen"
+  timestamp: 2024-10-15T16:48:14Z
+  uri: https://github.com/Oirschot/woz
+  author: Wouter Beek
+name: "Waarderen WOZ-objecten"
 instruments:
-  - urn: "urn:nl:aivt:ir:iama:1.0"
+  - urn: "urn:nl:aivt:tr:iama:1.0"
     version: "1.0"
     required: True
-  - urn: "urn:nl:aivt:ir:aiia:1.0"
+  - urn: "urn:nl:aivt:tr:aiia:1.0"
     version: "1.0"
     required: True
-upl: "http://standaarden.overheid.nl/owms/terms/AangifteVertrekBuitenland"
+upl: "https://standaarden.overheid.nl/owms/terms/woz-beschikking"
 owners:
   - oin: "00000003273808340000"
-    organization: "Ministerie van Justitie en Veiligheid"
-    name: "John Doe"
-    email: "johndoe@email.com"
-    role: "Data Scientist"
+    organization: "Gemeente Oirschot - Directie Belastingen, afdeling Waarderen, Heffen en Toezicht"
+    name: "Piet van Haaren"
+    email: "p.vanhaaren@oirschot.nl"
+    role: "Manager WOZ beschikking"
   - oin: "00000003273808340000"
-    organization: "Ministerie van Justitie en Veiligheid"
-    name: "John Doe"
-    email: "johndoe@email.com"
-    role: "Data Scientist"
-  - oin: "00000003273808340000"
-    organization: "Ministerie van Justitie en Veiligheid"
-    name: "John Doe"
-    email: "johndoe@email.com"
-    role: "Data Scientist"
-description: "Algoritme dat het mogelijk maakt om fonetisch (gegevens schrijven zoals ze klinken) te zoeken op persoonsgegevens van vreemdelingen die geregistreerd zijn in de Basisvoorziening Vreemdelingen (BVV)."
+    organization: "Gemeente Oirschot"
+    name: "Ellen Rokven"
+    email: "info@oirschot.nl"
+    role: "Medewerkster Klantcontactcentrum"
+description: "Het bepalen en fiatteren van de WOZ-waarde."
 labels:
-  - name: "label_1"
-    value: "value_1"
-  - name: "label_2"
-    value: "value_2"
-status: "production"
-publication_category: "other_algorithms"
-begin_date: "2003-05-1"
-goal_and_impact: "Providing assistance in investigating whether foreign nationals in contact with the Dutch government have previously been registered in the Basisvoorziening Vreemdelingen. The Basisvoorziening Vreemdelingen is the central information system used by the organisations working together in the migration chain. The system contains basic data on foreigners and is maintained by the chain partners in the migration chain. Searching whether someone is already registered can prevent people from being registered multiple times. The algorithm to search phonetically can be applied if a person is not found based on fingerprints, or if foreigners do not have an identity document."
-considerations: "The algorithm can be used to search for data of persons whose details are not well known. This can lead to better identification of foreigners. By entering data as it sounds, the algorithm is used to find the possible correct spelling of the data. This will help an employee if the language or letters do not match the Dutch alphabet. Use of this algorithm can prevent duplicate registrations."
-risk_management: "The algorithm is tested annually to see if the results given are sufficiently correct according to the agreements made (number of results shown, degree of similarity). This is done by the organisations using the algorithm and by the administrator. The operation of the algorithm can only be modified by the supplier. New versions are released regularly."
-human_intervention: "The algorithm is only used to support staff at organisations to establish the identity of a foreign national. This is done at the Police, Royal Military Police, Immigration and Naturalisation Service, Foreign Affairs. The algorithm can provide a list of candidates, but the employee always remains responsible for using this data himself. This may result in a registration being reused, or a new registration being made."
+  - name: "WOZ Waardering"
+    value: "Automatiseert het proces van waardebepaling van onroerend goed op basis van marktontwikkelingen."
+  - name: "Marktanalyse"
+    value: "Maakt gebruik van marktgegevens en statistische modellen om de WOZ-waarde te bepalen."
+  - name: "Juridische Naleving"
+    value: "Voldoet aan de Wet WOZ en relevante regelgeving omtrent waardebepaling en proceskostenvergoedingen."
+status: "ontwikkeling"
+publication_category: "Hoog-risico AI"
+begin_date: "2023-10-01"
+goal_and_impact: "Automatisering van de werkprocessen; de applicatie ondersteunt in het taxatieproces ten behoeve van de uitvoering van de wet WOZ."
+considerations: "Bij het bepalen van de WOZ-waarde worden de marktontwikkelingen nauwkeurig geanalyseerd en verwerkt in een taxatiemodel. Dit model zorgt ervoor dat de WOZ-waarde van een groot aantal woningen efficiënt kan worden berekend. De berekende modelwaarden worden vervolgens gecontroleerd door een taxateur en door statistische tests, zoals ratio-analyses. Het streven is om de WOZ-waarden zo dicht mogelijk bij de marktwaarde te laten aansluiten, binnen een toegestane bandbreedte."
+risk_management: "Transactieruis en afwijkende ratio’s worden beheerst door het gebruik van meerdere verkoopprijzen en de voortdurende aanpassing van het taxatiemodel, om fouten in de waardebepaling te minimaliseren."
+human_intervention: "Na berekening van de modelwaarde wordt deze gecontroleerd door een taxateur, die waar nodig aanpassingen maakt op basis van specifieke kenmerken van het object​."
 legal_base:
-  - name: "Aliens Act 2000"
-    link: "https://wetten.overheid.nl/BWBR0011823/2024-01-01"
-used_data: "The database only contains personal data of aliens registered in the Basic Immigration Facility. These include name data, birth data and nationalities. The data usually come from Police, Marechaussee, Immigration and Naturalisation Service or Foreign Affairs, but may also come from municipalities."
-technical_design: "When foreigners' data are registered or changed in the BMS, they are also immediately placed in the phonetic search system. The algorithm provides options for convenient searching in this. Depending on the search query, the way the data are consulted is determined. A maximum number of search results can also be specified. For each search result, the degree of similarity is shown."
+  - name: "Wet waardering onroerende zaken"
+    link: "https://wetten.overheid.nl/BWBR0007119/2024-01-01/0"
+  - name: "Wet herwaardering proceskostenvergoedingen WOZ en bpm"
+    link: "https://wetten.overheid.nl/BWBR0049132/2024-01-01/0"
+used_data: "WOZ-waarde: grootte, bouwjaar, adres, type objecten en bijgebouwen"
+technical_design: "De iObjecten-WOZ/WOZ Raadplegen is een computermodel dat grote hoeveelheden gegevens verwerkt om voor elk object een modelwaarde te berekenen, met correcties voor objectkenmerken zoals grootte en ligging​."
 external_providers:
-  - "Human Inference (part of the Data Agency)"
+  - "Civision Pink Roccade"
 references:
-  - "reference_1"
-  - "reference_2"
+  - name: "Civision Pink Roccade"
+    link: "https://www.pinkroccadelocalgovernment.nl/beleidsterreinen/ruimte-omgeving/iobjecten/woz-raadplegen/?bu=1250"
+  - name: "Algoritmeregister Overheid.nl"
+    link: "https://algoritmes.overheid.nl/nl/algoritme/wozwaarde-uitrekenen-gemeente-oirschot/12626742#algemeneInformatie"
 interaction_details:
-  - Interaction details
+  - "Met iObjecten-WOZ/WOZ Raadplegen doorzoek, raadpleeg én vergelijk je heel eenvoudig WOZ-objecten, sluimerende objecten en WOZ-waarden."
 version_requirements:
   - v0.1a0
 deployment_variants:
-  - system_deployment_variants
+  - Webtoepassing
+  - Mobiele applicatie
 hardware_requirements:
-  - system_hardware_requirements
+  - "2.0 GHz dual-core+ processor"
+  - "4 GB RAM geheugen"
+  - "500 MB vrije schijfruimte"
 product_markings:
-  - system_product_markings
+  - Algemene gebruiksvoorwaarden
+  - Privacyverklaring
+  - ISO
 user_interface:
-  - description: system_user_interface
-    link: system_user_interface_uri
-    snapshot: system_user_interface_snapshot_uri
+  - description: "Een intuïtieve gebruikersinterface waarmee WOZ-objecten op een efficiënte, betrouwbare en transparante wijze worden gewaardeerd."
+    link: "https://www.pinkroccadelocalgovernment.nl/beleidsterreinen/ruimte-omgeving/iobjecten/woz-raadplegen/?bu=1250"
+    snapshot: "https://www.pinkroccadelocalgovernment.nl/beleidsterreinen/ruimte-omgeving/iobjecten/woz-raadplegen/?bu=1250"
 
 measures: !include measures/measures.yaml
 requirements: !include requirements/requirements.yaml

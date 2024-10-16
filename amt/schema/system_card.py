@@ -12,6 +12,11 @@ from amt.schema.measure import MeasureTask
 from amt.schema.requirement import RequirementTask
 
 
+class Reference(BaseModel):
+    name: str = Field(default=None)
+    link: str = Field(default=None)
+
+
 class SystemCard(BaseModel):
     schema_version: str = Field(default="0.1a10")
     name: str = Field(default=None)
@@ -24,3 +29,4 @@ class SystemCard(BaseModel):
     requirements: list[RequirementTask] = Field(default=[])
     measures: list[MeasureTask] = Field(default=[])
     assessments: list[AssessmentCard] = Field(default=[])
+    references: list[Reference] = Field(default=[])

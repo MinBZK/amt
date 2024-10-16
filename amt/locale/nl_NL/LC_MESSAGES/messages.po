@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-16 10:41+0200\n"
+"POT-Creation-Date: 2024-10-16 11:52+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_NL\n"
@@ -272,7 +272,7 @@ msgstr "Er is een fout opgetreden"
 msgid "An error occurred. Please try again later"
 msgstr "Er is een fout opgetreden. Probeer het later opnieuw."
 
-#: amt/site/templates/layouts/base.html.j2:1
+#: amt/site/templates/layouts/base.html.j2:11
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr "Algoritme Management Toolkit (AMT)"
 
@@ -527,6 +527,10 @@ msgstr "Levenscyclus"
 #: amt/site/templates/projects/details_info.html.j2:36
 msgid "Labels"
 msgstr "Labels"
+
+#: amt/site/templates/projects/details_info.html.j2:44
+msgid "References"
+msgstr "Referenties"
 
 #: amt/site/templates/projects/details_measure_modal.html.j2:28
 msgid "Read more on the algoritmekader"

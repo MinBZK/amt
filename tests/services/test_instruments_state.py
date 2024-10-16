@@ -24,8 +24,8 @@ def system_card_data_with_instruments() -> dict[str, Any]:
         "name": "test-system-card",
         "schema_version": "0.0.0",
         "instruments": [
-            {"urn": "urn:nl:aivt:ir:iama:1.0"},
-            {"urn": "urn:nl:aivt:ir:aiia:1.0"},
+            {"urn": "urn:nl:aivt:tr:iama:1.0"},
+            {"urn": "urn:nl:aivt:tr:aiia:1.0"},
             {"urn": "urn:instrument:assessment"},
         ],
         "assessments": [
@@ -175,9 +175,9 @@ def test_get_state_per_instrument(system_card: SystemCard):
     instrument_state_service = InstrumentStateService(system_card)
     res = instrument_state_service.get_state_per_instrument()
     assert res == [
-        {"urn": "urn:nl:aivt:ir:aiia:1.0", "in_progress": 1, "name": "AI Impact Assessment (AIIA)"},
+        {"urn": "urn:nl:aivt:tr:aiia:1.0", "in_progress": 1, "name": "AI Impact Assessment (AIIA)"},
         {
-            "urn": "urn:nl:aivt:ir:iama:1.0",
+            "urn": "urn:nl:aivt:tr:iama:1.0",
             "in_progress": 1,
             "name": "Impact Assessment Mensenrechten en Algoritmes (IAMA)",
         },
