@@ -594,7 +594,7 @@ msgstr "Afgerond"
 
 #: amt/site/templates/projects/details_measure_modal.html.j2:66
 msgid "Information on how this measure is implemented"
-msgstr ""
+msgstr "Informatie over hoe deze maatregel is geïmplementeerd"
 
 #: amt/site/templates/projects/details_measure_modal.html.j2:71
 msgid ""

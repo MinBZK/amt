@@ -64,14 +64,16 @@
                              aria-labelledby="fieldId-label"
                              class="utrecht-form-field utrecht-form-field--text rvo-form-field">
                             <div class="rvo-form-field__label">
-                                <label class="rvo-label" id="fieldId-label" for="fieldId">{% trans %}Information on how this measure is implemented{% endtrans %}</label>
+                                <label class="rvo-label" id="fieldId-label" for="fieldId">
+                                    {% trans %}Information on how this measure is implemented{% endtrans %}
+                                </label>
                             </div>
-                                <textarea id="field"
-                                          class="utrecht-textarea utrecht-textarea--html-textarea utrecht-textarea--large"
-                                          dir="auto"
-                                          placeholder="{% trans %}Describe how the measure has been implemented, including challenges and solutions.{% endtrans %}"
-                                          name="measure_value"
-                                contenteditable="true">{{ measure_value }}</textarea>
+                            <textarea id="field"
+                                      class="utrecht-textarea utrecht-textarea--html-textarea utrecht-textarea--large"
+                                      dir="auto"
+                                      placeholder="{% trans %}Describe how the measure has been implemented, including challenges and solutions.{% endtrans %}"
+                                      name="measure_value"
+                                      contenteditable="true">{{ measure_value }}</textarea>
                         </div>
                     </fieldset>
                 </div>
