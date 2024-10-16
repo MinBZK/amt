@@ -23,7 +23,7 @@ date: ''
 url: https://minbzk.github.io/Algoritmekader/vereisten/aia-22-gebruiksverantwoordelijken-maatregelen/index.html
 subject: ["governance"]
 lifecycle: ["implementatie"]
-links: []
+links: ["urn:nl:ak:mtr:gov-02"]
 ai_risk_profile: ["AI-systeem", "AI-systeem voor algemene doeleinden", "hoog-risico AI", "gebruiksverantwoordelijke"]
 always_applicable: 0
 template: &systemcard_requirements_template

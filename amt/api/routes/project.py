@@ -5,6 +5,7 @@ from typing import Annotated, Any
 
 from fastapi import APIRouter, Depends, Request
 from fastapi.responses import HTMLResponse
+from pydantic import BaseModel, Field
 
 from amt.api.deps import templates
 from amt.api.lifecycles import get_lifecycle
@@ -18,8 +19,11 @@ from amt.api.navigation import (
 from amt.core.exceptions import AMTNotFound, AMTRepositoryError
 from amt.enums.status import Status
 from amt.models import Project
+from amt.schema.measure import ExtendedMeasureTask, MeasureTask
+from amt.schema.requirement import RequirementTask
 from amt.schema.system_card import SystemCard
 from amt.schema.task import MovedTask
+from amt.services import task_registry
 from amt.services.instruments_and_requirements_state import InstrumentStateService, RequirementsStateService
 from amt.services.projects import ProjectsService
 from amt.services.storage import StorageFactory
@@ -311,8 +315,27 @@ async def get_system_card_requirements(
     system_card = project.system_card
     requirements = fetch_requirements([requirement.urn for requirement in system_card.requirements])
 
-    # Get measures that correspond to the requirements.
-    requirements_and_measures = [(requirement, fetch_measures(requirement.links)) for requirement in requirements]
+    # Get measures that correspond to the requirements and merge them with the measuretasks
+    requirements_and_measures = []
+    for requirement in requirements:
+        completed_measures_count = 0
+        linked_measures = fetch_measures(requirement.links)
+        extended_linked_measures: list[ExtendedMeasureTask] = []
+        for measure in linked_measures:
+            measure_task = find_measure_task(system_card, measure.urn)
+            if measure_task:
+                ext_measure_task = ExtendedMeasureTask(
+                    name=measure.name,
+                    description=measure.description,
+                    urn=measure.urn,
+                    state=measure_task.state,
+                    value=measure_task.value,
+                    version=measure_task.version,
+                )
+                if ext_measure_task.state == "done":
+                    completed_measures_count += 1
+                extended_linked_measures.append(ext_measure_task)
+        requirements_and_measures.append((requirement, completed_measures_count, extended_linked_measures))  # pyright: ignore [reportUnknownMemberType]
 
     context = {
         "instrument_state": instrument_state,
@@ -325,6 +348,100 @@ async def get_system_card_requirements(
     }
 
     return templates.TemplateResponse(request, "projects/details_requirements.html.j2", context)
+
+
+def find_measure_task(system_card: SystemCard, urn: str) -> MeasureTask | None:
+    for measure in system_card.measures:
+        if measure.urn == urn:
+            return measure
+    return None
+
+
+def find_requirement_task(system_card: SystemCard, requirement_urn: str) -> RequirementTask | None:
+    for requirement in system_card.requirements:
+        if requirement.urn == requirement_urn:
+            return requirement
+    return None
+
+
+def find_requirement_tasks_by_measure_urn(system_card: SystemCard, measure_urn: str) -> list[RequirementTask]:
+    requirement_mapper: dict[str, RequirementTask] = {}
+    for requirement_task in system_card.requirements:
+        requirement_mapper[requirement_task.urn] = requirement_task
+
+    requirement_tasks: list[RequirementTask] = []
+    measure = fetch_measures([measure_urn])
+    for requirement_urn in measure[0].links:
+        # TODO: This is because measure are linked to too many requirement not applicable in our use case
+        if len(fetch_requirements([requirement_urn])) > 0:
+            requirement_tasks.append(requirement_mapper[requirement_urn])
+
+    return requirement_tasks
+
+
+@router.get("/{project_id}/measure/{measure_urn}")
+async def get_measure(
+    request: Request,
+    project_id: int,
+    measure_urn: str,
+    projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
+) -> HTMLResponse:
+    project = get_project_or_error(project_id, projects_service, request)
+    measure = task_registry.fetch_measures([measure_urn])
+    measure_task = find_measure_task(project.system_card, measure_urn)
+
+    context = {
+        "measure": measure[0],
+        "measure_state": measure_task.state,  # pyright: ignore [reportOptionalMemberAccess]
+        "measure_value": measure_task.value,  # pyright: ignore [reportOptionalMemberAccess]
+        "project_id": project_id,
+    }
+
+    return templates.TemplateResponse(request, "projects/details_measure_modal.html.j2", context)
+
+
+class MeasureUpdate(BaseModel):
+    measure_state: str = Field(default=None)
+    measure_value: str = Field(default=None)
+
+
+@router.post("/{project_id}/measure/{measure_urn}")
+async def update_measure_value(
+    request: Request,
+    project_id: int,
+    measure_urn: str,
+    measure_update: MeasureUpdate,
+    projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
+) -> HTMLResponse:
+    project = get_project_or_error(project_id, projects_service, request)
+
+    measure_task = find_measure_task(project.system_card, measure_urn)
+    measure_task.state = measure_update.measure_state  # pyright: ignore [reportOptionalMemberAccess]
+    measure_task.value = measure_update.measure_value  # pyright: ignore [reportOptionalMemberAccess]
+
+    # update for the linked requirements the state based on all it's measures
+    requirement_tasks = find_requirement_tasks_by_measure_urn(project.system_card, measure_urn)
+    requirement_urns = [requirement_task.urn for requirement_task in requirement_tasks]
+    requirements = fetch_requirements(requirement_urns)
+
+    for requirement in requirements:
+        count_completed = 0
+        for link_measure_urn in requirement.links:
+            link_measure_task = find_measure_task(project.system_card, link_measure_urn)
+            if link_measure_task:  # noqa: SIM102
+                if link_measure_task.state == "done":
+                    count_completed += 1
+        requirement_task = find_requirement_task(project.system_card, requirement.urn)
+        if count_completed == len(requirement.links):
+            requirement_task.state = "done"  # pyright: ignore [reportOptionalMemberAccess]
+        elif count_completed == 0 and len(requirement.links) > 0:
+            requirement_task.state = "to do"  # pyright: ignore [reportOptionalMemberAccess]
+        else:
+            requirement_task.state = "in progress"  # pyright: ignore [reportOptionalMemberAccess]
+
+    projects_service.update(project)
+    # TODO: FIX THIS!! The page now reloads at the top, which is annoying
+    return templates.Redirect(request, f"/project/{project_id}/details/system_card/requirements")
 
 
 # !!!

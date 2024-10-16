@@ -1,0 +1,28 @@
+systemcard_path: .systemcard.measures[]
+schema_version: 1.1.0
+name: Neem de ontwikkeling en gebruik van een algoritme of AI-systeem op in een privacyverklaring als persoonsgegevens worden verwerkt.
+description: Neem het gebruik van een algoritme of AI-systeem op in de privacyverklaring als hierbij persoonsgegevens worden verwerkt.
+explanation: "- Door in een privacyverklaring te vermelden welke persoonsgegevens worden verwerkt voor het gebruik van een algoritme of AI-systeem, wordt een betrokkene geïnformeerd over de verwerking van diens persoonsgegevens.\n- Een privacyverklaring kan op organistieniveau worden opgesteld en ook voor specifieke verwerkingen.\n- In een privacyverklaring wordt in ieder geval het volgende opgenomen:\n  \n  - de identiteit en contactgegevens van uw organisatie. En ook die van vertegenwoordiger in de Europese Unie (EU), als deze er zijn.\n  - de contactgegevens van de functionaris gegevensbescherming (FG), als een organistie deze heeft.\n  - de doeleinden van de verwerking en de AVG-grondslag. \n  - de (categorieën van) ontvangers van de persoonsgegevens.\n  - of de persoonsgegevens door worden geven buiten de EER of aan een internationale organisatie. En zo ja, op welke juridische grond.\n  - de bewaartermijn van de gegevens.\n  - de privacyrechten van de betrokkenen, zoals het recht op inzage, rectificatie en gegevens verwijderen.\n  - het recht van de betrokkenen om de toestemming die zij voor een bepaalde verwerking hebben gegeven, altijd weer te mogen intrekken.\n  - dat de betrokkenen een klacht kunnen indienen bij de privacytoezichthouder. In Nederland is dat de Autoriteit Persoonsgegevens (AP).\n  - of de betrokkenen verplicht zijn de persoonsgegevens te verstrekken. En zo ja, waarom. Vermeld dan ook wat de gevolgen zijn als zij de gegevens niet verstrekken.\n  - of er sprake is van geautomatiseerde besluitvorming, inclusief profilering. En zo ja, hoe deze beslissing wordt genomen.\n  - als persoonsgegevens van een andere organisatie zijn ontvangen: de bron waar de persoonsgegevens vandaan komen. En of de gegevens afkomstig zijn van openbare bronnen.\n\n- Het is denkbaar dat in een specifieke privacyverklaring informatie over onderliggende logica van het algoritme of AI-systeem, alsmede het belang en de verwachte gevolgen van die verwerking voor de betrokkene. Het is ook denkbaar dat deze informatie in het algoritmeregister wordt opgenomen.\n- Als ervoor wordt gekozen om het algoritme uit te faseren, dan moet informatie in het algoritmeregister hierop worden aangepast."
+urn: urn:nl:ak:mtr:pgb-05
+language: nl
+owners:
+- organization: Algoritmekader
+  name: ''
+  email: ''
+  role: ''
+date: ''
+url: https://minbzk.github.io/Algoritmekader/maatregelen/vermelding_in_privacyverklaring/index.html
+subject: ["privacy-en-gegevensbescherming"]
+suggested_roles: ["proceseigenaar", "beleidsmedewerker", "privacy-officer", "aanbieder"]
+lifecycle: ["ontwerp", "ontwikkelen", "verificatie-en-validatie", "implementatie", "uitfaseren"]
+links: ["urn:nl:ak:ver:avg-07"]
+template: &systemcard_measures_template
+  requirement: $MEASURE
+  value: $VALUE
+  remarks: $REMARKS
+  status: $STATUS
+  timestamp: $TIMESTAMP
+  authors:
+  - name: $AUTHOR.NAME
+    email: $AUTHOR.EMAIL
+    role: $AUTHOR.ROLE

@@ -1,0 +1,28 @@
+systemcard_path: .systemcard.measures[]
+schema_version: 1.1.0
+name: Persoonsgegevens die worden verwerkt voor het ontwikkelen en gebruiken van algoritmes en AI-systemen zijn beschreven en onderbouwd.
+description: Er is een overzicht opgesteld welke persoonsgegevens mogen worden verwerkt en om welke categorie persoonsgegevens het gaat. Het principe van dataminimalisatie is toegepast, zodat het minimum aantal persoonsgegevens wordt verwerkt om het beoogde doel te bereiken.
+explanation: "- Er is een overzicht opgesteld welke persoonsgegevens mogen worden verwerkt.\n- Bij de persoonsgegevens is aangegeven om wat voor categorie persoonsgegevens het gaat.\n- Per kenmerk is toegelicht waarom deze noodzakelijk is om te verwerken voor het ontwikkelen en gebruiken van het algoritme of AI-systeem.\n- Het principe van dataminimalisatie is toegepast, wat betekent dat een keuze is gemaakt of een persoonsgegevens al dan niet strikt noodzakelijk is om het doel te bereiken of dat verwerking ervan achterwege kan blijven.\n- Voor [het beschermen van deze persoonsgegevens](bescherm_persoonsgegevens_die_mogen_worden_verwerkt.md) wordt per kenmerk aangegeven op welke manier deze kan worden beschermd (anonimiseren, pseudonomiseren, aggregeren). \n- Een [DPIA](../instrumenten/DPIA.md) kan worden gebruikt om bovenstaande activiteiten uit te voeren."
+urn: urn:nl:ak:mtr:pgb-03
+language: nl
+owners:
+- organization: Algoritmekader
+  name: ''
+  email: ''
+  role: ''
+date: ''
+url: https://minbzk.github.io/Algoritmekader/maatregelen/persoonsgegevens_die_worden_verwerkt_zijn_beschreven/index.html
+subject: ["privacy-en-gegevensbescherming"]
+suggested_roles: ["proceseigenaar", "informatie analist", "data engineer", "privacy-officer"]
+lifecycle: ["ontwerp", "dataverkenning-en-datapreparatie", "ontwikkelen", "verificatie-en-validatie"]
+links: ["urn:nl:ak:ver:avg-01", "urn:nl:ak:ver:avg-04"]
+template: &systemcard_measures_template
+  requirement: $MEASURE
+  value: $VALUE
+  remarks: $REMARKS
+  status: $STATUS
+  timestamp: $TIMESTAMP
+  authors:
+  - name: $AUTHOR.NAME
+    email: $AUTHOR.EMAIL
+    role: $AUTHOR.ROLE

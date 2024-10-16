@@ -100,8 +100,8 @@ export function hideMobileMenu() {
 window.setCookie = setCookie;
 window.htmx = htmx;
 
-export function openModal() {
-  const el: Element | null = document.getElementById("decision-tree-modal");
+export function openModal(id: string) {
+  const el: Element | null = document.getElementById(id);
   if (el != null) {
     el.classList.remove("display-none");
   }
@@ -118,16 +118,16 @@ class AiActProfile {
   ) {}
 }
 
-export function closeModal() {
+export function closeModal(id: string) {
   // Do not show modal.
-  const el: Element | null = document.getElementById("decision-tree-modal");
+  const el: Element | null = document.getElementById(id);
   if (el != null) {
     el.classList.add("display-none");
   }
 }
 
-export function closeModalSave() {
-  closeModal();
+export function closeModalSave(id: string) {
+  closeModal(id);
 
   // Get decision tree state from local store.
   const decision_tree_state = localStorage?.getItem("labelsbycategory");

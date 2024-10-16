@@ -1,0 +1,28 @@
+systemcard_path: .systemcard.measures[]
+schema_version: 1.1.0
+name: Stel vast of het gaat om een algoritme en/of AI-systeem en wat de bijbehorende risicoclassificatie is om te bepalen welke vereisten hierop van toepassing zijn.
+description: Stel vast of het gaat om een algoritme en/of AI-systeem en wat de bijbehorende risicoclassificatie is om te bepalen welke vereisten hierop van toepassing zijn.
+explanation: "Het verschilt per typen algoritmen of AI-systemen welke vereisten hierop van toepassing is en waar een aanbieder of gebruiksverantwoordelijke aan moet voldoen. \nDit is mede afhankelijk van de bijbehorende risicoclassificatie. \nHiervoor kan in de nabije toekomst de 'beslisboom' in het Algoritmekader voor worden gebruikt. \nDeze stap is van groot belang, omdat dit ook bepalend is welke contractuele verplichtingen moeten worden gecreëerd tussen opdrachtgever en opdrachtnemer/aanbieder."
+urn: urn:nl:ak:mtr:pin-22
+language: nl
+owners:
+- organization: Algoritmekader
+  name: ''
+  email: ''
+  role: ''
+date: ''
+url: https://minbzk.github.io/Algoritmekader/maatregelen/vaststellen_typen_algoritme_of_AI-systeem_en_risicoclassificatie/index.html
+subject: ["publieke-inkoop", "governance"]
+suggested_roles: []
+lifecycle: ["ontwerp", "ontwikkelen"]
+links: ["urn:nl:ak:ver:aia-08", "urn:nl:ak:ver:avg-04", "urn:nl:ak:ver:aia-06"]
+template: &systemcard_measures_template
+  requirement: $MEASURE
+  value: $VALUE
+  remarks: $REMARKS
+  status: $STATUS
+  timestamp: $TIMESTAMP
+  authors:
+  - name: $AUTHOR.NAME
+    email: $AUTHOR.EMAIL
+    role: $AUTHOR.ROLE

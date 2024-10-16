@@ -1,0 +1,28 @@
+systemcard_path: .systemcard.measures[]
+schema_version: 1.1.0
+name: "Een politieke-bestuurlijk besluit wordt genomen over het gebruik van een impactvol algoritme en hoog risico AI-systemen."
+description: "Een politieke-bestuurlijk besluit wordt genomen over de inzet van een impactvol algoritme en hoog risico AI-systemen."
+explanation: "- Door een politiek-bestuurlijk besluit te nemen over de inzet of beëindiging van een impactvol algoritme of hoog risico AI-systeem, wordt een afweging en keuze gemaakt over de wenselijkheid, haalbaarheid, transparantie en eventueel de mate van onbewuste vooringenomenheid van het betreffende algoritme of AI-systeem.\n- Impactvolle algoritmes en hoog risico AI-systemen bevatten aspecten die vragen om politieke afwegingen, en niet enkel door de ambtelijke organisatie mogen worden beoordeeld.\n- Een voorbeeld van een politiek afweging is wanneer er wel of geen sprake is van een gerechtvaardigd onderscheid wat wordt gemaakt door een algoritme of AI-systeem.\n- Het is van belang dat overheidsorganisaties een politiek-bestuurlijk kader opstellen waarin wordt beschreven hoe wordt omgegaan met dergelijke gevallen.\n- Een openbaar besluit draagt bij aan de legitimiteit van de inzet van het algoritme of AI-systeem en de controleerbaarheid van de overheidsorganisatie."
+urn: urn:nl:ak:mtr:gov-16
+language: nl
+owners:
+- organization: Algoritmekader
+  name: ''
+  email: ''
+  role: ''
+date: ''
+url: https://minbzk.github.io/Algoritmekader/maatregelen/politiek-bestuurlijk_besluit/index.html
+subject: ["governance", "transparantie"]
+suggested_roles: ["proceseigenaar", "beleidsmedewerker", "privacy-officer", "aanbieder"]
+lifecycle: ["organisatieverantwoordelijkheden", "verificatie-en-validatie"]
+links: ["urn:nl:ak:ver:awb-01", "urn:nl:ak:ver:aia-08", "urn:nl:ak:ver:awb-02"]
+template: &systemcard_measures_template
+  requirement: $MEASURE
+  value: $VALUE
+  remarks: $REMARKS
+  status: $STATUS
+  timestamp: $TIMESTAMP
+  authors:
+  - name: $AUTHOR.NAME
+    email: $AUTHOR.EMAIL
+    role: $AUTHOR.ROLE

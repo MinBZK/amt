@@ -1,0 +1,29 @@
+systemcard_path: .systemcard.measures[]
+schema_version: 1.1.0
+name: Gebruik aselecte steekproeven als er gebruik gemaakt wordt van risicogestuurde selectie
+description: Gebruik aselecte steekproeven als er gebruik gemaakt wordt van risicogestuurde selectie
+explanation: "Aselecte steekproeven kunnen een waardevolle toevoeging zijn bij risicogestuurde selectie.\n\nHet toevoegen van aselecte steekproeven maakt het mogelijk om over tijd te beoordelen of het algoritme nog voldoende effectief is.\nPopulaties veranderen immers over tijd. Een selectie die het meest effectief was bij ingebruikname, kan over tijd dat niet meer zijn.\nDoor alleen risicogestuurd te selecteren, wordt dit niet inzichtelijk, omdat bepaalde groepen zelden tot nooit gecontroleerd worden.\nDoor de aanvullende mogelijkheid van monitoring, kan over tijd beoordeeld worden of er nog steeds sprake is van de meest proportionele vorm.\nAls dat niet zo is, kan bijvoorbeeld gekozen worden voor aanpassing van de risicogestuurde selectie of overgaan op volledig aselect.\n\nDe maatregel gaat daarmee niet direct discriminatie tegen, omdat er sprake kan zijn van discriminatie ongeacht de effectiviteit van de risicogestuurde selectie.\nEen lagere effectiviteit maakt het echter lastiger het gemaakte onderscheid te rechtvaardigen.\n\nHet gebruik van een aselecte steekproef is in veel gevallen essentieel om het systeem te kunnen toetsen op vooringenomenheid.\nEen aselecte steekproef geeft ook inzicht in heel deel van de populatie dat doorgaans niet geselecteerd en behandeld wordt door het betreffende risicogestuurde algoritme.\nDit maakt het mogelijk om te toetsen of er sprake is van een over- of ondervertegenwoordiging van bepaalde groepen, of om te bepalen of bepaalde typen fouten vaker gemaakt worden in bepaalde groepen.\n\nBij AI-systemen die verder leren op basis van verkregen data kan daarnaast sprake zijn van een reinforcing feedbackloop, omdat zij geen representatieve data krijgen.\nHet toevoegen van aselecte steekproeven kan deze feedbackloop doorbreken.\n\nHet is aan te bevelen om, waar mogelijk, behandelaars niet in te lichten of een casus toegewezen is op basis van een risicogestuurd of aselecte selectie.\nDaardoor wordt beperkt dat een behandelaar met tunnelvisie een zaak bekijkt.\nDe behandelaar weet immers dat er tussen de selecties zaken zitten waar niet sprake is van verhoogd risico.\nOp die manier kan automation bias beperkt worden.\nNiet in alle gevallen zal dit mogelijk zijn, omdat de behandelaar ook uit andere aangeleverde gegevens kan halen op basis waarvan een casus geselecteerd is.\nHet is dan belang om op andere wijze de tunnelvisie tegen te gaan.\n\nDe precieze inzet van aselecte steekproeven zal afhangen van de context.\nZo verschilt het per context hoeveel zaken aselect geselecteerd moeten worden.\nBepaal welke groepen er precies vergeleken dienen te worden en bepaal aan de hand daarvan een passende steekproefgrootte zodanig dat er gesproken kan worden over statistische significantie.\n\nIn sommige gevallen zal de impact van een selectie ook dusdanig zijn, dat het zich niet leent voor aselecte steekproef.\nZo kan een aselecte steekproef wel de basis zijn voor bureauonderzoek, maar mogelijk niet als enige basis voor een huisbezoek.\nDeze belangenafweging moet per context gemaakt worden."
+urn: urn:nl:ak:mtr:bnd-01
+language: nl
+owners:
+- organization: Algoritmekader
+  name: ''
+  email: ''
+  role: ''
+date: ''
+url: https://minbzk.github.io/Algoritmekader/maatregelen/aselecte_steekproeven/index.html
+subject: ["bias-en-non-discriminatie", "technische-robuustheid-en-veiligheid"]
+suggested_roles: []
+lifecycle: ["implementatie", "monitoring-en-beheer"]
+links: ["urn:nl:ak:ver:aia-29", "urn:nl:ak:ver:grw-02", "urn:nl:ak:ver:aia-10"]
+
+template: &systemcard_measures_template
+  requirement: $MEASURE
+  value: $VALUE
+  remarks: $REMARKS
+  status: $STATUS
+  timestamp: $TIMESTAMP
+  authors:
+    - name: $AUTHOR.NAME
+      email: $AUTHOR.EMAIL
+      role: $AUTHOR.ROLE

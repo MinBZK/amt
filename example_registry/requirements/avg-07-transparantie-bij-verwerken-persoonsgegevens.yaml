@@ -25,7 +25,20 @@ date: ''
 url: https://minbzk.github.io/Algoritmekader/vereisten/avg-07-transparantie-bij-verwerken-persoonsgegevens/index.html
 subject: ["privacy-en-gegevensbescherming", "transparantie"]
 lifecycle: ["ontwerp", "dataverkenning-en-datapreparatie", "ontwikkelen", "verificatie-en-validatie", "implementatie", "monitoring-en-beheer"]
-links: []
+links: [
+    "urn:nl:ak:mtr:pin-01",
+    "urn:nl:ak:mtr:pin-02",
+    "urn:nl:ak:mtr:pin-03",
+    "urn:nl:ak:mtr:pin-04",
+    "urn:nl:ak:mtr:pin-05",
+    "urn:nl:ak:mtr:pin-06",
+    "urn:nl:ak:mtr:pin-07",
+    "urn:nl:ak:mtr:pin-08",
+    "urn:nl:ak:mtr:pin-09",
+    "urn:nl:ak:mtr:pgb-05",
+    "urn:nl:ak:mtr:pgb-06",
+    "urn:nl:ak:mtr:tra-01"
+]
 ai_risk_profile: []
 always_applicable: 1
 template: &systemcard_requirements_template

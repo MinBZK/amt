@@ -15,7 +15,7 @@ explanation: "- Interne vastgestelde beleidskaders moeten worden toegepast bij h
   \ welke beleidskaders van toepassing zijn vanuit diens specifieke expertise. \n\
   - Ten behoeve van controles en audits is het van belang dat aantoonbaar wordt gemaakt\
   \ dat de vastgestelde beleidskaders zijn nageleefd. "
-urn: urn:nl:ak:mtr:gov:01
+urn: urn:nl:ak:mtr:gov-01
 language: nl
 owners:
 - organization: Algoritmekader
@@ -23,10 +23,27 @@ owners:
   email: ''
   role: ''
 date: ''
+url: https://minbzk.github.io/Algoritmekader/maatregelen/pas_vastgestelde_beleidskaders_zijn_nageleefd/index.html#toelichting
 subject: ["governance"]
-suggested_role: ["proceseigenaar", "beleidsmedewerker", "data-engineer", "data-scientist", "informatiebeheerder", "privacy-officer", "security-officer", "ethicus", "architect"]
+suggested_roles: ["proceseigenaar", "beleidsmedewerker", "data engineer", "data scientist", "informatiebeheerder", "privacy-officer", "security officer", "ethicus", "architect"]
 lifecycle: ["organisatieverantwoordelijkheden"]
-links: [urn:nl:ak:ver:awb-01, urn:nl:ak:ver:aia-11, urn:nl:ak:ver:aia-05, urn:nl:ak:ver:aia-37, urn:nl:ak:ver:aia-10, urn:nl:ak:ver:avg-11, urn:nl:ak:ver:aia-03, urn:nl:ak:ver:grw-01, urn:nl:ak:ver:bio-01, urn:nl:ak:ver:avg-09, urn:nl:ak:ver:grw-02, urn:nl:ak:ver:aia-19, urn:nl:ak:ver:aia-09, urn:nl:ak:ver:aia-08, urn:nl:ak:ver:aia-20]
+links: [
+    "urn:nl:ak:ver:awb-01",
+    "urn:nl:ak:ver:aia-11",
+    "urn:nl:ak:ver:aia-05",
+    "urn:nl:ak:ver:aia-37",
+    "urn:nl:ak:ver:aia-10",
+    "urn:nl:ak:ver:avg-11",
+    "urn:nl:ak:ver:aia-03",
+    "urn:nl:ak:ver:grw-01",
+    "urn:nl:ak:ver:bio-01",
+    "urn:nl:ak:ver:avg-09",
+    "urn:nl:ak:ver:grw-02",
+    "urn:nl:ak:ver:aia-19",
+    "urn:nl:ak:ver:aia-09",
+    "urn:nl:ak:ver:aia-08",
+    "urn:nl:ak:ver:aia-20"
+]
 template: &systemcard_measures_template
   requirement: $MEASURE
   value: $VALUE

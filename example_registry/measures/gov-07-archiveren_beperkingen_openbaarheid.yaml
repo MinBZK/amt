@@ -1,0 +1,32 @@
+systemcard_path: .systemcard.measures[]
+schema_version: 1.1.0
+name: Archiveren beperkingen openbaarheid
+description: Stel vast of beperkingen aan openbaarheid van de archiefbescheiden moeten worden gesteld.
+explanation: 'Er zijn gevallen waarbij het openbaren van archiefbescheiden is uitgesloten.
+  Overleg hierover met de verantwoordelijke binnen de organisatie voor het toepassen
+  van de Archiefwet.
+  Stem in het begin van het proces (pro-actief) met de opdrachtgever af wat de wenselijkheid
+  is t.a.v. transparantie/openheid (uitgangspunt zou ''open, tenzij'' moeten zijn).'
+urn: urn:nl:ak:mtr:gov-06
+language: nl
+owners:
+- organization: Algoritmekader
+  name: ''
+  email: ''
+  role: ''
+date: ''
+url: https://minbzk.github.io/Algoritmekader/maatregelen/archiveren_beperkingen_openbaarheid/index.html
+subject: ["governance"]
+suggested_roles: ["proceseigenaar", "informatiebeheerder", "archiefdeskundige", "jurist"]
+lifecycle: ["ontwerp", "ontwikkelen"]
+links: ["urn:nl:ak:ver:arc-01"]
+template: &systemcard_measures_template
+  requirement: $MEASURE
+  value: $VALUE
+  remarks: $REMARKS
+  status: $STATUS
+  timestamp: $TIMESTAMP
+  authors:
+  - name: $AUTHOR.NAME
+    email: $AUTHOR.EMAIL
+    role: $AUTHOR.ROLE

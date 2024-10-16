@@ -8,7 +8,7 @@ explanation: 'Door de vereiste op te nemen als subgunningscriteria, ontstaat een
   eerbiedigen privacyrechten of het verbod op schenden auteursrechten. Door vereisten
   te vertalen naar een subgunningscriteria, kan een inhoudelijke beoordeling worden
   gemaakt in hoeverre een aanbieder hier invulling aan geeft.'
-urn: urn:nl:ak:mtr:pin:08
+urn: urn:nl:ak:mtr:pin-08
 language: nl
 owners:
 - organization: Algoritmekader
@@ -16,10 +16,36 @@ owners:
   email: ''
   role: ''
 date: ''
+url: https://minbzk.github.io/Algoritmekader/maatregelen/neem_vereiste_op_als_subgunningscriteria/index.html
 subject: ["publieke-inkoop"]
-suggested_role: ["proceseigenaar", "behoeftesteller", "data-scientist", "ethicus", "privacy-officer", "security-officer", "inkoopadviseur", "contractbeheerder", "aanbestedingsjurist"]
+suggested_roles: ["proceseigenaar", "behoeftesteller", "data scientist", "ethicus", "privacy-officer", "security officer", "inkoopadviseur", "contractbeheerder", "aanbestedingsjurist"]
 lifecycle: ["ontwerp", "ontwikkelen"]
-links: [urn:nl:ak:ver:aia-28, urn:nl:ak:ver:aut-01, urn:nl:ak:ver:dat-01, urn:nl:ak:ver:aia-04, urn:nl:ak:ver:aia-01, urn:nl:ak:ver:aia-18, urn:nl:ak:ver:avg-08, urn:nl:ak:ver:grw-01, urn:nl:ak:ver:aia-11, urn:nl:ak:ver:aia-05, urn:nl:ak:ver:aia-29, urn:nl:ak:ver:grw-02, urn:nl:ak:ver:avg-03, urn:nl:ak:ver:avg-11, urn:nl:ak:ver:avg-10, urn:nl:ak:ver:aia-03, urn:nl:ak:ver:aia-04, urn:nl:ak:ver:aia-09, urn:nl:ak:ver:aia-08, urn:nl:ak:ver:avg-07, urn:nl:ak:ver:aia-03, urn:nl:ak:ver:aia-19, urn:nl:ak:ver:aia-20, urn:nl:ak:ver:woo-01]
+links: [
+    "urn:nl:ak:ver:aia-28",
+    "urn:nl:ak:ver:aut-01",
+    "urn:nl:ak:ver:dat-01",
+    "urn:nl:ak:ver:aia-04",
+    "urn:nl:ak:ver:aia-01",
+    "urn:nl:ak:ver:aia-18",
+    "urn:nl:ak:ver:avg-08",
+    "urn:nl:ak:ver:grw-01",
+    "urn:nl:ak:ver:aia-11",
+    "urn:nl:ak:ver:aia-05",
+    "urn:nl:ak:ver:aia-29",
+    "urn:nl:ak:ver:grw-02",
+    "urn:nl:ak:ver:avg-03",
+    "urn:nl:ak:ver:avg-11",
+    "urn:nl:ak:ver:avg-10",
+    "urn:nl:ak:ver:aia-03",
+    "urn:nl:ak:ver:aia-04",
+    "urn:nl:ak:ver:aia-09",
+    "urn:nl:ak:ver:aia-08",
+    "urn:nl:ak:ver:avg-07",
+    "urn:nl:ak:ver:aia-03",
+    "urn:nl:ak:ver:aia-19",
+    "urn:nl:ak:ver:aia-20",
+    "urn:nl:ak:ver:woo-01"
+]
 template: &systemcard_measures_template
   requirement: $MEASURE
   value: $VALUE

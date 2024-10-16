@@ -41,7 +41,16 @@ date: ''
 url: https://minbzk.github.io/Algoritmekader/vereisten/avg-13-dpia-verplicht/index.html
 subject: ["privacy-en-gegevensbescherming"]
 lifecycle: ["ontwerp", "dataverkenning-en-datapreparatie", "ontwikkelen", "verificatie-en-validatie"]
-links: []
+links: [
+    "urn:nl:ak:mtr:pin-01",
+    "urn:nl:ak:mtr:pin-02",
+    "urn:nl:ak:mtr:pin-04",
+    "urn:nl:ak:mtr:pin-05",
+    "urn:nl:ak:mtr:pin-07",
+    "urn:nl:ak:mtr:pin-24",
+    "urn:nl:ak:mtr:pin-09",
+    "urn:nl:ak:mtr:pgb-08"
+]
 ai_risk_profile: ["AI-systeem", "AI-systeem voor algemene doeleinden", "hoog-risico AI"]
 always_applicable: 0
 template:

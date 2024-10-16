@@ -28,7 +28,14 @@ date: ''
 url: https://minbzk.github.io/Algoritmekader/vereisten/aia-35-verwerking-in-testomgeving/index.html
 subject: ["privacy-en-gegevensbescherming", "data"]
 lifecycle: ["ontwikkelen", "dataverkenning-en-datapreparatie"]
-links: []
+links: [
+    "urn:nl:ak:mtr:pin-01",
+    "urn:nl:ak:mtr:pin-02",
+    "urn:nl:ak:mtr:pin-04",
+    "urn:nl:ak:mtr:pin-05",
+    "urn:nl:ak:mtr:pin-07",
+    "urn:nl:ak:mtr:pin-09"
+]
 ai_risk_profile: ["AI-systeem", "AI-systeem voor algemene doeleinden", "AI-model voor algemene doeleinden"]
 always_applicable: 0
 template: &systemcard_requirements_template

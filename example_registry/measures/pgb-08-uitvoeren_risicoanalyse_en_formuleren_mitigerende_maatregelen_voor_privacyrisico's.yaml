@@ -1,0 +1,28 @@
+systemcard_path: .systemcard.measures[]
+schema_version: 1.1.0
+name: "Uitvoeren risicoanalyse en formuleren mitigerende maatregelen voor privacyrisico's"
+description: "Uitvoeren risicoanalyse en formuleren mitigerende maatregelen voor privacyrisico"
+explanation: "- Verifieer of een [DPIA](../instrumenten/DPIA.md) is uitgevoerd over het werkproces dat wordt of zal worden ondersteund met een algoritme of AI-systeem. Zo nee, voer een risico analyse (DPIA) uit om de risico's voor de rechten en vrijheden van betrokkenen met de inzet van algoritmes en AI-systemen in beeld te brengen.\n- Organisatorische en technische maatregelen moeten worden getroffen om persoonsgegevens bij de ontwikkeling en het gebruik van het algoritme of AI-systeem te beschermen.\n- Beleg de mitigerende maatregelen bij betrokken actoren. Denk bijvoorbeeld aan het toekennen van de maatregelen als anonimiseren en pseudonimiseren van persoonsgegevens aan een data engineer, voordat deze kunnen worden gebruikt ten behoeve van het ontwikkelen of controleren van het algoritme of AI-systeem.\n- Bepaal welke maatregelen moeten zijn gerealiseerd voordat mag worden gestart met de verwerking van de persoonsgegevens en welke moeten worden gemonitord.\n- Monitor de voortgang op het realiseren van de maatregelen en zorg voor bewijsstukken als deze zijn gerealiseerd. Deze bewijsstukken kunnen onderdeel worden van een audit.\n- Als er een noodzaak is om na verloop van tijd meer persoonsgegevens te verwerken of om andere verwerkingen uit te voeren, zal opnieuw een beoordeling moeten plaatsvinden of er privacyrisico's ontstaan en hoe deze kunnen worden gemitigeerd. Gedurende de levenscyclus van het algoritme of AI-systeem moet aandacht blijven voor het uitvoeren van de risicoanalyse voor privacyrisico's.\n- Bij hoge risico's voor het verwerken van persoonsgegevens is een voorafgaande raadpleging bij de Autoriteit Persoonsgegevens onder artikel 36 AVG verplicht. Bepaal of raadpleging noodzakelijk is."
+urn: urn:nl:ak:mtr:pgb-08
+language: nl
+owners:
+- organization: Algoritmekader
+  name: ''
+  email: ''
+  role: ''
+date: ''
+url: https://minbzk.github.io/Algoritmekader/maatregelen/uitvoeren_risicoanalyse_en_formuleren_mitigerende_maatregelen_voor_privacyrisico's/index.html
+subject: ["privacy-en-gegevensbescherming"]
+suggested_roles: ["proceseigenaar", "data scientist", "data engineer", "aanbieder", "privacy-officer", "security officer", "ethicus", "beleidsmedewerker"]
+lifecycle: ["ontwerp", "dataverkenning-en-datapreparatie", "ontwikkelen", "verificatie-en-validatie", "implementatie"]
+links: ["urn:nl:ak:ver:avg-13"]
+template: &systemcard_measures_template
+  requirement: $MEASURE
+  value: $VALUE
+  remarks: $REMARKS
+  status: $STATUS
+  timestamp: $TIMESTAMP
+  authors:
+  - name: $AUTHOR.NAME
+    email: $AUTHOR.EMAIL
+    role: $AUTHOR.ROLE

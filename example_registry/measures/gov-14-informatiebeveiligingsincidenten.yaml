@@ -1,0 +1,28 @@
+systemcard_path: .systemcard.measures[]
+schema_version: 1.1.0
+name: "Richt een incidentmanagement proces in voor informatiebeveiligingsincidenten"
+description: "Richt een proces in waarmee beveiligingsincidenten m.b.t. algoritmes en data zo spoedig mogelijk worden opgelost."
+explanation: "- Er zijn procedures aanwezig die borgen dat beveiligingsincidenten m.b.t. algoritmes en data zo spoedig mogelijk, afhankelijk van de kwalificatie van het incident, worden opgepakt."
+urn: urn:nl:ak:mtr:gov-14
+language: nl
+owners:
+- organization: Algoritmekader
+  name: ''
+  email: ''
+  role: ''
+date: ''
+url: https://minbzk.github.io/Algoritmekader/maatregelen/informatiebeveiligingsincidenten/index.html
+subject: ["technische-robuustheid-en-veiligheid", "governance"]
+suggested_roles: ["projectleider", "informatiebeheerder", "security officer", "proceseigenaar"]
+lifecycle: ["organisatieverantwoordelijkheden"]
+links: ["urn:nl:ak:ver:bio-01", "urn:nl:ak:ver:aia-10", "urn:nl:ak:ver:avg-12"]
+template: &systemcard_measures_template
+  requirement: $MEASURE
+  value: $VALUE
+  remarks: $REMARKS
+  status: $STATUS
+  timestamp: $TIMESTAMP
+  authors:
+  - name: $AUTHOR.NAME
+    email: $AUTHOR.EMAIL
+    role: $AUTHOR.ROLE

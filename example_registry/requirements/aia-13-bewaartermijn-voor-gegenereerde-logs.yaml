@@ -27,7 +27,15 @@ date: ''
 url: https://minbzk.github.io/Algoritmekader/vereisten/aia-13-bewaartermijn-voor-gegenereerde-logs/index.html
 subject: ["governance", "technische-robuustheid-en-veiligheid"]
 lifecycle: ["ontwerp", "ontwikkelen", "verificatie-en-validatie", "monitoring-en-beheer", "uitfaseren"]
-links: []
+links: [
+    "urn:nl:ak:mtr:pin-01",
+    "urn:nl:ak:mtr:pin-02",
+    "urn:nl:ak:mtr:gov-04",
+    "urn:nl:ak:mtr:pin-04",
+    "urn:nl:ak:mtr:pin-05",
+    "urn:nl:ak:mtr:pin-07",
+    "urn:nl:ak:mtr:pin-09"
+]
 ai_risk_profile: []
 always_applicable: 1
 template: &systemcard_requirements_template

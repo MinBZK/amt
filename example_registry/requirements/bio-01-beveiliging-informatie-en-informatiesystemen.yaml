@@ -31,7 +31,7 @@ date: ''
 url: https://minbzk.github.io/Algoritmekader/vereisten/bio-01-beveiliging-informatie-en-informatiesystemen.md/index.html
 subject: ["technische-robuustheid-en-veiligheid"]
 lifecycle: []
-links: [urn:nl:ak:mtr:gov:01]
+links: ["urn:nl:ak:mtr:gov-13", "urn:nl:ak:mtr:pin-01", "urn:nl:ak:mtr:pin-02", "urn:nl:ak:mtr:gov-14", "urn:nl:ak:mtr:gov-04", "urn:nl:ak:mtr:pin-04", "urn:nl:ak:mtr:pin-05", "urn:nl:ak:mtr:pin-06", "urn:nl:ak:mtr:pin-07", "urn:nl:ak:mtr:gov-01", "urn:nl:ak:mtr:gov-15", "urn:nl:ak:mtr:gov-18", "urn:nl:ak:mtr:gov-19", "urn:nl:ak:mtr:gov-20", "urn:nl:ak:mtr:pin-09", "urn:nl:ak:mtr:gov-17"]
 ai_risk_profile: []
 always_applicable: 1
 template: &systemcard_requirements_template

@@ -1,0 +1,32 @@
+systemcard_path: .systemcard.measures[]
+schema_version: 1.1.0
+name: Bepaal of de output bepalende invloed heeft in een besluit richting personen
+description: 'Ga na of het algoritme of AI-systeem overwegend bepalende invloed heeft in een besluit richting personen en laat de aanbieder onderbouwen in hoeverre dit wel of niet het geval is.
+
+  Maak de mate van menselijke tussenkomst onderdeel van de wedstrijd/inkoop/beoordeelingsmatrix als ook de vaste beoordeling hiervan.'
+explanation: 'Maak een beoordeling in hoeverre de mate waarin menselijke tussenkomst is of kan worden gerealiseerd.
+
+  Raadpleeg voor deze beoordeling verschillende experts, zoals een gebruiker, proceseigenaar, ethicus en jurist.'
+urn: urn:nl:ak:mtr:pin-23
+language: nl
+owners:
+- organization: Algoritmekader
+  name: ''
+  email: ''
+  role: ''
+date: ''
+url: https://minbzk.github.io/Algoritmekader/maatregelen/bepalende_invloed_besluit_richting_personen/index.html
+subject: ["publieke-inkoop"]
+suggested_roles: ["behoeftesteller", "proceseigenaar", "gebruiker", "inkoopadviseur", "ethicus", "jurist"]
+lifecycle: ["ontwikkelen", "monitoring-en-beheer"]
+links: ["urn:nl:ak:ver:avg-10"]
+template: &systemcard_measures_template
+  requirement: $MEASURE
+  value: $VALUE
+  remarks: $REMARKS
+  status: $STATUS
+  timestamp: $TIMESTAMP
+  authors:
+  - name: $AUTHOR.NAME
+    email: $AUTHOR.EMAIL
+    role: $AUTHOR.ROLE
