@@ -41,7 +41,7 @@ async def get_root(
     request: Request,
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
     skip: int = Query(0, ge=0),
-    limit: int = Query(100, ge=1),
+    limit: int = Query(5000, ge=1),  # todo: fix infinite scroll
     search: str = Query(""),
 ) -> HTMLResponse:
     active_filters = {
@@ -57,8 +57,11 @@ async def get_root(
     drop_filters = [v for k, v in request.query_params.items() if k.startswith("drop-filter") and v != ""]
     filters = {k: v for k, v in (active_filters | add_filters).items() if k not in drop_filters}
     localized_filters = {k: get_localized_value(k, v, request) for k, v in filters.items()}
+    sort_by = {
+        k.removeprefix("sort-by-"): v for k, v in request.query_params.items() if k.startswith("sort-by-") and v != ""
+    }
 
-    projects = projects_service.paginate(skip=skip, limit=limit, search=search, filters=filters)
+    projects = projects_service.paginate(skip=skip, limit=limit, search=search, filters=filters, sort=sort_by)
     # todo: the lifecycle has to be 'localized', maybe for display 'Project' should become a different object
     for project in projects:
         project.lifecycle = get_lifecycle(project.lifecycle, request)  # pyright: ignore [reportAttributeAccessIssue]
@@ -79,6 +82,7 @@ async def get_root(
         "lifecycles": get_lifecycles(request),
         "publication_categories": get_publication_categories(request),
         "filters": localized_filters,
+        "sort_by": sort_by,
     }
 
     if request.state.htmx and drop_filters:

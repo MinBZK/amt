@@ -20,6 +20,10 @@ class Lifecycles(Enum):
     MONITORING_AND_MANAGEMENT = "MONITORING_AND_MANAGEMENT"
     PHASING_OUT = "PHASING_OUT"
 
+    @property
+    def index(self) -> int:
+        return list(Lifecycles).index(self)
+
 
 def get_lifecycle(key: Lifecycles | None, request: Request) -> Lifecycle | None:
     """

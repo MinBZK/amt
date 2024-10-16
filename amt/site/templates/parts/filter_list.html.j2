@@ -1,10 +1,6 @@
 {% macro item(loop, project, search, filters) -%}
     <tr class="rvo-table-row"
-        {% if loop.last and projects|length == limit %} data-marker="last-element" hx-get="/algorithm-systems/?skip={{ next }}&search={{ search }}{% for key, localized_value in filters.items() %}&active-filter-{{ key }}={{ localized_value.value }}{% endfor %}
-        "
-        hx-swap="afterend"
-        hx-trigger="revealed"
-        {% endif %}>
+        {% if loop.last and projects|length == limit %} data-marker="last-element" hx-get="/algorithm-systems/?skip={{ next }}" hx-swap="beforeend" hx-trigger="revealed" {% endif %}>
         <td class="rvo-table-cell">
             <a class="rvo-link rvo-link--no-underline rvo-link--zwart"
                href="/algorithm-system/{{ project.id }}/details/">{{ project.name }}</a>
@@ -16,6 +12,29 @@
             <span class="rvo-text--subtle" style="white-space: nowrap">{{ project.last_edited | time_ago(language) }} {% trans %} ago{% endtrans %}</span>
         </td>
     </tr>
+{% endmacro %}
+{% macro sort_button(field_name, sort_by) %}
+    {% if field_name in sort_by and sort_by[field_name] == "ascending" or (not field_name in sort_by) %}
+        <button hx-trigger="click"
+                hx-get="/algorithm-systems/?skip=0&sort-by-{{ field_name }}=descending"
+                hx-swap="innerHTML"
+                class="utrecht-button utrecht-button--rvo-tertiary-action utrecht-button--rvo-sm"
+                type="button">
+            <span class="utrecht-icon rvo-icon rvo-icon-delta-omhoog rvo-icon--sm rvo-icon--hemelblauw"
+                  role="img"
+                  aria-label="Delta omhoog"></span>
+        </button>
+    {% elif field_name in sort_by and sort_by[field_name] == "descending" %}
+        <button hx-trigger="click"
+                hx-get="/algorithm-systems/?skip=0&sort-by-{{ field_name }}=ascending"
+                hx-swap="innerHTML"
+                class="utrecht-button utrecht-button--rvo-tertiary-action utrecht-button--rvo-sm"
+                type="button">
+            <span class="utrecht-icon rvo-icon rvo-icon-delta-omlaag rvo-icon--sm rvo-icon--hemelblauw"
+                  role="img"
+                  aria-label="Delta omhoog"></span>
+        </button>
+    {% endif %}
 {% endmacro %}
 {% if start > 0 %}
     {% for project in projects %}{{ item(loop, project, search, filters) }}{% endfor %}
@@ -59,16 +78,36 @@
             algorithm systems.{% endtrans %}
         </div>
     {% else %}
-        <table id="search-results-table" class="rvo-table margin-top-large">
-            <thead class="rvo-table-head">
-                <tr class="rvo-table-row">
-                    <th style="width: 60%" scope="col" class="rvo-table-header">{% trans %}Algorithm system name{% endtrans %}</th>
-                    <th scope="col" class="rvo-table-header">{% trans %}Phase{% endtrans %}</th>
-                    <th scope="col" class="rvo-table-header" style="white-space: nowrap">{% trans %}Last updated{% endtrans %}</th>
-                </tr>
-            </thead>
-            {% for project in projects %}{{ item(loop, project, search, filters) }}{% endfor %}
-        </table>
+        <form name="htmx-sort-form"
+              hx-include="this"
+              hx-target="#project-search-results"
+              hx-swap="innerHTML">
+            <input type="hidden" name="search" value="{{ search }}">
+            {% for key, localized_value in filters.items() %}
+                <input type="hidden"
+                       name="active-filter-{{ key }}"
+                       value="{{ localized_value.value }}">
+            {% endfor %}
+            <table id="search-results-table" class="rvo-table margin-top-large">
+                <thead class="rvo-table-head">
+                    <tr class="rvo-table-row">
+                        <th style="width: 60%" scope="col" class="rvo-table-header">
+                            {% trans %}Algorithm system name{% endtrans %}
+                            {{ sort_button('name', sort_by) }}
+                        </th>
+                        <th scope="col" class="rvo-table-header">
+                            {% trans %}Phase{% endtrans %}
+                            {{ sort_button('phase', sort_by) }}
+                        </th>
+                        <th scope="col" class="rvo-table-header" style="white-space: nowrap">
+                            {% trans %}Last updated{% endtrans %}
+                            {{ sort_button('last_update', sort_by) }}
+                        </th>
+                    </tr>
+                </thead>
+                {% for project in projects %}{{ item(loop, project, search, filters) }}{% endfor %}
+            </table>
+        </form>
     {% endif %}
 {% endif %}
 <script type="text/javascript">amt.updateSearchCounter();</script>
