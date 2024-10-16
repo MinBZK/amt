@@ -1,0 +1,183 @@
+{% extends 'projects/details_base.html.j2' %}
+{% block detail_content %}
+    <div class="rvo-table--responsive rvo-alert--padding-md">
+        <table class="rvo-table">
+            <tbody class="rvo-table-body">
+                <tr class="rvo-table-row">
+                    <td class="rvo-table-cell">{% trans %}Floor area (m²):{% endtrans %}</td>
+                    <td class="rvo-table-cell">
+                        <input type="number"
+                               id="input.floor_area"
+                               class="rvo-form-field__input"
+                               value="100" />
+                    </td>
+                </tr>
+                <tr class="rvo-table-row">
+                    <td class="rvo-table-cell">{% trans %}Plot size (m²):{% endtrans %}</td>
+                    <td class="rvo-table-cell">
+                        <input type="number"
+                               id="input.plot_size"
+                               class="rvo-form-field__input"
+                               value="200" />
+                    </td>
+                </tr>
+                <tr class="rvo-table-row">
+                    <td class="rvo-table-cell">{% trans %}Building year:{% endtrans %}</td>
+                    <td class="rvo-table-cell">
+                        <input type="number"
+                               id="input.building_year"
+                               class="rvo-form-field__input"
+                               value="1980" />
+                    </td>
+                </tr>
+                <tr class="rvo-table-row">
+                    <td class="rvo-table-cell">{% trans %}Object type:{% endtrans %}</td>
+                    <td class="rvo-table-cell">
+                        <input type="number"
+                               id="input.object_type"
+                               class="rvo-form-field__input"
+                               value="1" />
+                    </td>
+                </tr>
+                <tr class="rvo-table-row">
+                    <td class="rvo-table-cell">{% trans %}Number of annexes:{% endtrans %}</td>
+                    <td class="rvo-table-cell">
+                        <input type="number"
+                               id="input.num_annexes"
+                               class="rvo-form-field__input"
+                               value="1" />
+                    </td>
+                </tr>
+                <tr class="rvo-table-row">
+                    <td class="rvo-table-cell">{% trans %}Neighborhood code:{% endtrans %}</td>
+                    <td class="rvo-table-cell">
+                        <input type="number"
+                               id="input.neighborhood_code"
+                               class="rvo-form-field__input"
+                               value="1234" />
+                    </td>
+                </tr>
+                <tr class="rvo-table-row">
+                    <td class="rvo-table-cell">{% trans %}Quality rating:{% endtrans %}</td>
+                    <td class="rvo-table-cell">
+                        <input type="number"
+                               id="input.quality_rating"
+                               class="rvo-form-field__input"
+                               value="4"
+                               step="0.1"
+                               min="1"
+                               max="5" />
+                    </td>
+                </tr>
+                <tr class="rvo-table-row">
+                    <td class="rvo-table-cell">{% trans %}Maintenance rating:{% endtrans %}</td>
+                    <td class="rvo-table-cell">
+                        <input type="number"
+                               id="input.maintenance_rating"
+                               class="rvo-form-field__input"
+                               value="3.5"
+                               step="0.1"
+                               min="1"
+                               max="5" />
+                    </td>
+                </tr>
+                <tr class="rvo-table-row">
+                    <td class="rvo-table-cell">{% trans %}Amenities rating:{% endtrans %}</td>
+                    <td class="rvo-table-cell">
+                        <input type="number"
+                               id="input.amenities_rating"
+                               class="rvo-form-field__input"
+                               value="4.5"
+                               step="0.1"
+                               min="1"
+                               max="5" />
+                    </td>
+                </tr>
+                <tr class="rvo-table-row">
+                    <td class="rvo-table-cell">{% trans %}Location rating:{% endtrans %}</td>
+                    <td class="rvo-table-cell">
+                        <input type="number"
+                               id="input.location_rating"
+                               class="rvo-form-field__input"
+                               value="4"
+                               step="0.1"
+                               min="1"
+                               max="5" />
+                    </td>
+                </tr>
+                <tr class="rvo-table-row">
+                    <td class="rvo-table-cell"></td>
+                    <td class="rvo-table-cell">
+                        <button id="runInference"
+                                class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
+                                type="button">{% trans %}Estimate WOZ Value{% endtrans %}</button>
+                    </td>
+                </tr>
+                <tr class="rvo-table-row rvo-text--bold">
+                    <td class="rvo-table-cell">{% trans %}Estimated WOZ Value{% endtrans %}</td>
+                    <td class="rvo-table-cell">
+                        <span id="wozValue" class="rvo-tag rvo-tag--success">{% trans %}Undefined{% endtrans %}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="error" class="rvo-alert rvo-alert--warning" style="display: none"></div>
+    <script type="module">
+    import * as ort from "https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/esm/ort.min.js";
+    ort.env.wasm.wasmPaths = "https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/";
+
+    async function runInference() {
+        try {
+            const modelUrl = 'https://raw.githubusercontent.com/MinBZK/poc-kijkdoos-wasm-models/main/woz/woz_simplified_model.onnx';
+            const session = await ort.InferenceSession.create(modelUrl);
+
+            const inputValues = [
+                parseFloat(document.getElementById('input.floor_area').value),
+                parseFloat(document.getElementById('input.plot_size').value),
+                parseFloat(document.getElementById('input.building_year').value),
+                parseFloat(document.getElementById('input.object_type').value),
+                parseFloat(document.getElementById('input.num_annexes').value),
+                parseFloat(document.getElementById('input.neighborhood_code').value),
+                parseFloat(document.getElementById('input.quality_rating').value),
+                parseFloat(document.getElementById('input.maintenance_rating').value),
+                parseFloat(document.getElementById('input.amenities_rating').value),
+                parseFloat(document.getElementById('input.location_rating').value)
+            ];
+
+            const tensor = new ort.Tensor('float32', inputValues, [1, 10]);
+            const feeds = { input: tensor };
+            const results = await session.run(feeds);
+
+            console.log('Raw results:', results);
+
+            let wozValue;
+            if (results.output && results.output.data) {
+                wozValue = results.output.data[0];
+            } else {
+                // If we can't find the output in the expected structure, let's try to find it elsewhere
+                const outputTensor = Object.values(results)[0];
+                if (outputTensor && outputTensor.data) {
+                    wozValue = outputTensor.data[0];
+                } else {
+                    throw new Error('Unexpected output structure');
+                }
+            }
+
+            const formattedWozValue = new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' }).format(wozValue);
+
+            const outputLabel = document.getElementById('wozValue');
+            outputLabel.textContent = formattedWozValue;
+
+            document.getElementById('error').style.display = 'none';
+        } catch (e) {
+            const errorElement = document.getElementById('error');
+            errorElement.textContent = `{% trans %}Failed to estimate WOZ value: {% endtrans %}${e}`;
+            errorElement.style.display = 'block';
+            console.error('Failed to estimate WOZ value:', e);
+        }
+    }
+
+    document.getElementById('runInference').addEventListener('click', runInference);
+    </script>
+{% endblock %}

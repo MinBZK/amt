@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-15 08:45+0200\n"
+"POT-Creation-Date: 2024-10-16 08:58+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -364,6 +364,62 @@ msgstr ""
 msgid "To be implemented"
 msgstr ""
 
+#: amt/site/templates/projects/details_inference.html.j2:7
+msgid "Floor area (m²):"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:16
+msgid "Plot size (m²):"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:25
+msgid "Building year:"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:34
+msgid "Object type:"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:43
+msgid "Number of annexes:"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:52
+msgid "Neighborhood code:"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:61
+msgid "Quality rating:"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:73
+msgid "Maintenance rating:"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:85
+msgid "Amenities rating:"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:97
+msgid "Location rating:"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:113
+msgid "Estimate WOZ Value"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:117
+msgid "Estimated WOZ Value"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:119
+msgid "Undefined"
+msgstr ""
+
+#: amt/site/templates/projects/details_inference.html.j2:175
+msgid "Failed to estimate WOZ value: "
+msgstr ""
+
 #: amt/site/templates/projects/details_info.html.j2:7
 msgid "Description"
 msgstr ""
@@ -466,4 +522,34 @@ msgstr ""
 #: amt/site/templates/projects/new.html.j2:191
 msgid "Copy results and close"
 msgstr ""
+
+#~ msgid "Algortime Management Toolkit"
+#~ msgstr ""
+
+#~ msgid "Inference"
+#~ msgstr ""
+
+#~ msgid "Sepal length:"
+#~ msgstr ""
+
+#~ msgid "Sepal width:"
+#~ msgstr ""
+
+#~ msgid "Petal length:"
+#~ msgstr ""
+
+#~ msgid "Petal width:"
+#~ msgstr ""
+
+#~ msgid "Run inference"
+#~ msgstr ""
+
+#~ msgid "Output"
+#~ msgstr ""
+
+#~ msgid "Output Probabilities"
+#~ msgstr ""
+
+#~ msgid "Failed to run inference: "
+#~ msgstr ""
 

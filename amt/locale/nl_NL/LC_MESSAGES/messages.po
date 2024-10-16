@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-15 08:45+0200\n"
+"POT-Creation-Date: 2024-10-16 08:58+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_NL\n"
@@ -371,6 +371,62 @@ msgstr "Ga naar all instrumenten"
 #: amt/site/templates/projects/details_instruments.html.j2:3
 msgid "To be implemented"
 msgstr "Nog te implementeren"
+
+#: amt/site/templates/projects/details_inference.html.j2:7
+msgid "Floor area (m²):"
+msgstr "Vloeroppervlakte (m²):"
+
+#: amt/site/templates/projects/details_inference.html.j2:16
+msgid "Plot size (m²):"
+msgstr "Perceelgrootte (m²):"
+
+#: amt/site/templates/projects/details_inference.html.j2:25
+msgid "Building year:"
+msgstr "Bouwjaar:"
+
+#: amt/site/templates/projects/details_inference.html.j2:34
+msgid "Object type:"
+msgstr "Objecttype:"
+
+#: amt/site/templates/projects/details_inference.html.j2:43
+msgid "Number of annexes:"
+msgstr "Aantal bijgebouwen:"
+
+#: amt/site/templates/projects/details_inference.html.j2:52
+msgid "Neighborhood code:"
+msgstr "Buurtcode:"
+
+#: amt/site/templates/projects/details_inference.html.j2:61
+msgid "Quality rating:"
+msgstr "Kwaliteitsbeoordeling:"
+
+#: amt/site/templates/projects/details_inference.html.j2:73
+msgid "Maintenance rating:"
+msgstr "Onderhoudsbeoordeling:"
+
+#: amt/site/templates/projects/details_inference.html.j2:85
+msgid "Amenities rating:"
+msgstr "Voorzieningenbeoordeling:"
+
+#: amt/site/templates/projects/details_inference.html.j2:97
+msgid "Location rating:"
+msgstr "Locatiebeoordeling:"
+
+#: amt/site/templates/projects/details_inference.html.j2:113
+msgid "Estimate WOZ Value"
+msgstr "WOZ-waarde schatten"
+
+#: amt/site/templates/projects/details_inference.html.j2:117
+msgid "Estimated WOZ Value"
+msgstr "Geschatte WOZ-waarde"
+
+#: amt/site/templates/projects/details_inference.html.j2:119
+msgid "Undefined"
+msgstr "Ongedefinieerd"
+
+#: amt/site/templates/projects/details_inference.html.j2:175
+msgid "Failed to estimate WOZ value: "
+msgstr "Fout bij het schatten van de WOZ-waarde: "
 
 #: amt/site/templates/projects/details_info.html.j2:7
 msgid "Description"
