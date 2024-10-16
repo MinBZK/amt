@@ -4,6 +4,7 @@ from gettext import NullTranslations
 
 from fastapi import Request
 
+from amt.api.publication_category import PublicationCategories
 from amt.core.internationalization import get_current_translation
 
 
@@ -72,15 +73,7 @@ def get_ai_act_profile_selector(request: Request) -> AiActProfileSelector:
         "AI-model voor algemene doeleinden",
     )
     role_options = ("aanbieder", "gebruiksverantwoordelijke")
-    publication_category_options = (
-        "impactvol algoritme",
-        "niet-impactvol algoritme",
-        "hoog-risico AI",
-        "geen hoog-risico AI",
-        "verboden AI",
-        "uitzondering van toepassing",
-        "niet van toepassing",
-    )
+    publication_category_options = (*(p.value for p in PublicationCategories), "niet van toepassing")
     systemic_risk_options = ("systeemrisico", "geen systeemrisico", "niet van toepassing")
     transparency_obligations_options = (
         "transparantieverplichtingen",

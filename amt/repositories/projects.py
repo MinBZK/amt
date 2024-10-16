@@ -8,6 +8,7 @@ from sqlalchemy.exc import NoResultFound, SQLAlchemyError
 from sqlalchemy.orm import Session
 from sqlalchemy_utils import escape_like  # pyright: ignore[reportMissingTypeStubs, reportUnknownVariableType]
 
+from amt.api.publication_category import PublicationCategories
 from amt.core.exceptions import AMTRepositoryError
 from amt.models import Project
 from amt.repositories.deps import get_session
@@ -56,11 +57,23 @@ class ProjectsRepository:
             logger.exception("Project not found")
             raise AMTRepositoryError from e
 
-    def paginate(self, skip: int, limit: int, search: str) -> list[Project]:
+    def paginate(self, skip: int, limit: int, search: str, filters: dict[str, str]) -> list[Project]:
         try:
             statement = select(Project)
             if search != "":
                 statement = statement.filter(Project.name.ilike(f"%{escape_like(search)}%"))
+            if filters:
+                for key, value in filters.items():
+                    match key:
+                        case "lifecycle":
+                            statement = statement.filter(Project.lifecycle == value)
+                        case "publication-category":
+                            statement = statement.filter(
+                                Project.system_card_json["ai_act_profile"]["publication_category"].as_string()
+                                == PublicationCategories[value].value
+                            )
+                        case _:
+                            raise TypeError("Unknown filter type")  # noqa
             statement = statement.order_by(func.lower(Project.name)).offset(skip).limit(limit)
             return list(self.session.execute(statement).scalars())
         except Exception as e:

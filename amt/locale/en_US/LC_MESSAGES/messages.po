@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-16 09:55+0200\n"
+"POT-Creation-Date: 2024-10-16 10:41+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -18,27 +18,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: amt/api/ai_act_profile.py:23
+#: amt/api/ai_act_profile.py:24
 msgid "Type"
 msgstr ""
 
-#: amt/api/ai_act_profile.py:25
+#: amt/api/ai_act_profile.py:26
 msgid "Is the application open source?"
 msgstr ""
 
-#: amt/api/ai_act_profile.py:27
+#: amt/api/ai_act_profile.py:28
 msgid "Publication Category"
 msgstr ""
 
-#: amt/api/ai_act_profile.py:29
+#: amt/api/ai_act_profile.py:30
 msgid "Is there a systemic risk?"
 msgstr ""
 
-#: amt/api/ai_act_profile.py:31
+#: amt/api/ai_act_profile.py:32
 msgid "Is there a transparency obligation?"
 msgstr ""
 
-#: amt/api/ai_act_profile.py:33
+#: amt/api/ai_act_profile.py:34
 msgid "Role"
 msgstr ""
 
@@ -83,7 +83,7 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: amt/api/navigation.py:46 amt/site/templates/projects/index.html.j2:7
+#: amt/api/navigation.py:46 amt/site/templates/parts/project_search.html.j2:9
 msgid "Projects"
 msgstr ""
 
@@ -137,6 +137,30 @@ msgstr ""
 
 #: amt/api/navigation.py:59 amt/site/templates/projects/new.html.j2:145
 msgid "Instruments"
+msgstr ""
+
+#: amt/api/publication_category.py:36
+msgid "Impactful algorithm"
+msgstr ""
+
+#: amt/api/publication_category.py:37
+msgid "Non-impactful algorithm"
+msgstr ""
+
+#: amt/api/publication_category.py:38
+msgid "High-risk AI"
+msgstr ""
+
+#: amt/api/publication_category.py:39
+msgid "No high-risk AI"
+msgstr ""
+
+#: amt/api/publication_category.py:40
+msgid "Forbidden AI"
+msgstr ""
+
+#: amt/api/publication_category.py:41
+msgid "Exception of application"
 msgstr ""
 
 #: amt/core/exceptions.py:20
@@ -240,7 +264,7 @@ msgstr ""
 msgid "An error occurred. Please try again later"
 msgstr ""
 
-#: amt/site/templates/layouts/base.html.j2:11
+#: amt/site/templates/layouts/base.html.j2:1
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr ""
 
@@ -271,6 +295,7 @@ msgstr ""
 #: amt/site/templates/pages/assessment_card.html.j2:7
 #: amt/site/templates/pages/model_card.html.j2:6
 #: amt/site/templates/pages/system_card.html.j2:4
+#: amt/site/templates/parts/filter_list.html.j2:66
 #: amt/site/templates/projects/details_info.html.j2:32
 msgid "Last updated"
 msgstr ""
@@ -313,6 +338,37 @@ msgstr ""
 msgid "Algorithm Management Toolkit"
 msgstr ""
 
+#: amt/site/templates/parts/filter_list.html.j2:16
+msgid " ago"
+msgstr ""
+
+#: amt/site/templates/parts/filter_list.html.j2:25
+msgid "result"
+msgstr ""
+
+#: amt/site/templates/parts/filter_list.html.j2:26
+msgid "results"
+msgstr ""
+
+#: amt/site/templates/parts/filter_list.html.j2:28
+msgid "for"
+msgstr ""
+
+#: amt/site/templates/parts/filter_list.html.j2:58
+msgid ""
+"No projects match your selected filters. Try adjusting your filters or "
+"clearing them to see more projects."
+msgstr ""
+
+#: amt/site/templates/parts/filter_list.html.j2:64
+#: amt/site/templates/projects/new.html.j2:23
+msgid "Project name"
+msgstr ""
+
+#: amt/site/templates/parts/filter_list.html.j2:65
+msgid "Phase"
+msgstr ""
+
 #: amt/site/templates/parts/footer.html.j2:10
 msgid "About us"
 msgstr ""
@@ -337,6 +393,22 @@ msgstr ""
 
 #: amt/site/templates/parts/header.html.j2:30
 msgid "Everyone is welcome to make comments and suggestions."
+msgstr ""
+
+#: amt/site/templates/parts/project_search.html.j2:14
+msgid "New project"
+msgstr ""
+
+#: amt/site/templates/parts/project_search.html.j2:29
+msgid "Find project..."
+msgstr ""
+
+#: amt/site/templates/parts/project_search.html.j2:48
+msgid "Select lifecycle"
+msgstr ""
+
+#: amt/site/templates/parts/project_search.html.j2:59
+msgid "Select publication category"
 msgstr ""
 
 #: amt/site/templates/projects/details_base.html.j2:24
@@ -491,20 +563,8 @@ msgstr ""
 msgid "Edit measure"
 msgstr ""
 
-#: amt/site/templates/projects/index.html.j2:12
-msgid "New project"
-msgstr ""
-
-#: amt/site/templates/projects/index.html.j2:28
-msgid "Find project..."
-msgstr ""
-
 #: amt/site/templates/projects/new.html.j2:7
 msgid "Create a new project"
-msgstr ""
-
-#: amt/site/templates/projects/new.html.j2:23
-msgid "Project name"
 msgstr ""
 
 #: amt/site/templates/projects/new.html.j2:26

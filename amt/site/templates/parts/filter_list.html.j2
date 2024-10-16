@@ -1,0 +1,73 @@
+{% macro item(loop, project, search, filters) -%}
+    <tr class="rvo-table-row"
+        {% if loop.last and projects|length == limit %} data-marker="last-element" hx-get="/projects/?skip={{ next }}&search={{ search }}{% for key, localized_value in filters.items() %}&active-filter-{{ key }}={{ localized_value.value }}{% endfor %}
+        "
+        hx-swap="afterend"
+        hx-trigger="revealed"
+        {% endif %}>
+        <td class="rvo-table-cell">
+            <a class="rvo-link rvo-link--no-underline rvo-link--zwart"
+               href="/project/{{ project.id }}/details/">{{ project.name }}</a>
+        </td>
+        <td class="rvo-table-cell">
+            <span class="rvo-text--subtle">{{ project.lifecycle.name }}</span>
+        </td>
+        <td class="rvo-table-cell">
+            <span class="rvo-text--subtle" style="white-space: nowrap">{{ project.last_edited | time_ago(language) }} {% trans %} ago{% endtrans %}</span>
+        </td>
+    </tr>
+{% endmacro %}
+{% if start > 0 %}
+    {% for project in projects %}{{ item(loop, project, search, filters) }}{% endfor %}
+{% else %}
+    <div class="margin-top-large">
+        <span id="search-results-counter">0</span>
+        <span id="search-results-single" class="display-none">{% trans %}result{% endtrans %}</span>
+        <span id="search-results-multiple">{% trans %}results{% endtrans %}</span>
+        {% if search or filters %}
+            <span>{% trans %}for{% endtrans %}</span>
+            {% if search %}<span><em>'{{ search }}'</em></span>{% endif %}
+        {% endif %}
+        <form name="htmx-remove-tags"
+              hx-target="#search-project-container"
+              hx-include="this"
+              hx-swap="innerHTML"
+              style="display: inline-block">
+            <input type="hidden" name="search" value="{{ search }}">
+            {% for key, localized_value in filters.items() %}
+                <span target="_self"
+                      class="rvo-tag rvo-tag--default"
+                      hx-trigger="click"
+                      hx-get="/projects/?skip=0&drop-filter-={{ key }}"
+                      hx-swap="innerHTML"
+                      style="cursor: pointer;
+                             display: inline-block">
+                    <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--sm form-input-clear"
+                          role="img"
+                          aria-label="Kruis"></span>
+                    {{ localized_value.display_value }}
+                    <input type="hidden"
+                           name="active-filter-{{ key }}"
+                           value="{{ localized_value.value }}">
+                </span>
+            {% endfor %}
+        </form>
+    </div>
+    {% if projects|length ==0 %}
+        <div class="margin-top-large">
+            {% trans %}No projects match your selected filters. Try adjusting your filters or clearing them to see more projects.{% endtrans %}
+        </div>
+    {% else %}
+        <table id="search-results-table" class="rvo-table margin-top-large">
+            <thead class="rvo-table-head">
+                <tr class="rvo-table-row">
+                    <th style="width: 60%" scope="col" class="rvo-table-header">{% trans %}Project name{% endtrans %}</th>
+                    <th scope="col" class="rvo-table-header">{% trans %}Phase{% endtrans %}</th>
+                    <th scope="col" class="rvo-table-header" style="white-space: nowrap">{% trans %}Last updated{% endtrans %}</th>
+                </tr>
+            </thead>
+            {% for project in projects %}{{ item(loop, project, search, filters) }}{% endfor %}
+        </table>
+    {% endif %}
+{% endif %}
+<script type="text/javascript">amt.updateSearchCounter();</script>

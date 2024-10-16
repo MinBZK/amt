@@ -6,7 +6,7 @@ from playwright.sync_api import Page, expect
 def test_e2e_scroll_projects(page: Page) -> None:
     page.goto("/projects/")
 
-    project_links = page.locator("#project-search-results > li").count()
+    project_links = page.locator("#search-results-table tr").count() - 1
 
     assert project_links == 100
 
@@ -18,5 +18,5 @@ def test_e2e_scroll_projects(page: Page) -> None:
     response = response_info.value
     assert response.status == 200
 
-    project_links = page.locator("#project-search-results > li").count()
+    project_links = page.locator("#search-results-table tr").count()
     assert project_links > 100
