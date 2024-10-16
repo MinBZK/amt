@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-16 11:52+0200\n"
+"POT-Creation-Date: 2024-10-16 13:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,8 +82,8 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: amt/api/navigation.py:46 amt/site/templates/parts/project_search.html.j2:9
-msgid "Projects"
+#: amt/api/navigation.py:46
+msgid "Algorithm systems"
 msgstr ""
 
 #: amt/api/navigation.py:47 amt/site/templates/auth/profile.html.j2:10
@@ -294,7 +294,7 @@ msgstr ""
 #: amt/site/templates/pages/assessment_card.html.j2:7
 #: amt/site/templates/pages/model_card.html.j2:6
 #: amt/site/templates/pages/system_card.html.j2:4
-#: amt/site/templates/parts/filter_list.html.j2:66
+#: amt/site/templates/parts/filter_list.html.j2:67
 #: amt/site/templates/projects/details_info.html.j2:32
 msgid "Last updated"
 msgstr ""
@@ -355,16 +355,16 @@ msgstr ""
 
 #: amt/site/templates/parts/filter_list.html.j2:58
 msgid ""
-"No projects match your selected filters. Try adjusting your filters or "
-"clearing them to see more projects."
-msgstr ""
-
-#: amt/site/templates/parts/filter_list.html.j2:64
-#: amt/site/templates/projects/new.html.j2:23
-msgid "Project name"
+"No Algorithm system match your selected filters. Try adjusting your "
+"filters or clearing them to see more\n"
+"            algorithm systems."
 msgstr ""
 
 #: amt/site/templates/parts/filter_list.html.j2:65
+msgid "Algorithm system name"
+msgstr ""
+
+#: amt/site/templates/parts/filter_list.html.j2:66
 msgid "Phase"
 msgstr ""
 
@@ -394,19 +394,23 @@ msgstr ""
 msgid "Everyone is welcome to make comments and suggestions."
 msgstr ""
 
-#: amt/site/templates/parts/project_search.html.j2:14
-msgid "New project"
+#: amt/site/templates/parts/project_search.html.j2:9
+msgid "Algorithm Systems"
 msgstr ""
 
-#: amt/site/templates/parts/project_search.html.j2:29
-msgid "Find project..."
+#: amt/site/templates/parts/project_search.html.j2:15
+msgid "New algorithm system"
 msgstr ""
 
-#: amt/site/templates/parts/project_search.html.j2:48
+#: amt/site/templates/parts/project_search.html.j2:30
+msgid "Find algorithm system..."
+msgstr ""
+
+#: amt/site/templates/parts/project_search.html.j2:49
 msgid "Select lifecycle"
 msgstr ""
 
-#: amt/site/templates/parts/project_search.html.j2:59
+#: amt/site/templates/parts/project_search.html.j2:60
 msgid "Select publication category"
 msgstr ""
 
@@ -506,7 +510,7 @@ msgid "Repository"
 msgstr ""
 
 #: amt/site/templates/projects/details_info.html.j2:17
-msgid "Project code"
+msgid "Algorithm system code"
 msgstr ""
 
 #: amt/site/templates/projects/details_info.html.j2:21
@@ -567,11 +571,15 @@ msgid "Edit measure"
 msgstr ""
 
 #: amt/site/templates/projects/new.html.j2:7
-msgid "Create a new project"
+msgid "Create a Algorithm System"
+msgstr ""
+
+#: amt/site/templates/projects/new.html.j2:23
+msgid "Algorithm System name"
 msgstr ""
 
 #: amt/site/templates/projects/new.html.j2:26
-msgid "Your project name here"
+msgid "Your algorithm system name here"
 msgstr ""
 
 #: amt/site/templates/projects/new.html.j2:37
@@ -579,7 +587,7 @@ msgid "Lifecycle"
 msgstr ""
 
 #: amt/site/templates/projects/new.html.j2:39
-msgid "Select the lifecycle your project is currently in."
+msgid "Select the lifecycle your algorithm system is currently in."
 msgstr ""
 
 #: amt/site/templates/projects/new.html.j2:40
@@ -625,11 +633,11 @@ msgstr ""
 msgid "Choose one or more instruments"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:176
-msgid "Create Project"
+#: amt/site/templates/projects/new.html.j2:177
+msgid "Create Algorithm System"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:193
+#: amt/site/templates/projects/new.html.j2:195
 msgid "Copy results and close"
 msgstr ""
 
