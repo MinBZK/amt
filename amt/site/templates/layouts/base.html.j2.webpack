@@ -37,7 +37,6 @@
         {% block content %}{% endblock %}
     </main>
     {% block footer %}
-    {% include 'parts/footer.html.j2' %}
     {% endblock %}
 </body>
 
