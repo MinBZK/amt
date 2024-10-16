@@ -614,8 +614,8 @@ msgid "measures executed"
 msgstr "maatregelen uitgevoerd"
 
 #: amt/site/templates/projects/details_requirements.html.j2:54
-msgid "Edit measure"
-msgstr "Maatregel aanpassen"
+msgid "Edit"
+msgstr "Bewerken"
 
 #: amt/site/templates/projects/new.html.j2:7
 msgid "Create a Algorithm System"

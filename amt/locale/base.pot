@@ -592,7 +592,7 @@ msgid "measures executed"
 msgstr ""
 
 #: amt/site/templates/projects/details_requirements.html.j2:54
-msgid "Edit measure"
+msgid "Edit"
 msgstr ""
 
 #: amt/site/templates/projects/new.html.j2:7
