@@ -3,7 +3,8 @@
 {% block content %}
     <div id="measure-modal" class="minbzk-modal display-none">
         <div class="modal-underlay" onclick="amt.closeModal('measure-modal')"></div>
-        <div class="modal-content rvo-layout-column rvo-layout-gap--md">
+        <div class="modal-content rvo-layout-column rvo-layout-gap--md"
+             style="height: auto">
             <div id="dynamic-modal-content"></div>
         </div>
     </div>
@@ -14,7 +15,7 @@
         <!-- Requirements Widget -->
         <div class="rvo-layout-grid-container">
             <div class="rvo-layout-grid rvo-layout-gap--sm rvo-layout-grid-columns--two rvo-layout-grid-layout--1fr">
-                <div class="rvo-card rvo-card--padding-md">
+                <div class="rvo-card rvo-card--padding-md" style="height: 225px">
                     <div class="rvo-layout-row"
                          style="display: flex;
                                 justify-content: space-between">
@@ -44,20 +45,24 @@
                                             {% endif %}
                                             <a class="rvo-link rvo-link--no-underline rvo-link--zwart" href="#">{{ requirement.name }}</a>
                                         </div>
-                                        {% if requirement.state == "to do" %}
-                                            <a class="rvo-text--subtle">{% trans %}To do{% endtrans %}</a>
-                                        {% elif requirement.state == "in progress" %}
-                                            <a class="rvo-text--subtle">{% trans %}In progress{% endtrans %}</a>
-                                        {% else %}
-                                            <a class="rvo-text--subtle">{% trans %}Done{% endtrans %}</a>
-                                        {% endif %}
+                                        <div style="white-space: nowrap">
+                                            {% if requirement.state == "to do" %}
+                                                <a class="rvo-text--subtle">{% trans %}To do{% endtrans %}</a>
+                                            {% elif requirement.state == "in progress" %}
+                                                <a class="rvo-text--subtle">{% trans %}In progress{% endtrans %}</a>
+                                            {% else %}
+                                                <a class="rvo-text--subtle">{% trans %}Done{% endtrans %}</a>
+                                            {% endif %}
+                                        </div>
                                     </div>
                                 </li>
                             {% endif %}
                         {% endfor %}
                     </ul>
-                    <a class="margin-top-large rvo-link rvo-link--normal rvo-link--with-icon"
-                       href="/algorithm-system/{{ project_id }}/details/system_card/requirements">
+                    <a class="margin-top-large rvo-link rvo-link--normal rvo-link--with-icon rvo-layout-margin-vertical--sm"
+                       href="/algorithm-system/{{ project_id }}/details/system_card/requirements"
+                       style="bottom: 0;
+                              position: absolute">
                         <span class="utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
                               role="img"
                               aria-label="Home"></span>
@@ -65,7 +70,7 @@
                     </a>
                 </div>
                 <!-- Instrument Widget -->
-                <div class="rvo-card rvo-card--padding-md">
+                <div class="rvo-card rvo-card--padding-md" style="height: 225px">
                     <div class="rvo-layout-row"
                          style="display: flex;
                                 justify-content: space-between">
@@ -94,18 +99,22 @@
                                             {% endif %}
                                             <a class="rvo-link rvo-link--no-underline rvo-link--zwart" href="#">{{ instrument.name }}</a>
                                         </div>
-                                        {% if instrument.in_progress == 1 %}
-                                            <a class="rvo-text--subtle">{% trans %}To do{% endtrans %}</a>
-                                        {% else %}
-                                            <a class="rvo-text--subtle">{% trans %}Done{% endtrans %}</a>
-                                        {% endif %}
+                                        <div style="white-space: nowrap">
+                                            {% if instrument.in_progress == 1 %}
+                                                <a class="rvo-text--subtle">{% trans %}To do{% endtrans %}</a>
+                                            {% else %}
+                                                <a class="rvo-text--subtle">{% trans %}Done{% endtrans %}</a>
+                                            {% endif %}
+                                        </div>
                                     </div>
                                 </li>
                             {% endif %}
                         {% endfor %}
                     </ul>
-                    <a class="margin-top-large rvo-link rvo-link--normal rvo-link--with-icon"
-                       href="#">
+                    <a class="margin-top-large rvo-link rvo-link--normal rvo-link--with-icon rvo-layout-margin-vertical--sm"
+                       href="/algorithm-system/{{ project_id }}/details/system_card/instruments"
+                       style="bottom: 0;
+                              position: absolute">
                         <span class="utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
                               role="img"
                               aria-label="Home"></span>

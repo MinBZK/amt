@@ -3,11 +3,12 @@
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-16 14:09+0000\n"
+"POT-Creation-Date: 2024-10-16 16:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -65,7 +66,6 @@ msgid "Verification and Validation"
 msgstr ""
 
 #: amt/api/lifecycles.py:49
-#: amt/site/templates/projects/details_measure_modal.html.j2:66
 msgid "Implementation"
 msgstr ""
 
@@ -279,10 +279,10 @@ msgid "Reviewing"
 msgstr ""
 
 #: amt/site/templates/macros/tasks.html.j2:32
-#: amt/site/templates/projects/details_base.html.j2:27
-#: amt/site/templates/projects/details_base.html.j2:52
-#: amt/site/templates/projects/details_base.html.j2:78
-#: amt/site/templates/projects/details_base.html.j2:100
+#: amt/site/templates/projects/details_base.html.j2:28
+#: amt/site/templates/projects/details_base.html.j2:53
+#: amt/site/templates/projects/details_base.html.j2:79
+#: amt/site/templates/projects/details_base.html.j2:101
 msgid "Done"
 msgstr ""
 
@@ -336,15 +336,15 @@ msgstr ""
 msgid "Algorithm Management Toolkit"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:22
+#: amt/site/templates/pages/landingpage.html.j2:23
 msgid "Grip on algorithms with the Algorithm Management Toolkit"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:24
+#: amt/site/templates/pages/landingpage.html.j2:25
 msgid "The AI Validation team"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:25
+#: amt/site/templates/pages/landingpage.html.j2:26
 msgid ""
 " has developed the Algorithm Management Toolkit on behalf of the Ministry"
 " of Interior Affairs.\n"
@@ -354,19 +354,19 @@ msgid ""
 "ensures uniformity, transparency and reproducibility."
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:31
+#: amt/site/templates/pages/landingpage.html.j2:32
 msgid "Log in"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:31
+#: amt/site/templates/pages/landingpage.html.j2:32
 msgid "or"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:32
+#: amt/site/templates/pages/landingpage.html.j2:33
 msgid "contact us"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:33
+#: amt/site/templates/pages/landingpage.html.j2:34
 msgid "for more information on how the toolkit can support your organization."
 msgstr ""
 
@@ -439,28 +439,28 @@ msgstr ""
 msgid "Select publication category"
 msgstr ""
 
-#: amt/site/templates/projects/details_base.html.j2:24
+#: amt/site/templates/projects/details_base.html.j2:25
 msgid "Does the algorithm meet the requirements?"
 msgstr ""
 
-#: amt/site/templates/projects/details_base.html.j2:48
-#: amt/site/templates/projects/details_base.html.j2:98
+#: amt/site/templates/projects/details_base.html.j2:49
+#: amt/site/templates/projects/details_base.html.j2:99
 msgid "To do"
 msgstr ""
 
-#: amt/site/templates/projects/details_base.html.j2:50
+#: amt/site/templates/projects/details_base.html.j2:51
 msgid "In progress"
 msgstr ""
 
-#: amt/site/templates/projects/details_base.html.j2:64
+#: amt/site/templates/projects/details_base.html.j2:65
 msgid "Go to all requirements"
 msgstr ""
 
-#: amt/site/templates/projects/details_base.html.j2:75
+#: amt/site/templates/projects/details_base.html.j2:76
 msgid "Which instruments are executed?"
 msgstr ""
 
-#: amt/site/templates/projects/details_base.html.j2:112
+#: amt/site/templates/projects/details_base.html.j2:113
 msgid "Go to all instruments"
 msgstr ""
 
@@ -573,17 +573,21 @@ msgstr ""
 msgid "done"
 msgstr ""
 
-#: amt/site/templates/projects/details_measure_modal.html.j2:69
+#: amt/site/templates/projects/details_measure_modal.html.j2:66
+msgid "Information on how this measure is implemented"
+msgstr ""
+
+#: amt/site/templates/projects/details_measure_modal.html.j2:71
 msgid ""
 "Describe how the measure has been implemented, including challenges and "
 "solutions."
 msgstr ""
 
-#: amt/site/templates/projects/details_measure_modal.html.j2:80
+#: amt/site/templates/projects/details_measure_modal.html.j2:81
 msgid "Save"
 msgstr ""
 
-#: amt/site/templates/projects/details_measure_modal.html.j2:84
+#: amt/site/templates/projects/details_measure_modal.html.j2:85
 msgid "Cancel"
 msgstr ""
 
@@ -592,7 +596,7 @@ msgid "measures executed"
 msgstr ""
 
 #: amt/site/templates/projects/details_requirements.html.j2:54
-msgid "Edit measure"
+msgid "Edit"
 msgstr ""
 
 #: amt/site/templates/projects/new.html.j2:7
