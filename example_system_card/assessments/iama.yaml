@@ -4,7 +4,7 @@ provenance:
   uri: https://github.com/MinBZK/tad-conversion-tool
   author: John Doe
 name: IAMA
-urn: "urn:nl:aivt:ir:iama:1.0"
+urn: "urn:nl:aivt:tr:iama:1.0"
 date: "2025-03-25"
 contents:
   - question: "Licht uw voorstel voor het gebruik/de inzet van een algoritme toe. Wat is de aanleiding hiervoor geweest? Voor welk probleem moet het algoritme een oplossing bieden?"

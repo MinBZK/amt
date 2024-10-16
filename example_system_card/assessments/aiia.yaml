@@ -4,7 +4,7 @@ provenance:
   uri: https://github.com/MinBZK/tad-conversion-tool
   author: John Doe
 name: AIIA
-urn: "urn:nl:aivt:ir:aiia:1.0"
+urn: "urn:nl:aivt:tr:aiia:1.0"
 date: "2025-03-25"
 contents:
   - question: "Geef een korte beschrijving van het beoogde AI-systeem (titel, algemene omschrijving, probleemstelling, en het domein)"

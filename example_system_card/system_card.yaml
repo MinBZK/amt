@@ -12,9 +12,6 @@ instruments:
   - urn: "urn:nl:aivt:tr:aiia:1.0"
     version: "1.0"
     required: True
-  - urn: "urn:nl:aivt:tr:dpia:1.0"
-    version: "1.0"
-    required: True
 upl: "https://standaarden.overheid.nl/owms/terms/woz-beschikking"
 owners:
   - oin: "00000003273808340000"
@@ -29,10 +26,12 @@ owners:
     role: "Medewerkster Klantcontactcentrum"
 description: "Het bepalen en fiatteren van de WOZ-waarde."
 labels:
-  - name:
-    value:
-  - name:
-    value:
+  - name: "WOZ Waardering"
+    value: "Automatiseert het proces van waardebepaling van onroerend goed op basis van marktontwikkelingen."
+  - name: "Marktanalyse"
+    value: "Maakt gebruik van marktgegevens en statistische modellen om de WOZ-waarde te bepalen."
+  - name: "Juridische Naleving"
+    value: "Voldoet aan de Wet WOZ en relevante regelgeving omtrent waardebepaling en proceskostenvergoedingen."
 status: "ontwikkeling"
 publication_category: "Hoog-risico AI"
 begin_date: "2023-10-01"
