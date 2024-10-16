@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-16 14:09+0000\n"
+"POT-Creation-Date: 2024-10-16 16:52+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_NL\n"
@@ -67,7 +67,6 @@ msgid "Verification and Validation"
 msgstr "Verficatie en validatie"
 
 #: amt/api/lifecycles.py:49
-#: amt/site/templates/projects/details_measure_modal.html.j2:66
 msgid "Implementation"
 msgstr "Implementeren"
 
@@ -289,10 +288,10 @@ msgid "Reviewing"
 msgstr "Beoordelen"
 
 #: amt/site/templates/macros/tasks.html.j2:32
-#: amt/site/templates/projects/details_base.html.j2:27
-#: amt/site/templates/projects/details_base.html.j2:52
-#: amt/site/templates/projects/details_base.html.j2:78
-#: amt/site/templates/projects/details_base.html.j2:100
+#: amt/site/templates/projects/details_base.html.j2:28
+#: amt/site/templates/projects/details_base.html.j2:53
+#: amt/site/templates/projects/details_base.html.j2:79
+#: amt/site/templates/projects/details_base.html.j2:101
 msgid "Done"
 msgstr "Afgerond"
 
@@ -346,15 +345,15 @@ msgstr "AMT Placeholder informatie pagina's"
 msgid "Algorithm Management Toolkit"
 msgstr "Algoritme Management Toolkit"
 
-#: amt/site/templates/pages/landingpage.html.j2:22
+#: amt/site/templates/pages/landingpage.html.j2:23
 msgid "Grip on algorithms with the Algorithm Management Toolkit"
 msgstr "Grip op algoritmes met de Algoritme Management Toolkit"
 
-#: amt/site/templates/pages/landingpage.html.j2:24
+#: amt/site/templates/pages/landingpage.html.j2:25
 msgid "The AI Validation team"
 msgstr "Het AI Validatie team"
 
-#: amt/site/templates/pages/landingpage.html.j2:25
+#: amt/site/templates/pages/landingpage.html.j2:26
 msgid ""
 " has developed the Algorithm Management Toolkit on behalf of the Ministry"
 " of Interior Affairs.\n"
@@ -371,19 +370,19 @@ msgstr ""
 "                    In samenwerking met (internationale) partners zorgt "
 "het voor uniformiteit, transparantie en reproduceerbaarheid."
 
-#: amt/site/templates/pages/landingpage.html.j2:31
+#: amt/site/templates/pages/landingpage.html.j2:32
 msgid "Log in"
 msgstr "Inloggen"
 
-#: amt/site/templates/pages/landingpage.html.j2:31
+#: amt/site/templates/pages/landingpage.html.j2:32
 msgid "or"
 msgstr "voor"
 
-#: amt/site/templates/pages/landingpage.html.j2:32
+#: amt/site/templates/pages/landingpage.html.j2:33
 msgid "contact us"
 msgstr "neem contact op"
 
-#: amt/site/templates/pages/landingpage.html.j2:33
+#: amt/site/templates/pages/landingpage.html.j2:34
 msgid "for more information on how the toolkit can support your organization."
 msgstr "voor meer informatie over hoe de toolkit uw organisatie kan ondersteunen."
 
@@ -459,28 +458,28 @@ msgstr "Selecteer levenscyclus"
 msgid "Select publication category"
 msgstr "Selecteer publicatiecategorie"
 
-#: amt/site/templates/projects/details_base.html.j2:24
+#: amt/site/templates/projects/details_base.html.j2:25
 msgid "Does the algorithm meet the requirements?"
 msgstr "Voldoet het algoritme aan de vereisten?"
 
-#: amt/site/templates/projects/details_base.html.j2:48
-#: amt/site/templates/projects/details_base.html.j2:98
+#: amt/site/templates/projects/details_base.html.j2:49
+#: amt/site/templates/projects/details_base.html.j2:99
 msgid "To do"
 msgstr "Te doen"
 
-#: amt/site/templates/projects/details_base.html.j2:50
+#: amt/site/templates/projects/details_base.html.j2:51
 msgid "In progress"
 msgstr "Onderhanden"
 
-#: amt/site/templates/projects/details_base.html.j2:64
+#: amt/site/templates/projects/details_base.html.j2:65
 msgid "Go to all requirements"
 msgstr "Ga naar alle Vereisten"
 
-#: amt/site/templates/projects/details_base.html.j2:75
+#: amt/site/templates/projects/details_base.html.j2:76
 msgid "Which instruments are executed?"
 msgstr "Welke instrumenten zijn uitgevoerd?"
 
-#: amt/site/templates/projects/details_base.html.j2:112
+#: amt/site/templates/projects/details_base.html.j2:113
 msgid "Go to all instruments"
 msgstr "Ga naar all instrumenten"
 
@@ -593,7 +592,11 @@ msgstr "Onderhanden"
 msgid "done"
 msgstr "Afgerond"
 
-#: amt/site/templates/projects/details_measure_modal.html.j2:69
+#: amt/site/templates/projects/details_measure_modal.html.j2:66
+msgid "Information on how this measure is implemented"
+msgstr ""
+
+#: amt/site/templates/projects/details_measure_modal.html.j2:71
 msgid ""
 "Describe how the measure has been implemented, including challenges and "
 "solutions."
@@ -601,11 +604,11 @@ msgstr ""
 "Beschrijf hoe de maatregel is geimplementeerd, inclusief uitdagingen "
 "enoplossingen."
 
-#: amt/site/templates/projects/details_measure_modal.html.j2:80
+#: amt/site/templates/projects/details_measure_modal.html.j2:81
 msgid "Save"
 msgstr "Opslaan"
 
-#: amt/site/templates/projects/details_measure_modal.html.j2:84
+#: amt/site/templates/projects/details_measure_modal.html.j2:85
 msgid "Cancel"
 msgstr "Annuleren"
 
