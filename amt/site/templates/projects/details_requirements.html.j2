@@ -14,6 +14,7 @@
                         {{ requirement.name }}
                     </h3>
                     <span class="rvo-accordion-teaser">
+                        <div class="rvo-layout">{{ requirement.description }}</div>
                         <div class="rvo-layout-row rvo-layout-gap--sm">
                             {% if completed_measures_count == 0 %}
                                 <div class="rvo-status-indicator rvo-status-indicator--hemelblauw"></div>
