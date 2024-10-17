@@ -15,6 +15,7 @@ class Measure(MeasureBase):
     name: str
     description: str
     links: list[str] = Field(default=[])
+    url: str
 
 
 class ExtendedMeasureTask(MeasureTask):
