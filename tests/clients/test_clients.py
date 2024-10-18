@@ -1,95 +1,58 @@
+import json
+
 import pytest
-from amt.clients.clients import get_client
+from amt.clients.clients import TaskRegistryAPIClient
 from amt.core.exceptions import AMTNotFound
 from amt.schema.github import RepositoryContent
+from amt.schema.instrument import Instrument
 from pytest_httpx import HTTPXMock
+from tests.constants import TASK_REGISTRY_CONTENT_PAYLOAD, TASK_REGISTRY_LIST_PAYLOAD
 
 
-def test_get_client_unknown_client():
-    with pytest.raises(AMTNotFound, match="The requested page or resource could not be found."):
-        get_client("unknown_client")
-
-
-def test_get_content_github(httpx_mock: HTTPXMock):
-    # given
+def test_task_registry_api_client_get_instrument_list(httpx_mock: HTTPXMock):
+    task_registry_api_client = TaskRegistryAPIClient()
     httpx_mock.add_response(
-        url="https://api.github.com/stuff/123",
-        content=b"somecontent",
-        headers={"X-RateLimit-Remaining": "7", "X-RateLimit-Reset": "200000000"},
+        url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
     )
-    github_client = get_client("github")
 
-    # when
-    result = github_client.get_content("https://api.github.com/stuff/123")
+    result = task_registry_api_client.get_instrument_list()
+
+    assert result == RepositoryContent.model_validate(json.loads(TASK_REGISTRY_LIST_PAYLOAD)["entries"])
+
+
+def test_task_registry_api_client_get_instrument_list_not_succesfull(httpx_mock: HTTPXMock):
+    task_registry_api_client = TaskRegistryAPIClient()
+    httpx_mock.add_response(status_code=408, url="https://task-registry.apps.digilab.network/instruments/")
 
     # then
-    assert result == b"somecontent"
+    pytest.raises(AMTNotFound, task_registry_api_client.get_instrument_list)
 
 
-def test_list_content_github(httpx_mock: HTTPXMock):
+def test_task_registry_api_client_get_instrument(httpx_mock: HTTPXMock):
     # given
-    url = "https://api.github.com/repos/MinBZK/task-registry/contents/?ref=main"
-    github_client = get_client("github")
-    repository_content = RepositoryContent(root=[])
-
+    task_registry_api_client = TaskRegistryAPIClient()
     httpx_mock.add_response(
-        url=url,
-        json=repository_content.model_dump(),
+        url="https://task-registry.apps.digilab.network/urns/?version=latest&urn=urn%3Anl%3Aaivt%3Atr%3Aiama%3A1.0",
+        content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
     )
 
     # when
-    result = github_client.list_content(url)
+    urn = "urn:nl:aivt:tr:iama:1.0"
+    result = task_registry_api_client.get_instrument(urn)
 
     # then
-    assert result == repository_content
+    assert result == Instrument(**json.loads(TASK_REGISTRY_CONTENT_PAYLOAD))
 
 
-def test_github_ratelimit_exceeded(httpx_mock: HTTPXMock):
-    # given
+def test_task_registry_api_client_get_instrument_not_succesfull(httpx_mock: HTTPXMock):
+    task_registry_api_client = TaskRegistryAPIClient()
     httpx_mock.add_response(
-        url="https://api.github.com/stuff/123",
-        status_code=403,
-        headers={"X-RateLimit-Remaining": "0", "X-RateLimit-Reset": "200000000"},
-    )
-    github_client = get_client("github")
-
-    # when
-    with pytest.raises(AMTNotFound) as exc_info:
-        github_client.get_content("https://api.github.com/stuff/123")
-
-    # then
-    assert "The requested page or resource could not be found" in str(exc_info.value)
-
-
-def test_get_content_github_pages(httpx_mock: HTTPXMock):
-    # given
-    httpx_mock.add_response(
-        url="https://minbzk.github.io/stuff/123",
-        content=b"somecontent",
-    )
-    github_client = get_client("github_pages")
-
-    # when
-    result = github_client.get_content("https://minbzk.github.io/stuff/123")
-
-    # then
-    assert result == b"somecontent"
-
-
-def test_list_content_github_pages(httpx_mock: HTTPXMock):
-    # given
-    url = "https://minbzk.github.io/task-registry/index.json"
-    github_client = get_client("github_pages")
-    repository_content = RepositoryContent(root=[])
-    input = {"entries": repository_content.model_dump()}
-
-    httpx_mock.add_response(
-        url=url,
-        json=input,
+        status_code=408,
+        url="https://task-registry.apps.digilab.network/urns/?version=latest&urn=urn%3Anl%3Aaivt%3Atr%3Aiama%3A1.0",
     )
 
-    # when
-    result = github_client.list_content(url)
+    urn = "urn:nl:aivt:tr:iama:1.0"
 
     # then
-    assert result == repository_content
+    with pytest.raises(AMTNotFound):
+        task_registry_api_client.get_instrument(urn)

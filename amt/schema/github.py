@@ -9,6 +9,7 @@ class Links(BaseModel):
 
 class ContentItem(BaseModel):
     name: str
+    urn: str
     path: str
     sha: str | None = Field(default=None)
     size: int
