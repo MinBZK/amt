@@ -16,14 +16,14 @@ from amt.repositories.deps import get_session
 logger = logging.getLogger(__name__)
 
 
-def sort_by_phase(project: Project) -> int:
+def sort_by_lifecycle(project: Project) -> int:
     if project.lifecycle:
         return project.lifecycle.index
     else:
         return -1
 
 
-def sort_by_phase_reversed(project: Project) -> int:
+def sort_by_lifecycle_reversed(project: Project) -> int:
     if project.lifecycle:
         return -project.lifecycle.index
     else:
@@ -105,11 +105,11 @@ class ProjectsRepository:
             result = list(self.session.execute(statement).scalars())
             # todo: the good way to do sorting is to use an enum field (or any int field)
             #  in the database so we can sort on that
-            if result and sort and "phase" in sort:
-                if sort["phase"] == "ascending":
-                    result = sorted(result, key=sort_by_phase)
+            if result and sort and "lifecycle" in sort:
+                if sort["lifecycle"] == "ascending":
+                    result = sorted(result, key=sort_by_lifecycle)
                 else:
-                    result = sorted(result, key=sort_by_phase_reversed)
+                    result = sorted(result, key=sort_by_lifecycle_reversed)
             return result  # noqa
         except Exception as e:
             logger.exception("Error paginating projects")

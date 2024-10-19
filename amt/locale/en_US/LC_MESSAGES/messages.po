@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-17 13:18+0000\n"
+"POT-Creation-Date: 2024-10-20 07:35+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -398,7 +398,8 @@ msgid "Algorithm system name"
 msgstr ""
 
 #: amt/site/templates/parts/filter_list.html.j2:99
-msgid "Phase"
+#: amt/site/templates/projects/new.html.j2:37
+msgid "Lifecycle"
 msgstr ""
 
 #: amt/site/templates/parts/header.html.j2:7
@@ -603,10 +604,6 @@ msgstr ""
 msgid "Your algorithm system name here"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:37
-msgid "Lifecycle"
-msgstr ""
-
 #: amt/site/templates/projects/new.html.j2:39
 msgid "Select the lifecycle your algorithm system is currently in."
 msgstr ""
@@ -711,5 +708,11 @@ msgstr ""
 #~ "This website is under development. All"
 #~ " versions are created in an open "
 #~ "manner."
+#~ msgstr ""
+
+#~ msgid "Lifecyle"
+#~ msgstr ""
+
+#~ msgid "Phase"
 #~ msgstr ""
 

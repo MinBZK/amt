@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-17 13:18+0000\n"
+"POT-Creation-Date: 2024-10-20 07:35+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_NL\n"
@@ -416,8 +416,9 @@ msgid "Algorithm system name"
 msgstr "Algoritme systeem naam"
 
 #: amt/site/templates/parts/filter_list.html.j2:99
-msgid "Phase"
-msgstr "Fase"
+#: amt/site/templates/projects/new.html.j2:37
+msgid "Lifecycle"
+msgstr "Levenscyclus"
 
 #: amt/site/templates/parts/header.html.j2:7
 msgid "Beta Version"
@@ -623,10 +624,6 @@ msgstr "Algoritmekader"
 msgid "Your algorithm system name here"
 msgstr "Jouw algoritme systeem naam hier"
 
-#: amt/site/templates/projects/new.html.j2:37
-msgid "Lifecycle"
-msgstr "Levenscyclus"
-
 #: amt/site/templates/projects/new.html.j2:39
 msgid "Select the lifecycle your algorithm system is currently in."
 msgstr ""
@@ -688,10 +685,4 @@ msgstr "Creëer Algoritme Systeem"
 #: amt/site/templates/projects/new.html.j2:195
 msgid "Copy results and close"
 msgstr "Resultaten overnemen en sluiten"
-
-#~ msgid "About us"
-#~ msgstr "Over ons"
-
-#~ msgid "Contact"
-#~ msgstr "Contact"
 
