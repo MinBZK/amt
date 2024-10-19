@@ -1,4 +1,6 @@
+import json
 from datetime import datetime
+from enum import Enum
 from typing import Any, TypeVar
 
 from sqlalchemy import String, func
@@ -11,6 +13,15 @@ from amt.models.base import Base
 from amt.schema.system_card import SystemCard
 
 T = TypeVar("T", bound="Project")
+
+
+class CustomJSONEncoder(json.JSONEncoder):
+    def default(self, o: Any) -> Any:  # noqa: ANN401
+        if isinstance(o, datetime):
+            return o.isoformat()
+        if isinstance(o, Enum):
+            return o.name
+        return super().default(o)
 
 
 class ProjectSystemCard(SystemCard):
@@ -27,6 +38,17 @@ class ProjectSystemCard(SystemCard):
         if isinstance(other, ProjectSystemCard | SystemCard):
             return self.model_dump(exclude={"_parent"}) == other.model_dump()
         return False
+
+    def model_dump(self, *args: Any, **kwargs: Any) -> dict[str, Any]:  # noqa: ANN401
+        exclude_unset = kwargs.pop("exclude_unset", False)
+        by_alias = kwargs.pop("by_alias", False)
+        exclude_none = kwargs.pop("exclude_none", False)
+
+        dumped = super().model_dump(
+            *args, exclude_unset=exclude_unset, by_alias=by_alias, exclude_none=exclude_none, **kwargs
+        )
+
+        return json.loads(json.dumps(dumped, cls=CustomJSONEncoder))
 
 
 class Project(Base):

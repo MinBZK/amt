@@ -1,6 +1,8 @@
 import logging
-import typing
+from collections.abc import Sequence
+from enum import Enum
 from os import PathLike
+from typing import Any, AnyStr, TypeVar
 
 from fastapi import Request
 from fastapi.responses import HTMLResponse
@@ -10,6 +12,7 @@ from starlette.background import BackgroundTask
 from starlette.templating import _TemplateResponse  # pyright: ignore [reportPrivateUsage]
 
 from amt.api.http_browser_caching import url_for_cache
+from amt.api.localizable import LocalizableEnum
 from amt.api.navigation import NavigationItem, get_main_menu
 from amt.core.authorization import get_user
 from amt.core.config import VERSION, get_settings
@@ -24,6 +27,9 @@ from amt.core.internationalization import (
     supported_translations,
     time_ago,
 )
+from amt.schema.localized_value_item import LocalizedValueItem
+
+T = TypeVar("T", bound=Enum | LocalizableEnum)
 
 logger = logging.getLogger(__name__)
 
@@ -47,12 +53,49 @@ def get_undefined_behaviour() -> type[Undefined]:
     return StrictUndefined if get_settings().DEBUG else Undefined
 
 
+def get_nested(obj: Any, attr_path: str) -> Any:  # noqa: ANN401
+    attrs = attr_path.lstrip(".").split(".")
+    for attr in attrs:
+        if hasattr(obj, attr):
+            obj = getattr(obj, attr)
+        elif isinstance(obj, dict) and attr in obj:
+            obj = obj[attr]
+        else:
+            obj = None
+            break
+    return obj
+
+
+def nested_value(obj: Any, attr_path: str) -> Any:  # noqa: ANN401
+    obj = get_nested(obj, attr_path)
+    if isinstance(obj, Enum):
+        return obj.value
+    return obj
+
+
+def is_nested_enum(obj: Any, attr_path: str) -> bool:  # noqa: ANN401
+    obj = get_nested(obj, attr_path)
+    return bool(isinstance(obj, Enum))
+
+
+def nested_enum(obj: Any, attr_path: str, language: str) -> list[LocalizedValueItem]:  # noqa: ANN401
+    nested_obj = get_nested(obj, attr_path)
+    if not isinstance(nested_obj, LocalizableEnum):
+        return []
+    enum_class = type(nested_obj)
+    return [e.localize(language) for e in enum_class if isinstance(e, LocalizableEnum)]
+
+
+def nested_enum_value(obj: Any, attr_path: str, language: str) -> Any:  # noqa: ANN401
+    return get_nested(obj, attr_path).localize(language)
+
+
 # we use a custom override so we can add the translation per request, which is parsed in the Request object in kwargs
 class LocaleJinja2Templates(Jinja2Templates):
     def _create_env(
         self,
-        directory: str | PathLike[typing.AnyStr] | typing.Sequence[str | PathLike[typing.AnyStr]],
-        **env_options: typing.Any,  # noqa: ANN401
+        directory: str | PathLike[AnyStr] | Sequence[str | PathLike[AnyStr]],
+        **env_options: Any,  # noqa: ANN401
     ) -> Environment:
         env: Environment = super()._create_env(directory, **env_options)  # pyright: ignore [reportUnknownMemberType, reportUnknownVariableType, reportArgumentType]
         env.add_extension("jinja2.ext.i18n")  # pyright: ignore [reportUnknownMemberType]
@@ -62,7 +105,7 @@ class LocaleJinja2Templates(Jinja2Templates):
         self,
         request: Request,
         name: str,
-        context: dict[str, typing.Any] | None = None,
+        context: dict[str, Any] | None = None,
         status_code: int = 200,
         headers: dict[str, str] | None = None,
         media_type: str | None = None,
@@ -99,3 +142,7 @@ templates.env.filters["format_datetime"] = format_datetime  # pyright: ignore [r
 templates.env.filters["format_timedelta"] = format_timedelta  # pyright: ignore [reportUnknownMemberType]
 templates.env.filters["time_ago"] = time_ago  # pyright: ignore [reportUnknownMemberType]
 templates.env.globals.update(url_for_cache=url_for_cache)  # pyright: ignore [reportUnknownMemberType]
+templates.env.globals.update(nested_value=nested_value)  # pyright: ignore [reportUnknownMemberType]
+templates.env.globals.update(is_nested_enum=is_nested_enum)  # pyright: ignore [reportUnknownMemberType]
+templates.env.globals.update(nested_enum=nested_enum)  # pyright: ignore [reportUnknownMemberType]
+templates.env.globals.update(nested_enum_value=nested_enum_value)  # pyright: ignore [reportUnknownMemberType]

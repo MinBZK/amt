@@ -6,9 +6,13 @@ from fastapi.responses import HTMLResponse
 
 from amt.api.ai_act_profile import get_ai_act_profile_selector
 from amt.api.deps import templates
-from amt.api.lifecycles import Lifecycles, get_lifecycle, get_lifecycles
+from amt.api.lifecycles import Lifecycles, get_localized_lifecycle, get_localized_lifecycles
 from amt.api.navigation import Navigation, resolve_base_navigation_items, resolve_navigation_items
-from amt.api.publication_category import PublicationCategories, get_publication_categories, get_publication_category
+from amt.api.publication_category import (
+    PublicationCategories,
+    get_localized_publication_categories,
+    get_localized_publication_category,
+)
 from amt.schema.localized_value_item import LocalizedValueItem
 from amt.schema.project import ProjectNew
 from amt.services.instruments import InstrumentsService
@@ -21,19 +25,16 @@ logger = logging.getLogger(__name__)
 def get_localized_value(key: str, value: str, request: Request) -> LocalizedValueItem:
     match key:
         case "lifecycle":
-            lifecycle = get_lifecycle(Lifecycles[value], request)
-            if lifecycle:
-                return LocalizedValueItem(value=value, display_value=lifecycle.name)
-            else:
-                return LocalizedValueItem(value=value, display_value="Unknown")
+            localized = get_localized_lifecycle(Lifecycles[value], request)
         case "publication-category":
-            publication_category = get_publication_category(PublicationCategories[value], request)
-            if publication_category:
-                return LocalizedValueItem(value=value, display_value=publication_category.name)
-            else:
-                return LocalizedValueItem(value=value, display_value="Unknown")
+            localized = get_localized_publication_category(PublicationCategories[value], request)
         case _:
-            return LocalizedValueItem(value=value, display_value="Unknown filter option")
+            localized = None
+
+    if localized:
+        return localized
+
+    return LocalizedValueItem(value=value, display_value="Unknown filter option")
 
 
 @router.get("/")
@@ -64,7 +65,7 @@ async def get_root(
     projects = projects_service.paginate(skip=skip, limit=limit, search=search, filters=filters, sort=sort_by)
     # todo: the lifecycle has to be 'localized', maybe for display 'Project' should become a different object
     for project in projects:
-        project.lifecycle = get_lifecycle(project.lifecycle, request)  # pyright: ignore [reportAttributeAccessIssue]
+        project.lifecycle = get_localized_lifecycle(project.lifecycle, request)  # pyright: ignore [reportAttributeAccessIssue]
 
     next = skip + limit
 
@@ -79,8 +80,8 @@ async def get_root(
         "limit": limit,
         "start": skip,
         "search": search,
-        "lifecycles": get_lifecycles(request),
-        "publication_categories": get_publication_categories(request),
+        "lifecycles": get_localized_lifecycles(request),
+        "publication_categories": get_localized_publication_categories(request),
         "filters": localized_filters,
         "sort_by": sort_by,
     }
@@ -108,7 +109,7 @@ async def get_new(
         "ai_act_profile": ai_act_profile,
         "breadcrumbs": breadcrumbs,
         "sub_menu_items": {},  # sub_menu_items disabled for now,
-        "lifecycles": get_lifecycles(request),
+        "lifecycles": get_localized_lifecycles(request),
     }
 
     response = templates.TemplateResponse(request, "projects/new.html.j2", context)

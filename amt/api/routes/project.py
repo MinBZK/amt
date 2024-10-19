@@ -1,14 +1,13 @@
 import functools
 import logging
 from pathlib import Path
-from typing import Annotated, Any
+from typing import Annotated, Any, cast
 
 from fastapi import APIRouter, Depends, Request
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
 
 from amt.api.deps import templates
-from amt.api.lifecycles import get_lifecycle
 from amt.api.navigation import (
     BaseNavigationItem,
     Navigation,
@@ -166,11 +165,31 @@ async def move_task(
     return templates.TemplateResponse(request, "parts/task.html.j2", context=context)
 
 
+async def get_project_context(
+    project_id: int, projects_service: ProjectsService, request: Request
+) -> tuple[Project, dict[str, Any]]:
+    project = get_project_or_error(project_id, projects_service, request)
+    system_card_data = get_system_card_data()
+    instrument_state = get_instrument_state()
+    requirements_state = get_requirements_state(project.system_card)
+    tab_items = get_project_details_tabs(request)
+    project.system_card = system_card_data
+    return project, {
+        "last_edited": project.last_edited,
+        "system_card": system_card_data,
+        "instrument_state": instrument_state,
+        "requirements_state": requirements_state,
+        "project": project,
+        "project_id": project.id,
+        "tab_items": tab_items,
+    }
+
+
 @router.get("/{project_id}/details")
 async def get_project_details(
     request: Request, project_id: int, projects_service: Annotated[ProjectsService, Depends(ProjectsService)]
 ) -> HTMLResponse:
-    project = get_project_or_error(project_id, projects_service, request)
+    project, context = await get_project_context(project_id, projects_service, request)
 
     breadcrumbs = resolve_base_navigation_items(
         [
@@ -183,25 +202,75 @@ async def get_project_details(
         request,
     )
 
-    system_card_data = get_system_card_data()
-    instrument_state = get_instrument_state()
-    requirements_state = get_requirements_state(project.system_card)
-
-    tab_items = get_project_details_tabs(request)
-
-    context = {
-        "lifecycle": get_lifecycle(project.lifecycle, request),
-        "last_edited": project.last_edited,
-        "system_card": system_card_data,
-        "instrument_state": instrument_state,
-        "requirements_state": requirements_state,
-        "project": project,
-        "project_id": project.id,
-        "breadcrumbs": breadcrumbs,
-        "tab_items": tab_items,
-    }
+    context["breadcrumbs"] = breadcrumbs
 
     return templates.TemplateResponse(request, "projects/details_info.html.j2", context)
+
+
+@router.get("/{project_id}/edit/{path:path}")
+async def get_project_edit(
+    request: Request,
+    project_id: int,
+    projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
+    path: str,
+) -> HTMLResponse:
+    _, context = await get_project_context(project_id, projects_service, request)
+    context["path"] = path.replace("/", ".")
+    return templates.TemplateResponse(request, "parts/edit_cell.html.j2", context)
+
+
+@router.get("/{project_id}/cancel/{path:path}")
+async def get_project_cancel(
+    request: Request,
+    project_id: int,
+    projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
+    path: str,
+) -> HTMLResponse:
+    _, context = await get_project_context(project_id, projects_service, request)
+    context["path"] = path.replace("/", ".")
+    return templates.TemplateResponse(request, "parts/view_cell.html.j2", context)
+
+
+class UpdateFieldModel(BaseModel):
+    value: str
+
+
+def set_path(project: dict[str, Any] | object, path: str, value: str) -> None:
+    if not path:
+        raise ValueError("Path cannot be empty")
+
+    attrs = path.lstrip("/").split("/")
+    obj: Any = project
+    for attr in attrs[:-1]:
+        if isinstance(obj, dict):
+            obj = cast(dict[str, Any], obj)
+            if attr not in obj:
+                obj[attr] = {}
+            obj = obj[attr]
+        else:
+            if not hasattr(obj, attr):
+                setattr(obj, attr, {})
+            obj = getattr(obj, attr)
+
+    if isinstance(obj, dict):
+        obj[attrs[-1]] = value
+    else:
+        setattr(obj, attrs[-1], value)
+
+
+@router.put("/{project_id}/update/{path:path}")
+async def get_project_update(
+    request: Request,
+    project_id: int,
+    projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
+    update_data: UpdateFieldModel,
+    path: str,
+) -> HTMLResponse:
+    project, context = await get_project_context(project_id, projects_service, request)
+    set_path(project, path, update_data.value)
+    projects_service.update(project)
+    context["path"] = path.replace("/", ".")
+    return templates.TemplateResponse(request, "parts/view_cell.html.j2", context)
 
 
 # !!!
@@ -277,7 +346,6 @@ async def get_project_inference(
     tab_items = get_project_details_tabs(request)
 
     context = {
-        "lifecycle": get_lifecycle(project.lifecycle, request),
         "last_edited": project.last_edited,
         "system_card": system_card_data,
         "instrument_state": instrument_state,

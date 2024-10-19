@@ -45,13 +45,13 @@
                                 </div>
                                 {% for lifecycle in lifecycles %}
                                     <div class="rvo-radio-button__group">
-                                        <label class="rvo-radio-button" for="{{ lifecycle.id }}">
-                                            <input id="lifecycle-{{ lifecycle.id }}"
+                                        <label class="rvo-radio-button" for="{{ lifecycle.value }}">
+                                            <input id="lifecycle-{{ lifecycle.value }}"
                                                    name="lifecycle"
-                                                   value="{{ lifecycle.id }}"
+                                                   value="{{ lifecycle.value }}"
                                                    type="radio"
                                                    class="utrecht-radio-button" />
-                                            {{ lifecycle.name }}
+                                            {{ lifecycle.display_value }}
                                         </label>
                                     </div>
                                 {% endfor %}

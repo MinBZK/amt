@@ -1,15 +1,12 @@
-import logging
-from enum import Enum
+from collections.abc import Callable
 
 from fastapi import Request
 
-from amt.core.internationalization import get_current_translation
-from amt.schema.lifecycle import Lifecycle
-
-logger = logging.getLogger(__name__)
+from ..schema.localized_value_item import LocalizedValueItem
+from .localizable import LocalizableEnum, get_localized_enum, get_localized_enums
 
 
-class Lifecycles(Enum):
+class Lifecycles(LocalizableEnum):
     ORGANIZATIONAL_RESPONSIBILITIES = "ORGANIZATIONAL_RESPONSIBILITIES"
     PROBLEM_ANALYSIS = "PROBLEM_ANALYSIS"
     DESIGN = "DESIGN"
@@ -20,39 +17,24 @@ class Lifecycles(Enum):
     MONITORING_AND_MANAGEMENT = "MONITORING_AND_MANAGEMENT"
     PHASING_OUT = "PHASING_OUT"
 
-    @property
-    def index(self) -> int:
-        return list(Lifecycles).index(self)
+    @classmethod
+    def get_display_values(cls: type["Lifecycles"], _: Callable[[str], str]) -> dict["Lifecycles", str]:
+        return {
+            cls.ORGANIZATIONAL_RESPONSIBILITIES: _("Organizational Responsibilities"),
+            cls.PROBLEM_ANALYSIS: _("Problem Analysis"),
+            cls.DESIGN: _("Design"),
+            cls.DATA_EXPLORATION_AND_PREPARATION: _("Data Exploration and Preparation"),
+            cls.DEVELOPMENT: _("Development"),
+            cls.VERIFICATION_AND_VALIDATION: _("Verification and Validation"),
+            cls.IMPLEMENTATION: _("Implementation"),
+            cls.MONITORING_AND_MANAGEMENT: _("Monitoring and Management"),
+            cls.PHASING_OUT: _("Phasing Out"),
+        }
 
 
-def get_lifecycle(key: Lifecycles | None, request: Request) -> Lifecycle | None:
-    """
-    Given the key and translation, returns the translated text.
-    :param key: the key
-    :param request: request to get the current language
-    :return: a Lifecycle model with the correct translation
-    """
-
-    if key is None:
-        return None
-
-    translations = get_current_translation(request)
-    _ = translations.gettext
-    # translations are determined at runtime, which is why we use the dictionary below
-    keys = {
-        Lifecycles.ORGANIZATIONAL_RESPONSIBILITIES: _("Organizational Responsibilities"),
-        Lifecycles.PROBLEM_ANALYSIS: _("Problem Analysis"),
-        Lifecycles.DESIGN: _("Design"),
-        Lifecycles.DATA_EXPLORATION_AND_PREPARATION: _("Data Exploration and Preparation"),
-        Lifecycles.DEVELOPMENT: _("Development"),
-        Lifecycles.VERIFICATION_AND_VALIDATION: _("Verification and Validation"),
-        Lifecycles.IMPLEMENTATION: _("Implementation"),
-        Lifecycles.MONITORING_AND_MANAGEMENT: _("Monitoring and Management"),
-        Lifecycles.PHASING_OUT: _("Phasing Out"),
-    }
-    return Lifecycle(id=key.value, name=keys[key])
+def get_localized_lifecycle(key: Lifecycles | None, request: Request) -> LocalizedValueItem | None:
+    return get_localized_enum(key, request)
 
 
-def get_lifecycles(request: Request) -> list[Lifecycle | None]:
-    lifecycles: list[Lifecycle | None] = [get_lifecycle(lifecycle, request) for lifecycle in Lifecycles]
-    return lifecycles
+def get_localized_lifecycles(request: Request) -> list[LocalizedValueItem | None]:
+    return get_localized_enums(Lifecycles, request)

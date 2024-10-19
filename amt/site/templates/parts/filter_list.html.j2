@@ -6,7 +6,7 @@
                href="/algorithm-system/{{ project.id }}/details/">{{ project.name }}</a>
         </td>
         <td class="rvo-table-cell">
-            <span class="rvo-text--subtle">{{ project.lifecycle.name }}</span>
+            <span class="rvo-text--subtle">{{ project.lifecycle.display_value }}</span>
         </td>
         <td class="rvo-table-cell">
             <span class="rvo-text--subtle" style="white-space: nowrap">{{ project.last_edited | time_ago(language) }} {% trans %} ago{% endtrans %}</span>

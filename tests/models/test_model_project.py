@@ -1,4 +1,8 @@
-from amt.models.project import Project
+import json
+from datetime import UTC, datetime
+from enum import Enum
+
+from amt.models.project import CustomJSONEncoder, Project
 from amt.schema.system_card import SystemCard
 
 
@@ -89,3 +93,38 @@ def test_model_systemcard_none():
 
     # then
     assert project.system_card == SystemCard()
+
+
+class TestEnum(Enum):
+    A = 1
+    B = 2
+
+
+def test_custom_json_encoder_datetime():
+    CustomJSONEncoder()
+    test_datetime = datetime(2023, 5, 17, 12, 30, 45, tzinfo=UTC)
+    encoded = json.dumps(test_datetime, cls=CustomJSONEncoder)
+    assert encoded == '"2023-05-17T12:30:45+00:00"'
+
+
+def test_custom_json_encoder_enum():
+    CustomJSONEncoder()
+    test_enum = TestEnum.A
+    encoded = json.dumps(test_enum, cls=CustomJSONEncoder)
+    assert encoded == '"A"'
+
+
+def test_custom_json_encoder_standard_types():
+    CustomJSONEncoder()
+    test_dict = {"string": "test", "integer": 42, "float": 3.14, "list": [1, 2, 3], "bool": True, "none": None}
+    encoded = json.dumps(test_dict, cls=CustomJSONEncoder)
+    decoded = json.loads(encoded)
+    assert decoded == test_dict
+
+
+def test_custom_json_encoder_mixed_types():
+    CustomJSONEncoder()
+    test_data = {"datetime": datetime(2023, 5, 17, 12, 30, 45, tzinfo=UTC), "enum": TestEnum.B, "standard": "test"}
+    encoded = json.dumps(test_data, cls=CustomJSONEncoder)
+    decoded = json.loads(encoded)
+    assert decoded == {"datetime": "2023-05-17T12:30:45+00:00", "enum": "B", "standard": "test"}
