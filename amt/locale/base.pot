@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-17 13:18+0000\n"
+"POT-Creation-Date: 2024-10-20 07:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -397,7 +397,8 @@ msgid "Algorithm system name"
 msgstr ""
 
 #: amt/site/templates/parts/filter_list.html.j2:99
-msgid "Phase"
+#: amt/site/templates/projects/new.html.j2:37
+msgid "Lifecycle"
 msgstr ""
 
 #: amt/site/templates/parts/header.html.j2:7
@@ -600,10 +601,6 @@ msgstr ""
 
 #: amt/site/templates/projects/new.html.j2:26
 msgid "Your algorithm system name here"
-msgstr ""
-
-#: amt/site/templates/projects/new.html.j2:37
-msgid "Lifecycle"
 msgstr ""
 
 #: amt/site/templates/projects/new.html.j2:39
