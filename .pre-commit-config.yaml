@@ -52,6 +52,15 @@ repos:
         files: \.po$
   - repo: local
     hooks:
+      - id: po-file-handler
+        name: PO file timestamp homogenizer
+        entry: ./script/po_file_handler
+        language: python
+        files: \.(po|pot)$
+        stages: [pre-commit]
+        additional_dependencies: ["babel==2.15.0"] # Specify the version you need
+  - repo: local
+    hooks:
       - id: husky-run-pre-commit-lint
         name: husky-lint
         language: system

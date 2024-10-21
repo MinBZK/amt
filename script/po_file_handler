@@ -1,0 +1,43 @@
+#!/usr/bin/env python
+
+import argparse
+from datetime import MINYEAR, UTC, datetime
+
+from babel.messages import pofile
+
+
+def remove_timestamps(filename: str) -> bool:
+    with open(filename, "rb") as f:
+        catalog = pofile.read_po(f)
+
+    modified = False
+    if catalog.creation_date or catalog.revision_date:
+        min_datetime = datetime(MINYEAR, 1, 1, 0, 0, 0, 0, tzinfo=UTC)
+        if catalog.creation_date == min_datetime and catalog.revision_date == min_datetime:
+            return modified
+        catalog.creation_date = min_datetime
+        catalog.revision_date = min_datetime
+        modified = True
+
+    if modified:
+        with open(filename, "wb") as f:
+            pofile.write_po(f, catalog, ignore_obsolete=True, include_previous=True)
+
+    return modified
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("filenames", nargs="*")
+    args = parser.parse_args()
+
+    return_code = 0
+    for filename in args.filenames:
+        if remove_timestamps(filename):
+            print(f"Removed timestamps from {filename}")
+            return_code = 1
+    return return_code
+
+
+if __name__ == "__main__":
+    exit(main())
