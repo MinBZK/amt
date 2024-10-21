@@ -199,14 +199,12 @@
                         </li>
                     {% else %}
                         <li class="rvo-breadcrumbs-item">
+                            <span class="utrecht-icon rvo-icon rvo-icon-delta-naar-rechts rvo-icon--xs rvo-icon--hemelblauw"
+                                  role="img"
+                                  aria-label="Delta naar rechts"></span>
                             <a data-navigation="breadcrumb:{{ breadcrumb.get_url() }}"
                                class="rvo-link rvo-link--normal rvo-link--no-underline"
-                               href="{{ breadcrumb.get_url() }}">
-                                <span class="utrecht-icon rvo-icon rvo-icon-delta-naar-rechts rvo-icon--xs rvo-icon--hemelblauw"
-                                      role="img"
-                                      aria-label="Delta naar rechts"></span>
-                                {{ breadcrumb.display_text }}
-                            </a>
+                               href="{{ breadcrumb.get_url() }}">{{ breadcrumb.display_text }}</a>
                         </li>
                     {% endif %}
                 {% endfor %}
