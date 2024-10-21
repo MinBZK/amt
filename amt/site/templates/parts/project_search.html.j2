@@ -48,8 +48,8 @@
                                     class="utrecht-select utrecht-select--html-select">
                                 <option value="">{% trans %}Select lifecycle{% endtrans %}</option>
                                 {% for lifecycle in lifecycles %}
-                                    <option {% if "lifecycle" in filters and lifecycle.id == filters["lifecycle"].value %}selected="selected"{% endif %}
-                                            value="{{ lifecycle.id }}">{{ lifecycle.name }}</option>
+                                    <option {% if "lifecycle" in filters and lifecycle.value == filters["lifecycle"].value %}selected="selected"{% endif %}
+                                            value="{{ lifecycle.value }}">{{ lifecycle.display_value }}</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -59,9 +59,9 @@
                                     class="utrecht-select utrecht-select--html-select">
                                 <option value="">{% trans %}Select publication category{% endtrans %}</option>
                                 {% for publication_category in publication_categories %}
-                                    <option {% if "publication-category" in filters and publication_category.id == filters["publication-category"].value %}selected="selected"{% endif %}
-                                            value="{{ publication_category.id }}">
-                                        {{ publication_category.name }}
+                                    <option {% if "publication-category" in filters and publication_category.value == filters["publication-category"].value %}selected="selected"{% endif %}
+                                            value="{{ publication_category.value }}">
+                                        {{ publication_category.display_value }}
                                     </option>
                                 {% endfor %}
                             </select>

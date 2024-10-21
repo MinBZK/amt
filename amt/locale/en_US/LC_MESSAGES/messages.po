@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-20 07:35+0200\n"
+"POT-Creation-Date: 2024-10-20 20:26+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -42,39 +42,39 @@ msgstr ""
 msgid "Role"
 msgstr ""
 
-#: amt/api/lifecycles.py:43
+#: amt/api/lifecycles.py:23
 msgid "Organizational Responsibilities"
 msgstr ""
 
-#: amt/api/lifecycles.py:44
+#: amt/api/lifecycles.py:24
 msgid "Problem Analysis"
 msgstr ""
 
-#: amt/api/lifecycles.py:45
+#: amt/api/lifecycles.py:25
 msgid "Design"
 msgstr ""
 
-#: amt/api/lifecycles.py:46
+#: amt/api/lifecycles.py:26
 msgid "Data Exploration and Preparation"
 msgstr ""
 
-#: amt/api/lifecycles.py:47
+#: amt/api/lifecycles.py:27
 msgid "Development"
 msgstr ""
 
-#: amt/api/lifecycles.py:48
+#: amt/api/lifecycles.py:28
 msgid "Verification and Validation"
 msgstr ""
 
-#: amt/api/lifecycles.py:49
+#: amt/api/lifecycles.py:29
 msgid "Implementation"
 msgstr ""
 
-#: amt/api/lifecycles.py:50
+#: amt/api/lifecycles.py:30
 msgid "Monitoring and Management"
 msgstr ""
 
-#: amt/api/lifecycles.py:51
+#: amt/api/lifecycles.py:31
 msgid "Phasing Out"
 msgstr ""
 
@@ -138,27 +138,27 @@ msgstr ""
 msgid "Instruments"
 msgstr ""
 
-#: amt/api/publication_category.py:36
+#: amt/api/publication_category.py:22
 msgid "Impactful algorithm"
 msgstr ""
 
-#: amt/api/publication_category.py:37
+#: amt/api/publication_category.py:23
 msgid "Non-impactful algorithm"
 msgstr ""
 
-#: amt/api/publication_category.py:38
+#: amt/api/publication_category.py:24
 msgid "High-risk AI"
 msgstr ""
 
-#: amt/api/publication_category.py:39
+#: amt/api/publication_category.py:25
 msgid "No high-risk AI"
 msgstr ""
 
-#: amt/api/publication_category.py:40
+#: amt/api/publication_category.py:26
 msgid "Forbidden AI"
 msgstr ""
 
-#: amt/api/publication_category.py:41
+#: amt/api/publication_category.py:27
 msgid "Exception of application"
 msgstr ""
 
@@ -223,6 +223,7 @@ msgid "Edit image"
 msgstr ""
 
 #: amt/site/templates/auth/profile.html.j2:34
+#: amt/site/templates/projects/details_info.html.j2:8
 msgid "Name"
 msgstr ""
 
@@ -267,6 +268,21 @@ msgstr ""
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr ""
 
+#: amt/site/templates/macros/editable.html.j2:21
+#: amt/site/templates/projects/details_requirements.html.j2:55
+msgid "Edit"
+msgstr ""
+
+#: amt/site/templates/macros/editable.html.j2:58
+#: amt/site/templates/projects/details_measure_modal.html.j2:84
+msgid "Save"
+msgstr ""
+
+#: amt/site/templates/macros/editable.html.j2:63
+#: amt/site/templates/projects/details_measure_modal.html.j2:88
+msgid "Cancel"
+msgstr ""
+
 #: amt/site/templates/macros/tasks.html.j2:11
 msgid "Todo"
 msgstr ""
@@ -295,7 +311,7 @@ msgstr ""
 #: amt/site/templates/pages/model_card.html.j2:6
 #: amt/site/templates/pages/system_card.html.j2:4
 #: amt/site/templates/parts/filter_list.html.j2:103
-#: amt/site/templates/projects/details_info.html.j2:32
+#: amt/site/templates/projects/details_info.html.j2:28
 msgid "Last updated"
 msgstr ""
 
@@ -398,6 +414,7 @@ msgid "Algorithm system name"
 msgstr ""
 
 #: amt/site/templates/parts/filter_list.html.j2:99
+#: amt/site/templates/projects/details_info.html.j2:24
 #: amt/site/templates/projects/new.html.j2:37
 msgid "Lifecycle"
 msgstr ""
@@ -518,28 +535,24 @@ msgstr ""
 msgid "Failed to estimate WOZ value: "
 msgstr ""
 
-#: amt/site/templates/projects/details_info.html.j2:7
+#: amt/site/templates/projects/details_info.html.j2:12
 #: amt/site/templates/projects/details_measure_modal.html.j2:19
 msgid "Description"
 msgstr ""
 
-#: amt/site/templates/projects/details_info.html.j2:11
+#: amt/site/templates/projects/details_info.html.j2:16
 msgid "Repository"
 msgstr ""
 
-#: amt/site/templates/projects/details_info.html.j2:17
+#: amt/site/templates/projects/details_info.html.j2:20
 msgid "Algorithm system code"
 msgstr ""
 
-#: amt/site/templates/projects/details_info.html.j2:21
-msgid "Lifecyle"
-msgstr ""
-
-#: amt/site/templates/projects/details_info.html.j2:36
+#: amt/site/templates/projects/details_info.html.j2:32
 msgid "Labels"
 msgstr ""
 
-#: amt/site/templates/projects/details_info.html.j2:44
+#: amt/site/templates/projects/details_info.html.j2:40
 msgid "References"
 msgstr ""
 
@@ -576,20 +589,8 @@ msgid ""
 "solutions."
 msgstr ""
 
-#: amt/site/templates/projects/details_measure_modal.html.j2:84
-msgid "Save"
-msgstr ""
-
-#: amt/site/templates/projects/details_measure_modal.html.j2:88
-msgid "Cancel"
-msgstr ""
-
 #: amt/site/templates/projects/details_requirements.html.j2:26
 msgid "measures executed"
-msgstr ""
-
-#: amt/site/templates/projects/details_requirements.html.j2:55
-msgid "Edit"
 msgstr ""
 
 #: amt/site/templates/projects/new.html.j2:7
@@ -658,61 +659,4 @@ msgstr ""
 #: amt/site/templates/projects/new.html.j2:195
 msgid "Copy results and close"
 msgstr ""
-
-#~ msgid "Projects"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "No projects match your selected filters."
-#~ " Try adjusting your filters or "
-#~ "clearing them to see more projects."
-#~ msgstr ""
-
-#~ msgid "Project name"
-#~ msgstr ""
-
-#~ msgid "New project"
-#~ msgstr ""
-
-#~ msgid "Find project..."
-#~ msgstr ""
-
-#~ msgid "Project code"
-#~ msgstr ""
-
-#~ msgid "Create a new project"
-#~ msgstr ""
-
-#~ msgid "Your project name here"
-#~ msgstr ""
-
-#~ msgid "Select the lifecycle your project is currently in."
-#~ msgstr ""
-
-#~ msgid "Create Project"
-#~ msgstr ""
-
-#~ msgid "Bètaversie"
-#~ msgstr ""
-
-#~ msgid "Everyone is welcome to make comments and suggestions."
-#~ msgstr ""
-
-#~ msgid "About us"
-#~ msgstr ""
-
-#~ msgid "Contact"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "This website is under development. All"
-#~ " versions are created in an open "
-#~ "manner."
-#~ msgstr ""
-
-#~ msgid "Lifecyle"
-#~ msgstr ""
-
-#~ msgid "Phase"
-#~ msgstr ""
 

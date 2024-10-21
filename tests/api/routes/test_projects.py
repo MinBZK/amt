@@ -3,6 +3,7 @@ from typing import cast
 from unittest.mock import Mock
 
 import pytest
+from amt.api.routes.projects import get_localized_value
 from amt.models import Project
 from amt.models.base import Base
 from amt.schema.ai_act_profile import AiActProfile
@@ -10,6 +11,7 @@ from amt.schema.project import ProjectNew
 from amt.schema.system_card import SystemCard
 from amt.services.instruments import InstrumentsService
 from amt.services.task_registry import get_requirements_and_measures
+from fastapi.requests import Request
 from fastapi.testclient import TestClient
 from fastapi_csrf_protect import CsrfProtect  # type: ignore # noqa
 
@@ -149,3 +151,34 @@ def test_post_new_projects_write_system_card(
     base_projects: list[Base] = db.get(Project, "name", name)
     projects: list[Project] = cast(list[Project], base_projects)
     assert any(project.system_card == system_card for project in projects if project.system_card is not None)
+
+
+class MockRequest(Request):
+    def __init__(self, lang: str) -> None:
+        self.lang = lang
+
+    @property
+    def headers(self):  # type: ignore
+        return {"Accept-Language": self.lang}
+
+
+def test_get_localized_value():
+    request = MockRequest("nl")
+    localized = get_localized_value("lifecycle", "PROBLEM_ANALYSIS", request)
+    assert localized.display_value == "Probleemanalyse"
+
+    request = MockRequest("en")
+    localized = get_localized_value("lifecycle", "PROBLEM_ANALYSIS", request)
+    assert localized.display_value == "Problem Analysis"
+
+    request = MockRequest("nl")
+    localized = get_localized_value("publication-category", "HOOG_RISICO_AI", request)
+    assert localized.display_value == "Hoog-risico AI"
+
+    request = MockRequest("en")
+    localized = get_localized_value("publication-category", "HOOG_RISICO_AI", request)
+    assert localized.display_value == "High-risk AI"
+
+    request = MockRequest("en")
+    localized = get_localized_value("other key", "", request)
+    assert localized.display_value == "Unknown filter option"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-20 07:35+0200\n"
+"POT-Creation-Date: 2024-10-20 20:26+0200\n"
 "PO-Revision-Date: 2024-07-25 21:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_NL\n"
@@ -42,39 +42,39 @@ msgstr "Zijn er transparantieverplichtingen?"
 msgid "Role"
 msgstr "Rol"
 
-#: amt/api/lifecycles.py:43
+#: amt/api/lifecycles.py:23
 msgid "Organizational Responsibilities"
 msgstr "Organisatieverantwoordelijkheden"
 
-#: amt/api/lifecycles.py:44
+#: amt/api/lifecycles.py:24
 msgid "Problem Analysis"
 msgstr "Probleemanalyse"
 
-#: amt/api/lifecycles.py:45
+#: amt/api/lifecycles.py:25
 msgid "Design"
 msgstr "Ontwerpen"
 
-#: amt/api/lifecycles.py:46
+#: amt/api/lifecycles.py:26
 msgid "Data Exploration and Preparation"
 msgstr "Dataverkenning en datapreparatie"
 
-#: amt/api/lifecycles.py:47
+#: amt/api/lifecycles.py:27
 msgid "Development"
 msgstr "Ontwikkelen"
 
-#: amt/api/lifecycles.py:48
+#: amt/api/lifecycles.py:28
 msgid "Verification and Validation"
 msgstr "Verficatie en validatie"
 
-#: amt/api/lifecycles.py:49
+#: amt/api/lifecycles.py:29
 msgid "Implementation"
 msgstr "Implementeren"
 
-#: amt/api/lifecycles.py:50
+#: amt/api/lifecycles.py:30
 msgid "Monitoring and Management"
 msgstr "Monitoring en beheer"
 
-#: amt/api/lifecycles.py:51
+#: amt/api/lifecycles.py:31
 msgid "Phasing Out"
 msgstr "Uitfaseren"
 
@@ -138,27 +138,27 @@ msgstr "Model"
 msgid "Instruments"
 msgstr "Instrumenten"
 
-#: amt/api/publication_category.py:36
+#: amt/api/publication_category.py:22
 msgid "Impactful algorithm"
 msgstr "Impactvol algoritme"
 
-#: amt/api/publication_category.py:37
+#: amt/api/publication_category.py:23
 msgid "Non-impactful algorithm"
 msgstr "Niet-impactvol algoritme"
 
-#: amt/api/publication_category.py:38
+#: amt/api/publication_category.py:24
 msgid "High-risk AI"
 msgstr "Hoog-risico AI"
 
-#: amt/api/publication_category.py:39
+#: amt/api/publication_category.py:25
 msgid "No high-risk AI"
 msgstr "Geen hoog-risico AI"
 
-#: amt/api/publication_category.py:40
+#: amt/api/publication_category.py:26
 msgid "Forbidden AI"
 msgstr "Verboden AI"
 
-#: amt/api/publication_category.py:41
+#: amt/api/publication_category.py:27
 msgid "Exception of application"
 msgstr "Uitzondering van toepassing"
 
@@ -231,6 +231,7 @@ msgid "Edit image"
 msgstr "Afbeelding aanpassen"
 
 #: amt/site/templates/auth/profile.html.j2:34
+#: amt/site/templates/projects/details_info.html.j2:8
 msgid "Name"
 msgstr "Naam"
 
@@ -275,6 +276,21 @@ msgstr "Er is een fout opgetreden. Probeer het later opnieuw."
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr "Algoritme Management Toolkit (AMT)"
 
+#: amt/site/templates/macros/editable.html.j2:21
+#: amt/site/templates/projects/details_requirements.html.j2:55
+msgid "Edit"
+msgstr "Bewerken"
+
+#: amt/site/templates/macros/editable.html.j2:58
+#: amt/site/templates/projects/details_measure_modal.html.j2:84
+msgid "Save"
+msgstr "Opslaan"
+
+#: amt/site/templates/macros/editable.html.j2:63
+#: amt/site/templates/projects/details_measure_modal.html.j2:88
+msgid "Cancel"
+msgstr "Annuleren"
+
 #: amt/site/templates/macros/tasks.html.j2:11
 msgid "Todo"
 msgstr "Te doen"
@@ -303,7 +319,7 @@ msgstr "Onbekend"
 #: amt/site/templates/pages/model_card.html.j2:6
 #: amt/site/templates/pages/system_card.html.j2:4
 #: amt/site/templates/parts/filter_list.html.j2:103
-#: amt/site/templates/projects/details_info.html.j2:32
+#: amt/site/templates/projects/details_info.html.j2:28
 msgid "Last updated"
 msgstr "Laatst bijgewerkt"
 
@@ -416,6 +432,7 @@ msgid "Algorithm system name"
 msgstr "Algoritme systeem naam"
 
 #: amt/site/templates/parts/filter_list.html.j2:99
+#: amt/site/templates/projects/details_info.html.j2:24
 #: amt/site/templates/projects/new.html.j2:37
 msgid "Lifecycle"
 msgstr "Levenscyclus"
@@ -536,28 +553,24 @@ msgstr "Ongedefinieerd"
 msgid "Failed to estimate WOZ value: "
 msgstr "Fout bij het schatten van de WOZ-waarde: "
 
-#: amt/site/templates/projects/details_info.html.j2:7
+#: amt/site/templates/projects/details_info.html.j2:12
 #: amt/site/templates/projects/details_measure_modal.html.j2:19
 msgid "Description"
 msgstr "Omschrijving"
 
-#: amt/site/templates/projects/details_info.html.j2:11
+#: amt/site/templates/projects/details_info.html.j2:16
 msgid "Repository"
 msgstr "Repository"
 
-#: amt/site/templates/projects/details_info.html.j2:17
+#: amt/site/templates/projects/details_info.html.j2:20
 msgid "Algorithm system code"
 msgstr "Algoritme systeem code"
 
-#: amt/site/templates/projects/details_info.html.j2:21
-msgid "Lifecyle"
-msgstr "Levenscyclus"
-
-#: amt/site/templates/projects/details_info.html.j2:36
+#: amt/site/templates/projects/details_info.html.j2:32
 msgid "Labels"
 msgstr "Labels"
 
-#: amt/site/templates/projects/details_info.html.j2:44
+#: amt/site/templates/projects/details_info.html.j2:40
 msgid "References"
 msgstr "Referenties"
 
@@ -596,21 +609,9 @@ msgstr ""
 "Beschrijf hoe de maatregel is geimplementeerd, inclusief uitdagingen "
 "enoplossingen."
 
-#: amt/site/templates/projects/details_measure_modal.html.j2:84
-msgid "Save"
-msgstr "Opslaan"
-
-#: amt/site/templates/projects/details_measure_modal.html.j2:88
-msgid "Cancel"
-msgstr "Annuleren"
-
 #: amt/site/templates/projects/details_requirements.html.j2:26
 msgid "measures executed"
 msgstr "maatregelen uitgevoerd"
-
-#: amt/site/templates/projects/details_requirements.html.j2:55
-msgid "Edit"
-msgstr "Bewerken"
 
 #: amt/site/templates/projects/new.html.j2:7
 msgid "Create a Algorithm System"
