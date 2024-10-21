@@ -134,7 +134,7 @@ msgstr ""
 msgid "Model"
 msgstr ""
 
-#: amt/api/navigation.py:59 amt/site/templates/projects/new.html.j2:145
+#: amt/api/navigation.py:59 amt/site/templates/projects/new.html.j2:147
 msgid "Instruments"
 msgstr ""
 
@@ -160,6 +160,14 @@ msgstr ""
 
 #: amt/api/publication_category.py:27
 msgid "Exception of application"
+msgstr ""
+
+#: amt/core/exception_handlers.py:20
+msgid "String should have at least {min_length} characters"
+msgstr ""
+
+#: amt/core/exception_handlers.py:21
+msgid "Field required"
 msgstr ""
 
 #: amt/core/exceptions.py:20
@@ -262,6 +270,14 @@ msgstr ""
 
 #: amt/site/templates/errors/_Exception.html.j2:5
 msgid "An error occurred. Please try again later"
+msgstr ""
+
+#: amt/site/templates/errors/_RequestValidationError_400.html.j2:3
+msgid "There are some errors"
+msgstr ""
+
+#: amt/site/templates/errors/_RequestValidationError_400.html.j2:5
+msgid "There is one error:"
 msgstr ""
 
 #: amt/site/templates/layouts/base.html.j2:11
@@ -416,7 +432,7 @@ msgstr ""
 
 #: amt/site/templates/parts/filter_list.html.j2:99
 #: amt/site/templates/projects/details_info.html.j2:24
-#: amt/site/templates/projects/new.html.j2:37
+#: amt/site/templates/projects/new.html.j2:38
 msgid "Lifecycle"
 msgstr ""
 
@@ -602,27 +618,27 @@ msgstr ""
 msgid "Algorithm System name"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:26
+#: amt/site/templates/projects/new.html.j2:27
 msgid "Name of the algorithm system"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:39
+#: amt/site/templates/projects/new.html.j2:41
 msgid "Select the lifecycle your algorithm system is currently in."
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:40
+#: amt/site/templates/projects/new.html.j2:42
 msgid "For more information on lifecycle, read the"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:43
+#: amt/site/templates/projects/new.html.j2:45
 msgid "Algorithm Framework"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:61
+#: amt/site/templates/projects/new.html.j2:63
 msgid "AI Act Profile"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:63
+#: amt/site/templates/projects/new.html.j2:65
 msgid ""
 "The AI Act profile provides insight into, among other things, the type of"
 " AI system and the associated obligations from the European AI Act. If "
@@ -631,33 +647,33 @@ msgid ""
 "tree."
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:70
+#: amt/site/templates/projects/new.html.j2:72
 msgid "Find your AI Act profile"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:128
+#: amt/site/templates/projects/new.html.j2:130
 msgid "Yes"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:138
+#: amt/site/templates/projects/new.html.j2:140
 msgid "No"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:147
+#: amt/site/templates/projects/new.html.j2:149
 msgid ""
 "Overview of instruments for the responsible development, deployment, "
 "assessment and monitoring of algorithms and AI-systems."
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:155
+#: amt/site/templates/projects/new.html.j2:157
 msgid "Choose one or more instruments"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:177
+#: amt/site/templates/projects/new.html.j2:181
 msgid "Create Algorithm System"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:195
+#: amt/site/templates/projects/new.html.j2:198
 msgid "Copy results and close"
 msgstr ""
 

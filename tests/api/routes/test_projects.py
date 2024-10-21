@@ -70,7 +70,7 @@ def test_post_new_projects_bad_request(client: TestClient, mocker: MockFixture) 
     # then
     assert response.status_code == 400
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"name: Field required" in response.content
+    assert b"Field required" in response.content
 
 
 def test_post_new_projects(client: TestClient, mocker: MockFixture) -> None:
