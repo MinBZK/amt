@@ -1,47 +1,38 @@
 import logging
 from collections.abc import Sequence
 
-import yaml
-
-from amt.clients.clients import get_client
-from amt.core.exceptions import AMTInstrumentError
-from amt.schema.github import RepositoryContent
+from amt.clients.clients import TaskRegistryAPIClient
 from amt.schema.instrument import Instrument
 
 logger = logging.getLogger(__name__)
 
 
 class InstrumentsService:
-    def __init__(self, repo_type: str = "github_pages") -> None:
-        self.client = get_client(repo_type)
+    def __init__(self) -> None:
+        self.client = TaskRegistryAPIClient()
 
-    def fetch_github_content_list(self) -> RepositoryContent:
-        response = self.client.list_content()
-        return RepositoryContent.model_validate(response)
+    def fetch_instruments(self, urns: str | Sequence[str] | None = None) -> list[Instrument]:
+        """
+        This functions returns instruments with given URN's. If urns contains an URN that is not a
+        valid URN of an instrument it is simply ignored.
 
-    def fetch_github_content(self, url: str) -> Instrument:
-        bytes_data = self.client.get_content(url)
+        @param: URN's of instruments to fetch. If empty, function returns all instruments.
+        @return: List of instruments with given URN's in 'urns'.
+        """
 
-        # assume yaml
-        data = yaml.safe_load(bytes_data)
+        if isinstance(urns, str):
+            urns = [urns]
 
-        if "urn" not in data:
-            # todo: this is now an HTTP error, while a service can also be used from another context
-            logger.exception("Key 'urn' not found in instrument.")
-            raise AMTInstrumentError()
+        all_valid_urns = self.fetch_urns()
 
-        return Instrument(**data)
+        if urns is not None:
+            return [self.client.get_instrument(urn) for urn in urns if urn in all_valid_urns]
 
-    def fetch_instruments(self, urns: Sequence[str] | None = None) -> list[Instrument]:
-        content_list = self.fetch_github_content_list()
+        return [self.client.get_instrument(urn) for urn in all_valid_urns]
 
-        instruments: list[Instrument] = []
-
-        for content in content_list.root:  # TODO(Berry): fix root field
-            instrument = self.fetch_github_content(str(content.download_url))
-            if urns is None:
-                instruments.append(instrument)
-            else:
-                if instrument.urn in set(urns):
-                    instruments.append(instrument)
-        return instruments
+    def fetch_urns(self) -> list[str]:
+        """
+        Fetches all valid instrument URN's.
+        """
+        content_list = self.client.get_instrument_list()
+        return [content.urn for content in content_list.root]

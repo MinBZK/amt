@@ -174,15 +174,14 @@ def test_find_next_tasks_for_instrument_correct_lifecycle(system_card: SystemCar
 def test_get_state_per_instrument(system_card: SystemCard):
     instrument_state_service = InstrumentStateService(system_card)
     res = instrument_state_service.get_state_per_instrument()
-    assert res == [
-        {"urn": "urn:nl:aivt:tr:aiia:1.0", "in_progress": 1, "name": "AI Impact Assessment (AIIA)"},
-        {
-            "urn": "urn:nl:aivt:tr:iama:1.0",
-            "in_progress": 1,
-            "name": "Impact Assessment Mensenrechten en Algoritmes (IAMA)",
-        },
-        {"in_progress": 0, "name": "URN not found in Task Registry.", "urn": "urn:instrument:assessment"},
-    ]
+    assert {"urn": "urn:nl:aivt:tr:aiia:1.0", "in_progress": 1, "name": "AI Impact Assessment (AIIA)"} in res
+    assert {
+        "urn": "urn:nl:aivt:tr:iama:1.0",
+        "in_progress": 1,
+        "name": "Impact Assessment Mensenrechten en Algoritmes (IAMA)",
+    } in res
+    assert {"urn": "urn:nl:aivt:tr:aiia:1.0", "in_progress": 1, "name": "AI Impact Assessment (AIIA)"} in res
+    assert {"in_progress": 0, "name": "URN not found in Task Registry.", "urn": "urn:instrument:assessment"} in res
 
 
 def test_get_amount_completed_instruments(system_card: SystemCard):

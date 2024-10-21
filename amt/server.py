@@ -37,6 +37,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     logger.info(f"Starting {PROJECT_NAME} version {VERSION}")
     logger.info(f"Settings: {mask.secrets(get_settings().model_dump())}")
     yield
+
     logger.info(f"Stopping application {PROJECT_NAME} version {VERSION}")
     logging.shutdown()
 

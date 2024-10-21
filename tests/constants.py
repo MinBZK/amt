@@ -62,41 +62,43 @@ def default_task(
     )
 
 
-GITHUB_LIST_PAYLOAD = """
-[
-  {
-    "name": "iama.yaml",
-    "path": "instruments/iama.yaml",
-    "sha": "50cf187eaea995ba848d93f1799fd34d4af8036b",
-    "size": 30319,
-    "url": "https://api.github.com/repos/MinBZK/task-registry/contents/instruments/iama.yaml?ref=main",
-    "html_url": "https://github.com/MinBZK/task-registry/blob/main/instruments/iama.yaml",
-    "git_url": "https://api.github.com/repos/MinBZK/task-registry/git/blobs/50cf187eaea995ba848d93f1799fd34d4af8036b",
-    "download_url": "https://raw.githubusercontent.com/MinBZK/task-registry/main/instruments/iama.yaml",
-    "type": "file",
-    "_links": {
-      "self": "https://api.github.com/repos/MinBZK/task-registry/contents/instruments/iama.yaml?ref=main",
-      "git": "https://api.github.com/repos/MinBZK/task-registry/git/blobs/50cf187eaea995ba848d93f1799fd34d4af8036b",
-      "html": "https://github.com/MinBZK/task-registry/blob/main/instruments/iama.yaml"
+TASK_REGISTRY_LIST_PAYLOAD = """
+{
+"entries": [
+ {
+      "type": "file",
+      "size": 32897,
+      "name": "iama.yaml",
+      "path": "instruments/iama.yaml",
+      "urn": "urn:nl:aivt:tr:iama:1.0",
+      "download_url": "https://minbzk.github.io/task-registry/instruments/iama.yaml",
+      "_links": {
+        "self": "https://minbzk.github.io/task-registry/instruments/iama.yaml"
+      }
     }
-  }
-  ]
-    """
+]
+}
+"""
 
-GITHUB_CONTENT_PAYLOAD = """
-systemcard_path: .assessments[]
-schema_version: 1.1.0
-
-name: "Impact Assessment Mensenrechten en Algoritmes (IAMA)"
-description: "Het IAMA helpt om de risico's voor mensenrechten bij het gebruik van algoritmen in kaart te brengen en maatregelen te nemen om deze aan te pakken."
-urn: "urn:nl:aivt:ir:iama:1.0"
-language: "nl"
-owners:
-- organization: ""
-  name: ""
-  email: ""
-  role: ""
-date: ""
-url: "https://www.rijksoverheid.nl/documenten/rapporten/2021/02/25/impact-assessment-mensenrechten-en-algoritmes"
-tasks: []
-"""  # noqa: E501
+TASK_REGISTRY_CONTENT_PAYLOAD = """
+{
+  "systemcard_path": ".assessments[]",
+  "schema_version": "1.1.0",
+  "name": "Impact Assessment Mensenrechten en Algoritmes (IAMA)",
+  "description": "Het IAMA helpt om de risico's voor mensenrechten bij het gebruik van algoritmen \
+          in kaart te brengen en maatregelen te nemen om deze aan te pakken.",
+  "urn": "urn:nl:aivt:tr:iama:1.0",
+  "language": "nl",
+  "owners": [
+    {
+      "organization": "",
+      "name": "",
+      "email": "",
+      "role": ""
+    }
+  ],
+  "date": "",
+  "url": "https://www.rijksoverheid.nl/documenten/rapporten/2021/02/25/impact-assessment-mensenrechten-en-algoritmes",
+  "tasks": []
+}
+"""
