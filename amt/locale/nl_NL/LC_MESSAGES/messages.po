@@ -276,17 +276,18 @@ msgstr "Er is een fout opgetreden. Probeer het later opnieuw."
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr "Algoritme Management Toolkit (AMT)"
 
-#: amt/site/templates/macros/editable.html.j2:21
+#: amt/site/templates/macros/editable.html.j2:23
+#: amt/site/templates/macros/editable.html.j2:26
 #: amt/site/templates/projects/details_requirements.html.j2:55
 msgid "Edit"
-msgstr "Bewerken"
+msgstr "Bewerk"
 
-#: amt/site/templates/macros/editable.html.j2:58
+#: amt/site/templates/macros/editable.html.j2:62
 #: amt/site/templates/projects/details_measure_modal.html.j2:84
 msgid "Save"
 msgstr "Opslaan"
 
-#: amt/site/templates/macros/editable.html.j2:63
+#: amt/site/templates/macros/editable.html.j2:67
 #: amt/site/templates/projects/details_measure_modal.html.j2:88
 msgid "Cancel"
 msgstr "Annuleren"
@@ -619,11 +620,11 @@ msgstr "Creëer een Algoritme Systeem"
 
 #: amt/site/templates/projects/new.html.j2:23
 msgid "Algorithm System name"
-msgstr "Algoritmekader"
+msgstr "Naam algoritme systeem"
 
 #: amt/site/templates/projects/new.html.j2:26
 msgid "Your algorithm system name here"
-msgstr "Jouw algoritme systeem naam hier"
+msgstr "Naam van het algoritme systeem"
 
 #: amt/site/templates/projects/new.html.j2:39
 msgid "Select the lifecycle your algorithm system is currently in."
