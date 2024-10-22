@@ -56,7 +56,7 @@ class Project(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(255))
-    lifecycle: Mapped[Lifecycles | None] = mapped_column(ENUM(Lifecycles), nullable=True)
+    lifecycle: Mapped[Lifecycles | None] = mapped_column(ENUM(Lifecycles, name="lifecycle"), nullable=True)
     system_card_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
     last_edited: Mapped[datetime] = mapped_column(server_default=func.now(), onupdate=func.now(), nullable=False)
 

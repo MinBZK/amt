@@ -1,8 +1,10 @@
-from fastapi.testclient import TestClient
+import pytest
+from httpx import AsyncClient
 
 
-def test_get_non_exisiting(client: TestClient) -> None:
-    response = client.get(
+@pytest.mark.asyncio
+async def test_get_non_exisiting(client: AsyncClient) -> None:
+    response = await client.get(
         "/pathdoesnotexist/",
     )
     assert response.status_code == 404

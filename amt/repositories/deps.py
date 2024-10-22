@@ -1,10 +1,15 @@
-from collections.abc import Generator
+from collections.abc import AsyncGenerator
 
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 
 from amt.core.db import get_engine
 
 
-def get_session() -> Generator[Session, None, None]:
-    with Session(get_engine()) as session:
-        yield session
+async def get_session() -> AsyncGenerator[AsyncSession, None]:
+    async_session_factory = async_sessionmaker(
+        get_engine(),
+        expire_on_commit=False,
+        class_=AsyncSession,
+    )
+    async with async_session_factory() as async_session:
+        yield async_session

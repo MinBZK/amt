@@ -1,11 +1,13 @@
-from fastapi.testclient import TestClient
+import pytest
+from httpx import AsyncClient
 
 from tests.database_test_utils import DatabaseTestUtils
 
 
-def test_get_main_page(client: TestClient, db: DatabaseTestUtils) -> None:
+@pytest.mark.asyncio
+async def test_get_main_page(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # when
-    response = client.get("/pages/")
+    response = await client.get("/pages/")
 
     # then
     assert response.status_code == 200
