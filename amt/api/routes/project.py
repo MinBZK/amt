@@ -65,10 +65,10 @@ def get_requirements_state(system_card: SystemCard) -> dict[str, Any]:
     }
 
 
-def get_project_or_error(project_id: int, projects_service: ProjectsService, request: Request) -> Project:
+async def get_project_or_error(project_id: int, projects_service: ProjectsService, request: Request) -> Project:
     try:
         logger.debug(f"getting project with id {project_id}")
-        project = projects_service.get(project_id)
+        project = await projects_service.get(project_id)
         request.state.path_variables = {"project_id": project_id}
     except AMTRepositoryError as e:
         raise AMTNotFound from e
@@ -105,7 +105,7 @@ async def get_tasks(
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
     tasks_service: Annotated[TasksService, Depends(TasksService)],
 ) -> HTMLResponse:
-    project = get_project_or_error(project_id, projects_service, request)
+    project = await get_project_or_error(project_id, projects_service, request)
     instrument_state = get_instrument_state()
     requirements_state = get_requirements_state(project.system_card)
     tab_items = get_project_details_tabs(request)
@@ -153,7 +153,7 @@ async def move_task(
         moved_task.next_sibling_id = None
     if moved_task.previous_sibling_id == -1:
         moved_task.previous_sibling_id = None
-    task = tasks_service.move_task(
+    task = await tasks_service.move_task(
         moved_task.id,
         moved_task.status_id,
         moved_task.previous_sibling_id,
@@ -168,7 +168,7 @@ async def move_task(
 async def get_project_context(
     project_id: int, projects_service: ProjectsService, request: Request
 ) -> tuple[Project, dict[str, Any]]:
-    project = get_project_or_error(project_id, projects_service, request)
+    project = await get_project_or_error(project_id, projects_service, request)
     system_card_data = get_system_card_data()
     instrument_state = get_instrument_state()
     requirements_state = get_requirements_state(project.system_card)
@@ -268,7 +268,7 @@ async def get_project_update(
 ) -> HTMLResponse:
     project, context = await get_project_context(project_id, projects_service, request)
     set_path(project, path, update_data.value)
-    projects_service.update(project)
+    await projects_service.update(project)
     context["path"] = path.replace("/", ".")
     return templates.TemplateResponse(request, "parts/view_cell.html.j2", context)
 
@@ -284,7 +284,7 @@ async def get_system_card(
     project_id: int,
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
 ) -> HTMLResponse:
-    project = get_project_or_error(project_id, projects_service, request)
+    project = await get_project_or_error(project_id, projects_service, request)
     instrument_state = get_instrument_state()
     requirements_state = get_requirements_state(project.system_card)
 
@@ -326,7 +326,7 @@ async def get_system_card(
 async def get_project_inference(
     request: Request, project_id: int, projects_service: Annotated[ProjectsService, Depends(ProjectsService)]
 ) -> HTMLResponse:
-    project = get_project_or_error(project_id, projects_service, request)
+    project = await get_project_or_error(project_id, projects_service, request)
 
     breadcrumbs = resolve_base_navigation_items(
         [
@@ -370,7 +370,7 @@ async def get_system_card_requirements(
     project_id: int,
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
 ) -> HTMLResponse:
-    project = get_project_or_error(project_id, projects_service, request)
+    project = await get_project_or_error(project_id, projects_service, request)
     instrument_state = get_instrument_state()
     requirements_state = get_requirements_state(project.system_card)
     # TODO: This tab is fairly slow, fix in later releases
@@ -464,7 +464,7 @@ async def get_measure(
     measure_urn: str,
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
 ) -> HTMLResponse:
-    project = get_project_or_error(project_id, projects_service, request)
+    project = await get_project_or_error(project_id, projects_service, request)
     measure = task_registry.fetch_measures([measure_urn])
     measure_task = find_measure_task(project.system_card, measure_urn)
 
@@ -491,7 +491,7 @@ async def update_measure_value(
     measure_update: MeasureUpdate,
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
 ) -> HTMLResponse:
-    project = get_project_or_error(project_id, projects_service, request)
+    project = await get_project_or_error(project_id, projects_service, request)
 
     measure_task = find_measure_task(project.system_card, measure_urn)
     measure_task.state = measure_update.measure_state  # pyright: ignore [reportOptionalMemberAccess]
@@ -517,7 +517,7 @@ async def update_measure_value(
         else:
             requirement_task.state = "in progress"  # pyright: ignore [reportOptionalMemberAccess]
 
-    projects_service.update(project)
+    await projects_service.update(project)
     # TODO: FIX THIS!! The page now reloads at the top, which is annoying
     return templates.Redirect(request, f"/algorithm-system/{project_id}/details/system_card/requirements")
 
@@ -533,7 +533,7 @@ async def get_system_card_data_page(
     project_id: int,
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
 ) -> HTMLResponse:
-    project = get_project_or_error(project_id, projects_service, request)
+    project = await get_project_or_error(project_id, projects_service, request)
     instrument_state = get_instrument_state()
     requirements_state = get_requirements_state(project.system_card)
 
@@ -573,7 +573,7 @@ async def get_system_card_instruments(
     project_id: int,
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
 ) -> HTMLResponse:
-    project = get_project_or_error(project_id, projects_service, request)
+    project = await get_project_or_error(project_id, projects_service, request)
     instrument_state = get_instrument_state()
     requirements_state = get_requirements_state(project.system_card)
 
@@ -614,7 +614,7 @@ async def get_assessment_card(
     assessment_card: str,
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
 ) -> HTMLResponse:
-    project = get_project_or_error(project_id, projects_service, request)
+    project = await get_project_or_error(project_id, projects_service, request)
     instrument_state = get_instrument_state()
     requirements_state = get_requirements_state(project.system_card)
 
@@ -665,7 +665,7 @@ async def get_model_card(
     model_card: str,
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
 ) -> HTMLResponse:
-    project = get_project_or_error(project_id, projects_service, request)
+    project = await get_project_or_error(project_id, projects_service, request)
     instrument_state = get_instrument_state()
     requirements_state = get_requirements_state(project.system_card)
 
