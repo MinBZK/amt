@@ -37,17 +37,9 @@ def system_card(system_card_data: dict[str, Any]) -> SystemCard:
     return system_card
 
 
-def test_get_system_card(system_card: SystemCard, system_card_data: dict[str, Any]):
-    init_orig = StorageFactory.init
-
-    storage_mock = Mock()
-    storage_mock.read.return_value = system_card_data
-    StorageFactory.init = Mock(return_value=storage_mock)
-
+def test_get_system_card(system_card: SystemCard, system_card_data: dict[str, Any], mocker):
+    mocker.patch('amt.services.storage.StorageFactory.init', return_value=mocker.Mock(read=mocker.Mock(return_value=system_card_data)))
     assert system_card == amt.cli.check_state.get_system_card(Path("dummy"))
-
-    StorageFactory.init = init_orig
-
 
 def test_get_requested_instruments():
     instrument0 = default_instrument(urn="instrument0")
@@ -58,9 +50,7 @@ def test_get_requested_instruments():
     assert expected == get_requested_instruments(all_instruments_cards, ["instrument0", "instrument2"])
 
 
-def test_cli(capsys: pytest.CaptureFixture[str], system_card: SystemCard):
-    fetch_instruments_orig = InstrumentsService.fetch_instruments
-    get_system_card_orig = amt.cli.check_state.get_system_card
+def test_cli(capsys: pytest.CaptureFixture[str], system_card: SystemCard, mocker):
     instrument = default_instrument(
         urn="urn:instrument:assessment",
         tasks=[
@@ -69,35 +59,28 @@ def test_cli(capsys: pytest.CaptureFixture[str], system_card: SystemCard):
         ],
     )
 
-    return_value = [instrument]
-    InstrumentsService.fetch_instruments = Mock(return_value=return_value)
-    amt.cli.check_state.get_system_card = Mock(return_value=system_card)
+    mocker.patch('amt.services.instruments.InstrumentsService.fetch_instruments' , return_value=[instrument])
+    mocker.patch('amt.cli.check_state.get_system_card', return_value=system_card)
     runner = CliRunner()
     # workaround for https://github.com/pallets/click/issues/824
     with capsys.disabled() as _:
         result = runner.invoke(get_tasks_by_priority, ["urn:instrument:assessment", "example/system_test_card.yaml"])  # type: ignore
         assert "urn:instrument:assessment:task2" in result.output
-    InstrumentsService.fetch_instruments = fetch_instruments_orig
-    amt.cli.check_state.get_system_card = get_system_card_orig
 
 
-def test_cli_with_exception(capsys: pytest.CaptureFixture[str], system_card: SystemCard):
-    fetch_instruments_orig = InstrumentsService.fetch_instruments
-    InstrumentsService.fetch_instruments = Mock(side_effect=AMTInstrumentError())
+def test_cli_with_exception(capsys: pytest.CaptureFixture[str], system_card: SystemCard, mocker):
+    mocker.patch('amt.services.instruments.InstrumentsService.fetch_instruments', side_effect=AMTInstrumentError())
     runner = CliRunner()
     # workaround for https://github.com/pallets/click/issues/824
     with capsys.disabled() as _:
         result = runner.invoke(get_tasks_by_priority, ["urn:instrument:assessment", "example/system_test_card.yaml"])  # type: ignore
-        assert "Sorry, an error occurre" in result.output
-    InstrumentsService.fetch_instruments = fetch_instruments_orig
+        assert "Sorry, an error occurred" in result.output
 
 
-def test_cli_with_exception_yaml(capsys: pytest.CaptureFixture[str], system_card: SystemCard):
-    read_orig = FileSystemStorageService.read
-    FileSystemStorageService.read = Mock(side_effect=YAMLError("Test error message"))
+def test_cli_with_exception_yaml(capsys: pytest.CaptureFixture[str], system_card: SystemCard, mocker):
+    mocker.patch('amt.services.storage.FileSystemStorageService.read' , side_effect=YAMLError("Test error message"))
     runner = CliRunner()
     # workaround for https://github.com/pallets/click/issues/824
     with capsys.disabled() as _:
         result = runner.invoke(get_tasks_by_priority, ["urn:instrument:assessment", "example/system_test_card.yaml"])  # type: ignore
         assert "Sorry, an error occurred; yaml could not be parsed:" in result.output
-    FileSystemStorageService.read = read_orig
