@@ -5,6 +5,7 @@ from typing import Annotated
 from fastapi import Depends
 from sqlalchemy import func, select
 from sqlalchemy.exc import NoResultFound, SQLAlchemyError
+from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import Session
 from sqlalchemy_utils import escape_like  # pyright: ignore[reportMissingTypeStubs, reportUnknownVariableType]
 
@@ -31,11 +32,12 @@ def sort_by_lifecycle_reversed(project: Project) -> int:
 
 
 class ProjectsRepository:
-    def __init__(self, session: Annotated[Session, Depends(get_session)]) -> None:
+    def __init__(self, session: Annotated[AsyncSession, Depends(get_session)]) -> None:
         self.session = session
 
-    def find_all(self) -> Sequence[Project]:
-        return self.session.execute(select(Project)).scalars().all()
+    async def find_all(self) -> Sequence[Project]:
+        result = await self.session.execute(select(Project))
+        return result.scalars().all()
 
     def delete(self, project: Project) -> None:
         """
