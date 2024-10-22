@@ -1,5 +1,4 @@
 from datetime import UTC, datetime, timedelta, timezone
-from unittest.mock import Mock
 
 import pytest
 from amt.core.internationalization import (
@@ -87,15 +86,15 @@ def test_time_ago():
             assert time_ago(past_date, locale) == expected
 
 
-def test_get_requested_language():
-    request: Request = Mock()
+def test_get_requested_language(mocker):
+    request: Request = mocker.Mock()
     request.cookies.get.return_value = "nl"
     request.headers.get.return_value = "nl"
     assert get_requested_language(request) == "nl"
 
 
-def test_fallback_get_requested_language():
-    request: Request = Mock()
+def test_fallback_get_requested_language(mocker):
+    request: Request = mocker.Mock()
     request.headers.get.return_value = "en"
     request.cookies = {}
     assert get_requested_language(request) == "en"

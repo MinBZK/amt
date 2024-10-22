@@ -1,6 +1,5 @@
 from collections.abc import Callable
 from enum import Enum
-from unittest.mock import Mock
 
 import pytest
 from amt.api.deps import (
@@ -18,8 +17,8 @@ from amt.schema.localized_value_item import LocalizedValueItem
 from fastapi import Request
 
 
-def test_custom_context_processor():
-    request: Request = Mock()
+def test_custom_context_processor(mocker):
+    request: Request = mocker.Mock()
     request.cookies.get.return_value = "nl"
     request.headers.get.return_value = "nl"
     result = custom_context_processor(request)

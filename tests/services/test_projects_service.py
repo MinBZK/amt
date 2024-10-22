@@ -1,5 +1,3 @@
-from unittest.mock import Mock
-
 from amt.models.project import Project
 from amt.repositories.projects import ProjectsRepository
 from amt.schema.project import ProjectNew
@@ -10,15 +8,15 @@ from amt.services.tasks import TasksService
 from tests.constants import default_instrument
 
 
-def test_get_project():
+def test_get_project(mocker):
     # Given
     project_id = 1
     project_name = "Project 1"
     project_lifecycle = "development"
     projects_service = ProjectsService(
-        repository=Mock(spec=ProjectsRepository),
-        task_service=Mock(spec=TasksService),
-        instrument_service=Mock(spec=InstrumentsService),
+        repository=mocker.Mock(spec=ProjectsRepository),
+        task_service=mocker.Mock(spec=TasksService),
+        instrument_service=mocker.Mock(spec=InstrumentsService),
     )
     projects_service.repository.find_by_id.return_value = Project(  # type: ignore
         id=project_id, name=project_name, lifecycle=project_lifecycle
@@ -34,16 +32,16 @@ def test_get_project():
     projects_service.repository.find_by_id.assert_called_once_with(project_id)  # type: ignore
 
 
-def test_create_project():
+def test_create_project(mocker):
     project_id = 1
     project_name = "Project 1"
     project_lifecycle = "development"
     system_card = SystemCard(name=project_name)
 
     projects_service = ProjectsService(
-        repository=Mock(spec=ProjectsRepository),
-        task_service=Mock(spec=TasksService),
-        instrument_service=Mock(spec=InstrumentsService),
+        repository=mocker.Mock(spec=ProjectsRepository),
+        task_service=mocker.Mock(spec=TasksService),
+        instrument_service=mocker.Mock(spec=InstrumentsService),
     )
     projects_service.repository.save.return_value = Project(  # type: ignore
         id=project_id, name=project_name, lifecycle=project_lifecycle, system_card=system_card
