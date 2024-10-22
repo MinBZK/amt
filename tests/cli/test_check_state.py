@@ -1,7 +1,6 @@
 # pyright: reportUnknownMemberType=false, reportUnknownVariableType=false, reportAttributeAccessIssue=false
 from pathlib import Path
 from typing import Any
-from unittest.mock import Mock
 
 import amt.services.instruments_and_requirements_state
 import pytest
@@ -9,8 +8,6 @@ from amt.cli.check_state import get_requested_instruments, get_tasks_by_priority
 from amt.core.exceptions import AMTInstrumentError
 from amt.schema.instrument import InstrumentTask
 from amt.schema.system_card import SystemCard
-from amt.services.instruments import InstrumentsService
-from amt.services.storage import FileSystemStorageService, StorageFactory
 from click.testing import CliRunner
 from tests.constants import default_instrument
 from yaml import YAMLError
