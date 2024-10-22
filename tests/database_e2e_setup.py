@@ -1,8 +1,9 @@
+from amt.api.lifecycles import Lifecycles
 from amt.enums.status import Status
 from amt.models import Project
 from sqlalchemy.ext.asyncio.session import AsyncSession
 
-from tests.constants import default_project, default_task, default_user
+from tests.constants import default_project_with_lifecycle, default_task, default_user
 from tests.database_test_utils import DatabaseTestUtils
 
 
@@ -13,7 +14,7 @@ async def setup_database_e2e(session: AsyncSession) -> None:
 
     projects: list[Project] = []
     for idx in range(120):
-        projects.append(default_project(name=f"Project {idx}"))
+        projects.append(default_project_with_lifecycle(name=f"Project {idx}", lifecycle=Lifecycles.DESIGN))
 
     await db_e2e.given([*projects])
 

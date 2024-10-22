@@ -153,28 +153,3 @@ export function closeModalSave(id: string) {
     });
   }
 }
-
-export function updateSearchCounter() {
-  let count = 0;
-  if (document.getElementById("search-results-table")) {
-    // @ts-expect-error No error expected
-    // prettier-ignore
-    count = document.getElementById("search-results-table").getElementsByTagName("tr").length - 1;
-  }
-  if (document.getElementById("search-results-counter")) {
-    // @ts-expect-error No error expected
-    document.getElementById("search-results-counter").innerText = String(count);
-  }
-  if (count == 1) {
-    // @ts-expect-error No error expected
-    document.getElementById("search-results-single").className = "";
-    // @ts-expect-error No error expected
-    document.getElementById("search-results-multiple").className =
-      "display-none";
-  } else {
-    // @ts-expect-error No error expected
-    document.getElementById("search-results-single").className = "display-none";
-    // @ts-expect-error No error expected
-    document.getElementById("search-results-multiple").className = "";
-  }
-}

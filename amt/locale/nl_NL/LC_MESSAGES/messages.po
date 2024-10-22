@@ -42,6 +42,13 @@ msgstr "Zijn er transparantieverplichtingen?"
 msgid "Role"
 msgstr "Rol"
 
+#: amt/api/group_by_category.py:15
+#: amt/site/templates/parts/filter_list.html.j2:94
+#: amt/site/templates/projects/details_info.html.j2:24
+#: amt/site/templates/projects/new.html.j2:38
+msgid "Lifecycle"
+msgstr "Levenscyclus"
+
 #: amt/api/lifecycles.py:23
 msgid "Organizational Responsibilities"
 msgstr "Organisatieverantwoordelijkheden"
@@ -292,6 +299,24 @@ msgstr "Er is één fout:"
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr "Algoritme Management Toolkit (AMT)"
 
+#: amt/site/templates/macros/algorithm_systems_grid.html.j2:36
+msgid ""
+"\n"
+"                                            Algorithm system\n"
+"                                        "
+msgid_plural ""
+"\n"
+"                                            Algorithm systems\n"
+"                                        "
+msgstr[0] ""
+"\n"
+"                                    Algoritmesysteem\n"
+"                                    "
+msgstr[1] ""
+"\n"
+"                                    Algoritmesystemen\n"
+"                                                                "
+
 #: amt/site/templates/macros/editable.html.j2:24
 #: amt/site/templates/macros/editable.html.j2:27
 #: amt/site/templates/projects/details_requirements.html.j2:55
@@ -307,6 +332,10 @@ msgstr "Opslaan"
 #: amt/site/templates/projects/details_measure_modal.html.j2:88
 msgid "Cancel"
 msgstr "Annuleren"
+
+#: amt/site/templates/macros/table_row.html.j2:15
+msgid " ago"
+msgstr "geleden"
 
 #: amt/site/templates/macros/tasks.html.j2:11
 msgid "Todo"
@@ -335,7 +364,8 @@ msgstr "Onbekend"
 #: amt/site/templates/pages/assessment_card.html.j2:7
 #: amt/site/templates/pages/model_card.html.j2:6
 #: amt/site/templates/pages/system_card.html.j2:4
-#: amt/site/templates/parts/filter_list.html.j2:103
+#: amt/site/templates/parts/filter_list.html.j2:98
+#: amt/site/templates/parts/filter_list.html.j2:120
 #: amt/site/templates/projects/details_info.html.j2:28
 msgid "Last updated"
 msgstr "Laatst bijgewerkt"
@@ -418,41 +448,49 @@ msgstr "neem contact op"
 msgid "for more information on how the toolkit can support your organization."
 msgstr "voor meer informatie over hoe de toolkit uw organisatie kan ondersteunen."
 
-#: amt/site/templates/parts/filter_list.html.j2:12
-msgid " ago"
-msgstr "geleden"
+#: amt/site/templates/parts/filter_list.html.j2:32
+#, python-format
+msgid ""
+"\n"
+"                %(amount_algorithm_systems)s result\n"
+"            "
+msgid_plural ""
+"\n"
+"                %(amount_algorithm_systems)s results\n"
+"            "
+msgstr[0] ""
+"\n"
+"                %(amount_algorithm_systems)s resultaat\n"
+"            "
+msgstr[1] ""
+"\n"
+"                %(amount_algorithm_systems)s resultaten\n"
+"            "
 
-#: amt/site/templates/parts/filter_list.html.j2:44
-msgid "result"
-msgstr "resultaat"
-
-#: amt/site/templates/parts/filter_list.html.j2:45
-msgid "results"
-msgstr "resultaten"
-
-#: amt/site/templates/parts/filter_list.html.j2:47
+#: amt/site/templates/parts/filter_list.html.j2:39
 msgid "for"
 msgstr "voor"
 
-#: amt/site/templates/parts/filter_list.html.j2:77
+#: amt/site/templates/parts/filter_list.html.j2:70
 msgid ""
 "No Algorithm system match your selected filters. Try adjusting your "
-"filters or clearing them to see more\n"
-"            algorithm systems."
+"filters or clearing them to\n"
+"        see more\n"
+"        algorithm systems."
 msgstr ""
 "Er zijn geen Algoritmesystemen die overeen komen met de geselecteerde "
 "filters. Pas de filters aan of verwijder ze om meer algoritmesystemen te "
 "zien."
 
-#: amt/site/templates/parts/filter_list.html.j2:95
+#: amt/site/templates/parts/filter_list.html.j2:90
 msgid "Algorithm system name"
 msgstr "Algoritmesysteem naam"
 
-#: amt/site/templates/parts/filter_list.html.j2:99
-#: amt/site/templates/projects/details_info.html.j2:24
-#: amt/site/templates/projects/new.html.j2:38
-msgid "Lifecycle"
-msgstr "Levenscyclus"
+#: amt/site/templates/parts/filter_list.html.j2:114
+msgid ""
+"Algorithm system\n"
+"                        name"
+msgstr "Algoritme Systeem naam"
 
 #: amt/site/templates/parts/header.html.j2:7
 msgid "Beta Version"
@@ -472,17 +510,37 @@ msgstr "Algoritmesystemen"
 msgid "New algorithm system"
 msgstr "Nieuw algoritmesysteem"
 
-#: amt/site/templates/parts/project_search.html.j2:30
+#: amt/site/templates/parts/project_search.html.j2:25
+msgid "Search"
+msgstr "Zoek"
+
+#: amt/site/templates/parts/project_search.html.j2:32
 msgid "Find algorithm system..."
 msgstr "Vind algoritmesysteem..."
 
 #: amt/site/templates/parts/project_search.html.j2:49
+msgid "Phase"
+msgstr "Fase"
+
+#: amt/site/templates/parts/project_search.html.j2:54
 msgid "Select lifecycle"
 msgstr "Selecteer levenscyclus"
 
-#: amt/site/templates/parts/project_search.html.j2:60
+#: amt/site/templates/parts/project_search.html.j2:63
+msgid "Category"
+msgstr "Categorie"
+
+#: amt/site/templates/parts/project_search.html.j2:68
 msgid "Select publication category"
 msgstr "Selecteer publicatiecategorie"
+
+#: amt/site/templates/parts/project_search.html.j2:86
+msgid "Group by"
+msgstr "Groeperen op"
+
+#: amt/site/templates/parts/project_search.html.j2:96
+msgid "Select group by"
+msgstr "Selecteer groepering"
 
 #: amt/site/templates/projects/details_base.html.j2:26
 msgid "Does the algorithm meet the requirements?"

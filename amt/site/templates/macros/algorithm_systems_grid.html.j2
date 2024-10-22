@@ -1,0 +1,59 @@
+{% import 'macros/table_row.html.j2' as table_row with context %}
+{% macro row(projects, lifecycle) -%}
+    {% if projects | length > 0 %}
+        <div class="rvo-accordion">
+        {% else %}
+            <div class="rvo-accordion" style="pointer-events: none">
+            {% endif %}
+            <details class="rvo-accordion__item">
+                <summary class="rvo-accordion__item-summary">
+                    <div class="rvo-layout-grid-container">
+                        <div class="rvo-layout-grid rvo-layout-gap--md rvo-layout-grid-columns--two rvo-layout-grid-layout--1fr">
+                            <div title="{{ lifecycle.display_value }}">
+                                {% if projects | length > 0 %}
+                                    <h3 class="rvo-accordion__item-title utrecht-heading-3 rvo-heading--no-margins rvo-heading--mixed">
+                                    {% else %}
+                                        <h3 class="rvo-accordion__item-title utrecht-heading-3 rvo-heading--no-margins rvo-heading--mixed"
+                                            style="color: var(--rvo-expandable-text-subtle-summary-color)">
+                                        {% endif %}
+                                        <span class="utrecht-icon rvo-icon rvo-icon-delta-omlaag rvo-icon--md rvo-icon--hemelblauw rvo-accordion__item-icon--closed"
+                                              role="img"
+                                              aria-label="Delta omlaag"></span>
+                                        <span class="utrecht-icon rvo-icon rvo-icon-delta-omhoog rvo-icon--md rvo-icon--hemelblauw rvo-accordion__item-icon--open"
+                                              role="img"
+                                              aria-label="Delta omhoog"></span>
+                                        {{ lifecycle.display_value }}
+                                    </h3>
+                                </div>
+                                <div>
+                                    {% if projects | length > 0 %}
+                                        <span style="color: var(--rvo-color-zwart); font-size: var(--rvo-size-md)">
+                                        {% else %}
+                                            <span style="color: var(--rvo-expandable-text-subtle-summary-color);
+                                                         font-size: var(--rvo-size-md)">
+                                            {% endif %}
+                                            <span style="font-weight: bold">{{ projects | length }}</span>
+                                            {% trans count=projects|length %}
+                                            Algorithm system
+                                        {% pluralize %}
+                                            Algorithm systems
+                                        {% endtrans %}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </summary>
+                    <div class="rvo-accordion__content" style="padding: var(--rvo-space-md)">
+                        <table class="rvo-table">
+                            <thead>
+                                <colgroup>
+                                    <col style="width: 80%">
+                                    <col style="width: 20%">
+                                </colgroup>
+                            </thead>
+                            {% for project in projects %}{{ table_row.item(loop, project, false) }}{% endfor %}
+                        </table>
+                    </div>
+                </details>
+            </div>
+        {% endmacro -%}

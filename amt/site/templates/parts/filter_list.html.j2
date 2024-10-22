@@ -1,18 +1,4 @@
-{% macro item(loop, project, search, filters) -%}
-    <tr class="rvo-table-row"
-        {% if loop.last and projects|length == limit %} data-marker="last-element" hx-get="/algorithm-systems/?skip={{ next }}" hx-swap="beforeend" hx-trigger="revealed" {% endif %}>
-        <td class="rvo-table-cell">
-            <a class="rvo-link rvo-link--no-underline rvo-link--zwart"
-               href="/algorithm-system/{{ project.id }}/details/">{{ project.name }}</a>
-        </td>
-        <td class="rvo-table-cell">
-            <span class="rvo-text--subtle">{{ project.lifecycle.display_value }}</span>
-        </td>
-        <td class="rvo-table-cell">
-            <span class="rvo-text--subtle" style="white-space: nowrap">{{ project.last_edited | time_ago(language) }} {% trans %} ago{% endtrans %}</span>
-        </td>
-    </tr>
-{% endmacro %}
+{% import 'macros/table_row.html.j2' as table_row with context %}
 {% macro sort_button(field_name, sort_by) %}
     {% if field_name in sort_by and sort_by[field_name] == "ascending" or (not field_name in sort_by) %}
         <button hx-trigger="click"
@@ -36,13 +22,19 @@
         </button>
     {% endif %}
 {% endmacro %}
+{% import 'macros/algorithm_systems_grid.html.j2' as render with context %}
 {% if start > 0 %}
-    {% for project in projects %}{{ item(loop, project, search, filters) }}{% endfor %}
+    {% for project in projects %}{{ table_row.item(loop, project, true) }}{% endfor %}
 {% else %}
-    <div class="margin-top-large">
-        <span id="search-results-counter">0</span>
-        <span id="search-results-single" class="display-none">{% trans %}result{% endtrans %}</span>
-        <span id="search-results-multiple">{% trans %}results{% endtrans %}</span>
+    <div class="margin-top-large rvo-layout-row rvo-layout-justify-content-space-between">
+        <div>
+            <span>
+                {% trans amount_algorithm_systems %}
+                {{ amount_algorithm_systems }} result
+            {% pluralize %}
+                {{ amount_algorithm_systems }} results
+            {% endtrans %}
+        </span>
         {% if search or filters %}
             <span>{% trans %}for{% endtrans %}</span>
             {% if search %}<span><em>'{{ search }}'</em></span>{% endif %}
@@ -72,12 +64,15 @@
             {% endfor %}
         </form>
     </div>
-    {% if projects|length ==0 %}
-        <div class="margin-top-large">
-            {% trans %}No Algorithm system match your selected filters. Try adjusting your filters or clearing them to see more
-            algorithm systems.{% endtrans %}
-        </div>
-    {% else %}
+</div>
+{% if projects|length == 0 %}
+    <div class="margin-top-large">
+        {% trans %}No Algorithm system match your selected filters. Try adjusting your filters or clearing them to
+        see more
+        algorithm systems.{% endtrans %}
+    </div>
+{% else %}
+    {% if display_type == "" %}
         <form name="htmx-sort-form"
               hx-include="this"
               hx-target="#project-search-results"
@@ -105,9 +100,43 @@
                         </th>
                     </tr>
                 </thead>
-                {% for project in projects %}{{ item(loop, project, search, filters) }}{% endfor %}
+                {% for project in projects %}{{ table_row.item(loop, project, true) }}{% endfor %}
             </table>
         </form>
-    {% endif %}
+    {% elif display_type == "LIFECYCLE" %}
+        <table id="search-results-table"
+               class="rvo-table margin-top-large"
+               style="width: 100%;
+                      table-layout: fixed">
+            <thead class="rvo-table-head">
+                <tr class="rvo-table-row">
+                    <th style="width: 81%" scope="col" class="rvo-table-header">
+                        {% trans %}Algorithm system
+                        name{% endtrans %}
+                    </th>
+                    <th scope="col"
+                        class="rvo-table-header"
+                        style="white-space: nowrap;
+                               width: 19%">{% trans %}Last updated{% endtrans %}</th>
+                </tr>
+            </thead>
+        </table>
+        <form name="htmx-sort-form"
+              hx-include="this"
+              hx-target="#project-search-results"
+              hx-swap="innerHTML">
+            <input type="hidden" name="search" value="{{ search }}">
+            {% for key, localized_value in filters.items() %}
+                <input type="hidden"
+                       name="active-filter-{{ key }}"
+                       value="{{ localized_value.value }}">
+            {% endfor %}
+            <div class="rvo-layout-column" style="padding: 0px">
+                {% for lifecycle in lifecycles %}{{ render.row(projects[lifecycle.value], lifecycle) }}{% endfor %}
+            </div>
+        {% else %}
+            Does not exist
+        {% endif %}
+    </form>
 {% endif %}
-<script type="text/javascript">amt.updateSearchCounter();</script>
+{% endif %}

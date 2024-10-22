@@ -1,3 +1,4 @@
+from amt.api.lifecycles import Lifecycles
 from amt.api.navigation import BaseNavigationItem, DisplayText
 from amt.models import Project, Task, User
 from amt.schema.instrument import Instrument, InstrumentTask, Owner
@@ -20,6 +21,10 @@ def default_user(name: str = "default user", avatar: str | None = None) -> User:
 
 def default_project(name: str = "default project") -> Project:
     return Project(name=name)
+
+
+def default_project_with_lifecycle(name: str = "default project", lifecycle: Lifecycles = Lifecycles.DESIGN) -> Project:
+    return Project(name=name, lifecycle=lifecycle)
 
 
 def default_fastapi_request(url: str = "/") -> Request:

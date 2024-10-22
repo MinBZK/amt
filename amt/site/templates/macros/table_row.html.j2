@@ -1,0 +1,18 @@
+{% macro item(loop, project, show_lifecycles) -%}
+    <tr class="rvo-table-row"
+        {% if loop.last and projects|length == limit %} data-marker="last-element" hx-get="/algorithm-systems/?skip={{ next }}" hx-swap="beforeend" hx-trigger="revealed" {% endif %}>
+        <td class="rvo-table-cell" style="padding-left: 0">
+            <a class="rvo-link rvo-link--no-underline rvo-link--zwart"
+               href="/algorithm-system/{{ project.id }}/details/">{{ project.name }}</a>
+        </td>
+        {% if show_lifecycles %}
+            <td class="rvo-table-cell">
+                <span class="rvo-text--subtle">{{ project.lifecycle.display_value }}</span>
+            </td>
+        {% endif %}
+        <td class="rvo-table-cell">
+            <span class="rvo-text--subtle" style="white-space: nowrap">{{ project.last_edited | time_ago(language) }}
+            {% trans %} ago{% endtrans %}</span>
+        </td>
+    </tr>
+{% endmacro %}

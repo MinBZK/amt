@@ -1,3 +1,4 @@
+from datetime import UTC, datetime
 from typing import cast
 
 import pytest
@@ -12,7 +13,7 @@ from fastapi.requests import Request
 from httpx import AsyncClient
 from pytest_mock import MockFixture
 
-from tests.constants import default_instrument
+from tests.constants import default_instrument, default_project
 from tests.database_test_utils import DatabaseTestUtils
 
 
@@ -21,7 +22,7 @@ async def test_projects_get_root(client: AsyncClient) -> None:
     response = await client.get("/algorithm-systems/")
 
     assert response.status_code == 200
-    assert b'<div id="project-search-results">' in response.content
+    assert b'<div id="project-search-results"' in response.content
 
 
 @pytest.mark.asyncio
@@ -29,7 +30,7 @@ async def test_projects_get_root_missing_slash(client: AsyncClient) -> None:
     response = await client.get("/algorithm-systems", follow_redirects=True)
 
     assert response.status_code == 200
-    assert b'<div id="project-search-results">' in response.content
+    assert b'<div id="project-search-results"' in response.content
 
 
 @pytest.mark.asyncio
@@ -38,6 +39,38 @@ async def test_projects_get_root_htmx(client: AsyncClient) -> None:
 
     assert response.status_code == 200
     assert b'<table id="search-results-table" class="rvo-table margin-top-large">' not in response.content
+
+
+@pytest.mark.asyncio
+async def test_projects_get_root_htmx_with_group_by(client: AsyncClient) -> None:
+    response = await client.get("/algorithm-systems/?skip=0&display_type=LIFECYCLE", headers={"HX-Request": "true"})
+
+    assert response.status_code == 200
+    assert b'<table id="search-results-table" class="rvo-table margin-top-large">' not in response.content
+
+
+@pytest.mark.asyncio
+async def test_projects_get_root_htmx_with_group_by_and_lifecycle_filter(client: AsyncClient) -> None:
+    response = await client.get(
+        "/algorithm-systems/?skip=0&add-filter-lifecycle=DESIGN&display_type=LIFECYCLE", headers={"HX-Request": "true"}
+    )
+
+    assert response.status_code == 200
+    assert b'<table id="search-results-table" class="rvo-table margin-top-large">' not in response.content
+
+
+@pytest.mark.asyncio
+async def test_projects_get_root_htmx_with_projects_mock(client: AsyncClient, mocker: MockFixture) -> None:
+    mock_project = default_project()
+    mock_project.last_edited = datetime.now(UTC)
+    # given
+    mocker.patch("amt.services.projects.ProjectsService.paginate", return_value=[mock_project])
+
+    # when
+    response = await client.get("/algorithm-systems/", headers={"HX-Request": "true"})
+
+    assert response.status_code == 200
+    assert b'<table id="search-results-table" class="rvo-table margin-top-large">' in response.content
 
 
 @pytest.mark.asyncio
