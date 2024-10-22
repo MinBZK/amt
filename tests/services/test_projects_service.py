@@ -5,10 +5,11 @@ from amt.schema.system_card import SystemCard
 from amt.services.instruments import InstrumentsService
 from amt.services.projects import ProjectsService
 from amt.services.tasks import TasksService
+from pytest_mock import MockFixture
 from tests.constants import default_instrument
 
 
-def test_get_project(mocker):
+def test_get_project(mocker: MockFixture):
     # Given
     project_id = 1
     project_name = "Project 1"
@@ -32,7 +33,7 @@ def test_get_project(mocker):
     projects_service.repository.find_by_id.assert_called_once_with(project_id)  # type: ignore
 
 
-def test_create_project(mocker):
+def test_create_project(mocker: MockFixture):
     project_id = 1
     project_name = "Project 1"
     project_lifecycle = "development"

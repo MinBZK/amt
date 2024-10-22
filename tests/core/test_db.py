@@ -5,13 +5,14 @@ import pytest
 from amt.core.db import (
     check_db,
 )
+from pytest_mock import MockFixture
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 logger = logging.getLogger(__name__)
 
 
-def test_check_database(monkeypatch: pytest.MonkeyPatch, tmp_path: Path, mocker):
+def test_check_database(monkeypatch: pytest.MonkeyPatch, tmp_path: Path, mocker: MockFixture):
     database_file = tmp_path / "database.sqlite3"
     monkeypatch.setenv("APP_DATABASE_FILE", str(database_file))
     org_exec = Session.execute

@@ -1,4 +1,3 @@
-from collections.abc import Generator
 from typing import cast
 
 from amt.api.routes.projects import get_localized_value
@@ -10,6 +9,7 @@ from amt.schema.system_card import SystemCard
 from amt.services.task_registry import get_requirements_and_measures
 from fastapi.requests import Request
 from fastapi.testclient import TestClient
+from pytest_mock import MockFixture
 
 from tests.constants import default_instrument
 from tests.database_test_utils import DatabaseTestUtils
@@ -36,11 +36,12 @@ def test_projects_get_root_htmx(client: TestClient) -> None:
     assert b'<table id="search-results-table" class="rvo-table margin-top-large">' not in response.content
 
 
-def test_get_new_projects(client: TestClient, mocker) -> None:
+def test_get_new_projects(client: TestClient, mocker: MockFixture) -> None:
     # given
-    mocker.patch('amt.services.instruments.InstrumentsService.fetch_instruments' ,
-                 return_value=[default_instrument(urn="urn1" , name="name1") ,
-                               default_instrument(urn="urn2" , name="name2")])
+    mocker.patch(
+        "amt.services.instruments.InstrumentsService.fetch_instruments",
+        return_value=[default_instrument(urn="urn1", name="name1"), default_instrument(urn="urn2", name="name2")],
+    )
 
     # when
     response = client.get("/algorithm-systems/new")
@@ -58,9 +59,9 @@ def test_get_new_projects(client: TestClient, mocker) -> None:
     )
 
 
-def test_post_new_projects_bad_request(client: TestClient, mocker) -> None:
+def test_post_new_projects_bad_request(client: TestClient, mocker: MockFixture) -> None:
     # given
-    mocker.patch('fastapi_csrf_protect.CsrfProtect.validate_csrf' , new_callable=mocker.AsyncMock)
+    mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
 
     # when
     client.cookies["fastapi-csrf-token"] = "1"
@@ -72,9 +73,7 @@ def test_post_new_projects_bad_request(client: TestClient, mocker) -> None:
     assert b"name: Field required" in response.content
 
 
-def test_post_new_projects(
-    client: TestClient, mocker
-) -> None:
+def test_post_new_projects(client: TestClient, mocker: MockFixture) -> None:
     client.cookies["fastapi-csrf-token"] = "1"
     new_project = ProjectNew(
         name="default project",
@@ -87,10 +86,11 @@ def test_post_new_projects(
         role="gebruiksverantwoordelijke",
     )
     # given
-    mocker.patch('fastapi_csrf_protect.CsrfProtect.validate_csrf' , new_callable=mocker.AsyncMock)
-    mocker.patch('amt.services.instruments.InstrumentsService.fetch_instruments' ,
-                 return_value=[default_instrument(urn="urn1" , name="name1") ,
-                               default_instrument(urn="urn2" , name="name2")])
+    mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+    mocker.patch(
+        "amt.services.instruments.InstrumentsService.fetch_instruments",
+        return_value=[default_instrument(urn="urn1", name="name1"), default_instrument(urn="urn2", name="name2")],
+    )
 
     # when
     response = client.post("/algorithm-systems/new", json=new_project.model_dump(), headers={"X-CSRF-Token": "1"})
@@ -103,16 +103,16 @@ def test_post_new_projects(
 
 def test_post_new_projects_write_system_card(
     client: TestClient,
-    mocker,
+    mocker: MockFixture,
     db: DatabaseTestUtils,
 ) -> None:
     # Given
     client.cookies["fastapi-csrf-token"] = "1"
-    mocker.patch('fastapi_csrf_protect.CsrfProtect.validate_csrf', new_callable=mocker.AsyncMock)
-    mocker.patch('amt.services.instruments.InstrumentsService.fetch_instruments' ,
-                 return_value=[default_instrument(urn="urn1" , name="name1") ,
-                               default_instrument(urn="urn2" , name="name2")])
-
+    mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+    mocker.patch(
+        "amt.services.instruments.InstrumentsService.fetch_instruments",
+        return_value=[default_instrument(urn="urn1", name="name1"), default_instrument(urn="urn2", name="name2")],
+    )
 
     name = "name1"
     project_new = ProjectNew(

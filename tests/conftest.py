@@ -5,7 +5,6 @@ from collections.abc import Callable, Generator
 from multiprocessing import Process
 from pathlib import Path
 from typing import Any
-from unittest.mock import AsyncMock
 
 import httpx
 import pytest
@@ -13,7 +12,6 @@ import uvicorn
 from amt.models.base import Base
 from amt.server import create_app
 from fastapi.testclient import TestClient
-from fastapi_csrf_protect import CsrfProtect  # type: ignore
 from playwright.sync_api import Browser
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import Session
