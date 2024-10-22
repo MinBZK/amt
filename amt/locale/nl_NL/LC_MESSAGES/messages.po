@@ -276,17 +276,18 @@ msgstr "Er is een fout opgetreden. Probeer het later opnieuw."
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr "Algoritme Management Toolkit (AMT)"
 
-#: amt/site/templates/macros/editable.html.j2:21
+#: amt/site/templates/macros/editable.html.j2:23
+#: amt/site/templates/macros/editable.html.j2:26
 #: amt/site/templates/projects/details_requirements.html.j2:55
 msgid "Edit"
-msgstr "Bewerken"
+msgstr "Bewerk"
 
-#: amt/site/templates/macros/editable.html.j2:58
+#: amt/site/templates/macros/editable.html.j2:62
 #: amt/site/templates/projects/details_measure_modal.html.j2:84
 msgid "Save"
 msgstr "Opslaan"
 
-#: amt/site/templates/macros/editable.html.j2:63
+#: amt/site/templates/macros/editable.html.j2:67
 #: amt/site/templates/projects/details_measure_modal.html.j2:88
 msgid "Cancel"
 msgstr "Annuleren"
@@ -304,10 +305,10 @@ msgid "Reviewing"
 msgstr "Beoordelen"
 
 #: amt/site/templates/macros/tasks.html.j2:32
-#: amt/site/templates/projects/details_base.html.j2:28
-#: amt/site/templates/projects/details_base.html.j2:54
-#: amt/site/templates/projects/details_base.html.j2:83
-#: amt/site/templates/projects/details_base.html.j2:106
+#: amt/site/templates/projects/details_base.html.j2:29
+#: amt/site/templates/projects/details_base.html.j2:55
+#: amt/site/templates/projects/details_base.html.j2:84
+#: amt/site/templates/projects/details_base.html.j2:107
 msgid "Done"
 msgstr "Afgerond"
 
@@ -467,28 +468,28 @@ msgstr "Selecteer levenscyclus"
 msgid "Select publication category"
 msgstr "Selecteer publicatiecategorie"
 
-#: amt/site/templates/projects/details_base.html.j2:25
+#: amt/site/templates/projects/details_base.html.j2:26
 msgid "Does the algorithm meet the requirements?"
 msgstr "Voldoet het algoritme aan de vereisten?"
 
-#: amt/site/templates/projects/details_base.html.j2:50
-#: amt/site/templates/projects/details_base.html.j2:104
+#: amt/site/templates/projects/details_base.html.j2:51
+#: amt/site/templates/projects/details_base.html.j2:105
 msgid "To do"
 msgstr "Te doen"
 
-#: amt/site/templates/projects/details_base.html.j2:52
+#: amt/site/templates/projects/details_base.html.j2:53
 msgid "In progress"
 msgstr "Onderhanden"
 
-#: amt/site/templates/projects/details_base.html.j2:69
+#: amt/site/templates/projects/details_base.html.j2:70
 msgid "Go to all requirements"
 msgstr "Ga naar alle Vereisten"
 
-#: amt/site/templates/projects/details_base.html.j2:80
+#: amt/site/templates/projects/details_base.html.j2:81
 msgid "Which instruments are executed?"
 msgstr "Welke instrumenten zijn uitgevoerd?"
 
-#: amt/site/templates/projects/details_base.html.j2:121
+#: amt/site/templates/projects/details_base.html.j2:122
 msgid "Go to all instruments"
 msgstr "Ga naar all instrumenten"
 
@@ -619,11 +620,11 @@ msgstr "Creëer een Algoritme Systeem"
 
 #: amt/site/templates/projects/new.html.j2:23
 msgid "Algorithm System name"
-msgstr "Algoritmekader"
+msgstr "Naam algoritme systeem"
 
 #: amt/site/templates/projects/new.html.j2:26
-msgid "Your algorithm system name here"
-msgstr "Jouw algoritme systeem naam hier"
+msgid "Name of the algorithm system"
+msgstr "Naam van het algoritme systeem"
 
 #: amt/site/templates/projects/new.html.j2:39
 msgid "Select the lifecycle your algorithm system is currently in."
