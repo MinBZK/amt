@@ -8,6 +8,7 @@ from fastapi.testclient import TestClient
 
 from tests.constants import default_project, default_task
 from tests.database_test_utils import DatabaseTestUtils
+from fastapi_csrf_protect import CsrfProtect  # type: ignore # noqa
 
 
 def test_get_unknown_project(client: TestClient) -> None:
@@ -232,10 +233,11 @@ def test_get_project_cancel(client: TestClient, db: DatabaseTestUtils) -> None:
     assert b"lifecycle" in response.content
 
 
-def test_get_project_update(client: TestClient, mock_csrf: Generator[None, None, None], db: DatabaseTestUtils) -> None:
+def test_get_project_update(client: TestClient, mocker, db: DatabaseTestUtils) -> None:
     # given
     db.given([default_project("testproject1")])
     client.cookies["fastapi-csrf-token"] = "1"
+    CsrfProtect.validate_csrf = mocker.AsyncMock()
 
     # when
     response = client.put("/algorithm-system/1/update/name", json={"value": "Test Name"}, headers={"X-CSRF-Token": "1"})

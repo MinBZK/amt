@@ -67,7 +67,10 @@ def test_get_new_projects(client: TestClient, init_instruments: Generator[None, 
     )
 
 
-def test_post_new_projects_bad_request(client: TestClient, mock_csrf: Generator[None, None, None]) -> None:
+def test_post_new_projects_bad_request(client: TestClient, mocker) -> None:
+    # given
+    CsrfProtect.validate_csrf = mocker.AsyncMock()
+
     # when
     client.cookies["fastapi-csrf-token"] = "1"
     response = client.post("/algorithm-systems/new", json={}, headers={"X-CSRF-Token": "1"})
@@ -79,7 +82,7 @@ def test_post_new_projects_bad_request(client: TestClient, mock_csrf: Generator[
 
 
 def test_post_new_projects(
-    client: TestClient, mock_csrf: Generator[None, None, None], init_instruments: Generator[None, None, None]
+    client: TestClient, mocker, init_instruments: Generator[None, None, None]
 ) -> None:
     client.cookies["fastapi-csrf-token"] = "1"
     new_project = ProjectNew(
@@ -92,6 +95,8 @@ def test_post_new_projects(
         transparency_obligations="geen transparantieverplichtingen",
         role="gebruiksverantwoordelijke",
     )
+    # given
+    CsrfProtect.validate_csrf = mocker.AsyncMock()
 
     # when
     response = client.post("/algorithm-systems/new", json=new_project.model_dump(), headers={"X-CSRF-Token": "1"})
@@ -104,12 +109,13 @@ def test_post_new_projects(
 
 def test_post_new_projects_write_system_card(
     client: TestClient,
-    mock_csrf: Generator[None, None, None],
+    mocker,
     init_instruments: Generator[None, None, None],
     db: DatabaseTestUtils,
 ) -> None:
     # Given
     client.cookies["fastapi-csrf-token"] = "1"
+    CsrfProtect.validate_csrf = mocker.AsyncMock()
 
     name = "name1"
     project_new = ProjectNew(

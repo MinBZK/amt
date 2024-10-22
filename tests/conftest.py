@@ -191,11 +191,3 @@ def db(
 
     with Session(engine, expire_on_commit=False) as session:
         yield DatabaseTestUtils(session, database_file)
-
-
-@pytest.fixture
-def mock_csrf() -> Generator[None, None, None]:  # noqa: PT004
-    original = CsrfProtect.validate_csrf
-    CsrfProtect.validate_csrf = AsyncMock()
-    yield
-    CsrfProtect.validate_csrf = original
