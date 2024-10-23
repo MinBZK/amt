@@ -1,6 +1,6 @@
 import pytest
-from sqlalchemy.ext.asyncio import AsyncSession
 from amt.repositories.deps import get_session
+from sqlalchemy.ext.asyncio import AsyncSession
 
 
 @pytest.mark.asyncio

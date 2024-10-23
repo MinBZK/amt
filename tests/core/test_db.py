@@ -2,12 +2,12 @@ import logging
 from pathlib import Path
 
 import pytest
-from sqlalchemy.ext.asyncio import AsyncSession
 from amt.core.db import (
     check_db,
 )
 from pytest_mock import MockFixture
 from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 logger = logging.getLogger(__name__)
 

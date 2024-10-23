@@ -1,3 +1,4 @@
+import pytest
 from amt.models.project import Project
 from amt.repositories.projects import ProjectsRepository
 from amt.schema.project import ProjectNew
