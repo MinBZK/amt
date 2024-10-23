@@ -1,5 +1,4 @@
 from datetime import UTC, datetime, timedelta, timezone
-from unittest.mock import Mock
 
 import pytest
 from amt.core.internationalization import (
@@ -14,6 +13,7 @@ from amt.core.internationalization import (
 from babel.support import Translations
 from fastapi import Request
 from freezegun import freeze_time
+from pytest_mock import MockFixture
 
 
 def test_get_supported_translations():
@@ -87,15 +87,15 @@ def test_time_ago():
             assert time_ago(past_date, locale) == expected
 
 
-def test_get_requested_language():
-    request: Request = Mock()
+def test_get_requested_language(mocker: MockFixture):
+    request: Request = mocker.Mock()
     request.cookies.get.return_value = "nl"
     request.headers.get.return_value = "nl"
     assert get_requested_language(request) == "nl"
 
 
-def test_fallback_get_requested_language():
-    request: Request = Mock()
+def test_fallback_get_requested_language(mocker: MockFixture):
+    request: Request = mocker.Mock()
     request.headers.get.return_value = "en"
     request.cookies = {}
     assert get_requested_language(request) == "en"

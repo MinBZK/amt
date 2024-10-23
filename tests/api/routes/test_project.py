@@ -1,10 +1,10 @@
-from collections.abc import Generator
 from typing import Any
 
 import pytest
 from amt.api.routes.project import set_path
 from amt.models import Project
 from fastapi.testclient import TestClient
+from pytest_mock import MockFixture
 
 from tests.constants import default_project, default_task
 from tests.database_test_utils import DatabaseTestUtils
@@ -232,10 +232,11 @@ def test_get_project_cancel(client: TestClient, db: DatabaseTestUtils) -> None:
     assert b"lifecycle" in response.content
 
 
-def test_get_project_update(client: TestClient, mock_csrf: Generator[None, None, None], db: DatabaseTestUtils) -> None:
+def test_get_project_update(client: TestClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
     # given
     db.given([default_project("testproject1")])
     client.cookies["fastapi-csrf-token"] = "1"
+    mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
 
     # when
     response = client.put("/algorithm-system/1/update/name", json={"value": "Test Name"}, headers={"X-CSRF-Token": "1"})

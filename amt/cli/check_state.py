@@ -1,5 +1,4 @@
 import logging
-import sys
 from pathlib import Path
 from typing import Any
 
@@ -44,8 +43,8 @@ def get_tasks_by_priority(urns: list[str], system_card_path: Path) -> None:
                     click.echo(task.urn)
     except yaml.YAMLError as error:
         click.echo(f"Sorry, an error occurred; yaml could not be parsed: {error}", err=True)
-        sys.exit(1)
+        click.Abort()
     except Exception as error:
         click.echo(f"Sorry, an error occurred. {error}", err=True)
-        sys.exit(1)
-    sys.exit(0)
+        click.Abort()
+    return
