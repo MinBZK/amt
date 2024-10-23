@@ -59,7 +59,7 @@ class ProjectsService:
 
         selected_instruments = self.instrument_service.fetch_instruments(project_new.instruments)  # type: ignore
         for instrument in selected_instruments:
-            self.task_service.create_instrument_tasks(instrument.tasks, project)
+            await self.task_service.create_instrument_tasks(instrument.tasks, project)
 
         return project
 

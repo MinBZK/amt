@@ -102,7 +102,7 @@ def get_projects_submenu_items() -> list[BaseNavigationItem]:
 
 
 async def gather_project_tasks(project_id: int, task_service: TasksService) -> dict[Status, Sequence[Task]]:
-    fetch_tasks = [task_service.get_tasks_for_project(project_id, status) for status in Status]
+    fetch_tasks = [task_service.get_tasks_for_project(project_id, status+0) for status in Status]
 
     results = await asyncio.gather(*fetch_tasks)
 
