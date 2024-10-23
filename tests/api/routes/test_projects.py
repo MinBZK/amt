@@ -101,7 +101,8 @@ def test_post_new_projects(client: TestClient, mocker: MockFixture) -> None:
     assert response.headers["HX-Redirect"] == "/algorithm-system/1/details/tasks"
 
 
-def test_post_new_projects_write_system_card(
+@pytest.mark.asyncio
+async def test_post_new_projects_write_system_card(
     client: TestClient,
     mocker: MockFixture,
     db: DatabaseTestUtils,
@@ -151,7 +152,7 @@ def test_post_new_projects_write_system_card(
     client.post("/algorithm-systems/new", json=project_new.model_dump(), headers={"X-CSRF-Token": "1"})
 
     # then
-    base_projects: list[Base] = db.get(Project, "name", name)
+    base_projects: list[Base] = await db.get(Project, "name", name)
     projects: list[Project] = cast(list[Project], base_projects)
     assert any(project.system_card == system_card for project in projects if project.system_card is not None)
 

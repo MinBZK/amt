@@ -9,22 +9,23 @@ from pytest_mock import MockFixture
 from tests.constants import default_instrument
 
 
-def test_get_project(mocker: MockFixture):
+@pytest.mark.asyncio
+async def test_get_project(mocker: MockFixture):
     # Given
     project_id = 1
     project_name = "Project 1"
     project_lifecycle = "development"
     projects_service = ProjectsService(
-        repository=mocker.Mock(spec=ProjectsRepository),
-        task_service=mocker.Mock(spec=TasksService),
-        instrument_service=mocker.Mock(spec=InstrumentsService),
+        repository=mocker.AsyncMock(spec=ProjectsRepository),
+        task_service=mocker.AsyncMock(spec=TasksService),
+        instrument_service=mocker.AsyncMock(spec=InstrumentsService),
     )
     projects_service.repository.find_by_id.return_value = Project(  # type: ignore
         id=project_id, name=project_name, lifecycle=project_lifecycle
     )
 
     # When
-    project = projects_service.get(project_id)
+    project = await projects_service.get(project_id)
 
     # Then
     assert project.id == project_id
@@ -33,16 +34,17 @@ def test_get_project(mocker: MockFixture):
     projects_service.repository.find_by_id.assert_called_once_with(project_id)  # type: ignore
 
 
-def test_create_project(mocker: MockFixture):
+@pytest.mark.asyncio
+async def test_create_project(mocker: MockFixture):
     project_id = 1
     project_name = "Project 1"
     project_lifecycle = "development"
     system_card = SystemCard(name=project_name)
 
     projects_service = ProjectsService(
-        repository=mocker.Mock(spec=ProjectsRepository),
-        task_service=mocker.Mock(spec=TasksService),
-        instrument_service=mocker.Mock(spec=InstrumentsService),
+        repository=mocker.AsyncMock(spec=ProjectsRepository),
+        task_service=mocker.AsyncMock(spec=TasksService),
+        instrument_service=mocker.AsyncMock(spec=InstrumentsService),
     )
     projects_service.repository.save.return_value = Project(  # type: ignore
         id=project_id, name=project_name, lifecycle=project_lifecycle, system_card=system_card
@@ -61,7 +63,7 @@ def test_create_project(mocker: MockFixture):
         transparency_obligations="project_transparency_obligations",
         role="project_role",
     )
-    project = projects_service.create(project_new)
+    project = await projects_service.create(project_new)
 
     # Then
     assert project.id == project_id
