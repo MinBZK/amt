@@ -21,7 +21,7 @@
         <div id="errorContainer"></div>
         <div class="rvo-layout-grid-container margin-bottom-large">
             <div class="rvo-layout-grid rvo-layout-gap--sm rvo-layout-grid-columns--four rvo-layout-grid-layout--1fr">
-                {% for status in statuses %}{{ render.column(project, status, translations, tasks_service) }}{% endfor %}
+                {% for status in statuses %}{{ render.column(project, status, translations, tasks_by_status) }}{% endfor %}
             </div>
         </div>
     </div>

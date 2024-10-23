@@ -39,9 +39,9 @@
              data-id="{{ status.value }}"
              id="column-{{ status.value }}">
             {% if project is defined %}
-                {% for task in tasks_service.get_tasks_for_project(project.id, status) %}{{ render_task_card_full(task) }}{% endfor %}
+                {% for task in tasks_by_status[status] %}{{ render_task_card_full(task) }}{% endfor %}
             {% else %}
-                {% for task in tasks_service.get_tasks(status) %}{{ render_task_card_full(task) }}{% endfor %}
+                {% for task in tasks_by_status[status] %}{{ render_task_card_full(task) }}{% endfor %}
             {% endif %}
         </div>
     </div>

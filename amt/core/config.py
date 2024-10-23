@@ -44,7 +44,7 @@ class Settings(BaseSettings):
 
     # todo(berry): create submodel for database settings
     APP_DATABASE_SCHEME: DatabaseSchemaType = "sqlite"
-    APP_DATABASE_DRIVER: str | None = None
+    APP_DATABASE_DRIVER: str | None = "aiosqlite"
 
     APP_DATABASE_SERVER: str = "db"
     APP_DATABASE_PORT: int = 5432

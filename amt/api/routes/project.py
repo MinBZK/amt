@@ -1,5 +1,7 @@
+import asyncio
 import functools
 import logging
+from collections.abc import Sequence
 from pathlib import Path
 from typing import Annotated, Any, cast
 
@@ -18,6 +20,7 @@ from amt.api.navigation import (
 from amt.core.exceptions import AMTNotFound, AMTRepositoryError
 from amt.enums.status import Status
 from amt.models import Project
+from amt.models.task import Task
 from amt.schema.measure import ExtendedMeasureTask, MeasureTask
 from amt.schema.requirement import RequirementTask
 from amt.schema.system_card import SystemCard
@@ -98,6 +101,14 @@ def get_projects_submenu_items() -> list[BaseNavigationItem]:
     ]
 
 
+async def gather_project_tasks(project_id: int, task_service: TasksService) -> dict[Status, Sequence[Task]]:
+    fetch_tasks = [task_service.get_tasks_for_project(project_id, status) for status in Status]
+
+    results = await asyncio.gather(*fetch_tasks)
+
+    return dict(zip(Status, results, strict=True))
+
+
 @router.get("/{project_id}/details/tasks")
 async def get_tasks(
     request: Request,
@@ -109,6 +120,7 @@ async def get_tasks(
     instrument_state = get_instrument_state()
     requirements_state = get_requirements_state(project.system_card)
     tab_items = get_project_details_tabs(request)
+    tasks_by_status = await gather_project_tasks(project_id, task_service=tasks_service)
 
     breadcrumbs = resolve_base_navigation_items(
         [
@@ -124,7 +136,7 @@ async def get_tasks(
     context = {
         "instrument_state": instrument_state,
         "requirements_state": requirements_state,
-        "tasks_service": tasks_service,
+        "tasks_by_status": tasks_by_status,
         "statuses": Status,
         "project": project,
         "project_id": project.id,
