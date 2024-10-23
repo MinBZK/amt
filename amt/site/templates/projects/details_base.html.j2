@@ -1,4 +1,5 @@
 {% extends 'layouts/base.html.j2' %}
+{% from "macros/editable.html.j2" import editable with context %}
 {% block title %}{{ project.name }} | AMT{% endblock %}
 {% block content %}
     <div id="measure-modal" class="minbzk-modal display-none">
@@ -10,7 +11,7 @@
     </div>
     <div class="rvo-max-width-layout rvo-max-width-layout--md rvo-max-width-layout-inline-padding--none">
         <div class="rvo-content">
-            <h1 class="utrecht-heading-1">{{ project.name }}</h1>
+            <h1 class="utrecht-heading-1">{{ editable(project, "name") }}</h1>
         </div>
         <!-- Requirements Widget -->
         <div class="rvo-layout-grid-container">
