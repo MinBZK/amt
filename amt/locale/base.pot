@@ -267,18 +267,18 @@ msgstr ""
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr ""
 
-#: amt/site/templates/macros/editable.html.j2:23
-#: amt/site/templates/macros/editable.html.j2:26
+#: amt/site/templates/macros/editable.html.j2:24
+#: amt/site/templates/macros/editable.html.j2:27
 #: amt/site/templates/projects/details_requirements.html.j2:55
 msgid "Edit"
 msgstr ""
 
-#: amt/site/templates/macros/editable.html.j2:62
+#: amt/site/templates/macros/editable.html.j2:63
 #: amt/site/templates/projects/details_measure_modal.html.j2:84
 msgid "Save"
 msgstr ""
 
-#: amt/site/templates/macros/editable.html.j2:67
+#: amt/site/templates/macros/editable.html.j2:68
 #: amt/site/templates/projects/details_measure_modal.html.j2:88
 msgid "Cancel"
 msgstr ""

@@ -84,7 +84,7 @@ msgstr "Start"
 
 #: amt/api/navigation.py:46
 msgid "Algorithm systems"
-msgstr "Algoritme systemen"
+msgstr "Algoritmesystemen"
 
 #: amt/api/navigation.py:47 amt/site/templates/auth/profile.html.j2:10
 msgid "Overview"
@@ -276,18 +276,18 @@ msgstr "Er is een fout opgetreden. Probeer het later opnieuw."
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr "Algoritme Management Toolkit (AMT)"
 
-#: amt/site/templates/macros/editable.html.j2:23
-#: amt/site/templates/macros/editable.html.j2:26
+#: amt/site/templates/macros/editable.html.j2:24
+#: amt/site/templates/macros/editable.html.j2:27
 #: amt/site/templates/projects/details_requirements.html.j2:55
 msgid "Edit"
 msgstr "Bewerk"
 
-#: amt/site/templates/macros/editable.html.j2:62
+#: amt/site/templates/macros/editable.html.j2:63
 #: amt/site/templates/projects/details_measure_modal.html.j2:84
 msgid "Save"
 msgstr "Opslaan"
 
-#: amt/site/templates/macros/editable.html.j2:67
+#: amt/site/templates/macros/editable.html.j2:68
 #: amt/site/templates/projects/details_measure_modal.html.j2:88
 msgid "Cancel"
 msgstr "Annuleren"
@@ -424,13 +424,13 @@ msgid ""
 "filters or clearing them to see more\n"
 "            algorithm systems."
 msgstr ""
-"Er zijn geen Algoritme systemen die overeen komen met de geselecteerde "
-"filters. Pas de filters aan of verwijder ze om meer algortime systemen te"
-" zien."
+"Er zijn geen Algoritmesystemen die overeen komen met de geselecteerde "
+"filters. Pas de filters aan of verwijder ze om meer algoritmesystemen te "
+"zien."
 
 #: amt/site/templates/parts/filter_list.html.j2:95
 msgid "Algorithm system name"
-msgstr "Algoritme systeem naam"
+msgstr "Algoritmesysteem naam"
 
 #: amt/site/templates/parts/filter_list.html.j2:99
 #: amt/site/templates/projects/details_info.html.j2:24
@@ -450,15 +450,15 @@ msgstr "Deze website is in ontwikkeling. Alle versies ontstaan op een open manie
 
 #: amt/site/templates/parts/project_search.html.j2:9
 msgid "Algorithm Systems"
-msgstr "Algoritme systemen"
+msgstr "Algoritmesystemen"
 
 #: amt/site/templates/parts/project_search.html.j2:15
 msgid "New algorithm system"
-msgstr "Nieuw algoritme systeem"
+msgstr "Nieuw algoritmesysteem"
 
 #: amt/site/templates/parts/project_search.html.j2:30
 msgid "Find algorithm system..."
-msgstr "Vind algoritme systeem..."
+msgstr "Vind algoritmesysteem..."
 
 #: amt/site/templates/parts/project_search.html.j2:49
 msgid "Select lifecycle"
@@ -565,7 +565,7 @@ msgstr "Repository"
 
 #: amt/site/templates/projects/details_info.html.j2:20
 msgid "Algorithm system code"
-msgstr "Algoritme systeem code"
+msgstr "Algoritmesysteem code"
 
 #: amt/site/templates/projects/details_info.html.j2:32
 msgid "Labels"
@@ -616,20 +616,20 @@ msgstr "maatregelen uitgevoerd"
 
 #: amt/site/templates/projects/new.html.j2:7
 msgid "Create a Algorithm System"
-msgstr "Creëer een Algoritme Systeem"
+msgstr "Creëer een Algoritmesysteem"
 
 #: amt/site/templates/projects/new.html.j2:23
 msgid "Algorithm System name"
-msgstr "Naam algoritme systeem"
+msgstr "Naam algoritmesysteem"
 
 #: amt/site/templates/projects/new.html.j2:26
 msgid "Name of the algorithm system"
-msgstr "Naam van het algoritme systeem"
+msgstr "Naam van het algoritmesysteem"
 
 #: amt/site/templates/projects/new.html.j2:39
 msgid "Select the lifecycle your algorithm system is currently in."
 msgstr ""
-"Selecteer de levenscyclus waarin uw algortime systeem zich momenteel "
+"Selecteer de levenscyclus waarin uw algoritmesysteem zich momenteel "
 "bevindt."
 
 #: amt/site/templates/projects/new.html.j2:40
@@ -682,7 +682,7 @@ msgstr "Kies één of meerdere instrumenten"
 
 #: amt/site/templates/projects/new.html.j2:177
 msgid "Create Algorithm System"
-msgstr "Creëer Algoritme Systeem"
+msgstr "Creëer Algoritmesysteem"
 
 #: amt/site/templates/projects/new.html.j2:195
 msgid "Copy results and close"
