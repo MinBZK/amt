@@ -8,6 +8,8 @@ from amt.core.db import (
 from pytest_mock import MockFixture
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
+from pytest_mock import MockFixture
+
 
 logger = logging.getLogger(__name__)
 

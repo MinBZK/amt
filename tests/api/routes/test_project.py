@@ -245,9 +245,7 @@ async def test_get_project_cancel(client: TestClient, db: DatabaseTestUtils) -> 
 
 
 @pytest.mark.asyncio
-async def test_get_project_update(
-    client: TestClient, mocker: MockFixture, db: DatabaseTestUtils
-) -> None:
+async def test_get_project_update(client: TestClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
     # given
     await db.given([default_project("testproject1")])
     client.cookies["fastapi-csrf-token"] = "1"
