@@ -20,9 +20,10 @@ def test_get_unknown_project(client: TestClient) -> None:
     assert b"The requested page or resource could not be found." in response.content
 
 
-def test_get_project_tasks(client: TestClient, db: DatabaseTestUtils) -> None:
+@pytest.mark.asyncio
+async def test_get_project_tasks(client: TestClient, db: DatabaseTestUtils) -> None:
     # given
-    db.given([default_project("testproject1"), default_task(project_id=1, status_id=1)])
+    await db.given([default_project("testproject1"), default_task(project_id=1, status_id=1)])
 
     # when
     response = client.get("/algorithm-system/1/details/tasks")
@@ -36,9 +37,10 @@ def test_get_project_tasks(client: TestClient, db: DatabaseTestUtils) -> None:
 # TODO: Test are now have hard coded URL paths because the system card
 # is fixed for now. Tests need to be refactored and made proper once
 # the actual stored system card in a project is being rendered.
-def test_get_system_card(client: TestClient, db: DatabaseTestUtils) -> None:
+@pytest.mark.asyncio
+async def test_get_system_card(client: TestClient, db: DatabaseTestUtils) -> None:
     # given
-    db.given([default_project("testproject1")])
+    await db.given([default_project("testproject1")])
 
     # when
     response = client.get("/algorithm-system/1/details/system_card")
@@ -65,9 +67,10 @@ def test_get_system_card_unknown_project(client: TestClient) -> None:
 # TODO: Test are now have hard coded URL paths because the system card
 # is fixed for now. Tests need to be refactored and made proper once
 # the actual stored system card in a project is being rendered.
-def test_get_assessment_card(client: TestClient, db: DatabaseTestUtils) -> None:
+@pytest.mark.asyncio
+async def test_get_assessment_card(client: TestClient, db: DatabaseTestUtils) -> None:
     # given
-    db.given([default_project("testproject1")])
+    await db.given([default_project("testproject1")])
 
     # when
     response = client.get("/algorithm-system/1/details/system_card/assessments/iama")
@@ -94,9 +97,10 @@ def test_get_assessment_card_unknown_project(client: TestClient) -> None:
 # TODO: Test are now have hard coded URL paths because the system card
 # is fixed for now. Tests need to be refactored and made proper once
 # the actual stored system card in a project is being rendered.
-def test_get_assessment_card_unknown_assessment(client: TestClient, db: DatabaseTestUtils) -> None:
+@pytest.mark.asyncio
+async def test_get_assessment_card_unknown_assessment(client: TestClient, db: DatabaseTestUtils) -> None:
     # given
-    db.given([default_project("testproject1")])
+    await db.given([default_project("testproject1")])
 
     # when
     response = client.get("/algorithm-system/1/details/system_card/assessments/nonexistent")
@@ -110,9 +114,10 @@ def test_get_assessment_card_unknown_assessment(client: TestClient, db: Database
 # TODO: Test are now have hard coded URL paths because the system card
 # is fixed for now. Tests need to be refactored and made proper once
 # the actual stored system card in a project is being rendered.
-def test_get_model_card(client: TestClient, db: DatabaseTestUtils) -> None:
+@pytest.mark.asyncio
+async def test_get_model_card(client: TestClient, db: DatabaseTestUtils) -> None:
     # given
-    db.given([default_project("testproject1")])
+    await db.given([default_project("testproject1")])
 
     # when
     response = client.get("/algorithm-system/1/details/system_card/models/logres_iris")
@@ -139,9 +144,10 @@ def test_get_model_card_unknown_project(client: TestClient) -> None:
 # TODO: Test are now have hard coded URL paths because the system card
 # is fixed for now. Tests need to be refactored and made proper once
 # the actual stored system card in a project is being rendered.
-def test_get_assessment_card_unknown_model_card(client: TestClient, db: DatabaseTestUtils) -> None:
+@pytest.mark.asyncio
+async def test_get_assessment_card_unknown_model_card(client: TestClient, db: DatabaseTestUtils) -> None:
     # given
-    db.given([default_project("testproject1")])
+    await db.given([default_project("testproject1")])
 
     # when
     response = client.get("/algorithm-system/1/details/system_card/models/nonexistent")
@@ -152,9 +158,10 @@ def test_get_assessment_card_unknown_model_card(client: TestClient, db: Database
     assert b"The requested page or resource could not be found." in response.content
 
 
-def test_get_project_details(client: TestClient, db: DatabaseTestUtils) -> None:
+@pytest.mark.asyncio
+async def test_get_project_details(client: TestClient, db: DatabaseTestUtils) -> None:
     # given
-    db.given([default_project("testproject1"), default_task(project_id=1, status_id=1)])
+    await db.given([default_project("testproject1"), default_task(project_id=1, status_id=1)])
 
     # when
     response = client.get("/algorithm-system/1/details")
@@ -165,9 +172,10 @@ def test_get_project_details(client: TestClient, db: DatabaseTestUtils) -> None:
     assert b"Details" in response.content
 
 
-def test_get_system_card_requirements(client: TestClient, db: DatabaseTestUtils) -> None:
+@pytest.mark.asyncio
+async def test_get_system_card_requirements(client: TestClient, db: DatabaseTestUtils) -> None:
     # given
-    db.given([default_project("testproject1"), default_task(project_id=1, status_id=1)])
+    await db.given([default_project("testproject1"), default_task(project_id=1, status_id=1)])
 
     # when
     response = client.get("/algorithm-system/1/details/system_card/requirements")
@@ -178,9 +186,10 @@ def test_get_system_card_requirements(client: TestClient, db: DatabaseTestUtils)
     assert b"0" in response.content
 
 
-def test_get_system_card_data_page(client: TestClient, db: DatabaseTestUtils) -> None:
+@pytest.mark.asyncio
+async def test_get_system_card_data_page(client: TestClient, db: DatabaseTestUtils) -> None:
     # given
-    db.given([default_project("testproject1"), default_task(project_id=1, status_id=1)])
+    await db.given([default_project("testproject1"), default_task(project_id=1, status_id=1)])
 
     # when
     response = client.get("/algorithm-system/1/details/system_card/data")
@@ -191,9 +200,10 @@ def test_get_system_card_data_page(client: TestClient, db: DatabaseTestUtils) ->
     assert b"To be implemented" in response.content
 
 
-def test_get_system_card_instruments(client: TestClient, db: DatabaseTestUtils) -> None:
+@pytest.mark.asyncio
+async def test_get_system_card_instruments(client: TestClient, db: DatabaseTestUtils) -> None:
     # given
-    db.given([default_project("testproject1"), default_task(project_id=1, status_id=1)])
+    await db.given([default_project("testproject1"), default_task(project_id=1, status_id=1)])
 
     # when
     response = client.get("/algorithm-system/1/details/system_card/instruments")
@@ -204,9 +214,10 @@ def test_get_system_card_instruments(client: TestClient, db: DatabaseTestUtils) 
     assert b"To be implemented" in response.content
 
 
-def test_get_project_edit(client: TestClient, db: DatabaseTestUtils) -> None:
+@pytest.mark.asyncio
+async def test_get_project_edit(client: TestClient, db: DatabaseTestUtils) -> None:
     # given
-    db.given([default_project("testproject1")])
+    await db.given([default_project("testproject1")])
 
     # when
     response = client.get("/algorithm-system/1/edit/system_card/lifecycle")
@@ -218,9 +229,10 @@ def test_get_project_edit(client: TestClient, db: DatabaseTestUtils) -> None:
     assert b"lifecycle" in response.content
 
 
-def test_get_project_cancel(client: TestClient, db: DatabaseTestUtils) -> None:
+@pytest.mark.asyncio
+async def test_get_project_cancel(client: TestClient, db: DatabaseTestUtils) -> None:
     # given
-    db.given([default_project("testproject1")])
+    await db.given([default_project("testproject1")])
 
     # when
     response = client.get("/algorithm-system/1/cancel/system_card/lifecycle")
@@ -232,9 +244,10 @@ def test_get_project_cancel(client: TestClient, db: DatabaseTestUtils) -> None:
     assert b"lifecycle" in response.content
 
 
-def test_get_project_update(client: TestClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
+@pytest.mark.asyncio
+async def test_get_project_update(client: TestClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
     # given
-    db.given([default_project("testproject1")])
+    await db.given([default_project("testproject1")])
     client.cookies["fastapi-csrf-token"] = "1"
     mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
 
@@ -248,7 +261,7 @@ def test_get_project_update(client: TestClient, mocker: MockFixture, db: Databas
     assert b"Test Name" in response.content
 
     # Verify that the project was updated in the database
-    updated_projects = db.get(Project, "id", 1)
+    updated_projects = await db.get(Project, "id", 1)
     assert len(updated_projects) == 1
     updated_project = updated_projects[0]
     assert updated_project.name == "Test Name"  # type: ignore

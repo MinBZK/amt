@@ -5,7 +5,7 @@ from typing import Annotated
 from fastapi import Depends
 from sqlalchemy import func, select
 from sqlalchemy.exc import NoResultFound, SQLAlchemyError
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy_utils import escape_like  # pyright: ignore[reportMissingTypeStubs, reportUnknownVariableType]
 
 from amt.api.publication_category import PublicationCategories
@@ -31,47 +31,49 @@ def sort_by_lifecycle_reversed(project: Project) -> int:
 
 
 class ProjectsRepository:
-    def __init__(self, session: Annotated[Session, Depends(get_session)]) -> None:
+    def __init__(self, session: Annotated[AsyncSession, Depends(get_session)]) -> None:
         self.session = session
 
-    def find_all(self) -> Sequence[Project]:
-        return self.session.execute(select(Project)).scalars().all()
+    async def find_all(self) -> Sequence[Project]:
+        result = await self.session.execute(select(Project))
+        return result.scalars().all()
 
-    def delete(self, project: Project) -> None:
+    async def delete(self, project: Project) -> None:
         """
         Deletes the given status in the repository.
         :param status: the status to store
         :return: the updated status after storing
         """
         try:
-            self.session.delete(project)
-            self.session.commit()
+            await self.session.delete(project)
+            await self.session.commit()
         except Exception as e:
             logger.exception("Error deleting project")
-            self.session.rollback()
+            await self.session.rollback()
             raise AMTRepositoryError from e
         return None
 
-    def save(self, project: Project) -> Project:
+    async def save(self, project: Project) -> Project:
         try:
             self.session.add(project)
-            self.session.commit()
-            self.session.refresh(project)
+            await self.session.commit()
+            await self.session.refresh(project)
         except SQLAlchemyError as e:
             logger.exception("Error saving project")
-            self.session.rollback()
+            await self.session.rollback()
             raise AMTRepositoryError from e
         return project
 
-    def find_by_id(self, project_id: int) -> Project:
+    async def find_by_id(self, project_id: int) -> Project:
         try:
             statement = select(Project).where(Project.id == project_id)
-            return self.session.execute(statement).scalars().one()
+            result = await self.session.execute(statement)
+            return result.scalars().one()
         except NoResultFound as e:
             logger.exception("Project not found")
             raise AMTRepositoryError from e
 
-    def paginate(  # noqa
+    async def paginate(  # noqa
         self, skip: int, limit: int, search: str, filters: dict[str, str], sort: dict[str, str]
     ) -> list[Project]:
         try:
@@ -102,7 +104,8 @@ class ProjectsRepository:
             else:
                 statement = statement.order_by(func.lower(Project.name))
             statement = statement.offset(skip).limit(limit)
-            result = list(self.session.execute(statement).scalars())
+            db_result = await self.session.execute(statement)
+            result = list(db_result.scalars())
             # todo: the good way to do sorting is to use an enum field (or any int field)
             #  in the database so we can sort on that
             if result and sort and "lifecycle" in sort:

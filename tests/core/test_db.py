@@ -7,18 +7,19 @@ from amt.core.db import (
 )
 from pytest_mock import MockFixture
 from sqlalchemy import select
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 
 logger = logging.getLogger(__name__)
 
 
-def test_check_database(monkeypatch: pytest.MonkeyPatch, tmp_path: Path, mocker: MockFixture):
+@pytest.mark.asyncio
+async def test_check_database(monkeypatch: pytest.MonkeyPatch, tmp_path: Path, mocker: MockFixture):
     database_file = tmp_path / "database.sqlite3"
     monkeypatch.setenv("APP_DATABASE_FILE", str(database_file))
-    org_exec = Session.execute
-    Session.execute = mocker.MagicMock()
-    check_db()
+    org_exec = AsyncSession.execute
+    AsyncSession.execute = mocker.AsyncMock()
+    await check_db()
 
-    assert Session.execute.call_args is not None
-    assert str(select(1)) == str(Session.execute.call_args.args[0])
-    Session.execute = org_exec
+    assert AsyncSession.execute.call_args is not None
+    assert str(select(1)) == str(AsyncSession.execute.call_args.args[0])
+    AsyncSession.execute = org_exec
