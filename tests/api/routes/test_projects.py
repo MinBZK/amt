@@ -1,5 +1,6 @@
 from typing import cast
 
+import pytest
 from amt.api.routes.projects import get_localized_value
 from amt.models import Project
 from amt.models.base import Base
