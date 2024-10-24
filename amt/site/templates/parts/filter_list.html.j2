@@ -28,9 +28,13 @@
 {% else %}
     <div class="margin-top-large rvo-layout-row rvo-layout-justify-content-space-between">
         <div>
-            <span id="search-results-counter">0</span>
-            <span id="search-results-single" class="display-none">{% trans %}result{% endtrans %}</span>
-            <span id="search-results-multiple">{% trans %}results{% endtrans %}</span>
+            <span>
+                {% trans amount_algorithm_systems %}
+                    {{ amount_algorithm_systems }} result
+                    {% pluralize %}
+                    {{ amount_algorithm_systems }} results
+                {% endtrans %}
+            </span>
             {% if search or filters %}
                 <span>{% trans %}for{% endtrans %}</span>
                 {% if search %}<span><em>'{{ search }}'</em></span>{% endif %}
@@ -60,20 +64,45 @@
                 {% endfor %}
             </form>
         </div>
+
         {#    if grid_view false dan rvo-icon-tegelweergave ander rvo-icon-menu#}
-        <div target="_self"
-             class="rvo-card rvo-alert--padding-xs rvo-link rvo-layout-row rvo-toggle rvo-toggle--default rvo-toggle--with-icon">
-            <span class="utrecht-icon rvo-icon rvo-icon-tegelweergave rvo-icon--lg rvo-link__icon--before"
-                  role="img"
-                  aria-label="Grid"></span>
-            <p>Toggle name</p>
+        <div class="rvo-layout-row rvo-layout-gap--sm">
+            <div class="rvo-text--bold" style="white-space: nowrap">
+                {% trans %}Group by{% endtrans %}
+            </div>
+            <div class="rvo-select-wrapper">
+                <form name="htmx-grouped-form"
+                      hx-target="#project-search-results"
+                      hx-trigger="change from:find select"
+                      hx-get="/algorithm-systems/?skip=0"
+                      hx-swap="innerHTML">
+                    <input type="hidden" name="search" value="{{ search }}">
+                    {% for key, localized_value in filters.items() %}
+                        <input type="hidden"
+                               name="active-filter-{{ key }}"
+                               value="{{ localized_value.value }}">
+                    {% endfor %}
+                    <select id="display_type"
+                            name="display_type"
+                            class="utrecht-select utrecht-select--html-select">
+                        <option value="">{% trans %}Select group by{% endtrans %}</option>
+                        {% for group_by_category in group_by_categories %}
+                            <option
+                                {% if "group-by-category" in filters and group_by_category.value == filters["group-by-category"].value %}selected="selected"{% endif %}
+                                value="{{ group_by_category.value }}">
+                                {{ group_by_category.display_value }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </form>
+            </div>
         </div>
     </div>
     {% if projects|length == 0 %}
         <div class="margin-top-large">
             {% trans %}No Algorithm system match your selected filters. Try adjusting your filters or clearing them to
-            see more
-            algorithm systems.{% endtrans %}
+                see more
+                algorithm systems.{% endtrans %}
         </div>
     {% else %}
         {% if display_type == "list" %}
@@ -89,56 +118,56 @@
                 {% endfor %}
                 <table id="search-results-table" class="rvo-table margin-top-large">
                     <thead class="rvo-table-head">
-                        <tr class="rvo-table-row">
-                            <th style="width: 60%" scope="col" class="rvo-table-header">
-                                {% trans %}Algorithm system name{% endtrans %}
-                                {{ sort_button('name', sort_by) }}
-                            </th>
-                            <th scope="col" class="rvo-table-header">
-                                {% trans %}Lifecycle{% endtrans %}
-                                {{ sort_button('lifecycle', sort_by) }}
-                            </th>
-                            <th scope="col" class="rvo-table-header" style="white-space: nowrap">
-                                {% trans %}Last updated{% endtrans %}
-                                {{ sort_button('last_update', sort_by) }}
-                            </th>
-                        </tr>
+                    <tr class="rvo-table-row">
+                        <th style="width: 60%" scope="col" class="rvo-table-header">
+                            {% trans %}Algorithm system name{% endtrans %}
+                            {{ sort_button('name', sort_by) }}
+                        </th>
+                        <th scope="col" class="rvo-table-header">
+                            {% trans %}Lifecycle{% endtrans %}
+                            {{ sort_button('lifecycle', sort_by) }}
+                        </th>
+                        <th scope="col" class="rvo-table-header" style="white-space: nowrap">
+                            {% trans %}Last updated{% endtrans %}
+                            {{ sort_button('last_update', sort_by) }}
+                        </th>
+                    </tr>
                     </thead>
                     {% for project in projects %}{{ table_row.item(loop, project, true) }}{% endfor %}
                 </table>
             </form>
-        {% elif display_type == "grouped" %}
+        {% elif display_type == "LIFECYCLE" %}
             <table id="search-results-table"
                    class="rvo-table margin-top-large"
                    style="width: 100%;
                           table-layout: fixed">
                 <thead class="rvo-table-head">
-                    <tr class="rvo-table-row">
-                        <th style="width: 81%" scope="col" class="rvo-table-header">{% trans %}Algorithm system name{% endtrans %}</th>
-                        <th scope="col"
-                            class="rvo-table-header"
-                            style="white-space: nowrap;
+                <tr class="rvo-table-row">
+                    <th style="width: 81%" scope="col" class="rvo-table-header">{% trans %}Algorithm system
+                        name{% endtrans %}</th>
+                    <th scope="col"
+                        class="rvo-table-header"
+                        style="white-space: nowrap;
                                    width: 19%">{% trans %}Last updated{% endtrans %}</th>
-                    </tr>
+                </tr>
                 </thead>
             </table>
             <form name="htmx-sort-form"
                   hx-include="this"
                   hx-target="#project-search-results"
                   hx-swap="innerHTML">
-                <input type="hidden" name="search" value="{{ search }}">
-                {% for key, localized_value in filters.items() %}
-                    <input type="hidden"
-                           name="active-filter-{{ key }}"
-                           value="{{ localized_value.value }}">
-                {% endfor %}
-                <div class="rvo-layout-column" style="padding: 0px">
-                    {% for lifecycle in lifecycles %}{{ render.row(projects[lifecycle.value], lifecycle) }}{% endfor %}
-                </div>
-            {% else %}
-                Does not exist
-            {% endif %}
-        </form>
+            <input type="hidden" name="search" value="{{ search }}">
+            {% for key, localized_value in filters.items() %}
+                <input type="hidden"
+                       name="active-filter-{{ key }}"
+                       value="{{ localized_value.value }}">
+            {% endfor %}
+            <div class="rvo-layout-column" style="padding: 0px">
+                {% for lifecycle in lifecycles %}{{ render.row(projects[lifecycle.value], lifecycle) }}{% endfor %}
+            </div>
+        {% else %}
+            Does not exist
+        {% endif %}
+    </form>
     {% endif %}
 {% endif %}
-<script type="text/javascript">amt.updateSearchCounter();</script>
