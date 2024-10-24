@@ -32,7 +32,7 @@ async def test_get_project(mocker: MockFixture):
     assert project.id == project_id
     assert project.name == project_name
     assert project.lifecycle == project_lifecycle
-    projects_service.repository.find_by_id.assert_called_once_with(project_id)  # type: ignore
+    projects_service.repository.find_by_id.assert_awaited_once_with(project_id)  # type: ignore
 
 
 @pytest.mark.asyncio
@@ -70,4 +70,4 @@ async def test_create_project(mocker: MockFixture):
     assert project.id == project_id
     assert project.name == project_name
     assert project.lifecycle == project_lifecycle
-    projects_service.repository.save.assert_called()  # type: ignore
+    projects_service.repository.save.assert_awaited()  # type: ignore
