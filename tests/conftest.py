@@ -1,3 +1,4 @@
+import asyncio
 import logging
 import os
 import re
@@ -33,7 +34,7 @@ def run_server_uvicorn(database_file: Path, host: str = "127.0.0.1", port: int =
     uvicorn.run(app, host=host, port=port)
 
 
-@pytest_asyncio.fixture(scope="session")
+@pytest.fixture(scope="session")
 async def setup_db_and_server(
     tmp_path_factory: pytest.TempPathFactory, request: pytest.FixtureRequest
 ) -> AsyncIterator[str]:
@@ -51,6 +52,7 @@ async def setup_db_and_server(
         await connection.run_sync(metadata.create_all)
 
     async_session = async_sessionmaker(engine, expire_on_commit=False)
+
     async with async_session() as session:
         await setup_database_e2e(session)
 
@@ -122,10 +124,21 @@ def browser_context_args(browser_context_args: dict[str, Any]) -> dict[str, Any]
 
 
 @pytest.fixture(scope="session")
-def browser(launch_browser: Callable[[], Browser], setup_db_and_server: str) -> Generator[Browser, None, None]:
+def browser(
+    launch_browser: Callable[[], Browser], setup_db_and_server: AsyncIterator[str]
+) -> Generator[Browser, None, None]:
     transport = httpx.HTTPTransport(retries=5)
+
+    async def setup_db_wrapper():
+        async for url in setup_db_and_server:
+            yield url
+
+    setup_db = setup_db_wrapper()
+    loop = asyncio.get_event_loop()
+    url = loop.run_until_complete(setup_db.__anext__())
+
     with httpx.Client(transport=transport, verify=False, timeout=0.7) as client:  # noqa: S501
-        client.get(f"{setup_db_and_server}/")
+        client.get(f"{url}/")
 
     browser = launch_browser()
     yield browser
