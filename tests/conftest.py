@@ -129,13 +129,8 @@ def browser(
 ) -> Generator[Browser, None, None]:
     transport = httpx.HTTPTransport(retries=5)
 
-    async def setup_db_wrapper():
-        async for url in setup_db_and_server:
-            yield url
-
-    setup_db = setup_db_wrapper()
     loop = asyncio.get_event_loop()
-    url = loop.run_until_complete(setup_db.__anext__())
+    url = loop.run_until_complete(setup_db_and_server.__anext__())
 
     with httpx.Client(transport=transport, verify=False, timeout=0.7) as client:  # noqa: S501
         client.get(f"{url}/")
