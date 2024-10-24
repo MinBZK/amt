@@ -48,35 +48,32 @@
                           hx-get="/algorithm-systems/?skip=0&drop-filter-={{ key }}"
                           hx-swap="innerHTML"
                           style="cursor: pointer;
-                             display: inline-block">
-                    <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--sm form-input-clear"
-                          role="img"
-                          aria-label="Kruis"></span>
-                    {{ localized_value.display_value }}
-                    <input type="hidden"
-                           name="active-filter-{{ key }}"
-                           value="{{ localized_value.value }}">
-                </span>
+                                 display: inline-block">
+                        <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--sm form-input-clear"
+                              role="img"
+                              aria-label="Kruis"></span>
+                        {{ localized_value.display_value }}
+                        <input type="hidden"
+                               name="active-filter-{{ key }}"
+                               value="{{ localized_value.value }}">
+                    </span>
                 {% endfor %}
             </form>
         </div>
         {#    if grid_view false dan rvo-icon-tegelweergave ander rvo-icon-menu#}
         <div target="_self"
              class="rvo-card rvo-alert--padding-xs rvo-link rvo-layout-row rvo-toggle rvo-toggle--default rvo-toggle--with-icon">
-            <span
-                class="utrecht-icon rvo-icon rvo-icon-tegelweergave rvo-icon--lg rvo-link__icon--before"
-                role="img"
-                aria-label="Grid"
-            ></span>
-            <p>
-                Toggle name</p>
+            <span class="utrecht-icon rvo-icon rvo-icon-tegelweergave rvo-icon--lg rvo-link__icon--before"
+                  role="img"
+                  aria-label="Grid"></span>
+            <p>Toggle name</p>
         </div>
     </div>
     {% if projects|length == 0 %}
         <div class="margin-top-large">
             {% trans %}No Algorithm system match your selected filters. Try adjusting your filters or clearing them to
-                see more
-                algorithm systems.{% endtrans %}
+            see more
+            algorithm systems.{% endtrans %}
         </div>
     {% else %}
         {% if display_type == "list" %}
@@ -92,56 +89,56 @@
                 {% endfor %}
                 <table id="search-results-table" class="rvo-table margin-top-large">
                     <thead class="rvo-table-head">
-                    <tr class="rvo-table-row">
-                        <th style="width: 60%" scope="col" class="rvo-table-header">
-                            {% trans %}Algorithm system name{% endtrans %}
-                            {{ sort_button('name', sort_by) }}
-                        </th>
-                        <th scope="col" class="rvo-table-header">
-                            {% trans %}Lifecycle{% endtrans %}
-                            {{ sort_button('lifecycle', sort_by) }}
-                        </th>
-                        <th scope="col" class="rvo-table-header" style="white-space: nowrap">
-                            {% trans %}Last updated{% endtrans %}
-                            {{ sort_button('last_update', sort_by) }}
-                        </th>
-                    </tr>
+                        <tr class="rvo-table-row">
+                            <th style="width: 60%" scope="col" class="rvo-table-header">
+                                {% trans %}Algorithm system name{% endtrans %}
+                                {{ sort_button('name', sort_by) }}
+                            </th>
+                            <th scope="col" class="rvo-table-header">
+                                {% trans %}Lifecycle{% endtrans %}
+                                {{ sort_button('lifecycle', sort_by) }}
+                            </th>
+                            <th scope="col" class="rvo-table-header" style="white-space: nowrap">
+                                {% trans %}Last updated{% endtrans %}
+                                {{ sort_button('last_update', sort_by) }}
+                            </th>
+                        </tr>
                     </thead>
                     {% for project in projects %}{{ table_row.item(loop, project, true) }}{% endfor %}
                 </table>
             </form>
         {% elif display_type == "grouped" %}
-            <table id="search-results-table" class="rvo-table margin-top-large" style="width: 100%; table-layout: fixed;">
-                    <thead class="rvo-table-head">
+            <table id="search-results-table"
+                   class="rvo-table margin-top-large"
+                   style="width: 100%;
+                          table-layout: fixed">
+                <thead class="rvo-table-head">
                     <tr class="rvo-table-row">
-                        <th style="width: 81%" scope="col" class="rvo-table-header">
-                            {% trans %}Algorithm system name{% endtrans %}
-                        </th>
-                        <th scope="col" class="rvo-table-header" style="white-space: nowrap; width: 19%">
-                            {% trans %}Last updated{% endtrans %}
-                        </th>
+                        <th style="width: 81%" scope="col" class="rvo-table-header">{% trans %}Algorithm system name{% endtrans %}</th>
+                        <th scope="col"
+                            class="rvo-table-header"
+                            style="white-space: nowrap;
+                                   width: 19%">{% trans %}Last updated{% endtrans %}</th>
                     </tr>
-                    </thead>
-            </table>
+                </thead>
+            </table>x§
             <form name="htmx-sort-form"
                   hx-include="this"
                   hx-target="#project-search-results"
                   hx-swap="innerHTML">
-            <input type="hidden" name="search" value="{{ search }}">
-            {% for key, localized_value in filters.items() %}
-                <input type="hidden"
-                       name="active-filter-{{ key }}"
-                       value="{{ localized_value.value }}">
-            {% endfor %}
-            <div class="rvo-layout-column">
-                {% for lifecycle in lifecycles %}
-                    {{ render.row(projects[lifecycle.value], lifecycle) }}
+                <input type="hidden" name="search" value="{{ search }}">
+                {% for key, localized_value in filters.items() %}
+                    <input type="hidden"
+                           name="active-filter-{{ key }}"
+                           value="{{ localized_value.value }}">
                 {% endfor %}
-            </div>
-        {% else %}
-            Does not exist
-        {% endif %}
-    </form>
+                <div class="rvo-layout-column" style="padding: 0px">
+                    {% for lifecycle in lifecycles %}{{ render.row(projects[lifecycle.value], lifecycle) }}{% endfor %}
+                </div>
+            {% else %}
+                Does not exist
+            {% endif %}
+        </form>
     {% endif %}
 {% endif %}
 <script type="text/javascript">amt.updateSearchCounter();</script>

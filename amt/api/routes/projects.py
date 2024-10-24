@@ -19,7 +19,6 @@ from amt.schema.project import ProjectNew
 from amt.services.instruments import InstrumentsService
 from amt.services.projects import ProjectsService
 
-
 router = APIRouter()
 logger = logging.getLogger(__name__)
 
@@ -46,7 +45,7 @@ async def get_root(
     skip: int = Query(0, ge=0),
     limit: int = Query(5000, ge=1),  # todo: fix infinite scroll
     search: str = Query(""),
-    display_type : str = Query("grouped")
+    display_type: str = Query("grouped"),
 ) -> HTMLResponse:
     active_filters = {
         k.removeprefix("active-filter-"): v
@@ -69,7 +68,9 @@ async def get_root(
         projects: dict[str, list[Project]] = {}
         for lifecycle in Lifecycles:
             filters["lifecycle"] = lifecycle.name
-            projects[lifecycle.name] = projects_service.paginate(skip=skip, limit=limit, search=search, filters=filters, sort=sort_by)
+            projects[lifecycle.name] = projects_service.paginate(
+                skip=skip, limit=limit, search=search, filters=filters, sort=sort_by
+            )
     else:
         projects = projects_service.paginate(skip=skip, limit=limit, search=search, filters=filters, sort=sort_by)
         # todo: the lifecycle has to be 'localized', maybe for display 'Project' should become a different object
@@ -93,7 +94,7 @@ async def get_root(
         "publication_categories": get_localized_publication_categories(request),
         "filters": localized_filters,
         "sort_by": sort_by,
-        "display_type": display_type
+        "display_type": display_type,
     }
 
     if request.state.htmx and drop_filters:
