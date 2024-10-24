@@ -286,3 +286,8 @@ main {
 .rvo-table-row td:first-child {
     width: 20%;
 }
+
+.amt-error-message {
+    color: var(--rvo-form-feedback-error-color);
+    font-weight: var(--rvo-form-feedback-error-font-weight);
+}

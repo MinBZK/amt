@@ -134,7 +134,7 @@ msgstr "Data"
 msgid "Model"
 msgstr "Model"
 
-#: amt/api/navigation.py:59 amt/site/templates/projects/new.html.j2:145
+#: amt/api/navigation.py:59 amt/site/templates/projects/new.html.j2:147
 msgid "Instruments"
 msgstr "Instrumenten"
 
@@ -161,6 +161,14 @@ msgstr "Verboden AI"
 #: amt/api/publication_category.py:27
 msgid "Exception of application"
 msgstr "Uitzondering van toepassing"
+
+#: amt/core/exception_handlers.py:20
+msgid "String should have at least {min_length} characters"
+msgstr "Tekst moet minimaal {min_length} tekens bevatten"
+
+#: amt/core/exception_handlers.py:21
+msgid "Field required"
+msgstr "Veld verplicht"
 
 #: amt/core/exceptions.py:20
 msgid ""
@@ -271,6 +279,14 @@ msgstr "Er is een fout opgetreden"
 #: amt/site/templates/errors/_Exception.html.j2:5
 msgid "An error occurred. Please try again later"
 msgstr "Er is een fout opgetreden. Probeer het later opnieuw."
+
+#: amt/site/templates/errors/_RequestValidationError_400.html.j2:3
+msgid "There are some errors"
+msgstr "r zijn enkele fouten"
+
+#: amt/site/templates/errors/_RequestValidationError_400.html.j2:5
+msgid "There is one error:"
+msgstr "Er is één fout:"
 
 #: amt/site/templates/layouts/base.html.j2:11
 msgid "Algorithmic Management Toolkit (AMT)"
@@ -434,7 +450,7 @@ msgstr "Algoritmesysteem naam"
 
 #: amt/site/templates/parts/filter_list.html.j2:99
 #: amt/site/templates/projects/details_info.html.j2:24
-#: amt/site/templates/projects/new.html.j2:37
+#: amt/site/templates/projects/new.html.j2:38
 msgid "Lifecycle"
 msgstr "Levenscyclus"
 
@@ -620,31 +636,31 @@ msgstr "Creëer een Algoritmesysteem"
 
 #: amt/site/templates/projects/new.html.j2:23
 msgid "Algorithm System name"
-msgstr "Naam algoritmesysteem"
+msgstr "Algoritme Systeem naam"
 
-#: amt/site/templates/projects/new.html.j2:26
+#: amt/site/templates/projects/new.html.j2:27
 msgid "Name of the algorithm system"
-msgstr "Naam van het algoritmesysteem"
+msgstr "Nieuw algoritmesysteem"
 
-#: amt/site/templates/projects/new.html.j2:39
+#: amt/site/templates/projects/new.html.j2:41
 msgid "Select the lifecycle your algorithm system is currently in."
 msgstr ""
 "Selecteer de levenscyclus waarin uw algoritmesysteem zich momenteel "
 "bevindt."
 
-#: amt/site/templates/projects/new.html.j2:40
+#: amt/site/templates/projects/new.html.j2:42
 msgid "For more information on lifecycle, read the"
 msgstr "Lees voor meer meer informatie over levenscyclus het"
 
-#: amt/site/templates/projects/new.html.j2:43
+#: amt/site/templates/projects/new.html.j2:45
 msgid "Algorithm Framework"
 msgstr "Algoritmekader"
 
-#: amt/site/templates/projects/new.html.j2:61
+#: amt/site/templates/projects/new.html.j2:63
 msgid "AI Act Profile"
 msgstr "AI Verordening Profiel"
 
-#: amt/site/templates/projects/new.html.j2:63
+#: amt/site/templates/projects/new.html.j2:65
 msgid ""
 "The AI Act profile provides insight into, among other things, the type of"
 " AI system and the associated obligations from the European AI Act. If "
@@ -656,19 +672,19 @@ msgstr ""
 "onder andere het type AI systeem, de regelgeving die van toepassing is en"
 " de risicocategorie."
 
-#: amt/site/templates/projects/new.html.j2:70
+#: amt/site/templates/projects/new.html.j2:72
 msgid "Find your AI Act profile"
 msgstr "Vind uw AI Act profiel"
 
-#: amt/site/templates/projects/new.html.j2:128
+#: amt/site/templates/projects/new.html.j2:130
 msgid "Yes"
 msgstr "Ja"
 
-#: amt/site/templates/projects/new.html.j2:138
+#: amt/site/templates/projects/new.html.j2:140
 msgid "No"
 msgstr "Nee"
 
-#: amt/site/templates/projects/new.html.j2:147
+#: amt/site/templates/projects/new.html.j2:149
 msgid ""
 "Overview of instruments for the responsible development, deployment, "
 "assessment and monitoring of algorithms and AI-systems."
@@ -676,15 +692,15 @@ msgstr ""
 "Overzicht van aanbevolen instrument voor het verantwoord ontwikkelen, "
 "gebruiken, beoordelen en monitoren van algoritmes en AI-systemen."
 
-#: amt/site/templates/projects/new.html.j2:155
+#: amt/site/templates/projects/new.html.j2:157
 msgid "Choose one or more instruments"
 msgstr "Kies één of meerdere instrumenten"
 
-#: amt/site/templates/projects/new.html.j2:177
+#: amt/site/templates/projects/new.html.j2:181
 msgid "Create Algorithm System"
 msgstr "Creëer Algoritmesysteem"
 
-#: amt/site/templates/projects/new.html.j2:195
+#: amt/site/templates/projects/new.html.j2:198
 msgid "Copy results and close"
 msgstr "Resultaten overnemen en sluiten"
 

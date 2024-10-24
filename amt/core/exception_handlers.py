@@ -1,5 +1,8 @@
 import logging
+from gettext import gettext as _
+from typing import Any
 
+from babel.support import NullTranslations
 from fastapi import Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import HTMLResponse
@@ -12,6 +15,21 @@ from amt.core.internationalization import (
 )
 
 logger = logging.getLogger(__name__)
+
+CUSTOM_MESSAGES = {
+    "string_too_short": _("String should have at least {min_length} characters"),
+    "missing": _("Field required"),
+}
+
+
+def translate_pydantic_exception(err: dict[str, Any], translations: NullTranslations) -> str:
+    message: str | None = CUSTOM_MESSAGES.get(err["type"], None)
+
+    if message:
+        custom_message = translations.gettext(message)
+        return custom_message.format(**err["ctx"]) if "ctx" in err else custom_message
+
+    return err["msg"]
 
 
 async def general_exception_handler(request: Request, exc: Exception) -> HTMLResponse:
@@ -27,8 +45,10 @@ async def general_exception_handler(request: Request, exc: Exception) -> HTMLRes
     elif isinstance(exc, StarletteHTTPException):
         message = AMTNotFound().getmessage(translations) if exc.status_code == status.HTTP_404_NOT_FOUND else exc.detail
     elif isinstance(exc, RequestValidationError):
-        messages: list[str] = [f"{error['loc'][-1]}: {error['msg']}" for error in exc.errors()]
-        message = "\n".join(messages)
+        # i assume only pydantic errors get into this section
+        message = exc.errors()
+        for err in message:
+            err["msg"] = translate_pydantic_exception(err, translations)
 
     status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
     if isinstance(exc, StarletteHTTPException):
@@ -42,6 +62,7 @@ async def general_exception_handler(request: Request, exc: Exception) -> HTMLRes
         if request.state.htmx
         else f"errors/{exception_name}_{status_code}.html.j2"
     )
+
     fallback_template_name = "errors/_Exception.html.j2" if request.state.htmx else "errors/Exception.html.j2"
 
     response: HTMLResponse | None = None
