@@ -282,7 +282,7 @@ msgstr "Er is een fout opgetreden. Probeer het later opnieuw."
 
 #: amt/site/templates/errors/_RequestValidationError_400.html.j2:3
 msgid "There are some errors"
-msgstr "r zijn enkele fouten"
+msgstr "Er zijn enkele fouten"
 
 #: amt/site/templates/errors/_RequestValidationError_400.html.j2:5
 msgid "There is one error:"
