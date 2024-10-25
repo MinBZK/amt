@@ -41,8 +41,7 @@ An example command:
 
 ### For developers
 
-When running the GitHub actions locally you can use [act](https://github.com/nektos/act), to do this run change the
-matrix in the `ci.yml` of the `test-local` job to have only python version 3.12. Then run the following command:
+When running the GitHub actions locally you can use [act](https://github.com/nektos/act), to do this run the following command:
 
 ```shell
 act -W '.github/workflows/ci.yml' -s GITHUB_TOKEN="$(gh auth token)" --artifact-server-path tmp/artifacts -e act_event.json
