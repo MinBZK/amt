@@ -1,8 +1,10 @@
-from fastapi.testclient import TestClient
+import pytest
+from httpx import AsyncClient
 
 
-def test_sts_header(client: TestClient) -> None:
-    response = client.get(
+@pytest.mark.asyncio
+async def test_sts_header(client: AsyncClient) -> None:
+    response = await client.get(
         "/",
     )
     assert response.status_code == 200

@@ -25,21 +25,24 @@ class TasksService:
         self.storage_writer = StorageFactory.init(storage_type="file", location="./output", filename="system_card.yaml")
         self.system_card = SystemCard()
 
-    def get_tasks(self, status_id: int) -> Sequence[Task]:
-        return self.repository.find_by_status_id(status_id)
+    async def get_tasks(self, status_id: int) -> Sequence[Task]:
+        task = await self.repository.find_by_status_id(status_id)
+        return task
 
-    def get_tasks_for_project(self, project_id: int, status_id: int) -> Sequence[Task]:
-        return self.repository.find_by_project_id_and_status_id(project_id, status_id)
+    async def get_tasks_for_project(self, project_id: int, status_id: int) -> Sequence[Task]:
+        tasks = await self.repository.find_by_project_id_and_status_id(project_id, status_id)
+        return tasks
 
-    def assign_task(self, task: Task, user: User) -> Task:
+    async def assign_task(self, task: Task, user: User) -> Task:
         task.user_id = user.id
-        return self.repository.save(task)
+        task = await self.repository.save(task)
+        return task
 
-    def create_instrument_tasks(self, tasks: Sequence[InstrumentTask], project: Project) -> None:
+    async def create_instrument_tasks(self, tasks: Sequence[InstrumentTask], project: Project) -> None:
         # TODO: (Christopher) At this moment a status has to be retrieved from the DB. In the future
         #       we will have static statuses, so this will need to change.
         status = Status.TODO
-        self.repository.save_all(
+        await self.repository.save_all(
             [
                 # TODO: (Christopher) The ticket does not specify what to do when question type is not an
                 # open questions, hence for now all titles will be set to task.question.
@@ -50,7 +53,7 @@ class TasksService:
             ]
         )
 
-    def move_task(
+    async def move_task(
         self, task_id: int, status_id: int, previous_sibling_id: int | None = None, next_sibling_id: int | None = None
     ) -> Task:
         """
@@ -61,7 +64,7 @@ class TasksService:
         :param next_sibling_id: the id of the next sibling of the task or None
         :return: the updated task
         """
-        task = self.repository.find_by_id(task_id)
+        task = await self.repository.find_by_id(task_id)
 
         if status_id == Status.DONE:
             # TODO: This seems off, tasks should be written to the correct location in the system card.
@@ -73,17 +76,18 @@ class TasksService:
 
         # update order position of the card
         if previous_sibling_id and next_sibling_id:
-            previous_task = self.repository.find_by_id(previous_sibling_id)
-            next_task = self.repository.find_by_id(next_sibling_id)
+            previous_task = await self.repository.find_by_id(previous_sibling_id)
+            next_task = await self.repository.find_by_id(next_sibling_id)
             new_sort_order = previous_task.sort_order + ((next_task.sort_order - previous_task.sort_order) / 2)
             task.sort_order = new_sort_order
         elif previous_sibling_id and not next_sibling_id:
-            previous_task = self.repository.find_by_id(previous_sibling_id)
+            previous_task = await self.repository.find_by_id(previous_sibling_id)
             task.sort_order = previous_task.sort_order + 10
         elif not previous_sibling_id and next_sibling_id:
-            next_task = self.repository.find_by_id(next_sibling_id)
+            next_task = await self.repository.find_by_id(next_sibling_id)
             task.sort_order = next_task.sort_order / 2
         else:
             task.sort_order = 10
 
-        return self.repository.save(task)
+        task = await self.repository.save(task)
+        return task

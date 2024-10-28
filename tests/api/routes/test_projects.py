@@ -1,5 +1,6 @@
 from typing import cast
 
+import pytest
 from amt.api.routes.projects import get_localized_value
 from amt.models import Project
 from amt.models.base import Base
@@ -8,35 +9,39 @@ from amt.schema.project import ProjectNew
 from amt.schema.system_card import SystemCard
 from amt.services.task_registry import get_requirements_and_measures
 from fastapi.requests import Request
-from fastapi.testclient import TestClient
+from httpx import AsyncClient
 from pytest_mock import MockFixture
 
 from tests.constants import default_instrument
 from tests.database_test_utils import DatabaseTestUtils
 
 
-def test_projects_get_root(client: TestClient) -> None:
-    response = client.get("/algorithm-systems/")
+@pytest.mark.asyncio
+async def test_projects_get_root(client: AsyncClient) -> None:
+    response = await client.get("/algorithm-systems/")
 
     assert response.status_code == 200
     assert b'<div id="project-search-results">' in response.content
 
 
-def test_projects_get_root_missing_slash(client: TestClient) -> None:
-    response = client.get("/algorithm-systems")
+@pytest.mark.asyncio
+async def test_projects_get_root_missing_slash(client: AsyncClient) -> None:
+    response = await client.get("/algorithm-systems", follow_redirects=True)
 
     assert response.status_code == 200
     assert b'<div id="project-search-results">' in response.content
 
 
-def test_projects_get_root_htmx(client: TestClient) -> None:
-    response = client.get("/algorithm-systems/", headers={"HX-Request": "true"})
+@pytest.mark.asyncio
+async def test_projects_get_root_htmx(client: AsyncClient) -> None:
+    response = await client.get("/algorithm-systems/", headers={"HX-Request": "true"})
 
     assert response.status_code == 200
     assert b'<table id="search-results-table" class="rvo-table margin-top-large">' not in response.content
 
 
-def test_get_new_projects(client: TestClient, mocker: MockFixture) -> None:
+@pytest.mark.asyncio
+async def test_get_new_projects(client: AsyncClient, mocker: MockFixture) -> None:
     # given
     mocker.patch(
         "amt.services.instruments.InstrumentsService.fetch_instruments",
@@ -44,7 +49,7 @@ def test_get_new_projects(client: TestClient, mocker: MockFixture) -> None:
     )
 
     # when
-    response = client.get("/algorithm-systems/new")
+    response = await client.get("/algorithm-systems/new")
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
     content = " ".join(response.content.decode().split())
@@ -59,13 +64,14 @@ def test_get_new_projects(client: TestClient, mocker: MockFixture) -> None:
     )
 
 
-def test_post_new_projects_bad_request(client: TestClient, mocker: MockFixture) -> None:
+@pytest.mark.asyncio
+async def test_post_new_projects_bad_request(client: AsyncClient, mocker: MockFixture) -> None:
     # given
     mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
 
     # when
     client.cookies["fastapi-csrf-token"] = "1"
-    response = client.post("/algorithm-systems/new", json={}, headers={"X-CSRF-Token": "1"})
+    response = await client.post("/algorithm-systems/new", json={}, headers={"X-CSRF-Token": "1"})
 
     # then
     assert response.status_code == 400
@@ -73,7 +79,8 @@ def test_post_new_projects_bad_request(client: TestClient, mocker: MockFixture) 
     assert b"Field required" in response.content
 
 
-def test_post_new_projects(client: TestClient, mocker: MockFixture) -> None:
+@pytest.mark.asyncio
+async def test_post_new_projects(client: AsyncClient, mocker: MockFixture) -> None:
     client.cookies["fastapi-csrf-token"] = "1"
     new_project = ProjectNew(
         name="default project",
@@ -93,7 +100,7 @@ def test_post_new_projects(client: TestClient, mocker: MockFixture) -> None:
     )
 
     # when
-    response = client.post("/algorithm-systems/new", json=new_project.model_dump(), headers={"X-CSRF-Token": "1"})
+    response = await client.post("/algorithm-systems/new", json=new_project.model_dump(), headers={"X-CSRF-Token": "1"})
 
     # then
     assert response.status_code == 200
@@ -101,8 +108,9 @@ def test_post_new_projects(client: TestClient, mocker: MockFixture) -> None:
     assert response.headers["HX-Redirect"] == "/algorithm-system/1/details/tasks"
 
 
-def test_post_new_projects_write_system_card(
-    client: TestClient,
+@pytest.mark.asyncio
+async def test_post_new_projects_write_system_card(
+    client: AsyncClient,
     mocker: MockFixture,
     db: DatabaseTestUtils,
 ) -> None:
@@ -148,10 +156,10 @@ def test_post_new_projects_write_system_card(
     )
 
     # when
-    client.post("/algorithm-systems/new", json=project_new.model_dump(), headers={"X-CSRF-Token": "1"})
+    await client.post("/algorithm-systems/new", json=project_new.model_dump(), headers={"X-CSRF-Token": "1"})
 
     # then
-    base_projects: list[Base] = db.get(Project, "name", name)
+    base_projects: list[Base] = await db.get(Project, "name", name)
     projects: list[Project] = cast(list[Project], base_projects)
     assert any(project.system_card == system_card for project in projects if project.system_card is not None)
 

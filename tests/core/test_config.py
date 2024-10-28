@@ -7,6 +7,7 @@ def test_environment_settings(monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setenv("ENVIRONMENT", "production")
     monkeypatch.setenv("SECRET_KEY", "mysecret")
     monkeypatch.setenv("APP_DATABASE_SCHEME", "postgresql")
+    monkeypatch.setenv("APP_DATABASE_DRIVER", "asyncpg")
     monkeypatch.setenv("APP_DATABASE_USER", "amt2")
     monkeypatch.setenv("APP_DATABASE_DB", "amt2")
     monkeypatch.setenv("APP_DATABASE_PASSWORD", "mypassword")
@@ -18,11 +19,12 @@ def test_environment_settings(monkeypatch: pytest.MonkeyPatch):
     assert settings.ENVIRONMENT == "production"
     assert settings.LOGGING_LEVEL == "INFO"
     assert settings.APP_DATABASE_SCHEME == "postgresql"
+    assert settings.APP_DATABASE_DRIVER == "asyncpg"
     assert settings.APP_DATABASE_SERVER == "db"
     assert settings.APP_DATABASE_PORT == 5432
     assert settings.APP_DATABASE_USER == "amt2"
     assert settings.APP_DATABASE_DB == "amt2"
-    assert settings.SQLALCHEMY_DATABASE_URI == "postgresql://amt2:mypassword@db:5432/amt2"
+    assert settings.SQLALCHEMY_DATABASE_URI == "postgresql+asyncpg://amt2:mypassword@db:5432/amt2"
 
 
 def test_environment_settings_production_sqlite_error(monkeypatch: pytest.MonkeyPatch):

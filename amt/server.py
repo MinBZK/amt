@@ -32,8 +32,8 @@ logger = logging.getLogger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     mask = Mask(mask_keywords=["database_uri"])
-    check_db()
-    init_db()
+    await check_db()
+    await init_db()
     logger.info(f"Starting {PROJECT_NAME} version {VERSION}")
     logger.info(f"Settings: {mask.secrets(get_settings().model_dump())}")
     yield

@@ -26,10 +26,11 @@ class ProjectsService:
         self.instrument_service = instrument_service
         self.task_service = task_service
 
-    def get(self, project_id: int) -> Project:
-        return self.repository.find_by_id(project_id)
+    async def get(self, project_id: int) -> Project:
+        project = await self.repository.find_by_id(project_id)
+        return project
 
-    def create(self, project_new: ProjectNew) -> Project:
+    async def create(self, project_new: ProjectNew) -> Project:
         instruments: list[InstrumentBase] = [
             InstrumentBase(urn=instrument_urn) for instrument_urn in project_new.instruments
         ]
@@ -54,20 +55,22 @@ class ProjectsService:
         )
 
         project = Project(name=project_new.name, lifecycle=project_new.lifecycle, system_card=system_card)
-        project = self.update(project)
+        project = await self.update(project)
 
         selected_instruments = self.instrument_service.fetch_instruments(project_new.instruments)  # type: ignore
         for instrument in selected_instruments:
-            self.task_service.create_instrument_tasks(instrument.tasks, project)
+            await self.task_service.create_instrument_tasks(instrument.tasks, project)
 
         return project
 
-    def paginate(
+    async def paginate(
         self, skip: int, limit: int, search: str, filters: dict[str, str], sort: dict[str, str]
     ) -> list[Project]:
-        return self.repository.paginate(skip=skip, limit=limit, search=search, filters=filters, sort=sort)
+        projects = await self.repository.paginate(skip=skip, limit=limit, search=search, filters=filters, sort=sort)
+        return projects
 
-    def update(self, project: Project) -> Project:
+    async def update(self, project: Project) -> Project:
         # TODO: Is this the right place to sync system cards: system_card and system_card_json?
         project.sync_system_card()
-        return self.repository.save(project)
+        project = await self.repository.save(project)
+        return project

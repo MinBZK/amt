@@ -62,7 +62,7 @@ async def get_root(
         k.removeprefix("sort-by-"): v for k, v in request.query_params.items() if k.startswith("sort-by-") and v != ""
     }
 
-    projects = projects_service.paginate(skip=skip, limit=limit, search=search, filters=filters, sort=sort_by)
+    projects = await projects_service.paginate(skip=skip, limit=limit, search=search, filters=filters, sort=sort_by)
     # todo: the lifecycle has to be 'localized', maybe for display 'Project' should become a different object
     for project in projects:
         project.lifecycle = get_localized_lifecycle(project.lifecycle, request)  # pyright: ignore [reportAttributeAccessIssue]
@@ -131,6 +131,6 @@ async def post_new(
     project_new.systemic_risk = "geen systeemrisico"
     project_new.open_source = "open-source"
 
-    project = projects_service.create(project_new)
+    project = await projects_service.create(project_new)
     response = templates.Redirect(request, f"/algorithm-system/{project.id}/details/tasks")
     return response
