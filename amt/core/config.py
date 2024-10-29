@@ -44,7 +44,7 @@ class Settings(BaseSettings):
 
     # todo(berry): create submodel for database settings
     APP_DATABASE_SCHEME: DatabaseSchemaType = "sqlite"
-    APP_DATABASE_DRIVER: str | None = "aiosqlite"
+    APP_DATABASE_DRIVER: str | None = None
 
     APP_DATABASE_SERVER: str = "db"
     APP_DATABASE_PORT: int = 5432
@@ -68,10 +68,12 @@ class Settings(BaseSettings):
 
     @computed_field
     def SQLALCHEMY_DATABASE_URI(self) -> str:
+        default_driver: str = "aiosqlite" if self.APP_DATABASE_SCHEME == "sqlite" else "asyncpg"
+
         scheme: str = (
             f"{self.APP_DATABASE_SCHEME}+{self.APP_DATABASE_DRIVER}"
             if isinstance(self.APP_DATABASE_DRIVER, str)
-            else self.APP_DATABASE_SCHEME
+            else f"{self.APP_DATABASE_SCHEME}+{default_driver}"
         )
 
         if self.APP_DATABASE_SCHEME == "sqlite":
