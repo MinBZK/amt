@@ -1,8 +1,14 @@
+import json
 import logging
+from functools import lru_cache
+from os import listdir
+from os.path import isfile, join
+from pathlib import Path
 from typing import Annotated
 
 from fastapi import Depends
 
+from amt.core.exceptions import AMTNotFound
 from amt.models import Project
 from amt.repositories.projects import ProjectsRepository
 from amt.schema.instrument import InstrumentBase
@@ -13,6 +19,8 @@ from amt.services.task_registry import get_requirements_and_measures
 from amt.services.tasks import TasksService
 
 logger = logging.getLogger(__name__)
+
+template_path = "resources/system_card_templates"
 
 
 class ProjectsService:
@@ -31,6 +39,15 @@ class ProjectsService:
         return project
 
     async def create(self, project_new: ProjectNew) -> Project:
+        system_card_from_template = None
+        if project_new.template_id:
+            template_files = get_template_files()
+            if project_new.template_id in template_files:
+                with open(Path(template_path) / Path(template_files[project_new.template_id]["value"])) as f:
+                    system_card_from_template = json.load(f)
+            else:
+                raise AMTNotFound()
+
         instruments: list[InstrumentBase] = [
             InstrumentBase(urn=instrument_urn) for instrument_urn in project_new.instruments
         ]
@@ -54,10 +71,32 @@ class ProjectsService:
             measures=measures,
         )
 
+        if system_card_from_template is not None:
+            system_card_dict = system_card.model_dump()
+            system_card_merged = {
+                k: (
+                    system_card_dict[k]
+                    if k in system_card_dict and system_card_dict.get(k)
+                    else system_card_from_template.get(k)
+                )
+                for k in set(system_card_dict) | set(system_card_from_template)
+            }
+            system_card_merged["ai_act_profile"] = {
+                k: (
+                    system_card_dict["ai_act_profile"][k]
+                    if k in system_card_dict["ai_act_profile"] and system_card_dict["ai_act_profile"].get(k)
+                    else system_card_from_template["ai_act_profile"].get(k)
+                )
+                for k in set(system_card_dict["ai_act_profile"]) | set(system_card_from_template["ai_act_profile"])
+            }
+            system_card = SystemCard.model_validate(system_card_merged)
+
         project = Project(name=project_new.name, lifecycle=project_new.lifecycle, system_card=system_card)
         project = await self.update(project)
 
-        selected_instruments = self.instrument_service.fetch_instruments(project_new.instruments)  # type: ignore
+        selected_instruments = self.instrument_service.fetch_instruments(
+            [instrument.urn for instrument in project.system_card.instruments]
+        )
         for instrument in selected_instruments:
             await self.task_service.create_instrument_tasks(instrument.tasks, project)
 
@@ -74,3 +113,12 @@ class ProjectsService:
         project.sync_system_card()
         project = await self.repository.save(project)
         return project
+
+
+@lru_cache
+def get_template_files() -> dict[str, dict[str, str]]:
+    return {
+        str(i): {"display_value": k.split(".")[0].replace("_", " "), "value": k}
+        for i, k in enumerate(listdir(template_path))
+        if isfile(join(template_path, k))
+    }

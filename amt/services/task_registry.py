@@ -18,22 +18,10 @@ def get_requirements_and_measures(
     list[RequirementTask],
     list[MeasureTask],
 ]:
-    # TODO: This now loads measures & requirements from the example system card independent of the project ID.
-    # TODO: Refactor to call the task registry api here (based on the ai_act_profile) NOT the system card which is very
-    # artificial and has extra information like status and value.
-    # TODO: Refactor and merge both the InstrumentService and this TaskRegsitryService to make use of the TaskRegistry
-    measure_path = Path("example_system_card/measures/measures.yaml")
-    requirements_path = Path("example_system_card/requirements/requirements.yaml")
-    measures: Any = StorageFactory.init(
-        storage_type="file", location=measure_path.parent, filename=measure_path.name
-    ).read()
-    requirements: Any = StorageFactory.init(
-        storage_type="file", location=requirements_path.parent, filename=requirements_path.name
-    ).read()
-    measure_card = [MeasureTask(**measure) for measure in measures]
-    requirements_card = [RequirementTask(**requirement) for requirement in requirements]
+    # TODO (Robbert): the body of this method will be added later (another ticket)
+    measure_card: list[MeasureTask] = []
+    requirements_card: list[RequirementTask] = []
 
-    # TODO: After calling the Task Registry API this should return a MeasureBase and RequirementBase
     return requirements_card, measure_card
 
 

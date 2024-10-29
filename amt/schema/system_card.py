@@ -1,15 +1,14 @@
 from typing import Any
 
-from pydantic import (
-    BaseModel,
-    Field,  # pyright: ignore [reportUnknownMemberType]
-)
+from pydantic import Field
 
 from amt.schema.ai_act_profile import AiActProfile
 from amt.schema.assessment_card import AssessmentCard
 from amt.schema.instrument import InstrumentBase
 from amt.schema.measure import MeasureTask
+from amt.schema.model_card import ModelCardSchema
 from amt.schema.requirement import RequirementTask
+from amt.schema.shared import BaseModel
 
 
 class Reference(BaseModel):
@@ -30,3 +29,4 @@ class SystemCard(BaseModel):
     measures: list[MeasureTask] = Field(default=[])
     assessments: list[AssessmentCard] = Field(default=[])
     references: list[Reference] = Field(default=[])
+    models: list[ModelCardSchema] = Field(default=[])

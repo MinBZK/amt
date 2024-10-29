@@ -2,6 +2,7 @@ import logging
 from collections.abc import Sequence
 from enum import Enum
 from os import PathLike
+from pyclbr import Class
 from typing import Any, AnyStr, TypeVar
 
 from fastapi import Request
@@ -28,6 +29,7 @@ from amt.core.internationalization import (
     time_ago,
 )
 from amt.schema.localized_value_item import LocalizedValueItem
+from amt.schema.shared import IterMixin
 
 T = TypeVar("T", bound=Enum | LocalizableEnum)
 
@@ -135,6 +137,20 @@ class LocaleJinja2Templates(Jinja2Templates):
         return self.TemplateResponse(request, "redirect.html.j2", headers=headers)
 
 
+def instance(obj: Class, type_string: str) -> bool:
+    match type_string:
+        case "str":
+            return isinstance(obj, str)
+        case "list":
+            return isinstance(obj, list)
+        case "IterMixin":
+            return isinstance(obj, IterMixin)
+        case "dict":
+            return isinstance(obj, dict)
+        case _:
+            raise TypeError("Unsupported type: " + type_string)
+
+
 templates = LocaleJinja2Templates(
     directory="amt/site/templates/", context_processors=[custom_context_processor], undefined=get_undefined_behaviour()
 )
@@ -146,3 +162,4 @@ templates.env.globals.update(nested_value=nested_value)  # pyright: ignore [repo
 templates.env.globals.update(is_nested_enum=is_nested_enum)  # pyright: ignore [reportUnknownMemberType]
 templates.env.globals.update(nested_enum=nested_enum)  # pyright: ignore [reportUnknownMemberType]
 templates.env.globals.update(nested_enum_value=nested_enum_value)  # pyright: ignore [reportUnknownMemberType]
+templates.env.globals.update(isinstance=instance)  # pyright: ignore [reportUnknownMemberType]

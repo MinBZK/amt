@@ -13,8 +13,8 @@
                         <th scope="col" class="rvo-table-header">{% trans %}Value{% endtrans %}</th>
                     </tr>
                 </thead>
-                {% for key, value in model_card.items() %}
-                    {% if key != "model-index" %}
+                {% for key, value in model_card %}
+                    {% if key != "model_index" %}
                         <tbody class="rvo-table-body">
                             <tr class="rvo-table-row">
                                 <td class="rvo-table-cell">
@@ -27,7 +27,7 @@
                 </tbody>
             </table>
         </div>
-        {% for model in model_card["model-index"] %}
+        {% for model in model_card["model_index"] %}
             <h3 class="utrecht-heading-3">{{ model["name"] }}</h3>
             <div class="rvo-table--responsive">
                 <table class="rvo-table">
@@ -37,7 +37,7 @@
                             <th scope="col" class="rvo-table-header">{% trans %}Value{% endtrans %}</th>
                         </tr>
                     </thead>
-                    {% for key, value in model.items() %}
+                    {% for key, value in model %}
                         {% if key != "name" %}
                             <tbody class="rvo-table-body">
                                 <tr class="rvo-table-row">
