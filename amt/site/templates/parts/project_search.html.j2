@@ -1,7 +1,7 @@
 <form id="search-project-form"
       hx-get="/algorithm-systems/?skip=0"
       hx-target="#project-search-results"
-      hx-trigger="change from:select"
+      hx-trigger="change #search-project-form select"
       hx-include="this"
       hx-swap="innerHTML">
     <div class="amt-layout-grid rvo-layout-gap--md amt-layout-grid-columns--two">
@@ -21,56 +21,88 @@
             <div class="rvo-inline-form">
                 <div class="rvo-layout-grid-container margin-bottom-none">
                     <div class="rvo-layout-grid rvo-layout-gap--sm rvo-layout-grid-columns--three rvo-layout-grid-layout--1fr">
-                        <div class="form-input-container">
-                            <input id="project-search-input"
-                                   type="text"
-                                   class="utrecht-textbox utrecht-textbox--html-input"
-                                   dir="auto"
-                                   value="{{ search }}"
-                                   placeholder="{% trans %}Find algorithm system...{% endtrans %}"
-                                   name="search"
-                                   hx-get="/algorithm-systems/?skip=0"
-                                   hx-trigger="input changed delay:500ms, search"
-                                   autocomplete="off"
-                                   onfocus="this.value=''" />
-                            <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--lg form-input-clear"
-                                  role="img"
-                                  aria-label="Kruis"
-                                  hx-trigger="click"
-                                  hx-get="/algorithm-systems/?skip=0"
-                                  hx-indicator=".htmx-indicator"
-                                  hx-swap="innerHTML"
-                                  onclick="document.getElementById('project-search-input').value = ''"></span>
+                        <div class="rvo-layout-column rvo-text--bold rvo-layout-gap--sm">
+                            <div>{% trans %}Search{% endtrans %}</div>
+                            <div class="form-input-container">
+                                <input id="project-search-input"
+                                       type="text"
+                                       class="utrecht-textbox utrecht-textbox--html-input"
+                                       dir="auto"
+                                       value="{{ search }}"
+                                       placeholder="{% trans %}Find algorithm system...{% endtrans %}"
+                                       name="search"
+                                       hx-get="/algorithm-systems/?skip=0"
+                                       hx-trigger="input changed delay:500ms, search"
+                                       autocomplete="off"
+                                       onfocus="this.value=''" />
+                                <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--lg form-input-clear"
+                                      role="img"
+                                      aria-label="Kruis"
+                                      hx-trigger="click"
+                                      hx-get="/algorithm-systems/?skip=0"
+                                      hx-indicator=".htmx-indicator"
+                                      hx-swap="innerHTML"
+                                      onclick="document.getElementById('project-search-input').value = ''"></span>
+                            </div>
                         </div>
-                        <div class="rvo-select-wrapper">
-                            <select id="add-lifecycle"
-                                    name="add-filter-lifecycle"
-                                    class="utrecht-select utrecht-select--html-select">
-                                <option value="">{% trans %}Select lifecycle{% endtrans %}</option>
-                                {% for lifecycle in lifecycles %}
-                                    <option {% if "lifecycle" in filters and lifecycle.value == filters["lifecycle"].value %}selected="selected"{% endif %}
-                                            value="{{ lifecycle.value }}">{{ lifecycle.display_value }}</option>
-                                {% endfor %}
-                            </select>
+                        <div class="rvo-layout-column rvo-text--bold rvo-layout-gap--sm">
+                            <div>{% trans %}Phase{% endtrans %}</div>
+                            <div class="rvo-select-wrapper">
+                                <select id="add-lifecycle"
+                                        name="add-filter-lifecycle"
+                                        class="utrecht-select utrecht-select--html-select">
+                                    <option value="">{% trans %}Select lifecycle{% endtrans %}</option>
+                                    {% for lifecycle in lifecycles %}
+                                        <option {% if "lifecycle" in filters and lifecycle.value == filters["lifecycle"].value %}selected="selected"{% endif %}
+                                                value="{{ lifecycle.value }}">{{ lifecycle.display_value }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                         </div>
-                        <div class="rvo-select-wrapper">
-                            <select id="add-publication-category"
-                                    name="add-filter-publication-category"
-                                    class="utrecht-select utrecht-select--html-select">
-                                <option value="">{% trans %}Select publication category{% endtrans %}</option>
-                                {% for publication_category in publication_categories %}
-                                    <option {% if "publication-category" in filters and publication_category.value == filters["publication-category"].value %}selected="selected"{% endif %}
-                                            value="{{ publication_category.value }}">
-                                        {{ publication_category.display_value }}
-                                    </option>
-                                {% endfor %}
-                            </select>
+                        <div class="rvo-layout-column rvo-text--bold rvo-layout-gap--sm">
+                            <div>{% trans %}Category{% endtrans %}</div>
+                            <div class="rvo-select-wrapper">
+                                <select id="add-publication-category"
+                                        name="add-filter-publication-category"
+                                        class="utrecht-select utrecht-select--html-select">
+                                    <option value="">{% trans %}Select publication category{% endtrans %}</option>
+                                    {% for publication_category in publication_categories %}
+                                        <option {% if "publication-category" in filters and publication_category.value == filters["publication-category"].value %}selected="selected"{% endif %}
+                                                value="{{ publication_category.value }}">
+                                            {{ publication_category.display_value }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </fieldset>
     </div>
+    <div class="rvo-layout-row rvo-layout-gap--sm rvo-alert--padding-xs"
+         style="display: flex;
+                justify-content: flex-end">
+        <div class="rvo-text--bold" style="white-space: nowrap">{% trans %}Group by{% endtrans %}</div>
+        <div class="rvo-select-wrapper">
+            <form name="htmx-grouped-form"
+                  hx-target="#project-search-results"
+                  hx-trigger="change from:find select"
+                  hx-get="/algorithm-systems/?skip=0"
+                  hx-swap="innerHTML">
+                <select id="display_type"
+                        name="display_type"
+                        class="utrecht-select utrecht-select--html-select">
+                    <option value="">{% trans %}Select group by{% endtrans %}</option>
+                    {% for group_by_category in group_by_categories %}
+                        <option {% if "group-by-category" in filters and group_by_category.value == filters["group-by-category"].value %}selected="selected"{% endif %}
+                                value="{{ group_by_category.value }}">{{ group_by_category.display_value }}</option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+    </div>
 </form>
-<div id="project-search-results">{% include 'parts/filter_list.html.j2' %}</div>
+{#53px = 45px (from the select wrapper) + an xs rvo alert padding of 8px#}
+<div id="project-search-results" style="margin-top: -53px">{% include 'parts/filter_list.html.j2' %}</div>
 <div id="errorContainer"></div>

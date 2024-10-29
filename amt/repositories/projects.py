@@ -91,7 +91,7 @@ class ProjectsRepository:
                                 == PublicationCategories[value].value
                             )
                         case _:
-                            raise TypeError("Unknown filter type")  # noqa
+                            raise TypeError(f"Unknown filter type with key: {key}")  # noqa
             if sort:
                 if "name" in sort and sort["name"] == "ascending":
                     statement = statement.order_by(func.lower(Project.name).asc())

@@ -79,6 +79,18 @@ main {
     user-select: none;
 }
 
+.algorithm-system-card-container {
+    margin: 0.5em;
+    border: 1px solid;
+    filter: drop-shadow(0 4px 4px rgb(115 142 171 / 50%));
+    border-color: var(--rvo-color-wit);
+    padding: 0.5em;
+    border-radius: 10px;
+    background-color: var(--rvo-color-wit);
+    cursor: move;
+    user-select: none;
+}
+
 .progress-card-assignees-container {
     display: flex;
     justify-content: flex-end;
