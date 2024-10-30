@@ -12,33 +12,21 @@
                             <div title="{{ lifecycle.display_value }}">
                                 {% if projects | length > 0 %}
                                     <h3 class="rvo-accordion__item-title utrecht-heading-3 rvo-heading--no-margins rvo-heading--mixed">
-                                    {% else %}
-                                        <h3 class="rvo-accordion__item-title utrecht-heading-3 rvo-heading--no-margins rvo-heading--mixed"
-                                            style="color: var(--rvo-expandable-text-subtle-summary-color)">
-                                        {% endif %}
                                         <span class="utrecht-icon rvo-icon rvo-icon-delta-omlaag rvo-icon--md rvo-icon--hemelblauw rvo-accordion__item-icon--closed"
                                               role="img"
                                               aria-label="Delta omlaag"></span>
                                         <span class="utrecht-icon rvo-icon rvo-icon-delta-omhoog rvo-icon--md rvo-icon--hemelblauw rvo-accordion__item-icon--open"
                                               role="img"
                                               aria-label="Delta omhoog"></span>
-                                        {{ lifecycle.display_value }}
+                                    {% else %}
+                                        <h3 class="rvo-accordion__item-title utrecht-heading-3 rvo-heading--no-margins rvo-heading--mixed"
+                                            style="color: var(--rvo-expandable-text-subtle-summary-color)">
+                                            <span class="utrecht-icon rvo-icon rvo-icon-delta-omlaag rvo-icon--md rvo-expandable-text-subtle-summary-color rvo-accordion__item-icon--closed"
+                                                  role="img"
+                                                  aria-label="Delta omlaag"></span>
+                                        {% endif %}
+                                        {{ lifecycle.display_value }} ({{ projects | length }})
                                     </h3>
-                                </div>
-                                <div>
-                                    {% if projects | length > 0 %}
-                                        <span style="color: var(--rvo-color-zwart); font-size: var(--rvo-size-md)">
-                                        {% else %}
-                                            <span style="color: var(--rvo-expandable-text-subtle-summary-color);
-                                                         font-size: var(--rvo-size-md)">
-                                            {% endif %}
-                                            <span style="font-weight: bold">{{ projects | length }}</span>
-                                            {% trans count=projects|length %}
-                                            Algorithm system
-                                        {% pluralize %}
-                                            Algorithm systems
-                                        {% endtrans %}
-                                    </span>
                                 </div>
                             </div>
                         </div>

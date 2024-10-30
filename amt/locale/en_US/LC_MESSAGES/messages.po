@@ -291,18 +291,6 @@ msgstr ""
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr ""
 
-#: amt/site/templates/macros/algorithm_systems_grid.html.j2:36
-msgid ""
-"\n"
-"                                            Algorithm system\n"
-"                                        "
-msgid_plural ""
-"\n"
-"                                            Algorithm systems\n"
-"                                        "
-msgstr[0] ""
-msgstr[1] ""
-
 #: amt/site/templates/macros/editable.html.j2:24
 #: amt/site/templates/macros/editable.html.j2:27
 #: amt/site/templates/projects/details_requirements.html.j2:55
@@ -319,7 +307,7 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: amt/site/templates/macros/table_row.html.j2:15
+#: amt/site/templates/macros/table_row.html.j2:19
 msgid " ago"
 msgstr ""
 
@@ -351,7 +339,7 @@ msgstr ""
 #: amt/site/templates/pages/model_card.html.j2:6
 #: amt/site/templates/pages/system_card.html.j2:4
 #: amt/site/templates/parts/filter_list.html.j2:98
-#: amt/site/templates/parts/filter_list.html.j2:120
+#: amt/site/templates/parts/filter_list.html.j2:122
 #: amt/site/templates/projects/details_info.html.j2:28
 msgid "Last updated"
 msgstr ""
@@ -453,13 +441,8 @@ msgid ""
 msgstr ""
 
 #: amt/site/templates/parts/filter_list.html.j2:90
+#: amt/site/templates/parts/filter_list.html.j2:117
 msgid "Algorithm system name"
-msgstr ""
-
-#: amt/site/templates/parts/filter_list.html.j2:114
-msgid ""
-"Algorithm system\n"
-"                        name"
 msgstr ""
 
 #: amt/site/templates/parts/header.html.j2:7
