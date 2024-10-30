@@ -299,24 +299,6 @@ msgstr "Er is één fout:"
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr "Algoritme Management Toolkit (AMT)"
 
-#: amt/site/templates/macros/algorithm_systems_grid.html.j2:36
-msgid ""
-"\n"
-"                                            Algorithm system\n"
-"                                        "
-msgid_plural ""
-"\n"
-"                                            Algorithm systems\n"
-"                                        "
-msgstr[0] ""
-"\n"
-"                                    Algoritmesysteem\n"
-"                                    "
-msgstr[1] ""
-"\n"
-"                                    Algoritmesystemen\n"
-"                                                                "
-
 #: amt/site/templates/macros/editable.html.j2:24
 #: amt/site/templates/macros/editable.html.j2:27
 #: amt/site/templates/projects/details_requirements.html.j2:55
@@ -333,7 +315,7 @@ msgstr "Opslaan"
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: amt/site/templates/macros/table_row.html.j2:15
+#: amt/site/templates/macros/table_row.html.j2:19
 msgid " ago"
 msgstr "geleden"
 
@@ -365,7 +347,7 @@ msgstr "Onbekend"
 #: amt/site/templates/pages/model_card.html.j2:6
 #: amt/site/templates/pages/system_card.html.j2:4
 #: amt/site/templates/parts/filter_list.html.j2:98
-#: amt/site/templates/parts/filter_list.html.j2:120
+#: amt/site/templates/parts/filter_list.html.j2:122
 #: amt/site/templates/projects/details_info.html.j2:28
 msgid "Last updated"
 msgstr "Laatst bijgewerkt"
@@ -483,14 +465,9 @@ msgstr ""
 "zien."
 
 #: amt/site/templates/parts/filter_list.html.j2:90
+#: amt/site/templates/parts/filter_list.html.j2:117
 msgid "Algorithm system name"
 msgstr "Algoritmesysteem naam"
-
-#: amt/site/templates/parts/filter_list.html.j2:114
-msgid ""
-"Algorithm system\n"
-"                        name"
-msgstr "Algoritme Systeem naam"
 
 #: amt/site/templates/parts/header.html.j2:7
 msgid "Beta Version"
@@ -694,7 +671,7 @@ msgstr "Creëer een Algoritmesysteem"
 
 #: amt/site/templates/projects/new.html.j2:23
 msgid "Algorithm System name"
-msgstr "Algoritme Systeem naam"
+msgstr "Algoritmesysteem naam"
 
 #: amt/site/templates/projects/new.html.j2:27
 msgid "Name of the algorithm system"
