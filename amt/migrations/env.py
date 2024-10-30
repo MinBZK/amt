@@ -19,19 +19,28 @@ target_metadata = Base.metadata
 
 
 def get_url() -> str:
-    scheme = os.getenv("APP_DATABASE_SCHEME", "sqlite")
-    driver = os.getenv("APP_DATABASE_DRIVER", "aiosqlite")
+    scheme_temp = os.getenv("APP_DATABASE_SCHEME", "sqlite")
+    driver = os.getenv("APP_DATABASE_DRIVER", None)
+    default_driver = "aiosqlite" if scheme_temp == "sqlite" else "asyncpg"
 
-    if scheme == "sqlite":
+    scheme = (
+            f"{scheme_temp}+{driver}"
+            if isinstance(driver, str)
+            else f"{scheme_temp}+{default_driver}"
+    )
+
+    if scheme_temp == "sqlite":
+
         file = os.getenv("APP_DATABASE_FILE", "database.sqlite3")
-        return f"{scheme}+{driver}:///{file}"
+        return f"{scheme}:///{file}"
+
 
     user = os.getenv("APP_DATABASE_USER", "amt")
     password = os.getenv("APP_DATABASE_PASSWORD", "")
     server = os.getenv("APP_DATABASE_SERVER", "db")
     port = os.getenv("APP_DATABASE_PORT", "5432")
     db = os.getenv("APP_DATABASE_DB", "amt")
-    return f"{scheme}+{driver}://{user}:{password}@{server}:{port}/{db}"
+    return f"{scheme}://{user}:{password}@{server}:{port}/{db}"
 
 
 def run_migrations_offline() -> None:
