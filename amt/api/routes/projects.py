@@ -18,7 +18,7 @@ from amt.models import Project
 from amt.schema.localized_value_item import LocalizedValueItem
 from amt.schema.project import ProjectNew
 from amt.services.instruments import InstrumentsService
-from amt.services.projects import ProjectsService
+from amt.services.projects import ProjectsService, get_template_files
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -130,12 +130,15 @@ async def get_new(
 
     ai_act_profile = get_ai_act_profile_selector(request)
 
+    template_files = get_template_files()
+
     context: dict[str, Any] = {
         "instruments": instrument_service.fetch_instruments(),
         "ai_act_profile": ai_act_profile,
         "breadcrumbs": breadcrumbs,
         "sub_menu_items": {},  # sub_menu_items disabled for now,
         "lifecycles": get_localized_lifecycles(request),
+        "template_files": template_files,
     }
 
     response = templates.TemplateResponse(request, "projects/new.html.j2", context)
@@ -148,15 +151,6 @@ async def post_new(
     project_new: ProjectNew,
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
 ) -> HTMLResponse:
-    # TODO: FOR DEMO 18 OCT
-    # Override AI Act Profile for demo purposes to values:
-    project_new.type = "AI-systeem"
-    project_new.publication_category = "hoog-risico AI"
-    project_new.transparency_obligations = "geen transparantieverplichtingen"
-    project_new.role = "gebruiksverantwoordelijke"
-    project_new.systemic_risk = "geen systeemrisico"
-    project_new.open_source = "open-source"
-
     project = await projects_service.create(project_new)
     response = templates.Redirect(request, f"/algorithm-system/{project.id}/details/tasks")
     return response

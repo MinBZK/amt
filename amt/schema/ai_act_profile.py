@@ -1,4 +1,6 @@
-from pydantic import BaseModel, field_validator
+from pydantic import field_validator
+
+from amt.schema.shared import BaseModel
 
 
 class AiActProfile(BaseModel):

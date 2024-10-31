@@ -4,11 +4,11 @@
     <span class="rvo-text">{% trans %}Last updated{% endtrans %}: {{ last_edited | time_ago(language) }}
     {% trans %}ago{% endtrans %}</span>
     <div class="rvo-layout-row rvo-layout-align-items-start rvo-layout-gap--xl">
-        {% if system_card["assessments"] %}
+        {% if system_card.assessments is defined and system_card.assessments|length > 0 %}
             <div>
-                <h4 class="utrecht-heading-4">Assessment cards</h4>
+                <h4 class="utrecht-heading-4">{% trans %}Assessment cards {% endtrans %}</h4>
                 <ul class="rvo-ul rvo-ul--no-margin rvo-ul--none rvo-ul--no-padding">
-                    {% for assessment in system_card["assessments"] %}
+                    {% for assessment in system_card.assessments %}
                         <li>
                             <a class="rvo-link rvo-link--with-icon rvo-link--zwart rvo-link--normal"
                                href="/algorithm-system/{{ project_id }}/details/system_card/assessments/{{ assessment["name"].lower() }}">
@@ -22,11 +22,11 @@
                 </ul>
             </div>
         {% endif %}
-        {% if system_card["models"] %}
+        {% if system_card.models is defined and system_card.models|length > 0 %}
             <div>
-                <h4 class="utrecht-heading-4">Model cards</h4>
+                <h4 class="utrecht-heading-4">{% trans %}Model cards{% endtrans %}</h4>
                 <ul class="rvo-ul rvo-ul--no-margin rvo-ul--none rvo-ul--no-padding">
-                    {% for model in system_card["models"] %}
+                    {% for model in system_card.models %}
                         <li>
                             <a class="rvo-link rvo-link--with-icon rvo-link--zwart rvo-link--normal"
                                href="/algorithm-system/{{ project_id }}/details/system_card/models/{{ model["name"].lower() }}">
@@ -49,7 +49,7 @@
                     <th scope="col" class="rvo-table-header">{% trans %}Value{% endtrans %}</th>
                 </tr>
             </thead>
-            {% for key, value in system_card.items() %}
+            {% for key, value in system_card %}
                 <tbody class="rvo-table-body">
                     <tr class="rvo-table-row">
                         <td class="rvo-table-cell">

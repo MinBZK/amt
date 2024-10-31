@@ -124,6 +124,7 @@ async def test_post_new_projects(client: AsyncClient, mocker: MockFixture) -> No
         systemic_risk="geen systeemrisico",
         transparency_obligations="geen transparantieverplichtingen",
         role="gebruiksverantwoordelijke",
+        template_id="0",
     )
     # given
     mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
@@ -165,6 +166,7 @@ async def test_post_new_projects_write_system_card(
         systemic_risk="geen systeemrisico",
         transparency_obligations="geen transparantieverplichtingen",
         role="gebruiksverantwoordelijke",
+        template_id="",
     )
 
     ai_act_profile = AiActProfile(
@@ -176,8 +178,6 @@ async def test_post_new_projects_write_system_card(
         role=project_new.role,
     )
 
-    # This should be refactored; this is here because for the demo of 18 oct the requirements and
-    # measures are hardcoded
     requirements, measures = get_requirements_and_measures(ai_act_profile)
 
     system_card = SystemCard(

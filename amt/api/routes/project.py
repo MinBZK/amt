@@ -1,8 +1,6 @@
 import asyncio
-import functools
 import logging
 from collections.abc import Sequence
-from pathlib import Path
 from typing import Annotated, Any, cast
 
 from fastapi import APIRouter, Depends, Request
@@ -28,26 +26,15 @@ from amt.schema.task import MovedTask
 from amt.services import task_registry
 from amt.services.instruments_and_requirements_state import InstrumentStateService, RequirementsStateService
 from amt.services.projects import ProjectsService
-from amt.services.storage import StorageFactory
 from amt.services.task_registry import fetch_measures, fetch_requirements
 from amt.services.tasks import TasksService
-from amt.utils.storage import get_include_content
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
 
 
-def get_system_card_data() -> SystemCard:
-    # TODO: This now loads an example system card independent of the project ID.
-    path = Path("example_system_card/system_card.yaml")
-    system_card: Any = StorageFactory.init(storage_type="file", location=path.parent, filename=path.name).read()
-    return SystemCard(**system_card)
-
-
-@functools.lru_cache
-def get_instrument_state() -> dict[str, Any]:
-    system_card_data = get_system_card_data()
-    instrument_state = InstrumentStateService(system_card_data)
+def get_instrument_state(system_card: SystemCard) -> dict[str, Any]:
+    instrument_state = InstrumentStateService(system_card)
     instrument_states = instrument_state.get_state_per_instrument()
     return {
         "instrument_states": instrument_states,
@@ -117,7 +104,7 @@ async def get_tasks(
     tasks_service: Annotated[TasksService, Depends(TasksService)],
 ) -> HTMLResponse:
     project = await get_project_or_error(project_id, projects_service, request)
-    instrument_state = get_instrument_state()
+    instrument_state = get_instrument_state(project.system_card)
     requirements_state = get_requirements_state(project.system_card)
     tab_items = get_project_details_tabs(request)
     tasks_by_status = await gather_project_tasks(project_id, task_service=tasks_service)
@@ -181,14 +168,12 @@ async def get_project_context(
     project_id: int, projects_service: ProjectsService, request: Request
 ) -> tuple[Project, dict[str, Any]]:
     project = await get_project_or_error(project_id, projects_service, request)
-    system_card_data = get_system_card_data()
-    instrument_state = get_instrument_state()
+    instrument_state = get_instrument_state(project.system_card)
     requirements_state = get_requirements_state(project.system_card)
     tab_items = get_project_details_tabs(request)
-    project.system_card = system_card_data
     return project, {
         "last_edited": project.last_edited,
-        "system_card": system_card_data,
+        "system_card": project.system_card,
         "instrument_state": instrument_state,
         "requirements_state": requirements_state,
         "project": project,
@@ -285,11 +270,6 @@ async def get_project_update(
     return templates.TemplateResponse(request, "parts/view_cell.html.j2", context)
 
 
-# !!!
-# Implementation of this endpoint is for now independent of the project ID, meaning
-# that the same system card is rendered for all project ID's. This is due to the fact
-# that the logical process flow of a system card is not complete.
-# !!!
 @router.get("/{project_id}/details/system_card")
 async def get_system_card(
     request: Request,
@@ -297,7 +277,7 @@ async def get_system_card(
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
 ) -> HTMLResponse:
     project = await get_project_or_error(project_id, projects_service, request)
-    instrument_state = get_instrument_state()
+    instrument_state = get_instrument_state(project.system_card)
     requirements_state = get_requirements_state(project.system_card)
 
     tab_items = get_project_details_tabs(request)
@@ -313,15 +293,8 @@ async def get_system_card(
         request,
     )
 
-    # TODO: This now loads an example system card independent of the project ID.
-    filepath = Path("example_system_card/system_card.yaml")
-    file_system_storage_service = StorageFactory.init(
-        storage_type="file", location=filepath.parent, filename=filepath.name
-    )
-    system_card_data = file_system_storage_service.read()
-
     context = {
-        "system_card": system_card_data,
+        "system_card": project.system_card,
         "instrument_state": instrument_state,
         "requirements_state": requirements_state,
         "last_edited": project.last_edited,
@@ -351,15 +324,14 @@ async def get_project_inference(
         request,
     )
 
-    system_card_data = get_system_card_data()
-    instrument_state = get_instrument_state()
+    instrument_state = get_instrument_state(project.system_card)
     requirements_state = get_requirements_state(project.system_card)
 
     tab_items = get_project_details_tabs(request)
 
     context = {
         "last_edited": project.last_edited,
-        "system_card": system_card_data,
+        "system_card": project.system_card,
         "instrument_state": instrument_state,
         "requirements_state": requirements_state,
         "project": project,
@@ -371,11 +343,6 @@ async def get_project_inference(
     return templates.TemplateResponse(request, "projects/details_inference.html.j2", context)
 
 
-# !!!
-# Implementation of this endpoint is for now independent of the project ID, meaning
-# that the same system card is rendered for all project ID's. This is due to the fact
-# that the logical process flow of a system card is not complete.
-# !!!
 @router.get("/{project_id}/details/system_card/requirements")
 async def get_system_card_requirements(
     request: Request,
@@ -383,9 +350,8 @@ async def get_system_card_requirements(
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
 ) -> HTMLResponse:
     project = await get_project_or_error(project_id, projects_service, request)
-    instrument_state = get_instrument_state()
+    instrument_state = get_instrument_state(project.system_card)
     requirements_state = get_requirements_state(project.system_card)
-    # TODO: This tab is fairly slow, fix in later releases
     tab_items = get_project_details_tabs(request)
 
     breadcrumbs = resolve_base_navigation_items(
@@ -399,11 +365,7 @@ async def get_system_card_requirements(
         request,
     )
 
-    # TODO: This is only for the demo of 18 Oct. In reality one would load the requirements from the requirement
-    # field in the system card, but one would load the AI Act Profile and determine the requirements from
-    # the labels in this field.
-    system_card = project.system_card
-    requirements = fetch_requirements([requirement.urn for requirement in system_card.requirements])
+    requirements = fetch_requirements([requirement.urn for requirement in project.system_card.requirements])
 
     # Get measures that correspond to the requirements and merge them with the measuretasks
     requirements_and_measures = []
@@ -412,7 +374,7 @@ async def get_system_card_requirements(
         linked_measures = fetch_measures(requirement.links)
         extended_linked_measures: list[ExtendedMeasureTask] = []
         for measure in linked_measures:
-            measure_task = find_measure_task(system_card, measure.urn)
+            measure_task = find_measure_task(project.system_card, measure.urn)
             if measure_task:
                 ext_measure_task = ExtendedMeasureTask(
                     name=measure.name,
@@ -546,7 +508,7 @@ async def get_system_card_data_page(
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
 ) -> HTMLResponse:
     project = await get_project_or_error(project_id, projects_service, request)
-    instrument_state = get_instrument_state()
+    instrument_state = get_instrument_state(project.system_card)
     requirements_state = get_requirements_state(project.system_card)
 
     tab_items = get_project_details_tabs(request)
@@ -586,7 +548,7 @@ async def get_system_card_instruments(
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
 ) -> HTMLResponse:
     project = await get_project_or_error(project_id, projects_service, request)
-    instrument_state = get_instrument_state()
+    instrument_state = get_instrument_state(project.system_card)
     requirements_state = get_requirements_state(project.system_card)
 
     tab_items = get_project_details_tabs(request)
@@ -614,11 +576,6 @@ async def get_system_card_instruments(
     return templates.TemplateResponse(request, "projects/details_instruments.html.j2", context)
 
 
-# !!!
-# Implementation of this endpoint is for now independent of the project ID, meaning
-# that the same system card is rendered for all project ID's. This is due to the fact
-# that the logical process flow of a system card is not complete.
-# !!!
 @router.get("/{project_id}/details/system_card/assessments/{assessment_card}")
 async def get_assessment_card(
     request: Request,
@@ -627,7 +584,7 @@ async def get_assessment_card(
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
 ) -> HTMLResponse:
     project = await get_project_or_error(project_id, projects_service, request)
-    instrument_state = get_instrument_state()
+    instrument_state = get_instrument_state(project.system_card)
     requirements_state = get_requirements_state(project.system_card)
 
     request.state.path_variables.update({"assessment_card": assessment_card})
@@ -645,9 +602,10 @@ async def get_assessment_card(
         request,
     )
 
-    # TODO: This now loads an example system card independent of the project ID.
-    filepath = Path("example_system_card/system_card.yaml")
-    assessment_card_data = get_include_content(filepath.parent, filepath.name, "assessments", assessment_card)
+    assessment_card_data = next(
+        (assessment for assessment in project.system_card.assessments if assessment.name.lower() == assessment_card),
+        None,
+    )
 
     if not assessment_card_data:
         logger.warning("assessment card not found")
@@ -678,13 +636,9 @@ async def get_model_card(
     projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
 ) -> HTMLResponse:
     project = await get_project_or_error(project_id, projects_service, request)
-    instrument_state = get_instrument_state()
-    requirements_state = get_requirements_state(project.system_card)
-
-    # TODO: This now loads an example system card independent of the project ID.
-    filepath = Path("example_system_card/system_card.yaml")
-    model_card_data = get_include_content(filepath.parent, filepath.name, "models", model_card)
     request.state.path_variables.update({"model_card": model_card})
+    instrument_state = get_instrument_state(project.system_card)
+    requirements_state = get_requirements_state(project.system_card)
 
     tab_items = get_project_details_tabs(request)
 
@@ -697,6 +651,15 @@ async def get_model_card(
             Navigation.PROJECT_MODEL_CARD,
         ],
         request,
+    )
+
+    model_card_data = next(
+        (
+            model
+            for model in project.system_card.models
+            if (model.name is not None and model.name.lower() == model_card)
+        ),
+        None,
     )
 
     if not model_card_data:

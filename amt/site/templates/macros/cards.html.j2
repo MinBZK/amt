@@ -5,16 +5,19 @@
     {{ attribute.capitalize().replace("_", " ") }}
 {%- endmacro %}
 {% macro render_value(key, value, depth) -%}
-    {% if value.__class__.__name__ == 'dict' %}
+    {% if isinstance(value, 'IterMixin') or isinstance(value, 'dict') %}
         <div class="{% if depth == 1 %}margin-bottom-large{% endif %}">
-            {% for subkey, subvalue in value.items() %}
+            {% if value.__class__.__name__ == 'dict' %}
+                {% set value = value.items() %}
+            {% endif %}
+            {% for subkey, subvalue in value %}
                 {% if subvalue %}
                     <strong>{{ render_attribute(subkey) }}</strong>: {{ render_value(subkey, subvalue, depth+1) }}
                 {% endif %}
                 {% if not loop.last %}<br \>{% endif %}
             {% endfor %}
         </div>
-    {% elif value.__class__.__name__ == 'list' %}
+    {% elif isinstance(value, 'list') %}
         {% if key == "assessments" %}
             {% for assessment in value %}{{ assessment["name"] }}{% endfor %}
         {% elif key == "models" %}

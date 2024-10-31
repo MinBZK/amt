@@ -1,4 +1,6 @@
 import pytest
+from amt.api.lifecycles import Lifecycles
+from amt.core.exceptions import AMTNotFound
 from amt.models.project import Project
 from amt.repositories.projects import ProjectsRepository
 from amt.schema.project import ProjectNew
@@ -71,3 +73,29 @@ async def test_create_project(mocker: MockFixture):
     assert project.name == project_name
     assert project.lifecycle == project_lifecycle
     projects_service.repository.save.assert_awaited()  # type: ignore
+
+
+@pytest.mark.asyncio
+async def test_create_project_unknown_template_id(mocker: MockFixture):
+    # When
+    project_new = ProjectNew(
+        template_id="1",
+        name="test",
+        lifecycle=Lifecycles.DEVELOPMENT.name,
+        instruments=[],
+        type="project_type",
+        open_source="project_open_source",
+        publication_category="project_publication_category",
+        systemic_risk="project_systemic_risk",
+        transparency_obligations="project_transparency_obligations",
+        role="project_role",
+    )
+
+    projects_service = ProjectsService(
+        repository=mocker.AsyncMock(spec=ProjectsRepository),
+        task_service=mocker.AsyncMock(spec=TasksService),
+        instrument_service=mocker.AsyncMock(spec=InstrumentsService),
+    )
+
+    with pytest.raises(AMTNotFound):
+        await projects_service.create(project_new)

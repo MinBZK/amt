@@ -44,7 +44,7 @@ msgstr ""
 #: amt/api/group_by_category.py:15
 #: amt/site/templates/parts/filter_list.html.j2:94
 #: amt/site/templates/projects/details_info.html.j2:24
-#: amt/site/templates/projects/new.html.j2:38
+#: amt/site/templates/projects/new.html.j2:40
 msgid "Lifecycle"
 msgstr ""
 
@@ -140,7 +140,7 @@ msgstr ""
 msgid "Model"
 msgstr ""
 
-#: amt/api/navigation.py:59 amt/site/templates/projects/new.html.j2:147
+#: amt/api/navigation.py:59 amt/site/templates/projects/new.html.j2:149
 msgid "Instruments"
 msgstr ""
 
@@ -286,7 +286,7 @@ msgstr ""
 msgid "There is one error:"
 msgstr ""
 
-#: amt/site/templates/layouts/base.html.j2:11
+#: amt/site/templates/layouts/base.html.j2:1
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr ""
 
@@ -338,7 +338,7 @@ msgstr ""
 #: amt/site/templates/pages/model_card.html.j2:6
 #: amt/site/templates/pages/system_card.html.j2:4
 #: amt/site/templates/parts/filter_list.html.j2:98
-#: amt/site/templates/parts/filter_list.html.j2:122
+#: amt/site/templates/parts/filter_list.html.j2:120
 #: amt/site/templates/projects/details_info.html.j2:28
 msgid "Last updated"
 msgstr ""
@@ -414,6 +414,14 @@ msgstr ""
 msgid "for more information on how the toolkit can support your organization."
 msgstr ""
 
+#: amt/site/templates/pages/system_card.html.j2:9
+msgid "Assessment cards "
+msgstr ""
+
+#: amt/site/templates/pages/system_card.html.j2:27
+msgid "Model cards"
+msgstr ""
+
 #: amt/site/templates/parts/filter_list.html.j2:32
 #, python-format
 msgid ""
@@ -440,7 +448,7 @@ msgid ""
 msgstr ""
 
 #: amt/site/templates/parts/filter_list.html.j2:90
-#: amt/site/templates/parts/filter_list.html.j2:117
+#: amt/site/templates/parts/filter_list.html.j2:116
 msgid "Algorithm system name"
 msgstr ""
 
@@ -642,31 +650,31 @@ msgstr ""
 msgid "Create a Algorithm System"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:23
+#: amt/site/templates/projects/new.html.j2:25
 msgid "Algorithm System name"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:27
+#: amt/site/templates/projects/new.html.j2:29
 msgid "Name of the algorithm system"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:41
+#: amt/site/templates/projects/new.html.j2:43
 msgid "Select the lifecycle your algorithm system is currently in."
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:42
+#: amt/site/templates/projects/new.html.j2:44
 msgid "For more information on lifecycle, read the"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:45
+#: amt/site/templates/projects/new.html.j2:47
 msgid "Algorithm Framework"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:63
+#: amt/site/templates/projects/new.html.j2:65
 msgid "AI Act Profile"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:65
+#: amt/site/templates/projects/new.html.j2:67
 msgid ""
 "The AI Act profile provides insight into, among other things, the type of"
 " AI system and the associated obligations from the European AI Act. If "
@@ -675,33 +683,33 @@ msgid ""
 "tree."
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:72
+#: amt/site/templates/projects/new.html.j2:74
 msgid "Find your AI Act profile"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:130
+#: amt/site/templates/projects/new.html.j2:132
 msgid "Yes"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:140
+#: amt/site/templates/projects/new.html.j2:142
 msgid "No"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:149
+#: amt/site/templates/projects/new.html.j2:151
 msgid ""
 "Overview of instruments for the responsible development, deployment, "
 "assessment and monitoring of algorithms and AI-systems."
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:157
+#: amt/site/templates/projects/new.html.j2:159
 msgid "Choose one or more instruments"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:181
+#: amt/site/templates/projects/new.html.j2:183
 msgid "Create Algorithm System"
 msgstr ""
 
-#: amt/site/templates/projects/new.html.j2:198
+#: amt/site/templates/projects/new.html.j2:200
 msgid "Copy results and close"
 msgstr ""
 

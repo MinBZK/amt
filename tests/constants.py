@@ -1,7 +1,10 @@
+import json
+
 from amt.api.lifecycles import Lifecycles
 from amt.api.navigation import BaseNavigationItem, DisplayText
 from amt.models import Project, Task, User
 from amt.schema.instrument import Instrument, InstrumentTask, Owner
+from amt.schema.system_card import SystemCard
 from fastapi import Request
 from starlette.datastructures import URL
 
@@ -21,6 +24,14 @@ def default_user(name: str = "default user", avatar: str | None = None) -> User:
 
 def default_project(name: str = "default project") -> Project:
     return Project(name=name)
+
+
+def default_project_with_system_card(name: str = "default project") -> Project:
+    with open("resources/system_card_templates/AMT_Template_1.json") as f:
+        system_card_from_template = json.load(f)
+    system_card_from_template["name"] = name
+    system_card = SystemCard.model_validate(system_card_from_template)
+    return Project(name=name, lifecycle=Lifecycles.DEVELOPMENT, system_card=system_card)
 
 
 def default_project_with_lifecycle(name: str = "default project", lifecycle: Lifecycles = Lifecycles.DESIGN) -> Project:

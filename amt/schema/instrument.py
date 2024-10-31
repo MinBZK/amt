@@ -1,4 +1,6 @@
-from pydantic import BaseModel, Field
+from pydantic import Field
+
+from amt.schema.shared import BaseModel
 
 
 class Owner(BaseModel):

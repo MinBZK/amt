@@ -1,9 +1,8 @@
 from datetime import datetime
 
-from pydantic import (
-    BaseModel,
-    Field,  # pyright: ignore [reportUnknownMemberType]
-)
+from pydantic import Field  # pyright: ignore [reportUnknownMemberType]
+
+from amt.schema.shared import BaseModel
 
 
 class AssessmentAuthor(BaseModel):

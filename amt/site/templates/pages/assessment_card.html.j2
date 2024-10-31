@@ -13,7 +13,7 @@
                             <th scope="col" class="rvo-table-header">{% trans %}Value{% endtrans %}</th>
                         </tr>
                     </thead>
-                    {% for key, value in assessment_card.items() %}
+                    {% for key, value in assessment_card %}
                         {% if key != "contents" %}
                             <tbody class="rvo-table-body">
                                 <tr class="rvo-table-row">

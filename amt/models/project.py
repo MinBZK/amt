@@ -85,12 +85,12 @@ class Project(Base):
         if value is None:
             self._system_card = ProjectSystemCard(self)
         else:
-            self._system_card = ProjectSystemCard(self, **value.model_dump(exclude_unset=True))
+            self._system_card = ProjectSystemCard(self, **value.model_dump(exclude_unset=True, by_alias=True))
         self.sync_system_card()
 
     def sync_system_card(self) -> None:
         if self._system_card is not None:
-            self.system_card_json = self._system_card.model_dump(exclude_unset=True)
+            self.system_card_json = self._system_card.model_dump(exclude_unset=True, by_alias=True)
 
 
 Project.__mapper_args__ = {"exclude_properties": ["_system_card"]}

@@ -15,6 +15,7 @@ class ProjectNew(ProjectBase):
     systemic_risk: str = Field(default=None)
     transparency_obligations: str = Field(default=None)
     role: list[str] | str = []
+    template_id: str = Field(default=None)
 
     @field_validator("instruments", "role")
     def ensure_list(cls, v: list[str] | str) -> list[str]:
