@@ -325,10 +325,10 @@ msgid "Reviewing"
 msgstr ""
 
 #: amt/site/templates/macros/tasks.html.j2:32
-#: amt/site/templates/projects/details_base.html.j2:29
-#: amt/site/templates/projects/details_base.html.j2:55
-#: amt/site/templates/projects/details_base.html.j2:84
-#: amt/site/templates/projects/details_base.html.j2:107
+#: amt/site/templates/projects/details_base.html.j2:74
+#: amt/site/templates/projects/details_base.html.j2:100
+#: amt/site/templates/projects/details_base.html.j2:129
+#: amt/site/templates/projects/details_base.html.j2:152
 msgid "Done"
 msgstr ""
 
@@ -500,28 +500,56 @@ msgstr ""
 msgid "Select group by"
 msgstr ""
 
+#: amt/site/templates/projects/details_base.html.j2:19
+msgid "Delete algoritmic system"
+msgstr ""
+
 #: amt/site/templates/projects/details_base.html.j2:26
+msgid "Are you sure you want to delete your algoritmic system "
+msgstr ""
+
+#: amt/site/templates/projects/details_base.html.j2:30
+msgid ""
+"Data will be stored for at least 45 days before permanent\n"
+"                deletion."
+msgstr ""
+
+#: amt/site/templates/projects/details_base.html.j2:39
+#: amt/site/templates/projects/new.html.j2:132
+msgid "Yes"
+msgstr ""
+
+#: amt/site/templates/projects/details_base.html.j2:44
+#: amt/site/templates/projects/new.html.j2:142
+msgid "No"
+msgstr ""
+
+#: amt/site/templates/projects/details_base.html.j2:57
+msgid "Delete algorithm system"
+msgstr ""
+
+#: amt/site/templates/projects/details_base.html.j2:71
 msgid "Does the algorithm meet the requirements?"
 msgstr ""
 
-#: amt/site/templates/projects/details_base.html.j2:51
-#: amt/site/templates/projects/details_base.html.j2:105
+#: amt/site/templates/projects/details_base.html.j2:96
+#: amt/site/templates/projects/details_base.html.j2:150
 msgid "To do"
 msgstr ""
 
-#: amt/site/templates/projects/details_base.html.j2:53
+#: amt/site/templates/projects/details_base.html.j2:98
 msgid "In progress"
 msgstr ""
 
-#: amt/site/templates/projects/details_base.html.j2:70
+#: amt/site/templates/projects/details_base.html.j2:115
 msgid "Go to all requirements"
 msgstr ""
 
-#: amt/site/templates/projects/details_base.html.j2:81
+#: amt/site/templates/projects/details_base.html.j2:126
 msgid "Which instruments are executed?"
 msgstr ""
 
-#: amt/site/templates/projects/details_base.html.j2:122
+#: amt/site/templates/projects/details_base.html.j2:167
 msgid "Go to all instruments"
 msgstr ""
 
@@ -683,14 +711,6 @@ msgstr ""
 
 #: amt/site/templates/projects/new.html.j2:74
 msgid "Find your AI Act profile"
-msgstr ""
-
-#: amt/site/templates/projects/new.html.j2:132
-msgid "Yes"
-msgstr ""
-
-#: amt/site/templates/projects/new.html.j2:142
-msgid "No"
 msgstr ""
 
 #: amt/site/templates/projects/new.html.j2:151

@@ -431,6 +431,16 @@ def find_requirement_tasks_by_measure_urn(system_card: SystemCard, measure_urn: 
     return requirement_tasks
 
 
+@router.delete("/{project_id}")
+async def delete_project(
+    request: Request,
+    project_id: int,
+    projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
+) -> HTMLResponse:
+    await projects_service.delete(project_id)
+    return templates.Redirect(request, "/algorithm-systems/")
+
+
 @router.get("/{project_id}/measure/{measure_urn}")
 async def get_measure(
     request: Request,

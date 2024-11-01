@@ -59,6 +59,7 @@ class Project(Base):
     lifecycle: Mapped[Lifecycles | None] = mapped_column(ENUM(Lifecycles, name="lifecycle"), nullable=True)
     system_card_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
     last_edited: Mapped[datetime] = mapped_column(server_default=func.now(), onupdate=func.now(), nullable=False)
+    deleted_at: Mapped[datetime | None] = mapped_column(server_default=None, nullable=True)
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:  # noqa: ANN401
         system_card: SystemCard | None = kwargs.pop("system_card", None)
