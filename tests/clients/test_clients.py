@@ -32,7 +32,7 @@ def test_task_registry_api_client_get_instrument(httpx_mock: HTTPXMock):
     # given
     task_registry_api_client = TaskRegistryAPIClient()
     httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/urns/?version=latest&urn=urn%3Anl%3Aaivt%3Atr%3Aiama%3A1.0",
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
         content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
     )
 
@@ -48,7 +48,7 @@ def test_task_registry_api_client_get_instrument_not_succesfull(httpx_mock: HTTP
     task_registry_api_client = TaskRegistryAPIClient()
     httpx_mock.add_response(
         status_code=408,
-        url="https://task-registry.apps.digilab.network/urns/?version=latest&urn=urn%3Anl%3Aaivt%3Atr%3Aiama%3A1.0",
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
     )
 
     urn = "urn:nl:aivt:tr:iama:1.0"

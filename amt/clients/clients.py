@@ -30,7 +30,9 @@ class TaskRegistryAPIClient:
         return RepositoryContent.model_validate(response.json()["entries"])
 
     def get_instrument(self, urn: str, version: str = "latest") -> Instrument:
-        response = self.client.get(f"{TaskRegistryAPIClient.base_url}/urns/", params={"version": version, "urn": urn})
+        response = self.client.get(
+            f"{TaskRegistryAPIClient.base_url}/instruments/urn/{urn}", params={"version": version}
+        )
 
         if response.status_code != 200:
             raise AMTNotFound()
