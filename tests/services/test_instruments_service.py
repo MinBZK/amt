@@ -3,6 +3,7 @@ from amt.core.exceptions import AMTInstrumentError
 from amt.services.instruments import InstrumentsService
 from pytest_httpx import HTTPXMock
 from tests.constants import (
+    TASK_REGISTRY_AIIA_CONTENT_PAYLOAD,
     TASK_REGISTRY_CONTENT_PAYLOAD,
     TASK_REGISTRY_LIST_PAYLOAD,
 )
@@ -21,8 +22,9 @@ def test_fetch_urns(httpx_mock: HTTPXMock):
     result = instruments_service.fetch_urns()
 
     # then
-    assert len(result) == 1
+    assert len(result) == 2
     assert result[0] == "urn:nl:aivt:tr:iama:1.0"
+    assert result[1] == "urn:nl:aivt:tr:aiia:1.0"
 
 
 def test_fetch_instruments(httpx_mock: HTTPXMock):
@@ -33,15 +35,19 @@ def test_fetch_instruments(httpx_mock: HTTPXMock):
     )
 
     httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/urns/?version=latest&urn=urn%3Anl%3Aaivt%3Atr%3Aiama%3A1.0",
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
         content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
+    )
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
+        content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
     )
 
     # when
     result = instruments_service.fetch_instruments()
 
     # then
-    assert len(result) == 1
+    assert len(result) == 2
 
 
 def test_fetch_instrument_with_urn(httpx_mock: HTTPXMock):
@@ -51,7 +57,7 @@ def test_fetch_instrument_with_urn(httpx_mock: HTTPXMock):
         url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
     )
     httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/urns/?version=latest&urn=urn%3Anl%3Aaivt%3Atr%3Aiama%3A1.0",
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
         content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
     )
 
@@ -70,7 +76,7 @@ def test_fetch_instruments_with_urns(httpx_mock: HTTPXMock):
         url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
     )
     httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/urns/?version=latest&urn=urn%3Anl%3Aaivt%3Atr%3Aiama%3A1.0",
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
         content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
     )
 
@@ -105,7 +111,7 @@ def test_fetch_instruments_invalid(httpx_mock: HTTPXMock):
     )
 
     httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/urns/?version=latest&urn=urn%3Anl%3Aaivt%3Atr%3Aiama%3A1.0",
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
         content=b'{"test": 1}',
     )
 

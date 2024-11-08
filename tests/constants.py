@@ -91,6 +91,17 @@ TASK_REGISTRY_LIST_PAYLOAD = """
       "_links": {
         "self": "https://minbzk.github.io/task-registry/instruments/iama.yaml"
       }
+    },
+ {
+      "type": "file",
+      "size": 32897,
+      "name": "aiia.yaml",
+      "path": "instruments/aiia.yaml",
+      "urn": "urn:nl:aivt:tr:aiia:1.0",
+      "download_url": "https://minbzk.github.io/task-registry/instruments/aiia.yaml",
+      "_links": {
+        "self": "https://minbzk.github.io/task-registry/instruments/aiia.yaml"
+      }
     }
 ]
 }
@@ -104,6 +115,29 @@ TASK_REGISTRY_CONTENT_PAYLOAD = """
   "description": "Het IAMA helpt om de risico's voor mensenrechten bij het gebruik van algoritmen \
           in kaart te brengen en maatregelen te nemen om deze aan te pakken.",
   "urn": "urn:nl:aivt:tr:iama:1.0",
+  "language": "nl",
+  "owners": [
+    {
+      "organization": "",
+      "name": "",
+      "email": "",
+      "role": ""
+    }
+  ],
+  "date": "",
+  "url": "https://www.rijksoverheid.nl/documenten/rapporten/2021/02/25/impact-assessment-mensenrechten-en-algoritmes",
+  "tasks": []
+}
+"""
+
+TASK_REGISTRY_AIIA_CONTENT_PAYLOAD = """
+{
+  "systemcard_path": ".assessments[]",
+  "schema_version": "1.1.0",
+  "name": "AI Impact Assessment (AIIA)",
+  "description": "Het IAMA helpt om de risico's voor mensenrechten bij het gebruik van algoritmen \
+          in kaart te brengen en maatregelen te nemen om deze aan te pakken.",
+  "urn": "urn:nl:aivt:tr:aiia:1.0",
   "language": "nl",
   "owners": [
     {

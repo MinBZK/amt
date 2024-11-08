@@ -4,9 +4,17 @@ import pytest
 from amt.api.routes.project import set_path
 from amt.models import Project
 from httpx import AsyncClient
+from pytest_httpx import HTTPXMock
 from pytest_mock import MockFixture
 
-from tests.constants import default_project, default_project_with_system_card, default_task
+from tests.constants import (
+    TASK_REGISTRY_AIIA_CONTENT_PAYLOAD,
+    TASK_REGISTRY_CONTENT_PAYLOAD,
+    TASK_REGISTRY_LIST_PAYLOAD,
+    default_project,
+    default_project_with_system_card,
+    default_task,
+)
 from tests.database_test_utils import DatabaseTestUtils
 
 
@@ -67,7 +75,18 @@ async def test_get_system_card_unknown_project(client: AsyncClient) -> None:
 
 
 @pytest.mark.asyncio
-async def test_get_assessment_card(client: AsyncClient, db: DatabaseTestUtils) -> None:
+async def test_get_assessment_card(client: AsyncClient, httpx_mock: HTTPXMock, db: DatabaseTestUtils) -> None:
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
+    )
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
+        content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
+    )
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
+        content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
+    )
     # given
     await db.given([default_project_with_system_card("testproject1")])
 
@@ -109,7 +128,18 @@ async def test_get_assessment_card_unknown_assessment(client: AsyncClient, db: D
 
 
 @pytest.mark.asyncio
-async def test_get_model_card(client: AsyncClient, db: DatabaseTestUtils) -> None:
+async def test_get_model_card(client: AsyncClient, httpx_mock: HTTPXMock, db: DatabaseTestUtils) -> None:
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
+    )
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
+        content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
+    )
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
+        content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
+    )
     # given
     await db.given([default_project_with_system_card("testproject1")])
 
@@ -161,7 +191,18 @@ async def test_get_project_details(client: AsyncClient, db: DatabaseTestUtils) -
 
 
 @pytest.mark.asyncio
-async def test_get_system_card_requirements(client: AsyncClient, db: DatabaseTestUtils) -> None:
+async def test_get_system_card_requirements(client: AsyncClient, httpx_mock: HTTPXMock, db: DatabaseTestUtils) -> None:
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
+    )
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
+        content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
+    )
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
+        content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
+    )
     # given
     await db.given([default_project_with_system_card("testproject1"), default_task(project_id=1, status_id=1)])
 
@@ -175,7 +216,18 @@ async def test_get_system_card_requirements(client: AsyncClient, db: DatabaseTes
 
 
 @pytest.mark.asyncio
-async def test_get_system_card_data_page(client: AsyncClient, db: DatabaseTestUtils) -> None:
+async def test_get_system_card_data_page(client: AsyncClient, httpx_mock: HTTPXMock, db: DatabaseTestUtils) -> None:
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
+    )
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
+        content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
+    )
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
+        content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
+    )
     # given
     await db.given([default_project_with_system_card("testproject1"), default_task(project_id=1, status_id=1)])
 
@@ -189,7 +241,18 @@ async def test_get_system_card_data_page(client: AsyncClient, db: DatabaseTestUt
 
 
 @pytest.mark.asyncio
-async def test_get_system_card_instruments(client: AsyncClient, db: DatabaseTestUtils) -> None:
+async def test_get_system_card_instruments(client: AsyncClient, httpx_mock: HTTPXMock, db: DatabaseTestUtils) -> None:
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
+    )
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
+        content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
+    )
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
+        content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
+    )
     # given
     await db.given([default_project_with_system_card("testproject1"), default_task(project_id=1, status_id=1)])
 

@@ -13,7 +13,13 @@ from amt.services.instruments_and_requirements_state import (
     get_next_tasks_per_instrument,
     get_task_timestamp_from_assessment_card,
 )
-from tests.constants import default_instrument
+from pytest_httpx import HTTPXMock
+from tests.constants import (
+    TASK_REGISTRY_AIIA_CONTENT_PAYLOAD,
+    TASK_REGISTRY_CONTENT_PAYLOAD,
+    TASK_REGISTRY_LIST_PAYLOAD,
+    default_instrument,
+)
 
 # TODO: Add more cases of the system_card for coverage
 
@@ -171,8 +177,19 @@ def test_find_next_tasks_for_instrument_correct_lifecycle(system_card: SystemCar
     assert tasks["tasks_per_lifecycle"][2] == test_tasks
 
 
-def test_get_state_per_instrument(system_card: SystemCard):
+def test_get_state_per_instrument(system_card: SystemCard, httpx_mock: HTTPXMock):
     instrument_state_service = InstrumentStateService(system_card)
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
+    )
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
+        content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
+    )
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
+        content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
+    )
     res = instrument_state_service.get_state_per_instrument()
     assert {"urn": "urn:nl:aivt:tr:aiia:1.0", "in_progress": 1, "name": "AI Impact Assessment (AIIA)"} in res
     assert {
@@ -184,22 +201,55 @@ def test_get_state_per_instrument(system_card: SystemCard):
     assert {"in_progress": 0, "name": "URN not found in Task Registry.", "urn": "urn:instrument:assessment"} in res
 
 
-def test_get_amount_completed_instruments(system_card: SystemCard):
+def test_get_amount_completed_instruments(system_card: SystemCard, httpx_mock: HTTPXMock):
     instrument_state_service = InstrumentStateService(system_card)
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
+    )
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
+        content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
+    )
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
+        content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
+    )
     _ = instrument_state_service.get_state_per_instrument()
     res = instrument_state_service.get_amount_completed_instruments()
     assert res == 1
 
 
-def test_get_amount_total_instruments(system_card: SystemCard):
+def test_get_amount_total_instruments(system_card: SystemCard, httpx_mock: HTTPXMock):
     instrument_state_service = InstrumentStateService(system_card)
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
+    )
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
+        content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
+    )
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
+        content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
+    )
     _ = instrument_state_service.get_state_per_instrument()
     res = instrument_state_service.get_amount_total_instruments()
     assert res == 3
 
 
-def test_get_amount_completed_instruments_one_completed(system_card: SystemCard):
+def test_get_amount_completed_instruments_one_completed(system_card: SystemCard, httpx_mock: HTTPXMock):
     instrument_state_service = InstrumentStateService(system_card)
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
+    )
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
+        content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
+    )
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
+        content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
+    )
     _ = instrument_state_service.get_state_per_instrument()
     instrument_state_service.instrument_states = [{"in_progress": 0}, {"in_progress": 1}]
     res = instrument_state_service.get_amount_completed_instruments()
