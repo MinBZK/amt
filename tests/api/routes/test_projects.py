@@ -1,5 +1,6 @@
+from collections.abc import MutableMapping
 from datetime import UTC, datetime
-from typing import cast
+from typing import Any, cast
 
 import pytest
 from amt.api.routes.projects import get_localized_value
@@ -12,6 +13,7 @@ from amt.services.task_registry import get_requirements_and_measures
 from fastapi.requests import Request
 from httpx import AsyncClient
 from pytest_mock import MockFixture
+from starlette.datastructures import URL
 
 from tests.constants import default_instrument, default_project
 from tests.database_test_utils import DatabaseTestUtils
@@ -198,8 +200,13 @@ async def test_post_new_projects_write_system_card(
 
 
 class MockRequest(Request):
-    def __init__(self, lang: str) -> None:
+    def __init__(self, lang: str, scope: MutableMapping[str, Any] | None = None, url: str | None = None) -> None:
+        if scope is None:
+            scope = {}
+        if url:
+            self._url = URL(url=url)
         self.lang = lang
+        self.scope = scope
 
     @property
     def headers(self):  # type: ignore

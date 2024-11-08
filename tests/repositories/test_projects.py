@@ -1,8 +1,10 @@
 import pytest
+from amt.api.lifecycles import Lifecycles
+from amt.api.publication_category import PublicationCategories
 from amt.core.exceptions import AMTRepositoryError
 from amt.models import Project
-from amt.repositories.projects import ProjectsRepository
-from tests.constants import default_project
+from amt.repositories.projects import ProjectsRepository, sort_by_lifecycle, sort_by_lifecycle_reversed
+from tests.constants import default_project, default_project_with_lifecycle, default_project_with_system_card
 from tests.database_test_utils import DatabaseTestUtils
 
 
@@ -182,3 +184,126 @@ async def test_raises_exception(db: DatabaseTestUtils):
 
     with pytest.raises(AMTRepositoryError):
         await project_repository.paginate(skip="a", limit=3, search="", filters={}, sort={})  # type: ignore
+
+
+@pytest.mark.asyncio
+async def test_sort_by_lifecyle(db: DatabaseTestUtils):
+    await db.given(
+        [
+            default_project_with_lifecycle(name="Project1", lifecycle=Lifecycles.DESIGN),
+            default_project(name="Project2"),
+        ]
+    )
+    project_repository = ProjectsRepository(db.get_session())
+
+    projects: list[Project] = await project_repository.paginate(skip=0, limit=4, search="", filters={}, sort={})
+    result = sort_by_lifecycle(projects[0])
+    assert result == 2
+
+    result = sort_by_lifecycle(projects[1])
+    assert result == -1
+
+
+@pytest.mark.asyncio
+async def test_sort_by_lifecycle_reversed(db: DatabaseTestUtils):
+    await db.given(
+        [
+            default_project_with_lifecycle(name="Project1", lifecycle=Lifecycles.DESIGN),
+            default_project(name="Project2"),
+        ]
+    )
+    project_repository = ProjectsRepository(db.get_session())
+
+    projects: list[Project] = await project_repository.paginate(skip=0, limit=4, search="", filters={}, sort={})
+    result = sort_by_lifecycle_reversed(projects[0])
+    assert result == -2
+
+    result = sort_by_lifecycle_reversed(projects[1])
+    assert result == 1
+
+
+@pytest.mark.asyncio
+async def test_with_lifecycle_filter(db: DatabaseTestUtils):
+    await db.given(
+        [
+            default_project_with_lifecycle(name="Project1"),
+            default_project(name="Project2"),
+            default_project(name="Project3"),
+            default_project(name="Project4"),
+        ]
+    )
+    project_repository = ProjectsRepository(db.get_session())
+
+    result: list[Project] = await project_repository.paginate(
+        skip=0, limit=4, search="", filters={"lifecycle": Lifecycles.DESIGN.name}, sort={}
+    )
+
+    assert len(result) == 1
+    assert result[0].name == "Project1"
+
+
+@pytest.mark.asyncio
+async def test_with_publication_category_filter(db: DatabaseTestUtils):
+    await db.given(
+        [
+            default_project_with_system_card(name="Project1"),
+            default_project(name="Project2"),
+            default_project(name="Project3"),
+            default_project(name="Project4"),
+        ]
+    )
+    project_repository = ProjectsRepository(db.get_session())
+
+    result: list[Project] = await project_repository.paginate(
+        skip=0, limit=4, search="", filters={"publication-category": PublicationCategories.HOOG_RISICO_AI.name}, sort={}
+    )
+
+    assert len(result) == 1
+    assert result[0].name == "Project1"
+
+
+@pytest.mark.asyncio
+async def test_with_sorting(db: DatabaseTestUtils):
+    await db.given(
+        [
+            default_project_with_lifecycle(name="Project1", lifecycle=Lifecycles.DESIGN),
+            default_project_with_lifecycle(name="Project2", lifecycle=Lifecycles.PHASING_OUT),
+        ]
+    )
+    project_repository = ProjectsRepository(db.get_session())
+
+    # Sort name Ascending
+    result: list[Project] = await project_repository.paginate(
+        skip=0, limit=4, search="", filters={}, sort={"name": "ascending"}
+    )
+    assert result[0].name == "Project1"
+
+    # Sort name Descending
+    result: list[Project] = await project_repository.paginate(
+        skip=0, limit=4, search="", filters={}, sort={"name": "descending"}
+    )
+    assert result[0].name == "Project2"
+
+    # Sort last_update Ascending
+    result: list[Project] = await project_repository.paginate(
+        skip=0, limit=4, search="", filters={}, sort={"last_update": "ascending"}
+    )
+    assert result[0].name == "Project1"
+
+    # Sort last_update Descending
+    result: list[Project] = await project_repository.paginate(
+        skip=0, limit=4, search="", filters={}, sort={"last_update": "descending"}
+    )
+    assert result[0].name == "Project1"
+
+    # Sort lifecycle regular
+    result: list[Project] = await project_repository.paginate(
+        skip=0, limit=4, search="", filters={}, sort={"lifecycle": "ascending"}
+    )
+    assert result[0].name == "Project1"
+
+    # Sort lifecycle reversed
+    result: list[Project] = await project_repository.paginate(
+        skip=0, limit=4, search="", filters={}, sort={"lifecycle": "descending"}
+    )
+    assert result[0].name == "Project2"
