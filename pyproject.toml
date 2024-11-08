@@ -115,10 +115,10 @@ relative_files = true # needed for sonarcloud code coverage
 omit = [
     "tests/*"
 ]
-
+concurrency = ["greenlet", "thread"]
 
 [tool.coverage.report]
-fail_under = 75
+fail_under = 95
 
 [tool.coverage.html]
 directory = "htmlcov"

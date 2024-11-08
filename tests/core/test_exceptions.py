@@ -1,5 +1,7 @@
+from gettext import NullTranslations
+
 import pytest
-from amt.core.exceptions import AMTInstrumentError, AMTNotFound, AMTSettingsError
+from amt.core.exceptions import AMTCSRFProtectError, AMTError, AMTInstrumentError, AMTNotFound, AMTSettingsError
 
 
 def test_settings_error():
@@ -27,3 +29,18 @@ def test_RepositoryNoResultFound():
         exc_info.value.detail
         == "The requested page or resource could not be found. Please check the URL or query and try again."
     )
+
+
+def test_AMTError():
+    e = AMTError()
+    e.detail = "test"  # pyright: ignore [reportAttributeAccessIssue]
+    res = e.getmessage(NullTranslations())  # pyright: ignore [reportArgumentType]
+
+    assert res == "test"
+
+
+def test_AMTCSRFProtectError():
+    with pytest.raises(AMTCSRFProtectError) as exc_info:
+        raise AMTCSRFProtectError()
+
+    assert exc_info.value.detail == "CSRF check failed."
