@@ -44,6 +44,7 @@ msgstr "Rol"
 
 #: amt/api/group_by_category.py:15
 #: amt/site/templates/parts/filter_list.html.j2:94
+#: amt/site/templates/parts/project_search.html.j2:49
 #: amt/site/templates/projects/details_info.html.j2:24
 #: amt/site/templates/projects/new.html.j2:40
 msgid "Lifecycle"
@@ -295,7 +296,7 @@ msgstr "Er zijn enkele fouten"
 msgid "There is one error:"
 msgstr "Er is één fout:"
 
-#: amt/site/templates/layouts/base.html.j2:1
+#: amt/site/templates/layouts/base.html.j2:11
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr "Algoritme Management Toolkit (AMT)"
 
@@ -502,10 +503,6 @@ msgstr "Zoek"
 #: amt/site/templates/parts/project_search.html.j2:32
 msgid "Find algorithm system..."
 msgstr "Vind algoritmesysteem..."
-
-#: amt/site/templates/parts/project_search.html.j2:49
-msgid "Phase"
-msgstr "Fase"
 
 #: amt/site/templates/parts/project_search.html.j2:54
 msgid "Select lifecycle"
