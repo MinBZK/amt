@@ -35,7 +35,7 @@ class ProjectsRepository:
         self.session = session
 
     async def find_all(self) -> Sequence[Project]:
-        result = await self.session.execute(select(Project))
+        result = await self.session.execute(select(Project).where(Project.deleted_at.is_(None)))
         return result.scalars().all()
 
     async def delete(self, project: Project) -> None:
@@ -66,7 +66,7 @@ class ProjectsRepository:
 
     async def find_by_id(self, project_id: int) -> Project:
         try:
-            statement = select(Project).where(Project.id == project_id)
+            statement = select(Project).where(Project.id == project_id).where(Project.deleted_at.is_(None))
             result = await self.session.execute(statement)
             return result.scalars().one()
         except NoResultFound as e:
@@ -103,6 +103,7 @@ class ProjectsRepository:
                     statement = statement.order_by(Project.last_edited.desc())
             else:
                 statement = statement.order_by(func.lower(Project.name))
+            statement = statement.filter(Project.deleted_at.is_(None))
             statement = statement.offset(skip).limit(limit)
             db_result = await self.session.execute(statement)
             result = list(db_result.scalars())

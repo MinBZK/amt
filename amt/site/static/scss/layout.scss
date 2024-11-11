@@ -303,3 +303,8 @@ main {
     color: var(--rvo-form-feedback-error-color);
     font-weight: var(--rvo-form-feedback-error-font-weight);
 }
+
+.amt-flex-container {
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,5 +1,6 @@
 import json
 import logging
+from datetime import datetime
 from functools import lru_cache
 from os import listdir
 from os.path import isfile, join
@@ -36,6 +37,14 @@ class ProjectsService:
 
     async def get(self, project_id: int) -> Project:
         project = await self.repository.find_by_id(project_id)
+        if project.deleted_at:
+            raise AMTNotFound()
+        return project
+
+    async def delete(self, project_id: int) -> Project:
+        project = await self.repository.find_by_id(project_id)
+        project.deleted_at = datetime.now(tz=None)  # noqa: DTZ005
+        project = await self.repository.save(project)
         return project
 
     async def create(self, project_new: ProjectNew) -> Project:

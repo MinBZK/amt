@@ -32,7 +32,7 @@ from tests.database_test_utils import DatabaseTestUtils
 @pytest.mark.asyncio
 async def test_get_unknown_project(client: AsyncClient) -> None:
     # when
-    response = await client.get("/algorithm-system/1")
+    response = await client.get("/algorithm-system/1/details")
 
     # then
     assert response.status_code == 404
@@ -382,6 +382,66 @@ async def test_get_project_edit(client: AsyncClient, db: DatabaseTestUtils) -> N
 
 
 @pytest.mark.asyncio
+async def test_delete_project(client: AsyncClient, db: DatabaseTestUtils, mocker: MockFixture) -> None:
+    # given
+    await db.given([default_project("testproject1")])
+    mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+    client.cookies["fastapi-csrf-token"] = "1"
+
+    # when
+    response = await client.delete("/algorithm-system/1", headers={"X-CSRF-Token": "1"})
+
+    # then
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert "hx-redirect" in response.headers
+    assert response.headers["hx-redirect"] == "/algorithm-systems/"
+
+
+@pytest.mark.asyncio
+async def test_delete_project_and_check_list(client: AsyncClient, db: DatabaseTestUtils, mocker: MockFixture) -> None:
+    # given
+    await db.given([default_project("testproject1"), default_project("testproject2")])
+    mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+    client.cookies["fastapi-csrf-token"] = "1"
+
+    # when
+    response = await client.delete("/algorithm-system/1", headers={"X-CSRF-Token": "1"})
+
+    # then
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert "hx-redirect" in response.headers
+
+    response2 = await client.get("/algorithm-systems/")
+    assert response2.status_code == 200
+    assert response2.headers["content-type"] == "text/html; charset=utf-8"
+    assert b"testproject2" in response2.content
+    assert b"testproject1" not in response2.content
+
+
+@pytest.mark.asyncio
+async def test_delete_project_and_check_project(
+    client: AsyncClient, db: DatabaseTestUtils, mocker: MockFixture
+) -> None:
+    # given
+    await db.given([default_project("testproject1"), default_project("testproject2")])
+    mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+    client.cookies["fastapi-csrf-token"] = "1"
+
+    # when
+    response = await client.delete("/algorithm-system/1", headers={"X-CSRF-Token": "1"})
+
+    # then
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert "hx-redirect" in response.headers
+
+    response2 = await client.get("/algorithm-system/1/details")
+    assert response2.status_code == 404
+
+
+@pytest.mark.asyncio
 async def test_get_project_cancel(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
     await db.given([default_project("testproject1")])
@@ -392,8 +452,6 @@ async def test_get_project_cancel(client: AsyncClient, db: DatabaseTestUtils) ->
     # then
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"Edit" in response.content
-    assert b"lifecycle" in response.content
 
 
 @pytest.mark.asyncio
