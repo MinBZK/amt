@@ -1,3 +1,4 @@
+import asyncio
 import logging
 from pathlib import Path
 from typing import Any
@@ -7,7 +8,7 @@ import yaml
 
 from amt.schema.instrument import Instrument
 from amt.schema.system_card import SystemCard
-from amt.services.instruments import InstrumentsService
+from amt.services.instruments import create_instrument_service
 from amt.services.instruments_and_requirements_state import all_lifecycles, get_all_next_tasks
 from amt.services.storage import StorageFactory
 
@@ -29,8 +30,8 @@ def get_requested_instruments(all_instruments: list[Instrument], urns: list[str]
 def get_tasks_by_priority(urns: list[str], system_card_path: Path) -> None:
     try:
         system_card = get_system_card(system_card_path)
-        instruments_service = InstrumentsService()
-        all_instruments = instruments_service.fetch_instruments()
+        instruments_service = create_instrument_service()
+        all_instruments = asyncio.run(instruments_service.fetch_instruments())
         instruments = get_requested_instruments(all_instruments, urns)
         next_tasks = get_all_next_tasks(instruments, system_card)
 

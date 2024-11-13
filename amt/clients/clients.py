@@ -1,45 +1,54 @@
 import logging
+from enum import StrEnum
+from typing import Any
 
 import httpx
 from amt.core.exceptions import AMTInstrumentError, AMTNotFound
 from amt.schema.github import RepositoryContent
-from amt.schema.instrument import Instrument
 
 logger = logging.getLogger(__name__)
 
 
-class TaskRegistryAPIClient:
-    """
-    This class interacts with the Task Registry API.
+class TaskType(StrEnum):
+    INSTRUMENTS = "instruments"
+    REQUIREMENTS = "requirements"
+    MEASURES = "measures"
 
-    Currently it supports:
-        - Retrieving the list of instruments.
-        - Getting an instrument by URN.
+
+class APIClient:
+    """
+    Base API client with common HTTP functionality.
     """
 
-    base_url = "https://task-registry.apps.digilab.network"
+    def __init__(self, base_url: str, max_retries: int = 3, timeout: int = 5) -> None:
+        self.base_url = base_url
+        transport = httpx.AsyncHTTPTransport(retries=max_retries)
+        self.client = httpx.AsyncClient(timeout=timeout, transport=transport)
+
+    async def _make_request(self, endpoint: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
+        response = await self.client.get(f"{self.base_url}/{endpoint}", params=params)
+        if response.status_code != 200:
+            raise AMTNotFound()
+        return response.json()
+
+
+class TaskRegistryAPIClient(APIClient):
+    """
+    Client for interacting with the Task Registry API.
+    """
 
     def __init__(self, max_retries: int = 3, timeout: int = 5) -> None:
-        transport = httpx.HTTPTransport(retries=max_retries)
-        self.client = httpx.Client(timeout=timeout, transport=transport)
-
-    def get_instrument_list(self) -> RepositoryContent:
-        response = self.client.get(f"{TaskRegistryAPIClient.base_url}/instruments/")
-        if response.status_code != 200:
-            raise AMTNotFound()
-        return RepositoryContent.model_validate(response.json()["entries"])
-
-    def get_instrument(self, urn: str, version: str = "latest") -> Instrument:
-        response = self.client.get(
-            f"{TaskRegistryAPIClient.base_url}/instruments/urn/{urn}", params={"version": version}
+        super().__init__(
+            base_url="https://task-registry.apps.digilab.network", max_retries=max_retries, timeout=timeout
         )
 
-        if response.status_code != 200:
-            raise AMTNotFound()
+    async def get_list_of_task(self, task: TaskType = TaskType.INSTRUMENTS) -> RepositoryContent:
+        response_data = await self._make_request(f"{task.value}/")
+        return RepositoryContent.model_validate(response_data["entries"])
 
-        data = response.json()
-        if "urn" not in data:
-            logger.exception("Invalid instrument fetched: key 'urn' must occur in instrument.")
+    async def get_task_by_urn(self, task_type: TaskType, urn: str, version: str = "latest") -> dict[str, Any]:
+        response_data = await self._make_request(f"{task_type.value}/urn/{urn}", params={"version": version})
+        if "urn" not in response_data:
+            logger.exception(f"Invalid task {task_type.value} fetched: key 'urn' must occur in task {task_type.value}.")
             raise AMTInstrumentError()
-
-        return Instrument(**data)
+        return response_data

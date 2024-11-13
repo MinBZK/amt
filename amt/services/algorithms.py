@@ -15,7 +15,7 @@ from amt.repositories.algorithms import AlgorithmsRepository
 from amt.schema.algorithm import AlgorithmNew
 from amt.schema.instrument import InstrumentBase
 from amt.schema.system_card import AiActProfile, SystemCard
-from amt.services.instruments import InstrumentsService
+from amt.services.instruments import InstrumentsService, create_instrument_service
 from amt.services.task_registry import get_requirements_and_measures
 from amt.services.tasks import TasksService
 
@@ -29,7 +29,7 @@ class AlgorithmsService:
         self,
         repository: Annotated[AlgorithmsRepository, Depends(AlgorithmsRepository)],
         task_service: Annotated[TasksService, Depends(TasksService)],
-        instrument_service: Annotated[InstrumentsService, Depends(InstrumentsService)],
+        instrument_service: Annotated[InstrumentsService, Depends(create_instrument_service)],
     ) -> None:
         self.repository = repository
         self.instrument_service = instrument_service
@@ -103,7 +103,7 @@ class AlgorithmsService:
         algorithm = Algorithm(name=algorithm_new.name, lifecycle=algorithm_new.lifecycle, system_card=system_card)
         algorithm = await self.update(algorithm)
 
-        selected_instruments = self.instrument_service.fetch_instruments(
+        selected_instruments = await self.instrument_service.fetch_instruments(
             [instrument.urn for instrument in algorithm.system_card.instruments]
         )
         for instrument in selected_instruments:

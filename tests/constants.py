@@ -111,6 +111,42 @@ TASK_REGISTRY_LIST_PAYLOAD = """
 }
 """
 
+TASK_REGISTRY_MEASURES_LIST_PAYLOAD = """
+{
+entries": [
+    {
+      "type": "file",
+      "size": 2075,
+      "name": "3-dat-03-persoonsgegevens-beschrijven.yaml",
+      "path": "measures/3-dat-03-persoonsgegevens-beschrijven.yaml",
+      "urn": "urn:nl:ak:mtr:dat-03",
+      "download_url": "https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-03",
+      "links": {
+        "self": "https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-03"
+      }
+    }
+]
+}
+"""
+
+TASK_REGISTRY_REQUIREMENTS_LIST_PAYLOAD = """
+{
+"entries": [
+    {
+      "type": "file",
+      "size": 2032,
+      "name": "aia-08-transparantie-aan-gebruiksverantwoordelijken.yaml",
+      "path": "requirements/aia-08-transparantie-aan-gebruiksverantwoordelijken.yaml",
+      "urn": "urn:nl:ak:ver:aia-08",
+      "download_url": "https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-08",
+      "links": {
+        "self": "https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-08"
+      }
+    }
+]
+}
+"""
+
 TASK_REGISTRY_CONTENT_PAYLOAD = """
 {
   "systemcard_path": ".assessments[]",
@@ -154,5 +190,18 @@ TASK_REGISTRY_AIIA_CONTENT_PAYLOAD = """
   "date": "",
   "url": "https://www.rijksoverheid.nl/documenten/rapporten/2021/02/25/impact-assessment-mensenrechten-en-algoritmes",
   "tasks": []
+}
+"""
+
+TASK_REGISTRY_REQ_CONTENT_PAYLOAD = """
+{
+  "name": "Hoog-risico-AI-systemen zijn op een transparante manier ontwikkeld en ontworpen",
+  "description": "AI-systemen met een hoog risico worden op zodanige wijze ontworpen en ontwikkeld dat de werking \
+          ervan voldoende transparant is om gebruiksverantwoordelijken in staat te stellen de output van een \
+          systeem te interpreteren en op passende wijze te gebruiken.Een passende soort en mate van \
+          transparantie wordt gewaarborgd met het oog op de naleving van de relevante verplichtingen \
+          van de aanbieder en de gebruiksverantwoordelijke zoals uiteengezet in afdeling 3 van Artikel\
+          13 van de AI verordening.",
+  "urn": "urn:nl:ak:ver:aia-08"
 }
 """

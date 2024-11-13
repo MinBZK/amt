@@ -23,19 +23,19 @@ from amt.schema.measure import ExtendedMeasureTask, MeasureTask
 from amt.schema.requirement import RequirementTask
 from amt.schema.system_card import SystemCard
 from amt.schema.task import MovedTask
-from amt.services import task_registry
 from amt.services.algorithms import AlgorithmsService
 from amt.services.instruments_and_requirements_state import InstrumentStateService, RequirementsStateService
-from amt.services.task_registry import fetch_measures, fetch_requirements
+from amt.services.measures import MeasuresService, create_measures_service
+from amt.services.requirements import RequirementsService, create_requirements_service
 from amt.services.tasks import TasksService
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
 
 
-def get_instrument_state(system_card: SystemCard) -> dict[str, Any]:
+async def get_instrument_state(system_card: SystemCard) -> dict[str, Any]:
     instrument_state = InstrumentStateService(system_card)
-    instrument_states = instrument_state.get_state_per_instrument()
+    instrument_states = await instrument_state.get_state_per_instrument()
     return {
         "instrument_states": instrument_states,
         "count_0": instrument_state.get_amount_completed_instruments(),
@@ -43,8 +43,11 @@ def get_instrument_state(system_card: SystemCard) -> dict[str, Any]:
     }
 
 
-def get_requirements_state(system_card: SystemCard) -> dict[str, Any]:
-    requirements = fetch_requirements([requirement.urn for requirement in system_card.requirements])
+async def get_requirements_state(system_card: SystemCard) -> dict[str, Any]:
+    requirements_service = create_requirements_service()
+    requirements = await requirements_service.fetch_requirements(
+        [requirement.urn for requirement in system_card.requirements]
+    )
     requirements_state_service = RequirementsStateService(system_card)
     requirements_state = requirements_state_service.get_requirements_state(requirements)
 
@@ -106,8 +109,8 @@ async def get_tasks(
     tasks_service: Annotated[TasksService, Depends(TasksService)],
 ) -> HTMLResponse:
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
-    instrument_state = get_instrument_state(algorithm.system_card)
-    requirements_state = get_requirements_state(algorithm.system_card)
+    instrument_state = await get_instrument_state(algorithm.system_card)
+    requirements_state = await get_requirements_state(algorithm.system_card)
     tab_items = get_algorithm_details_tabs(request)
     tasks_by_status = await gather_algorithm_tasks(algorithm_id, task_service=tasks_service)
 
@@ -168,8 +171,8 @@ async def get_algorithm_context(
     algorithm_id: int, algorithms_service: AlgorithmsService, request: Request
 ) -> tuple[Algorithm, dict[str, Any]]:
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
-    instrument_state = get_instrument_state(algorithm.system_card)
-    requirements_state = get_requirements_state(algorithm.system_card)
+    instrument_state = await get_instrument_state(algorithm.system_card)
+    requirements_state = await get_requirements_state(algorithm.system_card)
     tab_items = get_algorithm_details_tabs(request)
     return algorithm, {
         "last_edited": algorithm.last_edited,
@@ -275,8 +278,8 @@ async def get_system_card(
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
 ) -> HTMLResponse:
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
-    instrument_state = get_instrument_state(algorithm.system_card)
-    requirements_state = get_requirements_state(algorithm.system_card)
+    instrument_state = await get_instrument_state(algorithm.system_card)
+    requirements_state = await get_requirements_state(algorithm.system_card)
 
     tab_items = get_algorithm_details_tabs(request)
 
@@ -320,8 +323,8 @@ async def get_algorithm_inference(
         request,
     )
 
-    instrument_state = get_instrument_state(algorithm.system_card)
-    requirements_state = get_requirements_state(algorithm.system_card)
+    instrument_state = await get_instrument_state(algorithm.system_card)
+    requirements_state = await get_requirements_state(algorithm.system_card)
 
     tab_items = get_algorithm_details_tabs(request)
 
@@ -344,10 +347,12 @@ async def get_system_card_requirements(
     request: Request,
     algorithm_id: int,
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
+    requirements_service: Annotated[RequirementsService, Depends(create_requirements_service)],
+    measures_service: Annotated[MeasuresService, Depends(create_measures_service)],
 ) -> HTMLResponse:
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
-    instrument_state = get_instrument_state(algorithm.system_card)
-    requirements_state = get_requirements_state(algorithm.system_card)
+    instrument_state = await get_instrument_state(algorithm.system_card)
+    requirements_state = await get_requirements_state(algorithm.system_card)
     tab_items = get_algorithm_details_tabs(request)
 
     breadcrumbs = resolve_base_navigation_items(
@@ -359,13 +364,15 @@ async def get_system_card_requirements(
         request,
     )
 
-    requirements = fetch_requirements([requirement.urn for requirement in algorithm.system_card.requirements])
+    requirements = await requirements_service.fetch_requirements(
+        [requirement.urn for requirement in algorithm.system_card.requirements]
+    )
 
     # Get measures that correspond to the requirements and merge them with the measuretasks
     requirements_and_measures = []
     for requirement in requirements:
         completed_measures_count = 0
-        linked_measures = fetch_measures(requirement.links)
+        linked_measures = await measures_service.fetch_measures(requirement.links)
         extended_linked_measures: list[ExtendedMeasureTask] = []
         for measure in linked_measures:
             measure_task = find_measure_task(algorithm.system_card, measure.urn)
@@ -410,16 +417,18 @@ def find_requirement_task(system_card: SystemCard, requirement_urn: str) -> Requ
     return None
 
 
-def find_requirement_tasks_by_measure_urn(system_card: SystemCard, measure_urn: str) -> list[RequirementTask]:
+async def find_requirement_tasks_by_measure_urn(system_card: SystemCard, measure_urn: str) -> list[RequirementTask]:
     requirement_mapper: dict[str, RequirementTask] = {}
     for requirement_task in system_card.requirements:
         requirement_mapper[requirement_task.urn] = requirement_task
 
     requirement_tasks: list[RequirementTask] = []
-    measure = fetch_measures([measure_urn])
+    measures_service = create_measures_service()
+    requirements_service = create_requirements_service()
+    measure = await measures_service.fetch_measures(measure_urn)
     for requirement_urn in measure[0].links:
         # TODO: This is because measure are linked to too many requirement not applicable in our use case
-        if len(fetch_requirements([requirement_urn])) > 0:
+        if len(await requirements_service.fetch_requirements(requirement_urn)) > 0:
             requirement_tasks.append(requirement_mapper[requirement_urn])
 
     return requirement_tasks
@@ -443,7 +452,8 @@ async def get_measure(
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
 ) -> HTMLResponse:
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
-    measure = task_registry.fetch_measures([measure_urn])
+    measures_service = create_measures_service()
+    measure = await measures_service.fetch_measures([measure_urn])
     measure_task = find_measure_task(algorithm.system_card, measure_urn)
 
     context = {
@@ -468,6 +478,7 @@ async def update_measure_value(
     measure_urn: str,
     measure_update: MeasureUpdate,
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
+    requirements_service: Annotated[RequirementsService, Depends(create_requirements_service)],
 ) -> HTMLResponse:
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
 
@@ -476,9 +487,9 @@ async def update_measure_value(
     measure_task.value = measure_update.measure_value  # pyright: ignore [reportOptionalMemberAccess]
 
     # update for the linked requirements the state based on all it's measures
-    requirement_tasks = find_requirement_tasks_by_measure_urn(algorithm.system_card, measure_urn)
+    requirement_tasks = await find_requirement_tasks_by_measure_urn(algorithm.system_card, measure_urn)
     requirement_urns = [requirement_task.urn for requirement_task in requirement_tasks]
-    requirements = fetch_requirements(requirement_urns)
+    requirements = await requirements_service.fetch_requirements(requirement_urns)
 
     for requirement in requirements:
         count_completed = 0
@@ -512,8 +523,8 @@ async def get_system_card_data_page(
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
 ) -> HTMLResponse:
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
-    instrument_state = get_instrument_state(algorithm.system_card)
-    requirements_state = get_requirements_state(algorithm.system_card)
+    instrument_state = await get_instrument_state(algorithm.system_card)
+    requirements_state = await get_requirements_state(algorithm.system_card)
 
     tab_items = get_algorithm_details_tabs(request)
 
@@ -550,8 +561,8 @@ async def get_system_card_instruments(
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
 ) -> HTMLResponse:
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
-    instrument_state = get_instrument_state(algorithm.system_card)
-    requirements_state = get_requirements_state(algorithm.system_card)
+    instrument_state = await get_instrument_state(algorithm.system_card)
+    requirements_state = await get_requirements_state(algorithm.system_card)
 
     tab_items = get_algorithm_details_tabs(request)
 
@@ -584,8 +595,8 @@ async def get_assessment_card(
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
 ) -> HTMLResponse:
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
-    instrument_state = get_instrument_state(algorithm.system_card)
-    requirements_state = get_requirements_state(algorithm.system_card)
+    instrument_state = await get_instrument_state(algorithm.system_card)
+    requirements_state = await get_requirements_state(algorithm.system_card)
 
     request.state.path_variables.update({"assessment_card": assessment_card})
 
@@ -635,8 +646,8 @@ async def get_model_card(
 ) -> HTMLResponse:
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
     request.state.path_variables.update({"model_card": model_card})
-    instrument_state = get_instrument_state(algorithm.system_card)
-    requirements_state = get_requirements_state(algorithm.system_card)
+    instrument_state = await get_instrument_state(algorithm.system_card)
+    requirements_state = await get_requirements_state(algorithm.system_card)
 
     tab_items = get_algorithm_details_tabs(request)
 
