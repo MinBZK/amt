@@ -1,4 +1,5 @@
 import json
+from uuid import UUID
 
 from amt.api.lifecycles import Lifecycles
 from amt.api.navigation import BaseNavigationItem, DisplayText
@@ -18,12 +19,13 @@ def default_base_navigation_item(
     return BaseNavigationItem(display_text=display_text, url=url, custom_display_text=custom_display_text, icon=icon)
 
 
-def default_user(name: str = "default user", avatar: str | None = None) -> User:
-    return User(name=name, avatar=avatar)
-
-
 def default_project(name: str = "default project") -> Project:
     return Project(name=name)
+
+
+def default_user(id: str | UUID = "00494b4d-bcdf-425a-8140-bea0f3cbd3c2", name: str = "John Smith") -> User:
+    id = UUID(id) if isinstance(id, str) else id
+    return User(id=id, name=name)
 
 
 def default_project_with_system_card(name: str = "default project") -> Project:

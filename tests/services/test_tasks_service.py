@@ -84,9 +84,9 @@ async def test_get_tasks_for_project(tasks_service_with_mock: TasksService, mock
 @pytest.mark.asyncio
 async def test_assign_task(tasks_service_with_mock: TasksService, mock_tasks_repository: TasksRepository):
     task1: Task = await mock_tasks_repository.find_by_id(1)
-    user1: User = User(id=1, name="User 1", avatar="none.jpg")
+    user1: User = User(id="1", name="User 1")
     await tasks_service_with_mock.assign_task(task1, user1)
-    assert task1.user_id == 1
+    assert task1.user_id == "1"
 
 
 @pytest.mark.asyncio

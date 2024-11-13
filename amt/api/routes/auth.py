@@ -1,14 +1,18 @@
 import hashlib
 import logging
+from typing import Annotated
 from urllib.parse import quote_plus
+from uuid import UUID
 
 from authlib.integrations.starlette_client import OAuth, OAuthError  # type: ignore
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Depends, Request
 from fastapi.responses import HTMLResponse, RedirectResponse, Response
 
 from amt.api.deps import templates
 from amt.core.authorization import get_user
 from amt.core.exceptions import AMTAuthorizationFlowError
+from amt.models.user import User
+from amt.services.users import UsersService
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -42,7 +46,10 @@ async def logout(request: Request) -> RedirectResponse:  # pragma: no cover
 
 
 @router.get("/callback", response_class=Response)
-async def auth_callback(request: Request) -> Response:  # pragma: no cover
+async def auth_callback(
+    request: Request,
+    users_service: Annotated[UsersService, Depends(UsersService)],
+) -> Response:  # pragma: no cover
     oauth: OAuth = request.app.state.oauth
     try:
         token = await oauth.keycloak.authorize_access_token(request)  # type: ignore
@@ -57,6 +64,10 @@ async def auth_callback(request: Request) -> Response:  # pragma: no cover
     if "name" in user and isinstance(user["name"], str):
         name: str = str(user["name"]).strip().lower()  # type: ignore
         user["name_encoded"] = quote_plus(name)
+
+    if "sub" in user and isinstance(user["sub"], str):
+        new_user = User(id=UUID(user["sub"]), name=user["name"])  # type: ignore
+        new_user = await users_service.create_or_update(new_user)
 
     if user:
         request.session["user"] = dict(user)  # type: ignore
