@@ -156,6 +156,6 @@ class ModelCardSchema(BaseModel):
     name: str | None = Field(None, description="Name of the model")
     language: list[str] | None = Field(None, description="The natural languages the model supports in ISO 639")
     license: License
-    tags: list[str] | None = Field(None, description="Tags with keywords to describe the project")
+    tags: list[str] | None = Field(None, description="Tags with keywords to describe the algorithm")
     owners: list[Owner] | None = None
     model_index: list[ModelIndexItem] = Field(alias="model-index")  # pyright: ignore [reportGeneralTypeIssues]

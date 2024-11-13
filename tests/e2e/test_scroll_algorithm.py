@@ -3,12 +3,12 @@ from playwright.sync_api import Page, expect
 
 
 @pytest.mark.slow
-def test_e2e_scroll_projects(page: Page) -> None:
+def test_e2e_scroll_algorithms(page: Page) -> None:
     page.goto("/algorithm-systems/?limit=100")
 
-    project_links = page.locator("#search-results-table tr").count() - 1
+    algorithm_links = page.locator("#search-results-table tr").count() - 1
 
-    assert project_links == 100
+    assert algorithm_links == 100
 
     expect(page.locator('[data-marker="last-element"]')).to_be_visible()
 
@@ -18,5 +18,5 @@ def test_e2e_scroll_projects(page: Page) -> None:
     response = response_info.value
     assert response.status == 200
 
-    project_links = page.locator("#search-results-table tr").count()
-    assert project_links > 100
+    algorithm_links = page.locator("#search-results-table tr").count()
+    assert algorithm_links > 100

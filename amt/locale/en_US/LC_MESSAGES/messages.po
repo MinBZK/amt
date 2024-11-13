@@ -1,6 +1,6 @@
 # English (United States) translations for PROJECT.
 # Copyright (C) 2024 ORGANIZATION
-# This file is distributed under the same license as the PROJECT project.
+# This file is distributed under the same license as the PROJECT algorithm.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
 #
 msgid ""
@@ -43,10 +43,10 @@ msgid "Role"
 msgstr ""
 
 #: amt/api/group_by_category.py:15
+#: amt/site/templates/algorithms/details_info.html.j2:24
+#: amt/site/templates/algorithms/new.html.j2:40
+#: amt/site/templates/parts/algorithm_search.html.j2:49
 #: amt/site/templates/parts/filter_list.html.j2:94
-#: amt/site/templates/parts/project_search.html.j2:49
-#: amt/site/templates/projects/details_info.html.j2:24
-#: amt/site/templates/projects/new.html.j2:40
 msgid "Lifecycle"
 msgstr ""
 
@@ -142,7 +142,7 @@ msgstr ""
 msgid "Model"
 msgstr ""
 
-#: amt/api/navigation.py:59 amt/site/templates/projects/new.html.j2:149
+#: amt/api/navigation.py:59 amt/site/templates/algorithms/new.html.j2:149
 msgid "Instruments"
 msgstr ""
 
@@ -226,6 +226,275 @@ msgid ""
 "later."
 msgstr ""
 
+#: amt/site/templates/algorithms/details_base.html.j2:19
+msgid "Delete algoritmic system"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_base.html.j2:26
+msgid "Are you sure you want to delete your algoritmic system "
+msgstr ""
+
+#: amt/site/templates/algorithms/details_base.html.j2:30
+msgid ""
+"Data will be stored for at least 45 days before permanent\n"
+"                deletion."
+msgstr ""
+
+#: amt/site/templates/algorithms/details_base.html.j2:39
+#: amt/site/templates/algorithms/new.html.j2:132
+msgid "Yes"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_base.html.j2:44
+#: amt/site/templates/algorithms/new.html.j2:142
+msgid "No"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_base.html.j2:57
+msgid "Delete algorithm system"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_base.html.j2:71
+msgid "Does the algorithm meet the requirements?"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_base.html.j2:74
+#: amt/site/templates/algorithms/details_base.html.j2:100
+#: amt/site/templates/algorithms/details_base.html.j2:129
+#: amt/site/templates/algorithms/details_base.html.j2:152
+#: amt/site/templates/macros/tasks.html.j2:32
+msgid "Done"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_base.html.j2:96
+#: amt/site/templates/algorithms/details_base.html.j2:150
+msgid "To do"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_base.html.j2:98
+msgid "In progress"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_base.html.j2:115
+msgid "Go to all requirements"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_base.html.j2:126
+msgid "Which instruments are executed?"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_base.html.j2:167
+msgid "Go to all instruments"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_data.html.j2:3
+#: amt/site/templates/algorithms/details_instruments.html.j2:3
+msgid "To be implemented"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_inference.html.j2:7
+msgid "Floor area (m²):"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_inference.html.j2:16
+msgid "Plot size (m²):"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_inference.html.j2:25
+msgid "Building year:"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_inference.html.j2:34
+msgid "Object type:"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_inference.html.j2:43
+msgid "Number of annexes:"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_inference.html.j2:52
+msgid "Neighborhood code:"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_inference.html.j2:61
+msgid "Quality rating:"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_inference.html.j2:73
+msgid "Maintenance rating:"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_inference.html.j2:85
+msgid "Amenities rating:"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_inference.html.j2:97
+msgid "Location rating:"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_inference.html.j2:113
+msgid "Estimate WOZ Value"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_inference.html.j2:117
+msgid "Estimated WOZ Value"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_inference.html.j2:119
+msgid "Undefined"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_inference.html.j2:175
+msgid "Failed to estimate WOZ value: "
+msgstr ""
+
+#: amt/site/templates/algorithms/details_info.html.j2:8
+#: amt/site/templates/auth/profile.html.j2:34
+msgid "Name"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_info.html.j2:12
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:19
+msgid "Description"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_info.html.j2:16
+msgid "Repository"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_info.html.j2:20
+msgid "Algorithm system code"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_info.html.j2:28
+#: amt/site/templates/pages/assessment_card.html.j2:7
+#: amt/site/templates/pages/model_card.html.j2:6
+#: amt/site/templates/pages/system_card.html.j2:4
+#: amt/site/templates/parts/filter_list.html.j2:98
+#: amt/site/templates/parts/filter_list.html.j2:120
+msgid "Last updated"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_info.html.j2:32
+msgid "Labels"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_info.html.j2:40
+msgid "References"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:29
+msgid "Read more on the algoritmekader"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:38
+msgid "Status"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:45
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:47
+msgid "to do"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:50
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:52
+msgid "in progress"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:55
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:57
+msgid "done"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:68
+msgid "Information on how this measure is implemented"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:74
+msgid ""
+"Describe how the measure has been implemented, including challenges and "
+"solutions."
+msgstr ""
+
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:84
+#: amt/site/templates/macros/editable.html.j2:63
+msgid "Save"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:88
+#: amt/site/templates/macros/editable.html.j2:68
+msgid "Cancel"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_requirements.html.j2:26
+msgid "measures executed"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_requirements.html.j2:55
+#: amt/site/templates/macros/editable.html.j2:24
+#: amt/site/templates/macros/editable.html.j2:27
+msgid "Edit"
+msgstr ""
+
+#: amt/site/templates/algorithms/new.html.j2:7
+msgid "Create a Algorithm System"
+msgstr ""
+
+#: amt/site/templates/algorithms/new.html.j2:25
+msgid "Algorithm System name"
+msgstr ""
+
+#: amt/site/templates/algorithms/new.html.j2:29
+msgid "Name of the algorithm system"
+msgstr ""
+
+#: amt/site/templates/algorithms/new.html.j2:43
+msgid "Select the lifecycle your algorithm system is currently in."
+msgstr ""
+
+#: amt/site/templates/algorithms/new.html.j2:44
+msgid "For more information on lifecycle, read the"
+msgstr ""
+
+#: amt/site/templates/algorithms/new.html.j2:47
+msgid "Algorithm Framework"
+msgstr ""
+
+#: amt/site/templates/algorithms/new.html.j2:65
+msgid "AI Act Profile"
+msgstr ""
+
+#: amt/site/templates/algorithms/new.html.j2:67
+msgid ""
+"The AI Act profile provides insight into, among other things, the type of"
+" AI system and the associated obligations from the European AI Act. If "
+"you already know the type of AI system you can fill in the below fields. "
+"Otherwise, you can find your AI Act Profile with the AI Act Decision "
+"tree."
+msgstr ""
+
+#: amt/site/templates/algorithms/new.html.j2:74
+msgid "Find your AI Act profile"
+msgstr ""
+
+#: amt/site/templates/algorithms/new.html.j2:151
+msgid ""
+"Overview of instruments for the responsible development, deployment, "
+"assessment and monitoring of algorithms and AI-systems."
+msgstr ""
+
+#: amt/site/templates/algorithms/new.html.j2:159
+msgid "Choose one or more instruments"
+msgstr ""
+
+#: amt/site/templates/algorithms/new.html.j2:183
+msgid "Create Algorithm System"
+msgstr ""
+
+#: amt/site/templates/algorithms/new.html.j2:200
+msgid "Copy results and close"
+msgstr ""
+
 #: amt/site/templates/auth/profile.html.j2:10
 msgid "of"
 msgstr ""
@@ -236,11 +505,6 @@ msgstr ""
 
 #: amt/site/templates/auth/profile.html.j2:30
 msgid "Edit image"
-msgstr ""
-
-#: amt/site/templates/auth/profile.html.j2:34
-#: amt/site/templates/projects/details_info.html.j2:8
-msgid "Name"
 msgstr ""
 
 #: amt/site/templates/auth/profile.html.j2:37
@@ -292,22 +556,6 @@ msgstr ""
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr ""
 
-#: amt/site/templates/macros/editable.html.j2:24
-#: amt/site/templates/macros/editable.html.j2:27
-#: amt/site/templates/projects/details_requirements.html.j2:55
-msgid "Edit"
-msgstr ""
-
-#: amt/site/templates/macros/editable.html.j2:63
-#: amt/site/templates/projects/details_measure_modal.html.j2:84
-msgid "Save"
-msgstr ""
-
-#: amt/site/templates/macros/editable.html.j2:68
-#: amt/site/templates/projects/details_measure_modal.html.j2:88
-msgid "Cancel"
-msgstr ""
-
 #: amt/site/templates/macros/table_row.html.j2:19
 msgid " ago"
 msgstr ""
@@ -324,25 +572,8 @@ msgstr ""
 msgid "Reviewing"
 msgstr ""
 
-#: amt/site/templates/macros/tasks.html.j2:32
-#: amt/site/templates/projects/details_base.html.j2:74
-#: amt/site/templates/projects/details_base.html.j2:100
-#: amt/site/templates/projects/details_base.html.j2:129
-#: amt/site/templates/projects/details_base.html.j2:152
-msgid "Done"
-msgstr ""
-
 #: amt/site/templates/macros/tasks.html.j2:35
 msgid "Unknown"
-msgstr ""
-
-#: amt/site/templates/pages/assessment_card.html.j2:7
-#: amt/site/templates/pages/model_card.html.j2:6
-#: amt/site/templates/pages/system_card.html.j2:4
-#: amt/site/templates/parts/filter_list.html.j2:98
-#: amt/site/templates/parts/filter_list.html.j2:120
-#: amt/site/templates/projects/details_info.html.j2:28
-msgid "Last updated"
 msgstr ""
 
 #: amt/site/templates/pages/assessment_card.html.j2:7
@@ -424,6 +655,42 @@ msgstr ""
 msgid "Model cards"
 msgstr ""
 
+#: amt/site/templates/parts/algorithm_search.html.j2:9
+msgid "Algorithm Systems"
+msgstr ""
+
+#: amt/site/templates/parts/algorithm_search.html.j2:15
+msgid "New algorithm system"
+msgstr ""
+
+#: amt/site/templates/parts/algorithm_search.html.j2:25
+msgid "Search"
+msgstr ""
+
+#: amt/site/templates/parts/algorithm_search.html.j2:32
+msgid "Find algorithm system..."
+msgstr ""
+
+#: amt/site/templates/parts/algorithm_search.html.j2:54
+msgid "Select lifecycle"
+msgstr ""
+
+#: amt/site/templates/parts/algorithm_search.html.j2:63
+msgid "Category"
+msgstr ""
+
+#: amt/site/templates/parts/algorithm_search.html.j2:68
+msgid "Select publication category"
+msgstr ""
+
+#: amt/site/templates/parts/algorithm_search.html.j2:86
+msgid "Group by"
+msgstr ""
+
+#: amt/site/templates/parts/algorithm_search.html.j2:96
+msgid "Select group by"
+msgstr ""
+
 #: amt/site/templates/parts/filter_list.html.j2:32
 #, python-format
 msgid ""
@@ -462,272 +729,5 @@ msgstr ""
 msgid ""
 "  |  This website is under development  |  All versions are created in an"
 " open manner."
-msgstr ""
-
-#: amt/site/templates/parts/project_search.html.j2:9
-msgid "Algorithm Systems"
-msgstr ""
-
-#: amt/site/templates/parts/project_search.html.j2:15
-msgid "New algorithm system"
-msgstr ""
-
-#: amt/site/templates/parts/project_search.html.j2:25
-msgid "Search"
-msgstr ""
-
-#: amt/site/templates/parts/project_search.html.j2:32
-msgid "Find algorithm system..."
-msgstr ""
-
-#: amt/site/templates/parts/project_search.html.j2:54
-msgid "Select lifecycle"
-msgstr ""
-
-#: amt/site/templates/parts/project_search.html.j2:63
-msgid "Category"
-msgstr ""
-
-#: amt/site/templates/parts/project_search.html.j2:68
-msgid "Select publication category"
-msgstr ""
-
-#: amt/site/templates/parts/project_search.html.j2:86
-msgid "Group by"
-msgstr ""
-
-#: amt/site/templates/parts/project_search.html.j2:96
-msgid "Select group by"
-msgstr ""
-
-#: amt/site/templates/projects/details_base.html.j2:19
-msgid "Delete algoritmic system"
-msgstr ""
-
-#: amt/site/templates/projects/details_base.html.j2:26
-msgid "Are you sure you want to delete your algoritmic system "
-msgstr ""
-
-#: amt/site/templates/projects/details_base.html.j2:30
-msgid ""
-"Data will be stored for at least 45 days before permanent\n"
-"                deletion."
-msgstr ""
-
-#: amt/site/templates/projects/details_base.html.j2:39
-#: amt/site/templates/projects/new.html.j2:132
-msgid "Yes"
-msgstr ""
-
-#: amt/site/templates/projects/details_base.html.j2:44
-#: amt/site/templates/projects/new.html.j2:142
-msgid "No"
-msgstr ""
-
-#: amt/site/templates/projects/details_base.html.j2:57
-msgid "Delete algorithm system"
-msgstr ""
-
-#: amt/site/templates/projects/details_base.html.j2:71
-msgid "Does the algorithm meet the requirements?"
-msgstr ""
-
-#: amt/site/templates/projects/details_base.html.j2:96
-#: amt/site/templates/projects/details_base.html.j2:150
-msgid "To do"
-msgstr ""
-
-#: amt/site/templates/projects/details_base.html.j2:98
-msgid "In progress"
-msgstr ""
-
-#: amt/site/templates/projects/details_base.html.j2:115
-msgid "Go to all requirements"
-msgstr ""
-
-#: amt/site/templates/projects/details_base.html.j2:126
-msgid "Which instruments are executed?"
-msgstr ""
-
-#: amt/site/templates/projects/details_base.html.j2:167
-msgid "Go to all instruments"
-msgstr ""
-
-#: amt/site/templates/projects/details_data.html.j2:3
-#: amt/site/templates/projects/details_instruments.html.j2:3
-msgid "To be implemented"
-msgstr ""
-
-#: amt/site/templates/projects/details_inference.html.j2:7
-msgid "Floor area (m²):"
-msgstr ""
-
-#: amt/site/templates/projects/details_inference.html.j2:16
-msgid "Plot size (m²):"
-msgstr ""
-
-#: amt/site/templates/projects/details_inference.html.j2:25
-msgid "Building year:"
-msgstr ""
-
-#: amt/site/templates/projects/details_inference.html.j2:34
-msgid "Object type:"
-msgstr ""
-
-#: amt/site/templates/projects/details_inference.html.j2:43
-msgid "Number of annexes:"
-msgstr ""
-
-#: amt/site/templates/projects/details_inference.html.j2:52
-msgid "Neighborhood code:"
-msgstr ""
-
-#: amt/site/templates/projects/details_inference.html.j2:61
-msgid "Quality rating:"
-msgstr ""
-
-#: amt/site/templates/projects/details_inference.html.j2:73
-msgid "Maintenance rating:"
-msgstr ""
-
-#: amt/site/templates/projects/details_inference.html.j2:85
-msgid "Amenities rating:"
-msgstr ""
-
-#: amt/site/templates/projects/details_inference.html.j2:97
-msgid "Location rating:"
-msgstr ""
-
-#: amt/site/templates/projects/details_inference.html.j2:113
-msgid "Estimate WOZ Value"
-msgstr ""
-
-#: amt/site/templates/projects/details_inference.html.j2:117
-msgid "Estimated WOZ Value"
-msgstr ""
-
-#: amt/site/templates/projects/details_inference.html.j2:119
-msgid "Undefined"
-msgstr ""
-
-#: amt/site/templates/projects/details_inference.html.j2:175
-msgid "Failed to estimate WOZ value: "
-msgstr ""
-
-#: amt/site/templates/projects/details_info.html.j2:12
-#: amt/site/templates/projects/details_measure_modal.html.j2:19
-msgid "Description"
-msgstr ""
-
-#: amt/site/templates/projects/details_info.html.j2:16
-msgid "Repository"
-msgstr ""
-
-#: amt/site/templates/projects/details_info.html.j2:20
-msgid "Algorithm system code"
-msgstr ""
-
-#: amt/site/templates/projects/details_info.html.j2:32
-msgid "Labels"
-msgstr ""
-
-#: amt/site/templates/projects/details_info.html.j2:40
-msgid "References"
-msgstr ""
-
-#: amt/site/templates/projects/details_measure_modal.html.j2:29
-msgid "Read more on the algoritmekader"
-msgstr ""
-
-#: amt/site/templates/projects/details_measure_modal.html.j2:38
-msgid "Status"
-msgstr ""
-
-#: amt/site/templates/projects/details_measure_modal.html.j2:45
-#: amt/site/templates/projects/details_measure_modal.html.j2:47
-msgid "to do"
-msgstr ""
-
-#: amt/site/templates/projects/details_measure_modal.html.j2:50
-#: amt/site/templates/projects/details_measure_modal.html.j2:52
-msgid "in progress"
-msgstr ""
-
-#: amt/site/templates/projects/details_measure_modal.html.j2:55
-#: amt/site/templates/projects/details_measure_modal.html.j2:57
-msgid "done"
-msgstr ""
-
-#: amt/site/templates/projects/details_measure_modal.html.j2:68
-msgid "Information on how this measure is implemented"
-msgstr ""
-
-#: amt/site/templates/projects/details_measure_modal.html.j2:74
-msgid ""
-"Describe how the measure has been implemented, including challenges and "
-"solutions."
-msgstr ""
-
-#: amt/site/templates/projects/details_requirements.html.j2:26
-msgid "measures executed"
-msgstr ""
-
-#: amt/site/templates/projects/new.html.j2:7
-msgid "Create a Algorithm System"
-msgstr ""
-
-#: amt/site/templates/projects/new.html.j2:25
-msgid "Algorithm System name"
-msgstr ""
-
-#: amt/site/templates/projects/new.html.j2:29
-msgid "Name of the algorithm system"
-msgstr ""
-
-#: amt/site/templates/projects/new.html.j2:43
-msgid "Select the lifecycle your algorithm system is currently in."
-msgstr ""
-
-#: amt/site/templates/projects/new.html.j2:44
-msgid "For more information on lifecycle, read the"
-msgstr ""
-
-#: amt/site/templates/projects/new.html.j2:47
-msgid "Algorithm Framework"
-msgstr ""
-
-#: amt/site/templates/projects/new.html.j2:65
-msgid "AI Act Profile"
-msgstr ""
-
-#: amt/site/templates/projects/new.html.j2:67
-msgid ""
-"The AI Act profile provides insight into, among other things, the type of"
-" AI system and the associated obligations from the European AI Act. If "
-"you already know the type of AI system you can fill in the below fields. "
-"Otherwise, you can find your AI Act Profile with the AI Act Decision "
-"tree."
-msgstr ""
-
-#: amt/site/templates/projects/new.html.j2:74
-msgid "Find your AI Act profile"
-msgstr ""
-
-#: amt/site/templates/projects/new.html.j2:151
-msgid ""
-"Overview of instruments for the responsible development, deployment, "
-"assessment and monitoring of algorithms and AI-systems."
-msgstr ""
-
-#: amt/site/templates/projects/new.html.j2:159
-msgid "Choose one or more instruments"
-msgstr ""
-
-#: amt/site/templates/projects/new.html.j2:183
-msgid "Create Algorithm System"
-msgstr ""
-
-#: amt/site/templates/projects/new.html.j2:200
-msgid "Copy results and close"
 msgstr ""
 

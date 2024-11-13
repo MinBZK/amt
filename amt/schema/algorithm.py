@@ -2,12 +2,12 @@ from pydantic import BaseModel, Field
 from pydantic.functional_validators import field_validator
 
 
-class ProjectBase(BaseModel):
+class AlgorithmBase(BaseModel):
     name: str = Field(min_length=3, max_length=255)
     lifecycle: str = Field()
 
 
-class ProjectNew(ProjectBase):
+class AlgorithmNew(AlgorithmBase):
     instruments: list[str] | str = []
     type: str = Field(default=None)
     open_source: str = Field(default=None)

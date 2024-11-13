@@ -22,7 +22,7 @@ class DisplayText(Enum):
     ALGORITHM_DETAILS = "algorithm_details"
     INFO = "info"
     HOME = "home"
-    PROJECTS = "algorithm systems"
+    ALGORITHMS = "algorithm systems"
     OVERVIEW = "overview"
     TASKS = "tasks"
     NEW = "new"
@@ -43,7 +43,7 @@ def get_translation(key: DisplayText, translations: NullTranslations) -> str:
     # translations are determined at runtime, which is why we use the dictionary below
     keys = {
         DisplayText.HOME: _("Home"),
-        DisplayText.PROJECTS: _("Algorithm systems"),
+        DisplayText.ALGORITHMS: _("Algorithm systems"),
         DisplayText.OVERVIEW: _("Overview"),
         DisplayText.TASKS: _("Tasks"),
         DisplayText.NEW: _("New"),
@@ -90,44 +90,47 @@ class BaseNavigationItem:
 
 
 class Navigation:
-    PROJECTS_ROOT = BaseNavigationItem(
-        display_text=DisplayText.PROJECTS, url=["/algorithm-systems/", "/algorithm-system/"], icon="rvo-icon-publicatie"
+    ALGORITHMS_ROOT = BaseNavigationItem(
+        display_text=DisplayText.ALGORITHMS,
+        url=["/algorithm-systems/", "/algorithm-system/"],
+        icon="rvo-icon-publicatie",
     )
-    PROJECTS_OVERVIEW = BaseNavigationItem(display_text=DisplayText.OVERVIEW, url="/algorithm-systems/")
-    PROJECT_TASKS = BaseNavigationItem(
-        display_text=DisplayText.TASKS, url="/algorithm-system/{project_id}/details/tasks"
+    ALGORITHMS_OVERVIEW = BaseNavigationItem(display_text=DisplayText.OVERVIEW, url="/algorithm-systems/")
+    ALGORITHM_TASKS = BaseNavigationItem(
+        display_text=DisplayText.TASKS, url="/algorithm-system/{algorithm_id}/details/tasks"
     )
-    PROJECT_DETAILS = BaseNavigationItem(
-        display_text=DisplayText.DETAILS, url="/algorithm-system/{project_id}/details/system_card"
+    ALGORITHM_DETAILS = BaseNavigationItem(
+        display_text=DisplayText.DETAILS, url="/algorithm-system/{algorithm_id}/details/system_card"
     )
-    PROJECT_MODEL = BaseNavigationItem(
-        display_text=DisplayText.MODEL, url="/algorithm-system/{project_id}/details/model/inference"
+    ALGORITHM_MODEL = BaseNavigationItem(
+        display_text=DisplayText.MODEL, url="/algorithm-system/{algorithm_id}/details/model/inference"
     )
-    PROJECT_NEW = BaseNavigationItem(display_text=DisplayText.NEW, url="/algorithm-systems/new")
-    PROJECT_SYSTEM_INFO = BaseNavigationItem(
-        display_text=DisplayText.INFO, url="/algorithm-system/{project_id}/details"
+    ALGORITHM_NEW = BaseNavigationItem(display_text=DisplayText.NEW, url="/algorithm-systems/new")
+    ALGORITHM_SYSTEM_INFO = BaseNavigationItem(
+        display_text=DisplayText.INFO, url="/algorithm-system/{algorithm_id}/details"
     )
-    PROJECT_SYSTEM_ALGORITHM_DETAILS = BaseNavigationItem(
-        display_text=DisplayText.ALGORITHM_DETAILS, url="/algorithm-system/{project_id}/details/system_card"
+    ALGORITHM_SYSTEM_ALGORITHM_DETAILS = BaseNavigationItem(
+        display_text=DisplayText.ALGORITHM_DETAILS, url="/algorithm-system/{algorithm_id}/details/system_card"
     )
-    PROJECT_SYSTEM_CARD = BaseNavigationItem(
-        display_text=DisplayText.SYSTEMCARD, url="/algorithm-system/{project_id}/details/system_card"
+    ALGORITHM_SYSTEM_CARD = BaseNavigationItem(
+        display_text=DisplayText.SYSTEMCARD, url="/algorithm-system/{algorithm_id}/details/system_card"
     )
-    PROJECT_DATA_CARD = BaseNavigationItem(
-        display_text=DisplayText.DATA, url="/algorithm-system/{project_id}/details/system_card/data"
+    ALGORITHM_DATA_CARD = BaseNavigationItem(
+        display_text=DisplayText.DATA, url="/algorithm-system/{algorithm_id}/details/system_card/data"
     )
-    PROJECT_MODEL_CARD = BaseNavigationItem(
-        display_text=DisplayText.MODELCARD, url="/algorithm-system/{project_id}/details/system_card/models/{model_card}"
+    ALGORITHM_MODEL_CARD = BaseNavigationItem(
+        display_text=DisplayText.MODELCARD,
+        url="/algorithm-system/{algorithm_id}/details/system_card/models/{model_card}",
     )
-    PROJECT_ASSESSMENT_CARD = BaseNavigationItem(
+    ALGORITHM_ASSESSMENT_CARD = BaseNavigationItem(
         display_text=DisplayText.ASSESSMENTCARD,
-        url="/algorithm-system/{project_id}/details/system_card/assessment/{assessment_card}",
+        url="/algorithm-system/{algorithm_id}/details/system_card/assessment/{assessment_card}",
     )
-    PROJECT_REQUIREMENTS = BaseNavigationItem(
-        display_text=DisplayText.REQUIREMENTS, url="/algorithm-system/{project_id}/details/system_card/requirements"
+    ALGORITHM_REQUIREMENTS = BaseNavigationItem(
+        display_text=DisplayText.REQUIREMENTS, url="/algorithm-system/{algorithm_id}/details/system_card/requirements"
     )
-    PROJECT_SYSTEM_INSTRUMENTS = BaseNavigationItem(
-        display_text=DisplayText.INSTRUMENTS, url="/algorithm-system/{project_id}/details/system_card/instruments"
+    ALGORITHM_SYSTEM_INSTRUMENTS = BaseNavigationItem(
+        display_text=DisplayText.INSTRUMENTS, url="/algorithm-system/{algorithm_id}/details/system_card/instruments"
     )
 
 
@@ -242,7 +245,7 @@ def resolve_navigation_items(
 def get_main_menu(request: Request, translations: NullTranslations) -> list[NavigationItem]:
     # main menu items are the same for all pages
     main_menu_items = [
-        NavigationItem(Navigation.PROJECTS_ROOT, translations=translations),
+        NavigationItem(Navigation.ALGORITHMS_ROOT, translations=translations),
     ]
 
     return _mark_active_navigation_item(main_menu_items, request.url.path)

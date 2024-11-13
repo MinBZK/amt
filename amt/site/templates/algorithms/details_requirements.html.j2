@@ -1,4 +1,4 @@
-{% extends 'projects/details_base.html.j2' %}
+{% extends 'algorithms/details_base.html.j2' %}
 {% block detail_content %}
     <div class="rvo-accordion">
         {% for (requirement, completed_measures_count, measures) in requirements_and_measures %}
@@ -46,7 +46,7 @@
                                 <a class="rvo-link rvo-link--normal rvo-link--with-icon"
                                    hx-trigger="click"
                                    hx-target="#dynamic-modal-content"
-                                   hx-get="/algorithm-system/{{ project_id }}/measure/{{ measure.urn }}"
+                                   hx-get="/algorithm-system/{{ algorithm_id }}/measure/{{ measure.urn }}"
                                    hx-swap="innerHTML"
                                    onclick="amt.openModal('measure-modal')">
                                     <span class="utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"

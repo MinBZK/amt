@@ -18,5 +18,5 @@ class Task(Base):
     ## TODO: (Christopher) SQLModel does not allow to give the below restraint an name
     ##       which is needed for alembic. This results in changing the migration file
     ##       manually to give the restrain a name.
-    project_id: Mapped[int | None] = mapped_column(ForeignKey("project.id"))
+    algorithm_id: Mapped[int | None] = mapped_column(ForeignKey("algorithm.id"))
     # todo(robbert) Tasks probably are grouped (and sub-grouped), so we probably need a reference to a group_id

@@ -14,11 +14,11 @@ from amt.api.publication_category import (
     get_localized_publication_categories,
     get_localized_publication_category,
 )
-from amt.models import Project
+from amt.models import Algorithm
+from amt.schema.algorithm import AlgorithmNew
 from amt.schema.localized_value_item import LocalizedValueItem
-from amt.schema.project import ProjectNew
+from amt.services.algorithms import AlgorithmsService, get_template_files
 from amt.services.instruments import InstrumentsService
-from amt.services.projects import ProjectsService, get_template_files
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -42,7 +42,7 @@ def get_localized_value(key: str, value: str, request: Request) -> LocalizedValu
 @router.get("/")
 async def get_root(
     request: Request,
-    projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
+    algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
     skip: int = Query(0, ge=0),
     limit: int = Query(5000, ge=1),  # todo: fix infinite scroll
     search: str = Query(""),
@@ -67,38 +67,40 @@ async def get_root(
 
     amount_algorithm_systems: int = 0
     if display_type == "LIFECYCLE":
-        projects: dict[str, list[Project]] = {}
+        algorithms: dict[str, list[Algorithm]] = {}
 
         # When the lifecycle filter is active, only show these algorithm systems
         if "lifecycle" in filters:
             for lifecycle in Lifecycles:
-                projects[lifecycle.name] = []
-            projects[filters["lifecycle"]] = await projects_service.paginate(
+                algorithms[lifecycle.name] = []
+            algorithms[filters["lifecycle"]] = await algorithms_service.paginate(
                 skip=skip, limit=limit, search=search, filters=filters, sort=sort_by
             )
-            amount_algorithm_systems += len(projects[filters["lifecycle"]])
+            amount_algorithm_systems += len(algorithms[filters["lifecycle"]])
         else:
             for lifecycle in Lifecycles:
                 filters["lifecycle"] = lifecycle.name
-                projects[lifecycle.name] = await projects_service.paginate(
+                algorithms[lifecycle.name] = await algorithms_service.paginate(
                     skip=skip, limit=limit, search=search, filters=filters, sort=sort_by
                 )
-                amount_algorithm_systems += len(projects[lifecycle.name])
+                amount_algorithm_systems += len(algorithms[lifecycle.name])
     else:
-        projects = await projects_service.paginate(skip=skip, limit=limit, search=search, filters=filters, sort=sort_by)  # pyright: ignore [reportAssignmentType]
-        # todo: the lifecycle has to be 'localized', maybe for display 'Project' should become a different object
-        for project in projects:
-            project.lifecycle = get_localized_lifecycle(project.lifecycle, request)  # pyright: ignore [reportAttributeAccessIssue, reportUnknownMemberType, reportUnknownArgumentType]
-        amount_algorithm_systems += len(projects)
+        algorithms = await algorithms_service.paginate(
+            skip=skip, limit=limit, search=search, filters=filters, sort=sort_by
+        )  # pyright: ignore [reportAssignmentType]
+        # todo: the lifecycle has to be 'localized', maybe for display 'Algorithm' should become a different object
+        for algorithm in algorithms:
+            algorithm.lifecycle = get_localized_lifecycle(algorithm.lifecycle, request)  # pyright: ignore [reportAttributeAccessIssue, reportUnknownMemberType, reportUnknownArgumentType]
+        amount_algorithm_systems += len(algorithms)
     next = skip + limit
 
-    sub_menu_items = resolve_navigation_items([Navigation.PROJECTS_OVERVIEW], request)  # pyright: ignore [reportUnusedVariable] # noqa
-    breadcrumbs = resolve_base_navigation_items([Navigation.PROJECTS_ROOT, Navigation.PROJECTS_OVERVIEW], request)
+    sub_menu_items = resolve_navigation_items([Navigation.ALGORITHMS_OVERVIEW], request)  # pyright: ignore [reportUnusedVariable] # noqa
+    breadcrumbs = resolve_base_navigation_items([Navigation.ALGORITHMS_ROOT, Navigation.ALGORITHMS_OVERVIEW], request)
 
     context: dict[str, Any] = {
         "breadcrumbs": breadcrumbs,
         "sub_menu_items": {},  # sub_menu_items disabled for now
-        "projects": projects,
+        "algorithms": algorithms,
         "amount_algorithm_systems": amount_algorithm_systems,
         "next": next,
         "limit": limit,
@@ -113,11 +115,11 @@ async def get_root(
     }
 
     if request.state.htmx and drop_filters:
-        return templates.TemplateResponse(request, "parts/project_search.html.j2", context)
+        return templates.TemplateResponse(request, "parts/algorithm_search.html.j2", context)
     elif request.state.htmx:
         return templates.TemplateResponse(request, "parts/filter_list.html.j2", context)
     else:
-        return templates.TemplateResponse(request, "projects/index.html.j2", context)
+        return templates.TemplateResponse(request, "algorithms/index.html.j2", context)
 
 
 @router.get("/new")
@@ -125,8 +127,8 @@ async def get_new(
     request: Request,
     instrument_service: Annotated[InstrumentsService, Depends(InstrumentsService)],
 ) -> HTMLResponse:
-    sub_menu_items = resolve_navigation_items([Navigation.PROJECTS_OVERVIEW], request)  # pyright: ignore [reportUnusedVariable] # noqa
-    breadcrumbs = resolve_base_navigation_items([Navigation.PROJECTS_ROOT, Navigation.PROJECT_NEW], request)
+    sub_menu_items = resolve_navigation_items([Navigation.ALGORITHMS_OVERVIEW], request)  # pyright: ignore [reportUnusedVariable] # noqa
+    breadcrumbs = resolve_base_navigation_items([Navigation.ALGORITHMS_ROOT, Navigation.ALGORITHM_NEW], request)
 
     ai_act_profile = get_ai_act_profile_selector(request)
 
@@ -141,16 +143,16 @@ async def get_new(
         "template_files": template_files,
     }
 
-    response = templates.TemplateResponse(request, "projects/new.html.j2", context)
+    response = templates.TemplateResponse(request, "algorithms/new.html.j2", context)
     return response
 
 
 @router.post("/new", response_class=HTMLResponse)
 async def post_new(
     request: Request,
-    project_new: ProjectNew,
-    projects_service: Annotated[ProjectsService, Depends(ProjectsService)],
+    algorithm_new: AlgorithmNew,
+    algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
 ) -> HTMLResponse:
-    project = await projects_service.create(project_new)
-    response = templates.Redirect(request, f"/algorithm-system/{project.id}/details/tasks")
+    algorithm = await algorithms_service.create(algorithm_new)
+    response = templates.Redirect(request, f"/algorithm-system/{algorithm.id}/details/tasks")
     return response

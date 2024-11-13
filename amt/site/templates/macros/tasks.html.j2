@@ -1,4 +1,4 @@
-{% macro column(project, status, translations, tasks_service) -%}
+{% macro column(algorithm, status, translations, tasks_service) -%}
     <div>
         <h5 class="utrecht-heading-5 amt-task-heading"
             style="color: var(--rvo-color-logoblauw)">
@@ -38,7 +38,7 @@
         <div class="progress-cards-container sortable"
              data-id="{{ status.value }}"
              id="column-{{ status.value }}">
-            {% if project is defined %}
+            {% if algorithm is defined %}
                 {% for task in tasks_by_status[status] %}{{ render_task_card_full(task) }}{% endfor %}
             {% else %}
                 {% for task in tasks_by_status[status] %}{{ render_task_card_full(task) }}{% endfor %}

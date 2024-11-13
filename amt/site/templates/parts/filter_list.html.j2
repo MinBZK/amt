@@ -24,7 +24,7 @@
 {% endmacro %}
 {% import 'macros/algorithm_systems_grid.html.j2' as render with context %}
 {% if start > 0 %}
-    {% for project in projects %}{{ table_row.item(loop, project, true) }}{% endfor %}
+    {% for algorithm in algorithms %}{{ table_row.item(loop, algorithm, true) }}{% endfor %}
 {% else %}
     <div class="margin-top-large rvo-layout-row rvo-layout-justify-content-space-between">
         <div>
@@ -40,7 +40,7 @@
             {% if search %}<span><em>'{{ search }}'</em></span>{% endif %}
         {% endif %}
         <form name="htmx-remove-tags"
-              hx-target="#search-project-container"
+              hx-target="#search-algorithm-container"
               hx-include="this"
               hx-swap="innerHTML"
               style="display: inline-block">
@@ -65,7 +65,7 @@
         </form>
     </div>
 </div>
-{% if projects|length == 0 %}
+{% if algorithms|length == 0 %}
     <div class="margin-top-large">
         {% trans %}No Algorithm system match your selected filters. Try adjusting your filters or clearing them to
         see more
@@ -75,7 +75,7 @@
     {% if display_type == "" %}
         <form name="htmx-sort-form"
               hx-include="this"
-              hx-target="#project-search-results"
+              hx-target="#algorithm-search-results"
               hx-swap="innerHTML">
             <input type="hidden" name="search" value="{{ search }}">
             {% for key, localized_value in filters.items() %}
@@ -100,7 +100,7 @@
                         </th>
                     </tr>
                 </thead>
-                {% for project in projects %}{{ table_row.item(loop, project, true) }}{% endfor %}
+                {% for algorithm in algorithms %}{{ table_row.item(loop, algorithm, true) }}{% endfor %}
             </table>
         </form>
     {% elif display_type == "LIFECYCLE" %}
@@ -123,7 +123,7 @@
         </table>
         <form name="htmx-sort-form"
               hx-include="this"
-              hx-target="#project-search-results"
+              hx-target="#algorithm-search-results"
               hx-swap="innerHTML">
             <input type="hidden" name="search" value="{{ search }}">
             {% for key, localized_value in filters.items() %}
@@ -132,7 +132,7 @@
                        value="{{ localized_value.value }}">
             {% endfor %}
             <div class="rvo-layout-column" style="padding: 0px">
-                {% for lifecycle in lifecycles %}{{ render.row(projects[lifecycle.value], lifecycle) }}{% endfor %}
+                {% for lifecycle in lifecycles %}{{ render.row(algorithms[lifecycle.value], lifecycle) }}{% endfor %}
             </div>
         {% else %}
             Does not exist

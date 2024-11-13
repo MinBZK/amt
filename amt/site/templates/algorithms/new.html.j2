@@ -13,7 +13,7 @@
                       hx-target-error="#errorContainer"
                       hx-swap="innerHTML"
                       method="post"
-                      id="form-new-project">
+                      id="form-new-algorithm">
                     <!-- TODO: hidden field below probably will become a template select field in the future -->
                     <input type="hidden" name="template_id" value="0" />
                     <div class="utrecht-form-fieldset rvo-form-fieldset">
@@ -178,7 +178,7 @@
                     <p class="utrecht-button-group">
                         <button class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
                                 type="submit"
-                                id="button-new-project-create"
+                                id="button-new-algorithm-create"
                                 hx-on:click="document.querySelectorAll('div.htmx-error-oob').forEach(e => e.innerHTML = '')">
                             {% trans %}Create Algorithm System{% endtrans %}
                         </button>

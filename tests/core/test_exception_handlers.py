@@ -1,7 +1,7 @@
 import pytest
 from amt.core.exception_handlers import translate_pydantic_exception
 from amt.core.exceptions import AMTCSRFProtectError
-from amt.schema.project import ProjectNew
+from amt.schema.algorithm import AlgorithmNew
 from babel.support import NullTranslations
 from fastapi import status
 from httpx import AsyncClient
@@ -26,10 +26,13 @@ async def test_request_validation_exception_handler(client: AsyncClient):
 @pytest.mark.asyncio
 async def test_request_csrf_protect_exception_handler_invalid_token_in_header(client: AsyncClient):
     data = await client.get("/algorithm-systems/new")
-    new_project = ProjectNew(name="default project", lifecycle="DATA_EXPLORATION_AND_PREPARATION")
+    new_algorithm = AlgorithmNew(name="default algorithm", lifecycle="DATA_EXPLORATION_AND_PREPARATION")
     with pytest.raises(AMTCSRFProtectError):
         _response = await client.post(
-            "/algorithm-systems/new", json=new_project.model_dump(), headers={"X-CSRF-Token": "1"}, cookies=data.cookies
+            "/algorithm-systems/new",
+            json=new_algorithm.model_dump(),
+            headers={"X-CSRF-Token": "1"},
+            cookies=data.cookies,
         )
 
 
@@ -52,11 +55,11 @@ async def test_request_validation_exception_handler_htmx(client: AsyncClient):
 @pytest.mark.asyncio
 async def test_request_csrf_protect_exception_handler_invalid_token(client: AsyncClient):
     data = await client.get("/algorithm-systems/new")
-    new_project = ProjectNew(name="default project", lifecycle="DATA_EXPLORATION_AND_PREPARATION")
+    new_algorithm = AlgorithmNew(name="default algorithm", lifecycle="DATA_EXPLORATION_AND_PREPARATION")
     with pytest.raises(AMTCSRFProtectError):
         _response = await client.post(
             "/algorithm-systems/new",
-            json=new_project.model_dump(),
+            json=new_algorithm.model_dump(),
             headers={"HX-Request": "true", "X-CSRF-Token": "1"},
             cookies=data.cookies,
         )

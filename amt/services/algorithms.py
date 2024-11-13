@@ -10,10 +10,10 @@ from typing import Annotated
 from fastapi import Depends
 
 from amt.core.exceptions import AMTNotFound
-from amt.models import Project
-from amt.repositories.projects import ProjectsRepository
+from amt.models import Algorithm
+from amt.repositories.algorithms import AlgorithmsRepository
+from amt.schema.algorithm import AlgorithmNew
 from amt.schema.instrument import InstrumentBase
-from amt.schema.project import ProjectNew
 from amt.schema.system_card import AiActProfile, SystemCard
 from amt.services.instruments import InstrumentsService
 from amt.services.task_registry import get_requirements_and_measures
@@ -24,10 +24,10 @@ logger = logging.getLogger(__name__)
 template_path = "resources/system_card_templates"
 
 
-class ProjectsService:
+class AlgorithmsService:
     def __init__(
         self,
-        repository: Annotated[ProjectsRepository, Depends(ProjectsRepository)],
+        repository: Annotated[AlgorithmsRepository, Depends(AlgorithmsRepository)],
         task_service: Annotated[TasksService, Depends(TasksService)],
         instrument_service: Annotated[InstrumentsService, Depends(InstrumentsService)],
     ) -> None:
@@ -35,45 +35,45 @@ class ProjectsService:
         self.instrument_service = instrument_service
         self.task_service = task_service
 
-    async def get(self, project_id: int) -> Project:
-        project = await self.repository.find_by_id(project_id)
-        if project.deleted_at:
+    async def get(self, algorithm_id: int) -> Algorithm:
+        algorithm = await self.repository.find_by_id(algorithm_id)
+        if algorithm.deleted_at:
             raise AMTNotFound()
-        return project
+        return algorithm
 
-    async def delete(self, project_id: int) -> Project:
-        project = await self.repository.find_by_id(project_id)
-        project.deleted_at = datetime.now(tz=None)  # noqa: DTZ005
-        project = await self.repository.save(project)
-        return project
+    async def delete(self, algorithm_id: int) -> Algorithm:
+        algorithm = await self.repository.find_by_id(algorithm_id)
+        algorithm.deleted_at = datetime.now(tz=None)  # noqa: DTZ005
+        algorithm = await self.repository.save(algorithm)
+        return algorithm
 
-    async def create(self, project_new: ProjectNew) -> Project:
+    async def create(self, algorithm_new: AlgorithmNew) -> Algorithm:
         system_card_from_template = None
-        if project_new.template_id:
+        if algorithm_new.template_id:
             template_files = get_template_files()
-            if project_new.template_id in template_files:
-                with open(Path(template_path) / Path(template_files[project_new.template_id]["value"])) as f:
+            if algorithm_new.template_id in template_files:
+                with open(Path(template_path) / Path(template_files[algorithm_new.template_id]["value"])) as f:
                     system_card_from_template = json.load(f)
             else:
                 raise AMTNotFound()
 
         instruments: list[InstrumentBase] = [
-            InstrumentBase(urn=instrument_urn) for instrument_urn in project_new.instruments
+            InstrumentBase(urn=instrument_urn) for instrument_urn in algorithm_new.instruments
         ]
 
         ai_act_profile = AiActProfile(
-            type=project_new.type,
-            open_source=project_new.open_source,
-            publication_category=project_new.publication_category,
-            systemic_risk=project_new.systemic_risk,
-            transparency_obligations=project_new.transparency_obligations,
-            role=project_new.role,
+            type=algorithm_new.type,
+            open_source=algorithm_new.open_source,
+            publication_category=algorithm_new.publication_category,
+            systemic_risk=algorithm_new.systemic_risk,
+            transparency_obligations=algorithm_new.transparency_obligations,
+            role=algorithm_new.role,
         )
 
         requirements, measures = get_requirements_and_measures(ai_act_profile)
 
         system_card = SystemCard(
-            name=project_new.name,
+            name=algorithm_new.name,
             ai_act_profile=ai_act_profile,
             instruments=instruments,
             requirements=requirements,
@@ -100,28 +100,28 @@ class ProjectsService:
             }
             system_card = SystemCard.model_validate(system_card_merged)
 
-        project = Project(name=project_new.name, lifecycle=project_new.lifecycle, system_card=system_card)
-        project = await self.update(project)
+        algorithm = Algorithm(name=algorithm_new.name, lifecycle=algorithm_new.lifecycle, system_card=system_card)
+        algorithm = await self.update(algorithm)
 
         selected_instruments = self.instrument_service.fetch_instruments(
-            [instrument.urn for instrument in project.system_card.instruments]
+            [instrument.urn for instrument in algorithm.system_card.instruments]
         )
         for instrument in selected_instruments:
-            await self.task_service.create_instrument_tasks(instrument.tasks, project)
+            await self.task_service.create_instrument_tasks(instrument.tasks, algorithm)
 
-        return project
+        return algorithm
 
     async def paginate(
         self, skip: int, limit: int, search: str, filters: dict[str, str], sort: dict[str, str]
-    ) -> list[Project]:
-        projects = await self.repository.paginate(skip=skip, limit=limit, search=search, filters=filters, sort=sort)
-        return projects
+    ) -> list[Algorithm]:
+        algorithms = await self.repository.paginate(skip=skip, limit=limit, search=search, filters=filters, sort=sort)
+        return algorithms
 
-    async def update(self, project: Project) -> Project:
+    async def update(self, algorithm: Algorithm) -> Algorithm:
         # TODO: Is this the right place to sync system cards: system_card and system_card_json?
-        project.sync_system_card()
-        project = await self.repository.save(project)
-        return project
+        algorithm.sync_system_card()
+        algorithm = await self.repository.save(algorithm)
+        return algorithm
 
 
 @lru_cache

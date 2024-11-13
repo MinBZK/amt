@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 import pytest
 from amt.models import Task, User
-from amt.models.project import Project
+from amt.models.algorithm import Algorithm
 from amt.repositories.tasks import TasksRepository
 from amt.schema.instrument import InstrumentTask
 from amt.services.tasks import TasksService
@@ -20,19 +20,19 @@ class MockTasksRepository:
     def reset(self):
         self.clear()
         self._tasks.append(
-            Task(id=1, title="Test 1", description="Description 1", status_id=1, project_id=1, sort_order=10)
+            Task(id=1, title="Test 1", description="Description 1", status_id=1, algorithm_id=1, sort_order=10)
         )
         self._tasks.append(
-            Task(id=2, title="Test 2", description="Description 2", status_id=1, project_id=1, sort_order=20)
+            Task(id=2, title="Test 2", description="Description 2", status_id=1, algorithm_id=1, sort_order=20)
         )
         self._tasks.append(
-            Task(id=3, title="Test 3", description="Description 3", status_id=1, project_id=2, sort_order=30)
+            Task(id=3, title="Test 3", description="Description 3", status_id=1, algorithm_id=2, sort_order=30)
         )
         self._tasks.append(
-            Task(id=4, title="Test 4", description="Description 4", status_id=2, project_id=1, sort_order=10)
+            Task(id=4, title="Test 4", description="Description 4", status_id=2, algorithm_id=1, sort_order=10)
         )
         self._tasks.append(
-            Task(id=5, title="Test 5", description="Description 5", status_id=3, project_id=3, sort_order=20)
+            Task(id=5, title="Test 5", description="Description 5", status_id=3, algorithm_id=3, sort_order=20)
         )
 
     def find_all(self):
@@ -41,8 +41,8 @@ class MockTasksRepository:
     async def find_by_status_id(self, status_id: int) -> Sequence[Task]:
         return list(filter(lambda x: x.status_id == status_id, self._tasks))
 
-    async def find_by_project_id_and_status_id(self, project_id: int, status_id: int) -> Sequence[Task]:
-        return list(filter(lambda x: x.status_id == status_id and x.project_id == project_id, self._tasks))
+    async def find_by_algorithm_id_and_status_id(self, algorithm_id: int, status_id: int) -> Sequence[Task]:
+        return list(filter(lambda x: x.status_id == status_id and x.algorithm_id == algorithm_id, self._tasks))
 
     async def find_by_id(self, task_id: int) -> Task:
         return next(filter(lambda x: x.id == task_id, self._tasks))
@@ -76,8 +76,8 @@ async def test_get_tasks(tasks_service_with_mock: TasksService, mock_tasks_repos
 
 
 @pytest.mark.asyncio
-async def test_get_tasks_for_project(tasks_service_with_mock: TasksService, mock_tasks_repository: TasksRepository):
-    tasks = await tasks_service_with_mock.get_tasks_for_project(1, 1)
+async def test_get_tasks_for_algorithm(tasks_service_with_mock: TasksService, mock_tasks_repository: TasksRepository):
+    tasks = await tasks_service_with_mock.get_tasks_for_algorithm(1, 1)
     assert len(tasks) == 2
 
 
@@ -97,20 +97,20 @@ async def test_create_instrument_tasks(
     task_1 = InstrumentTask(question="question_1", urn="instrument_1_task_1", lifecycle=[])
     task_2 = InstrumentTask(question="question_1", urn="instrument_1_task_1", lifecycle=[])
 
-    project_id = 1
-    project_name = "Project 1"
-    project = Project(id=project_id, name=project_name)
+    algorithm_id = 1
+    algorithm_name = "Algorithm 1"
+    algorithm = Algorithm(id=algorithm_id, name=algorithm_name)
 
     # When
     mock_tasks_repository.clear()
-    await tasks_service_with_mock.create_instrument_tasks([task_1, task_2], project)
+    await tasks_service_with_mock.create_instrument_tasks([task_1, task_2], algorithm)
 
     # Then
     tasks = mock_tasks_repository.find_all()
     assert len(tasks) == 2
-    assert tasks[0].project_id == 1
+    assert tasks[0].algorithm_id == 1
     assert tasks[0].title == task_1.question
-    assert tasks[1].project_id == 1
+    assert tasks[1].algorithm_id == 1
     assert tasks[1].title == task_2.question
 
 

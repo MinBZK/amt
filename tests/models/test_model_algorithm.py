@@ -2,97 +2,97 @@ import json
 from datetime import UTC, datetime
 from enum import Enum
 
-from amt.models.project import CustomJSONEncoder, Project
+from amt.models.algorithm import Algorithm, CustomJSONEncoder
 from amt.schema.system_card import SystemCard
 
 
-def test_model_basic_project():
+def test_model_basic_algorithm():
     # given
-    project = Project(name="Test Project")
+    algorithm = Algorithm(name="Test Algorithm")
 
     # then
-    assert project.name == "Test Project"
+    assert algorithm.name == "Test Algorithm"
 
 
 def test_model_systemcard():
     # given
     system_card = SystemCard(name="Test System Card")
 
-    project = Project(name="Test Project", system_card=system_card)
+    algorithm = Algorithm(name="Test Algorithm", system_card=system_card)
 
     # then
-    assert project.system_card is not None
-    assert project.system_card.name == "Test System Card"
+    assert algorithm.system_card is not None
+    assert algorithm.system_card.name == "Test System Card"
 
 
 def test_model_systemcard_full():
     # given
     system_card = SystemCard(name="Test System Card", description="Test description", status="active")
 
-    project = Project(name="Test Project")
-    project.system_card = system_card
+    algorithm = Algorithm(name="Test Algorithm")
+    algorithm.system_card = system_card
 
     # then
-    assert project.system_card is not None
-    assert project.system_card.name == "Test System Card"
-    assert project.system_card.description == "Test description"
-    assert project.system_card.status == "active"
+    assert algorithm.system_card is not None
+    assert algorithm.system_card.name == "Test System Card"
+    assert algorithm.system_card.description == "Test description"
+    assert algorithm.system_card.status == "active"
 
     # when
-    project.system_card.name = "Another name"
+    algorithm.system_card.name = "Another name"
 
     # then
-    assert project.system_card.name == "Another name"
-    assert project.system_card_json["name"] == "Another name"
+    assert algorithm.system_card.name == "Another name"
+    assert algorithm.system_card_json["name"] == "Another name"
 
 
 def test_model_systemcard_direct():
     # given
-    project = Project(name="Test Project")
-    project.system_card.name = "Test System Card"
+    algorithm = Algorithm(name="Test Algorithm")
+    algorithm.system_card.name = "Test System Card"
 
     # then
-    assert project.system_card.name == "Test System Card"
+    assert algorithm.system_card.name == "Test System Card"
 
 
 def test_model_systemcard_equal():
     # given
     system_card = SystemCard(name="Test System Card", description="Test description", status="active")
-    project = Project(name="Test Project", system_card=system_card)
+    algorithm = Algorithm(name="Test Algorithm", system_card=system_card)
 
     # then
-    assert project.system_card.name == "Test System Card"
-    assert project.system_card == system_card
-    assert system_card == project.system_card
+    assert algorithm.system_card.name == "Test System Card"
+    assert algorithm.system_card == system_card
+    assert system_card == algorithm.system_card
 
     # when
-    project.system_card.name = "Another name"
+    algorithm.system_card.name = "Another name"
 
     # then
-    assert project.system_card != system_card
-    assert project.system_card != {}
+    assert algorithm.system_card != system_card
+    assert algorithm.system_card != {}
 
 
 def test_model_systemcard_from_json():
     # given
-    project = Project(name="Test Project")
+    algorithm = Algorithm(name="Test Algorithm")
 
     # when
-    project.system_card_json = {"name": "Test System Card"}
+    algorithm.system_card_json = {"name": "Test System Card"}
 
     # then
-    assert project.system_card == SystemCard(name="Test System Card")
+    assert algorithm.system_card == SystemCard(name="Test System Card")
 
 
 def test_model_systemcard_none():
     # given
-    project = Project(name="Test Project")
+    algorithm = Algorithm(name="Test Algorithm")
 
     # when
-    project.system_card = None
+    algorithm.system_card = None
 
     # then
-    assert project.system_card == SystemCard()
+    assert algorithm.system_card == SystemCard()
 
 
 class TestEnum(Enum):

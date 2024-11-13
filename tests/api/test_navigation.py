@@ -31,7 +31,7 @@ def test_base_navigation_item():
 
 
 def test_navigation_enum():
-    assert type(Navigation.PROJECTS_ROOT) is BaseNavigationItem
+    assert type(Navigation.ALGORITHMS_ROOT) is BaseNavigationItem
 
 
 def test_navigation_item():
@@ -71,12 +71,12 @@ def test_sort_by_path_length():
 def test_get_sub_menu():
     item1 = BaseNavigationItem(custom_display_text="test 1", url="/a/")
     item2 = BaseNavigationItem(custom_display_text="test 2", url="/a/bb/")
-    item3 = BaseNavigationItem(custom_display_text="test 3", url="/a/bb/ccc/{project_id}/")
+    item3 = BaseNavigationItem(custom_display_text="test 3", url="/a/bb/ccc/{algorithm_id}/")
     item4 = BaseNavigationItem(custom_display_text="test 4", url=["/a/bb/ccc/ddd/", "/a/bb/ccc/dddd/"])
     item5 = BaseNavigationItem(display_text=DisplayText.HOME, url="/home")
 
     request: Request = default_fastapi_request(url="/a/bb/")
-    request.state.path_variables = {"project_id": 1}
+    request.state.path_variables = {"algorithm_id": 1}
 
     sub_menu = resolve_navigation_items([item1, item2, item3, item4, item5], request)
     # assert right item is active
@@ -92,10 +92,10 @@ def test_get_sub_menu():
 
 def test_resolve_base_navigation_items():
     request: Request = default_fastapi_request(url="/a/bb/")
-    request.state.path_variables = {"project_id": 1}
+    request.state.path_variables = {"algorithm_id": 1}
     item1 = BaseNavigationItem(custom_display_text="test 1", url="/a/bb/")
-    item2 = BaseNavigationItem(custom_display_text="test 2", url="/a/bb/ccc/{project_id}/")
-    item3 = BaseNavigationItem(display_text=DisplayText.HOME, url="/a/bb/ccc/{project_id}/")
+    item2 = BaseNavigationItem(custom_display_text="test 2", url="/a/bb/ccc/{algorithm_id}/")
+    item3 = BaseNavigationItem(display_text=DisplayText.HOME, url="/a/bb/ccc/{algorithm_id}/")
     resolved_items = resolve_base_navigation_items([item1, item2, item3], request)
 
     # assert path resolving worked

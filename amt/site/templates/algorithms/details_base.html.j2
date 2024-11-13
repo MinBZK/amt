@@ -1,6 +1,6 @@
 {% extends 'layouts/base.html.j2' %}
 {% from "macros/editable.html.j2" import editable with context %}
-{% block title %}{{ project.name }} | AMT{% endblock %}
+{% block title %}{{ algorithm.name }} | AMT{% endblock %}
 {% block content %}
     <div id="measure-modal" class="minbzk-modal display-none">
         <div class="modal-underlay" onclick="amt.closeModal('measure-modal')"></div>
@@ -24,7 +24,7 @@
             <hr class="rvo-hr" />
             <p style="padding-block: 0.5em 0.4em;">
                 <strong>{% trans %}Are you sure you want to delete your algoritmic system {%
-                endtrans %} {{ project.name }}?</strong>
+                endtrans %} {{ algorithm.name }}?</strong>
             </p>
             <p style="padding-block: 0.0em 1.25em;">
                 {% trans %}Data will be stored for at least 45 days before permanent
@@ -33,7 +33,7 @@
             </p>
             <p class="utrecht-button-group">
                 <button hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
-                        hx-delete="/algorithm-system/{{ project.id }}"
+                        hx-delete="/algorithm-system/{{ algorithm.id }}"
                         class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
                         type="button">
                     {% trans %}Yes{%
@@ -48,7 +48,7 @@
     <div class="rvo-max-width-layout rvo-max-width-layout--md rvo-max-width-layout-inline-padding--none">
         <div class="rvo-content">
             <div class="amt-flex-container">
-                <h1 class="utrecht-heading-1 project-title">{{ project.name }}</h1>
+                <h1 class="utrecht-heading-1 algorithm-title">{{ algorithm.name }}</h1>
                 <a class="rvo-link rvo-link--normal rvo-link--with-icon"
                    onclick="amt.openModal('delete-modal')">
                     <span class="utrecht-icon rvo-icon rvo-icon-verwijderen rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
@@ -106,7 +106,7 @@
                         {% endfor %}
                     </ul>
                     <a class="margin-top-large rvo-link rvo-link--normal rvo-link--with-icon rvo-layout-margin-vertical--sm"
-                       href="/algorithm-system/{{ project_id }}/details/system_card/requirements"
+                       href="/algorithm-system/{{ algorithm_id }}/details/system_card/requirements"
                        style="bottom: 0;
                               position: absolute">
                         <span class="utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
@@ -158,7 +158,7 @@
                         {% endfor %}
                     </ul>
                     <a class="margin-top-large rvo-link rvo-link--normal rvo-link--with-icon rvo-layout-margin-vertical--sm"
-                       href="/algorithm-system/{{ project_id }}/details/system_card/instruments"
+                       href="/algorithm-system/{{ algorithm_id }}/details/system_card/instruments"
                        style="bottom: 0;
                               position: absolute">
                         <span class="utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
