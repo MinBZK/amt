@@ -1,4 +1,4 @@
-{% extends 'projects/details_base.html.j2' %}
+{% extends 'algorithms/details_base.html.j2' %}
 {# disable macro caching, see // https://jinja.palletsprojects.com/en/3.0.x/templates/#import-context-behavior #}
 {% import 'macros/tasks.html.j2' as render with context %}
 {% block detail_content %}
@@ -21,7 +21,7 @@
         <div id="errorContainer"></div>
         <div class="rvo-layout-grid-container margin-bottom-large">
             <div class="rvo-layout-grid rvo-layout-gap--sm rvo-layout-grid-columns--four rvo-layout-grid-layout--1fr">
-                {% for status in statuses %}{{ render.column(project, status, translations, tasks_by_status) }}{% endfor %}
+                {% for status in statuses %}{{ render.column(algorithm, status, translations, tasks_by_status) }}{% endfor %}
             </div>
         </div>
     </div>

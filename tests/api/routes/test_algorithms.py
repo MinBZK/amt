@@ -3,11 +3,11 @@ from datetime import UTC, datetime
 from typing import Any, cast
 
 import pytest
-from amt.api.routes.projects import get_localized_value
-from amt.models import Project
+from amt.api.routes.algorithms import get_localized_value
+from amt.models import Algorithm
 from amt.models.base import Base
 from amt.schema.ai_act_profile import AiActProfile
-from amt.schema.project import ProjectNew
+from amt.schema.algorithm import AlgorithmNew
 from amt.schema.system_card import SystemCard
 from amt.services.task_registry import get_requirements_and_measures
 from fastapi.requests import Request
@@ -15,28 +15,28 @@ from httpx import AsyncClient
 from pytest_mock import MockFixture
 from starlette.datastructures import URL
 
-from tests.constants import default_instrument, default_project
+from tests.constants import default_algorithm, default_instrument
 from tests.database_test_utils import DatabaseTestUtils
 
 
 @pytest.mark.asyncio
-async def test_projects_get_root(client: AsyncClient) -> None:
+async def test_algorithms_get_root(client: AsyncClient) -> None:
     response = await client.get("/algorithm-systems/")
 
     assert response.status_code == 200
-    assert b'<div id="project-search-results"' in response.content
+    assert b'<div id="algorithm-search-results"' in response.content
 
 
 @pytest.mark.asyncio
-async def test_projects_get_root_missing_slash(client: AsyncClient) -> None:
+async def test_algorithms_get_root_missing_slash(client: AsyncClient) -> None:
     response = await client.get("/algorithm-systems", follow_redirects=True)
 
     assert response.status_code == 200
-    assert b'<div id="project-search-results"' in response.content
+    assert b'<div id="algorithm-search-results"' in response.content
 
 
 @pytest.mark.asyncio
-async def test_projects_get_root_htmx(client: AsyncClient) -> None:
+async def test_algorithms_get_root_htmx(client: AsyncClient) -> None:
     response = await client.get("/algorithm-systems/", headers={"HX-Request": "true"})
 
     assert response.status_code == 200
@@ -44,7 +44,7 @@ async def test_projects_get_root_htmx(client: AsyncClient) -> None:
 
 
 @pytest.mark.asyncio
-async def test_projects_get_root_htmx_with_group_by(client: AsyncClient) -> None:
+async def test_algorithms_get_root_htmx_with_group_by(client: AsyncClient) -> None:
     response = await client.get("/algorithm-systems/?skip=0&display_type=LIFECYCLE", headers={"HX-Request": "true"})
 
     assert response.status_code == 200
@@ -52,7 +52,7 @@ async def test_projects_get_root_htmx_with_group_by(client: AsyncClient) -> None
 
 
 @pytest.mark.asyncio
-async def test_projects_get_root_htmx_with_group_by_and_lifecycle_filter(client: AsyncClient) -> None:
+async def test_algorithms_get_root_htmx_with_group_by_and_lifecycle_filter(client: AsyncClient) -> None:
     response = await client.get(
         "/algorithm-systems/?skip=0&add-filter-lifecycle=DESIGN&display_type=LIFECYCLE", headers={"HX-Request": "true"}
     )
@@ -62,11 +62,11 @@ async def test_projects_get_root_htmx_with_group_by_and_lifecycle_filter(client:
 
 
 @pytest.mark.asyncio
-async def test_projects_get_root_htmx_with_projects_mock(client: AsyncClient, mocker: MockFixture) -> None:
-    mock_project = default_project()
-    mock_project.last_edited = datetime.now(UTC)
+async def test_algorithms_get_root_htmx_with_algorithms_mock(client: AsyncClient, mocker: MockFixture) -> None:
+    mock_algorithm = default_algorithm()
+    mock_algorithm.last_edited = datetime.now(UTC)
     # given
-    mocker.patch("amt.services.projects.ProjectsService.paginate", return_value=[mock_project])
+    mocker.patch("amt.services.algorithms.AlgorithmsService.paginate", return_value=[mock_algorithm])
 
     # when
     response = await client.get("/algorithm-systems/", headers={"HX-Request": "true"})
@@ -76,7 +76,7 @@ async def test_projects_get_root_htmx_with_projects_mock(client: AsyncClient, mo
 
 
 @pytest.mark.asyncio
-async def test_get_new_projects(client: AsyncClient, mocker: MockFixture) -> None:
+async def test_get_new_algorithms(client: AsyncClient, mocker: MockFixture) -> None:
     # given
     mocker.patch(
         "amt.services.instruments.InstrumentsService.fetch_instruments",
@@ -100,7 +100,7 @@ async def test_get_new_projects(client: AsyncClient, mocker: MockFixture) -> Non
 
 
 @pytest.mark.asyncio
-async def test_post_new_projects_bad_request(client: AsyncClient, mocker: MockFixture) -> None:
+async def test_post_new_algorithms_bad_request(client: AsyncClient, mocker: MockFixture) -> None:
     # given
     mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
 
@@ -115,10 +115,10 @@ async def test_post_new_projects_bad_request(client: AsyncClient, mocker: MockFi
 
 
 @pytest.mark.asyncio
-async def test_post_new_projects(client: AsyncClient, mocker: MockFixture) -> None:
+async def test_post_new_algorithms(client: AsyncClient, mocker: MockFixture) -> None:
     client.cookies["fastapi-csrf-token"] = "1"
-    new_project = ProjectNew(
-        name="default project",
+    new_algorithm = AlgorithmNew(
+        name="default algorithm",
         lifecycle="DESIGN",
         type="AI-systeem",
         open_source="open-source",
@@ -136,7 +136,9 @@ async def test_post_new_projects(client: AsyncClient, mocker: MockFixture) -> No
     )
 
     # when
-    response = await client.post("/algorithm-systems/new", json=new_project.model_dump(), headers={"X-CSRF-Token": "1"})
+    response = await client.post(
+        "/algorithm-systems/new", json=new_algorithm.model_dump(), headers={"X-CSRF-Token": "1"}
+    )
 
     # then
     assert response.status_code == 200
@@ -145,7 +147,7 @@ async def test_post_new_projects(client: AsyncClient, mocker: MockFixture) -> No
 
 
 @pytest.mark.asyncio
-async def test_post_new_projects_write_system_card(
+async def test_post_new_algorithms_write_system_card(
     client: AsyncClient,
     mocker: MockFixture,
     db: DatabaseTestUtils,
@@ -159,7 +161,7 @@ async def test_post_new_projects_write_system_card(
     )
 
     name = "name1"
-    project_new = ProjectNew(
+    algorithm_new = AlgorithmNew(
         name=name,
         lifecycle="DESIGN",
         type="AI-systeem",
@@ -172,18 +174,18 @@ async def test_post_new_projects_write_system_card(
     )
 
     ai_act_profile = AiActProfile(
-        type=project_new.type,
-        open_source=project_new.open_source,
-        publication_category=project_new.publication_category,
-        systemic_risk=project_new.systemic_risk,
-        transparency_obligations=project_new.transparency_obligations,
-        role=project_new.role,
+        type=algorithm_new.type,
+        open_source=algorithm_new.open_source,
+        publication_category=algorithm_new.publication_category,
+        systemic_risk=algorithm_new.systemic_risk,
+        transparency_obligations=algorithm_new.transparency_obligations,
+        role=algorithm_new.role,
     )
 
     requirements, measures = get_requirements_and_measures(ai_act_profile)
 
     system_card = SystemCard(
-        name=project_new.name,
+        name=algorithm_new.name,
         instruments=[],
         ai_act_profile=ai_act_profile,
         requirements=requirements,
@@ -191,12 +193,12 @@ async def test_post_new_projects_write_system_card(
     )
 
     # when
-    await client.post("/algorithm-systems/new", json=project_new.model_dump(), headers={"X-CSRF-Token": "1"})
+    await client.post("/algorithm-systems/new", json=algorithm_new.model_dump(), headers={"X-CSRF-Token": "1"})
 
     # then
-    base_projects: list[Base] = await db.get(Project, "name", name)
-    projects: list[Project] = cast(list[Project], base_projects)
-    assert any(project.system_card == system_card for project in projects if project.system_card is not None)
+    base_algorithms: list[Base] = await db.get(Algorithm, "name", name)
+    algorithms: list[Algorithm] = cast(list[Algorithm], base_algorithms)
+    assert any(algorithm.system_card == system_card for algorithm in algorithms if algorithm.system_card is not None)
 
 
 class MockRequest(Request):

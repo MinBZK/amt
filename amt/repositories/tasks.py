@@ -38,15 +38,15 @@ class TasksRepository:
         statement = select(Task).where(Task.status_id == status_id).order_by(Task.sort_order)
         return (await self.session.execute(statement)).scalars().all()
 
-    async def find_by_project_id_and_status_id(self, project_id: int, status_id: int) -> Sequence[Task]:
+    async def find_by_algorithm_id_and_status_id(self, algorithm_id: int, status_id: int) -> Sequence[Task]:
         """
-        Returns all tasks in the repository for the given project_id.
-        :param project_id: the project_id to filter on
-        :return: a list of tasks in the repository for the given project_id
+        Returns all tasks in the repository for the given algorithm_id.
+        :param algorithm_id: the algorithm_id to filter on
+        :return: a list of tasks in the repository for the given algorithm_id
         """
         statement = (
             select(Task)
-            .where(and_(Task.status_id == status_id, Task.project_id == project_id))
+            .where(and_(Task.status_id == status_id, Task.algorithm_id == algorithm_id))
             .order_by(Task.sort_order)
         )
         return (await self.session.execute(statement)).scalars().all()

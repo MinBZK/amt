@@ -3,7 +3,7 @@ from uuid import UUID
 
 from amt.api.lifecycles import Lifecycles
 from amt.api.navigation import BaseNavigationItem, DisplayText
-from amt.models import Project, Task, User
+from amt.models import Algorithm, Task, User
 from amt.schema.instrument import Instrument, InstrumentTask, Owner
 from amt.schema.system_card import SystemCard
 from fastapi import Request
@@ -19,8 +19,8 @@ def default_base_navigation_item(
     return BaseNavigationItem(display_text=display_text, url=url, custom_display_text=custom_display_text, icon=icon)
 
 
-def default_project(name: str = "default project") -> Project:
-    return Project(name=name)
+def default_algorithm(name: str = "default algorithm") -> Algorithm:
+    return Algorithm(name=name)
 
 
 def default_user(id: str | UUID = "00494b4d-bcdf-425a-8140-bea0f3cbd3c2", name: str = "John Smith") -> User:
@@ -28,16 +28,18 @@ def default_user(id: str | UUID = "00494b4d-bcdf-425a-8140-bea0f3cbd3c2", name: 
     return User(id=id, name=name)
 
 
-def default_project_with_system_card(name: str = "default project") -> Project:
+def default_algorithm_with_system_card(name: str = "default algorithm") -> Algorithm:
     with open("resources/system_card_templates/AMT_Template_1.json") as f:
         system_card_from_template = json.load(f)
     system_card_from_template["name"] = name
     system_card = SystemCard.model_validate(system_card_from_template)
-    return Project(name=name, lifecycle=Lifecycles.DEVELOPMENT, system_card=system_card)
+    return Algorithm(name=name, lifecycle=Lifecycles.DEVELOPMENT, system_card=system_card)
 
 
-def default_project_with_lifecycle(name: str = "default project", lifecycle: Lifecycles = Lifecycles.DESIGN) -> Project:
-    return Project(name=name, lifecycle=lifecycle)
+def default_algorithm_with_lifecycle(
+    name: str = "default algorithm", lifecycle: Lifecycles = Lifecycles.DESIGN
+) -> Algorithm:
+    return Algorithm(name=name, lifecycle=lifecycle)
 
 
 def default_fastapi_request(url: str = "/") -> Request:
@@ -68,7 +70,7 @@ def default_task(
     sort_order: float = 1.0,
     status_id: int | None = None,
     user_id: int | None = None,
-    project_id: int | None = None,
+    algorithm_id: int | None = None,
 ) -> Task:
     return Task(
         title=title,
@@ -76,7 +78,7 @@ def default_task(
         sort_order=sort_order,
         status_id=status_id,
         user_id=user_id,
-        project_id=project_id,
+        algorithm_id=algorithm_id,
     )
 
 

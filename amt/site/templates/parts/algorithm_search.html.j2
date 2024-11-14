@@ -1,7 +1,7 @@
-<form id="search-project-form"
+<form id="search-algorithm-form"
       hx-get="/algorithm-systems/?skip=0"
-      hx-target="#project-search-results"
-      hx-trigger="change #search-project-form select"
+      hx-target="#algorithm-search-results"
+      hx-trigger="change #search-algorithm-form select"
       hx-include="this"
       hx-swap="innerHTML">
     <div class="amt-layout-grid rvo-layout-gap--md amt-layout-grid-columns--two">
@@ -24,7 +24,7 @@
                         <div class="rvo-layout-column rvo-text--bold rvo-layout-gap--sm">
                             <div>{% trans %}Search{% endtrans %}</div>
                             <div class="form-input-container">
-                                <input id="project-search-input"
+                                <input id="algorithm-search-input"
                                        type="text"
                                        class="utrecht-textbox utrecht-textbox--html-input"
                                        dir="auto"
@@ -42,7 +42,7 @@
                                       hx-get="/algorithm-systems/?skip=0"
                                       hx-indicator=".htmx-indicator"
                                       hx-swap="innerHTML"
-                                      onclick="document.getElementById('project-search-input').value = ''"></span>
+                                      onclick="document.getElementById('algorithm-search-input').value = ''"></span>
                             </div>
                         </div>
                         <div class="rvo-layout-column rvo-text--bold rvo-layout-gap--sm">
@@ -86,7 +86,7 @@
         <div class="rvo-text--bold" style="white-space: nowrap">{% trans %}Group by{% endtrans %}</div>
         <div class="rvo-select-wrapper">
             <form name="htmx-grouped-form"
-                  hx-target="#project-search-results"
+                  hx-target="#algorithm-search-results"
                   hx-trigger="change from:find select"
                   hx-get="/algorithm-systems/?skip=0"
                   hx-swap="innerHTML">
@@ -104,5 +104,5 @@
     </div>
 </form>
 {#53px = 45px (from the select wrapper) + an xs rvo alert padding of 8px#}
-<div id="project-search-results" style="margin-top: -53px">{% include 'parts/filter_list.html.j2' %}</div>
+<div id="algorithm-search-results" style="margin-top: -53px">{% include 'parts/filter_list.html.j2' %}</div>
 <div id="errorContainer"></div>

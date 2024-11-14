@@ -5,7 +5,7 @@ from typing import Annotated
 from fastapi import Depends
 
 from amt.enums.status import Status
-from amt.models.project import Project
+from amt.models.algorithm import Algorithm
 from amt.models.task import Task
 from amt.models.user import User
 from amt.repositories.tasks import TasksRepository
@@ -29,8 +29,8 @@ class TasksService:
         task = await self.repository.find_by_status_id(status_id)
         return task
 
-    async def get_tasks_for_project(self, project_id: int, status_id: int) -> Sequence[Task]:
-        tasks = await self.repository.find_by_project_id_and_status_id(project_id, status_id)
+    async def get_tasks_for_algorithm(self, algorithm_id: int, status_id: int) -> Sequence[Task]:
+        tasks = await self.repository.find_by_algorithm_id_and_status_id(algorithm_id, status_id)
         return tasks
 
     async def assign_task(self, task: Task, user: User) -> Task:
@@ -38,7 +38,7 @@ class TasksService:
         task = await self.repository.save(task)
         return task
 
-    async def create_instrument_tasks(self, tasks: Sequence[InstrumentTask], project: Project) -> None:
+    async def create_instrument_tasks(self, tasks: Sequence[InstrumentTask], algorithm: Algorithm) -> None:
         # TODO: (Christopher) At this moment a status has to be retrieved from the DB. In the future
         #       we will have static statuses, so this will need to change.
         status = Status.TODO
@@ -47,7 +47,11 @@ class TasksService:
                 # TODO: (Christopher) The ticket does not specify what to do when question type is not an
                 # open questions, hence for now all titles will be set to task.question.
                 Task(
-                    title=task.question[:1024], description="", project_id=project.id, status_id=status, sort_order=idx
+                    title=task.question[:1024],
+                    description="",
+                    algorithm_id=algorithm.id,
+                    status_id=status,
+                    sort_order=idx,
                 )
                 for idx, task in enumerate(tasks)
             ]

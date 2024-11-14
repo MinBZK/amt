@@ -1,36 +1,36 @@
 from typing import Any
 
 import pytest
-from amt.api.routes.project import (
+from amt.api.routes.algorithm import (
     MeasureUpdate,
     find_measure_task,
     find_requirement_task,
     find_requirement_tasks_by_measure_urn,
-    get_project_context,
-    get_project_or_error,
+    get_algorithm_context,
+    get_algorithm_or_error,
     set_path,
 )
 from amt.core.exceptions import AMTNotFound, AMTRepositoryError
-from amt.models import Project
+from amt.models import Algorithm
 from amt.schema.task import MovedTask
 from httpx import AsyncClient
 from pytest_httpx import HTTPXMock
 from pytest_mock import MockFixture
 
-from tests.api.routes.test_projects import MockRequest
+from tests.api.routes.test_algorithms import MockRequest
 from tests.constants import (
     TASK_REGISTRY_AIIA_CONTENT_PAYLOAD,
     TASK_REGISTRY_CONTENT_PAYLOAD,
     TASK_REGISTRY_LIST_PAYLOAD,
-    default_project,
-    default_project_with_system_card,
+    default_algorithm,
+    default_algorithm_with_system_card,
     default_task,
 )
 from tests.database_test_utils import DatabaseTestUtils
 
 
 @pytest.mark.asyncio
-async def test_get_unknown_project(client: AsyncClient) -> None:
+async def test_get_unknown_algorithm(client: AsyncClient) -> None:
     # when
     response = await client.get("/algorithm-system/1/details")
 
@@ -41,9 +41,9 @@ async def test_get_unknown_project(client: AsyncClient) -> None:
 
 
 @pytest.mark.asyncio
-async def test_get_project_tasks(client: AsyncClient, db: DatabaseTestUtils) -> None:
+async def test_get_algorithm_tasks(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_project("testproject1"), default_task(project_id=1, status_id=1)])
+    await db.given([default_algorithm("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
 
     # when
     response = await client.get("/algorithm-system/1/details/tasks")
@@ -55,9 +55,9 @@ async def test_get_project_tasks(client: AsyncClient, db: DatabaseTestUtils) -> 
 
 
 @pytest.mark.asyncio
-async def test_get_project_inference(client: AsyncClient, db: DatabaseTestUtils) -> None:
+async def test_get_algorithm_inference(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_project("testproject1"), default_task(project_id=1, status_id=1)])
+    await db.given([default_algorithm("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
 
     # when
     response = await client.get("/algorithm-system/1/details/model/inference")
@@ -73,9 +73,9 @@ async def test_move_task(client: AsyncClient, db: DatabaseTestUtils, mocker: Moc
     # given
     await db.given(
         [
-            default_project("testproject1"),
-            default_task(project_id=1, status_id=1),
-            default_task(project_id=1, status_id=1),
+            default_algorithm("testalgorithm1"),
+            default_task(algorithm_id=1, status_id=1),
+            default_task(algorithm_id=1, status_id=1),
         ]
     )
     mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
@@ -101,23 +101,23 @@ async def test_move_task(client: AsyncClient, db: DatabaseTestUtils, mocker: Moc
 
 
 @pytest.mark.asyncio
-async def test_get_project_context(client: AsyncClient, db: DatabaseTestUtils, mocker: MockFixture) -> None:
+async def test_get_algorithm_context(client: AsyncClient, db: DatabaseTestUtils, mocker: MockFixture) -> None:
     # given
-    test_project = default_project_with_system_card("testproject1")
-    project_service = mocker.AsyncMock()
-    project_service.get.return_value = test_project
+    test_algorithm = default_algorithm_with_system_card("testalgorithm1")
+    algorithm_service = mocker.AsyncMock()
+    algorithm_service.get.return_value = test_algorithm
 
-    project, project_context = await get_project_context(
-        project_id=1, projects_service=project_service, request=MockRequest("nl", url="/")
+    algorithm, algorithm_context = await get_algorithm_context(
+        algorithm_id=1, algorithms_service=algorithm_service, request=MockRequest("nl", url="/")
     )
-    assert project_context["last_edited"] is None
-    assert project == test_project
+    assert algorithm_context["last_edited"] is None
+    assert algorithm == test_algorithm
 
 
 @pytest.mark.asyncio
-async def test_get_project_non_existing_project(client: AsyncClient, db: DatabaseTestUtils) -> None:
+async def test_get_algorithm_non_existing_algorithm(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_project("testproject1"), default_task(project_id=1, status_id=1)])
+    await db.given([default_algorithm("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
 
     # when
     response = await client.get("/algorithm-system/99/details/tasks")
@@ -128,29 +128,33 @@ async def test_get_project_non_existing_project(client: AsyncClient, db: Databas
 
 
 @pytest.mark.asyncio
-async def test_get_project_or_error(client: AsyncClient, db: DatabaseTestUtils, mocker: MockFixture) -> None:
+async def test_get_algorithm_or_error(client: AsyncClient, db: DatabaseTestUtils, mocker: MockFixture) -> None:
     # given
-    test_project = default_project("testproject1")
-    project_service = mocker.AsyncMock()
-    project_service.get.return_value = test_project
+    test_algorithm = default_algorithm("testalgorithm1")
+    algorithm_service = mocker.AsyncMock()
+    algorithm_service.get.return_value = test_algorithm
 
     # happy flow
-    project = await get_project_or_error(project_id=1, projects_service=project_service, request=mocker.AsyncMock())
-    assert project == test_project
+    algorithm = await get_algorithm_or_error(
+        algorithm_id=1, algorithms_service=algorithm_service, request=mocker.AsyncMock()
+    )
+    assert algorithm == test_algorithm
 
     # unhappy flow
-    project_service.get.side_effect = AMTRepositoryError
+    algorithm_service.get.side_effect = AMTRepositoryError
     with pytest.raises(AMTNotFound):
-        _ = await get_project_or_error(project_id=99, projects_service=project_service, request=mocker.AsyncMock())
+        _ = await get_algorithm_or_error(
+            algorithm_id=99, algorithms_service=algorithm_service, request=mocker.AsyncMock()
+        )
 
 
 # TODO: Test are now have hard coded URL paths because the system card
 # is fixed for now. Tests need to be refactored and made proper once
-# the actual stored system card in a project is being rendered.
+# the actual stored system card in a algorithm is being rendered.
 @pytest.mark.asyncio
 async def test_get_system_card(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_project("testproject1")])
+    await db.given([default_algorithm("testalgorithm1")])
 
     # when
     response = await client.get("/algorithm-system/1/details/system_card")
@@ -163,9 +167,9 @@ async def test_get_system_card(client: AsyncClient, db: DatabaseTestUtils) -> No
 
 # TODO: Test are now have hard coded URL paths because the system card
 # is fixed for now. Tests need to be refactored and made proper once
-# the actual stored system card in a project is being rendered.
+# the actual stored system card in a algorithm is being rendered.
 @pytest.mark.asyncio
-async def test_get_system_card_unknown_project(client: AsyncClient) -> None:
+async def test_get_system_card_unknown_algorithm(client: AsyncClient) -> None:
     # when
     response = await client.get("/algorithm-system/1/details/system_card")
 
@@ -189,7 +193,7 @@ async def test_get_assessment_card(client: AsyncClient, httpx_mock: HTTPXMock, d
         content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
     )
     # given
-    await db.given([default_project_with_system_card("testproject1")])
+    await db.given([default_algorithm_with_system_card("testalgorithm1")])
 
     # when
     response = await client.get("/algorithm-system/1/details/system_card/assessments/iama")
@@ -201,9 +205,9 @@ async def test_get_assessment_card(client: AsyncClient, httpx_mock: HTTPXMock, d
 
 
 @pytest.mark.asyncio
-async def test_get_assessment_card_unknown_project(client: AsyncClient, db: DatabaseTestUtils) -> None:
+async def test_get_assessment_card_unknown_algorithm(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_project("testproject1")])
+    await db.given([default_algorithm("testalgorithm1")])
 
     # when
     response = await client.get("/algorithm-system/1/details/system_card/assessments/iama")
@@ -217,7 +221,7 @@ async def test_get_assessment_card_unknown_project(client: AsyncClient, db: Data
 @pytest.mark.asyncio
 async def test_get_assessment_card_unknown_assessment(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_project("testproject1")])
+    await db.given([default_algorithm("testalgorithm1")])
 
     # when
     response = await client.get("/algorithm-system/1/details/system_card/assessments/nonexistent")
@@ -242,7 +246,7 @@ async def test_get_model_card(client: AsyncClient, httpx_mock: HTTPXMock, db: Da
         content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
     )
     # given
-    await db.given([default_project_with_system_card("testproject1")])
+    await db.given([default_algorithm_with_system_card("testalgorithm1")])
 
     # when
     response = await client.get("/algorithm-system/1/details/system_card/models/logres_iris")
@@ -253,7 +257,7 @@ async def test_get_model_card(client: AsyncClient, httpx_mock: HTTPXMock, db: Da
     assert b"Model card" in response.content
 
 
-async def test_get_model_card_unknown_project(client: AsyncClient) -> None:
+async def test_get_model_card_unknown_algorithm(client: AsyncClient) -> None:
     # when
     response = await client.get("/algorithm-system/1/details/system_card/models/logres_iris")
 
@@ -266,7 +270,7 @@ async def test_get_model_card_unknown_project(client: AsyncClient) -> None:
 @pytest.mark.asyncio
 async def test_get_assessment_card_unknown_model_card(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_project("testproject1")])
+    await db.given([default_algorithm("testalgorithm1")])
 
     # when
     response = await client.get("/algorithm-system/1/details/system_card/models/nonexistent")
@@ -278,9 +282,9 @@ async def test_get_assessment_card_unknown_model_card(client: AsyncClient, db: D
 
 
 @pytest.mark.asyncio
-async def test_get_project_details(client: AsyncClient, db: DatabaseTestUtils) -> None:
+async def test_get_algorithm_details(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_project("testproject1"), default_task(project_id=1, status_id=1)])
+    await db.given([default_algorithm("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
 
     # when
     response = await client.get("/algorithm-system/1/details")
@@ -305,7 +309,7 @@ async def test_get_system_card_requirements(client: AsyncClient, httpx_mock: HTT
         content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
     )
     # given
-    await db.given([default_project_with_system_card("testproject1"), default_task(project_id=1, status_id=1)])
+    await db.given([default_algorithm_with_system_card("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
 
     # when
     response = await client.get("/algorithm-system/1/details/system_card/requirements")
@@ -330,7 +334,7 @@ async def test_get_system_card_data_page(client: AsyncClient, httpx_mock: HTTPXM
         content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
     )
     # given
-    await db.given([default_project_with_system_card("testproject1"), default_task(project_id=1, status_id=1)])
+    await db.given([default_algorithm_with_system_card("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
 
     # when
     response = await client.get("/algorithm-system/1/details/system_card/data")
@@ -355,7 +359,7 @@ async def test_get_system_card_instruments(client: AsyncClient, httpx_mock: HTTP
         content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
     )
     # given
-    await db.given([default_project_with_system_card("testproject1"), default_task(project_id=1, status_id=1)])
+    await db.given([default_algorithm_with_system_card("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
 
     # when
     response = await client.get("/algorithm-system/1/details/system_card/instruments")
@@ -367,9 +371,9 @@ async def test_get_system_card_instruments(client: AsyncClient, httpx_mock: HTTP
 
 
 @pytest.mark.asyncio
-async def test_get_project_edit(client: AsyncClient, db: DatabaseTestUtils) -> None:
+async def test_get_algorithm_edit(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_project("testproject1")])
+    await db.given([default_algorithm("testalgorithm1")])
 
     # when
     response = await client.get("/algorithm-system/1/edit/system_card/lifecycle")
@@ -382,9 +386,9 @@ async def test_get_project_edit(client: AsyncClient, db: DatabaseTestUtils) -> N
 
 
 @pytest.mark.asyncio
-async def test_delete_project(client: AsyncClient, db: DatabaseTestUtils, mocker: MockFixture) -> None:
+async def test_delete_algorithm(client: AsyncClient, db: DatabaseTestUtils, mocker: MockFixture) -> None:
     # given
-    await db.given([default_project("testproject1")])
+    await db.given([default_algorithm("testalgorithm1")])
     mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
     client.cookies["fastapi-csrf-token"] = "1"
 
@@ -399,9 +403,9 @@ async def test_delete_project(client: AsyncClient, db: DatabaseTestUtils, mocker
 
 
 @pytest.mark.asyncio
-async def test_delete_project_and_check_list(client: AsyncClient, db: DatabaseTestUtils, mocker: MockFixture) -> None:
+async def test_delete_algorithm_and_check_list(client: AsyncClient, db: DatabaseTestUtils, mocker: MockFixture) -> None:
     # given
-    await db.given([default_project("testproject1"), default_project("testproject2")])
+    await db.given([default_algorithm("testalgorithm1"), default_algorithm("testalgorithm2")])
     mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
     client.cookies["fastapi-csrf-token"] = "1"
 
@@ -416,16 +420,16 @@ async def test_delete_project_and_check_list(client: AsyncClient, db: DatabaseTe
     response2 = await client.get("/algorithm-systems/")
     assert response2.status_code == 200
     assert response2.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"testproject2" in response2.content
-    assert b"testproject1" not in response2.content
+    assert b"testalgorithm2" in response2.content
+    assert b"testalgorithm1" not in response2.content
 
 
 @pytest.mark.asyncio
-async def test_delete_project_and_check_project(
+async def test_delete_algorithm_and_check_algorithm(
     client: AsyncClient, db: DatabaseTestUtils, mocker: MockFixture
 ) -> None:
     # given
-    await db.given([default_project("testproject1"), default_project("testproject2")])
+    await db.given([default_algorithm("testalgorithm1"), default_algorithm("testalgorithm2")])
     mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
     client.cookies["fastapi-csrf-token"] = "1"
 
@@ -442,9 +446,9 @@ async def test_delete_project_and_check_project(
 
 
 @pytest.mark.asyncio
-async def test_get_project_cancel(client: AsyncClient, db: DatabaseTestUtils) -> None:
+async def test_get_algorithm_cancel(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_project("testproject1")])
+    await db.given([default_algorithm("testalgorithm1")])
 
     # when
     response = await client.get("/algorithm-system/1/cancel/system_card/lifecycle")
@@ -455,9 +459,9 @@ async def test_get_project_cancel(client: AsyncClient, db: DatabaseTestUtils) ->
 
 
 @pytest.mark.asyncio
-async def test_get_project_update(client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
+async def test_get_algorithm_update(client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_project("testproject1")])
+    await db.given([default_algorithm("testalgorithm1")])
     client.cookies["fastapi-csrf-token"] = "1"
     mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
 
@@ -472,11 +476,11 @@ async def test_get_project_update(client: AsyncClient, mocker: MockFixture, db: 
     assert b"name" in response.content
     assert b"Test Name" in response.content
 
-    # Verify that the project was updated in the database
-    updated_projects = await db.get(Project, "id", 1)
-    assert len(updated_projects) == 1
-    updated_project = updated_projects[0]
-    assert updated_project.name == "Test Name"  # type: ignore
+    # Verify that the algorithm was updated in the database
+    updated_algorithms = await db.get(Algorithm, "id", 1)
+    assert len(updated_algorithms) == 1
+    updated_algorithm = updated_algorithms[0]
+    assert updated_algorithm.name == "Test Name"  # type: ignore
 
 
 class DummyObject:
@@ -485,108 +489,108 @@ class DummyObject:
 
 def test_set_path():  # type: ignore
     # Test with dictionary input
-    project_dict: dict[str, Any] = {}
-    set_path(project_dict, "/a/b/c", "value1")  # type: ignore
-    assert project_dict == {"a": {"b": {"c": "value1"}}}
+    algorithm_dict: dict[str, Any] = {}
+    set_path(algorithm_dict, "/a/b/c", "value1")  # type: ignore
+    assert algorithm_dict == {"a": {"b": {"c": "value1"}}}
 
     # Test with nested dictionary input
-    project_dict: dict[str, Any] = {"x": {"y": {}}}
-    set_path(project_dict, "/x/y/z", "value2")
-    assert project_dict == {"x": {"y": {"z": "value2"}}}
+    algorithm_dict: dict[str, Any] = {"x": {"y": {}}}
+    set_path(algorithm_dict, "/x/y/z", "value2")
+    assert algorithm_dict == {"x": {"y": {"z": "value2"}}}
 
     # Test with object input
-    project_obj: DummyObject = DummyObject()
-    set_path(project_obj, "/a/b/c", "value3")
-    assert hasattr(project_obj, "a")
-    assert project_obj.a == {"b": {"c": "value3"}}  # type: ignore
+    algorithm_obj: DummyObject = DummyObject()
+    set_path(algorithm_obj, "/a/b/c", "value3")
+    assert hasattr(algorithm_obj, "a")
+    assert algorithm_obj.a == {"b": {"c": "value3"}}  # type: ignore
 
     # Test with mixed object and dictionary input
-    project_obj = DummyObject()
-    project_obj.x = {}  # type: ignore
-    set_path(project_obj, "/x/y/z", "value4")
-    assert isinstance(project_obj.x, dict)  # type: ignore
-    assert project_obj.x == {"y": {"z": "value4"}}  # type: ignore
+    algorithm_obj = DummyObject()
+    algorithm_obj.x = {}  # type: ignore
+    set_path(algorithm_obj, "/x/y/z", "value4")
+    assert isinstance(algorithm_obj.x, dict)  # type: ignore
+    assert algorithm_obj.x == {"y": {"z": "value4"}}  # type: ignore
 
     # Test with existing attributes
-    project_obj: DummyObject = DummyObject()
-    project_obj.a = DummyObject()  # type: ignore
-    project_obj.a.b = "old_value"  # type: ignore
-    set_path(project_obj, "/a/b", "new_value")
-    assert project_obj.a.b == "new_value"  # type: ignore
+    algorithm_obj: DummyObject = DummyObject()
+    algorithm_obj.a = DummyObject()  # type: ignore
+    algorithm_obj.a.b = "old_value"  # type: ignore
+    set_path(algorithm_obj, "/a/b", "new_value")
+    assert algorithm_obj.a.b == "new_value"  # type: ignore
 
     # Test with empty path
-    project_dict: dict[str, Any] = {}
+    algorithm_dict: dict[str, Any] = {}
     with pytest.raises(ValueError):  # noqa: PT011
-        set_path(project_dict, "", "value")
+        set_path(algorithm_dict, "", "value")
 
     # Test with root-level path
-    project_dict: dict[str, Any] = {}
-    set_path(project_dict, "/root", "value5")
-    assert project_dict == {"root": "value5"}
+    algorithm_dict: dict[str, Any] = {}
+    set_path(algorithm_dict, "/root", "value5")
+    assert algorithm_dict == {"root": "value5"}
 
 
 @pytest.mark.asyncio
 async def test_find_measure_task() -> None:
-    test_project = default_project_with_system_card("testproject1")
+    test_algorithm = default_algorithm_with_system_card("testalgorithm1")
 
     # no matched measure
-    measure = find_measure_task(test_project.system_card, "")
+    measure = find_measure_task(test_algorithm.system_card, "")
     assert measure is None
 
     # matches measure
-    measure = find_measure_task(test_project.system_card, "urn:nl:ak:mtr:bnd-01")
+    measure = find_measure_task(test_algorithm.system_card, "urn:nl:ak:mtr:bnd-01")
     assert measure.urn == "urn:nl:ak:mtr:bnd-01"  # pyright: ignore [reportOptionalMemberAccess]
     assert measure.value is not None  # pyright: ignore [reportOptionalMemberAccess]
 
     # no measures in system_card
-    test_project.system_card.measures = []
-    measure = find_measure_task(test_project.system_card, "")
+    test_algorithm.system_card.measures = []
+    measure = find_measure_task(test_algorithm.system_card, "")
     assert measure is None
 
 
 @pytest.mark.asyncio
 async def test_find_requirement_task() -> None:
-    test_project = default_project_with_system_card("testproject1")
+    test_algorithm = default_algorithm_with_system_card("testalgorithm1")
 
     # no matched requirement
-    requirement = find_requirement_task(test_project.system_card, "")
+    requirement = find_requirement_task(test_algorithm.system_card, "")
     assert requirement is None
 
     # matches measure
-    requirement = find_requirement_task(test_project.system_card, "urn:nl:ak:ver:aia-05")
+    requirement = find_requirement_task(test_algorithm.system_card, "urn:nl:ak:ver:aia-05")
     assert requirement.urn == "urn:nl:ak:ver:aia-05"  # pyright: ignore [reportOptionalMemberAccess]
     assert requirement.state is not None  # pyright: ignore [reportOptionalMemberAccess]
 
     # no measures in system_card
-    test_project.system_card.requirements = []
-    requirement = find_measure_task(test_project.system_card, "")
+    test_algorithm.system_card.requirements = []
+    requirement = find_measure_task(test_algorithm.system_card, "")
     assert requirement is None
 
 
 @pytest.mark.asyncio
 async def test_find_requirement_tasks_by_measure_urn() -> None:
-    test_project = default_project_with_system_card("testproject1")
+    test_algorithm = default_algorithm_with_system_card("testalgorithm1")
 
     # no matched requirement
     with pytest.raises(IndexError):
         # TODO: this is because it is not coded well change later
-        requirement_tasks = find_requirement_tasks_by_measure_urn(test_project.system_card, "")
+        requirement_tasks = find_requirement_tasks_by_measure_urn(test_algorithm.system_card, "")
 
     # matches measure
-    requirement_tasks = find_requirement_tasks_by_measure_urn(test_project.system_card, "urn:nl:ak:mtr:bnd-01")
+    requirement_tasks = find_requirement_tasks_by_measure_urn(test_algorithm.system_card, "urn:nl:ak:mtr:bnd-01")
     assert len(requirement_tasks) == 3
 
     # empty requirements
-    test_project.system_card.requirements = []
+    test_algorithm.system_card.requirements = []
     with pytest.raises(KeyError):
         # TODO: this is because it is not coded well change later
-        requirement_tasks = find_requirement_tasks_by_measure_urn(test_project.system_card, "urn:nl:ak:mtr:bnd-01")
+        requirement_tasks = find_requirement_tasks_by_measure_urn(test_algorithm.system_card, "urn:nl:ak:mtr:bnd-01")
 
 
 @pytest.mark.asyncio
 async def test_get_measure(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_project_with_system_card("testproject1")])
+    await db.given([default_algorithm_with_system_card("testalgorithm1")])
 
     # when
     response = await client.get("/algorithm-system/1/measure/urn:nl:ak:mtr:bnd-01")
@@ -600,7 +604,7 @@ async def test_get_measure(client: AsyncClient, db: DatabaseTestUtils) -> None:
 @pytest.mark.asyncio
 async def test_update_measure_value(client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_project_with_system_card("testproject1")])
+    await db.given([default_algorithm_with_system_card("testalgorithm1")])
     client.cookies["fastapi-csrf-token"] = "1"
     mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
 

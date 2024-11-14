@@ -3,7 +3,7 @@ from amt.core.exceptions import AMTRepositoryError
 from amt.enums.status import Status
 from amt.models import Task
 from amt.repositories.tasks import TasksRepository
-from tests.constants import default_project, default_task
+from tests.constants import default_algorithm, default_task
 from tests.database_test_utils import DatabaseTestUtils
 
 
@@ -138,13 +138,13 @@ async def test_find_by_status_id(db: DatabaseTestUtils):
 
 
 @pytest.mark.asyncio
-async def test_find_by_project_id_and_status_id(db: DatabaseTestUtils):
-    await db.given([default_project()])
-    task = default_task(status_id=Status.TODO, project_id=1)
+async def test_find_by_algorithm_id_and_status_id(db: DatabaseTestUtils):
+    await db.given([default_algorithm()])
+    task = default_task(status_id=Status.TODO, algorithm_id=1)
     await db.given([task, default_task()])
 
     tasks_repository: TasksRepository = TasksRepository(db.get_session())
-    results = await tasks_repository.find_by_project_id_and_status_id(1, 1)
+    results = await tasks_repository.find_by_algorithm_id_and_status_id(1, 1)
     assert len(results) == 1
     assert results[0].id == 1
-    assert results[0].project_id == 1
+    assert results[0].algorithm_id == 1
