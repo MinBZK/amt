@@ -308,3 +308,15 @@ main {
     display: flex;
     justify-content: space-between;
 }
+
+.amt-theme {
+    /* this is a placeholder class, do not remove */
+}
+
+/* we override the default ROOS style because we want to display as column, not rows */
+/* stylelint-disable selector-class-pattern */
+.amt-theme .rvo-accordion__item > .rvo-accordion__item-summary {
+    align-items: initial;
+    flex-direction: column;
+}
+/* stylelint-enable */

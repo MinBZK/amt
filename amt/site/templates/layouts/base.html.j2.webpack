@@ -29,7 +29,7 @@
     {% endblock %}
 </head>
 
-<body hx-ext="response-targets" class="rvo-theme">
+<body hx-ext="response-targets" class="rvo-theme amt-theme">
     {% block header %}
     {% include 'parts/header.html.j2' %}
     {% endblock %}
