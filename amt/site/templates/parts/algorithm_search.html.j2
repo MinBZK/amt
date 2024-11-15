@@ -1,18 +1,17 @@
 <form id="search-algorithm-form"
-      hx-get="/algorithm-systems/?skip=0"
+      hx-get="/algorithms/?skip=0"
       hx-target="#algorithm-search-results"
       hx-trigger="change #search-algorithm-form select"
       hx-include="this"
       hx-swap="innerHTML">
     <div class="amt-layout-grid rvo-layout-gap--md amt-layout-grid-columns--two">
         <div>
-            <h1 class="utrecht-heading-1">{% trans %}Algorithm Systems{% endtrans %}</h1>
+            <h1 class="utrecht-heading-1">{% trans %}algorithms{% endtrans %}</h1>
         </div>
         <div style="margin-left: auto">
-            <a data-navigation="button:/algorithm-systems/new"
-               href="/algorithm-systems/new">
+            <a data-navigation="button:/algorithms/new" href="/algorithms/new">
                 <button class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
-                        type="button">{% trans %}New algorithm system{% endtrans %}</button>
+                        type="button">{% trans %}New algorithm{% endtrans %}</button>
             </a>
         </div>
     </div>
@@ -29,9 +28,9 @@
                                        class="utrecht-textbox utrecht-textbox--html-input"
                                        dir="auto"
                                        value="{{ search }}"
-                                       placeholder="{% trans %}Find algorithm system...{% endtrans %}"
+                                       placeholder="{% trans %}Find algorithm...{% endtrans %}"
                                        name="search"
-                                       hx-get="/algorithm-systems/?skip=0"
+                                       hx-get="/algorithms/?skip=0"
                                        hx-trigger="input changed delay:500ms, search"
                                        autocomplete="off"
                                        onfocus="this.value=''" />
@@ -39,7 +38,7 @@
                                       role="img"
                                       aria-label="Kruis"
                                       hx-trigger="click"
-                                      hx-get="/algorithm-systems/?skip=0"
+                                      hx-get="/algorithms/?skip=0"
                                       hx-indicator=".htmx-indicator"
                                       hx-swap="innerHTML"
                                       onclick="document.getElementById('algorithm-search-input').value = ''"></span>
@@ -88,7 +87,7 @@
             <form name="htmx-grouped-form"
                   hx-target="#algorithm-search-results"
                   hx-trigger="change from:find select"
-                  hx-get="/algorithm-systems/?skip=0"
+                  hx-get="/algorithms/?skip=0"
                   hx-swap="innerHTML">
                 <select id="display_type"
                         name="display_type"

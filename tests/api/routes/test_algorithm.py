@@ -32,7 +32,7 @@ from tests.database_test_utils import DatabaseTestUtils
 @pytest.mark.asyncio
 async def test_get_unknown_algorithm(client: AsyncClient) -> None:
     # when
-    response = await client.get("/algorithm-system/1/details")
+    response = await client.get("/algorithm/1/details")
 
     # then
     assert response.status_code == 404
@@ -46,7 +46,7 @@ async def test_get_algorithm_tasks(client: AsyncClient, db: DatabaseTestUtils) -
     await db.given([default_algorithm("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
 
     # when
-    response = await client.get("/algorithm-system/1/details/tasks")
+    response = await client.get("/algorithm/1/details/tasks")
 
     # then
     assert response.status_code == 200
@@ -60,7 +60,7 @@ async def test_get_algorithm_inference(client: AsyncClient, db: DatabaseTestUtil
     await db.given([default_algorithm("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
 
     # when
-    response = await client.get("/algorithm-system/1/details/model/inference")
+    response = await client.get("/algorithm/1/details/model/inference")
 
     # then
     assert response.status_code == 200
@@ -83,7 +83,7 @@ async def test_move_task(client: AsyncClient, db: DatabaseTestUtils, mocker: Moc
 
     # All -1 flow
     move_task_json = MovedTask(taskId=1, statusId=1, previousSiblingId=-1, nextSiblingId=-1).model_dump(by_alias=True)
-    response = await client.patch("/algorithm-system/move_task", json=move_task_json, headers={"X-CSRF-Token": "1"})
+    response = await client.patch("/algorithm/move_task", json=move_task_json, headers={"X-CSRF-Token": "1"})
 
     # then
     assert response.status_code == 200
@@ -92,7 +92,7 @@ async def test_move_task(client: AsyncClient, db: DatabaseTestUtils, mocker: Moc
 
     # All 1 flow
     move_task_json = MovedTask(taskId=1, statusId=1, previousSiblingId=1, nextSiblingId=1).model_dump(by_alias=True)
-    response = await client.patch("/algorithm-system/move_task", json=move_task_json, headers={"X-CSRF-Token": "1"})
+    response = await client.patch("/algorithm/move_task", json=move_task_json, headers={"X-CSRF-Token": "1"})
 
     # then
     assert response.status_code == 200
@@ -120,7 +120,7 @@ async def test_get_algorithm_non_existing_algorithm(client: AsyncClient, db: Dat
     await db.given([default_algorithm("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
 
     # when
-    response = await client.get("/algorithm-system/99/details/tasks")
+    response = await client.get("/algorithm/99/details/tasks")
 
     # then
     assert response.status_code == 404
@@ -157,7 +157,7 @@ async def test_get_system_card(client: AsyncClient, db: DatabaseTestUtils) -> No
     await db.given([default_algorithm("testalgorithm1")])
 
     # when
-    response = await client.get("/algorithm-system/1/details/system_card")
+    response = await client.get("/algorithm/1/details/system_card")
 
     # then
     assert response.status_code == 200
@@ -171,7 +171,7 @@ async def test_get_system_card(client: AsyncClient, db: DatabaseTestUtils) -> No
 @pytest.mark.asyncio
 async def test_get_system_card_unknown_algorithm(client: AsyncClient) -> None:
     # when
-    response = await client.get("/algorithm-system/1/details/system_card")
+    response = await client.get("/algorithm/1/details/system_card")
 
     # then
     assert response.status_code == 404
@@ -196,7 +196,7 @@ async def test_get_assessment_card(client: AsyncClient, httpx_mock: HTTPXMock, d
     await db.given([default_algorithm_with_system_card("testalgorithm1")])
 
     # when
-    response = await client.get("/algorithm-system/1/details/system_card/assessments/iama")
+    response = await client.get("/algorithm/1/details/system_card/assessments/iama")
 
     # then
     assert response.status_code == 200
@@ -210,7 +210,7 @@ async def test_get_assessment_card_unknown_algorithm(client: AsyncClient, db: Da
     await db.given([default_algorithm("testalgorithm1")])
 
     # when
-    response = await client.get("/algorithm-system/1/details/system_card/assessments/iama")
+    response = await client.get("/algorithm/1/details/system_card/assessments/iama")
 
     # then
     assert response.status_code == 404
@@ -224,7 +224,7 @@ async def test_get_assessment_card_unknown_assessment(client: AsyncClient, db: D
     await db.given([default_algorithm("testalgorithm1")])
 
     # when
-    response = await client.get("/algorithm-system/1/details/system_card/assessments/nonexistent")
+    response = await client.get("/algorithm/1/details/system_card/assessments/nonexistent")
 
     # then
     assert response.status_code == 404
@@ -249,7 +249,7 @@ async def test_get_model_card(client: AsyncClient, httpx_mock: HTTPXMock, db: Da
     await db.given([default_algorithm_with_system_card("testalgorithm1")])
 
     # when
-    response = await client.get("/algorithm-system/1/details/system_card/models/logres_iris")
+    response = await client.get("/algorithm/1/details/system_card/models/logres_iris")
 
     # then
     assert response.status_code == 200
@@ -259,7 +259,7 @@ async def test_get_model_card(client: AsyncClient, httpx_mock: HTTPXMock, db: Da
 
 async def test_get_model_card_unknown_algorithm(client: AsyncClient) -> None:
     # when
-    response = await client.get("/algorithm-system/1/details/system_card/models/logres_iris")
+    response = await client.get("/algorithm/1/details/system_card/models/logres_iris")
 
     # then
     assert response.status_code == 404
@@ -273,7 +273,7 @@ async def test_get_assessment_card_unknown_model_card(client: AsyncClient, db: D
     await db.given([default_algorithm("testalgorithm1")])
 
     # when
-    response = await client.get("/algorithm-system/1/details/system_card/models/nonexistent")
+    response = await client.get("/algorithm/1/details/system_card/models/nonexistent")
 
     # then
     assert response.status_code == 404
@@ -287,7 +287,7 @@ async def test_get_algorithm_details(client: AsyncClient, db: DatabaseTestUtils)
     await db.given([default_algorithm("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
 
     # when
-    response = await client.get("/algorithm-system/1/details")
+    response = await client.get("/algorithm/1/details")
 
     # then
     assert response.status_code == 200
@@ -312,7 +312,7 @@ async def test_get_system_card_requirements(client: AsyncClient, httpx_mock: HTT
     await db.given([default_algorithm_with_system_card("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
 
     # when
-    response = await client.get("/algorithm-system/1/details/system_card/requirements")
+    response = await client.get("/algorithm/1/details/system_card/requirements")
 
     # then
     assert response.status_code == 200
@@ -337,7 +337,7 @@ async def test_get_system_card_data_page(client: AsyncClient, httpx_mock: HTTPXM
     await db.given([default_algorithm_with_system_card("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
 
     # when
-    response = await client.get("/algorithm-system/1/details/system_card/data")
+    response = await client.get("/algorithm/1/details/system_card/data")
 
     # then
     assert response.status_code == 200
@@ -362,7 +362,7 @@ async def test_get_system_card_instruments(client: AsyncClient, httpx_mock: HTTP
     await db.given([default_algorithm_with_system_card("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
 
     # when
-    response = await client.get("/algorithm-system/1/details/system_card/instruments")
+    response = await client.get("/algorithm/1/details/system_card/instruments")
 
     # then
     assert response.status_code == 200
@@ -376,7 +376,7 @@ async def test_get_algorithm_edit(client: AsyncClient, db: DatabaseTestUtils) ->
     await db.given([default_algorithm("testalgorithm1")])
 
     # when
-    response = await client.get("/algorithm-system/1/edit/system_card/lifecycle")
+    response = await client.get("/algorithm/1/edit/system_card/lifecycle")
 
     # then
     assert response.status_code == 200
@@ -393,13 +393,13 @@ async def test_delete_algorithm(client: AsyncClient, db: DatabaseTestUtils, mock
     client.cookies["fastapi-csrf-token"] = "1"
 
     # when
-    response = await client.delete("/algorithm-system/1", headers={"X-CSRF-Token": "1"})
+    response = await client.delete("/algorithm/1", headers={"X-CSRF-Token": "1"})
 
     # then
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
     assert "hx-redirect" in response.headers
-    assert response.headers["hx-redirect"] == "/algorithm-systems/"
+    assert response.headers["hx-redirect"] == "/algorithms/"
 
 
 @pytest.mark.asyncio
@@ -410,14 +410,14 @@ async def test_delete_algorithm_and_check_list(client: AsyncClient, db: Database
     client.cookies["fastapi-csrf-token"] = "1"
 
     # when
-    response = await client.delete("/algorithm-system/1", headers={"X-CSRF-Token": "1"})
+    response = await client.delete("/algorithm/1", headers={"X-CSRF-Token": "1"})
 
     # then
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
     assert "hx-redirect" in response.headers
 
-    response2 = await client.get("/algorithm-systems/")
+    response2 = await client.get("/algorithms/")
     assert response2.status_code == 200
     assert response2.headers["content-type"] == "text/html; charset=utf-8"
     assert b"testalgorithm2" in response2.content
@@ -434,14 +434,14 @@ async def test_delete_algorithm_and_check_algorithm(
     client.cookies["fastapi-csrf-token"] = "1"
 
     # when
-    response = await client.delete("/algorithm-system/1", headers={"X-CSRF-Token": "1"})
+    response = await client.delete("/algorithm/1", headers={"X-CSRF-Token": "1"})
 
     # then
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
     assert "hx-redirect" in response.headers
 
-    response2 = await client.get("/algorithm-system/1/details")
+    response2 = await client.get("/algorithm/1/details")
     assert response2.status_code == 404
 
 
@@ -451,7 +451,7 @@ async def test_get_algorithm_cancel(client: AsyncClient, db: DatabaseTestUtils) 
     await db.given([default_algorithm("testalgorithm1")])
 
     # when
-    response = await client.get("/algorithm-system/1/cancel/system_card/lifecycle")
+    response = await client.get("/algorithm/1/cancel/system_card/lifecycle")
 
     # then
     assert response.status_code == 200
@@ -466,9 +466,7 @@ async def test_get_algorithm_update(client: AsyncClient, mocker: MockFixture, db
     mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
 
     # when
-    response = await client.put(
-        "/algorithm-system/1/update/name", json={"value": "Test Name"}, headers={"X-CSRF-Token": "1"}
-    )
+    response = await client.put("/algorithm/1/update/name", json={"value": "Test Name"}, headers={"X-CSRF-Token": "1"})
 
     # then
     assert response.status_code == 200
@@ -593,7 +591,7 @@ async def test_get_measure(client: AsyncClient, db: DatabaseTestUtils) -> None:
     await db.given([default_algorithm_with_system_card("testalgorithm1")])
 
     # when
-    response = await client.get("/algorithm-system/1/measure/urn:nl:ak:mtr:bnd-01")
+    response = await client.get("/algorithm/1/measure/urn:nl:ak:mtr:bnd-01")
 
     # then
     assert response.status_code == 200
@@ -610,7 +608,7 @@ async def test_update_measure_value(client: AsyncClient, mocker: MockFixture, db
 
     # happy flow
     response = await client.post(
-        "/algorithm-system/1/measure/urn:nl:ak:mtr:bnd-01",
+        "/algorithm/1/measure/urn:nl:ak:mtr:bnd-01",
         json={"measure_update": MeasureUpdate(measure_state="done", measure_value="something").model_dump()},
         headers={"X-CSRF-Token": "1"},
     )

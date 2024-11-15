@@ -4,7 +4,7 @@ from playwright.sync_api import Page, expect
 
 @pytest.mark.slow
 def test_e2e_create_algorithm(page: Page):
-    page.goto("/algorithm-systems/new")
+    page.goto("/algorithms/new")
 
     page.fill("#name", "My new algorithm")
 
@@ -34,7 +34,7 @@ def test_e2e_create_algorithm(page: Page):
 
 @pytest.mark.slow
 def test_e2e_create_algorithm_invalid(page: Page):
-    page.goto("/algorithm-systems/new")
+    page.goto("/algorithms/new")
 
     button = page.locator("#transparency_obligations-transparantieverplichtingen")
     button.click()
@@ -53,7 +53,7 @@ def test_e2e_create_algorithm_invalid(page: Page):
 
 @pytest.mark.slow
 def test_e2e_create_algorithm_with_tasks(page: Page):
-    page.goto("/algorithm-systems/new")
+    page.goto("/algorithms/new")
 
     page.fill("#name", "My new filled algorithm")
 

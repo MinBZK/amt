@@ -21,7 +21,7 @@ from tests.database_test_utils import DatabaseTestUtils
 
 @pytest.mark.asyncio
 async def test_algorithms_get_root(client: AsyncClient) -> None:
-    response = await client.get("/algorithm-systems/")
+    response = await client.get("/algorithms/")
 
     assert response.status_code == 200
     assert b'<div id="algorithm-search-results"' in response.content
@@ -29,7 +29,7 @@ async def test_algorithms_get_root(client: AsyncClient) -> None:
 
 @pytest.mark.asyncio
 async def test_algorithms_get_root_missing_slash(client: AsyncClient) -> None:
-    response = await client.get("/algorithm-systems", follow_redirects=True)
+    response = await client.get("/algorithms", follow_redirects=True)
 
     assert response.status_code == 200
     assert b'<div id="algorithm-search-results"' in response.content
@@ -37,7 +37,7 @@ async def test_algorithms_get_root_missing_slash(client: AsyncClient) -> None:
 
 @pytest.mark.asyncio
 async def test_algorithms_get_root_htmx(client: AsyncClient) -> None:
-    response = await client.get("/algorithm-systems/", headers={"HX-Request": "true"})
+    response = await client.get("/algorithms/", headers={"HX-Request": "true"})
 
     assert response.status_code == 200
     assert b'<table id="search-results-table" class="rvo-table margin-top-large">' not in response.content
@@ -45,7 +45,7 @@ async def test_algorithms_get_root_htmx(client: AsyncClient) -> None:
 
 @pytest.mark.asyncio
 async def test_algorithms_get_root_htmx_with_group_by(client: AsyncClient) -> None:
-    response = await client.get("/algorithm-systems/?skip=0&display_type=LIFECYCLE", headers={"HX-Request": "true"})
+    response = await client.get("/algorithms/?skip=0&display_type=LIFECYCLE", headers={"HX-Request": "true"})
 
     assert response.status_code == 200
     assert b'<table id="search-results-table" class="rvo-table margin-top-large">' not in response.content
@@ -54,7 +54,7 @@ async def test_algorithms_get_root_htmx_with_group_by(client: AsyncClient) -> No
 @pytest.mark.asyncio
 async def test_algorithms_get_root_htmx_with_group_by_and_lifecycle_filter(client: AsyncClient) -> None:
     response = await client.get(
-        "/algorithm-systems/?skip=0&add-filter-lifecycle=DESIGN&display_type=LIFECYCLE", headers={"HX-Request": "true"}
+        "/algorithms/?skip=0&add-filter-lifecycle=DESIGN&display_type=LIFECYCLE", headers={"HX-Request": "true"}
     )
 
     assert response.status_code == 200
@@ -69,7 +69,7 @@ async def test_algorithms_get_root_htmx_with_algorithms_mock(client: AsyncClient
     mocker.patch("amt.services.algorithms.AlgorithmsService.paginate", return_value=[mock_algorithm])
 
     # when
-    response = await client.get("/algorithm-systems/", headers={"HX-Request": "true"})
+    response = await client.get("/algorithms/", headers={"HX-Request": "true"})
 
     assert response.status_code == 200
     assert b'<table id="search-results-table" class="rvo-table margin-top-large">' in response.content
@@ -84,7 +84,7 @@ async def test_get_new_algorithms(client: AsyncClient, mocker: MockFixture) -> N
     )
 
     # when
-    response = await client.get("/algorithm-systems/new")
+    response = await client.get("/algorithms/new")
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
     content = " ".join(response.content.decode().split())
@@ -106,7 +106,7 @@ async def test_post_new_algorithms_bad_request(client: AsyncClient, mocker: Mock
 
     # when
     client.cookies["fastapi-csrf-token"] = "1"
-    response = await client.post("/algorithm-systems/new", json={}, headers={"X-CSRF-Token": "1"})
+    response = await client.post("/algorithms/new", json={}, headers={"X-CSRF-Token": "1"})
 
     # then
     assert response.status_code == 400
@@ -136,14 +136,12 @@ async def test_post_new_algorithms(client: AsyncClient, mocker: MockFixture) -> 
     )
 
     # when
-    response = await client.post(
-        "/algorithm-systems/new", json=new_algorithm.model_dump(), headers={"X-CSRF-Token": "1"}
-    )
+    response = await client.post("/algorithms/new", json=new_algorithm.model_dump(), headers={"X-CSRF-Token": "1"})
 
     # then
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert response.headers["HX-Redirect"] == "/algorithm-system/1/details/tasks"
+    assert response.headers["HX-Redirect"] == "/algorithm/1/details/tasks"
 
 
 @pytest.mark.asyncio
@@ -193,7 +191,7 @@ async def test_post_new_algorithms_write_system_card(
     )
 
     # when
-    await client.post("/algorithm-systems/new", json=algorithm_new.model_dump(), headers={"X-CSRF-Token": "1"})
+    await client.post("/algorithms/new", json=algorithm_new.model_dump(), headers={"X-CSRF-Token": "1"})
 
     # then
     base_algorithms: list[Base] = await db.get(Algorithm, "name", name)

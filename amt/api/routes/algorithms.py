@@ -69,7 +69,7 @@ async def get_root(
     if display_type == "LIFECYCLE":
         algorithms: dict[str, list[Algorithm]] = {}
 
-        # When the lifecycle filter is active, only show these algorithm systems
+        # When the lifecycle filter is active, only show these algorithms
         if "lifecycle" in filters:
             for lifecycle in Lifecycles:
                 algorithms[lifecycle.name] = []
@@ -154,5 +154,5 @@ async def post_new(
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
 ) -> HTMLResponse:
     algorithm = await algorithms_service.create(algorithm_new)
-    response = templates.Redirect(request, f"/algorithm-system/{algorithm.id}/details/tasks")
+    response = templates.Redirect(request, f"/algorithm/{algorithm.id}/details/tasks")
     return response

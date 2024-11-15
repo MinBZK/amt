@@ -12,4 +12,4 @@ def test_tempate_algorithms_new():
 
     # then
     assert response.headers["Content-Type"] == "text/html; charset=utf-8"
-    assert b"Create Algorithm System" in response.body
+    assert b"Create Algorithm" in response.body

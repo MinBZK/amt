@@ -17,7 +17,7 @@ async def test_http_exception_handler(client: AsyncClient):
 
 @pytest.mark.asyncio
 async def test_request_validation_exception_handler(client: AsyncClient):
-    response = await client.get("/algorithm-systems/?skip=a")
+    response = await client.get("/algorithms/?skip=a")
 
     assert response.status_code == status.HTTP_400_BAD_REQUEST
     assert response.headers["content-type"] == "text/html; charset=utf-8"
@@ -25,11 +25,11 @@ async def test_request_validation_exception_handler(client: AsyncClient):
 
 @pytest.mark.asyncio
 async def test_request_csrf_protect_exception_handler_invalid_token_in_header(client: AsyncClient):
-    data = await client.get("/algorithm-systems/new")
+    data = await client.get("/algorithms/new")
     new_algorithm = AlgorithmNew(name="default algorithm", lifecycle="DATA_EXPLORATION_AND_PREPARATION")
     with pytest.raises(AMTCSRFProtectError):
         _response = await client.post(
-            "/algorithm-systems/new",
+            "/algorithms/new",
             json=new_algorithm.model_dump(),
             headers={"X-CSRF-Token": "1"},
             cookies=data.cookies,
@@ -46,7 +46,7 @@ async def test_http_exception_handler_htmx(client: AsyncClient):
 
 @pytest.mark.asyncio
 async def test_request_validation_exception_handler_htmx(client: AsyncClient):
-    response = await client.get("/algorithm-systems/?skip=a", headers={"HX-Request": "true"})
+    response = await client.get("/algorithms/?skip=a", headers={"HX-Request": "true"})
 
     assert response.status_code == status.HTTP_400_BAD_REQUEST
     assert response.headers["content-type"] == "text/html; charset=utf-8"
@@ -54,11 +54,11 @@ async def test_request_validation_exception_handler_htmx(client: AsyncClient):
 
 @pytest.mark.asyncio
 async def test_request_csrf_protect_exception_handler_invalid_token(client: AsyncClient):
-    data = await client.get("/algorithm-systems/new")
+    data = await client.get("/algorithms/new")
     new_algorithm = AlgorithmNew(name="default algorithm", lifecycle="DATA_EXPLORATION_AND_PREPARATION")
     with pytest.raises(AMTCSRFProtectError):
         _response = await client.post(
-            "/algorithm-systems/new",
+            "/algorithms/new",
             json=new_algorithm.model_dump(),
             headers={"HX-Request": "true", "X-CSRF-Token": "1"},
             cookies=data.cookies,
