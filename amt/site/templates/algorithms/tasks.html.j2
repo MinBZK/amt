@@ -4,7 +4,7 @@
 {% block detail_content %}
     <div class="container margin-top-large">
         <form id="cardMovedForm"
-              hx-patch="/algorithm-system/move_task"
+              hx-patch="/algorithm/move_task"
               hx-ext="json-enc"
               hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
               hx-target-5

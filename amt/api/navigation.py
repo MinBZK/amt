@@ -22,7 +22,7 @@ class DisplayText(Enum):
     ALGORITHM_DETAILS = "algorithm_details"
     INFO = "info"
     HOME = "home"
-    ALGORITHMS = "algorithm systems"
+    ALGORITHMS = "algorithms"
     OVERVIEW = "overview"
     TASKS = "tasks"
     NEW = "new"
@@ -43,7 +43,7 @@ def get_translation(key: DisplayText, translations: NullTranslations) -> str:
     # translations are determined at runtime, which is why we use the dictionary below
     keys = {
         DisplayText.HOME: _("Home"),
-        DisplayText.ALGORITHMS: _("Algorithm systems"),
+        DisplayText.ALGORITHMS: _("Algorithms"),
         DisplayText.OVERVIEW: _("Overview"),
         DisplayText.TASKS: _("Tasks"),
         DisplayText.NEW: _("New"),
@@ -92,45 +92,41 @@ class BaseNavigationItem:
 class Navigation:
     ALGORITHMS_ROOT = BaseNavigationItem(
         display_text=DisplayText.ALGORITHMS,
-        url=["/algorithm-systems/", "/algorithm-system/"],
+        url=["/algorithms/", "/algorithm/"],
         icon="rvo-icon-publicatie",
     )
-    ALGORITHMS_OVERVIEW = BaseNavigationItem(display_text=DisplayText.OVERVIEW, url="/algorithm-systems/")
-    ALGORITHM_TASKS = BaseNavigationItem(
-        display_text=DisplayText.TASKS, url="/algorithm-system/{algorithm_id}/details/tasks"
-    )
+    ALGORITHMS_OVERVIEW = BaseNavigationItem(display_text=DisplayText.OVERVIEW, url="/algorithms/")
+    ALGORITHM_TASKS = BaseNavigationItem(display_text=DisplayText.TASKS, url="/algorithm/{algorithm_id}/details/tasks")
     ALGORITHM_DETAILS = BaseNavigationItem(
-        display_text=DisplayText.DETAILS, url="/algorithm-system/{algorithm_id}/details/system_card"
+        display_text=DisplayText.DETAILS, url="/algorithm/{algorithm_id}/details/system_card"
     )
     ALGORITHM_MODEL = BaseNavigationItem(
-        display_text=DisplayText.MODEL, url="/algorithm-system/{algorithm_id}/details/model/inference"
+        display_text=DisplayText.MODEL, url="/algorithm/{algorithm_id}/details/model/inference"
     )
-    ALGORITHM_NEW = BaseNavigationItem(display_text=DisplayText.NEW, url="/algorithm-systems/new")
-    ALGORITHM_SYSTEM_INFO = BaseNavigationItem(
-        display_text=DisplayText.INFO, url="/algorithm-system/{algorithm_id}/details"
-    )
-    ALGORITHM_SYSTEM_ALGORITHM_DETAILS = BaseNavigationItem(
-        display_text=DisplayText.ALGORITHM_DETAILS, url="/algorithm-system/{algorithm_id}/details/system_card"
+    ALGORITHM_NEW = BaseNavigationItem(display_text=DisplayText.NEW, url="/algorithms/new")
+    ALGORITHM_INFO = BaseNavigationItem(display_text=DisplayText.INFO, url="/algorithm/{algorithm_id}/details")
+    ALGORITHM_ALGORITHM_DETAILS = BaseNavigationItem(
+        display_text=DisplayText.ALGORITHM_DETAILS, url="/algorithm/{algorithm_id}/details/system_card"
     )
     ALGORITHM_SYSTEM_CARD = BaseNavigationItem(
-        display_text=DisplayText.SYSTEMCARD, url="/algorithm-system/{algorithm_id}/details/system_card"
+        display_text=DisplayText.SYSTEMCARD, url="/algorithm/{algorithm_id}/details/system_card"
     )
     ALGORITHM_DATA_CARD = BaseNavigationItem(
-        display_text=DisplayText.DATA, url="/algorithm-system/{algorithm_id}/details/system_card/data"
+        display_text=DisplayText.DATA, url="/algorithm/{algorithm_id}/details/system_card/data"
     )
     ALGORITHM_MODEL_CARD = BaseNavigationItem(
         display_text=DisplayText.MODELCARD,
-        url="/algorithm-system/{algorithm_id}/details/system_card/models/{model_card}",
+        url="/algorithm/{algorithm_id}/details/system_card/models/{model_card}",
     )
     ALGORITHM_ASSESSMENT_CARD = BaseNavigationItem(
         display_text=DisplayText.ASSESSMENTCARD,
-        url="/algorithm-system/{algorithm_id}/details/system_card/assessment/{assessment_card}",
+        url="/algorithm/{algorithm_id}/details/system_card/assessment/{assessment_card}",
     )
     ALGORITHM_REQUIREMENTS = BaseNavigationItem(
-        display_text=DisplayText.REQUIREMENTS, url="/algorithm-system/{algorithm_id}/details/system_card/requirements"
+        display_text=DisplayText.REQUIREMENTS, url="/algorithm/{algorithm_id}/details/system_card/requirements"
     )
-    ALGORITHM_SYSTEM_INSTRUMENTS = BaseNavigationItem(
-        display_text=DisplayText.INSTRUMENTS, url="/algorithm-system/{algorithm_id}/details/system_card/instruments"
+    ALGORITHM_INSTRUMENTS = BaseNavigationItem(
+        display_text=DisplayText.INSTRUMENTS, url="/algorithm/{algorithm_id}/details/system_card/instruments"
     )
 
 

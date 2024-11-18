@@ -72,7 +72,7 @@ async def auth_callback(
     if user:
         request.session["user"] = dict(user)  # type: ignore
         request.session["id_token"] = token["id_token"]  # type: ignore
-    return RedirectResponse(url="/algorithm-systems/")
+    return RedirectResponse(url="/algorithms/")
 
 
 @router.get("/profile", response_class=Response)

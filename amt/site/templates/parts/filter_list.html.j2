@@ -2,7 +2,7 @@
 {% macro sort_button(field_name, sort_by) %}
     {% if field_name in sort_by and sort_by[field_name] == "ascending" or (not field_name in sort_by) %}
         <button hx-trigger="click"
-                hx-get="/algorithm-systems/?skip=0&sort-by-{{ field_name }}=descending"
+                hx-get="/algorithms/?skip=0&sort-by-{{ field_name }}=descending"
                 hx-swap="innerHTML"
                 class="utrecht-button utrecht-button--rvo-tertiary-action utrecht-button--rvo-sm"
                 type="button">
@@ -12,7 +12,7 @@
         </button>
     {% elif field_name in sort_by and sort_by[field_name] == "descending" %}
         <button hx-trigger="click"
-                hx-get="/algorithm-systems/?skip=0&sort-by-{{ field_name }}=ascending"
+                hx-get="/algorithms/?skip=0&sort-by-{{ field_name }}=ascending"
                 hx-swap="innerHTML"
                 class="utrecht-button utrecht-button--rvo-tertiary-action utrecht-button--rvo-sm"
                 type="button">
@@ -49,7 +49,7 @@
                 <span target="_self"
                       class="rvo-tag rvo-tag--default"
                       hx-trigger="click"
-                      hx-get="/algorithm-systems/?skip=0&drop-filter-={{ key }}"
+                      hx-get="/algorithms/?skip=0&drop-filter-={{ key }}"
                       hx-swap="innerHTML"
                       style="cursor: pointer;
                              display: inline-block">
@@ -67,9 +67,9 @@
 </div>
 {% if algorithms|length == 0 %}
     <div class="margin-top-large">
-        {% trans %}No Algorithm system match your selected filters. Try adjusting your filters or clearing them to
+        {% trans %}No Algorithm match your selected filters. Try adjusting your filters or clearing them to
         see more
-        algorithm systems.{% endtrans %}
+        algorithms.{% endtrans %}
     </div>
 {% else %}
     {% if display_type == "" %}
@@ -87,7 +87,7 @@
                 <thead class="rvo-table-head">
                     <tr class="rvo-table-row">
                         <th style="width: 60%" scope="col" class="rvo-table-header">
-                            {% trans %}Algorithm system name{% endtrans %}
+                            {% trans %}Algorithm name{% endtrans %}
                             {{ sort_button('name', sort_by) }}
                         </th>
                         <th scope="col" class="rvo-table-header">
@@ -113,7 +113,7 @@
                     <th style="width: 81%;
                                padding-left: var(--rvo-card-padding-xl-padding-block-start)"
                         scope="col"
-                        class="rvo-table-header">{% trans %}Algorithm system name{% endtrans %}</th>
+                        class="rvo-table-header">{% trans %}Algorithm name{% endtrans %}</th>
                     <th scope="col"
                         class="rvo-table-header"
                         style="white-space: nowrap;

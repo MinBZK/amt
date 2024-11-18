@@ -70,13 +70,13 @@ async def get_algorithm_or_error(
 def get_algorithm_details_tabs(request: Request) -> list[NavigationItem]:
     return resolve_navigation_items(
         [
-            Navigation.ALGORITHM_SYSTEM_INFO,
-            Navigation.ALGORITHM_SYSTEM_ALGORITHM_DETAILS,
+            Navigation.ALGORITHM_INFO,
+            Navigation.ALGORITHM_ALGORITHM_DETAILS,
             Navigation.ALGORITHM_MODEL,
             Navigation.ALGORITHM_REQUIREMENTS,
             Navigation.ALGORITHM_DATA_CARD,
             Navigation.ALGORITHM_TASKS,
-            Navigation.ALGORITHM_SYSTEM_INSTRUMENTS,
+            Navigation.ALGORITHM_INSTRUMENTS,
         ],
         request,
     )
@@ -114,9 +114,7 @@ async def get_tasks(
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.ALGORITHMS_ROOT,
-            BaseNavigationItem(
-                custom_display_text=algorithm.name, url="/algorithm-system/{algorithm_id}/details/system_card"
-            ),
+            BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details/system_card"),
             Navigation.ALGORITHM_TASKS,
         ],
         request,
@@ -193,9 +191,7 @@ async def get_algorithm_details(
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.ALGORITHMS_ROOT,
-            BaseNavigationItem(
-                custom_display_text=algorithm.name, url="/algorithm-system/{algorithm_id}/details/system_card"
-            ),
+            BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details/system_card"),
             Navigation.ALGORITHM_DETAILS,
         ],
         request,
@@ -287,9 +283,7 @@ async def get_system_card(
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.ALGORITHMS_ROOT,
-            BaseNavigationItem(
-                custom_display_text=algorithm.name, url="/algorithm-system/{algorithm_id}/details/system_card"
-            ),
+            BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details/system_card"),
             Navigation.ALGORITHM_SYSTEM_CARD,
         ],
         request,
@@ -319,7 +313,7 @@ async def get_algorithm_inference(
         [
             Navigation.ALGORITHMS_ROOT,
             BaseNavigationItem(
-                custom_display_text=algorithm.name, url="/algorithm-system/{algorithm_id}/details/model/inference"
+                custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details/model/inference"
             ),
             Navigation.ALGORITHM_MODEL,
         ],
@@ -359,9 +353,7 @@ async def get_system_card_requirements(
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.ALGORITHMS_ROOT,
-            BaseNavigationItem(
-                custom_display_text=algorithm.name, url="/algorithm-system/{algorithm_id}/details/system_card"
-            ),
+            BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details/system_card"),
             Navigation.ALGORITHM_SYSTEM_CARD,
         ],
         request,
@@ -440,7 +432,7 @@ async def delete_algorithm(
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
 ) -> HTMLResponse:
     await algorithms_service.delete(algorithm_id)
-    return templates.Redirect(request, "/algorithm-systems/")
+    return templates.Redirect(request, "/algorithms/")
 
 
 @router.get("/{algorithm_id}/measure/{measure_urn}")
@@ -505,7 +497,7 @@ async def update_measure_value(
 
     await algorithms_service.update(algorithm)
     # TODO: FIX THIS!! The page now reloads at the top, which is annoying
-    return templates.Redirect(request, f"/algorithm-system/{algorithm_id}/details/system_card/requirements")
+    return templates.Redirect(request, f"/algorithm/{algorithm_id}/details/system_card/requirements")
 
 
 # !!!
@@ -528,9 +520,7 @@ async def get_system_card_data_page(
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.ALGORITHMS_ROOT,
-            BaseNavigationItem(
-                custom_display_text=algorithm.name, url="/algorithm-system/{algorithm_id}/details/system_card"
-            ),
+            BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details/system_card"),
             Navigation.ALGORITHM_SYSTEM_CARD,
         ],
         request,
@@ -568,9 +558,7 @@ async def get_system_card_instruments(
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.ALGORITHMS_ROOT,
-            BaseNavigationItem(
-                custom_display_text=algorithm.name, url="/algorithm-system/{algorithm_id}/details/system_card"
-            ),
+            BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details/system_card"),
             Navigation.ALGORITHM_SYSTEM_CARD,
         ],
         request,
@@ -606,9 +594,7 @@ async def get_assessment_card(
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.ALGORITHMS_ROOT,
-            BaseNavigationItem(
-                custom_display_text=algorithm.name, url="/algorithm-system/{algorithm_id}/details/system_card"
-            ),
+            BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details/system_card"),
             Navigation.ALGORITHM_ASSESSMENT_CARD,
         ],
         request,
@@ -657,9 +643,7 @@ async def get_model_card(
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.ALGORITHMS_ROOT,
-            BaseNavigationItem(
-                custom_display_text=algorithm.name, url="/algorithm-system/{algorithm_id}/details/system_card"
-            ),
+            BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details/system_card"),
             Navigation.ALGORITHM_MODEL_CARD,
         ],
         request,

@@ -4,7 +4,7 @@ from playwright.sync_api import Page, expect
 
 @pytest.mark.slow
 def test_e2e_search_algorithms(page: Page) -> None:
-    page.goto("/algorithm-systems/?limit=100")
+    page.goto("/algorithms/?limit=100")
 
     algorithm_links = page.locator("#search-results-table tr").count() - 1
 
@@ -13,7 +13,7 @@ def test_e2e_search_algorithms(page: Page) -> None:
     page.locator("#algorithm-search-input").fill("10")
 
     with page.expect_response(
-        "/algorithm-systems/?skip=0&search=10&add-filter-lifecycle=&add-filter-publication-category=&display_type=",
+        "/algorithms/?skip=0&search=10&add-filter-lifecycle=&add-filter-publication-category=&display_type=",
         timeout=3000,
     ) as response_info:
         expect(page.get_by_text("Algorithm 10", exact=True)).to_be_visible()
@@ -25,7 +25,7 @@ def test_e2e_search_algorithms(page: Page) -> None:
 
 @pytest.mark.slow
 def test_e2e_search_scroll_algorithms(page: Page) -> None:
-    page.goto("/algorithm-systems/?limit=100")
+    page.goto("/algorithms/?limit=100")
 
     algorithm_links = page.locator("#search-results-table tr").count() - 1
 
@@ -34,7 +34,7 @@ def test_e2e_search_scroll_algorithms(page: Page) -> None:
     page.locator("#algorithm-search-input").fill("Algorithm")
 
     with page.expect_request(
-        "/algorithm-systems/?skip=0&search=Algorithm&add-filter-lifecycle=&add-filter-publication-category=&display_type=",
+        "/algorithms/?skip=0&search=Algorithm&add-filter-lifecycle=&add-filter-publication-category=&display_type=",
         timeout=3000,
     ) as _:
         algorithm_links = page.locator("#search-results-table tr").count() - 1
@@ -44,7 +44,7 @@ def test_e2e_search_scroll_algorithms(page: Page) -> None:
 
 @pytest.mark.slow
 def test_e2e_search_algorithms_with_group_by_lifecycle_view(page: Page) -> None:
-    page.goto("/algorithm-systems/?limit=100")
+    page.goto("/algorithms/?limit=100")
 
     algorithm_links = page.locator("#search-results-table tr").count() - 1
 
@@ -54,7 +54,7 @@ def test_e2e_search_algorithms_with_group_by_lifecycle_view(page: Page) -> None:
     page.locator("#display_type").select_option("LIFECYCLE")
 
     with page.expect_request(
-        "/algorithm-systems/?skip=0&search=Algorithm&add-filter-lifecycle=&add-filter-publication-category=&display_type=LIFECYCLE",
+        "/algorithms/?skip=0&search=Algorithm&add-filter-lifecycle=&add-filter-publication-category=&display_type=LIFECYCLE",
         timeout=3000,
     ) as _:
         expect(page.get_by_title("Organizational Responsibilities", exact=True)).to_be_visible()
@@ -63,7 +63,7 @@ def test_e2e_search_algorithms_with_group_by_lifecycle_view(page: Page) -> None:
 
 @pytest.mark.slow
 def test_e2e_search_algorithms_with_group_by_lifecycle_view_and_search(page: Page) -> None:
-    page.goto("/algorithm-systems/?limit=100")
+    page.goto("/algorithms/?limit=100")
 
     algorithm_links = page.locator("#search-results-table tr").count() - 1
 
@@ -73,7 +73,7 @@ def test_e2e_search_algorithms_with_group_by_lifecycle_view_and_search(page: Pag
     page.locator("#display_type").select_option("LIFECYCLE")
 
     with page.expect_request(
-        "/algorithm-systems/?skip=0&search=10&add-filter-lifecycle=&add-filter-publication-category=&display_type=LIFECYCLE",
+        "/algorithms/?skip=0&search=10&add-filter-lifecycle=&add-filter-publication-category=&display_type=LIFECYCLE",
         timeout=3000,
     ) as _:
         expect(page.get_by_title("Organizational Responsibilities", exact=True)).to_be_visible()

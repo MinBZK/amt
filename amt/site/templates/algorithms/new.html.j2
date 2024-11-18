@@ -4,11 +4,11 @@
         <div class="rvo-form">
             <div class="rvo-layout-column rvo-layout-gap--sm">
                 <div class="rvo-form-intro">
-                    <h1 class="utrecht-heading-1">{% trans %}Create a Algorithm System{% endtrans %}</h1>
+                    <h1 class="utrecht-heading-1">{% trans %}Create a Algorithm{% endtrans %}</h1>
                 </div>
                 <form class="rvo-layout-column rvo-layout-gap--sm"
                       hx-ext="json-enc"
-                      hx-post="/algorithm-systems/new"
+                      hx-post="/algorithms/new"
                       hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
                       hx-target-error="#errorContainer"
                       hx-swap="innerHTML"
@@ -22,11 +22,11 @@
                                  aria-labelledby="fieldId-label"
                                  class="utrecht-form-field utrecht-form-field--text rvo-form-field">
                                 <div class="rvo-form-field__label">
-                                    <label class="rvo-label rvo-label--required">{% trans %}Algorithm System name{% endtrans %}</label>
+                                    <label class="rvo-label rvo-label--required">{% trans %}Algorithm name{% endtrans %}</label>
                                 </div>
                                 <div id="error-name" class="htmx-error-oob"></div>
                                 <input id="name"
-                                       placeholder="{% trans %}Name of the algorithm system{% endtrans %}"
+                                       placeholder="{% trans %}Name of the algorithm{% endtrans %}"
                                        name="name"
                                        type="text"
                                        class="utrecht-textbox utrecht-textbox--html-input"
@@ -40,7 +40,7 @@
                                     <label class="rvo-label rvo-label--required">{% trans %}Lifecycle{% endtrans %}</label>
                                     <div id="error-lifecycle" class="htmx-error-oob"></div>
                                     <p>
-                                        {% trans %}Select the lifecycle your algorithm system is currently in.{% endtrans %}
+                                        {% trans %}Select the lifecycle your algorithm is currently in.{% endtrans %}
                                         {% trans %}For more information on lifecycle, read the{% endtrans %}
                                         <a class="rvo-link"
                                            href="https://minbzk.github.io/Algoritmekader/levenscyclus/"
@@ -180,7 +180,7 @@
                                 type="submit"
                                 id="button-new-algorithm-create"
                                 hx-on:click="document.querySelectorAll('div.htmx-error-oob').forEach(e => e.innerHTML = '')">
-                            {% trans %}Create Algorithm System{% endtrans %}
+                            {% trans %}Create Algorithm{% endtrans %}
                         </button>
                     </p>
                 </form>
