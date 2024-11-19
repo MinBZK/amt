@@ -70,7 +70,7 @@ class AlgorithmsService:
             role=algorithm_new.role,
         )
 
-        requirements, measures = get_requirements_and_measures(ai_act_profile)
+        requirements, measures = await get_requirements_and_measures(ai_act_profile)
 
         system_card = SystemCard(
             name=algorithm_new.name,

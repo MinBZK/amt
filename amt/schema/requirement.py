@@ -40,12 +40,12 @@ class RoleEnum(Enum):
     distributeur = "distributeur"
 
 
-class AiActProfileItem(BaseModel):
+class RequirementAiActProfile(BaseModel):
     type: list[TypeEnum]
-    open_source: list[OpenSourceEnum] | None = None
+    open_source: list[OpenSourceEnum]
     risk_category: list[RiskCategoryEnum]
-    systemic_risk: list[SystemicRiskEnum] | None = None
-    transparency_obligations: list[TransparencyObligation] | None = None
+    systemic_risk: list[SystemicRiskEnum]
+    transparency_obligations: list[TransparencyObligation]
     role: list[RoleEnum]
 
 
@@ -54,15 +54,16 @@ class RequirementBase(BaseModel):
 
 
 class RequirementTask(RequirementBase):
-    state: str
+    state: str = Field(default="")
     version: str
 
 
 class Requirement(RequirementBase):
     name: str
     description: str
+    schema_version: str
     links: list[str] = Field(default=[])
-    ai_act_profile: list[AiActProfileItem]
+    ai_act_profile: list[RequirementAiActProfile]
     always_applicable: int = Field(
         ...,
         description="1 if requirements applies to every system, 0 if only for specific systems",

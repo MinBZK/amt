@@ -24,6 +24,7 @@ def sample_data() -> list[dict[str, Any]]:
         {
             "urn": "urn:measure:1",
             "name": "Measure 1",
+            "schema_version": "1.1.0",
             "description": "description_1",
             "links": [],
             "url": "url_1",
@@ -31,6 +32,7 @@ def sample_data() -> list[dict[str, Any]]:
         {
             "urn": "urn:measure:2",
             "name": "Measure 2",
+            "schema_version": "1.1.0",
             "description": "description_2",
             "url": "url_2",
             "language": "nl",

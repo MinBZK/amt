@@ -16,7 +16,6 @@ class TaskRegistryRepository:
 
     def __init__(self, client: TaskRegistryAPIClient) -> None:
         self.client = client
-        self._urn_cache: dict[TaskType, list[str]] = {}
 
     async def fetch_tasks(self, task_type: TaskType, urns: str | Sequence[str] | None = None) -> list[dict[str, Any]]:
         """
@@ -41,10 +40,8 @@ class TaskRegistryRepository:
         """
         Fetches all valid URNs for the given task type.
         """
-        if task_type not in self._urn_cache:
-            content_list = await self.client.get_list_of_task(task_type)
-            self._urn_cache[task_type] = [content.urn for content in content_list.root]
-        return self._urn_cache[task_type]
+        content_list = await self.client.get_list_of_task(task_type)
+        return [content.urn for content in content_list.root]
 
     async def _fetch_tasks_by_urns(self, task_type: TaskType, urns: Sequence[str]) -> list[dict[str, Any]]:
         """
@@ -55,12 +52,18 @@ class TaskRegistryRepository:
         results = await asyncio.gather(*get_tasks, return_exceptions=True)
 
         tasks: list[dict[str, Any]] = []
-        for result in results:
+        failed_urns: list[str] = []
+        for urn, result in zip(urns, results, strict=True):
             if isinstance(result, dict):
                 tasks.append(result)
             elif isinstance(result, AMTNotFound):
-                logger.warning(f"Cannot find {task_type.value}")
-            else:
+                failed_urns.append(urn)
+            elif isinstance(result, Exception):
                 raise result
+
+        if failed_urns:
+            # Sonar cloud does not like displaying the failed urns, so  the warning is now
+            # generic without specification of the urns.
+            logger.warning("Cannot find all tasks")
 
         return tasks

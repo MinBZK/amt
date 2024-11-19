@@ -21,9 +21,7 @@
         "DEBUG": "True",
         "AUTO_CREATE_SCHEMA": "True",
         "ENVIRONMENT": "local",
-        "LOGGING_LEVEL": "DEBUG",
-        "OIDC_CLIENT_SECRET": "uIeFiKFazNEIbpJ3wzj0lZLLSJXefeld",
-        "OIDC_CLIENT_ID": "AMT"
+        "LOGGING_LEVEL": "DEBUG"
       }
     },
     {

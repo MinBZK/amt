@@ -8,13 +8,14 @@ class MeasureBase(BaseModel):
 
 
 class MeasureTask(MeasureBase):
-    state: str
+    state: str = Field(default="")
+    value: str = Field(default="")
     version: str
-    value: str
 
 
 class Measure(MeasureBase):
     name: str
+    schema_version: str
     description: str
     links: list[str] = Field(default=[])
     url: str

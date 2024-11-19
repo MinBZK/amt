@@ -13,38 +13,6 @@ interactions:
         user-agent:
           - python-httpx/0.27.2
       method: GET
-      uri: https://task-registry.apps.digilab.network/instruments/
-    response:
-      body:
-        string: '{"type":"dir","size":0,"name":"instruments","path":"instruments","download_url":"https://task-registry.apps.digilab.network/instruments","links":{"self":"https://task-registry.apps.digilab.network/instruments"},"entries":[{"type":"file","size":14009,"name":"technical_docs_for_high_risk_ai.yaml","path":"instruments/technical_docs_for_high_risk_ai.yaml","urn":"urn:nl:aivt:tr:td:1.0","download_url":"https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:td:1.0","links":{"self":"https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:td:1.0"}},{"type":"file","size":32897,"name":"iama.yaml","path":"instruments/iama.yaml","urn":"urn:nl:aivt:tr:iama:1.0","download_url":"https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0","links":{"self":"https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0"}},{"type":"file","size":5187,"name":"conformity_assessment_eu_ai_act.yaml","path":"instruments/conformity_assessment_eu_ai_act.yaml","urn":"urn:nl:aivt:tr:ca:1.0","download_url":"https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:ca:1.0","links":{"self":"https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:ca:1.0"}},{"type":"file","size":60271,"name":"aiia.yaml","path":"instruments/aiia.yaml","urn":"urn:nl:aivt:tr:aiia:1.0","download_url":"https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0","links":{"self":"https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0"}}]}'
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "1570"
-        Content-Type:
-          - application/json
-        Date:
-          - Wed, 13 Nov 2024 15:33:26 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
       uri: https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest
     response:
       body:
@@ -314,7 +282,7 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Wed, 13 Nov 2024 15:33:26 GMT
+          - Wed, 20 Nov 2024 09:15:46 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -747,7 +715,1768 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Wed, 13 Nov 2024 15:33:26 GMT
+          - Wed, 20 Nov 2024 09:15:46 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-07?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"AI-systemen
+          loggen automatisch bepaalde gegevens\",\"description\":\"Algoritmes en AI-systemen
+          zijn dusdanig technisch vormgegeven dat gebeurtenissen gedurende hun levenscyclus
+          automatisch worden geregistreerd (\u201Clogs\u201D). \\n\",\"explanation\":\"AI-systemen
+          met een hoog risico zijn ontworpen met functionaliteiten die gebeurtenissen
+          gedurende hun levenscyclus automatisch registreren.\\nDit wordt vaak aangeduid
+          als \\\"logs\\\".\\nDeze logs bieden een traceerbaarheidsmechanisme waarmee
+          gebruiksverantwoordelijken en autoriteiten incidenten en fouten kunnen analyseren,
+          naleving kunnen controleren en mogelijke risico's kunnen identificeren en
+          aanpakken.\\nHet doel van deze registratie is om de transparantie en verantwoordingsplicht
+          van AI-systemen te vergroten, waardoor het beheer van risico's en incidenten
+          verbetert.\\n\\nVoor AI-systemen met een hoog-risico voorziet de loggingcapaciteit
+          ten minste in: a) de registratie van de duur van elk gebruik van het systeem;
+          b) de referentiedatabank aan de hand waarvan de inputdata zijn gecontroleerd
+          door het systeem; c) de inputdata ten aanzien waarvan de zoekopdracht een
+          match heeft opgeleverd; d) de identificatie van natuurlijke personen die betrokken
+          zijn bij de verificatie van de resultaten. Specifiek voor gebruiksverantwoordelijken\\n\\nVoor
+          AI-systemen die door bestuursorganen worden gebruikt of AI-systmen die persoonsgegevens
+          verwerken leveren de BIO en AVG vergelijkbare verplichingen op die ook van
+          toepassing zijn op AI-systmen die niet gezien worden als een AI-systeem met
+          hoog risico. Daarbij komen nog verplichtingen om de logs doorlopend of periodiek
+          te monitoren op incidenten.\",\"urn\":\"urn:nl:ak:ver:aia-07\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/vereisten/aia-07-automatische-logregistratie/index.html\",\"subject\":[\"transparantie\",\"technische-robuustheid-en-veiligheid\"],\"lifecycle\":[\"ontwikkelen\",\"monitoring-en-beheer\"],\"links\":[\"urn:nl:ak:mtr:owk-01\",\"urn:nl:ak:mtr:owk-04\",\"urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder\",\"urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract\",\"urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen\",\"urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst\",\"urn:nl:ak:mtr:maak_vereiste_onderdeel_van_service_level_agreement\",\"urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden\",\"urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste\"],\"ai_act_profile\":[{\"type\":[],\"open_source\":[],\"risk_category\":[],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[]}],\"always_applicable\":0,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "2917"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:46 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-13?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Logs
+          van hoog-risico-AI-systemen worden 6 maanden bewaard door de aanbieder","description":"Aanbieders
+          van AI-systemen met een hoog risico bewaren de in artikel 12, lid 1, bedoelde
+          logs die automatisch worden gegenereerd door hun AI-systemen met een hoog
+          risico voor zover dergelijke logs onder hun controle vallen.\nOnverminderd
+          het toepasselijke Unie- of nationale recht worden deze logs bewaard gedurende
+          een periode, die passend is voor het beoogde doel van het AI-systeem met een
+          hoog risico, van ten minste zes maanden, tenzij anders is bepaald in het Unie-
+          of nationaal recht, met name de Uniewetgeving inzake de bescherming van persoonsgegevens.","explanation":"Aanbieders
+          van AI-systemen met een hoog risico moeten de automatisch gegenereerde logs
+          bewaren volgens de voorschriften van artikel 12, lid 1, zolang deze logs onder
+          hun controle vallen.\nDeze logs moeten ten minste zes maanden worden bewaard,
+          tenzij anders bepaald door Unie- of nationale wetgeving met betrekking tot
+          gegevensbescherming, om te voldoen aan de relevante voorschriften en verantwoordingsplicht.","urn":"urn:nl:ak:ver:aia-13","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/vereisten/aia-13-bewaartermijn-voor-gegenereerde-logs/index.html","subject":["transparantie","technische-robuustheid-en-veiligheid"],"lifecycle":["ontwerp","monitoring-en-beheer","uitfaseren"],"links":["urn:nl:ak:mtr:owk-04","urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder","urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract","urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen","urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst","urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden","urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste"],"ai_act_profile":[{"type":["AI-systeem","AI-systeem
+          voor algemene doeleinden"],"open_source":[],"risk_category":["hoog-risico
+          AI"],"systemic_risk":[],"transparency_obligations":[],"role":["aanbieder"]}],"always_applicable":0,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "2368"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:46 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-05?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Datasets
+          voor Hoog-risico-AI-systemen voldoen aan kwaliteitscriteria","description":"AI-systemen
+          met een hoog risico die technieken gebruiken die het trainen van AI-modellen
+          met data omvatten, worden ontwikkeld op basis van datasets voor training,
+          validatie en tests die voldoen aan de kwaliteitscriteria telkens wanneer dergelijke
+          datasets worden gebruikt.","explanation":"","urn":"urn:nl:ak:ver:aia-05","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/vereisten/aia-05-data-kwaliteitscriteria/index.html","subject":["data"],"lifecycle":["dataverkenning-en-datapreparatie","verificatie-en-validatie"],"links":["urn:nl:ak:mtr:org-02","urn:nl:ak:mtr:owp-02","urn:nl:ak:mtr:dat-01","urn:nl:ak:mtr:ver-03","urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder","urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract","urn:nl:ak:mtr:leveren_bewijs_onderdeel_beoordeling_inschrijving","urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen","urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst","urn:nl:ak:mtr:maak_vereiste_onderdeel_van_service_level_agreement","urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden","urn:nl:ak:mtr:neem_vereiste_op_als_subgunningscriteria","urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste"],"ai_act_profile":[{"type":["AI-systeem","AI-systeem
+          voor algemene doeleinden"],"open_source":[],"risk_category":["hoog-risico
+          AI"],"systemic_risk":[],"transparency_obligations":[],"role":["aanbieder"]}],"always_applicable":0,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "1877"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:46 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:awb-01?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Organisaties
+          die algoritmes gebruiken voor publieke taken gaan zorgvuldig te werk","description":"De
+          ontwikkeling en het gebruik van algoritmes en AI-systemen komt zorgvuldig
+          tot stand.","explanation":"","urn":"urn:nl:ak:ver:awb-01","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/vereisten/awb-01-zorgvuldigheidsbeginsel/index.html","subject":["fundamentele-rechten"],"lifecycle":["ontwerp","ontwikkelen","verificatie-en-validatie"],"links":["urn:nl:ak:mtr:org-01","urn:nl:ak:mtr:org-02","urn:nl:ak:mtr:org-03","urn:nl:ak:mtr:pba-01","urn:nl:ak:mtr:pba-02","urn:nl:ak:mtr:pba-03","urn:nl:ak:mtr:pba-04","urn:nl:ak:mtr:pba-05","urn:nl:ak:mtr:owp-01","urn:nl:ak:mtr:owp-03","urn:nl:ak:mtr:owp-04","urn:nl:ak:mtr:owp-10","urn:nl:ak:mtr:owk-02","urn:nl:ak:mtr:ver-01","urn:nl:ak:mtr:ver-03","urn:nl:ak:mtr:imp-01","urn:nl:ak:mtr:imp-03","urn:nl:ak:mtr:imp-04","urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder","urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract","urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen","urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst","urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden","urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste"],"ai_act_profile":[{"type":[],"open_source":[],"risk_category":[],"systemic_risk":[],"transparency_obligations":[],"role":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "1764"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:46 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-25?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Logs
+          voor Hoog-risico-AI-systemen worden bewaard door de gebruiksveranwoordelijke\",\"description\":\"Gebruiksverantwoordelijken
+          van AI-systemen met een hoog risico bewaren de logs die automatisch worden
+          gegenereerd door dat AI-systeem met een hoog risico voor zover dergelijke
+          logs onder hun controle vallen gedurende een periode die passend is voor het
+          beoogde doel van het AI-systeem met een hoog risico, of ten minste zes maanden,
+          tenzij anders is bepaald in het toepasselijke Unie- of nationaal recht, meer
+          in het bijzonder het Unierecht over de bescherming van persoonsgegevens\",\"explanation\":\"Anders
+          dan in artikel 16(e) AI-verordening, waar een vergelijkbare vereiste geldt
+          voor aanbieders, gaat het hier om een vereiste specifiek voor de gebruiksverantwoordelijken.\\nHet
+          is van belang dat de gebruiksverantwoordelijken een zelfstandige beoordeling
+          maakt wat moet worden gelogd en voor welke periode gezien de doelstelling
+          van de inzet van het AI-systeem.\\nDaarbij is het van belang om te beoordelen
+          in hoeverre een gebruiksverantwoordelijke hier 'controle' over heeft.\\nDe
+          gebruiksverantwoordelijke zal, al dan niet samen met de aanbieder, (technische)
+          maatregelen moeten treffen om dit te realiseren.\\n\\n\\nGebruiksverantwoordelijken
+          die in de hoedanigheid van financi\xEBle instellingen onderworpen zijn aan
+          eisen met betrekking tot hun interne governance, regelingen of processen uit
+          hoofde van het Unierecht inzake financi\xEBle diensten bewaren de logs als
+          onderdeel van de documentatie die bewaard wordt krachtens het desbetreffende
+          Unierecht inzake financi\xEBle diensten.\",\"urn\":\"urn:nl:ak:ver:aia-25\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/vereisten/aia-25-gebruiksverantwoordelijken-bewaren-logs/index.html\",\"subject\":[\"technische-robuustheid-en-veiligheid\"],\"lifecycle\":[\"ontwikkelen\",\"monitoring-en-beheer\"],\"links\":[],\"ai_act_profile\":[{\"type\":[\"AI-systeem\",\"AI-systeem
+          voor algemene doeleinden\"],\"open_source\":[],\"risk_category\":[\"hoog-risico
+          AI\"],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[\"gebruiksverantwoordelijke\"]}],\"always_applicable\":0,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "2450"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:46 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-35?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"AI-testomgevingen
+          die persoonsgegevens verwerken, voldoen aan strenge voorwaarden","description":"Rechtmatig
+          voor andere doeleinden verzamelde persoonsgegevens mogen uitsluitend in de
+          AI-testomgeving voor regelgeving worden verwerkt ten behoeve van het ontwikkelen,
+          trainen en testen van bepaalde AI-systemen en indien aan alle voorwaarden
+          van art. 57 is voldaan.","explanation":"De verwerking van persoonsgegevens
+          voor AI-testdoeleinden is mogelijk maar het moet voldoen aan strikte voorwaarden
+          die zijn opgenomen in artikel 57 AI-Verordening.\nHierbij kan worden gedacht
+          aan voorwaarden als het beschermen van persoonsgevens met passende technische
+          en organisatorische maatregelen,  persoonsgegevens die in de testomgeving
+          worden aangemaakt mogen niet buiten de testomgeving worden gedeeld en logbestanden
+          worden bijgehouden voor de duur van de deelname aan de testomgeving.\nVoor
+          toepassingen voor het verder verwerken van gegevens kan worden gedacht aan
+          het ontwikkelen van een AI-systeem zodat een overheidsinstantie of een andere
+          natuurlijke of rechtspersoon een aanzienlijk openbaar belang kan waarborgen,
+          bijvoorbeeld op het gebied van kwaliteit van milieu, duurzaamheid, openbare
+          veiligheid en gezondheid.","urn":"urn:nl:ak:ver:aia-35","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/vereisten/aia-35-verwerking-in-testomgeving/index.html","subject":["privacy-en-gegevensbescherming","data"],"lifecycle":["organisatieverantwoordelijkheden","ontwikkelen","dataverkenning-en-datapreparatie"],"links":["urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder","urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract","urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen","urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst","urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden","urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste"],"ai_act_profile":[{"type":["AI-model
+          voor algemene doeleinden","AI-systeem","AI-systeem voor algemene doeleinden"],"open_source":[],"risk_category":[],"systemic_risk":[],"transparency_obligations":[],"role":["aanbieder","gebruiksverantwoordelijke"]}],"always_applicable":0,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "2540"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:46 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-28?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Mensen
+          over wie besluiten worden genomen door een hoog-risico-AI-systemen, krijgen
+          op verzoek informatie over deze besluiten","description":"Elke getroffen persoon
+          op wie een besluit van toepassing is dat door de gebruiksverantwoordelijke
+          wordt genomen op basis van de output van een in bijlage III vermeld AI-systeem
+          met een hoog risico, met uitzondering van systemen die in punt 2 van die bijlage
+          zijn vermeld, en dat rechtsgevolgen heeft voor die persoon, of op deze op
+          vergelijkbare wijze aanzienlijke invloed heeft die hij of zij als nadelige
+          gevolgen voor zijn of haar gezondheid, veiligheid of grondrechten beschouwt,
+          heeft het recht om van de gebruiksverantwoordelijke duidelijke, inhoudelijke
+          toelichting te verkrijgen bij de rol van het AI-systeem in de besluitvormingsprocedure
+          en de voornaamste elementen van het genomen besluit.","explanation":"Getroffen
+          personen moeten het recht hebben om uitleg te krijgen indien het besluit van
+          een gebruiksverantwoordelijke voornamelijk is gebaseerd op de output van bepaalde
+          AI-systemen met een hoog risico die binnen het toepassingsgebied van de AI-verordening
+          vallen en indien dat besluit rechtsgevolgen of gelijkaardige aanzienlijke
+          gevolgen heeft voor de gezondheid, veiligheid of grondrechten van die personen.\nDie
+          uitleg moet duidelijk en zinvol zijn en moet de grondslag zijn waarop de getroffen
+          personen zich kunnen baseren om hun rechten uit te oefenen.\nHet recht om
+          uitleg te krijgen mag niet van toepassing zijn op het gebruik van AI-systemen
+          waarvoor uitzonderingen of beperkingen voortvloeien uit het Unierecht of het
+          nationale recht en moet alleen van toepassing zijn voor zover het Unierecht
+          niet reeds in dit recht voorziet.\nDit vereiste geldt bijvoorbeeld niet als
+          het gaat om AI-systemen die bedoeld zijn om te worden gebruikt als veiligheidscomponent
+          bij het beheer of de exploitatie van kritieke digitale infrastructuur, wegverkeer
+          of bij de levering van water, gas, verwerking en electriciteit (punt 2 bij
+          Bijlage III van AI-verordening).\n","urn":"urn:nl:ak:ver:aia-28","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/vereisten/aia-28-recht-op-uitleg-ai-besluiten/index.html","subject":["governance","fundamentele-rechten","transparantie"],"lifecycle":["organisatieverantwoordelijkheden","ontwerp","monitoring-en-beheer"],"links":["urn:nl:ak:mtr:imp-09","urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder","urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract","urn:nl:ak:mtr:leveren_bewijs_onderdeel_beoordeling_inschrijving","urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen","urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst","urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden","urn:nl:ak:mtr:neem_vereiste_op_als_subgunningscriteria","urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste"],"ai_act_profile":[{"type":["AI-systeem","AI-systeem
+          voor algemene doeleinden"],"open_source":[],"risk_category":["hoog-risico
+          AI"],"systemic_risk":[],"transparency_obligations":[],"role":["gebruiksverantwoordelijke"]}],"always_applicable":0,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "3454"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:46 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aut-01?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Auteursrechten
+          zijn beschermd","description":"Auteursrechten mogen niet geschonden worden
+          bij het ontwikkelen en gebruiken van algoritmes en AI.","explanation":"","urn":"urn:nl:ak:ver:aut-01","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/vereisten/aut-01-auteursrechten/index.html","subject":["data","governance"],"lifecycle":["dataverkenning-en-datapreparatie","ontwerp"],"links":["urn:nl:ak:mtr:dat-06","urn:nl:ak:mtr:aansprakelijkheidsvoorwaarden_aanbieder_onderdeel_beoordelingsmatrix","urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder","urn:nl:ak:mtr:contractuele_afspraken_data_en_artefacten","urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract","urn:nl:ak:mtr:getroffen_maatregelen_van_aanbieder_voorkomen_schending_auteursrechten","urn:nl:ak:mtr:leveren_bewijs_niet_schenden_auteursrechten_output","urn:nl:ak:mtr:leveren_bewijs_niet_schenden_auteursrechten_trainingsdata","urn:nl:ak:mtr:leveren_bewijs_onderdeel_beoordeling_inschrijving","urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen","urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst","urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden","urn:nl:ak:mtr:neem_vereiste_op_als_subgunningscriteria","urn:nl:ak:mtr:omgaan_restrisico''s_aanbiede_onderdeel_beoordelingsmaatrix","urn:nl:ak:mtr:schending_auteursrechten_output_onderdeel_conceptovereenkomst","urn:nl:ak:mtr:schending_auteursrechten_trainingsdata_onderdeel_conceptovereenkomst","urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste"],"ai_act_profile":[{"type":[],"open_source":[],"risk_category":[],"systemic_risk":[],"transparency_obligations":[],"role":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "2046"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:46 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-03?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Hoog-risico-AI-systemen
+          zijn voorzien van een risicobeheersysteem\",\"description\":\"Voor AI-systemen
+          met een hoog risico wordt een systeem voor risicobeheer vastgesteld, uitgevoerd,
+          gedocumenteerd en in stand gehouden.\",\"explanation\":\"Het systeem voor
+          risicobeheer moet bestaan uit een tijdens de gehele levensduur van een AI-systeem
+          met een hoog risico doorlopend en gepland iteratief proces.\\nDit proces moet
+          gericht zijn op het vaststellen en beperken van de relevante risico\u2019s
+          van AI-systemen voor de gezondheid, veiligheid en grondrechten.\\nHet systeem
+          voor risicobeheer moet periodiek worden ge\xEBvalueerd en geactualiseerd om
+          de blijvende doeltreffendheid ervan te waarborgen, alsook de motivering en
+          de documentatie van eventuele significante besluiten en maatregelen die op
+          grond van de AI-verordening zijn genomen.\\n\\n\\nDit proces moet ervoor zorgen
+          dat de aanbieder de risico\u2019s of negatieve effecten vaststelt en risicobeperkende
+          maatregelen uitvoert voor de bekende en de redelijkerwijs te voorziene risico\u2019s
+          van AI-systemen voor de gezondheid, veiligheid en grondrechten.\\nHierin moeten
+          ook maatregelen zitten voor redelijkerwijs te voorzien misbruik, met inbegrip
+          van de mogelijke risico\u2019s die voortvloeien uit de wisselwerking tussen
+          het AI-systeem en de omgeving waarin het werkt.\\nHet systeem voor risicobeheer
+          moet de passendste risicobeheersmaatregelen vaststellen.\\nBij het vaststellen
+          van de passendste risicobeheersmaatregelen moet de aanbieder de gemaakte keuzes
+          documenteren en toelichten en, in voorkomend geval, deskundigen en externe
+          belanghebbenden betrekken.\\nBij het vaststellen van het redelijkerwijs te
+          voorzien misbruik van AI-systemen met een hoog risico moet de aanbieder aandacht
+          hebben voor het gebruik van AI-systemen waarvan, hoewel zij niet rechtstreeks
+          onder het beoogde doel vallen en niet in de gebruiksinstructies worden vermeld,
+          mag worden verwacht dat zij kunnen voortvloeien uit gemakkelijk voorspelbaar
+          menselijk gedrag.\",\"urn\":\"urn:nl:ak:ver:aia-03\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/vereisten/aia-03-risicobeheersysteem/index.html\",\"subject\":[\"governance\"],\"lifecycle\":[\"organisatieverantwoordelijkheden\"],\"links\":[\"urn:nl:ak:mtr:org-02\",\"urn:nl:ak:mtr:org-03\",\"urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder\",\"urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract\",\"urn:nl:ak:mtr:leveren_bewijs_onderdeel_beoordeling_inschrijving\",\"urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen\",\"urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst\",\"urn:nl:ak:mtr:maak_vereiste_onderdeel_van_service_level_agreement\",\"urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden\",\"urn:nl:ak:mtr:neem_vereiste_op_als_subgunningscriteria\",\"urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste\"],\"ai_act_profile\":[{\"type\":[\"AI-systeem\",\"AI-systeem
+          voor algemene doeleinden\"],\"open_source\":[],\"risk_category\":[\"hoog-risico
+          AI\"],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[\"aanbieder\"]}],\"always_applicable\":0,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "3405"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:46 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-09?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Betrokkenen
+          kunnen een beroep doen op hun privacyrechten","description":"Betrokkenen kunnen
+          een beroep doen op hun privacyrechten.","explanation":"Mensen hebben het recht
+          om hun privacyrechten uit te oefenen door een beroep te doen op verschillende
+          wettelijke bepalingen, zoals het recht op inzage, correctie, verwijdering
+          en bezwaar tegen de verwerking van hun persoonsgegevens.\nDit betekent dat
+          individuen controle hebben over hoe hun gegevens worden gebruikt en kunnen
+          verzoeken om toegang te krijgen tot hun gegevens of om wijzigingen aan te
+          brengen indien nodig.\nHet kunnen uitoefenen van privacyrechten is essentieel
+          voor het beschermen van de privacy van individuen, het waarborgen van transparantie
+          en controle uitvoeren over persoonsgegevens.\nAls persoonsgegevens worden
+          verwerkt voor het ontwikkelen en gebruiken van algoritmes en AI, is het van
+          belang dat maatregelen worden getroffen om deze rechten te eerbiedigen.","urn":"urn:nl:ak:ver:avg-09","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/vereisten/avg-09-inroepen-privacyrecht-bij-verwerking-persoonsgegevens/index.html","subject":["privacy-en-gegevensbescherming","data"],"lifecycle":["organisatieverantwoordelijkheden","ontwikkelen"],"links":["urn:nl:ak:mtr:imp-06","urn:nl:ak:mtr:imp-09","urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder","urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract","urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen","urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst","urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden","urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste"],"ai_act_profile":[{"type":[],"open_source":[],"risk_category":[],"systemic_risk":[],"transparency_obligations":[],"role":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "2169"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:46 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-27?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Gebruiksverantwoordelijken
+          controleren de registratie van het hoog-risico AI-systeem in de EU-databank\",\"description\":\"Gebruiksverantwoordelijken
+          van AI-systemen met een hoog risico die de hoedanigheid van overheidsinstanties
+          of instellingen, organen of instanties van de Unie hebben, leven de in artikel
+          49 bedoelde registratieverplichtingen na.\\nWanneer deze gebruiksverantwoordelijke
+          vaststellen dat het AI-systeem met een hoog risico dat zij voornemens zijn
+          te gebruiken niet in de in artikel 71 bedoelde EU-databank is\\ngeregistreerd,
+          gebruiken zij dat systeem niet en stellen zij de aanbieder of de distributeur
+          daarvan in kennis.\",\"explanation\":\"Het is van belang dat gebruiksverantwoordelijken
+          nagaan of het betreffende hoog risico AI-systeem door aanbieder is geregistreerd
+          in de EU-databank (zoals omschreven in artikel 71 AI-verordening).\\nVoordat
+          het betreffende AI-systeem (bijlage III vermeld AI-systeem met een hoog risico)
+          in gebruik te stellen of te gebruiken (met uitzondering van de in punt 2 van
+          bijlage III vermelde AI-systemen met een hoog risico) registreren gebruiksverantwoordelijken
+          die overheidsinstanties, instellingen, organen of instanties van de Unie,
+          of personen die namens hen optreden, zichzelf en selecteren zij het systeem
+          en registreren zij het gebruik ervan in de in [artikel 71](https://eur-lex.europa.eu/legal-content/NL/TXT/HTML/?uri=OJ:L_202401689#d1e7019-1-1)
+          bedoelde EU-databank.\\n\\nHeeft de aanbieder het betreffende hoog risico
+          AI-systeem niet geregistreerd in de EU-Databank, dan mag het hoog risico AI-systeem
+          niet worden gebruikt.\\nDe aanbieder of distributeur wordt door de gebruiksverantwoordelijke
+          ge\xEFnformeerd dat het systeem niet is geregistreerd in de EU-databank.\\n\\nAI-systemen
+          met een hoog risico als bedoeld in punt 2 van bijlage III (kritieke infrastructuur)
+          worden op nationaal niveau geregistreerd.\",\"urn\":\"urn:nl:ak:ver:aia-27\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/vereisten/aia-27-gebruiksverantwoordelijken-registratieverplichtingen/index.html\",\"subject\":[\"transparantie\",\"governance\"],\"lifecycle\":[\"implementatie\",\"monitoring-en-beheer\"],\"links\":[],\"ai_act_profile\":[{\"type\":[\"AI-systeem\",\"AI-systeem
+          voor algemene doeleinden\"],\"open_source\":[],\"risk_category\":[\"hoog-risico
+          AI\"],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[\"gebruiksverantwoordelijke\"]}],\"always_applicable\":0,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "2740"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:46 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-22?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Hoog-risico-AI-systemen
+          worden gebruikt volgens de gebruiksaanwijzing","description":"Gebruiksverantwoordelijken
+          van AI-systemen met een hoog risico nemen passende technische en organisatorische
+          maatregelen om te waarborgen dat zij dergelijke systemen gebruiken in overeenstemming
+          met de gebruiksaanwijzingen die bij de systemen zijn gevoegd, in overeenstemming
+          met de leden 3 en 6 van artikel 26 van de AI-verordening.","explanation":"Gebruiksverantwoordelijken
+          van AI-systemen met een hoog risico moeten geschikte maatregelen nemen om
+          ervoor te zorgen dat zij deze systemen gebruiken volgens de bijgevoegde instructies.\nDe
+          gebruiksverantwoordelijke zorgt ervoor dat de inputdata relevant en voldoende
+          representatief zijn voor het beoogde doel van het AI-systeem met een hoog
+          risico, voor zover hij daar controle over heeft.\n","urn":"urn:nl:ak:ver:aia-22","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/vereisten/aia-22-gebruiksverantwoordelijken-maatregelen/index.html","subject":["governance"],"lifecycle":["organisatieverantwoordelijkheden","implementatie"],"links":[],"ai_act_profile":[{"type":["AI-systeem","AI-systeem
+          voor algemene doeleinden"],"open_source":[],"risk_category":["hoog-risico
+          AI"],"systemic_risk":[],"transparency_obligations":[],"role":["gebruiksverantwoordelijke"]}],"always_applicable":0,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "1688"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:46 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-03?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Persoonsgegevens
+          worden zo min mogelijk verwerkt\",\"description\":\"De verwerking van persoonsgegevens
+          moet minimaal worden gehouden, dat wil zeggen dat die verwerking toereikend
+          moet zijn, ter zake dienend en beperkt tot wat noodzakelijk is voor de doeleinden
+          waarvoor zij worden verwerkt.\\n\",\"explanation\":\"Het is van belang dat
+          \xE9nkel persoonsgegevens worden verwerkt die noodzakelijk zijn gezien de
+          doeleinden van die vewerking.\\nEr moet een beoordeling worden gemaakt welke
+          persoonsgegevens dit wel en eventueel niet zijn.\\nVoor het ontwikkelen en
+          gebruiken van algoritmes of AI-systemen is het van belang om te beoordelen
+          welke persoonsgegevens noodzakelijk zijn om het beoogde doel te bereiken.
+          Afhankelijk van de toepassing vraagt dit om een intensieve toets. Er moet
+          voor worden gezorgd dat persoonsgegevens die niet als noodzakelijk worden
+          beschouwd, buiten de verwerking blijven. \",\"urn\":\"urn:nl:ak:ver:avg-03\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/vereisten/avg-03-minimale-verwerking-van-persoonsgegevens/index.html\",\"subject\":[\"privacy-en-gegevensbescherming\"],\"lifecycle\":[\"ontwerp\",\"dataverkenning-en-datapreparatie\",\"ontwikkelen\"],\"links\":[\"urn:nl:ak:mtr:dat-05\",\"urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder\",\"urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract\",\"urn:nl:ak:mtr:leveren_bewijs_onderdeel_beoordeling_inschrijving\",\"urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen\",\"urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst\",\"urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden\",\"urn:nl:ak:mtr:neem_vereiste_op_als_subgunningscriteria\",\"urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste\"],\"ai_act_profile\":[{\"type\":[],\"open_source\":[],\"risk_category\":[],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[]}],\"always_applicable\":1,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "2217"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:46 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-38?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Klokkenluiders
+          kunnen veilig melden dat een organisatie zich niet houdt aan de AI-verordening","description":"Inbreuken
+          op de AI verordening moeten gemeld kunnen worden en melders moeten dit op
+          een veilige en vertrouwelijke manier kunnen doen, zoals beschreven in Richtlijn
+          (EU) 2019/1937.","explanation":"Personen die optreden als klokkenluiders bij
+          inbreuken op de AI-verordening, moeten worden beschermd uit hoofde van het
+          Unierecht.\nRichtlijn (EU) 2019/1937 (https://eur-lex.europa.eu/legal-content/NL/LSU/?uri=CELEX:32019L1937)
+          van het Europees Parlement en de Raad moet daarom van toepassing zijn.\nDe
+          richtlijn biedt een kader voor het veilig en vertrouwelijk melden van schendingen
+          van de verordening, terwijl het de melders (\"klokkenluiders\") beschermt
+          tegen represailles of vervolging.\nDeze richtlijn bevordert transparantie
+          en verantwoording binnen organisaties en draagt bij aan een cultuur van naleving
+          en integriteit.","urn":"urn:nl:ak:ver:aia-38","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/vereisten/aia-38-melding-inbreuk-op-ai-verordening/index.html","subject":["governance","menselijke-controle"],"lifecycle":["organisatieverantwoordelijkheden","monitoring-en-beheer"],"links":["urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder","urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract","urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen","urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst","urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden","urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste"],"ai_act_profile":[{"type":["AI-systeem","AI-systeem
+          voor algemene doeleinden","AI-model voor algemene doeleinden"],"open_source":[],"risk_category":[],"systemic_risk":[],"transparency_obligations":[],"role":["aanbieder","gebruiksverantwoordelijke"]}],"always_applicable":0,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "2237"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:46 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-05?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Persoonsgegevens
+          zijn juist en actueel","description":"De te verwerken persoonsgegevens zijn
+          juist, nauwkeurig en worden zo nodig geactualiseerd of gewist.","explanation":"De
+          te verwerken persoonsgegevens moeten nauwkeurig, juist en zo nodig actueel
+          zijn.\nDit betekent dat alle maatregelen moeten worden genomen om ervoor te
+          zorgen dat onjuiste persoonsgegevens worden gerectificeerd of gewist.\nDat
+          kan betekenen dat persoonsgegevens moeten worden geactualiseerd of verbeterd.\nIn
+          de context van algoritmes en AI is het van belang dat ook daar wordt onderzocht
+          welke maatregelen nodig zijn om die juistheid toe te passen.","urn":"urn:nl:ak:ver:avg-05","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/vereisten/avg-05-juistheid-en-actualiteit-van-persoonsgegevens/index.html","subject":["privacy-en-gegevensbescherming"],"lifecycle":["dataverkenning-en-datapreparatie"],"links":["urn:nl:ak:mtr:dat-01","urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder","urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract","urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen","urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst","urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden","urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste"],"ai_act_profile":[{"type":[],"open_source":[],"risk_category":[],"systemic_risk":[],"transparency_obligations":[],"role":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "1810"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:46 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-08?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Gevoelige
+          persoonsgegevens worden alleen gebruikt als hiervoor een wettelijke uitzondering
+          geldt\",\"description\":\"Bijzondere categorie\xEBn van persoonsgegevens mogen
+          alleen worden verwerkt op basis van een wettelijke uitzondering.\",\"explanation\":\"Persoonsgegevens
+          die door hun aard bijzonder gevoelig zijn wat betreft de grondrechten en fundamentele
+          vrijheden, verdienen specifieke bescherming.\\nDit komt doordat de context
+          van de verwerking ervan significante risico's kan meebrengen voor de grondrechten
+          en de fundamentele vrijheden.\\nDenk hierbij aan persoonsgegevens als ras,
+          ethnische afkomst, politieke opvattingen of religieuze of levenschouwelijke
+          overtuigingen.\\n\\n\\nBijzondere categorie\xEBn persoonsgegevens mogen alleen
+          worden verwerkt als er hier een wettelijke uitzondering voor is ([artikel\\n9
+          AVG](https://eur-lex.europa.eu/legal-content/NL/TXT/HTML/?uri=CELEX:32016R0679#d1e2043-1-1)
+          en [artikel 30 UAVG](https://wetten.overheid.nl/jci1.3:c:BWBR0040940&hoofdstuk=3&paragraaf=3.1&artikel=30&z=2021-07-01&g=2021-07-01)).\\nDeze
+          vereiste is ook van toepassing bij het ontwikkelen en gebruiken van algoritmes
+          of AI-systemen en stelt daarmee beperkingen aan het mogen verwerken van deze
+          categorie\xEBn persoonsgegevens, bv. ten behoeve van trainingsdata of het
+          genereren van de beoogde output.\",\"urn\":\"urn:nl:ak:ver:avg-08\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/vereisten/avg-08-wettelijke-verwerking-van-gevoelige-gegevens/index.html\",\"subject\":[\"privacy-en-gegevensbescherming\",\"bias-en-non-discriminatie\"],\"lifecycle\":[\"ontwerp\",\"dataverkenning-en-datapreparatie\"],\"links\":[\"urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder\",\"urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract\",\"urn:nl:ak:mtr:leveren_bewijs_onderdeel_beoordeling_inschrijving\",\"urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen\",\"urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst\",\"urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden\",\"urn:nl:ak:mtr:neem_vereiste_op_als_subgunningscriteria\",\"urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste\"],\"ai_act_profile\":[{\"type\":[],\"open_source\":[],\"risk_category\":[],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[]}],\"always_applicable\":1,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "2622"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:46 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:arc-01?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Informatie
+          over algoritmes wordt gedocumenteerd volgens de Archiefwet","description":"Overheidsorganen
+          zijn verplicht de onder hen berustende archiefbescheiden in goede, geordende
+          en toegankelijke staat te brengen en te bewaren, alsmede zorg te dragen voor
+          de vernietiging van de daarvoor in aanmerking komende archiefbescheiden.","explanation":"","urn":"urn:nl:ak:ver:arc-01","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/vereisten/arc-01-archiefwet/index.html","subject":["governance","data"],"lifecycle":["uitfaseren","monitoring-en-beheer","ontwikkelen"],"links":["urn:nl:ak:mtr:owp-08","urn:nl:ak:mtr:dat-04","urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder","urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract","urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen","urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst","urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden","urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste"],"ai_act_profile":[{"type":["algoritme","AI-systeem","AI-systeem
+          voor algemene doeleinden","AI-model voor algemene doeleinden"],"open_source":[],"risk_category":["hoog-risico
+          AI","verboden AI","geen hoog-risico AI"],"systemic_risk":[],"transparency_obligations":[],"role":["aanbieder","gebruiksverantwoordelijke"]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "1712"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:46 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-29?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Hoog-risico-AI-systemen
+          voor publieke taken worden beoordeeld op gevolgen voor grondrechten\",\"description\":\"Voordat
+          een AI-systeem met een hoog risico als bedoeld in artikel 6, lid 2 AI-verordening,
+          in gebruik wordt genomen, met uitzondering van AI-systemen met een hoog risico
+          die bedoeld zijn om te worden gebruikt op het in punt 2 van bijlage III vermelde
+          gebied, voeren operatoren die publiekrechtelijke instellingen zijn of particuliere
+          entiteiten zijn die openbare diensten verlenen, en operatoren van AI-systemen
+          met een hoog risico als bedoeld in bijlage III, punt 5, onder b) en c), een
+          beoordeling uit van de gevolgen voor de grondrechten die het gebruik van een
+          dergelijk systeem kan opleveren.\",\"explanation\":\"Voordat een AI-systeem
+          met een hoog risico in gebruik wordt genomen, moeten publieke instellingen
+          of particuliere entiteiten die openbare diensten leveren, en operators van
+          bepaalde AI-systemen, een beoordeling uitvoeren van de impact op de grondrechten
+          die het gebruik ervan kan hebben.\\nDeze evaluatie is bedoeld om potenti\xEBle
+          risico's te identificeren die kunnen voortvloeien uit het gebruik van dergelijke
+          systemen en om passende maatregelen te nemen om deze risico's te beheersen.\\nHet
+          doel is om de bescherming van grondrechten te waarborgen bij het gebruik van
+          AI-systemen met een hoog risico, met name in sectoren waar deze systemen cruciale
+          diensten leveren aan het publiek.\",\"urn\":\"urn:nl:ak:ver:aia-29\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/vereisten/aia-29-beoordelen-gevolgen-grondrechten/index.html\",\"subject\":[\"fundamentele-rechten\"],\"lifecycle\":[\"ontwerp\",\"verificatie-en-validatie\"],\"links\":[\"urn:nl:ak:mtr:org-07\",\"urn:nl:ak:mtr:owp-06\",\"urn:nl:ak:mtr:owk-02\",\"urn:nl:ak:mtr:ver-01\",\"urn:nl:ak:mtr:imp-02\",\"urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder\",\"urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract\",\"urn:nl:ak:mtr:leveren_bewijs_onderdeel_beoordeling_inschrijving\",\"urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen\",\"urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst\",\"urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden\",\"urn:nl:ak:mtr:neem_vereiste_op_als_subgunningscriteria\",\"urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste\"],\"ai_act_profile\":[{\"type\":[\"AI-systeem\",\"AI-systeem
+          voor algemene doeleinden\"],\"open_source\":[],\"risk_category\":[\"hoog-risico
+          AI\"],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[\"gebruiksverantwoordelijke\"]}],\"always_applicable\":0,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "2880"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:46 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-23?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Menselijke
+          controle van Hoog-risico-AI-systemen wordt uitgevoerd door mensen met voldoende
+          kennis en mogelijkheden","description":"Gebruiksverantwoordelijken dragen
+          het menselijk toezicht over een hoog risico AI-systeem op aan natuurlijke
+          personen die over de nodige bekwaamheid, opleiding en autoriteit beschikken
+          en de nodige ondersteuning krijgen.","explanation":"Het is van belang dat
+          natuurlijke personen die het menselijk toezicht moeten uitvoeren over het
+          AI-systeem met een hoog risico, daarvoor over de nodige bekwaamheid, opleiding
+          en autoriteit beschikt.\nDaarbij kan het van belang zijn dat deze natuurlijke
+          personen ondersteuning krijgen bij het uitvoeren van deze taak.\n","urn":"urn:nl:ak:ver:aia-23","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/vereisten/aia-23-gebruiksverantwoordelijken-menselijk-toezicht/index.html","subject":["governance","menselijke-controle"],"lifecycle":["organisatieverantwoordelijkheden"],"links":[],"ai_act_profile":[{"type":["AI-systeem","AI-systeem
+          voor algemene doeleinden"],"open_source":[],"risk_category":["hoog-risico
+          AI"],"systemic_risk":[],"transparency_obligations":[],"role":["gebruiksverantwoordelijke"]}],"always_applicable":0,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "1558"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:47 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-04?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Persoonsgegevens
+          en andere data verwerken gebeurt proportioneel en subsidiair","description":"Gegevensverwerking
+          moet in verhouding staan tot het beoogde doel en persoonsgegevens mogen alleen
+          verwerkt worden als er geen minder ingrijpende manier is om het doel te bereiken.
+          Voor zover het gaat om de verwerking van persoonsgegevens moet dit vereiste
+          aantoonbaar zijn. ","explanation":"","urn":"urn:nl:ak:ver:avg-04","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/vereisten/avg-04-proportionaliteit-en-subsidiariteit/index.html","subject":["fundamentele-rechten","privacy-en-gegevensbescherming"],"lifecycle":["ontwerp","dataverkenning-en-datapreparatie"],"links":["urn:nl:ak:mtr:owp-05","urn:nl:ak:mtr:dat-03","urn:nl:ak:mtr:owk-02","urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder","urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract","urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen","urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst","urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden","urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste"],"ai_act_profile":[{"type":[],"open_source":[],"risk_category":[],"systemic_risk":[],"transparency_obligations":[],"role":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "1641"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:47 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:grw-02?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Algoritmes
+          discrimineren niet","description":"Allen die zich in Nederland bevinden, worden
+          in gelijke gevallen gelijk behandeld.\nDirecte en indirecte discriminatie
+          wegens godsdienst, levensovertuiging, politieke gezindheid, ras, geslacht,
+          handicap, seksuele gerichtheid of op welke grond dan ook, is niet toegestaan.","explanation":"","urn":"urn:nl:ak:ver:grw-02","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/vereisten/grw-02-non-discriminatie/index.html","subject":["bias-en-non-discriminatie"],"lifecycle":["dataverkenning-en-datapreparatie","verificatie-en-validatie","monitoring-en-beheer"],"links":["urn:nl:ak:mtr:owk-02","urn:nl:ak:mtr:ver-01","urn:nl:ak:mtr:imp-02","urn:nl:ak:mtr:imp-05","urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder","urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract","urn:nl:ak:mtr:leveren_bewijs_onderdeel_beoordeling_inschrijving","urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen","urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst","urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden","urn:nl:ak:mtr:neem_vereiste_op_als_subgunningscriteria","urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste"],"ai_act_profile":[{"type":[],"open_source":[],"risk_category":[],"systemic_risk":[],"transparency_obligations":[],"role":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "1730"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:47 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-10?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Hoog-risico-AI-systemen
+          zijn voldoende nauwkeurig, robuust en cyberveilig\",\"description\":\"AI-systemen
+          met een hoog risico worden op zodanige wijze ontworpen en ontwikkeld dat deze
+          een passend niveau van nauwkeurigheid, robuustheid en cyberbeveiliging bieden,
+          alsook consistente prestaties gedurende de levensduur met betrekking tot deze
+          aspecten.\",\"explanation\":\"AI-systemen met een hoog risico worden zorgvuldig
+          ontworpen en ontwikkeld om een hoog niveau van nauwkeurigheid, robuustheid
+          en cyberbeveiliging te bieden.\\nDit garandeert consistente prestaties gedurende
+          hun levensduur en minimaliseert risico's met betrekking tot deze aspecten,
+          waardoor de betrouwbaarheid en veiligheid van het systeem worden gewaarborgd.\\n\\nTechnische
+          robuustheid is een essenti\xEBle eis voor AI-systemen met een hoog risico.\\nDeze
+          systemen moeten bestand zijn tegen schadelijk of anderszins ongewenst gedrag
+          dat kan voortvloeien uit de beperkingen binnen de systemen of de omgeving
+          waarin de systemen opereren (bijvoorbeeld fouten, onregelmatigheden, onverwachte
+          situaties).\\nDaarom moeten technische en organisatorische maatregelen worden
+          getroffen om de robuustheid van AI-systemen met een hoog risico te waarborgen.\\nEen
+          technische oplossing kan bijvoorbeeld bestaan uit mechanismen die het systeem
+          in staat stellen zijn werking veilig te onderbreken (storingsbeveiligingsplannen)
+          wanneer zich bepaalde anomalie\xEBn voordoen of wanneer de werking buiten
+          bepaalde vooraf bepaalde grenzen plaatsvindt.\\n\\nCyberbeveiliging is cruciaal
+          om te waarborgen dat AI-systemen bestand zijn tegen pogingen van kwaadwillige
+          derden die gebruikmaken van de kwetsbaarheden van het systeem om het gebruik,
+          het gedrag of de prestaties ervan te wijzigen of de veiligheidskenmerken ervan
+          in gevaar te brengen.\\nBij cyberaanvallen tegen AI-systemen kunnen AI-specifieke
+          activa worden gebruikt, zoals trainingsdatasets (bv.\\ndatavervuiling) of
+          getrainde modellen (bv.\\nvijandige aanvallen of membership inference), of
+          kwetsbaarheden in de digitale activa van het AI-systeem of de onderliggende
+          ICT-infrastructuur worden benut.\\nOm te zorgen voor een niveau van cyberbeveiliging
+          dat aansluit op de risico\u2019s, moeten aanbieders van AI-systemen met een
+          hoog risico passende maatregelen zoals veiligheidscontroles nemen, waarbij
+          ook rekening wordt gehouden met de onderliggende ICT infrastructuur.\",\"urn\":\"urn:nl:ak:ver:aia-10\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/vereisten/aia-10-nauwkeurigheid-robuustheid-cyberbeveiliging/index.html\",\"subject\":[\"technische-robuustheid-en-veiligheid\"],\"lifecycle\":[\"ontwerp\",\"ontwikkelen\",\"verificatie-en-validatie\",\"monitoring-en-beheer\"],\"links\":[\"urn:nl:ak:mtr:owp-04\",\"urn:nl:ak:mtr:owp-10\",\"urn:nl:ak:mtr:ver-01\",\"urn:nl:ak:mtr:imp-02\",\"urn:nl:ak:mtr:mon-02\",\"urn:nl:ak:mtr:mon-03\",\"urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder\",\"urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract\",\"urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen\",\"urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst\",\"urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden\",\"urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste\"],\"ai_act_profile\":[{\"type\":[\"AI-systeem\",\"AI-systeem
+          voor algemene doeleinden\"],\"open_source\":[],\"risk_category\":[\"hoog-risico
+          AI\"],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[\"aanbieder\"]}],\"always_applicable\":0,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "3778"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:47 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-26?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Werknemers
+          weten dat hun organisatie een hoog-risico AI-systeem gebruikt","description":"Voordat
+          een AI-systeem met een hoog risico op de werkplek in gebruik wordt gesteld
+          of wordt gebruikt, delen gebruiksverantwoordelijken die werkgever zijn werknemersvertegenwoordigers
+          en de betrokken werknemers mee dat zij zullen worden onderworpen aan het gebruik
+          van het AI-systeem met een hoog risico.\nDeze informatie wordt, indien van
+          toepassing, verstrekt in overeenstemming met de in het Unie- en nationaal
+          recht vastgelegde regels en procedures en de praktijk inzake informatie van
+          werknemers en hun vertegenwoordigers.","explanation":"Dit vereiste benadrukt
+          het belang van het informeren van werknemersvertegenwoordigers en betrokken
+          werknemers over de inzet van een hoog risico AI-systeem op de werkplaats.\nDit
+          dient voorafgaand aan de inzet van het systeem plaats te vinden.\nDe gebruiksverantwoordelijke
+          als werknemer dient hier zorg voor te dragen.","urn":"urn:nl:ak:ver:aia-26","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/vereisten/aia-26-informeren-werknemers/index.html","subject":["transparantie"],"lifecycle":["implementatie"],"links":[],"ai_act_profile":[{"type":["AI-systeem","AI-systeem
+          voor algemene doeleinden"],"open_source":[],"risk_category":["hoog-risico
+          AI"],"systemic_risk":[],"transparency_obligations":[],"role":["gebruiksverantwoordelijke"]}],"always_applicable":0,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "1761"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:47 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:bzk-01?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Impactvolle
+          algoritmes en hoog-risico-AI-systemen staan in het Nederlandse Algoritmeregister","description":"Bestuursorganen
+          publiceren algoritmes met impact en hoog-risico-AI-systemen in het [Nederlandse
+          Algoritmeregister](../hulpmiddelen/algoritmeregister.md).","explanation":"","urn":"urn:nl:ak:ver:bzk-01","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/vereisten/bzk-01-algoritmeregister/index.html","subject":["transparantie"],"lifecycle":["implementatie","monitoring-en-beheer"],"links":["urn:nl:ak:mtr:imp-04","urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder","urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract","urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen","urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst","urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden","urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste"],"ai_act_profile":[{"type":[],"open_source":[],"risk_category":[],"systemic_risk":[],"transparency_obligations":[],"role":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "1425"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:47 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-01?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Persoonsgegevens
+          worden op een rechtmatige manier verwerkt\",\"description\":\"De verwerking
+          van persoonsgegevens moet rechtmatig plaatsvinden.\",\"explanation\":\"De
+          verwerking van persoonsgegevens moet rechtmatig plaatsvinden, wat betekent
+          dat de verwerking gebaseerd moet zijn op \xE9\xE9n van de wettelijke grondslagen
+          die zijn geformuleerd in artikel 6 Algemene Verordening Gegevensbescherming.\\nPersoonsgegevens
+          mogen alleen worden verzameld voor specifieke, duidelijk omschreven en gerechtvaardigde
+          doeleinden.\\nHet is niet toegestaan om deze gegevens verder te verwerken
+          op een manier die niet verenigbaar is met deze oorspronkelijke doeleinden.\\n\\nBij
+          het verwerken van persoonsgegevens ten behoeve van de ontwikkeling en gebruik
+          van algoritmes en AI moet worden onderzocht of dit kan worden gebaseerd op
+          \xE9\xE9n van de verwerkingsgrondslagen.\\nHet is van belang dat wordt uitgewerkt
+          welke persoonsgegevens waarvoor worden verwerkt en op basis van welke grondslag.\\nHierbij
+          kan worden gedacht aan persoonsgegevens ten behoeve van trainingsdata, voor
+          het genereren van output of, indien (juridisch) mogelijk, voor het uitvoeren
+          van een onderzoek naar onbewuste vooringenomenheid.\",\"urn\":\"urn:nl:ak:ver:avg-01\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/vereisten/avg-01-persoonsgegevens-worden-rechtmatig-verwerkt/index.html\",\"subject\":[\"privacy-en-gegevensbescherming\"],\"lifecycle\":[\"probleemanalyse\",\"ontwerp\",\"dataverkenning-en-datapreparatie\"],\"links\":[\"urn:nl:ak:mtr:pba-05\",\"urn:nl:ak:mtr:owp-03\",\"urn:nl:ak:mtr:dat-03\",\"urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder\",\"urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract\",\"urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen\",\"urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst\",\"urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden\",\"urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste\"],\"ai_act_profile\":[{\"type\":[],\"open_source\":[],\"risk_category\":[],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[]}],\"always_applicable\":1,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "2432"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:47 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:awb-01?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Organisaties
+          die algoritmes gebruiken voor publieke taken gaan zorgvuldig te werk","description":"De
+          ontwikkeling en het gebruik van algoritmes en AI-systemen komt zorgvuldig
+          tot stand.","explanation":"","urn":"urn:nl:ak:ver:awb-01","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/vereisten/awb-01-zorgvuldigheidsbeginsel/index.html","subject":["fundamentele-rechten"],"lifecycle":["ontwerp","ontwikkelen","verificatie-en-validatie"],"links":["urn:nl:ak:mtr:org-01","urn:nl:ak:mtr:org-02","urn:nl:ak:mtr:org-03","urn:nl:ak:mtr:pba-01","urn:nl:ak:mtr:pba-02","urn:nl:ak:mtr:pba-03","urn:nl:ak:mtr:pba-04","urn:nl:ak:mtr:pba-05","urn:nl:ak:mtr:owp-01","urn:nl:ak:mtr:owp-03","urn:nl:ak:mtr:owp-04","urn:nl:ak:mtr:owp-10","urn:nl:ak:mtr:owk-02","urn:nl:ak:mtr:ver-01","urn:nl:ak:mtr:ver-03","urn:nl:ak:mtr:imp-01","urn:nl:ak:mtr:imp-03","urn:nl:ak:mtr:imp-04","urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder","urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract","urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen","urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst","urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden","urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste"],"ai_act_profile":[{"type":[],"open_source":[],"risk_category":[],"systemic_risk":[],"transparency_obligations":[],"role":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "1764"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:47 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-24?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"De
+          werking van Hoog-risico-AI-systemen wordt gemonitord\",\"description\":\"Gebruiksverantwoordelijken
+          monitoren de werking van het AI-systeem met een hoog risico op basis van de
+          gebruiksaanwijzingen en stellen in voorkomend geval de aanbieders in kennis
+          overeenkomstig artikel 72 AI Verordening\",\"explanation\":\"Gebruiksverantwoordelijken
+          moeten de werking van hoog risico AI-systemen monitoren.\\nDit is van belang
+          om passende maatregelen te kunnen treffen als het systeem onbedoeld anders
+          gaat functioneren.\\n \\nWanneer gebruiksverantwoordelijken redenen hebben
+          om aan te nemen dat het gebruik overeenkomstig de gebruiksaanwijzingen ertoe
+          kan leiden dat dat AI-systeem een risico vormt in de zin van artikel 79, lid
+          1, stellen zij de aanbieder of distributeur en de betreffende markttoezichtautoriteit
+          hiervan zonder onnodige vertraging in kennis en onderbreken zij het gebruik
+          van dat systeem.\\nWanneer gebruiksverantwoordelijke een ernstig incident
+          vaststellen, stellen zij ook onmiddellijk eerst de aanbieder hiervan in kennis,
+          en vervolgens de importeur of distributeur en de betreffende markttoezichtautoriteiten
+          van dat incident.\\nWanneer de gebruiksverantwoordelijke de aanbieder niet
+          kan bereiken, is artikel 73 mutatis mutandis van toepassing.\\nDeze verplichting
+          geldt niet voor gevoelige operationele gegevens van gebruiksverantwoordelijke
+          van AI-systemen die de hoedanigheid van rechtshandhavingsinstanties hebben.\\n\\nVoor
+          gebruiksverantwoordelijke die in de hoedanigheid van financi\xEBle instellingen
+          onderworpen zijn aan eisen met betrekking tot hun interne governance, regelingen
+          of processen uit hoofde van het Unierecht inzake financi\xEBle diensten, wordt
+          de monitoringsverplichting overeenkomstig de eerste alinea geacht te zijn
+          vervuld door te voldoen aan de regels inzake interne governance, regelingen
+          of processen en -mechanismen uit hoofde van het desbetreffende recht inzake
+          financi\xEBle diensten.\",\"urn\":\"urn:nl:ak:ver:aia-24\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/vereisten/aia-24-gebruiksverantwoordelijken-monitoren-werking/index.html\",\"subject\":[\"menselijke-controle\"],\"lifecycle\":[\"monitoring-en-beheer\"],\"links\":[\"urn:nl:ak:mtr:owk-02\",\"urn:nl:ak:mtr:imp-03\"],\"ai_act_profile\":[{\"type\":[\"AI-systeem\",\"AI-systeem
+          voor algemene doeleinden\"],\"open_source\":[],\"risk_category\":[\"hoog-risico
+          AI\"],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[\"gebruiksverantwoordelijke\"]}],\"always_applicable\":0,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "2806"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:47 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-13?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Een
+          Data Protection Impact Assessment (DPIA) wordt uitgevoerd wanneer de verwerking
+          van persoonsgegevens waarschijnlijk een hoog risico met zich meebrengt voor
+          de rechten en vrijheden van natuurlijke personen","description":"Een gegevensbeschermingseffectbeoordeling
+          (DPIA) is verplicht, indien een verwerking van persoonsgegevens waarschijnlijk
+          een hoog risico inhoudt voor de rechten en vrijheden van natuurlijke personen.","explanation":"","urn":"urn:nl:ak:ver:avg-13","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/vereisten/avg-13-dpia-verplicht/index.html","subject":["privacy-en-gegevensbescherming"],"lifecycle":["ontwerp","dataverkenning-en-datapreparatie","verificatie-en-validatie"],"links":["urn:nl:ak:mtr:owp-09","urn:nl:ak:mtr:owk-03","urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder","urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract","urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen","urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst","urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden","urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste"],"ai_act_profile":[{"type":[],"open_source":[],"risk_category":[],"systemic_risk":[],"transparency_obligations":[],"role":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "1657"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:47 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:bio-01?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Computersystemen
+          zijn voldoende beveiligd tegen ongelukken en cyberaanvallen","description":"Informatie
+          en informatiesystemen moeten op de juiste manier worden beveiligd.","explanation":"","urn":"urn:nl:ak:ver:bio-01","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/vereisten/bio-01-beveiliging-informatie-en-informatiesystemen/index.html","subject":["technische-robuustheid-en-veiligheid"],"lifecycle":["organisatieverantwoordelijkheden"],"links":["urn:nl:ak:mtr:org-02","urn:nl:ak:mtr:org-04","urn:nl:ak:mtr:org-05","urn:nl:ak:mtr:org-06","urn:nl:ak:mtr:owk-01","urn:nl:ak:mtr:owk-04","urn:nl:ak:mtr:mon-01","urn:nl:ak:mtr:mon-02","urn:nl:ak:mtr:mon-03","urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder","urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract","urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen","urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst","urn:nl:ak:mtr:maak_vereiste_onderdeel_van_service_level_agreement","urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden","urn:nl:ak:mtr:risico-analyse_informatiebeveiliging_leverancier","urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste"],"ai_act_profile":[{"type":[],"open_source":[],"risk_category":[],"systemic_risk":[],"transparency_obligations":[],"role":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "1696"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:47 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-11?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Ontwerp
+          en standaardinstellingen (defaults) zijn zo gunstig mogelijk voor de privacy
+          van betrokkenen\",\"description\":\"Privacy en gegevensbescherming door goed
+          ontwerp en door standaardinstellingen\",\"explanation\":\"Gegevensbescherming
+          door ontwerp en standaardinstellingen houdt in dat privacy- en gegevensbescherming
+          vanaf het begin worden ge\xEFntegreerd in de ontwikkeling van systemen en
+          processen (ook wel privacy-by-design genoemd).\\nDoor al bij het ontwerp rekening
+          te houden met privacyaspecten en door standaardinstellingen die privacy bevorderen,
+          wordt de bescherming van persoonsgegevens versterkt.\\nHierbij kan worden
+          gedacht een het pseudonimiseren van persoonsgegevens of dataminimalisatie.\\nDeze
+          aanpak zorgt ervoor dat privacy-overwegingen een integraal onderdeel zijn
+          van alle aspecten van gegevensverwerking en draagt bij aan het vertrouwen
+          van individuen in de veilige omgang met hun gegevens.\\nDit is eveneens van
+          toepassing als persoonsgegevens worden verwerkt bij het ontwikkelen en gebruiken
+          van algoritmes en AI.\\n\",\"urn\":\"urn:nl:ak:ver:avg-11\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/vereisten/avg-11-privacy-bij-ontwerp-bij-verwerking-van-persoonsgegevens/index.html\",\"subject\":[\"privacy-en-gegevensbescherming\"],\"lifecycle\":[\"ontwerp\",\"dataverkenning-en-datapreparatie\"],\"links\":[\"urn:nl:ak:mtr:owp-10\",\"urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder\",\"urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract\",\"urn:nl:ak:mtr:leveren_bewijs_onderdeel_beoordeling_inschrijving\",\"urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen\",\"urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst\",\"urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden\",\"urn:nl:ak:mtr:neem_vereiste_op_als_subgunningscriteria\",\"urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste\"],\"ai_act_profile\":[{\"type\":[],\"open_source\":[],\"risk_category\":[],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[]}],\"always_applicable\":1,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "2363"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:47 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:dat-01?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Databanken
+          worden alleen gebruikt met toestemming van de databank-producent\",\"description\":\"Het
+          is verboden om zonder goedkeuring van de producent een databank op te vragen
+          en/of te hergebruiken.\",\"explanation\":\"De Databankrichtlijn en Databankenwet
+          beschermt de producten/fabrikanten van databanken tegen onrechtmatige toe-eigening
+          van een databank.\\nDegene die een substanti\xEBle financi\xEBle en professionele
+          investering heeft verricht om de inhoud van de databank te verkijgen en te
+          verzamelen, krijgt een verbodsrecht en kan zo anderen verbieden de databank
+          te gebruiken.\\nBij verkrijgen gaat het om \\\"het verzamelen van de werken,
+          gegevens of andere zelfstandige elementen die tezamen de inhoud van de databank
+          vormen\\\".\\nDit recht bestaat naast het recht op bescherming van de originele
+          keuze of rangschikking van de inhoud van databanken (auteurswet).\\n \\n\\nVoor
+          het ontwikkelen van algoritme en AI is data nodig.\\nDe data die hiervoor
+          wordt gebruikt mag niet ongeoorloofd zijn verkregen uit een databank.\\n\",\"urn\":\"urn:nl:ak:ver:dat-01\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/vereisten/dat-01-databankenwet/index.html\",\"subject\":[\"data\"],\"lifecycle\":[\"dataverkenning-en-datapreparatie\"],\"links\":[\"urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder\",\"urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract\",\"urn:nl:ak:mtr:leveren_bewijs_onderdeel_beoordeling_inschrijving\",\"urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen\",\"urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst\",\"urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden\",\"urn:nl:ak:mtr:neem_vereiste_op_als_subgunningscriteria\",\"urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste\"],\"ai_act_profile\":[{\"type\":[],\"open_source\":[],\"risk_category\":[],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[]}],\"always_applicable\":1,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "2242"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:47 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:woo-01?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Iedereen
+          kan openbare informatie over algoritmes vinden of aanvragen","description":"Een
+          bestuursorgaan draagt er zorg voor dat de documenten die het ontvangt, vervaardigt
+          of anderszins onder zich heeft, zich in goede, geordende en toegankelijke
+          staat bevinden.\nEen bestuursorgaan draagt er zoveel mogelijk zorg voor dat
+          de informatie die het overeenkomstig deze wet verstrekt, actueel, nauwkeurig
+          en vergelijkbaar is.","explanation":"Bij het ontwikkelen en gebruiken van
+          algoritmes en AI kunnen documenten en publieke informatie ontstaan die (op
+          verzoek) in aanmerking komen voor openbaarmaking.\nHet kunnen openbaren van
+          publieke informatie is in het belang van een democratische rechtstaat.\nDe
+          Wet open overheid gaat uit van een recht op openbaarheid van publieke informatie.\nIedereenkan
+          een verzoek tot openbaarmaking van publieke informatie doen bij een bestuursorgaan
+          zonder daarbij een belang te stellen (artikel 4.1 Woo).\nDe aan een verzoeker
+          verstrekte informatie wordt openbaar voor iedereen.\nDe Woo is niet van toepassing
+          op informatie die al openbaar is (uitspraken van de Afdeling bestuursrechtspraak
+          van de Raad van State van 1 december 2010 (ECLI:NL:RVS:2010:BNS6990) en 20
+          oktober 2010 (ECLI:NL:RVS:2010:BO1165)).\nEr kunnen uitsluitingsgronden bestaan
+          voor het openbaarmaken van documenten (artikel 5.1 Woo).\n\nIn de context
+          van het ontwikkelen en gebruiken van algoritmes en AI-systemen is het van
+          belang dat tijdig wordt vastgesteld welke documenten in aanmerking komen voor
+          openbaarmaking.\nDit moet worden bekeken in het licht van wat ''actief'' moet
+          worden geopenbaard, dus proactief vanuit overheidsinstanties zelf, of wat
+          op ''verzoek'' van iemand moet worden geopenbaard.","urn":"urn:nl:ak:ver:woo-01","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/vereisten/woo-01-recht-op-toegang-tot-publieke-informatie/index.html","subject":["transparantie"],"lifecycle":["organisatieverantwoordelijkheden"],"links":["urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder","urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract","urn:nl:ak:mtr:leveren_bewijs_onderdeel_beoordeling_inschrijving","urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen","urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst","urn:nl:ak:mtr:maak_vereiste_onderdeel_van_service_level_agreement","urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden","urn:nl:ak:mtr:neem_vereiste_op_als_subgunningscriteria","urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste"],"ai_act_profile":[{"type":[],"open_source":[],"risk_category":[],"systemic_risk":[],"transparency_obligations":[],"role":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "3031"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:47 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-10?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Besluiten
+          die levens kunnen be\xEFnvloeden, zijn niet volledig geautomatiseerd\",\"description\":\"Betrokkenen
+          hebben het recht om niet onderworpen te worden aan een enkel op geautomatiseerde
+          verwerking, waaronder proflering, gebaseerd besluit, wanneer dit rechtsgevolgen
+          heeft voor hen of het hen anderszins in aanzienlijke mate treft. Dit verbod
+          geldt niet indien de  geautomatiseerde individuele besluitvorming, anders
+          dan op basis van profilering, noodzakelijk is om te voldoen aan een wettelijke
+          verplichting die op de verwerkingsverantwoordelijke rust of noodzakelijk is
+          voor de vervulling van een taak van algemeen belang.\",\"explanation\":\"Mensen
+          hebben het recht om niet onderworpen te worden aan beslissingen die uitsluitend
+          gebaseerd zijn op geautomatiseerde verwerking, zoals profilering, als dit
+          aanzienlijke gevolgen voor hen heeft of hen op een andere manier aanzienlijk
+          be\xEFnvloedt.\\nDit recht biedt bescherming tegen mogelijke negatieve effecten
+          van volledig geautomatiseerde besluitvormingssystemen, en waarborgt dat individuen
+          kunnen rekenen op menselijke tussenkomst en beoordeling bij belangrijke beslissingen
+          die hen kunnen treffen.\\nUitgangspunt is dat voor elk individueel geval een
+          zorgvuldige beoordeling van de kenmerken en omstandigheden plaatsvindt voordat
+          een besluit wordt genomen.\",\"urn\":\"urn:nl:ak:ver:avg-10\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/vereisten/avg-10-recht-op-niet-geautomatiseerde-besluitvorming/index.html\",\"subject\":[\"privacy-en-gegevensbescherming\"],\"lifecycle\":[\"ontwerp\",\"implementatie\"],\"links\":[\"urn:nl:ak:mtr:imp-03\",\"urn:nl:ak:mtr:bepalende_invloed_besluit_richting_personen\",\"urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder\",\"urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract\",\"urn:nl:ak:mtr:leveren_bewijs_onderdeel_beoordeling_inschrijving\",\"urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen\",\"urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst\",\"urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden\",\"urn:nl:ak:mtr:menselijke_tussenkomst_projectplan_en_dchargedocument\",\"urn:nl:ak:mtr:neem_vereiste_op_als_subgunningscriteria\",\"urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste\"],\"ai_act_profile\":[{\"type\":[],\"open_source\":[],\"risk_category\":[],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[]}],\"always_applicable\":1,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "2735"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:47 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:awb-02?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Organisaties
+          kunnen duidelijk uitleggen waarom en hoe algoritmes leiden tot een besluit","description":"Een
+          besluit berust op een deugdelijke motivering\n","explanation":"Een bestuursorgaan
+          moet inzichtelijk maken: \n\n1. dat een besluit tot stand is gekomen met behulp
+          van een algoritme; \n2. van welke feiten het is uitgegaan en welke gegevens
+          van de burger gebruikt c.q. verwerkt zijn;\n3. welke relevante belangen tegen
+          elkaar zijn afgewogen en hoe die afweging is verlopen (bijvoorbeeld het gewicht
+          dat wordt toegekend aan elk afgewogen kenmerk; welke analytische technieken
+          gebruikt zijn; welke specifieke voorspellende data; wat de belangrijkste policy-keuzes
+          waren; een uitleg van het voorspellende algoritme); \n4. hoe het algoritme
+          werkt (niet de techniek, maar hoe de uitkomsten van het algoritme tot stand
+          komen). \n\nDe keuzes en aannames die zijn gemaakt en gedaan moeten worden
+          beschreven en toegelicht.","urn":"urn:nl:ak:ver:awb-02","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/vereisten/awb-02-motiveringsbeginsel/index.html","subject":["transparantie"],"lifecycle":["ontwerp","implementatie","monitoring-en-beheer"],"links":["urn:nl:ak:mtr:ver-03","urn:nl:ak:mtr:imp-01","urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder","urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract","urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen","urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst","urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden","urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste"],"ai_act_profile":[{"type":[],"open_source":[],"risk_category":[],"systemic_risk":[],"transparency_obligations":[],"role":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "2099"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:47 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-12?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Data
+          zoals persoonsgegevens zijn voldoende beveiligd tegen ongelukken en cyberaanvallen","description":"Rekening
+          houdend met de stand van de techniek, de uitvoeringskosten, alsook met de
+          aard, de omvang, de context en de verwerkingsdoeleinden en de qua waarschijnlijkheid
+          en ernst uiteenlopende risico''s voor de rechten en vrijheden van personen,
+          treffen de verwerkingsverantwoordelijke en de verwerker passende technische
+          en organisatorische maatregelen om een op het risico afgestemd beveiligingsniveau
+          te waarborgen.\n","explanation":"","urn":"urn:nl:ak:ver:avg-12","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/vereisten/avg-12-beveiliging-van-verwerking/index.html","subject":["privacy-en-gegevensbescherming","technische-robuustheid-en-veiligheid"],"lifecycle":["organisatieverantwoordelijkheden"],"links":["urn:nl:ak:mtr:dat-05","urn:nl:ak:mtr:owk-01","urn:nl:ak:mtr:mon-02","urn:nl:ak:mtr:mon-03","urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder","urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract","urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen","urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst","urn:nl:ak:mtr:maak_vereiste_onderdeel_van_service_level_agreement","urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden","urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste"],"ai_act_profile":[{"type":[],"open_source":[],"risk_category":[],"systemic_risk":[],"transparency_obligations":[],"role":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "1882"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:47 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-07?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Organisaties
+          zijn transparant over het verwerken van persoonsgegevens","description":"De
+          verwerking van persoonsgegevens moet transparant zijn.","explanation":"Een
+          betrokkene moet op de hoogte worden gesteld van het feit dat er verwerking
+          plaatsvindt van diens persoonsgegevens en van de doeleinden daarvan (zoals
+          ook is verwoord in het beginsel van transparante verwerking, artikel 5 AVG).\nHierbij
+          moeten de specifieke omstandigheden en de context waarin de persoonsgegevens
+          worden verwerkt, worden meegenomen.\nIn artikel 13 en 14 AVG wordt toegelicht
+          welke informatie in welke gevallen moet worden verstrekt door de verwerkersverantwoordelijke.\nAls
+          persoonsgegevens worden verwerkt ten behoeve van het ontwikkelen of gebruiken
+          van algoritmes en AI-systemen, zal deze informatie moeten worden verstrekt.","urn":"urn:nl:ak:ver:avg-07","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/vereisten/avg-07-transparantie-bij-verwerken-persoonsgegevens/index.html","subject":["privacy-en-gegevensbescherming","transparantie"],"lifecycle":["implementatie","monitoring-en-beheer"],"links":["urn:nl:ak:mtr:imp-04","urn:nl:ak:mtr:imp-07","urn:nl:ak:mtr:imp-08","urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder","urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract","urn:nl:ak:mtr:leveren_bewijs_onderdeel_beoordeling_inschrijving","urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen","urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst","urn:nl:ak:mtr:maak_vereiste_onderdeel_van_service_level_agreement","urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden","urn:nl:ak:mtr:neem_vereiste_op_als_subgunningscriteria","urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste"],"ai_act_profile":[{"type":[],"open_source":[],"risk_category":[],"systemic_risk":[],"transparency_obligations":[],"role":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "2250"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:47 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:grw-01?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Algoritmes
+          schenden geen grondrechten of mensenrechten\",\"description\":\"Fundamentele
+          vrijheden, mensenrechten en grondrechten worden beschermd bij de inzet van
+          algoritmes en AI.\",\"explanation\":\"Mensenrechten gelden voor alle mensen
+          op de wereld.\\nDe mensenrechten in Nederland zijn beschermd door nationale
+          wetten en internationale verdragen.\\nIn Nederland staan veel mensenrechten
+          in hoofdstuk 1 van de Grondwet.\\nDeze rechten heten ook wel \u2019grondrechten\u2019.\\nEen
+          bekend voorbeeld is artikel 1 van de Grondwet.\\nOm mensenrechten te beschermen
+          zijn ze op Europees en internationaal niveau in verschillende verklaringen
+          en verdragen vastgelegd.\\n\\n\\nMensenrechten kunnen soms onder druk komen
+          te staan.\\nDe inzet van algoritmes en AI-systemen kan bijvoorbeeld een bedreiging
+          vormen voor de privacy van burgers, voor het  recht op gelijke behandeling
+          en voor het recht op behoorlijk bestuur.\\nHet is daarom belangrijk om tijdig
+          te onderzoeken of er sprake is of kan zijn van een eventuele inbreuk op fundamentele
+          rechten en vrijheden van burgers. Het is van belang dat maatregelen worden
+          getroffen om een eventuele inbreuk te voorkomen.\",\"urn\":\"urn:nl:ak:ver:grw-01\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/vereisten/grw-01-fundamentele-rechten/index.html\",\"subject\":[\"fundamentele-rechten\"],\"lifecycle\":[\"probleemanalyse\",\"ontwerp\",\"verificatie-en-validatie\",\"monitoring-en-beheer\"],\"links\":[\"urn:nl:ak:mtr:owp-06\",\"urn:nl:ak:mtr:owp-07\",\"urn:nl:ak:mtr:owk-02\",\"urn:nl:ak:mtr:ver-01\",\"urn:nl:ak:mtr:imp-03\",\"urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder\",\"urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract\",\"urn:nl:ak:mtr:leveren_bewijs_onderdeel_beoordeling_inschrijving\",\"urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen\",\"urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst\",\"urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden\",\"urn:nl:ak:mtr:neem_vereiste_op_als_subgunningscriteria\",\"urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste\"],\"ai_act_profile\":[{\"type\":[],\"open_source\":[],\"risk_category\":[],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[]}],\"always_applicable\":1,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "2545"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:47 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-06?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Organisaties
+          kunnen bewijzen dat zij persoonsgegevens op de juiste manier verwerken","description":"De
+          verantwoordelijken moeten bij de verwerking van persoonsgegevens door algoritmes
+          en AI-systemen kunnen aantonen dat de verwerkingen rechtmatig plaatsvinden.\nDit
+          betekent concreet dat de volgende punten aangetoond kunnen worden:\n\n - Rechtmatigheid,
+          behoorlijkheid en transparantie\n - Doelbinding\n - Minimale gegevensverwerking\n
+          - Juistheid\n - Opslagbeperking\n - Integriteit en vertrouwelijkheid\n\nEen
+          aandachtpunt daarbij is dat de rechtmatigheid van de verwerking ten opzichte
+          van andere gerelateerde wetgeving zoals de AI Act en de Algemene wet gelijke
+          behandeling ook moeten kunnen worden aangetoond voor zover de rechtmatigheid
+          van de verwerking onder de AVG daarvan afhankelijk is.","explanation":"","urn":"urn:nl:ak:ver:avg-06","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/vereisten/avg-06-verantwoordingsplicht-rechtmatigheid/index.html","subject":["governance","privacy-en-gegevensbescherming"],"lifecycle":["ontwerp","dataverkenning-en-datapreparatie"],"links":["urn:nl:ak:mtr:owp-01","urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder","urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract","urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen","urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst","urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden","urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste"],"ai_act_profile":[{"type":[],"open_source":[],"risk_category":[],"systemic_risk":[],"transparency_obligations":[],"role":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "2015"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 20 Nov 2024 09:15:47 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -767,26 +2496,26 @@ interactions:
         user-agent:
           - python-httpx/0.27.2
       method: GET
-      uri: http://testserver/algorithm-system/1/details/system_card/instruments
+      uri: http://testserver/algorithm/1/details/system_card/instruments
     response:
       body:
         string:
           "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"UTF-8\">\n
           \   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\n
           \   <link rel=\"icon\" type=\"image/x-icon\" href=\"/static/dist/@nl-rvo/assets/images/favicon/favicon.ico?etag=2623c3cf4644b245049d6e64a45e9a0b\">\n
-          \   <title>\n        testproject1 | AMT\n    </title>\n    \n    \n        \n
+          \   <title>\n        testalgorithm1 | AMT\n    </title>\n    \n    \n        \n
           \         <script type=\"text/javascript\" src=\"/static/dist/amt.js?etag=3ee5bf711702eb84442113b096590d5d\"></script>\n
-          \       \n    \n        \n          <script type=\"module\" src=\"/static/dist/@nl-rvo/design-tokens/index.mjs?etag=2f803d0ce3fa3cc501beab5caaac1766\"></script>\n
+          \       \n    \n        \n          <script type=\"module\" src=\"/static/dist/@nl-rvo/design-tokens/index.mjs?etag=b9177e180ef3d1a30d38cb1beb5e5aa7\"></script>\n
           \       \n    \n    <script type=\"text/javascript\" src=\"/static/vendor/htmx/js/json-enc.js?etag=e35a4cdbede2e811870937f9a33bf98c\"></script>\n
           \   <script type=\"text/javascript\" src=\"/static/vendor/htmx/js/response-targets.js?etag=af08293f8075f63c77b50f6716599e1a\"></script>\n
-          \   \n    \n    \n        <link rel=\"stylesheet\" href=\"/static/dist/main.css?etag=c7a68a7d6a387915cf11c00c616c6430\">\n
+          \   \n    \n    \n        <link rel=\"stylesheet\" href=\"/static/dist/main.css?etag=92e2b596ba035298de6d82ada599625b\">\n
           \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/assets/fonts/index.css?etag=2af3ca217ec5542a0376aac75c52f162\">\n
-          \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/assets/icons/index.css?etag=6ac80f6368662a5ce534e07ce3b5cc3b\">\n
+          \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/assets/icons/index.css?etag=c38fae87c4eb0dfe03db7fb7bf74c3a9\">\n
           \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/assets/images/index.css?etag=769f8d795360ba037771dc146cd6a7e6\">\n
-          \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/design-tokens/index.css?etag=93c946e3d8e3e1a988fa2c7a0bae571d\">\n
-          \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/component-library-css/index.css?etag=5a54b56ba46c98699221250ed4bc43b6\">\n
-          \       \n    \n</head>\n\n<body hx-ext=\"response-targets\" class=\"rvo-theme\">\n
-          \   \n    <div class=\"rvo-alert rvo-alert--warning rvo-alert--padding-sm\">\n
+          \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/design-tokens/index.css?etag=1fd8afba923f6dbe84d47f9dd2042936\">\n
+          \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/component-library-css/index.css?etag=4886b56bf8991f0b35619598bce696f9\">\n
+          \       \n    \n</head>\n\n<body hx-ext=\"response-targets\" class=\"rvo-theme
+          amt-theme\">\n    \n    <div class=\"rvo-alert rvo-alert--warning rvo-alert--padding-sm\">\n
           \   <span class=\"utrecht-icon rvo-icon rvo-icon-waarschuwing rvo-icon--xl
           rvo-status-icon-waarschuwing\"\n          role=\"img\"\n          aria-label=\"Waarschuwing\"></span>\n
           \   <div class=\"rvo-alert-text\">\n        <div>\n            <b>Beta Version
@@ -851,16 +2580,16 @@ interactions:
           class=\"rvo-max-width-layout rvo-max-width-layout--md rvo-max-width-layout-inline-padding--none
           margin-top-large margin-bottom-large\">\n            <ol class=\"rvo-breadcrumbs
           rvo-breadcrumbs--md\">\n                \n                    \n                        <li
-          class=\"rvo-breadcrumbs-item\">\n                            <a data-navigation=\"breadcrumb:/algorithm-systems/\"\n
+          class=\"rvo-breadcrumbs-item\">\n                            <a data-navigation=\"breadcrumb:/algorithms/\"\n
           \                              class=\"rvo-link rvo-link--normal rvo-link--no-underline\"\n
-          \                              href=\"/algorithm-systems/\">Algorithm systems</a>\n
-          \                       </li>\n                    \n                \n                    \n
-          \                       <li class=\"rvo-breadcrumbs-item\">\n                            <span
-          class=\"utrecht-icon rvo-icon rvo-icon-delta-naar-rechts rvo-icon--xs rvo-icon--hemelblauw\"\n
+          \                              href=\"/algorithms/\">Algorithms</a>\n                        </li>\n
+          \                   \n                \n                    \n                        <li
+          class=\"rvo-breadcrumbs-item\">\n                            <span class=\"utrecht-icon
+          rvo-icon rvo-icon-delta-naar-rechts rvo-icon--xs rvo-icon--hemelblauw\"\n
           \                                 role=\"img\"\n                                  aria-label=\"Delta
-          naar rechts\"></span>\n                            <a data-navigation=\"breadcrumb:/algorithm-system/1/details/system_card\"\n
+          naar rechts\"></span>\n                            <a data-navigation=\"breadcrumb:/algorithm/1/details/system_card\"\n
           \                              class=\"rvo-link rvo-link--normal rvo-link--no-underline\"\n
-          \                              href=\"/algorithm-system/1/details/system_card\">testproject1</a>\n
+          \                              href=\"/algorithm/1/details/system_card\">testalgorithm1</a>\n
           \                       </li>\n                    \n                \n                    \n
           \                       <li class=\"rvo-breadcrumbs-item\">\n                            <span
           class=\"rvo-breadcrumb-current-page\">\n                                <span
@@ -883,11 +2612,11 @@ interactions:
           rvo-icon-kruis rvo-icon--md rvo-icon--hemelblauw\"\n      role=\"img\"\n      aria-label=\"Close\"></span></a>\n
           \           </div>\n            <hr class=\"rvo-hr\" />\n            <p style=\"padding-block:
           0.5em 0.4em;\">\n                <strong>Are you sure you want to delete your
-          algoritmic system  testproject1?</strong>\n            </p>\n            <p
+          algoritmic system  testalgorithm1?</strong>\n            </p>\n            <p
           style=\"padding-block: 0.0em 1.25em;\">\n                Data will be stored
           for at least 45 days before permanent\n                deletion.\n            </p>\n
           \           <p class=\"utrecht-button-group\">\n                <button hx-headers='{\"X-CSRF-Token\":
-          \"17ff3cc92dc4d0ee814fb90ff330e03fa90eb80b\"}'\n                        hx-delete=\"/algorithm-system/1\"\n
+          \"5c489c2441dc92ce96795f3facf0bb5fd13805d9\"}'\n                        hx-delete=\"/algorithm/1\"\n
           \                       class=\"utrecht-button utrecht-button--primary-action
           utrecht-button--rvo-md\"\n                        type=\"button\">\n                    Yes\n
           \               </button>\n                <button class=\"utrecht-button
@@ -896,20 +2625,22 @@ interactions:
           \   </div>\n    <div class=\"rvo-max-width-layout rvo-max-width-layout--md
           rvo-max-width-layout-inline-padding--none\">\n        <div class=\"rvo-content\">\n
           \           <div class=\"amt-flex-container\">\n                <h1 class=\"utrecht-heading-1
-          project-title\">testproject1</h1>\n                <a class=\"rvo-link rvo-link--normal
-          rvo-link--with-icon\"\n                   onclick=\"amt.openModal('delete-modal')\">\n
+          algorithm-title\">testalgorithm1</h1>\n                <a class=\"rvo-link
+          rvo-link--normal rvo-link--with-icon\"\n                   onclick=\"amt.openModal('delete-modal')\">\n
           \                   <span class=\"utrecht-icon rvo-icon rvo-icon-verwijderen
           rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before\"\n                          role=\"img\"\n
           \                         aria-label=\"Home\"></span>\n                    Delete
-          algorithm system\n                </a>\n            </div>\n        </div>\n
-          \       <!-- Requirements Widget -->\n        <div class=\"rvo-layout-grid-container\">\n
+          algorithm\n                </a>\n            </div>\n        </div>\n        <!--
+          Requirements Widget -->\n        <div class=\"rvo-layout-grid-container\">\n
           \           <div class=\"rvo-layout-grid rvo-layout-gap--sm rvo-layout-grid-columns--two
-          rvo-layout-grid-layout--1fr\">\n                <div class=\"rvo-card rvo-card--padding-md\"
-          style=\"height: 225px\">\n                    <div class=\"rvo-layout-row\"\n
-          \                        style=\"display: flex;\n                                justify-content:
-          space-between\">\n                        <h5 class=\"amt-widget-title rvo-link--with-icon\">\n
-          \                           <span class=\"utrecht-icon rvo-icon rvo-icon-vinkje
-          rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before\"\n                                  role=\"img\"\n
+          rvo-layout-grid-layout--1fr\">\n                <div class=\"rvo-card rvo-card--padding-md\"\n
+          \                    style=\"min-height: 225px;\n                            display:
+          flex;\n                            flex-direction: column\">\n                    <div
+          class=\"rvo-layout-row\"\n                         style=\"display: flex;\n
+          \                               justify-content: space-between\">\n                        <h5
+          class=\"amt-widget-title rvo-link--with-icon\">\n                            <span
+          class=\"utrecht-icon rvo-icon rvo-icon-vinkje rvo-icon--md rvo-icon--hemelblauw
+          rvo-link__icon--before\"\n                                  role=\"img\"\n
           \                                 aria-label=\"\"></span>Does the algorithm
           meet the requirements?\n                        </h5>\n                        <a
           class=\"rvo-text--subtle rvo-text--bold\">0/38\n                        Done</a>\n
@@ -997,18 +2728,18 @@ interactions:
           \                           \n                            \n                        \n
           \                           \n                            \n                        \n
           \                           \n                            \n                        \n
-          \                   </ul>\n                    <a class=\"margin-top-large
-          rvo-link rvo-link--normal rvo-link--with-icon rvo-layout-margin-vertical--sm\"\n
-          \                      href=\"/algorithm-system/1/details/system_card/requirements\"\n
-          \                      style=\"bottom: 0;\n                              position:
-          absolute\">\n                        <span class=\"utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts
-          rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before\"\n                              role=\"img\"\n
-          \                             aria-label=\"Home\"></span>\n                        Go
-          to all requirements\n                    </a>\n                </div>\n                <!--
-          Instrument Widget -->\n                <div class=\"rvo-card rvo-card--padding-md\"
-          style=\"height: 225px\">\n                    <div class=\"rvo-layout-row\"\n
-          \                        style=\"display: flex;\n                                justify-content:
-          space-between\">\n                        <h5 class=\"amt-widget-title rvo-link--with-icon\">\n
+          \                   </ul>\n                    <a class=\"rvo-link rvo-link--normal
+          rvo-link--with-icon\"\n                       href=\"/algorithm/1/details/system_card/requirements\"\n
+          \                      style=\"margin-top: auto\">\n                        <span
+          class=\"utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--md rvo-icon--hemelblauw
+          rvo-link__icon--before\"\n                              role=\"img\"\n                              aria-label=\"Home\"></span>\n
+          \                       Go to all requirements\n                    </a>\n
+          \               </div>\n                <!-- Instrument Widget -->\n                <div
+          class=\"rvo-card rvo-card--padding-md\"\n                     style=\"min-height:
+          225px;\n                            display: flex;\n                            flex-direction:
+          column\">\n                    <div class=\"rvo-layout-row\"\n                         style=\"display:
+          flex;\n                                justify-content: space-between\">\n
+          \                       <h5 class=\"amt-widget-title rvo-link--with-icon\">\n
           \                           <span class=\"utrecht-icon rvo-icon rvo-icon-permanent-beta
           rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before\"\n                                  role=\"img\"\n
           \                                 aria-label=\"\"></span>Which instruments
@@ -1045,52 +2776,51 @@ interactions:
           class=\"rvo-text--subtle\">To do</a>\n                                            \n
           \                                       </div>\n                                    </div>\n
           \                               </li>\n                            \n                        \n
-          \                   </ul>\n                    <a class=\"margin-top-large
-          rvo-link rvo-link--normal rvo-link--with-icon rvo-layout-margin-vertical--sm\"\n
-          \                      href=\"/algorithm-system/1/details/system_card/instruments\"\n
-          \                      style=\"bottom: 0;\n                              position:
-          absolute\">\n                        <span class=\"utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts
-          rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before\"\n                              role=\"img\"\n
-          \                             aria-label=\"Home\"></span>\n                        Go
-          to all instruments\n                    </a>\n                </div>\n            </div>\n
-          \       </div>\n        <!-- tabs container -->\n        <div class=\"margin-top-large\">\n
-          \           <ul class=\"rvo-tabs rvo-ul rvo-ul--no-margin rvo-ul--no-padding
-          rvo-ul--icon rvo-ul--icon-option-2\"\n                role=\"tablist\"\n                aria-label=\"Tabs\">\n
+          \                   </ul>\n                    <a class=\"rvo-link rvo-link--normal
+          rvo-link--with-icon\"\n                       href=\"/algorithm/1/details/system_card/instruments\"\n
+          \                      style=\"margin-top: auto\">\n                        <span
+          class=\"utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--md rvo-icon--hemelblauw
+          rvo-link__icon--before\"\n                              role=\"img\"\n                              aria-label=\"Home\"></span>\n
+          \                       Go to all instruments\n                    </a>\n
+          \               </div>\n            </div>\n        </div>\n        <!-- tabs
+          container -->\n        <div class=\"margin-top-large\">\n            <ul class=\"rvo-tabs
+          rvo-ul rvo-ul--no-margin rvo-ul--no-padding rvo-ul--icon rvo-ul--icon-option-2\"\n
+          \               role=\"tablist\"\n                aria-label=\"Tabs\">\n                \n
+          \                   <li role=\"presentation\" class=\"rvo-tabs__item\">\n
+          \                       <a data-navigation=\"tab:/algorithm/1/details\"\n
+          \                          class=\"rvo-link rvo-tabs__item-link rvo-link--no-underline
+          rvo-link--normal\"\n                           role=\"tab\"\n                           aria-selected=\"true\"\n
+          \                          href=\"/algorithm/1/details\">Info</a>\n                    </li>\n
           \               \n                    <li role=\"presentation\" class=\"rvo-tabs__item\">\n
-          \                       <a data-navigation=\"tab:/algorithm-system/1/details\"\n
+          \                       <a data-navigation=\"tab:/algorithm/1/details/system_card\"\n
           \                          class=\"rvo-link rvo-tabs__item-link rvo-link--no-underline
           rvo-link--normal\"\n                           role=\"tab\"\n                           aria-selected=\"true\"\n
-          \                          href=\"/algorithm-system/1/details\">Info</a>\n
-          \                   </li>\n                \n                    <li role=\"presentation\"
-          class=\"rvo-tabs__item\">\n                        <a data-navigation=\"tab:/algorithm-system/1/details/system_card\"\n
-          \                          class=\"rvo-link rvo-tabs__item-link rvo-link--no-underline
-          rvo-link--normal\"\n                           role=\"tab\"\n                           aria-selected=\"true\"\n
-          \                          href=\"/algorithm-system/1/details/system_card\">Algorithm
+          \                          href=\"/algorithm/1/details/system_card\">Algorithm
           details</a>\n                    </li>\n                \n                    <li
           role=\"presentation\" class=\"rvo-tabs__item\">\n                        <a
-          data-navigation=\"tab:/algorithm-system/1/details/model/inference\"\n                           class=\"rvo-link
+          data-navigation=\"tab:/algorithm/1/details/model/inference\"\n                           class=\"rvo-link
           rvo-tabs__item-link rvo-link--no-underline rvo-link--normal\"\n                           role=\"tab\"\n
-          \                          aria-selected=\"true\"\n                           href=\"/algorithm-system/1/details/model/inference\">Model</a>\n
+          \                          aria-selected=\"true\"\n                           href=\"/algorithm/1/details/model/inference\">Model</a>\n
           \                   </li>\n                \n                    <li role=\"presentation\"
-          class=\"rvo-tabs__item\">\n                        <a data-navigation=\"tab:/algorithm-system/1/details/system_card/requirements\"\n
+          class=\"rvo-tabs__item\">\n                        <a data-navigation=\"tab:/algorithm/1/details/system_card/requirements\"\n
           \                          class=\"rvo-link rvo-tabs__item-link rvo-link--no-underline
           rvo-link--normal\"\n                           role=\"tab\"\n                           aria-selected=\"true\"\n
-          \                          href=\"/algorithm-system/1/details/system_card/requirements\">Requirements</a>\n
+          \                          href=\"/algorithm/1/details/system_card/requirements\">Requirements</a>\n
           \                   </li>\n                \n                    <li role=\"presentation\"
-          class=\"rvo-tabs__item\">\n                        <a data-navigation=\"tab:/algorithm-system/1/details/system_card/data\"\n
+          class=\"rvo-tabs__item\">\n                        <a data-navigation=\"tab:/algorithm/1/details/system_card/data\"\n
           \                          class=\"rvo-link rvo-tabs__item-link rvo-link--no-underline
           rvo-link--normal\"\n                           role=\"tab\"\n                           aria-selected=\"true\"\n
-          \                          href=\"/algorithm-system/1/details/system_card/data\">Data</a>\n
+          \                          href=\"/algorithm/1/details/system_card/data\">Data</a>\n
           \                   </li>\n                \n                    <li role=\"presentation\"
-          class=\"rvo-tabs__item\">\n                        <a data-navigation=\"tab:/algorithm-system/1/details/tasks\"\n
+          class=\"rvo-tabs__item\">\n                        <a data-navigation=\"tab:/algorithm/1/details/tasks\"\n
           \                          class=\"rvo-link rvo-tabs__item-link rvo-link--no-underline
           rvo-link--normal\"\n                           role=\"tab\"\n                           aria-selected=\"true\"\n
-          \                          href=\"/algorithm-system/1/details/tasks\">Tasks</a>\n
+          \                          href=\"/algorithm/1/details/tasks\">Tasks</a>\n
           \                   </li>\n                \n                    <li role=\"presentation\"
-          class=\"rvo-tabs__item\">\n                        <a data-navigation=\"tab:/algorithm-system/1/details/system_card/instruments\"\n
+          class=\"rvo-tabs__item\">\n                        <a data-navigation=\"tab:/algorithm/1/details/system_card/instruments\"\n
           \                          class=\"rvo-link rvo-tabs__item-link rvo-link--no-underline
           rvo-tabs__item-link--active rvo-link--active\"\n                           role=\"tab\"\n
-          \                          aria-selected=\"true\"\n                           href=\"/algorithm-system/1/details/system_card/instruments\">Instruments</a>\n
+          \                          aria-selected=\"true\"\n                           href=\"/algorithm/1/details/system_card/instruments\">Instruments</a>\n
           \                   </li>\n                \n            </ul>\n        </div>\n
           \       <div class=\"margin-top-large\">\n            \n    <div>To be implemented</div>\n\n
           \       </div>\n    </div>\n\n    </main>\n    \n    \n</body>\n\n</html>"
@@ -1100,16 +2830,16 @@ interactions:
         content-language:
           - en,nl
         content-length:
-          - "28273"
+          - "28190"
         content-type:
           - text/html; charset=utf-8
         set-cookie:
-          - fastapi-csrf-token=IjE3ZmYzY2M5MmRjNGQwZWU4MTRmYjkwZmYzMzBlMDNmYTkwZWI4MGIi.ZzTGxg.br722W8MnAsOEY972bdNIl4u6ow;
+          - fastapi-csrf-token=IjVjNDg5YzI0NDFkYzkyY2U5Njc5NWYzZmFjZjBiYjVmZDEzODA1ZDki.Zz2owg.3prxFCFRTqPX6EzzBZSV8SZNFlQ;
             HttpOnly; Max-Age=3600; Path=/; SameSite=strict
         strict-transport-security:
           - max-age=31536000; includeSubDomains
         x-api-request-id:
-          - 01JCK2GY3WNCYAKT80T44V9SCR
+          - 01JD4DPDR0X48VV11BZA4M8M2W
       status:
         code: 200
         message: OK
