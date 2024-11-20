@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
@@ -88,7 +89,7 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: amt/api/navigation.py:46
+#: amt/api/navigation.py:46 amt/site/templates/parts/algorithm_search.html.j2:9
 msgid "Algorithms"
 msgstr ""
 
@@ -252,36 +253,36 @@ msgstr ""
 msgid "Delete algorithm"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:71
+#: amt/site/templates/algorithms/details_base.html.j2:74
 msgid "Does the algorithm meet the requirements?"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:74
-#: amt/site/templates/algorithms/details_base.html.j2:100
-#: amt/site/templates/algorithms/details_base.html.j2:129
-#: amt/site/templates/algorithms/details_base.html.j2:152
+#: amt/site/templates/algorithms/details_base.html.j2:77
+#: amt/site/templates/algorithms/details_base.html.j2:103
+#: amt/site/templates/algorithms/details_base.html.j2:134
+#: amt/site/templates/algorithms/details_base.html.j2:157
 #: amt/site/templates/macros/tasks.html.j2:32
 msgid "Done"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:96
-#: amt/site/templates/algorithms/details_base.html.j2:150
+#: amt/site/templates/algorithms/details_base.html.j2:99
+#: amt/site/templates/algorithms/details_base.html.j2:155
 msgid "To do"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:98
+#: amt/site/templates/algorithms/details_base.html.j2:101
 msgid "In progress"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:115
+#: amt/site/templates/algorithms/details_base.html.j2:117
 msgid "Go to all requirements"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:126
+#: amt/site/templates/algorithms/details_base.html.j2:131
 msgid "Which instruments are executed?"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:167
+#: amt/site/templates/algorithms/details_base.html.j2:171
 msgid "Go to all instruments"
 msgstr ""
 
@@ -653,10 +654,6 @@ msgstr ""
 
 #: amt/site/templates/pages/system_card.html.j2:27
 msgid "Model cards"
-msgstr ""
-
-#: amt/site/templates/parts/algorithm_search.html.j2:9
-msgid "algorithms"
 msgstr ""
 
 #: amt/site/templates/parts/algorithm_search.html.j2:14
