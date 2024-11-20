@@ -8,7 +8,7 @@ from amt.schema.assessment_card import AssessmentCard
 from amt.schema.instrument import Instrument, InstrumentTask
 from amt.schema.requirement import Requirement
 from amt.schema.system_card import SystemCard
-from amt.services.instruments import InstrumentsService
+from amt.services.instruments import create_instrument_service
 
 logger = logging.getLogger(__name__)
 
@@ -127,12 +127,13 @@ class InstrumentStateService:
         self.system_card = system_card
         self.instrument_states = []
 
-    def get_state_per_instrument(self) -> list[dict[str, int]]:
+    async def get_state_per_instrument(self) -> list[dict[str, int]]:
         # Returns dictionary with instrument urns with value 0 or 1, if 1 then the instrument is not completed yet
         # Otherwise the instrument is completed as there are not any tasks left.
 
         urns = [instrument.urn for instrument in self.system_card.instruments]
-        instruments = InstrumentsService().fetch_instruments(urns)
+        instruments_service = create_instrument_service()
+        instruments = await instruments_service.fetch_instruments(urns)
         # TODO: refactor this data structure in 3 lines below (also change in get_all_next_tasks + check_state.py)
         instruments_dict = {}
         instrument_states: dict[str, Any] = {}

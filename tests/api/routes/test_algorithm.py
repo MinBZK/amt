@@ -1,6 +1,7 @@
 from typing import Any
 
 import pytest
+import vcr  # type: ignore
 from amt.api.routes.algorithm import (
     MeasureUpdate,
     find_measure_task,
@@ -14,14 +15,10 @@ from amt.core.exceptions import AMTNotFound, AMTRepositoryError
 from amt.models import Algorithm
 from amt.schema.task import MovedTask
 from httpx import AsyncClient
-from pytest_httpx import HTTPXMock
 from pytest_mock import MockFixture
 
 from tests.api.routes.test_algorithms import MockRequest
 from tests.constants import (
-    TASK_REGISTRY_AIIA_CONTENT_PAYLOAD,
-    TASK_REGISTRY_CONTENT_PAYLOAD,
-    TASK_REGISTRY_LIST_PAYLOAD,
     default_algorithm,
     default_algorithm_with_system_card,
     default_task,
@@ -180,18 +177,8 @@ async def test_get_system_card_unknown_algorithm(client: AsyncClient) -> None:
 
 
 @pytest.mark.asyncio
-async def test_get_assessment_card(client: AsyncClient, httpx_mock: HTTPXMock, db: DatabaseTestUtils) -> None:
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
-    )
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
-        content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
-    )
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
-        content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
-    )
+@vcr.use_cassette("tests/fixtures/vcr_cassettes/test_get_assessment_card.yml")  # type: ignore
+async def test_get_assessment_card(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
     await db.given([default_algorithm_with_system_card("testalgorithm1")])
 
@@ -233,18 +220,8 @@ async def test_get_assessment_card_unknown_assessment(client: AsyncClient, db: D
 
 
 @pytest.mark.asyncio
-async def test_get_model_card(client: AsyncClient, httpx_mock: HTTPXMock, db: DatabaseTestUtils) -> None:
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
-    )
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
-        content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
-    )
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
-        content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
-    )
+@vcr.use_cassette("tests/fixtures/vcr_cassettes/test_get_model_card.yml")  # type: ignore
+async def test_get_model_card(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
     await db.given([default_algorithm_with_system_card("testalgorithm1")])
 
@@ -296,18 +273,8 @@ async def test_get_algorithm_details(client: AsyncClient, db: DatabaseTestUtils)
 
 
 @pytest.mark.asyncio
-async def test_get_system_card_requirements(client: AsyncClient, httpx_mock: HTTPXMock, db: DatabaseTestUtils) -> None:
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
-    )
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
-        content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
-    )
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
-        content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
-    )
+@vcr.use_cassette("tests/fixtures/vcr_cassettes/test_get_system_card_requirements.yml")  # type: ignore
+async def test_get_system_card_requirements(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
     await db.given([default_algorithm_with_system_card("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
 
@@ -321,18 +288,8 @@ async def test_get_system_card_requirements(client: AsyncClient, httpx_mock: HTT
 
 
 @pytest.mark.asyncio
-async def test_get_system_card_data_page(client: AsyncClient, httpx_mock: HTTPXMock, db: DatabaseTestUtils) -> None:
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
-    )
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
-        content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
-    )
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
-        content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
-    )
+@vcr.use_cassette("tests/fixtures/vcr_cassettes/test_get_system_card_data_page.yml")  # type: ignore
+async def test_get_system_card_data_page(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
     await db.given([default_algorithm_with_system_card("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
 
@@ -346,18 +303,8 @@ async def test_get_system_card_data_page(client: AsyncClient, httpx_mock: HTTPXM
 
 
 @pytest.mark.asyncio
-async def test_get_system_card_instruments(client: AsyncClient, httpx_mock: HTTPXMock, db: DatabaseTestUtils) -> None:
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
-    )
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
-        content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
-    )
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
-        content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
-    )
+@vcr.use_cassette("tests/fixtures/vcr_cassettes/test_get_system_card_instruments.yml")  # type: ignore
+async def test_get_system_card_instruments(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
     await db.given([default_algorithm_with_system_card("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
 
@@ -536,8 +483,8 @@ async def test_find_measure_task() -> None:
     assert measure is None
 
     # matches measure
-    measure = find_measure_task(test_algorithm.system_card, "urn:nl:ak:mtr:bnd-01")
-    assert measure.urn == "urn:nl:ak:mtr:bnd-01"  # pyright: ignore [reportOptionalMemberAccess]
+    measure = find_measure_task(test_algorithm.system_card, "urn:nl:ak:mtr:dat-01")
+    assert measure.urn == "urn:nl:ak:mtr:dat-01"  # pyright: ignore [reportOptionalMemberAccess]
     assert measure.value is not None  # pyright: ignore [reportOptionalMemberAccess]
 
     # no measures in system_card
@@ -572,17 +519,19 @@ async def test_find_requirement_tasks_by_measure_urn() -> None:
     # no matched requirement
     with pytest.raises(IndexError):
         # TODO: this is because it is not coded well change later
-        requirement_tasks = find_requirement_tasks_by_measure_urn(test_algorithm.system_card, "")
+        requirement_tasks = await find_requirement_tasks_by_measure_urn(test_algorithm.system_card, "")
 
     # matches measure
-    requirement_tasks = find_requirement_tasks_by_measure_urn(test_algorithm.system_card, "urn:nl:ak:mtr:bnd-01")
-    assert len(requirement_tasks) == 3
+    requirement_tasks = await find_requirement_tasks_by_measure_urn(test_algorithm.system_card, "urn:nl:ak:mtr:dat-01")
+    assert len(requirement_tasks) == 2
 
     # empty requirements
     test_algorithm.system_card.requirements = []
     with pytest.raises(KeyError):
         # TODO: this is because it is not coded well change later
-        requirement_tasks = find_requirement_tasks_by_measure_urn(test_algorithm.system_card, "urn:nl:ak:mtr:bnd-01")
+        requirement_tasks = await find_requirement_tasks_by_measure_urn(
+            test_algorithm.system_card, "urn:nl:ak:mtr:dat-01"
+        )
 
 
 @pytest.mark.asyncio
@@ -591,12 +540,12 @@ async def test_get_measure(client: AsyncClient, db: DatabaseTestUtils) -> None:
     await db.given([default_algorithm_with_system_card("testalgorithm1")])
 
     # when
-    response = await client.get("/algorithm/1/measure/urn:nl:ak:mtr:bnd-01")
+    response = await client.get("/algorithm/1/measure/urn:nl:ak:mtr:dat-01")
 
     # then
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"Gebruik aselecte steekproeven" in response.content
+    assert b"Controleer de datakwaliteit" in response.content
 
 
 @pytest.mark.asyncio
@@ -608,7 +557,7 @@ async def test_update_measure_value(client: AsyncClient, mocker: MockFixture, db
 
     # happy flow
     response = await client.post(
-        "/algorithm/1/measure/urn:nl:ak:mtr:bnd-01",
+        "/algorithm/1/measure/urn:nl:ak:mtr:dat-01",
         json={"measure_update": MeasureUpdate(measure_state="done", measure_value="something").model_dump()},
         headers={"X-CSRF-Token": "1"},
     )

@@ -29,6 +29,7 @@ def test_e2e_create_algorithm(page: Page):
     button = page.locator("#button-new-algorithm-create")
     button.click()
 
+    page.wait_for_timeout(10000)
     expect(page.get_by_text("My new algorithm").first).to_be_visible()
 
 
@@ -78,6 +79,7 @@ def test_e2e_create_algorithm_with_tasks(page: Page):
     button = page.locator("#button-new-algorithm-create")
     button.click()
 
+    page.wait_for_timeout(10000)
     expect(page.get_by_text("My new filled algorithm").first).to_be_visible()
     card_1 = page.get_by_text("Geef een korte beschrijving van het beoogde AI-systeem")
     expect(card_1).to_be_visible()

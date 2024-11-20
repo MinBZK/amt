@@ -1,119 +1,112 @@
+from typing import Any
+
 import pytest
-from amt.core.exceptions import AMTInstrumentError
+from amt.clients.clients import TaskType
+from amt.repositories.task_registry import TaskRegistryRepository
+from amt.schema.instrument import Instrument
 from amt.services.instruments import InstrumentsService
-from pytest_httpx import HTTPXMock
-from tests.constants import (
-    TASK_REGISTRY_AIIA_CONTENT_PAYLOAD,
-    TASK_REGISTRY_CONTENT_PAYLOAD,
-    TASK_REGISTRY_LIST_PAYLOAD,
-)
-
-# TODO(berry): made payloads to a better location
+from pytest_mock import MockerFixture, MockType
 
 
-def test_fetch_urns(httpx_mock: HTTPXMock):
+@pytest.fixture
+def mock_repository(mocker: MockerFixture) -> MockType:
+    return mocker.create_autospec(TaskRegistryRepository)
+
+
+@pytest.fixture
+def service(mock_repository: MockType) -> InstrumentsService:
+    return InstrumentsService(repository=mock_repository)  # type: ignore
+
+
+@pytest.fixture
+def sample_data() -> list[dict[str, Any]]:
+    return [
+        {
+            "urn": "urn:instrument:1",
+            "name": "Instrument 1",
+            "description": "description_1",
+            "url": "url_1",
+            "language": "nl",
+            "date": "",
+            "owners": [],
+        },
+        {
+            "urn": "urn:instrument:2",
+            "name": "Instrument 2",
+            "description": "description_2",
+            "url": "url_2",
+            "language": "nl",
+            "date": "",
+            "owners": [],
+        },
+    ]
+
+
+@pytest.mark.asyncio
+async def test_fetch_all_instruments(
+    service: InstrumentsService, mock_repository: MockType, sample_data: list[dict[str, Any]]
+):
     # given
-    instruments_service = InstrumentsService()
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
-    )
+    mock_repository.fetch_tasks.return_value = sample_data
 
     # when
-    result = instruments_service.fetch_urns()
+    result = await service.fetch_instruments()
 
     # then
+    mock_repository.fetch_tasks.assert_called_once_with(TaskType.INSTRUMENTS, None)
+
     assert len(result) == 2
-    assert result[0] == "urn:nl:aivt:tr:iama:1.0"
-    assert result[1] == "urn:nl:aivt:tr:aiia:1.0"
+    assert all(isinstance(instrument, Instrument) for instrument in result)
 
 
-def test_fetch_instruments(httpx_mock: HTTPXMock):
+@pytest.mark.asyncio
+async def test_fetch_instruments_with_single_urn(
+    service: InstrumentsService, mock_repository: MockType, sample_data: list[dict[str, Any]], mocker: MockerFixture
+) -> None:
     # given
-    instruments_service = InstrumentsService()
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
-    )
-
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
-        content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
-    )
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
-        content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
-    )
+    single_urn: str = "urn:instrument:1"
+    mock_data = [sample_data[0]]
+    mock_repository.fetch_tasks.return_value = mock_data
 
     # when
-    result = instruments_service.fetch_instruments()
+    result = await service.fetch_instruments(single_urn)
 
     # then
+    mock_repository.fetch_tasks.assert_called_once_with(TaskType.INSTRUMENTS, single_urn)
+    assert len(result) == 1
+    assert isinstance(result[0], Instrument)
+    assert result[0].urn == "urn:instrument:1"
+
+
+@pytest.mark.asyncio
+async def test_fetch_instruments_with_specific_urns(
+    service: InstrumentsService, mock_repository: MockType, sample_data: list[dict[str, Any]], mocker: MockerFixture
+) -> None:
+    # given
+    urns = ["urn:instrument:1", "urn:instrument:2"]
+    mock_repository.fetch_tasks.return_value = sample_data
+
+    # when
+    result = await service.fetch_instruments(urns)
+
+    # then
+    mock_repository.fetch_tasks.assert_called_once_with(TaskType.INSTRUMENTS, urns)
     assert len(result) == 2
+    assert all(isinstance(instrument, Instrument) for instrument in result)
+    assert result[0].urn == "urn:instrument:1"
+    assert result[1].urn == "urn:instrument:2"
 
 
-def test_fetch_instrument_with_urn(httpx_mock: HTTPXMock):
+@pytest.mark.asyncio
+async def test_fetch_instruments_with_empty_result(
+    service: InstrumentsService, mock_repository: MockType, mocker: MockerFixture
+) -> None:
     # given
-    instruments_service = InstrumentsService()
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
-    )
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
-        content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
-    )
+    mock_repository.fetch_tasks.return_value = []
 
     # when
-    urn = "urn:nl:aivt:tr:iama:1.0"
-    result = instruments_service.fetch_instruments(urn)
-
-    # then
-    assert len(result) == 1
-
-
-def test_fetch_instruments_with_urns(httpx_mock: HTTPXMock):
-    # given
-    instruments_service = InstrumentsService()
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
-    )
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
-        content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
-    )
-
-    # when
-    urn = "urn:nl:aivt:tr:iama:1.0"
-    result = instruments_service.fetch_instruments([urn])
-
-    # then
-    assert len(result) == 1
-
-
-def test_fetch_instruments_with_invalid_urn(httpx_mock: HTTPXMock):
-    # given
-    instruments_service = InstrumentsService()
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
-    )
-
-    # when
-    urn = "urn:nl:aivt:ir:iama:1.0"
-    result = instruments_service.fetch_instruments([urn])
+    result = await service.fetch_instruments(["non_existent_urn"])
 
     # then
     assert len(result) == 0
-
-
-def test_fetch_instruments_invalid(httpx_mock: HTTPXMock):
-    # given
-    instruments_service = InstrumentsService()
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
-    )
-
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
-        content=b'{"test": 1}',
-    )
-
-    # then
-    pytest.raises(AMTInstrumentError, instruments_service.fetch_instruments)
+    mock_repository.fetch_tasks.assert_called_once_with(TaskType.INSTRUMENTS, ["non_existent_urn"])

@@ -113,18 +113,6 @@
   ],
   "measures": [
     {
-      "urn": "urn:nl:ak:mtr:bnd-01",
-      "state": "to do",
-      "version": "",
-      "value": ""
-    },
-    {
-      "urn": "urn:nl:ak:mtr:bnd-02",
-      "state": "to do",
-      "version": "",
-      "value": ""
-    },
-    {
       "urn": "urn:nl:ak:mtr:dat-01",
       "state": "to do",
       "version": "",
@@ -472,7 +460,7 @@
       "version": ""
     },
     {
-      "urn": "urn:nl:ak:ver:aia-7",
+      "urn": "urn:nl:ak:ver:aia-07",
       "state": "to do",
       "version": ""
     },

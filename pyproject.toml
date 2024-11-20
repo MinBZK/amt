@@ -54,6 +54,7 @@ playwright = "^1.47.0"
 pytest-playwright = "^0.5.2"
 pytest-httpx = "^0.33.0"
 freezegun = "^1.5.1"
+vcrpy = "^6.0.2"
 
 
 [tool.poetry.group.dev.dependencies]

@@ -1,75 +1,86 @@
 import logging
-from collections.abc import Sequence
-from functools import lru_cache
-from pathlib import Path
-from typing import Any
 
-from amt.schema.measure import Measure, MeasureTask
+from amt.schema.measure import MeasureTask
 from amt.schema.requirement import Requirement, RequirementTask
 from amt.schema.system_card import AiActProfile
-from amt.services.storage import StorageFactory
+from amt.services.measures import create_measures_service
+from amt.services.requirements import create_requirements_service
 
 logger = logging.getLogger(__name__)
 
 
-def get_requirements_and_measures(
+def is_requirement_applicable(requirement: Requirement, ai_act_profile: AiActProfile) -> bool:
+    """
+    Determine if a specific requirement is applicable to a given AI Act profile.
+
+    Evaluation Criteria:
+    - Always applicable requirements automatically return True.
+    - For the 'role' attribute, handles compound values like
+      "gebruiksverantwoordelijke + aanbieder".
+    - For the 'systemic_risk' attribute, handles the old name 'publication_category'.
+    - A requirement is applicable if all specified attributes match or have no
+      specific restrictions.
+    """
+    if requirement.always_applicable == 1:
+        return True
+
+    # We can assume the ai_act_profile field always contains exactly 1 element.
+    requirement_profile = requirement.ai_act_profile[0]
+    comparison_attrs = (
+        "type",
+        "risk_category",
+        "type",
+        "open_source",
+        "systemic_risk",
+        "transparency_obligations",
+    )
+
+    for attr in comparison_attrs:
+        requirement_attr_values = getattr(requirement_profile, attr, [])
+
+        if not requirement_attr_values:
+            continue
+
+        input_value = _parse_attribute_values(attr, ai_act_profile)
+
+        if not input_value & {attr_value.value for attr_value in requirement_attr_values}:
+            return False
+
+    return True
+
+
+async def get_requirements_and_measures(
     ai_act_profile: AiActProfile,
-) -> tuple[
-    list[RequirementTask],
-    list[MeasureTask],
-]:
-    # TODO (Robbert): the body of this method will be added later (another ticket)
-    measure_card: list[MeasureTask] = []
-    requirements_card: list[RequirementTask] = []
+) -> tuple[list[RequirementTask], list[MeasureTask]]:
+    requirements_service = create_requirements_service()
+    measure_service = create_measures_service()
+    all_requirements = await requirements_service.fetch_requirements()
 
-    return requirements_card, measure_card
+    applicable_requirements: list[RequirementTask] = []
+    applicable_measures: list[MeasureTask] = []
+    measure_urns: set[str] = set()
+
+    for requirement in all_requirements:
+        if is_requirement_applicable(requirement, ai_act_profile):
+            applicable_requirements.append(RequirementTask(urn=requirement.urn, version=requirement.schema_version))
+
+            for measure_urn in requirement.links:
+                if measure_urn not in measure_urns:
+                    measure = await measure_service.fetch_measures(measure_urn)
+                    applicable_measures.append(MeasureTask(urn=measure_urn, version=measure[0].schema_version))
+                    measure_urns.add(measure_urn)
+
+    return applicable_requirements, applicable_measures
 
 
-@lru_cache
-def fetch_all_requirements() -> dict[str, Requirement]:
+def _parse_attribute_values(attr: str, ai_act_profile: AiActProfile) -> set[str]:
     """
-    Fetch requirements with URN in urns.
+    Helper function needed in `is_requirement_applicable`, handling special case for 'role'
+    and 'publication_category'.
     """
-    mock_registry_path = Path("example_registry/requirements")
-    requirements: dict[str, Requirement] = {}
+    if attr == "role":
+        return {s.strip() for s in getattr(ai_act_profile, attr, "").split("+")}
+    if attr == "risk_category":
+        return {getattr(ai_act_profile, "publication_category", "")}
 
-    for requirement_path in mock_registry_path.glob("*.yaml"):
-        requirement: Any = StorageFactory.init(
-            storage_type="file", location=requirement_path.parent, filename=requirement_path.name
-        ).read()
-        requirements[requirement["urn"]] = Requirement(**requirement)
-
-    return requirements
-
-
-def fetch_requirements(urns: Sequence[str]) -> list[Requirement]:
-    """
-    Fetch requirements with URN in urns.
-    """
-    all_requirements = fetch_all_requirements()
-    return [all_requirements[urn] for urn in urns if urn in all_requirements]
-
-
-@lru_cache
-def fetch_all_measures() -> dict[str, Measure]:
-    """
-    Fetch measures with URN in urns.
-    """
-    mock_registry_path = Path("example_registry/measures")
-    measures: dict[str, Measure] = {}
-
-    for measure_path in mock_registry_path.glob("*.yaml"):
-        measure: Any = StorageFactory.init(
-            storage_type="file", location=measure_path.parent, filename=measure_path.name
-        ).read()
-        measures[measure["urn"]] = Measure(**measure)
-
-    return measures
-
-
-def fetch_measures(urns: Sequence[str]) -> list[Measure]:
-    """
-    Fetch measures with URN in urns.
-    """
-    all_measures = fetch_all_measures()
-    return [all_measures[urn] for urn in urns if urn in all_measures]
+    return {getattr(ai_act_profile, attr, "")}

@@ -17,7 +17,6 @@ from pytest_httpx import HTTPXMock
 from tests.constants import (
     TASK_REGISTRY_AIIA_CONTENT_PAYLOAD,
     TASK_REGISTRY_CONTENT_PAYLOAD,
-    TASK_REGISTRY_LIST_PAYLOAD,
     default_instrument,
 )
 
@@ -177,11 +176,9 @@ def test_find_next_tasks_for_instrument_correct_lifecycle(system_card: SystemCar
     assert tasks["tasks_per_lifecycle"][2] == test_tasks
 
 
-def test_get_state_per_instrument(system_card: SystemCard, httpx_mock: HTTPXMock):
+@pytest.mark.asyncio
+async def test_get_state_per_instrument(system_card: SystemCard, httpx_mock: HTTPXMock):
     instrument_state_service = InstrumentStateService(system_card)
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
-    )
     httpx_mock.add_response(
         url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
         content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
@@ -190,7 +187,12 @@ def test_get_state_per_instrument(system_card: SystemCard, httpx_mock: HTTPXMock
         url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
         content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
     )
-    res = instrument_state_service.get_state_per_instrument()
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:instrument:assessment?version=latest",
+        content=b'{"detail": "invalid urn: urn:instrument:assessment"}',
+        status_code=400,
+    )
+    res = await instrument_state_service.get_state_per_instrument()
     assert {"urn": "urn:nl:aivt:tr:aiia:1.0", "in_progress": 1, "name": "AI Impact Assessment (AIIA)"} in res
     assert {
         "urn": "urn:nl:aivt:tr:iama:1.0",
@@ -201,11 +203,9 @@ def test_get_state_per_instrument(system_card: SystemCard, httpx_mock: HTTPXMock
     assert {"in_progress": 0, "name": "URN not found in Task Registry.", "urn": "urn:instrument:assessment"} in res
 
 
-def test_get_amount_completed_instruments(system_card: SystemCard, httpx_mock: HTTPXMock):
+@pytest.mark.asyncio
+async def test_get_amount_completed_instruments(system_card: SystemCard, httpx_mock: HTTPXMock):
     instrument_state_service = InstrumentStateService(system_card)
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
-    )
     httpx_mock.add_response(
         url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
         content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
@@ -214,16 +214,19 @@ def test_get_amount_completed_instruments(system_card: SystemCard, httpx_mock: H
         url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
         content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
     )
-    _ = instrument_state_service.get_state_per_instrument()
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:instrument:assessment?version=latest",
+        content=b'{"detail": "invalid urn: urn:instrument:assessment"}',
+        status_code=400,
+    )
+    _ = await instrument_state_service.get_state_per_instrument()
     res = instrument_state_service.get_amount_completed_instruments()
     assert res == 1
 
 
-def test_get_amount_total_instruments(system_card: SystemCard, httpx_mock: HTTPXMock):
+@pytest.mark.asyncio
+async def test_get_amount_total_instruments(system_card: SystemCard, httpx_mock: HTTPXMock):
     instrument_state_service = InstrumentStateService(system_card)
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
-    )
     httpx_mock.add_response(
         url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
         content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
@@ -232,16 +235,19 @@ def test_get_amount_total_instruments(system_card: SystemCard, httpx_mock: HTTPX
         url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
         content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
     )
-    _ = instrument_state_service.get_state_per_instrument()
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:instrument:assessment?version=latest",
+        content=b'{"detail": "invalid urn: urn:instrument:assessment"}',
+        status_code=400,
+    )
+    _ = await instrument_state_service.get_state_per_instrument()
     res = instrument_state_service.get_amount_total_instruments()
     assert res == 3
 
 
-def test_get_amount_completed_instruments_one_completed(system_card: SystemCard, httpx_mock: HTTPXMock):
+@pytest.mark.asyncio
+async def test_get_amount_completed_instruments_one_completed(system_card: SystemCard, httpx_mock: HTTPXMock):
     instrument_state_service = InstrumentStateService(system_card)
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
-    )
     httpx_mock.add_response(
         url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
         content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
@@ -250,7 +256,12 @@ def test_get_amount_completed_instruments_one_completed(system_card: SystemCard,
         url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
         content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
     )
-    _ = instrument_state_service.get_state_per_instrument()
+    httpx_mock.add_response(
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:instrument:assessment?version=latest",
+        content=b'{"detail": "invalid urn: urn:instrument:assessment"}',
+        status_code=400,
+    )
+    _ = await instrument_state_service.get_state_per_instrument()
     instrument_state_service.instrument_states = [{"in_progress": 0}, {"in_progress": 1}]
     res = instrument_state_service.get_amount_completed_instruments()
     assert res == 1

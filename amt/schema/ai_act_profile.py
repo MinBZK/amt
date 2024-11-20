@@ -1,15 +1,15 @@
-from pydantic import field_validator
+from pydantic import Field, field_validator
 
 from amt.schema.shared import BaseModel
 
 
 class AiActProfile(BaseModel):
-    type: str | None
-    open_source: str | None
-    publication_category: str | None
-    systemic_risk: str | None
-    transparency_obligations: str | None
-    role: list[str] | str | None
+    type: str | None = Field(default=None)
+    open_source: str | None = Field(default=None)
+    publication_category: str | None = Field(default=None)
+    systemic_risk: str | None = Field(default=None)
+    transparency_obligations: str | None = Field(default=None)
+    role: list[str] | str | None = Field(default=None)
 
     @field_validator("role")
     def compute_role(cls, v: list[str] | None) -> str | None:

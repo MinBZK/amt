@@ -180,7 +180,7 @@ async def test_post_new_algorithms_write_system_card(
         role=algorithm_new.role,
     )
 
-    requirements, measures = get_requirements_and_measures(ai_act_profile)
+    requirements, measures = await get_requirements_and_measures(ai_act_profile)
 
     system_card = SystemCard(
         name=algorithm_new.name,

@@ -18,7 +18,7 @@ from amt.models import Algorithm
 from amt.schema.algorithm import AlgorithmNew
 from amt.schema.localized_value_item import LocalizedValueItem
 from amt.services.algorithms import AlgorithmsService, get_template_files
-from amt.services.instruments import InstrumentsService
+from amt.services.instruments import InstrumentsService, create_instrument_service
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -125,7 +125,7 @@ async def get_root(
 @router.get("/new")
 async def get_new(
     request: Request,
-    instrument_service: Annotated[InstrumentsService, Depends(InstrumentsService)],
+    instrument_service: Annotated[InstrumentsService, Depends(create_instrument_service)],
 ) -> HTMLResponse:
     sub_menu_items = resolve_navigation_items([Navigation.ALGORITHMS_OVERVIEW], request)  # pyright: ignore [reportUnusedVariable] # noqa
     breadcrumbs = resolve_base_navigation_items([Navigation.ALGORITHMS_ROOT, Navigation.ALGORITHM_NEW], request)
@@ -134,8 +134,10 @@ async def get_new(
 
     template_files = get_template_files()
 
+    instruments = await instrument_service.fetch_instruments()
+
     context: dict[str, Any] = {
-        "instruments": instrument_service.fetch_instruments(),
+        "instruments": instruments,
         "ai_act_profile": ai_act_profile,
         "breadcrumbs": breadcrumbs,
         "sub_menu_items": {},  # sub_menu_items disabled for now,
