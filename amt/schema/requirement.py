@@ -63,7 +63,8 @@ class Requirement(RequirementBase):
     description: str
     schema_version: str
     links: list[str] = Field(default=[])
-    ai_act_profile: list[RequirementAiActProfile]
+    # TODO (Robbert): field below should be required but is made default for a task registry sync issue
+    ai_act_profile: list[RequirementAiActProfile] = Field(default=[])
     always_applicable: int = Field(
         ...,
         description="1 if requirements applies to every system, 0 if only for specific systems",
