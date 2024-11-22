@@ -23,14 +23,14 @@ def test_e2e_create_algorithm(page: Page) -> None:
 
     impact_assessment.check()
 
-    button = page.locator("#transparency_obligations-transparantieverplichtingen")
-    button.click()
-
-    button = page.locator("#open_source-open-source")
-    button.click()
-
-    button = page.locator("#systemic_risk-systeemrisico")
-    button.click()
+    page.locator("#role-aanbieder").check()
+    page.locator("#type").select_option("AI-systeem voor algemene doeleinden")
+    page.locator("#risk_group").select_option("verboden AI")
+    page.locator("#transparency_obligations").select_option("geen transparantieverplichtingen")
+    page.locator("#systemic_risk").select_option("geen systeemrisico")
+    page.locator("#open_source").select_option("geen open-source")
+    page.locator("#conformity_assessment_body").select_option("niet van toepassing")
+    page.locator("#conformity_assessment_body").select_option("beoordeling door derde partij")
 
     button = page.locator("#button-new-algorithm-create")
     button.click()
@@ -45,14 +45,11 @@ def test_e2e_create_algorithm_invalid(page: Page):
 
     page.goto("/algorithms/new")
 
-    button = page.locator("#transparency_obligations-transparantieverplichtingen")
-    button.click()
+    page.locator("#transparency_obligations").select_option("geen transparantieverplichtingen")
 
-    button = page.locator("#open_source-open-source")
-    button.click()
+    page.locator("#open_source").select_option("geen open-source")
 
-    button = page.locator("#systemic_risk-systeemrisico")
-    button.click()
+    page.locator("#systemic_risk").select_option("geen systeemrisico")
 
     button = page.locator("#button-new-algorithm-create")
     button.click()

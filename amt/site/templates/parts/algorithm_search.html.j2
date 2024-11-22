@@ -60,15 +60,13 @@
                         <div class="rvo-layout-column rvo-text--bold rvo-layout-gap--sm">
                             <div>{% trans %}Category{% endtrans %}</div>
                             <div class="rvo-select-wrapper">
-                                <select id="add-publication-category"
-                                        name="add-filter-publication-category"
+                                <select id="add-risk-group"
+                                        name="add-filter-risk-group"
                                         class="utrecht-select utrecht-select--html-select">
-                                    <option value="">{% trans %}Select publication category{% endtrans %}</option>
-                                    {% for publication_category in publication_categories %}
-                                        <option {% if "publication-category" in filters and publication_category.value == filters["publication-category"].value %}selected="selected"{% endif %}
-                                                value="{{ publication_category.value }}">
-                                            {{ publication_category.display_value }}
-                                        </option>
+                                    <option value="">{% trans %}Select risk group{% endtrans %}</option>
+                                    {% for risk_group in risk_groups %}
+                                        <option {% if "risk-group" in filters and risk_group.value==filters["risk-group"].value %}selected="selected" {% endif
+                                            %} value="{{ risk_group.value }}">{{ risk_group.display_value }}</option>
                                     {% endfor %}
                                 </select>
                             </div>

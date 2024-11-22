@@ -10,8 +10,8 @@ from amt.api.forms.algorithm import get_algorithm_form
 from amt.api.group_by_category import get_localized_group_by_categories
 from amt.api.lifecycles import Lifecycles, get_localized_lifecycle, get_localized_lifecycles
 from amt.api.navigation import Navigation, resolve_base_navigation_items, resolve_navigation_items
-from amt.api.publication_category import (
-    get_localized_publication_categories,
+from amt.api.risk_group import (
+    get_localized_risk_groups,
 )
 from amt.api.routes.shared import get_filters_and_sort_by
 from amt.core.authorization import get_user
@@ -81,7 +81,7 @@ async def get_root(
         "start": skip,
         "search": search,
         "lifecycles": get_localized_lifecycles(request),
-        "publication_categories": get_localized_publication_categories(request),
+        "risk_groups": get_localized_risk_groups(request),
         "group_by_categories": get_localized_group_by_categories(request),
         "filters": localized_filters,
         "sort_by": sort_by,
@@ -104,6 +104,8 @@ async def get_new(
 ) -> HTMLResponse:
     sub_menu_items = resolve_navigation_items([Navigation.ALGORITHMS_OVERVIEW], request)  # pyright: ignore [reportUnusedVariable] # noqa
     breadcrumbs = resolve_base_navigation_items([Navigation.ALGORITHMS_ROOT, Navigation.ALGORITHM_NEW], request)
+
+    # clean up session storage
 
     ai_act_profile = get_ai_act_profile_selector(request)
 

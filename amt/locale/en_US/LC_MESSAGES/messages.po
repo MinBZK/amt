@@ -27,18 +27,22 @@ msgid "Is the application open source?"
 msgstr ""
 
 #: amt/api/ai_act_profile.py:28
-msgid "Publication Category"
+msgid "In what risk group falls the application?"
 msgstr ""
 
 #: amt/api/ai_act_profile.py:30
-msgid "Is there a systemic risk?"
+msgid "Does a conformity assessment need to be performed by an accredited body"
 msgstr ""
 
 #: amt/api/ai_act_profile.py:32
-msgid "Is there a transparency obligation?"
+msgid "Is there a systemic risk?"
 msgstr ""
 
 #: amt/api/ai_act_profile.py:34
+msgid "Is there a transparency obligation?"
+msgstr ""
+
+#: amt/api/ai_act_profile.py:36
 msgid "Role"
 msgstr ""
 
@@ -143,7 +147,7 @@ msgstr ""
 msgid "Model"
 msgstr ""
 
-#: amt/api/navigation.py:61 amt/site/templates/algorithms/new.html.j2:151
+#: amt/api/navigation.py:61 amt/site/templates/algorithms/new.html.j2:170
 msgid "Instruments"
 msgstr ""
 
@@ -166,29 +170,25 @@ msgstr ""
 msgid "My organizations"
 msgstr ""
 
-#: amt/api/publication_category.py:22
-msgid "Impactful algorithm"
-msgstr ""
+#: amt/api/risk_group.py:19
+msgid "hoog-risico AI"
+msgstr "high-risk AI"
 
-#: amt/api/publication_category.py:23
-msgid "Non-impactful algorithm"
-msgstr ""
+#: amt/api/risk_group.py:20
+msgid "geen hoog-risico AI"
+msgstr "No high-risk AI"
 
-#: amt/api/publication_category.py:24
-msgid "High-risk AI"
-msgstr ""
+#: amt/api/risk_group.py:21
+msgid "verboden AI"
+msgstr "Forbidden A"
 
-#: amt/api/publication_category.py:25
-msgid "No high-risk AI"
-msgstr ""
+#: amt/api/risk_group.py:22
+msgid "uitzondering van toepassing"
+msgstr "Exception of application"
 
-#: amt/api/publication_category.py:26
-msgid "Forbidden AI"
-msgstr ""
-
-#: amt/api/publication_category.py:27
-msgid "Exception of application"
-msgstr ""
+#: amt/api/risk_group.py:23
+msgid "niet van toepassing"
+msgstr "Not applicable"
 
 #: amt/api/forms/algorithm.py:19
 msgid "Select organization"
@@ -313,13 +313,13 @@ msgid ""
 msgstr ""
 
 #: amt/site/templates/algorithms/details_base.html.j2:39
-#: amt/site/templates/algorithms/new.html.j2:134
+#: amt/site/templates/algorithms/new.html.j2:153
 #: amt/site/templates/organizations/members.html.j2:33
 msgid "Yes"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_base.html.j2:44
-#: amt/site/templates/algorithms/new.html.j2:144
+#: amt/site/templates/algorithms/new.html.j2:163
 #: amt/site/templates/organizations/members.html.j2:36
 msgid "No"
 msgstr ""
@@ -549,21 +549,25 @@ msgstr ""
 msgid "Find your AI Act profile"
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:153
+#: amt/site/templates/algorithms/new.html.j2:112
+msgid "Select Option"
+msgstr ""
+
+#: amt/site/templates/algorithms/new.html.j2:172
 msgid ""
 "Overview of instruments for the responsible development, deployment, "
 "assessment and monitoring of algorithms and AI-systems."
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:161
+#: amt/site/templates/algorithms/new.html.j2:180
 msgid "Choose one or more instruments"
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:185
+#: amt/site/templates/algorithms/new.html.j2:204
 msgid "Create Algorithm"
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:202
+#: amt/site/templates/algorithms/new.html.j2:221
 msgid "Copy results and close"
 msgstr ""
 
@@ -853,14 +857,14 @@ msgid "Category"
 msgstr ""
 
 #: amt/site/templates/parts/algorithm_search.html.j2:66
-msgid "Select publication category"
+msgid "Select risk group"
 msgstr ""
 
-#: amt/site/templates/parts/algorithm_search.html.j2:84
+#: amt/site/templates/parts/algorithm_search.html.j2:82
 msgid "Group by"
 msgstr ""
 
-#: amt/site/templates/parts/algorithm_search.html.j2:94
+#: amt/site/templates/parts/algorithm_search.html.j2:92
 msgid "Select group by"
 msgstr ""
 
