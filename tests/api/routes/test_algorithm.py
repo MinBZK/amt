@@ -525,14 +525,6 @@ async def test_find_requirement_tasks_by_measure_urn() -> None:
     requirement_tasks = await find_requirement_tasks_by_measure_urn(test_algorithm.system_card, "urn:nl:ak:mtr:dat-01")
     assert len(requirement_tasks) == 2
 
-    # empty requirements
-    test_algorithm.system_card.requirements = []
-    with pytest.raises(KeyError):
-        # TODO: this is because it is not coded well change later
-        requirement_tasks = await find_requirement_tasks_by_measure_urn(
-            test_algorithm.system_card, "urn:nl:ak:mtr:dat-01"
-        )
-
 
 @pytest.mark.asyncio
 async def test_get_measure(client: AsyncClient, db: DatabaseTestUtils) -> None:

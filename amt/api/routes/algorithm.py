@@ -428,6 +428,9 @@ async def find_requirement_tasks_by_measure_urn(system_card: SystemCard, measure
     measure = await measures_service.fetch_measures(measure_urn)
     for requirement_urn in measure[0].links:
         # TODO: This is because measure are linked to too many requirement not applicable in our use case
+        if requirement_urn not in requirement_mapper:
+            continue
+
         if len(await requirements_service.fetch_requirements(requirement_urn)) > 0:
             requirement_tasks.append(requirement_mapper[requirement_urn])
 
