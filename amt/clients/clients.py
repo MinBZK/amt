@@ -5,6 +5,7 @@ from typing import Any
 import httpx
 from amt.core.exceptions import AMTInstrumentError, AMTNotFound
 from amt.schema.github import RepositoryContent
+from async_lru import alru_cache
 
 logger = logging.getLogger(__name__)
 
@@ -52,3 +53,9 @@ class TaskRegistryAPIClient(APIClient):
             logger.exception(f"Invalid task {task_type.value} fetched: key 'urn' must occur in task {task_type.value}.")
             raise AMTInstrumentError()
         return response_data
+
+
+@alru_cache
+async def get_task_by_urn(task_type: TaskType, urn: str, version: str = "latest") -> dict[str, Any]:
+    client = TaskRegistryAPIClient()
+    return await client.get_task_by_urn(task_type, urn, version)

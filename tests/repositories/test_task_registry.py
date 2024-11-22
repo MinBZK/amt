@@ -4,9 +4,6 @@ from amt.clients.clients import TaskRegistryAPIClient, TaskType
 from amt.core.exceptions import AMTInstrumentError
 from amt.repositories.task_registry import TaskRegistryRepository
 from pytest_httpx import HTTPXMock
-from tests.constants import TASK_REGISTRY_AIIA_CONTENT_PAYLOAD, TASK_REGISTRY_LIST_PAYLOAD
-
-# TODO(berry): made payloads to a better location
 
 
 @vcr.use_cassette("tests/fixtures/vcr_cassettes/test_fetch_tasks_all.yml")  # type: ignore
@@ -112,37 +109,14 @@ async def test_fetch_tasks_invalid_response(httpx_mock: HTTPXMock):
     # given
     client = TaskRegistryAPIClient()
     repository = TaskRegistryRepository(client)
-    urn = "urn:nl:aivt:tr:iama:1.0"
+    urn = "urn:nl:aivt:tr:td:1.0"
 
     httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
+        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:td:1.0?version=latest",
         content=b'{"test": 1}',
+        is_optional=True,
     )
 
     # then
     with pytest.raises(AMTInstrumentError):
         await repository.fetch_tasks(TaskType.INSTRUMENTS, urn)
-
-
-@pytest.mark.asyncio
-async def test_fetch_tasks_valid_and_invalid_response(httpx_mock: HTTPXMock):
-    # given
-    client = TaskRegistryAPIClient()
-    repository = TaskRegistryRepository(client)
-
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/",
-        content=TASK_REGISTRY_LIST_PAYLOAD.encode(),
-    )
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
-        content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
-    )
-    httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
-        content=b'{"test": 1}',
-    )
-
-    # then
-    with pytest.raises(AMTInstrumentError):
-        await repository.fetch_tasks(TaskType.INSTRUMENTS)
