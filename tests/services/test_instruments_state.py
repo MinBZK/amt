@@ -182,15 +182,18 @@ async def test_get_state_per_instrument(system_card: SystemCard, httpx_mock: HTT
     httpx_mock.add_response(
         url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
         content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
+        is_optional=True,
     )
     httpx_mock.add_response(
         url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
         content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
+        is_optional=True,
     )
     httpx_mock.add_response(
         url="https://task-registry.apps.digilab.network/instruments/urn/urn:instrument:assessment?version=latest",
         content=b'{"detail": "invalid urn: urn:instrument:assessment"}',
         status_code=400,
+        is_optional=True,
     )
     res = await instrument_state_service.get_state_per_instrument()
     assert {"urn": "urn:nl:aivt:tr:aiia:1.0", "in_progress": 1, "name": "AI Impact Assessment (AIIA)"} in res
@@ -209,15 +212,18 @@ async def test_get_amount_completed_instruments(system_card: SystemCard, httpx_m
     httpx_mock.add_response(
         url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
         content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
+        is_optional=True,
     )
     httpx_mock.add_response(
         url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
         content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
+        is_optional=True,
     )
     httpx_mock.add_response(
         url="https://task-registry.apps.digilab.network/instruments/urn/urn:instrument:assessment?version=latest",
         content=b'{"detail": "invalid urn: urn:instrument:assessment"}',
         status_code=400,
+        is_optional=True,
     )
     _ = await instrument_state_service.get_state_per_instrument()
     res = instrument_state_service.get_amount_completed_instruments()
@@ -230,15 +236,18 @@ async def test_get_amount_total_instruments(system_card: SystemCard, httpx_mock:
     httpx_mock.add_response(
         url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
         content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
+        is_optional=True,
     )
     httpx_mock.add_response(
         url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
         content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
+        is_optional=True,
     )
     httpx_mock.add_response(
         url="https://task-registry.apps.digilab.network/instruments/urn/urn:instrument:assessment?version=latest",
         content=b'{"detail": "invalid urn: urn:instrument:assessment"}',
         status_code=400,
+        is_optional=True,
     )
     _ = await instrument_state_service.get_state_per_instrument()
     res = instrument_state_service.get_amount_total_instruments()
@@ -251,15 +260,18 @@ async def test_get_amount_completed_instruments_one_completed(system_card: Syste
     httpx_mock.add_response(
         url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
         content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
+        is_optional=True,
     )
     httpx_mock.add_response(
         url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
         content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
+        is_optional=True,
     )
     httpx_mock.add_response(
         url="https://task-registry.apps.digilab.network/instruments/urn/urn:instrument:assessment?version=latest",
         content=b'{"detail": "invalid urn: urn:instrument:assessment"}',
         status_code=400,
+        is_optional=True,
     )
     _ = await instrument_state_service.get_state_per_instrument()
     instrument_state_service.instrument_states = [{"in_progress": 0}, {"in_progress": 1}]

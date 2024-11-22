@@ -3,7 +3,7 @@ import logging
 from collections.abc import Sequence
 from typing import Any
 
-from amt.clients.clients import TaskRegistryAPIClient, TaskType
+from amt.clients.clients import TaskRegistryAPIClient, TaskType, get_task_by_urn
 from amt.core.exceptions import AMTNotFound
 
 logger = logging.getLogger(__name__)
@@ -48,7 +48,7 @@ class TaskRegistryRepository:
         Fetches tasks given a list of URN's.
         If an URN is not valid, it is ignored.
         """
-        get_tasks = [self.client.get_task_by_urn(task_type, urn) for urn in urns]
+        get_tasks = [get_task_by_urn(task_type, urn) for urn in urns]
         results = await asyncio.gather(*get_tasks, return_exceptions=True)
 
         tasks: list[dict[str, Any]] = []
