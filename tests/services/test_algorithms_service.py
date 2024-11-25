@@ -7,7 +7,6 @@ from amt.schema.algorithm import AlgorithmNew
 from amt.schema.system_card import SystemCard
 from amt.services.algorithms import AlgorithmsService
 from amt.services.instruments import InstrumentsService
-from amt.services.tasks import TasksService
 from pytest_mock import MockFixture
 from tests.constants import default_instrument
 
@@ -20,7 +19,6 @@ async def test_get_algorithm(mocker: MockFixture):
     algorithm_lifecycle = "development"
     algorithms_service = AlgorithmsService(
         repository=mocker.AsyncMock(spec=AlgorithmsRepository),
-        task_service=mocker.AsyncMock(spec=TasksService),
         instrument_service=mocker.AsyncMock(spec=InstrumentsService),
     )
     algorithms_service.repository.find_by_id.return_value = Algorithm(  # type: ignore
@@ -46,7 +44,6 @@ async def test_create_algorithm(mocker: MockFixture):
 
     algorithms_service = AlgorithmsService(
         repository=mocker.AsyncMock(spec=AlgorithmsRepository),
-        task_service=mocker.AsyncMock(spec=TasksService),
         instrument_service=mocker.AsyncMock(spec=InstrumentsService),
     )
     algorithms_service.repository.save.return_value = Algorithm(  # type: ignore
@@ -93,7 +90,6 @@ async def test_create_algorithm_unknown_template_id(mocker: MockFixture):
 
     algorithms_service = AlgorithmsService(
         repository=mocker.AsyncMock(spec=AlgorithmsRepository),
-        task_service=mocker.AsyncMock(spec=TasksService),
         instrument_service=mocker.AsyncMock(spec=InstrumentsService),
     )
 
