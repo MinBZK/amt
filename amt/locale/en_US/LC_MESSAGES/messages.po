@@ -417,12 +417,12 @@ msgid ""
 msgstr ""
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:84
-#: amt/site/templates/macros/editable.html.j2:63
+#: amt/site/templates/macros/editable.html.j2:70
 msgid "Save"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:88
-#: amt/site/templates/macros/editable.html.j2:68
+#: amt/site/templates/macros/editable.html.j2:75
 msgid "Cancel"
 msgstr ""
 
@@ -431,8 +431,8 @@ msgid "measures executed"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_requirements.html.j2:55
-#: amt/site/templates/macros/editable.html.j2:24
-#: amt/site/templates/macros/editable.html.j2:27
+#: amt/site/templates/macros/editable.html.j2:31
+#: amt/site/templates/macros/editable.html.j2:34
 msgid "Edit"
 msgstr ""
 
