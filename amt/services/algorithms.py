@@ -17,7 +17,6 @@ from amt.schema.instrument import InstrumentBase
 from amt.schema.system_card import AiActProfile, SystemCard
 from amt.services.instruments import InstrumentsService, create_instrument_service
 from amt.services.task_registry import get_requirements_and_measures
-from amt.services.tasks import TasksService
 
 logger = logging.getLogger(__name__)
 
@@ -28,12 +27,10 @@ class AlgorithmsService:
     def __init__(
         self,
         repository: Annotated[AlgorithmsRepository, Depends(AlgorithmsRepository)],
-        task_service: Annotated[TasksService, Depends(TasksService)],
         instrument_service: Annotated[InstrumentsService, Depends(create_instrument_service)],
     ) -> None:
         self.repository = repository
         self.instrument_service = instrument_service
-        self.task_service = task_service
 
     async def get(self, algorithm_id: int) -> Algorithm:
         algorithm = await self.repository.find_by_id(algorithm_id)
@@ -102,12 +99,6 @@ class AlgorithmsService:
 
         algorithm = Algorithm(name=algorithm_new.name, lifecycle=algorithm_new.lifecycle, system_card=system_card)
         algorithm = await self.update(algorithm)
-
-        selected_instruments = await self.instrument_service.fetch_instruments(
-            [instrument.urn for instrument in algorithm.system_card.instruments]
-        )
-        for instrument in selected_instruments:
-            await self.task_service.create_instrument_tasks(instrument.tasks, algorithm)
 
         return algorithm
 

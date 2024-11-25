@@ -58,7 +58,7 @@ def test_e2e_search_algorithms_with_group_by_lifecycle_view(page: Page) -> None:
         timeout=3000,
     ) as _:
         expect(page.get_by_title("Organizational Responsibilities", exact=True)).to_be_visible()
-        expect(page.get_by_text("122 results for 'Algorithm'", exact=True)).to_be_visible()
+        expect(page.get_by_text("121 results for 'Algorithm'", exact=True)).to_be_visible()
 
 
 @pytest.mark.slow
