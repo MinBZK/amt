@@ -24,7 +24,7 @@ packages = [
 python = "^3.12"
 fastapi = "^0.115.5"
 alembic = "^1.14.0"
-pydantic = "2.9.2" #TODO: remove pinned version
+pydantic = "2.10.1" #TODO: remove pinned version
 jinja2 = "^3.1.4"
 pydantic-settings = "^2.6.1"
 psycopg2-binary = "^2.9.10"
@@ -50,7 +50,7 @@ pytest = "^8.3.3"
 pytest-asyncio = "^0.24.0"
 nest-asyncio = "^1.6.0"
 pytest-mock = "^3.14.0"
-coverage = "^7.6.7"
+coverage = "^7.6.8"
 playwright = "^1.47.0"
 pytest-playwright = "^0.5.2"
 pytest-httpx = "^0.34.0"
@@ -59,7 +59,7 @@ vcrpy = "^6.0.2"
 
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.7.4"
+ruff = "^0.8.0"
 pre-commit = "^4.0.1"
 polib = "^1.2.0"
 pyright = "^1.1.389"
