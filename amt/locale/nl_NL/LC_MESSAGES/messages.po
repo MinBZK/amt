@@ -429,12 +429,12 @@ msgstr ""
 "enoplossingen."
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:84
-#: amt/site/templates/macros/editable.html.j2:63
+#: amt/site/templates/macros/editable.html.j2:70
 msgid "Save"
 msgstr "Opslaan"
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:88
-#: amt/site/templates/macros/editable.html.j2:68
+#: amt/site/templates/macros/editable.html.j2:75
 msgid "Cancel"
 msgstr "Annuleren"
 
@@ -443,8 +443,8 @@ msgid "measures executed"
 msgstr "maatregelen uitgevoerd"
 
 #: amt/site/templates/algorithms/details_requirements.html.j2:55
-#: amt/site/templates/macros/editable.html.j2:24
-#: amt/site/templates/macros/editable.html.j2:27
+#: amt/site/templates/macros/editable.html.j2:31
+#: amt/site/templates/macros/editable.html.j2:34
 msgid "Edit"
 msgstr "Bewerk"
 
@@ -659,11 +659,11 @@ msgstr ""
 
 #: amt/site/templates/pages/landingpage.html.j2:32
 msgid "Log in"
-msgstr "Inloggen"
+msgstr "Log in"
 
 #: amt/site/templates/pages/landingpage.html.j2:32
 msgid "or"
-msgstr "voor"
+msgstr "of"
 
 #: amt/site/templates/pages/landingpage.html.j2:33
 msgid "contact us"
