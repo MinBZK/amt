@@ -6,12 +6,14 @@ from os import listdir
 from os.path import isfile, join
 from pathlib import Path
 from typing import Annotated
+from uuid import UUID
 
 from fastapi import Depends
 
 from amt.core.exceptions import AMTNotFound
 from amt.models import Algorithm
 from amt.repositories.algorithms import AlgorithmsRepository
+from amt.repositories.organizations import OrganizationsRepository
 from amt.schema.algorithm import AlgorithmNew
 from amt.schema.instrument import InstrumentBase
 from amt.schema.system_card import AiActProfile, SystemCard
@@ -28,9 +30,11 @@ class AlgorithmsService:
         self,
         repository: Annotated[AlgorithmsRepository, Depends(AlgorithmsRepository)],
         instrument_service: Annotated[InstrumentsService, Depends(create_instrument_service)],
+        organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
     ) -> None:
         self.repository = repository
         self.instrument_service = instrument_service
+        self.organizations_repository = organizations_repository
 
     async def get(self, algorithm_id: int) -> Algorithm:
         algorithm = await self.repository.find_by_id(algorithm_id)
@@ -44,7 +48,7 @@ class AlgorithmsService:
         algorithm = await self.repository.save(algorithm)
         return algorithm
 
-    async def create(self, algorithm_new: AlgorithmNew) -> Algorithm:
+    async def create(self, algorithm_new: AlgorithmNew, user_id: UUID | str) -> Algorithm:
         system_card_from_template = None
         if algorithm_new.template_id:
             template_files = get_template_files()
@@ -98,6 +102,10 @@ class AlgorithmsService:
             system_card = SystemCard.model_validate(system_card_merged)
 
         algorithm = Algorithm(name=algorithm_new.name, lifecycle=algorithm_new.lifecycle, system_card=system_card)
+        algorithm.organization = await self.organizations_repository.find_by_id_and_user_id(
+            algorithm_new.organization_id, user_id
+        )
+
         algorithm = await self.update(algorithm)
 
         return algorithm

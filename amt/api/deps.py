@@ -9,6 +9,7 @@ from fastapi import Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from jinja2 import Environment, StrictUndefined, Undefined
+from jinja2_base64_filters import jinja2_base64_filters  # pyright: ignore #noqa
 from starlette.background import BackgroundTask
 from starlette.templating import _TemplateResponse  # pyright: ignore [reportPrivateUsage]
 
@@ -30,6 +31,7 @@ from amt.core.internationalization import (
 )
 from amt.schema.localized_value_item import LocalizedValueItem
 from amt.schema.shared import IterMixin
+from amt.schema.webform import WebFormFieldType
 
 T = TypeVar("T", bound=Enum | LocalizableEnum)
 
@@ -38,7 +40,7 @@ logger = logging.getLogger(__name__)
 
 def custom_context_processor(
     request: Request,
-) -> dict[str, str | None | list[str] | dict[str, str] | list[NavigationItem]]:
+) -> dict[str, str | None | list[str] | dict[str, str] | list[NavigationItem] | type[WebFormFieldType]]:
     lang = get_requested_language(request)
     translations = get_current_translation(request)
     return {
@@ -48,6 +50,7 @@ def custom_context_processor(
         "translations": get_dynamic_field_translations(lang),
         "main_menu_items": get_main_menu(request, translations),
         "user": get_user(request),
+        "WebFormFieldType": WebFormFieldType,
     }
 
 
@@ -163,3 +166,4 @@ templates.env.globals.update(is_nested_enum=is_nested_enum)  # pyright: ignore [
 templates.env.globals.update(nested_enum=nested_enum)  # pyright: ignore [reportUnknownMemberType]
 templates.env.globals.update(nested_enum_value=nested_enum_value)  # pyright: ignore [reportUnknownMemberType]
 templates.env.globals.update(isinstance=instance)  # pyright: ignore [reportUnknownMemberType]
+templates.env.add_extension("jinja2_base64_filters.Base64Filters")  # pyright: ignore [reportUnknownMemberType]

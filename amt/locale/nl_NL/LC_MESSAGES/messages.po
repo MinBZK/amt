@@ -43,10 +43,10 @@ msgid "Role"
 msgstr "Rol"
 
 #: amt/api/group_by_category.py:15
-#: amt/site/templates/algorithms/details_info.html.j2:24
-#: amt/site/templates/algorithms/new.html.j2:40
+#: amt/site/templates/algorithms/details_info.html.j2:28
+#: amt/site/templates/algorithms/new.html.j2:41
 #: amt/site/templates/parts/algorithm_search.html.j2:48
-#: amt/site/templates/parts/filter_list.html.j2:94
+#: amt/site/templates/parts/filter_list.html.j2:71
 msgid "Lifecycle"
 msgstr "Levenscyclus"
 
@@ -86,65 +86,84 @@ msgstr "Monitoring en beheer"
 msgid "Phasing Out"
 msgstr "Uitfaseren"
 
-#: amt/api/navigation.py:45
+#: amt/api/navigation.py:47
 msgid "Home"
 msgstr "Start"
 
-#: amt/api/navigation.py:46 amt/site/templates/parts/algorithm_search.html.j2:9
+#: amt/api/navigation.py:48 amt/api/navigation.py:63
+#: amt/site/templates/parts/algorithm_search.html.j2:9
 msgid "Algorithms"
 msgstr "Algoritmes"
 
-#: amt/api/navigation.py:47 amt/site/templates/auth/profile.html.j2:10
+#: amt/api/navigation.py:49 amt/site/templates/auth/profile.html.j2:10
 msgid "Overview"
 msgstr "Overzicht"
 
-#: amt/api/navigation.py:48
+#: amt/api/navigation.py:50
 msgid "Tasks"
 msgstr "Taken"
 
-#: amt/api/navigation.py:49
+#: amt/api/navigation.py:51
 msgid "New"
 msgstr "Nieuw"
 
-#: amt/api/navigation.py:50
+#: amt/api/navigation.py:52
 msgid "System card"
 msgstr "Systeemkaart"
 
-#: amt/api/navigation.py:51
+#: amt/api/navigation.py:53
 msgid "Assessment card"
 msgstr "Beoordelingskaart"
 
-#: amt/api/navigation.py:52
+#: amt/api/navigation.py:54
 msgid "Model card"
 msgstr "Model kaart"
 
-#: amt/api/navigation.py:53
+#: amt/api/navigation.py:55
 msgid "Details"
 msgstr "Details"
 
-#: amt/api/navigation.py:54
+#: amt/api/navigation.py:56
 msgid "Info"
 msgstr "Info"
 
-#: amt/api/navigation.py:55
+#: amt/api/navigation.py:57
 msgid "Algorithm details"
 msgstr "Algoritme details"
 
-#: amt/api/navigation.py:56
+#: amt/api/navigation.py:58
 msgid "Requirements"
 msgstr "Vereisten"
 
-#: amt/api/navigation.py:57
+#: amt/api/navigation.py:59
 msgid "Data"
 msgstr "Data"
 
-#: amt/api/navigation.py:58
+#: amt/api/navigation.py:60
 msgid "Model"
 msgstr "Model"
 
-#: amt/api/navigation.py:59 amt/site/templates/algorithms/new.html.j2:149
+#: amt/api/navigation.py:61 amt/site/templates/algorithms/new.html.j2:151
 msgid "Instruments"
 msgstr "Instrumenten"
+
+#: amt/api/navigation.py:62
+#: amt/site/templates/organizations/parts/overview_results.html.j2:6
+msgid "Organizations"
+msgstr "Organisaties"
+
+#: amt/api/navigation.py:64 amt/site/templates/organizations/home.html.j2:45
+#: amt/site/templates/organizations/parts/overview_results.html.j2:130
+msgid "Members"
+msgstr "Leden"
+
+#: amt/api/organization_filter_options.py:17
+msgid "All organizations"
+msgstr "Alle organisaties"
+
+#: amt/api/organization_filter_options.py:17
+msgid "My organizations"
+msgstr "Mijn organisaties"
 
 #: amt/api/publication_category.py:22
 msgid "Impactful algorithm"
@@ -170,13 +189,64 @@ msgstr "Verboden AI"
 msgid "Exception of application"
 msgstr "Uitzondering van toepassing"
 
+#: amt/api/forms/algorithm.py:19
+msgid "Select organization"
+msgstr "Selecteer organisatie"
+
+#: amt/api/forms/algorithm.py:25
+#: amt/site/templates/algorithms/details_info.html.j2:12
+msgid "Organization"
+msgstr "Organisatie"
+
+#: amt/api/forms/organization.py:15
+#: amt/site/templates/algorithms/details_info.html.j2:8
+#: amt/site/templates/auth/profile.html.j2:34
+#: amt/site/templates/organizations/home.html.j2:25
+msgid "Name"
+msgstr "Naam"
+
+#: amt/api/forms/organization.py:16
+msgid "Name of the organization"
+msgstr "Naam van de organisatie"
+
+#: amt/api/forms/organization.py:23
+msgid "The slug is the web path, like /organizations/my-organization-name"
+msgstr ""
+"Een slug is het pad in het webadres, zoals /organizations/mijn-"
+"organisatie-naam"
+
+#: amt/api/forms/organization.py:24
+#: amt/site/templates/organizations/home.html.j2:29
+msgid "Slug"
+msgstr "Slug"
+
+#: amt/api/forms/organization.py:25
+msgid "The slug for this organization"
+msgstr "Het web-pad (slug) voor deze organisatie"
+
+#: amt/api/forms/organization.py:30
+msgid "Add members"
+msgstr "Voeg personen toe"
+
+#: amt/api/forms/organization.py:31
+msgid "Search for a person..."
+msgstr "Zoek een persoon..."
+
+#: amt/api/forms/organization.py:36
+msgid "Add organization"
+msgstr "Organisatie toevoegen"
+
 #: amt/core/exception_handlers.py:20
 msgid "String should have at least {min_length} characters"
 msgstr "Tekst moet minimaal {min_length} tekens bevatten"
 
-#: amt/core/exception_handlers.py:21
+#: amt/core/exception_handlers.py:21 amt/core/exception_handlers.py:22
 msgid "Field required"
 msgstr "Veld verplicht"
+
+#: amt/core/exception_handlers.py:23
+msgid "String should match pattern '{pattern}'"
+msgstr "De waarde moet voldoen aan het patroon '{pattern}'"
 
 #: amt/core/exceptions.py:20
 msgid ""
@@ -251,12 +321,12 @@ msgstr ""
 "                verwijderd."
 
 #: amt/site/templates/algorithms/details_base.html.j2:39
-#: amt/site/templates/algorithms/new.html.j2:132
+#: amt/site/templates/algorithms/new.html.j2:134
 msgid "Yes"
 msgstr "Ja"
 
 #: amt/site/templates/algorithms/details_base.html.j2:44
-#: amt/site/templates/algorithms/new.html.j2:142
+#: amt/site/templates/algorithms/new.html.j2:144
 msgid "No"
 msgstr "Nee"
 
@@ -358,38 +428,34 @@ msgstr "Ongedefinieerd"
 msgid "Failed to estimate WOZ value: "
 msgstr "Fout bij het schatten van de WOZ-waarde: "
 
-#: amt/site/templates/algorithms/details_info.html.j2:8
-#: amt/site/templates/auth/profile.html.j2:34
-msgid "Name"
-msgstr "Naam"
-
-#: amt/site/templates/algorithms/details_info.html.j2:12
+#: amt/site/templates/algorithms/details_info.html.j2:16
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:19
 msgid "Description"
 msgstr "Omschrijving"
 
-#: amt/site/templates/algorithms/details_info.html.j2:16
+#: amt/site/templates/algorithms/details_info.html.j2:20
 msgid "Repository"
 msgstr "Repository"
 
-#: amt/site/templates/algorithms/details_info.html.j2:20
+#: amt/site/templates/algorithms/details_info.html.j2:24
 msgid "Algorithm code"
 msgstr "algoritme code"
 
-#: amt/site/templates/algorithms/details_info.html.j2:28
+#: amt/site/templates/algorithms/details_info.html.j2:32
+#: amt/site/templates/organizations/parts/overview_results.html.j2:132
 #: amt/site/templates/pages/assessment_card.html.j2:7
 #: amt/site/templates/pages/model_card.html.j2:6
 #: amt/site/templates/pages/system_card.html.j2:4
-#: amt/site/templates/parts/filter_list.html.j2:98
-#: amt/site/templates/parts/filter_list.html.j2:120
+#: amt/site/templates/parts/filter_list.html.j2:75
+#: amt/site/templates/parts/filter_list.html.j2:97
 msgid "Last updated"
 msgstr "Laatst bijgewerkt"
 
-#: amt/site/templates/algorithms/details_info.html.j2:32
+#: amt/site/templates/algorithms/details_info.html.j2:36
 msgid "Labels"
 msgstr "Labels"
 
-#: amt/site/templates/algorithms/details_info.html.j2:40
+#: amt/site/templates/algorithms/details_info.html.j2:44
 msgid "References"
 msgstr "Referenties"
 
@@ -429,12 +495,12 @@ msgstr ""
 "enoplossingen."
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:84
-#: amt/site/templates/macros/editable.html.j2:70
+#: amt/site/templates/macros/editable.html.j2:82
 msgid "Save"
 msgstr "Opslaan"
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:88
-#: amt/site/templates/macros/editable.html.j2:75
+#: amt/site/templates/macros/editable.html.j2:87
 msgid "Cancel"
 msgstr "Annuleren"
 
@@ -443,42 +509,42 @@ msgid "measures executed"
 msgstr "maatregelen uitgevoerd"
 
 #: amt/site/templates/algorithms/details_requirements.html.j2:55
-#: amt/site/templates/macros/editable.html.j2:31
-#: amt/site/templates/macros/editable.html.j2:34
+#: amt/site/templates/macros/editable.html.j2:24
+#: amt/site/templates/macros/editable.html.j2:27
 msgid "Edit"
 msgstr "Bewerk"
 
-#: amt/site/templates/algorithms/new.html.j2:7
+#: amt/site/templates/algorithms/new.html.j2:8
 msgid "Create a Algorithm"
 msgstr "Creëer een algoritme"
 
-#: amt/site/templates/algorithms/new.html.j2:25
-#: amt/site/templates/parts/filter_list.html.j2:90
-#: amt/site/templates/parts/filter_list.html.j2:116
+#: amt/site/templates/algorithms/new.html.j2:26
+#: amt/site/templates/parts/filter_list.html.j2:67
+#: amt/site/templates/parts/filter_list.html.j2:93
 msgid "Algorithm name"
 msgstr "algoritme naam"
 
-#: amt/site/templates/algorithms/new.html.j2:29
+#: amt/site/templates/algorithms/new.html.j2:30
 msgid "Name of the algorithm"
 msgstr "Nieuw algoritme"
 
-#: amt/site/templates/algorithms/new.html.j2:43
+#: amt/site/templates/algorithms/new.html.j2:44
 msgid "Select the lifecycle your algorithm is currently in."
 msgstr "Selecteer de levenscyclus waarin uw algoritme zich momenteel bevindt."
 
-#: amt/site/templates/algorithms/new.html.j2:44
+#: amt/site/templates/algorithms/new.html.j2:45
 msgid "For more information on lifecycle, read the"
 msgstr "Lees voor meer meer informatie over levenscyclus het"
 
-#: amt/site/templates/algorithms/new.html.j2:47
+#: amt/site/templates/algorithms/new.html.j2:48
 msgid "Algorithm Framework"
 msgstr "Algoritmekader"
 
-#: amt/site/templates/algorithms/new.html.j2:65
+#: amt/site/templates/algorithms/new.html.j2:67
 msgid "AI Act Profile"
 msgstr "AI Verordening Profiel"
 
-#: amt/site/templates/algorithms/new.html.j2:67
+#: amt/site/templates/algorithms/new.html.j2:69
 msgid ""
 "The AI Act profile provides insight into, among other things, the type of"
 " AI system and the associated obligations from the European AI Act. If "
@@ -490,11 +556,11 @@ msgstr ""
 "onder andere het type AI systeem, de regelgeving die van toepassing is en"
 " de risicocategorie."
 
-#: amt/site/templates/algorithms/new.html.j2:74
+#: amt/site/templates/algorithms/new.html.j2:76
 msgid "Find your AI Act profile"
 msgstr "Vind uw AI Act profiel"
 
-#: amt/site/templates/algorithms/new.html.j2:151
+#: amt/site/templates/algorithms/new.html.j2:153
 msgid ""
 "Overview of instruments for the responsible development, deployment, "
 "assessment and monitoring of algorithms and AI-systems."
@@ -502,15 +568,15 @@ msgstr ""
 "Overzicht van aanbevolen instrument voor het verantwoord ontwikkelen, "
 "gebruiken, beoordelen en monitoren van algoritmes en AI-systemen."
 
-#: amt/site/templates/algorithms/new.html.j2:159
+#: amt/site/templates/algorithms/new.html.j2:161
 msgid "Choose one or more instruments"
 msgstr "Kies één of meerdere instrumenten"
 
-#: amt/site/templates/algorithms/new.html.j2:183
+#: amt/site/templates/algorithms/new.html.j2:185
 msgid "Create Algorithm"
 msgstr "Creëer algoritme"
 
-#: amt/site/templates/algorithms/new.html.j2:200
+#: amt/site/templates/algorithms/new.html.j2:202
 msgid "Copy results and close"
 msgstr "Resultaten overnemen en sluiten"
 
@@ -551,7 +617,7 @@ msgstr "Meld u aan om deze pagina te bekijken"
 #: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:11
 #: amt/site/templates/pages/landingpage.html.j2:17
 #: amt/site/templates/parts/header.html.j2:86
-#: amt/site/templates/parts/header.html.j2:144
+#: amt/site/templates/parts/header.html.j2:145
 msgid "Login"
 msgstr "Inloggen"
 
@@ -559,6 +625,7 @@ msgstr "Inloggen"
 msgid "An error occurred"
 msgstr "Er is een fout opgetreden"
 
+#: amt/site/templates/errors/_AMTCSRFProtectError_401.html.j2:11
 #: amt/site/templates/errors/_Exception.html.j2:5
 msgid "An error occurred. Please try again later"
 msgstr "Er is een fout opgetreden. Probeer het later opnieuw."
@@ -571,7 +638,7 @@ msgstr "Er zijn enkele fouten"
 msgid "There is one error:"
 msgstr "Er is één fout:"
 
-#: amt/site/templates/layouts/base.html.j2:11
+#: amt/site/templates/layouts/base.html.j2:1
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr "Algoritme Management Toolkit (AMT)"
 
@@ -594,6 +661,59 @@ msgstr "Beoordelen"
 #: amt/site/templates/macros/tasks.html.j2:35
 msgid "Unknown"
 msgstr "Onbekend"
+
+#: amt/site/templates/organizations/home.html.j2:33
+msgid "Created at"
+msgstr "Aangemaakt op"
+
+#: amt/site/templates/organizations/home.html.j2:37
+msgid "Created by"
+msgstr "Aangemaakt door"
+
+#: amt/site/templates/organizations/home.html.j2:41
+msgid "Modified at"
+msgstr "Bijgewerkt op"
+
+#: amt/site/templates/organizations/new.html.j2:8
+msgid "Create an organization"
+msgstr "Organisatie aanmaken"
+
+#: amt/site/templates/organizations/parts/overview_results.html.j2:11
+msgid "New organization"
+msgstr "Nieuwe organisatie"
+
+#: amt/site/templates/organizations/parts/overview_results.html.j2:27
+#: amt/site/templates/parts/algorithm_search.html.j2:24
+msgid "Search"
+msgstr "Zoek"
+
+#: amt/site/templates/organizations/parts/overview_results.html.j2:34
+msgid "Find organizations..."
+msgstr "Zoek een organisatie..."
+
+#: amt/site/templates/organizations/parts/overview_results.html.j2:51
+msgid "Organisation Type"
+msgstr "Organisatie Type"
+
+#: amt/site/templates/organizations/parts/overview_results.html.j2:79
+#, python-format
+msgid ""
+"%(organizations_length)s result\n"
+"                "
+msgid_plural ""
+"\n"
+"                    %(organizations_length)s results"
+msgstr[0] "%(organizations_length)s resultaat"
+msgstr[1] "%(organizations_length)s resultaten"
+
+#: amt/site/templates/organizations/parts/overview_results.html.j2:84
+#: amt/site/templates/parts/filter_list.html.j2:16
+msgid "for"
+msgstr "voor"
+
+#: amt/site/templates/organizations/parts/overview_results.html.j2:127
+msgid "Organization name"
+msgstr "Organisatie naam"
 
 #: amt/site/templates/pages/assessment_card.html.j2:7
 #: amt/site/templates/pages/model_card.html.j2:7
@@ -624,6 +744,7 @@ msgid "Answer"
 msgstr "Antwoord"
 
 #: amt/site/templates/pages/index.html.j2:3
+#: amt/site/templates/pages/under_construction.html.j2:3
 msgid "AMT Placeholder informatie pagina's"
 msgstr "AMT Placeholder informatie pagina's"
 
@@ -681,13 +802,17 @@ msgstr "Assessmentkaart"
 msgid "Model cards"
 msgstr "Modelkaart"
 
+#: amt/site/templates/pages/under_construction.html.j2:8
+msgid "Under construction"
+msgstr "In ontwikkeling"
+
+#: amt/site/templates/pages/under_construction.html.j2:9
+msgid "This page is yet to be build."
+msgstr "Deze pagina is nog niet klaar."
+
 #: amt/site/templates/parts/algorithm_search.html.j2:14
 msgid "New algorithm"
 msgstr "Nieuw algoritme"
-
-#: amt/site/templates/parts/algorithm_search.html.j2:24
-msgid "Search"
-msgstr "Zoek"
 
 #: amt/site/templates/parts/algorithm_search.html.j2:31
 msgid "Find algorithm..."
@@ -713,7 +838,7 @@ msgstr "Groeperen op"
 msgid "Select group by"
 msgstr "Selecteer groepering"
 
-#: amt/site/templates/parts/filter_list.html.j2:32
+#: amt/site/templates/parts/filter_list.html.j2:9
 #, python-format
 msgid ""
 "\n"
@@ -732,11 +857,7 @@ msgstr[1] ""
 "                %(amount_algorithm_systems)s resultaten\n"
 "            "
 
-#: amt/site/templates/parts/filter_list.html.j2:39
-msgid "for"
-msgstr "voor"
-
-#: amt/site/templates/parts/filter_list.html.j2:70
+#: amt/site/templates/parts/filter_list.html.j2:47
 msgid ""
 "No Algorithm match your selected filters. Try adjusting your filters or "
 "clearing them to\n"

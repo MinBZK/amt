@@ -112,7 +112,7 @@ def test_get_main_menu():
     main_menu = get_main_menu(default_fastapi_request(url="/algorithm/"), internationalization.get_translation("en"))
 
     # assert right item is active
-    assert len(main_menu) == 1
+    assert len(main_menu) == 2
     assert main_menu[0].active is True
 
     # assert display text is correct

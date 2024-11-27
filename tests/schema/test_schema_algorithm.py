@@ -12,6 +12,7 @@ def test_algorithm_schema_create_new():
         systemic_risk="systeemrisico",
         transparency_obligations="transparantieverplichtingen",
         role=["aanbieder", "gebruiksverantwoordelijke"],
+        organization_id=1,
     )
     assert algorithm_new.name == "Algorithm Name"
     assert algorithm_new.instruments == ["urn:instrument:1", "urn:instrument:2"]
@@ -21,6 +22,7 @@ def test_algorithm_schema_create_new():
     assert algorithm_new.systemic_risk == "systeemrisico"
     assert algorithm_new.transparency_obligations == "transparantieverplichtingen"
     assert algorithm_new.role == ["aanbieder", "gebruiksverantwoordelijke"]
+    assert algorithm_new.organization_id == 1
 
 
 def test_algorithm_schema_create_new_one_instrument():
@@ -34,6 +36,7 @@ def test_algorithm_schema_create_new_one_instrument():
         systemic_risk="systeemrisico",
         transparency_obligations="transparantieverplichtingen",
         role="aanbieder",
+        organization_id=1,
     )
     assert algorithm_new.name == "Algorithm Name"
     assert algorithm_new.instruments == ["urn:instrument:1"]
@@ -43,3 +46,4 @@ def test_algorithm_schema_create_new_one_instrument():
     assert algorithm_new.systemic_risk == "systeemrisico"
     assert algorithm_new.transparency_obligations == "transparantieverplichtingen"
     assert algorithm_new.role == ["aanbieder"]
+    assert algorithm_new.organization_id == 1

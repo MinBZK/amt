@@ -16,6 +16,16 @@ class Reference(BaseModel):
     link: str = Field(default=None)
 
 
+# TODO: consider reusing classes, Owner is now also defined for Models
+class Owner(BaseModel):
+    organization: str = Field(default=None)
+    oin: str | None = Field(default=None)
+
+    def __init__(self, organization: str, oin: str | None = None, **data) -> None:  # pyright: ignore # noqa
+        super().__init__(**data)
+        self.organization = organization
+
+
 class SystemCard(BaseModel):
     schema_version: str = Field(default="0.1a10")
     name: str = Field(default=None)
@@ -30,3 +40,4 @@ class SystemCard(BaseModel):
     assessments: list[AssessmentCard] = Field(default=[])
     references: list[Reference] = Field(default=[])
     models: list[ModelCardSchema] = Field(default=[])
+    owners: list[Owner] = Field(default=[])

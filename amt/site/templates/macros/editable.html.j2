@@ -1,4 +1,4 @@
-{% macro editable(obj, field_path) %}
+{% macro editable(obj, field_path, type) %}
     <span hx-target="this">
         {% set value = nested_value(obj, field_path) %}
         {% if value is string and value.startswith('http') %}
@@ -15,7 +15,7 @@
             {% endif %}
         {% endif %}
         <span class="rvo-link rvo-link--hover rvo-link--with-icon"
-              hx-get="edit/{{ field_path | replace('.', '/') }}"
+              hx-get="{{ base_href }}/edit/{{ field_path | replace('.', '/') }}?edit_type={{ type }}"
               hx-swap="outerHTML"
               style="cursor: pointer;
                      float:right">
@@ -27,17 +27,35 @@
            color: rgb(0, 123, 199) !important">{% trans %}Edit{% endtrans %}</a>
         </span>
     {% endmacro %}
-    {% macro edit(obj, field_path) %}
+    {% macro edit(obj, field_path, edit_type) %}
         <span hx-target="this">
-            <form hx-put="update/{{ field_path | replace('.', '/') }}"
+            <form hx-put="{{ base_href }}/update/{{ field_path | replace('.', '/') }}?edit_type={{ edit_type }}"
                   hx-ext="json-enc"
+                  hx-target-error="#errorContainer"
+                  hx-swap="innerHTML"
+                  method="post"
                   hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
                   hx-swap="outerHTML">
+                <div id="error-{{ field_path }}" class="htmx-error-oob"></div>
                 <div class="rvo-layout-grid-container">
                     <div class="rvo-layout-grid rvo-layout-gap--md rvo-layout-grid-columns--two rvo-layout-grid-layout--1fr">
                         <div>
-                            {% set value = nested_value(obj, field_path) %}
-                            {% if is_nested_enum(obj, field_path) %}
+                            {% if edit_type == "select_my_organizations" %}
+                                {% set value = algorithm.organization.id %}
+                                <div class="rvo-select-wrapper">
+                                    <select id="field"
+                                            name="value"
+                                            class="utrecht-select utrecht-select--html-select">
+                                        {% for e in select_options %}
+                                            <option value="{{ e.value }}"
+                                                    {% if e.value == value|string %}selected="selected"{% endif %}>
+                                                {{ e.display_value }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            {% elif is_nested_enum(obj, field_path) %}
+                                {% set value = nested_value(obj, field_path) %}
                                 <div class="rvo-select-wrapper">
                                     <select id="field"
                                             name="value"
@@ -51,6 +69,7 @@
                                     </select>
                                 </div>
                             {% else %}
+                                {% set value = nested_value(obj, field_path) %}
                                 <input type="text"
                                        name="value"
                                        value="{{ value }}"
@@ -62,7 +81,7 @@
                                     class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md">
                                 {% trans %}Save{% endtrans %}
                             </button>
-                            <button hx-get="cancel/{{ field_path | replace('.', '/') }}"
+                            <button hx-get="{{ base_href }}/cancel/{{ field_path | replace('.', '/') }}?edit_type={{ edit_type }}"
                                     hx-swap="outerHTML"
                                     class="utrecht-button utrecht-button--secondary-action utrecht-button-group__align-right utrecht-button--rvo-md">
                                 {% trans %}Cancel{% endtrans %}
@@ -71,5 +90,6 @@
                     </div>
                 </div>
             </form>
+            <div id="errorContainer" class="display-none"></div>
         </span>
     {% endmacro %}

@@ -30,6 +30,7 @@ def test_custom_context_processor(mocker: MockerFixture):
         "translations",
         "main_menu_items",
         "user",
+        "WebFormFieldType",
     ]
     assert result["version"] == VERSION
     assert result["available_translations"] == list(supported_translations)

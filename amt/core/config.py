@@ -35,7 +35,6 @@ class Settings(BaseSettings):
     DEBUG: bool = False
     AUTO_CREATE_SCHEMA: bool = False
 
-    ISSUER: str = "https://keycloak.apps.digilab.network/realms/algoritmes"
     OIDC_CLIENT_ID: str | None = None
     OIDC_CLIENT_SECRET: str | None = None
     OIDC_DISCOVERY_URL: str = "https://keycloak.apps.digilab.network/realms/algoritmes/.well-known/openid-configuration"
@@ -61,6 +60,8 @@ class Settings(BaseSettings):
     CSRF_TOKEN_LOCATION: str = "header"
     CSRF_TOKEN_KEY: str = "csrf-token"
     CSRF_COOKIE_SAMESITE: str = "strict"
+
+    TASK_REGISTRY_URL: str = "https://task-registry.apps.digilab.network"
 
     @computed_field
     def SQLALCHEMY_ECHO(self) -> bool:

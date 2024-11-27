@@ -8,14 +8,14 @@ from pathlib import Path
 from typing import Any
 
 import httpx
-import nest_asyncio  # type: ignore [(reportMissingTypeStubs)]
+import nest_asyncio  # pyright: ignore [(reportMissingTypeStubs)]
 import pytest
 import pytest_asyncio
 import uvicorn
 from amt.models.base import Base
 from amt.server import create_app
 from httpx import ASGITransport, AsyncClient
-from playwright.sync_api import Browser
+from playwright.sync_api import Browser, Page
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy.ext.asyncio.session import async_sessionmaker
@@ -28,11 +28,17 @@ logger = logging.getLogger(__name__)
 # Dubious choice here: allow nested event loops.
 nest_asyncio.apply()  # type: ignore [(reportUnknownMemberType)]
 
+logging.getLogger("vcr").setLevel(logging.WARNING)
+
 
 def run_server_uvicorn(database_file: Path, host: str = "127.0.0.1", port: int = 3462) -> None:
     os.environ["APP_DATABASE_FILE"] = "/" + str(database_file)
     os.environ["AUTO_CREATE_SCHEMA"] = "true"
     os.environ["DISABLE_AUTH"] = "true"
+    os.environ["OIDC_CLIENT_ID"] = "AMT"
+    os.environ["OIDC_DISCOVERY_URL"] = (
+        "https://keycloak.apps.digilab.network/realms/algoritmes-test/.well-known/openid-configuration"
+    )
     logger.info(os.environ["APP_DATABASE_FILE"])
     app = create_app()
     uvicorn.run(app, host=host, port=port)
@@ -218,3 +224,11 @@ async def db(
     async_session = async_sessionmaker(engine, expire_on_commit=False)
     async with async_session() as session:
         yield DatabaseTestUtils(session, database_file)
+
+
+def do_e2e_login(page: Page):
+    page.goto("/")
+    page.locator("#header-link-login").click()
+    page.fill("#username", "default")
+    page.fill("#password", "default")
+    page.locator("#kc-login").click()

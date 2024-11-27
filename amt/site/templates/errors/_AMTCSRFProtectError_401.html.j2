@@ -1,0 +1,32 @@
+<div id="general-error-content"
+     class="rvo-alert rvo-alert--error rvo-alert--padding-md">
+    <span class="utrecht-icon rvo-icon rvo-icon-foutmelding rvo-icon--xl rvo-status-icon-foutmelding"
+          role="img"
+          aria-label="Foutmelding"></span>
+    <div class="rvo-alert-text">
+        <div>
+            {% if message is defined and message is not none %}
+                {{ message }}
+            {% else %}
+                {% trans %}An error occurred. Please try again later{% endtrans %}
+            {% endif %}
+        </div>
+    </div>
+    <button onclick="document.getElementById('general-error-content').remove()"
+            class="utrecht-button utrecht-button--subtle rvo-button__close utrecht-button--rvo-md"
+            type="button"
+            aria-label="Sluiten">
+        <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--md rvo-icon--zwart"
+              role="img"
+              aria-label="Kruis"></span>
+    </button>
+    <script type="text/javascript">
+        window.setTimeout(function() {
+            try {
+                document.getElementById('general-error-content').remove()
+            } catch (e) {
+                // ok
+            }
+        }, 5000)
+    </script>
+</div>

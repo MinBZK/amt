@@ -30,6 +30,8 @@ class DisplayText(Enum):
     ASSESSMENTCARD = "assessmentcard"
     MODELCARD = "modelcard"
     DETAILS = "details"
+    ORGANIZATIONS = "organizations"
+    MEMBERS = "people"
 
 
 def get_translation(key: DisplayText, translations: NullTranslations) -> str:
@@ -57,6 +59,9 @@ def get_translation(key: DisplayText, translations: NullTranslations) -> str:
         DisplayText.DATA: _("Data"),
         DisplayText.MODEL: _("Model"),
         DisplayText.INSTRUMENTS: _("Instruments"),
+        DisplayText.ORGANIZATIONS: _("Organizations"),
+        DisplayText.ALGORITHMS: _("Algorithms"),
+        DisplayText.MEMBERS: _("Members"),
     }
     return keys[key]
 
@@ -127,6 +132,18 @@ class Navigation:
     )
     ALGORITHM_INSTRUMENTS = BaseNavigationItem(
         display_text=DisplayText.INSTRUMENTS, url="/algorithm/{algorithm_id}/details/system_card/instruments"
+    )
+    ORGANIZATIONS_ROOT = BaseNavigationItem(
+        display_text=DisplayText.ORGANIZATIONS, url="/organizations", icon="rvo-icon-man-torso-voor-hoogbouw"
+    )
+    ORGANIZATIONS_NEW = BaseNavigationItem(display_text=DisplayText.NEW, url="/organizations/new")
+    ORGANIZATIONS_OVERVIEW = BaseNavigationItem(display_text=DisplayText.OVERVIEW, url="/organizations/")
+    ORGANIZATIONS_INFO = BaseNavigationItem(display_text=DisplayText.INFO, url="/organizations/{organization_slug}")
+    ORGANIZATIONS_ALGORITHMS = BaseNavigationItem(
+        display_text=DisplayText.ALGORITHMS, url="/organizations/{organization_slug}/algorithms"
+    )
+    ORGANIZATIONS_PEOPLE = BaseNavigationItem(
+        display_text=DisplayText.MEMBERS, url="/organizations/{organization_slug}/people"
     )
 
 
@@ -242,6 +259,7 @@ def get_main_menu(request: Request, translations: NullTranslations) -> list[Navi
     # main menu items are the same for all pages
     main_menu_items = [
         NavigationItem(Navigation.ALGORITHMS_ROOT, translations=translations),
+        NavigationItem(Navigation.ORGANIZATIONS_ROOT, translations=translations),
     ]
 
     return _mark_active_navigation_item(main_menu_items, request.url.path)

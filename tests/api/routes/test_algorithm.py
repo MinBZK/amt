@@ -22,6 +22,7 @@ from tests.constants import (
     default_algorithm,
     default_algorithm_with_system_card,
     default_task,
+    default_user,
 )
 from tests.database_test_utils import DatabaseTestUtils
 
@@ -40,7 +41,7 @@ async def test_get_unknown_algorithm(client: AsyncClient) -> None:
 @pytest.mark.asyncio
 async def test_get_algorithm_tasks(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_algorithm("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
+    await db.given([default_user(), default_algorithm("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
 
     # when
     response = await client.get("/algorithm/1/details/tasks")
@@ -54,7 +55,7 @@ async def test_get_algorithm_tasks(client: AsyncClient, db: DatabaseTestUtils) -
 @pytest.mark.asyncio
 async def test_get_algorithm_inference(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_algorithm("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
+    await db.given([default_user(), default_algorithm("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
 
     # when
     response = await client.get("/algorithm/1/details/model/inference")
@@ -70,6 +71,7 @@ async def test_move_task(client: AsyncClient, db: DatabaseTestUtils, mocker: Moc
     # given
     await db.given(
         [
+            default_user(),
             default_algorithm("testalgorithm1"),
             default_task(algorithm_id=1, status_id=1),
             default_task(algorithm_id=1, status_id=1),
@@ -114,7 +116,7 @@ async def test_get_algorithm_context(client: AsyncClient, db: DatabaseTestUtils,
 @pytest.mark.asyncio
 async def test_get_algorithm_non_existing_algorithm(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_algorithm("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
+    await db.given([default_user(), default_algorithm("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
 
     # when
     response = await client.get("/algorithm/99/details/tasks")
@@ -151,7 +153,7 @@ async def test_get_algorithm_or_error(client: AsyncClient, db: DatabaseTestUtils
 @pytest.mark.asyncio
 async def test_get_system_card(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_algorithm("testalgorithm1")])
+    await db.given([default_user(), default_algorithm("testalgorithm1")])
 
     # when
     response = await client.get("/algorithm/1/details/system_card")
@@ -180,7 +182,7 @@ async def test_get_system_card_unknown_algorithm(client: AsyncClient) -> None:
 @vcr.use_cassette("tests/fixtures/vcr_cassettes/test_get_assessment_card.yml")  # type: ignore
 async def test_get_assessment_card(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_algorithm_with_system_card("testalgorithm1")])
+    await db.given([default_user(), default_algorithm_with_system_card("testalgorithm1")])
 
     # when
     response = await client.get("/algorithm/1/details/system_card/assessments/iama")
@@ -194,7 +196,7 @@ async def test_get_assessment_card(client: AsyncClient, db: DatabaseTestUtils) -
 @pytest.mark.asyncio
 async def test_get_assessment_card_unknown_algorithm(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_algorithm("testalgorithm1")])
+    await db.given([default_user(), default_algorithm("testalgorithm1")])
 
     # when
     response = await client.get("/algorithm/1/details/system_card/assessments/iama")
@@ -208,7 +210,7 @@ async def test_get_assessment_card_unknown_algorithm(client: AsyncClient, db: Da
 @pytest.mark.asyncio
 async def test_get_assessment_card_unknown_assessment(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_algorithm("testalgorithm1")])
+    await db.given([default_user(), default_algorithm("testalgorithm1")])
 
     # when
     response = await client.get("/algorithm/1/details/system_card/assessments/nonexistent")
@@ -223,7 +225,7 @@ async def test_get_assessment_card_unknown_assessment(client: AsyncClient, db: D
 @vcr.use_cassette("tests/fixtures/vcr_cassettes/test_get_model_card.yml")  # type: ignore
 async def test_get_model_card(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_algorithm_with_system_card("testalgorithm1")])
+    await db.given([default_user(), default_algorithm_with_system_card("testalgorithm1")])
 
     # when
     response = await client.get("/algorithm/1/details/system_card/models/logres_iris")
@@ -247,7 +249,7 @@ async def test_get_model_card_unknown_algorithm(client: AsyncClient) -> None:
 @pytest.mark.asyncio
 async def test_get_assessment_card_unknown_model_card(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_algorithm("testalgorithm1")])
+    await db.given([default_user(), default_algorithm("testalgorithm1")])
 
     # when
     response = await client.get("/algorithm/1/details/system_card/models/nonexistent")
@@ -261,7 +263,7 @@ async def test_get_assessment_card_unknown_model_card(client: AsyncClient, db: D
 @pytest.mark.asyncio
 async def test_get_algorithm_details(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_algorithm("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
+    await db.given([default_user(), default_algorithm("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
 
     # when
     response = await client.get("/algorithm/1/details")
@@ -276,7 +278,13 @@ async def test_get_algorithm_details(client: AsyncClient, db: DatabaseTestUtils)
 @vcr.use_cassette("tests/fixtures/vcr_cassettes/test_get_system_card_requirements.yml")  # type: ignore
 async def test_get_system_card_requirements(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_algorithm_with_system_card("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
+    await db.given(
+        [
+            default_user(),
+            default_algorithm_with_system_card("testalgorithm1"),
+            default_task(algorithm_id=1, status_id=1),
+        ]
+    )
 
     # when
     response = await client.get("/algorithm/1/details/system_card/requirements")
@@ -291,7 +299,13 @@ async def test_get_system_card_requirements(client: AsyncClient, db: DatabaseTes
 @vcr.use_cassette("tests/fixtures/vcr_cassettes/test_get_system_card_data_page.yml")  # type: ignore
 async def test_get_system_card_data_page(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_algorithm_with_system_card("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
+    await db.given(
+        [
+            default_user(),
+            default_algorithm_with_system_card("testalgorithm1"),
+            default_task(algorithm_id=1, status_id=1),
+        ]
+    )
 
     # when
     response = await client.get("/algorithm/1/details/system_card/data")
@@ -306,7 +320,13 @@ async def test_get_system_card_data_page(client: AsyncClient, db: DatabaseTestUt
 @vcr.use_cassette("tests/fixtures/vcr_cassettes/test_get_system_card_instruments.yml")  # type: ignore
 async def test_get_system_card_instruments(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_algorithm_with_system_card("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
+    await db.given(
+        [
+            default_user(),
+            default_algorithm_with_system_card("testalgorithm1"),
+            default_task(algorithm_id=1, status_id=1),
+        ]
+    )
 
     # when
     response = await client.get("/algorithm/1/details/system_card/instruments")
@@ -320,7 +340,7 @@ async def test_get_system_card_instruments(client: AsyncClient, db: DatabaseTest
 @pytest.mark.asyncio
 async def test_get_algorithm_edit(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_algorithm("testalgorithm1")])
+    await db.given([default_user(), default_algorithm("testalgorithm1")])
 
     # when
     response = await client.get("/algorithm/1/edit/system_card/lifecycle")
@@ -335,7 +355,7 @@ async def test_get_algorithm_edit(client: AsyncClient, db: DatabaseTestUtils) ->
 @pytest.mark.asyncio
 async def test_delete_algorithm(client: AsyncClient, db: DatabaseTestUtils, mocker: MockFixture) -> None:
     # given
-    await db.given([default_algorithm("testalgorithm1")])
+    await db.given([default_user(), default_algorithm("testalgorithm1")])
     mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
     client.cookies["fastapi-csrf-token"] = "1"
 
@@ -352,7 +372,7 @@ async def test_delete_algorithm(client: AsyncClient, db: DatabaseTestUtils, mock
 @pytest.mark.asyncio
 async def test_delete_algorithm_and_check_list(client: AsyncClient, db: DatabaseTestUtils, mocker: MockFixture) -> None:
     # given
-    await db.given([default_algorithm("testalgorithm1"), default_algorithm("testalgorithm2")])
+    await db.given([default_user(), default_algorithm("testalgorithm1"), default_algorithm("testalgorithm2")])
     mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
     client.cookies["fastapi-csrf-token"] = "1"
 
@@ -376,7 +396,7 @@ async def test_delete_algorithm_and_check_algorithm(
     client: AsyncClient, db: DatabaseTestUtils, mocker: MockFixture
 ) -> None:
     # given
-    await db.given([default_algorithm("testalgorithm1"), default_algorithm("testalgorithm2")])
+    await db.given([default_user(), default_algorithm("testalgorithm1"), default_algorithm("testalgorithm2")])
     mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
     client.cookies["fastapi-csrf-token"] = "1"
 
@@ -395,7 +415,7 @@ async def test_delete_algorithm_and_check_algorithm(
 @pytest.mark.asyncio
 async def test_get_algorithm_cancel(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_algorithm("testalgorithm1")])
+    await db.given([default_user(), default_algorithm("testalgorithm1")])
 
     # when
     response = await client.get("/algorithm/1/cancel/system_card/lifecycle")
@@ -408,7 +428,7 @@ async def test_get_algorithm_cancel(client: AsyncClient, db: DatabaseTestUtils) 
 @pytest.mark.asyncio
 async def test_get_algorithm_update(client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_algorithm("testalgorithm1")])
+    await db.given([default_user(), default_algorithm("testalgorithm1")])
     client.cookies["fastapi-csrf-token"] = "1"
     mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
 
@@ -529,7 +549,7 @@ async def test_find_requirement_tasks_by_measure_urn() -> None:
 @pytest.mark.asyncio
 async def test_get_measure(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_algorithm_with_system_card("testalgorithm1")])
+    await db.given([default_user(), default_algorithm_with_system_card("testalgorithm1")])
 
     # when
     response = await client.get("/algorithm/1/measure/urn:nl:ak:mtr:dat-01")
@@ -543,7 +563,7 @@ async def test_get_measure(client: AsyncClient, db: DatabaseTestUtils) -> None:
 @pytest.mark.asyncio
 async def test_update_measure_value(client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_algorithm_with_system_card("testalgorithm1")])
+    await db.given([default_user(), default_algorithm_with_system_card("testalgorithm1")])
     client.cookies["fastapi-csrf-token"] = "1"
     mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
 

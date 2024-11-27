@@ -9,7 +9,7 @@ from fastapi.responses import HTMLResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from amt.api.deps import templates
-from amt.core.exceptions import AMTHTTPException, AMTNotFound, AMTRepositoryError
+from amt.core.exceptions import AMTCSRFProtectError, AMTHTTPException, AMTNotFound, AMTRepositoryError
 from amt.core.internationalization import (
     get_current_translation,
 )
@@ -19,6 +19,8 @@ logger = logging.getLogger(__name__)
 CUSTOM_MESSAGES = {
     "string_too_short": _("String should have at least {min_length} characters"),
     "missing": _("Field required"),
+    "value_error": _("Field required"),
+    "string_pattern_mismatch": _("String should match pattern '{pattern}'"),
 }
 
 
@@ -32,20 +34,24 @@ def translate_pydantic_exception(err: dict[str, Any], translations: NullTranslat
     return err["msg"]
 
 
-async def general_exception_handler(request: Request, exc: Exception) -> HTMLResponse:
+async def general_exception_handler(request: Request, exc: Exception) -> HTMLResponse:  # noqa
     exception_name = exc.__class__.__name__
 
     logger.debug(f"general_exception_handler {exception_name}: {exc}")
 
     translations = get_current_translation(request)
 
+    response_headers: dict[str, str] = {}
     message = None
-    if isinstance(exc, AMTRepositoryError | AMTHTTPException):
+    if isinstance(exc, AMTCSRFProtectError):  # AMTCSRFProtectError is AMTHTTPException
+        message = exc.getmessage(translations)
+        response_headers["HX-Retarget"] = "#general-error-container"
+    elif isinstance(exc, AMTRepositoryError | AMTHTTPException):
         message = exc.getmessage(translations)
     elif isinstance(exc, StarletteHTTPException):
         message = AMTNotFound().getmessage(translations) if exc.status_code == status.HTTP_404_NOT_FOUND else exc.detail
     elif isinstance(exc, RequestValidationError):
-        # i assume only pydantic errors get into this section
+        # I assume only pydantic errors get into this section
         message = exc.errors()
         for err in message:
             err["msg"] = translate_pydantic_exception(err, translations)
@@ -69,10 +75,7 @@ async def general_exception_handler(request: Request, exc: Exception) -> HTMLRes
 
     try:
         response = templates.TemplateResponse(
-            request,
-            template_name,
-            {"message": message},
-            status_code=status_code,
+            request, template_name, {"message": message}, status_code=status_code, headers=response_headers
         )
     except Exception:
         response = templates.TemplateResponse(

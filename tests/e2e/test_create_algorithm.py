@@ -1,15 +1,21 @@
 import pytest
 from playwright.sync_api import Page, expect
 
+from tests.conftest import do_e2e_login
+
 
 @pytest.mark.slow
-def test_e2e_create_algorithm(page: Page):
+def test_e2e_create_algorithm(page: Page) -> None:
+    do_e2e_login(page)
+
     page.goto("/algorithms/new")
 
     page.fill("#name", "My new algorithm")
 
     button = page.locator("#lifecycle-DATA_EXPLORATION_AND_PREPARATION")
     button.click()
+
+    page.locator("#algorithmorganization_id").select_option("default organization")
 
     impact_assessment = page.get_by_label("AI Impact Assessment (AIIA)")
 
@@ -35,6 +41,8 @@ def test_e2e_create_algorithm(page: Page):
 
 @pytest.mark.slow
 def test_e2e_create_algorithm_invalid(page: Page):
+    do_e2e_login(page)
+
     page.goto("/algorithms/new")
 
     button = page.locator("#transparency_obligations-transparantieverplichtingen")

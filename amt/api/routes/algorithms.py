@@ -6,37 +6,26 @@ from fastapi.responses import HTMLResponse
 
 from amt.api.ai_act_profile import get_ai_act_profile_selector
 from amt.api.deps import templates
+from amt.api.forms.algorithm import get_algorithm_form
 from amt.api.group_by_category import get_localized_group_by_categories
 from amt.api.lifecycles import Lifecycles, get_localized_lifecycle, get_localized_lifecycles
 from amt.api.navigation import Navigation, resolve_base_navigation_items, resolve_navigation_items
 from amt.api.publication_category import (
-    PublicationCategories,
     get_localized_publication_categories,
-    get_localized_publication_category,
 )
+from amt.api.routes.shared import get_filters_and_sort_by
+from amt.core.authorization import get_user
+from amt.core.exceptions import AMTAuthorizationError
+from amt.core.internationalization import get_current_translation
 from amt.models import Algorithm
 from amt.schema.algorithm import AlgorithmNew
-from amt.schema.localized_value_item import LocalizedValueItem
+from amt.schema.webform import WebForm
 from amt.services.algorithms import AlgorithmsService, get_template_files
 from amt.services.instruments import InstrumentsService, create_instrument_service
+from amt.services.organizations import OrganizationsService
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
-
-
-def get_localized_value(key: str, value: str, request: Request) -> LocalizedValueItem:
-    match key:
-        case "lifecycle":
-            localized = get_localized_lifecycle(Lifecycles[value], request)
-        case "publication-category":
-            localized = get_localized_publication_category(PublicationCategories[value], request)
-        case _:
-            localized = None
-
-    if localized:
-        return localized
-
-    return LocalizedValueItem(value=value, display_value="Unknown filter option")
 
 
 @router.get("/")
@@ -48,22 +37,7 @@ async def get_root(
     search: str = Query(""),
     display_type: str = Query(""),
 ) -> HTMLResponse:
-    active_filters = {
-        k.removeprefix("active-filter-"): v
-        for k, v in request.query_params.items()
-        if k.startswith("active-filter") and v != ""
-    }
-    add_filters = {
-        k.removeprefix("add-filter-"): v
-        for k, v in request.query_params.items()
-        if k.startswith("add-filter") and v != ""
-    }
-    drop_filters = [v for k, v in request.query_params.items() if k.startswith("drop-filter") and v != ""]
-    filters = {k: v for k, v in (active_filters | add_filters).items() if k not in drop_filters}
-    localized_filters = {k: get_localized_value(k, v, request) for k, v in filters.items()}
-    sort_by = {
-        k.removeprefix("sort-by-"): v for k, v in request.query_params.items() if k.startswith("sort-by-") and v != ""
-    }
+    filters, drop_filters, localized_filters, sort_by = get_filters_and_sort_by(request)
 
     amount_algorithm_systems: int = 0
     if display_type == "LIFECYCLE":
@@ -126,11 +100,21 @@ async def get_root(
 async def get_new(
     request: Request,
     instrument_service: Annotated[InstrumentsService, Depends(create_instrument_service)],
+    organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
 ) -> HTMLResponse:
     sub_menu_items = resolve_navigation_items([Navigation.ALGORITHMS_OVERVIEW], request)  # pyright: ignore [reportUnusedVariable] # noqa
     breadcrumbs = resolve_base_navigation_items([Navigation.ALGORITHMS_ROOT, Navigation.ALGORITHM_NEW], request)
 
     ai_act_profile = get_ai_act_profile_selector(request)
+
+    user = get_user(request)
+
+    algorithm_form: WebForm = await get_algorithm_form(
+        id="algorithm",
+        translations=get_current_translation(request),
+        organizations_service=organizations_service,
+        user_id=user["sub"] if user else None,
+    )
 
     template_files = get_template_files()
 
@@ -143,6 +127,7 @@ async def get_new(
         "sub_menu_items": {},  # sub_menu_items disabled for now,
         "lifecycles": get_localized_lifecycles(request),
         "template_files": template_files,
+        "form": algorithm_form,
     }
 
     response = templates.TemplateResponse(request, "algorithms/new.html.j2", context)
@@ -155,6 +140,10 @@ async def post_new(
     algorithm_new: AlgorithmNew,
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
 ) -> HTMLResponse:
-    algorithm = await algorithms_service.create(algorithm_new)
-    response = templates.Redirect(request, f"/algorithm/{algorithm.id}/details/tasks")
-    return response
+    user: dict[str, Any] | None = get_user(request)
+    # TODO (Robbert): we need to handle (show) repository or service errors in the forms
+    if user:
+        algorithm = await algorithms_service.create(algorithm_new, user["sub"])
+        response = templates.Redirect(request, f"/algorithm/{algorithm.id}/details/tasks")
+        return response
+    raise AMTAuthorizationError

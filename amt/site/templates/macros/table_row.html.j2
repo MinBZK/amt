@@ -20,3 +20,26 @@
             </td>
         </tr>
     {% endmacro %}
+    {% macro sort_button(field_name, sort_by, base_url) %}
+        {% if field_name in sort_by and sort_by[field_name] == "ascending" or (not field_name in sort_by) %}
+            <button hx-trigger="click"
+                    hx-get="{{ base_url }}?skip=0&sort-by-{{ field_name }}=descending"
+                    hx-swap="innerHTML"
+                    class="utrecht-button utrecht-button--rvo-tertiary-action utrecht-button--rvo-sm"
+                    type="button">
+                <span class="utrecht-icon rvo-icon rvo-icon-delta-omhoog rvo-icon--sm rvo-icon--hemelblauw"
+                      role="img"
+                      aria-label="Delta omhoog"></span>
+            </button>
+        {% elif field_name in sort_by and sort_by[field_name] == "descending" %}
+            <button hx-trigger="click"
+                    hx-get="{{ base_url }}?skip=0&sort-by-{{ field_name }}=ascending"
+                    hx-swap="innerHTML"
+                    class="utrecht-button utrecht-button--rvo-tertiary-action utrecht-button--rvo-sm"
+                    type="button">
+                <span class="utrecht-icon rvo-icon rvo-icon-delta-omlaag rvo-icon--sm rvo-icon--hemelblauw"
+                      role="img"
+                      aria-label="Delta omhoog"></span>
+            </button>
+        {% endif %}
+    {% endmacro %}

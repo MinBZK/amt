@@ -11,6 +11,7 @@ async def setup_database_e2e(session: AsyncSession) -> None:
     db_e2e = DatabaseTestUtils(session)
 
     await db_e2e.given([default_user()])
+    await db_e2e.given([default_user(id="4738b1e151dc46219556a5662b26517c", name="Test User", organizations=[])])
 
     algorithms: list[Algorithm] = []
     for idx in range(120):

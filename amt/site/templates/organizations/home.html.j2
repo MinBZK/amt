@@ -1,0 +1,52 @@
+{% extends 'layouts/base.html.j2' %}
+{% from "macros/editable.html.j2" import editable with context %}
+{% import "macros/form_macros.html.j2" as macros with context %}
+{% block content %}
+    <div class="rvo-max-width-layout rvo-max-width-layout--md rvo-max-width-layout-inline-padding--none">
+        <div class="margin-top-large">
+            <ul class="rvo-tabs rvo-ul rvo-ul--no-margin rvo-ul--no-padding rvo-ul--icon rvo-ul--icon-option-2"
+                role="tablist"
+                aria-label="Tabs">
+                {% for tab_item in tab_items %}
+                    <li role="presentation" class="rvo-tabs__item">
+                        <a data-navigation="tab:{{ tab_item.get_url() }}"
+                           class="rvo-link rvo-tabs__item-link rvo-link--no-underline {% if tab_item.active %}rvo-tabs__item-link--active rvo-link--active{% else %}rvo-link--normal{% endif %}"
+                           role="tab"
+                           aria-selected="true"
+                           href="{{ tab_item.get_url() }}">{{ tab_item.display_text }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="rvo-table--responsive rvo-alert--padding-md">
+            <table class="rvo-table">
+                <tbody class="rvo-table-body">
+                    <tr class="rvo-table-row">
+                        <td class="rvo-table-cell">{% trans %}Name{% endtrans %}</td>
+                        <td class="rvo-table-cell">{{ editable(organization, "name", "systemcard") }}</td>
+                    </tr>
+                    <tr class="rvo-table-row">
+                        <td class="rvo-table-cell">{% trans %}Slug{% endtrans %}</td>
+                        <td class="rvo-table-cell">{{ editable(organization, "slug", "systemcard") }}</td>
+                    </tr>
+                    <tr class="rvo-table-row">
+                        <td class="rvo-table-cell">{% trans %}Created at{% endtrans %}</td>
+                        <td class="rvo-table-cell">{{ organization.created_at|format_datetime(language) }}</td>
+                    </tr>
+                    <tr class="rvo-table-row">
+                        <td class="rvo-table-cell">{% trans %}Created by{% endtrans %}</td>
+                        <td class="rvo-table-cell">{{ organization.created_by.name }}</td>
+                    </tr>
+                    <tr class="rvo-table-row">
+                        <td class="rvo-table-cell">{% trans %}Modified at{% endtrans %}</td>
+                        <td class="rvo-table-cell">{{ organization.modified_at|format_datetime(language) }}</td>
+                    </tr>
+                    <tr class="rvo-table-row">
+                        <td class="rvo-table-cell">{% trans %}Members{% endtrans %}</td>
+                        <td class="rvo-table-cell">{{ macros.user_avatars(organization.users) }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
