@@ -197,6 +197,36 @@ msgstr ""
 msgid "Organization"
 msgstr ""
 
+#: amt/api/forms/measure.py:17
+msgid "Status"
+msgstr ""
+
+#: amt/api/forms/measure.py:30
+msgid "Information on how this measure is implemented"
+msgstr ""
+
+#: amt/api/forms/measure.py:31
+msgid ""
+"Describe how the measure has been implemented, including challenges and "
+"solutions."
+msgstr ""
+
+#: amt/api/forms/measure.py:38
+msgid "Add files"
+msgstr ""
+
+#: amt/api/forms/measure.py:43
+msgid "Add URI"
+msgstr ""
+
+#: amt/api/forms/measure.py:46
+msgid "Add links to documents"
+msgstr ""
+
+#: amt/api/forms/measure.py:47
+msgid "URI"
+msgstr ""
+
 #: amt/api/forms/organization.py:15
 #: amt/site/templates/algorithms/details_info.html.j2:8
 #: amt/site/templates/auth/profile.html.j2:34
@@ -450,41 +480,12 @@ msgstr ""
 msgid "Read more on the algoritmekader"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:38
-msgid "Status"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:45
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:47
-msgid "to do"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:50
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:52
-msgid "in progress"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:55
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:57
-msgid "done"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:68
-msgid "Information on how this measure is implemented"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:74
-msgid ""
-"Describe how the measure has been implemented, including challenges and "
-"solutions."
-msgstr ""
-
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:84
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:40
 #: amt/site/templates/macros/editable.html.j2:82
 msgid "Save"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:88
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:44
 #: amt/site/templates/macros/editable.html.j2:87
 msgid "Cancel"
 msgstr ""
@@ -617,8 +618,12 @@ msgstr ""
 msgid "There is one error:"
 msgstr ""
 
-#: amt/site/templates/layouts/base.html.j2:1
+#: amt/site/templates/layouts/base.html.j2:11
 msgid "Algorithmic Management Toolkit (AMT)"
+msgstr ""
+
+#: amt/site/templates/macros/form_macros.html.j2:127
+msgid "Saved files"
 msgstr ""
 
 #: amt/site/templates/macros/table_row.html.j2:19

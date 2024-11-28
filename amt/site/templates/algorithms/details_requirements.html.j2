@@ -31,11 +31,15 @@
                     <div class="rvo-accordion__content">
                         <div class="rvo-layout-row rvo-layout-gap--sm rvo-layout-align-items-start rvo-layout-margin-horizontal--xl">
                             {% if measure.state == "to do" %}
-                                <div class="rvo-status-indicator rvo-status-indicator--hemelblauw"></div>
+                                <div class="rvo-status-indicator rvo-status-indicator--oranje-300"></div>
                             {% elif measure.state == "in progress" %}
+                                <div class="rvo-status-indicator rvo-status-indicator--hemelblauw"></div>
+                            {% elif measure.state == "in review" %}
                                 <div class="rvo-status-indicator rvo-status-indicator--oranje"></div>
                             {% elif measure.state == "done" %}
                                 <div class="rvo-status-indicator rvo-status-indicator--groen"></div>
+                            {% elif measure.state == "not implemented" %}
+                                <div class="rvo-status-indicator rvo-status-indicator--hemelblauw-300"></div>
                             {% else %}
                                 {# This should not happen, red could be for overdue.#}
                                 <div class="rvo-status-indicator rvo-status-indicator--rood"></div>
