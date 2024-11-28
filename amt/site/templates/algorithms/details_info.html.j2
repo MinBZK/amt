@@ -6,15 +6,19 @@
             <tbody class="rvo-table-body">
                 <tr class="rvo-table-row">
                     <td class="rvo-table-cell">{% trans %}Name{% endtrans %}</td>
-                    <td class="rvo-table-cell">{{ editable(algorithm, "name") }}</td>
+                    <td class="rvo-table-cell">{{ editable(algorithm, "name", "systemcard") }}</td>
+                </tr>
+                <tr class="rvo-table-row">
+                    <td class="rvo-table-cell">{% trans %}Organization{% endtrans %}</td>
+                    <td class="rvo-table-cell">{{ editable(algorithm, "organization.name", "select_my_organizations") }}</td>
                 </tr>
                 <tr class="rvo-table-row">
                     <td class="rvo-table-cell">{% trans %}Description{% endtrans %}</td>
-                    <td class="rvo-table-cell">{{ editable(algorithm, "system_card.description") }}</td>
+                    <td class="rvo-table-cell">{{ editable(algorithm, "system_card.description", "systemcard") }}</td>
                 </tr>
                 <tr class="rvo-table-row">
                     <td class="rvo-table-cell">{% trans %}Repository{% endtrans %}</td>
-                    <td class="rvo-table-cell">{{ editable(algorithm, "system_card.provenance.uri") }}</td>
+                    <td class="rvo-table-cell">{{ editable(algorithm, "system_card.provenance.uri", "systemcard") }}</td>
                 </tr>
                 <tr class="rvo-table-row rvo-max-width-layout--sm">
                     <td class="rvo-table-cell">{% trans %}Algorithm code{% endtrans %}</td>
@@ -22,7 +26,7 @@
                 </tr>
                 <tr class="rvo-table-row">
                     <td class="rvo-table-cell">{% trans %}Lifecycle{% endtrans %}</td>
-                    <td class="rvo-table-cell">{{ editable(algorithm, "lifecycle") }}</td>
+                    <td class="rvo-table-cell">{{ editable(algorithm, "lifecycle", "systemcard") }}</td>
                 </tr>
                 <tr class="rvo-table-row">
                     <td class="rvo-table-cell">{% trans %}Last updated{% endtrans %}</td>

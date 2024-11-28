@@ -1,16 +1,23 @@
+from datetime import datetime
+
 import pytest
 from amt.api.lifecycles import Lifecycles
 from amt.api.publication_category import PublicationCategories
 from amt.core.exceptions import AMTRepositoryError
 from amt.models import Algorithm
 from amt.repositories.algorithms import AlgorithmsRepository, sort_by_lifecycle, sort_by_lifecycle_reversed
-from tests.constants import default_algorithm, default_algorithm_with_lifecycle, default_algorithm_with_system_card
+from tests.constants import (
+    default_algorithm,
+    default_algorithm_with_lifecycle,
+    default_algorithm_with_system_card,
+    default_user,
+)
 from tests.database_test_utils import DatabaseTestUtils
 
 
 @pytest.mark.asyncio
 async def test_find_all(db: DatabaseTestUtils):
-    await db.given([default_algorithm(), default_algorithm()])
+    await db.given([default_user(), default_algorithm(), default_algorithm()])
     algorithm_repository = AlgorithmsRepository(db.get_session())
     results = await algorithm_repository.find_all()
     assert results[0].id == 1
@@ -27,6 +34,8 @@ async def test_find_all_no_results(db: DatabaseTestUtils):
 
 @pytest.mark.asyncio
 async def test_save(db: DatabaseTestUtils):
+    await db.given([default_user()])
+
     algorithm_repository = AlgorithmsRepository(db.get_session())
     algorithm = default_algorithm()
     await algorithm_repository.save(algorithm)
@@ -41,6 +50,7 @@ async def test_save(db: DatabaseTestUtils):
 
 @pytest.mark.asyncio
 async def test_delete(db: DatabaseTestUtils):
+    await db.given([default_user()])
     algorithm_repository = AlgorithmsRepository(db.get_session())
     algorithm = default_algorithm()
     await algorithm_repository.save(algorithm)
@@ -53,6 +63,7 @@ async def test_delete(db: DatabaseTestUtils):
 
 @pytest.mark.asyncio
 async def test_save_failed(db: DatabaseTestUtils):
+    await db.given([default_user()])
     algorithm_repository = AlgorithmsRepository(db.get_session())
     algorithm = default_algorithm()
     algorithm.id = 1
@@ -69,6 +80,7 @@ async def test_save_failed(db: DatabaseTestUtils):
 
 @pytest.mark.asyncio
 async def test_delete_failed(db: DatabaseTestUtils):
+    await db.given([default_user()])
     algorithm_repository = AlgorithmsRepository(db.get_session())
     algorithm = default_algorithm()
 
@@ -78,7 +90,7 @@ async def test_delete_failed(db: DatabaseTestUtils):
 
 @pytest.mark.asyncio
 async def test_find_by_id(db: DatabaseTestUtils):
-    await db.given([default_algorithm()])
+    await db.given([default_user(), default_algorithm()])
     algorithm_repository = AlgorithmsRepository(db.get_session())
     result = await algorithm_repository.find_by_id(1)
     assert result.id == 1
@@ -94,7 +106,7 @@ async def test_find_by_id_failed(db: DatabaseTestUtils):
 
 @pytest.mark.asyncio
 async def test_paginate(db: DatabaseTestUtils):
-    await db.given([default_algorithm()])
+    await db.given([default_user(), default_algorithm()])
     algorithm_repository = AlgorithmsRepository(db.get_session())
 
     result: list[Algorithm] = await algorithm_repository.paginate(skip=0, limit=3, search="", filters={}, sort={})
@@ -104,7 +116,7 @@ async def test_paginate(db: DatabaseTestUtils):
 
 @pytest.mark.asyncio
 async def test_paginate_more(db: DatabaseTestUtils):
-    await db.given([default_algorithm(), default_algorithm(), default_algorithm(), default_algorithm()])
+    await db.given([default_user(), default_algorithm(), default_algorithm(), default_algorithm(), default_algorithm()])
     algorithm_repository = AlgorithmsRepository(db.get_session())
 
     result: list[Algorithm] = await algorithm_repository.paginate(skip=0, limit=3, search="", filters={}, sort={})
@@ -116,6 +128,7 @@ async def test_paginate_more(db: DatabaseTestUtils):
 async def test_paginate_capitalize(db: DatabaseTestUtils):
     await db.given(
         [
+            default_user(),
             default_algorithm(name="Algorithm1"),
             default_algorithm(name="bbb"),
             default_algorithm(name="Aaa"),
@@ -137,6 +150,7 @@ async def test_paginate_capitalize(db: DatabaseTestUtils):
 async def test_search(db: DatabaseTestUtils):
     await db.given(
         [
+            default_user(),
             default_algorithm(name="Algorithm1"),
             default_algorithm(name="bbb"),
             default_algorithm(name="Aaa"),
@@ -155,6 +169,7 @@ async def test_search(db: DatabaseTestUtils):
 async def test_search_multiple(db: DatabaseTestUtils):
     await db.given(
         [
+            default_user(),
             default_algorithm(name="Algorithm1"),
             default_algorithm(name="bbb"),
             default_algorithm(name="Aaa"),
@@ -180,7 +195,7 @@ async def test_search_no_results(db: DatabaseTestUtils):
 
 @pytest.mark.asyncio
 async def test_raises_exception(db: DatabaseTestUtils):
-    await db.given([default_algorithm()])
+    await db.given([default_user(), default_algorithm()])
     algorithm_repository = AlgorithmsRepository(db.get_session())
 
     with pytest.raises(AMTRepositoryError):
@@ -191,6 +206,7 @@ async def test_raises_exception(db: DatabaseTestUtils):
 async def test_sort_by_lifecyle(db: DatabaseTestUtils):
     await db.given(
         [
+            default_user(),
             default_algorithm_with_lifecycle(name="Algorithm1", lifecycle=Lifecycles.DESIGN),
             default_algorithm(name="Algorithm2"),
         ]
@@ -209,6 +225,7 @@ async def test_sort_by_lifecyle(db: DatabaseTestUtils):
 async def test_sort_by_lifecycle_reversed(db: DatabaseTestUtils):
     await db.given(
         [
+            default_user(),
             default_algorithm_with_lifecycle(name="Algorithm1", lifecycle=Lifecycles.DESIGN),
             default_algorithm(name="Algorithm2"),
         ]
@@ -227,6 +244,7 @@ async def test_sort_by_lifecycle_reversed(db: DatabaseTestUtils):
 async def test_with_lifecycle_filter(db: DatabaseTestUtils):
     await db.given(
         [
+            default_user(),
             default_algorithm_with_lifecycle(name="Algorithm1"),
             default_algorithm(name="Algorithm2"),
             default_algorithm(name="Algorithm3"),
@@ -247,6 +265,7 @@ async def test_with_lifecycle_filter(db: DatabaseTestUtils):
 async def test_with_publication_category_filter(db: DatabaseTestUtils):
     await db.given(
         [
+            default_user(),
             default_algorithm_with_system_card(name="Algorithm1"),
             default_algorithm(name="Algorithm2"),
             default_algorithm(name="Algorithm3"),
@@ -267,8 +286,13 @@ async def test_with_publication_category_filter(db: DatabaseTestUtils):
 async def test_with_sorting(db: DatabaseTestUtils):
     await db.given(
         [
+            default_user(),
             default_algorithm_with_lifecycle(name="Algorithm1", lifecycle=Lifecycles.DESIGN),
-            default_algorithm_with_lifecycle(name="Algorithm2", lifecycle=Lifecycles.PHASING_OUT),
+            default_algorithm_with_lifecycle(
+                name="Algorithm2",
+                last_edited=datetime(2099, 1, 1, 1, 1, 1, 0),  # noqa: DTZ001
+                lifecycle=Lifecycles.PHASING_OUT,
+            ),
         ]
     )
     algorithm_repository = AlgorithmsRepository(db.get_session())
@@ -295,7 +319,7 @@ async def test_with_sorting(db: DatabaseTestUtils):
     result: list[Algorithm] = await algorithm_repository.paginate(
         skip=0, limit=4, search="", filters={}, sort={"last_update": "descending"}
     )
-    assert result[0].name == "Algorithm1"
+    assert result[0].name == "Algorithm2"
 
     # Sort lifecycle regular
     result: list[Algorithm] = await algorithm_repository.paginate(

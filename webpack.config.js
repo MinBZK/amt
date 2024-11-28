@@ -95,7 +95,7 @@ module.exports = {
       dir: 'amt/site/static/dist/@nl-rvo/assets/icons/',
       files: ['index.css'],
       rules: [{
-        search: /url\("/ig,
+        search: /url\("(?!\/)/ig,
         replace: 'url("/static/dist/@nl-rvo/assets/icons/'
       }]
     }])

@@ -304,6 +304,32 @@ main {
     font-weight: var(--rvo-form-feedback-error-font-weight);
 }
 
+/* stylelint-disable selector-class-pattern */
+
+.amt-item-list__as_select {
+    border-width: var(--utrecht-form-control-border-width);
+    border-color: var(--utrecht-form-control-focus-border-color);
+    border-radius: var(--utrecht-form-control-border-radius, 0);
+    border-style: solid;
+    position: absolute;
+    background-color: var(--rvo-color-wit);
+    width: 100%;
+    top: 45px;
+    z-index: 100;
+}
+
+.amt-item-list__item_as_select {
+    padding-left: 1em;
+
+    &:hover {
+        background-color: var(--rvo-color-logoblauw-150);
+    }
+}
+
+.amt-position-relative {
+    position: relative;
+}
+
 .amt-flex-container {
     display: flex;
     justify-content: space-between;
@@ -314,9 +340,54 @@ main {
 }
 
 /* we override the default ROOS style because we want to display as column, not rows */
-/* stylelint-disable selector-class-pattern */
 .amt-theme .rvo-accordion__item > .rvo-accordion__item-summary {
     align-items: initial;
     flex-direction: column;
+}
+
+.amt-avatar-list {
+    display: inline-flex;
+}
+
+.amt-avatar-list__item {
+    img {
+        border: 1px solid var(--rvo-color-hemelblauw-750);
+        border-radius: 50%;
+    }
+
+    .amt-avatar-list__more {
+        display: inline-block;
+        min-width: 24px;
+        font-size: var(--rvo-size-sm);
+        height: 24px;
+        border: 1px solid var(--rvo-color-hemelblauw-750);
+        border-radius: 50%;
+        text-align: center;
+        background-color: var(--rvo-color-grijs-300);
+    }
+}
+
+.amt-avatar-list__item:not(:first-child) {
+    margin-left: -10px;
+}
+
+.amt-tooltip {
+    position: relative;
+}
+
+.amt-tooltip .amt-tooltip__text {
+    visibility: hidden;
+    background-color: var(--rvo-color-hemelblauw);
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    top: -2em;
+    text-align: center;
+}
+
+.amt-tooltip:hover .amt-tooltip__text {
+    visibility: visible;
 }
 /* stylelint-enable */

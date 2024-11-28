@@ -3,6 +3,7 @@ from enum import StrEnum
 from typing import Any
 
 import httpx
+from amt.core.config import get_settings
 from amt.core.exceptions import AMTInstrumentError, AMTNotFound
 from amt.schema.github import RepositoryContent
 from async_lru import alru_cache
@@ -39,9 +40,7 @@ class TaskRegistryAPIClient(APIClient):
     """
 
     def __init__(self, max_retries: int = 3, timeout: int = 5) -> None:
-        super().__init__(
-            base_url="https://task-registry.apps.digilab.network", max_retries=max_retries, timeout=timeout
-        )
+        super().__init__(base_url=get_settings().TASK_REGISTRY_URL, max_retries=max_retries, timeout=timeout)
 
     async def get_list_of_task(self, task: TaskType = TaskType.INSTRUMENTS) -> RepositoryContent:
         response_data = await self._make_request(f"{task.value}/")

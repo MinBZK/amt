@@ -4,6 +4,7 @@ import _hyperscript from "hyperscript.org";
 
 import "../scss/tabs.scss";
 import "../scss/layout.scss";
+/* eslint-disable  @typescript-eslint/no-non-null-assertion */
 
 _hyperscript.browserInit();
 
@@ -151,5 +152,95 @@ export function closeModalSave(id: string) {
         element?.click();
       });
     });
+  }
+}
+
+export function reset_errorfield(id: string): void {
+  const el = document.getElementById(id);
+  if (el) {
+    el.innerHTML = "";
+  }
+}
+
+export function prevent_submit_on_enter(): void {
+  // @ts-expect-error false positive
+  if (event.key === "Enter") {
+    // @ts-expect-error false positive
+    event.preventDefault();
+  }
+}
+
+export function generate_slug(sourceId: string, targetId: string) {
+  if (
+    document.getElementById(sourceId) != null &&
+    document.getElementById(targetId) != null
+  ) {
+    const value = (document.getElementById(sourceId) as HTMLInputElement)!
+      .value;
+    (document.getElementById(targetId) as HTMLInputElement)!.value = value
+      .toLowerCase()
+      .replace(/[^a-z0-9-_ ]/g, "")
+      .replace(/\s/g, "-");
+  }
+}
+
+export function add_field(field: HTMLElement) {
+  const value = field.getAttribute("data-value");
+  const targetId = (field.parentNode as HTMLElement)!.getAttribute(
+    "data-target-id",
+  );
+  const parentId = (field?.parentNode as HTMLElement).id;
+
+  if (targetId != null) {
+    const existing = document
+      .getElementById(targetId)!
+      .querySelectorAll(`[data-value="` + value + `"]`);
+    if (existing.length === 1) {
+      return;
+    }
+    // the new element is in the attribute field of the search result as base64 encoded string
+    const newElement = atob(field.getAttribute("data-list-result") as string);
+    document
+      .getElementById(targetId)!
+      .insertAdjacentHTML("beforeend", newElement);
+    document.getElementById(parentId)!.style.display = "none";
+    document.getElementById(parentId)!.innerHTML = "";
+    (document.getElementById(parentId)!
+      .previousElementSibling as HTMLFormElement)!.value = "";
+  }
+}
+
+export function show_form_search_options(id: string) {
+  document.getElementById(id)!.style.display = "block";
+}
+
+export function hide_form_search_options(id: string) {
+  window.setTimeout(function () {
+    document.getElementById(id)!.style.display = "none";
+  }, 250);
+}
+
+export function add_field_on_enter(id: string) {
+  if (!event) {
+    return;
+  }
+  if (
+    (event as KeyboardEvent).key == "ArrowUp" ||
+    (event as KeyboardEvent).key == "ArrowDown"
+  ) {
+    // const searchOptions = document.getElementById(id)!.querySelectorAll("li");
+    event.preventDefault();
+    // nice to have: use arrow keys to select options
+    // searchOptions[0].style.border = "1px solid red"
+  }
+  if ((event as KeyboardEvent).key === "Enter") {
+    event.preventDefault();
+    const searchOptions = document.getElementById(id)!.querySelectorAll("li");
+    if (searchOptions.length === 1) {
+      searchOptions[0].click();
+    }
+  } else {
+    // make sure search results are visible when we type any key
+    show_form_search_options(id);
   }
 }

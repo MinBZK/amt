@@ -15,9 +15,11 @@ class DatabaseTestUtils:
 
     async def given(self, models: list[Base]) -> None:
         session = self.get_session()
-        session.add_all(models)
-
-        await session.commit()
+        # we add each model separately, because they may have relationships,
+        #  that doesn't work with session.add_all
+        for model in models:
+            session.add(model)
+            await session.commit()
 
         for model in models:
             await session.refresh(model)  # inefficient, but needed to create correlations between models

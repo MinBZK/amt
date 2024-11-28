@@ -15,17 +15,21 @@ from amt.api.navigation import (
     resolve_base_navigation_items,
     resolve_navigation_items,
 )
+from amt.core.authorization import get_user
 from amt.core.exceptions import AMTNotFound, AMTRepositoryError
 from amt.enums.status import Status
 from amt.models import Algorithm
 from amt.models.task import Task
+from amt.repositories.organizations import OrganizationsRepository
 from amt.schema.measure import ExtendedMeasureTask, MeasureTask
 from amt.schema.requirement import RequirementTask
-from amt.schema.system_card import SystemCard
+from amt.schema.system_card import Owner, SystemCard
 from amt.schema.task import MovedTask
+from amt.schema.webform import WebFormOption
 from amt.services.algorithms import AlgorithmsService
 from amt.services.instruments_and_requirements_state import InstrumentStateService, RequirementsStateService
 from amt.services.measures import MeasuresService, create_measures_service
+from amt.services.organizations import OrganizationsService
 from amt.services.requirements import RequirementsService, create_requirements_service
 from amt.services.tasks import TasksService
 
@@ -201,6 +205,7 @@ async def get_algorithm_details(
     )
 
     context["breadcrumbs"] = breadcrumbs
+    context["base_href"] = f"/algorithm/{ algorithm_id }"
 
     return templates.TemplateResponse(request, "algorithms/details_info.html.j2", context)
 
@@ -210,10 +215,30 @@ async def get_algorithm_edit(
     request: Request,
     algorithm_id: int,
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
+    organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
     path: str,
+    edit_type: str = "systemcard",
 ) -> HTMLResponse:
-    _, context = await get_algorithm_context(algorithm_id, algorithms_service, request)
-    context["path"] = path.replace("/", ".")
+    algorithm, context = await get_algorithm_context(algorithm_id, algorithms_service, request)
+    context.update(
+        {
+            "path": path.replace("/", "."),
+            "edit_type": edit_type,
+            "object": algorithm,
+            "base_href": f"/algorithm/{ algorithm_id }",
+        }
+    )
+
+    if edit_type == "select_my_organizations":
+        user = get_user(request)
+
+        my_organizations = await organizations_service.get_organizations_for_user(user_id=user["sub"] if user else None)
+
+        context["select_options"] = [
+            WebFormOption(value=str(organization.id), display_value=organization.name)
+            for organization in my_organizations
+        ]
+
     return templates.TemplateResponse(request, "parts/edit_cell.html.j2", context)
 
 
@@ -223,9 +248,17 @@ async def get_algorithm_cancel(
     algorithm_id: int,
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
     path: str,
+    edit_type: str = "systemcard",
 ) -> HTMLResponse:
-    _, context = await get_algorithm_context(algorithm_id, algorithms_service, request)
-    context["path"] = path.replace("/", ".")
+    algorithm, context = await get_algorithm_context(algorithm_id, algorithms_service, request)
+    context.update(
+        {
+            "path": path.replace("/", "."),
+            "edit_type": edit_type,
+            "base_href": f"/algorithm/{ algorithm_id }",
+            "object": algorithm,
+        }
+    )
     return templates.TemplateResponse(request, "parts/view_cell.html.j2", context)
 
 
@@ -261,13 +294,28 @@ async def get_algorithm_update(
     request: Request,
     algorithm_id: int,
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
+    organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
     update_data: UpdateFieldModel,
     path: str,
+    edit_type: str = "systemcard",
 ) -> HTMLResponse:
     algorithm, context = await get_algorithm_context(algorithm_id, algorithms_service, request)
-    set_path(algorithm, path, update_data.value)
-    await algorithms_service.update(algorithm)
-    context["path"] = path.replace("/", ".")
+    context.update(
+        {"path": path.replace("/", "."), "edit_type": edit_type, "base_href": f"/algorithm/{ algorithm_id }"}
+    )
+
+    if edit_type == "select_my_organizations":
+        organization = await organizations_repository.find_by_id(int(update_data.value))
+        algorithm.organization = organization
+        # TODO: we need to know which organization to update and what to remove
+        if not algorithm.system_card.owners:
+            algorithm.system_card.owners = [Owner(organization=organization.name, oin=str(organization.id))]
+        algorithm.system_card.owners[0].organization = organization.name
+    else:
+        set_path(algorithm, path, update_data.value)
+
+    algorithm = await algorithms_service.update(algorithm)
+    context.update({"object": algorithm})
     return templates.TemplateResponse(request, "parts/view_cell.html.j2", context)
 
 

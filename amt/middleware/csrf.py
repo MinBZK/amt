@@ -9,6 +9,7 @@ from starlette.responses import Response
 from starlette.types import ASGIApp
 
 from amt.core.csrf import get_csrf_config  # type: ignore # noqa
+from amt.core.exception_handlers import general_exception_handler
 from amt.core.exceptions import AMTCSRFProtectError
 
 RequestResponseEndpoint = typing.Callable[[Request], typing.Awaitable[Response]]
@@ -55,9 +56,11 @@ class CSRFMiddleware(BaseHTTPMiddleware):
 
         response = await call_next(request)
 
-        if self._include_request(request) and request.method in self.safe_methods:
-            self.csrf_protect.set_csrf_cookie(signed_token, response)
-            logger.debug(f"set csrf_cookie: signed_token={signed_token}")
+        if self._include_request(request) and request.method in self.safe_methods:  # noqa
+            # TODO FIXME (Robbert) we always set the cookie, this causes CSRF problems
+            if request.url.path != "/organizations/users":
+                self.csrf_protect.set_csrf_cookie(signed_token, response)
+                logger.debug(f"set csrf_cookie: signed_token={signed_token}")
 
         return response
 
@@ -73,6 +76,7 @@ class CSRFMiddlewareExceptionHandler(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next: RequestResponseEndpoint) -> Response:
         try:
             response = await call_next(request)
-        except CsrfProtectError as e:
-            raise AMTCSRFProtectError() from e
+        except CsrfProtectError:
+            # middleware exceptions are not handled by the fastapi error handlers, so we call the function ourselves
+            return await general_exception_handler(request, AMTCSRFProtectError())
         return response

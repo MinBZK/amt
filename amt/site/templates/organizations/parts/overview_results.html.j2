@@ -1,0 +1,141 @@
+{% import "macros/table_row.html.j2" as table_row with context %}
+{% import "macros/form_macros.html.j2" as macros with context %}
+{% if include_filters %}
+    <div class="amt-layout-grid rvo-layout-gap--md amt-layout-grid-columns--two">
+        <div>
+            <h1 class="utrecht-heading-1">{% trans %}Organizations{% endtrans %}</h1>
+        </div>
+        <div style="margin-left: auto">
+            <a data-navigation="button:/organizations/new" href="/organizations/new">
+                <button class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
+                        type="button">{% trans %}New organization{% endtrans %}</button>
+            </a>
+        </div>
+    </div>
+    <form id="search-organization-form"
+          hx-get="/organizations/?skip=0"
+          hx-target="#organization-search-results"
+          hx-trigger="change"
+          hx-include="this"
+          hx-swap="innerHTML">
+        <div class="utrecht-form-fieldset rvo-form-fieldset">
+            <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
+                <div class="rvo-inline-form">
+                    <div class="rvo-layout-grid-container margin-bottom-none">
+                        <div class="rvo-layout-grid rvo-layout-gap--sm rvo-layout-grid-columns--two rvo-layout-grid-layout--2fr1fr">
+                            <div class="rvo-layout-column rvo-text--bold rvo-layout-gap--sm">
+                                <div>{% trans %}Search{% endtrans %}</div>
+                                <div class="form-input-container">
+                                    <input id="organization-search-input"
+                                           type="text"
+                                           class="utrecht-textbox utrecht-textbox--html-input"
+                                           dir="auto"
+                                           value="{{ search }}"
+                                           placeholder="{% trans %}Find organizations...{% endtrans %}"
+                                           name="search"
+                                           hx-get="/organizations/?skip=0"
+                                           hx-trigger="input changed delay:500ms, search"
+                                           autocomplete="off"
+                                           onfocus="this.value=''" />
+                                    <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--lg form-input-clear"
+                                          role="img"
+                                          aria-label="Kruis"
+                                          hx-trigger="click"
+                                          hx-get="/organizations/?skip=0"
+                                          hx-indicator=".htmx-indicator"
+                                          hx-swap="innerHTML"
+                                          onclick="document.getElementById('organization-search-input').value = ''"></span>
+                                </div>
+                            </div>
+                            <div class="rvo-layout-column rvo-text--bold rvo-layout-gap--sm">
+                                <div>{% trans %}Organisation Type{% endtrans %}</div>
+                                <div class="rvo-select-wrapper">
+                                    <select id="add-filter-organization-type"
+                                            name="add-filter-organization-type"
+                                            class="utrecht-select utrecht-select--html-select">
+                                        {% for organization_filter in organization_filters %}
+                                            <option {% if "organization_filter" in filters and organization_filter.value == filters["organization_filters"].value %}selected="selected"{% endif %}
+                                                    value="{{ organization_filter.value }}">
+                                                {{ organization_filter.display_value }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </form>
+{% endif %}
+{% if start > 0 %}
+    {% for organization in organizations %}{{ macros.overview_table_row(loop, organization) }}{% endfor %}
+{% else %}
+    <div id="organization-search-results">
+        <div class="margin-top-large rvo-layout-row rvo-layout-justify-content-space-between">
+            <div>
+                <span>
+                    {% trans organizations_length %}{{ organizations_length }} result
+                {% pluralize %}
+                    {{ organizations_length }} results{% endtrans %}
+                </span>
+                {% if search or filters %}
+                    <span>{% trans %}for{% endtrans %}</span>
+                    {% if search %}<span><em>'{{ search }}'</em></span>{% endif %}
+                {% endif %}
+                <form name="htmx-remove-tags"
+                      hx-target="#search-organization-container"
+                      hx-include="this"
+                      hx-swap="innerHTML"
+                      style="display: inline-block">
+                    <input type="hidden" name="search" value="{{ search }}">
+                    {% for key, localized_value in filters.items() %}
+                        <span target="_self"
+                              class="rvo-tag rvo-tag--default"
+                              hx-trigger="click"
+                              hx-get="/organizations/?skip=0&drop-filter-={{ key }}"
+                              hx-swap="innerHTML"
+                              style="cursor: pointer;
+                                     display: inline-block">
+                            <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--sm form-input-clear"
+                                  role="img"
+                                  aria-label="Kruis"></span>
+                            {{ localized_value.display_value }}
+                            <input type="hidden"
+                                   name="active-filter-{{ key }}"
+                                   value="{{ localized_value.value }}">
+                        </span>
+                    {% endfor %}
+                </form>
+            </div>
+        </div>
+        <form name="htmx-sort-form"
+              hx-include="this"
+              hx-target="#organization-search-results"
+              hx-swap="innerHTML">
+            <input type="hidden" name="search" value="{{ search }}">
+            {% for key, localized_value in filters.items() %}
+                <input type="hidden"
+                       name="active-filter-{{ key }}"
+                       value="{{ localized_value.value }}">
+            {% endfor %}
+            <table id="search-results-table" class="rvo-table margin-top-large">
+                <thead class="rvo-table-head">
+                    <tr class="rvo-table-row">
+                        <th style="width: 60%" scope="col" class="rvo-table-header">
+                            {% trans %}Organization name{% endtrans %}
+                            {{ table_row.sort_button('name', sort_by, "/organizations/") }}
+                        </th>
+                        <th scope="col" class="rvo-table-header">{% trans %}Members{% endtrans %}</th>
+                        <th scope="col" class="rvo-table-header" style="white-space: nowrap">
+                            {% trans %}Last updated{% endtrans %}
+                            {{ table_row.sort_button('last_update', sort_by, "/organizations/") }}
+                        </th>
+                    </tr>
+                </thead>
+                {% for organization in organizations %}{{ macros.overview_table_row(loop, organization) }}{% endfor %}
+            </table>
+        </form>
+    </div>
+{% endif %}

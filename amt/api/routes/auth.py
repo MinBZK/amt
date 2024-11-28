@@ -66,8 +66,15 @@ async def auth_callback(
         user["name_encoded"] = quote_plus(name)
 
     if "sub" in user and isinstance(user["sub"], str):
-        new_user = User(id=UUID(user["sub"]), name=user["name"])  # type: ignore
-        new_user = await users_service.create_or_update(new_user)
+        new_user = User(
+            id=UUID(user["sub"]),  # type: ignore
+            name=user["name"],
+            email=user["email"],
+            name_encoded=user["name_encoded"],
+            email_hash=user["email_hash"],
+        )
+        # update the user in the database with (potential) new information
+        await users_service.create_or_update(new_user)
 
     if user:
         request.session["user"] = dict(user)  # type: ignore

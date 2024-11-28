@@ -1,13 +1,42 @@
 import json
+from datetime import datetime
+from typing import Any
+from urllib.parse import quote_plus
 from uuid import UUID
 
 from amt.api.lifecycles import Lifecycles
 from amt.api.navigation import BaseNavigationItem, DisplayText
-from amt.models import Algorithm, Task, User
+from amt.models import Algorithm, Organization, Task, User
 from amt.schema.instrument import Instrument, InstrumentTask, Owner
 from amt.schema.system_card import SystemCard
 from fastapi import Request
 from starlette.datastructures import URL
+
+
+def default_auth_user() -> dict[str, Any]:
+    return {
+        "exp": 1732621076,
+        "iat": 1732620776,
+        "auth_time": 1732620601,
+        "jti": "ad011860-aecb-4378-ba46-98284a7818f3",
+        "iss": "https://keycloak.apps.digilab.network/realms/algoritmes-test",
+        "aud": "AMT",
+        "sub": "92714be3-f798-4461-ba83-55d6cfd889a6",
+        "typ": "ID",
+        "azp": "AMT",
+        "nonce": "qZ9KGvZs6acg4nYENou5",
+        "sid": "dd57ee84-8920-437e-bd86-35f7d306074f",
+        "at_hash": "NI7WGdovQASx96dOg_wDlg",
+        "acr": "0",
+        "email_verified": True,
+        "name": "Default User",
+        "preferred_username": "default",
+        "given_name": "Default",
+        "family_name": "User",
+        "email": "default@amt.nl",
+        "email_hash": "a329108d9aabe362bc2fe4994989f6090b1445fd90ebe3520ab052f1836fa1a1",
+        "name_encoded": "default+user",
+    }
 
 
 def default_base_navigation_item(
@@ -19,13 +48,31 @@ def default_base_navigation_item(
     return BaseNavigationItem(display_text=display_text, url=url, custom_display_text=custom_display_text, icon=icon)
 
 
-def default_algorithm(name: str = "default algorithm") -> Algorithm:
-    return Algorithm(name=name)
+def default_algorithm(name: str = "default algorithm", organization_id: int = 1) -> Algorithm:
+    return Algorithm(name=name, organization_id=organization_id)
 
 
-def default_user(id: str | UUID = "00494b4d-bcdf-425a-8140-bea0f3cbd3c2", name: str = "John Smith") -> User:
-    id = UUID(id) if isinstance(id, str) else id
-    return User(id=id, name=name)
+def default_organization(name: str = "default organization") -> Organization:
+    return Organization(name=name, slug="default-organization", created_by_id=UUID(default_auth_user()["sub"]))
+
+
+def default_user(
+    id: str | UUID | None = None,
+    name: str | None = None,
+    organizations: list[Organization] | None = None,
+) -> User:
+    user_name = name if name else default_auth_user()["name"]
+    organizations = [default_organization()] if organizations is None else organizations
+    user_id = UUID(default_auth_user()["sub"]) if id is None else UUID(id) if isinstance(id, str) else id
+
+    return User(
+        id=user_id,
+        name=user_name,
+        email=default_auth_user()["email"],
+        name_encoded=quote_plus(user_name.strip().lower()),
+        email_hash=default_auth_user()["email_hash"],
+        organizations=organizations,
+    )
 
 
 def default_algorithm_with_system_card(name: str = "default algorithm") -> Algorithm:
@@ -33,13 +80,15 @@ def default_algorithm_with_system_card(name: str = "default algorithm") -> Algor
         system_card_from_template = json.load(f)
     system_card_from_template["name"] = name
     system_card = SystemCard.model_validate(system_card_from_template)
-    return Algorithm(name=name, lifecycle=Lifecycles.DEVELOPMENT, system_card=system_card)
+    return Algorithm(name=name, lifecycle=Lifecycles.DEVELOPMENT, system_card=system_card, organization_id=1)
 
 
 def default_algorithm_with_lifecycle(
-    name: str = "default algorithm", lifecycle: Lifecycles = Lifecycles.DESIGN
+    name: str = "default algorithm", lifecycle: Lifecycles = Lifecycles.DESIGN, last_edited: datetime | None = None
 ) -> Algorithm:
-    return Algorithm(name=name, lifecycle=lifecycle)
+    if last_edited:
+        return Algorithm(name=name, lifecycle=lifecycle, organization_id=1, last_edited=last_edited)
+    return Algorithm(name=name, lifecycle=lifecycle, organization_id=1)
 
 
 def default_fastapi_request(url: str = "/") -> Request:

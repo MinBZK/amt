@@ -1,3 +1,4 @@
+{% import "macros/form_macros.html.j2" as macros with context %}
 {% extends "layouts/base.html.j2" %}
 {% block content %}
     <div class="rvo-max-width-layout rvo-max-width-layout--md rvo-max-width-layout-inline-padding--none margin-bottom-large">
@@ -60,6 +61,7 @@
                                     </div>
                                 {% endfor %}
                             </div>
+                            {{ macros.form_field(form.id, form.fields[0]) }}
                         </fieldset>
                     </div>
                     <h2 class="utrecht-heading-2 rvo-heading--no-margins">{% trans %}AI Act Profile{% endtrans %}</h2>
@@ -200,7 +202,7 @@
                 {% trans %}Copy results and close{% endtrans %}
             </button>
             <div id="app">
-                <script src="https://github.com/MinBZK/ai-act-decisiontree/releases/download/1.1.7/index.js"></script>
+                {#                <script src="https://github.com/MinBZK/ai-act-decisiontree/releases/download/1.1.7/index.js"></script>#}
             </div>
         </p>
     </div>

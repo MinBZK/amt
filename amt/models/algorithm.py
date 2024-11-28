@@ -3,9 +3,9 @@ from datetime import datetime
 from enum import Enum
 from typing import Any, TypeVar
 
-from sqlalchemy import String, func
+from sqlalchemy import ForeignKey, String, func
 from sqlalchemy.dialects.postgresql import ENUM
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.types import JSON
 
 from amt.api.lifecycles import Lifecycles
@@ -60,6 +60,8 @@ class Algorithm(Base):
     system_card_json: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
     last_edited: Mapped[datetime] = mapped_column(server_default=func.now(), onupdate=func.now(), nullable=False)
     deleted_at: Mapped[datetime | None] = mapped_column(server_default=None, nullable=True)
+    organization_id: Mapped[int] = mapped_column(ForeignKey("organization.id"))
+    organization: Mapped["Organization"] = relationship(back_populates="algorithms", lazy="selectin")  # pyright: ignore [reportUndefinedVariable, reportUnknownVariableType] #noqa
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:  # noqa: ANN401
         system_card: SystemCard | None = kwargs.pop("system_card", None)

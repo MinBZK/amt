@@ -6,7 +6,6 @@ from alembic import context
 from amt.models import *  # noqa
 from sqlalchemy import Connection, pool
 from sqlalchemy.ext.asyncio import async_engine_from_config
-from sqlalchemy.schema import MetaData
 
 from amt.models.base import Base
 

@@ -136,7 +136,8 @@
                                 </a>
                             {% endif %}
                         {% endfor %}
-                        <a class="rvo-link rvo-topnav__link rvo-link--logoblauw"
+                        <a id="header-link-login"
+                           class="rvo-link rvo-topnav__link rvo-link--logoblauw"
                            href="/auth/login">
                             <span class="utrecht-icon rvo-icon rvo-icon-user rvo-icon--md rvo-icon--wit"
                                   role="img"
@@ -176,6 +177,7 @@
         </div>
     </div>
 {% endif %}
+<div id="general-error-container"></div>
 {% if breadcrumbs is defined %}
     <div>
         <!-- container needed to keep breadcrumbs from aligning in the center -->

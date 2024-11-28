@@ -42,10 +42,10 @@ msgid "Role"
 msgstr ""
 
 #: amt/api/group_by_category.py:15
-#: amt/site/templates/algorithms/details_info.html.j2:24
-#: amt/site/templates/algorithms/new.html.j2:40
+#: amt/site/templates/algorithms/details_info.html.j2:28
+#: amt/site/templates/algorithms/new.html.j2:41
 #: amt/site/templates/parts/algorithm_search.html.j2:48
-#: amt/site/templates/parts/filter_list.html.j2:94
+#: amt/site/templates/parts/filter_list.html.j2:71
 msgid "Lifecycle"
 msgstr ""
 
@@ -85,64 +85,83 @@ msgstr ""
 msgid "Phasing Out"
 msgstr ""
 
-#: amt/api/navigation.py:45
+#: amt/api/navigation.py:47
 msgid "Home"
 msgstr ""
 
-#: amt/api/navigation.py:46 amt/site/templates/parts/algorithm_search.html.j2:9
+#: amt/api/navigation.py:48 amt/api/navigation.py:63
+#: amt/site/templates/parts/algorithm_search.html.j2:9
 msgid "Algorithms"
 msgstr ""
 
-#: amt/api/navigation.py:47 amt/site/templates/auth/profile.html.j2:10
+#: amt/api/navigation.py:49 amt/site/templates/auth/profile.html.j2:10
 msgid "Overview"
 msgstr ""
 
-#: amt/api/navigation.py:48
+#: amt/api/navigation.py:50
 msgid "Tasks"
 msgstr ""
 
-#: amt/api/navigation.py:49
+#: amt/api/navigation.py:51
 msgid "New"
 msgstr ""
 
-#: amt/api/navigation.py:50
+#: amt/api/navigation.py:52
 msgid "System card"
 msgstr ""
 
-#: amt/api/navigation.py:51
+#: amt/api/navigation.py:53
 msgid "Assessment card"
 msgstr ""
 
-#: amt/api/navigation.py:52
+#: amt/api/navigation.py:54
 msgid "Model card"
 msgstr ""
 
-#: amt/api/navigation.py:53
+#: amt/api/navigation.py:55
 msgid "Details"
 msgstr ""
 
-#: amt/api/navigation.py:54
+#: amt/api/navigation.py:56
 msgid "Info"
 msgstr ""
 
-#: amt/api/navigation.py:55
+#: amt/api/navigation.py:57
 msgid "Algorithm details"
 msgstr ""
 
-#: amt/api/navigation.py:56
+#: amt/api/navigation.py:58
 msgid "Requirements"
 msgstr ""
 
-#: amt/api/navigation.py:57
+#: amt/api/navigation.py:59
 msgid "Data"
 msgstr ""
 
-#: amt/api/navigation.py:58
+#: amt/api/navigation.py:60
 msgid "Model"
 msgstr ""
 
-#: amt/api/navigation.py:59 amt/site/templates/algorithms/new.html.j2:149
+#: amt/api/navigation.py:61 amt/site/templates/algorithms/new.html.j2:151
 msgid "Instruments"
+msgstr ""
+
+#: amt/api/navigation.py:62
+#: amt/site/templates/organizations/parts/overview_results.html.j2:6
+msgid "Organizations"
+msgstr ""
+
+#: amt/api/navigation.py:64 amt/site/templates/organizations/home.html.j2:45
+#: amt/site/templates/organizations/parts/overview_results.html.j2:130
+msgid "Members"
+msgstr ""
+
+#: amt/api/organization_filter_options.py:17
+msgid "All organizations"
+msgstr ""
+
+#: amt/api/organization_filter_options.py:17
+msgid "My organizations"
 msgstr ""
 
 #: amt/api/publication_category.py:22
@@ -169,12 +188,61 @@ msgstr ""
 msgid "Exception of application"
 msgstr ""
 
+#: amt/api/forms/algorithm.py:19
+msgid "Select organization"
+msgstr ""
+
+#: amt/api/forms/algorithm.py:25
+#: amt/site/templates/algorithms/details_info.html.j2:12
+msgid "Organization"
+msgstr ""
+
+#: amt/api/forms/organization.py:15
+#: amt/site/templates/algorithms/details_info.html.j2:8
+#: amt/site/templates/auth/profile.html.j2:34
+#: amt/site/templates/organizations/home.html.j2:25
+msgid "Name"
+msgstr ""
+
+#: amt/api/forms/organization.py:16
+msgid "Name of the organization"
+msgstr ""
+
+#: amt/api/forms/organization.py:23
+msgid "The slug is the web path, like /organizations/my-organization-name"
+msgstr ""
+
+#: amt/api/forms/organization.py:24
+#: amt/site/templates/organizations/home.html.j2:29
+msgid "Slug"
+msgstr ""
+
+#: amt/api/forms/organization.py:25
+msgid "The slug for this organization"
+msgstr ""
+
+#: amt/api/forms/organization.py:30
+msgid "Add members"
+msgstr ""
+
+#: amt/api/forms/organization.py:31
+msgid "Search for a person..."
+msgstr ""
+
+#: amt/api/forms/organization.py:36
+msgid "Add organization"
+msgstr ""
+
 #: amt/core/exception_handlers.py:20
 msgid "String should have at least {min_length} characters"
 msgstr ""
 
-#: amt/core/exception_handlers.py:21
+#: amt/core/exception_handlers.py:21 amt/core/exception_handlers.py:22
 msgid "Field required"
+msgstr ""
+
+#: amt/core/exception_handlers.py:23
+msgid "String should match pattern '{pattern}'"
 msgstr ""
 
 #: amt/core/exceptions.py:20
@@ -240,12 +308,12 @@ msgid ""
 msgstr ""
 
 #: amt/site/templates/algorithms/details_base.html.j2:39
-#: amt/site/templates/algorithms/new.html.j2:132
+#: amt/site/templates/algorithms/new.html.j2:134
 msgid "Yes"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_base.html.j2:44
-#: amt/site/templates/algorithms/new.html.j2:142
+#: amt/site/templates/algorithms/new.html.j2:144
 msgid "No"
 msgstr ""
 
@@ -347,38 +415,34 @@ msgstr ""
 msgid "Failed to estimate WOZ value: "
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:8
-#: amt/site/templates/auth/profile.html.j2:34
-msgid "Name"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_info.html.j2:12
+#: amt/site/templates/algorithms/details_info.html.j2:16
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:19
 msgid "Description"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:16
+#: amt/site/templates/algorithms/details_info.html.j2:20
 msgid "Repository"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:20
+#: amt/site/templates/algorithms/details_info.html.j2:24
 msgid "Algorithm code"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:28
+#: amt/site/templates/algorithms/details_info.html.j2:32
+#: amt/site/templates/organizations/parts/overview_results.html.j2:132
 #: amt/site/templates/pages/assessment_card.html.j2:7
 #: amt/site/templates/pages/model_card.html.j2:6
 #: amt/site/templates/pages/system_card.html.j2:4
-#: amt/site/templates/parts/filter_list.html.j2:98
-#: amt/site/templates/parts/filter_list.html.j2:120
+#: amt/site/templates/parts/filter_list.html.j2:75
+#: amt/site/templates/parts/filter_list.html.j2:97
 msgid "Last updated"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:32
+#: amt/site/templates/algorithms/details_info.html.j2:36
 msgid "Labels"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:40
+#: amt/site/templates/algorithms/details_info.html.j2:44
 msgid "References"
 msgstr ""
 
@@ -416,12 +480,12 @@ msgid ""
 msgstr ""
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:84
-#: amt/site/templates/macros/editable.html.j2:63
+#: amt/site/templates/macros/editable.html.j2:82
 msgid "Save"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:88
-#: amt/site/templates/macros/editable.html.j2:68
+#: amt/site/templates/macros/editable.html.j2:87
 msgid "Cancel"
 msgstr ""
 
@@ -435,37 +499,37 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:7
+#: amt/site/templates/algorithms/new.html.j2:8
 msgid "Create a Algorithm"
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:25
-#: amt/site/templates/parts/filter_list.html.j2:90
-#: amt/site/templates/parts/filter_list.html.j2:116
+#: amt/site/templates/algorithms/new.html.j2:26
+#: amt/site/templates/parts/filter_list.html.j2:67
+#: amt/site/templates/parts/filter_list.html.j2:93
 msgid "Algorithm name"
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:29
+#: amt/site/templates/algorithms/new.html.j2:30
 msgid "Name of the algorithm"
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:43
+#: amt/site/templates/algorithms/new.html.j2:44
 msgid "Select the lifecycle your algorithm is currently in."
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:44
+#: amt/site/templates/algorithms/new.html.j2:45
 msgid "For more information on lifecycle, read the"
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:47
+#: amt/site/templates/algorithms/new.html.j2:48
 msgid "Algorithm Framework"
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:65
+#: amt/site/templates/algorithms/new.html.j2:67
 msgid "AI Act Profile"
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:67
+#: amt/site/templates/algorithms/new.html.j2:69
 msgid ""
 "The AI Act profile provides insight into, among other things, the type of"
 " AI system and the associated obligations from the European AI Act. If "
@@ -474,25 +538,25 @@ msgid ""
 "tree."
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:74
+#: amt/site/templates/algorithms/new.html.j2:76
 msgid "Find your AI Act profile"
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:151
+#: amt/site/templates/algorithms/new.html.j2:153
 msgid ""
 "Overview of instruments for the responsible development, deployment, "
 "assessment and monitoring of algorithms and AI-systems."
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:159
+#: amt/site/templates/algorithms/new.html.j2:161
 msgid "Choose one or more instruments"
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:183
+#: amt/site/templates/algorithms/new.html.j2:185
 msgid "Create Algorithm"
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:200
+#: amt/site/templates/algorithms/new.html.j2:202
 msgid "Copy results and close"
 msgstr ""
 
@@ -533,7 +597,7 @@ msgstr ""
 #: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:11
 #: amt/site/templates/pages/landingpage.html.j2:17
 #: amt/site/templates/parts/header.html.j2:86
-#: amt/site/templates/parts/header.html.j2:144
+#: amt/site/templates/parts/header.html.j2:145
 msgid "Login"
 msgstr ""
 
@@ -541,6 +605,7 @@ msgstr ""
 msgid "An error occurred"
 msgstr ""
 
+#: amt/site/templates/errors/_AMTCSRFProtectError_401.html.j2:11
 #: amt/site/templates/errors/_Exception.html.j2:5
 msgid "An error occurred. Please try again later"
 msgstr ""
@@ -553,7 +618,7 @@ msgstr ""
 msgid "There is one error:"
 msgstr ""
 
-#: amt/site/templates/layouts/base.html.j2:11
+#: amt/site/templates/layouts/base.html.j2:1
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr ""
 
@@ -575,6 +640,59 @@ msgstr ""
 
 #: amt/site/templates/macros/tasks.html.j2:35
 msgid "Unknown"
+msgstr ""
+
+#: amt/site/templates/organizations/home.html.j2:33
+msgid "Created at"
+msgstr ""
+
+#: amt/site/templates/organizations/home.html.j2:37
+msgid "Created by"
+msgstr ""
+
+#: amt/site/templates/organizations/home.html.j2:41
+msgid "Modified at"
+msgstr ""
+
+#: amt/site/templates/organizations/new.html.j2:8
+msgid "Create an organization"
+msgstr ""
+
+#: amt/site/templates/organizations/parts/overview_results.html.j2:11
+msgid "New organization"
+msgstr ""
+
+#: amt/site/templates/organizations/parts/overview_results.html.j2:27
+#: amt/site/templates/parts/algorithm_search.html.j2:24
+msgid "Search"
+msgstr ""
+
+#: amt/site/templates/organizations/parts/overview_results.html.j2:34
+msgid "Find organizations..."
+msgstr ""
+
+#: amt/site/templates/organizations/parts/overview_results.html.j2:51
+msgid "Organisation Type"
+msgstr ""
+
+#: amt/site/templates/organizations/parts/overview_results.html.j2:79
+#, python-format
+msgid ""
+"%(organizations_length)s result\n"
+"                "
+msgid_plural ""
+"\n"
+"                    %(organizations_length)s results"
+msgstr[0] ""
+msgstr[1] ""
+
+#: amt/site/templates/organizations/parts/overview_results.html.j2:84
+#: amt/site/templates/parts/filter_list.html.j2:16
+msgid "for"
+msgstr ""
+
+#: amt/site/templates/organizations/parts/overview_results.html.j2:127
+msgid "Organization name"
 msgstr ""
 
 #: amt/site/templates/pages/assessment_card.html.j2:7
@@ -606,6 +724,7 @@ msgid "Answer"
 msgstr ""
 
 #: amt/site/templates/pages/index.html.j2:3
+#: amt/site/templates/pages/under_construction.html.j2:3
 msgid "AMT Placeholder informatie pagina's"
 msgstr ""
 
@@ -656,12 +775,16 @@ msgstr ""
 msgid "Model cards"
 msgstr ""
 
-#: amt/site/templates/parts/algorithm_search.html.j2:14
-msgid "New algorithm"
+#: amt/site/templates/pages/under_construction.html.j2:8
+msgid "Under construction"
 msgstr ""
 
-#: amt/site/templates/parts/algorithm_search.html.j2:24
-msgid "Search"
+#: amt/site/templates/pages/under_construction.html.j2:9
+msgid "This page is yet to be build."
+msgstr ""
+
+#: amt/site/templates/parts/algorithm_search.html.j2:14
+msgid "New algorithm"
 msgstr ""
 
 #: amt/site/templates/parts/algorithm_search.html.j2:31
@@ -688,7 +811,7 @@ msgstr ""
 msgid "Select group by"
 msgstr ""
 
-#: amt/site/templates/parts/filter_list.html.j2:32
+#: amt/site/templates/parts/filter_list.html.j2:9
 #, python-format
 msgid ""
 "\n"
@@ -701,11 +824,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: amt/site/templates/parts/filter_list.html.j2:39
-msgid "for"
-msgstr ""
-
-#: amt/site/templates/parts/filter_list.html.j2:70
+#: amt/site/templates/parts/filter_list.html.j2:47
 msgid ""
 "No Algorithm match your selected filters. Try adjusting your filters or "
 "clearing them to\n"

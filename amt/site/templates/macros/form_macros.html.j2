@@ -1,0 +1,192 @@
+{% macro user_avatars(users) %}
+    <div class="amt-avatar-list">
+        {# this solution is not very elegant, a limit and count query would be better #}
+        {% for user in users[0:5] %}
+            <span class="amt-avatar-list__item amt-tooltip">
+                <img width="24"
+                     height="24"
+                     src="https://gravatar.com/avatar/{{ user.email_hash }}?r=g&s=48&d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/{{ user.name_encoded }}/48"
+                     alt="User icon {{ user.name }}">
+                <span class="amt-tooltip__text"
+                      style="left: -{{ (user.name | length / 2) | round }}ch;
+                             min-width: {{ user.name|length }}ch">{{ user.name }}</span>
+            </span>
+        {% endfor %}
+        {% if users|length > 5 %}
+            <span class="amt-avatar-list__item amt-tooltip">
+                <span class="amt-avatar-list__more">+{{ users|length - 5 }}</span>
+            </span>
+        {% endif %}
+    </div>
+{% endmacro %}
+{% macro form_field(form, field) %}
+    {% if field.type == WebFormFieldType.TEXT %}
+        {{ form_field_text(form, field) }}
+    {% elif field.type == WebFormFieldType.SELECT %}
+        {{ form_field_select(form, field) }}
+    {% elif field.type == WebFormFieldType.SEARCH_SELECT %}
+        {{ form_field_search(form, field) }}
+    {% elif field.type == WebFormFieldType.SUBMIT %}
+        {{ form_field_submit(form, field) }}
+    {% else %}
+        Unknown field {{ field.type }}
+    {% endif %}
+{% endmacro %}
+{% macro overview_table_row(loop, organization) -%}
+    <tr class="rvo-table-row"
+        {% if loop.last and organizations|length == limit %} data-marker="last-element" hx-get="/organizations/?skip={{ next }}" hx-swap="beforeend" hx-trigger="revealed" {% endif %}>
+        <td class="rvo-table-cell">
+            <a class="rvo-link rvo-link--no-underline rvo-link--zwart"
+               href="/organizations/{{ organization.slug }}">{{ organization.name }}</a>
+        </td>
+        <td class="rvo-table-cell">{{ user_avatars(organization.users) }}</td>
+        <td class="rvo-table-cell">{{ organization.modified_at | time_ago(language) }}</td>
+    </tr>
+{% endmacro %}
+{% macro render_form_field_search_result(value, display_value) -%}
+    {% set list_result = render_form_field_list_result("user_ids", value, display_value) %}
+    <li data-list-result="{{ list_result | b64encode }}"
+        onkeyup="amt.add_field_on_enter()"
+        onclick="amt.add_field(this)"
+        data-value="{{ value }}"
+        class="rvo-item-list__item amt-item-list__item_as_select ">
+        <span style="padding-inline-start: 1em">{{ display_value }}</span>
+    </li>
+{% endmacro %}
+{% macro render_form_field_list_result(name, value, display_value) -%}
+    <li class="rvo-item-list__item" data-value="{{ value }}">
+        <input type="hidden" name="{{ name }}" value="{{ value }}">
+        <span>{{ display_value }}</span>
+        <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--lg form-input-clear"
+              style="float: right;
+                     cursor: pointer"
+              role="img"
+              aria-label="Kruis"
+              onclick="this.parentNode.remove()"></span>
+    </li>
+{% endmacro %}
+{% macro form_field_select(prefix, field) %}
+    <div role="group"
+         aria-labelledby="label-{{ prefix }}{{ field.name }}"
+         class="utrecht-form-field utrecht-form-field--text rvo-form-field">
+        <div class="rvo-form-field__label">
+            <label id="label-{{ prefix }}{{ field.name }}"
+                   for="{{ prefix }}{{ field.name }}"
+                   class="rvo-label rvo-label--required">{{ field.label }}</label>
+            {% if field.description %}
+                <div id="description-{{ prefix }}{{ field.name }}"
+                     class="utrecht-form-field-description">{{ field.description }}</div>
+            {% endif %}
+        </div>
+        <div id="error-{{ field.name }}" class="htmx-error-oob"></div>
+        <div class="rvo-select-wrapper">
+            <select id="{{ prefix }}{{ field.name }}"
+                    name="{{ field.name }}"
+                    class="utrecht-select utrecht-select--html-select"
+                    aria-describedby="description-{{ prefix }}{{ field.name }}">
+                {% for option in field.options %}
+                    <option value="{{ option.value }}"
+                            {% if option.value == field.default_value %}selected=""{% endif %}>
+                        {{ option.display_value }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+{% endmacro %}
+{% macro form_field_text(prefix, field) %}
+    <div role="group"
+         aria-labelledby="label-{{ prefix }}{{ field.name }}"
+         class="utrecht-form-field utrecht-form-field--text rvo-form-field">
+        <div class="rvo-form-field__label">
+            <label id="label-{{ prefix }}{{ field.name }}"
+                   for="{{ prefix }}{{ field.name }}"
+                   class="rvo-label rvo-label--required">{{ field.label }}</label>
+            {% if field.description %}<div class="utrecht-form-field-description">{{ field.description }}</div>{% endif %}
+        </div>
+        <div id="error-{{ field.name }}" class="htmx-error-oob"></div>
+        <input id="{{ prefix }}{{ field.name }}" placeholder="{{ field.placeholder }}" name="{{ field.name }}" type="text" class="utrecht-textbox utrecht-textbox--html-input" dir="auto" autocomplete="off" onchange="amt.reset_errorfield('error-{{ field.name }}')" {% if isinstance(field.attributes, "dict") %} {% for key, value in field.attributes.items() %}{{ key }}="{{ value }}"{% endfor %} {% endif %} value="" />
+    </div>
+{% endmacro %}
+{% macro form_field_search(prefix, field) %}
+    <div role="group"
+         aria-labelledby="label-{{ prefix }}{{ field.name }}"
+         class="utrecht-form-field utrecht-form-field--text rvo-form-field">
+        <div class="rvo-form-field__label">
+            <label id="label-{{ prefix }}{{ field.name }}"
+                   class="rvo-label rvo-label--required">{{ field.label }}</label>
+            {% if field.description %}<div class="utrecht-form-field-description">{{ field.description }}</div>{% endif %}
+        </div>
+        <div id="error-{{ field.name }}" class="htmx-error-oob"></div>
+        <div class="amt-position-relative">
+            <input id="{{ prefix }}{{ field.name }}-search"
+                   autocomplete="off"
+                   placeholder="{{ field.placeholder }}"
+                   name="{{ field.query_var_name }}"
+                   type="text"
+                   class="utrecht-textbox utrecht-textbox--html-input"
+                   onblur="amt.hide_form_search_options('{{ prefix }}{{ field.name }}-options-list')"
+                   onclick="amt.show_form_search_options('{{ prefix }}{{ field.name }}-options-list')"
+                   onkeyup="amt.add_field_on_enter('{{ prefix }}{{ field.name }}-options-list')"
+                   hx-get="{{ field.search_url }}"
+                   hx-target="#{{ prefix }}{{ field.name }}-options-list"
+                   hx-trigger="input changed delay:250ms"
+                   hx-include="this"
+                   hx-swap="innerHTML"
+                   value="" />
+            <ul id="{{ prefix }}{{ field.name }}-options-list"
+                data-target-id="{{ prefix }}{{ field.name }}-results-list"
+                class="rvo-item-list amt-item-list__as_select"
+                style="display: none">
+            </ul>
+        </div>
+        <ul id="{{ prefix }}{{ field.name }}-results-list">
+            {% if user %}{{ render_form_field_list_result("user_ids", user.sub, user.name) }}{% endif %}
+        </ul>
+    </div>
+{% endmacro %}
+{% macro form_field_submit(form, field) %}
+    <div id="errorContainer" class="margin-bottom-small"></div>
+    <p class="utrecht-button-group">
+        <button class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
+                type="submit"
+                id="{{ field.name }}-button"
+                hx-on:click="document.querySelectorAll('div.htmx-error-oob').forEach(e => e.innerHTML = '')">
+            {{ field.label }}
+        </button>
+    </p>
+{% endmacro %}
+{% macro add_form(form) %}
+    <form class="rvo-layout-column rvo-layout-gap--sm"
+          onkeydown="amt.prevent_submit_on_enter()"
+          hx-ext="json-enc"
+          hx-post="{{ form.post_url }}"
+          hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
+          hx-target-error="#errorContainer"
+          hx-swap="innerHTML"
+          method="post"
+          id="form-{{ form.id }}">
+        {% set vars = {'last_group': '', 'fieldset_closed': False} %}
+        {% for field in form.fields %}
+            {% if vars.last_group != "" and vars.last_group != field.group %}
+                {% if vars.update({'fieldset_closed': True}) %}{% endif %}
+            </fieldset>
+        </div>
+    {% endif %}
+    {% if vars.last_group == "" or vars.last_group != field.group %}
+        {% if vars.update({'fieldset_closed': False}) %}{% endif %}
+        <div class="utrecht-form-fieldset rvo-form-fieldset">
+            <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
+                {% if form.legend %}
+                    <legend class="utrecht-form-fieldset__legend utrecht-form-fieldset__legend--html-legend">{{ form.legend }}</legend>
+                {% endif %}
+            {% endif %}
+            {{ form_field(form.id, field) }}
+            {% if vars.update({'last_group': field.group}) %}{% endif %}
+        {% endfor %}
+        {% if not vars.fieldset_closed %}
+        </fieldset>
+    </div>
+{% endif %}
+</form>
+{% endmacro %}

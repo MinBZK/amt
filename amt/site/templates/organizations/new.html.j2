@@ -1,0 +1,14 @@
+{% import "macros/form_macros.html.j2" as macros with context %}
+{% extends "layouts/base.html.j2" %}
+{% block content %}
+    <div class="rvo-max-width-layout rvo-max-width-layout--md rvo-max-width-layout-inline-padding--none margin-bottom-large">
+        <div class="rvo-form">
+            <div class="rvo-layout-column rvo-layout-gap--sm">
+                <div class="rvo-form-intro">
+                    <h1 class="utrecht-heading-1">{% trans %}Create an organization{% endtrans %}</h1>
+                </div>
+                {{ macros.add_form(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

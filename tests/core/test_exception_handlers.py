@@ -1,6 +1,5 @@
 import pytest
 from amt.core.exception_handlers import translate_pydantic_exception
-from amt.core.exceptions import AMTCSRFProtectError
 from amt.schema.algorithm import AlgorithmNew
 from babel.support import NullTranslations
 from fastapi import status
@@ -26,14 +25,16 @@ async def test_request_validation_exception_handler(client: AsyncClient):
 @pytest.mark.asyncio
 async def test_request_csrf_protect_exception_handler_invalid_token_in_header(client: AsyncClient):
     data = await client.get("/algorithms/new")
-    new_algorithm = AlgorithmNew(name="default algorithm", lifecycle="DATA_EXPLORATION_AND_PREPARATION")
-    with pytest.raises(AMTCSRFProtectError):
-        _response = await client.post(
-            "/algorithms/new",
-            json=new_algorithm.model_dump(),
-            headers={"X-CSRF-Token": "1"},
-            cookies=data.cookies,
-        )
+    new_algorithm = AlgorithmNew(
+        name="default algorithm", lifecycle="DATA_EXPLORATION_AND_PREPARATION", organization_id=1
+    )
+    response = await client.post(
+        "/algorithms/new",
+        json=new_algorithm.model_dump(),
+        headers={"X-CSRF-Token": "1"},
+        cookies=data.cookies,
+    )
+    assert response.status_code == 401
 
 
 @pytest.mark.asyncio
@@ -55,14 +56,16 @@ async def test_request_validation_exception_handler_htmx(client: AsyncClient):
 @pytest.mark.asyncio
 async def test_request_csrf_protect_exception_handler_invalid_token(client: AsyncClient):
     data = await client.get("/algorithms/new")
-    new_algorithm = AlgorithmNew(name="default algorithm", lifecycle="DATA_EXPLORATION_AND_PREPARATION")
-    with pytest.raises(AMTCSRFProtectError):
-        _response = await client.post(
-            "/algorithms/new",
-            json=new_algorithm.model_dump(),
-            headers={"HX-Request": "true", "X-CSRF-Token": "1"},
-            cookies=data.cookies,
-        )
+    new_algorithm = AlgorithmNew(
+        name="default algorithm", lifecycle="DATA_EXPLORATION_AND_PREPARATION", organization_id=1
+    )
+    response = await client.post(
+        "/algorithms/new",
+        json=new_algorithm.model_dump(),
+        headers={"HX-Request": "true", "X-CSRF-Token": "1"},
+        cookies=data.cookies,
+    )
+    assert response.status_code == 401
 
 
 @pytest.mark.asyncio

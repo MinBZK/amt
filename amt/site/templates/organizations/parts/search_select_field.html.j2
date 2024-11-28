@@ -1,0 +1,4 @@
+{% import "macros/form_macros.html.j2" as macros with context %}
+{% for result in search_results %}
+    {{ macros.render_form_field_search_result(result.value, result.display_value) }}
+{% endfor %}

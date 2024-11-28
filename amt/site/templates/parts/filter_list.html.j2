@@ -1,27 +1,4 @@
 {% import 'macros/table_row.html.j2' as table_row with context %}
-{% macro sort_button(field_name, sort_by) %}
-    {% if field_name in sort_by and sort_by[field_name] == "ascending" or (not field_name in sort_by) %}
-        <button hx-trigger="click"
-                hx-get="/algorithms/?skip=0&sort-by-{{ field_name }}=descending"
-                hx-swap="innerHTML"
-                class="utrecht-button utrecht-button--rvo-tertiary-action utrecht-button--rvo-sm"
-                type="button">
-            <span class="utrecht-icon rvo-icon rvo-icon-delta-omhoog rvo-icon--sm rvo-icon--hemelblauw"
-                  role="img"
-                  aria-label="Delta omhoog"></span>
-        </button>
-    {% elif field_name in sort_by and sort_by[field_name] == "descending" %}
-        <button hx-trigger="click"
-                hx-get="/algorithms/?skip=0&sort-by-{{ field_name }}=ascending"
-                hx-swap="innerHTML"
-                class="utrecht-button utrecht-button--rvo-tertiary-action utrecht-button--rvo-sm"
-                type="button">
-            <span class="utrecht-icon rvo-icon rvo-icon-delta-omlaag rvo-icon--sm rvo-icon--hemelblauw"
-                  role="img"
-                  aria-label="Delta omhoog"></span>
-        </button>
-    {% endif %}
-{% endmacro %}
 {% import 'macros/algorithm_systems_grid.html.j2' as render with context %}
 {% if start > 0 %}
     {% for algorithm in algorithms %}{{ table_row.item(loop, algorithm, true) }}{% endfor %}
@@ -88,15 +65,15 @@
                     <tr class="rvo-table-row">
                         <th style="width: 60%" scope="col" class="rvo-table-header">
                             {% trans %}Algorithm name{% endtrans %}
-                            {{ sort_button('name', sort_by) }}
+                            {{ table_row.sort_button('name', sort_by, "/algorithms/") }}
                         </th>
                         <th scope="col" class="rvo-table-header">
                             {% trans %}Lifecycle{% endtrans %}
-                            {{ sort_button('lifecycle', sort_by) }}
+                            {{ table_row.sort_button('lifecycle', sort_by, "/algorithms/") }}
                         </th>
                         <th scope="col" class="rvo-table-header" style="white-space: nowrap">
                             {% trans %}Last updated{% endtrans %}
-                            {{ sort_button('last_update', sort_by) }}
+                            {{ table_row.sort_button('last_update', sort_by, "/algorithms/") }}
                         </th>
                     </tr>
                 </thead>
