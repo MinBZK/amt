@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 0001-01-01 00:00+0000\n"
+"POT-Creation-Date: 2024-12-17 11:48+0100\n"
 "PO-Revision-Date: 0001-01-01 00:00+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_NL\n"
@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.15.0\n"
+"Generated-By: Babel 2.16.0\n"
 
 #: amt/api/ai_act_profile.py:24
 msgid "Type"
@@ -201,6 +201,50 @@ msgstr "Selecteer organisatie"
 msgid "Organization"
 msgstr "Organisatie"
 
+#: amt/api/forms/measure.py:17
+msgid "Status"
+msgstr "Status"
+
+#: amt/api/forms/measure.py:32
+msgid "Information on how this measure is implemented"
+msgstr "Informatie over hoe deze maatregel is geïmplementeerd"
+
+#: amt/api/forms/measure.py:33
+msgid ""
+"Describe how the measure has been implemented, including challenges and "
+"solutions."
+msgstr ""
+"Beschrijf hoe de maatregel is geimplementeerd, inclusief uitdagingen en "
+"oplossingen."
+
+#: amt/api/forms/measure.py:39
+msgid ""
+"Select one or more to upload. The files will be saved once you confirm "
+"changes by pressing the save button."
+msgstr ""
+"Selecteer één of meer bestanden om te uploaden. De bestanden zullen "
+"worden opgeslagen wanneer de Opslaan knop wordt ingedrukt."
+
+#: amt/api/forms/measure.py:41
+msgid "Add files"
+msgstr "Bestanden toevoegen"
+
+#: amt/api/forms/measure.py:42
+msgid "No files selected."
+msgstr "Geen bestanden geselecteerd."
+
+#: amt/api/forms/measure.py:46
+msgid "Add URI"
+msgstr "Voeg URI toe"
+
+#: amt/api/forms/measure.py:49
+msgid "Add links to documents"
+msgstr "Voeg link naar bestanden toe"
+
+#: amt/api/forms/measure.py:50
+msgid "URI"
+msgstr "URI"
+
 #: amt/api/forms/organization.py:23
 #: amt/site/templates/algorithms/details_info.html.j2:8
 #: amt/site/templates/auth/profile.html.j2:34
@@ -213,32 +257,32 @@ msgstr "Naam"
 msgid "Name of the organization"
 msgstr "Naam van de organisatie"
 
-#: amt/api/forms/organization.py:31
+#: amt/api/forms/organization.py:32
 msgid "The slug is the web path, like /organizations/my-organization-name"
 msgstr ""
 "Een slug is het pad in het webadres, zoals /organizations/mijn-"
 "organisatie-naam"
 
-#: amt/api/forms/organization.py:32
+#: amt/api/forms/organization.py:33
 #: amt/site/templates/organizations/home.html.j2:16
 msgid "Slug"
 msgstr "Slug"
 
-#: amt/api/forms/organization.py:33
+#: amt/api/forms/organization.py:34
 msgid "The slug for this organization"
 msgstr "Het web-pad (slug) voor deze organisatie"
 
-#: amt/api/forms/organization.py:38
+#: amt/api/forms/organization.py:40
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:4
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:23
 msgid "Add members"
 msgstr "Voeg personen toe"
 
-#: amt/api/forms/organization.py:39
+#: amt/api/forms/organization.py:41
 msgid "Search for a person..."
 msgstr "Zoek een persoon..."
 
-#: amt/api/forms/organization.py:45
+#: amt/api/forms/organization.py:47
 msgid "Add organization"
 msgstr "Organisatie toevoegen"
 
@@ -310,6 +354,12 @@ msgstr ""
 "Er is iets fout gegaan tijdens de autorisatiestroom. Probeer het later "
 "opnieuw"
 
+#: amt/core/exceptions.py:84
+msgid "Something went wrong storing your file. PLease try again later."
+msgstr ""
+"Er is iets fout gegaan tijdens het opslaan van uw bestand. Probeer het "
+"later opnieuw."
+
 #: amt/site/templates/algorithms/details_base.html.j2:19
 msgid "Delete algoritmic system"
 msgstr "Verwijder algoritme"
@@ -328,12 +378,14 @@ msgstr ""
 
 #: amt/site/templates/algorithms/details_base.html.j2:39
 #: amt/site/templates/algorithms/new.html.j2:153
+#: amt/site/templates/macros/form_macros.html.j2:167
 #: amt/site/templates/organizations/members.html.j2:33
 msgid "Yes"
 msgstr "Ja"
 
 #: amt/site/templates/algorithms/details_base.html.j2:44
 #: amt/site/templates/algorithms/new.html.j2:163
+#: amt/site/templates/macros/form_macros.html.j2:172
 #: amt/site/templates/organizations/members.html.j2:36
 msgid "No"
 msgstr "Nee"
@@ -471,43 +523,12 @@ msgstr "Referenties"
 msgid "Read more on the algoritmekader"
 msgstr "Lees meer op het algoritmekader"
 
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:38
-msgid "Status"
-msgstr "Status"
-
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:45
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:47
-msgid "to do"
-msgstr "Te doen"
-
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:50
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:52
-msgid "in progress"
-msgstr "Onderhanden"
-
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:55
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:57
-msgid "done"
-msgstr "Afgerond"
-
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:68
-msgid "Information on how this measure is implemented"
-msgstr "Informatie over hoe deze maatregel is geïmplementeerd"
-
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:74
-msgid ""
-"Describe how the measure has been implemented, including challenges and "
-"solutions."
-msgstr ""
-"Beschrijf hoe de maatregel is geimplementeerd, inclusief uitdagingen "
-"enoplossingen."
-
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:84
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:40
 #: amt/site/templates/macros/editable.html.j2:82
 msgid "Save"
 msgstr "Opslaan"
 
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:88
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:44
 #: amt/site/templates/macros/editable.html.j2:87
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:26
 msgid "Cancel"
@@ -517,7 +538,7 @@ msgstr "Annuleren"
 msgid "measures executed"
 msgstr "maatregelen uitgevoerd"
 
-#: amt/site/templates/algorithms/details_requirements.html.j2:55
+#: amt/site/templates/algorithms/details_requirements.html.j2:59
 #: amt/site/templates/macros/editable.html.j2:24
 #: amt/site/templates/macros/editable.html.j2:27
 msgid "Edit"
@@ -654,21 +675,29 @@ msgstr "Er is één fout:"
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr "Algoritme Management Toolkit"
 
-#: amt/site/templates/macros/form_macros.html.j2:52
+#: amt/site/templates/macros/form_macros.html.j2:58
 msgid "Are you sure you want to remove "
 msgstr "Weet u zeker dat u uw algoritmische systeem wilt verwijderen "
 
-#: amt/site/templates/macros/form_macros.html.j2:52
+#: amt/site/templates/macros/form_macros.html.j2:58
 msgid " from this organization? "
 msgstr "Het web-pad (slug) voor deze organisatie"
 
-#: amt/site/templates/macros/form_macros.html.j2:55
+#: amt/site/templates/macros/form_macros.html.j2:61
 msgid "Delete"
 msgstr "Verwijder"
 
-#: amt/site/templates/macros/form_macros.html.j2:56
+#: amt/site/templates/macros/form_macros.html.j2:62
 msgid "Delete member"
 msgstr "Voeg personen toe"
+
+#: amt/site/templates/macros/form_macros.html.j2:149
+msgid "Delete file"
+msgstr "Verwijder bestand"
+
+#: amt/site/templates/macros/form_macros.html.j2:156
+msgid "Are you sure you want to delete"
+msgstr "Weet u zeker dat u het bestand wilt verwijderen"
 
 #: amt/site/templates/macros/table_row.html.j2:19
 msgid " ago"

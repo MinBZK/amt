@@ -77,3 +77,9 @@ class AMTAuthorizationFlowError(AMTHTTPException):
     def __init__(self) -> None:
         self.detail: str = _("Something went wrong during the authorization flow. Please try again later.")
         super().__init__(status.HTTP_401_UNAUTHORIZED, self.detail)
+
+
+class AMTStorageError(AMTHTTPException):
+    def __init__(self) -> None:
+        self.detail: str = _("Something went wrong storing your file. PLease try again later.")
+        super().__init__(status.HTTP_500_INTERNAL_SERVER_ERROR, self.detail)

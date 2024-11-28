@@ -24,6 +24,7 @@ def get_organization_form(id: str, translations: NullTranslations, user: User | 
             placeholder=_("Name of the organization"),
             attributes={"onkeyup": "amt.generate_slug('" + id + "name', '" + id + "slug')"},
             group="1",
+            required=True,
         ),
         WebFormField(
             type=WebFormFieldType.TEXT,
@@ -32,6 +33,7 @@ def get_organization_form(id: str, translations: NullTranslations, user: User | 
             label=_("Slug"),
             placeholder=_("The slug for this organization"),
             group="1",
+            required=True,
         ),
         WebFormSearchField(
             name="user_ids",

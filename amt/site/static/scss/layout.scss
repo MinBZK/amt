@@ -424,8 +424,12 @@ main {
     z-index: 1;
 }
 
-/* stylelint-enable */
-
 .amt-cursor-pointer {
     cursor: pointer;
 }
+
+.rvo-layout-gap--0 {
+    gap: 0 !important;
+}
+
+/* stylelint-enable */
