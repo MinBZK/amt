@@ -388,3 +388,41 @@ export function add_field_on_enter(id: string) {
     show_form_search_options(id);
   }
 }
+
+export function createLinkComponent(template_id: string, element_id: string) {
+  const template = document.getElementById(template_id) as HTMLTemplateElement;
+  const item = document.getElementById(element_id);
+  const link = template?.content.cloneNode(true);
+  if (link) {
+    item?.appendChild(link);
+  }
+}
+
+export function getFiles(element: HTMLInputElement, target_id: string) {
+  if (element.files) {
+    const list = document.getElementById(target_id) as HTMLElement;
+    list.innerHTML = "";
+    for (const file of element.files) {
+      const li = document.createElement("li");
+      li.className = "rvo-item-list__item";
+
+      const container = document.createElement("div");
+      container.className = "rvo-layout-row rvo-layout-gap--sm";
+
+      const icon_el = document.createElement("span");
+      icon_el.className =
+        "utrecht-icon rvo-icon rvo-icon-document-met-lijnen rvo-icon--md rvo-icon--hemelblauw";
+      icon_el.role = "img";
+      icon_el.ariaLabel = "File";
+      container.appendChild(icon_el);
+
+      const text_el = document.createElement("span");
+      text_el.textContent = file.name;
+      container.appendChild(text_el);
+
+      li.appendChild(container);
+
+      list.appendChild(li);
+    }
+  }
+}
