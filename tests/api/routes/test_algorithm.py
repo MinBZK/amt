@@ -3,7 +3,6 @@ from typing import Any
 import pytest
 import vcr  # type: ignore
 from amt.api.routes.algorithm import (
-    MeasureUpdate,
     find_measure_task,
     find_requirement_task,
     find_requirement_tasks_by_measure_urn,
@@ -570,7 +569,13 @@ async def test_update_measure_value(client: AsyncClient, mocker: MockFixture, db
     # happy flow
     response = await client.post(
         "/algorithm/1/measure/urn:nl:ak:mtr:dat-01",
-        json={"measure_update": MeasureUpdate(measure_state="done", measure_value="something").model_dump()},
+        data={
+            "measure_state": "done",
+            "measure_value": "something",
+            "measure_links": [],
+            "existing_file_names": [],
+            "measure_files": [],
+        },
         headers={"X-CSRF-Token": "1"},
     )
     assert response.status_code == 200

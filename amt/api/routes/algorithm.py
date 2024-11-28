@@ -3,11 +3,13 @@ import logging
 from collections.abc import Sequence
 from typing import Annotated, Any, cast
 
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends, File, Form, Request, UploadFile
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
+from regex import W
 
 from amt.api.deps import templates
+from amt.api.forms.measure import get_measure_form
 from amt.api.navigation import (
     BaseNavigationItem,
     Navigation,
@@ -17,6 +19,7 @@ from amt.api.navigation import (
 )
 from amt.core.authorization import get_user
 from amt.core.exceptions import AMTNotFound, AMTRepositoryError
+from amt.core.internationalization import get_current_translation
 from amt.enums.status import Status
 from amt.models import Algorithm
 from amt.models.task import Task
@@ -506,12 +509,21 @@ async def get_measure(
     measures_service = create_measures_service()
     measure = await measures_service.fetch_measures([measure_urn])
     measure_task = find_measure_task(algorithm.system_card, measure_urn)
+    measure_form = await get_measure_form(
+        id="measure_state",
+        current_values={
+            "measure_state": measure_task.state,  # pyright: ignore [reportOptionalMemberAccess]
+            "measure_value": measure_task.value,  # pyright: ignore [reportOptionalMemberAccess]
+            "measure_links": measure_task.links,  # pyright: ignore [reportOptionalMemberAccess]
+            "measure_files": measure_task.files,  # pyright: ignore [reportOptionalMemberAccess]
+        },
+        translations=get_current_translation(request),
+    )
 
     context = {
         "measure": measure[0],
-        "measure_state": measure_task.state,  # pyright: ignore [reportOptionalMemberAccess]
-        "measure_value": measure_task.value,  # pyright: ignore [reportOptionalMemberAccess]
         "algorithm_id": algorithm_id,
+        "form": measure_form,
     }
 
     return templates.TemplateResponse(request, "algorithms/details_measure_modal.html.j2", context)
@@ -520,6 +532,8 @@ async def get_measure(
 class MeasureUpdate(BaseModel):
     measure_state: str = Field(default=None)
     measure_value: str = Field(default=None)
+    measure_links: list[str] = Field(default=[])
+    measure_files: list[str] = Field(default=[])
 
 
 @router.post("/{algorithm_id}/measure/{measure_urn}")
@@ -527,15 +541,22 @@ async def update_measure_value(
     request: Request,
     algorithm_id: int,
     measure_urn: str,
-    measure_update: MeasureUpdate,
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
     requirements_service: Annotated[RequirementsService, Depends(create_requirements_service)],
+    measure_state: Annotated[str, Form()],
+    measure_value: Annotated[str | None, Form()] = None,
+    measure_links: Annotated[list[str] | None, Form()] = None,
+    existing_file_names: Annotated[list[str] | None, Form()] = None,
+    measure_files: Annotated[list[UploadFile] | None, File()] = None,
 ) -> HTMLResponse:
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
 
     measure_task = find_measure_task(algorithm.system_card, measure_urn)
-    measure_task.state = measure_update.measure_state  # pyright: ignore [reportOptionalMemberAccess]
-    measure_task.value = measure_update.measure_value  # pyright: ignore [reportOptionalMemberAccess]
+    if measure_task:
+        measure_task.update(measure_state, measure_value, measure_links, existing_file_names, measure_files)
+    else:
+        # This should never happen because find_measure task should never return None.
+        raise AMTNotFound()
 
     # update for the linked requirements the state based on all it's measures
     requirement_tasks = await find_requirement_tasks_by_measure_urn(algorithm.system_card, measure_urn)

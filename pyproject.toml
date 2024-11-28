@@ -44,6 +44,7 @@ aiosqlite = "^0.20.0"
 asyncpg = "^0.30.0"
 async-lru = "^2.0.4"
 jinja2-base64-filters = "^0.1.4"
+python-multipart = "^0.0.19"
 
 
 [tool.poetry.group.test.dependencies]

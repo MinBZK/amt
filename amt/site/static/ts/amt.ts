@@ -244,3 +244,25 @@ export function add_field_on_enter(id: string) {
     show_form_search_options(id);
   }
 }
+
+export function createLinkComponent(template_id: string, element_id: string) {
+  const template = document.getElementById(template_id) as HTMLTemplateElement;
+  const item = document.getElementById(element_id);
+  const link = template?.content.cloneNode(true);
+  if (link) {
+    item?.appendChild(link);
+  }
+}
+
+export function getFiles(element: HTMLInputElement, target_id: string) {
+  if (element.files) {
+    const list = document.getElementById(target_id) as HTMLElement;
+    list.innerHTML = "";
+    for (const file of element.files) {
+      const li = document.createElement("li");
+      li.className = "rvo-item-list__item";
+      li.textContent = file.name;
+      list.appendChild(li);
+    }
+  }
+}
