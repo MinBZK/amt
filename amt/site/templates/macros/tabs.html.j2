@@ -1,0 +1,17 @@
+{% macro show_tabs(tab_items) %}
+    <div class="margin-top-large">
+        <ul class="rvo-tabs rvo-ul rvo-ul--no-margin rvo-ul--no-padding rvo-ul--icon rvo-ul--icon-option-2"
+            role="tablist"
+            aria-label="Tabs">
+            {% for tab_item in tab_items %}
+                <li role="presentation" class="rvo-tabs__item">
+                    <a data-navigation="tab:{{ tab_item.get_url() }}"
+                       class="rvo-link rvo-tabs__item-link rvo-link--no-underline {% if tab_item.active %}rvo-tabs__item-link--active rvo-link--active{% else %}rvo-link--normal{% endif %}"
+                       role="tab"
+                       aria-selected="true"
+                       href="{{ tab_item.get_url() }}">{{ tab_item.display_text }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endmacro %}

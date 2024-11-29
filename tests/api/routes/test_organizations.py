@@ -1,9 +1,10 @@
 import pytest
+from amt.models import Organization
 from amt.schema.organization import OrganizationNew
 from httpx import AsyncClient
 from pytest_mock import MockFixture
 
-from tests.constants import default_auth_user, default_user
+from tests.constants import default_auth_user, default_user, default_user_without_default_organization
 from tests.database_test_utils import DatabaseTestUtils
 
 
@@ -184,3 +185,77 @@ async def test_get_users(client: AsyncClient, mocker: MockFixture, db: DatabaseT
     assert response.status_code == 200
     assert response.headers["content-type"] == "application/json"
     assert b"[]" in response.content
+
+
+@pytest.mark.asyncio
+async def test_get_members(client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
+    # given
+    await db.given([default_user()])
+    client.cookies["fastapi-csrf-token"] = "1"
+
+    mocker.patch("amt.api.routes.organizations.get_user", return_value=default_auth_user())
+    mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+
+    # when
+    response = await client.get("/organizations/default-organization/members")
+    # then
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert b"/organizations/default-organization/members/92714be3-f798-4461-ba83-55d6cfd889a6" in response.content
+
+    # when
+    response = await client.get("/organizations/default-organization/members", headers={"HX-Request": "true"})
+    # then
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert b"/organizations/default-organization/members/92714be3-f798-4461-ba83-55d6cfd889a6" in response.content
+
+
+@pytest.mark.asyncio
+async def test_delete_member(client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
+    # given
+    await db.given([default_user()])
+
+    client.cookies["fastapi-csrf-token"] = "1"
+
+    mocker.patch("amt.api.routes.organizations.get_user", return_value=default_auth_user())
+    mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+    # when
+    response = await client.delete(
+        f"/organizations/default-organization/members/{default_user().id!s}", headers={"X-CSRF-Token": "1"}
+    )
+
+    # then
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert response.headers["HX-Redirect"] == "/organizations/default-organization/members"
+
+
+@pytest.mark.asyncio
+async def test_add_member(client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
+    # given
+    await db.given(
+        [
+            default_user(),
+            default_user_without_default_organization(
+                id="910edc25-135c-4a86-9cfb-58935c47db90", name="Another user", organizations=None
+            ),
+        ]
+    )
+
+    client.cookies["fastapi-csrf-token"] = "1"
+
+    mocker.patch("amt.api.routes.organizations.get_user", return_value=default_auth_user())
+    mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+
+    client.cookies["fastapi-csrf-token"] = "1"
+    response = await client.put(
+        "/organizations/default-organization/members",
+        json={"user_ids": ["910edc25-135c-4a86-9cfb-58935c47db90"]},
+        headers={"X-CSRF-Token": "1"},
+    )
+    updated_organization: Organization = (await db.get(Organization, "id", 1))[0]
+    assert len(updated_organization.users) == 2  # pyright: ignore[reportUnknownMemberType, reportUnknownArgumentType]
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert response.headers["HX-Redirect"] == "/organizations/default-organization/members"

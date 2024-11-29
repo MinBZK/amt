@@ -20,12 +20,12 @@ from amt.api.organization_filter_options import get_localized_organization_filte
 from amt.api.routes.algorithm import UpdateFieldModel, set_path
 from amt.api.routes.shared import get_filters_and_sort_by
 from amt.core.authorization import get_user
-from amt.core.exceptions import AMTNotFound, AMTRepositoryError
+from amt.core.exceptions import AMTAuthorizationError, AMTNotFound, AMTRepositoryError
 from amt.core.internationalization import get_current_translation
-from amt.models import Organization
+from amt.models import Organization, User
 from amt.repositories.organizations import OrganizationsRepository
 from amt.repositories.users import UsersRepository
-from amt.schema.organization import OrganizationBase, OrganizationNew, OrganizationSlug
+from amt.schema.organization import OrganizationBase, OrganizationNew, OrganizationSlug, OrganizationUsers
 from amt.services.organizations import OrganizationsService
 
 router = APIRouter()
@@ -35,7 +35,7 @@ def get_organization_tabs(request: Request, organization_slug: str) -> list[Navi
     request.state.path_variables = {"organization_slug": organization_slug}
 
     return resolve_navigation_items(
-        [Navigation.ORGANIZATIONS_INFO, Navigation.ORGANIZATIONS_ALGORITHMS, Navigation.ORGANIZATIONS_PEOPLE],
+        [Navigation.ORGANIZATIONS_INFO, Navigation.ORGANIZATIONS_ALGORITHMS, Navigation.ORGANIZATIONS_MEMBERS],
         request,
     )
 
@@ -65,14 +65,17 @@ async def get_users(
 @router.get("/new")
 async def get_new(
     request: Request,
+    users_repository: Annotated[UsersRepository, Depends(UsersRepository)],
 ) -> HTMLResponse:
     breadcrumbs = resolve_base_navigation_items([Navigation.ORGANIZATIONS_ROOT, Navigation.ORGANIZATIONS_NEW], request)
-
-    form = get_organization_form(id="organization", translations=get_current_translation(request))
-
-    context: dict[str, Any] = {"form": form, "breadcrumbs": breadcrumbs}
-
-    return templates.TemplateResponse(request, "organizations/new.html.j2", context)
+    # todo (Robbert): make object SessionUser so it can be used as alternative for Database User
+    session_user = get_user(request)
+    if session_user:
+        user = await users_repository.find_by_id(session_user["sub"])
+        form = get_organization_form(id="organization", translations=get_current_translation(request), user=user)
+        context: dict[str, Any] = {"form": form, "breadcrumbs": breadcrumbs}
+        return templates.TemplateResponse(request, "organizations/new.html.j2", context)
+    raise AMTAuthorizationError()
 
 
 @router.get("/")
@@ -247,8 +250,91 @@ async def get_algorithms(
     return templates.TemplateResponse(request, "pages/under_construction.html.j2", {})
 
 
-@router.get("/{slug}/people")
-async def get_people(
+@router.delete("/{slug}/members/{user_id}")
+async def remove_member(
     request: Request,
+    slug: str,
+    user_id: UUID,
+    organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
+    users_repository: Annotated[UsersRepository, Depends(UsersRepository)],
 ) -> HTMLResponse:
-    return templates.TemplateResponse(request, "pages/under_construction.html.j2", {})
+    # TODO (Robbert): add authorization and check if user and organization exist?
+    organization = await organizations_repository.find_by_slug(slug)
+    user: User | None = await users_repository.find_by_id(user_id)
+    if user:
+        await organizations_repository.remove_user(organization, user)
+        return templates.Redirect(request, f"/organizations/{slug}/members")
+    raise AMTAuthorizationError
+
+
+@router.get("/{slug}/members/form")
+async def get_members_form(
+    request: Request,
+    slug: str,
+) -> HTMLResponse:
+    form = get_organization_form(id="organization", translations=get_current_translation(request), user=None)
+    context: dict[str, Any] = {"form": form, "slug": slug}
+    return templates.TemplateResponse(request, "organizations/parts/add_members_modal.html.j2", context)
+
+
+@router.put("/{slug}/members", response_class=HTMLResponse)
+async def add_new_members(
+    request: Request,
+    slug: str,
+    organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
+    organization_users: OrganizationUsers,
+) -> HTMLResponse:
+    organization = await organizations_service.find_by_slug(slug)
+    await organizations_service.add_users(organization, organization_users.user_ids)
+    return templates.Redirect(request, f"/organizations/{slug}/members")
+
+
+@router.get("/{slug}/members")
+async def get_members(
+    request: Request,
+    slug: str,
+    organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
+    users_repository: Annotated[UsersRepository, Depends(UsersRepository)],
+    skip: int = Query(0, ge=0),
+    limit: int = Query(5000, ge=1),  # todo: fix infinite scroll
+    search: str = Query(""),
+) -> HTMLResponse:
+    filters, drop_filters, localized_filters, sort_by = get_filters_and_sort_by(request)
+    organization = await organizations_repository.find_by_slug(slug)
+    tab_items = get_organization_tabs(request, organization_slug=slug)
+    request.state.path_variables = {"organization_slug": organization.slug}
+    breadcrumbs = resolve_base_navigation_items(
+        [
+            Navigation.ORGANIZATIONS_ROOT,
+            BaseNavigationItem(custom_display_text=organization.name, url="/organizations/{organization_slug}"),
+            Navigation.ORGANIZATIONS_MEMBERS,
+        ],
+        request,
+    )
+
+    filters["organization-id"] = str(organization.id)
+    members = await users_repository.find_all(search=search, sort=sort_by, filters=filters)
+
+    context: dict[str, Any] = {
+        "slug": organization.slug,
+        "breadcrumbs": breadcrumbs,
+        "tab_items": tab_items,
+        "members": members,
+        "next": next,
+        "limit": limit,
+        "start": skip,
+        "search": search,
+        "sort_by": sort_by,
+        "members_length": len(members),
+        "filters": localized_filters,
+        "include_filters": False,
+        "organization_filters": get_localized_organization_filters(request),
+    }
+
+    if request.state.htmx:
+        if drop_filters:
+            context.update({"include_filters": True})
+        return templates.TemplateResponse(request, "organizations/parts/members_results.html.j2", context)
+    else:
+        context.update({"include_filters": True})
+        return templates.TemplateResponse(request, "organizations/members.html.j2", context)

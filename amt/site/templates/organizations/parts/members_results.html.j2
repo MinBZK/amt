@@ -1,0 +1,129 @@
+{% import "macros/table_row.html.j2" as table_row with context %}
+{% import "macros/form_macros.html.j2" as macros with context %}
+{% if include_filters %}
+    <div class="amt-layout-grid rvo-layout-gap--md amt-layout-grid-columns--two rvo-margin-block-start--lg">
+        <div>
+            <h1 class="utrecht-heading-1">{% trans %}Members{% endtrans %}</h1>
+        </div>
+        <div style="margin-left: auto">
+            <button class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
+                    hx-trigger="click"
+                    hx-target="#dynamic-modal-content"
+                    hx-get="/organizations/{{ slug }}/members/form"
+                    hx-swap="innerHTML"
+                    onclick="amt.openModal('members-modal')"
+                    type="button">{% trans %}Add member{% endtrans %}</button>
+        </div>
+    </div>
+    <form id="search-members-form"
+          hx-get="/organizations/{{ slug }}/members?skip=0"
+          hx-target="#members-search-results"
+          hx-include="this"
+          hx-swap="innerHTML">
+        <div class="utrecht-form-fieldset rvo-form-fieldset rvo-margin-block-start--lg">
+            <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
+                <div class="rvo-inline-form">
+                    <div class="rvo-layout-grid-container margin-bottom-none">
+                        <div class="rvo-layout-grid rvo-layout-gap--sm">
+                            <div class="rvo-layout-column rvo-text--bold rvo-layout-gap--sm">
+                                <div>{% trans %}Search{% endtrans %}</div>
+                                <div class="form-input-container">
+                                    <input id="members-search-input"
+                                           type="text"
+                                           class="utrecht-textbox utrecht-textbox--html-input"
+                                           dir="auto"
+                                           value="{{ search }}"
+                                           placeholder="{% trans %}Find member...{% endtrans %}"
+                                           name="search"
+                                           hx-get="/organizations/{{ slug }}/members?skip=0"
+                                           hx-trigger="input changed delay:500ms, search"
+                                           autocomplete="off"
+                                           onfocus="this.value=''" />
+                                    <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--lg form-input-clear"
+                                          role="img"
+                                          aria-label="Kruis"
+                                          hx-trigger="click"
+                                          hx-get="/organizations/{{ slug }}/members?skip=0"
+                                          hx-swap="innerHTML"
+                                          onclick="document.getElementById('members-search-input').value = ''"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </form>
+{% endif %}
+{% if start > 0 %}
+    {% for member in members %}{{ macros.overview_table_row_member(loop, member) }}{% endfor %}
+{% else %}
+    <div id="members-search-results">
+        <div class="margin-top-large rvo-layout-row rvo-layout-justify-content-space-between">
+            <div>
+                <span>
+                    {% trans members_length %}{{ members_length }} result
+                {% pluralize %}
+                    {{ members_length }} results{% endtrans %}
+                </span>
+                {% if search or filters %}
+                    <span>{% trans %}for{% endtrans %}</span>
+                    {% if search %}<span><em>'{{ search }}'</em></span>{% endif %}
+                {% endif %}
+                <form name="htmx-remove-tags"
+                      hx-target="#search-members-container"
+                      hx-include="this"
+                      hx-swap="innerHTML"
+                      style="display: inline-block">
+                    <input type="hidden" name="search" value="{{ search }}">
+                    {% for key, localized_value in filters.items() %}
+                        <span target="_self"
+                              class="rvo-tag rvo-tag--default"
+                              hx-trigger="click"
+                              hx-get="/organizations/{{ slug }}/members?skip=0&drop-filter-={{ key }}"
+                              hx-swap="innerHTML"
+                              style="cursor: pointer;
+                                     display: inline-block">
+                            <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--sm form-input-clear"
+                                  role="img"
+                                  aria-label="Kruis"></span>
+                            {{ localized_value.display_value }}
+                            <input type="hidden"
+                                   name="active-filter-{{ key }}"
+                                   value="{{ localized_value.value }}">
+                        </span>
+                    {% endfor %}
+                </form>
+            </div>
+        </div>
+        <form name="htmx-sort-form"
+              hx-include="this"
+              hx-target="#members-search-results"
+              hx-swap="innerHTML">
+            <input type="hidden" name="search" value="{{ search }}">
+            {% for key, localized_value in filters.items() %}
+                <input type="hidden"
+                       name="active-filter-{{ key }}"
+                       value="{{ localized_value.value }}">
+            {% endfor %}
+            {% if members|length > 0 %}
+                <table id="search-results-table" class="rvo-table margin-top-large">
+                    <colgroup>
+                        <col style="width: 80%" />
+                        <col style="width: 20%" />
+                    </colgroup>
+                    <thead class="rvo-table-head">
+                        <tr class="rvo-table-row">
+                            <th style="width: 60%" scope="col" class="rvo-table-header">
+                                {% trans %}Name{% endtrans %}
+                                {{ table_row.sort_button('name', sort_by, "/organizations/" + slug + "/members") }}
+                            </th>
+                            <th scope="col" class="rvo-table-header">{% trans %}Action{% endtrans %}</th>
+                        </tr>
+                    </thead>
+                    {% for member in members %}{{ macros.overview_table_row_member(loop, member) }}{% endfor %}
+                </table>
+            {% endif %}
+        </form>
+    </div>
+{% endif %}

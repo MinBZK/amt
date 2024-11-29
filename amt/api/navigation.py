@@ -31,7 +31,7 @@ class DisplayText(Enum):
     MODELCARD = "modelcard"
     DETAILS = "details"
     ORGANIZATIONS = "organizations"
-    MEMBERS = "people"
+    MEMBERS = "members"
 
 
 def get_translation(key: DisplayText, translations: NullTranslations) -> str:
@@ -142,8 +142,8 @@ class Navigation:
     ORGANIZATIONS_ALGORITHMS = BaseNavigationItem(
         display_text=DisplayText.ALGORITHMS, url="/organizations/{organization_slug}/algorithms"
     )
-    ORGANIZATIONS_PEOPLE = BaseNavigationItem(
-        display_text=DisplayText.MEMBERS, url="/organizations/{organization_slug}/people"
+    ORGANIZATIONS_MEMBERS = BaseNavigationItem(
+        display_text=DisplayText.MEMBERS, url="/organizations/{organization_slug}/members"
     )
 
 

@@ -135,3 +135,9 @@ class OrganizationsRepository:
         except NoResultFound as e:
             logger.exception("Organization not found")
             raise AMTRepositoryError from e
+
+    async def remove_user(self, organization: Organization, user: User) -> Organization:
+        organization.users.remove(user)  # pyright: ignore[reportUnknownMemberType]
+        await self.session.commit()
+        await self.session.refresh(organization)
+        return organization

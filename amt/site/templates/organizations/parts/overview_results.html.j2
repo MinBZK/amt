@@ -15,7 +15,6 @@
     <form id="search-organization-form"
           hx-get="/organizations/?skip=0"
           hx-target="#organization-search-results"
-          hx-trigger="change"
           hx-include="this"
           hx-swap="innerHTML">
         <div class="utrecht-form-fieldset rvo-form-fieldset">
@@ -51,8 +50,11 @@
                                 <div>{% trans %}Organisation Type{% endtrans %}</div>
                                 <div class="rvo-select-wrapper">
                                     <select id="add-filter-organization-type"
-                                            name="add-filter-organization-type"
-                                            class="utrecht-select utrecht-select--html-select">
+                                        {# TODO: we would rather want to trigger a form submit event, not only this element as this excludes the search result #}
+                                        hx-trigger="change"
+                                        hx-get="/organizations/?skip=0"
+                                        name="add-filter-organization-type"
+                                        class="utrecht-select utrecht-select--html-select">
                                         {% for organization_filter in organization_filters %}
                                             <option {% if "organization_filter" in filters and organization_filter.value == filters["organization_filters"].value %}selected="selected"{% endif %}
                                                     value="{{ organization_filter.value }}">

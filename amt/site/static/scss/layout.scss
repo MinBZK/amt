@@ -319,8 +319,6 @@ main {
 }
 
 .amt-item-list__item_as_select {
-    padding-left: 1em;
-
     &:hover {
         background-color: var(--rvo-color-logoblauw-150);
     }
@@ -390,4 +388,9 @@ main {
 .amt-tooltip:hover .amt-tooltip__text {
     visibility: visible;
 }
+
 /* stylelint-enable */
+
+.amt-cursor-pointer {
+    cursor: pointer;
+}

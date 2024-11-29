@@ -47,3 +47,13 @@ class OrganizationsService:
             filters={"organization-type": OrganizationFilterOptions.MY_ORGANIZATIONS.value},
             user_id=user_id,
         )
+
+    async def add_users(self, organization: Organization, user_ids: list[str] | str) -> Organization:
+        new_users: list[User | None] = [await self.users_service.find_by_id(user_id) for user_id in user_ids]
+        for user in new_users:
+            if user not in organization.users:  # pyright: ignore[reportUnknownMemberType]
+                organization.users.append(user)  # pyright: ignore[reportUnknownMemberType]
+        return await self.organizations_repository.save(organization)
+
+    async def find_by_slug(self, slug: str) -> Organization:
+        return await self.organizations_repository.find_by_slug(slug)

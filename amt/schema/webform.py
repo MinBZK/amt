@@ -38,7 +38,7 @@ class WebFormBaseField:
 
 class WebFormField(WebFormBaseField):
     placeholder: str | None
-    default_value: str | None
+    default_value: str | WebFormOption | None
     options: list[WebFormOption] | None
     validators: list[Any]
     description: str | None
@@ -50,7 +50,7 @@ class WebFormField(WebFormBaseField):
         name: str,
         label: str,
         placeholder: str | None = None,
-        default_value: str | None = None,
+        default_value: str | WebFormOption | None = None,
         options: list[WebFormOption] | None = None,
         attributes: dict[str, str] | None = None,
         description: str | None = None,
@@ -75,7 +75,7 @@ class WebFormSearchField(WebFormField):
         name: str,
         label: str,
         placeholder: str | None = None,
-        default_value: str | None = None,
+        default_value: str | None | WebFormOption = None,
         options: list[WebFormOption] | None = None,
         attributes: dict[str, str] | None = None,
         group: str | None = None,
