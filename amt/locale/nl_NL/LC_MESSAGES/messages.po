@@ -640,7 +640,7 @@ msgstr "Er is één fout:"
 
 #: amt/site/templates/layouts/base.html.j2:1
 msgid "Algorithmic Management Toolkit (AMT)"
-msgstr "Algoritme Management Toolkit (AMT)"
+msgstr "Algoritme Management Toolkit"
 
 #: amt/site/templates/macros/table_row.html.j2:19
 msgid " ago"
