@@ -66,12 +66,12 @@
                     </div>
                     <h2 class="utrecht-heading-2 rvo-heading--no-margins">{% trans %}AI Act Profile{% endtrans %}</h2>
                     <p class="rvo-text rvo-text--no-margins">
-                        {% trans %}The AI Act profile provides insight into, among other things, the type of AI system and the associated obligations from the European AI Act. If you already know the type of AI system you can fill in the below fields. Otherwise, you can find your AI Act Profile with the AI Act Decision tree.{% endtrans %}
+                        {% trans %}The AI Act profile provides insight into, among other things, the type of AI system and the associated obligations from the European AI Act. If you already know the type of AI system you can fill in the below fields. Otherwise, you can find your AI Act Profile with the AI Act Support Tool.{% endtrans %}
                     </p>
                     <div class="utrecht-form-fieldset rvo-form-fieldset">
-                        <button id="decision-tree-modal-button"
+                        <button id="ai-act-support-tool-modal-button"
                                 class="utrecht-button utrecht-button--secondary-action utrecht-button--rvo-md utrecht-button-group__align-right"
-                                onclick="amt.openModal('decision-tree-modal')"
+                                onclick="amt.openModal('ai-act-support-tool-modal')"
                                 type="button"
                                 style="float: right">{% trans %}Find your AI Act profile{% endtrans %}</button>
                         <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
@@ -190,15 +190,15 @@
         </div>
     </div>
 </div>
-<div id="decision-tree-modal" class="minbzk-modal display-none">
+<div id="ai-act-support-tool-modal" class="minbzk-modal display-none">
     <div class="modal-underlay"
-         onclick="amt.closeModal('decision-tree-modal')"></div>
+         onclick="amt.closeModal('ai-act-support-tool-modal')"></div>
     <div class="modal-content">
         <p class="utrecht-button-group">
-            <button id="close-decision-tree-modal-button"
+            <button id="close-ai-act-support-tool-modal-button"
                     type="button"
                     class="flex utrecht-button utrecht-button--secondary-action rvo-layout-row rvo-layout-gap--md utrecht-button--rvo-md rvo-link--no-underline utrecht-button-group__align-right"
-                    onclick="amt.closeModalSave('decision-tree-modal')">
+                    onclick="amt.closeModalSave('ai-act-support-tool-modal')">
                 {% trans %}Copy results and close{% endtrans %}
             </button>
             <div id="app">

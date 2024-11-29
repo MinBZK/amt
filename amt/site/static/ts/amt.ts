@@ -130,12 +130,12 @@ export function closeModal(id: string) {
 export function closeModalSave(id: string) {
   closeModal(id);
 
-  // Get decision tree state from local store.
-  const decision_tree_state = localStorage?.getItem("labelsbycategory");
+  // Get ai act support tool state from local store.
+  const ai_act_support_tool_state = localStorage?.getItem("labelsbycategory");
 
-  if (decision_tree_state != null) {
-    // Parse decision tree state into AiActProfile object.
-    const aiActProfileRaw = JSON.parse(decision_tree_state);
+  if (ai_act_support_tool_state != null) {
+    // Parse ai act support tool state into AiActProfile object.
+    const aiActProfileRaw = JSON.parse(ai_act_support_tool_state);
     const aiActProfile: AiActProfile = new AiActProfile(
       aiActProfileRaw["Soort toepassing"],
       aiActProfileRaw["Publicatiecategorie"],

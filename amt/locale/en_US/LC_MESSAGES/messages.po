@@ -535,8 +535,7 @@ msgid ""
 "The AI Act profile provides insight into, among other things, the type of"
 " AI system and the associated obligations from the European AI Act. If "
 "you already know the type of AI system you can fill in the below fields. "
-"Otherwise, you can find your AI Act Profile with the AI Act Decision "
-"tree."
+"Otherwise, you can find your AI Act Profile with the AI Act Support Tool."
 msgstr ""
 
 #: amt/site/templates/algorithms/new.html.j2:76
