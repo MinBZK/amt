@@ -261,7 +261,23 @@ export function getFiles(element: HTMLInputElement, target_id: string) {
     for (const file of element.files) {
       const li = document.createElement("li");
       li.className = "rvo-item-list__item";
-      li.textContent = file.name;
+
+      const container = document.createElement("div");
+      container.className = "rvo-layout-row rvo-layout-gap--sm";
+
+      const icon_el = document.createElement("span");
+      icon_el.className =
+        "utrecht-icon rvo-icon rvo-icon-document-met-lijnen rvo-icon--md rvo-icon--hemelblauw";
+      icon_el.role = "img";
+      icon_el.ariaLabel = "File";
+      container.appendChild(icon_el);
+
+      const text_el = document.createElement("span");
+      text_el.textContent = file.name;
+      container.appendChild(text_el);
+
+      li.appendChild(container);
+
       list.appendChild(li);
     }
   }

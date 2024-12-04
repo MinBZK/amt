@@ -18,7 +18,9 @@ async def get_measure_form(
             options=[
                 WebFormOption(value="to do", display_value="to do"),
                 WebFormOption(value="in progress", display_value="in progress"),
+                WebFormOption(value="in review", display_value="in review"),
                 WebFormOption(value="done", display_value="done"),
+                WebFormOption(value="not implemented", display_value="not implemented"),
             ],
             default_value=current_values.get("measure_state"),
             group="1",
