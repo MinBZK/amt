@@ -220,6 +220,43 @@ export function hide_form_search_options(id: string) {
   }, 250);
 }
 
+export function hide_download_dropdown() {
+  const dropdownContent = document.querySelector(
+    ".dropdown-content",
+  ) as HTMLElement;
+  const dropdownUnderlay = document.querySelector(
+    ".dropdown-underlay",
+  ) as HTMLElement;
+
+  if (dropdownContent && dropdownUnderlay) {
+    dropdownContent.style.display = "none";
+    dropdownUnderlay.style.display = "none";
+  } else {
+    console.error("Could not find dropdown elements.");
+  }
+}
+
+export function show_download_dropdown() {
+  const dropdownContent = document.querySelector(
+    ".dropdown-content",
+  ) as HTMLElement;
+  const dropdownUnderlay = document.querySelector(
+    ".dropdown-underlay",
+  ) as HTMLElement;
+
+  if (dropdownContent && dropdownUnderlay) {
+    dropdownContent.style.display = "block";
+    dropdownUnderlay.style.display = "block";
+  } else {
+    console.error("Could not find dropdown elements.");
+  }
+}
+
+export function download_as_yaml() {
+  alert("je gaat nu iets downloaden");
+  hide_download_dropdown();
+}
+
 export function add_field_on_enter(id: string) {
   if (!event) {
     return;
