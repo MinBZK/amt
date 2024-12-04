@@ -6,7 +6,6 @@ from typing import Annotated, Any, cast
 from fastapi import APIRouter, Depends, File, Form, Request, UploadFile
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
-from regex import W
 
 from amt.api.deps import templates
 from amt.api.forms.measure import get_measure_form
