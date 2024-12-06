@@ -52,8 +52,8 @@ def default_algorithm(name: str = "default algorithm", organization_id: int = 1)
     return Algorithm(name=name, organization_id=organization_id)
 
 
-def default_organization(name: str = "default organization") -> Organization:
-    return Organization(name=name, slug="default-organization", created_by_id=UUID(default_auth_user()["sub"]))
+def default_organization(name: str = "default organization", slug: str = "default-organization") -> Organization:
+    return Organization(name=name, slug=slug, created_by_id=UUID(default_auth_user()["sub"]))
 
 
 def default_user(
@@ -63,6 +63,25 @@ def default_user(
 ) -> User:
     user_name = name if name else default_auth_user()["name"]
     organizations = [default_organization()] if organizations is None else organizations
+    user_id = UUID(default_auth_user()["sub"]) if id is None else UUID(id) if isinstance(id, str) else id
+
+    return User(
+        id=user_id,
+        name=user_name,
+        email=default_auth_user()["email"],
+        name_encoded=quote_plus(user_name.strip().lower()),
+        email_hash=default_auth_user()["email_hash"],
+        organizations=organizations,
+    )
+
+
+def default_user_without_default_organization(
+    id: str | UUID | None = None,
+    name: str | None = None,
+    organizations: list[Organization] | None = None,
+) -> User:
+    user_name = name if name else default_auth_user()["name"]
+    organizations = [] if organizations is None else organizations
     user_id = UUID(default_auth_user()["sub"]) if id is None else UUID(id) if isinstance(id, str) else id
 
     return User(

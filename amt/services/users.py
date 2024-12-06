@@ -23,3 +23,6 @@ class UsersService:
 
     async def create_or_update(self, user: User) -> User:
         return await self.repository.upsert(user)
+
+    async def find_by_id(self, id: UUID | str) -> User | None:
+        return await self.repository.find_by_id(id)

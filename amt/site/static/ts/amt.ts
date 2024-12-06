@@ -108,6 +108,32 @@ export function openModal(id: string) {
   }
 }
 
+export function openConfirmModal(
+  title: string,
+  content: string,
+  action_type: string,
+  action_url: string,
+) {
+  const template: HTMLElement | null = document.getElementById(
+    "confirm-modal-template",
+  );
+  if (template) {
+    const clone: Node = (template as HTMLTemplateElement).content.cloneNode(
+      true,
+    );
+    (clone as HTMLElement).querySelector("[data-target='title']")!.innerHTML =
+      title;
+    (clone as HTMLElement).querySelector("[data-target='content']")!.innerHTML =
+      content;
+    (clone as HTMLElement)
+      .querySelector("[data-target='confirm-button']")!
+      .setAttribute(action_type, action_url);
+    document.body.appendChild(clone);
+    // TODO: find out why process does not work on the clone element and if there are side effects to do it on the body
+    htmx.process(document.body);
+  }
+}
+
 class AiActProfile {
   constructor(
     public type: string[],
@@ -124,6 +150,23 @@ export function closeModal(id: string) {
   const el: Element | null = document.getElementById(id);
   if (el != null) {
     el.classList.add("display-none");
+  } else {
+    console.error(
+      "Can not close modal, element with id '" + id + "' not found",
+    );
+  }
+}
+
+export function closeAndResetDynamicModal(id: string) {
+  closeModal(id);
+  const el: Element | null = document.getElementById("dynamic-modal-content");
+  if (el) {
+    // we want to remove all modal content to avoid unwanted or unexpected behaviour
+    el.innerHTML = "";
+  } else {
+    console.error(
+      "Can not reset modal content, element with id 'dynamic-modal-content' not found",
+    );
   }
 }
 

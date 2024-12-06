@@ -43,6 +43,21 @@
         <td class="rvo-table-cell">{{ organization.modified_at | time_ago(language) }}</td>
     </tr>
 {% endmacro %}
+{% macro overview_table_row_member(loop, member) -%}
+    <tr class="rvo-table-row"
+        {% if loop.last and members|length == limit %} data-marker="last-element" hx-get="/organizations/?skip={{ next }}" hx-swap="beforeend" hx-trigger="revealed" {% endif %}>
+        <td class="rvo-table-cell">{{ member.name }}</td>
+        <td class="rvo-table-cell">
+            <a class="rvo-link rvo-link--normal rvo-link--with-icon"
+               onclick="amt.openConfirmModal('Remove member {{ member.name }}','{% trans %}Are you sure you want to remove {% endtrans %} {{ member.name }} {% trans %} from this organization? {% endtrans %}', 'hx-delete','/organizations/{{ slug }}/members/{{ member.id }}')">
+                <span class="utrecht-icon rvo-icon rvo-icon-verwijderen rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
+                      role="img"
+                      aria-label="{% trans %}Delete{% endtrans %}"></span>
+                {% trans %}Delete member{% endtrans %}
+            </a>
+        </td>
+    </tr>
+{% endmacro %}
 {% macro render_form_field_search_result(value, display_value) -%}
     {% set list_result = render_form_field_list_result("user_ids", value, display_value) %}
     <li data-list-result="{{ list_result | b64encode }}"
@@ -141,7 +156,9 @@
             </ul>
         </div>
         <ul id="{{ prefix }}{{ field.name }}-results-list">
-            {% if user %}{{ render_form_field_list_result("user_ids", user.sub, user.name) }}{% endif %}
+            {% if field.default_value %}
+                {{ render_form_field_list_result("user_ids", field.default_value.value, field.default_value.display_value) }}
+            {% endif %}
         </ul>
     </div>
 {% endmacro %}

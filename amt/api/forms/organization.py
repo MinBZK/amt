@@ -1,9 +1,17 @@
 from gettext import NullTranslations
 
-from amt.schema.webform import WebForm, WebFormField, WebFormFieldType, WebFormSearchField, WebFormSubmitButton
+from amt.models import User
+from amt.schema.webform import (
+    WebForm,
+    WebFormField,
+    WebFormFieldType,
+    WebFormOption,
+    WebFormSearchField,
+    WebFormSubmitButton,
+)
 
 
-def get_organization_form(id: str, translations: NullTranslations) -> WebForm:
+def get_organization_form(id: str, translations: NullTranslations, user: User | None) -> WebForm:
     _ = translations.gettext
 
     organization_form: WebForm = WebForm(id=id, post_url="/organizations/new")
@@ -31,6 +39,7 @@ def get_organization_form(id: str, translations: NullTranslations) -> WebForm:
             placeholder=_("Search for a person..."),
             search_url="/organizations/users?returnType=search_select_field",
             query_var_name="query",
+            default_value=WebFormOption(str(user.id), user.name) if user else None,
             group="1",
         ),
         WebFormSubmitButton(label=_("Add organization"), group="1", name="submit"),

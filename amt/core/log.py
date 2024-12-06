@@ -32,6 +32,7 @@ LOGGING_CONFIG = {
     "loggers": {
         "": {"handlers": ["console", "file"], "level": "DEBUG", "propagate": False},
         "httpcore": {"handlers": ["console", "file"], "level": "ERROR", "propagate": False},
+        "aiosqlite": {"handlers": ["console", "file"], "level": "INFO", "propagate": False},
     },
 }
 

@@ -44,7 +44,7 @@ msgstr ""
 #: amt/api/group_by_category.py:15
 #: amt/site/templates/algorithms/details_info.html.j2:28
 #: amt/site/templates/algorithms/new.html.j2:41
-#: amt/site/templates/parts/algorithm_search.html.j2:48
+#: amt/site/templates/parts/algorithm_search.html.j2:47
 #: amt/site/templates/parts/filter_list.html.j2:71
 msgid "Lifecycle"
 msgstr ""
@@ -151,8 +151,9 @@ msgstr ""
 msgid "Organizations"
 msgstr ""
 
-#: amt/api/navigation.py:64 amt/site/templates/organizations/home.html.j2:45
-#: amt/site/templates/organizations/parts/overview_results.html.j2:130
+#: amt/api/navigation.py:64 amt/site/templates/organizations/home.html.j2:32
+#: amt/site/templates/organizations/parts/members_results.html.j2:6
+#: amt/site/templates/organizations/parts/overview_results.html.j2:132
 msgid "Members"
 msgstr ""
 
@@ -197,39 +198,42 @@ msgstr ""
 msgid "Organization"
 msgstr ""
 
-#: amt/api/forms/organization.py:15
+#: amt/api/forms/organization.py:23
 #: amt/site/templates/algorithms/details_info.html.j2:8
 #: amt/site/templates/auth/profile.html.j2:34
-#: amt/site/templates/organizations/home.html.j2:25
+#: amt/site/templates/organizations/home.html.j2:12
+#: amt/site/templates/organizations/parts/members_results.html.j2:118
 msgid "Name"
 msgstr ""
 
-#: amt/api/forms/organization.py:16
+#: amt/api/forms/organization.py:24
 msgid "Name of the organization"
 msgstr ""
 
-#: amt/api/forms/organization.py:23
+#: amt/api/forms/organization.py:31
 msgid "The slug is the web path, like /organizations/my-organization-name"
 msgstr ""
 
-#: amt/api/forms/organization.py:24
-#: amt/site/templates/organizations/home.html.j2:29
+#: amt/api/forms/organization.py:32
+#: amt/site/templates/organizations/home.html.j2:16
 msgid "Slug"
 msgstr ""
 
-#: amt/api/forms/organization.py:25
+#: amt/api/forms/organization.py:33
 msgid "The slug for this organization"
 msgstr ""
 
-#: amt/api/forms/organization.py:30
+#: amt/api/forms/organization.py:38
+#: amt/site/templates/organizations/parts/add_members_modal.html.j2:4
+#: amt/site/templates/organizations/parts/add_members_modal.html.j2:23
 msgid "Add members"
 msgstr ""
 
-#: amt/api/forms/organization.py:31
+#: amt/api/forms/organization.py:39
 msgid "Search for a person..."
 msgstr ""
 
-#: amt/api/forms/organization.py:36
+#: amt/api/forms/organization.py:45
 msgid "Add organization"
 msgstr ""
 
@@ -309,11 +313,13 @@ msgstr ""
 
 #: amt/site/templates/algorithms/details_base.html.j2:39
 #: amt/site/templates/algorithms/new.html.j2:134
+#: amt/site/templates/organizations/members.html.j2:33
 msgid "Yes"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_base.html.j2:44
 #: amt/site/templates/algorithms/new.html.j2:144
+#: amt/site/templates/organizations/members.html.j2:36
 msgid "No"
 msgstr ""
 
@@ -429,7 +435,7 @@ msgid "Algorithm code"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_info.html.j2:32
-#: amt/site/templates/organizations/parts/overview_results.html.j2:132
+#: amt/site/templates/organizations/parts/overview_results.html.j2:134
 #: amt/site/templates/pages/assessment_card.html.j2:7
 #: amt/site/templates/pages/model_card.html.j2:6
 #: amt/site/templates/pages/system_card.html.j2:4
@@ -486,6 +492,7 @@ msgstr ""
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:88
 #: amt/site/templates/macros/editable.html.j2:87
+#: amt/site/templates/organizations/parts/add_members_modal.html.j2:26
 msgid "Cancel"
 msgstr ""
 
@@ -617,8 +624,24 @@ msgstr ""
 msgid "There is one error:"
 msgstr ""
 
-#: amt/site/templates/layouts/base.html.j2:1
+#: amt/site/templates/layouts/base.html.j2:11
 msgid "Algorithmic Management Toolkit (AMT)"
+msgstr ""
+
+#: amt/site/templates/macros/form_macros.html.j2:52
+msgid "Are you sure you want to remove "
+msgstr ""
+
+#: amt/site/templates/macros/form_macros.html.j2:52
+msgid " from this organization? "
+msgstr ""
+
+#: amt/site/templates/macros/form_macros.html.j2:55
+msgid "Delete"
+msgstr ""
+
+#: amt/site/templates/macros/form_macros.html.j2:56
+msgid "Delete member"
 msgstr ""
 
 #: amt/site/templates/macros/table_row.html.j2:19
@@ -641,40 +664,75 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-#: amt/site/templates/organizations/home.html.j2:33
+#: amt/site/templates/organizations/home.html.j2:20
 msgid "Created at"
 msgstr ""
 
-#: amt/site/templates/organizations/home.html.j2:37
+#: amt/site/templates/organizations/home.html.j2:24
 msgid "Created by"
 msgstr ""
 
-#: amt/site/templates/organizations/home.html.j2:41
+#: amt/site/templates/organizations/home.html.j2:28
 msgid "Modified at"
+msgstr ""
+
+#: amt/site/templates/organizations/members.html.j2:24
+#: amt/site/templates/organizations/parts/add_members_modal.html.j2:8
+msgid "Close"
 msgstr ""
 
 #: amt/site/templates/organizations/new.html.j2:8
 msgid "Create an organization"
 msgstr ""
 
-#: amt/site/templates/organizations/parts/overview_results.html.j2:11
-msgid "New organization"
+#: amt/site/templates/organizations/parts/members_results.html.j2:15
+msgid "Add member"
 msgstr ""
 
-#: amt/site/templates/organizations/parts/overview_results.html.j2:27
+#: amt/site/templates/organizations/parts/members_results.html.j2:29
+#: amt/site/templates/organizations/parts/overview_results.html.j2:26
 #: amt/site/templates/parts/algorithm_search.html.j2:24
 msgid "Search"
 msgstr ""
 
-#: amt/site/templates/organizations/parts/overview_results.html.j2:34
+#: amt/site/templates/organizations/parts/members_results.html.j2:36
+msgid "Find member..."
+msgstr ""
+
+#: amt/site/templates/organizations/parts/members_results.html.j2:65
+#, python-format
+msgid ""
+"%(members_length)s result\n"
+"                "
+msgid_plural ""
+"\n"
+"                    %(members_length)s results"
+msgstr[0] ""
+msgstr[1] ""
+
+#: amt/site/templates/organizations/parts/members_results.html.j2:70
+#: amt/site/templates/organizations/parts/overview_results.html.j2:86
+#: amt/site/templates/parts/filter_list.html.j2:16
+msgid "for"
+msgstr ""
+
+#: amt/site/templates/organizations/parts/members_results.html.j2:121
+msgid "Action"
+msgstr ""
+
+#: amt/site/templates/organizations/parts/overview_results.html.j2:11
+msgid "New organization"
+msgstr ""
+
+#: amt/site/templates/organizations/parts/overview_results.html.j2:33
 msgid "Find organizations..."
 msgstr ""
 
-#: amt/site/templates/organizations/parts/overview_results.html.j2:51
+#: amt/site/templates/organizations/parts/overview_results.html.j2:50
 msgid "Organisation Type"
 msgstr ""
 
-#: amt/site/templates/organizations/parts/overview_results.html.j2:79
+#: amt/site/templates/organizations/parts/overview_results.html.j2:81
 #, python-format
 msgid ""
 "%(organizations_length)s result\n"
@@ -685,12 +743,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: amt/site/templates/organizations/parts/overview_results.html.j2:84
-#: amt/site/templates/parts/filter_list.html.j2:16
-msgid "for"
-msgstr ""
-
-#: amt/site/templates/organizations/parts/overview_results.html.j2:127
+#: amt/site/templates/organizations/parts/overview_results.html.j2:129
 msgid "Organization name"
 msgstr ""
 
@@ -790,23 +843,23 @@ msgstr ""
 msgid "Find algorithm..."
 msgstr ""
 
-#: amt/site/templates/parts/algorithm_search.html.j2:53
+#: amt/site/templates/parts/algorithm_search.html.j2:52
 msgid "Select lifecycle"
 msgstr ""
 
-#: amt/site/templates/parts/algorithm_search.html.j2:62
+#: amt/site/templates/parts/algorithm_search.html.j2:61
 msgid "Category"
 msgstr ""
 
-#: amt/site/templates/parts/algorithm_search.html.j2:67
+#: amt/site/templates/parts/algorithm_search.html.j2:66
 msgid "Select publication category"
 msgstr ""
 
-#: amt/site/templates/parts/algorithm_search.html.j2:85
+#: amt/site/templates/parts/algorithm_search.html.j2:84
 msgid "Group by"
 msgstr ""
 
-#: amt/site/templates/parts/algorithm_search.html.j2:95
+#: amt/site/templates/parts/algorithm_search.html.j2:94
 msgid "Select group by"
 msgstr ""
 
