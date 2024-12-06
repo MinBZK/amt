@@ -8,7 +8,7 @@ from sqlalchemy.exc import NoResultFound, SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy_utils import escape_like  # pyright: ignore[reportMissingTypeStubs, reportUnknownVariableType]
 
-from amt.api.publication_category import PublicationCategories
+from amt.api.risk_group import RiskGroup
 from amt.core.exceptions import AMTRepositoryError
 from amt.models import Algorithm
 from amt.repositories.deps import get_session
@@ -85,10 +85,10 @@ class AlgorithmsRepository:
                     match key:
                         case "lifecycle":
                             statement = statement.filter(Algorithm.lifecycle == value)
-                        case "publication-category":
+                        case "risk-group":
                             statement = statement.filter(
-                                Algorithm.system_card_json["ai_act_profile"]["publication_category"].as_string()
-                                == PublicationCategories[value].value
+                                Algorithm.system_card_json["ai_act_profile"]["risk_group"].as_string()
+                                == RiskGroup[value].value
                             )
                         case _:
                             raise TypeError(f"Unknown filter type with key: {key}")  # noqa

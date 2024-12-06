@@ -13,7 +13,7 @@ def test_e2e_search_algorithms(page: Page) -> None:
     page.locator("#algorithm-search-input").fill("10")
 
     with page.expect_response(
-        "/algorithms/?skip=0&search=10&add-filter-lifecycle=&add-filter-publication-category=&display_type=",
+        "/algorithms/?skip=0&search=10&add-filter-lifecycle=&add-filter-risk-group=&display_type=",
         timeout=3000,
     ) as response_info:
         expect(page.get_by_text("Algorithm 10", exact=True)).to_be_visible()
@@ -34,7 +34,7 @@ def test_e2e_search_scroll_algorithms(page: Page) -> None:
     page.locator("#algorithm-search-input").fill("Algorithm")
 
     with page.expect_request(
-        "/algorithms/?skip=0&search=Algorithm&add-filter-lifecycle=&add-filter-publication-category=&display_type=",
+        "/algorithms/?skip=0&search=Algorithm&add-filter-lifecycle=&add-filter-risk-group=&display_type=",
         timeout=3000,
     ) as _:
         algorithm_links = page.locator("#search-results-table tr").count() - 1
@@ -54,7 +54,7 @@ def test_e2e_search_algorithms_with_group_by_lifecycle_view(page: Page) -> None:
     page.locator("#display_type").select_option("LIFECYCLE")
 
     with page.expect_request(
-        "/algorithms/?skip=0&search=Algorithm&add-filter-lifecycle=&add-filter-publication-category=&display_type=LIFECYCLE",
+        "/algorithms/?skip=0&search=Algorithm&add-filter-lifecycle=&add-filter-risk-group=&display_type=LIFECYCLE",
         timeout=3000,
     ) as _:
         expect(page.get_by_title("Organizational Responsibilities", exact=True)).to_be_visible()
@@ -73,7 +73,7 @@ def test_e2e_search_algorithms_with_group_by_lifecycle_view_and_search(page: Pag
     page.locator("#display_type").select_option("LIFECYCLE")
 
     with page.expect_request(
-        "/algorithms/?skip=0&search=10&add-filter-lifecycle=&add-filter-publication-category=&display_type=LIFECYCLE",
+        "/algorithms/?skip=0&search=10&add-filter-lifecycle=&add-filter-risk-group=&display_type=LIFECYCLE",
         timeout=3000,
     ) as _:
         expect(page.get_by_title("Organizational Responsibilities", exact=True)).to_be_visible()

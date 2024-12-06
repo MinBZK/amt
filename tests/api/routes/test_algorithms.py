@@ -128,7 +128,8 @@ async def test_post_new_algorithms(client: AsyncClient, mocker: MockFixture, db:
         lifecycle="DESIGN",
         type="AI-systeem",
         open_source="open-source",
-        publication_category="hoog-risico AI",
+        risk_group="hoog-risico AI",
+        conformity_assessment_body="beoordeling door derde partij",
         systemic_risk="geen systeemrisico",
         transparency_obligations="geen transparantieverplichtingen",
         role="gebruiksverantwoordelijke",
@@ -175,7 +176,8 @@ async def test_post_new_algorithms_write_system_card(
         lifecycle="DESIGN",
         type="AI-systeem",
         open_source="open-source",
-        publication_category="hoog-risico AI",
+        risk_group="hoog-risico AI",
+        conformity_assessment_body="beoordeling door derde partij",
         systemic_risk="geen systeemrisico",
         transparency_obligations="geen transparantieverplichtingen",
         role="gebruiksverantwoordelijke",
@@ -186,7 +188,8 @@ async def test_post_new_algorithms_write_system_card(
     ai_act_profile = AiActProfile(
         type=algorithm_new.type,
         open_source=algorithm_new.open_source,
-        publication_category=algorithm_new.publication_category,
+        risk_group=algorithm_new.risk_group,
+        conformity_assessment_body=algorithm_new.conformity_assessment_body,
         systemic_risk=algorithm_new.systemic_risk,
         transparency_obligations=algorithm_new.transparency_obligations,
         role=algorithm_new.role,
@@ -235,12 +238,12 @@ def test_get_localized_value():
     assert localized.display_value == "Problem Analysis"
 
     request = MockRequest("nl")
-    localized = get_localized_value("publication-category", "HOOG_RISICO_AI", request)
+    localized = get_localized_value("risk-group", "HOOG_RISICO_AI", request)
     assert localized.display_value == "Hoog-risico AI"
 
     request = MockRequest("en")
-    localized = get_localized_value("publication-category", "HOOG_RISICO_AI", request)
-    assert localized.display_value == "High-risk AI"
+    localized = get_localized_value("risk-group", "HOOG_RISICO_AI", request)
+    assert localized.display_value == "high-risk AI"
 
     request = MockRequest("en")
     localized = get_localized_value("other key", "", request)

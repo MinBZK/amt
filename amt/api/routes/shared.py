@@ -2,7 +2,7 @@ from starlette.requests import Request
 
 from amt.api.lifecycles import Lifecycles, get_localized_lifecycle
 from amt.api.organization_filter_options import OrganizationFilterOptions, get_localized_organization_filter
-from amt.api.publication_category import PublicationCategories, get_localized_publication_category
+from amt.api.risk_group import RiskGroup, get_localized_risk_group
 from amt.schema.localized_value_item import LocalizedValueItem
 
 
@@ -37,8 +37,8 @@ def get_localized_value(key: str, value: str, request: Request) -> LocalizedValu
     match key:
         case "lifecycle":
             localized = get_localized_lifecycle(Lifecycles(value), request)
-        case "publication-category":
-            localized = get_localized_publication_category(PublicationCategories[value], request)
+        case "risk-group":
+            localized = get_localized_risk_group(RiskGroup[value], request)
         case "organization-type":
             localized = get_localized_organization_filter(OrganizationFilterOptions(value), request)
         case _:

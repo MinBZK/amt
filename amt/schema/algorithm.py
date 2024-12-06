@@ -11,7 +11,8 @@ class AlgorithmNew(AlgorithmBase):
     instruments: list[str] | str = []
     type: str = Field(default=None)
     open_source: str = Field(default=None)
-    publication_category: str = Field(default=None)
+    risk_group: str = Field(default=None)
+    conformity_assessment_body: str = Field(default=None)
     systemic_risk: str = Field(default=None)
     transparency_obligations: str = Field(default=None)
     role: list[str] | str = []

@@ -75,27 +75,6 @@
                                 type="button"
                                 style="float: right">{% trans %}Find your AI Act profile{% endtrans %}</button>
                         <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
-                            {% for item in ai_act_profile.radio_select %}
-                                <div role="group"
-                                     aria-labelledby="fieldId-label"
-                                     class="utrecht-form-field utrecht-form-field--text rvo-form-field">
-                                    <div class="rvo-form-field__label">
-                                        <label class="rvo-label">{{ item.display_name }}</label>
-                                    </div>
-                                    {% for option in item.options %}
-                                        <div class="rvo-radio-button__group">
-                                            <label class="rvo-radio-button" for="{{ option }}">
-                                                <input id="{{ item.target_name }}-{{ option }}"
-                                                       name="{{ item.target_name }}"
-                                                       value="{{ option }}"
-                                                       type="radio"
-                                                       class="utrecht-radio-button" />
-                                                {{ option }}
-                                            </label>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            {% endfor %}
                             {% for item in ai_act_profile.multiple_select %}
                                 <div role="group"
                                      aria-labelledby="fieldId-label"
@@ -111,6 +90,46 @@
                                                        class="rvo-checkbox__input"
                                                        type="checkbox"
                                                        value="{{ option }}" />
+                                                {{ option }}
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+                            {% for item in ai_act_profile.dropdown_select %}
+                                <div style="min-inline-size: max-content;
+                                            max-inline-size: clamp(20rem, 40%, 50rem)"
+                                     role="group"
+                                     aria-labelledby="fieldId-label"
+                                     class="utrecht-form-field utrecht-form-field--text rvo-form-field">
+                                    <div class="rvo-form-field__label">
+                                        <label class="rvo-label" id="fieldId-label" for="fieldId">{{ item.display_name }}</label>
+                                    </div>
+                                    <div class="rvo-select-wrapper">
+                                        <select id="{{ item.target_name }}"
+                                                name="{{ item.target_name }}"
+                                                class="utrecht-select utrecht-select--html-select">
+                                            <option value="" hidden>{% trans %}Select Option{% endtrans %}</option>
+                                            {% for option in item.options %}<option value="{{ option }}">{{ option }}</option>{% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            {% for item in ai_act_profile.radio_select %}
+                                <div role="group"
+                                     aria-labelledby="fieldId-label"
+                                     class="utrecht-form-field utrecht-form-field--text rvo-form-field">
+                                    <div class="rvo-form-field__label">
+                                        <label class="rvo-label">{{ item.display_name }}</label>
+                                    </div>
+                                    {% for option in item.options %}
+                                        <div class="rvo-radio-button__group">
+                                            <label class="rvo-radio-button" for="{{ option }}">
+                                                <input id="{{ item.target_name }}-{{ option }}"
+                                                       name="{{ item.target_name }}"
+                                                       value="{{ option }}"
+                                                       type="radio"
+                                                       class="utrecht-radio-button" />
                                                 {{ option }}
                                             </label>
                                         </div>
@@ -202,7 +221,7 @@
                 {% trans %}Copy results and close{% endtrans %}
             </button>
             <div id="app">
-                <script src="https://github.com/MinBZK/ai-act-decisiontree/releases/download/1.1.7/index.js"></script>
+                <script src="https://github.com/MinBZK/ai-act-decisiontree/releases/download/v1.2.0/index.js"></script>
             </div>
         </p>
     </div>
