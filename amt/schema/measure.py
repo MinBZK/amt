@@ -1,4 +1,3 @@
-from fastapi import UploadFile
 from pydantic import Field
 
 from amt.schema.shared import BaseModel
@@ -20,17 +19,18 @@ class MeasureTask(MeasureBase):
         state: str | None,
         value: str | None,
         links: list[str] | None,
-        saved_files: list[str] | None,
-        new_files: list[UploadFile] | None,
+        new_files: list[str] | None,
     ) -> None:
         if state:
             self.state = state
+
         if value:
             self.value = value
+
         self.links = [link for link in links if link] if links else []
-        self.files = saved_files if saved_files else []
+
         if new_files:
-            self.files.extend([file.filename for file in new_files if file and file.filename])
+            self.files.extend(new_files)
 
 
 class Measure(MeasureBase):

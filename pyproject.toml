@@ -34,7 +34,7 @@ babel = "^2.15.0"
 httpx = "^0.27.2"
 pyyaml-include = "^2.2"
 click = "^8.1.7"
-python-ulid = "^3.0.0"
+python-ulid = {extras = ["pydantic"], version = "^3.0.0"}
 fastapi-csrf-protect = "^0.3.4"
 sqlalchemy = {extras = ["asyncio"], version = "^2.0.36"}
 sqlalchemy-utils = "^0.41.2"
@@ -45,6 +45,7 @@ asyncpg = "^0.30.0"
 async-lru = "^2.0.4"
 jinja2-base64-filters = "^0.1.4"
 python-multipart = "^0.0.19"
+minio = "^7.2.12"
 
 
 [tool.poetry.group.test.dependencies]

@@ -63,6 +63,10 @@ class Settings(BaseSettings):
 
     TASK_REGISTRY_URL: str = "https://task-registry.apps.digilab.network"
 
+    OBJECT_STORE_URL: str = "localhost:9000"
+    OBJECT_STORE_USER: str = "berry"
+    OBJECT_STORE_PASSWORD: str = "berryberry"
+
     @computed_field
     def SQLALCHEMY_ECHO(self) -> bool:
         return self.DEBUG
