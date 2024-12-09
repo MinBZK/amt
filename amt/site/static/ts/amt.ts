@@ -308,6 +308,61 @@ export function hide_form_search_options(id: string) {
   }, 250);
 }
 
+export function hide_download_dropdown() {
+  const dropdownContent = document.querySelector(
+    ".dropdown-content",
+  ) as HTMLElement;
+  const dropdownUnderlay = document.querySelector(
+    ".dropdown-underlay",
+  ) as HTMLElement;
+
+  if (dropdownContent && dropdownUnderlay) {
+    dropdownContent.style.display = "none";
+    dropdownUnderlay.style.display = "none";
+  } else {
+    console.error("Could not find dropdown elements.");
+  }
+}
+
+export function show_download_dropdown() {
+  const dropdownContent = document.querySelector(
+    ".dropdown-content",
+  ) as HTMLElement;
+  const dropdownUnderlay = document.querySelector(
+    ".dropdown-underlay",
+  ) as HTMLElement;
+
+  if (dropdownContent && dropdownUnderlay) {
+    dropdownContent.style.display = "block";
+    dropdownUnderlay.style.display = "block";
+  } else {
+    console.error("Could not find dropdown elements.");
+  }
+}
+
+export async function download_as_yaml(
+  algorithm_id: string,
+  algorithm_name: string,
+): Promise<void> {
+  try {
+    const response = await fetch(
+      `/algorithm/${algorithm_id}/details/system_card/download`,
+    );
+    const blob = await response.blob(); // Get the response as a Blob
+
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    const filename = algorithm_name + "_" + new Date().toISOString() + ".yaml";
+    link.setAttribute("download", filename);
+    document.body.appendChild(link);
+    link.click();
+  } catch (error) {
+    console.error("Error downloading system card:", error);
+  }
+  hide_download_dropdown();
+}
+
 export function add_field_on_enter(id: string) {
   if (!event) {
     return;

@@ -1,10 +1,12 @@
 import asyncio
+import datetime
 import logging
 from collections.abc import Sequence
 from typing import Annotated, Any, cast
 
+import yaml
 from fastapi import APIRouter, Depends, Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import FileResponse, HTMLResponse
 from pydantic import BaseModel, Field
 
 from amt.api.deps import templates
@@ -736,3 +738,17 @@ async def get_model_card(
     }
 
     return templates.TemplateResponse(request, "pages/model_card.html.j2", context)
+
+
+@router.get("/{algorithm_id}/details/system_card/download")
+async def download_algorithm_system_card_as_yaml(
+    algorithm_id: int, algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)], request: Request
+) -> FileResponse:
+    algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
+    filename = algorithm.name + "_" + datetime.datetime.now(datetime.UTC).isoformat() + ".yaml"
+    with open(filename, "w") as outfile:
+        yaml.dump(algorithm.system_card.model_dump(), outfile)
+    try:
+        return FileResponse(filename, filename=filename)
+    except AMTRepositoryError as e:
+        raise AMTNotFound from e
