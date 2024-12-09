@@ -6,14 +6,14 @@ def test_ai_act_profile_schema_create_new():
     algorithm_new = AiActProfile(
         type="AI-systeem",
         open_source="open-source",
-        publication_category="hoog-risico AI",
+        risk_group="hoog-risico AI",
         systemic_risk="systeemrisico",
         transparency_obligations="transparantieverplichtingen",
         role="aanbieder",
     )
     assert algorithm_new.type == "AI-systeem"
     assert algorithm_new.open_source == "open-source"
-    assert algorithm_new.publication_category == "hoog-risico AI"
+    assert algorithm_new.risk_group == "hoog-risico AI"
     assert algorithm_new.systemic_risk == "systeemrisico"
     assert algorithm_new.transparency_obligations == "transparantieverplichtingen"
     assert algorithm_new.role == "aanbieder"
@@ -23,14 +23,14 @@ def test_ai_act_profile_schema_create_new_no_role():
     algorithm_new = AiActProfile(
         type="AI-systeem",
         open_source="open-source",
-        publication_category="hoog-risico AI",
+        risk_group="hoog-risico AI",
         systemic_risk="systeemrisico",
         transparency_obligations="transparantieverplichtingen",
         role=None,
     )
     assert algorithm_new.type == "AI-systeem"
     assert algorithm_new.open_source == "open-source"
-    assert algorithm_new.publication_category == "hoog-risico AI"
+    assert algorithm_new.risk_group == "hoog-risico AI"
     assert algorithm_new.systemic_risk == "systeemrisico"
     assert algorithm_new.transparency_obligations == "transparantieverplichtingen"
     assert algorithm_new.role is None
@@ -40,14 +40,14 @@ def test_ai_act_profile_schema_create_new_empty_role_list():
     algorithm_new = AiActProfile(
         type="AI-systeem",
         open_source="open-source",
-        publication_category="hoog-risico AI",
+        risk_group="hoog-risico AI",
         systemic_risk="systeemrisico",
         transparency_obligations="transparantieverplichtingen",
         role=[],
     )
     assert algorithm_new.type == "AI-systeem"
     assert algorithm_new.open_source == "open-source"
-    assert algorithm_new.publication_category == "hoog-risico AI"
+    assert algorithm_new.risk_group == "hoog-risico AI"
     assert algorithm_new.systemic_risk == "systeemrisico"
     assert algorithm_new.transparency_obligations == "transparantieverplichtingen"
     assert algorithm_new.role is None
@@ -57,14 +57,14 @@ def test_ai_act_profile_schema_create_new_double_role():
     algorithm_new = AiActProfile(
         type="AI-systeem",
         open_source="open-source",
-        publication_category="hoog-risico AI",
+        risk_group="hoog-risico AI",
         systemic_risk="systeemrisico",
         transparency_obligations="transparantieverplichtingen",
         role=["aanbieder", "gebruiksverantwoordelijke"],
     )
     assert algorithm_new.type == "AI-systeem"
     assert algorithm_new.open_source == "open-source"
-    assert algorithm_new.publication_category == "hoog-risico AI"
+    assert algorithm_new.risk_group == "hoog-risico AI"
     assert algorithm_new.systemic_risk == "systeemrisico"
     assert algorithm_new.transparency_obligations == "transparantieverplichtingen"
     assert algorithm_new.role == "aanbieder + gebruiksverantwoordelijke"
@@ -75,7 +75,7 @@ def test_ai_act_profile_schema_create_new_too_many_roles():
         AiActProfile(
             type="AI-systeem",
             open_source="open-source",
-            publication_category="hoog-risico AI",
+            risk_group="hoog-risico AI",
             systemic_risk="systeemrisico",
             transparency_obligations="transparantieverplichtingen",
             role=["aanbieder", "gebruiksverantwoordelijke", "I am too much of a role"],

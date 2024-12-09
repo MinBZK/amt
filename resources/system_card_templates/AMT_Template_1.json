@@ -10,7 +10,8 @@
   "ai_act_profile": {
     "type": "AI-systeem",
     "open_source": "open-source",
-    "publication_category": "hoog-risico AI",
+    "risk_group": "hoog-risico AI",
+    "conformity_assessment_body": "niet van toepassing",
     "systemic_risk": "geen systeemrisico",
     "transparency_obligations": "geen transparantieverplichtingen",
     "role": "gebruiksverantwoordelijke"

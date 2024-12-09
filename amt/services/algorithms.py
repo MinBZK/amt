@@ -65,7 +65,8 @@ class AlgorithmsService:
         ai_act_profile = AiActProfile(
             type=algorithm_new.type,
             open_source=algorithm_new.open_source,
-            publication_category=algorithm_new.publication_category,
+            risk_group=algorithm_new.risk_group,
+            conformity_assessment_body=algorithm_new.conformity_assessment_body,
             systemic_risk=algorithm_new.systemic_risk,
             transparency_obligations=algorithm_new.transparency_obligations,
             role=algorithm_new.role,
