@@ -38,7 +38,7 @@ msgstr ""
 
 #: amt/api/ai_act_profile.py:32
 msgid "Is there a systemic risk?"
-msgstr "Is er sprake van systematisch risico?"
+msgstr "Is er sprake van een systeemrisico?"
 
 #: amt/api/ai_act_profile.py:34
 msgid "Is there a transparency obligation?"
@@ -570,7 +570,7 @@ msgstr "Vind uw AI Act profiel"
 
 #: amt/site/templates/algorithms/new.html.j2:112
 msgid "Select Option"
-msgstr "Selecteer organisatie"
+msgstr "Selecteer optie"
 
 #: amt/site/templates/algorithms/new.html.j2:172
 msgid ""

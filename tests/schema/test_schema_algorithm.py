@@ -10,7 +10,7 @@ def test_algorithm_schema_create_new():
         open_source="open-source",
         risk_group="hoog-risico AI",
         systemic_risk="systeemrisico",
-        transparency_obligations="transparantieverplichtingen",
+        transparency_obligations="transparantieverplichting",
         role=["aanbieder", "gebruiksverantwoordelijke"],
         organization_id=1,
     )
@@ -20,7 +20,7 @@ def test_algorithm_schema_create_new():
     assert algorithm_new.open_source == "open-source"
     assert algorithm_new.risk_group == "hoog-risico AI"
     assert algorithm_new.systemic_risk == "systeemrisico"
-    assert algorithm_new.transparency_obligations == "transparantieverplichtingen"
+    assert algorithm_new.transparency_obligations == "transparantieverplichting"
     assert algorithm_new.role == ["aanbieder", "gebruiksverantwoordelijke"]
     assert algorithm_new.organization_id == 1
 
@@ -34,7 +34,7 @@ def test_algorithm_schema_create_new_one_instrument():
         open_source="open-source",
         risk_group="hoog-risico AI",
         systemic_risk="systeemrisico",
-        transparency_obligations="transparantieverplichtingen",
+        transparency_obligations="transparantieverplichting",
         role="aanbieder",
         organization_id=1,
     )
@@ -44,6 +44,6 @@ def test_algorithm_schema_create_new_one_instrument():
     assert algorithm_new.open_source == "open-source"
     assert algorithm_new.risk_group == "hoog-risico AI"
     assert algorithm_new.systemic_risk == "systeemrisico"
-    assert algorithm_new.transparency_obligations == "transparantieverplichtingen"
+    assert algorithm_new.transparency_obligations == "transparantieverplichting"
     assert algorithm_new.role == ["aanbieder"]
     assert algorithm_new.organization_id == 1

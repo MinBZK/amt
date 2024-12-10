@@ -212,6 +212,7 @@ export function closeModalSave(id: string) {
       aiActProfileRaw["Rol"],
       aiActProfileRaw["Open source"],
     );
+
     // Select the correct entries.
     Object.entries(aiActProfile).forEach(([category, el_ids]) => {
       el_ids.forEach((el_id: string) => {

@@ -101,8 +101,8 @@ def get_ai_act_profile_selector(request: Request) -> AiActProfileSelector:
 
     systemic_risk_options = ("systeemrisico", "geen systeemrisico", "niet van toepassing")
     transparency_obligations_options = (
-        "transparantieverplichtingen",
-        "geen transparantieverplichtingen",
+        "transparantieverplichting",
+        "geen transparantieverplichting",
         "niet van toepassing",
     )
     open_source_options = ("open-source", "geen open-source", "niet van toepassing")
