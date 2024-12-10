@@ -19,6 +19,10 @@ class AuthorizationMiddleware(BaseHTTPMiddleware):
             return await call_next(request)
 
         user = get_user(request)
+
+        # todo: append authorization set with valid authorization for that user
+        request.state.authorization = ()
+
         if user:  # pragma: no cover
             return await call_next(request)
 

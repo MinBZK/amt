@@ -10,6 +10,7 @@ from sqlalchemy.types import JSON
 
 from amt.api.lifecycles import Lifecycles
 from amt.models.base import Base
+from amt.models.relationships import role_and_algorithms
 from amt.schema.system_card import SystemCard
 
 T = TypeVar("T", bound="Algorithm")
@@ -62,6 +63,9 @@ class Algorithm(Base):
     deleted_at: Mapped[datetime | None] = mapped_column(server_default=None, nullable=True)
     organization_id: Mapped[int] = mapped_column(ForeignKey("organization.id"))
     organization: Mapped["Organization"] = relationship(back_populates="algorithms", lazy="selectin")  # pyright: ignore [reportUndefinedVariable, reportUnknownVariableType] #noqa
+    roles: Mapped[list["Role"]] = relationship(  # pyright: ignore[reportUnknownVariableType, reportUndefinedVariable] #noqa
+        secondary=role_and_algorithms, back_populates="algorithms", lazy="selectin"
+    )
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:  # noqa: ANN401
         system_card: SystemCard | None = kwargs.pop("system_card", None)
