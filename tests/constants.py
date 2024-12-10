@@ -6,7 +6,8 @@ from uuid import UUID
 
 from amt.api.lifecycles import Lifecycles
 from amt.api.navigation import BaseNavigationItem, DisplayText
-from amt.models import Algorithm, Organization, Task, User
+from amt.core.authorization import AuthorizationResource, AuthorizationVerb
+from amt.models import Algorithm, Authorization, Organization, Role, Rule, Task, User
 from amt.schema.instrument import Instrument, InstrumentTask, Owner
 from amt.schema.system_card import SystemCard
 from fastapi import Request
@@ -54,6 +55,27 @@ def default_algorithm(name: str = "default algorithm", organization_id: int = 1)
 
 def default_organization(name: str = "default organization", slug: str = "default-organization") -> Organization:
     return Organization(name=name, slug=slug, created_by_id=UUID(default_auth_user()["sub"]))
+
+
+def default_rule() -> Rule:
+    return Rule(
+        resource=AuthorizationResource.ORGANIZATION_INFO,
+        verbs=[AuthorizationVerb.CREATE, AuthorizationVerb.READ],
+        role_id=1,
+    )
+
+
+def default_role() -> Role:
+    return Role(name="default role")
+
+
+def default_authorization() -> Authorization:
+    return Authorization(
+        user_id=UUID(default_auth_user()["sub"]),
+        role_id=1,
+        type="Organization",
+        type_id=1,
+    )
 
 
 def default_user(
