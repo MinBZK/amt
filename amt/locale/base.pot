@@ -198,33 +198,45 @@ msgstr ""
 msgid "Organization"
 msgstr ""
 
-#: amt/api/forms/measure.py:17
-msgid "Status"
+#: amt/api/forms/measure.py:24
+msgid "Responsible"
 msgstr ""
 
 #: amt/api/forms/measure.py:32
+msgid "Reviewer"
+msgstr ""
+
+#: amt/api/forms/measure.py:40
+msgid "Accountable"
+msgstr ""
+
+#: amt/api/forms/measure.py:48
+msgid "Status"
+msgstr ""
+
+#: amt/api/forms/measure.py:63
 msgid "Information on how this measure is implemented"
 msgstr ""
 
-#: amt/api/forms/measure.py:39
+#: amt/api/forms/measure.py:70
 msgid ""
 "Select one or more to upload. The files will be saved once you confirm "
 "changes by pressing the save button."
 msgstr ""
 
-#: amt/api/forms/measure.py:44
+#: amt/api/forms/measure.py:75
 msgid "Add files"
 msgstr ""
 
-#: amt/api/forms/measure.py:45
+#: amt/api/forms/measure.py:76
 msgid "No files selected."
 msgstr ""
 
-#: amt/api/forms/measure.py:49
+#: amt/api/forms/measure.py:80
 msgid "Add URI"
 msgstr ""
 
-#: amt/api/forms/measure.py:52
+#: amt/api/forms/measure.py:83
 msgid "Add links to documents"
 msgstr ""
 
@@ -458,7 +470,7 @@ msgid "Failed to estimate WOZ value: "
 msgstr ""
 
 #: amt/site/templates/algorithms/details_info.html.j2:16
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:26
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:27
 msgid "Description"
 msgstr ""
 
@@ -488,26 +500,26 @@ msgstr ""
 msgid "References"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:36
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:37
 msgid "Read more on the algoritmekader"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:47
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:63
 #: amt/site/templates/macros/editable.html.j2:82
 msgid "Save"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:51
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:67
 #: amt/site/templates/macros/editable.html.j2:87
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:26
 msgid "Cancel"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_requirements.html.j2:26
+#: amt/site/templates/algorithms/details_requirements.html.j2:27
 msgid "measures executed"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_requirements.html.j2:59
+#: amt/site/templates/algorithms/details_requirements.html.j2:60
 #: amt/site/templates/macros/editable.html.j2:24
 #: amt/site/templates/macros/editable.html.j2:27
 msgid "Edit"
@@ -562,7 +574,7 @@ msgstr ""
 #: amt/site/templates/algorithms/new.html.j2:172
 msgid ""
 "Overview of instruments for the responsible development, deployment, "
-"assessment and monitoring of algorithms and AI-systems."
+"assessment, and monitoring of algorithms and AI-systems."
 msgstr ""
 
 #: amt/site/templates/algorithms/new.html.j2:180

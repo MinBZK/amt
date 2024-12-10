@@ -1,16 +1,47 @@
+from collections.abc import Sequence
 from gettext import NullTranslations
 
+from amt.models import User
 from amt.schema.webform import WebForm, WebFormField, WebFormFieldType, WebFormOption, WebFormTextCloneableField
 
 
 async def get_measure_form(
-    id: str, current_values: dict[str, str | list[str] | list[tuple[str, str]]], translations: NullTranslations
+    id: str,
+    current_values: dict[str, str | list[str] | list[tuple[str, str]]],
+    members: Sequence[User],
+    translations: NullTranslations,
 ) -> WebForm:
     _ = translations.gettext
 
     measure_form: WebForm = WebForm(id="", post_url="")
 
+    member_option_list = [WebFormOption(value=member.name, display_value=member.name) for member in members]
+    member_option_list.append(WebFormOption(value="", display_value=""))
     measure_form.fields = [
+        WebFormField(
+            type=WebFormFieldType.SELECT,
+            name="measure_responsible",
+            label=_("Responsible"),
+            options=member_option_list,
+            default_value=current_values.get("measure_responsible"),
+            group="1",
+        ),
+        WebFormField(
+            type=WebFormFieldType.SELECT,
+            name="measure_reviewer",
+            label=_("Reviewer"),
+            options=member_option_list,
+            default_value=current_values.get("measure_reviewer"),
+            group="1",
+        ),
+        WebFormField(
+            type=WebFormFieldType.SELECT,
+            name="measure_accountable",
+            label=_("Accountable"),
+            options=member_option_list,
+            default_value=current_values.get("measure_accountable"),
+            group="1",
+        ),
         WebFormField(
             type=WebFormFieldType.SELECT,
             name="measure_state",

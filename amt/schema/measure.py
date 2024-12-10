@@ -7,12 +7,20 @@ class MeasureBase(BaseModel):
     urn: str
 
 
+class Person(BaseModel):
+    name: str
+    uuid: str
+
+
 class MeasureTask(MeasureBase):
     state: str = Field(default="")
     value: str = Field(default="")
     links: list[str] = Field(default=[])
     files: list[str] = Field(default=[])
     version: str
+    accountable_persons: list[Person] = Field(default=[])
+    reviewer_persons: list[Person] = Field(default=[])
+    responsible_persons: list[Person] = Field(default=[])
 
     def update(
         self,
@@ -20,6 +28,9 @@ class MeasureTask(MeasureBase):
         value: str | None,
         links: list[str] | None,
         new_files: list[str] | None,
+        responsible_persons: list[Person] | None,
+        reviewer_persons: list[Person] | None,
+        accountable_persons: list[Person] | None,
     ) -> None:
         if state:
             self.state = state
@@ -31,6 +42,10 @@ class MeasureTask(MeasureBase):
 
         if new_files:
             self.files.extend(new_files)
+
+        self.responsible_persons = responsible_persons
+        self.reviewer_persons = reviewer_persons
+        self.accountable_persons = accountable_persons
 
 
 class Measure(MeasureBase):

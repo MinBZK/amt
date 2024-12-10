@@ -117,7 +117,10 @@
       "urn": "urn:nl:ak:mtr:dat-01",
       "state": "to do",
       "version": "",
-      "value": ""
+      "value": "",
+      "accountable_persons": [{ "name": "Default User", "uuid": "1" }],
+      "reviewer_persons": [{ "name": "Default User", "uuid": "1" }],
+      "responsible_persons": [{ "name": "Default User", "uuid": "1" }]
     },
     {
       "urn": "urn:nl:ak:mtr:fur-01",
