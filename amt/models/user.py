@@ -3,7 +3,7 @@ from uuid import UUID
 from sqlalchemy import UUID as SQLAlchemyUUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from amt.models import Organization
+from amt.models import Authorization, Organization
 from amt.models.base import Base
 
 
@@ -19,3 +19,4 @@ class User(Base):
         "Organization", secondary="users_and_organizations", back_populates="users", lazy="selectin"
     )
     organizations_created: Mapped[list["Organization"]] = relationship(back_populates="created_by", lazy="selectin")
+    authorizations: Mapped[list["Authorization"]] = relationship("Authorization", back_populates="user")
