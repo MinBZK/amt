@@ -324,40 +324,40 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:57
-msgid "Delete algorithm"
+#: amt/site/templates/algorithms/details_base.html.j2:63
+msgid "Download as YAML"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:74
+#: amt/site/templates/algorithms/details_base.html.j2:87
 msgid "Does the algorithm meet the requirements?"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:77
-#: amt/site/templates/algorithms/details_base.html.j2:103
-#: amt/site/templates/algorithms/details_base.html.j2:134
-#: amt/site/templates/algorithms/details_base.html.j2:157
+#: amt/site/templates/algorithms/details_base.html.j2:90
+#: amt/site/templates/algorithms/details_base.html.j2:116
+#: amt/site/templates/algorithms/details_base.html.j2:147
+#: amt/site/templates/algorithms/details_base.html.j2:170
 #: amt/site/templates/macros/tasks.html.j2:32
 msgid "Done"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:99
-#: amt/site/templates/algorithms/details_base.html.j2:155
+#: amt/site/templates/algorithms/details_base.html.j2:112
+#: amt/site/templates/algorithms/details_base.html.j2:168
 msgid "To do"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:101
+#: amt/site/templates/algorithms/details_base.html.j2:114
 msgid "In progress"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:117
+#: amt/site/templates/algorithms/details_base.html.j2:130
 msgid "Go to all requirements"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:131
+#: amt/site/templates/algorithms/details_base.html.j2:144
 msgid "Which instruments are executed?"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:171
+#: amt/site/templates/algorithms/details_base.html.j2:184
 msgid "Go to all instruments"
 msgstr ""
 

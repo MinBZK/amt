@@ -575,3 +575,20 @@ async def test_update_measure_value(client: AsyncClient, mocker: MockFixture, db
     )
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
+
+
+@pytest.mark.asyncio
+async def test_download_algorithm_system_card_as_yaml(
+    client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils
+) -> None:
+    # given
+    await db.given([default_user(), default_algorithm_with_system_card("testalgorithm1")])
+    client.cookies["fastapi-csrf-token"] = "1"
+    mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+
+    # happy flow
+    response = await client.get("/algorithm/1/details/system_card/download")
+
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/plain; charset=utf-8"
+    assert b"ai_act_profile:" in response.content
