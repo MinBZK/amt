@@ -423,7 +423,7 @@ msgid "Failed to estimate WOZ value: "
 msgstr ""
 
 #: amt/site/templates/algorithms/details_info.html.j2:16
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:19
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:23
 msgid "Description"
 msgstr ""
 
@@ -453,48 +453,66 @@ msgstr ""
 msgid "References"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:29
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:34
 msgid "Read more on the algoritmekader"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:38
-msgid "Status"
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:43
+msgid "Accountable"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:45
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:47
-msgid "to do"
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:48
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:69
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:90
+msgid "Select"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:50
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:52
-msgid "in progress"
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:64
+msgid "Reviewer"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:55
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:57
-msgid "done"
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:85
+msgid "Responsible"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:68
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:112
 msgid "Information on how this measure is implemented"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:74
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:118
 msgid ""
 "Describe how the measure has been implemented, including challenges and "
 "solutions."
 msgstr ""
 
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:84
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:128
 #: amt/site/templates/macros/editable.html.j2:82
 msgid "Save"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:88
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:132
 #: amt/site/templates/macros/editable.html.j2:87
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:26
 msgid "Cancel"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:142
+msgid "Status"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:149
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:151
+msgid "to do"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:154
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:156
+msgid "in progress"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:159
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:161
+msgid "done"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_requirements.html.j2:26

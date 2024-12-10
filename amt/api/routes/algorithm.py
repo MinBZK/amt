@@ -5,7 +5,7 @@ from collections.abc import Sequence
 from typing import Annotated, Any, cast
 
 import yaml
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends, Query, Request
 from fastapi.responses import FileResponse, HTMLResponse
 from pydantic import BaseModel, Field
 
@@ -17,13 +17,15 @@ from amt.api.navigation import (
     resolve_base_navigation_items,
     resolve_navigation_items,
 )
+from amt.api.routes.shared import get_filters_and_sort_by
 from amt.core.authorization import get_user
 from amt.core.exceptions import AMTNotFound, AMTRepositoryError
 from amt.enums.status import Status
 from amt.models import Algorithm
 from amt.models.task import Task
 from amt.repositories.organizations import OrganizationsRepository
-from amt.schema.measure import ExtendedMeasureTask, MeasureTask
+from amt.repositories.users import UsersRepository
+from amt.schema.measure import ExtendedMeasureTask, MeasureTask, Person
 from amt.schema.requirement import RequirementTask
 from amt.schema.system_card import Owner, SystemCard
 from amt.schema.task import MovedTask
@@ -500,20 +502,35 @@ async def delete_algorithm(
 @router.get("/{algorithm_id}/measure/{measure_urn}")
 async def get_measure(
     request: Request,
+    organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
+    users_repository: Annotated[UsersRepository, Depends(UsersRepository)],
     algorithm_id: int,
     measure_urn: str,
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
+    search: str = Query(""),
 ) -> HTMLResponse:
+    filters, _, _, sort_by = get_filters_and_sort_by(request)
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
     measures_service = create_measures_service()
     measure = await measures_service.fetch_measures([measure_urn])
     measure_task = find_measure_task(algorithm.system_card, measure_urn)
+
+    organization = await organizations_repository.find_by_id(algorithm.organization_id)
+    filters["organization-id"] = str(organization.id)
+    members = await users_repository.find_all(search=search, sort=sort_by, filters=filters)
+    measure_accountable = measure_task.accountable_persons[0].name if measure_task.accountable_persons else ""
+    measure_reviewer = measure_task.reviewer_persons[0].name if measure_task.reviewer_persons else ""
+    measure_responsible = measure_task.responsible_persons[0].name if measure_task.responsible_persons else ""
 
     context = {
         "measure": measure[0],
         "measure_state": measure_task.state,  # pyright: ignore [reportOptionalMemberAccess]
         "measure_value": measure_task.value,  # pyright: ignore [reportOptionalMemberAccess]
         "algorithm_id": algorithm_id,
+        "members": members,
+        "measure_accountable_name": measure_accountable,
+        "measure_reviewer_name": measure_reviewer,
+        "measure_responsible_name": measure_responsible,
     }
 
     return templates.TemplateResponse(request, "algorithms/details_measure_modal.html.j2", context)
@@ -522,22 +539,48 @@ async def get_measure(
 class MeasureUpdate(BaseModel):
     measure_state: str = Field(default=None)
     measure_value: str = Field(default=None)
+    measure_accountable_name: str = Field(default=None)
+    measure_responsible_name: str = Field(default=None)
+    measure_reviewer_name: str = Field(default=None)
 
 
 @router.post("/{algorithm_id}/measure/{measure_urn}")
-async def update_measure_value(
+async def update_measure_value(  # noqa: C901
     request: Request,
     algorithm_id: int,
     measure_urn: str,
     measure_update: MeasureUpdate,
+    organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
+    users_repository: Annotated[UsersRepository, Depends(UsersRepository)],
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
     requirements_service: Annotated[RequirementsService, Depends(create_requirements_service)],
 ) -> HTMLResponse:
+    filters, _, _, sort_by = get_filters_and_sort_by(request)
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
+    organization = await organizations_repository.find_by_id(algorithm.organization_id)
+    filters["organization-id"] = str(organization.id)
 
+    # Update the measure task
     measure_task = find_measure_task(algorithm.system_card, measure_urn)
     measure_task.state = measure_update.measure_state  # pyright: ignore [reportOptionalMemberAccess]
     measure_task.value = measure_update.measure_value  # pyright: ignore [reportOptionalMemberAccess]
+
+    # Update the measure task with the member selected
+    if measure_update.measure_accountable_name:
+        accountable_member = await users_repository.find_all(
+            search=measure_update.measure_accountable_name, sort=sort_by, filters=filters
+        )
+        measure_task.accountable_persons = [Person(name=accountable_member[0].name, uuid=str(accountable_member[0].id))]
+    if measure_update.measure_reviewer_name:
+        reviewer_member = await users_repository.find_all(
+            search=measure_update.measure_reviewer_name, sort=sort_by, filters=filters
+        )
+        measure_task.reviewer_persons = [Person(name=reviewer_member[0].name, uuid=str(reviewer_member[0].id))]
+    if measure_update.measure_responsible_name:
+        responsible_member = await users_repository.find_all(
+            search=measure_update.measure_responsible_name, sort=sort_by, filters=filters
+        )
+        measure_task.responsible_persons = [Person(name=responsible_member[0].name, uuid=str(responsible_member[0].id))]
 
     # update for the linked requirements the state based on all it's measures
     requirement_tasks = await find_requirement_tasks_by_measure_urn(algorithm.system_card, measure_urn)
