@@ -50,6 +50,7 @@
     "@nl-rvo/assets": "1.0.0-alpha.360",
     "@nl-rvo/component-library-css": "2.1.0",
     "@nl-rvo/design-tokens": "1.4.3",
+    "build": "^0.1.4",
     "htmx.org": "^1.9.12",
     "hyperscript.org": "^0.9.13",
     "reset-css": "^5.0.2",

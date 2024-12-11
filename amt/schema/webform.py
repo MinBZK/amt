@@ -5,6 +5,8 @@ from typing import Any
 class WebFormFieldType(Enum):
     HIDDEN = "hidden"
     TEXT = "text"
+    TEXT_CLONEABLE = "text_cloneable"
+    FILE = "file"
     RADIO = "radio"
     SELECT = "select"
     TEXTAREA = "textarea"
@@ -38,11 +40,12 @@ class WebFormBaseField:
 
 class WebFormField(WebFormBaseField):
     placeholder: str | None
-    default_value: str | WebFormOption | None
+    default_value: str | list[str] | WebFormOption | list[tuple[str, str]] | None
     options: list[WebFormOption] | None
     validators: list[Any]
     description: str | None
     attributes: dict[str, str] | None
+    required: bool
 
     def __init__(
         self,
@@ -50,11 +53,12 @@ class WebFormField(WebFormBaseField):
         name: str,
         label: str,
         placeholder: str | None = None,
-        default_value: str | WebFormOption | None = None,
+        default_value: str | list[str] | list[tuple[str, str]] | WebFormOption | None = None,
         options: list[WebFormOption] | None = None,
         attributes: dict[str, str] | None = None,
         description: str | None = None,
         group: str | None = None,
+        required: bool = False,
     ) -> None:
         super().__init__(type=type, name=name, label=label, group=group)
         self.placeholder = placeholder
@@ -62,6 +66,7 @@ class WebFormField(WebFormBaseField):
         self.options = options
         self.attributes = attributes
         self.description = description
+        self.required = required
 
 
 class WebFormSearchField(WebFormField):
@@ -75,7 +80,7 @@ class WebFormSearchField(WebFormField):
         name: str,
         label: str,
         placeholder: str | None = None,
-        default_value: str | None | WebFormOption = None,
+        default_value: str | list[str] | list[tuple[str, str]] | WebFormOption | None = None,
         options: list[WebFormOption] | None = None,
         attributes: dict[str, str] | None = None,
         group: str | None = None,
@@ -94,6 +99,35 @@ class WebFormSearchField(WebFormField):
         )
         self.search_url = search_url
         self.query_var_name = query_var_name
+
+
+class WebFormTextCloneableField(WebFormField):
+    clone_button_name: str
+
+    def __init__(
+        self,
+        clone_button_name: str,
+        name: str,
+        label: str,
+        placeholder: str | None = None,
+        default_value: str | list[str] | list[tuple[str, str]] | None = None,
+        options: list[WebFormOption] | None = None,
+        attributes: dict[str, str] | None = None,
+        group: str | None = None,
+        description: str | None = None,
+    ) -> None:
+        super().__init__(
+            type=WebFormFieldType.TEXT_CLONEABLE,
+            name=name,
+            label=label,
+            placeholder=placeholder,
+            default_value=default_value,
+            options=options,
+            attributes=attributes,
+            group=group,
+            description=description,
+        )
+        self.clone_button_name = clone_button_name
 
 
 class WebForm:

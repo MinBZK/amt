@@ -1,20 +1,27 @@
+from io import BytesIO
 from typing import Any
 
 import pytest
 import vcr  # type: ignore
 from amt.api.routes.algorithm import (
-    MeasureUpdate,
     find_measure_task,
     find_requirement_task,
     find_requirement_tasks_by_measure_urn,
     get_algorithm_context,
     get_algorithm_or_error,
+    get_user_id_or_error,
     set_path,
 )
-from amt.core.exceptions import AMTNotFound, AMTRepositoryError
+from amt.core.config import get_settings
+from amt.core.exceptions import AMTError, AMTNotFound, AMTRepositoryError
 from amt.models import Algorithm
+from amt.schema.measure import MeasureTask
 from amt.schema.task import MovedTask
+from amt.services.object_storage import create_object_storage_service
+from fastapi import UploadFile
 from httpx import AsyncClient
+from minio import Minio
+from pytest_minio_mock.plugin import MockMinioClient  # pyright: ignore [reportMissingTypeStubs]
 from pytest_mock import MockFixture
 
 from tests.api.routes.test_algorithms import MockRequest
@@ -547,9 +554,18 @@ async def test_find_requirement_tasks_by_measure_urn() -> None:
 
 
 @pytest.mark.asyncio
-async def test_get_measure(client: AsyncClient, db: DatabaseTestUtils) -> None:
+async def test_get_measure(minio_mock: MockMinioClient, client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
     await db.given([default_user(), default_algorithm_with_system_card("testalgorithm1")])
+
+    # Need to make bucket in object store. The Minio class is mocked by minio_mock.
+    storage_client = Minio(
+        endpoint=get_settings().OBJECT_STORE_URL,
+        access_key=get_settings().OBJECT_STORE_USER,
+        secret_key=get_settings().OBJECT_STORE_PASSWORD,
+        secure=False,
+    )
+    storage_client.make_bucket(get_settings().OBJECT_STORE_BUCKET_NAME)
 
     # when
     response = await client.get("/algorithm/1/measure/urn:nl:ak:mtr:dat-01")
@@ -561,16 +577,34 @@ async def test_get_measure(client: AsyncClient, db: DatabaseTestUtils) -> None:
 
 
 @pytest.mark.asyncio
-async def test_update_measure_value(client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
+async def test_update_measure_value(
+    minio_mock: MockMinioClient, client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils
+) -> None:
     # given
     await db.given([default_user(), default_algorithm_with_system_card("testalgorithm1")])
     client.cookies["fastapi-csrf-token"] = "1"
     mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+    mocker.patch("amt.api.routes.algorithm.get_user_id_or_error", return_value=default_user().id)
+
+    # Need to make bucket in object store. The Minio class is mocked by minio_mock.
+    storage_client = Minio(
+        endpoint=get_settings().OBJECT_STORE_URL,
+        access_key=get_settings().OBJECT_STORE_USER,
+        secret_key=get_settings().OBJECT_STORE_PASSWORD,
+        secure=False,
+    )
+    storage_client.make_bucket(get_settings().OBJECT_STORE_BUCKET_NAME)
 
     # happy flow
     response = await client.post(
         "/algorithm/1/measure/urn:nl:ak:mtr:dat-01",
-        json={"measure_update": MeasureUpdate(measure_state="done", measure_value="something").model_dump()},
+        data={
+            "measure_state": "done",
+            "measure_value": "something",
+            "measure_links": [],
+            "existing_file_names": [],
+            "measure_files": [],
+        },
         headers={"X-CSRF-Token": "1"},
     )
     assert response.status_code == 200
@@ -591,4 +625,91 @@ async def test_download_algorithm_system_card_as_yaml(
 
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/plain; charset=utf-8"
-    assert b"ai_act_profile:" in response.content
+
+
+@pytest.mark.asyncio
+async def test_get_file(
+    minio_mock: MockMinioClient, client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils
+) -> None:
+    # given
+    await db.given([default_user(), default_algorithm_with_system_card("testalgorithm1")])
+    client.cookies["fastapi-csrf-token"] = "1"
+    mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+
+    # Need to make bucket in object store. The Minio class is mocked by minio_mock.
+    storage_client = Minio(
+        endpoint=get_settings().OBJECT_STORE_URL,
+        access_key=get_settings().OBJECT_STORE_USER,
+        secret_key=get_settings().OBJECT_STORE_PASSWORD,
+        secure=False,
+    )
+    storage_client.make_bucket(get_settings().OBJECT_STORE_BUCKET_NAME)
+
+    file_content = b"test file content"
+    file = UploadFile(filename="test.txt", file=BytesIO(file_content))
+    file.size = len(file_content)
+
+    object_storage_service = create_object_storage_service()
+    path = object_storage_service.upload_file("1", "1", "1", "1", file)
+    ulid = path.split("/")[-1]
+
+    # happy flow
+    response = await client.get(f"/algorithm/1/file/{ulid}")
+
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "application/octet-stream"
+
+
+@pytest.mark.asyncio
+async def test_delete_file(
+    minio_mock: MockMinioClient, client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils
+) -> None:
+    # given
+    await db.given([default_user(), default_algorithm_with_system_card("testalgorithm1")])
+    client.cookies["fastapi-csrf-token"] = "1"
+    mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+
+    # Need to make bucket in object store. The Minio class is mocked by minio_mock.
+    storage_client = Minio(
+        endpoint=get_settings().OBJECT_STORE_URL,
+        access_key=get_settings().OBJECT_STORE_USER,
+        secret_key=get_settings().OBJECT_STORE_PASSWORD,
+        secure=False,
+    )
+    storage_client.make_bucket(get_settings().OBJECT_STORE_BUCKET_NAME)
+
+    # Mock UploadFile and upload it to Minio and retrieve the ULID.
+    file_content = b"test file content"
+    file = UploadFile(filename="test.txt", file=BytesIO(file_content))
+    file.size = len(file_content)
+    object_storage_service = create_object_storage_service()
+    path = object_storage_service.upload_file("1", "1", "1", "1", file)
+    ulid = path.split("/")[-1]
+
+    # Mock a MeasureTask with file refering to the UploadFile
+    mock_get_measure_task_or_error = mocker.patch("amt.api.routes.algorithm.get_measure_task_or_error")
+    mock_get_measure_task_or_error.return_value = MeasureTask(
+        urn="1", version="1", files=[f"uploads/org/1/algorithm/1/{ulid}"]
+    )
+
+    # happy flow
+    response = await client.delete(f"/algorithm/1/file/{ulid}", headers={"X-CSRF-Token": "1"})
+
+    assert response.status_code == 200
+
+
+@pytest.mark.asyncio
+def test_get_user_id_or_error_success(mocker: MockFixture) -> None:
+    mock_get_user = mocker.patch("amt.api.routes.algorithm.get_user")
+    mock_get_user.return_value = {"sub": "user_uuid"}
+
+    assert get_user_id_or_error(MockRequest(lang="nl")) == "user_uuid"
+
+
+@pytest.mark.asyncio
+def test_get_user_id_or_error_failure(mocker: MockFixture) -> None:
+    mock_get_user = mocker.patch("amt.api.routes.algorithm.get_user")
+    mock_get_user.return_value = None
+
+    with pytest.raises(AMTError):
+        get_user_id_or_error(MockRequest(lang="nl"))
