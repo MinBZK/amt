@@ -578,6 +578,33 @@ async def test_update_measure_value(client: AsyncClient, mocker: MockFixture, db
 
 
 @pytest.mark.asyncio
+async def test_update_measure_value_with_people(
+    client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils
+) -> None:
+    # given
+    await db.given([default_user(), default_algorithm_with_system_card("testalgorithm1")])
+    client.cookies["fastapi-csrf-token"] = "1"
+    mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+
+    # happy flow
+    response = await client.post(
+        "/algorithm/1/measure/urn:nl:ak:mtr:dat-01",
+        json={
+            "measure_update": MeasureUpdate(
+                measure_state="done",
+                measure_value="something",
+                measure_accountable_name="John Doe",
+                measure_reviewer_name="John Doe",
+                measure_responsible_name="John Doe",
+            ).model_dump()
+        },
+        headers={"X-CSRF-Token": "1"},
+    )
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+
+
+@pytest.mark.asyncio
 async def test_download_algorithm_system_card_as_yaml(
     client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils
 ) -> None:
