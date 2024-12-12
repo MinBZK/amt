@@ -49,13 +49,26 @@
         <div class="rvo-content">
             <div class="amt-flex-container">
                 <h1 class="utrecht-heading-1 algorithm-title">{{ algorithm.name }}</h1>
-                <a class="rvo-link rvo-link--normal rvo-link--with-icon"
-                   onclick="amt.openModal('delete-modal')">
-                    <span class="utrecht-icon rvo-icon rvo-icon-verwijderen rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
-                          role="img"
-                          aria-label="Home"></span>
-                    {% trans %}Delete algorithm{% endtrans %}
-                </a>
+                <div class="rvo-layout-row" id="algorithm-operations-div">
+                    <div class="download-dropdown">
+                        <a class="rvo-alert--padding-xs" onclick="amt.show_download_dropdown()">
+                            <span class="utrecht-icon rvo-icon rvo-icon-downloaden rvo-icon--xl rvo-icon--hemelblauw rvo-link__icon--before"
+                                  role="img"
+                                  aria-label="Home"></span>
+                        </a>
+                        <div class="dropdown-underlay" onclick="amt.hide_download_dropdown()"></div>
+                        <div class="dropdown-content"
+                             id="dropdown-content"
+                             onclick="amt.download_as_yaml('{{ algorithm_id }}', '{{ algorithm.name }}')">
+                            <a>{% trans %}Download as YAML{% endtrans %}</a>
+                        </div>
+                    </div>
+                    <a onclick="amt.openModal('delete-modal')">
+                        <span class="utrecht-icon rvo-icon rvo-icon-verwijderen rvo-icon--xl rvo-icon--hemelblauw rvo-link__icon--before"
+                              role="img"
+                              aria-label="Home"></span>
+                    </a>
+                </div>
             </div>
         </div>
         <!-- Requirements Widget -->

@@ -2,7 +2,7 @@ from datetime import datetime
 
 import pytest
 from amt.api.lifecycles import Lifecycles
-from amt.api.publication_category import PublicationCategories
+from amt.api.risk_group import RiskGroup
 from amt.core.exceptions import AMTRepositoryError
 from amt.models import Algorithm
 from amt.repositories.algorithms import AlgorithmsRepository, sort_by_lifecycle, sort_by_lifecycle_reversed
@@ -262,7 +262,7 @@ async def test_with_lifecycle_filter(db: DatabaseTestUtils):
 
 
 @pytest.mark.asyncio
-async def test_with_publication_category_filter(db: DatabaseTestUtils):
+async def test_with_risk_group_filter(db: DatabaseTestUtils):
     await db.given(
         [
             default_user(),
@@ -275,7 +275,7 @@ async def test_with_publication_category_filter(db: DatabaseTestUtils):
     algorithm_repository = AlgorithmsRepository(db.get_session())
 
     result: list[Algorithm] = await algorithm_repository.paginate(
-        skip=0, limit=4, search="", filters={"publication-category": PublicationCategories.HOOG_RISICO_AI.name}, sort={}
+        skip=0, limit=4, search="", filters={"risk-group": RiskGroup.HOOG_RISICO_AI.name}, sort={}
     )
 
     assert len(result) == 1

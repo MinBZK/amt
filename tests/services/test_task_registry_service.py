@@ -70,7 +70,8 @@ async def test_is_requirement_applicable_with_profile():
     # given
     ai_act_profile = AiActProfile(
         type="AI-systeem",
-        publication_category="hoog-risico AI",
+        risk_group="hoog-risico AI",
+        conformity_assessment_body="beoordeling door derde partij",
         role="gebruiksverantwoordelijke",
         open_source="open-source",
         systemic_risk="systeemrisico",
@@ -112,7 +113,7 @@ async def test_is_requirement_applicable_with_profile_with_2_roles():
     # given
     ai_act_profile = AiActProfile(
         type="AI-model voor algemene doeleinden",
-        publication_category="hoog-risico AI",
+        risk_group="hoog-risico AI",
         role="aanbieder + gebruiksverantwoordelijke",
         open_source="geen open-source",
         systemic_risk="systeemrisico",
@@ -154,7 +155,7 @@ async def test_is_requirement_applicable_with_non_matching_profile():
     # given
     ai_act_profile = AiActProfile(
         type="AI-model voor algemene doeleinden",
-        publication_category="hoog-risico AI",
+        risk_group="hoog-risico AI",
         role="aanbieder + gebruiksverantwoordelijke",
         open_source="geen open-source",
         systemic_risk="systeemrisico",
@@ -196,7 +197,7 @@ async def test_is_requirement_applicable_with_matching_profile():
     # given
     ai_act_profile = AiActProfile(
         type="AI-model voor algemene doeleinden",
-        publication_category="hoog-risico AI",
+        risk_group="hoog-risico AI",
         role="aanbieder",
         open_source="geen open-source",
         systemic_risk="systeemrisico",

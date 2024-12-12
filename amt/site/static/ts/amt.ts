@@ -8,10 +8,29 @@ import "../scss/layout.scss";
 
 _hyperscript.browserInit();
 
+const keysToRemove = [
+  "labelsbysubcategory",
+  "answers",
+  "categoryState",
+  "categoryTrace",
+  "currentCategory",
+  "currentconclusion",
+  "currentquestion",
+  "currentSubCategory",
+  "labels",
+  "previousCategory",
+  "previousSubCategory",
+  "subCategoryTrace",
+];
+if (window.location.pathname === "/algorithms/new") {
+  keysToRemove.forEach((key) => {
+    sessionStorage.removeItem(key);
+  });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   // TODO (robbert): we need (better) event handling and displaying of server errors
   document.body.addEventListener("htmx:sendError", function () {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     document.getElementById("errorContainer")!.innerHTML =
       "<h1>Placeholder: Error while connecting to server</h1";
   });
@@ -137,7 +156,9 @@ export function openConfirmModal(
 class AiActProfile {
   constructor(
     public type: string[],
-    public publication_category: string[],
+    public operational: string[],
+    public risk_group: string[],
+    public conformity_assessment_body: string[],
     public transparency_obligations: string[],
     public systemic_risk: string[],
     public role: string[],
@@ -174,25 +195,50 @@ export function closeModalSave(id: string) {
   closeModal(id);
 
   // Get ai act support tool state from local store.
-  const ai_act_support_tool_state = localStorage?.getItem("labelsbycategory");
+  const ai_act_support_tool_state = sessionStorage?.getItem(
+    "labelsbysubcategory",
+  );
 
   if (ai_act_support_tool_state != null) {
     // Parse ai act support tool state into AiActProfile object.
     const aiActProfileRaw = JSON.parse(ai_act_support_tool_state);
     const aiActProfile: AiActProfile = new AiActProfile(
       aiActProfileRaw["Soort toepassing"],
-      aiActProfileRaw["Publicatiecategorie"],
-      aiActProfileRaw["Transparantieverplichtingen"],
+      aiActProfileRaw["Operationeel"],
+      aiActProfileRaw["Risicogroep"],
+      aiActProfileRaw["Conformiteitsbeoordelingsinstantie"],
+      aiActProfileRaw["Transparantieverplichting"],
       aiActProfileRaw["Systeemrisico"],
       aiActProfileRaw["Rol"],
-      aiActProfileRaw["Open-source"],
+      aiActProfileRaw["Open source"],
     );
 
     // Select the correct entries.
     Object.entries(aiActProfile).forEach(([category, el_ids]) => {
       el_ids.forEach((el_id: string) => {
-        const element = document.getElementById(`${category}-${el_id}`);
-        element?.click();
+        // radio buttons and checkboxes
+        try {
+          const element: HTMLElement | null = document.getElementById(
+            `${category}-${el_id}`,
+          );
+          if (element) {
+            element.click();
+          }
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        } catch (e) {
+          // Do Nothing
+        }
+
+        // dropdowns
+        try {
+          const element = document.getElementById(`${category}`);
+          if (element) {
+            (element as HTMLInputElement).value = el_ids[0];
+          }
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        } catch (e) {
+          // Do Nothing
+        }
       });
     });
   }
@@ -261,6 +307,61 @@ export function hide_form_search_options(id: string) {
   window.setTimeout(function () {
     document.getElementById(id)!.style.display = "none";
   }, 250);
+}
+
+export function hide_download_dropdown() {
+  const dropdownContent = document.querySelector(
+    ".dropdown-content",
+  ) as HTMLElement;
+  const dropdownUnderlay = document.querySelector(
+    ".dropdown-underlay",
+  ) as HTMLElement;
+
+  if (dropdownContent && dropdownUnderlay) {
+    dropdownContent.style.display = "none";
+    dropdownUnderlay.style.display = "none";
+  } else {
+    console.error("Could not find dropdown elements.");
+  }
+}
+
+export function show_download_dropdown() {
+  const dropdownContent = document.querySelector(
+    ".dropdown-content",
+  ) as HTMLElement;
+  const dropdownUnderlay = document.querySelector(
+    ".dropdown-underlay",
+  ) as HTMLElement;
+
+  if (dropdownContent && dropdownUnderlay) {
+    dropdownContent.style.display = "block";
+    dropdownUnderlay.style.display = "block";
+  } else {
+    console.error("Could not find dropdown elements.");
+  }
+}
+
+export async function download_as_yaml(
+  algorithm_id: string,
+  algorithm_name: string,
+): Promise<void> {
+  try {
+    const response = await fetch(
+      `/algorithm/${algorithm_id}/details/system_card/download`,
+    );
+    const blob = await response.blob(); // Get the response as a Blob
+
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    const filename = algorithm_name + "_" + new Date().toISOString() + ".yaml";
+    link.setAttribute("download", filename);
+    document.body.appendChild(link);
+    link.click();
+  } catch (error) {
+    console.error("Error downloading system card:", error);
+  }
+  hide_download_dropdown();
 }
 
 export function add_field_on_enter(id: string) {

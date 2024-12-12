@@ -27,18 +27,24 @@ msgid "Is the application open source?"
 msgstr "Is de applicatie open source?"
 
 #: amt/api/ai_act_profile.py:28
-msgid "Publication Category"
-msgstr "Publicatiecategorie"
+msgid "In what risk group falls the application?"
+msgstr "In welke risicogroep valt de applicatie?"
 
 #: amt/api/ai_act_profile.py:30
-msgid "Is there a systemic risk?"
-msgstr "Is er sprake van systematisch risico?"
+msgid "Does a conformity assessment need to be performed by an accredited body"
+msgstr ""
+"Moet een conformiteitsbeoordeling worden uitgevoerd door een "
+"geaccrediteerde instantie?"
 
 #: amt/api/ai_act_profile.py:32
+msgid "Is there a systemic risk?"
+msgstr "Is er sprake van een systeemrisico?"
+
+#: amt/api/ai_act_profile.py:34
 msgid "Is there a transparency obligation?"
 msgstr "Zijn er transparantieverplichtingen?"
 
-#: amt/api/ai_act_profile.py:34
+#: amt/api/ai_act_profile.py:36
 msgid "Role"
 msgstr "Rol"
 
@@ -143,7 +149,7 @@ msgstr "Data"
 msgid "Model"
 msgstr "Model"
 
-#: amt/api/navigation.py:61 amt/site/templates/algorithms/new.html.j2:151
+#: amt/api/navigation.py:61 amt/site/templates/algorithms/new.html.j2:170
 msgid "Instruments"
 msgstr "Instrumenten"
 
@@ -166,29 +172,25 @@ msgstr "Alle organisaties"
 msgid "My organizations"
 msgstr "Mijn organisaties"
 
-#: amt/api/publication_category.py:22
-msgid "Impactful algorithm"
-msgstr "Impactvol algoritme"
-
-#: amt/api/publication_category.py:23
-msgid "Non-impactful algorithm"
-msgstr "Niet-impactvol algoritme"
-
-#: amt/api/publication_category.py:24
-msgid "High-risk AI"
+#: amt/api/risk_group.py:19
+msgid "hoog-risico AI"
 msgstr "Hoog-risico AI"
 
-#: amt/api/publication_category.py:25
-msgid "No high-risk AI"
+#: amt/api/risk_group.py:20
+msgid "geen hoog-risico AI"
 msgstr "Geen hoog-risico AI"
 
-#: amt/api/publication_category.py:26
-msgid "Forbidden AI"
+#: amt/api/risk_group.py:21
+msgid "verboden AI"
 msgstr "Verboden AI"
 
-#: amt/api/publication_category.py:27
-msgid "Exception of application"
+#: amt/api/risk_group.py:22
+msgid "uitzondering van toepassing"
 msgstr "Uitzondering van toepassing"
+
+#: amt/api/risk_group.py:23
+msgid "niet van toepassing"
+msgstr "Niet van toepassing"
 
 #: amt/api/forms/algorithm.py:19
 msgid "Select organization"
@@ -325,51 +327,51 @@ msgstr ""
 "                verwijderd."
 
 #: amt/site/templates/algorithms/details_base.html.j2:39
-#: amt/site/templates/algorithms/new.html.j2:134
+#: amt/site/templates/algorithms/new.html.j2:153
 #: amt/site/templates/organizations/members.html.j2:33
 msgid "Yes"
 msgstr "Ja"
 
 #: amt/site/templates/algorithms/details_base.html.j2:44
-#: amt/site/templates/algorithms/new.html.j2:144
+#: amt/site/templates/algorithms/new.html.j2:163
 #: amt/site/templates/organizations/members.html.j2:36
 msgid "No"
 msgstr "Nee"
 
-#: amt/site/templates/algorithms/details_base.html.j2:57
-msgid "Delete algorithm"
-msgstr "Verwijder algoritme"
+#: amt/site/templates/algorithms/details_base.html.j2:63
+msgid "Download as YAML"
+msgstr "Download naar YAML"
 
-#: amt/site/templates/algorithms/details_base.html.j2:74
+#: amt/site/templates/algorithms/details_base.html.j2:87
 msgid "Does the algorithm meet the requirements?"
 msgstr "Voldoet het algoritme aan de vereisten?"
 
-#: amt/site/templates/algorithms/details_base.html.j2:77
-#: amt/site/templates/algorithms/details_base.html.j2:103
-#: amt/site/templates/algorithms/details_base.html.j2:134
-#: amt/site/templates/algorithms/details_base.html.j2:157
+#: amt/site/templates/algorithms/details_base.html.j2:90
+#: amt/site/templates/algorithms/details_base.html.j2:116
+#: amt/site/templates/algorithms/details_base.html.j2:147
+#: amt/site/templates/algorithms/details_base.html.j2:170
 #: amt/site/templates/macros/tasks.html.j2:32
 msgid "Done"
 msgstr "Afgerond"
 
-#: amt/site/templates/algorithms/details_base.html.j2:99
-#: amt/site/templates/algorithms/details_base.html.j2:155
+#: amt/site/templates/algorithms/details_base.html.j2:112
+#: amt/site/templates/algorithms/details_base.html.j2:168
 msgid "To do"
 msgstr "Te doen"
 
-#: amt/site/templates/algorithms/details_base.html.j2:101
+#: amt/site/templates/algorithms/details_base.html.j2:114
 msgid "In progress"
 msgstr "Onderhanden"
 
-#: amt/site/templates/algorithms/details_base.html.j2:117
+#: amt/site/templates/algorithms/details_base.html.j2:130
 msgid "Go to all requirements"
 msgstr "Ga naar alle Vereisten"
 
-#: amt/site/templates/algorithms/details_base.html.j2:131
+#: amt/site/templates/algorithms/details_base.html.j2:144
 msgid "Which instruments are executed?"
 msgstr "Welke instrumenten zijn uitgevoerd?"
 
-#: amt/site/templates/algorithms/details_base.html.j2:171
+#: amt/site/templates/algorithms/details_base.html.j2:184
 msgid "Go to all instruments"
 msgstr "Ga naar all instrumenten"
 
@@ -566,7 +568,11 @@ msgstr ""
 msgid "Find your AI Act profile"
 msgstr "Vind uw AI Act profiel"
 
-#: amt/site/templates/algorithms/new.html.j2:153
+#: amt/site/templates/algorithms/new.html.j2:112
+msgid "Select Option"
+msgstr "Selecteer optie"
+
+#: amt/site/templates/algorithms/new.html.j2:172
 msgid ""
 "Overview of instruments for the responsible development, deployment, "
 "assessment and monitoring of algorithms and AI-systems."
@@ -574,15 +580,15 @@ msgstr ""
 "Overzicht van aanbevolen instrument voor het verantwoord ontwikkelen, "
 "gebruiken, beoordelen en monitoren van algoritmes en AI-systemen."
 
-#: amt/site/templates/algorithms/new.html.j2:161
+#: amt/site/templates/algorithms/new.html.j2:180
 msgid "Choose one or more instruments"
 msgstr "Kies één of meerdere instrumenten"
 
-#: amt/site/templates/algorithms/new.html.j2:185
+#: amt/site/templates/algorithms/new.html.j2:204
 msgid "Create Algorithm"
 msgstr "Creëer algoritme"
 
-#: amt/site/templates/algorithms/new.html.j2:202
+#: amt/site/templates/algorithms/new.html.j2:221
 msgid "Copy results and close"
 msgstr "Resultaten overnemen en sluiten"
 
@@ -879,14 +885,14 @@ msgid "Category"
 msgstr "Categorie"
 
 #: amt/site/templates/parts/algorithm_search.html.j2:66
-msgid "Select publication category"
-msgstr "Selecteer publicatiecategorie"
+msgid "Select risk group"
+msgstr "Selecteer groepering"
 
-#: amt/site/templates/parts/algorithm_search.html.j2:84
+#: amt/site/templates/parts/algorithm_search.html.j2:82
 msgid "Group by"
 msgstr "Groeperen op"
 
-#: amt/site/templates/parts/algorithm_search.html.j2:94
+#: amt/site/templates/parts/algorithm_search.html.j2:92
 msgid "Select group by"
 msgstr "Selecteer groepering"
 
