@@ -84,7 +84,6 @@ def get_ai_act_profile_selector(request: Request) -> AiActProfileSelector:
     role_options = (
         "aanbieder",
         "gebruiksverantwoordelijke",
-        "aanbieder & gebruiksverantwoordelijke",
         "importeur",
         "distributeur",
     )
