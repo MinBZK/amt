@@ -2,13 +2,14 @@ import pytest
 from amt.schema.ai_act_profile import AiActProfile
 from amt.schema.measure import Measure
 from amt.schema.requirement import (
+    ConformityAssessmentBodyEnum,
     OpenSourceEnum,
     Requirement,
     RequirementAiActProfile,
-    RiskCategoryEnum,
+    RiskGroupEnum,
     RoleEnum,
     SystemicRiskEnum,
-    TransparencyObligation,
+    TransparencyObligationEnum,
     TypeEnum,
 )
 from amt.services.task_registry import get_requirements_and_measures, is_requirement_applicable
@@ -47,11 +48,12 @@ async def test_is_requirement_applicable_empty_profile():
         ai_act_profile=[
             RequirementAiActProfile(
                 type=[TypeEnum.AI_systeem],
-                risk_category=[RiskCategoryEnum.hoog_risico_AI],
+                risk_category=[RiskGroupEnum.hoog_risico_AI],
                 role=[RoleEnum.gebruiksverantwoordelijke],
                 open_source=[OpenSourceEnum.open_source],
                 systemic_risk=[SystemicRiskEnum.systeemrisico],
-                transparency_obligations=[TransparencyObligation.transparantieverplichting],
+                transparency_obligations=[TransparencyObligationEnum.transparantieverplichting],
+                conformity_assessment_body = [ConformityAssessmentBodyEnum.beoordeling_door_derde_partij],
             ),
         ],
     )
@@ -89,9 +91,9 @@ async def test_is_requirement_applicable_with_profile():
             RequirementAiActProfile(
                 type=[],
                 risk_category=[
-                    RiskCategoryEnum.hoog_risico_AI,
-                    RiskCategoryEnum.verboden_AI,
-                    RiskCategoryEnum.geen_hoog_risico_AI,
+                    RiskGroupEnum.hoog_risico_AI,
+                    RiskGroupEnum.verboden_AI,
+                    RiskGroupEnum.geen_hoog_risico_AI,
                 ],
                 role=[RoleEnum.gebruiksverantwoordelijke, RoleEnum.aanbieder],
                 open_source=[],
@@ -131,9 +133,9 @@ async def test_is_requirement_applicable_with_profile_with_2_roles():
             RequirementAiActProfile(
                 type=[],
                 risk_category=[
-                    RiskCategoryEnum.hoog_risico_AI,
-                    RiskCategoryEnum.verboden_AI,
-                    RiskCategoryEnum.geen_hoog_risico_AI,
+                    RiskGroupEnum.hoog_risico_AI,
+                    RiskGroupEnum.verboden_AI,
+                    RiskGroupEnum.geen_hoog_risico_AI,
                 ],
                 role=[RoleEnum.gebruiksverantwoordelijke, RoleEnum.aanbieder],
                 open_source=[],
@@ -173,9 +175,9 @@ async def test_is_requirement_applicable_with_non_matching_profile():
             RequirementAiActProfile(
                 type=[TypeEnum.AI_systeem],
                 risk_category=[
-                    RiskCategoryEnum.hoog_risico_AI,
-                    RiskCategoryEnum.verboden_AI,
-                    RiskCategoryEnum.geen_hoog_risico_AI,
+                    RiskGroupEnum.hoog_risico_AI,
+                    RiskGroupEnum.verboden_AI,
+                    RiskGroupEnum.geen_hoog_risico_AI,
                 ],
                 role=[RoleEnum.gebruiksverantwoordelijke, RoleEnum.aanbieder],
                 open_source=[],
@@ -202,6 +204,7 @@ async def test_is_requirement_applicable_with_matching_profile():
         open_source="geen open-source",
         systemic_risk="systeemrisico",
         transparency_obligations="transparantieverplichting",
+        conformity_assessment_body="beoordeling door derde partij",
     )
 
     requirement = Requirement(
@@ -214,11 +217,12 @@ async def test_is_requirement_applicable_with_matching_profile():
         ai_act_profile=[
             RequirementAiActProfile(
                 type=[TypeEnum.AI_model_voor_algemene_doeleinden],
-                risk_category=[RiskCategoryEnum.hoog_risico_AI],
+                risk_category=[RiskGroupEnum.hoog_risico_AI],
                 role=[RoleEnum.aanbieder],
                 open_source=[OpenSourceEnum.geen_open_source],
                 systemic_risk=[SystemicRiskEnum.systeemrisico],
-                transparency_obligations=[TransparencyObligation.transparantieverplichting],
+                transparency_obligations=[TransparencyObligationEnum.transparantieverplichting],
+                conformity_assessment_body = [ConformityAssessmentBodyEnum.beoordeling_door_derde_partij],
             ),
         ],
     )
