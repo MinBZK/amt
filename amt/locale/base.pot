@@ -198,6 +198,36 @@ msgstr ""
 msgid "Organization"
 msgstr ""
 
+#: amt/api/forms/measure.py:17
+msgid "Status"
+msgstr ""
+
+#: amt/api/forms/measure.py:32
+msgid "Information on how this measure is implemented"
+msgstr ""
+
+#: amt/api/forms/measure.py:39
+msgid ""
+"Select one or more to upload. The files will be saved once you confirm "
+"changes by pressing the save button."
+msgstr ""
+
+#: amt/api/forms/measure.py:44
+msgid "Add files"
+msgstr ""
+
+#: amt/api/forms/measure.py:45
+msgid "No files selected."
+msgstr ""
+
+#: amt/api/forms/measure.py:49
+msgid "Add URI"
+msgstr ""
+
+#: amt/api/forms/measure.py:52
+msgid "Add links to documents"
+msgstr ""
+
 #: amt/api/forms/organization.py:23
 #: amt/site/templates/algorithms/details_info.html.j2:8
 #: amt/site/templates/auth/profile.html.j2:34
@@ -210,30 +240,30 @@ msgstr ""
 msgid "Name of the organization"
 msgstr ""
 
-#: amt/api/forms/organization.py:31
+#: amt/api/forms/organization.py:32
 msgid "The slug is the web path, like /organizations/my-organization-name"
 msgstr ""
 
-#: amt/api/forms/organization.py:32
+#: amt/api/forms/organization.py:33
 #: amt/site/templates/organizations/home.html.j2:16
 msgid "Slug"
 msgstr ""
 
-#: amt/api/forms/organization.py:33
+#: amt/api/forms/organization.py:34
 msgid "The slug for this organization"
 msgstr ""
 
-#: amt/api/forms/organization.py:38
+#: amt/api/forms/organization.py:40
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:4
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:23
 msgid "Add members"
 msgstr ""
 
-#: amt/api/forms/organization.py:39
+#: amt/api/forms/organization.py:41
 msgid "Search for a person..."
 msgstr ""
 
-#: amt/api/forms/organization.py:45
+#: amt/api/forms/organization.py:47
 msgid "Add organization"
 msgstr ""
 
@@ -297,6 +327,10 @@ msgid ""
 "later."
 msgstr ""
 
+#: amt/core/exceptions.py:84
+msgid "Something went wrong storing your file. PLease try again later."
+msgstr ""
+
 #: amt/site/templates/algorithms/details_base.html.j2:19
 msgid "Delete algoritmic system"
 msgstr ""
@@ -313,12 +347,14 @@ msgstr ""
 
 #: amt/site/templates/algorithms/details_base.html.j2:39
 #: amt/site/templates/algorithms/new.html.j2:153
+#: amt/site/templates/macros/form_macros.html.j2:168
 #: amt/site/templates/organizations/members.html.j2:33
 msgid "Yes"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_base.html.j2:44
 #: amt/site/templates/algorithms/new.html.j2:163
+#: amt/site/templates/macros/form_macros.html.j2:173
 #: amt/site/templates/organizations/members.html.j2:36
 msgid "No"
 msgstr ""
@@ -422,7 +458,7 @@ msgid "Failed to estimate WOZ value: "
 msgstr ""
 
 #: amt/site/templates/algorithms/details_info.html.j2:16
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:19
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:26
 msgid "Description"
 msgstr ""
 
@@ -452,45 +488,16 @@ msgstr ""
 msgid "References"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:29
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:36
 msgid "Read more on the algoritmekader"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:38
-msgid "Status"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:45
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:47
-msgid "to do"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:50
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:52
-msgid "in progress"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:55
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:57
-msgid "done"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:68
-msgid "Information on how this measure is implemented"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:74
-msgid ""
-"Describe how the measure has been implemented, including challenges and "
-"solutions."
-msgstr ""
-
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:84
 #: amt/site/templates/macros/editable.html.j2:82
 msgid "Save"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:88
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:51
 #: amt/site/templates/macros/editable.html.j2:87
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:26
 msgid "Cancel"
@@ -500,7 +507,7 @@ msgstr ""
 msgid "measures executed"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_requirements.html.j2:55
+#: amt/site/templates/algorithms/details_requirements.html.j2:59
 #: amt/site/templates/macros/editable.html.j2:24
 #: amt/site/templates/macros/editable.html.j2:27
 msgid "Edit"
@@ -632,20 +639,28 @@ msgstr ""
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr ""
 
-#: amt/site/templates/macros/form_macros.html.j2:52
+#: amt/site/templates/macros/form_macros.html.j2:58
 msgid "Are you sure you want to remove "
 msgstr ""
 
-#: amt/site/templates/macros/form_macros.html.j2:52
+#: amt/site/templates/macros/form_macros.html.j2:58
 msgid " from this organization? "
 msgstr ""
 
-#: amt/site/templates/macros/form_macros.html.j2:55
+#: amt/site/templates/macros/form_macros.html.j2:61
 msgid "Delete"
 msgstr ""
 
-#: amt/site/templates/macros/form_macros.html.j2:56
+#: amt/site/templates/macros/form_macros.html.j2:62
 msgid "Delete member"
+msgstr ""
+
+#: amt/site/templates/macros/form_macros.html.j2:150
+msgid "Delete file"
+msgstr ""
+
+#: amt/site/templates/macros/form_macros.html.j2:157
+msgid "Are you sure you want to delete"
 msgstr ""
 
 #: amt/site/templates/macros/table_row.html.j2:19

@@ -22,6 +22,12 @@
 {% macro form_field(form, field) %}
     {% if field.type == WebFormFieldType.TEXT %}
         {{ form_field_text(form, field) }}
+    {% elif field.type == WebFormFieldType.FILE %}
+        {{ form_field_file(form, field) }}
+    {% elif field.type == WebFormFieldType.TEXT_CLONEABLE %}
+        {{ form_field_text_cloneable(form, field) }}
+    {% elif field.type == WebFormFieldType.TEXTAREA %}
+        {{ form_field_textarea(form, field) }}
     {% elif field.type == WebFormFieldType.SELECT %}
         {{ form_field_select(form, field) }}
     {% elif field.type == WebFormFieldType.SEARCH_SELECT %}
@@ -83,11 +89,11 @@
 {% macro form_field_select(prefix, field) %}
     <div role="group"
          aria-labelledby="label-{{ prefix }}{{ field.name }}"
-         class="utrecht-form-field utrecht-form-field--text rvo-form-field">
-        <div class="rvo-form-field__label">
+         class="utrecht-form-field utrecht-form-field--text rvo-form-field rvo-layout-gap--0">
+        <div class="rvo-form-field__label rvo-layout-gap--0">
             <label id="label-{{ prefix }}{{ field.name }}"
                    for="{{ prefix }}{{ field.name }}"
-                   class="rvo-label rvo-label--required">{{ field.label }}</label>
+                   class="rvo-label {% if field.required %}rvo-label--required{% endif %}">{{ field.label }}</label>
             {% if field.description %}
                 <div id="description-{{ prefix }}{{ field.name }}"
                      class="utrecht-form-field-description">{{ field.description }}</div>
@@ -109,28 +115,200 @@
         </div>
     </div>
 {% endmacro %}
+{% macro form_field_file(prefix, field) %}
+    <div role="group"
+         aria-labelledby="label-{{ prefix }}{{ field.name }}"
+         class="utrecht-form-field utrecht-form-field--text rvo-form-field rvo-layout-gap--0">
+        <div class="rvo-form-field__label rvo-layout-gap--0">
+            <label id="label-{{ prefix }}{{ field.name }}"
+                   for="{{ prefix }}{{ field.name }}"
+                   class="rvo-label {% if field.required %}rvo-label--required{% endif %}">{{ field.label }}</label>
+            {% if field.description %}<div class="utrecht-form-field-description">{{ field.description }}</div>{% endif %}
+        </div>
+        <div id="error-{{ field.name }}" class="htmx-error-oob"></div>
+        <input id="{{ prefix }}{{ field.name }}"
+               name="{{ field.name }}"
+               type="file"
+               class="rvo-file-input rvo-link"
+               multiple="" />
+        {% if field.default_value %}
+            <div role="group"
+                 aria-labelledby="fieldId-label"
+                 class="utrecht-form-field utrecht-form-field--text rvo-form-field rvo-layout-gap--0">
+                <div class="rvo-form-field__label rvo-layout-gap--0">
+                    <ul class="rvo-item-list" id="files-output">
+                        {% for ulid, file in field.default_value %}
+                            <div id="delete-file-modal-{{ ulid }}" class="minbzk-modal display-none">
+                                <div class="modal-underlay"
+                                     onclick="amt.closeModal('delete-file-modal-{{ ulid }}')"></div>
+                                <div class="modal-content rvo-layout-column rvo-layout-align-content-space-between"
+                                     style="overflow-x: hidden;
+                                            min-height: 240px;
+                                            height: auto;
+                                            width: auto">
+                                    <div class="amt-flex-container">
+                                        <h3 class="utrecht-heading-3 rvo-heading--no-margins">{% trans %}Delete file{% endtrans %}</h3>
+                                        <a onclick="amt.closeModal('delete-file-modal-{{ ulid }}')"><span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--md rvo-icon--hemelblauw"
+      role="img"
+      aria-label="Close"></span></a>
+                                    </div>
+                                    <hr class="rvo-hr" />
+                                    <p style="min-height: 54%; padding-block: 0.5em 0.4em;">
+                                        {% trans %}Are you sure you want to delete{% endtrans %}
+                                        <strong>{{ file }}?</strong>
+                                    </p>
+                                    <div class="utrecht-button-group">
+                                        <button hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
+                                                hx-delete="/algorithm/{{ algorithm_id }}/file/{{ ulid }}"
+                                                hx-target="#file-{{ ulid }}"
+                                                hx-swap="delete"
+                                                hx-on::after-request="amt.closeModal('delete-file-modal-{{ ulid }}')"
+                                                class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
+                                                type="button">
+                                            {% trans %}Yes{%
+                                            endtrans %}
+                                        </button>
+                                        <button class="utrecht-button utrecht-button--secondary-action utrecht-button--rvo-md"
+                                                onclick="amt.closeModal('delete-file-modal-{{ ulid }}')"
+                                                type="button">{% trans %}No{% endtrans %}</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <li id="file-{{ ulid }}" class="rvo-item-list__item">
+                                <div class="rvo-layout-row rvo-layout-justify-content-space-between rvo-layout-gap--md">
+                                    <div class="rvo-layout-row rvo-layout-gap--sm">
+                                        <span class="utrecht-icon rvo-icon rvo-icon-document-met-lijnen rvo-icon--md rvo-icon--hemelblauw"
+                                              role="img"
+                                              aria-label="File"></span>
+                                        <a id="link-to-file"
+                                           href="{{ url_for('get_file', algorithm_id=algorithm_id, ulid=ulid) }}"
+                                           class="rvo-link rvo-link--normal">{{ file }}</a>
+                                    </div>
+                                    <a id="saved-file-delete"
+                                       class="rvo-link rvo-link--normal rvo-link--no-underline rvo-link--with-icon"
+                                       onclick="amt.openModal('delete-file-modal-{{ ulid }}')">
+                                        <span class="utrecht-icon rvo-icon rvo-icon-verwijderen rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
+                                              role="img"
+                                              aria-label="Delete"></span>
+                                    </a>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endmacro %}
 {% macro form_field_text(prefix, field) %}
     <div role="group"
          aria-labelledby="label-{{ prefix }}{{ field.name }}"
          class="utrecht-form-field utrecht-form-field--text rvo-form-field">
-        <div class="rvo-form-field__label">
+        <div class="rvo-form-field__label rvo-layout-gap--0">
             <label id="label-{{ prefix }}{{ field.name }}"
                    for="{{ prefix }}{{ field.name }}"
-                   class="rvo-label rvo-label--required">{{ field.label }}</label>
+                   class="rvo-label {% if field.required %}rvo-label--required{% endif %}">{{ field.label }}</label>
             {% if field.description %}<div class="utrecht-form-field-description">{{ field.description }}</div>{% endif %}
         </div>
         <div id="error-{{ field.name }}" class="htmx-error-oob"></div>
-        <input id="{{ prefix }}{{ field.name }}" placeholder="{{ field.placeholder }}" name="{{ field.name }}" type="text" class="utrecht-textbox utrecht-textbox--html-input" dir="auto" autocomplete="off" onchange="amt.reset_errorfield('error-{{ field.name }}')" {% if isinstance(field.attributes, "dict") %} {% for key, value in field.attributes.items() %}{{ key }}="{{ value }}"{% endfor %} {% endif %} value="" />
+        <input id="{{ prefix }}{{ field.name }}" placeholder="{{ field.placeholder }}" name="{{ field.name }}" type="text" class="utrecht-textbox utrecht-textbox--html-input" dir="auto" autocomplete="off" onchange="amt.reset_errorfield('error-{{ field.name }}')" {% if isinstance(field.attributes, "dict") %} {% for key, value in field.attributes.items() %}{{ key }}="{{ value }}"{% endfor %} {% endif %} {% if field.default_value %}value="{{ field.default_value }}"{% endif %} />
+    </div>
+{% endmacro %}
+{% macro form_field_text_cloneable(prefix, field) %}
+    <div role="group"
+         aria-labelledby="label-{{ prefix }}{{ field.name }}"
+         class="utrecht-form-field utrecht-form-field--text rvo-form-field rvo-layout-gap--0">
+        <div class="rvo-form-field__label rvo-layout-gap--0">
+            <label id="label-{{ prefix }}{{ field.name }}"
+                   for="{{ prefix }}{{ field.name }}"
+                   class="rvo-label {% if field.required %}rvo-label--required{% endif %}">{{ field.label }}</label>
+            {% if field.description %}<div class="utrecht-form-field-description">{{ field.description }}</div>{% endif %}
+        </div>
+        <div id="error-{{ field.name }}" class="htmx-error-oob"></div>
+        <div id="{{ prefix }}{{ field.name }}-container" class="rvo-padding--none">
+            {% if isinstance(field.default_value, 'list') and field.default_value %}
+                {% for value in field.default_value %}
+                    <div class="rvo-margin-block-end--md">
+                        <div class="rvo-layout-row rvo-layout-justify-content-space-between rvo-layout-gap--md">
+                            <input id="{{ prefix }}{{ field.name }}" placeholder="{{ field.placeholder }}" name="{{ field.name }}" type="text" class="utrecht-textbox utrecht-textbox--html-input utrecht-textbox--lg" dir="auto" autocomplete="off" onchange="amt.reset_errorfield('error-{{ field.name }}')" {% if isinstance(field.attributes, "dict") %} {% for key, value in field.attributes.items() %}{{ key }}="{{ value }}"{% endfor %} {% endif %} value="{{ value }}" onkeydown="if (event.key === 'Enter') event.preventDefault();" />
+                            <a id="document-link-delete"
+                               class="rvo-link rvo-link--normal rvo-link--no-underline rvo-link--with-icon"
+                               onclick="this.parentNode.remove()">
+                                <span class="utrecht-icon rvo-icon rvo-icon-verwijderen rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
+                                      role="img"
+                                      aria-label="Delete"></span>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="rvo-margin-block-end--md">
+                    <div class="rvo-layout-row rvo-layout-justify-content-space-between rvo-layout-gap--md">
+                        <input placeholder="{{ field.placeholder }}" name="{{ field.name }}" type="text" class="utrecht-textbox utrecht-textbox--html-input utrecht-textbox--html-input utrecht-textbox--lg" dir="auto" autocomplete="off" onchange="amt.reset_errorfield('error-{{ field.name }}')" {% if isinstance(field.attributes, "dict") %} {% for key, value in field.attributes.items() %}{{ key }}="{{ value }}"{% endfor %} {% endif %} />
+                        <a id="document-link-delete"
+                           class="rvo-link rvo-link--normal rvo-link--no-underline rvo-link--with-icon"
+                           onclick="this.parentNode.remove()">
+                            <span class="utrecht-icon rvo-icon rvo-icon-verwijderen rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
+                                  role="img"
+                                  aria-label="Delete"></span>
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+            <template id="{{ prefix }}{{ field.name }}-template">
+                <div class="rvo-margin-block-end--md">
+                    <div class="rvo-layout-row rvo-layout-justify-content-space-between rvo-layout-gap--md">
+                        <input placeholder="{{ field.placeholder }}" name="{{ field.name }}" type="text" class="utrecht-textbox utrecht-textbox--html-input utrecht-textbox--html-input utrecht-textbox--lg" dir="auto" autocomplete="off" onchange="amt.reset_errorfield('error-{{ field.name }}')" {% if isinstance(field.attributes, "dict") %} {% for key, value in field.attributes.items() %}{{ key }}="{{ value }}"{% endfor %} {% endif %} onkeydown="if (event.key === 'Enter') event.preventDefault();" />
+                        <a id="document-link-delete"
+                           class="rvo-link rvo-link--normal rvo-link--no-underline rvo-link--with-icon"
+                           onclick="this.parentNode.remove()">
+                            <span class="utrecht-icon rvo-icon rvo-icon-verwijderen rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
+                                  role="img"
+                                  aria-label="Delete"></span>
+                        </a>
+                    </div>
+                </div>
+            </template>
+        </div>
+        <div class="utrecht-button utrecht-button--rvo-tertiary-action utrecht-button--rvo-sm"
+             type="button"
+             onclick="amt.createLinkComponent('{{ prefix }}{{ field.name }}-template','{{ prefix }}{{ field.name }}-container')"
+             style="padding-left: 0">
+            <span class="utrecht-icon rvo-icon rvo-icon-plus rvo-icon--md rvo-icon--hemelblauw"
+                  role="img"
+                  aria-label="Delete"></span>
+            {{ field.clone_button_name }}
+        </div>
+    </div>
+{% endmacro %}
+{% macro form_field_textarea(prefix, field) %}
+    <div role="group"
+         aria-labelledby="label-{{ prefix }}{{ field.name }}"
+         class="utrecht-form-field utrecht-form-field--text rvo-form-field rvo-layout-gap--0">
+        <div class="rvo-form-field__label rvo-layout-gap--0">
+            <label id="label-{{ prefix }}{{ field.name }}"
+                   for="{{ prefix }}{{ field.name }}"
+                   class="rvo-label {% if field.required %}rvo-label--required{% endif %}">{{ field.label }}</label>
+            {% if field.description %}<div class="utrecht-form-field-description">{{ field.description }}</div>{% endif %}
+        </div>
+        <div id="error-{{ field.name }}" class="htmx-error-oob"></div>
+        <div class="rvo-layout-column rvo-layout-gap--xs">
+            <textarea id="{{ prefix }}{{ field.name }}" name="{{ field.name }}" placeholder="{{ field.placeholder }}" aria-describedby="helperTextId" class="utrecht-textarea utrecht-textarea--html-textarea" dir="auto" onchange="amt.reset_errorfield('error-{{ field.name }}')" {% if isinstance(field.attributes, "dict") %} {% for key, value in field.attributes.items() %}{{ key }}="{{ value }}"{% endfor %}{% endif %}>{{ field.default_value }}</textarea>
+            {# TODO: Fix when we upgrade to higher @nl-rvo npm package #}
+            {# <span class="utrecht-textbox-remaining-chars">{% trans %}Still{% endtrans %} <strong>300</strong> {% trans %}Characters remaining{% endtrans %}</span>#}
+        </div>
     </div>
 {% endmacro %}
 {% macro form_field_search(prefix, field) %}
     <div role="group"
          aria-labelledby="label-{{ prefix }}{{ field.name }}"
-         class="utrecht-form-field utrecht-form-field--text rvo-form-field">
-        <div class="rvo-form-field__label">
+         class="utrecht-form-field utrecht-form-field--text rvo-form-field rvo-layout-gap--0">
+        <div class="rvo-form-field__label rvo-layout-gap--0">
             <label id="label-{{ prefix }}{{ field.name }}"
-                   class="rvo-label rvo-label--required">{{ field.label }}</label>
-            {% if field.description %}<div class="utrecht-form-field-description">{{ field.description }}</div>{% endif %}
+                   class="rvo-label {% if field.required %}rvo-label--required{% endif %}">{{ field.label }}</label>
+            {% if field.description %}
+                <div class="utrecht-form-field-description">{{ field.description }}</div>
+            {% endif %}
         </div>
         <div id="error-{{ field.name }}" class="htmx-error-oob"></div>
         <div class="amt-position-relative">
@@ -192,7 +370,7 @@
     {% endif %}
     {% if vars.last_group == "" or vars.last_group != field.group %}
         {% if vars.update({'fieldset_closed': False}) %}{% endif %}
-        <div class="utrecht-form-fieldset rvo-form-fieldset">
+        <div class="utrecht-form-fieldset rvo-form-fieldset rvo-layout-gap--0">
             <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
                 {% if form.legend %}
                     <legend class="utrecht-form-fieldset__legend utrecht-form-fieldset__legend--html-legend">{{ form.legend }}</legend>

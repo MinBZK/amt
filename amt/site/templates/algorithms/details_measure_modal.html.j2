@@ -1,21 +1,28 @@
+{% import "macros/form_macros.html.j2" as macros with context %}
 <div class="rvo-layout-column rvo-layout-gap--xl">
-    <h1 class="utrecht-heading-1 rvo-heading--no-margins">{{ measure.name }}</h1>
+    <div class="amt-flex-container">
+        <h1 class="utrecht-heading-1 rvo-heading--no-margins">{{ measure.name }}</h1>
+        <a onclick="amt.closeModal('measure-modal')"><span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--md rvo-icon--hemelblauw"
+      role="img"
+      aria-label="Close"></span></a>
+    </div>
+    <hr class="rvo-hr" />
     <div class="rvo-layout-column rvo-layout-gap--md">
         <div class="rvo-layout-column rvo-layout-gap--xs">
-            <form hx-ext="json-enc"
+            <form hx-encoding="multipart/form-data"
                   hx-post="/algorithm/{{ algorithm_id }}/measure/{{ measure.urn }}"
                   hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
                   hx-target-error="#errorContainer"
                   hx-swap="innerHTML"
                   method="post"
-                  class="rvo-layout-column rvo-layout-gap--md">
-                <div class="utrecht-form-fieldset rvo-form-fieldset">
+                  class="rvo-layout-column rvo-layout-gap--md"
+                  id="form-edit-measure">
+                <div class="utrecht-form-fieldset rvo-form-fieldset rvo-layout-gap--0">
                     <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
-                        {#   Description #}
                         <div role="group"
                              aria-labelledby="fieldId-label"
-                             class="utrecht-form-field utrecht-form-field--text rvo-form-field">
-                            <div class="rvo-form-field__label">
+                             class="utrecht-form-field utrecht-form-field--text rvo-form-field rvo-layout-gap--0">
+                            <div class="rvo-form-field__label rvo-layout-gap--0">
                                 <label class="rvo-label" id="fieldId-label" for="fieldId">{% trans %}Description{% endtrans %}</label>
                                 <div class="utrecht-form-field-description">{{ measure.description }}</div>
                             </div>
@@ -30,51 +37,7 @@
                                 </a>
                             </div>
                         </div>
-                        {#  Status#}
-                        <div role="group"
-                             aria-labelledby="fieldId-label"
-                             class="utrecht-form-field utrecht-form-field--text rvo-form-field">
-                            <div class="rvo-form-field__label">
-                                <label class="rvo-label" id="fieldId-label" for="fieldId">{% trans %}Status{% endtrans %}</label>
-                            </div>
-                            <div class="rvo-select-wrapper utrecht-textbox--small">
-                                <select id="field"
-                                        name="measure_state"
-                                        class="utrecht-select utrecht-select--html-select">
-                                    {% if measure_state == "to do" %}
-                                        <option value="to do" selected="selected">{% trans %}to do{% endtrans %}</option>
-                                    {% else %}
-                                        <option value="to do">{% trans %}to do{% endtrans %}</option>
-                                    {% endif %}
-                                    {% if measure_state == "in progress" %}
-                                        <option value="in progress" selected="selected">{% trans %}in progress{% endtrans %}</option>
-                                    {% else %}
-                                        <option value="in progress">{% trans %}in progress{% endtrans %}</option>
-                                    {% endif %}
-                                    {% if measure_state == "done" %}
-                                        <option value="done" selected="selected">{% trans %}done{% endtrans %}</option>
-                                    {% else %}
-                                        <option value="done">{% trans %}done{% endtrans %}</option>
-                                    {% endif %}
-                                </select>
-                            </div>
-                        </div>
-                        {# Implementation#}
-                        <div role="group"
-                             aria-labelledby="fieldId-label"
-                             class="utrecht-form-field utrecht-form-field--text rvo-form-field">
-                            <div class="rvo-form-field__label">
-                                <label class="rvo-label" id="fieldId-label" for="fieldId">
-                                    {% trans %}Information on how this measure is implemented{% endtrans %}
-                                </label>
-                            </div>
-                            <textarea id="field"
-                                      class="utrecht-textarea utrecht-textarea--html-textarea utrecht-textarea--large"
-                                      dir="auto"
-                                      placeholder="{% trans %}Describe how the measure has been implemented, including challenges and solutions.{% endtrans %}"
-                                      name="measure_value"
-                                      contenteditable="true">{{ measure_value }}</textarea>
-                        </div>
+                        {% for form_field in form.fields %}{{ macros.form_field(form.id, form_field) }}{% endfor %}
                     </fieldset>
                 </div>
                 <p class="utrecht-button-group">
