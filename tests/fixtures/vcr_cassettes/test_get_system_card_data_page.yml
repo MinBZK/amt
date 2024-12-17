@@ -19,20 +19,20 @@ interactions:
         string:
           "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"UTF-8\">\n
           \   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\n
-          \   <link rel=\"icon\" type=\"image/x-icon\" href=\"/static/favicon.ico?etag=668376cacf56da58c12b7bcd12edcebb\">\n
+          \   <link rel=\"icon\" type=\"image/x-icon\" href=\"/static/dist/@nl-rvo/assets/images/favicon/favicon.ico?etag=72468084736f22cc85d357218f5d2ec8\">\n
           \   <title>\n        testalgorithm1 | AMT\n    </title>\n    \n    \n        \n
-          \         <script type=\"text/javascript\" src=\"/static/dist/amt.js?etag=159e9e0725bca2bd1131f28bf8a323d3\"></script>\n
-          \       \n    \n        \n          <script type=\"module\" src=\"/static/dist/@nl-rvo/design-tokens/index.mjs?etag=c83f3139b2f59c9b6c2cd8f1e1da2312\"></script>\n
-          \       \n    \n    <script type=\"text/javascript\" src=\"/static/vendor/htmx/js/json-enc.js?etag=63e6601589d97b27e989c0f87240befc\"></script>\n
-          \   <script type=\"text/javascript\" src=\"/static/vendor/htmx/js/response-targets.js?etag=94e5a37d67efc9380580bb2b892e57a2\"></script>\n
-          \   \n    \n    \n        <link rel=\"stylesheet\" href=\"/static/dist/main.css?etag=14a18870a26f4bdc8d1b2e5e39f590db\">\n
-          \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/assets/fonts/index.css?etag=3a1b83bc575201167148662737ad0247\">\n
-          \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/assets/icons/index.css?etag=2a6d9a9de9003ba5d08ace23620ff8d2\">\n
-          \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/assets/images/index.css?etag=aa95c45515e65e4507833b5fad03391d\">\n
-          \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/design-tokens/index.css?etag=7567b3657685dbe8deb980489ef50ac5\">\n
-          \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/component-library-css/index.css?etag=df1b6bfe291b9621f1017115cb9baeb9\">\n
-          \       \n    \n</head>\n\n<body hx-ext=\"response-targets\" class=\"rvo-theme\">\n
-          \   \n    <div class=\"rvo-alert rvo-alert--warning rvo-alert--padding-sm\">\n
+          \         <script type=\"text/javascript\" src=\"/static/dist/amt.js?etag=4f2d224cd9b1d4d7ea9066c2e9a12529\"></script>\n
+          \       \n    \n        \n          <script type=\"module\" src=\"/static/dist/@nl-rvo/design-tokens/index.mjs?etag=d1e69147f8a6b4f059708b747418020b\"></script>\n
+          \       \n    \n    <script type=\"text/javascript\" src=\"/static/vendor/htmx/js/json-enc.js?etag=73c270c2deb80a8758471378bb47da4b\"></script>\n
+          \   <script type=\"text/javascript\" src=\"/static/vendor/htmx/js/response-targets.js?etag=41861e3906eb6ed9a9d1da3861988633\"></script>\n
+          \   \n    \n    \n        <link rel=\"stylesheet\" href=\"/static/dist/main.css?etag=1116c631f406cc8e9d21bb78c96da97f\">\n
+          \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/assets/fonts/index.css?etag=e21212f18384f5e238578cadc76b9aa2\">\n
+          \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/assets/icons/index.css?etag=8b11b6f9aade3a822a83266f675e9d51\">\n
+          \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/assets/images/index.css?etag=12adc140f7a9ce482ad674eae573859f\">\n
+          \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/design-tokens/index.css?etag=dd40546f9c018e7f67f6d1d247a1a31c\">\n
+          \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/component-library-css/index.css?etag=5b52157d75d4cc408af30796ee685c54\">\n
+          \       \n    \n</head>\n\n<body hx-ext=\"response-targets\" class=\"rvo-theme
+          amt-theme\">\n    \n    <div class=\"rvo-alert rvo-alert--warning rvo-alert--padding-sm\">\n
           \   <span class=\"utrecht-icon rvo-icon rvo-icon-waarschuwing rvo-icon--xl
           rvo-status-icon-waarschuwing\"\n          role=\"img\"\n          aria-label=\"Waarschuwing\"></span>\n
           \   <div class=\"rvo-alert-text\">\n        <div>\n            <b>Beta Version
@@ -134,7 +134,7 @@ interactions:
           style=\"padding-block: 0.0em 1.25em;\">\n                Data will be stored
           for at least 45 days before permanent\n                deletion.\n            </p>\n
           \           <p class=\"utrecht-button-group\">\n                <button hx-headers='{\"X-CSRF-Token\":
-          \"03179d30dbf1b1f26fef9ef9ecea43c7401545e0\"}'\n                        hx-delete=\"/algorithm/1\"\n
+          \"bf4f74750da33b7367ff89ec92d4c44f740c289a\"}'\n                        hx-delete=\"/algorithm/1\"\n
           \                       class=\"utrecht-button utrecht-button--primary-action
           utrecht-button--rvo-md\"\n                        type=\"button\">\n                    Yes\n
           \               </button>\n                <button class=\"utrecht-button
@@ -355,16 +355,16 @@ interactions:
         content-language:
           - en,nl
         content-length:
-          - "28915"
+          - "28960"
         content-type:
           - text/html; charset=utf-8
         set-cookie:
-          - fastapi-csrf-token=IjAzMTc5ZDMwZGJmMWIxZjI2ZmVmOWVmOWVjZWE0M2M3NDAxNTQ1ZTAi.Z2F7yg.sKiQ5QwUkfA0N0X_rtXO_7iVXhI;
+          - fastapi-csrf-token=ImJmNGY3NDc1MGRhMzNiNzM2N2ZmODllYzkyZDRjNDRmNzQwYzI4OWEi.Z2GUmw.RvX1mNQXbptnnAXNpRzo9-PpwxQ;
             HttpOnly; Max-Age=3600; Path=/; SameSite=strict
         strict-transport-security:
           - max-age=31536000; includeSubDomains
         x-api-request-id:
-          - 01JFACQ3KG34GS5X7P32E5ST91
+          - 01JFAJS01517JV88JEB792B3SQ
       status:
         code: 200
         message: OK
