@@ -1,40 +1,40 @@
 {% extends 'layouts/base.html.j2' %}
 {% block content %}
-    <div class="rvo-max-width-layout rvo-max-width-layout--md rvo-max-width-layout-inline-padding--none">
-        <div class="rvo-content">
-            <div class="rvo-hero">
-                <div class="rvo-hero__image-container">
-                    <img src="static/images/berichtenbox-bedrijven.jpg"
-                         class="rvo-hero__image"
-                         alt="" />
-                </div>
-                <h1 class="rvo-hero__title utrecht-heading-1">
-                    {% trans %}Algorithm Management Toolkit{% endtrans %}
-                    <br>
-                    {% if not user %}
-                        <a href="/auth/login"
-                           class="utrecht-button utrecht-button--secondary-action utrecht-button--rvo-md rvo-link--no-underline"
-                           type="button">{% trans %}Login{% endtrans %}</a>
-                    {% endif %}
-                </h1>
-            </div>
-            <div class="rvo-max-width-layout rvo-max-width-layout--md"
-                 style="padding: 1.5em">
-                <h3 class="utrecht-heading-3">{% trans %}Grip on algorithms with the Algorithm Management Toolkit{% endtrans %}</h3>
-                <p>
-                    <a href="https://minbzk.github.io/ai-validation/" class="rvo-link">{% trans %}The AI Validation team{% endtrans %}</a>
-                    {% trans %} has developed the Algorithm Management Toolkit on behalf of the Ministry of Interior Affairs.
-                    This toolkit offers organizations a standardized way to develop, validate, manage, control and publish algorithms.
-                    In collaboration with (international) partners, it ensures uniformity, transparency and reproducibility.{% endtrans %}
-                </p>
-                <br>
-                <p>
-                    <a href="/auth/login" class="rvo-link">{% trans %}Log in{% endtrans %}</a> {% trans %}or{% endtrans %}
-                    <a href="mailto:ai-validatie@minbzk.nl" class="rvo-link">{% trans %}contact us{% endtrans %}</a>
-                    {% trans %}for more information on how the toolkit can support your organization.{% endtrans %}
-                </p>
-            </div>
+    <div class="rvo-max-width-layout rvo-max-width-layout--md rvo-hero">
+        <div class="rvo-hero__image-container">
+            <img src="static/images/berichtenbox-bedrijven.jpg"
+                 class="rvo-hero__image"
+                 alt="Hero image for Algorithm Management Toolkit" />
+        </div>
+        <div class="rvo-hero__content">
+            <h1 class="rvo-hero__title utrecht-heading-1 rvo-heading--no-margins">
+                {% trans %}Algorithm Management Toolkit{% endtrans %}
+            </h1>
+            {% if not user %}
+                <a href="/auth/login"
+                   class="utrecht-button utrecht-button--secondary-action utrecht-button--rvo-md rvo-link--no-underline">
+                    {% trans %}Login{% endtrans %}
+                </a>
+            {% endif %}
         </div>
     </div>
-</div>
+    <div class="rvo-content">
+        <div class="rvo-max-width-layout rvo-max-width-layout--md"
+             style="padding: 1.5em">
+            <h3 class="utrecht-heading-3">{% trans %}Grip on algorithms with the Algorithm Management Toolkit{% endtrans %}</h3>
+            <p>
+                <a href="https://minbzk.github.io/ai-validation/" class="rvo-link">{% trans %}The AI Validation team{% endtrans %}</a>
+                {% trans %}has developed the Algorithm Management Toolkit on behalf of the Ministry of Interior Affairs.
+                This toolkit offers organizations a standardized way to develop, validate, manage, control, and publish algorithms.
+                In collaboration with (international) partners, it ensures uniformity, transparency, and reproducibility.{% endtrans %}
+            </p>
+            <br>
+            <p>
+                <a href="/auth/login" class="rvo-link">{% trans %}Log in{% endtrans %}</a>
+                {% trans %}or{% endtrans %}
+                <a href="mailto:ai-validatie@minbzk.nl" class="rvo-link">{% trans %}contact us{% endtrans %}</a>
+                {% trans %}for more information on how the toolkit can support your organization.{% endtrans %}
+            </p>
+        </div>
+    </div>
 {% endblock %}

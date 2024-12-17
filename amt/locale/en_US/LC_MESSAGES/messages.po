@@ -606,7 +606,7 @@ msgid "Please login to view this page"
 msgstr ""
 
 #: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:11
-#: amt/site/templates/pages/landingpage.html.j2:17
+#: amt/site/templates/pages/landingpage.html.j2:16
 #: amt/site/templates/parts/header.html.j2:86
 #: amt/site/templates/parts/header.html.j2:145
 msgid "Login"
@@ -785,42 +785,42 @@ msgstr ""
 msgid "AMT Placeholder informatie pagina's"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:12
+#: amt/site/templates/pages/landingpage.html.j2:11
 #: amt/site/templates/parts/header.html.j2:18
 msgid "Algorithm Management Toolkit"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:23
+#: amt/site/templates/pages/landingpage.html.j2:24
 msgid "Grip on algorithms with the Algorithm Management Toolkit"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:25
+#: amt/site/templates/pages/landingpage.html.j2:26
 msgid "The AI Validation team"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:26
+#: amt/site/templates/pages/landingpage.html.j2:27
 msgid ""
-" has developed the Algorithm Management Toolkit on behalf of the Ministry"
-" of Interior Affairs.\n"
-"                    This toolkit offers organizations a standardized way "
-"to develop, validate, manage, control and publish algorithms.\n"
-"                    In collaboration with (international) partners, it "
-"ensures uniformity, transparency and reproducibility."
-msgstr ""
-
-#: amt/site/templates/pages/landingpage.html.j2:32
-msgid "Log in"
-msgstr ""
-
-#: amt/site/templates/pages/landingpage.html.j2:32
-msgid "or"
+"has developed the Algorithm Management Toolkit on behalf of the Ministry "
+"of Interior Affairs.\n"
+"                This toolkit offers organizations a standardized way to "
+"develop, validate, manage, control, and publish algorithms.\n"
+"                In collaboration with (international) partners, it "
+"ensures uniformity, transparency, and reproducibility."
 msgstr ""
 
 #: amt/site/templates/pages/landingpage.html.j2:33
-msgid "contact us"
+msgid "Log in"
 msgstr ""
 
 #: amt/site/templates/pages/landingpage.html.j2:34
+msgid "or"
+msgstr ""
+
+#: amt/site/templates/pages/landingpage.html.j2:35
+msgid "contact us"
+msgstr ""
+
+#: amt/site/templates/pages/landingpage.html.j2:36
 msgid "for more information on how the toolkit can support your organization."
 msgstr ""
 
