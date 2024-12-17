@@ -282,50 +282,7 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Fri, 15 Nov 2024 14:39:50 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-08?version=latest
-    response:
-      body:
-        string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Hoog-risico-AI-systemen
-          zijn op een transparante manier ontwikkeld en ontworpen","description":"AI-systemen
-          met een hoog risico worden op zodanige wijze ontworpen en ontwikkeld dat de
-          werking ervan voldoende transparant is om gebruiksverantwoordelijken in staat
-          te stellen de output van een systeem te interpreteren en op passende wijze
-          te gebruiken.\nEen passende soort en mate van transparantie wordt gewaarborgd
-          met het oog op de naleving van de relevante verplichtingen van de aanbieder
-          en de gebruiksverantwoordelijke zoals uiteengezet in afdeling 3 van Artikel
-          13 van de AI verordening.","explanation":"","urn":"urn:nl:ak:ver:aia-08","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/vereisten/aia-08-transparantie-aan-gebruiksverantwoordelijken/index.html","subject":["transparantie"],"lifecycle":["ontwerp","ontwikkelen","monitoring-en-beheer"],"links":["urn:nl:ak:mtr:owp-05","urn:nl:ak:mtr:ver-03","urn:nl:ak:mtr:imp-01","urn:nl:ak:mtr:imp-04","urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder","urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract","urn:nl:ak:mtr:leveren_bewijs_onderdeel_beoordeling_inschrijving","urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen","urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst","urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden","urn:nl:ak:mtr:neem_vereiste_op_als_subgunningscriteria","urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste"],"ai_act_profile":[{"type":["AI-systeem","AI-systeem
-          voor algemene doeleinden"],"open_source":[],"risk_category":["hoog-risico
-          AI"],"systemic_risk":[],"transparency_obligations":[],"role":["aanbieder"]}],"always_applicable":0,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "2059"
-        Content-Type:
-          - application/json
-        Date:
-          - Fri, 15 Nov 2024 14:39:50 GMT
+          - Tue, 17 Dec 2024 13:25:34 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -348,37 +305,19 @@ interactions:
       uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-03?version=latest
     response:
       body:
-        string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Beschrijf
-          welke persoonsgegevens het algoritme gebruikt en waarom","description":"Er
-          is een overzicht opgesteld welke persoonsgegevens mogen worden verwerkt en
-          om welke categorie persoonsgegevens het gaat. Het principe van dataminimalisatie
-          is toegepast, zodat het minimum aantal persoonsgegevens wordt verwerkt om
-          het beoogde doel te bereiken. ","explanation":"- Er is een overzicht opgesteld
-          welke persoonsgegevens mogen worden verwerkt mogen worden verwerkt.\n- Bij
-          de persoonsgegevens is aangegeven om wat voor categorie persoonsgegevens het
-          gaat.\n- Per kenmerk is toegelicht waarom deze noodzakelijk is om te verwerken
-          voor het ontwikkelen en gebruiken van het algoritme of AI-systeem.\n- Het
-          principe van dataminimalisatie is toegepast, wat betekent dat een keuze is
-          gemaakt of een persoonsgegevens al dan niet strikt noodzakelijk is om het
-          doel te bereiken of dat verwerking ervan achterwege kan blijven.\n- Voor [het
-          beschermen van deze persoonsgegevens](3-dat-05-pseudonimiseren-anonimiseren.md)
-          wordt per kenmerk aangegeven op welke manier deze kan worden beschermd (anonimiseren,
-          pseudonomiseren, aggregeren). \n- Een [DPIA](../instrumenten/DPIA.md) kan
-          worden gebruikt om bovenstaande activiteiten uit te voeren.\n  \n## Bijbehorende
-          vereiste(n)\n\n<!-- list_vereisten_on_maatregelen_page -->","urn":"urn:nl:ak:mtr:dat-03","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/maatregelen/3-dat-03-persoonsgegevens-beschrijven/index.html","subject":["privacy-en-gegevensbescherming"],"suggested_roles":["projectleider","ontwikkelaar"],"lifecycle":["dataverkenning-en-datapreparatie","ontwikkelen","verificatie-en-validatie"],"links":["urn:nl:ak:ver:avg-01","urn:nl:ak:ver:avg-04"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+        string: '{"detail":"invalid urn: urn:nl:ak:mtr:dat-03"}'
       headers:
         Connection:
           - keep-alive
         Content-Length:
-          - "2059"
+          - "46"
         Content-Type:
           - application/json
         Date:
-          - Fri, 15 Nov 2024 14:39:50 GMT
+          - Tue, 17 Dec 2024 13:25:34 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
-        code: 200
-        message: OK
+        code: 400
+        message: Bad Request
 version: 1

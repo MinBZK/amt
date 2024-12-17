@@ -9,7 +9,9 @@ class TypeEnum(Enum):
     AI_systeem = "AI-systeem"
     AI_systeem_voor_algemene_doeleinden = "AI-systeem voor algemene doeleinden"
     AI_model_voor_algemene_doeleinden = "AI-model voor algemene doeleinden"
-    algoritme = "algoritme"
+    geen_algoritme = "geen algoritme"
+    impactvol_algoritme = "impactvol algoritme"
+    niet_impactvol_algoritme = "niet-impactvol algoritme"
 
 
 class OpenSourceEnum(Enum):
@@ -17,10 +19,11 @@ class OpenSourceEnum(Enum):
     geen_open_source = "geen open-source"
 
 
-class RiskCategoryEnum(Enum):
+class RiskGroupEnum(Enum):
     geen_hoog_risico_AI = "geen hoog-risico AI"
     hoog_risico_AI = "hoog-risico AI"
     verboden_AI = "verboden AI"
+    uitzondering_van_toepassing = "uitzondering van toepassing"
 
 
 class SystemicRiskEnum(Enum):
@@ -28,9 +31,13 @@ class SystemicRiskEnum(Enum):
     geen_systeemrisico = "geen systeemrisico"
 
 
-class TransparencyObligation(Enum):
+class TransparencyObligationEnum(Enum):
     transparantieverplichting = "transparantieverplichting"
     geen_transparantieverplichting = "geen transparantieverplichting"
+
+
+class ConformityAssessmentBodyEnum(Enum):
+    beoordeling_door_derde_partij = "beoordeling door derde partij"
 
 
 class RoleEnum(Enum):
@@ -43,9 +50,10 @@ class RoleEnum(Enum):
 class RequirementAiActProfile(BaseModel):
     type: list[TypeEnum]
     open_source: list[OpenSourceEnum]
-    risk_category: list[RiskCategoryEnum]
+    risk_group: list[RiskGroupEnum]
     systemic_risk: list[SystemicRiskEnum]
-    transparency_obligations: list[TransparencyObligation]
+    transparency_obligations: list[TransparencyObligationEnum]
+    conformity_assessment_body: list[ConformityAssessmentBodyEnum]
     role: list[RoleEnum]
 
 

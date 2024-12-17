@@ -20,8 +20,8 @@ async def test_fetch_tasks_all():
 
     # then
     assert len(instrument_result) == 4
-    assert len(requirement_result) == 60
-    assert len(measure_result) == 70
+    assert len(requirement_result) == 61
+    assert len(measure_result) == 88
 
 
 @vcr.use_cassette("tests/fixtures/vcr_cassettes/test_fetch_task_with_urn.yml")  # type: ignore
@@ -32,7 +32,7 @@ async def test_fetch_task_with_urn():
     repository = TaskRegistryRepository(client)
     instrument_urn = "urn:nl:aivt:tr:iama:1.0"
     requirement_urn = "urn:nl:ak:ver:aia-08"
-    measure_urn = "urn:nl:ak:mtr:dat-03"
+    measure_urn = "urn:nl:ak:mtr:dat-02"
 
     # when
     instrument_result = await repository.fetch_tasks(TaskType.INSTRUMENTS, urns=instrument_urn)
