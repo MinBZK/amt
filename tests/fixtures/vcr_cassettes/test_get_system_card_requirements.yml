@@ -13,22 +13,34 @@ interactions:
         user-agent:
           - python-httpx/0.27.2
       method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:pba-04?version=latest
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:pba-02?version=latest
     response:
       body:
         string:
-          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Stel
-          vast welke betrokkenen ge\xEFnformeerd moeten worden en welke informatie zij
-          nodig hebben.\",\"description\":\"\",\"explanation\":\"\",\"urn\":\"urn:nl:ak:mtr:pba-04\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-29-informeer_betrokkenen/index.html\",\"subject\":[\"transparantie\"],\"suggested_roles\":[\"projectleider\",\"beleid-en-advies\"],\"lifecycle\":[\"ontwerp\",\"ontwikkelen\"],\"links\":[\"urn:nl:ak:ver:awb-01\",\"urn:nl:ak:ver:aia-08\",\"urn:nl:ak:ver:aia-28\"],\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Beschrijf
+          het doel van het algoritme","description":"Het doel en de eventuele subdoelen
+          van het algoritme moeten zo specifiek mogelijk zijn geformuleerd, en waar
+          mogelijk gekwantificeerd. \nMaak de consequenties van het algoritme specifiek
+          en zorg dat het doel van het algoritme formeel is vastgesteld en vastgelegd.
+          ","explanation":"- Het doel van de inzet van een algoritme dient zo concreet
+          en specifiek mogelijk gedefinieerd te worden. \nIndien er meerdere doelen
+          zijn, is het belangrijk om een zekere rangorde te maken: wat zijn de belangrijkste
+          doelen? En waarom?\nWelke doelen zijn subdoelen, waarvoor het minder belangrijk
+          is om deze te realiseren?\n\n- Indien mogelijk, dienen de doelstellingen gekwantificeerd
+          te worden (SMART). \n\n- Om te zorgen voor voldoende draagvlak voor de beoogde
+          doelen, is het noodzaak om [voldoende belanghebbenden te betrekken](1-pba-04-betrek-belanghebbenden.md).
+          \nHierbij kan het ook helpen om burgers te betrekken bij de totstandkoming
+          van de doelstellingen, bijvoorbeeld door middel van een burgerpanel of het
+          betrekken van belangengroepen. ","urn":"urn:nl:ak:mtr:pba-02","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/1-pba-02-formuleren-doelstelling/index.html","subject":["governance","transparantie"],"suggested_roles":["projectleider"],"lifecycle":["probleemanalyse"],"links":["urn:nl:ak:ver:awb-01"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
       headers:
         Connection:
           - keep-alive
         Content-Length:
-          - "861"
+          - "1763"
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:28 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -48,21 +60,305 @@ interactions:
         user-agent:
           - python-httpx/0.27.2
       method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-03?version=latest
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-01?version=latest
     response:
       body:
         string:
-          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Maak
-          een plan voor het omgaan met risico\u2019s\",\"description\":\"\",\"explanation\":\"\",\"urn\":\"urn:nl:ak:mtr:org-03\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/0-org-03-toepassen_risicobeheer/index.html\",\"subject\":[\"governance\"],\"suggested_roles\":[\"projectleider\",\"beleid-en-advies\"],\"lifecycle\":[\"organisatieverantwoordelijkheden\"],\"links\":[\"urn:nl:ak:ver:aia-03\",\"urn:nl:ak:ver:awb-01\"],\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Beschrijf
+          de rollen en verantwoordelijkheden voor het ontwikkelen en gebruiken van algoritmes","description":"","explanation":"","urn":"urn:nl:ak:mtr:owp-01","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-01-rollen-en-verantwoordelijkheden/index.html","subject":["governance"],"suggested_roles":["projectleider"],"lifecycle":["ontwerp","implementatie","monitoring-en-beheer"],"links":["urn:nl:ak:ver:avg-06","urn:nl:ak:ver:awb-01"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
       headers:
         Connection:
           - keep-alive
         Content-Length:
-          - "798"
+          - "851"
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:28 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-01?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Bepaal
+          of er genoeg experts beschikbaar zijn","description":"","explanation":"","urn":"urn:nl:ak:mtr:org-01","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/0-org-01-benodigde-expertise-en-capaciteit/index.html","subject":["governance"],"suggested_roles":["projectleider","beleid-en-advies"],"lifecycle":["organisatieverantwoordelijkheden"],"links":["urn:nl:ak:ver:awb-01","urn:nl:ak:ver:aia-21"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "809"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 17 Dec 2024 13:25:28 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-21?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Neem
+          het kunnen uitvoeren van een audit over de vereiste op in contractvoorwaarden
+          en de contractovereenkomst","description":"","explanation":"","urn":"urn:nl:ak:mtr:owp-21","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-21-uitvoeren-audit-voor-naleving-vereisten/index.html","subject":["publieke-inkoop"],"suggested_roles":["projectleider","beleid-en-advies"],"lifecycle":["ontwerp"],"links":["urn:nl:ak:ver:aia-02","urn:nl:ak:ver:aia-03","urn:nl:ak:ver:aia-04","urn:nl:ak:ver:aia-05","urn:nl:ak:ver:aia-06","urn:nl:ak:ver:aia-07","urn:nl:ak:ver:aia-08","urn:nl:ak:ver:aia-09","urn:nl:ak:ver:aia-10","urn:nl:ak:ver:aia-11","urn:nl:ak:ver:aia-12","urn:nl:ak:ver:aia-13","urn:nl:ak:ver:aia-14","urn:nl:ak:ver:aia-15","urn:nl:ak:ver:aia-16","urn:nl:ak:ver:aia-17","urn:nl:ak:ver:aia-18","urn:nl:ak:ver:aia-19","urn:nl:ak:ver:aia-20","urn:nl:ak:ver:aia-21","urn:nl:ak:ver:aia-28","urn:nl:ak:ver:aia-27","urn:nl:ak:ver:aia-30","urn:nl:ak:ver:aia-31","urn:nl:ak:ver:aia-32","urn:nl:ak:ver:aia-33","urn:nl:ak:ver:aia-34","urn:nl:ak:ver:aia-35","urn:nl:ak:ver:aia-36","urn:nl:ak:ver:aia-37","urn:nl:ak:ver:aia-38","urn:nl:ak:ver:aia-39","urn:nl:ak:ver:bzk-01","urn:nl:ak:ver:arc-01","urn:nl:ak:ver:aut-01","urn:nl:ak:ver:avg-01","urn:nl:ak:ver:avg-02","urn:nl:ak:ver:avg-03","urn:nl:ak:ver:avg-04","urn:nl:ak:ver:avg-05","urn:nl:ak:ver:avg-06","urn:nl:ak:ver:avg-07","urn:nl:ak:ver:avg-08","urn:nl:ak:ver:avg-09","urn:nl:ak:ver:avg-10","urn:nl:ak:ver:avg-11","urn:nl:ak:ver:avg-12","urn:nl:ak:ver:avg-13","urn:nl:ak:ver:awb-01","urn:nl:ak:ver:awb-02","urn:nl:ak:ver:bio-01","urn:nl:ak:ver:dat-01","urn:nl:ak:ver:grw-01","urn:nl:ak:ver:grw-02","urn:nl:ak:ver:woo-01"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "2079"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 17 Dec 2024 13:25:28 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-12?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Ontwerp
+          algoritmes zo eenvoudig mogelijk","description":"","explanation":"","urn":"urn:nl:ak:mtr:owp-12","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-12-eenvoudigere-algoritmes/index.html","subject":["duurzaamheid"],"suggested_roles":["ontwikkelaar"],"lifecycle":["ontwerp","ontwikkelen"],"links":[],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "721"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 17 Dec 2024 13:25:28 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:pba-01?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Beschrijf
+          het probleem dat het algoritme moet oplossen","description":"","explanation":"","urn":"urn:nl:ak:mtr:pba-01","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/1-pba-01-formuleren-probleemdefinitie/index.html","subject":["governance","transparantie"],"suggested_roles":["projectleider"],"lifecycle":["probleemanalyse"],"links":["urn:nl:ak:ver:awb-01"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "771"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 17 Dec 2024 13:25:28 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-19?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Cre\xEBer
+          ruimte om met een aanbieder samen te gaan werken om specifieke vereisten te
+          realiseren\",\"description\":\"\",\"explanation\":\"\",\"urn\":\"urn:nl:ak:mtr:owp-19\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-19-ruimte-voor-samenwerking-met-aanbieder/index.html\",\"subject\":[\"publieke-inkoop\"],\"suggested_roles\":[\"projectleider\"],\"lifecycle\":[\"ontwerp\",\"ontwikkelen\"],\"links\":[\"urn:nl:ak:ver:aia-02\",\"urn:nl:ak:ver:aia-03\",\"urn:nl:ak:ver:aia-04\",\"urn:nl:ak:ver:aia-05\",\"urn:nl:ak:ver:aia-06\",\"urn:nl:ak:ver:aia-07\",\"urn:nl:ak:ver:aia-08\",\"urn:nl:ak:ver:aia-09\",\"urn:nl:ak:ver:aia-10\",\"urn:nl:ak:ver:aia-11\",\"urn:nl:ak:ver:aia-12\",\"urn:nl:ak:ver:aia-13\",\"urn:nl:ak:ver:aia-14\",\"urn:nl:ak:ver:aia-15\",\"urn:nl:ak:ver:aia-16\",\"urn:nl:ak:ver:aia-17\",\"urn:nl:ak:ver:aia-18\",\"urn:nl:ak:ver:aia-19\",\"urn:nl:ak:ver:aia-20\",\"urn:nl:ak:ver:aia-21\",\"urn:nl:ak:ver:aia-28\",\"urn:nl:ak:ver:aia-27\",\"urn:nl:ak:ver:aia-30\",\"urn:nl:ak:ver:aia-31\",\"urn:nl:ak:ver:aia-32\",\"urn:nl:ak:ver:aia-33\",\"urn:nl:ak:ver:aia-34\",\"urn:nl:ak:ver:aia-35\",\"urn:nl:ak:ver:aia-36\",\"urn:nl:ak:ver:aia-37\",\"urn:nl:ak:ver:aia-38\",\"urn:nl:ak:ver:aia-39\",\"urn:nl:ak:ver:bzk-01\",\"urn:nl:ak:ver:arc-01\",\"urn:nl:ak:ver:aut-01\",\"urn:nl:ak:ver:avg-01\",\"urn:nl:ak:ver:avg-02\",\"urn:nl:ak:ver:avg-03\",\"urn:nl:ak:ver:avg-04\",\"urn:nl:ak:ver:avg-05\",\"urn:nl:ak:ver:avg-06\",\"urn:nl:ak:ver:avg-07\",\"urn:nl:ak:ver:avg-08\",\"urn:nl:ak:ver:avg-09\",\"urn:nl:ak:ver:avg-10\",\"urn:nl:ak:ver:avg-11\",\"urn:nl:ak:ver:avg-12\",\"urn:nl:ak:ver:avg-13\",\"urn:nl:ak:ver:awb-01\",\"urn:nl:ak:ver:awb-02\",\"urn:nl:ak:ver:bio-01\",\"urn:nl:ak:ver:dat-01\",\"urn:nl:ak:ver:grw-01\",\"urn:nl:ak:ver:grw-02\",\"urn:nl:ak:ver:woo-01\"],\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "2058"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 17 Dec 2024 13:25:28 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-13?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Maak
+          vereisten voor algoritmes onderdeel van algemene inkoopvoorwaarden en de contractovereenkomst.","description":"","explanation":"","urn":"urn:nl:ak:mtr:owp-13","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-13-vereisten-onderdeel-algemene-inkoopvoorwaarden-en-contractovereenkomst/index.html","subject":["publieke-inkoop","transparantie"],"suggested_roles":["projectleider","beleid-en-advies"],"lifecycle":["ontwerp"],"links":["urn:nl:ak:ver:aia-02","urn:nl:ak:ver:aia-03","urn:nl:ak:ver:aia-04","urn:nl:ak:ver:aia-05","urn:nl:ak:ver:aia-06","urn:nl:ak:ver:aia-07","urn:nl:ak:ver:aia-08","urn:nl:ak:ver:aia-09","urn:nl:ak:ver:aia-10","urn:nl:ak:ver:aia-11","urn:nl:ak:ver:aia-12","urn:nl:ak:ver:aia-13","urn:nl:ak:ver:aia-14","urn:nl:ak:ver:aia-15","urn:nl:ak:ver:aia-16","urn:nl:ak:ver:aia-17","urn:nl:ak:ver:aia-18","urn:nl:ak:ver:aia-19","urn:nl:ak:ver:aia-20","urn:nl:ak:ver:aia-21","urn:nl:ak:ver:aia-28","urn:nl:ak:ver:aia-27","urn:nl:ak:ver:aia-30","urn:nl:ak:ver:aia-31","urn:nl:ak:ver:aia-32","urn:nl:ak:ver:aia-33","urn:nl:ak:ver:aia-34","urn:nl:ak:ver:aia-35","urn:nl:ak:ver:aia-36","urn:nl:ak:ver:aia-37","urn:nl:ak:ver:aia-38","urn:nl:ak:ver:aia-39","urn:nl:ak:ver:bzk-01","urn:nl:ak:ver:arc-01","urn:nl:ak:ver:aut-01","urn:nl:ak:ver:avg-01","urn:nl:ak:ver:avg-02","urn:nl:ak:ver:avg-03","urn:nl:ak:ver:avg-04","urn:nl:ak:ver:avg-05","urn:nl:ak:ver:avg-06","urn:nl:ak:ver:avg-07","urn:nl:ak:ver:avg-08","urn:nl:ak:ver:avg-09","urn:nl:ak:ver:avg-10","urn:nl:ak:ver:avg-11","urn:nl:ak:ver:avg-12","urn:nl:ak:ver:avg-13","urn:nl:ak:ver:awb-01","urn:nl:ak:ver:awb-02","urn:nl:ak:ver:bio-01","urn:nl:ak:ver:dat-01","urn:nl:ak:ver:grw-01","urn:nl:ak:ver:grw-02","urn:nl:ak:ver:woo-01"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "2116"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 17 Dec 2024 13:25:28 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:pba-03?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Beschrijf
+          waarom een algoritme het probleem moet oplossen","description":"","explanation":"-
+          Bepaal waarom het gewenst of nodig is om een algoritme in te zetten, en of
+          er ook alternatieven zijn om het probleem op te lossen. \nDocumenteer de onderbouwing
+          waarom een algoritme een betere oplossing zou bieden dan een niet-geautomatiseerd
+          of niet-digitaal proces. \n\n- Maak een bewuste afweging of een algoritme
+          het juiste middel is om [het probleem](1-pba-01-formuleren-probleemdefinitie.md)
+          op doelmatige en doeltreffende wijze op te lossen, en documenteer deze afweging.\n\n-
+          Beoordeel of de gewenste oplossing is [toegestaan op grond van de AI-Verordening](aia-01-verboden-AI-praktijken.md).
+          ","urn":"urn:nl:ak:mtr:pba-03","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/1-pba-03-onderbouwen-gebruik-algoritme/index.html","subject":["governance","menselijke-controle"],"suggested_roles":["projectleider"],"lifecycle":["probleemanalyse"],"links":["urn:nl:ak:ver:aia-01","urn:nl:ak:ver:awb-01"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "1407"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 17 Dec 2024 13:25:28 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-04?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Beschrijf
+          welke techniek gebruikt wordt voor de beoogde toepassing","description":"","explanation":"
+          ## Bijbehorende vereiste(n) { data-search-exclude }\n??? expander \"Bekijk
+          alle vereisten\"\n    <!-- list_vereisten_on_maatregelen_page -->","urn":"urn:nl:ak:mtr:owp-04","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-04-gebruikte-techniek/index.html","subject":["technische-robuustheid-en-veiligheid"],"suggested_roles":["ontwikkelaar"],"lifecycle":["ontwerp"],"links":["urn:nl:ak:ver:awb-01","urn:nl:ak:ver:aia-06","urn:nl:ak:ver:aia-10"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "961"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 17 Dec 2024 13:25:28 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -99,557 +395,7 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-02?version=latest
-    response:
-      body:
-        string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Pas
-          vastgestelde beleidskaders toe","description":"","explanation":"","urn":"urn:nl:ak:mtr:org-02","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-31-toepassen_vastgestelde-beleidskaders/index.html","subject":["governance","transparantie"],"suggested_roles":["projectleider","beleid-en-advies"],"lifecycle":["organisatieverantwoordelijkheden"],"links":["urn:nl:ak:ver:awb-01","urn:nl:ak:ver:aia-11","urn:nl:ak:ver:aia-05","urn:nl:ak:ver:aia-03","urn:nl:ak:ver:bio-01","urn:nl:ak:ver:aia-19","urn:nl:ak:ver:aia-09"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "933"
-        Content-Type:
-          - application/json
-        Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-13?version=latest
-    response:
-      body:
-        string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Maak
-          vereisten voor algoritmes onderdeel van algemene inkoopvoorwaarden en de contractovereenkomst.","description":"","explanation":"","urn":"urn:nl:ak:mtr:owp-13","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-13-vereisten-onderdeel-algemene-inkoopvoorwaarden-en-contractovereenkomst/index.html","subject":["publieke-inkoop","transparantie"],"suggested_roles":["projectleider","beleid-en-advies"],"lifecycle":["ontwerp"],"links":["urn:nl:ak:ver:aia-02","urn:nl:ak:ver:aia-03","urn:nl:ak:ver:aia-04","urn:nl:ak:ver:aia-05","urn:nl:ak:ver:aia-06","urn:nl:ak:ver:aia-07","urn:nl:ak:ver:aia-08","urn:nl:ak:ver:aia-09","urn:nl:ak:ver:aia-10","urn:nl:ak:ver:aia-11","urn:nl:ak:ver:aia-12","urn:nl:ak:ver:aia-13","urn:nl:ak:ver:aia-14","urn:nl:ak:ver:aia-15","urn:nl:ak:ver:aia-16","urn:nl:ak:ver:aia-17","urn:nl:ak:ver:aia-18","urn:nl:ak:ver:aia-19","urn:nl:ak:ver:aia-20","urn:nl:ak:ver:aia-21","urn:nl:ak:ver:aia-28","urn:nl:ak:ver:aia-27","urn:nl:ak:ver:aia-30","urn:nl:ak:ver:aia-31","urn:nl:ak:ver:aia-32","urn:nl:ak:ver:aia-33","urn:nl:ak:ver:aia-34","urn:nl:ak:ver:aia-35","urn:nl:ak:ver:aia-36","urn:nl:ak:ver:aia-37","urn:nl:ak:ver:aia-38","urn:nl:ak:ver:aia-39","urn:nl:ak:ver:bzk-01","urn:nl:ak:ver:arc-01","urn:nl:ak:ver:aut-01","urn:nl:ak:ver:avg-01","urn:nl:ak:ver:avg-02","urn:nl:ak:ver:avg-03","urn:nl:ak:ver:avg-04","urn:nl:ak:ver:avg-05","urn:nl:ak:ver:avg-06","urn:nl:ak:ver:avg-07","urn:nl:ak:ver:avg-08","urn:nl:ak:ver:avg-09","urn:nl:ak:ver:avg-10","urn:nl:ak:ver:avg-11","urn:nl:ak:ver:avg-12","urn:nl:ak:ver:avg-13","urn:nl:ak:ver:awb-01","urn:nl:ak:ver:awb-02","urn:nl:ak:ver:bio-01","urn:nl:ak:ver:dat-01","urn:nl:ak:ver:grw-01","urn:nl:ak:ver:grw-02","urn:nl:ak:ver:woo-01"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "2116"
-        Content-Type:
-          - application/json
-        Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-09?version=latest
-    response:
-      body:
-        string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Een
-          model-verwerkersovereenkomst is onderdeel van de aanbesteding als persoonsgegevens
-          worden verwerkt","description":"Inventariseer of er mogelijk sprake is van
-          een algoritme dat een hoog risico kan inhouden voor de rechten en vrijheden
-          van natuurlijke personen of impactvol kan zijn voor hen en maak in voorkomend
-          geval in de model-verwerkersovereenkomst een uitdrukkelijke verwijzing naar
-          een concreet DPIA-document (met datum/kenmerk) of (indien op dat moment nog
-          in bezit of bekend bij de steller) een expliciet invulveld voor het duiden
-          van de betreffende DPIA, zodat die wordt genoemd ter completeren van de verwerkersovereenkomst
-          vooraf het overeenkomen/ondertekenen van die verwerkersovereenkomst.","explanation":"Een
-          model-verwerkersoverenkomst is veelal een verplicht onderdeel bij het publiek
-          inkopen van software waarbij persoonsgegevens worden verwerkt en bij de totstandkoming
-          van de overeenkomst.","urn":"urn:nl:ak:mtr:owp-09","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-09-model-verwerkersovereenkomst-onderdeel-aanbesteding/index.html","subject":["publieke-inkoop","privacy-en-gegevensbescherming"],"suggested_roles":["projectleider","beleid-en-advies"],"lifecycle":["ontwerp","monitoring-en-beheer"],"links":["urn:nl:ak:ver:avg-13"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "1674"
-        Content-Type:
-          - application/json
-        Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:ver-01?version=latest
-    response:
-      body:
-        string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Controleer
-          regelmatig of het algoritme werkt zoals het bedoeld is","description":"","explanation":"","urn":"urn:nl:ak:mtr:ver-01","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/5-ver-01-functioneren-in-lijn-met-doeleinden/index.html","subject":["technische-robuustheid-en-veiligheid","bias-en-non-discriminatie"],"suggested_roles":["projectleider","ontwikkelaar"],"lifecycle":["ontwikkelen","verificatie-en-validatie","monitoring-en-beheer"],"links":["urn:nl:ak:ver:awb-01","urn:nl:ak:ver:aia-10"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "911"
-        Content-Type:
-          - application/json
-        Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-12?version=latest
-    response:
-      body:
-        string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Ontwerp
-          algoritmes zo eenvoudig mogelijk","description":"","explanation":"","urn":"urn:nl:ak:mtr:owp-12","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-12-eenvoudigere-algoritmes/index.html","subject":["duurzaamheid"],"suggested_roles":["ontwikkelaar"],"lifecycle":["ontwerp","ontwikkelen"],"links":[],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "721"
-        Content-Type:
-          - application/json
-        Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:pba-03?version=latest
-    response:
-      body:
-        string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Beschrijf
-          waarom een algoritme het probleem moet oplossen","description":"","explanation":"-
-          Bepaal waarom het gewenst of nodig is om een algoritme in te zetten, en of
-          er ook alternatieven zijn om het probleem op te lossen. \nDocumenteer de onderbouwing
-          waarom een algoritme een betere oplossing zou bieden dan een niet-geautomatiseerd
-          of niet-digitaal proces. \n\n- Maak een bewuste afweging of een algoritme
-          het juiste middel is om [het probleem](1-pba-01-formuleren-probleemdefinitie.md)
-          op doelmatige en doeltreffende wijze op te lossen, en documenteer deze afweging.
-          ","urn":"urn:nl:ak:mtr:pba-03","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/1-pba-03-onderbouwen-gebruik-algoritme/index.html","subject":["governance","menselijke-controle"],"suggested_roles":["projectleider"],"lifecycle":["probleemanalyse"],"links":["urn:nl:ak:ver:awb-01"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "1262"
-        Content-Type:
-          - application/json
-        Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-04?version=latest
-    response:
-      body:
-        string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Stel
-          beleid op voor een verantwoorde inzet van algoritmes binnen de organisatie.","description":"Stel
-          beleid op voor een verantwoorde inzet van algoritmes binnen de organisatie.
-          ","explanation":"","urn":"urn:nl:ak:mtr:org-04","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/0-org-02-beleid_opstellen_inzet_algoritmes/index.html","subject":["governance","transparantie"],"suggested_roles":["beleid-en-advies"],"lifecycle":["organisatieverantwoordelijkheden"],"links":["urn:nl:ak:ver:awb-01"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "903"
-        Content-Type:
-          - application/json
-        Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-01?version=latest
-    response:
-      body:
-        string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Bepaal
-          of er genoeg experts beschikbaar zijn","description":"","explanation":"","urn":"urn:nl:ak:mtr:org-01","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/0-org-01-benodigde-expertise-en-capaciteit/index.html","subject":["governance"],"suggested_roles":["projectleider","beleid-en-advies"],"lifecycle":["organisatieverantwoordelijkheden"],"links":["urn:nl:ak:ver:awb-01","urn:nl:ak:ver:aia-21"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "809"
-        Content-Type:
-          - application/json
-        Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-01?version=latest
-    response:
-      body:
-        string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Maak
-          een openbaar besluit over de inzet van het algoritme","description":"","explanation":"","urn":"urn:nl:ak:mtr:imp-01","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/6-imp-09-politiek-bestuurlijk-besluit/index.html","subject":["governance","transparantie"],"suggested_roles":["projectleider"],"lifecycle":["organisatieverantwoordelijkheden","implementatie"],"links":["urn:nl:ak:ver:awb-01","urn:nl:ak:ver:aia-08","urn:nl:ak:ver:awb-02","urn:nl:ak:ver:aia-21","urn:nl:ak:ver:aia-22"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "899"
-        Content-Type:
-          - application/json
-        Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-01?version=latest
-    response:
-      body:
-        string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Beschrijf
-          de rollen en verantwoordelijkheden voor het ontwikkelen en gebruiken van algoritmes","description":"","explanation":"","urn":"urn:nl:ak:mtr:owp-01","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-01-rollen-en-verantwoordelijkheden/index.html","subject":["governance"],"suggested_roles":["projectleider"],"lifecycle":["ontwerp","implementatie","monitoring-en-beheer"],"links":["urn:nl:ak:ver:avg-06","urn:nl:ak:ver:awb-01"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "851"
-        Content-Type:
-          - application/json
-        Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:pba-01?version=latest
-    response:
-      body:
-        string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Beschrijf
-          het probleem dat het algoritme moet oplossen","description":"","explanation":"","urn":"urn:nl:ak:mtr:pba-01","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/1-pba-01-formuleren-probleemdefinitie/index.html","subject":["governance","transparantie"],"suggested_roles":["projectleider"],"lifecycle":["probleemanalyse"],"links":["urn:nl:ak:ver:awb-01"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "771"
-        Content-Type:
-          - application/json
-        Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-10?version=latest
-    response:
-      body:
-        string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Maak
-          een Project Startarchitectuur (PSA) voor de ontwikkeling of inkoop van algoritmes","description":"Voer
-          een Project Startarchitectuur (PSA) uit als algoritmes worden ontwikkeld of
-          ingekocht.","explanation":"- Een Project Startarchitectuur (PSA) is een hulpmiddel
-          dat bij een project wordt ingezet om veranderingen van A naar Beter te faciliteren.\n-
-          De PSA richt zich daarbij op de kaders die op een project van toepassing zijn
-          en wat de oplossing bijdraagt aan het realiseren van de gewenste, toekomstige
-          architectuur, wat de implicaties zullen zijn voor bestaande voorzieningen
-          en waar het project zal afwijken van bestaande beelden.\n- Met de PSA wordt
-          een concreet en doelgericht ICT-architectuurkader opgesteld, waarbinnen het
-          project moet worden uitgevoerd. \n- De PSA maakt concreet wat architectuur
-          voor een project betekent.\n- Door een PSA uit te voeren ontstaan inzichten
-          hoe het betreffende algoritme zo optimaal mogelijk onderdeel kan worden gemaakt
-          van het bestaande applicatielandschap, waarmee bijvoorbeeld kan worden voorkomen
-          dat het algoritme of AI-systeem na verloop van tijd geen input meer kan ontvangen
-          door onverwachte wijzigingen in systemen.\n- Onderwerpen als privacy, informatiebeheer
-          en beheer worden hierin ook globaal meegenomen. \n  \n## Bijbehorende vereiste(n)
-          { data-search-exclude }\n??? expander \"Bekijk alle vereisten\"\n    <!--
-          list_vereisten_on_maatregelen_page -->","urn":"urn:nl:ak:mtr:owp-10","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-10-projectstartarchitectuur/index.html","subject":["technische-robuustheid-en-veiligheid"],"suggested_roles":["projectleider","beleid-en-advies"],"lifecycle":["ontwerp","ontwikkelen","verificatie-en-validatie","implementatie"],"links":["urn:nl:ak:ver:aia-10","urn:nl:ak:ver:awb-01","urn:nl:ak:ver:avg-11"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "2214"
-        Content-Type:
-          - application/json
-        Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-04?version=latest
-    response:
-      body:
-        string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Publiceer
-          impactvolle algoritmes en hoog-risico-AI-systemen in het Algoritmeregister","description":"Publiceer
-          het algoritme  in het [Nederlandse Algoritmeregister](../hulpmiddelen/algoritmeregister.md).  ","explanation":"","urn":"urn:nl:ak:mtr:imp-04","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/6-imp-04-publiceren-algoritmeregister/index.html","subject":["transparantie"],"suggested_roles":["projectleider","beleid-en-advies"],"lifecycle":["implementatie","monitoring-en-beheer"],"links":["urn:nl:ak:ver:bzk-01","urn:nl:ak:ver:aia-08","urn:nl:ak:ver:avg-07","urn:nl:ak:ver:awb-01"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "1001"
-        Content-Type:
-          - application/json
-        Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:pba-05?version=latest
-    response:
-      body:
-        string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Beschrijf
-          de wettelijke grondslag voor de inzet van het algoritme","description":"","explanation":"","urn":"urn:nl:ak:mtr:pba-05","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/1-pba-05-wettelijke-grondslag/index.html","subject":["governance","transparantie"],"suggested_roles":["jurist"],"lifecycle":["probleemanalyse"],"links":["urn:nl:ak:ver:awb-01","urn:nl:ak:ver:avg-01"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "790"
-        Content-Type:
-          - application/json
-        Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-04?version=latest
-    response:
-      body:
-        string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Beschrijf
-          welke techniek gebruikt wordt voor de beoogde toepassing","description":"","explanation":"
-          ## Bijbehorende vereiste(n) { data-search-exclude }\n??? expander \"Bekijk
-          alle vereisten\"\n    <!-- list_vereisten_on_maatregelen_page -->","urn":"urn:nl:ak:mtr:owp-04","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-04-gebruikte-techniek/index.html","subject":["technische-robuustheid-en-veiligheid"],"suggested_roles":["ontwikkelaar"],"lifecycle":["ontwerp"],"links":["urn:nl:ak:ver:awb-01","urn:nl:ak:ver:aia-06","urn:nl:ak:ver:aia-10"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "961"
-        Content-Type:
-          - application/json
-        Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:28 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -673,53 +419,17 @@ interactions:
     response:
       body:
         string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Voer
-          voorafgaand aan een project een data beschikbaarheid, kwaliteit- en toegankelijkheidsanalayse
-          uit.","description":"","explanation":"","urn":"urn:nl:ak:mtr:owp-11","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-11-data-beschikbaarheid/index.html","subject":["publieke-inkoop","data"],"suggested_roles":["projectleider","beleid-en-advies"],"lifecycle":["ontwerp"],"links":["urn:nl:ak:ver:aia-05"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Koop
+          duurzaam algoritmes in","description":"","explanation":"","urn":"urn:nl:ak:mtr:owp-11","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-11-duurzaam-inkopen/index.html","subject":["publieke-inkoop","duurzaamheid"],"suggested_roles":["projectleider","beleid-en-advies"],"lifecycle":["ontwerp"],"links":["urn:nl:ak:ver:awb-01"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
       headers:
         Connection:
           - keep-alive
         Content-Length:
-          - "819"
+          - "747"
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:ver-03?version=latest
-    response:
-      body:
-        string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Controleer
-          regelmatig of het algoritme voldoet aan alle wetten en regels en het eigen
-          beleid","description":"","explanation":"","urn":"urn:nl:ak:mtr:ver-03","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/5-ver-03-vertaling-wetgeving-naar-systeem/index.html","subject":["governance","transparantie"],"suggested_roles":["jurist"],"lifecycle":["verificatie-en-validatie"],"links":["urn:nl:ak:ver:awb-01","urn:nl:ak:ver:aia-08","urn:nl:ak:ver:awb-02","urn:nl:ak:ver:aia-05"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "884"
-        Content-Type:
-          - application/json
-        Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:28 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -781,7 +491,7 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:28 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -815,7 +525,7 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:28 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -835,69 +545,21 @@ interactions:
         user-agent:
           - python-httpx/0.27.2
       method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:pba-02?version=latest
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-02?version=latest
     response:
       body:
         string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Beschrijf
-          het doel van het algoritme","description":"Het doel en de eventuele subdoelen
-          van het algoritme moeten zo specifiek mogelijk zijn geformuleerd, en waar
-          mogelijk gekwantificeerd. \nMaak de consequenties van het algoritme specifiek
-          en zorg dat het doel van het algoritme formeel is vastgesteld en vastgelegd.
-          ","explanation":"- Het doel van de inzet van een algoritme dient zo concreet
-          en specifiek mogelijk gedefinieerd te worden. \nIndien er meerdere doelen
-          zijn, is het belangrijk om een zekere rangorde te maken: wat zijn de belangrijkste
-          doelen? En waarom?\nWelke doelen zijn subdoelen, waarvoor het minder belangrijk
-          is om deze te realiseren?\n\n- Indien mogelijk, dienen de doelstellingen gekwantificeerd
-          te worden (SMART). \n\n- Om te zorgen voor voldoende draagvlak voor de beoogde
-          doelen, is het noodzaak om [voldoende belanghebbenden te betrekken](1-pba-04-betrek-belanghebbenden.md).
-          \nHierbij kan het ook helpen om burgers te betrekken bij de totstandkoming
-          van de doelstellingen, bijvoorbeeld door middel van een burgerpanel of het
-          betrekken van belangengroepen. ","urn":"urn:nl:ak:mtr:pba-02","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/1-pba-02-formuleren-doelstelling/index.html","subject":["governance","transparantie"],"suggested_roles":["projectleider"],"lifecycle":["probleemanalyse"],"links":["urn:nl:ak:ver:awb-01"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Pas
+          vastgestelde beleidskaders toe","description":"","explanation":"","urn":"urn:nl:ak:mtr:org-02","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-31-toepassen_vastgestelde-beleidskaders/index.html","subject":["governance","transparantie"],"suggested_roles":["projectleider","beleid-en-advies"],"lifecycle":["organisatieverantwoordelijkheden"],"links":["urn:nl:ak:ver:awb-01","urn:nl:ak:ver:aia-11","urn:nl:ak:ver:aia-05","urn:nl:ak:ver:aia-03","urn:nl:ak:ver:bio-01","urn:nl:ak:ver:aia-19","urn:nl:ak:ver:aia-09"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
       headers:
         Connection:
           - keep-alive
         Content-Length:
-          - "1763"
+          - "933"
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-19?version=latest
-    response:
-      body:
-        string:
-          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Cre\xEBer
-          ruimte om met een aanbieder samen te gaan werken om specifieke vereisten te
-          realiseren\",\"description\":\"\",\"explanation\":\"\",\"urn\":\"urn:nl:ak:mtr:owp-19\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-19-ruimte-voor-samenwerking-met-aanbieder/index.html\",\"subject\":[\"publieke-inkoop\"],\"suggested_roles\":[\"projectleider\"],\"lifecycle\":[\"ontwerp\",\"ontwikkelen\"],\"links\":[\"urn:nl:ak:ver:aia-02\",\"urn:nl:ak:ver:aia-03\",\"urn:nl:ak:ver:aia-04\",\"urn:nl:ak:ver:aia-05\",\"urn:nl:ak:ver:aia-06\",\"urn:nl:ak:ver:aia-07\",\"urn:nl:ak:ver:aia-08\",\"urn:nl:ak:ver:aia-09\",\"urn:nl:ak:ver:aia-10\",\"urn:nl:ak:ver:aia-11\",\"urn:nl:ak:ver:aia-12\",\"urn:nl:ak:ver:aia-13\",\"urn:nl:ak:ver:aia-14\",\"urn:nl:ak:ver:aia-15\",\"urn:nl:ak:ver:aia-16\",\"urn:nl:ak:ver:aia-17\",\"urn:nl:ak:ver:aia-18\",\"urn:nl:ak:ver:aia-19\",\"urn:nl:ak:ver:aia-20\",\"urn:nl:ak:ver:aia-21\",\"urn:nl:ak:ver:aia-28\",\"urn:nl:ak:ver:aia-27\",\"urn:nl:ak:ver:aia-30\",\"urn:nl:ak:ver:aia-31\",\"urn:nl:ak:ver:aia-32\",\"urn:nl:ak:ver:aia-33\",\"urn:nl:ak:ver:aia-34\",\"urn:nl:ak:ver:aia-35\",\"urn:nl:ak:ver:aia-36\",\"urn:nl:ak:ver:aia-37\",\"urn:nl:ak:ver:aia-38\",\"urn:nl:ak:ver:aia-39\",\"urn:nl:ak:ver:bzk-01\",\"urn:nl:ak:ver:arc-01\",\"urn:nl:ak:ver:aut-01\",\"urn:nl:ak:ver:avg-01\",\"urn:nl:ak:ver:avg-02\",\"urn:nl:ak:ver:avg-03\",\"urn:nl:ak:ver:avg-04\",\"urn:nl:ak:ver:avg-05\",\"urn:nl:ak:ver:avg-06\",\"urn:nl:ak:ver:avg-07\",\"urn:nl:ak:ver:avg-08\",\"urn:nl:ak:ver:avg-09\",\"urn:nl:ak:ver:avg-10\",\"urn:nl:ak:ver:avg-11\",\"urn:nl:ak:ver:avg-12\",\"urn:nl:ak:ver:avg-13\",\"urn:nl:ak:ver:awb-01\",\"urn:nl:ak:ver:awb-02\",\"urn:nl:ak:ver:bio-01\",\"urn:nl:ak:ver:dat-01\",\"urn:nl:ak:ver:grw-01\",\"urn:nl:ak:ver:grw-02\",\"urn:nl:ak:ver:woo-01\"],\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "2058"
-        Content-Type:
-          - application/json
-        Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:28 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -921,29 +583,227 @@ interactions:
     response:
       body:
         string:
-          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Beschrijf
-          voor welk doel het algoritme persoonsgegevens gebruikt en waarom dit mag\",\"description\":\"Het
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Beschrijf
+          voor welk doel het algoritme persoonsgegevens gebruikt en waarom dit mag","description":"Het
           doel voor het verwerken van persoonsgegevens met een algoritme is welbepaald
-          en omschreven.\",\"explanation\":\"- Persoonsgegevens mogen alleen worden
-          verwerkt voor een \u2018welbepaald, uitdrukkelijk omschreven en gerechtvaardigd\u2019
-          doel;\\n- De  wettelijke grondslag / wettelijke taak voor de verwerking van
-          de persoonsgegevens moet zijn beschreven, bijvoorbeeld in een DPIA;\\n- De
-          verwerking van persoonsgevens voor het ontwikkelen en gebruiken van het algoritme
-          moet verenigbaar met het oorspronkelijke verwerkingsdoel (doelbinding);\\n-
-          Eventuele verdere (subsidiaire) verwerkingen, zoals het verwerken van persoonsgegevens
-          voor een onderzoek naar onbewuste vooringenomenheid, moeten uitdrukkelijk
-          worden omschreven.\\n  \\n## Bijbehorende vereiste(n) { data-search-exclude
-          }\\n??? expander \\\"Bekijk alle vereisten\\\"\\n    <!-- list_vereisten_on_maatregelen_page
-          -->\\n\",\"urn\":\"urn:nl:ak:mtr:owp-03\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-03-doel-verwerken-persoonsgegevens/index.html\",\"subject\":[\"privacy-en-gegevensbescherming\"],\"suggested_roles\":[\"projectleider\",\"jurist\"],\"lifecycle\":[\"ontwerp\",\"dataverkenning-en-datapreparatie\",\"ontwikkelen\",\"verificatie-en-validatie\",\"implementatie\"],\"links\":[\"urn:nl:ak:ver:avg-01\",\"urn:nl:ak:ver:awb-01\"],\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+          en omschreven.","explanation":"","urn":"urn:nl:ak:mtr:owp-03","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-03-doel-verwerken-persoonsgegevens/index.html","subject":["privacy-en-gegevensbescherming"],"suggested_roles":["projectleider","jurist"],"lifecycle":["ontwerp","dataverkenning-en-datapreparatie","ontwikkelen","verificatie-en-validatie","implementatie"],"links":["urn:nl:ak:ver:avg-01","urn:nl:ak:ver:awb-01"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
       headers:
         Connection:
           - keep-alive
         Content-Length:
-          - "1769"
+          - "1017"
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:28 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-04?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Stel
+          beleid op voor een verantwoorde inzet van algoritmes binnen de organisatie.","description":"Stel
+          beleid op voor een verantwoorde inzet van algoritmes binnen de organisatie.
+          ","explanation":"","urn":"urn:nl:ak:mtr:org-04","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/0-org-02-beleid_opstellen_inzet_algoritmes/index.html","subject":["governance","transparantie"],"suggested_roles":["beleid-en-advies"],"lifecycle":["organisatieverantwoordelijkheden"],"links":["urn:nl:ak:ver:awb-01"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "903"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 17 Dec 2024 13:25:28 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-03?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Maak
+          een plan voor het omgaan met risico\u2019s\",\"description\":\"\",\"explanation\":\"\",\"urn\":\"urn:nl:ak:mtr:org-03\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/0-org-03-toepassen_risicobeheer/index.html\",\"subject\":[\"governance\"],\"suggested_roles\":[\"projectleider\",\"beleid-en-advies\"],\"lifecycle\":[\"organisatieverantwoordelijkheden\"],\"links\":[\"urn:nl:ak:ver:aia-03\",\"urn:nl:ak:ver:awb-01\"],\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "798"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 17 Dec 2024 13:25:28 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:ver-03?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Controleer
+          regelmatig of het algoritme voldoet aan alle wetten en regels en het eigen
+          beleid","description":"","explanation":"","urn":"urn:nl:ak:mtr:ver-03","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/5-ver-03-vertaling-wetgeving-naar-systeem/index.html","subject":["governance","transparantie"],"suggested_roles":["jurist"],"lifecycle":["verificatie-en-validatie"],"links":["urn:nl:ak:ver:awb-01","urn:nl:ak:ver:aia-08","urn:nl:ak:ver:awb-02","urn:nl:ak:ver:aia-05"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "884"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 17 Dec 2024 13:25:28 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:ver-01?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Controleer
+          regelmatig of het algoritme werkt zoals het bedoeld is","description":"","explanation":"","urn":"urn:nl:ak:mtr:ver-01","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/5-ver-01-functioneren-in-lijn-met-doeleinden/index.html","subject":["technische-robuustheid-en-veiligheid","bias-en-non-discriminatie"],"suggested_roles":["projectleider","ontwikkelaar"],"lifecycle":["ontwikkelen","verificatie-en-validatie","monitoring-en-beheer"],"links":["urn:nl:ak:ver:awb-01","urn:nl:ak:ver:aia-10"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "911"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 17 Dec 2024 13:25:28 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-01?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Maak
+          een openbaar besluit over de inzet van het algoritme","description":"","explanation":"","urn":"urn:nl:ak:mtr:imp-01","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/6-imp-09-politiek-bestuurlijk-besluit/index.html","subject":["governance","transparantie"],"suggested_roles":["projectleider"],"lifecycle":["organisatieverantwoordelijkheden","implementatie"],"links":["urn:nl:ak:ver:awb-01","urn:nl:ak:ver:aia-08","urn:nl:ak:ver:awb-02","urn:nl:ak:ver:aia-21","urn:nl:ak:ver:aia-22"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "899"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 17 Dec 2024 13:25:28 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-10?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Stel
+          een protocol vast voor de situatie dat er (een vermoeden van) discriminatie
+          door een algoritme is geconstateerd en pas dit wanneer nodig toe.","description":"","explanation":"","urn":"urn:nl:ak:mtr:imp-10","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/0-org-15-discriminatieprotocol/index.html","subject":["bias-en-non-discriminatie"],"suggested_roles":["projectleider","beleid-en-advies"],"lifecycle":["organisatieverantwoordelijkheden","implementatie"],"links":["urn:nl:ak:ver:grw-02"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "907"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 17 Dec 2024 13:25:28 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -977,7 +837,7 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:28 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -997,22 +857,22 @@ interactions:
         user-agent:
           - python-httpx/0.27.2
       method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-21?version=latest
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-04?version=latest
     response:
       body:
         string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Neem
-          het kunnen uitvoeren van een audit over de vereiste op in contractvoorwaarden
-          en de contractovereenkomst","description":"","explanation":"","urn":"urn:nl:ak:mtr:owp-21","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-21-uitvoeren-audit-voor-naleving-vereisten/index.html","subject":["publieke-inkoop"],"suggested_roles":["projectleider","beleid-en-advies"],"lifecycle":["ontwerp"],"links":["urn:nl:ak:ver:aia-02","urn:nl:ak:ver:aia-03","urn:nl:ak:ver:aia-04","urn:nl:ak:ver:aia-05","urn:nl:ak:ver:aia-06","urn:nl:ak:ver:aia-07","urn:nl:ak:ver:aia-08","urn:nl:ak:ver:aia-09","urn:nl:ak:ver:aia-10","urn:nl:ak:ver:aia-11","urn:nl:ak:ver:aia-12","urn:nl:ak:ver:aia-13","urn:nl:ak:ver:aia-14","urn:nl:ak:ver:aia-15","urn:nl:ak:ver:aia-16","urn:nl:ak:ver:aia-17","urn:nl:ak:ver:aia-18","urn:nl:ak:ver:aia-19","urn:nl:ak:ver:aia-20","urn:nl:ak:ver:aia-21","urn:nl:ak:ver:aia-28","urn:nl:ak:ver:aia-27","urn:nl:ak:ver:aia-30","urn:nl:ak:ver:aia-31","urn:nl:ak:ver:aia-32","urn:nl:ak:ver:aia-33","urn:nl:ak:ver:aia-34","urn:nl:ak:ver:aia-35","urn:nl:ak:ver:aia-36","urn:nl:ak:ver:aia-37","urn:nl:ak:ver:aia-38","urn:nl:ak:ver:aia-39","urn:nl:ak:ver:bzk-01","urn:nl:ak:ver:arc-01","urn:nl:ak:ver:aut-01","urn:nl:ak:ver:avg-01","urn:nl:ak:ver:avg-02","urn:nl:ak:ver:avg-03","urn:nl:ak:ver:avg-04","urn:nl:ak:ver:avg-05","urn:nl:ak:ver:avg-06","urn:nl:ak:ver:avg-07","urn:nl:ak:ver:avg-08","urn:nl:ak:ver:avg-09","urn:nl:ak:ver:avg-10","urn:nl:ak:ver:avg-11","urn:nl:ak:ver:avg-12","urn:nl:ak:ver:avg-13","urn:nl:ak:ver:awb-01","urn:nl:ak:ver:awb-02","urn:nl:ak:ver:bio-01","urn:nl:ak:ver:dat-01","urn:nl:ak:ver:grw-01","urn:nl:ak:ver:grw-02","urn:nl:ak:ver:woo-01"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Publiceer
+          impactvolle algoritmes en hoog-risico-AI-systemen in het Algoritmeregister","description":"Publiceer
+          het algoritme  in het [Nederlandse Algoritmeregister](../hulpmiddelen/algoritmeregister.md).  ","explanation":"","urn":"urn:nl:ak:mtr:imp-04","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/6-imp-04-publiceren-algoritmeregister/index.html","subject":["transparantie"],"suggested_roles":["projectleider","beleid-en-advies"],"lifecycle":["implementatie","monitoring-en-beheer"],"links":["urn:nl:ak:ver:bzk-01","urn:nl:ak:ver:aia-08","urn:nl:ak:ver:avg-07","urn:nl:ak:ver:awb-01"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
       headers:
         Connection:
           - keep-alive
         Content-Length:
-          - "2079"
+          - "1001"
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:28 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -1032,21 +892,152 @@ interactions:
         user-agent:
           - python-httpx/0.27.2
       method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-26?version=latest
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:pba-04?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Stel
+          vast welke betrokkenen ge\xEFnformeerd moeten worden en welke informatie zij
+          nodig hebben.\",\"description\":\"\",\"explanation\":\"\",\"urn\":\"urn:nl:ak:mtr:pba-04\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-29-informeer_betrokkenen/index.html\",\"subject\":[\"transparantie\"],\"suggested_roles\":[\"projectleider\",\"beleid-en-advies\"],\"lifecycle\":[\"ontwerp\",\"ontwikkelen\"],\"links\":[\"urn:nl:ak:ver:awb-01\",\"urn:nl:ak:ver:aia-08\",\"urn:nl:ak:ver:aia-28\"],\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "861"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 17 Dec 2024 13:25:28 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:pba-05?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Beschrijf
+          de wettelijke grondslag voor de inzet van het algoritme","description":"","explanation":"","urn":"urn:nl:ak:mtr:pba-05","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/1-pba-05-wettelijke-grondslag/index.html","subject":["governance","transparantie"],"suggested_roles":["jurist"],"lifecycle":["probleemanalyse"],"links":["urn:nl:ak:ver:awb-01","urn:nl:ak:ver:avg-01"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "790"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 17 Dec 2024 13:25:28 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-10?version=latest
     response:
       body:
         string:
           '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Maak
-          vereisten voor algoritmes onderdeel van de Service Level Agreement","description":"","explanation":"","urn":"urn:nl:ak:mtr:owp-26","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-26-maak-vereisten-onderdeel-van-service-level-agreement/index.html","subject":["publieke-inkoop"],"suggested_roles":["projectleider","beleid-en-advies","ontwikkelaar"],"lifecycle":["ontwerp"],"links":["urn:nl:ak:ver:bio-01","urn:nl:ak:ver:avg-12","urn:nl:ak:ver:aia-37","urn:nl:ak:ver:aia-07","urn:nl:ak:ver:aia-01","urn:nl:ak:ver:aia-18","urn:nl:ak:ver:aia-11","urn:nl:ak:ver:aia-05","urn:nl:ak:ver:aia-36","urn:nl:ak:ver:aia-03","urn:nl:ak:ver:aia-09","urn:nl:ak:ver:avg-07","urn:nl:ak:ver:aia-03","urn:nl:ak:ver:aia-19","urn:nl:ak:ver:aia-20","urn:nl:ak:ver:woo-01"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+          een Project Startarchitectuur (PSA) voor de ontwikkeling of inkoop van algoritmes","description":"Voer
+          een Project Startarchitectuur (PSA) uit als algoritmes worden ontwikkeld of
+          ingekocht.","explanation":"- Een Project Startarchitectuur (PSA) is een hulpmiddel
+          dat bij een project wordt ingezet om veranderingen van A naar Beter te faciliteren.\n-
+          De PSA richt zich daarbij op de kaders die op een project van toepassing zijn
+          en wat de oplossing bijdraagt aan het realiseren van de gewenste, toekomstige
+          architectuur, wat de implicaties zullen zijn voor bestaande voorzieningen
+          en waar het project zal afwijken van bestaande beelden.\n- Met de PSA wordt
+          een concreet en doelgericht ICT-architectuurkader opgesteld, waarbinnen het
+          project moet worden uitgevoerd. \n- De PSA maakt concreet wat architectuur
+          voor een project betekent.\n- Door een PSA uit te voeren ontstaan inzichten
+          hoe het betreffende algoritme zo optimaal mogelijk onderdeel kan worden gemaakt
+          van het bestaande applicatielandschap, waarmee bijvoorbeeld kan worden voorkomen
+          dat het algoritme of AI-systeem na verloop van tijd geen input meer kan ontvangen
+          door onverwachte wijzigingen in systemen.\n- Onderwerpen als privacy, informatiebeheer
+          en beheer worden hierin ook globaal meegenomen. \n  \n## Bijbehorende vereiste(n)
+          { data-search-exclude }\n??? expander \"Bekijk alle vereisten\"\n    <!--
+          list_vereisten_on_maatregelen_page -->","urn":"urn:nl:ak:mtr:owp-10","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-10-projectstartarchitectuur/index.html","subject":["technische-robuustheid-en-veiligheid"],"suggested_roles":["projectleider","beleid-en-advies"],"lifecycle":["ontwerp","ontwikkelen","verificatie-en-validatie","implementatie"],"links":["urn:nl:ak:ver:aia-10","urn:nl:ak:ver:awb-01","urn:nl:ak:ver:avg-11"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
       headers:
         Connection:
           - keep-alive
         Content-Length:
-          - "1172"
+          - "2214"
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:28 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-09?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Een
+          model-verwerkersovereenkomst is onderdeel van de aanbesteding als persoonsgegevens
+          worden verwerkt","description":"Inventariseer of er mogelijk sprake is van
+          een algoritme dat een hoog risico kan inhouden voor de rechten en vrijheden
+          van natuurlijke personen of impactvol kan zijn voor hen en maak in voorkomend
+          geval in de model-verwerkersovereenkomst een uitdrukkelijke verwijzing naar
+          een concreet DPIA-document (met datum/kenmerk) of (indien op dat moment nog
+          in bezit of bekend bij de steller) een expliciet invulveld voor het duiden
+          van de betreffende DPIA, zodat die wordt genoemd ter completeren van de verwerkersovereenkomst
+          vooraf het overeenkomen/ondertekenen van die verwerkersovereenkomst.","explanation":"Een
+          model-verwerkersoverenkomst is veelal een verplicht onderdeel bij het publiek
+          inkopen van software waarbij persoonsgegevens worden verwerkt en bij de totstandkoming
+          van de overeenkomst.","urn":"urn:nl:ak:mtr:owp-09","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-09-model-verwerkersovereenkomst-onderdeel-aanbesteding/index.html","subject":["publieke-inkoop","privacy-en-gegevensbescherming"],"suggested_roles":["projectleider","beleid-en-advies"],"lifecycle":["ontwerp","monitoring-en-beheer"],"links":["urn:nl:ak:ver:avg-13"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "1674"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 17 Dec 2024 13:25:28 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -1080,7 +1071,7 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:28 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -1100,58 +1091,21 @@ interactions:
         user-agent:
           - python-httpx/0.27.2
       method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-02?version=latest
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-26?version=latest
     response:
       body:
         string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Beschrijf
-          welke data gebruikt wordt voor de beoogde toepassing","description":"","explanation":"
-          \n## Bijbehorende vereiste(n) { data-search-exclude }\n??? expander \"Bekijk
-          alle vereisten\"\n    <!-- list_vereisten_on_maatregelen_page -->","urn":"urn:nl:ak:mtr:owp-02","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-02-gebruikte-data/index.html","subject":["data"],"suggested_roles":["ontwikkelaar","beleid-en-advies"],"lifecycle":["ontwerp","dataverkenning-en-datapreparatie"],"links":["urn:nl:ak:ver:aia-05"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Maak
+          vereisten voor algoritmes onderdeel van de Service Level Agreement","description":"","explanation":"","urn":"urn:nl:ak:mtr:owp-26","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-26-maak-vereisten-onderdeel-van-service-level-agreement/index.html","subject":["publieke-inkoop"],"suggested_roles":["projectleider","beleid-en-advies","ontwikkelaar"],"lifecycle":["ontwerp"],"links":["urn:nl:ak:ver:bio-01","urn:nl:ak:ver:avg-12","urn:nl:ak:ver:aia-37","urn:nl:ak:ver:aia-07","urn:nl:ak:ver:aia-01","urn:nl:ak:ver:aia-18","urn:nl:ak:ver:aia-11","urn:nl:ak:ver:aia-05","urn:nl:ak:ver:aia-36","urn:nl:ak:ver:aia-03","urn:nl:ak:ver:aia-09","urn:nl:ak:ver:avg-07","urn:nl:ak:ver:aia-03","urn:nl:ak:ver:aia-19","urn:nl:ak:ver:aia-20","urn:nl:ak:ver:woo-01"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
       headers:
         Connection:
           - keep-alive
         Content-Length:
-          - "931"
+          - "1172"
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:mon-04?version=latest
-    response:
-      body:
-        string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Monitor
-          regelmatig op veranderingen in de data. Bij veranderingen evalueer je de prestaties
-          en output van het algoritme.","description":"","explanation":"","urn":"urn:nl:ak:mtr:mon-04","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/7-mon-04-evalueer-bij-veranderingen-in-data/index.html","subject":["data","technische-robuustheid-en-veiligheid"],"suggested_roles":["ontwikkelaar"],"lifecycle":["monitoring-en-beheer"],"links":["urn:nl:ak:ver:aia-05","urn:nl:ak:ver:aia-11","urn:nl:ak:ver:aia-10","urn:nl:ak:ver:avg-05"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "933"
-        Content-Type:
-          - application/json
-        Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:28 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -1185,7 +1139,43 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:29 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-02?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Beschrijf
+          welke data gebruikt wordt voor de beoogde toepassing","description":"","explanation":"
+          \n## Bijbehorende vereiste(n) { data-search-exclude }\n??? expander \"Bekijk
+          alle vereisten\"\n    <!-- list_vereisten_on_maatregelen_page -->","urn":"urn:nl:ak:mtr:owp-02","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-11-gebruikte-data/index.html","subject":["data"],"suggested_roles":["ontwikkelaar","beleid-en-advies"],"lifecycle":["ontwerp","dataverkenning-en-datapreparatie"],"links":["urn:nl:ak:ver:aia-05"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "931"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 17 Dec 2024 13:25:29 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -1241,7 +1231,42 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:29 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:mon-04?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Monitor
+          regelmatig op veranderingen in de data. Bij veranderingen evalueer je de prestaties
+          en output van het algoritme.","description":"","explanation":"","urn":"urn:nl:ak:mtr:mon-04","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/7-mon-04-evalueer-bij-veranderingen-in-data/index.html","subject":["data","technische-robuustheid-en-veiligheid"],"suggested_roles":["ontwikkelaar"],"lifecycle":["monitoring-en-beheer"],"links":["urn:nl:ak:ver:aia-05","urn:nl:ak:ver:aia-11","urn:nl:ak:ver:aia-10","urn:nl:ak:ver:avg-05"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "933"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 17 Dec 2024 13:25:29 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -1282,7 +1307,7 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:29 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -1316,7 +1341,76 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:29 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-02?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Doe
+          aselecte steekproeven om algoritmes met 'risicogestuurde selectie\u2019 te
+          controleren\",\"description\":\"\",\"explanation\":\"\",\"urn\":\"urn:nl:ak:mtr:imp-02\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/6-imp-02-aselecte-steekproeven/index.html\",\"subject\":[\"bias-en-non-discriminatie\",\"technische-robuustheid-en-veiligheid\"],\"suggested_roles\":[\"ontwikkelaar\"],\"lifecycle\":[\"dataverkenning-en-datapreparatie\",\"implementatie\",\"monitoring-en-beheer\"],\"links\":[\"urn:nl:ak:ver:aia-27\",\"urn:nl:ak:ver:grw-02\",\"urn:nl:ak:ver:aia-10\"],\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "936"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 17 Dec 2024 13:25:29 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:mon-03?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Maak
+          een noodplan voor beveiligingsincidenten","description":"","explanation":"","urn":"urn:nl:ak:mtr:mon-03","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/7-mon-03-informatiebeveiligingsincidenten/index.html","subject":["technische-robuustheid-en-veiligheid","governance"],"suggested_roles":["projectleider","beleid-en-advies","jurist"],"lifecycle":["organisatieverantwoordelijkheden","monitoring-en-beheer"],"links":["urn:nl:ak:ver:bio-01","urn:nl:ak:ver:aia-10","urn:nl:ak:ver:avg-12"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "903"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 17 Dec 2024 13:25:29 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -1351,41 +1445,7 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:mon-03?version=latest
-    response:
-      body:
-        string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Maak
-          een noodplan voor beveiligingsincidenten","description":"","explanation":"","urn":"urn:nl:ak:mtr:mon-03","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/7-mon-03-informatiebeveiligingsincidenten/index.html","subject":["technische-robuustheid-en-veiligheid","governance"],"suggested_roles":["projectleider","beleid-en-advies","jurist"],"lifecycle":["organisatieverantwoordelijkheden","monitoring-en-beheer"],"links":["urn:nl:ak:ver:bio-01","urn:nl:ak:ver:aia-10","urn:nl:ak:ver:avg-12"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "903"
-        Content-Type:
-          - application/json
-        Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:29 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -1444,7 +1504,7 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:29 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -1464,22 +1524,89 @@ interactions:
         user-agent:
           - python-httpx/0.27.2
       method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-02?version=latest
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-07?version=latest
     response:
       body:
         string:
-          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Doe
-          aselecte steekproeven om algoritmes met 'risicogestuurde selectie\u2019 te
-          controleren\",\"description\":\"\",\"explanation\":\"\",\"urn\":\"urn:nl:ak:mtr:imp-02\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/6-imp-02-aselecte-steekproeven/index.html\",\"subject\":[\"bias-en-non-discriminatie\",\"technische-robuustheid-en-veiligheid\"],\"suggested_roles\":[\"ontwikkelaar\"],\"lifecycle\":[\"dataverkenning-en-datapreparatie\",\"implementatie\",\"monitoring-en-beheer\"],\"links\":[\"urn:nl:ak:ver:aia-27\",\"urn:nl:ak:ver:grw-02\",\"urn:nl:ak:ver:aia-10\"],\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Pas
+          uitlegbaarheidstechnieken toe en evalueer en valideer deze.","description":"","explanation":"","urn":"urn:nl:ak:mtr:owp-07","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-30-toepassen_uitlegbaarheidstechnieken/index.html","subject":["transparantie"],"suggested_roles":["projectleider","beleid-en-advies","ontwikkelaar"],"lifecycle":["ontwerp"],"links":["urn:nl:ak:ver:aia-08","urn:nl:ak:ver:aia-26","urn:nl:ak:ver:awb-02"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
       headers:
         Connection:
           - keep-alive
         Content-Length:
-          - "936"
+          - "846"
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:29 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-12?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Controleer
+          en verbeter regelmatig de kwaliteit van het algoritme","description":"","explanation":"","urn":"urn:nl:ak:mtr:org-12","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/0-org-12-periodieke-evaluatie-kwaliteit/index.html","subject":["governance","menselijke-controle"],"suggested_roles":["projectleider","beleid-en-advies"],"lifecycle":["organisatieverantwoordelijkheden","monitoring-en-beheer"],"links":["urn:nl:ak:ver:aia-11","urn:nl:ak:ver:aia-27"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "871"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 17 Dec 2024 13:25:29 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-06?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Inventariseer
+          welke grondrechten het algoritme kan schenden en maak een belangenafweging","description":"","explanation":"","urn":"urn:nl:ak:mtr:owp-06","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-06-afwegen-grondrechten/index.html","subject":["fundamentele-rechten"],"suggested_roles":["projectleider","beleid-en-advies"],"lifecycle":["probleemanalyse","ontwerp","verificatie-en-validatie","monitoring-en-beheer"],"links":["urn:nl:ak:ver:grw-01","urn:nl:ak:ver:aia-27"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "893"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 17 Dec 2024 13:25:29 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -1537,7 +1664,7 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:29 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -1582,45 +1709,7 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-27?version=latest
-    response:
-      body:
-        string:
-          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Maak
-          (contractuele) afspraken over data en artefacten met een aanbieder\",\"description\":\"Maak
-          (contractuele) afspraken met de aanbieder wie eigenaar is van de data en artefacten
-          die ontstaan bij het gebruik van algoritmes.\",\"explanation\":\"Hier kan
-          worden gedacht aan (initi\xEBle) trainingsdatasets, outputdata (richting gebruikers)
-          en nieuwe trainingsdata (vanuit gebruikers). \",\"urn\":\"urn:nl:ak:mtr:owp-27\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-27-contractuele-afspraken-data-en-artefacten/index.html\",\"subject\":[\"publieke-inkoop\"],\"suggested_roles\":[\"jurist\"],\"lifecycle\":[\"ontwerp\",\"implementatie\"],\"links\":[\"urn:nl:ak:ver:aut-01\",\"urn:nl:ak:ver:dat-01\"],\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "1084"
-        Content-Type:
-          - application/json
-        Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:29 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -1678,7 +1767,7 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:29 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -1714,7 +1803,45 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:29 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-27?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Maak
+          (contractuele) afspraken over data en artefacten met een aanbieder\",\"description\":\"Maak
+          (contractuele) afspraken met de aanbieder wie eigenaar is van de data en artefacten
+          die ontstaan bij het gebruik van algoritmes.\",\"explanation\":\"Hier kan
+          worden gedacht aan (initi\xEBle) trainingsdatasets, outputdata (richting gebruikers)
+          en nieuwe trainingsdata (vanuit gebruikers). \",\"urn\":\"urn:nl:ak:mtr:owp-27\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-27-contractuele-afspraken-data-en-artefacten/index.html\",\"subject\":[\"publieke-inkoop\"],\"suggested_roles\":[\"jurist\"],\"lifecycle\":[\"ontwerp\",\"implementatie\"],\"links\":[\"urn:nl:ak:ver:aut-01\",\"urn:nl:ak:ver:dat-01\"],\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "1084"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 17 Dec 2024 13:25:29 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -1768,57 +1895,7 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-03?version=latest
-    response:
-      body:
-        string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Beschrijf
-          welke persoonsgegevens het algoritme gebruikt en waarom","description":"Er
-          is een overzicht opgesteld welke persoonsgegevens mogen worden verwerkt en
-          om welke categorie persoonsgegevens het gaat. Het principe van dataminimalisatie
-          is toegepast, zodat het minimum aantal persoonsgegevens wordt verwerkt om
-          het beoogde doel te bereiken. ","explanation":"- Er is een overzicht opgesteld
-          welke persoonsgegevens mogen worden verwerkt mogen worden verwerkt.\n- Bij
-          de persoonsgegevens is aangegeven om wat voor categorie persoonsgegevens het
-          gaat.\n- Per kenmerk is toegelicht waarom deze noodzakelijk is om te verwerken
-          voor het ontwikkelen en gebruiken van het algoritme.\n- Het principe van dataminimalisatie
-          is toegepast, wat betekent dat een keuze is gemaakt of een persoonsgegevens
-          al dan niet strikt noodzakelijk is om het doel te bereiken of dat verwerking
-          ervan achterwege kan blijven.\n- Voor [het beschermen van deze persoonsgegevens](3-dat-05-pseudonimiseren-anonimiseren.md)
-          wordt per kenmerk aangegeven op welke manier deze kan worden beschermd (anonimiseren,
-          pseudonomiseren, aggregeren). \n- Een [DPIA](../hulpmiddelen/DPIA.md) kan
-          worden gebruikt om bovenstaande activiteiten uit te voeren.\n  \n## Bijbehorende
-          vereiste(n) { data-search-exclude }\n??? expander \"Bekijk alle vereisten\"\n    <!--
-          list_vereisten_on_maatregelen_page -->","urn":"urn:nl:ak:mtr:dat-03","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/3-dat-03-persoonsgegevens-beschrijven/index.html","subject":["privacy-en-gegevensbescherming","transparantie"],"suggested_roles":["projectleider","ontwikkelaar"],"lifecycle":["dataverkenning-en-datapreparatie","ontwikkelen","verificatie-en-validatie"],"links":["urn:nl:ak:ver:avg-01","urn:nl:ak:ver:avg-04"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "2156"
-        Content-Type:
-          - application/json
-        Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:29 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -1854,7 +1931,7 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:29 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -1888,7 +1965,43 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:29 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-08?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Vermeld
+          het gebruik van persoonsgegevens in het verwerkingsregister","description":"
+          Neem de ontwikkeling en gebruik van een algoritme op in het verwerkingsregister
+          als persoonsgegevens worden verwerkt.  ","explanation":"","urn":"urn:nl:ak:mtr:imp-08","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/6-imp-08-vermelding-in-verwerkingsregister/index.html","subject":["transparantie","privacy-en-gegevensbescherming"],"suggested_roles":["projectleider","jurist"],"lifecycle":["implementatie"],"links":["urn:nl:ak:ver:avg-07"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "936"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 17 Dec 2024 13:25:29 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -1954,83 +2067,7 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-08?version=latest
-    response:
-      body:
-        string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Vermeld
-          het gebruik van persoonsgegevens in het verwerkingsregister","description":"
-          Neem de ontwikkeling en gebruik van een algoritme op in het verwerkingsregister
-          als persoonsgegevens worden verwerkt.  ","explanation":"","urn":"urn:nl:ak:mtr:imp-08","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/6-imp-08-vermelding-in-verwerkingsregister/index.html","subject":["transparantie","privacy-en-gegevensbescherming"],"suggested_roles":["projectleider","jurist"],"lifecycle":["implementatie"],"links":["urn:nl:ak:ver:avg-07"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "936"
-        Content-Type:
-          - application/json
-        Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-09?version=latest
-    response:
-      body:
-        string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Richt
-          een proces in zodat burgers of andere belanghebbenden een klacht, bezwaar
-          of beroep kunnen indienen over het gebruik van het algoritme en monitor dit
-          proces.","description":"","explanation":" ## Bronnen\n- [Onderzoekskader Auditdienst
-          Rijk, SV.17, PRI.9](https://www.rijksoverheid.nl/documenten/rapporten/2023/07/11/onderzoekskader-algoritmes-adr-2023)\n-
-          [Toetsingskader Algoritmes Algemene Rekenkamer, 1.08](https://www.rekenkamer.nl/onderwerpen/algoritmes/documenten/publicaties/2024/05/15/het-toetsingskader-aan-de-slag)\n-
-          [Onderzoek misbruik uitwonendenbeurs, PricewaterhouseCoopers](https://open.overheid.nl/documenten/dpc-97a155051e66b292ef3cc5799cb4aef61dcbf46b/pdf#page=48)\n-
-          [Intern onderzoek controle uitwonendenbeurs, DUO](https://open.overheid.nl/documenten/dpc-486d1370ee92580b07ae27198a636c73fc28b87d/pdf)","urn":"urn:nl:ak:mtr:imp-09","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/6-imp-07-klacht-bezwaar-beroep/index.html","subject":["governance"],"suggested_roles":["projectleider","ontwikkelaar"],"lifecycle":["implementatie","monitoring-en-beheer"],"links":["urn:nl:ak:ver:avg-09"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "1524"
-        Content-Type:
-          - application/json
-        Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:29 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -2077,7 +2114,47 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:29 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-09?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Richt
+          een proces in zodat burgers of andere belanghebbenden een klacht, bezwaar
+          of beroep kunnen indienen over het gebruik van het algoritme en monitor dit
+          proces.","description":"","explanation":" ## Bronnen\n- [Onderzoekskader Auditdienst
+          Rijk, SV.17, PRI.9](https://www.rijksoverheid.nl/documenten/rapporten/2023/07/11/onderzoekskader-algoritmes-adr-2023)\n-
+          [Toetsingskader Algoritmes Algemene Rekenkamer, 1.08](https://www.rekenkamer.nl/onderwerpen/algoritmes/documenten/publicaties/2024/05/15/het-toetsingskader-aan-de-slag)\n-
+          [Onderzoek misbruik uitwonendenbeurs, PricewaterhouseCoopers](https://open.overheid.nl/documenten/dpc-97a155051e66b292ef3cc5799cb4aef61dcbf46b/pdf#page=48)\n-
+          [Intern onderzoek controle uitwonendenbeurs, DUO](https://open.overheid.nl/documenten/dpc-486d1370ee92580b07ae27198a636c73fc28b87d/pdf)","urn":"urn:nl:ak:mtr:imp-09","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/6-imp-07-klacht-bezwaar-beroep/index.html","subject":["governance"],"suggested_roles":["projectleider","ontwikkelaar"],"lifecycle":["implementatie","monitoring-en-beheer"],"links":["urn:nl:ak:ver:avg-09"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "1524"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 17 Dec 2024 13:25:29 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -2112,7 +2189,7 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:30 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -2185,7 +2262,7 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:30 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -2242,7 +2319,7 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:30 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -2262,21 +2339,69 @@ interactions:
         user-agent:
           - python-httpx/0.27.2
       method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-07?version=latest
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-14?version=latest
     response:
       body:
         string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Pas
-          uitlegbaarheidstechnieken toe en evalueer en valideer deze.","description":"","explanation":"","urn":"urn:nl:ak:mtr:owp-07","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-30-toepassen_uitlegbaarheidstechnieken/index.html","subject":["transparantie"],"suggested_roles":["projectleider","beleid-en-advies","ontwikkelaar"],"lifecycle":["ontwerp"],"links":["urn:nl:ak:ver:aia-08","urn:nl:ak:ver:aia-26","urn:nl:ak:ver:awb-02"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Maak
+          afspraken over het wijzigen van de code","description":"Richt een wijzigingenproces
+          in, waarmee bepaald wordt hoe codewijzigingen plaatsvinden.\n","explanation":"Bij
+          het inrichten van een proces om wijzigingen aan de code te mogen aanbrengen,
+          kunnen aan de volgende elementen worden gedacht:\n\n- Wijzigingen dienen van
+          te voren te worden geautoriseerd door de systeemeigenaar of product owner.
+          (BIO 12.1.2)\n- Wijzigingen worden getest in een andere omgeving dan de productieomgeving.
+          (BIO 12.1.4, 14.2.3, 14.2.9, 14.3.1)\n- Wijzigingen worden door de systeemeigenaar
+          of product owner goedgekeurd op basis van gedocumenteerde testresultaten en
+          pas daarna doorgevoerd in de productieomgeving. (BIO 12.1.2, 14.2.2, 14.2.9)\n-
+          Er dient functiescheiding te zijn ingericht tussen het aanvragen, goedkeuren
+          en doorvoeren van wijzigingen om onbevoegde en onbedoelde wijzigingen te beperken.
+          (BIO 6.1.2, 14.2.2)\n- Er dient periodiek controle plaats te vinden op wijzigingen
+          aan het systeem, zodanig dat oneigenlijke wijzigingen worden gesignaleerd.
+          (BIO 9.4.4, 12.4.1)","urn":"urn:nl:ak:mtr:org-14","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/0-org-14-wijzigingenproces/index.html","subject":["technische-robuustheid-en-veiligheid","governance"],"suggested_roles":["projectleider","ontwikkelaar"],"lifecycle":["organisatieverantwoordelijkheden"],"links":["urn:nl:ak:ver:bio-01"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
       headers:
         Connection:
           - keep-alive
         Content-Length:
-          - "846"
+          - "1794"
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:02 GMT
+          - Tue, 17 Dec 2024 13:25:30 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - keep-alive
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.27.2
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-24?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Voer
+          een risico-analyse met de aanbieder uit op het gebied van informatiebeveiliging
+          bij een uitbestedingstraject","description":"","explanation":"","urn":"urn:nl:ak:mtr:owp-24","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-24-risico-analyse-informatiebeveiliging-leverancier/index.html","subject":["technische-robuustheid-en-veiligheid","publieke-inkoop"],"suggested_roles":["projectleider","beleid-en-advies"],"lifecycle":["ontwerp"],"links":["urn:nl:ak:ver:bio-01"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "889"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 17 Dec 2024 13:25:30 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -2314,7 +2439,7 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:03 GMT
+          - Tue, 17 Dec 2024 13:25:30 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -2381,7 +2506,7 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:03 GMT
+          - Tue, 17 Dec 2024 13:25:30 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -2434,158 +2559,7 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:03 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-14?version=latest
-    response:
-      body:
-        string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Maak
-          afspraken over het wijzigen van de code","description":"Richt een wijzigingenproces
-          in, waarmee bepaald wordt hoe codewijzigingen plaatsvinden.\n","explanation":"Bij
-          het inrichten van een proces om wijzigingen aan de code te mogen aanbrengen,
-          kunnen aan de volgende elementen worden gedacht:\n\n- Wijzigingen dienen van
-          te voren te worden geautoriseerd door de systeemeigenaar of product owner.
-          (BIO 12.1.2)\n- Wijzigingen worden getest in een andere omgeving dan de productieomgeving.
-          (BIO 12.1.4, 14.2.3, 14.2.9, 14.3.1)\n- Wijzigingen worden door de systeemeigenaar
-          of product owner goedgekeurd op basis van gedocumenteerde testresultaten en
-          pas daarna doorgevoerd in de productieomgeving. (BIO 12.1.2, 14.2.2, 14.2.9)\n-
-          Er dient functiescheiding te zijn ingericht tussen het aanvragen, goedkeuren
-          en doorvoeren van wijzigingen om onbevoegde en onbedoelde wijzigingen te beperken.
-          (BIO 6.1.2, 14.2.2)\n- Er dient periodiek controle plaats te vinden op wijzigingen
-          aan het systeem, zodanig dat oneigenlijke wijzigingen worden gesignaleerd.
-          (BIO 9.4.4, 12.4.1)","urn":"urn:nl:ak:mtr:org-14","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/0-org-14-wijzigingenproces/index.html","subject":["technische-robuustheid-en-veiligheid","governance"],"suggested_roles":["projectleider","ontwikkelaar"],"lifecycle":["organisatieverantwoordelijkheden"],"links":["urn:nl:ak:ver:bio-01"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "1794"
-        Content-Type:
-          - application/json
-        Date:
-          - Tue, 17 Dec 2024 12:57:03 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-24?version=latest
-    response:
-      body:
-        string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Voer
-          een risico-analyse met de aanbieder uit op het gebied van informatiebeveiliging
-          bij een uitbestedingstraject","description":"","explanation":"","urn":"urn:nl:ak:mtr:owp-24","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-24-risico-analyse-informatiebeveiliging-leverancier/index.html","subject":["technische-robuustheid-en-veiligheid","publieke-inkoop"],"suggested_roles":["projectleider","beleid-en-advies"],"lifecycle":["ontwerp"],"links":["urn:nl:ak:ver:bio-01"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "889"
-        Content-Type:
-          - application/json
-        Date:
-          - Tue, 17 Dec 2024 12:57:03 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-06?version=latest
-    response:
-      body:
-        string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Inventariseer
-          welke grondrechten het algoritme kan schenden en maak een belangenafweging","description":"","explanation":"","urn":"urn:nl:ak:mtr:owp-06","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-06-afwegen-grondrechten/index.html","subject":["fundamentele-rechten"],"suggested_roles":["projectleider","beleid-en-advies"],"lifecycle":["probleemanalyse","ontwerp","verificatie-en-validatie","monitoring-en-beheer"],"links":["urn:nl:ak:ver:grw-01","urn:nl:ak:ver:aia-27"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "893"
-        Content-Type:
-          - application/json
-        Date:
-          - Tue, 17 Dec 2024 12:57:03 GMT
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains
-      status:
-        code: 200
-        message: OK
-  - request:
-      body: ""
-      headers:
-        accept:
-          - "*/*"
-        accept-encoding:
-          - gzip, deflate
-        connection:
-          - keep-alive
-        host:
-          - task-registry.apps.digilab.network
-        user-agent:
-          - python-httpx/0.27.2
-      method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-10?version=latest
-    response:
-      body:
-        string:
-          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Stel
-          een protocol vast voor de situatie dat er (een vermoeden van) discriminatie
-          door een algoritme is geconstateerd en pas dit wanneer nodig toe.","description":"","explanation":"","urn":"urn:nl:ak:mtr:imp-10","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/0-org-15-discriminatieprotocol/index.html","subject":["bias-en-non-discriminatie"],"suggested_roles":["projectleider","beleid-en-advies"],"lifecycle":["organisatieverantwoordelijkheden","implementatie"],"links":["urn:nl:ak:ver:grw-02"],"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
-      headers:
-        Connection:
-          - keep-alive
-        Content-Length:
-          - "907"
-        Content-Type:
-          - application/json
-        Date:
-          - Tue, 17 Dec 2024 12:57:03 GMT
+          - Tue, 17 Dec 2024 13:25:30 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -2619,7 +2593,7 @@ interactions:
         Content-Type:
           - application/json
         Date:
-          - Tue, 17 Dec 2024 12:57:03 GMT
+          - Tue, 17 Dec 2024 13:25:30 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
       status:
@@ -2760,7 +2734,7 @@ interactions:
           style=\"padding-block: 0.0em 1.25em;\">\n                Data will be stored
           for at least 45 days before permanent\n                deletion.\n            </p>\n
           \           <p class=\"utrecht-button-group\">\n                <button hx-headers='{\"X-CSRF-Token\":
-          \"64a223b738d6e7143dfb83ba3251e6421262272a\"}'\n                        hx-delete=\"/algorithm/1\"\n
+          \"5f954069ac48b66b7b766615f60e9e481c0d91bd\"}'\n                        hx-delete=\"/algorithm/1\"\n
           \                       class=\"utrecht-button utrecht-button--primary-action
           utrecht-button--rvo-md\"\n                        type=\"button\">\n                    Yes\n
           \               </button>\n                <button class=\"utrecht-button
@@ -2795,7 +2769,7 @@ interactions:
           rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before\"\n                                  role=\"img\"\n
           \                                 aria-label=\"\"></span>Does the algorithm
           meet the requirements?\n                        </h5>\n                        <a
-          class=\"rvo-text--subtle rvo-text--bold\">0/35\n                        Done</a>\n
+          class=\"rvo-text--subtle rvo-text--bold\">0/37\n                        Done</a>\n
           \                   </div>\n                    <ul class=\"rvo-item-list\">\n
           \                       \n                            \n                            \n
           \                               <li class=\"rvo-item-list__item\">\n                                    <div
@@ -2845,6 +2819,8 @@ interactions:
           class=\"rvo-text--subtle\">To do</a>\n                                            \n
           \                                       </div>\n                                    </div>\n
           \                               </li>\n                            \n                        \n
+          \                           \n                            \n                        \n
+          \                           \n                            \n                        \n
           \                           \n                            \n                        \n
           \                           \n                            \n                        \n
           \                           \n                            \n                        \n
@@ -3054,16 +3030,14 @@ interactions:
           class=\"utrecht-icon rvo-icon rvo-icon-delta-omhoog rvo-icon--md rvo-icon--hemelblauw
           rvo-accordion__item-icon--open\"\n                              role=\"img\"\n
           \                             aria-label=\"Delta omhoog\"></span>\n                        Hoog-risico-AI-systemen
-          loggen automatisch bepaalde gegevens\n                    </h3>\n                    <div
-          class=\"rvo-accordion-teaser\">\n                        <div class=\"rvo-layout\">Algoritmes
-          en AI-systemen zijn dusdanig technisch vormgegeven dat gebeurtenissen gedurende
-          hun levenscyclus automatisch worden geregistreerd (\u201Clogs\u201D). \n</div>\n
-          \                       <div class=\"rvo-layout-row rvo-layout-gap--sm\">\n
-          \                           \n                                <div class=\"rvo-status-indicator
-          rvo-status-indicator--hemelblauw\"></div>\n                            \n
-          \                           0 / 0 measures executed\n                        </div>\n
-          \                   </div>\n                </summary>\n                \n
-          \           </details>\n        \n            <details class=\"rvo-accordion__item\">\n
+          loggen automatisch bepaalde gegevens.\n                    </h3>\n                    <div
+          class=\"rvo-accordion-teaser\">\n                        <div class=\"rvo-layout\">Hoog-risico-AI-systemen
+          loggen automatisch bepaalde gegevens.\n</div>\n                        <div
+          class=\"rvo-layout-row rvo-layout-gap--sm\">\n                            \n
+          \                               <div class=\"rvo-status-indicator rvo-status-indicator--hemelblauw\"></div>\n
+          \                           \n                            0 / 0 measures executed\n
+          \                       </div>\n                    </div>\n                </summary>\n
+          \               \n            </details>\n        \n            <details class=\"rvo-accordion__item\">\n
           \               <summary class=\"rvo-accordion__item-summary margin-bottom-large\">\n
           \                   <h3 class=\"utrecht-heading-3 rvo-accordion__item-title
           rvo-heading--no-margins rvo-heading--mixed\">\n                        <span
@@ -3073,12 +3047,10 @@ interactions:
           class=\"utrecht-icon rvo-icon rvo-icon-delta-omhoog rvo-icon--md rvo-icon--hemelblauw
           rvo-accordion__item-icon--open\"\n                              role=\"img\"\n
           \                             aria-label=\"Delta omhoog\"></span>\n                        Hoog-risico-AI-systemen
-          zijn voldoende nauwkeurig, robuust en cyberveilig\n                    </h3>\n
+          zijn voldoende nauwkeurig, robuust en cyberveilig.\n                    </h3>\n
           \                   <div class=\"rvo-accordion-teaser\">\n                        <div
-          class=\"rvo-layout\">AI-systemen met een hoog risico worden op zodanige wijze
-          ontworpen en ontwikkeld dat deze een passend niveau van nauwkeurigheid, robuustheid
-          en cyberbeveiliging bieden, alsook consistente prestaties gedurende de levensduur
-          met betrekking tot deze aspecten.</div>\n                        <div class=\"rvo-layout-row
+          class=\"rvo-layout\">Hoog-risico-AI-systemen zijn voldoende nauwkeurig, robuust
+          en cyberveilig.</div>\n                        <div class=\"rvo-layout-row
           rvo-layout-gap--sm\">\n                            \n                                <div
           class=\"rvo-status-indicator rvo-status-indicator--hemelblauw\"></div>\n                            \n
           \                           0 / 0 measures executed\n                        </div>\n
@@ -3093,16 +3065,10 @@ interactions:
           class=\"utrecht-icon rvo-icon rvo-icon-delta-omhoog rvo-icon--md rvo-icon--hemelblauw
           rvo-accordion__item-icon--open\"\n                              role=\"img\"\n
           \                             aria-label=\"Delta omhoog\"></span>\n                        Logs
-          van hoog-risico-AI-systemen worden zes maanden bewaard door de aanbieder\n
+          van hoog-risico-AI-systemen worden zes maanden bewaard door de aanbieder.\n
           \                   </h3>\n                    <div class=\"rvo-accordion-teaser\">\n
-          \                       <div class=\"rvo-layout\">Aanbieders van AI-systemen
-          met een hoog risico bewaren de in artikel 12, lid 1, bedoelde logs die automatisch
-          worden gegenereerd door hun AI-systemen met een hoog risico voor zover dergelijke
-          logs onder hun controle vallen.\nOnverminderd het toepasselijke Unie- of nationale
-          recht worden deze logs bewaard gedurende een periode, die passend is voor
-          het beoogde doel van het AI-systeem met een hoog risico, van ten minste zes
-          maanden, tenzij anders is bepaald in het Unie- of nationaal recht, met name
-          de Uniewetgeving inzake de bescherming van persoonsgegevens.</div>\n                        <div
+          \                       <div class=\"rvo-layout\">Logs van hoog-risico-AI-systemen
+          worden zes maanden bewaard door de aanbieder.</div>\n                        <div
           class=\"rvo-layout-row rvo-layout-gap--sm\">\n                            \n
           \                               <div class=\"rvo-status-indicator rvo-status-indicator--hemelblauw\"></div>\n
           \                           \n                            0 / 0 measures executed\n
@@ -3200,6 +3166,56 @@ interactions:
           \                           0 / 0 measures executed\n                        </div>\n
           \                   </div>\n                </summary>\n                \n
           \           </details>\n        \n            <details class=\"rvo-accordion__item\">\n
+          \               <summary class=\"rvo-accordion__item-summary margin-bottom-large\">\n
+          \                   <h3 class=\"utrecht-heading-3 rvo-accordion__item-title
+          rvo-heading--no-margins rvo-heading--mixed\">\n                        <span
+          class=\"utrecht-icon rvo-icon rvo-icon-delta-omlaag rvo-icon--md rvo-icon--hemelblauw
+          rvo-accordion__item-icon--closed\"\n                              role=\"img\"\n
+          \                             aria-label=\"Delta omlaag\"></span>\n                        <span
+          class=\"utrecht-icon rvo-icon rvo-icon-delta-omhoog rvo-icon--md rvo-icon--hemelblauw
+          rvo-accordion__item-icon--open\"\n                              role=\"img\"\n
+          \                             aria-label=\"Delta omhoog\"></span>\n                        Mensen
+          over wie besluiten worden genomen door een hoog-risico-AI-systemen, krijgen
+          op verzoek informatie over deze besluiten\n                    </h3>\n                    <div
+          class=\"rvo-accordion-teaser\">\n                        <div class=\"rvo-layout\">Elke
+          getroffen persoon op wie een besluit van toepassing is dat door de gebruiksverantwoordelijke
+          wordt genomen op basis van de output van een in bijlage III vermeld AI-systeem
+          met een hoog risico, met uitzondering van systemen die in punt 2 van die bijlage
+          zijn vermeld, en dat rechtsgevolgen heeft voor die persoon, of op deze op
+          vergelijkbare wijze aanzienlijke invloed heeft die hij of zij als nadelige
+          gevolgen voor zijn of haar gezondheid, veiligheid of grondrechten beschouwt,
+          heeft het recht om van de gebruiksverantwoordelijke duidelijke, inhoudelijke
+          toelichting te verkrijgen bij de rol van het AI-systeem in de besluitvormingsprocedure
+          en de voornaamste elementen van het genomen besluit.</div>\n                        <div
+          class=\"rvo-layout-row rvo-layout-gap--sm\">\n                            \n
+          \                               <div class=\"rvo-status-indicator rvo-status-indicator--hemelblauw\"></div>\n
+          \                           \n                            0 / 0 measures executed\n
+          \                       </div>\n                    </div>\n                </summary>\n
+          \               \n            </details>\n        \n            <details class=\"rvo-accordion__item\">\n
+          \               <summary class=\"rvo-accordion__item-summary margin-bottom-large\">\n
+          \                   <h3 class=\"utrecht-heading-3 rvo-accordion__item-title
+          rvo-heading--no-margins rvo-heading--mixed\">\n                        <span
+          class=\"utrecht-icon rvo-icon rvo-icon-delta-omlaag rvo-icon--md rvo-icon--hemelblauw
+          rvo-accordion__item-icon--closed\"\n                              role=\"img\"\n
+          \                             aria-label=\"Delta omlaag\"></span>\n                        <span
+          class=\"utrecht-icon rvo-icon rvo-icon-delta-omhoog rvo-icon--md rvo-icon--hemelblauw
+          rvo-accordion__item-icon--open\"\n                              role=\"img\"\n
+          \                             aria-label=\"Delta omhoog\"></span>\n                        Hoog-risico-AI-systemen
+          voor publieke taken worden beoordeeld op gevolgen voor grondrechten\n                    </h3>\n
+          \                   <div class=\"rvo-accordion-teaser\">\n                        <div
+          class=\"rvo-layout\">Voordat een AI-systeem met een hoog risico als bedoeld
+          in artikel 6, lid 2 AI-verordening, in gebruik wordt genomen, met uitzondering
+          van AI-systemen met een hoog risico die bedoeld zijn om te worden gebruikt
+          op het in punt 2 van bijlage III vermelde gebied, voeren operatoren die publiekrechtelijke
+          instellingen zijn of particuliere entiteiten zijn die openbare diensten verlenen,
+          en operatoren van AI-systemen met een hoog risico als bedoeld in bijlage III,
+          punt 5, onder b) en c), een beoordeling uit van de gevolgen voor de grondrechten
+          die het gebruik van een dergelijk systeem kan opleveren.</div>\n                        <div
+          class=\"rvo-layout-row rvo-layout-gap--sm\">\n                            \n
+          \                               <div class=\"rvo-status-indicator rvo-status-indicator--hemelblauw\"></div>\n
+          \                           \n                            0 / 0 measures executed\n
+          \                       </div>\n                    </div>\n                </summary>\n
+          \               \n            </details>\n        \n            <details class=\"rvo-accordion__item\">\n
           \               <summary class=\"rvo-accordion__item-summary margin-bottom-large\">\n
           \                   <h3 class=\"utrecht-heading-3 rvo-accordion__item-title
           rvo-heading--no-margins rvo-heading--mixed\">\n                        <span
@@ -3482,7 +3498,7 @@ interactions:
           class=\"rvo-layout\">Betrokkenen hebben het recht om niet onderworpen te worden
           aan een enkel op geautomatiseerde verwerking, waaronder proflering, gebaseerd
           besluit, wanneer dit rechtsgevolgen heeft voor hen of het hen anderszins in
-          aanzienlijke mate treft. Dit verbod geldt niet indien de  geautomatiseerde
+          aanzienlijke mate treft. Dit verbod geldt niet indien de geautomatiseerde
           individuele besluitvorming, anders dan op basis van profilering, noodzakelijk
           is om te voldoen aan een wettelijke verplichting die op de verwerkingsverantwoordelijke
           rust of noodzakelijk is voor de vervulling van een taak van algemeen belang.</div>\n
@@ -3711,16 +3727,16 @@ interactions:
         content-language:
           - en,nl
         content-length:
-          - "89402"
+          - "93006"
         content-type:
           - text/html; charset=utf-8
         set-cookie:
-          - fastapi-csrf-token=IjY0YTIyM2I3MzhkNmU3MTQzZGZiODNiYTMyNTFlNjQyMTI2MjI3MmEi.Z2F1HQ.Q76VBndPTCTS_119FndQsGqh1ek;
+          - fastapi-csrf-token=IjVmOTU0MDY5YWM0OGI2NmI3Yjc2NjYxNWY2MGU5ZTQ4MWMwZDkxYmQi.Z2F7yA.sAwkyQa2QcLN9HOzDJe4QiX7gQg;
             HttpOnly; Max-Age=3600; Path=/; SameSite=strict
         strict-transport-security:
           - max-age=31536000; includeSubDomains
         x-api-request-id:
-          - 01JFAB2Z6TZRQKGBVQ4WSNSJWE
+          - 01JFACQ1VVC3YB86J8C60BZQKR
       status:
         code: 200
         message: OK

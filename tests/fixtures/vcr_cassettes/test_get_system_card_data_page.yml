@@ -134,7 +134,7 @@ interactions:
           style=\"padding-block: 0.0em 1.25em;\">\n                Data will be stored
           for at least 45 days before permanent\n                deletion.\n            </p>\n
           \           <p class=\"utrecht-button-group\">\n                <button hx-headers='{\"X-CSRF-Token\":
-          \"2f63075191e99fb2a49c1332703bf2d8a76caa1e\"}'\n                        hx-delete=\"/algorithm/1\"\n
+          \"03179d30dbf1b1f26fef9ef9ecea43c7401545e0\"}'\n                        hx-delete=\"/algorithm/1\"\n
           \                       class=\"utrecht-button utrecht-button--primary-action
           utrecht-button--rvo-md\"\n                        type=\"button\">\n                    Yes\n
           \               </button>\n                <button class=\"utrecht-button
@@ -169,7 +169,7 @@ interactions:
           rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before\"\n                                  role=\"img\"\n
           \                                 aria-label=\"\"></span>Does the algorithm
           meet the requirements?\n                        </h5>\n                        <a
-          class=\"rvo-text--subtle rvo-text--bold\">0/35\n                        Done</a>\n
+          class=\"rvo-text--subtle rvo-text--bold\">0/37\n                        Done</a>\n
           \                   </div>\n                    <ul class=\"rvo-item-list\">\n
           \                       \n                            \n                            \n
           \                               <li class=\"rvo-item-list__item\">\n                                    <div
@@ -219,6 +219,8 @@ interactions:
           class=\"rvo-text--subtle\">To do</a>\n                                            \n
           \                                       </div>\n                                    </div>\n
           \                               </li>\n                            \n                        \n
+          \                           \n                            \n                        \n
+          \                           \n                            \n                        \n
           \                           \n                            \n                        \n
           \                           \n                            \n                        \n
           \                           \n                            \n                        \n
@@ -353,16 +355,16 @@ interactions:
         content-language:
           - en,nl
         content-length:
-          - "28749"
+          - "28915"
         content-type:
           - text/html; charset=utf-8
         set-cookie:
-          - fastapi-csrf-token=IjJmNjMwNzUxOTFlOTlmYjJhNDljMTMzMjcwM2JmMmQ4YTc2Y2FhMWUi.Z2F1Hw.YBDUN9StR47JBLm5ahUf0noPuGY;
+          - fastapi-csrf-token=IjAzMTc5ZDMwZGJmMWIxZjI2ZmVmOWVmOWVjZWE0M2M3NDAxNTQ1ZTAi.Z2F7yg.sKiQ5QwUkfA0N0X_rtXO_7iVXhI;
             HttpOnly; Max-Age=3600; Path=/; SameSite=strict
         strict-transport-security:
           - max-age=31536000; includeSubDomains
         x-api-request-id:
-          - 01JFAB30F0GXF4KZJG6A73PY5T
+          - 01JFACQ3KG34GS5X7P32E5ST91
       status:
         code: 200
         message: OK

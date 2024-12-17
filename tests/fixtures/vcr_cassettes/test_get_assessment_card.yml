@@ -2116,12 +2116,12 @@ interactions:
         content-type:
           - text/html; charset=utf-8
         set-cookie:
-          - fastapi-csrf-token=IjUwZmVhZjJhMWVmMTY0MjVjZTMzZGRmM2ZmYWNmNmNhZjUzZTIzNjYi.Z2F1HQ.XlZExhWI0yo3twIRJy_ZoEoLhKA;
+          - fastapi-csrf-token=IjNkMWQwMzRlN2RmM2FjNDgwYTk4ODRiYTkwNGEwOWYyZWQ2MjJkZjQi.Z2F7yA.vMkjuZxO9Q7QEawlRn95-boOc3E;
             HttpOnly; Max-Age=3600; Path=/; SameSite=strict
         strict-transport-security:
           - max-age=31536000; includeSubDomains
         x-api-request-id:
-          - 01JFAB2YVK2MPZWT6D5ZJQQKRZ
+          - 01JFACQ1G3PRZ3E10RRF1QXP5N
       status:
         code: 200
         message: OK
