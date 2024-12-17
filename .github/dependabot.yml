@@ -58,3 +58,7 @@ updates:
       allnpm:
         patterns:
           - "*"
+    ignore:
+      - dependency-name: "@nl-rvo/assets"
+      - dependency-name: "@nl-rvo/component-library-css"
+      - dependency-name: "@nl-rvo/design-tokens"
