@@ -206,36 +206,26 @@ msgstr ""
 msgid "Information on how this measure is implemented"
 msgstr ""
 
-#: amt/api/forms/measure.py:33
-msgid ""
-"Describe how the measure has been implemented, including challenges and "
-"solutions."
-msgstr ""
-
 #: amt/api/forms/measure.py:39
 msgid ""
 "Select one or more to upload. The files will be saved once you confirm "
 "changes by pressing the save button."
 msgstr ""
 
-#: amt/api/forms/measure.py:41
+#: amt/api/forms/measure.py:44
 msgid "Add files"
 msgstr ""
 
-#: amt/api/forms/measure.py:42
+#: amt/api/forms/measure.py:45
 msgid "No files selected."
 msgstr ""
 
-#: amt/api/forms/measure.py:46
+#: amt/api/forms/measure.py:49
 msgid "Add URI"
 msgstr ""
 
-#: amt/api/forms/measure.py:49
+#: amt/api/forms/measure.py:52
 msgid "Add links to documents"
-msgstr ""
-
-#: amt/api/forms/measure.py:50
-msgid "URI"
 msgstr ""
 
 #: amt/api/forms/organization.py:23
@@ -357,14 +347,14 @@ msgstr ""
 
 #: amt/site/templates/algorithms/details_base.html.j2:39
 #: amt/site/templates/algorithms/new.html.j2:153
-#: amt/site/templates/macros/form_macros.html.j2:167
+#: amt/site/templates/macros/form_macros.html.j2:168
 #: amt/site/templates/organizations/members.html.j2:33
 msgid "Yes"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_base.html.j2:44
 #: amt/site/templates/algorithms/new.html.j2:163
-#: amt/site/templates/macros/form_macros.html.j2:172
+#: amt/site/templates/macros/form_macros.html.j2:173
 #: amt/site/templates/organizations/members.html.j2:36
 msgid "No"
 msgstr ""
@@ -468,7 +458,7 @@ msgid "Failed to estimate WOZ value: "
 msgstr ""
 
 #: amt/site/templates/algorithms/details_info.html.j2:16
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:19
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:26
 msgid "Description"
 msgstr ""
 
@@ -498,16 +488,16 @@ msgstr ""
 msgid "References"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:29
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:36
 msgid "Read more on the algoritmekader"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:40
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:47
 #: amt/site/templates/macros/editable.html.j2:82
 msgid "Save"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:44
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:51
 #: amt/site/templates/macros/editable.html.j2:87
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:26
 msgid "Cancel"
@@ -665,11 +655,11 @@ msgstr ""
 msgid "Delete member"
 msgstr ""
 
-#: amt/site/templates/macros/form_macros.html.j2:149
+#: amt/site/templates/macros/form_macros.html.j2:150
 msgid "Delete file"
 msgstr ""
 
-#: amt/site/templates/macros/form_macros.html.j2:156
+#: amt/site/templates/macros/form_macros.html.j2:157
 msgid "Are you sure you want to delete"
 msgstr ""
 
