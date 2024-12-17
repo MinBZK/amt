@@ -28,11 +28,12 @@ def is_requirement_applicable(requirement: Requirement, ai_act_profile: AiActPro
     requirement_profile = requirement.ai_act_profile[0]
     comparison_attrs = (
         "type",
-        "risk_category",
-        "type",
+        "risk_group",
+        "role",
         "open_source",
         "systemic_risk",
         "transparency_obligations",
+        "conformity_assessment_body",
     )
 
     for attr in comparison_attrs:
@@ -80,7 +81,7 @@ def _parse_attribute_values(attr: str, ai_act_profile: AiActProfile) -> set[str]
     """
     if attr == "role":
         return {s.strip() for s in getattr(ai_act_profile, attr, "").split("+")}
-    if attr == "risk_category":
+    if attr == "risk_group":
         return {getattr(ai_act_profile, "risk_group", "")}
 
     return {getattr(ai_act_profile, attr, "")}

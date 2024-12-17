@@ -21,7 +21,7 @@ async def test_fetch_tasks_all():
     # then
     assert len(instrument_result) == 4
     assert len(requirement_result) == 60
-    assert len(measure_result) == 70
+    assert len(measure_result) == 88
 
 
 @vcr.use_cassette("tests/fixtures/vcr_cassettes/test_fetch_task_with_urn.yml")  # type: ignore

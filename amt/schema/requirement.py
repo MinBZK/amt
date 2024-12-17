@@ -35,6 +35,7 @@ class TransparencyObligationEnum(Enum):
     transparantieverplichting = "transparantieverplichting"
     geen_transparantieverplichting = "geen transparantieverplichting"
 
+
 class ConformityAssessmentBodyEnum(Enum):
     beoordeling_door_derde_partij = "beoordeling door derde partij"
 
