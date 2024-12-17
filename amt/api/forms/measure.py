@@ -36,7 +36,9 @@ async def get_measure_form(
         WebFormField(
             type=WebFormFieldType.FILE,
             name="measure_files",
-            description=_("Select one or more to upload. The files will be saved once you confirm changes by pressing the save button."),
+            description=_(
+                "Select one or more to upload. The files will be saved once you confirm changes by pressing the save button."
+            ),
             default_value=current_values.get("measure_files"),
             label=_("Add files"),
             placeholder=_("No files selected."),

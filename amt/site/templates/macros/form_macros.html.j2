@@ -145,7 +145,7 @@
                                      style="overflow-x: hidden;
                                             min-height: 240px;
                                             height: auto;
-                                            width: auto";>
+                                            width: auto">
                                     <div class="amt-flex-container">
                                         <h3 class="utrecht-heading-3 rvo-heading--no-margins">{% trans %}Delete file{% endtrans %}</h3>
                                         <a onclick="amt.closeModal('delete-file-modal-{{ ulid }}')"><span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--md rvo-icon--hemelblauw"
@@ -155,7 +155,7 @@
                                     <hr class="rvo-hr" />
                                     <p style="min-height: 54%; padding-block: 0.5em 0.4em;">
                                         {% trans %}Are you sure you want to delete{% endtrans %}
-                                        <strong> {{ file }}?</strong>
+                                        <strong>{{ file }}?</strong>
                                     </p>
                                     <div class="utrecht-button-group">
                                         <button hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
@@ -230,16 +230,7 @@
                 {% for value in field.default_value %}
                     <div class="rvo-margin-block-end--md">
                         <div class="rvo-layout-row rvo-layout-justify-content-space-between rvo-layout-gap--md">
-                            <input id="{{ prefix }}{{ field.name }}"
-                                   placeholder="{{ field.placeholder }}"
-                                   name="{{ field.name }}"
-                                   type="text"
-                                   class="utrecht-textbox utrecht-textbox--html-input utrecht-textbox--lg"
-                                   dir="auto"
-                                   autocomplete="off"
-                                   onchange="amt.reset_errorfield('error-{{ field.name }}')" {% if isinstance(field.attributes, "dict") %} {% for key, value in field.attributes.items() %}{{ key }}="{{ value }}"{% endfor %} {% endif %}
-                                   value="{{ value }}"
-                                   onkeydown="if (event.key === 'Enter') event.preventDefault();"/>
+                            <input id="{{ prefix }}{{ field.name }}" placeholder="{{ field.placeholder }}" name="{{ field.name }}" type="text" class="utrecht-textbox utrecht-textbox--html-input utrecht-textbox--lg" dir="auto" autocomplete="off" onchange="amt.reset_errorfield('error-{{ field.name }}')" {% if isinstance(field.attributes, "dict") %} {% for key, value in field.attributes.items() %}{{ key }}="{{ value }}"{% endfor %} {% endif %} value="{{ value }}" onkeydown="if (event.key === 'Enter') event.preventDefault();" />
                             <a id="document-link-delete"
                                class="rvo-link rvo-link--normal rvo-link--no-underline rvo-link--with-icon"
                                onclick="this.parentNode.remove()">
@@ -267,9 +258,7 @@
             <template id="{{ prefix }}{{ field.name }}-template">
                 <div class="rvo-margin-block-end--md">
                     <div class="rvo-layout-row rvo-layout-justify-content-space-between rvo-layout-gap--md">
-                        <input placeholder="{{ field.placeholder }}"
-                               name="{{ field.name }}"
-                               type="text" class="utrecht-textbox utrecht-textbox--html-input utrecht-textbox--html-input utrecht-textbox--lg" dir="auto" autocomplete="off" onchange="amt.reset_errorfield('error-{{ field.name }}')" {% if isinstance(field.attributes, "dict") %} {% for key, value in field.attributes.items() %}{{ key }}="{{ value }}"{% endfor %} {% endif %} onkeydown="if (event.key === 'Enter') event.preventDefault();" />
+                        <input placeholder="{{ field.placeholder }}" name="{{ field.name }}" type="text" class="utrecht-textbox utrecht-textbox--html-input utrecht-textbox--html-input utrecht-textbox--lg" dir="auto" autocomplete="off" onchange="amt.reset_errorfield('error-{{ field.name }}')" {% if isinstance(field.attributes, "dict") %} {% for key, value in field.attributes.items() %}{{ key }}="{{ value }}"{% endfor %} {% endif %} onkeydown="if (event.key === 'Enter') event.preventDefault();" />
                         <a id="document-link-delete"
                            class="rvo-link rvo-link--normal rvo-link--no-underline rvo-link--with-icon"
                            onclick="this.parentNode.remove()">
