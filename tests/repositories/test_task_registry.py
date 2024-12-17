@@ -20,7 +20,7 @@ async def test_fetch_tasks_all():
 
     # then
     assert len(instrument_result) == 4
-    assert len(requirement_result) == 61
+    assert len(requirement_result) == 62
     assert len(measure_result) == 88
 
 
