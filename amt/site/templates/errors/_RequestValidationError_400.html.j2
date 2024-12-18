@@ -14,13 +14,15 @@
         </div>
     {% endfor %}
 </div>
-{% for msg in message %}
-    <div id="error-{{ msg['loc'][-1] }}"
-         class="htmx-error-oob rvo-form-feedback rvo-form-feedback--error"
-         hx-swap-oob="true">
-        <span class="utrecht-icon rvo-icon rvo-icon-foutmelding rvo-icon--md rvo-status-icon-foutmelding rvo-status-icon-foutmelding"
-              role="img"
-              aria-label="Foutmelding"></span>
-        <span>{{ msg['msg'] }}</span>
-    </div>
-{% endfor %}
+{% if request.state.htmx is defined and request.state.htmx %}
+    {% for msg in message %}
+        <div id="error-{{ msg['loc'][-1] }}"
+             class="htmx-error-oob rvo-form-feedback rvo-form-feedback--error"
+             hx-swap-oob="true">
+            <span class="utrecht-icon rvo-icon rvo-icon-foutmelding rvo-icon--md rvo-status-icon-foutmelding rvo-status-icon-foutmelding"
+                  role="img"
+                  aria-label="Foutmelding"></span>
+            <span>{{ msg['msg'] }}</span>
+        </div>
+    {% endfor %}
+{% endif %}

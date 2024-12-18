@@ -90,6 +90,8 @@ class AlgorithmsRepository:
                                 Algorithm.system_card_json["ai_act_profile"]["risk_group"].as_string()
                                 == RiskGroup[value].value
                             )
+                        case "organization-id":
+                            statement = statement.filter(Algorithm.organization_id == int(value))
                         case _:
                             raise TypeError(f"Unknown filter type with key: {key}")  # noqa
             if sort:

@@ -6,7 +6,11 @@ from amt.services.organizations import OrganizationsService
 
 
 async def get_algorithm_form(
-    id: str, translations: NullTranslations, organizations_service: OrganizationsService, user_id: str | UUID | None
+    id: str,
+    translations: NullTranslations,
+    organizations_service: OrganizationsService,
+    user_id: str | UUID | None,
+    organization_id: int | None,
 ) -> WebForm:
     _ = translations.gettext
 
@@ -28,7 +32,7 @@ async def get_algorithm_form(
                 WebFormOption(value=str(organization.id), display_value=organization.name)
                 for organization in my_organizations
             ],
-            default_value="",
+            default_value=str(organization_id),
             group="1",
         ),
     ]

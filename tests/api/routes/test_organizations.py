@@ -4,7 +4,12 @@ from amt.schema.organization import OrganizationNew
 from httpx import AsyncClient
 from pytest_mock import MockFixture
 
-from tests.constants import default_auth_user, default_user, default_user_without_default_organization
+from tests.constants import (
+    default_algorithm,
+    default_auth_user,
+    default_user,
+    default_user_without_default_organization,
+)
 from tests.database_test_utils import DatabaseTestUtils
 
 
@@ -259,3 +264,44 @@ async def test_add_member(client: AsyncClient, mocker: MockFixture, db: Database
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
     assert response.headers["HX-Redirect"] == "/organizations/default-organization/members"
+
+
+@pytest.mark.asyncio
+async def test_get_algorithms(client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
+    # given
+    await db.given(
+        [
+            default_user(),
+            default_algorithm(name="Algorithm1"),
+            default_algorithm(name="Algorithm2", organization_id=1),
+        ]
+    )
+    client.cookies["fastapi-csrf-token"] = "1"
+
+    mocker.patch("amt.api.routes.organizations.get_user", return_value=default_auth_user())
+    mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+
+    # when
+    response = await client.get("/organizations/default-organization/algorithms")
+    # then
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert b"Algorithm1" in response.content
+    assert b"Algorithm2" in response.content
+
+    # when
+    response = await client.get("/organizations/default-organization/algorithms?search=Algorithm1")
+    # then
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert b"Algorithm1" in response.content
+    assert b"Algorithm2" not in response.content
+
+    # when
+    query = "?skip=5&search=&add-filter-lifecycle=&add-filter-risk-group=VERBODEN_AI&display_type"
+    response = await client.get("/organizations/default-organization/algorithms" + query)
+    # then
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert b"Algorithm1" not in response.content
+    assert b"Algorithm2" not in response.content

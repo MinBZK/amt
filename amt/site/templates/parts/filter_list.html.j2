@@ -26,7 +26,7 @@
                 <span target="_self"
                       class="rvo-tag rvo-tag--default"
                       hx-trigger="click"
-                      hx-get="/algorithms/?skip=0&drop-filter-={{ key }}"
+                      hx-get="{{ base_href }}?skip=0&drop-filter-={{ key }}"
                       hx-swap="innerHTML"
                       style="cursor: pointer;
                              display: inline-block">
@@ -65,15 +65,15 @@
                     <tr class="rvo-table-row">
                         <th style="width: 60%" scope="col" class="rvo-table-header">
                             {% trans %}Algorithm name{% endtrans %}
-                            {{ table_row.sort_button('name', sort_by, "/algorithms/") }}
+                            {{ table_row.sort_button('name', sort_by, base_href) }}
                         </th>
                         <th scope="col" class="rvo-table-header">
                             {% trans %}Lifecycle{% endtrans %}
-                            {{ table_row.sort_button('lifecycle', sort_by, "/algorithms/") }}
+                            {{ table_row.sort_button('lifecycle', sort_by, base_href) }}
                         </th>
                         <th scope="col" class="rvo-table-header" style="white-space: nowrap">
                             {% trans %}Last updated{% endtrans %}
-                            {{ table_row.sort_button('last_update', sort_by, "/algorithms/") }}
+                            {{ table_row.sort_button('last_update', sort_by, base_href) }}
                         </th>
                     </tr>
                 </thead>
@@ -111,9 +111,9 @@
             <div class="rvo-layout-column" style="padding: 0px">
                 {% for lifecycle in lifecycles %}{{ render.row(algorithms[lifecycle.value], lifecycle) }}{% endfor %}
             </div>
-        {% else %}
-            Does not exist
-        {% endif %}
-    </form>
+        </form>
+    {% else %}
+        {% trans %}Does not exist{% endtrans %}
+    {% endif %}
 {% endif %}
 {% endif %}
