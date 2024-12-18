@@ -7,50 +7,75 @@
       aria-label="Close"></span></a>
     </div>
     <hr class="rvo-hr" />
-    <div class="rvo-layout-column rvo-layout-gap--md">
-        <div class="rvo-layout-column rvo-layout-gap--xs">
-            <form hx-encoding="multipart/form-data"
-                  hx-post="/algorithm/{{ algorithm_id }}/measure/{{ measure.urn }}"
-                  hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
-                  hx-target-error="#errorContainer"
-                  hx-swap="innerHTML"
-                  method="post"
-                  class="rvo-layout-column rvo-layout-gap--md"
-                  id="form-edit-measure">
-                <div class="utrecht-form-fieldset rvo-form-fieldset rvo-layout-gap--0">
-                    <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
-                        <div role="group"
-                             aria-labelledby="fieldId-label"
-                             class="utrecht-form-field utrecht-form-field--text rvo-form-field rvo-layout-gap--0">
-                            <div class="rvo-form-field__label rvo-layout-gap--0">
-                                <label class="rvo-label" id="fieldId-label" for="fieldId">{% trans %}Description{% endtrans %}</label>
-                                <div class="utrecht-form-field-description">{{ measure.description }}</div>
+    <form hx-encoding="multipart/form-data"
+          hx-post="/algorithm/{{ algorithm_id }}/measure/{{ measure.urn }}"
+          hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
+          hx-target-error="#errorContainer"
+          hx-swap="innerHTML"
+          method="post"
+          class="rvo-layout-column rvo-layout-gap--md"
+          id="form-edit-measure">
+        <div class="rvo-layout-row rvo-layout-align-items-start">
+            <div class="rvo-layout-column rvo-layout-gap--md" style="width: 80%">
+                <div class="rvo-layout-column rvo-layout-gap--xs">
+                    <div class="utrecht-form-fieldset rvo-form-fieldset rvo-layout-gap--0">
+                        <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
+                            <div role="group"
+                                 aria-labelledby="fieldId-label"
+                                 class="utrecht-form-field utrecht-form-field--text rvo-form-field rvo-layout-gap--0">
+                                <div class="rvo-form-field__label rvo-layout-gap--0">
+                                    <label class="rvo-label" id="fieldId-label" for="fieldId">{% trans %}Description{% endtrans %}</label>
+                                    <div class="utrecht-form-field-description">{{ measure.description }}</div>
+                                </div>
+                                <div class="rvo-layout-row">
+                                    <span class="utrecht-icon rvo-icon rvo-icon-info rvo-icon--xl rvo-status-icon-info"
+                                          role="img"
+                                          aria-label="Info"></span>
+                                    <a href="{{ measure.url }}"
+                                       target="_blank"
+                                       class="rvo-link utrecht-link">
+                                        {% trans %}Read more on the algoritmekader{% endtrans %}
+                                    </a>
+                                </div>
                             </div>
-                            <div class="rvo-layout-row">
-                                <span class="utrecht-icon rvo-icon rvo-icon-info rvo-icon--xl rvo-status-icon-info"
-                                      role="img"
-                                      aria-label="Info"></span>
-                                <a href="{{ measure.url }}"
-                                   target="_blank"
-                                   class="rvo-link utrecht-link">
-                                    {% trans %}Read more on the algoritmekader{% endtrans %}
-                                </a>
-                            </div>
-                        </div>
-                        {% for form_field in form.fields %}{{ macros.form_field(form.id, form_field) }}{% endfor %}
-                    </fieldset>
+                            {% for form_field   in form.fields %}
+                                {# Place the measure_state on the side in the modal #}
+                                {% if form_field.name != "measure_state" %}
+                                    {# The functions have a specific ordering in horizontal fashion #}
+                                    {% if form_field.name == "measure_responsible" %}
+                                        <div class="rvo-layout-row rvo-layout-gap--md"
+                                             style="justify-content: space-between;
+                                                    align-items: start">
+                                            {{ macros.form_field(form.id, form_field) }}
+                                        {% elif form_field.name == "measure_accountable" %}
+                                            {{ macros.form_field(form.id, form_field) }}
+                                        </div>
+                                    {% else %}
+                                        {{ macros.form_field(form.id, form_field) }}
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        </fieldset>
+                    </div>
+                    <p class="utrecht-button-group">
+                        <button id="save-measure-edit"
+                                type="submit"
+                                class="flex utrecht-button utrecht-button--primary-action rvo-layout-row rvo-layout-gap--md utrecht-button--rvo-md rvo-link--no-underline utrecht-button-group__align-left"
+                                onclick="amt.closeModal('measure-modal')">{% trans %}Save{% endtrans %}</button>
+                        <button id="close-measure-edit"
+                                type="button"
+                                class="flex utrecht-button utrecht-button--secondary-action rvo-layout-row rvo-layout-gap--md utrecht-button--rvo-md rvo-link--no-underline utrecht-button-group__align-left"
+                                onclick="amt.closeModal('measure-modal')">{% trans %}Cancel{% endtrans %}</button>
+                    </p>
                 </div>
-                <p class="utrecht-button-group">
-                    <button id="save-measure-edit"
-                            type="submit"
-                            class="flex utrecht-button utrecht-button--primary-action rvo-layout-row rvo-layout-gap--md utrecht-button--rvo-md rvo-link--no-underline utrecht-button-group__align-left"
-                            onclick="amt.closeModal('measure-modal')">{% trans %}Save{% endtrans %}</button>
-                    <button id="close-measure-edit"
-                            type="button"
-                            class="flex utrecht-button utrecht-button--secondary-action rvo-layout-row rvo-layout-gap--md utrecht-button--rvo-md rvo-link--no-underline utrecht-button-group__align-left"
-                            onclick="amt.closeModal('measure-modal')">{% trans %}Cancel{% endtrans %}</button>
-                </p>
-            </form>
+            </div>
+            <div class="utrecht-form-field utrecht-form-field--text rvo-form-field"
+                 style="margin-top: var(--rvo-card-image-margin-block-end);
+                        margin-left: var(--rvo-card-image-margin-block-end)">
+                {% for form_field in form.fields %}
+                    {% if form_field.name == "measure_state" %}{{ macros.form_field(form.id, form_field) }}{% endif %}
+                {% endfor %}
+            </div>
         </div>
-    </div>
+    </form>
 </div>

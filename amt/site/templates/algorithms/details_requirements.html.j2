@@ -1,4 +1,5 @@
 {% extends 'algorithms/details_base.html.j2' %}
+{% import "macros/form_macros.html.j2" as macros with context %}
 {% block detail_content %}
     <div class="rvo-accordion">
         {% for (requirement, completed_measures_count, measures) in requirements_and_measures %}
@@ -58,6 +59,7 @@
                                           aria-label="Home"></span>
                                     {% trans %}Edit{% endtrans %}
                                 </a>
+                                {{ macros.user_avatars(measure_task_functions[measure.urn]) }}
                             </div>
                         </div>
                     </div>

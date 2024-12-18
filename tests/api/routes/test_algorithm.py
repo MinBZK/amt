@@ -612,6 +612,44 @@ async def test_update_measure_value(
 
 
 @pytest.mark.asyncio
+async def test_update_measure_value_with_people(
+    minio_mock: MockMinioClient, client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils
+) -> None:
+    # given
+    await db.given([default_user(), default_algorithm_with_system_card("testalgorithm1")])
+    client.cookies["fastapi-csrf-token"] = "1"
+    mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+    mocker.patch("amt.api.routes.algorithm.get_user_id_or_error", return_value=default_user().id)
+
+    # Need to make bucket in object store. The Minio class is mocked by minio_mock.
+    storage_client = Minio(
+        endpoint=get_settings().OBJECT_STORE_URL,
+        access_key=get_settings().OBJECT_STORE_USER,
+        secret_key=get_settings().OBJECT_STORE_PASSWORD,
+        secure=False,
+    )
+    storage_client.make_bucket(get_settings().OBJECT_STORE_BUCKET_NAME)
+
+    # happy flow
+    response = await client.post(
+        "/algorithm/1/measure/urn:nl:ak:mtr:dat-01",
+        data={
+            "measure_state": "done",
+            "measure_value": "something",
+            "measure_links": [],
+            "existing_file_names": [],
+            "measure_files": [],
+            "measure_responsible": "Default User",
+            "measure_accountable": "Default User",
+            "measure_reviewer": "Default User",
+        },
+        headers={"X-CSRF-Token": "1"},
+    )
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+
+
+@pytest.mark.asyncio
 async def test_download_algorithm_system_card_as_yaml(
     client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils
 ) -> None:
