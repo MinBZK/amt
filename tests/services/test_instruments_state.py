@@ -133,7 +133,8 @@ def test_get_first_lifecycle_empty_list():
 
 
 def test_get_next_tasks_per_instrument_correct_urn(system_card: SystemCard):
-    urn_0: str = system_card.assessments[0].urn
+    urn_0: str | None = system_card.assessments[0].urn
+    assert urn_0 is not None
     assessment_card: AssessmentCard = system_card.assessments[0]
     instrument = default_instrument(urn=urn_0)
 
@@ -146,6 +147,8 @@ def test_get_next_tasks_per_instrument_correct_timestamp_default(system_card: Sy
     assessment_card.contents[0].timestamp = None
     urn_0 = system_card.assessments[0].urn
     urn_1 = system_card.assessments[0].contents[0].urn
+    assert urn_0 is not None
+    assert urn_1 is not None
 
     instrument = default_instrument(urn=urn_0, tasks=[InstrumentTask(urn=urn_1, lifecycle=["Ontwerp"], question="")])
     tasks = get_next_tasks_per_instrument(instrument, assessment_card)
@@ -156,6 +159,8 @@ def test_get_next_tasks_per_instrument_correct_timestamp(system_card: SystemCard
     assessment_card: AssessmentCard = system_card.assessments[0]
     urn_0 = system_card.assessments[0].urn
     urn_1 = system_card.assessments[0].contents[0].urn
+    assert urn_0 is not None
+    assert urn_1 is not None
 
     instrument = default_instrument(urn=urn_0, tasks=[InstrumentTask(question="question", urn=urn_1, lifecycle=[])])
     tasks = get_next_tasks_per_instrument(instrument, assessment_card)
@@ -167,6 +172,8 @@ def test_find_next_tasks_for_instrument_correct_lifecycle(system_card: SystemCar
     assessment_card.contents[0].timestamp = None
     urn_0 = system_card.assessments[0].urn
     urn_1 = system_card.assessments[0].contents[0].urn
+    assert urn_0 is not None
+    assert urn_1 is not None
 
     test_tasks = [InstrumentTask(urn=urn_1, lifecycle=["Ontwerp"], question="")]
     instrument = default_instrument(urn=urn_0, tasks=test_tasks)

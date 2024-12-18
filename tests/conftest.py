@@ -76,7 +76,7 @@ async def setup_db_and_server(
 
 
 @pytest.fixture(autouse=True)
-def disable_auth(request: pytest.FixtureRequest, monkeypatch: pytest.MonkeyPatch) -> None:  # noqa: PT004
+def disable_auth(request: pytest.FixtureRequest, monkeypatch: pytest.MonkeyPatch) -> None:
     marker = request.node.get_closest_marker("enable_auth")  # type: ignore [(reportUnknownMemberType)]
 
     if not marker:
