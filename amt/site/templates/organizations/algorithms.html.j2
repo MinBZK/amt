@@ -1,0 +1,10 @@
+{% import "macros/form_macros.html.j2" as macros with context %}
+{% import "macros/tabs.html.j2" as tabs with context %}
+{% extends "layouts/base.html.j2" %}
+{% block content %}
+    <div class="rvo-max-width-layout rvo-max-width-layout--md rvo-max-width-layout-inline-padding--none">
+        {{ tabs.show_tabs(tab_items) }}
+        <div class="rvo-content rvo-margin-block-start--lg"
+             id="search-algorithm-container">{% include 'parts/algorithm_search.html.j2' %}</div>
+    </div>
+{% endblock content %}

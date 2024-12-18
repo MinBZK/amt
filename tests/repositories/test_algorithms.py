@@ -10,6 +10,7 @@ from tests.constants import (
     default_algorithm,
     default_algorithm_with_lifecycle,
     default_algorithm_with_system_card,
+    default_organization,
     default_user,
 )
 from tests.database_test_utils import DatabaseTestUtils
@@ -332,3 +333,36 @@ async def test_with_sorting(db: DatabaseTestUtils):
         skip=0, limit=4, search="", filters={}, sort={"lifecycle": "descending"}
     )
     assert result[0].name == "Algorithm2"
+
+
+@pytest.mark.asyncio
+async def test_with_organization_filter(db: DatabaseTestUtils):
+    await db.given(
+        [
+            default_user(),
+            default_algorithm(name="Algorithm1"),
+            default_organization(name="Organization 2", slug="organization-2"),
+            default_algorithm(name="Algorithm2", organization_id=2),
+        ]
+    )
+    algorithm_repository = AlgorithmsRepository(db.get_session())
+
+    result: list[Algorithm] = await algorithm_repository.paginate(
+        skip=0, limit=4, search="", filters={"organization-id": "1"}, sort={}
+    )
+
+    assert len(result) == 1
+    assert result[0].name == "Algorithm1"
+
+    result: list[Algorithm] = await algorithm_repository.paginate(
+        skip=0, limit=4, search="", filters={"organization-id": "2"}, sort={}
+    )
+
+    assert len(result) == 1
+    assert result[0].name == "Algorithm2"
+
+    result: list[Algorithm] = await algorithm_repository.paginate(
+        skip=0, limit=4, search="", filters={"organization-id": "99"}, sort={}
+    )
+
+    assert len(result) == 0

@@ -9,6 +9,8 @@ from pydantic_core._pydantic_core import ValidationError  # pyright: ignore
 
 from amt.api.deps import templates
 from amt.api.forms.organization import get_organization_form
+from amt.api.group_by_category import get_localized_group_by_categories
+from amt.api.lifecycles import get_localized_lifecycles
 from amt.api.navigation import (
     BaseNavigationItem,
     Navigation,
@@ -17,7 +19,9 @@ from amt.api.navigation import (
     resolve_navigation_items,
 )
 from amt.api.organization_filter_options import get_localized_organization_filters
+from amt.api.risk_group import get_localized_risk_groups
 from amt.api.routes.algorithm import UpdateFieldModel, set_path
+from amt.api.routes.algorithms import get_algorithms
 from amt.api.routes.shared import get_filters_and_sort_by
 from amt.core.authorization import get_user
 from amt.core.exceptions import AMTAuthorizationError, AMTNotFound, AMTRepositoryError
@@ -26,6 +30,7 @@ from amt.models import Organization, User
 from amt.repositories.organizations import OrganizationsRepository
 from amt.repositories.users import UsersRepository
 from amt.schema.organization import OrganizationBase, OrganizationNew, OrganizationSlug, OrganizationUsers
+from amt.services.algorithms import AlgorithmsService
 from amt.services.organizations import OrganizationsService
 
 router = APIRouter()
@@ -145,27 +150,34 @@ async def get_by_slug(
     slug: str,
     organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
 ) -> HTMLResponse:
+    organization = await get_organization_or_error(organizations_repository, request, slug)
+    breadcrumbs = resolve_base_navigation_items(
+        [
+            Navigation.ORGANIZATIONS_ROOT,
+            BaseNavigationItem(custom_display_text=organization.name, url="/organizations/{organization_slug}"),
+        ],
+        request,
+    )
+
+    tab_items = get_organization_tabs(request, organization_slug=slug)
+    context = {
+        "base_href": f"/organizations/{ slug }",
+        "organization": organization,
+        "tab_items": tab_items,
+        "breadcrumbs": breadcrumbs,
+    }
+    return templates.TemplateResponse(request, "organizations/home.html.j2", context)
+
+
+async def get_organization_or_error(
+    organizations_repository: OrganizationsRepository, request: Request, slug: str
+) -> Organization:
     try:
         organization = await organizations_repository.find_by_slug(slug)
         request.state.path_variables = {"organization_slug": organization.slug}
-        breadcrumbs = resolve_base_navigation_items(
-            [
-                Navigation.ORGANIZATIONS_ROOT,
-                BaseNavigationItem(custom_display_text=organization.name, url="/organizations/{organization_slug}"),
-            ],
-            request,
-        )
-
-        tab_items = get_organization_tabs(request, organization_slug=slug)
-        context = {
-            "base_href": f"/organizations/{ slug }",
-            "organization": organization,
-            "tab_items": tab_items,
-            "breadcrumbs": breadcrumbs,
-        }
-        return templates.TemplateResponse(request, "organizations/home.html.j2", context)
     except AMTRepositoryError as e:
         raise AMTNotFound from e
+    return organization
 
 
 @router.get("/{slug}/edit/{path:path}")
@@ -177,7 +189,7 @@ async def get_organization_edit(
     edit_type: str,
 ) -> HTMLResponse:
     context: dict[str, Any] = {"base_href": f"/organizations/{ slug }"}
-    organization = await organizations_repository.find_by_slug(slug)
+    organization = await get_organization_or_error(organizations_repository, request, slug)
     context.update({"path": path.replace("/", "."), "edit_type": edit_type, "object": organization})
     return templates.TemplateResponse(request, "parts/edit_cell.html.j2", context)
 
@@ -195,7 +207,7 @@ async def get_organization_cancel(
         "path": path.replace("/", "."),
         "edit_type": edit_type,
     }
-    organization = await organizations_repository.find_by_slug(slug)
+    organization = await get_organization_or_error(organizations_repository, request, slug)
     context.update({"object": organization})
     return templates.TemplateResponse(request, "parts/view_cell.html.j2", context)
 
@@ -214,7 +226,7 @@ async def get_organization_update(
         "path": path.replace("/", "."),
         "edit_type": edit_type,
     }
-    organization = await organizations_repository.find_by_slug(slug)
+    organization = await get_organization_or_error(organizations_repository, request, slug)
     context.update({"object": organization})
 
     redirect_to: str | None = None
@@ -244,10 +256,62 @@ async def get_organization_update(
 
 
 @router.get("/{slug}/algorithms")
-async def get_algorithms(
+async def show_algorithms(
     request: Request,
+    algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
+    organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
+    slug: str,
+    skip: int = Query(0, ge=0),
+    limit: int = Query(5000, ge=1),  # todo: fix infinite scroll
+    search: str = Query(""),
+    display_type: str = Query(""),
 ) -> HTMLResponse:
-    return templates.TemplateResponse(request, "pages/under_construction.html.j2", {})
+    organization = await get_organization_or_error(organizations_repository, request, slug)
+    filters, drop_filters, localized_filters, sort_by = get_filters_and_sort_by(request)
+
+    filters["organization-id"] = str(organization.id)
+    algorithms, amount_algorithm_systems = await get_algorithms(
+        algorithms_service, display_type, filters, limit, request, search, skip, sort_by
+    )
+    next = skip + limit
+
+    tab_items = get_organization_tabs(request, organization_slug=slug)
+
+    breadcrumbs = resolve_base_navigation_items(
+        [
+            Navigation.ORGANIZATIONS_ROOT,
+            BaseNavigationItem(custom_display_text=organization.name, url="/organizations/{organization_slug}"),
+            Navigation.ORGANIZATIONS_ALGORITHMS,
+        ],
+        request,
+    )
+
+    context: dict[str, Any] = {
+        "breadcrumbs": breadcrumbs,
+        "tab_items": tab_items,
+        "sub_menu_items": {},
+        "algorithms": algorithms,
+        "amount_algorithm_systems": amount_algorithm_systems,
+        "next": next,
+        "limit": limit,
+        "start": skip,
+        "search": search,
+        "lifecycles": get_localized_lifecycles(request),
+        "risk_groups": get_localized_risk_groups(request),
+        "group_by_categories": get_localized_group_by_categories(request),
+        "filters": localized_filters,
+        "sort_by": sort_by,
+        "display_type": display_type,
+        "base_href": f"/organizations/{slug}/algorithms",
+        "organization_id": organization.id,
+    }
+
+    if request.state.htmx and drop_filters:
+        return templates.TemplateResponse(request, "parts/algorithm_search.html.j2", context)
+    elif request.state.htmx:
+        return templates.TemplateResponse(request, "parts/filter_list.html.j2", context)
+    else:
+        return templates.TemplateResponse(request, "organizations/algorithms.html.j2", context)
 
 
 @router.delete("/{slug}/members/{user_id}")
@@ -259,7 +323,7 @@ async def remove_member(
     users_repository: Annotated[UsersRepository, Depends(UsersRepository)],
 ) -> HTMLResponse:
     # TODO (Robbert): add authorization and check if user and organization exist?
-    organization = await organizations_repository.find_by_slug(slug)
+    organization = await get_organization_or_error(organizations_repository, request, slug)
     user: User | None = await users_repository.find_by_id(user_id)
     if user:
         await organizations_repository.remove_user(organization, user)
@@ -281,10 +345,11 @@ async def get_members_form(
 async def add_new_members(
     request: Request,
     slug: str,
+    organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
     organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
     organization_users: OrganizationUsers,
 ) -> HTMLResponse:
-    organization = await organizations_service.find_by_slug(slug)
+    organization = await get_organization_or_error(organizations_repository, request, slug)
     await organizations_service.add_users(organization, organization_users.user_ids)
     return templates.Redirect(request, f"/organizations/{slug}/members")
 
@@ -299,10 +364,9 @@ async def get_members(
     limit: int = Query(5000, ge=1),  # todo: fix infinite scroll
     search: str = Query(""),
 ) -> HTMLResponse:
+    organization = await get_organization_or_error(organizations_repository, request, slug)
     filters, drop_filters, localized_filters, sort_by = get_filters_and_sort_by(request)
-    organization = await organizations_repository.find_by_slug(slug)
     tab_items = get_organization_tabs(request, organization_slug=slug)
-    request.state.path_variables = {"organization_slug": organization.slug}
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.ORGANIZATIONS_ROOT,

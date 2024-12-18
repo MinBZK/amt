@@ -1,7 +1,7 @@
 <form id="search-algorithm-form"
-      hx-get="/algorithms/?skip=0"
+      hx-get="{{ base_href }}?skip=0"
       hx-target="#algorithm-search-results"
-      hx-trigger="change #search-algorithm-form select"
+      hx-trigger="change"
       hx-include="this"
       hx-swap="innerHTML">
     <div class="amt-layout-grid rvo-layout-gap--md amt-layout-grid-columns--two">
@@ -9,13 +9,14 @@
             <h1 class="utrecht-heading-1">{% trans %}Algorithms{% endtrans %}</h1>
         </div>
         <div style="margin-left: auto">
-            <a data-navigation="button:/algorithms/new" href="/algorithms/new">
+            <a data-navigation="button:/algorithms/new"
+               href="/algorithms/new{% if organization_id is defined %}?organization_id={{ organization_id }}{% endif %}">
                 <button class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
                         type="button">{% trans %}New algorithm{% endtrans %}</button>
             </a>
         </div>
     </div>
-    <div class="utrecht-form-fieldset rvo-form-fieldset">
+    <div class="utrecht-form-fieldset rvo-form-fieldset rvo-margin-block-start--lg">
         <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
             <div class="rvo-inline-form">
                 <div class="rvo-layout-grid-container margin-bottom-none">
@@ -30,7 +31,7 @@
                                        value="{{ search }}"
                                        placeholder="{% trans %}Find algorithm...{% endtrans %}"
                                        name="search"
-                                       hx-get="/algorithms/?skip=0"
+                                       hx-get="{{ base_href }}?skip=0"
                                        hx-trigger="input changed delay:500ms, search"
                                        autocomplete="off"
                                        onfocus="this.value=''" />
@@ -38,7 +39,7 @@
                                       role="img"
                                       aria-label="Kruis"
                                       hx-trigger="click"
-                                      hx-get="/algorithms/?skip=0"
+                                      hx-get="{{ base_href }}?skip=0"
                                       hx-swap="innerHTML"
                                       onclick="document.getElementById('algorithm-search-input').value = ''"></span>
                             </div>
@@ -81,21 +82,15 @@
                 justify-content: flex-end">
         <div class="rvo-text--bold" style="white-space: nowrap">{% trans %}Group by{% endtrans %}</div>
         <div class="rvo-select-wrapper">
-            <form name="htmx-grouped-form"
-                  hx-target="#algorithm-search-results"
-                  hx-trigger="change from:find select"
-                  hx-get="/algorithms/?skip=0"
-                  hx-swap="innerHTML">
-                <select id="display_type"
-                        name="display_type"
-                        class="utrecht-select utrecht-select--html-select">
-                    <option value="">{% trans %}Select group by{% endtrans %}</option>
-                    {% for group_by_category in group_by_categories %}
-                        <option {% if "group-by-category" in filters and group_by_category.value == filters["group-by-category"].value %}selected="selected"{% endif %}
-                                value="{{ group_by_category.value }}">{{ group_by_category.display_value }}</option>
-                    {% endfor %}
-                </select>
-            </form>
+            <select id="display_type"
+                    name="display_type"
+                    class="utrecht-select utrecht-select--html-select">
+                <option value="">{% trans %}Select group by{% endtrans %}</option>
+                {% for group_by_category in group_by_categories %}
+                    <option {% if "group-by-category" in filters and group_by_category.value == filters["group-by-category"].value %}selected="selected"{% endif %}
+                            value="{{ group_by_category.value }}">{{ group_by_category.display_value }}</option>
+                {% endfor %}
+            </select>
         </div>
     </div>
 </form>

@@ -39,6 +39,50 @@ async def get_root(
 ) -> HTMLResponse:
     filters, drop_filters, localized_filters, sort_by = get_filters_and_sort_by(request)
 
+    algorithms, amount_algorithm_systems = await get_algorithms(
+        algorithms_service, display_type, filters, limit, request, search, skip, sort_by
+    )
+    next = skip + limit
+
+    sub_menu_items = resolve_navigation_items([Navigation.ALGORITHMS_OVERVIEW], request)  # pyright: ignore [reportUnusedVariable] # noqa
+    breadcrumbs = resolve_base_navigation_items([Navigation.ALGORITHMS_ROOT, Navigation.ALGORITHMS_OVERVIEW], request)
+
+    context: dict[str, Any] = {
+        "breadcrumbs": breadcrumbs,
+        "sub_menu_items": {},  # sub_menu_items disabled for now
+        "algorithms": algorithms,
+        "amount_algorithm_systems": amount_algorithm_systems,
+        "next": next,
+        "limit": limit,
+        "start": skip,
+        "search": search,
+        "lifecycles": get_localized_lifecycles(request),
+        "risk_groups": get_localized_risk_groups(request),
+        "group_by_categories": get_localized_group_by_categories(request),
+        "filters": localized_filters,
+        "sort_by": sort_by,
+        "display_type": display_type,
+        "base_href": "/algorithms/",
+    }
+
+    if request.state.htmx and drop_filters:
+        return templates.TemplateResponse(request, "parts/algorithm_search.html.j2", context)
+    elif request.state.htmx:
+        return templates.TemplateResponse(request, "parts/filter_list.html.j2", context)
+    else:
+        return templates.TemplateResponse(request, "algorithms/index.html.j2", context)
+
+
+async def get_algorithms(
+    algorithms_service: AlgorithmsService,
+    display_type: str,
+    filters: dict[str, str],
+    limit: int,
+    request: Request,
+    search: str,
+    skip: int,
+    sort_by: dict[str, str],
+) -> tuple[dict[str, list[Algorithm]], int | Any]:
     amount_algorithm_systems: int = 0
     if display_type == "LIFECYCLE":
         algorithms: dict[str, list[Algorithm]] = {}
@@ -66,34 +110,7 @@ async def get_root(
         for algorithm in algorithms:
             algorithm.lifecycle = get_localized_lifecycle(algorithm.lifecycle, request)  # pyright: ignore [reportAttributeAccessIssue, reportUnknownMemberType, reportUnknownArgumentType]
         amount_algorithm_systems += len(algorithms)
-    next = skip + limit
-
-    sub_menu_items = resolve_navigation_items([Navigation.ALGORITHMS_OVERVIEW], request)  # pyright: ignore [reportUnusedVariable] # noqa
-    breadcrumbs = resolve_base_navigation_items([Navigation.ALGORITHMS_ROOT, Navigation.ALGORITHMS_OVERVIEW], request)
-
-    context: dict[str, Any] = {
-        "breadcrumbs": breadcrumbs,
-        "sub_menu_items": {},  # sub_menu_items disabled for now
-        "algorithms": algorithms,
-        "amount_algorithm_systems": amount_algorithm_systems,
-        "next": next,
-        "limit": limit,
-        "start": skip,
-        "search": search,
-        "lifecycles": get_localized_lifecycles(request),
-        "risk_groups": get_localized_risk_groups(request),
-        "group_by_categories": get_localized_group_by_categories(request),
-        "filters": localized_filters,
-        "sort_by": sort_by,
-        "display_type": display_type,
-    }
-
-    if request.state.htmx and drop_filters:
-        return templates.TemplateResponse(request, "parts/algorithm_search.html.j2", context)
-    elif request.state.htmx:
-        return templates.TemplateResponse(request, "parts/filter_list.html.j2", context)
-    else:
-        return templates.TemplateResponse(request, "algorithms/index.html.j2", context)
+    return algorithms, amount_algorithm_systems
 
 
 @router.get("/new")
@@ -101,6 +118,7 @@ async def get_new(
     request: Request,
     instrument_service: Annotated[InstrumentsService, Depends(create_instrument_service)],
     organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
+    organization_id: int = Query(None),
 ) -> HTMLResponse:
     sub_menu_items = resolve_navigation_items([Navigation.ALGORITHMS_OVERVIEW], request)  # pyright: ignore [reportUnusedVariable] # noqa
     breadcrumbs = resolve_base_navigation_items([Navigation.ALGORITHMS_ROOT, Navigation.ALGORITHM_NEW], request)
@@ -116,6 +134,7 @@ async def get_new(
         translations=get_current_translation(request),
         organizations_service=organizations_service,
         user_id=user["sub"] if user else None,
+        organization_id=organization_id,
     )
 
     template_files = get_template_files()

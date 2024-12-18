@@ -21,6 +21,7 @@ CUSTOM_MESSAGES = {
     "missing": _("Field required"),
     "value_error": _("Field required"),
     "string_pattern_mismatch": _("String should match pattern '{pattern}'"),
+    "int_parsing": _("Input should be a valid integer."),
 }
 
 
@@ -78,6 +79,7 @@ async def general_exception_handler(request: Request, exc: Exception) -> HTMLRes
             request, template_name, {"message": message}, status_code=status_code, headers=response_headers
         )
     except Exception:
+        logger.exception("Can not display error template")
         response = templates.TemplateResponse(
             request,
             fallback_template_name,

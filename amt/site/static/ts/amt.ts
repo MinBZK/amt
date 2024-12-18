@@ -426,3 +426,5 @@ export function getFiles(element: HTMLInputElement, target_id: string) {
     }
   }
 }
+
+// for debugging htmx use -> htmx.logAll();
