@@ -18,9 +18,9 @@ class MeasureTask(MeasureBase):
     links: list[str] = Field(default=[])
     files: list[str] = Field(default=[])
     version: str
-    accountable_persons: list[Person] = Field(default=[])
-    reviewer_persons: list[Person] = Field(default=[])
-    responsible_persons: list[Person] = Field(default=[])
+    accountable_persons: list[Person] | None = Field(default=[])
+    reviewer_persons: list[Person] | None = Field(default=[])
+    responsible_persons: list[Person] | None = Field(default=[])
 
     def update(
         self,
