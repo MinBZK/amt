@@ -58,7 +58,11 @@ class TasksService:
         )
 
     async def move_task(
-        self, task_id: int, status_id: int, previous_sibling_id: int | None = None, next_sibling_id: int | None = None
+        self,
+        task_id: int | None,
+        status_id: int | None,
+        previous_sibling_id: int | None = None,
+        next_sibling_id: int | None = None,
     ) -> Task:
         """
         Updates the task with the given task_id
@@ -68,6 +72,8 @@ class TasksService:
         :param next_sibling_id: the id of the next sibling of the task or None
         :return: the updated task
         """
+        if task_id is None or status_id is None:
+            raise ValueError("task_id or status_id must not be None")
         task = await self.repository.find_by_id(task_id)
 
         if status_id == Status.DONE:

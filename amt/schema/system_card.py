@@ -12,13 +12,13 @@ from amt.schema.shared import BaseModel
 
 
 class Reference(BaseModel):
-    name: str = Field(default=None)
-    link: str = Field(default=None)
+    name: str | None = Field(default=None)
+    link: str | None = Field(default=None)
 
 
 # TODO: consider reusing classes, Owner is now also defined for Models
 class Owner(BaseModel):
-    organization: str = Field(default=None)
+    organization: str | None = Field(default=None)
     oin: str | None = Field(default=None)
 
     def __init__(self, organization: str, oin: str | None = None, **data) -> None:  # pyright: ignore # noqa
@@ -28,12 +28,12 @@ class Owner(BaseModel):
 
 class SystemCard(BaseModel):
     schema_version: str = Field(default="0.1a10")
-    name: str = Field(default=None)
-    ai_act_profile: AiActProfile = Field(default=None)
+    name: str | None = Field(default=None)
+    ai_act_profile: AiActProfile | None = Field(default=None)
     provenance: dict[str, Any] = Field(default={})
-    description: str = Field(default=None)
+    description: str | None = Field(default=None)
     labels: list[dict[str, Any]] = Field(default=[])
-    status: str = Field(default=None)
+    status: str | None = Field(default=None)
     instruments: list[InstrumentBase] = Field(default=[])
     requirements: list[RequirementTask] = Field(default=[])
     measures: list[MeasureTask] = Field(default=[])

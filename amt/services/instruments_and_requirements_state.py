@@ -42,7 +42,7 @@ def get_first_lifecycle_idx(lifecycles: list[str]) -> int | None:
     return 0
 
 
-def get_instrument_result_from_system_card(urn: str, system_card: SystemCard) -> AssessmentCard | None:
+def get_instrument_result_from_system_card(urn: str | None, system_card: SystemCard) -> AssessmentCard | None:
     """
     Returns the results of the given instrument if it is found in the system card, otherwise None.
     :param urn: the urn of the instrument
@@ -57,7 +57,9 @@ def get_instrument_result_from_system_card(urn: str, system_card: SystemCard) ->
     return None
 
 
-def get_task_timestamp_from_assessment_card(task_urn: str, assessment_card: AssessmentCard) -> datetime | None:
+def get_task_timestamp_from_assessment_card(task_urn: str | None, assessment_card: AssessmentCard) -> datetime | None:
+    if task_urn is None:
+        raise ValueError("Can not get timestamp from assessment card if task_urn is none")
     for content in assessment_card.contents:
         if content.urn == task_urn and content.timestamp:
             return content.timestamp

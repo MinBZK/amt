@@ -793,7 +793,11 @@ async def get_assessment_card(
     )
 
     assessment_card_data = next(
-        (assessment for assessment in algorithm.system_card.assessments if assessment.name.lower() == assessment_card),
+        (
+            assessment
+            for assessment in algorithm.system_card.assessments
+            if assessment.name is not None and assessment.name.lower() == assessment_card
+        ),
         None,
     )
 
