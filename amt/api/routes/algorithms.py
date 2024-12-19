@@ -165,6 +165,6 @@ async def post_new(
     # TODO (Robbert): we need to handle (show) repository or service errors in the forms
     if user:
         algorithm = await algorithms_service.create(algorithm_new, user["sub"])
-        response = templates.Redirect(request, f"/algorithm/{algorithm.id}/details/tasks")
+        response = templates.Redirect(request, f"/algorithm/{algorithm.id}/details")
         return response
     raise AMTAuthorizationError
