@@ -22,13 +22,13 @@ interactions:
           \   <link rel=\"icon\" type=\"image/x-icon\" href=\"/static/dist/@nl-rvo/assets/images/favicon/favicon.ico?etag=72468084736f22cc85d357218f5d2ec8\">\n
           \   <title>\n        \n        Algorithmic Management Toolkit (AMT)\n        \n
           \   </title>\n    \n    \n        \n          <script type=\"text/javascript\"
-          src=\"/static/dist/amt.js?etag=4f2d224cd9b1d4d7ea9066c2e9a12529\"></script>\n
+          src=\"/static/dist/amt.js?etag=c6cbe99eaf1f66af057cc5354a6bcd43\"></script>\n
           \       \n    \n        \n          <script type=\"module\" src=\"/static/dist/@nl-rvo/design-tokens/index.mjs?etag=d1e69147f8a6b4f059708b747418020b\"></script>\n
           \       \n    \n    <script type=\"text/javascript\" src=\"/static/vendor/htmx/js/json-enc.js?etag=73c270c2deb80a8758471378bb47da4b\"></script>\n
           \   <script type=\"text/javascript\" src=\"/static/vendor/htmx/js/response-targets.js?etag=41861e3906eb6ed9a9d1da3861988633\"></script>\n
-          \   \n    \n    \n        <link rel=\"stylesheet\" href=\"/static/dist/main.css?etag=1116c631f406cc8e9d21bb78c96da97f\">\n
+          \   \n    \n    \n        <link rel=\"stylesheet\" href=\"/static/dist/main.css?etag=def8e296f71d4f3bf93c281bcbbd8142\">\n
           \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/assets/fonts/index.css?etag=e21212f18384f5e238578cadc76b9aa2\">\n
-          \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/assets/icons/index.css?etag=8b11b6f9aade3a822a83266f675e9d51\">\n
+          \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/assets/icons/index.css?etag=3d3e54f2dc3da251cc29463d2a2b6f17\">\n
           \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/assets/images/index.css?etag=12adc140f7a9ce482ad674eae573859f\">\n
           \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/design-tokens/index.css?etag=dd40546f9c018e7f67f6d1d247a1a31c\">\n
           \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/component-library-css/index.css?etag=5b52157d75d4cc408af30796ee685c54\">\n
@@ -2116,12 +2116,12 @@ interactions:
         content-type:
           - text/html; charset=utf-8
         set-cookie:
-          - fastapi-csrf-token=Ijg5ODU3MmY1NTEzN2MzYzIyZGQzZDA4YWRmMTBjZDA3Mjc2ZWI2ZTUi.Z2GUmQ.u8SPguUtdDCWI4Hc61lVDQUoXbE;
+          - fastapi-csrf-token=IjUxOWU0ZjY2ZDIwYWZiZjI5ZjUzNGI2Njk4OTRiN2U3OGVlNTU5Yzci.Z2QYSw.rj6xIZoD4bYG4y-2NBF2ggCEzxg;
             HttpOnly; Max-Age=3600; Path=/; SameSite=strict
         strict-transport-security:
           - max-age=31536000; includeSubDomains
         x-api-request-id:
-          - 01JFAJRXX8FH2XFAV90PMJF74V
+          - 01JFFFXSMS2T9NKPJ343F97AR4
       status:
         code: 200
         message: OK

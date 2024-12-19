@@ -2,6 +2,13 @@
 {% import "macros/form_macros.html.j2" as macros with context %}
 {% block detail_content %}
     <div class="rvo-accordion">
+        <div id="measure-modal" class="minbzk-modal display-none">
+            <div class="modal-underlay" onclick="amt.closeModal('measure-modal')"></div>
+            <div class="modal-content rvo-layout-column rvo-layout-gap--md"
+                 style="height: auto">
+                <div id="dynamic-modal-content"></div>
+            </div>
+        </div>
         {% for (requirement, completed_measures_count, measures) in requirements_and_measures %}
             <details class="rvo-accordion__item">
                 <summary class="rvo-accordion__item-summary margin-bottom-large">
@@ -24,7 +31,7 @@
                             {% else %}
                                 <div class="rvo-status-indicator rvo-status-indicator--groen"></div>
                             {% endif %}
-                            {{ completed_measures_count }} / {{ measures | length }} {% trans %}measures executed{% endtrans %}
+                            {{ completed_measures_count }} / {{ measures | length }} {% trans %}measure executed{% endtrans %}
                         </div>
                     </div>
                 </summary>

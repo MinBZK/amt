@@ -21,13 +21,13 @@ interactions:
           \   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\n
           \   <link rel=\"icon\" type=\"image/x-icon\" href=\"/static/dist/@nl-rvo/assets/images/favicon/favicon.ico?etag=72468084736f22cc85d357218f5d2ec8\">\n
           \   <title>\n        testalgorithm1 | AMT\n    </title>\n    \n    \n        \n
-          \         <script type=\"text/javascript\" src=\"/static/dist/amt.js?etag=4f2d224cd9b1d4d7ea9066c2e9a12529\"></script>\n
+          \         <script type=\"text/javascript\" src=\"/static/dist/amt.js?etag=c6cbe99eaf1f66af057cc5354a6bcd43\"></script>\n
           \       \n    \n        \n          <script type=\"module\" src=\"/static/dist/@nl-rvo/design-tokens/index.mjs?etag=d1e69147f8a6b4f059708b747418020b\"></script>\n
           \       \n    \n    <script type=\"text/javascript\" src=\"/static/vendor/htmx/js/json-enc.js?etag=73c270c2deb80a8758471378bb47da4b\"></script>\n
           \   <script type=\"text/javascript\" src=\"/static/vendor/htmx/js/response-targets.js?etag=41861e3906eb6ed9a9d1da3861988633\"></script>\n
-          \   \n    \n    \n        <link rel=\"stylesheet\" href=\"/static/dist/main.css?etag=1116c631f406cc8e9d21bb78c96da97f\">\n
+          \   \n    \n    \n        <link rel=\"stylesheet\" href=\"/static/dist/main.css?etag=def8e296f71d4f3bf93c281bcbbd8142\">\n
           \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/assets/fonts/index.css?etag=e21212f18384f5e238578cadc76b9aa2\">\n
-          \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/assets/icons/index.css?etag=8b11b6f9aade3a822a83266f675e9d51\">\n
+          \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/assets/icons/index.css?etag=3d3e54f2dc3da251cc29463d2a2b6f17\">\n
           \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/assets/images/index.css?etag=12adc140f7a9ce482ad674eae573859f\">\n
           \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/design-tokens/index.css?etag=dd40546f9c018e7f67f6d1d247a1a31c\">\n
           \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/component-library-css/index.css?etag=5b52157d75d4cc408af30796ee685c54\">\n
@@ -116,12 +116,8 @@ interactions:
           naar rechts\"></span>\n                            <span class=\"rvo-breadcrumb-current-page\">Model
           card</span>\n                        </li>\n                    \n                \n
           \           </ol>\n        </div>\n    </div>\n\n    \n    <main>\n        \n
-          \   <div id=\"measure-modal\" class=\"minbzk-modal display-none\">\n        <div
-          class=\"modal-underlay\" onclick=\"amt.closeModal('measure-modal')\"></div>\n
-          \       <div class=\"modal-content rvo-layout-column rvo-layout-gap--md\"\n
-          \            style=\"height: auto\">\n            <div id=\"dynamic-modal-content\"></div>\n
-          \       </div>\n    </div>\n    <div id=\"delete-modal\" class=\"minbzk-modal
-          display-none\">\n        <div class=\"modal-underlay\" onclick=\"amt.closeModal('delete-modal')\"></div>\n
+          \   <div id=\"delete-modal\" class=\"minbzk-modal display-none\">\n        <div
+          class=\"modal-underlay\" onclick=\"amt.closeModal('delete-modal')\"></div>\n
           \       <div class=\"modal-content rvo-layout-column\"\n             style=\"overflow-x:
           hidden;\n                    height: auto;\n                    width: auto\">\n
           \           <div class=\"amt-flex-container\">\n                <h3 class=\"utrecht-heading-3
@@ -132,13 +128,13 @@ interactions:
           0.5em 0.4em;\">\n                <strong>Are you sure you want to delete your
           algoritmic system  testalgorithm1?</strong>\n            </p>\n            <p
           style=\"padding-block: 0.0em 1.25em;\">\n                Data will be stored
-          for at least 45 days before permanent\n                deletion.\n            </p>\n
-          \           <p class=\"utrecht-button-group\">\n                <button hx-headers='{\"X-CSRF-Token\":
-          \"00ad9f4deb849a739471062f010c85736d702f3c\"}'\n                        hx-delete=\"/algorithm/1\"\n
+          for at least 45 days before permanent deletion.\n            </p>\n            <p
+          class=\"utrecht-button-group\">\n                <button hx-headers='{\"X-CSRF-Token\":
+          \"d2df9aad8711e543fb723c08af7d01217e6937c1\"}'\n                        hx-delete=\"/algorithm/1\"\n
           \                       class=\"utrecht-button utrecht-button--primary-action
-          utrecht-button--rvo-md\"\n                        type=\"button\">\n                    Yes\n
-          \               </button>\n                <button class=\"utrecht-button
-          utrecht-button--secondary-action utrecht-button--rvo-md\"\n                        onclick=\"amt.closeModal('delete-modal')\"\n
+          utrecht-button--rvo-md\"\n                        type=\"button\">Yes</button>\n
+          \               <button class=\"utrecht-button utrecht-button--secondary-action
+          utrecht-button--rvo-md\"\n                        onclick=\"amt.closeModal('delete-modal')\"\n
           \                       type=\"button\">No</button>\n            </p>\n        </div>\n
           \   </div>\n    <div class=\"rvo-max-width-layout rvo-max-width-layout--md
           rvo-max-width-layout-inline-padding--none\">\n        <div class=\"rvo-content\">\n
@@ -157,200 +153,39 @@ interactions:
           \                       <span class=\"utrecht-icon rvo-icon rvo-icon-verwijderen
           rvo-icon--xl rvo-icon--hemelblauw rvo-link__icon--before\"\n                              role=\"img\"\n
           \                             aria-label=\"Home\"></span>\n                    </a>\n
-          \               </div>\n            </div>\n        </div>\n        <!-- Requirements
-          Widget -->\n        <div class=\"rvo-layout-grid-container\">\n            <div
-          class=\"rvo-layout-grid rvo-layout-gap--sm rvo-layout-grid-columns--two rvo-layout-grid-layout--1fr\">\n
-          \               <div class=\"rvo-card rvo-card--padding-md\"\n                     style=\"min-height:
-          225px;\n                            display: flex;\n                            flex-direction:
-          column\">\n                    <div class=\"rvo-layout-row\"\n                         style=\"display:
-          flex;\n                                justify-content: space-between\">\n
-          \                       <h5 class=\"amt-widget-title rvo-link--with-icon\">\n
-          \                           <span class=\"utrecht-icon rvo-icon rvo-icon-vinkje
-          rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before\"\n                                  role=\"img\"\n
-          \                                 aria-label=\"\"></span>Does the algorithm
-          meet the requirements?\n                        </h5>\n                        <a
-          class=\"rvo-text--subtle rvo-text--bold\">0/37\n                        Done</a>\n
-          \                   </div>\n                    <ul class=\"rvo-item-list\">\n
-          \                       \n                            \n                            \n
-          \                               <li class=\"rvo-item-list__item\">\n                                    <div
-          class=\"rvo-layout-row rvo-layout-gap--sm\"\n                                         style=\"display:
-          flex;\n                                                justify-content: space-between\">\n
-          \                                       <div class=\"rvo-layout-row rvo-layout-gap--sm
-          rvo-layout-align-items-start\">\n                                            \n
-          \                                               <div class=\"rvo-status-indicator
-          rvo-status-indicator--hemelblauw\"></div>\n                                            \n
-          \                                           <a class=\"rvo-link rvo-link--no-underline
-          rvo-link--zwart\" href=\"#\">Organisaties die algoritmes gebruiken voor publieke
-          taken nemen besluiten zorgvuldig.</a>\n                                        </div>\n
-          \                                       <div style=\"white-space: nowrap\">\n
-          \                                           \n                                                <a
-          class=\"rvo-text--subtle\">To do</a>\n                                            \n
-          \                                       </div>\n                                    </div>\n
-          \                               </li>\n                            \n                        \n
-          \                           \n                            \n                                <li
-          class=\"rvo-item-list__item\">\n                                    <div class=\"rvo-layout-row
-          rvo-layout-gap--sm\"\n                                         style=\"display:
-          flex;\n                                                justify-content: space-between\">\n
-          \                                       <div class=\"rvo-layout-row rvo-layout-gap--sm
-          rvo-layout-align-items-start\">\n                                            \n
-          \                                               <div class=\"rvo-status-indicator
-          rvo-status-indicator--hemelblauw\"></div>\n                                            \n
-          \                                           <a class=\"rvo-link rvo-link--no-underline
-          rvo-link--zwart\" href=\"#\">Hoog-risico-AI-systemen zijn voorzien van een
-          risicobeheersysteem</a>\n                                        </div>\n
-          \                                       <div style=\"white-space: nowrap\">\n
-          \                                           \n                                                <a
-          class=\"rvo-text--subtle\">To do</a>\n                                            \n
-          \                                       </div>\n                                    </div>\n
-          \                               </li>\n                            \n                        \n
-          \                           \n                            \n                                <li
-          class=\"rvo-item-list__item\">\n                                    <div class=\"rvo-layout-row
-          rvo-layout-gap--sm\"\n                                         style=\"display:
-          flex;\n                                                justify-content: space-between\">\n
-          \                                       <div class=\"rvo-layout-row rvo-layout-gap--sm
-          rvo-layout-align-items-start\">\n                                            \n
-          \                                               <div class=\"rvo-status-indicator
-          rvo-status-indicator--hemelblauw\"></div>\n                                            \n
-          \                                           <a class=\"rvo-link rvo-link--no-underline
-          rvo-link--zwart\" href=\"#\">Datasets voor hoog-risico-AI-systemen voldoen
-          aan kwaliteitscriteria</a>\n                                        </div>\n
-          \                                       <div style=\"white-space: nowrap\">\n
-          \                                           \n                                                <a
-          class=\"rvo-text--subtle\">To do</a>\n                                            \n
-          \                                       </div>\n                                    </div>\n
-          \                               </li>\n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                           \n                            \n                        \n
-          \                   </ul>\n                    <a class=\"rvo-link rvo-link--normal
-          rvo-link--with-icon\"\n                       href=\"/algorithm/1/details/system_card/requirements\"\n
-          \                      style=\"margin-top: auto\">\n                        <span
-          class=\"utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--md rvo-icon--hemelblauw
-          rvo-link__icon--before\"\n                              role=\"img\"\n                              aria-label=\"Home\"></span>\n
-          \                       Go to all requirements\n                    </a>\n
-          \               </div>\n                <!-- Instrument Widget -->\n                <div
-          class=\"rvo-card rvo-card--padding-md\"\n                     style=\"min-height:
-          225px;\n                            display: flex;\n                            flex-direction:
-          column\">\n                    <div class=\"rvo-layout-row\"\n                         style=\"display:
-          flex;\n                                justify-content: space-between\">\n
-          \                       <h5 class=\"amt-widget-title rvo-link--with-icon\">\n
-          \                           <span class=\"utrecht-icon rvo-icon rvo-icon-permanent-beta
-          rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before\"\n                                  role=\"img\"\n
-          \                                 aria-label=\"\"></span>Which instruments
-          are executed?\n                        </h5>\n                        <a class=\"rvo-text--bold
-          rvo-text--subtle\">0/2\n                        Done</a>\n                    </div>\n
-          \                   <!-- Instruments widgets -->\n                    <ul
-          class=\"rvo-item-list\">\n                        \n                            \n
-          \                           \n                                <li class=\"rvo-item-list__item\">\n
-          \                                   <div class=\"rvo-layout-row rvo-layout-gap--sm\"\n
-          \                                        style=\"display: flex;\n                                                justify-content:
-          space-between\">\n                                        <div class=\"rvo-layout-row
-          rvo-layout-gap--sm rvo-layout-align-items-start\">\n                                            \n
-          \                                               <div class=\"rvo-status-indicator
-          rvo-status-indicator--oranje\"></div>\n                                            \n
-          \                                           <a class=\"rvo-link rvo-link--no-underline
-          rvo-link--zwart\" href=\"#\">Impact Assessment Mensenrechten en Algoritmes
-          (IAMA)</a>\n                                        </div>\n                                        <div
-          style=\"white-space: nowrap\">\n                                            \n
-          \                                               <a class=\"rvo-text--subtle\">To
-          do</a>\n                                            \n                                        </div>\n
-          \                                   </div>\n                                </li>\n
-          \                           \n                        \n                            \n
-          \                           \n                                <li class=\"rvo-item-list__item\">\n
-          \                                   <div class=\"rvo-layout-row rvo-layout-gap--sm\"\n
-          \                                        style=\"display: flex;\n                                                justify-content:
-          space-between\">\n                                        <div class=\"rvo-layout-row
-          rvo-layout-gap--sm rvo-layout-align-items-start\">\n                                            \n
-          \                                               <div class=\"rvo-status-indicator
-          rvo-status-indicator--oranje\"></div>\n                                            \n
-          \                                           <a class=\"rvo-link rvo-link--no-underline
-          rvo-link--zwart\" href=\"#\">AI Impact Assessment (AIIA)</a>\n                                        </div>\n
-          \                                       <div style=\"white-space: nowrap\">\n
-          \                                           \n                                                <a
-          class=\"rvo-text--subtle\">To do</a>\n                                            \n
-          \                                       </div>\n                                    </div>\n
-          \                               </li>\n                            \n                        \n
-          \                   </ul>\n                    <a class=\"rvo-link rvo-link--normal
-          rvo-link--with-icon\"\n                       href=\"/algorithm/1/details/system_card/instruments\"\n
-          \                      style=\"margin-top: auto\">\n                        <span
-          class=\"utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--md rvo-icon--hemelblauw
-          rvo-link__icon--before\"\n                              role=\"img\"\n                              aria-label=\"Home\"></span>\n
-          \                       Go to all instruments\n                    </a>\n
           \               </div>\n            </div>\n        </div>\n        <!-- tabs
-          container -->\n        <div class=\"margin-top-large\">\n            <ul class=\"rvo-tabs
-          rvo-ul rvo-ul--no-margin rvo-ul--no-padding rvo-ul--icon rvo-ul--icon-option-2\"\n
-          \               role=\"tablist\"\n                aria-label=\"Tabs\">\n                \n
-          \                   <li role=\"presentation\" class=\"rvo-tabs__item\">\n
-          \                       <a data-navigation=\"tab:/algorithm/1/details\"\n
-          \                          class=\"rvo-link rvo-tabs__item-link rvo-link--no-underline
-          rvo-link--normal\"\n                           role=\"tab\"\n                           aria-selected=\"true\"\n
-          \                          href=\"/algorithm/1/details\">Info</a>\n                    </li>\n
-          \               \n                    <li role=\"presentation\" class=\"rvo-tabs__item\">\n
-          \                       <a data-navigation=\"tab:/algorithm/1/details/system_card\"\n
+          container -->\n        <div>\n            <ul class=\"rvo-tabs rvo-ul rvo-ul--no-margin
+          rvo-ul--no-padding rvo-ul--icon rvo-ul--icon-option-2\"\n                role=\"tablist\"\n
+          \               aria-label=\"Tabs\">\n                \n                    <li
+          role=\"presentation\" class=\"rvo-tabs__item\">\n                        <a
+          data-navigation=\"tab:/algorithm/1/details\"\n                           class=\"rvo-link
+          rvo-tabs__item-link rvo-link--no-underline rvo-link--normal\"\n                           role=\"tab\"\n
+          \                          aria-selected=\"true\"\n                           href=\"/algorithm/1/details\">Info</a>\n
+          \                   </li>\n                \n                    <li role=\"presentation\"
+          class=\"rvo-tabs__item\">\n                        <a data-navigation=\"tab:/algorithm/1/details/system_card\"\n
           \                          class=\"rvo-link rvo-tabs__item-link rvo-link--no-underline
           rvo-link--normal\"\n                           role=\"tab\"\n                           aria-selected=\"true\"\n
           \                          href=\"/algorithm/1/details/system_card\">Algorithm
           details</a>\n                    </li>\n                \n                    <li
           role=\"presentation\" class=\"rvo-tabs__item\">\n                        <a
-          data-navigation=\"tab:/algorithm/1/details/model/inference\"\n                           class=\"rvo-link
+          data-navigation=\"tab:/algorithm/1/details/system_card/compliance\"\n                           class=\"rvo-link
           rvo-tabs__item-link rvo-link--no-underline rvo-link--normal\"\n                           role=\"tab\"\n
-          \                          aria-selected=\"true\"\n                           href=\"/algorithm/1/details/model/inference\">Model</a>\n
-          \                   </li>\n                \n                    <li role=\"presentation\"
-          class=\"rvo-tabs__item\">\n                        <a data-navigation=\"tab:/algorithm/1/details/system_card/requirements\"\n
-          \                          class=\"rvo-link rvo-tabs__item-link rvo-link--no-underline
-          rvo-link--normal\"\n                           role=\"tab\"\n                           aria-selected=\"true\"\n
-          \                          href=\"/algorithm/1/details/system_card/requirements\">Requirements</a>\n
-          \                   </li>\n                \n                    <li role=\"presentation\"
-          class=\"rvo-tabs__item\">\n                        <a data-navigation=\"tab:/algorithm/1/details/system_card/data\"\n
-          \                          class=\"rvo-link rvo-tabs__item-link rvo-link--no-underline
-          rvo-link--normal\"\n                           role=\"tab\"\n                           aria-selected=\"true\"\n
-          \                          href=\"/algorithm/1/details/system_card/data\">Data</a>\n
+          \                          aria-selected=\"true\"\n                           href=\"/algorithm/1/details/system_card/compliance\">Compliance</a>\n
           \                   </li>\n                \n                    <li role=\"presentation\"
           class=\"rvo-tabs__item\">\n                        <a data-navigation=\"tab:/algorithm/1/details/tasks\"\n
           \                          class=\"rvo-link rvo-tabs__item-link rvo-link--no-underline
           rvo-link--normal\"\n                           role=\"tab\"\n                           aria-selected=\"true\"\n
           \                          href=\"/algorithm/1/details/tasks\">Tasks</a>\n
           \                   </li>\n                \n                    <li role=\"presentation\"
-          class=\"rvo-tabs__item\">\n                        <a data-navigation=\"tab:/algorithm/1/details/system_card/instruments\"\n
+          class=\"rvo-tabs__item\">\n                        <a data-navigation=\"tab:/algorithm/1/members\"\n
           \                          class=\"rvo-link rvo-tabs__item-link rvo-link--no-underline
           rvo-link--normal\"\n                           role=\"tab\"\n                           aria-selected=\"true\"\n
-          \                          href=\"/algorithm/1/details/system_card/instruments\">Instruments</a>\n
-          \                   </li>\n                \n            </ul>\n        </div>\n
-          \       <div class=\"margin-top-large\">\n            \n    <div class=\"rvo-layout-column
-          rvo-layout-gap--md\">\n        <h2 class=\"utrecht-heading-2 rvo-heading--no-margins\">Model
-          card</h2>\n        <span class=\"rvo-text\">Last updated: 0 seconds\n        ago</span>\n
-          \       <div class=\"rvo-table--responsive\">\n            <table class=\"rvo-table\">\n
+          \                          href=\"/algorithm/1/members\">Members</a>\n                    </li>\n
+          \               \n            </ul>\n        </div>\n        <div class=\"margin-top-large\">\n
+          \           \n    <div class=\"rvo-layout-column rvo-layout-gap--md\">\n        <h2
+          class=\"utrecht-heading-2 rvo-heading--no-margins\">Model card</h2>\n        <span
+          class=\"rvo-text\">Last updated: 0 seconds\n        ago</span>\n        <div
+          class=\"rvo-table--responsive\">\n            <table class=\"rvo-table\">\n
           \               <thead class=\"rvo-table-head\">\n                    <tr
           class=\"rvo-table-row\">\n                        <th scope=\"col\" class=\"rvo-table-header\">Attribute</th>\n
           \                       <th scope=\"col\" class=\"rvo-table-header\">Value</th>\n
@@ -605,16 +440,16 @@ interactions:
         content-language:
           - en,nl
         content-length:
-          - "49280"
+          - "35040"
         content-type:
           - text/html; charset=utf-8
         set-cookie:
-          - fastapi-csrf-token=IjAwYWQ5ZjRkZWI4NDlhNzM5NDcxMDYyZjAxMGM4NTczNmQ3MDJmM2Mi.Z2GUmQ.JbzfRRwiVpvgZ58NCdcfnmh8d2A;
+          - fastapi-csrf-token=ImQyZGY5YWFkODcxMWU1NDNmYjcyM2MwOGFmN2QwMTIxN2U2OTM3YzEi.Z2QYSw.VEnvHqHR_RkX7C4ozaPM4agfwe0;
             HttpOnly; Max-Age=3600; Path=/; SameSite=strict
         strict-transport-security:
           - max-age=31536000; includeSubDomains
         x-api-request-id:
-          - 01JFAJRY2TQ8CFMZFH5ZPP75N1
+          - 01JFFFXSSCAZJPEB8FBZKE5TFW
       status:
         code: 200
         message: OK
