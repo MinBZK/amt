@@ -1,4 +1,5 @@
 import logging
+import re
 from collections.abc import Sequence
 from enum import Enum
 from os import PathLike
@@ -16,6 +17,7 @@ from starlette.templating import _TemplateResponse  # pyright: ignore [reportPri
 from amt.api.http_browser_caching import url_for_cache
 from amt.api.localizable import LocalizableEnum
 from amt.api.navigation import NavigationItem, get_main_menu
+from amt.api.routes.shared import Editable
 from amt.core.authorization import get_user
 from amt.core.config import VERSION, get_settings
 from amt.core.internationalization import (
@@ -58,8 +60,16 @@ def get_undefined_behaviour() -> type[Undefined]:
     return StrictUndefined if get_settings().DEBUG else Undefined
 
 
+def replace_digits_in_brackets(string: str) -> str:
+    return re.sub(r"\[(\d+)]", "[*]", string)
+
+
+def is_editable_resource(full_resource_path: str, editables: list[Editable]) -> bool:
+    return replace_digits_in_brackets(full_resource_path) in editables
+
+
 def get_nested(obj: Any, attr_path: str) -> Any:  # noqa: ANN401
-    attrs = attr_path.lstrip(".").split(".")
+    attrs = attr_path.lstrip("/").split("/") if "/" in attr_path else attr_path.lstrip(".").split(".")
     for attr in attrs:
         if hasattr(obj, attr):
             obj = getattr(obj, attr)
@@ -166,4 +176,6 @@ templates.env.globals.update(is_nested_enum=is_nested_enum)  # pyright: ignore [
 templates.env.globals.update(nested_enum=nested_enum)  # pyright: ignore [reportUnknownMemberType]
 templates.env.globals.update(nested_enum_value=nested_enum_value)  # pyright: ignore [reportUnknownMemberType]
 templates.env.globals.update(isinstance=instance)  # pyright: ignore [reportUnknownMemberType]
+templates.env.globals.update(is_editable_resource=is_editable_resource)  # pyright: ignore [reportUnknownMemberType]
+templates.env.globals.update(replace_digits_in_brackets=replace_digits_in_brackets)  # pyright: ignore [reportUnknownMemberType]
 templates.env.add_extension("jinja2_base64_filters.Base64Filters")  # pyright: ignore [reportUnknownMemberType]

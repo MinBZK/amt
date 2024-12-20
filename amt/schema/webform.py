@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from enum import Enum
 from typing import Any
 
@@ -13,6 +14,20 @@ class WebFormFieldType(Enum):
     DISABLED = "disabled"
     SEARCH_SELECT = "search_select"
     SUBMIT = "submit"
+
+
+@dataclass
+class WebFormFieldImplementationTypeFields:
+    name: str
+    type: WebFormFieldType | None
+
+
+class WebFormFieldImplementationType:
+    TEXT = WebFormFieldImplementationTypeFields("text", WebFormFieldType.TEXT)
+    PARENT = WebFormFieldImplementationTypeFields("parent", None)
+    TEXTAREA = WebFormFieldImplementationTypeFields("textarea", WebFormFieldType.TEXTAREA)
+    SELECT_MY_ORGANIZATIONS = WebFormFieldImplementationTypeFields("select_my_organizations", WebFormFieldType.SELECT)
+    SELECT_LIFECYCLE = WebFormFieldImplementationTypeFields("select_lifecycle", WebFormFieldType.SELECT)
 
 
 class WebFormOption:

@@ -1,6 +1,6 @@
-{% macro editable(obj, field_path, type) %}
+{% macro editable(obj, field_path, type, resource) %}
     <span hx-target="this">
-        {% set value = nested_value(obj, field_path) %}
+    {% set value = nested_value(obj, field_path) %}
         {% if value is string and value.startswith('http') %}
             <a href="{{ value }}" target="_blank" rel="noopener noreferrer">{{ value }}</a>
         {% else %}
@@ -9,87 +9,107 @@
                     <span class="utrecht-icon rvo-icon rvo-icon-bevestiging rvo-icon--lg"
                           role="img"></span>
                     {{ nested_enum_value(obj, field_path, language).display_value }}
-                </span>
+            </span>
             {% else %}
                 {{ value }}
             {% endif %}
         {% endif %}
         <span class="rvo-link rvo-link--hover rvo-link--with-icon"
-              hx-get="{{ base_href }}/edit/{{ field_path | replace('.', '/') }}?edit_type={{ type }}"
+              hx-get="{{ base_href }}/edit/{{ field_path | replace('.', '/') }}?edit_type={{ type }}&resource={{ resource }}"
               hx-swap="outerHTML"
               style="cursor: pointer;
                      float:right">
             <span class="utrecht-icon rvo-icon rvo-icon-bewerken rvo-icon--md rvo-icon--hemelblauw"
                   role="img"
-                  aria-label="{% trans %}Edit{% endtrans %}"></span> <a class="rvo-link"
-    href="#"
-    style="font-size: 14px !important;
+                  aria-label="{% trans %}Edit{% endtrans %}"></span>
+            <a class="rvo-link" href="#" onclick="event.preventDefault()" style="font-size: 14px !important;
            color: rgb(0, 123, 199) !important">{% trans %}Edit{% endtrans %}</a>
         </span>
-    {% endmacro %}
-    {% macro edit(obj, field_path, edit_type) %}
-        <span hx-target="this">
-            <form hx-put="{{ base_href }}/update/{{ field_path | replace('.', '/') }}?edit_type={{ edit_type }}"
-                  hx-ext="json-enc"
-                  hx-target-error="#errorContainer"
-                  hx-swap="innerHTML"
-                  method="post"
-                  hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
-                  hx-swap="outerHTML">
-                <div id="error-{{ field_path }}" class="htmx-error-oob"></div>
-                <div class="rvo-layout-grid-container">
-                    <div class="rvo-layout-grid rvo-layout-gap--md rvo-layout-grid-columns--two rvo-layout-grid-layout--1fr">
-                        <div>
-                            {% if edit_type == "select_my_organizations" %}
-                                {% set value = algorithm.organization.id %}
-                                <div class="rvo-select-wrapper">
-                                    <select id="field"
-                                            name="value"
-                                            class="utrecht-select utrecht-select--html-select">
-                                        {% for e in select_options %}
-                                            <option value="{{ e.value }}"
-                                                    {% if e.value == value|string %}selected="selected"{% endif %}>
-                                                {{ e.display_value }}
-                                            </option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                            {% elif is_nested_enum(obj, field_path) %}
-                                {% set value = nested_value(obj, field_path) %}
-                                <div class="rvo-select-wrapper">
-                                    <select id="field"
-                                            name="value"
-                                            class="utrecht-select utrecht-select--html-select">
-                                        {% for e in nested_enum(obj, field_path, language) %}
-                                            <option value="{{ e.value }}"
-                                                    {% if e.value == value %}selected="selected"{% endif %}>
-                                                {{ e.display_value }}
-                                            </option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                            {% else %}
-                                {% set value = nested_value(obj, field_path) %}
-                                <input type="text"
-                                       name="value"
-                                       value="{{ value }}"
-                                       class="utrecht-textbox utrecht-textbox--html-input" />
-                            {% endif %}
-                        </div>
-                        <div>
-                            <button type="submit"
-                                    class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md">
-                                {% trans %}Save{% endtrans %}
-                            </button>
-                            <button hx-get="{{ base_href }}/cancel/{{ field_path | replace('.', '/') }}?edit_type={{ edit_type }}"
-                                    hx-swap="outerHTML"
-                                    class="utrecht-button utrecht-button--secondary-action utrecht-button-group__align-right utrecht-button--rvo-md">
-                                {% trans %}Cancel{% endtrans %}
-                            </button>
-                        </div>
-                    </div>
+    </span>
+{% endmacro %}
+{% macro edit(obj, field_path, edit_type, resource) %}
+    <div hx-target="this">
+        <form
+            hx-put="{{ base_href }}/update/{{ field_path | replace('.', '/') }}?edit_type={{ edit_type }}&resource={{ resource }}"
+            hx-ext="json-enc"
+            hx-target-error="#errorContainer"
+            hx-swap="innerHTML"
+            method="post"
+            hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
+            hx-swap="outerHTML">
+            <div id="error-{{ field_path }}" class="htmx-error-oob"></div>
+            <div class="rvo-layout-grid-container">
+                {% if web_form_field_type == WebFormFieldType.TEXTAREA %}
+                {% set value = nested_value(obj, field_path) %}
+                <div>
+                    <!-- TODO: classes utrecht-textarea seem to be missing? wrong NL design version? -->
+                    <textarea
+                        id="field"
+                        name="value"
+                        placeholder=""
+                        class="utrecht-textbox utrecht-textarea utrecht-textarea--html-textarea"
+                        dir="auto"
+                    >{{ value }}</textarea>
                 </div>
-            </form>
-            <div id="errorContainer" class="display-none"></div>
-        </span>
-    {% endmacro %}
+                <div style="text-align: right">
+                    {{ inline_editor_form_buttons(field_path, type, resource) }}
+                </div>
+                {% else %}
+                <div
+                    class="rvo-layout-grid rvo-layout-gap--md rvo-layout-grid--division" style="grid-template-columns: 2fr 1fr;">
+                        {% if web_form_field_type == WebFormFieldType.SELECT %}
+                            {% set value = nested_value(obj, field_path) %}
+                            <div class="rvo-select-wrapper">
+                                <select id="field"
+                                        name="value"
+                                        class="utrecht-select utrecht-select--html-select">
+                                    {% for e in select_options %}
+                                        <option value="{{ e.value }}"
+                                                {% if e.value == value|string %}selected="selected"{% endif %}>
+                                            {{ e.display_value }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        {% elif is_nested_enum(obj, field_path) %}
+                            {% set value = nested_value(obj, field_path) %}
+                            <div class="rvo-select-wrapper">
+                                <select id="field"
+                                        name="value"
+                                        class="utrecht-select utrecht-select--html-select">
+                                    {% for e in nested_enum(obj, field_path, language) %}
+                                        <option value="{{ e.value }}"
+                                                {% if e.value == value %}selected="selected"{% endif %}>
+                                            {{ e.display_value }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        {% else %}
+                            {% set value = nested_value(obj, field_path) %}
+                            <input type="text"
+                                   name="value"
+                                   value="{{ value }}"
+                                   class="utrecht-textbox utrecht-textbox--html-input"/>
+                        {% endif %}
+                    <div style="text-align: right">
+                        {{ inline_editor_form_buttons(field_path, type, resource) }}
+                    </div>
+            </div>
+                {% endif %}
+        </form>
+    <div id="errorContainer" class="display-none"></div>
+    </div>
+{% endmacro %}
+{% macro inline_editor_form_buttons(field_path, type, resource) %}
+    <button type="submit"
+            class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md">
+        {% trans %}Save{% endtrans %}
+    </button>
+    <button
+        hx-get="{{ base_href }}/cancel/{{ field_path | replace('.', '/') }}?edit_type={{ edit_type }}&resource={{ resource }}"
+        hx-swap="outerHTML"
+        class="utrecht-button utrecht-button--secondary-action utrecht-button-group__align-right utrecht-button--rvo-md">
+        {% trans %}Cancel{% endtrans %}
+    </button>
+{% endmacro %}
