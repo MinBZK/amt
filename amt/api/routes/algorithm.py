@@ -1,6 +1,7 @@
 import asyncio
 import datetime
 import logging
+import typing
 from collections import defaultdict
 from collections.abc import Sequence
 from typing import Annotated, Any, cast
@@ -13,6 +14,7 @@ from ulid import ULID
 
 from amt.api.deps import templates
 from amt.api.forms.measure import get_measure_form
+from amt.api.lifecycles import get_localized_lifecycles
 from amt.api.navigation import (
     BaseNavigationItem,
     Navigation,
@@ -20,9 +22,9 @@ from amt.api.navigation import (
     resolve_base_navigation_items,
     resolve_navigation_items,
 )
-from amt.api.routes.shared import get_filters_and_sort_by
+from amt.api.routes.shared import get_editables, get_filters_and_sort_by
 from amt.core.authorization import get_user
-from amt.core.exceptions import AMTError, AMTNotFound, AMTRepositoryError
+from amt.core.exceptions import AMTAuthorizationError, AMTError, AMTNotFound, AMTRepositoryError
 from amt.core.internationalization import get_current_translation
 from amt.enums.status import Status
 from amt.models import Algorithm
@@ -33,7 +35,7 @@ from amt.schema.measure import ExtendedMeasureTask, MeasureTask, Person
 from amt.schema.requirement import RequirementTask
 from amt.schema.system_card import Owner, SystemCard
 from amt.schema.task import MovedTask
-from amt.schema.webform import WebFormOption
+from amt.schema.webform import WebFormFieldImplementationType, WebFormOption
 from amt.services.algorithms import AlgorithmsService
 from amt.services.instruments_and_requirements_state import InstrumentStateService, RequirementsStateService
 from amt.services.measures import MeasuresService, create_measures_service
@@ -240,27 +242,39 @@ async def get_algorithm_edit(
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
     organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
     path: str,
+    resource: str,
     edit_type: str = "systemcard",
 ) -> HTMLResponse:
+    editable = get_editables(context_variables={"algorithm_id": algorithm_id}).get(resource)
+    resource_name, resource_id, resource_path = editable.resource.split("/", 2)
+
     algorithm, context = await get_algorithm_context(algorithm_id, algorithms_service, request)
     context.update(
         {
-            "path": path.replace("/", "."),
+            "path": resource_path,
+            "resource": resource,
             "edit_type": edit_type,
             "object": algorithm,
             "base_href": f"/algorithm/{ algorithm_id }",
         }
     )
 
-    if edit_type == "select_my_organizations":
+    if editable.implementation_type == WebFormFieldImplementationType.SELECT_MY_ORGANIZATIONS:
         user = get_user(request)
-
         my_organizations = await organizations_service.get_organizations_for_user(user_id=user["sub"] if user else None)
-
         context["select_options"] = [
             WebFormOption(value=str(organization.id), display_value=organization.name)
             for organization in my_organizations
         ]
+        context["web_form_field_type"] = WebFormFieldImplementationType.SELECT_MY_ORGANIZATIONS.type
+    elif editable.implementation_type == WebFormFieldImplementationType.SELECT_LIFECYCLE:
+        context["select_options"] = [
+            WebFormOption(value=str(lifecycle.value), display_value=lifecycle.display_value)
+            for lifecycle in get_localized_lifecycles(request)
+        ]
+        context["web_form_field_type"] = WebFormFieldImplementationType.SELECT_MY_ORGANIZATIONS.type
+    else:
+        context["web_form_field_type"] = editable.implementation_type.type
 
     return templates.TemplateResponse(request, "parts/edit_cell.html.j2", context)
 
@@ -271,6 +285,7 @@ async def get_algorithm_cancel(
     algorithm_id: int,
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
     path: str,
+    resource: str,
     edit_type: str = "systemcard",
 ) -> HTMLResponse:
     algorithm, context = await get_algorithm_context(algorithm_id, algorithms_service, request)
@@ -280,6 +295,7 @@ async def get_algorithm_cancel(
             "edit_type": edit_type,
             "base_href": f"/algorithm/{ algorithm_id }",
             "object": algorithm,
+            "resource": resource,
         }
     )
     return templates.TemplateResponse(request, "parts/view_cell.html.j2", context)
@@ -289,7 +305,7 @@ class UpdateFieldModel(BaseModel):
     value: str
 
 
-def set_path(algorithm: dict[str, Any] | object, path: str, value: str) -> None:
+def set_path(algorithm: dict[str, Any] | object, path: str, value: typing.Any) -> None:
     if not path:
         raise ValueError("Path cannot be empty")
 
@@ -320,25 +336,37 @@ async def get_algorithm_update(
     organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
     update_data: UpdateFieldModel,
     path: str,
+    resource: str,
     edit_type: str = "systemcard",
 ) -> HTMLResponse:
+    editable = get_editables(context_variables={"algorithm_id": algorithm_id}).get(resource)
+    resource_name, resource_id, resource_path = editable.resource.split("/", 2)
+
     algorithm, context = await get_algorithm_context(algorithm_id, algorithms_service, request)
     context.update(
         {"path": path.replace("/", "."), "edit_type": edit_type, "base_href": f"/algorithm/{ algorithm_id }"}
     )
 
-    if edit_type == "select_my_organizations":
-        organization = await organizations_repository.find_by_id(int(update_data.value))
-        algorithm.organization = organization
+    if editable.implementation_type == WebFormFieldImplementationType.SELECT_MY_ORGANIZATIONS:
+        user_id = get_user_id_or_error(request)
+        organization = await organizations_repository.find_by_id_and_user_id(
+            organization_id=int(update_data.value), user_id=user_id
+        )
+        if organization is None:
+            raise AMTAuthorizationError()
+        set_path(algorithm, resource_path, organization)
         # TODO: we need to know which organization to update and what to remove
         if not algorithm.system_card.owners:
             algorithm.system_card.owners = [Owner(organization=organization.name, oin=str(organization.id))]
         algorithm.system_card.owners[0].organization = organization.name
     else:
         set_path(algorithm, path, update_data.value)
+        for target_editable in editable.couples:
+            # for now, we ignore the resource identified and id because we already know it..
+            set_path(algorithm, target_editable.resource.split("/", 2)[2], update_data.value)
 
     algorithm = await algorithms_service.update(algorithm)
-    context.update({"object": algorithm})
+    context.update({"object": algorithm, "resource": resource})
     return templates.TemplateResponse(request, "parts/view_cell.html.j2", context)
 
 
@@ -351,6 +379,8 @@ async def get_system_card(
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
     instrument_state = await get_instrument_state(algorithm.system_card)
     requirements_state = await get_requirements_state(algorithm.system_card)
+
+    editables = get_editables(context_variables={"algorithm_id": algorithm_id})
 
     tab_items = get_algorithm_details_tabs(request)
 
@@ -372,6 +402,8 @@ async def get_system_card(
         "algorithm_id": algorithm.id,
         "tab_items": tab_items,
         "breadcrumbs": breadcrumbs,
+        "editables": editables,
+        "base_href": f"/algorithm/{ algorithm_id }",
     }
 
     return templates.TemplateResponse(request, "pages/system_card.html.j2", context)

@@ -11,12 +11,12 @@ from uuid import UUID
 from fastapi import Depends
 
 from amt.core.exceptions import AMTNotFound
-from amt.models import Algorithm
+from amt.models import Algorithm, Organization
 from amt.repositories.algorithms import AlgorithmsRepository
 from amt.repositories.organizations import OrganizationsRepository
 from amt.schema.algorithm import AlgorithmNew
 from amt.schema.instrument import InstrumentBase
-from amt.schema.system_card import AiActProfile, SystemCard
+from amt.schema.system_card import AiActProfile, SystemCard, Owner
 from amt.services.instruments import InstrumentsService, create_instrument_service
 from amt.services.task_registry import get_requirements_and_measures
 
@@ -49,6 +49,11 @@ class AlgorithmsService:
         return algorithm
 
     async def create(self, algorithm_new: AlgorithmNew, user_id: UUID | str) -> Algorithm:
+
+        organization: Organization = await self.organizations_repository.find_by_id_and_user_id(
+            algorithm_new.organization_id, user_id
+        )
+
         system_card_from_template = None
         if algorithm_new.template_id:
             template_files = get_template_files()
@@ -80,6 +85,7 @@ class AlgorithmsService:
             instruments=instruments,
             requirements=requirements,
             measures=measures,
+            owners=[Owner(organization=organization.name)]
         )
 
         if system_card_from_template is not None:
@@ -103,9 +109,7 @@ class AlgorithmsService:
             system_card = SystemCard.model_validate(system_card_merged)
 
         algorithm = Algorithm(name=algorithm_new.name, lifecycle=algorithm_new.lifecycle, system_card=system_card)
-        algorithm.organization = await self.organizations_repository.find_by_id_and_user_id(
-            algorithm_new.organization_id, user_id
-        )
+        algorithm.organization = organization
 
         algorithm = await self.update(algorithm)
 

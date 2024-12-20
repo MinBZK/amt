@@ -163,6 +163,7 @@ async def get_by_slug(
     context = {
         "base_href": f"/organizations/{ slug }",
         "organization": organization,
+        "organization_id": organization.id,
         "tab_items": tab_items,
         "breadcrumbs": breadcrumbs,
     }
@@ -187,8 +188,9 @@ async def get_organization_edit(
     path: str,
     slug: str,
     edit_type: str,
+    resource: str,
 ) -> HTMLResponse:
-    context: dict[str, Any] = {"base_href": f"/organizations/{ slug }"}
+    context: dict[str, Any] = {"base_href": f"/organizations/{ slug }", "resource": resource}
     organization = await get_organization_or_error(organizations_repository, request, slug)
     context.update({"path": path.replace("/", "."), "edit_type": edit_type, "object": organization})
     return templates.TemplateResponse(request, "parts/edit_cell.html.j2", context)
@@ -201,11 +203,13 @@ async def get_organization_cancel(
     path: str,
     edit_type: str,
     slug: str,
+    resource: str,
 ) -> HTMLResponse:
     context: dict[str, Any] = {
         "base_href": f"/organizations/{ slug }",
         "path": path.replace("/", "."),
         "edit_type": edit_type,
+        "resource": resource,
     }
     organization = await get_organization_or_error(organizations_repository, request, slug)
     context.update({"object": organization})
@@ -220,11 +224,13 @@ async def get_organization_update(
     path: str,
     edit_type: str,
     slug: str,
+    resource: str,
 ) -> HTMLResponse:
     context: dict[str, Any] = {
         "base_href": f"/organizations/{ slug }",
         "path": path.replace("/", "."),
         "edit_type": edit_type,
+        "resource": resource,
     }
     organization = await get_organization_or_error(organizations_repository, request, slug)
     context.update({"object": organization})
