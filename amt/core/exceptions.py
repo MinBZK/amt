@@ -78,6 +78,11 @@ class AMTAuthorizationFlowError(AMTHTTPException):
         self.detail: str = _("Something went wrong during the authorization flow. Please try again later.")
         super().__init__(status.HTTP_401_UNAUTHORIZED, self.detail)
 
+class AMTPermissionDenied(AMTHTTPException):
+    def __init__(self) -> None:
+        self.detail: str = _("You do not have the correct permissions to access this resource.")
+        super().__init__(status.HTTP_401_UNAUTHORIZED, self.detail)
+
 
 class AMTStorageError(AMTHTTPException):
     def __init__(self) -> None:

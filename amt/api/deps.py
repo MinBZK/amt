@@ -43,6 +43,8 @@ def custom_context_processor(
 ) -> dict[str, str | None | list[str] | dict[str, str] | list[NavigationItem] | type[WebFormFieldType]]:
     lang = get_requested_language(request)
     translations = get_current_translation(request)
+    permissions = getattr(request.state, "permissions", {})
+
     return {
         "version": VERSION,
         "available_translations": list(supported_translations),
@@ -50,6 +52,7 @@ def custom_context_processor(
         "translations": get_dynamic_field_translations(lang),
         "main_menu_items": get_main_menu(request, translations),
         "user": get_user(request),
+        "permissions": permissions,
         "WebFormFieldType": WebFormFieldType,
     }
 
@@ -93,6 +96,14 @@ def nested_enum(obj: Any, attr_path: str, language: str) -> list[LocalizedValueI
 
 def nested_enum_value(obj: Any, attr_path: str, language: str) -> Any:  # noqa: ANN401
     return get_nested(obj, attr_path).localize(language)
+
+def permission(permission: str, verb: str, permissions: dict[str, Any]) -> bool:  # noqa: ANN401
+    authorized = False
+
+    if permission in permissions and verb in permissions[permission]:
+        authorized = True
+
+    return authorized
 
 
 # we use a custom override so we can add the translation per request, which is parsed in the Request object in kwargs
@@ -166,4 +177,5 @@ templates.env.globals.update(is_nested_enum=is_nested_enum)  # pyright: ignore [
 templates.env.globals.update(nested_enum=nested_enum)  # pyright: ignore [reportUnknownMemberType]
 templates.env.globals.update(nested_enum_value=nested_enum_value)  # pyright: ignore [reportUnknownMemberType]
 templates.env.globals.update(isinstance=instance)  # pyright: ignore [reportUnknownMemberType]
+templates.env.globals.update(permission=permission)  # pyright: ignore [reportUnknownMemberType]
 templates.env.add_extension("jinja2_base64_filters.Base64Filters")  # pyright: ignore [reportUnknownMemberType]
