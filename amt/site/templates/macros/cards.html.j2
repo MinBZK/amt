@@ -14,12 +14,23 @@
                 {% if subvalue %}
                     <strong>{{ render_attribute(subkey) }}</strong>: {{ render_value(subkey, subvalue, depth+1) }}
                 {% endif %}
-                {% if not loop.last %}<br \>{% endif %}
+                {% if not loop.last %}
+                    {% if subvalue %}<br \>{% endif %}
+                {% endif %}
             {% endfor %}
         </div>
     {% elif isinstance(value, 'list') %}
         {% if key == "assessments" %}
-            {% for assessment in value %}{{ assessment["name"] }}{% endfor %}
+            <ul>
+                {% for assessment in value %}
+                    <li>
+                        <a class="rvo-link rvo-link--normal"
+                           href="/algorithm/{{ algorithm_id }}/details/system_card/assessments/{{ assessment['name'].lower() }}">
+                            {{ assessment['name'] }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
         {% elif key == "models" %}
             {% for model in value %}{{ model["name"] }}{% endfor %}
         {% else %}
