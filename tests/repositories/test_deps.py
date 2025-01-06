@@ -1,5 +1,5 @@
 import pytest
-from amt.repositories.deps import get_session
+from amt.repositories.deps import get_session, get_session_non_generator
 from sqlalchemy.ext.asyncio import AsyncSession
 
 
@@ -14,3 +14,9 @@ async def test_get_session():
         await session_generator.aclose()
     except StopAsyncIteration:
         pass
+
+
+@pytest.mark.asyncio
+async def test_get_session_non_generator():
+    session = await get_session_non_generator()
+    assert isinstance(session, AsyncSession)

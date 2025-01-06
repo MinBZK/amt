@@ -1,7 +1,15 @@
 from gettext import NullTranslations
 
 import pytest
-from amt.core.exceptions import AMTCSRFProtectError, AMTError, AMTInstrumentError, AMTNotFound, AMTSettingsError
+from amt.core.exceptions import (
+    AMTAuthorizationFlowError,
+    AMTCSRFProtectError,
+    AMTError,
+    AMTInstrumentError,
+    AMTNotFound,
+    AMTPermissionDenied,
+    AMTSettingsError,
+)
 
 
 def test_settings_error():
@@ -44,3 +52,17 @@ def test_AMTCSRFProtectError():
         raise AMTCSRFProtectError()
 
     assert exc_info.value.detail == "CSRF check failed."
+
+
+def test_AMTPermissionDenied():
+    with pytest.raises(AMTPermissionDenied) as exc_info:
+        raise AMTPermissionDenied()
+
+    assert exc_info.value.detail == "You do not have the correct permissions to access this resource."
+
+
+def test_AMTAuthorizationFlowError():
+    with pytest.raises(AMTAuthorizationFlowError) as exc_info:
+        raise AMTAuthorizationFlowError()
+
+    assert exc_info.value.detail == "Something went wrong during the authorization flow. Please try again later."
