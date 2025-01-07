@@ -97,7 +97,7 @@ def upgrade() -> None:
     # lets add user 1 to all organizations bij default
     for organization in organizations:
         authorizations.append(
-            {'id': 1, 'user_id': first_user.id, 'role_id': 1, 'type': AuthorizationType.ORGANIZATION, 'type_id': organization.id},
+            {'user_id': first_user.id, 'role_id': 1, 'type': AuthorizationType.ORGANIZATION, 'type_id': organization.id},
         )
 
     op.bulk_insert(
