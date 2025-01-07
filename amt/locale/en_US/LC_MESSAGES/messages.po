@@ -345,6 +345,10 @@ msgid ""
 msgstr ""
 
 #: amt/core/exceptions.py:84
+msgid "You do not have the correct permissions to access this resource."
+msgstr ""
+
+#: amt/core/exceptions.py:90
 msgid "Something went wrong storing your file. PLease try again later."
 msgstr ""
 

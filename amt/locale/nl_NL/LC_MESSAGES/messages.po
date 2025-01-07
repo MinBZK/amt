@@ -359,6 +359,10 @@ msgstr ""
 "opnieuw"
 
 #: amt/core/exceptions.py:84
+msgid "You do not have the correct permissions to access this resource."
+msgstr "U beschikt niet over de juiste machtigingen om deze bron te openen."
+
+#: amt/core/exceptions.py:90
 msgid "Something went wrong storing your file. PLease try again later."
 msgstr ""
 "Er is iets fout gegaan tijdens het opslaan van uw bestand. Probeer het "

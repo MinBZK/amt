@@ -15,10 +15,7 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
     "Typing :: Typed"
 ]
-packages = [
-    { include = "amt" }
-]
-
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -46,6 +43,7 @@ async-lru = "^2.0.4"
 jinja2-base64-filters = "^0.1.4"
 python-multipart = "^0.0.20"
 minio = "^7.2.12"
+poetry = "^2.0.0"
 
 
 [tool.poetry.group.test.dependencies]
