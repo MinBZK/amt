@@ -451,7 +451,7 @@ async def _fetch_members(
     search_name: str,
     sort_by: dict[str, str],
     filters: dict[str, str],
-) -> Sequence[User] | None:
+) -> User | None:
     members = await users_repository.find_all(search=search_name, sort=sort_by, filters=filters)
     return members[0] if members else None
 
