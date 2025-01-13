@@ -46,7 +46,7 @@ msgid "Role"
 msgstr ""
 
 #: amt/api/group_by_category.py:15
-#: amt/site/templates/algorithms/details_info.html.j2:144
+#: amt/site/templates/algorithms/details_info.html.j2:90
 #: amt/site/templates/algorithms/new.html.j2:41
 #: amt/site/templates/parts/algorithm_search.html.j2:48
 #: amt/site/templates/parts/filter_list.html.j2:71
@@ -197,7 +197,7 @@ msgid "Select organization"
 msgstr ""
 
 #: amt/api/forms/algorithm.py:29
-#: amt/site/templates/algorithms/details_info.html.j2:128
+#: amt/site/templates/algorithms/details_info.html.j2:74
 msgid "Organization"
 msgstr ""
 
@@ -244,7 +244,7 @@ msgid "Add links to documents"
 msgstr ""
 
 #: amt/api/forms/organization.py:23
-#: amt/site/templates/algorithms/details_info.html.j2:124
+#: amt/site/templates/algorithms/details_info.html.j2:70
 #: amt/site/templates/auth/profile.html.j2:34
 #: amt/site/templates/organizations/home.html.j2:13
 #: amt/site/templates/organizations/parts/members_results.html.j2:118
@@ -400,14 +400,11 @@ msgstr ""
 
 #: amt/site/templates/algorithms/details_info.html.j2:20
 #: amt/site/templates/algorithms/details_info.html.j2:46
-#: amt/site/templates/algorithms/details_info.html.j2:77
-#: amt/site/templates/algorithms/details_info.html.j2:100
 #: amt/site/templates/macros/tasks.html.j2:32
 msgid "Done"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_info.html.j2:42
-#: amt/site/templates/algorithms/details_info.html.j2:98
 msgid "To do"
 msgstr ""
 
@@ -419,28 +416,20 @@ msgstr ""
 msgid "Go to all requirements"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:74
-msgid "Which instruments are executed?"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_info.html.j2:114
-msgid "Go to all instruments"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_info.html.j2:132
+#: amt/site/templates/algorithms/details_info.html.j2:78
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:27
 msgid "Description"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:136
+#: amt/site/templates/algorithms/details_info.html.j2:82
 msgid "Repository"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:140
+#: amt/site/templates/algorithms/details_info.html.j2:86
 msgid "Algorithm code"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:148
+#: amt/site/templates/algorithms/details_info.html.j2:94
 #: amt/site/templates/organizations/parts/overview_results.html.j2:134
 #: amt/site/templates/pages/assessment_card.html.j2:7
 #: amt/site/templates/pages/model_card.html.j2:6
@@ -450,11 +439,11 @@ msgstr ""
 msgid "Last updated"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:152
+#: amt/site/templates/algorithms/details_info.html.j2:98
 msgid "Labels"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:160
+#: amt/site/templates/algorithms/details_info.html.j2:106
 msgid "References"
 msgstr ""
 
