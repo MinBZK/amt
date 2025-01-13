@@ -21,13 +21,13 @@ interactions:
           \   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\n
           \   <link rel=\"icon\" type=\"image/x-icon\" href=\"/static/dist/@nl-rvo/assets/images/favicon/favicon.ico?etag=72468084736f22cc85d357218f5d2ec8\">\n
           \   <title>\n        testalgorithm1 | AMT\n    </title>\n    \n    \n        \n
-          \         <script type=\"text/javascript\" src=\"/static/dist/amt.js?etag=c6cbe99eaf1f66af057cc5354a6bcd43\"></script>\n
+          \         <script type=\"text/javascript\" src=\"/static/dist/amt.js?etag=662b320fe0d63dabccbb08990828e20d\"></script>\n
           \       \n    \n        \n          <script type=\"module\" src=\"/static/dist/@nl-rvo/design-tokens/index.mjs?etag=d1e69147f8a6b4f059708b747418020b\"></script>\n
           \       \n    \n    <script type=\"text/javascript\" src=\"/static/vendor/htmx/js/json-enc.js?etag=73c270c2deb80a8758471378bb47da4b\"></script>\n
           \   <script type=\"text/javascript\" src=\"/static/vendor/htmx/js/response-targets.js?etag=41861e3906eb6ed9a9d1da3861988633\"></script>\n
-          \   \n    \n    \n        <link rel=\"stylesheet\" href=\"/static/dist/main.css?etag=def8e296f71d4f3bf93c281bcbbd8142\">\n
+          \   \n    \n    \n        <link rel=\"stylesheet\" href=\"/static/dist/main.css?etag=f537edd2a69b110b6666d18fecc2f69f\">\n
           \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/assets/fonts/index.css?etag=e21212f18384f5e238578cadc76b9aa2\">\n
-          \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/assets/icons/index.css?etag=3d3e54f2dc3da251cc29463d2a2b6f17\">\n
+          \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/assets/icons/index.css?etag=6a0b8d38db98d57348c790f7ebce771d\">\n
           \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/assets/images/index.css?etag=12adc140f7a9ce482ad674eae573859f\">\n
           \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/design-tokens/index.css?etag=dd40546f9c018e7f67f6d1d247a1a31c\">\n
           \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/component-library-css/index.css?etag=5b52157d75d4cc408af30796ee685c54\">\n
@@ -130,7 +130,7 @@ interactions:
           style=\"padding-block: 0.0em 1.25em;\">\n                Data will be stored
           for at least 45 days before permanent deletion.\n            </p>\n            <p
           class=\"utrecht-button-group\">\n                <button hx-headers='{\"X-CSRF-Token\":
-          \"16c0154bd7227376546663a46e4ca408a9694e76\"}'\n                        hx-delete=\"/algorithm/1\"\n
+          \"f042fa54b538e4a841d60f2c54d6cc078ddb3219\"}'\n                        hx-delete=\"/algorithm/1\"\n
           \                       class=\"utrecht-button utrecht-button--primary-action
           utrecht-button--rvo-md\"\n                        type=\"button\">Yes</button>\n
           \               <button class=\"utrecht-button utrecht-button--secondary-action
@@ -176,11 +176,6 @@ interactions:
           \                          class=\"rvo-link rvo-tabs__item-link rvo-link--no-underline
           rvo-link--normal\"\n                           role=\"tab\"\n                           aria-selected=\"true\"\n
           \                          href=\"/algorithm/1/details/tasks\">Tasks</a>\n
-          \                   </li>\n                \n                    <li role=\"presentation\"
-          class=\"rvo-tabs__item\">\n                        <a data-navigation=\"tab:/algorithm/1/members\"\n
-          \                          class=\"rvo-link rvo-tabs__item-link rvo-link--no-underline
-          rvo-tabs__item-link--active rvo-link--active\"\n                           role=\"tab\"\n
-          \                          aria-selected=\"true\"\n                           href=\"/algorithm/1/members\">Members</a>\n
           \                   </li>\n                \n            </ul>\n        </div>\n
           \       <div class=\"margin-top-large\">\n            Placeholder\n        </div>\n
           \   </div>\n\n    </main>\n    \n    \n</body>\n\n</html>"
@@ -190,16 +185,16 @@ interactions:
         content-language:
           - en,nl
         content-length:
-          - "14693"
+          - "14227"
         content-type:
           - text/html; charset=utf-8
         set-cookie:
-          - fastapi-csrf-token=IjE2YzAxNTRiZDcyMjczNzY1NDY2NjNhNDZlNGNhNDA4YTk2OTRlNzYi.Z2QYTQ.lIjXM869pQDJi17A5jMUCNynlwU;
+          - fastapi-csrf-token=ImYwNDJmYTU0YjUzOGU0YTg0MWQ2MGYyYzU0ZDZjYzA3OGRkYjMyMTki.Z4UQyg.KpAyBq5j34OC2ZYV5AbO9Z-gmow;
             HttpOnly; Max-Age=3600; Path=/; SameSite=strict
         strict-transport-security:
           - max-age=31536000; includeSubDomains
         x-api-request-id:
-          - 01JFFFXV9GW2B55H7S0D1A0AMS
+          - 01JHFWK5CHXKVCQCNA1XD5YFB0
       status:
         code: 200
         message: OK

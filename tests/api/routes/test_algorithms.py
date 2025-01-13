@@ -150,7 +150,7 @@ async def test_post_new_algorithms(client: AsyncClient, mocker: MockFixture, db:
     # then
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert response.headers["HX-Redirect"] == "/algorithm/1/details/tasks"
+    assert response.headers["HX-Redirect"] == "/algorithm/1/details"
 
 
 @pytest.mark.asyncio

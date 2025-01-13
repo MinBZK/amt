@@ -25,7 +25,7 @@ from amt.core.authorization import get_user
 from amt.core.exceptions import AMTError, AMTNotFound, AMTRepositoryError
 from amt.core.internationalization import get_current_translation
 from amt.enums.status import Status
-from amt.models import Algorithm
+from amt.models import Algorithm, User
 from amt.models.task import Task
 from amt.repositories.organizations import OrganizationsRepository
 from amt.repositories.users import UsersRepository
@@ -446,6 +446,16 @@ async def get_system_card_requirements(
     return templates.TemplateResponse(request, "algorithms/details_compliance.html.j2", context)
 
 
+async def _fetch_members(
+    users_repository: UsersRepository,
+    search_name: str,
+    sort_by: dict[str, str],
+    filters: dict[str, str],
+) -> Sequence[User] | None:
+    members = await users_repository.find_all(search=search_name, sort=sort_by, filters=filters)
+    return members[0] if members else None
+
+
 async def get_measure_task_functions(
     measure_tasks: list[MeasureTask | None],
     users_repository: Annotated[UsersRepository, Depends(UsersRepository)],
@@ -453,33 +463,18 @@ async def get_measure_task_functions(
     filters: dict[str, str],
 ) -> dict[str, list[Any]]:
     measure_task_functions: dict[str, list[Any]] = defaultdict(list)
+
     for measure_task in measure_tasks:
-        if measure_task.accountable_persons:  # pyright: ignore [reportOptionalMemberAccess]
-            members_accountable = await users_repository.find_all(
-                search=measure_task.accountable_persons[0].name,  # pyright: ignore [reportOptionalMemberAccess]
-                sort=sort_by,
-                filters=filters,
-            )
-            if members_accountable:
-                measure_task_functions[measure_task.urn].append(members_accountable[0])  # pyright: ignore [reportOptionalMemberAccess]
+        if measure_task is None:
+            continue
 
-        if measure_task.reviewer_persons:  # pyright: ignore [reportOptionalMemberAccess]
-            members_reviewer = await users_repository.find_all(
-                search=measure_task.reviewer_persons[0].name,  # pyright: ignore [reportOptionalMemberAccess]
-                sort=sort_by,
-                filters=filters,
-            )
-            if members_reviewer:
-                measure_task_functions[measure_task.urn].append(members_reviewer[0])  # pyright: ignore [reportOptionalMemberAccess]
-
-        if measure_task.responsible_persons:  # pyright: ignore [reportOptionalMemberAccess]
-            members_responsible = await users_repository.find_all(
-                search=measure_task.responsible_persons[0].name,  # pyright: ignore [reportOptionalMemberAccess]
-                sort=sort_by,
-                filters=filters,
-            )
-            if members_responsible:
-                measure_task_functions[measure_task.urn].append(members_responsible[0])  # pyright: ignore [reportOptionalMemberAccess]
+        person_types = ["accountable_persons", "reviewer_persons", "responsible_persons"]
+        for person_type in person_types:
+            person_list = getattr(measure_task, person_type)
+            if person_list:
+                member = await _fetch_members(users_repository, person_list[0].name, sort_by, filters)
+                if member:
+                    measure_task_functions[measure_task.urn].append(member)
     return measure_task_functions
 
 

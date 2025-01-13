@@ -21,13 +21,13 @@ interactions:
           \   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\n
           \   <link rel=\"icon\" type=\"image/x-icon\" href=\"/static/dist/@nl-rvo/assets/images/favicon/favicon.ico?etag=72468084736f22cc85d357218f5d2ec8\">\n
           \   <title>\n        testalgorithm1 | AMT\n    </title>\n    \n    \n        \n
-          \         <script type=\"text/javascript\" src=\"/static/dist/amt.js?etag=c6cbe99eaf1f66af057cc5354a6bcd43\"></script>\n
+          \         <script type=\"text/javascript\" src=\"/static/dist/amt.js?etag=662b320fe0d63dabccbb08990828e20d\"></script>\n
           \       \n    \n        \n          <script type=\"module\" src=\"/static/dist/@nl-rvo/design-tokens/index.mjs?etag=d1e69147f8a6b4f059708b747418020b\"></script>\n
           \       \n    \n    <script type=\"text/javascript\" src=\"/static/vendor/htmx/js/json-enc.js?etag=73c270c2deb80a8758471378bb47da4b\"></script>\n
           \   <script type=\"text/javascript\" src=\"/static/vendor/htmx/js/response-targets.js?etag=41861e3906eb6ed9a9d1da3861988633\"></script>\n
-          \   \n    \n    \n        <link rel=\"stylesheet\" href=\"/static/dist/main.css?etag=def8e296f71d4f3bf93c281bcbbd8142\">\n
+          \   \n    \n    \n        <link rel=\"stylesheet\" href=\"/static/dist/main.css?etag=f537edd2a69b110b6666d18fecc2f69f\">\n
           \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/assets/fonts/index.css?etag=e21212f18384f5e238578cadc76b9aa2\">\n
-          \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/assets/icons/index.css?etag=3d3e54f2dc3da251cc29463d2a2b6f17\">\n
+          \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/assets/icons/index.css?etag=6a0b8d38db98d57348c790f7ebce771d\">\n
           \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/assets/images/index.css?etag=12adc140f7a9ce482ad674eae573859f\">\n
           \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/design-tokens/index.css?etag=dd40546f9c018e7f67f6d1d247a1a31c\">\n
           \       \n        <link rel=\"stylesheet\" href=\"/static/dist/@nl-rvo/component-library-css/index.css?etag=5b52157d75d4cc408af30796ee685c54\">\n
@@ -130,7 +130,7 @@ interactions:
           style=\"padding-block: 0.0em 1.25em;\">\n                Data will be stored
           for at least 45 days before permanent deletion.\n            </p>\n            <p
           class=\"utrecht-button-group\">\n                <button hx-headers='{\"X-CSRF-Token\":
-          \"d2df9aad8711e543fb723c08af7d01217e6937c1\"}'\n                        hx-delete=\"/algorithm/1\"\n
+          \"6cd2dfd3d32679996c1c99f01c05d12a133eb1b1\"}'\n                        hx-delete=\"/algorithm/1\"\n
           \                       class=\"utrecht-button utrecht-button--primary-action
           utrecht-button--rvo-md\"\n                        type=\"button\">Yes</button>\n
           \               <button class=\"utrecht-button utrecht-button--secondary-action
@@ -176,16 +176,11 @@ interactions:
           \                          class=\"rvo-link rvo-tabs__item-link rvo-link--no-underline
           rvo-link--normal\"\n                           role=\"tab\"\n                           aria-selected=\"true\"\n
           \                          href=\"/algorithm/1/details/tasks\">Tasks</a>\n
-          \                   </li>\n                \n                    <li role=\"presentation\"
-          class=\"rvo-tabs__item\">\n                        <a data-navigation=\"tab:/algorithm/1/members\"\n
-          \                          class=\"rvo-link rvo-tabs__item-link rvo-link--no-underline
-          rvo-link--normal\"\n                           role=\"tab\"\n                           aria-selected=\"true\"\n
-          \                          href=\"/algorithm/1/members\">Members</a>\n                    </li>\n
-          \               \n            </ul>\n        </div>\n        <div class=\"margin-top-large\">\n
-          \           \n    <div class=\"rvo-layout-column rvo-layout-gap--md\">\n        <h2
-          class=\"utrecht-heading-2 rvo-heading--no-margins\">Model card</h2>\n        <span
-          class=\"rvo-text\">Last updated: 0 seconds\n        ago</span>\n        <div
-          class=\"rvo-table--responsive\">\n            <table class=\"rvo-table\">\n
+          \                   </li>\n                \n            </ul>\n        </div>\n
+          \       <div class=\"margin-top-large\">\n            \n    <div class=\"rvo-layout-column
+          rvo-layout-gap--md\">\n        <h2 class=\"utrecht-heading-2 rvo-heading--no-margins\">Model
+          card</h2>\n        <span class=\"rvo-text\">Last updated: 0 seconds\n        ago</span>\n
+          \       <div class=\"rvo-table--responsive\">\n            <table class=\"rvo-table\">\n
           \               <thead class=\"rvo-table-head\">\n                    <tr
           class=\"rvo-table-row\">\n                        <th scope=\"col\" class=\"rvo-table-header\">Attribute</th>\n
           \                       <th scope=\"col\" class=\"rvo-table-header\">Value</th>\n
@@ -214,12 +209,12 @@ interactions:
           \                               </td>\n                                <td
           class=\"rvo-table-cell\">\n        <div class=\"\">\n            \n            \n
           \               \n                    <strong>License name</strong>: \n        \n
-          \           EUPL-1.2\n        \n    \n                \n                <br
-          \\>\n            \n                \n                \n            \n        </div>\n
-          \   </td>\n                            </tr>\n                        \n                    \n
-          \                   \n                        <tbody class=\"rvo-table-body\">\n
-          \                           <tr class=\"rvo-table-row\">\n                                <td
-          class=\"rvo-table-cell\">\n                                    <strong>Tags</strong>\n
+          \           EUPL-1.2\n        \n    \n                \n                \n
+          \                   <br \\>\n                \n            \n                \n
+          \               \n            \n        </div>\n    </td>\n                            </tr>\n
+          \                       \n                    \n                    \n                        <tbody
+          class=\"rvo-table-body\">\n                            <tr class=\"rvo-table-row\">\n
+          \                               <td class=\"rvo-table-cell\">\n                                    <strong>Tags</strong>\n
           \                               </td>\n                                <td
           class=\"rvo-table-cell\">\n        \n            <div style=\"margin-left:
           0px\">\n                \n        \n            Iris Flower Classifcation\n
@@ -233,17 +228,18 @@ interactions:
           0px\">\n                \n        <div class=\"margin-bottom-large\">\n            \n
           \           \n                \n                    <strong>Oin</strong>:
           \n        \n            <a class=\"rvo-link rvo-link--normal\"\n               href=\"https://oinregister.logius.nl/oin-register/0000001003214345000\">0000001003214345000</a>\n
-          \       \n    \n                \n                <br \\>\n            \n
-          \               \n                    <strong>Organization</strong>: \n        \n
-          \           Ministerie van Binnenlandse Zaken en Koninkrijksrelaties\n        \n
-          \   \n                \n                <br \\>\n            \n                \n
-          \                   <strong>Name</strong>: \n        \n            John Doe\n
-          \       \n    \n                \n                <br \\>\n            \n
-          \               \n                    <strong>Email</strong>: \n        \n
-          \           <a class=\"rvo-link rvo-link--normal\" href=\"mailto:johndoe@email.com\">johndoe@email.com</a>\n
-          \       \n    \n                \n                <br \\>\n            \n
-          \               \n                    <strong>Role</strong>: \n        \n
-          \           Engineer\n        \n    \n                \n                \n
+          \       \n    \n                \n                \n                    <br
+          \\>\n                \n            \n                \n                    <strong>Organization</strong>:
+          \n        \n            Ministerie van Binnenlandse Zaken en Koninkrijksrelaties\n
+          \       \n    \n                \n                \n                    <br
+          \\>\n                \n            \n                \n                    <strong>Name</strong>:
+          \n        \n            John Doe\n        \n    \n                \n                \n
+          \                   <br \\>\n                \n            \n                \n
+          \                   <strong>Email</strong>: \n        \n            <a class=\"rvo-link
+          rvo-link--normal\" href=\"mailto:johndoe@email.com\">johndoe@email.com</a>\n
+          \       \n    \n                \n                \n                    <br
+          \\>\n                \n            \n                \n                    <strong>Role</strong>:
+          \n        \n            Engineer\n        \n    \n                \n                \n
           \           \n        </div>\n    \n            </div>\n        \n    </td>\n
           \                           </tr>\n                        \n                    \n
           \                   \n                    \n                </tbody>\n            </table>\n
@@ -268,164 +264,185 @@ interactions:
           0px\">\n                \n        <div class=\"margin-bottom-large\">\n            \n
           \           \n                \n                    <strong>Uri</strong>:
           \n        \n            <a class=\"rvo-link rvo-link--normal\" href=\"https://raw.githubusercontent.com/MinBZK/poc-kijkdoos-wasm-models/main/logres_iris/logreg_iris.onnx\">https://raw.githubusercontent.com/MinBZK/poc-kijkdoos-wasm-models/main/logres_iris/logreg_iris.onnx</a>\n
-          \       \n    \n                \n                <br \\>\n            \n
-          \               \n                <br \\>\n            \n                \n
-          \               \n            \n        </div>\n    \n            </div>\n
-          \       \n    </td>\n                                </tr>\n                            \n
-          \                       \n                        \n                            <tbody
-          class=\"rvo-table-body\">\n                                <tr class=\"rvo-table-row\">\n
-          \                                   <td class=\"rvo-table-cell\">\n                                        <strong>Parameters</strong>\n
+          \       \n    \n                \n                \n                    <br
+          \\>\n                \n            \n                \n                \n
+          \                   \n                \n            \n                \n                \n
+          \           \n        </div>\n    \n            </div>\n        \n    </td>\n
+          \                               </tr>\n                            \n                        \n
+          \                       \n                            <tbody class=\"rvo-table-body\">\n
+          \                               <tr class=\"rvo-table-row\">\n                                    <td
+          class=\"rvo-table-cell\">\n                                        <strong>Parameters</strong>\n
           \                                   </td>\n                                    <td
           class=\"rvo-table-cell\">\n        \n            <div style=\"margin-left:
           0px\">\n                \n        <div class=\"margin-bottom-large\">\n            \n
           \           \n                \n                    <strong>Name</strong>:
-          \n        \n            epochs\n        \n    \n                \n                <br
-          \\>\n            \n                \n                    <strong>Dtype</strong>:
-          \n        \n            int\n        \n    \n                \n                <br
-          \\>\n            \n                \n                    <strong>Value</strong>:
-          \n        \n            100\n        \n    \n                \n                <br
-          \\>\n            \n                \n                    <strong>Labels</strong>:
-          \n        \n            <div style=\"margin-left: 20px\">\n                \n
-          \       <div class=\"\">\n            \n            \n                \n                    <strong>Name</strong>:
+          \n        \n            epochs\n        \n    \n                \n                \n
+          \                   <br \\>\n                \n            \n                \n
+          \                   <strong>Dtype</strong>: \n        \n            int\n
+          \       \n    \n                \n                \n                    <br
+          \\>\n                \n            \n                \n                    <strong>Value</strong>:
+          \n        \n            100\n        \n    \n                \n                \n
+          \                   <br \\>\n                \n            \n                \n
+          \                   <strong>Labels</strong>: \n        \n            <div
+          style=\"margin-left: 20px\">\n                \n        <div class=\"\">\n
+          \           \n            \n                \n                    <strong>Name</strong>:
           \n        \n            param_label_name\n        \n    \n                \n
-          \               <br \\>\n            \n                \n                    <strong>Dtype</strong>:
-          \n        \n            param_label_dtype\n        \n    \n                \n
-          \               <br \\>\n            \n                \n                    <strong>Value</strong>:
-          \n        \n            param_label_value\n        \n    \n                \n
-          \               \n            \n        </div>\n    \n            </div>\n
+          \               \n                    <br \\>\n                \n            \n
+          \               \n                    <strong>Dtype</strong>: \n        \n
+          \           param_label_dtype\n        \n    \n                \n                \n
+          \                   <br \\>\n                \n            \n                \n
+          \                   <strong>Value</strong>: \n        \n            param_label_value\n
           \       \n    \n                \n                \n            \n        </div>\n
-          \   \n            </div>\n        \n    </td>\n                                </tr>\n
-          \                           \n                        \n                        \n
-          \                           <tbody class=\"rvo-table-body\">\n                                <tr
-          class=\"rvo-table-row\">\n                                    <td class=\"rvo-table-cell\">\n
-          \                                       <strong>Results</strong>\n                                    </td>\n
-          \                                   <td class=\"rvo-table-cell\">\n        \n
-          \           <div style=\"margin-left: 0px\">\n                \n        <div
-          class=\"margin-bottom-large\">\n            \n            \n                \n
-          \                   <strong>Task</strong>: \n        \n            <div style=\"margin-left:
-          20px\">\n                \n        <div class=\"\">\n            \n            \n
-          \               \n                    <strong>Type</strong>: \n        \n
-          \           tabular-classification\n        \n    \n                \n                <br
-          \\>\n            \n                \n                    <strong>Name</strong>:
-          \n        \n            Classification of Iris Flowers\n        \n    \n                \n
-          \               \n            \n        </div>\n    \n            </div>\n
-          \       \n    \n                \n                <br \\>\n            \n
-          \               \n                    <strong>Datasets</strong>: \n        \n
-          \           <div style=\"margin-left: 20px\">\n                \n        <div
-          class=\"\">\n            \n            \n                \n                    <strong>Type</strong>:
-          \n        \n            https://huggingface.co/datasets/scikit-learn/iris/viewer\n
-          \       \n    \n                \n                <br \\>\n            \n
+          \   \n            </div>\n        \n    \n                \n                \n
+          \           \n        </div>\n    \n            </div>\n        \n    </td>\n
+          \                               </tr>\n                            \n                        \n
+          \                       \n                            <tbody class=\"rvo-table-body\">\n
+          \                               <tr class=\"rvo-table-row\">\n                                    <td
+          class=\"rvo-table-cell\">\n                                        <strong>Results</strong>\n
+          \                                   </td>\n                                    <td
+          class=\"rvo-table-cell\">\n        \n            <div style=\"margin-left:
+          0px\">\n                \n        <div class=\"margin-bottom-large\">\n            \n
+          \           \n                \n                    <strong>Task</strong>:
+          \n        \n            <div style=\"margin-left: 20px\">\n                \n
+          \       <div class=\"\">\n            \n            \n                \n                    <strong>Type</strong>:
+          \n        \n            tabular-classification\n        \n    \n                \n
+          \               \n                    <br \\>\n                \n            \n
           \               \n                    <strong>Name</strong>: \n        \n
-          \           Iris Species Dataset\n        \n    \n                \n                <br
-          \\>\n            \n                \n                    <strong>Split</strong>:
-          \n        \n            train\n        \n    \n                \n                <br
-          \\>\n            \n                \n                    <strong>Features</strong>:
+          \           Classification of Iris Flowers\n        \n    \n                \n
+          \               \n            \n        </div>\n    \n            </div>\n
+          \       \n    \n                \n                \n                    <br
+          \\>\n                \n            \n                \n                    <strong>Datasets</strong>:
+          \n        \n            <div style=\"margin-left: 20px\">\n                \n
+          \       <div class=\"\">\n            \n            \n                \n                    <strong>Type</strong>:
+          \n        \n            https://huggingface.co/datasets/scikit-learn/iris/viewer\n
+          \       \n    \n                \n                \n                    <br
+          \\>\n                \n            \n                \n                    <strong>Name</strong>:
+          \n        \n            Iris Species Dataset\n        \n    \n                \n
+          \               \n                    <br \\>\n                \n            \n
+          \               \n                    <strong>Split</strong>: \n        \n
+          \           train\n        \n    \n                \n                \n                    <br
+          \\>\n                \n            \n                \n                    <strong>Features</strong>:
           \n        \n            <div style=\"margin-left: 40px\">\n                \n
           \       \n            sepal_length\n        \n    \n        \n            sepal_width\n
           \       \n    \n        \n            petal_length\n        \n    \n        \n
           \           petal_width\n        \n    \n            </div>\n        \n    \n
-          \               \n                <br \\>\n            \n                \n
-          \                   <strong>Revision</strong>: \n        \n            5503434ddd753f426f4b38109466949a1217c2bb\n
-          \       \n    \n                \n                \n            \n        </div>\n
-          \   \n            </div>\n        \n    \n                \n                <br
-          \\>\n            \n                \n                    <strong>Metrics</strong>:
+          \               \n                \n                    <br \\>\n                \n
+          \           \n                \n                    <strong>Revision</strong>:
+          \n        \n            5503434ddd753f426f4b38109466949a1217c2bb\n        \n
+          \   \n                \n                \n            \n        </div>\n    \n
+          \           </div>\n        \n    \n                \n                \n                    <br
+          \\>\n                \n            \n                \n                    <strong>Metrics</strong>:
           \n        \n            <div style=\"margin-left: 20px\">\n                \n
           \       <div class=\"\">\n            \n            \n                \n                    <strong>Type</strong>:
-          \n        \n            accuracy\n        \n    \n                \n                <br
-          \\>\n            \n                \n                    <strong>Name</strong>:
-          \n        \n            Training Accuracy\n        \n    \n                \n
-          \               <br \\>\n            \n                \n                    <strong>Dtype</strong>:
-          \n        \n            float\n        \n    \n                \n                <br
-          \\>\n            \n                \n                    <strong>Value</strong>:
-          \n        \n            1.0\n        \n    \n                \n                <br
-          \\>\n            \n                \n                    <strong>Labels</strong>:
+          \n        \n            accuracy\n        \n    \n                \n                \n
+          \                   <br \\>\n                \n            \n                \n
+          \                   <strong>Name</strong>: \n        \n            Training
+          Accuracy\n        \n    \n                \n                \n                    <br
+          \\>\n                \n            \n                \n                    <strong>Dtype</strong>:
+          \n        \n            float\n        \n    \n                \n                \n
+          \                   <br \\>\n                \n            \n                \n
+          \                   <strong>Value</strong>: \n        \n            1.0\n
+          \       \n    \n                \n                \n                    <br
+          \\>\n                \n            \n                \n                    <strong>Labels</strong>:
           \n        \n            <div style=\"margin-left: 40px\">\n                \n
           \       <div class=\"\">\n            \n            \n                \n                    <strong>Name</strong>:
-          \n        \n            split\n        \n    \n                \n                <br
-          \\>\n            \n                \n                    <strong>Type</strong>:
-          \n        \n            metadata\n        \n    \n                \n                <br
-          \\>\n            \n                \n                    <strong>Dtype</strong>:
-          \n        \n            string\n        \n    \n                \n                <br
-          \\>\n            \n                \n                    <strong>Value</strong>:
-          \n        \n            training\n        \n    \n                \n                \n
+          \n        \n            split\n        \n    \n                \n                \n
+          \                   <br \\>\n                \n            \n                \n
+          \                   <strong>Type</strong>: \n        \n            metadata\n
+          \       \n    \n                \n                \n                    <br
+          \\>\n                \n            \n                \n                    <strong>Dtype</strong>:
+          \n        \n            string\n        \n    \n                \n                \n
+          \                   <br \\>\n                \n            \n                \n
+          \                   <strong>Value</strong>: \n        \n            training\n
+          \       \n    \n                \n                \n            \n        </div>\n
+          \   \n            </div>\n        \n    \n                \n                \n
           \           \n        </div>\n    \n            </div>\n        \n    \n                \n
-          \               \n            \n        </div>\n    \n            </div>\n
-          \       \n    \n                \n                <br \\>\n            \n
+          \               \n                    <br \\>\n                \n            \n
           \               \n                    <strong>Measurements</strong>: \n        <div
           class=\"\">\n            \n            \n                \n                    <strong>Bar
           plots</strong>: \n        \n            <div style=\"margin-left: 30px\">\n
           \               \n        <div class=\"\">\n            \n            \n                \n
           \                   <strong>Type</strong>: \n        \n            SHAP\n
-          \       \n    \n                \n                <br \\>\n            \n
-          \               \n                    <strong>Name</strong>: \n        \n
-          \           Mean Absolute Shap Values\n        \n    \n                \n
-          \               <br \\>\n            \n                \n                    <strong>Results</strong>:
-          \n        \n            <div style=\"margin-left: 50px\">\n                \n
-          \       <div class=\"\">\n            \n            \n                \n                    <strong>Name</strong>:
-          \n        \n            age\n        \n    \n                \n                <br
-          \\>\n            \n                \n                    <strong>Value</strong>:
-          \n        \n            2.7313991690892594e-08\n        \n    \n                \n
-          \               \n            \n        </div>\n    \n        <div class=\"\">\n
-          \           \n            \n                \n                    <strong>Name</strong>:
-          \n        \n            gender\n        \n    \n                \n                <br
-          \\>\n            \n                \n                    <strong>Value</strong>:
+          \       \n    \n                \n                \n                    <br
+          \\>\n                \n            \n                \n                    <strong>Name</strong>:
+          \n        \n            Mean Absolute Shap Values\n        \n    \n                \n
+          \               \n                    <br \\>\n                \n            \n
+          \               \n                    <strong>Results</strong>: \n        \n
+          \           <div style=\"margin-left: 50px\">\n                \n        <div
+          class=\"\">\n            \n            \n                \n                    <strong>Name</strong>:
+          \n        \n            age\n        \n    \n                \n                \n
+          \                   <br \\>\n                \n            \n                \n
+          \                   <strong>Value</strong>: \n        \n            2.7313991690892594e-08\n
+          \       \n    \n                \n                \n            \n        </div>\n
+          \   \n        <div class=\"\">\n            \n            \n                \n
+          \                   <strong>Name</strong>: \n        \n            gender\n
+          \       \n    \n                \n                \n                    <br
+          \\>\n                \n            \n                \n                    <strong>Value</strong>:
           \n        \n            2.1010905880210835e-11\n        \n    \n                \n
           \               \n            \n        </div>\n    \n        <div class=\"\">\n
           \           \n            \n                \n                    <strong>Name</strong>:
-          \n        \n            income\n        \n    \n                \n                <br
-          \\>\n            \n                \n                    <strong>Value</strong>:
-          \n        \n            0.027878870612476556\n        \n    \n                \n
-          \               \n            \n        </div>\n    \n        <div class=\"\">\n
-          \           \n            \n                \n                    <strong>Name</strong>:
-          \n        \n            race\n        \n    \n                \n                <br
-          \\>\n            \n                \n                    <strong>Value</strong>:
+          \n        \n            income\n        \n    \n                \n                \n
+          \                   <br \\>\n                \n            \n                \n
+          \                   <strong>Value</strong>: \n        \n            0.027878870612476556\n
+          \       \n    \n                \n                \n            \n        </div>\n
+          \   \n        <div class=\"\">\n            \n            \n                \n
+          \                   <strong>Name</strong>: \n        \n            race\n
+          \       \n    \n                \n                \n                    <br
+          \\>\n                \n            \n                \n                    <strong>Value</strong>:
           \n        \n            1.9742755605937866e-11\n        \n    \n                \n
           \               \n            \n        </div>\n    \n        <div class=\"\">\n
           \           \n            \n                \n                    <strong>Name</strong>:
           \n        \n            home_ownership\n        \n    \n                \n
-          \               <br \\>\n            \n                \n                    <strong>Value</strong>:
-          \n        \n            4.98389997821369e-12\n        \n    \n                \n
-          \               \n            \n        </div>\n    \n        <div class=\"\">\n
-          \           \n            \n                \n                    <strong>Name</strong>:
-          \n        \n            prior_count\n        \n    \n                \n                <br
-          \\>\n            \n                \n                    <strong>Value</strong>:
-          \n        \n            2.7000142407680143e-08\n        \n    \n                \n
-          \               \n            \n        </div>\n    \n        <div class=\"\">\n
-          \           \n            \n                \n                    <strong>Name</strong>:
-          \n        \n            loan_amount\n        \n    \n                \n                <br
-          \\>\n            \n                \n                    <strong>Value</strong>:
+          \               \n                    <br \\>\n                \n            \n
+          \               \n                    <strong>Value</strong>: \n        \n
+          \           4.98389997821369e-12\n        \n    \n                \n                \n
+          \           \n        </div>\n    \n        <div class=\"\">\n            \n
+          \           \n                \n                    <strong>Name</strong>:
+          \n        \n            prior_count\n        \n    \n                \n                \n
+          \                   <br \\>\n                \n            \n                \n
+          \                   <strong>Value</strong>: \n        \n            2.7000142407680143e-08\n
+          \       \n    \n                \n                \n            \n        </div>\n
+          \   \n        <div class=\"\">\n            \n            \n                \n
+          \                   <strong>Name</strong>: \n        \n            loan_amount\n
+          \       \n    \n                \n                \n                    <br
+          \\>\n                \n            \n                \n                    <strong>Value</strong>:
           \n        \n            0.03782010359850043\n        \n    \n                \n
           \               \n            \n        </div>\n    \n        <div class=\"\">\n
           \           \n            \n                \n                    <strong>Name</strong>:
           \n        \n            loan_interests\n        \n    \n                \n
-          \               <br \\>\n            \n                \n                    <strong>Value</strong>:
-          \n        \n            3.5613580001571624e-12\n        \n    \n                \n
-          \               \n            \n        </div>\n    \n            </div>\n
-          \       \n    \n                \n                \n            \n        </div>\n
-          \   \n            </div>\n        \n    \n                \n                <br
-          \\>\n            \n                \n                    <strong>Graph plots</strong>:
-          \n        \n            <div style=\"margin-left: 30px\">\n                \n
-          \       <div class=\"\">\n            \n            \n                \n                    <strong>Type</strong>:
-          \n        \n            partial_dependence\n        \n    \n                \n
-          \               <br \\>\n            \n                \n                    <strong>Name</strong>:
-          \n        \n            Partial Dependence Plot\n        \n    \n                \n
-          \               <br \\>\n            \n                \n                    <strong>Results</strong>:
-          \n        \n            <div style=\"margin-left: 50px\">\n                \n
-          \       <div class=\"\">\n            \n            \n                \n                    <strong>Class
-          </strong>: \n        \n            1\n        \n    \n                \n                <br
-          \\>\n            \n                \n                    <strong>Feature</strong>:
-          \n        \n            gender\n        \n    \n                \n                <br
-          \\>\n            \n                \n                    <strong>Data</strong>:
-          \n        \n            <div style=\"margin-left: 70px\">\n                \n
-          \       <div class=\"\">\n            \n            \n                \n                <br
-          \\>\n            \n                \n                    <strong>Y value</strong>:
-          \n        \n            1.0\n        \n    \n                \n                \n
-          \           \n        </div>\n    \n        <div class=\"\">\n            \n
-          \           \n                \n                    <strong>X value</strong>:
-          \n        \n            1.0\n        \n    \n                \n                <br
-          \\>\n            \n                \n                    <strong>Y value</strong>:
-          \n        \n            1.0\n        \n    \n                \n                \n
+          \               \n                    <br \\>\n                \n            \n
+          \               \n                    <strong>Value</strong>: \n        \n
+          \           3.5613580001571624e-12\n        \n    \n                \n                \n
           \           \n        </div>\n    \n            </div>\n        \n    \n                \n
+          \               \n            \n        </div>\n    \n            </div>\n
+          \       \n    \n                \n                \n                    <br
+          \\>\n                \n            \n                \n                    <strong>Graph
+          plots</strong>: \n        \n            <div style=\"margin-left: 30px\">\n
+          \               \n        <div class=\"\">\n            \n            \n                \n
+          \                   <strong>Type</strong>: \n        \n            partial_dependence\n
+          \       \n    \n                \n                \n                    <br
+          \\>\n                \n            \n                \n                    <strong>Name</strong>:
+          \n        \n            Partial Dependence Plot\n        \n    \n                \n
+          \               \n                    <br \\>\n                \n            \n
+          \               \n                    <strong>Results</strong>: \n        \n
+          \           <div style=\"margin-left: 50px\">\n                \n        <div
+          class=\"\">\n            \n            \n                \n                    <strong>Class
+          </strong>: \n        \n            1\n        \n    \n                \n                \n
+          \                   <br \\>\n                \n            \n                \n
+          \                   <strong>Feature</strong>: \n        \n            gender\n
+          \       \n    \n                \n                \n                    <br
+          \\>\n                \n            \n                \n                    <strong>Data</strong>:
+          \n        \n            <div style=\"margin-left: 70px\">\n                \n
+          \       <div class=\"\">\n            \n            \n                \n                \n
+          \                   \n                \n            \n                \n                    <strong>Y
+          value</strong>: \n        \n            1.0\n        \n    \n                \n
+          \               \n            \n        </div>\n    \n        <div class=\"\">\n
+          \           \n            \n                \n                    <strong>X
+          value</strong>: \n        \n            1.0\n        \n    \n                \n
+          \               \n                    <br \\>\n                \n            \n
+          \               \n                    <strong>Y value</strong>: \n        \n
+          \           1.0\n        \n    \n                \n                \n            \n
+          \       </div>\n    \n            </div>\n        \n    \n                \n
           \               \n            \n        </div>\n    \n            </div>\n
           \       \n    \n                \n                \n            \n        </div>\n
           \   \n            </div>\n        \n    \n                \n                \n
@@ -440,16 +457,16 @@ interactions:
         content-language:
           - en,nl
         content-length:
-          - "35040"
+          - "36262"
         content-type:
           - text/html; charset=utf-8
         set-cookie:
-          - fastapi-csrf-token=ImQyZGY5YWFkODcxMWU1NDNmYjcyM2MwOGFmN2QwMTIxN2U2OTM3YzEi.Z2QYSw.VEnvHqHR_RkX7C4ozaPM4agfwe0;
+          - fastapi-csrf-token=IjZjZDJkZmQzZDMyNjc5OTk2YzFjOTlmMDFjMDVkMTJhMTMzZWIxYjEi.Z4UQyA.ijE-9pCgrBMHom-dPNsU2UAHSNE;
             HttpOnly; Max-Age=3600; Path=/; SameSite=strict
         strict-transport-security:
           - max-age=31536000; includeSubDomains
         x-api-request-id:
-          - 01JFFFXSSCAZJPEB8FBZKE5TFW
+          - 01JHFWK3PWTK1ZH845T8EFPTRY
       status:
         code: 200
         message: OK
