@@ -655,7 +655,7 @@ async def update_measure_value(
 
     await algorithms_service.update(algorithm)
     # TODO: FIX THIS!! The page now reloads at the top, which is annoying
-    return templates.Redirect(request, f"/algorithm/{algorithm_id}/details/system_card/requirements")
+    return templates.Redirect(request, f"/algorithm/{algorithm_id}/details/system_card/compliance")
 
 
 @router.get("/{algorithm_id}/members")
