@@ -1,5 +1,5 @@
 import pytest
-from amt.clients.clients import TaskRegistryAPIClient, TaskType
+from amt.clients.clients import TaskType, task_registry_api_client
 from amt.core.exceptions import AMTInstrumentError
 from amt.repositories.task_registry import TaskRegistryRepository
 from pytest_httpx import HTTPXMock
@@ -10,8 +10,7 @@ from tests.conftest import amt_vcr
 @pytest.mark.asyncio
 async def test_fetch_tasks_all():
     # given
-    client = TaskRegistryAPIClient()
-    repository = TaskRegistryRepository(client)
+    repository = TaskRegistryRepository(task_registry_api_client)
 
     # when
     instrument_result = await repository.fetch_tasks(TaskType.INSTRUMENTS)
@@ -28,8 +27,7 @@ async def test_fetch_tasks_all():
 @pytest.mark.asyncio
 async def test_fetch_task_with_urn():
     # given
-    client = TaskRegistryAPIClient()
-    repository = TaskRegistryRepository(client)
+    repository = TaskRegistryRepository(task_registry_api_client)
     instrument_urn = "urn:nl:aivt:tr:iama:1.0"
     requirement_urn = "urn:nl:ak:ver:aia-08"
     measure_urn = "urn:nl:ak:mtr:dat-02"
@@ -57,8 +55,7 @@ async def test_fetch_task_with_urn():
 @pytest.mark.asyncio
 async def test_fetch_task_with_urns():
     # given
-    client = TaskRegistryAPIClient()
-    repository = TaskRegistryRepository(client)
+    repository = TaskRegistryRepository(task_registry_api_client)
     urns = ["urn:nl:aivt:tr:iama:1.0", "urn:nl:aivt:tr:aiia:1.0"]
 
     # when
@@ -76,8 +73,7 @@ async def test_fetch_task_with_urns():
 @pytest.mark.asyncio
 async def test_fetch_task_with_invalid_urn():
     # given
-    client = TaskRegistryAPIClient()
-    repository = TaskRegistryRepository(client)
+    repository = TaskRegistryRepository(task_registry_api_client)
     urn = "invalid"
 
     # when
@@ -91,8 +87,7 @@ async def test_fetch_task_with_invalid_urn():
 @pytest.mark.asyncio
 async def test_fetch_task_with_valid_and_invalid_urn():
     # given
-    client = TaskRegistryAPIClient()
-    repository = TaskRegistryRepository(client)
+    repository = TaskRegistryRepository(task_registry_api_client)
     urns = ["urn:nl:aivt:tr:iama:1.0", "invalid"]
 
     # when
@@ -107,8 +102,7 @@ async def test_fetch_task_with_valid_and_invalid_urn():
 @pytest.mark.asyncio
 async def test_fetch_tasks_invalid_response(httpx_mock: HTTPXMock):
     # given
-    client = TaskRegistryAPIClient()
-    repository = TaskRegistryRepository(client)
+    repository = TaskRegistryRepository(task_registry_api_client)
     urn = "urn:nl:aivt:tr:td:1.0"
 
     httpx_mock.add_response(

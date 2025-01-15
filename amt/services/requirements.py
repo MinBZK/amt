@@ -1,7 +1,7 @@
 import logging
 from collections.abc import Sequence
 
-from amt.clients.clients import TaskRegistryAPIClient, TaskType
+from amt.clients.clients import TaskType, task_registry_api_client
 from amt.repositories.task_registry import TaskRegistryRepository
 from amt.schema.requirement import Requirement
 
@@ -24,6 +24,5 @@ class RequirementsService:
 
 
 def create_requirements_service() -> RequirementsService:
-    client = TaskRegistryAPIClient()
-    repository = TaskRegistryRepository(client)
+    repository = TaskRegistryRepository(task_registry_api_client)
     return RequirementsService(repository)

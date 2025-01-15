@@ -55,8 +55,9 @@ class TaskRegistryAPIClient(APIClient):
         return response_data
 
 
+task_registry_api_client = TaskRegistryAPIClient()
+
+
 @alru_cache(maxsize=0 if "pytest" in sys.modules else 1000)
-async def get_task_by_urn(
-    client: TaskRegistryAPIClient, task_type: TaskType, urn: str, version: str = "latest"
-) -> dict[str, Any]:
-    return await client.get_task_by_urn(task_type, urn, version)
+async def get_task_by_urn(task_type: TaskType, urn: str, version: str = "latest") -> dict[str, Any]:
+    return await task_registry_api_client.get_task_by_urn(task_type, urn, version)
