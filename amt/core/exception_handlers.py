@@ -79,7 +79,9 @@ async def general_exception_handler(request: Request, exc: Exception) -> HTMLRes
             request, template_name, {"message": message}, status_code=status_code, headers=response_headers
         )
     except Exception:
-        logger.exception("Can not display error template")
+        logger.warning(
+            "Can not display error template " + template_name + " as it does not exist, using fallback template"
+        )
         response = templates.TemplateResponse(
             request,
             fallback_template_name,

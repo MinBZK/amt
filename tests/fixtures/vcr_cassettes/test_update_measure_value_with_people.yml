@@ -1,0 +1,272 @@
+interactions:
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - close
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-01?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Controleer
+          de datakwaliteit\",\"description\":\"Stel vast of de gebruikte data van voldoende
+          kwaliteit is voor de beoogde toepassing.\\n\",\"explanation\":\"- Stel functionele
+          eisen voor de datakwaliteit vast en [analyseer structureel of er aan deze
+          eisen wordt voldaan](https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/7-mon-05-evalueer-bij-veranderingen-in-data/index.html).
+          \\n\\n- De kwaliteit van de data die als input voor het algoritme wordt gebruikt
+          is bepalend voor de uitkomsten van het algoritme. Hier wordt soms ook naar
+          gerefereerd als *garbage in = garbage out*. \\n- Een vraag die gesteld dient
+          te worden: beschrijft de data het fenomeen dat onderzocht dient te worden?
+          \\n- Het [Raamwerk gegevenskwaliteit](https://www.noraonline.nl/wiki/Raamwerk_gegevenskwaliteit)
+          bevat een breed toepasbare set van kwaliteitsdimensies:\\n\\n    - juistheid\\n
+          \   - compleetheid\\n    - validiteit\\n    - consistentie\\n    - actualiteit\\n
+          \   - precisie\\n    - plausibiliteit\\n    - traceerbaarheid\\n    - begrijpelijkheid\\n\\n
+          \   Deze dimensies zijn aangevuld met [kwaliteitsattributen](https://www.noraonline.nl/wiki/Raamwerk_gegevenskwaliteit/Kwaliteitsattributen)
+          welke gebruikt kunnen worden om de verschillende dimensies meetbaar te maken.
+          \\n\\n- De vraag of de data kwaliteit voldoende is, hangt sterk samen met
+          de vraag of er bias in de onderliggende data zit. Analyseer daarom ook welke
+          bias en aannames er besloten zijn in de onderliggende data. Denk hierbij onder
+          andere aan de volgende vormen van bias:\\n\\n    - [historische bias](../../onderwerpen/bias-en-non-discriminatie.md#herken-bias)\\n
+          \   - [meetbias](../../onderwerpen/bias-en-non-discriminatie.md#herken-bias)\\n
+          \   - [representatie bias](../../onderwerpen/bias-en-non-discriminatie.md#herken-bias)\\n\\n-
+          Zorg dat je data [vindbaar, toegankelijk, interoperabel en herbruikbaar (FAIR)](https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/3-dat-02-fair-data/index.html)
+          is.\\n\\n\\n!!! note \\\"Let op!\\\"\\n\\n    Wanneer je een algoritme inkoopt
+          en de ontwikkeling van het algoritme uitbesteedt aan een derde partij, houdt
+          er dan dan rekening mee dat data traceerbaar en reproduceerbaar moet zijn.
+          Maak hier heldere afspraken over met de aanbieder. \\n\\n- Door onjuiste beslissingen
+          van gegevens kunnen verkeerde beslissingen genomen worden. \\n- Het model
+          cre\xEBert onwenselijke systematische afwijking voor specifieke personen,
+          groepen of andere eenheden. Dit kan leiden tot ongelijke behandeling en discriminerende
+          effecten met eventuele schade voor betrokkenen. \\n\",\"urn\":\"urn:nl:ak:mtr:dat-01\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/3-dat-01-datakwaliteit/index.html\",\"subject\":[\"data\"],\"suggested_roles\":[\"ontwikkelaar\"],\"lifecycle\":[\"dataverkenning-en-datapreparatie\"],\"links\":[\"urn:nl:ak:ver:avg-05\",\"urn:nl:ak:ver:aia-05\"],\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        Connection:
+          - close
+        Content-Length:
+          - "3253"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 15 Jan 2025 14:31:34 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - close
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-05?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Persoonsgegevens
+          zijn juist en actueel.","description":"\nPersoonsgegevens zijn juist en actueel.\n","explanation":"De
+          te verwerken persoonsgegevens moeten nauwkeurig, juist en zo nodig actueel
+          zijn.\nDit betekent dat alle maatregelen moeten worden genomen om ervoor te
+          zorgen dat onjuiste persoonsgegevens worden gerectificeerd of gewist.\n\nDat
+          kan betekenen dat persoonsgegevens moeten worden geactualiseerd of verbeterd.
+          In de context van algoritmes is het van belang dat ook daar wordt onderzocht
+          welke maatregelen nodig zijn om die [juistheid](https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-11-gebruikte-data/index.html)
+          toe te passen.\n\n\nAls er geen rekening wordt gehouden met de juistheid,
+          nauwkeurigheid en volledigheid van persoonsgegevens, kunnen kwaliteit en integriteit
+          van data niet voldoende worden gewaarborgd.\n","urn":"urn:nl:ak:ver:avg-05","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/avg-05-juistheid-en-actualiteit-van-persoonsgegevens/index.html","subject":["privacy-en-gegevensbescherming"],"lifecycle":["dataverkenning-en-datapreparatie"],"links":["urn:nl:ak:mtr:owp-15","urn:nl:ak:mtr:owp-16","urn:nl:ak:mtr:owp-22","urn:nl:ak:mtr:owp-24","urn:nl:ak:mtr:owp-28","urn:nl:ak:mtr:dat-01","urn:nl:ak:mtr:mon-05"],"ai_act_profile":[{"type":[],"open_source":[],"risk_group":[],"systemic_risk":[],"transparency_obligations":[],"role":[],"conformity_assessment_body":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - close
+        Content-Length:
+          - "1867"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 15 Jan 2025 14:31:34 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - close
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-05?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Datasets
+          voor hoog-risico-AI-systemen voldoen aan kwaliteitscriteria","description":"\nAI-systemen
+          met een hoog risico die technieken gebruiken die het trainen van AI-modellen
+          met data omvatten, worden ontwikkeld op basis van datasets voor training,
+          validatie en tests die voldoen aan de kwaliteitscriteria telkens wanneer dergelijke
+          datasets worden gebruikt.\n","explanation":"AI-systemen met een hoog risico
+          die data gebruiken voor het trainen van AI-modellen, moeten gebaseerd zijn
+          op datasets die voldoen aan specifieke [kwaliteitscriteria](https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/3-dat-01-datakwaliteit/index.html).
+          \n\nDeze criteria zorgen ervoor dat de data geschikt zijn voor [training,
+          validatie en tests](https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/3-dat-07-training-validatie-en-testdata/index.html),
+          wat de betrouwbaarheid en nauwkeurigheid van het AI-systeem waarborgt. De
+          kwaliteitscriteria zijn te vinden in leden 2 t/m 5 van artikel 10 van de AI-verordening.
+          Bijvoorbeeld datasets moeten aan praktijken voor databeheer voldoen en moeten
+          relevant, representatief, accuraat en volledig zijn.\n\nDeze vereiste houdt
+          in dat de gebruikte datasets onder meer moeten voldoen aan:\n\n- datasets
+          voor training, validatie en tests worden onderworpen aan praktijken op het
+          gebied van databeheer die stroken met het beoogde doel van het AI-systeem
+          met een hoog risico. Dit heeft in het bijzonder betrekking op relevante ontwerpkeuzes,
+          processen voor dataverzameling, verwerkingsactiviteiten voor datavoorbereiding,
+          het opstellen van aannames met name betrekking tot de informatie die de data
+          moeten meten en vertegenwoordigen, beschikbaarheid, kwantiteit en geschiktheid
+          van de datasets en een beoordeling op mogelijke vooringenomenheid en passende
+          maatregelen om deze vooringenomenheid op te sporen, te voorkomen en te beperken.
+          \n- datasets voor training, validatie en tests zijn relevant, voldoende representatief
+          en zoveel mogelijk foutenvrij en volledig met het oog op het beoogde doel.\n-
+          Er wordt rekening gehouden met de eigenschappen of elementen die specifiek
+          zijn voor een bepaalde geografische, contextuele, functionele of gedragsomgeving
+          waarin het AI-systeem wordt gebruikt.\n","urn":"urn:nl:ak:ver:aia-05","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/aia-05-data-kwaliteitscriteria/index.html","subject":["data"],"lifecycle":["dataverkenning-en-datapreparatie","verificatie-en-validatie"],"links":["urn:nl:ak:mtr:owp-11","urn:nl:ak:mtr:owp-15","urn:nl:ak:mtr:owp-16","urn:nl:ak:mtr:owp-21","urn:nl:ak:mtr:owp-22","urn:nl:ak:mtr:owp-24","urn:nl:ak:mtr:owp-28","urn:nl:ak:mtr:owp-29","urn:nl:ak:mtr:owp-30","urn:nl:ak:mtr:owp-32","urn:nl:ak:mtr:owp-35","urn:nl:ak:mtr:dat-01","urn:nl:ak:mtr:dat-08","urn:nl:ak:mtr:ver-05","urn:nl:ak:mtr:mon-05"],"ai_act_profile":[{"type":["AI-systeem","AI-systeem
+          voor algemene doeleinden"],"open_source":[],"risk_group":["hoog-risico AI"],"systemic_risk":[],"transparency_obligations":[],"role":["aanbieder"],"conformity_assessment_body":[]}],"always_applicable":0,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - close
+        Content-Length:
+          - "3508"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 15 Jan 2025 14:31:34 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - close
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-05?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Persoonsgegevens
+          zijn juist en actueel.","description":"\nPersoonsgegevens zijn juist en actueel.\n","explanation":"De
+          te verwerken persoonsgegevens moeten nauwkeurig, juist en zo nodig actueel
+          zijn.\nDit betekent dat alle maatregelen moeten worden genomen om ervoor te
+          zorgen dat onjuiste persoonsgegevens worden gerectificeerd of gewist.\n\nDat
+          kan betekenen dat persoonsgegevens moeten worden geactualiseerd of verbeterd.
+          In de context van algoritmes is het van belang dat ook daar wordt onderzocht
+          welke maatregelen nodig zijn om die [juistheid](https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-11-gebruikte-data/index.html)
+          toe te passen.\n\n\nAls er geen rekening wordt gehouden met de juistheid,
+          nauwkeurigheid en volledigheid van persoonsgegevens, kunnen kwaliteit en integriteit
+          van data niet voldoende worden gewaarborgd.\n","urn":"urn:nl:ak:ver:avg-05","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/avg-05-juistheid-en-actualiteit-van-persoonsgegevens/index.html","subject":["privacy-en-gegevensbescherming"],"lifecycle":["dataverkenning-en-datapreparatie"],"links":["urn:nl:ak:mtr:owp-15","urn:nl:ak:mtr:owp-16","urn:nl:ak:mtr:owp-22","urn:nl:ak:mtr:owp-24","urn:nl:ak:mtr:owp-28","urn:nl:ak:mtr:dat-01","urn:nl:ak:mtr:mon-05"],"ai_act_profile":[{"type":[],"open_source":[],"risk_group":[],"systemic_risk":[],"transparency_obligations":[],"role":[],"conformity_assessment_body":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - close
+        Content-Length:
+          - "1867"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 15 Jan 2025 14:31:34 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        accept:
+          - "*/*"
+        accept-encoding:
+          - gzip, deflate
+        connection:
+          - close
+        host:
+          - task-registry.apps.digilab.network
+        user-agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-05?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Datasets
+          voor hoog-risico-AI-systemen voldoen aan kwaliteitscriteria","description":"\nAI-systemen
+          met een hoog risico die technieken gebruiken die het trainen van AI-modellen
+          met data omvatten, worden ontwikkeld op basis van datasets voor training,
+          validatie en tests die voldoen aan de kwaliteitscriteria telkens wanneer dergelijke
+          datasets worden gebruikt.\n","explanation":"AI-systemen met een hoog risico
+          die data gebruiken voor het trainen van AI-modellen, moeten gebaseerd zijn
+          op datasets die voldoen aan specifieke [kwaliteitscriteria](https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/3-dat-01-datakwaliteit/index.html).
+          \n\nDeze criteria zorgen ervoor dat de data geschikt zijn voor [training,
+          validatie en tests](https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/3-dat-07-training-validatie-en-testdata/index.html),
+          wat de betrouwbaarheid en nauwkeurigheid van het AI-systeem waarborgt. De
+          kwaliteitscriteria zijn te vinden in leden 2 t/m 5 van artikel 10 van de AI-verordening.
+          Bijvoorbeeld datasets moeten aan praktijken voor databeheer voldoen en moeten
+          relevant, representatief, accuraat en volledig zijn.\n\nDeze vereiste houdt
+          in dat de gebruikte datasets onder meer moeten voldoen aan:\n\n- datasets
+          voor training, validatie en tests worden onderworpen aan praktijken op het
+          gebied van databeheer die stroken met het beoogde doel van het AI-systeem
+          met een hoog risico. Dit heeft in het bijzonder betrekking op relevante ontwerpkeuzes,
+          processen voor dataverzameling, verwerkingsactiviteiten voor datavoorbereiding,
+          het opstellen van aannames met name betrekking tot de informatie die de data
+          moeten meten en vertegenwoordigen, beschikbaarheid, kwantiteit en geschiktheid
+          van de datasets en een beoordeling op mogelijke vooringenomenheid en passende
+          maatregelen om deze vooringenomenheid op te sporen, te voorkomen en te beperken.
+          \n- datasets voor training, validatie en tests zijn relevant, voldoende representatief
+          en zoveel mogelijk foutenvrij en volledig met het oog op het beoogde doel.\n-
+          Er wordt rekening gehouden met de eigenschappen of elementen die specifiek
+          zijn voor een bepaalde geografische, contextuele, functionele of gedragsomgeving
+          waarin het AI-systeem wordt gebruikt.\n","urn":"urn:nl:ak:ver:aia-05","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/aia-05-data-kwaliteitscriteria/index.html","subject":["data"],"lifecycle":["dataverkenning-en-datapreparatie","verificatie-en-validatie"],"links":["urn:nl:ak:mtr:owp-11","urn:nl:ak:mtr:owp-15","urn:nl:ak:mtr:owp-16","urn:nl:ak:mtr:owp-21","urn:nl:ak:mtr:owp-22","urn:nl:ak:mtr:owp-24","urn:nl:ak:mtr:owp-28","urn:nl:ak:mtr:owp-29","urn:nl:ak:mtr:owp-30","urn:nl:ak:mtr:owp-32","urn:nl:ak:mtr:owp-35","urn:nl:ak:mtr:dat-01","urn:nl:ak:mtr:dat-08","urn:nl:ak:mtr:ver-05","urn:nl:ak:mtr:mon-05"],"ai_act_profile":[{"type":["AI-systeem","AI-systeem
+          voor algemene doeleinden"],"open_source":[],"risk_group":["hoog-risico AI"],"systemic_risk":[],"transparency_obligations":[],"role":["aanbieder"],"conformity_assessment_body":[]}],"always_applicable":0,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        Connection:
+          - close
+        Content-Length:
+          - "3508"
+        Content-Type:
+          - application/json
+        Date:
+          - Wed, 15 Jan 2025 14:31:34 GMT
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+version: 1

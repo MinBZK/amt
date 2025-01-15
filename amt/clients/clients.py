@@ -29,7 +29,10 @@ class APIClient:
         self.client = httpx.AsyncClient(timeout=timeout, transport=transport)
 
     async def _make_request(self, endpoint: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
-        response = await self.client.get(f"{self.base_url}/{endpoint}", params=params)
+        # we use 'Connection: close' for this reason https://github.com/encode/httpx/discussions/2959
+        response = await self.client.get(
+            f"{self.base_url}/{endpoint}", params=params, headers=[("Connection", "close")]
+        )
         if response.status_code != 200:
             raise AMTNotFound()
         return response.json()
@@ -55,8 +58,9 @@ class TaskRegistryAPIClient(APIClient):
         return response_data
 
 
+task_registry_api_client = TaskRegistryAPIClient()
+
+
 @alru_cache(maxsize=0 if "pytest" in sys.modules else 1000)
-async def get_task_by_urn(
-    client: TaskRegistryAPIClient, task_type: TaskType, urn: str, version: str = "latest"
-) -> dict[str, Any]:
-    return await client.get_task_by_urn(task_type, urn, version)
+async def get_task_by_urn(task_type: TaskType, urn: str, version: str = "latest") -> dict[str, Any]:
+    return await task_registry_api_client.get_task_by_urn(task_type, urn, version)
