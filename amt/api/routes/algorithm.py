@@ -25,7 +25,7 @@ from amt.core.authorization import get_user
 from amt.core.exceptions import AMTError, AMTNotFound, AMTRepositoryError
 from amt.core.internationalization import get_current_translation
 from amt.enums.status import Status
-from amt.models import Algorithm
+from amt.models import Algorithm, User
 from amt.models.task import Task
 from amt.repositories.organizations import OrganizationsRepository
 from amt.repositories.users import UsersRepository
@@ -102,11 +102,8 @@ def get_algorithm_details_tabs(request: Request) -> list[NavigationItem]:
         [
             Navigation.ALGORITHM_INFO,
             Navigation.ALGORITHM_ALGORITHM_DETAILS,
-            Navigation.ALGORITHM_MODEL,
-            Navigation.ALGORITHM_REQUIREMENTS,
-            Navigation.ALGORITHM_DATA_CARD,
+            Navigation.ALGORITHM_COMPLIANCE,
             Navigation.ALGORITHM_TASKS,
-            Navigation.ALGORITHM_INSTRUMENTS,
         ],
         request,
     )
@@ -377,43 +374,7 @@ async def get_system_card(
     return templates.TemplateResponse(request, "pages/system_card.html.j2", context)
 
 
-@router.get("/{algorithm_id}/details/model/inference")
-async def get_algorithm_inference(
-    request: Request, algorithm_id: int, algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)]
-) -> HTMLResponse:
-    algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
-
-    breadcrumbs = resolve_base_navigation_items(
-        [
-            Navigation.ALGORITHMS_ROOT,
-            BaseNavigationItem(
-                custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details/model/inference"
-            ),
-            Navigation.ALGORITHM_MODEL,
-        ],
-        request,
-    )
-
-    instrument_state = await get_instrument_state(algorithm.system_card)
-    requirements_state = await get_requirements_state(algorithm.system_card)
-
-    tab_items = get_algorithm_details_tabs(request)
-
-    context = {
-        "last_edited": algorithm.last_edited,
-        "system_card": algorithm.system_card,
-        "instrument_state": instrument_state,
-        "requirements_state": requirements_state,
-        "algorithm": algorithm,
-        "algorithm_id": algorithm.id,
-        "breadcrumbs": breadcrumbs,
-        "tab_items": tab_items,
-    }
-
-    return templates.TemplateResponse(request, "algorithms/details_inference.html.j2", context)
-
-
-@router.get("/{algorithm_id}/details/system_card/requirements")
+@router.get("/{algorithm_id}/details/system_card/compliance")
 async def get_system_card_requirements(
     request: Request,
     algorithm_id: int,
@@ -435,7 +396,7 @@ async def get_system_card_requirements(
         [
             Navigation.ALGORITHMS_ROOT,
             BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details/system_card"),
-            Navigation.ALGORITHM_SYSTEM_CARD,
+            Navigation.ALGORITHM_COMPLIANCE,
         ],
         request,
     )
@@ -482,7 +443,17 @@ async def get_system_card_requirements(
         "measure_task_functions": measure_task_functions,
     }
 
-    return templates.TemplateResponse(request, "algorithms/details_requirements.html.j2", context)
+    return templates.TemplateResponse(request, "algorithms/details_compliance.html.j2", context)
+
+
+async def _fetch_members(
+    users_repository: UsersRepository,
+    search_name: str,
+    sort_by: dict[str, str],
+    filters: dict[str, str],
+) -> User | None:
+    members = await users_repository.find_all(search=search_name, sort=sort_by, filters=filters)
+    return members[0] if members else None
 
 
 async def get_measure_task_functions(
@@ -492,33 +463,18 @@ async def get_measure_task_functions(
     filters: dict[str, str],
 ) -> dict[str, list[Any]]:
     measure_task_functions: dict[str, list[Any]] = defaultdict(list)
+
     for measure_task in measure_tasks:
-        if measure_task.accountable_persons:  # pyright: ignore [reportOptionalMemberAccess]
-            members_accountable = await users_repository.find_all(
-                search=measure_task.accountable_persons[0].name,  # pyright: ignore [reportOptionalMemberAccess]
-                sort=sort_by,
-                filters=filters,
-            )
-            if members_accountable:
-                measure_task_functions[measure_task.urn].append(members_accountable[0])  # pyright: ignore [reportOptionalMemberAccess]
+        if measure_task is None:
+            continue
 
-        if measure_task.reviewer_persons:  # pyright: ignore [reportOptionalMemberAccess]
-            members_reviewer = await users_repository.find_all(
-                search=measure_task.reviewer_persons[0].name,  # pyright: ignore [reportOptionalMemberAccess]
-                sort=sort_by,
-                filters=filters,
-            )
-            if members_reviewer:
-                measure_task_functions[measure_task.urn].append(members_reviewer[0])  # pyright: ignore [reportOptionalMemberAccess]
-
-        if measure_task.responsible_persons:  # pyright: ignore [reportOptionalMemberAccess]
-            members_responsible = await users_repository.find_all(
-                search=measure_task.responsible_persons[0].name,  # pyright: ignore [reportOptionalMemberAccess]
-                sort=sort_by,
-                filters=filters,
-            )
-            if members_responsible:
-                measure_task_functions[measure_task.urn].append(members_responsible[0])  # pyright: ignore [reportOptionalMemberAccess]
+        person_types = ["accountable_persons", "reviewer_persons", "responsible_persons"]
+        for person_type in person_types:
+            person_list = getattr(measure_task, person_type)
+            if person_list:
+                member = await _fetch_members(users_repository, person_list[0].name, sort_by, filters)
+                if member:
+                    measure_task_functions[measure_task.urn].append(member)
     return measure_task_functions
 
 
@@ -699,11 +655,11 @@ async def update_measure_value(
 
     await algorithms_service.update(algorithm)
     # TODO: FIX THIS!! The page now reloads at the top, which is annoying
-    return templates.Redirect(request, f"/algorithm/{algorithm_id}/details/system_card/requirements")
+    return templates.Redirect(request, f"/algorithm/{algorithm_id}/details/system_card/compliance")
 
 
-@router.get("/{algorithm_id}/details/system_card/data")
-async def get_system_card_data_page(
+@router.get("/{algorithm_id}/members")
+async def get_algorithm_members(
     request: Request,
     algorithm_id: int,
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
@@ -718,7 +674,7 @@ async def get_system_card_data_page(
         [
             Navigation.ALGORITHMS_ROOT,
             BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details/system_card"),
-            Navigation.ALGORITHM_SYSTEM_CARD,
+            Navigation.ALGORITHM_MEMBERS,
         ],
         request,
     )
@@ -732,40 +688,7 @@ async def get_system_card_data_page(
         "breadcrumbs": breadcrumbs,
     }
 
-    return templates.TemplateResponse(request, "algorithms/details_data.html.j2", context)
-
-
-@router.get("/{algorithm_id}/details/system_card/instruments")
-async def get_system_card_instruments(
-    request: Request,
-    algorithm_id: int,
-    algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
-) -> HTMLResponse:
-    algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
-    instrument_state = await get_instrument_state(algorithm.system_card)
-    requirements_state = await get_requirements_state(algorithm.system_card)
-
-    tab_items = get_algorithm_details_tabs(request)
-
-    breadcrumbs = resolve_base_navigation_items(
-        [
-            Navigation.ALGORITHMS_ROOT,
-            BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details/system_card"),
-            Navigation.ALGORITHM_SYSTEM_CARD,
-        ],
-        request,
-    )
-
-    context = {
-        "instrument_state": instrument_state,
-        "requirements_state": requirements_state,
-        "algorithm": algorithm,
-        "algorithm_id": algorithm.id,
-        "tab_items": tab_items,
-        "breadcrumbs": breadcrumbs,
-    }
-
-    return templates.TemplateResponse(request, "algorithms/details_instruments.html.j2", context)
+    return templates.TemplateResponse(request, "algorithms/members.html.j2", context)
 
 
 @router.get("/{algorithm_id}/details/system_card/assessments/{assessment_card}")

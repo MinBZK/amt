@@ -1,6 +1,68 @@
 {% extends 'algorithms/details_base.html.j2' %}
 {% from "macros/editable.html.j2" import editable with context %}
 {% block detail_content %}
+    <!-- Requirements Widget -->
+    <div class="rvo-layout-grid-container">
+        <div class="rvo-layout-grid rvo-layout-gap--sm rvo-layout-grid-columns--one rvo-layout-grid-layout--1fr">
+            <div class="rvo-card rvo-card--padding-md"
+                 style="min-height: 225px;
+                        display: flex;
+                        flex-direction: column">
+                <div class="rvo-layout-row"
+                     style="display: flex;
+                            justify-content: space-between">
+                    <h5 class="amt-widget-title rvo-link--with-icon">
+                        <span class="utrecht-icon rvo-icon rvo-icon-vinkje rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
+                              role="img"
+                              aria-label=""></span>{% trans %}Does the algorithm meet the requirements?{% endtrans %}
+                    </h5>
+                    <a class="rvo-text--subtle rvo-text--bold">{{ requirements_state.count_0 }}/{{ requirements_state.count_1 }}
+                    {% trans %}Done{% endtrans %}</a>
+                </div>
+                <ul class="rvo-item-list">
+                    {% for requirement in requirements_state.states %}
+                        {# Only show the first 3 elements of the instruments_state#}
+                        {% if loop.index <= 3 %}
+                            <li class="rvo-item-list__item">
+                                <div class="rvo-layout-row rvo-layout-gap--sm"
+                                     style="display: flex;
+                                            justify-content: space-between">
+                                    <div class="rvo-layout-row rvo-layout-gap--sm rvo-layout-align-items-start">
+                                        {% if requirement.state == "to do" %}
+                                            <div class="rvo-status-indicator rvo-status-indicator--hemelblauw"></div>
+                                        {% elif requirement.state == "in progress" %}
+                                            <div class="rvo-status-indicator rvo-status-indicator--oranje"></div>
+                                        {% else %}
+                                            <div class="rvo-status-indicator rvo-status-indicator--groen"></div>
+                                        {% endif %}
+                                        <a class="rvo-link rvo-link--no-underline rvo-link--zwart" href="#">{{ requirement.name }}</a>
+                                    </div>
+                                    <div style="white-space: nowrap">
+                                        {% if requirement.state == "to do" %}
+                                            <a class="rvo-text--subtle">{% trans %}To do{% endtrans %}</a>
+                                        {% elif requirement.state == "in progress" %}
+                                            <a class="rvo-text--subtle">{% trans %}In progress{% endtrans %}</a>
+                                        {% else %}
+                                            <a class="rvo-text--subtle">{% trans %}Done{% endtrans %}</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                <a class="rvo-link rvo-link--normal rvo-link--with-icon"
+                   href="/algorithm/{{ algorithm_id }}/details/system_card/compliance"
+                   style="margin-top: auto">
+                    <span class="utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
+                          role="img"
+                          aria-label="Home"></span>
+                    {% trans %}Go to all requirements{% endtrans %}
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Table with Information on the Algorithm -->
     <div class="rvo-table--responsive rvo-alert--padding-md">
         <table class="rvo-table">
             <tbody class="rvo-table-body">

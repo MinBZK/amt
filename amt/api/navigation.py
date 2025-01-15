@@ -32,6 +32,7 @@ class DisplayText(Enum):
     DETAILS = "details"
     ORGANIZATIONS = "organizations"
     MEMBERS = "members"
+    COMPLIANCE = "compliance"
 
 
 def get_translation(key: DisplayText, translations: NullTranslations) -> str:
@@ -60,8 +61,8 @@ def get_translation(key: DisplayText, translations: NullTranslations) -> str:
         DisplayText.MODEL: _("Model"),
         DisplayText.INSTRUMENTS: _("Instruments"),
         DisplayText.ORGANIZATIONS: _("Organizations"),
-        DisplayText.ALGORITHMS: _("Algorithms"),
         DisplayText.MEMBERS: _("Members"),
+        DisplayText.COMPLIANCE: _("Compliance"),
     }
     return keys[key]
 
@@ -105,9 +106,6 @@ class Navigation:
     ALGORITHM_DETAILS = BaseNavigationItem(
         display_text=DisplayText.DETAILS, url="/algorithm/{algorithm_id}/details/system_card"
     )
-    ALGORITHM_MODEL = BaseNavigationItem(
-        display_text=DisplayText.MODEL, url="/algorithm/{algorithm_id}/details/model/inference"
-    )
     ALGORITHM_NEW = BaseNavigationItem(display_text=DisplayText.NEW, url="/algorithms/new")
     ALGORITHM_INFO = BaseNavigationItem(display_text=DisplayText.INFO, url="/algorithm/{algorithm_id}/details")
     ALGORITHM_ALGORITHM_DETAILS = BaseNavigationItem(
@@ -115,9 +113,6 @@ class Navigation:
     )
     ALGORITHM_SYSTEM_CARD = BaseNavigationItem(
         display_text=DisplayText.SYSTEMCARD, url="/algorithm/{algorithm_id}/details/system_card"
-    )
-    ALGORITHM_DATA_CARD = BaseNavigationItem(
-        display_text=DisplayText.DATA, url="/algorithm/{algorithm_id}/details/system_card/data"
     )
     ALGORITHM_MODEL_CARD = BaseNavigationItem(
         display_text=DisplayText.MODELCARD,
@@ -127,12 +122,10 @@ class Navigation:
         display_text=DisplayText.ASSESSMENTCARD,
         url="/algorithm/{algorithm_id}/details/system_card/assessment/{assessment_card}",
     )
-    ALGORITHM_REQUIREMENTS = BaseNavigationItem(
-        display_text=DisplayText.REQUIREMENTS, url="/algorithm/{algorithm_id}/details/system_card/requirements"
+    ALGORITHM_COMPLIANCE = BaseNavigationItem(
+        display_text=DisplayText.COMPLIANCE, url="/algorithm/{algorithm_id}/details/system_card/compliance"
     )
-    ALGORITHM_INSTRUMENTS = BaseNavigationItem(
-        display_text=DisplayText.INSTRUMENTS, url="/algorithm/{algorithm_id}/details/system_card/instruments"
-    )
+    ALGORITHM_MEMBERS = BaseNavigationItem(display_text=DisplayText.MEMBERS, url="/algorithm/{algorithm_id}/members")
     ORGANIZATIONS_ROOT = BaseNavigationItem(
         display_text=DisplayText.ORGANIZATIONS, url="/organizations", icon="rvo-icon-man-torso-voor-hoogbouw"
     )

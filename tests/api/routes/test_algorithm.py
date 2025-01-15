@@ -60,20 +60,6 @@ async def test_get_algorithm_tasks(client: AsyncClient, db: DatabaseTestUtils) -
 
 
 @pytest.mark.asyncio
-async def test_get_algorithm_inference(client: AsyncClient, db: DatabaseTestUtils) -> None:
-    # given
-    await db.given([default_user(), default_algorithm("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
-
-    # when
-    response = await client.get("/algorithm/1/details/model/inference")
-
-    # then
-    assert response.status_code == 200
-    assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b'<button id="runInference"' in response.content
-
-
-@pytest.mark.asyncio
 async def test_move_task(client: AsyncClient, db: DatabaseTestUtils, mocker: MockFixture) -> None:
     # given
     await db.given(
@@ -282,8 +268,8 @@ async def test_get_algorithm_details(client: AsyncClient, db: DatabaseTestUtils)
 
 
 @pytest.mark.asyncio
-@vcr.use_cassette("tests/fixtures/vcr_cassettes/test_get_system_card_requirements.yml")  # type: ignore
-async def test_get_system_card_requirements(client: AsyncClient, db: DatabaseTestUtils) -> None:
+@vcr.use_cassette("tests/fixtures/vcr_cassettes/test_get_system_card_compliance.yml")  # type: ignore
+async def test_get_system_card_compliance(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
     await db.given(
         [
@@ -294,7 +280,7 @@ async def test_get_system_card_requirements(client: AsyncClient, db: DatabaseTes
     )
 
     # when
-    response = await client.get("/algorithm/1/details/system_card/requirements")
+    response = await client.get("/algorithm/1/details/system_card/compliance")
 
     # then
     assert response.status_code == 200
@@ -303,8 +289,8 @@ async def test_get_system_card_requirements(client: AsyncClient, db: DatabaseTes
 
 
 @pytest.mark.asyncio
-@vcr.use_cassette("tests/fixtures/vcr_cassettes/test_get_system_card_data_page.yml")  # type: ignore
-async def test_get_system_card_data_page(client: AsyncClient, db: DatabaseTestUtils) -> None:
+@vcr.use_cassette("tests/fixtures/vcr_cassettes/test_get_algorithm_members.yml")  # type: ignore
+async def test_get_algorithm_members(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
     await db.given(
         [
@@ -315,33 +301,11 @@ async def test_get_system_card_data_page(client: AsyncClient, db: DatabaseTestUt
     )
 
     # when
-    response = await client.get("/algorithm/1/details/system_card/data")
+    response = await client.get("/algorithm/1/members")
 
     # then
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"To be implemented" in response.content
-
-
-@pytest.mark.asyncio
-@vcr.use_cassette("tests/fixtures/vcr_cassettes/test_get_system_card_instruments.yml")  # type: ignore
-async def test_get_system_card_instruments(client: AsyncClient, db: DatabaseTestUtils) -> None:
-    # given
-    await db.given(
-        [
-            default_user(),
-            default_algorithm_with_system_card("testalgorithm1"),
-            default_task(algorithm_id=1, status_id=1),
-        ]
-    )
-
-    # when
-    response = await client.get("/algorithm/1/details/system_card/instruments")
-
-    # then
-    assert response.status_code == 200
-    assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"To be implemented" in response.content
 
 
 @pytest.mark.asyncio

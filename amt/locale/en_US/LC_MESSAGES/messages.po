@@ -47,7 +47,7 @@ msgid "Role"
 msgstr ""
 
 #: amt/api/group_by_category.py:15
-#: amt/site/templates/algorithms/details_info.html.j2:28
+#: amt/site/templates/algorithms/details_info.html.j2:90
 #: amt/site/templates/algorithms/new.html.j2:41
 #: amt/site/templates/parts/algorithm_search.html.j2:48
 #: amt/site/templates/parts/filter_list.html.j2:71
@@ -90,68 +90,67 @@ msgstr ""
 msgid "Phasing Out"
 msgstr ""
 
-#: amt/api/navigation.py:47
+#: amt/api/navigation.py:48
 msgid "Home"
 msgstr ""
 
-#: amt/api/navigation.py:48 amt/api/navigation.py:63
-#: amt/site/templates/parts/algorithm_search.html.j2:9
+#: amt/api/navigation.py:49 amt/site/templates/parts/algorithm_search.html.j2:9
 msgid "Algorithms"
 msgstr ""
 
-#: amt/api/navigation.py:49 amt/site/templates/auth/profile.html.j2:10
+#: amt/api/navigation.py:50 amt/site/templates/auth/profile.html.j2:10
 msgid "Overview"
 msgstr ""
 
-#: amt/api/navigation.py:50
+#: amt/api/navigation.py:51
 msgid "Tasks"
 msgstr ""
 
-#: amt/api/navigation.py:51
+#: amt/api/navigation.py:52
 msgid "New"
 msgstr ""
 
-#: amt/api/navigation.py:52
+#: amt/api/navigation.py:53
 msgid "System card"
 msgstr ""
 
-#: amt/api/navigation.py:53
+#: amt/api/navigation.py:54
 msgid "Assessment card"
 msgstr ""
 
-#: amt/api/navigation.py:54
+#: amt/api/navigation.py:55
 msgid "Model card"
 msgstr ""
 
-#: amt/api/navigation.py:55
+#: amt/api/navigation.py:56
 msgid "Details"
 msgstr ""
 
-#: amt/api/navigation.py:56 amt/site/templates/organizations/home.html.j2:8
+#: amt/api/navigation.py:57 amt/site/templates/organizations/home.html.j2:8
 msgid "Info"
 msgstr ""
 
-#: amt/api/navigation.py:57
+#: amt/api/navigation.py:58
 msgid "Algorithm details"
 msgstr ""
 
-#: amt/api/navigation.py:58
+#: amt/api/navigation.py:59
 msgid "Requirements"
 msgstr ""
 
-#: amt/api/navigation.py:59
+#: amt/api/navigation.py:60
 msgid "Data"
 msgstr ""
 
-#: amt/api/navigation.py:60
+#: amt/api/navigation.py:61
 msgid "Model"
 msgstr ""
 
-#: amt/api/navigation.py:61 amt/site/templates/algorithms/new.html.j2:170
+#: amt/api/navigation.py:62 amt/site/templates/algorithms/new.html.j2:170
 msgid "Instruments"
 msgstr ""
 
-#: amt/api/navigation.py:62
+#: amt/api/navigation.py:63
 #: amt/site/templates/organizations/parts/overview_results.html.j2:6
 msgid "Organizations"
 msgstr ""
@@ -160,6 +159,10 @@ msgstr ""
 #: amt/site/templates/organizations/parts/members_results.html.j2:6
 #: amt/site/templates/organizations/parts/overview_results.html.j2:132
 msgid "Members"
+msgstr ""
+
+#: amt/api/navigation.py:65
+msgid "Compliance"
 msgstr ""
 
 #: amt/api/organization_filter_options.py:17
@@ -195,7 +198,7 @@ msgid "Select organization"
 msgstr ""
 
 #: amt/api/forms/algorithm.py:29
-#: amt/site/templates/algorithms/details_info.html.j2:12
+#: amt/site/templates/algorithms/details_info.html.j2:74
 msgid "Organization"
 msgstr ""
 
@@ -242,7 +245,7 @@ msgid "Add links to documents"
 msgstr ""
 
 #: amt/api/forms/organization.py:23
-#: amt/site/templates/algorithms/details_info.html.j2:8
+#: amt/site/templates/algorithms/details_info.html.j2:70
 #: amt/site/templates/auth/profile.html.j2:34
 #: amt/site/templates/organizations/home.html.j2:13
 #: amt/site/templates/organizations/parts/members_results.html.j2:118
@@ -352,146 +355,82 @@ msgstr ""
 msgid "Something went wrong storing your file. PLease try again later."
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:19
+#: amt/site/templates/algorithms/details_base.html.j2:12
 msgid "Delete algoritmic system"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:26
+#: amt/site/templates/algorithms/details_base.html.j2:19
 msgid "Are you sure you want to delete your algoritmic system "
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:30
-msgid ""
-"Data will be stored for at least 45 days before permanent\n"
-"                deletion."
+#: amt/site/templates/algorithms/details_base.html.j2:22
+msgid "Data will be stored for at least 45 days before permanent deletion."
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:39
+#: amt/site/templates/algorithms/details_base.html.j2:28
 #: amt/site/templates/algorithms/new.html.j2:153
 #: amt/site/templates/macros/form_macros.html.j2:168
 #: amt/site/templates/organizations/members.html.j2:33
 msgid "Yes"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:44
+#: amt/site/templates/algorithms/details_base.html.j2:31
 #: amt/site/templates/algorithms/new.html.j2:163
 #: amt/site/templates/macros/form_macros.html.j2:173
 #: amt/site/templates/organizations/members.html.j2:36
 msgid "No"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:63
+#: amt/site/templates/algorithms/details_base.html.j2:50
 msgid "Download as YAML"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:87
+#: amt/site/templates/algorithms/details_compliance.html.j2:34
+msgid "measure executed"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_compliance.html.j2:67
+#: amt/site/templates/macros/editable.html.j2:24
+#: amt/site/templates/macros/editable.html.j2:27
+msgid "Edit"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_info.html.j2:17
 msgid "Does the algorithm meet the requirements?"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:90
-#: amt/site/templates/algorithms/details_base.html.j2:116
-#: amt/site/templates/algorithms/details_base.html.j2:147
-#: amt/site/templates/algorithms/details_base.html.j2:170
+#: amt/site/templates/algorithms/details_info.html.j2:20
+#: amt/site/templates/algorithms/details_info.html.j2:46
 #: amt/site/templates/macros/tasks.html.j2:32
 msgid "Done"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:112
-#: amt/site/templates/algorithms/details_base.html.j2:168
+#: amt/site/templates/algorithms/details_info.html.j2:42
 msgid "To do"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:114
+#: amt/site/templates/algorithms/details_info.html.j2:44
 msgid "In progress"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:130
+#: amt/site/templates/algorithms/details_info.html.j2:60
 msgid "Go to all requirements"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:144
-msgid "Which instruments are executed?"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_base.html.j2:184
-msgid "Go to all instruments"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_data.html.j2:3
-#: amt/site/templates/algorithms/details_instruments.html.j2:3
-msgid "To be implemented"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_inference.html.j2:7
-msgid "Floor area (m²):"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_inference.html.j2:16
-msgid "Plot size (m²):"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_inference.html.j2:25
-msgid "Building year:"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_inference.html.j2:34
-msgid "Object type:"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_inference.html.j2:43
-msgid "Number of annexes:"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_inference.html.j2:52
-msgid "Neighborhood code:"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_inference.html.j2:61
-msgid "Quality rating:"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_inference.html.j2:73
-msgid "Maintenance rating:"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_inference.html.j2:85
-msgid "Amenities rating:"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_inference.html.j2:97
-msgid "Location rating:"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_inference.html.j2:113
-msgid "Estimate WOZ Value"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_inference.html.j2:117
-msgid "Estimated WOZ Value"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_inference.html.j2:119
-msgid "Undefined"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_inference.html.j2:175
-msgid "Failed to estimate WOZ value: "
-msgstr ""
-
-#: amt/site/templates/algorithms/details_info.html.j2:16
+#: amt/site/templates/algorithms/details_info.html.j2:78
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:27
 msgid "Description"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:20
+#: amt/site/templates/algorithms/details_info.html.j2:82
 msgid "Repository"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:24
+#: amt/site/templates/algorithms/details_info.html.j2:86
 msgid "Algorithm code"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:32
+#: amt/site/templates/algorithms/details_info.html.j2:94
 #: amt/site/templates/organizations/parts/overview_results.html.j2:134
 #: amt/site/templates/pages/assessment_card.html.j2:7
 #: amt/site/templates/pages/model_card.html.j2:6
@@ -501,12 +440,16 @@ msgstr ""
 msgid "Last updated"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:36
+#: amt/site/templates/algorithms/details_info.html.j2:98
 msgid "Labels"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:44
+#: amt/site/templates/algorithms/details_info.html.j2:106
 msgid "References"
+msgstr ""
+
+#: amt/site/templates/algorithms/details_instruments.html.j2:3
+msgid "To be implemented"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:37
@@ -522,16 +465,6 @@ msgstr ""
 #: amt/site/templates/macros/editable.html.j2:87
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:26
 msgid "Cancel"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_requirements.html.j2:27
-msgid "measures executed"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_requirements.html.j2:60
-#: amt/site/templates/macros/editable.html.j2:24
-#: amt/site/templates/macros/editable.html.j2:27
-msgid "Edit"
 msgstr ""
 
 #: amt/site/templates/algorithms/new.html.j2:8
@@ -657,7 +590,7 @@ msgstr ""
 msgid "There is one error:"
 msgstr ""
 
-#: amt/site/templates/layouts/base.html.j2:1
+#: amt/site/templates/layouts/base.html.j2:11
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr ""
 
