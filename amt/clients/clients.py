@@ -29,7 +29,10 @@ class APIClient:
         self.client = httpx.AsyncClient(timeout=timeout, transport=transport)
 
     async def _make_request(self, endpoint: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
-        response = await self.client.get(f"{self.base_url}/{endpoint}", params=params)
+        # we use 'Connection: close' for this reason https://github.com/encode/httpx/discussions/2959
+        response = await self.client.get(
+            f"{self.base_url}/{endpoint}", params=params, headers=[("Connection", "close")]
+        )
         if response.status_code != 200:
             raise AMTNotFound()
         return response.json()

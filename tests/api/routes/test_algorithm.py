@@ -584,6 +584,7 @@ async def test_update_measure_value(
 
 
 @pytest.mark.asyncio
+@amt_vcr.use_cassette("tests/fixtures/vcr_cassettes/test_update_measure_value_with_people.yml")  # type: ignore
 async def test_update_measure_value_with_people(
     minio_mock: MockMinioClient, client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils
 ) -> None:

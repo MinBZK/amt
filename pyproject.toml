@@ -139,7 +139,7 @@ filterwarnings = [
 ]
 log_cli = true
 log_cli_level = "INFO"
-faulthandler_timeout = 40
+faulthandler_timeout = 60
 markers = [
    "slow: marks tests as slow",
    "enable_auth: marks tests that require authentication"
