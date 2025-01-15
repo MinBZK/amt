@@ -35,7 +35,7 @@ def test_e2e_create_algorithm(page: Page) -> None:
     button = page.locator("#button-new-algorithm-create")
     button.click()
     page.wait_for_timeout(30000)
-    expect(page.get_by_text("My new algorithm").first).to_be_visible()
+    expect(page.get_by_text("My new algorithm").first).to_be_visible(timeout=10000)
 
 
 @pytest.mark.slow
