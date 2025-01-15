@@ -20,7 +20,10 @@
                                 <td class="rvo-table-cell">
                                     <strong>{{ key.capitalize().replace("_", " ") }}</strong>
                                 </td>
-                                <td class="rvo-table-cell">{{ render.render_value(key, value,0) }}</td>
+                                {# TODO: the base path should be the name of the assessment probably.. like system_card/assessments/iama #}
+                                <td class="rvo-table-cell">
+                                    {{ render.render_value(key, value, 0, "algorithm/" + algorithm_id|string + "/FIXME", "/system_card") }}
+                                </td>
                             </tr>
                         {% endif %}
                     {% endfor %}
@@ -44,7 +47,9 @@
                                     <td class="rvo-table-cell">
                                         <strong>{{ key.capitalize().replace("_", " ") }}</strong>
                                     </td>
-                                    <td class="rvo-table-cell">{{ render.render_value(key, value,0) }}</td>
+                                    <td class="rvo-table-cell">
+                                        {{ render.render_value(key, value, 0, "algorithm/" + algorithm_id|string + "/FIXME", "/system_card/models/FIXME") }}
+                                    </td>
                                 </tr>
                             {% endif %}
                         {% endfor %}

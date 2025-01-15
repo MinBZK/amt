@@ -1,5 +1,6 @@
 {% extends 'algorithms/details_base.html.j2' %}
 {% import 'macros/cards.html.j2' as render with context %}
+{% from "macros/editable.html.j2" import editable with context %}
 {% block detail_content %}
     <span class="rvo-text">{% trans %}Last updated{% endtrans %}: {{ last_edited | time_ago(language) }}
     {% trans %}ago{% endtrans %}</span>
@@ -50,13 +51,17 @@
                 </tr>
             </thead>
             {% for key, value in system_card %}
-                <tbody class="rvo-table-body">
-                    <tr class="rvo-table-row">
-                        <td class="rvo-table-cell">
-                            <strong>{{ key.capitalize().replace("_", " ") }}</strong>
-                        </td>
-                        <td class="rvo-table-cell">{{ render.render_value(key, value, 0) }}</td>
-                    </tr>
+                {% if key not in ["requirements","measures"] %}
+                    <tbody class="rvo-table-body">
+                        <tr class="rvo-table-row">
+                            <td class="rvo-table-cell">
+                                <strong>{{ key.capitalize().replace("_", " ") }}</strong>
+                            </td>
+                            <td class="rvo-table-cell">
+                                {{ render.render_value(key, value, 0, "algorithm/" + algorithm_id|string, "/system_card") }}
+                            </td>
+                        </tr>
+                    {% endif %}
                 {% endfor %}
             </tbody>
         </table>

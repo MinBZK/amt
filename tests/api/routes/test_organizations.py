@@ -117,12 +117,15 @@ async def test_edit_organization_inline(client: AsyncClient, mocker: MockFixture
     mocker.patch("amt.api.routes.organizations.get_user", return_value=default_auth_user())
 
     # when
-    response = await client.get("/organizations/default-organization/edit/name?edit_type=systemcard")
+    response = await client.get("/organizations/default-organization/edit?full_resource_path=organization/1/name")
 
     # then
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"/organizations/default-organization/update/name?edit_type=systemcard" in response.content
+    assert (
+        b'hx-put="/organizations/default-organization/update?full_resource_path=organization/1/name"'
+        in response.content
+    )
 
 
 @pytest.mark.asyncio
@@ -153,7 +156,7 @@ async def test_update_organization_inline(client: AsyncClient, mocker: MockFixtu
 
     client.cookies["fastapi-csrf-token"] = "1"
     response = await client.put(
-        "/organizations/default-organization/update/name?edit_type=systemcard",
+        "/organizations/default-organization/update?full_resource_path=organization/1/name",
         json={"value": "New name"},
         headers={"X-CSRF-Token": "1"},
     )

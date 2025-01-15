@@ -2,7 +2,7 @@ from io import BytesIO
 from typing import Any
 
 import pytest
-import vcr  # type: ignore
+from amt.api.editable import set_path
 from amt.api.routes.algorithm import (
     find_measure_task,
     find_requirement_task,
@@ -10,7 +10,6 @@ from amt.api.routes.algorithm import (
     get_algorithm_context,
     get_algorithm_or_error,
     get_user_id_or_error,
-    set_path,
 )
 from amt.core.config import get_settings
 from amt.core.exceptions import AMTError, AMTNotFound, AMTRepositoryError
@@ -25,6 +24,7 @@ from pytest_minio_mock.plugin import MockMinioClient  # pyright: ignore [reportM
 from pytest_mock import MockFixture
 
 from tests.api.routes.test_algorithms import MockRequest
+from tests.conftest import amt_vcr
 from tests.constants import (
     default_algorithm,
     default_algorithm_with_system_card,
@@ -93,6 +93,7 @@ async def test_move_task(client: AsyncClient, db: DatabaseTestUtils, mocker: Moc
 
 
 @pytest.mark.asyncio
+@amt_vcr.use_cassette("tests/fixtures/vcr_cassettes/test_get_algorithm_context.yml")  # type: ignore
 async def test_get_algorithm_context(client: AsyncClient, db: DatabaseTestUtils, mocker: MockFixture) -> None:
     # given
     test_algorithm = default_algorithm_with_system_card("testalgorithm1")
@@ -172,7 +173,7 @@ async def test_get_system_card_unknown_algorithm(client: AsyncClient) -> None:
 
 
 @pytest.mark.asyncio
-@vcr.use_cassette("tests/fixtures/vcr_cassettes/test_get_assessment_card.yml")  # type: ignore
+@amt_vcr.use_cassette("tests/fixtures/vcr_cassettes/test_get_assessment_card.yml")  # type: ignore
 async def test_get_assessment_card(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
     await db.given([default_user(), default_algorithm_with_system_card("testalgorithm1")])
@@ -215,7 +216,7 @@ async def test_get_assessment_card_unknown_assessment(client: AsyncClient, db: D
 
 
 @pytest.mark.asyncio
-@vcr.use_cassette("tests/fixtures/vcr_cassettes/test_get_model_card.yml")  # type: ignore
+@amt_vcr.use_cassette("tests/fixtures/vcr_cassettes/test_get_model_card.yml")  # type: ignore
 async def test_get_model_card(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
     await db.given([default_user(), default_algorithm_with_system_card("testalgorithm1")])
@@ -268,7 +269,7 @@ async def test_get_algorithm_details(client: AsyncClient, db: DatabaseTestUtils)
 
 
 @pytest.mark.asyncio
-@vcr.use_cassette("tests/fixtures/vcr_cassettes/test_get_system_card_compliance.yml")  # type: ignore
+@amt_vcr.use_cassette("tests/fixtures/vcr_cassettes/test_get_system_card_compliance.yml")  # type: ignore
 async def test_get_system_card_compliance(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
     await db.given(
@@ -289,7 +290,7 @@ async def test_get_system_card_compliance(client: AsyncClient, db: DatabaseTestU
 
 
 @pytest.mark.asyncio
-@vcr.use_cassette("tests/fixtures/vcr_cassettes/test_get_algorithm_members.yml")  # type: ignore
+@amt_vcr.use_cassette("tests/fixtures/vcr_cassettes/test_get_algorithm_members.yml")  # type: ignore
 async def test_get_algorithm_members(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
     await db.given(
@@ -314,13 +315,13 @@ async def test_get_algorithm_edit(client: AsyncClient, db: DatabaseTestUtils) ->
     await db.given([default_user(), default_algorithm("testalgorithm1")])
 
     # when
-    response = await client.get("/algorithm/1/edit/system_card/lifecycle")
+    response = await client.get("/algorithm/1/edit?full_resource_path=algorithm/1/system_card/name")
 
     # then
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
     assert b"Save" in response.content
-    assert b"lifecycle" in response.content
+    assert b"name" in response.content
 
 
 @pytest.mark.asyncio
@@ -389,7 +390,7 @@ async def test_get_algorithm_cancel(client: AsyncClient, db: DatabaseTestUtils) 
     await db.given([default_user(), default_algorithm("testalgorithm1")])
 
     # when
-    response = await client.get("/algorithm/1/cancel/system_card/lifecycle")
+    response = await client.get("/algorithm/1/cancel?full_resource_path=algorithm/1/system_card/name")
 
     # then
     assert response.status_code == 200
@@ -404,7 +405,11 @@ async def test_get_algorithm_update(client: AsyncClient, mocker: MockFixture, db
     mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
 
     # when
-    response = await client.put("/algorithm/1/update/name", json={"value": "Test Name"}, headers={"X-CSRF-Token": "1"})
+    response = await client.put(
+        "/algorithm/1/update?full_resource_path=algorithm/1/system_card/name",
+        json={"value": "Test Name"},
+        headers={"X-CSRF-Token": "1"},
+    )
 
     # then
     assert response.status_code == 200
@@ -504,6 +509,7 @@ async def test_find_requirement_task() -> None:
 
 
 @pytest.mark.asyncio
+@amt_vcr.use_cassette("tests/fixtures/vcr_cassettes/test_find_requirement_tasks_by_measure_urn.yml")  # type: ignore
 async def test_find_requirement_tasks_by_measure_urn() -> None:
     test_algorithm = default_algorithm_with_system_card("testalgorithm1")
 
@@ -518,6 +524,7 @@ async def test_find_requirement_tasks_by_measure_urn() -> None:
 
 
 @pytest.mark.asyncio
+@amt_vcr.use_cassette("tests/fixtures/vcr_cassettes/test_get_measure.yml")  # type: ignore
 async def test_get_measure(minio_mock: MockMinioClient, client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
     await db.given([default_user(), default_algorithm_with_system_card("testalgorithm1")])
@@ -541,6 +548,7 @@ async def test_get_measure(minio_mock: MockMinioClient, client: AsyncClient, db:
 
 
 @pytest.mark.asyncio
+@amt_vcr.use_cassette("tests/fixtures/vcr_cassettes/test_update_measure_value.yml")  # type: ignore
 async def test_update_measure_value(
     minio_mock: MockMinioClient, client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils
 ) -> None:

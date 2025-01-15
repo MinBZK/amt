@@ -298,6 +298,7 @@ main {
 
 .rvo-table-row td:first-child {
     width: 20%;
+    vertical-align: top;
 }
 
 .amt-error-message {
@@ -334,14 +335,25 @@ main {
     justify-content: space-between;
 }
 
-.amt-theme {
-    /* this is a placeholder class, do not remove */
-}
-
 /* we override the default ROOS style because we want to display as column, not rows */
-.amt-theme .rvo-accordion__item > .rvo-accordion__item-summary {
-    align-items: initial;
-    flex-direction: column;
+.amt-theme {
+    & .rvo-accordion__item > .rvo-accordion__item-summary {
+        align-items: initial;
+        flex-direction: column;
+    }
+
+    & .rvo-accordion__item-title {
+        align-items: baseline;
+    }
+
+    /** TODO: this is a fix for width: 100% on a margin-left element which should be fixed by ROOS */
+    & .rvo-header__logo-wrapper {
+        width: auto;
+    }
+
+    & main {
+        margin-bottom: var(--rvo-size-2xl);
+    }
 }
 
 .amt-avatar-list {

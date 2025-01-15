@@ -49,7 +49,7 @@ msgid "Role"
 msgstr "Rol"
 
 #: amt/api/group_by_category.py:15
-#: amt/site/templates/algorithms/details_info.html.j2:90
+#: amt/site/templates/algorithms/details_info.html.j2:96
 #: amt/site/templates/algorithms/new.html.j2:41
 #: amt/site/templates/parts/algorithm_search.html.j2:48
 #: amt/site/templates/parts/filter_list.html.j2:71
@@ -157,7 +157,7 @@ msgstr "Instrumenten"
 msgid "Organizations"
 msgstr "Organisaties"
 
-#: amt/api/navigation.py:64 amt/site/templates/organizations/home.html.j2:33
+#: amt/api/navigation.py:64 amt/site/templates/organizations/home.html.j2:37
 #: amt/site/templates/organizations/parts/members_results.html.j2:6
 #: amt/site/templates/organizations/parts/overview_results.html.j2:132
 msgid "Members"
@@ -195,11 +195,11 @@ msgstr "Uitzondering van toepassing"
 msgid "niet van toepassing"
 msgstr "Niet van toepassing"
 
-#: amt/api/forms/algorithm.py:23
+#: amt/api/forms/algorithm.py:38
 msgid "Select organization"
 msgstr "Selecteer organisatie"
 
-#: amt/api/forms/algorithm.py:29
+#: amt/api/forms/algorithm.py:42
 #: amt/site/templates/algorithms/details_info.html.j2:74
 msgid "Organization"
 msgstr "Organisatie"
@@ -267,7 +267,7 @@ msgstr ""
 "organisatie-naam"
 
 #: amt/api/forms/organization.py:33
-#: amt/site/templates/organizations/home.html.j2:17
+#: amt/site/templates/organizations/home.html.j2:19
 msgid "Slug"
 msgstr "Slug"
 
@@ -408,8 +408,8 @@ msgid "measure executed"
 msgstr "maatregelen uitgevoerd"
 
 #: amt/site/templates/algorithms/details_compliance.html.j2:67
-#: amt/site/templates/macros/editable.html.j2:24
-#: amt/site/templates/macros/editable.html.j2:27
+#: amt/site/templates/macros/editable.html.j2:28
+#: amt/site/templates/macros/editable.html.j2:33
 msgid "Edit"
 msgstr "Bewerk"
 
@@ -435,34 +435,34 @@ msgstr "Onderhanden"
 msgid "Go to all requirements"
 msgstr "Ga naar alle Vereisten"
 
-#: amt/site/templates/algorithms/details_info.html.j2:78
+#: amt/site/templates/algorithms/details_info.html.j2:80
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:27
 msgid "Description"
 msgstr "Omschrijving"
 
-#: amt/site/templates/algorithms/details_info.html.j2:82
+#: amt/site/templates/algorithms/details_info.html.j2:86
 msgid "Repository"
 msgstr "Repository"
 
-#: amt/site/templates/algorithms/details_info.html.j2:86
+#: amt/site/templates/algorithms/details_info.html.j2:92
 msgid "Algorithm code"
 msgstr "Algoritme code"
 
-#: amt/site/templates/algorithms/details_info.html.j2:94
+#: amt/site/templates/algorithms/details_info.html.j2:102
 #: amt/site/templates/organizations/parts/overview_results.html.j2:134
 #: amt/site/templates/pages/assessment_card.html.j2:7
 #: amt/site/templates/pages/model_card.html.j2:6
-#: amt/site/templates/pages/system_card.html.j2:4
+#: amt/site/templates/pages/system_card.html.j2:5
 #: amt/site/templates/parts/filter_list.html.j2:75
 #: amt/site/templates/parts/filter_list.html.j2:97
 msgid "Last updated"
 msgstr "Laatst bijgewerkt"
 
-#: amt/site/templates/algorithms/details_info.html.j2:98
+#: amt/site/templates/algorithms/details_info.html.j2:106
 msgid "Labels"
 msgstr "Labels"
 
-#: amt/site/templates/algorithms/details_info.html.j2:106
+#: amt/site/templates/algorithms/details_info.html.j2:114
 msgid "References"
 msgstr "Referenties"
 
@@ -475,12 +475,12 @@ msgid "Read more on the algoritmekader"
 msgstr "Lees meer op het algoritmekader"
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:64
-#: amt/site/templates/macros/editable.html.j2:82
+#: amt/site/templates/macros/editable.html.j2:109
 msgid "Save"
 msgstr "Opslaan"
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:68
-#: amt/site/templates/macros/editable.html.j2:87
+#: amt/site/templates/macros/editable.html.j2:114
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:26
 msgid "Cancel"
 msgstr "Annuleren"
@@ -613,17 +613,17 @@ msgstr "Er zijn enkele fouten"
 msgid "There is one error:"
 msgstr "Er is één fout:"
 
-#: amt/site/templates/layouts/base.html.j2:11
+#: amt/site/templates/layouts/base.html.j2:1
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr "Algoritme Management Toolkit"
 
 #: amt/site/templates/macros/form_macros.html.j2:58
 msgid "Are you sure you want to remove "
-msgstr "Weet u zeker dat u uw algoritmische systeem wilt verwijderen "
+msgstr "Weet u zeker dat u "
 
 #: amt/site/templates/macros/form_macros.html.j2:58
 msgid " from this organization? "
-msgstr "Het web-pad (slug) voor deze organisatie"
+msgstr " wilt verwijderen van deze organisatie?"
 
 #: amt/site/templates/macros/form_macros.html.j2:61
 msgid "Delete"
@@ -631,7 +631,7 @@ msgstr "Verwijder"
 
 #: amt/site/templates/macros/form_macros.html.j2:62
 msgid "Delete member"
-msgstr "Voeg personen toe"
+msgstr "Verwijder persoon"
 
 #: amt/site/templates/macros/form_macros.html.j2:150
 msgid "Delete file"
@@ -661,15 +661,15 @@ msgstr "Beoordelen"
 msgid "Unknown"
 msgstr "Onbekend"
 
-#: amt/site/templates/organizations/home.html.j2:21
+#: amt/site/templates/organizations/home.html.j2:25
 msgid "Created at"
 msgstr "Aangemaakt op"
 
-#: amt/site/templates/organizations/home.html.j2:25
+#: amt/site/templates/organizations/home.html.j2:29
 msgid "Created by"
 msgstr "Aangemaakt door"
 
-#: amt/site/templates/organizations/home.html.j2:29
+#: amt/site/templates/organizations/home.html.j2:33
 msgid "Modified at"
 msgstr "Bijgewerkt op"
 
@@ -746,29 +746,29 @@ msgstr "Organisatie naam"
 
 #: amt/site/templates/pages/assessment_card.html.j2:7
 #: amt/site/templates/pages/model_card.html.j2:7
-#: amt/site/templates/pages/system_card.html.j2:5
+#: amt/site/templates/pages/system_card.html.j2:6
 msgid "ago"
 msgstr "geleden"
 
 #: amt/site/templates/pages/assessment_card.html.j2:12
 #: amt/site/templates/pages/model_card.html.j2:12
-#: amt/site/templates/pages/model_card.html.j2:36
-#: amt/site/templates/pages/system_card.html.j2:48
+#: amt/site/templates/pages/model_card.html.j2:39
+#: amt/site/templates/pages/system_card.html.j2:49
 msgid "Attribute"
 msgstr "Attribuut"
 
 #: amt/site/templates/pages/assessment_card.html.j2:13
 #: amt/site/templates/pages/model_card.html.j2:13
-#: amt/site/templates/pages/model_card.html.j2:37
-#: amt/site/templates/pages/system_card.html.j2:49
+#: amt/site/templates/pages/model_card.html.j2:40
+#: amt/site/templates/pages/system_card.html.j2:50
 msgid "Value"
 msgstr "Waarde"
 
-#: amt/site/templates/pages/assessment_card.html.j2:35
+#: amt/site/templates/pages/assessment_card.html.j2:37
 msgid "Question"
 msgstr "Vraag"
 
-#: amt/site/templates/pages/assessment_card.html.j2:36
+#: amt/site/templates/pages/assessment_card.html.j2:38
 msgid "Answer"
 msgstr "Antwoord"
 
@@ -823,11 +823,11 @@ msgstr "neem contact op"
 msgid "for more information on how the toolkit can support your organization."
 msgstr "voor meer informatie over hoe de toolkit uw organisatie kan ondersteunen."
 
-#: amt/site/templates/pages/system_card.html.j2:9
+#: amt/site/templates/pages/system_card.html.j2:10
 msgid "Assessment cards "
 msgstr "Assessmentkaart"
 
-#: amt/site/templates/pages/system_card.html.j2:27
+#: amt/site/templates/pages/system_card.html.j2:28
 msgid "Model cards"
 msgstr "Modelkaart"
 

@@ -3,11 +3,17 @@ from typing import Annotated, Any
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, Query, Request
-from fastapi.exceptions import RequestValidationError
 from fastapi.responses import HTMLResponse, JSONResponse, Response
-from pydantic_core._pydantic_core import ValidationError  # pyright: ignore
 
 from amt.api.deps import templates
+from amt.api.editable import (
+    Editables,
+    EditModes,
+    ResolvedEditable,
+    SafeDict,
+    get_enriched_resolved_editable,
+    save_editable,
+)
 from amt.api.forms.organization import get_organization_form
 from amt.api.group_by_category import get_localized_group_by_categories
 from amt.api.lifecycles import get_localized_lifecycles
@@ -20,16 +26,16 @@ from amt.api.navigation import (
 )
 from amt.api.organization_filter_options import get_localized_organization_filters
 from amt.api.risk_group import get_localized_risk_groups
-from amt.api.routes.algorithm import UpdateFieldModel, set_path
+from amt.api.routes.algorithm import get_user_id_or_error
 from amt.api.routes.algorithms import get_algorithms
-from amt.api.routes.shared import get_filters_and_sort_by
+from amt.api.routes.shared import UpdateFieldModel, get_filters_and_sort_by
 from amt.core.authorization import get_user
 from amt.core.exceptions import AMTAuthorizationError, AMTNotFound, AMTRepositoryError
 from amt.core.internationalization import get_current_translation
 from amt.models import Organization, User
 from amt.repositories.organizations import OrganizationsRepository
 from amt.repositories.users import UsersRepository
-from amt.schema.organization import OrganizationBase, OrganizationNew, OrganizationSlug, OrganizationUsers
+from amt.schema.organization import OrganizationNew, OrganizationUsers
 from amt.services.algorithms import AlgorithmsService
 from amt.services.organizations import OrganizationsService
 
@@ -148,9 +154,9 @@ async def post_new(
 async def get_by_slug(
     request: Request,
     slug: str,
-    organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
+    organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
 ) -> HTMLResponse:
-    organization = await get_organization_or_error(organizations_repository, request, slug)
+    organization = await get_organization_or_error(organizations_service, request, slug)
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.ORGANIZATIONS_ROOT,
@@ -163,6 +169,7 @@ async def get_by_slug(
     context = {
         "base_href": f"/organizations/{ slug }",
         "organization": organization,
+        "organization_id": organization.id,
         "tab_items": tab_items,
         "breadcrumbs": breadcrumbs,
     }
@@ -170,87 +177,137 @@ async def get_by_slug(
 
 
 async def get_organization_or_error(
-    organizations_repository: OrganizationsRepository, request: Request, slug: str
+    organizations_service: OrganizationsService, request: Request, slug: str
 ) -> Organization:
     try:
-        organization = await organizations_repository.find_by_slug(slug)
+        organization = await organizations_service.find_by_slug(slug)
         request.state.path_variables = {"organization_slug": organization.slug}
     except AMTRepositoryError as e:
         raise AMTNotFound from e
     return organization
 
 
-@router.get("/{slug}/edit/{path:path}")
+@router.get("/{slug}/edit")
 async def get_organization_edit(
     request: Request,
-    organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
-    path: str,
+    organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
     slug: str,
-    edit_type: str,
+    full_resource_path: str,
 ) -> HTMLResponse:
-    context: dict[str, Any] = {"base_href": f"/organizations/{ slug }"}
-    organization = await get_organization_or_error(organizations_repository, request, slug)
-    context.update({"path": path.replace("/", "."), "edit_type": edit_type, "object": organization})
+    organization = await get_organization_or_error(organizations_service, request, slug)
+
+    editable: ResolvedEditable = await get_enriched_resolved_editable(
+        context_variables={"organization_id": organization.id},
+        full_resource_path=full_resource_path,
+        organizations_service=organizations_service,
+        edit_mode=EditModes.VIEW,
+    )
+
+    editable_context = {"organizations_service": organizations_service}
+
+    # TODO: the converter could be done in the get_enriched_resolved_editable as it knows what editmode we are in
+    if editable.converter:
+        editable.value = await editable.converter.read(editable.value, **editable_context)
+
+    context = {
+        "relative_resource_path": editable.relative_resource_path.replace("/", ".")
+        if editable.relative_resource_path
+        else "",
+        "base_href": f"/organizations/{ slug }",
+        "resource_object": editable.resource_object,
+        "full_resource_path": full_resource_path,
+        "editable_object": editable,
+    }
+
     return templates.TemplateResponse(request, "parts/edit_cell.html.j2", context)
 
 
-@router.get("/{slug}/cancel/{path:path}")
+@router.get("/{slug}/cancel")
 async def get_organization_cancel(
-    organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
     request: Request,
-    path: str,
-    edit_type: str,
     slug: str,
+    full_resource_path: str,
+    organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
 ) -> HTMLResponse:
-    context: dict[str, Any] = {
+    organization = await get_organization_or_error(organizations_service, request, slug)
+
+    editable: ResolvedEditable = await get_enriched_resolved_editable(
+        context_variables={"organization_id": organization.id},
+        full_resource_path=full_resource_path,
+        organizations_service=organizations_service,
+        edit_mode=EditModes.VIEW,
+    )
+
+    editable_context = {"organizations_service": organizations_service}
+
+    if editable.converter:
+        editable.value = await editable.converter.view(editable.value, **editable_context)
+
+    context = {
+        "relative_resource_path": editable.relative_resource_path.replace("/", ".")
+        if editable.relative_resource_path
+        else "",
         "base_href": f"/organizations/{ slug }",
-        "path": path.replace("/", "."),
-        "edit_type": edit_type,
+        "resource_object": None,  # TODO: this should become an optional parameter in the Jinja template
+        "full_resource_path": full_resource_path,
+        "editable_object": editable,
     }
-    organization = await get_organization_or_error(organizations_repository, request, slug)
-    context.update({"object": organization})
+
     return templates.TemplateResponse(request, "parts/view_cell.html.j2", context)
 
 
-@router.put("/{slug}/update/{path:path}")
+@router.put("/{slug}/update")
 async def get_organization_update(
     request: Request,
-    organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
+    organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
     update_data: UpdateFieldModel,
-    path: str,
-    edit_type: str,
     slug: str,
+    full_resource_path: str,
 ) -> HTMLResponse:
-    context: dict[str, Any] = {
-        "base_href": f"/organizations/{ slug }",
-        "path": path.replace("/", "."),
-        "edit_type": edit_type,
+    organization = await get_organization_or_error(organizations_service, request, slug)
+
+    user_id = get_user_id_or_error(request)
+
+    context_variables: dict[str, str | int] = {"organization_id": organization.id}
+
+    editable: ResolvedEditable = await get_enriched_resolved_editable(
+        context_variables=context_variables,
+        full_resource_path=full_resource_path,
+        organizations_service=organizations_service,
+        edit_mode=EditModes.SAVE,
+    )
+
+    editable_context = {
+        "user_id": user_id,
+        "new_value": update_data.value,
+        "organizations_service": organizations_service,
     }
-    organization = await get_organization_or_error(organizations_repository, request, slug)
-    context.update({"object": organization})
 
-    redirect_to: str | None = None
-    # TODO (Robbert) it would be nice to check this on the object.field type (instead of strings)
-    if path == "slug":
-        try:
-            organization_new1: OrganizationSlug = OrganizationSlug(slug=update_data.value)
-            OrganizationSlug.model_validate(organization_new1)
-            redirect_to = organization_new1.slug
-        except ValidationError as e:
-            raise RequestValidationError(e.errors()) from e
-    elif path == "name":
-        try:
-            organization_new: OrganizationBase = OrganizationBase(name=update_data.value)
-            OrganizationBase.model_validate(organization_new)
-        except ValidationError as e:
-            raise RequestValidationError(e.errors()) from e
+    editable = await save_editable(
+        editable,
+        update_data=update_data,
+        editable_context=editable_context,
+        organizations_service=organizations_service,
+        do_save=True,
+    )
 
-    set_path(organization, path, update_data.value)
+    # set the value back to view mode if needed
+    if editable.converter:
+        editable.value = await editable.converter.view(editable.value, **editable_context)
 
-    await organizations_repository.save(organization)
+    context = {
+        "relative_resource_path": editable.relative_resource_path.replace("/", ".")
+        if editable.relative_resource_path
+        else "",
+        "base_href": f"/organizations/{ slug }",
+        "resource_object": None,
+        "full_resource_path": full_resource_path,
+        "editable_object": editable,
+    }
 
-    if redirect_to:
-        return templates.Redirect(request, f"/organizations/{redirect_to}")
+    # TODO: add a 'next action' to editable for f.e. redirect options, THIS IS A HACK
+    if full_resource_path == Editables.ORGANIZATION_SLUG.full_resource_path.format_map(SafeDict(context_variables)):
+        return templates.Redirect(request, f"/organizations/{editable.value}")
     else:
         return templates.TemplateResponse(request, "parts/view_cell.html.j2", context)
 
@@ -259,14 +316,14 @@ async def get_organization_update(
 async def show_algorithms(
     request: Request,
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
-    organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
+    organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
     slug: str,
     skip: int = Query(0, ge=0),
     limit: int = Query(5000, ge=1),  # todo: fix infinite scroll
     search: str = Query(""),
     display_type: str = Query(""),
 ) -> HTMLResponse:
-    organization = await get_organization_or_error(organizations_repository, request, slug)
+    organization = await get_organization_or_error(organizations_service, request, slug)
     filters, drop_filters, localized_filters, sort_by = get_filters_and_sort_by(request)
 
     filters["organization-id"] = str(organization.id)
@@ -319,14 +376,14 @@ async def remove_member(
     request: Request,
     slug: str,
     user_id: UUID,
-    organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
+    organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
     users_repository: Annotated[UsersRepository, Depends(UsersRepository)],
 ) -> HTMLResponse:
     # TODO (Robbert): add authorization and check if user and organization exist?
-    organization = await get_organization_or_error(organizations_repository, request, slug)
+    organization = await get_organization_or_error(organizations_service, request, slug)
     user: User | None = await users_repository.find_by_id(user_id)
     if user:
-        await organizations_repository.remove_user(organization, user)
+        await organizations_service.remove_user(organization, user)
         return templates.Redirect(request, f"/organizations/{slug}/members")
     raise AMTAuthorizationError
 
@@ -345,11 +402,10 @@ async def get_members_form(
 async def add_new_members(
     request: Request,
     slug: str,
-    organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
     organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
     organization_users: OrganizationUsers,
 ) -> HTMLResponse:
-    organization = await get_organization_or_error(organizations_repository, request, slug)
+    organization = await get_organization_or_error(organizations_service, request, slug)
     await organizations_service.add_users(organization, organization_users.user_ids)
     return templates.Redirect(request, f"/organizations/{slug}/members")
 
@@ -358,13 +414,13 @@ async def add_new_members(
 async def get_members(
     request: Request,
     slug: str,
-    organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
+    organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
     users_repository: Annotated[UsersRepository, Depends(UsersRepository)],
     skip: int = Query(0, ge=0),
     limit: int = Query(5000, ge=1),  # todo: fix infinite scroll
     search: str = Query(""),
 ) -> HTMLResponse:
-    organization = await get_organization_or_error(organizations_repository, request, slug)
+    organization = await get_organization_or_error(organizations_service, request, slug)
     filters, drop_filters, localized_filters, sort_by = get_filters_and_sort_by(request)
     tab_items = get_organization_tabs(request, organization_slug=slug)
     breadcrumbs = resolve_base_navigation_items(

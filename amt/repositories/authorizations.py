@@ -45,6 +45,11 @@ class AuthorizationRepository:
             .filter(Authorization.user_id == user)
         )
 
-        result = await self.session.execute(statement)  # type: ignore
-        authorizations = result.all()
-        return authorizations  # type: ignore
+        try:
+            result = await self.session.execute(statement)  # type: ignore
+            authorizations = result.all()
+            # TODO: with close the session to avoid the pool error, but this feels like a work-around, not a fix
+            return authorizations  # type: ignore
+        finally:
+            if self.session is not None:
+                await self.session.close()

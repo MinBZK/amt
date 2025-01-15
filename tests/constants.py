@@ -49,8 +49,15 @@ def default_base_navigation_item(
     return BaseNavigationItem(display_text=display_text, url=url, custom_display_text=custom_display_text, icon=icon)
 
 
+def default_system_card() -> SystemCard:
+    return SystemCard(  # pyright: ignore[reportCallIssue]
+        name="Default System Card",
+        description="Default system card",
+    )
+
+
 def default_algorithm(name: str = "default algorithm", organization_id: int = 1) -> Algorithm:
-    return Algorithm(name=name, organization_id=organization_id)
+    return Algorithm(name=name, organization_id=organization_id, system_card=default_system_card())
 
 
 def default_organization(name: str = "default organization", slug: str = "default-organization") -> Organization:
@@ -295,3 +302,40 @@ TASK_REGISTRY_REQ_CONTENT_PAYLOAD = """
   "urn": "urn:nl:ak:ver:aia-08"
 }
 """
+
+
+def default_systemcard_dic() -> dict[str, str | list[Any] | None]:
+    return {
+        "version": "0.0.0",
+        "provenance": None,
+        "name": None,
+        "instruments": [],
+        "upl": None,
+        "owners": [],
+        "description": None,
+        "ai_act_profile": None,
+        "labels": [],
+        "status": None,
+        "begin_date": None,
+        "end_date": None,
+        "goal_and_impact": None,
+        "considerations": None,
+        "risk_management": None,
+        "human_intervention": None,
+        "legal_base": None,
+        "used_data": None,
+        "technical_design": None,
+        "external_providers": None,
+        "interaction_details": None,
+        "version_requirements": None,
+        "deployment_variants": None,
+        "hardware_requirements": None,
+        "product_markings": None,
+        "user_interface": None,
+        "schema_version": "0.1a10",
+        "requirements": [],
+        "measures": [],
+        "assessments": [],
+        "references": [],
+        "models": [],
+    }

@@ -23,7 +23,7 @@ class TasksService:
     ) -> None:
         self.repository = repository
         self.storage_writer = StorageFactory.init(storage_type="file", location="./output", filename="system_card.yaml")
-        self.system_card = SystemCard()
+        self.system_card = SystemCard(version="0.0.0")  # pyright: ignore[reportCallIssue]
 
     async def get_tasks(self, status_id: int) -> Sequence[Task]:
         task = await self.repository.find_by_status_id(status_id)

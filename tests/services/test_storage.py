@@ -58,7 +58,7 @@ def test_file_system_writer_yaml_with_content_in_dir(setup_and_teardown: tuple[s
 
 def test_file_system_writer_with_system_card(setup_and_teardown: tuple[str, Path]) -> None:
     filename, location = setup_and_teardown
-    data = SystemCard()
+    data = SystemCard()  # pyright: ignore[reportCallIssue]
     data.name = "test"
     data_dict = data.model_dump()
 

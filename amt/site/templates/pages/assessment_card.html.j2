@@ -20,7 +20,9 @@
                                     <td class="rvo-table-cell">
                                         <strong>{{ key.capitalize().replace("_", " ") }}</strong>
                                     </td>
-                                    <td class="rvo-table-cell">{{ render.render_value(key, value,0) }}</td>
+                                    <td class="rvo-table-cell">
+                                        {{ render.render_value(key, value, 0, "algorithm/" + algorithm_id|string, "/system_card/assessments/FIXME") }}
+                                    </td>
                                 </tr>
                             {% endif %}
                         {% endfor %}
@@ -49,7 +51,7 @@
                                     {% for key in keys %}
                                         {% set _x = metadata.__setitem__(key, content[key]) %}
                                     {% endfor %}
-                                    {{ render.render_value("",metadata,0) }}
+                                    {{ render.render_value("",metadata,0, "algorithm/" + algorithm_id|string + "/FIXME", "/system_card/assessments/FIXME") }}
                                 </td>
                             </tr>
                         {% endfor %}

@@ -5,6 +5,8 @@ from babel.support import NullTranslations
 from fastapi import status
 from httpx import AsyncClient
 
+from tests.conftest import amt_vcr
+
 
 @pytest.mark.asyncio
 async def test_http_exception_handler(client: AsyncClient):
@@ -23,6 +25,7 @@ async def test_request_validation_exception_handler(client: AsyncClient):
 
 
 @pytest.mark.asyncio
+@amt_vcr.use_cassette("tests/fixtures/vcr_cassettes/test_request_csrf_protect_exception.yml")  # type: ignore
 async def test_request_csrf_protect_exception_handler_invalid_token_in_header(client: AsyncClient):
     data = await client.get("/algorithms/new")
     new_algorithm = AlgorithmNew(
@@ -54,6 +57,7 @@ async def test_request_validation_exception_handler_htmx(client: AsyncClient):
 
 
 @pytest.mark.asyncio
+@amt_vcr.use_cassette("tests/fixtures/vcr_cassettes/test_request_csrf_protect_exception_handler_invalid_token.yml")  # type: ignore
 async def test_request_csrf_protect_exception_handler_invalid_token(client: AsyncClient):
     data = await client.get("/algorithms/new")
     new_algorithm = AlgorithmNew(

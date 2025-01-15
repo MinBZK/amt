@@ -1,5 +1,5 @@
 import json
-from datetime import datetime
+from datetime import date, datetime
 from enum import Enum
 from typing import Any, TypeVar
 
@@ -18,6 +18,8 @@ T = TypeVar("T", bound="Algorithm")
 class CustomJSONEncoder(json.JSONEncoder):
     def default(self, o: Any) -> Any:  # noqa: ANN401
         if isinstance(o, datetime):
+            return o.isoformat()
+        if isinstance(o, date):
             return o.isoformat()
         if isinstance(o, Enum):
             return o.name

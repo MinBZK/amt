@@ -1,21 +1,29 @@
+{% from "macros/editable.html.j2" import editable with context %}
 {% macro render_include_path(path) -%}
     {{ path.urlpath.split("/")[-1] .split(".")[0] }}
 {%- endmacro %}
 {% macro render_attribute(attribute) -%}
     {{ attribute.capitalize().replace("_", " ") }}
 {%- endmacro %}
-{% macro render_value(key, value, depth) -%}
+{% macro render_value(key, value, depth, base_resource_path, path) -%}
+    {% if key is defined and key != "" %}
+        {% set relative_resource_path = path + "/" + key %}
+    {% else %}
+        {% set relative_resource_path = path %}
+    {% endif %}
+    {% set full_resource_path = base_resource_path + relative_resource_path %}
     {% if isinstance(value, 'IterMixin') or isinstance(value, 'dict') %}
         <div class="{% if depth == 1 %}margin-bottom-large{% endif %}">
+            {% if is_editable_resource(full_resource_path, editables) %}
+                {{ editable(algorithm, relative_resource_path, editables[replace_digits_in_brackets(full_resource_path) ].full_resource_path) }}
+            {% endif %}
             {% if value.__class__.__name__ == 'dict' %}
                 {% set value = value.items() %}
             {% endif %}
             {% for subkey, subvalue in value %}
                 {% if subvalue %}
-                    <strong>{{ render_attribute(subkey) }}</strong>: {{ render_value(subkey, subvalue, depth+1) }}
-                {% endif %}
-                {% if not loop.last %}
-                    {% if subvalue %}<br \>{% endif %}
+                    <strong>{{ render_attribute(subkey) }}</strong>: {{ render_value(subkey, subvalue, depth+1, base_resource_path, path) }}
+                    {% if not loop.last %}<br />{% endif %}
                 {% endif %}
             {% endfor %}
         </div>
@@ -34,8 +42,10 @@
         {% elif key == "models" %}
             {% for model in value %}{{ model["name"] }}{% endfor %}
         {% else %}
-            <div style="margin-left: {{ depth * 10 }}px">
-                {% for item in value %}{{ render_value("", item, depth+1) }}{% endfor %}
+            <div style="margin-left: {{ depth * 10 }}px;">
+                {% for item in value %}
+                    {{ render_value("", item, depth+1, base_resource_path, path + "/" + key + "[" + (loop.index-1) |string + "]") }}
+                {% endfor %}
             </div>
         {% endif %}
     {% else %}
@@ -50,7 +60,11 @@
             <a class="rvo-link rvo-link--normal"
                href="https://task-registry.apps.digilab.network/urns/?version=latest&urn={{ value }}">{{ value }}</a>
         {% else %}
-            {{ value }}
+            {% if is_editable_resource(full_resource_path, editables) %}
+                {{ editable(algorithm, relative_resource_path, editables[full_resource_path].full_resource_path) }}
+            {% else %}
+                {{ value }}
+            {% endif %}
         {% endif %}
     {% endif %}
 {%- endmacro %}

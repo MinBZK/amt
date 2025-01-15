@@ -1,4 +1,5 @@
 import os
+import sys
 import urllib
 from functools import lru_cache
 from os import PathLike
@@ -61,7 +62,7 @@ class URLComponents(NamedTuple):
     fragment: str
 
 
-@lru_cache(maxsize=1000)
+@lru_cache(maxsize=0 if "pytest" in sys.modules else 1000)
 def url_for_cache(name: str, /, **path_params: str) -> str:
     if name != "static":
         raise AMTOnlyStatic()

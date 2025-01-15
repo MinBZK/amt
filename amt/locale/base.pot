@@ -46,7 +46,7 @@ msgid "Role"
 msgstr ""
 
 #: amt/api/group_by_category.py:15
-#: amt/site/templates/algorithms/details_info.html.j2:90
+#: amt/site/templates/algorithms/details_info.html.j2:96
 #: amt/site/templates/algorithms/new.html.j2:41
 #: amt/site/templates/parts/algorithm_search.html.j2:48
 #: amt/site/templates/parts/filter_list.html.j2:71
@@ -154,7 +154,7 @@ msgstr ""
 msgid "Organizations"
 msgstr ""
 
-#: amt/api/navigation.py:64 amt/site/templates/organizations/home.html.j2:33
+#: amt/api/navigation.py:64 amt/site/templates/organizations/home.html.j2:37
 #: amt/site/templates/organizations/parts/members_results.html.j2:6
 #: amt/site/templates/organizations/parts/overview_results.html.j2:132
 msgid "Members"
@@ -192,11 +192,11 @@ msgstr ""
 msgid "niet van toepassing"
 msgstr ""
 
-#: amt/api/forms/algorithm.py:23
+#: amt/api/forms/algorithm.py:38
 msgid "Select organization"
 msgstr ""
 
-#: amt/api/forms/algorithm.py:29
+#: amt/api/forms/algorithm.py:42
 #: amt/site/templates/algorithms/details_info.html.j2:74
 msgid "Organization"
 msgstr ""
@@ -260,7 +260,7 @@ msgid "The slug is the web path, like /organizations/my-organization-name"
 msgstr ""
 
 #: amt/api/forms/organization.py:33
-#: amt/site/templates/organizations/home.html.j2:17
+#: amt/site/templates/organizations/home.html.j2:19
 msgid "Slug"
 msgstr ""
 
@@ -389,8 +389,8 @@ msgid "measure executed"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_compliance.html.j2:67
-#: amt/site/templates/macros/editable.html.j2:24
-#: amt/site/templates/macros/editable.html.j2:27
+#: amt/site/templates/macros/editable.html.j2:28
+#: amt/site/templates/macros/editable.html.j2:33
 msgid "Edit"
 msgstr ""
 
@@ -416,34 +416,34 @@ msgstr ""
 msgid "Go to all requirements"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:78
+#: amt/site/templates/algorithms/details_info.html.j2:80
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:27
 msgid "Description"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:82
+#: amt/site/templates/algorithms/details_info.html.j2:86
 msgid "Repository"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:86
+#: amt/site/templates/algorithms/details_info.html.j2:92
 msgid "Algorithm code"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:94
+#: amt/site/templates/algorithms/details_info.html.j2:102
 #: amt/site/templates/organizations/parts/overview_results.html.j2:134
 #: amt/site/templates/pages/assessment_card.html.j2:7
 #: amt/site/templates/pages/model_card.html.j2:6
-#: amt/site/templates/pages/system_card.html.j2:4
+#: amt/site/templates/pages/system_card.html.j2:5
 #: amt/site/templates/parts/filter_list.html.j2:75
 #: amt/site/templates/parts/filter_list.html.j2:97
 msgid "Last updated"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:98
+#: amt/site/templates/algorithms/details_info.html.j2:106
 msgid "Labels"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:106
+#: amt/site/templates/algorithms/details_info.html.j2:114
 msgid "References"
 msgstr ""
 
@@ -456,12 +456,12 @@ msgid "Read more on the algoritmekader"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:64
-#: amt/site/templates/macros/editable.html.j2:82
+#: amt/site/templates/macros/editable.html.j2:109
 msgid "Save"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:68
-#: amt/site/templates/macros/editable.html.j2:87
+#: amt/site/templates/macros/editable.html.j2:114
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:26
 msgid "Cancel"
 msgstr ""
@@ -589,7 +589,7 @@ msgstr ""
 msgid "There is one error:"
 msgstr ""
 
-#: amt/site/templates/layouts/base.html.j2:11
+#: amt/site/templates/layouts/base.html.j2:1
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr ""
 
@@ -637,15 +637,15 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-#: amt/site/templates/organizations/home.html.j2:21
+#: amt/site/templates/organizations/home.html.j2:25
 msgid "Created at"
 msgstr ""
 
-#: amt/site/templates/organizations/home.html.j2:25
+#: amt/site/templates/organizations/home.html.j2:29
 msgid "Created by"
 msgstr ""
 
-#: amt/site/templates/organizations/home.html.j2:29
+#: amt/site/templates/organizations/home.html.j2:33
 msgid "Modified at"
 msgstr ""
 
@@ -722,29 +722,29 @@ msgstr ""
 
 #: amt/site/templates/pages/assessment_card.html.j2:7
 #: amt/site/templates/pages/model_card.html.j2:7
-#: amt/site/templates/pages/system_card.html.j2:5
+#: amt/site/templates/pages/system_card.html.j2:6
 msgid "ago"
 msgstr ""
 
 #: amt/site/templates/pages/assessment_card.html.j2:12
 #: amt/site/templates/pages/model_card.html.j2:12
-#: amt/site/templates/pages/model_card.html.j2:36
-#: amt/site/templates/pages/system_card.html.j2:48
+#: amt/site/templates/pages/model_card.html.j2:39
+#: amt/site/templates/pages/system_card.html.j2:49
 msgid "Attribute"
 msgstr ""
 
 #: amt/site/templates/pages/assessment_card.html.j2:13
 #: amt/site/templates/pages/model_card.html.j2:13
-#: amt/site/templates/pages/model_card.html.j2:37
-#: amt/site/templates/pages/system_card.html.j2:49
+#: amt/site/templates/pages/model_card.html.j2:40
+#: amt/site/templates/pages/system_card.html.j2:50
 msgid "Value"
 msgstr ""
 
-#: amt/site/templates/pages/assessment_card.html.j2:35
+#: amt/site/templates/pages/assessment_card.html.j2:37
 msgid "Question"
 msgstr ""
 
-#: amt/site/templates/pages/assessment_card.html.j2:36
+#: amt/site/templates/pages/assessment_card.html.j2:38
 msgid "Answer"
 msgstr ""
 
@@ -792,11 +792,11 @@ msgstr ""
 msgid "for more information on how the toolkit can support your organization."
 msgstr ""
 
-#: amt/site/templates/pages/system_card.html.j2:9
+#: amt/site/templates/pages/system_card.html.j2:10
 msgid "Assessment cards "
 msgstr ""
 
-#: amt/site/templates/pages/system_card.html.j2:27
+#: amt/site/templates/pages/system_card.html.j2:28
 msgid "Model cards"
 msgstr ""
 

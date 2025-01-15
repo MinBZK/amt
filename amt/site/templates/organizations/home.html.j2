@@ -11,11 +11,15 @@
                 <tbody class="rvo-table-body">
                     <tr class="rvo-table-row">
                         <td class="rvo-table-cell">{% trans %}Name{% endtrans %}</td>
-                        <td class="rvo-table-cell">{{ editable(organization, "name", "systemcard") }}</td>
+                        <td class="rvo-table-cell">
+                            {{ editable(organization, "name", "organization/" + organization_id|string + "/name") }}
+                        </td>
                     </tr>
                     <tr class="rvo-table-row">
                         <td class="rvo-table-cell">{% trans %}Slug{% endtrans %}</td>
-                        <td class="rvo-table-cell">{{ editable(organization, "slug", "systemcard") }}</td>
+                        <td class="rvo-table-cell">
+                            {{ editable(organization, "slug", "organization/" + organization_id|string + "/slug") }}
+                        </td>
                     </tr>
                     <tr class="rvo-table-row">
                         <td class="rvo-table-cell">{% trans %}Created at{% endtrans %}</td>
