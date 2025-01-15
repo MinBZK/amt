@@ -48,7 +48,7 @@ class TaskRegistryRepository:
         Fetches tasks given a list of URN's.
         If an URN is not valid, it is ignored.
         """
-        get_tasks = [get_task_by_urn(task_type, urn) for urn in urns]
+        get_tasks = [get_task_by_urn(self.client, task_type, urn) for urn in urns]
         results = await asyncio.gather(*get_tasks, return_exceptions=True)
 
         tasks: list[dict[str, Any]] = []

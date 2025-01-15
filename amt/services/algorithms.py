@@ -1,5 +1,6 @@
 import json
 import logging
+import sys
 from datetime import datetime
 from functools import lru_cache
 from os import listdir
@@ -11,12 +12,12 @@ from uuid import UUID
 from fastapi import Depends
 
 from amt.core.exceptions import AMTNotFound
-from amt.models import Algorithm
+from amt.models import Algorithm, Organization
 from amt.repositories.algorithms import AlgorithmsRepository
 from amt.repositories.organizations import OrganizationsRepository
 from amt.schema.algorithm import AlgorithmNew
 from amt.schema.instrument import InstrumentBase
-from amt.schema.system_card import AiActProfile, SystemCard
+from amt.schema.system_card import AiActProfile, Owner, SystemCard
 from amt.services.instruments import InstrumentsService, create_instrument_service
 from amt.services.task_registry import get_requirements_and_measures
 
@@ -49,6 +50,10 @@ class AlgorithmsService:
         return algorithm
 
     async def create(self, algorithm_new: AlgorithmNew, user_id: UUID | str) -> Algorithm:
+        organization: Organization = await self.organizations_repository.find_by_id_and_user_id(
+            algorithm_new.organization_id, user_id
+        )
+
         system_card_from_template = None
         if algorithm_new.template_id:
             template_files = get_template_files()
@@ -74,12 +79,14 @@ class AlgorithmsService:
 
         requirements, measures = await get_requirements_and_measures(ai_act_profile)
 
-        system_card = SystemCard(
+        system_card = SystemCard(  # pyright: ignore[reportCallIssue]
             name=algorithm_new.name,
             ai_act_profile=ai_act_profile,
             instruments=instruments,
             requirements=requirements,
             measures=measures,
+            owners=[Owner(organization=organization.name)],  # pyright: ignore[reportCallIssue]
+            version="0.0.0",
         )
 
         if system_card_from_template is not None:
@@ -103,9 +110,7 @@ class AlgorithmsService:
             system_card = SystemCard.model_validate(system_card_merged)
 
         algorithm = Algorithm(name=algorithm_new.name, lifecycle=algorithm_new.lifecycle, system_card=system_card)
-        algorithm.organization = await self.organizations_repository.find_by_id_and_user_id(
-            algorithm_new.organization_id, user_id
-        )
+        algorithm.organization = organization
 
         algorithm = await self.update(algorithm)
 
@@ -119,12 +124,13 @@ class AlgorithmsService:
 
     async def update(self, algorithm: Algorithm) -> Algorithm:
         # TODO: Is this the right place to sync system cards: system_card and system_card_json?
-        algorithm.sync_system_card()
+        # TODO: when system card is missing things break, so we call it here to make sure it exists??
+        dummy = algorithm.system_card  # noqa: F841 # pyright: ignore[reportUnusedVariable]
         algorithm = await self.repository.save(algorithm)
         return algorithm
 
 
-@lru_cache
+@lru_cache(maxsize=0 if "pytest" in sys.modules else 256)
 def get_template_files() -> dict[str, dict[str, str]]:
     return {
         str(i): {"display_value": k.split(".")[0].replace("_", " "), "value": k}

@@ -4,13 +4,9 @@ from enum import Enum
 import pytest
 from amt.api.deps import (
     custom_context_processor,
-    get_nested,
-    is_nested_enum,
-    nested_enum,
-    nested_enum_value,
-    nested_value,
 )
 from amt.api.localizable import LocalizableEnum
+from amt.api.routes.shared import get_nested, is_nested_enum, nested_enum, nested_enum_value, nested_value
 from amt.core.config import VERSION
 from amt.core.internationalization import supported_translations
 from amt.schema.localized_value_item import LocalizedValueItem

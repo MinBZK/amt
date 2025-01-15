@@ -24,36 +24,53 @@ def test_url_for_cache_file_not_found():
         http_browser_caching.url_for_cache("static", path="this/does/not/exist")
 
 
+# TODO: because lru_cache is disabled in pytest, we can not reliable test this
 def test_url_for_cache_file_happy_flow(tmp_path: Path, mocker: MockerFixture):
+    http_browser_caching.url_for_cache.cache_clear()
+
     class MockStatResult(NamedTuple):
         st_mtime: int
         st_size: int
 
     (tmp_path / "testfile").write_text("This is a test", encoding="utf-8")
-    http_browser_caching.static_files = http_browser_caching.StaticFilesCache(directory=Path(tmp_path))
+    mocker.patch(
+        "amt.api.http_browser_caching.static_files",
+        return_value=http_browser_caching.StaticFilesCache(directory=Path(tmp_path)),
+    )
     mocker.patch("amt.api.http_browser_caching.static_files.lookup_path", return_value=(None, MockStatResult(1, 2)))
     result = http_browser_caching.url_for_cache("static", path="testfile")
     assert result == "/static/testfile?etag=98c6f2c2287f4c73cea3d40ae7ec3ff2"
+
     # also test with a query param
     result = http_browser_caching.url_for_cache("static", path="testfile?queryparam1=true")
     assert result == "/static/testfile?queryparam1=true&etag=98c6f2c2287f4c73cea3d40ae7ec3ff2"
 
+    print(http_browser_caching.url_for_cache.cache_info())
 
-def test_static_files_class_immutable(tmp_path: Path):
+
+def test_static_files_class_immutable(tmp_path: Path, mocker: MockerFixture):
     testfile = tmp_path / "testfile"
     testfile.write_text("This is a test", encoding="utf-8")
-    static_files = http_browser_caching.StaticFilesCache(directory=Path(tmp_path))
+    mocker.patch(
+        "amt.api.http_browser_caching.static_files",
+        return_value=http_browser_caching.StaticFilesCache(directory=Path(tmp_path)),
+    )
     stat_result = os.stat(testfile)
-    response: Response = static_files.file_response(  #  pyright: ignore [reportUnknownMemberType]
+    response: Response = http_browser_caching.static_files.file_response(  #  pyright: ignore [reportUnknownMemberType]
         testfile, stat_result, {"headers": [], "query_string": b"etag=value-for-testing"}
     )
     assert b"cache-control", b"public, max-age=31536000, immutable" in response.headers
 
 
-def test_static_files_class_temporary(tmp_path: Path):
+def test_static_files_class_temporary(tmp_path: Path, mocker: MockerFixture):
     testfile = tmp_path / "testfile"
     testfile.write_text("This is a test", encoding="utf-8")
-    static_files = http_browser_caching.StaticFilesCache(directory=Path(tmp_path))
+    mocker.patch(
+        "amt.api.http_browser_caching.static_files",
+        return_value=http_browser_caching.StaticFilesCache(directory=Path(tmp_path)),
+    )
     stat_result = os.stat(testfile)
-    response: Response = static_files.file_response(testfile, stat_result, {"headers": [], "query_string": b""})  #  pyright: ignore [reportUnknownMemberType]
+    response: Response = http_browser_caching.static_files.file_response(  #  pyright: ignore [reportUnknownMemberType]
+        testfile, stat_result, {"headers": [], "query_string": b""}
+    )
     assert b"cache-control", b"public, max-age=3600, must-revalidate" in response.headers

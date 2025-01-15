@@ -1,12 +1,12 @@
 import pytest
-import vcr  # type: ignore
 from amt.clients.clients import TaskRegistryAPIClient, TaskType
 from amt.core.exceptions import AMTInstrumentError
 from amt.repositories.task_registry import TaskRegistryRepository
 from pytest_httpx import HTTPXMock
+from tests.conftest import amt_vcr
 
 
-@vcr.use_cassette("tests/fixtures/vcr_cassettes/test_fetch_tasks_all.yml")  # type: ignore
+@amt_vcr.use_cassette("tests/fixtures/vcr_cassettes/test_fetch_tasks_all.yml")  # type: ignore
 @pytest.mark.asyncio
 async def test_fetch_tasks_all():
     # given
@@ -24,7 +24,7 @@ async def test_fetch_tasks_all():
     assert len(measure_result) == 105
 
 
-@vcr.use_cassette("tests/fixtures/vcr_cassettes/test_fetch_task_with_urn.yml")  # type: ignore
+@amt_vcr.use_cassette("tests/fixtures/vcr_cassettes/test_fetch_task_with_urn.yml")  # type: ignore
 @pytest.mark.asyncio
 async def test_fetch_task_with_urn():
     # given
@@ -53,7 +53,7 @@ async def test_fetch_task_with_urn():
     assert measure_result[0]["urn"] == measure_urn
 
 
-@vcr.use_cassette("tests/fixtures/vcr_cassettes/test_fetch_task_with_urns.yml")  # type: ignore
+@amt_vcr.use_cassette("tests/fixtures/vcr_cassettes/test_fetch_task_with_urns.yml")  # type: ignore
 @pytest.mark.asyncio
 async def test_fetch_task_with_urns():
     # given
@@ -72,7 +72,7 @@ async def test_fetch_task_with_urns():
     assert result[1]["urn"] == urns[1]
 
 
-@vcr.use_cassette("tests/fixtures/vcr_cassettes/test_fetch_task_with_invalid_urn.yml")  # type: ignore
+@amt_vcr.use_cassette("tests/fixtures/vcr_cassettes/test_fetch_task_with_invalid_urn.yml")  # type: ignore
 @pytest.mark.asyncio
 async def test_fetch_task_with_invalid_urn():
     # given
@@ -87,7 +87,7 @@ async def test_fetch_task_with_invalid_urn():
     assert len(result) == 0
 
 
-@vcr.use_cassette("tests/fixtures/vcr_cassettes/test_fetch_task_with_valid_and_invalid_urn.yml")  # type: ignore
+@amt_vcr.use_cassette("tests/fixtures/vcr_cassettes/test_fetch_task_with_valid_and_invalid_urn.yml")  # type: ignore
 @pytest.mark.asyncio
 async def test_fetch_task_with_valid_and_invalid_urn():
     # given

@@ -3,15 +3,21 @@ import datetime
 import logging
 from collections import defaultdict
 from collections.abc import Sequence
-from typing import Annotated, Any, cast
+from typing import Annotated, Any
 
 import yaml
 from fastapi import APIRouter, Depends, File, Form, Query, Request, Response, UploadFile
 from fastapi.responses import FileResponse, HTMLResponse
-from pydantic import BaseModel
 from ulid import ULID
 
 from amt.api.deps import templates
+from amt.api.editable import (
+    EditModes,
+    ResolvedEditable,
+    get_enriched_resolved_editable,
+    get_resolved_editables,
+    save_editable,
+)
 from amt.api.forms.measure import get_measure_form
 from amt.api.navigation import (
     BaseNavigationItem,
@@ -20,7 +26,7 @@ from amt.api.navigation import (
     resolve_base_navigation_items,
     resolve_navigation_items,
 )
-from amt.api.routes.shared import get_filters_and_sort_by
+from amt.api.routes.shared import UpdateFieldModel, get_filters_and_sort_by, replace_none_with_empty_string_inplace
 from amt.core.authorization import get_user
 from amt.core.exceptions import AMTError, AMTNotFound, AMTRepositoryError
 from amt.core.internationalization import get_current_translation
@@ -31,9 +37,8 @@ from amt.repositories.organizations import OrganizationsRepository
 from amt.repositories.users import UsersRepository
 from amt.schema.measure import ExtendedMeasureTask, MeasureTask, Person
 from amt.schema.requirement import RequirementTask
-from amt.schema.system_card import Owner, SystemCard
+from amt.schema.system_card import SystemCard
 from amt.schema.task import MovedTask
-from amt.schema.webform import WebFormOption
 from amt.services.algorithms import AlgorithmsService
 from amt.services.instruments_and_requirements_state import InstrumentStateService, RequirementsStateService
 from amt.services.measures import MeasuresService, create_measures_service
@@ -230,112 +235,123 @@ async def get_algorithm_details(
     return templates.TemplateResponse(request, "algorithms/details_info.html.j2", context)
 
 
-@router.get("/{algorithm_id}/edit/{path:path}")
+@router.get("/{algorithm_id}/edit")
 async def get_algorithm_edit(
     request: Request,
     algorithm_id: int,
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
     organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
-    path: str,
-    edit_type: str = "systemcard",
+    full_resource_path: str,
 ) -> HTMLResponse:
-    algorithm, context = await get_algorithm_context(algorithm_id, algorithms_service, request)
-    context.update(
-        {
-            "path": path.replace("/", "."),
-            "edit_type": edit_type,
-            "object": algorithm,
-            "base_href": f"/algorithm/{ algorithm_id }",
-        }
+    user_id = get_user_id_or_error(request)
+
+    editable: ResolvedEditable = await get_enriched_resolved_editable(
+        context_variables={"algorithm_id": algorithm_id},
+        full_resource_path=full_resource_path,
+        algorithms_service=algorithms_service,
+        organizations_service=organizations_service,
+        edit_mode=EditModes.EDIT,
+        user_id=user_id,
+        request=request,
     )
 
-    if edit_type == "select_my_organizations":
-        user = get_user(request)
+    editable_context = {
+        "organizations_service": organizations_service,
+    }
 
-        my_organizations = await organizations_service.get_organizations_for_user(user_id=user["sub"] if user else None)
+    if editable.converter:
+        editable.value = await editable.converter.read(editable.value, **editable_context)
 
-        context["select_options"] = [
-            WebFormOption(value=str(organization.id), display_value=organization.name)
-            for organization in my_organizations
-        ]
+    context = {
+        "base_href": f"/algorithm/{ algorithm_id }",
+        "editable_object": editable,
+    }
 
     return templates.TemplateResponse(request, "parts/edit_cell.html.j2", context)
 
 
-@router.get("/{algorithm_id}/cancel/{path:path}")
+@router.get("/{algorithm_id}/cancel")
 async def get_algorithm_cancel(
     request: Request,
     algorithm_id: int,
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
-    path: str,
-    edit_type: str = "systemcard",
+    organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
+    full_resource_path: str,
 ) -> HTMLResponse:
-    algorithm, context = await get_algorithm_context(algorithm_id, algorithms_service, request)
-    context.update(
-        {
-            "path": path.replace("/", "."),
-            "edit_type": edit_type,
-            "base_href": f"/algorithm/{ algorithm_id }",
-            "object": algorithm,
-        }
+    editable: ResolvedEditable = await get_enriched_resolved_editable(
+        context_variables={"algorithm_id": algorithm_id},
+        full_resource_path=full_resource_path,
+        algorithms_service=algorithms_service,
+        organizations_service=organizations_service,
+        edit_mode=EditModes.VIEW,
     )
+
+    editable_context = {"organizations_service": organizations_service, "algorithms_service": algorithms_service}
+
+    if editable.converter:
+        editable.value = await editable.converter.view(editable.value, **editable_context)
+
+    context = {
+        "relative_resource_path": editable.relative_resource_path.replace("/", ".")
+        if editable.relative_resource_path
+        else "",
+        "base_href": f"/algorithm/{ algorithm_id }",
+        "resource_object": editable.resource_object,
+        "full_resource_path": full_resource_path,
+        "editable_object": editable,
+    }
+
     return templates.TemplateResponse(request, "parts/view_cell.html.j2", context)
 
 
-class UpdateFieldModel(BaseModel):
-    value: str
-
-
-def set_path(algorithm: dict[str, Any] | object, path: str, value: str) -> None:
-    if not path:
-        raise ValueError("Path cannot be empty")
-
-    attrs = path.lstrip("/").split("/")
-    obj: Any = algorithm
-    for attr in attrs[:-1]:
-        if isinstance(obj, dict):
-            obj = cast(dict[str, Any], obj)
-            if attr not in obj:
-                obj[attr] = {}
-            obj = obj[attr]
-        else:
-            if not hasattr(obj, attr):
-                setattr(obj, attr, {})
-            obj = getattr(obj, attr)
-
-    if isinstance(obj, dict):
-        obj[attrs[-1]] = value
-    else:
-        setattr(obj, attrs[-1], value)
-
-
-@router.put("/{algorithm_id}/update/{path:path}")
+@router.put("/{algorithm_id}/update")
 async def get_algorithm_update(
     request: Request,
     algorithm_id: int,
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
-    organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
+    organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
     update_data: UpdateFieldModel,
-    path: str,
-    edit_type: str = "systemcard",
+    full_resource_path: str,
 ) -> HTMLResponse:
-    algorithm, context = await get_algorithm_context(algorithm_id, algorithms_service, request)
-    context.update(
-        {"path": path.replace("/", "."), "edit_type": edit_type, "base_href": f"/algorithm/{ algorithm_id }"}
+    user_id = get_user_id_or_error(request)
+
+    editable: ResolvedEditable = await get_enriched_resolved_editable(
+        context_variables={"algorithm_id": algorithm_id},
+        full_resource_path=full_resource_path,
+        algorithms_service=algorithms_service,
+        organizations_service=organizations_service,
+        edit_mode=EditModes.SAVE,
     )
 
-    if edit_type == "select_my_organizations":
-        organization = await organizations_repository.find_by_id(int(update_data.value))
-        algorithm.organization = organization
-        # TODO: we need to know which organization to update and what to remove
-        if not algorithm.system_card.owners:
-            algorithm.system_card.owners = [Owner(organization=organization.name, oin=str(organization.id))]
-        algorithm.system_card.owners[0].organization = organization.name
-    else:
-        set_path(algorithm, path, update_data.value)
+    editable_context = {
+        "user_id": user_id,
+        "new_value": update_data.value,
+        "organizations_service": organizations_service,
+    }
 
-    algorithm = await algorithms_service.update(algorithm)
-    context.update({"object": algorithm})
+    editable = await save_editable(
+        editable,
+        update_data=update_data,
+        editable_context=editable_context,
+        algorithms_service=algorithms_service,
+        organizations_service=organizations_service,
+        do_save=True,
+    )
+
+    # set the value back to view mode if needed
+    if editable.converter:
+        editable.value = await editable.converter.view(editable.value, **editable_context)
+
+    context = {
+        "relative_resource_path": editable.relative_resource_path.replace("/", ".")
+        if editable.relative_resource_path
+        else "",
+        "base_href": f"/algorithm/{ algorithm_id }",
+        "resource_object": editable.resource_object,
+        "full_resource_path": full_resource_path,
+        "editable_object": editable,
+    }
+
     return templates.TemplateResponse(request, "parts/view_cell.html.j2", context)
 
 
@@ -349,6 +365,8 @@ async def get_system_card(
     instrument_state = await get_instrument_state(algorithm.system_card)
     requirements_state = await get_requirements_state(algorithm.system_card)
 
+    editables = get_resolved_editables(context_variables={"algorithm_id": algorithm_id})
+
     tab_items = get_algorithm_details_tabs(request)
 
     breadcrumbs = resolve_base_navigation_items(
@@ -360,8 +378,11 @@ async def get_system_card(
         request,
     )
 
+    system_card = algorithm.system_card
+    replace_none_with_empty_string_inplace(system_card)
+
     context = {
-        "system_card": algorithm.system_card,
+        "system_card": system_card,
         "instrument_state": instrument_state,
         "requirements_state": requirements_state,
         "last_edited": algorithm.last_edited,
@@ -369,6 +390,8 @@ async def get_system_card(
         "algorithm_id": algorithm.id,
         "tab_items": tab_items,
         "breadcrumbs": breadcrumbs,
+        "editables": editables,
+        "base_href": f"/algorithm/{ algorithm_id }",
     }
 
     return templates.TemplateResponse(request, "pages/system_card.html.j2", context)
@@ -407,14 +430,14 @@ async def get_system_card_requirements(
 
     # Get measures that correspond to the requirements and merge them with the measure tasks
     requirements_and_measures = []
-    measure_tasks: list[MeasureTask | None] = []
+    measure_tasks: list[MeasureTask] = []
     for requirement in requirements:
         completed_measures_count = 0
         linked_measures = await measures_service.fetch_measures(requirement.links)
         extended_linked_measures: list[ExtendedMeasureTask] = []
         for measure in linked_measures:
             measure_task = find_measure_task(algorithm.system_card, measure.urn)
-            if measure_task not in measure_tasks:
+            if measure_task is not None and measure_task not in measure_tasks:
                 measure_tasks.append(measure_task)
             if measure_task:
                 ext_measure_task = ExtendedMeasureTask(
@@ -457,7 +480,7 @@ async def _fetch_members(
 
 
 async def get_measure_task_functions(
-    measure_tasks: list[MeasureTask | None],
+    measure_tasks: list[MeasureTask],
     users_repository: Annotated[UsersRepository, Depends(UsersRepository)],
     sort_by: dict[str, str],
     filters: dict[str, str],
@@ -465,9 +488,6 @@ async def get_measure_task_functions(
     measure_task_functions: dict[str, list[Any]] = defaultdict(list)
 
     for measure_task in measure_tasks:
-        if measure_task is None:
-            continue
-
         person_types = ["accountable_persons", "reviewer_persons", "responsible_persons"]
         for person_type in person_types:
             person_list = getattr(measure_task, person_type)
@@ -728,6 +748,8 @@ async def get_assessment_card(
         logger.warning("assessment card not found")
         raise AMTNotFound()
 
+    editables = get_resolved_editables(context_variables={"algorithm_id": algorithm_id})
+
     context = {
         "instrument_state": instrument_state,
         "requirements_state": requirements_state,
@@ -735,6 +757,8 @@ async def get_assessment_card(
         "last_edited": algorithm.last_edited,
         "sub_menu_items": sub_menu_items,
         "breadcrumbs": breadcrumbs,
+        "algorithm_id": algorithm.id,
+        "editables": editables,
     }
 
     return templates.TemplateResponse(request, "pages/assessment_card.html.j2", context)
@@ -776,7 +800,10 @@ async def get_model_card(
         logger.warning("model card not found")
         raise AMTNotFound()
 
+    editables = get_resolved_editables(context_variables={"algorithm_id": algorithm_id})
+
     context = {
+        "base_href": f"/algorithm/{ algorithm_id }",
         "instrument_state": instrument_state,
         "requirements_state": requirements_state,
         "model_card": model_card_data,
@@ -785,6 +812,7 @@ async def get_model_card(
         "algorithm": algorithm,
         "algorithm_id": algorithm.id,
         "tab_items": tab_items,
+        "editables": editables,
     }
 
     return templates.TemplateResponse(request, "pages/model_card.html.j2", context)

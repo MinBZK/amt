@@ -1,4 +1,5 @@
 import logging
+import sys
 from datetime import UTC, datetime, timedelta
 from functools import lru_cache
 
@@ -13,7 +14,7 @@ _default_language_fallback = "en"
 supported_translations: tuple[str, ...] = ("en", "nl")
 
 
-@lru_cache(maxsize=len(supported_translations))
+@lru_cache(maxsize=0 if "pytest" in sys.modules else len(supported_translations))
 def get_dynamic_field_translations(lang: str) -> dict[str, str]:
     lang = get_supported_translation(lang)
     with open(f"amt/languages/{lang}.yaml") as stream:
@@ -27,7 +28,7 @@ def get_supported_translation(lang: str) -> str:
     return lang
 
 
-@lru_cache(maxsize=len(supported_translations))
+@lru_cache(maxsize=0 if "pytest" in sys.modules else len(supported_translations))
 def get_translation(lang: str) -> NullTranslations:
     lang = get_supported_translation(lang)
     return Translations.load("amt/locale", locales=lang)

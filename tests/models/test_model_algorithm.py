@@ -16,7 +16,7 @@ def test_model_basic_algorithm():
 
 def test_model_systemcard():
     # given
-    system_card = SystemCard(name="Test System Card")
+    system_card = SystemCard(name="Test System Card")  # pyright: ignore[reportCallIssue]
 
     algorithm = Algorithm(name="Test Algorithm", system_card=system_card)
 
@@ -27,7 +27,7 @@ def test_model_systemcard():
 
 def test_model_systemcard_full():
     # given
-    system_card = SystemCard(name="Test System Card", description="Test description", status="active")
+    system_card = SystemCard(name="Test System Card", description="Test description", status="active")  # pyright: ignore[reportCallIssue]
 
     algorithm = Algorithm(name="Test Algorithm")
     algorithm.system_card = system_card
@@ -57,7 +57,7 @@ def test_model_systemcard_direct():
 
 def test_model_systemcard_equal():
     # given
-    system_card = SystemCard(name="Test System Card", description="Test description", status="active")
+    system_card = SystemCard(name="Test System Card", description="Test description", status="active")  # pyright: ignore[reportCallIssue]
     algorithm = Algorithm(name="Test Algorithm", system_card=system_card)
 
     # then
@@ -81,7 +81,7 @@ def test_model_systemcard_from_json():
     algorithm.system_card_json = {"name": "Test System Card"}
 
     # then
-    assert algorithm.system_card == SystemCard(name="Test System Card")
+    assert algorithm.system_card == SystemCard(name="Test System Card")  # pyright: ignore[reportCallIssue]
 
 
 def test_model_systemcard_none():
@@ -92,7 +92,7 @@ def test_model_systemcard_none():
     algorithm.system_card = None
 
     # then
-    assert algorithm.system_card == SystemCard()
+    assert algorithm.system_card == SystemCard()  # pyright: ignore[reportCallIssue]
 
 
 class TestEnum(Enum):

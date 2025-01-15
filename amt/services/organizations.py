@@ -57,3 +57,15 @@ class OrganizationsService:
 
     async def find_by_slug(self, slug: str) -> Organization:
         return await self.organizations_repository.find_by_slug(slug)
+
+    async def get_by_id(self, organization_id: int) -> Organization:
+        return await self.organizations_repository.find_by_id(organization_id)
+
+    async def find_by_id_and_user_id(self, organization_id: int, user_id: str | UUID) -> Organization:
+        return await self.organizations_repository.find_by_id_and_user_id(organization_id, user_id)
+
+    async def update(self, organization: Organization) -> Organization:
+        return await self.organizations_repository.save(organization)
+
+    async def remove_user(self, organization: Organization, user: User) -> Organization:
+        return await self.organizations_repository.remove_user(organization, user)

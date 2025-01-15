@@ -1,4 +1,5 @@
 import logging
+import sys
 from enum import StrEnum
 from typing import Any
 
@@ -54,7 +55,8 @@ class TaskRegistryAPIClient(APIClient):
         return response_data
 
 
-@alru_cache
-async def get_task_by_urn(task_type: TaskType, urn: str, version: str = "latest") -> dict[str, Any]:
-    client = TaskRegistryAPIClient()
+@alru_cache(maxsize=0 if "pytest" in sys.modules else 1000)
+async def get_task_by_urn(
+    client: TaskRegistryAPIClient, task_type: TaskType, urn: str, version: str = "latest"
+) -> dict[str, Any]:
     return await client.get_task_by_urn(task_type, urn, version)

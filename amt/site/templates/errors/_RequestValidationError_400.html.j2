@@ -17,7 +17,7 @@
 {% if request.state.htmx is defined and request.state.htmx %}
     {% for msg in message %}
         <div id="error-{{ msg['loc'][-1] }}"
-             class="htmx-error-oob rvo-form-feedback rvo-form-feedback--error"
+             class="htmx-error-oob rvo-form-feedback rvo-form-feedback--error margin-bottom-small"
              hx-swap-oob="true">
             <span class="utrecht-icon rvo-icon rvo-icon-foutmelding rvo-icon--md rvo-status-icon-foutmelding rvo-status-icon-foutmelding"
                   role="img"

@@ -9,6 +9,7 @@ from amt.schema.system_card import SystemCard
 from amt.services.algorithms import AlgorithmsService
 from amt.services.instruments import InstrumentsService
 from pytest_mock import MockFixture
+from tests.conftest import amt_vcr
 from tests.constants import default_instrument, default_organization, default_user
 
 
@@ -37,12 +38,13 @@ async def test_get_algorithm(mocker: MockFixture):
     algorithms_service.repository.find_by_id.assert_awaited_once_with(algorithm_id)  # type: ignore
 
 
+@amt_vcr.use_cassette("tests/fixtures/vcr_cassettes/service_test_create_algorithm.yaml")  # type: ignore
 @pytest.mark.asyncio
 async def test_create_algorithm(mocker: MockFixture):
     algorithm_id = 1
     algorithm_name = "Algorithm 1"
     algorithm_lifecycle = "development"
-    system_card = SystemCard(name=algorithm_name)
+    system_card = SystemCard(name=algorithm_name)  # pyright: ignore[reportCallIssue]
 
     organizations_repository = mocker.AsyncMock(spec=OrganizationsRepository)
 

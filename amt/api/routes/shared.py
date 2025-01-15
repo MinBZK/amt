@@ -1,9 +1,15 @@
+from enum import Enum
+from typing import Any
+
+from pydantic import BaseModel
 from starlette.requests import Request
 
 from amt.api.lifecycles import Lifecycles, get_localized_lifecycle
+from amt.api.localizable import LocalizableEnum
 from amt.api.organization_filter_options import OrganizationFilterOptions, get_localized_organization_filter
 from amt.api.risk_group import RiskGroup, get_localized_risk_group
 from amt.schema.localized_value_item import LocalizedValueItem
+from amt.schema.shared import IterMixin
 
 
 def get_filters_and_sort_by(
@@ -48,3 +54,76 @@ def get_localized_value(key: str, value: str, request: Request) -> LocalizedValu
         return localized
 
     return LocalizedValueItem(value=value, display_value="Unknown filter option")
+
+
+def get_nested(obj: Any, attr_path: str) -> Any:  # noqa: ANN401
+    attrs = attr_path.lstrip("/").split("/") if "/" in attr_path else attr_path.lstrip(".").split(".")
+    for attr in attrs:
+        if hasattr(obj, attr):
+            obj = getattr(obj, attr)
+        elif isinstance(obj, dict) and attr in obj:
+            obj = obj[attr]
+        else:
+            obj = None
+            break
+    return obj
+
+
+def nested_value(obj: Any, attr_path: str) -> Any:  # noqa: ANN401
+    obj = get_nested(obj, attr_path)
+    if isinstance(obj, Enum):
+        return obj.value
+    return obj
+
+
+def is_nested_enum(obj: Any, attr_path: str) -> bool:  # noqa: ANN401
+    obj = get_nested(obj, attr_path)
+    return bool(isinstance(obj, Enum))
+
+
+def nested_enum(obj: Any, attr_path: str, language: str) -> list[LocalizedValueItem]:  # noqa: ANN401
+    nested_obj = get_nested(obj, attr_path)
+    if not isinstance(nested_obj, LocalizableEnum):
+        return []
+    enum_class = type(nested_obj)
+    return [e.localize(language) for e in enum_class if isinstance(e, LocalizableEnum)]
+
+
+def nested_enum_value(obj: Any, attr_path: str, language: str) -> Any:  # noqa: ANN401
+    return get_nested(obj, attr_path).localize(language)
+
+
+class UpdateFieldModel(BaseModel):
+    value: str
+
+
+# TODO: fix this method
+def replace_none_with_empty_string_inplace(obj: dict[Any, Any] | list[Any] | IterMixin) -> None:  # noqa: C901
+    """
+    Recursively replaces all None values within a list, dict,
+    or an IterMixin (class) object with an empty string.
+    This function modifies the object in-place.
+
+    Args:
+      obj: The input object, which can be a list, dict, or an IterMixin (class) object.
+    """
+    if isinstance(obj, list):
+        for i, item in enumerate(obj):
+            if item is None and isinstance(item, str):
+                obj[i] = ""
+            elif isinstance(item, list | dict | IterMixin):
+                replace_none_with_empty_string_inplace(item)  # pyright: ignore[reportUnknownArgumentType]
+
+    elif isinstance(obj, dict):
+        for key, value in obj.items():
+            if value is None and isinstance(value, str):
+                obj[key] = ""
+            elif isinstance(value, (list, dict, IterMixin)):  # noqa: UP038
+                replace_none_with_empty_string_inplace(value)  # pyright: ignore[reportUnknownArgumentType]
+
+    elif isinstance(obj, IterMixin):
+        for item in obj:
+            if isinstance(item, tuple) and item[1] is None:
+                setattr(obj, item[0], "")
+            if isinstance(item, list | dict | IterMixin):
+                replace_none_with_empty_string_inplace(item)  # pyright: ignore[reportUnknownArgumentType]

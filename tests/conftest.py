@@ -12,6 +12,7 @@ import nest_asyncio  # pyright: ignore [(reportMissingTypeStubs)]
 import pytest
 import pytest_asyncio
 import uvicorn
+import vcr  # pyright: ignore[reportMissingTypeStubs]
 from amt.models.base import Base
 from amt.server import create_app
 from httpx import ASGITransport, AsyncClient
@@ -19,7 +20,9 @@ from playwright.sync_api import Browser, Page
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy.ext.asyncio.session import async_sessionmaker
+from vcr.config import RecordMode  # pyright: ignore[reportMissingTypeStubs]
 
+from tests.constants import default_auth_user
 from tests.database_e2e_setup import setup_database_e2e
 from tests.database_test_utils import DatabaseTestUtils
 
@@ -29,6 +32,9 @@ logger = logging.getLogger(__name__)
 nest_asyncio.apply()  # type: ignore [(reportUnknownMemberType)]
 
 logging.getLogger("vcr").setLevel(logging.WARNING)
+
+# we use a custom VCR as I could not find out how to use global settings
+amt_vcr = vcr.VCR(ignore_hosts=["127.0.0.1", "localhost", "testserver"], record_mode=RecordMode.NEW_EPISODES)
 
 
 def run_server_uvicorn(database_file: Path, host: str = "127.0.0.1", port: int = 3462) -> None:
@@ -79,8 +85,11 @@ async def setup_db_and_server(
 def disable_auth(request: pytest.FixtureRequest, monkeypatch: pytest.MonkeyPatch) -> None:
     marker = request.node.get_closest_marker("enable_auth")  # type: ignore [(reportUnknownMemberType)]
 
-    if not marker:
+    if marker:
+        monkeypatch.setenv("DISABLE_AUTH", "false")
+    else:
         monkeypatch.setenv("DISABLE_AUTH", "true")
+        monkeypatch.setenv("AUTO_LOGIN_UUID", default_auth_user()["sub"])
     return
 
 
@@ -119,6 +128,7 @@ def pytest_collection_modifyitems(session: pytest.Session, config: pytest.Config
 async def client(db: DatabaseTestUtils, monkeypatch: pytest.MonkeyPatch) -> AsyncIterator[AsyncClient]:
     # overwrite db url
     monkeypatch.setenv("APP_DATABASE_FILE", "/" + str(db.get_database_file()))
+
     from amt.repositories.deps import get_session
 
     app = create_app()

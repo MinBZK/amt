@@ -1,4 +1,5 @@
 import logging
+import re
 from collections.abc import Sequence
 from enum import Enum
 from os import PathLike
@@ -9,13 +10,14 @@ from fastapi import Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from jinja2 import Environment, StrictUndefined, Undefined
-from jinja2_base64_filters import jinja2_base64_filters  # pyright: ignore #noqa
 from starlette.background import BackgroundTask
 from starlette.templating import _TemplateResponse  # pyright: ignore [reportPrivateUsage]
 
+from amt.api.editable import ResolvedEditable
 from amt.api.http_browser_caching import url_for_cache
 from amt.api.localizable import LocalizableEnum
 from amt.api.navigation import NavigationItem, get_main_menu
+from amt.api.routes.shared import is_nested_enum, nested_enum, nested_enum_value, nested_value
 from amt.core.authorization import AuthorizationVerb, get_user
 from amt.core.config import VERSION, get_settings
 from amt.core.internationalization import (
@@ -29,7 +31,6 @@ from amt.core.internationalization import (
     supported_translations,
     time_ago,
 )
-from amt.schema.localized_value_item import LocalizedValueItem
 from amt.schema.shared import IterMixin
 from amt.schema.webform import WebFormFieldType
 
@@ -61,41 +62,12 @@ def get_undefined_behaviour() -> type[Undefined]:
     return StrictUndefined if get_settings().DEBUG else Undefined
 
 
-def get_nested(obj: Any, attr_path: str) -> Any:  # noqa: ANN401
-    attrs = attr_path.lstrip(".").split(".")
-    for attr in attrs:
-        if hasattr(obj, attr):
-            obj = getattr(obj, attr)
-        elif isinstance(obj, dict) and attr in obj:
-            obj = obj[attr]
-        else:
-            obj = None
-            break
-    return obj
+def replace_digits_in_brackets(string: str) -> str:
+    return re.sub(r"\[(\d+)]", "[*]", string)
 
 
-def nested_value(obj: Any, attr_path: str) -> Any:  # noqa: ANN401
-    obj = get_nested(obj, attr_path)
-    if isinstance(obj, Enum):
-        return obj.value
-    return obj
-
-
-def is_nested_enum(obj: Any, attr_path: str) -> bool:  # noqa: ANN401
-    obj = get_nested(obj, attr_path)
-    return bool(isinstance(obj, Enum))
-
-
-def nested_enum(obj: Any, attr_path: str, language: str) -> list[LocalizedValueItem]:  # noqa: ANN401
-    nested_obj = get_nested(obj, attr_path)
-    if not isinstance(nested_obj, LocalizableEnum):
-        return []
-    enum_class = type(nested_obj)
-    return [e.localize(language) for e in enum_class if isinstance(e, LocalizableEnum)]
-
-
-def nested_enum_value(obj: Any, attr_path: str, language: str) -> Any:  # noqa: ANN401
-    return get_nested(obj, attr_path).localize(language)
+def is_editable_resource(full_resource_path: str, editables: dict[str, ResolvedEditable]) -> bool:
+    return replace_digits_in_brackets(full_resource_path) in editables
 
 
 def permission(permission: str, verb: AuthorizationVerb, permissions: dict[str, list[AuthorizationVerb]]) -> bool:
@@ -178,6 +150,8 @@ templates.env.globals.update(is_nested_enum=is_nested_enum)  # pyright: ignore [
 templates.env.globals.update(nested_enum=nested_enum)  # pyright: ignore [reportUnknownMemberType]
 templates.env.globals.update(nested_enum_value=nested_enum_value)  # pyright: ignore [reportUnknownMemberType]
 templates.env.globals.update(isinstance=instance)  # pyright: ignore [reportUnknownMemberType]
+templates.env.globals.update(is_editable_resource=is_editable_resource)  # pyright: ignore [reportUnknownMemberType]
+templates.env.globals.update(replace_digits_in_brackets=replace_digits_in_brackets)  # pyright: ignore [reportUnknownMemberType]
 templates.env.globals.update(permission=permission)  # pyright: ignore [reportUnknownMemberType]
 templates.env.tests["permission"] = permission  # pyright: ignore [reportUnknownMemberType]
 templates.env.add_extension("jinja2_base64_filters.Base64Filters")  # pyright: ignore [reportUnknownMemberType]

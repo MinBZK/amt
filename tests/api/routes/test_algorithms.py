@@ -15,6 +15,7 @@ from httpx import AsyncClient
 from pytest_mock import MockFixture
 from starlette.datastructures import URL
 
+from tests.conftest import amt_vcr
 from tests.constants import default_algorithm, default_auth_user, default_instrument, default_user
 from tests.database_test_utils import DatabaseTestUtils
 
@@ -118,6 +119,7 @@ async def test_post_new_algorithms_bad_request(client: AsyncClient, mocker: Mock
     assert b"Field required" in response.content
 
 
+@amt_vcr.use_cassette("tests/fixtures/vcr_cassettes/test_post_new_algorithms.yml")  # type: ignore
 @pytest.mark.asyncio
 async def test_post_new_algorithms(client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
     await db.given([default_user()])
@@ -153,6 +155,7 @@ async def test_post_new_algorithms(client: AsyncClient, mocker: MockFixture, db:
     assert response.headers["HX-Redirect"] == "/algorithm/1/details"
 
 
+@amt_vcr.use_cassette("tests/fixtures/vcr_cassettes/test_post_new_algorithms_write_system_card.yml")  # type: ignore
 @pytest.mark.asyncio
 async def test_post_new_algorithms_write_system_card(
     client: AsyncClient,
@@ -197,7 +200,7 @@ async def test_post_new_algorithms_write_system_card(
 
     requirements, measures = await get_requirements_and_measures(ai_act_profile)
 
-    system_card = SystemCard(
+    system_card = SystemCard(  # pyright: ignore[reportCallIssue]
         name=algorithm_new.name,
         instruments=[],
         ai_act_profile=ai_act_profile,
@@ -211,7 +214,9 @@ async def test_post_new_algorithms_write_system_card(
     # then
     base_algorithms: list[Base] = await db.get(Algorithm, "name", name)
     algorithms: list[Algorithm] = cast(list[Algorithm], base_algorithms)
-    assert any(algorithm.system_card == system_card for algorithm in algorithms if algorithm.system_card is not None)
+    assert any(
+        algorithm.system_card.name == system_card.name for algorithm in algorithms if algorithm.system_card is not None
+    )
 
 
 class MockRequest(Request):

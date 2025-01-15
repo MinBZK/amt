@@ -19,6 +19,13 @@ class AuthorizationMiddleware(BaseHTTPMiddleware):
         if request.url.path.startswith("/static/"):
             return await call_next(request)
 
+        disable_auth_str = os.environ.get("DISABLE_AUTH")
+        auth_disable = False if disable_auth_str is None else disable_auth_str.lower() == "true"
+        if auth_disable:
+            auto_login_uuid: str | None = os.environ.get("AUTO_LOGIN_UUID", None)
+            if auto_login_uuid:
+                request.session["user"] = {"sub": auto_login_uuid}
+
         authorization_service = AuthorizationService()
 
         user = get_user(request)
@@ -29,8 +36,6 @@ class AuthorizationMiddleware(BaseHTTPMiddleware):
             return await call_next(request)
 
         response = await call_next(request)
-
-        auth_disable: bool = bool(os.environ.get("DISABLE_AUTH", False))
 
         if auth_disable:
             return response
