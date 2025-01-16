@@ -293,7 +293,7 @@
         </div>
         <div id="error-{{ field.name }}" class="htmx-error-oob"></div>
         <div class="rvo-layout-column rvo-layout-gap--xs">
-            <textarea id="{{ prefix }}{{ field.name }}" name="{{ field.name }}" placeholder="{{ field.placeholder }}" aria-describedby="helperTextId" class="utrecht-textarea utrecht-textarea--html-textarea" dir="auto" onchange="amt.reset_errorfield('error-{{ field.name }}')" {% if isinstance(field.attributes, "dict") %} {% for key, value in field.attributes.items() %}{{ key }}="{{ value }}"{% endfor %}{% endif %}>{{ field.default_value }}</textarea>
+            <textarea id="{{ prefix }}{{ field.name }}" name="{{ field.name }}" placeholder="{{ field.placeholder }}" aria-describedby="helperTextId" class="utrecht-textbox utrecht-textarea utrecht-textarea--html-textarea" dir="auto" onchange="amt.reset_errorfield('error-{{ field.name }}')" {% if isinstance(field.attributes, "dict") %} {% for key, value in field.attributes.items() %}{{ key }}="{{ value }}"{% endfor %}{% endif %}>{{ field.default_value }}</textarea>
             {# TODO: Fix when we upgrade to higher @nl-rvo npm package #}
             {# <span class="utrecht-textbox-remaining-chars">{% trans %}Still{% endtrans %} <strong>300</strong> {% trans %}Characters remaining{% endtrans %}</span>#}
         </div>

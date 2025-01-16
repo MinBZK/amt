@@ -4,13 +4,16 @@ from uuid import UUID
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from amt.core.authorization import AuthorizationVerb
-from amt.models import Authorization, Role, Rule
+from amt.core.authorization import AuthorizationResource, AuthorizationType, AuthorizationVerb
+from amt.models import Authorization, Role, Rule, User
+from amt.repositories.algorithms import AlgorithmsRepository
 from amt.repositories.deps import get_session_non_generator
+from amt.repositories.organizations import OrganizationsRepository
+from amt.repositories.users import UsersRepository
 
 logger = logging.getLogger(__name__)
 
-PermissionTuple = tuple[str, list[AuthorizationVerb], str, int]
+PermissionTuple = tuple[AuthorizationResource, list[AuthorizationVerb], AuthorizationType, str | int]
 PermissionsList = list[PermissionTuple]
 
 
@@ -26,7 +29,53 @@ class AuthorizationRepository:
         if self.session is None:
             self.session = await get_session_non_generator()
 
+    async def get_user(self, user_id: UUID) -> User | None:
+        try:
+            await self.init_session()
+            return await UsersRepository(session=self.session).find_by_id(user_id)  # pyright: ignore[reportArgumentType]
+        finally:
+            if self.session is not None:
+                await self.session.close()
+
     async def find_by_user(self, user: UUID) -> PermissionsList | None:
+        """
+        Returns all authorization for a user.
+        :return: all authorization for the user
+        """
+        try:
+            await self.init_session()
+            authorization_verbs: list[AuthorizationVerb] = [
+                AuthorizationVerb.READ,
+                AuthorizationVerb.UPDATE,
+                AuthorizationVerb.CREATE,
+                AuthorizationVerb.LIST,
+                AuthorizationVerb.DELETE,
+            ]
+            my_algorithms: PermissionsList = [
+                (AuthorizationResource.ALGORITHMS, authorization_verbs, AuthorizationType.ALGORITHM, "*"),
+            ]
+            my_algorithms += [
+                (AuthorizationResource.ALGORITHM, authorization_verbs, AuthorizationType.ALGORITHM, algorithm.id)
+                for algorithm in await AlgorithmsRepository(session=self.session).get_by_user(user)  # pyright: ignore[reportArgumentType]
+            ]
+            my_organizations: PermissionsList = [
+                (AuthorizationResource.ORGANIZATIONS, authorization_verbs, AuthorizationType.ORGANIZATION, "*"),
+            ]
+            my_organizations += [
+                (
+                    AuthorizationResource.ORGANIZATION_INFO_SLUG,
+                    authorization_verbs,
+                    AuthorizationType.ORGANIZATION,
+                    organization.slug,
+                )
+                for organization in await OrganizationsRepository(session=self.session).get_by_user(user)  # pyright: ignore[reportArgumentType]
+            ]
+            return my_algorithms + my_organizations
+        finally:
+            if self.session is not None:
+                await self.session.close()
+
+    async def find_by_user_original(self, user: UUID) -> PermissionsList | None:
         """
         Returns all authorization for a user.
         :return: all authorization for the user

@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Any
+from typing import Any, cast
 
 from pydantic import BaseModel
 from starlette.requests import Request
@@ -14,7 +14,7 @@ from amt.schema.shared import IterMixin
 
 def get_filters_and_sort_by(
     request: Request,
-) -> tuple[dict[str, str], list[str], dict[str, LocalizedValueItem], dict[str, str]]:
+) -> tuple[dict[str, str | list[str | int]], list[str], dict[str, LocalizedValueItem], dict[str, str]]:
     active_filters: dict[str, str] = {
         k.removeprefix("active-filter-"): v
         for k, v in request.query_params.items()
@@ -29,9 +29,11 @@ def get_filters_and_sort_by(
     if "organization-type" in add_filters and add_filters["organization-type"] == OrganizationFilterOptions.ALL.value:
         del add_filters["organization-type"]
     drop_filters: list[str] = [v for k, v in request.query_params.items() if k.startswith("drop-filter") and v != ""]
-    filters: dict[str, str] = {k: v for k, v in (active_filters | add_filters).items() if k not in drop_filters}
+    filters: dict[str, str | list[str | int]] = {
+        k: v for k, v in (active_filters | add_filters).items() if k not in drop_filters
+    }
     localized_filters: dict[str, LocalizedValueItem] = {
-        k: get_localized_value(k, v, request) for k, v in filters.items()
+        k: get_localized_value(k, cast(str, v), request) for k, v in filters.items()
     }
     sort_by: dict[str, str] = {
         k.removeprefix("sort-by-"): v for k, v in request.query_params.items() if k.startswith("sort-by-") and v != ""

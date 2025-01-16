@@ -339,3 +339,7 @@ def default_systemcard_dic() -> dict[str, str | list[Any] | None]:
         "references": [],
         "models": [],
     }
+
+
+def default_not_found_no_permission_msg() -> bytes:
+    return b"We couldn't find what you were looking for. This might be because:"

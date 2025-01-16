@@ -10,6 +10,7 @@ from fastapi import APIRouter, Depends, File, Form, Query, Request, Response, Up
 from fastapi.responses import FileResponse, HTMLResponse
 from ulid import ULID
 
+from amt.api.decorators import permission
 from amt.api.deps import templates
 from amt.api.editable import (
     EditModes,
@@ -27,7 +28,7 @@ from amt.api.navigation import (
     resolve_navigation_items,
 )
 from amt.api.routes.shared import UpdateFieldModel, get_filters_and_sort_by, replace_none_with_empty_string_inplace
-from amt.core.authorization import get_user
+from amt.core.authorization import AuthorizationResource, AuthorizationVerb, get_user
 from amt.core.exceptions import AMTError, AMTNotFound, AMTRepositoryError
 from amt.core.internationalization import get_current_translation
 from amt.enums.status import Status
@@ -215,6 +216,7 @@ async def get_algorithm_context(
 
 
 @router.get("/{algorithm_id}/details")
+@permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
 async def get_algorithm_details(
     request: Request, algorithm_id: int, algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)]
 ) -> HTMLResponse:
@@ -236,6 +238,7 @@ async def get_algorithm_details(
 
 
 @router.get("/{algorithm_id}/edit")
+@permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.UPDATE]})
 async def get_algorithm_edit(
     request: Request,
     algorithm_id: int,
@@ -271,6 +274,7 @@ async def get_algorithm_edit(
 
 
 @router.get("/{algorithm_id}/cancel")
+@permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.UPDATE]})
 async def get_algorithm_cancel(
     request: Request,
     algorithm_id: int,
@@ -305,6 +309,7 @@ async def get_algorithm_cancel(
 
 
 @router.put("/{algorithm_id}/update")
+@permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.UPDATE]})
 async def get_algorithm_update(
     request: Request,
     algorithm_id: int,
@@ -356,6 +361,7 @@ async def get_algorithm_update(
 
 
 @router.get("/{algorithm_id}/details/system_card")
+@permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
 async def get_system_card(
     request: Request,
     algorithm_id: int,
@@ -398,6 +404,7 @@ async def get_system_card(
 
 
 @router.get("/{algorithm_id}/details/system_card/compliance")
+@permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
 async def get_system_card_requirements(
     request: Request,
     algorithm_id: int,
@@ -453,7 +460,9 @@ async def get_system_card_requirements(
                 extended_linked_measures.append(ext_measure_task)
         requirements_and_measures.append((requirement, completed_measures_count, extended_linked_measures))  # pyright: ignore [reportUnknownMemberType]
 
-    measure_task_functions = await get_measure_task_functions(measure_tasks, users_repository, sort_by, filters)
+    measure_task_functions: dict[str, list[User]] = await get_measure_task_functions(
+        measure_tasks, users_repository, sort_by, filters
+    )
 
     context = {
         "instrument_state": instrument_state,
@@ -473,7 +482,7 @@ async def _fetch_members(
     users_repository: UsersRepository,
     search_name: str,
     sort_by: dict[str, str],
-    filters: dict[str, str],
+    filters: dict[str, str | list[str | int]],
 ) -> User | None:
     members = await users_repository.find_all(search=search_name, sort=sort_by, filters=filters)
     return members[0] if members else None
@@ -483,9 +492,9 @@ async def get_measure_task_functions(
     measure_tasks: list[MeasureTask],
     users_repository: Annotated[UsersRepository, Depends(UsersRepository)],
     sort_by: dict[str, str],
-    filters: dict[str, str],
-) -> dict[str, list[Any]]:
-    measure_task_functions: dict[str, list[Any]] = defaultdict(list)
+    filters: dict[str, str | list[str | int]],
+) -> dict[str, list[User]]:
+    measure_task_functions: dict[str, list[User]] = defaultdict(list)
 
     for measure_task in measure_tasks:
         person_types = ["accountable_persons", "reviewer_persons", "responsible_persons"]
@@ -533,6 +542,7 @@ async def find_requirement_tasks_by_measure_urn(system_card: SystemCard, measure
 
 
 @router.delete("/{algorithm_id}")
+@permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.DELETE]})
 async def delete_algorithm(
     request: Request,
     algorithm_id: int,
@@ -543,6 +553,7 @@ async def delete_algorithm(
 
 
 @router.get("/{algorithm_id}/measure/{measure_urn}")
+@permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
 async def get_measure(
     request: Request,
     organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
@@ -598,7 +609,7 @@ async def get_users_from_function_name(
     measure_responsible: Annotated[str | None, Form()],
     users_repository: Annotated[UsersRepository, Depends(UsersRepository)],
     sort_by: dict[str, str],
-    filters: dict[str, str],
+    filters: dict[str, str | list[str | int]],
 ) -> tuple[list[Person], list[Person], list[Person]]:
     accountable_persons, reviewer_persons, responsible_persons = [], [], []
     if measure_accountable:
@@ -614,6 +625,7 @@ async def get_users_from_function_name(
 
 
 @router.post("/{algorithm_id}/measure/{measure_urn}")
+@permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
 async def update_measure_value(
     request: Request,
     algorithm_id: int,
@@ -679,6 +691,7 @@ async def update_measure_value(
 
 
 @router.get("/{algorithm_id}/members")
+@permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
 async def get_algorithm_members(
     request: Request,
     algorithm_id: int,
@@ -712,6 +725,7 @@ async def get_algorithm_members(
 
 
 @router.get("/{algorithm_id}/details/system_card/assessments/{assessment_card}")
+@permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
 async def get_assessment_card(
     request: Request,
     algorithm_id: int,
@@ -765,6 +779,7 @@ async def get_assessment_card(
 
 
 @router.get("/{algorithm_id}/details/system_card/models/{model_card}")
+@permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
 async def get_model_card(
     request: Request,
     algorithm_id: int,
@@ -819,6 +834,7 @@ async def get_model_card(
 
 
 @router.get("/{algorithm_id}/details/system_card/download")
+@permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
 async def download_algorithm_system_card_as_yaml(
     algorithm_id: int, algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)], request: Request
 ) -> FileResponse:
@@ -833,6 +849,7 @@ async def download_algorithm_system_card_as_yaml(
 
 
 @router.get("/{algorithm_id}/file/{ulid}")
+@permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
 async def get_file(
     request: Request,
     algorithm_id: int,
@@ -854,6 +871,7 @@ async def get_file(
 
 
 @router.delete("/{algorithm_id}/file/{ulid}")
+@permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
 async def delete_file(
     request: Request,
     algorithm_id: int,

@@ -141,3 +141,7 @@ class OrganizationsRepository:
         await self.session.commit()
         await self.session.refresh(organization)
         return organization
+
+    async def get_by_user(self, user_id: UUID) -> Sequence[Organization]:
+        statement = select(Organization).where(Organization.users.any(User.id == user_id))  # pyright: ignore[reportUnknownMemberType]
+        return (await self.session.execute(statement)).scalars().all()
