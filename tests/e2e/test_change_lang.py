@@ -3,7 +3,9 @@ from playwright.sync_api import Cookie, Page, expect
 
 
 @pytest.mark.slow
-def test_e2e_change_language(page: Page):
+def test_e2e_change_language(page_no_login: Page):
+    page = page_no_login
+
     def get_lang_cookie(page: Page) -> Cookie | None:
         for cookie in page.context.cookies():
             if "name" in cookie and cookie["name"] == "lang":

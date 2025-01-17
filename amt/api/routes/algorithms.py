@@ -1,10 +1,11 @@
 import logging
-from typing import Annotated, Any
+from typing import Annotated, Any, cast
 
 from fastapi import APIRouter, Depends, Query, Request
 from fastapi.responses import HTMLResponse
 
 from amt.api.ai_act_profile import get_ai_act_profile_selector
+from amt.api.decorators import permission
 from amt.api.deps import templates
 from amt.api.forms.algorithm import get_algorithm_form
 from amt.api.group_by_category import get_localized_group_by_categories
@@ -14,7 +15,7 @@ from amt.api.risk_group import (
     get_localized_risk_groups,
 )
 from amt.api.routes.shared import get_filters_and_sort_by
-from amt.core.authorization import get_user
+from amt.core.authorization import AuthorizationResource, AuthorizationVerb, get_user
 from amt.core.exceptions import AMTAuthorizationError
 from amt.core.internationalization import get_current_translation
 from amt.models import Algorithm
@@ -29,15 +30,24 @@ logger = logging.getLogger(__name__)
 
 
 @router.get("/")
+@permission({AuthorizationResource.ALGORITHMS: [AuthorizationVerb.LIST]})
 async def get_root(
     request: Request,
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
+    organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
     skip: int = Query(0, ge=0),
     limit: int = Query(5000, ge=1),  # todo: fix infinite scroll
     search: str = Query(""),
     display_type: str = Query(""),
 ) -> HTMLResponse:
     filters, drop_filters, localized_filters, sort_by = get_filters_and_sort_by(request)
+
+    session_user = get_user(request)
+    user_id: str | None = session_user["sub"] if session_user else None  # pyright: ignore[reportUnknownVariableType]
+
+    filters["organization-id"] = [
+        organization.id for organization in await organizations_service.get_organizations_for_user(user_id)
+    ]
 
     algorithms, amount_algorithm_systems = await get_algorithms(
         algorithms_service, display_type, filters, limit, request, search, skip, sort_by
@@ -76,7 +86,7 @@ async def get_root(
 async def get_algorithms(
     algorithms_service: AlgorithmsService,
     display_type: str,
-    filters: dict[str, str],
+    filters: dict[str, str | list[str | int]],
     limit: int,
     request: Request,
     search: str,
@@ -84,6 +94,7 @@ async def get_algorithms(
     sort_by: dict[str, str],
 ) -> tuple[dict[str, list[Algorithm]], int | Any]:
     amount_algorithm_systems: int = 0
+
     if display_type == "LIFECYCLE":
         algorithms: dict[str, list[Algorithm]] = {}
 
@@ -91,10 +102,10 @@ async def get_algorithms(
         if "lifecycle" in filters:
             for lifecycle in Lifecycles:
                 algorithms[lifecycle.name] = []
-            algorithms[filters["lifecycle"]] = await algorithms_service.paginate(
+            algorithms[cast(str, filters["lifecycle"])] = await algorithms_service.paginate(
                 skip=skip, limit=limit, search=search, filters=filters, sort=sort_by
             )
-            amount_algorithm_systems += len(algorithms[filters["lifecycle"]])
+            amount_algorithm_systems += len(algorithms[cast(str, filters["lifecycle"])])
         else:
             for lifecycle in Lifecycles:
                 filters["lifecycle"] = lifecycle.name
@@ -114,6 +125,7 @@ async def get_algorithms(
 
 
 @router.get("/new")
+@permission({AuthorizationResource.ALGORITHMS: [AuthorizationVerb.CREATE]})
 async def get_new(
     request: Request,
     instrument_service: Annotated[InstrumentsService, Depends(create_instrument_service)],
@@ -156,6 +168,7 @@ async def get_new(
 
 
 @router.post("/new", response_class=HTMLResponse)
+@permission({AuthorizationResource.ALGORITHMS: [AuthorizationVerb.CREATE]})
 async def post_new(
     request: Request,
     algorithm_new: AlgorithmNew,

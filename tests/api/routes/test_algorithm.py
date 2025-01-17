@@ -28,6 +28,7 @@ from tests.conftest import amt_vcr
 from tests.constants import (
     default_algorithm,
     default_algorithm_with_system_card,
+    default_not_found_no_permission_msg,
     default_task,
     default_user,
 )
@@ -42,7 +43,7 @@ async def test_get_unknown_algorithm(client: AsyncClient) -> None:
     # then
     assert response.status_code == 404
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"The requested page or resource could not be found." in response.content
+    assert default_not_found_no_permission_msg() in response.content
 
 
 @pytest.mark.asyncio
@@ -117,7 +118,7 @@ async def test_get_algorithm_non_existing_algorithm(client: AsyncClient, db: Dat
 
     # then
     assert response.status_code == 404
-    assert b"The requested page or resource could not be found." in response.content
+    assert default_not_found_no_permission_msg() in response.content
 
 
 @pytest.mark.asyncio
@@ -169,7 +170,7 @@ async def test_get_system_card_unknown_algorithm(client: AsyncClient) -> None:
     # then
     assert response.status_code == 404
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"The requested page or resource could not be found." in response.content
+    assert default_not_found_no_permission_msg() in response.content
 
 
 @pytest.mark.asyncio
@@ -198,7 +199,7 @@ async def test_get_assessment_card_unknown_algorithm(client: AsyncClient, db: Da
     # then
     assert response.status_code == 404
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"The requested page or resource could not be found." in response.content
+    assert default_not_found_no_permission_msg() in response.content
 
 
 @pytest.mark.asyncio
@@ -212,7 +213,7 @@ async def test_get_assessment_card_unknown_assessment(client: AsyncClient, db: D
     # then
     assert response.status_code == 404
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"The requested page or resource could not be found." in response.content
+    assert default_not_found_no_permission_msg() in response.content
 
 
 @pytest.mark.asyncio
@@ -237,7 +238,7 @@ async def test_get_model_card_unknown_algorithm(client: AsyncClient) -> None:
     # then
     assert response.status_code == 404
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"The requested page or resource could not be found." in response.content
+    assert default_not_found_no_permission_msg() in response.content
 
 
 @pytest.mark.asyncio
@@ -251,7 +252,7 @@ async def test_get_assessment_card_unknown_model_card(client: AsyncClient, db: D
     # then
     assert response.status_code == 404
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"The requested page or resource could not be found." in response.content
+    assert default_not_found_no_permission_msg() in response.content
 
 
 @pytest.mark.asyncio

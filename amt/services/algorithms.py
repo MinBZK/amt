@@ -117,15 +117,16 @@ class AlgorithmsService:
         return algorithm
 
     async def paginate(
-        self, skip: int, limit: int, search: str, filters: dict[str, str], sort: dict[str, str]
+        self, skip: int, limit: int, search: str, filters: dict[str, str | list[str | int]], sort: dict[str, str]
     ) -> list[Algorithm]:
         algorithms = await self.repository.paginate(skip=skip, limit=limit, search=search, filters=filters, sort=sort)
         return algorithms
 
     async def update(self, algorithm: Algorithm) -> Algorithm:
         # TODO: Is this the right place to sync system cards: system_card and system_card_json?
+        algorithm.sync_system_card()
         # TODO: when system card is missing things break, so we call it here to make sure it exists??
-        dummy = algorithm.system_card  # noqa: F841 # pyright: ignore[reportUnusedVariable]
+        dummy = algorithm.system_card  #  noqa: F841 # pyright: ignore[reportUnusedVariable]
         algorithm = await self.repository.save(algorithm)
         return algorithm
 

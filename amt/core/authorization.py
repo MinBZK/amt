@@ -21,12 +21,17 @@ class AuthorizationType(StrEnum):
 
 
 class AuthorizationResource(StrEnum):
+    ORGANIZATIONS = "organizations/"
     ORGANIZATION_INFO = "organization/{organization_id}"
     ORGANIZATION_ALGORITHM = "organization/{organization_id}/algorithm"
     ORGANIZATION_MEMBER = "organization/{organization_id}/member"
-    ALGORITHM = "algoritme/{algoritme_id}"
-    ALGORITHM_SYSTEMCARD = "algoritme/{algoritme_id}/systemcard"
-    ALGORITHM_MEMBER = "algoritme/{algoritme_id}/user"
+    ORGANIZATION_INFO_SLUG = "organization/{organization_slug}"
+    ORGANIZATION_ALGORITHM_SLUG = "organization/{organization_slug}/algorithm"
+    ORGANIZATION_MEMBER_SLUG = "organization/{organization_slug}/member"
+    ALGORITHMS = "algorithms/"
+    ALGORITHM = "algorithm/{algorithm_id}"
+    ALGORITHM_SYSTEMCARD = "algorithm/{algorithm_id}/systemcard"
+    ALGORITHM_MEMBER = "algorithm/{algorithm_id}/user"
 
 
 def get_user(request: Request) -> dict[str, Any] | None:

@@ -34,8 +34,9 @@ def test_RepositoryNoResultFound():
         raise AMTNotFound()
 
     assert (
-        exc_info.value.detail
-        == "The requested page or resource could not be found. Please check the URL or query and try again."
+        exc_info.value.detail == "The requested page or resource could not be found, "
+        "or you do not have the correct permissions to access it. "
+        "Please check the URL or query and try again."
     )
 
 
@@ -58,7 +59,11 @@ def test_AMTPermissionDenied():
     with pytest.raises(AMTPermissionDenied) as exc_info:
         raise AMTPermissionDenied()
 
-    assert exc_info.value.detail == "You do not have the correct permissions to access this resource."
+    assert (
+        exc_info.value.detail == "The requested page or resource could not be found, "
+        "or you do not have the correct permissions to access it. "
+        "Please check the URL or query and try again."
+    )
 
 
 def test_AMTAuthorizationFlowError():

@@ -16,7 +16,7 @@ import vcr  # pyright: ignore[reportMissingTypeStubs]
 from amt.models.base import Base
 from amt.server import create_app
 from httpx import ASGITransport, AsyncClient
-from playwright.sync_api import Browser, Page
+from playwright.sync_api import Browser, BrowserContext, Page
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy.ext.asyncio.session import async_sessionmaker
@@ -144,6 +144,18 @@ async def client(db: DatabaseTestUtils, monkeypatch: pytest.MonkeyPatch) -> Asyn
 @pytest.fixture(scope="session")
 def browser_context_args(browser_context_args: dict[str, Any]) -> dict[str, Any]:
     return {**browser_context_args, "base_url": "http://127.0.0.1:3462"}
+
+
+@pytest.fixture
+def page(context: BrowserContext) -> Page:
+    page = context.new_page()
+    do_e2e_login(page)
+    return page
+
+
+@pytest.fixture
+def page_no_login(context: BrowserContext) -> Page:
+    return context.new_page()
 
 
 @pytest.fixture(scope="session")

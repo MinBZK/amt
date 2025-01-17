@@ -1,6 +1,6 @@
 from amt.api.lifecycles import Lifecycles
 from amt.enums.status import Status
-from amt.models import Algorithm
+from amt.models import Algorithm, Organization
 from sqlalchemy.ext.asyncio.session import AsyncSession
 
 from tests.constants import default_algorithm_with_lifecycle, default_task, default_user
@@ -11,7 +11,10 @@ async def setup_database_e2e(session: AsyncSession) -> None:
     db_e2e = DatabaseTestUtils(session)
 
     await db_e2e.given([default_user()])
-    await db_e2e.given([default_user(id="4738b1e151dc46219556a5662b26517c", name="Test User", organizations=[])])
+    default_organization_db = (await db_e2e.get(Organization, "id", 1))[0]
+    await db_e2e.given(
+        [default_user(id="4738b1e151dc46219556a5662b26517c", name="Test User", organizations=[default_organization_db])]
+    )
 
     algorithms: list[Algorithm] = []
     for idx in range(120):

@@ -38,7 +38,9 @@ class AMTInstrumentError(AMTHTTPException):
 class AMTNotFound(AMTHTTPException):
     def __init__(self) -> None:
         self.detail: str = _(
-            "The requested page or resource could not be found. Please check the URL or query and try again."
+            "The requested page or resource could not be found, "
+            "or you do not have the correct permissions to access it. Please check the "
+            "URL or query and try again."
         )
         super().__init__(status.HTTP_404_NOT_FOUND, self.detail)
 
@@ -81,8 +83,12 @@ class AMTAuthorizationFlowError(AMTHTTPException):
 
 class AMTPermissionDenied(AMTHTTPException):
     def __init__(self) -> None:
-        self.detail: str = _("You do not have the correct permissions to access this resource.")
-        super().__init__(status.HTTP_401_UNAUTHORIZED, self.detail)
+        self.detail: str = _(
+            "The requested page or resource could not be found, "
+            "or you do not have the correct permissions to access it. Please check the "
+            "URL or query and try again."
+        )
+        super().__init__(status.HTTP_404_NOT_FOUND, self.detail)
 
 
 class AMTStorageError(AMTHTTPException):

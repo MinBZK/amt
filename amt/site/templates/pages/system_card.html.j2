@@ -5,7 +5,7 @@
     <span class="rvo-text">{% trans %}Last updated{% endtrans %}: {{ last_edited | time_ago(language) }}
     {% trans %}ago{% endtrans %}</span>
     <div class="rvo-layout-row rvo-layout-align-items-start rvo-layout-gap--xl">
-        {% if system_card.assessments is defined and system_card.assessments|length > 0 %}
+        {% if "DISABLED" == "FOR NOW" and system_card.assessments is defined and system_card.assessments|length > 0 %}
             <div>
                 <h4 class="utrecht-heading-4">{% trans %}Assessment cards {% endtrans %}</h4>
                 <ul class="rvo-ul rvo-ul--no-margin rvo-ul--none rvo-ul--no-padding">
@@ -23,7 +23,7 @@
                 </ul>
             </div>
         {% endif %}
-        {% if system_card.models is defined and system_card.models|length > 0 %}
+        {% if "DISABLED" == "FOR NOW" and system_card.models is defined and system_card.models|length > 0 %}
             <div>
                 <h4 class="utrecht-heading-4">{% trans %}Model cards{% endtrans %}</h4>
                 <ul class="rvo-ul rvo-ul--no-margin rvo-ul--none rvo-ul--no-padding">
@@ -42,7 +42,7 @@
             </div>
         {% endif %}
     </div>
-    <div class="rvo-table--responsive">
+    <div class="rvo-table--responsive margin-top-middle">
         <table class="rvo-table">
             <thead class="rvo-table-head">
                 <tr class="rvo-table-row">
@@ -51,7 +51,7 @@
                 </tr>
             </thead>
             {% for key, value in system_card %}
-                {% if key not in ["requirements","measures"] %}
+                {% if key not in ["requirements","measures", "assessments", "models", "instruments"] %}
                     <tbody class="rvo-table-body">
                         <tr class="rvo-table-row">
                             <td class="rvo-table-cell">

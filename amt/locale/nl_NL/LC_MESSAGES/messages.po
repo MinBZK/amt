@@ -325,35 +325,37 @@ msgstr ""
 "Er is een fout opgetreden tijdens het verwerken van het instrument. "
 "Probeer het later opnieuw."
 
-#: amt/core/exceptions.py:40
+#: amt/core/exceptions.py:40 amt/core/exceptions.py:86
 msgid ""
-"The requested page or resource could not be found. Please check the URL "
-"or query and try again."
+"The requested page or resource could not be found, or you do not have the"
+" correct permissions to access it. Please check the URL or query and try "
+"again."
 msgstr ""
-"De gevraagde pagina of bron kon niet worden gevonden. Controleer de URL "
-"of query en probeer het opnieuw."
+"De gevraagde pagina of bron kon niet worden gevonden of u beschikt niet "
+"over de juiste machtigingen om deze bron te openen. Controleer de URL of "
+"query en probeer het opnieuw."
 
-#: amt/core/exceptions.py:48
+#: amt/core/exceptions.py:50
 msgid "CSRF check failed."
 msgstr "CSRF-controle mislukt."
 
-#: amt/core/exceptions.py:54
+#: amt/core/exceptions.py:56
 msgid "Only static files are supported."
 msgstr "Alleen statische bestanden worden ondersteund."
 
-#: amt/core/exceptions.py:60
+#: amt/core/exceptions.py:62
 msgid "Key not correct: {field}"
 msgstr "Sleutel niet correct: {field}"
 
-#: amt/core/exceptions.py:66
+#: amt/core/exceptions.py:68
 msgid "Value not correct: {field}"
 msgstr "Waarde is niet correct: {field}"
 
-#: amt/core/exceptions.py:72
+#: amt/core/exceptions.py:74
 msgid "Failed to authorize, please login and try again."
 msgstr "Autoriseren is mislukt. Meld u aan en probeer het opnieuw."
 
-#: amt/core/exceptions.py:78
+#: amt/core/exceptions.py:80
 msgid ""
 "Something went wrong during the authorization flow. Please try again "
 "later."
@@ -361,11 +363,7 @@ msgstr ""
 "Er is iets fout gegaan tijdens de autorisatiestroom. Probeer het later "
 "opnieuw"
 
-#: amt/core/exceptions.py:84
-msgid "You do not have the correct permissions to access this resource."
-msgstr "U beschikt niet over de juiste machtigingen om deze bron te openen."
-
-#: amt/core/exceptions.py:90
+#: amt/core/exceptions.py:96
 msgid "Something went wrong storing your file. PLease try again later."
 msgstr ""
 "Er is iets fout gegaan tijdens het opslaan van uw bestand. Probeer het "
@@ -597,8 +595,41 @@ msgstr "Inloggen"
 
 #: amt/site/templates/errors/Exception.html.j2:5
 #: amt/site/templates/errors/RequestValidationError_400.html.j2:5
+#: amt/site/templates/errors/_404_Exception.html.j2:1
 msgid "An error occurred"
 msgstr "Er is een fout opgetreden"
+
+#: amt/site/templates/errors/_404_Exception.html.j2:3
+msgid "We couldn't find what you were looking for. This might be because:"
+msgstr "We konden niet vinden wat u zocht. Dit kan komen doordat:"
+
+#: amt/site/templates/errors/_404_Exception.html.j2:6
+msgid "The link isn't correct (anymore)"
+msgstr "De link niet (meer) correct is"
+
+#: amt/site/templates/errors/_404_Exception.html.j2:7
+msgid "The page has moved or been removed"
+msgstr "De pagina is verplaatst of verwijderd"
+
+#: amt/site/templates/errors/_404_Exception.html.j2:8
+msgid "You don't have access to this page"
+msgstr "U heeft geen toegang tot deze pagina"
+
+#: amt/site/templates/errors/_404_Exception.html.j2:10
+msgid "What now?"
+msgstr "Wat nu?"
+
+#: amt/site/templates/errors/_404_Exception.html.j2:12
+msgid "Double-check if you typed the URL correctly"
+msgstr "Controleer nogmaals of u de URL correct hebt getypt"
+
+#: amt/site/templates/errors/_404_Exception.html.j2:14
+msgid "Head back to the&nbsp;<a href=\"/\">overview page</a>"
+msgstr "Ga terug naar de&nbsp;<a href=\"/\">overzichtspagina</a>"
+
+#: amt/site/templates/errors/_404_Exception.html.j2:16
+msgid "Contact your admin"
+msgstr "Neem contact op met uw beheerder"
 
 #: amt/site/templates/errors/_AMTCSRFProtectError_401.html.j2:11
 #: amt/site/templates/errors/_Exception.html.j2:5
