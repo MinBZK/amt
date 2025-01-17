@@ -841,7 +841,7 @@ async def download_algorithm_system_card_as_yaml(
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
     filename = algorithm.name + "_" + datetime.datetime.now(datetime.UTC).isoformat() + ".yaml"
     with open(filename, "w") as outfile:
-        yaml.dump(algorithm.system_card.model_dump(), outfile)
+        yaml.dump(algorithm.system_card.model_dump(), outfile, sort_keys=False)
     try:
         return FileResponse(filename, filename=filename)
     except AMTRepositoryError as e:
