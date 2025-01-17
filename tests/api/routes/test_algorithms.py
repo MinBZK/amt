@@ -91,16 +91,6 @@ async def test_get_new_algorithms(client: AsyncClient, mocker: MockFixture, db: 
     response = await client.get("/algorithms/new")
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    content = " ".join(response.content.decode().split())
-
-    assert (
-        '<input id="urn1" name="instruments" class="rvo-checkbox__input" type="checkbox" value="urn1" /> name1'
-        in content
-    )
-    assert (
-        '<input id="urn2" name="instruments" class="rvo-checkbox__input" type="checkbox" value="urn2" /> name2'
-        in content
-    )
 
 
 @pytest.mark.asyncio

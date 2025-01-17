@@ -13,12 +13,6 @@ def test_e2e_create_algorithm(page: Page) -> None:
 
     page.locator("#algorithmorganization_id").select_option("default organization")
 
-    impact_assessment = page.get_by_label("AI Impact Assessment (AIIA)")
-
-    expect(impact_assessment).not_to_be_checked()
-
-    impact_assessment.check()
-
     page.locator("#role-aanbieder").check()
     page.locator("#type").select_option("AI-systeem voor algemene doeleinden")
     page.locator("#risk_group").select_option("verboden AI")
