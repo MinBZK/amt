@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
     new Sortable(column, { //NOSONAR
       group: "shared", // set both lists to same group
       animation: 150,
-      onEnd: function(evt) {
+      onEnd: function (evt) {
         if (evt.oldIndex !== evt.newIndex || evt.from !== evt.to) {
           const previousSiblingId = evt.item.previousElementSibling
             ? evt.item.previousElementSibling.getAttribute("data-id")
@@ -425,6 +425,34 @@ export function getFiles(element: HTMLInputElement, target_id: string) {
       list.appendChild(li);
     }
   }
+}
+
+function getAnchor() {
+  const currentUrl = document.URL,
+    urlParts = currentUrl.split("#");
+  return urlParts.length > 1 ? urlParts[1] : null;
+}
+
+function scrollElementIntoViewClickAndBlur(id: string | null) {
+  if (!id) {
+    return;
+  }
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "start",
+    });
+    element.click();
+    element.blur();
+  }
+}
+
+export function showRequirementDetails() {
+  document.addEventListener("DOMContentLoaded", function () {
+    scrollElementIntoViewClickAndBlur(getAnchor());
+  });
 }
 
 // for debugging htmx use -> htmx.logAll();

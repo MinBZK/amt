@@ -243,8 +243,8 @@ async def test_get_requirements_and_measures_no_applicable_requirements(mocker: 
     mock_requirements_service = mocker.AsyncMock()
     mock_measures_service = mocker.AsyncMock()
 
-    mocker.patch("amt.services.task_registry.create_requirements_service", return_value=mock_requirements_service)
-    mocker.patch("amt.services.task_registry.create_measures_service", return_value=mock_measures_service)
+    mocker.patch("amt.services.task_registry.requirements_service", new=mock_requirements_service)
+    mocker.patch("amt.services.task_registry.measures_service", new=mock_measures_service)
     mocker.patch("amt.services.task_registry.is_requirement_applicable", return_value=False)
 
     mock_requirements_service.fetch_requirements.return_value = [
@@ -284,8 +284,8 @@ async def test_get_requirements_and_measures_single_requirement_with_measures(mo
     mock_requirements_service = mocker.AsyncMock()
     mock_measures_service = mocker.AsyncMock()
 
-    mocker.patch("amt.services.task_registry.create_requirements_service", return_value=mock_requirements_service)
-    mocker.patch("amt.services.task_registry.create_measures_service", return_value=mock_measures_service)
+    mocker.patch("amt.services.task_registry.requirements_service", new=mock_requirements_service)
+    mocker.patch("amt.services.task_registry.measures_service", new=mock_measures_service)
     mocker.patch("amt.services.task_registry.is_requirement_applicable", return_value=True)
 
     mock_requirements_service.fetch_requirements.return_value = [
@@ -331,8 +331,8 @@ async def test_get_requirements_and_measures_duplicate_measure_urns(mocker: Mock
     mock_requirements_service = mocker.AsyncMock()
     mock_measures_service = mocker.AsyncMock()
 
-    mocker.patch("amt.services.task_registry.create_requirements_service", return_value=mock_requirements_service)
-    mocker.patch("amt.services.task_registry.create_measures_service", return_value=mock_measures_service)
+    mocker.patch("amt.services.task_registry.requirements_service", new=mock_requirements_service)
+    mocker.patch("amt.services.task_registry.measures_service", new=mock_measures_service)
     mocker.patch("amt.services.task_registry.is_requirement_applicable", return_value=True)
 
     mock_requirements_service.fetch_requirements.return_value = [

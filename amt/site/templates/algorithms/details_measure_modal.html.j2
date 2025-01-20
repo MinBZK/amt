@@ -8,7 +8,7 @@
     </div>
     <hr class="rvo-hr" />
     <form hx-encoding="multipart/form-data"
-          hx-post="/algorithm/{{ algorithm_id }}/measure/{{ measure.urn }}"
+          hx-post="/algorithm/{{ algorithm_id }}/measure/{{ measure.urn }}?requirement_urn={{ requirement_urn }}"
           hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
           hx-target-error="#errorContainer"
           hx-swap="innerHTML"

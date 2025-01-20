@@ -1,8 +1,8 @@
 import logging
 from collections.abc import Sequence
 
-from amt.clients.clients import TaskType, task_registry_api_client
-from amt.repositories.task_registry import TaskRegistryRepository
+from amt.clients.clients import TaskType
+from amt.repositories.task_registry import TaskRegistryRepository, task_registry_repository
 from amt.schema.instrument import Instrument
 
 logger = logging.getLogger(__name__)
@@ -23,6 +23,4 @@ class InstrumentsService:
         return [Instrument(**data) for data in task_data]
 
 
-def create_instrument_service() -> InstrumentsService:
-    repository = TaskRegistryRepository(task_registry_api_client)
-    return InstrumentsService(repository)
+instruments_service = InstrumentsService(task_registry_repository)

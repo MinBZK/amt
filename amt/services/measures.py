@@ -1,8 +1,8 @@
 import logging
 from collections.abc import Sequence
 
-from amt.clients.clients import TaskType, task_registry_api_client
-from amt.repositories.task_registry import TaskRegistryRepository
+from amt.clients.clients import TaskType
+from amt.repositories.task_registry import TaskRegistryRepository, task_registry_repository
 from amt.schema.measure import Measure
 
 logger = logging.getLogger(__name__)
@@ -23,6 +23,4 @@ class MeasuresService:
         return [Measure(**data) for data in task_data]
 
 
-def create_measures_service() -> MeasuresService:
-    repository = TaskRegistryRepository(task_registry_api_client)
-    return MeasuresService(repository)
+measures_service = MeasuresService(task_registry_repository)
