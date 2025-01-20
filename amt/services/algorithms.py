@@ -18,7 +18,6 @@ from amt.repositories.organizations import OrganizationsRepository
 from amt.schema.algorithm import AlgorithmNew
 from amt.schema.instrument import InstrumentBase
 from amt.schema.system_card import AiActProfile, Owner, SystemCard
-from amt.services.instruments import InstrumentsService, create_instrument_service
 from amt.services.task_registry import get_requirements_and_measures
 
 logger = logging.getLogger(__name__)
@@ -30,11 +29,9 @@ class AlgorithmsService:
     def __init__(
         self,
         repository: Annotated[AlgorithmsRepository, Depends(AlgorithmsRepository)],
-        instrument_service: Annotated[InstrumentsService, Depends(create_instrument_service)],
         organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
     ) -> None:
         self.repository = repository
-        self.instrument_service = instrument_service
         self.organizations_repository = organizations_repository
 
     async def get(self, algorithm_id: int) -> Algorithm:

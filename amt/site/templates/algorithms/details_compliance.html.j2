@@ -11,7 +11,9 @@
         </div>
         {% for (requirement, completed_measures_count, measures) in requirements_and_measures %}
             <details class="rvo-accordion__item">
-                <summary class="rvo-accordion__item-summary margin-bottom-large">
+                <summary style="scroll-margin-top: 75px"
+                         id="{{ requirement.urn | replace(':', '_') }}"
+                         class="rvo-accordion__item-summary margin-bottom-large">
                     <h3 class="utrecht-heading-3 rvo-accordion__item-title rvo-heading--no-margins rvo-heading--mixed">
                         <span class="utrecht-icon rvo-icon rvo-icon-delta-omlaag rvo-icon--md rvo-icon--hemelblauw rvo-accordion__item-icon--closed"
                               role="img"
@@ -58,7 +60,7 @@
                                 <a class="rvo-link rvo-link--normal rvo-link--with-icon"
                                    hx-trigger="click"
                                    hx-target="#dynamic-modal-content"
-                                   hx-get="/algorithm/{{ algorithm_id }}/measure/{{ measure.urn }}"
+                                   hx-get="/algorithm/{{ algorithm_id }}/measure/{{ measure.urn }}?requirement_urn={{ requirement.urn }}"
                                    hx-swap="innerHTML"
                                    onclick="amt.openModal('measure-modal')">
                                     <span class="utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
@@ -66,7 +68,7 @@
                                           aria-label="Home"></span>
                                     {% trans %}Edit{% endtrans %}
                                 </a>
-                                {{ macros.user_avatars(measure_task_functions[measure.urn]) }}
+                                <div class="margin-top-middle">{{ macros.user_avatars(measure_task_functions[measure.urn]) }}</div>
                             </div>
                         </div>
                     </div>
@@ -74,4 +76,5 @@
             </details>
         {% endfor %}
     </div>
+    <script type="text/javascript">amt.showRequirementDetails();</script>
 {% endblock %}

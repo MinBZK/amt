@@ -35,16 +35,21 @@
                                         {% else %}
                                             <div class="rvo-status-indicator rvo-status-indicator--groen"></div>
                                         {% endif %}
-                                        <a class="rvo-link rvo-link--no-underline rvo-link--zwart" href="#">{{ requirement.name }}</a>
+                                        <a class="rvo-link rvo-link--no-underline rvo-link--zwart"
+                                           href="details/system_card/compliance#{{ requirement.urn | replace(':', '_') }}">{{ requirement.name }}</a>
                                     </div>
                                     <div style="white-space: nowrap">
-                                        {% if requirement.state == "to do" %}
-                                            <a class="rvo-text--subtle">{% trans %}To do{% endtrans %}</a>
-                                        {% elif requirement.state == "in progress" %}
-                                            <a class="rvo-text--subtle">{% trans %}In progress{% endtrans %}</a>
-                                        {% else %}
-                                            <a class="rvo-text--subtle">{% trans %}Done{% endtrans %}</a>
-                                        {% endif %}
+                                        <span class="rvo-text--subtle">
+                                            {% if requirement.state == "to do" or requirement.state == "" %}
+                                                {% trans %}To do{% endtrans %}
+                                            {% elif requirement.state == "in progress" %}
+                                                {% trans %}In progress{% endtrans %}
+                                            {% elif requirement.state == "done" %}
+                                                {% trans %}Done{% endtrans %}
+                                            {% else %}
+                                                {{ requirement.state }}
+                                            {% endif %}
+                                        </span>
                                     </div>
                                 </div>
                             </li>

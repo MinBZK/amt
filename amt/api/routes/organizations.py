@@ -112,6 +112,11 @@ async def root(
         search=search, sort=sort_by, filters=filters, user_id=user["sub"] if user else None
     )
 
+    # we only can show organization you belong to, so the all organizations option is disabled
+    organization_filters = [
+        f for f in get_localized_organization_filters(request) if f and f.value != OrganizationFilterOptions.ALL.value
+    ]
+
     context: dict[str, Any] = {
         "breadcrumbs": breadcrumbs,
         "organizations": organizations,
@@ -123,7 +128,7 @@ async def root(
         "organizations_length": len(organizations),
         "filters": localized_filters,
         "include_filters": False,
-        "organization_filters": get_localized_organization_filters(request),
+        "organization_filters": organization_filters,
     }
 
     if request.state.htmx:

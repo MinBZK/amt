@@ -46,7 +46,7 @@ msgid "Role"
 msgstr ""
 
 #: amt/api/group_by_category.py:15
-#: amt/site/templates/algorithms/details_info.html.j2:96
+#: amt/site/templates/algorithms/details_info.html.j2:101
 #: amt/site/templates/algorithms/new.html.j2:41
 #: amt/site/templates/parts/algorithm_search.html.j2:48
 #: amt/site/templates/parts/filter_list.html.j2:71
@@ -145,7 +145,7 @@ msgstr ""
 msgid "Model"
 msgstr ""
 
-#: amt/api/navigation.py:62 amt/site/templates/algorithms/new.html.j2:170
+#: amt/api/navigation.py:62
 msgid "Instruments"
 msgstr ""
 
@@ -164,11 +164,7 @@ msgstr ""
 msgid "Compliance"
 msgstr ""
 
-#: amt/api/organization_filter_options.py:17
-msgid "All organizations"
-msgstr ""
-
-#: amt/api/organization_filter_options.py:17
+#: amt/api/organization_filter_options.py:16
 msgid "My organizations"
 msgstr ""
 
@@ -197,54 +193,54 @@ msgid "Select organization"
 msgstr ""
 
 #: amt/api/forms/algorithm.py:42
-#: amt/site/templates/algorithms/details_info.html.j2:74
+#: amt/site/templates/algorithms/details_info.html.j2:79
 msgid "Organization"
 msgstr ""
 
-#: amt/api/forms/measure.py:24
+#: amt/api/forms/measure.py:33
 msgid "Responsible"
 msgstr ""
 
-#: amt/api/forms/measure.py:32
+#: amt/api/forms/measure.py:41
 msgid "Reviewer"
 msgstr ""
 
-#: amt/api/forms/measure.py:40
+#: amt/api/forms/measure.py:49
 msgid "Accountable"
 msgstr ""
 
-#: amt/api/forms/measure.py:48
+#: amt/api/forms/measure.py:57
 msgid "Status"
 msgstr ""
 
-#: amt/api/forms/measure.py:63
+#: amt/api/forms/measure.py:72
 msgid "Information on how this measure is implemented"
 msgstr ""
 
-#: amt/api/forms/measure.py:70
+#: amt/api/forms/measure.py:79
 msgid ""
 "Select one or more to upload. The files will be saved once you confirm "
 "changes by pressing the save button."
 msgstr ""
 
-#: amt/api/forms/measure.py:75
+#: amt/api/forms/measure.py:84
 msgid "Add files"
 msgstr ""
 
-#: amt/api/forms/measure.py:76
+#: amt/api/forms/measure.py:85
 msgid "No files selected."
 msgstr ""
 
-#: amt/api/forms/measure.py:80
+#: amt/api/forms/measure.py:89
 msgid "Add URI"
 msgstr ""
 
-#: amt/api/forms/measure.py:83
+#: amt/api/forms/measure.py:92
 msgid "Add links to documents"
 msgstr ""
 
 #: amt/api/forms/organization.py:23
-#: amt/site/templates/algorithms/details_info.html.j2:70
+#: amt/site/templates/algorithms/details_info.html.j2:75
 #: amt/site/templates/auth/profile.html.j2:34
 #: amt/site/templates/organizations/home.html.j2:13
 #: amt/site/templates/organizations/parts/members_results.html.j2:118
@@ -381,11 +377,11 @@ msgstr ""
 msgid "Download as YAML"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_compliance.html.j2:34
+#: amt/site/templates/algorithms/details_compliance.html.j2:36
 msgid "measure executed"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_compliance.html.j2:67
+#: amt/site/templates/algorithms/details_compliance.html.j2:69
 #: amt/site/templates/macros/editable.html.j2:28
 #: amt/site/templates/macros/editable.html.j2:33
 msgid "Edit"
@@ -396,37 +392,37 @@ msgid "Does the algorithm meet the requirements?"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_info.html.j2:20
-#: amt/site/templates/algorithms/details_info.html.j2:46
+#: amt/site/templates/algorithms/details_info.html.j2:48
 #: amt/site/templates/macros/tasks.html.j2:32
 msgid "Done"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:42
+#: amt/site/templates/algorithms/details_info.html.j2:44
 msgid "To do"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:44
+#: amt/site/templates/algorithms/details_info.html.j2:46
 msgid "In progress"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:60
+#: amt/site/templates/algorithms/details_info.html.j2:65
 msgid "Go to all requirements"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:80
+#: amt/site/templates/algorithms/details_info.html.j2:85
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:27
 msgid "Description"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:86
+#: amt/site/templates/algorithms/details_info.html.j2:91
 msgid "Repository"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:92
+#: amt/site/templates/algorithms/details_info.html.j2:97
 msgid "Algorithm code"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:102
+#: amt/site/templates/algorithms/details_info.html.j2:107
 #: amt/site/templates/organizations/parts/overview_results.html.j2:134
 #: amt/site/templates/pages/assessment_card.html.j2:7
 #: amt/site/templates/pages/model_card.html.j2:6
@@ -436,11 +432,11 @@ msgstr ""
 msgid "Last updated"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:106
+#: amt/site/templates/algorithms/details_info.html.j2:111
 msgid "Labels"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:114
+#: amt/site/templates/algorithms/details_info.html.j2:119
 msgid "References"
 msgstr ""
 
@@ -509,21 +505,11 @@ msgstr ""
 msgid "Select Option"
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:172
-msgid ""
-"Overview of instruments for the responsible development, deployment, "
-"assessment, and monitoring of algorithms and AI-systems."
-msgstr ""
-
-#: amt/site/templates/algorithms/new.html.j2:180
-msgid "Choose one or more instruments"
-msgstr ""
-
-#: amt/site/templates/algorithms/new.html.j2:204
+#: amt/site/templates/algorithms/new.html.j2:176
 msgid "Create Algorithm"
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:221
+#: amt/site/templates/algorithms/new.html.j2:193
 msgid "Copy results and close"
 msgstr ""
 

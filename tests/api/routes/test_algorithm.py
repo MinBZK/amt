@@ -636,7 +636,7 @@ async def test_download_algorithm_system_card_as_yaml(
     response = await client.get("/algorithm/1/details/system_card/download")
 
     assert response.status_code == 200
-    assert response.headers["content-type"] == "text/plain; charset=utf-8"
+    assert response.headers["content-type"] == "application/yaml; charset=utf-8"
 
 
 @pytest.mark.asyncio

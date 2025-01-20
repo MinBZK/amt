@@ -22,7 +22,6 @@ from amt.models import Algorithm
 from amt.schema.algorithm import AlgorithmNew
 from amt.schema.webform import WebForm
 from amt.services.algorithms import AlgorithmsService, get_template_files
-from amt.services.instruments import InstrumentsService, create_instrument_service
 from amt.services.organizations import OrganizationsService
 
 router = APIRouter()
@@ -128,7 +127,6 @@ async def get_algorithms(
 @permission({AuthorizationResource.ALGORITHMS: [AuthorizationVerb.CREATE]})
 async def get_new(
     request: Request,
-    instrument_service: Annotated[InstrumentsService, Depends(create_instrument_service)],
     organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
     organization_id: int = Query(None),
 ) -> HTMLResponse:
@@ -151,10 +149,8 @@ async def get_new(
 
     template_files = get_template_files()
 
-    instruments = await instrument_service.fetch_instruments()
-
     context: dict[str, Any] = {
-        "instruments": instruments,
+        "instruments": [],
         "ai_act_profile": ai_act_profile,
         "breadcrumbs": breadcrumbs,
         "sub_menu_items": {},  # sub_menu_items disabled for now,
