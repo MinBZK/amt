@@ -15,6 +15,7 @@ class User(Base):
     email_hash: Mapped[str] = mapped_column(default=None)
     name_encoded: Mapped[str] = mapped_column(default=None)
     email: Mapped[str] = mapped_column(default=None)
+    # TODO: most fields below are often not required or needed and should be 'lazy loaded'
     organizations: Mapped[list["Organization"]] = relationship(
         "Organization", secondary="users_and_organizations", back_populates="users", lazy="selectin"
     )

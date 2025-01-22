@@ -28,7 +28,7 @@
                                      style="display: flex;
                                             justify-content: space-between">
                                     <div class="rvo-layout-row rvo-layout-gap--sm rvo-layout-align-items-start">
-                                        {% if requirement.state == "to do" %}
+                                        {% if requirement.state == "to do" or requirement.state == "" %}
                                             <div class="rvo-status-indicator rvo-status-indicator--hemelblauw"></div>
                                         {% elif requirement.state == "in progress" %}
                                             <div class="rvo-status-indicator rvo-status-indicator--oranje"></div>

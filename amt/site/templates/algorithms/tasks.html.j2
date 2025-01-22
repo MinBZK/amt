@@ -2,9 +2,16 @@
 {# disable macro caching, see // https://jinja.palletsprojects.com/en/3.0.x/templates/#import-context-behavior #}
 {% import 'macros/tasks.html.j2' as render with context %}
 {% block detail_content %}
+    <div id="measure-modal" class="minbzk-modal display-none">
+        <div class="modal-underlay" onclick="amt.closeModal('measure-modal')"></div>
+        <div class="modal-content rvo-layout-column rvo-layout-gap--md"
+             style="height: auto">
+            <div id="dynamic-modal-content"></div>
+        </div>
+    </div>
     <div class="container margin-top-large">
         <form id="cardMovedForm"
-              hx-patch="/algorithm/move_task"
+              hx-patch="/algorithm/{{ algorithm_id }}/move_task"
               hx-ext="json-enc"
               hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
               hx-target-5
@@ -20,7 +27,7 @@
         </form>
         <div id="errorContainer"></div>
         <div class="rvo-layout-grid-container margin-bottom-large">
-            <div class="rvo-layout-grid rvo-layout-gap--sm rvo-layout-grid-columns--four rvo-layout-grid-layout--1fr">
+            <div class="rvo-layout-grid rvo-layout-gap--sm rvo-layout-grid-columns--five rvo-layout-grid-layout--1fr">
                 {% for status in statuses %}{{ render.column(algorithm, status, translations, tasks_by_status) }}{% endfor %}
             </div>
         </div>

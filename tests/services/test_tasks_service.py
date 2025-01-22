@@ -77,7 +77,7 @@ async def test_get_tasks(tasks_service_with_mock: TasksService, mock_tasks_repos
 
 @pytest.mark.asyncio
 async def test_get_tasks_for_algorithm(tasks_service_with_mock: TasksService, mock_tasks_repository: TasksRepository):
-    tasks = await tasks_service_with_mock.get_tasks_for_algorithm(1, 1)
+    tasks = await tasks_service_with_mock.find_by_algorithm_id_and_status_id(1, 1)
     assert len(tasks) == 2
 
 

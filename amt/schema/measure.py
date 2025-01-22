@@ -15,22 +15,23 @@ class Person(BaseModel):
 class MeasureTask(MeasureBase):
     state: str = Field(default="")
     value: str = Field(default="")
-    links: list[str] = Field(default=[])
-    files: list[str] = Field(default=[])
+    links: list[str] = Field(default_factory=list)
+    files: list[str] = Field(default_factory=list)
     version: str
-    accountable_persons: list[Person] | None = Field(default=[])
-    reviewer_persons: list[Person] | None = Field(default=[])
-    responsible_persons: list[Person] | None = Field(default=[])
+    accountable_persons: list[Person] | None = Field(default_factory=list)
+    reviewer_persons: list[Person] | None = Field(default_factory=list)
+    responsible_persons: list[Person] | None = Field(default_factory=list)
+    lifecycle: list[str] = Field(default_factory=list)
 
     def update(
         self,
-        state: str | None,
-        value: str | None,
-        links: list[str] | None,
-        new_files: list[str] | None,
-        responsible_persons: list[Person] | None,
-        reviewer_persons: list[Person] | None,
-        accountable_persons: list[Person] | None,
+        state: str | None = None,
+        value: str | None = None,
+        links: list[str] | None = None,
+        new_files: list[str] | None = None,
+        responsible_persons: list[Person] | None = None,
+        reviewer_persons: list[Person] | None = None,
+        accountable_persons: list[Person] | None = None,
     ) -> None:
         if state:
             self.state = state
@@ -43,17 +44,23 @@ class MeasureTask(MeasureBase):
         if new_files:
             self.files.extend(new_files)
 
-        self.responsible_persons = responsible_persons
-        self.reviewer_persons = reviewer_persons
-        self.accountable_persons = accountable_persons
+        if responsible_persons is not None:
+            self.responsible_persons = responsible_persons
+
+        if reviewer_persons is not None:
+            self.reviewer_persons = reviewer_persons
+
+        if accountable_persons is not None:
+            self.accountable_persons = accountable_persons
 
 
 class Measure(MeasureBase):
     name: str
     schema_version: str
     description: str
-    links: list[str] = Field(default=[])
+    links: list[str] = Field(default_factory=list)
     url: str
+    lifecycle: list[str] = Field(default_factory=list)
 
 
 class ExtendedMeasureTask(MeasureTask):

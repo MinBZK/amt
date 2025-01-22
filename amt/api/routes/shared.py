@@ -111,21 +111,19 @@ def replace_none_with_empty_string_inplace(obj: dict[Any, Any] | list[Any] | Ite
     """
     if isinstance(obj, list):
         for i, item in enumerate(obj):
-            if item is None and isinstance(item, str):
+            if item is None:
                 obj[i] = ""
-            elif isinstance(item, list | dict | IterMixin):
+            else:
                 replace_none_with_empty_string_inplace(item)  # pyright: ignore[reportUnknownArgumentType]
-
     elif isinstance(obj, dict):
         for key, value in obj.items():
-            if value is None and isinstance(value, str):
+            if value is None:
                 obj[key] = ""
-            elif isinstance(value, (list, dict, IterMixin)):  # noqa: UP038
-                replace_none_with_empty_string_inplace(value)  # pyright: ignore[reportUnknownArgumentType]
-
+            else:
+                replace_none_with_empty_string_inplace(obj[key])  # pyright: ignore[reportUnknownArgumentType]
     elif isinstance(obj, IterMixin):
         for item in obj:
-            if isinstance(item, tuple) and item[1] is None:
+            if getattr(obj, item[0]) is None:
                 setattr(obj, item[0], "")
-            if isinstance(item, list | dict | IterMixin):
-                replace_none_with_empty_string_inplace(item)  # pyright: ignore[reportUnknownArgumentType]
+            else:
+                replace_none_with_empty_string_inplace(getattr(obj, item[0]))  # pyright: ignore[reportUnknownArgumentType]

@@ -10,13 +10,17 @@ from amt.api.routes.algorithm import (
     get_algorithm_context,
     get_algorithm_or_error,
     get_user_id_or_error,
+    resolve_and_enrich_measures,
 )
 from amt.core.config import get_settings
 from amt.core.exceptions import AMTError, AMTNotFound, AMTRepositoryError
+from amt.enums.tasks import TaskType
 from amt.models import Algorithm
+from amt.repositories.users import UsersRepository
 from amt.schema.measure import MeasureTask
 from amt.schema.task import MovedTask
 from amt.services.object_storage import create_object_storage_service
+from amt.services.users import UsersService
 from fastapi import UploadFile
 from httpx import AsyncClient
 from minio import Minio
@@ -66,9 +70,10 @@ async def test_move_task(client: AsyncClient, db: DatabaseTestUtils, mocker: Moc
     await db.given(
         [
             default_user(),
-            default_algorithm("testalgorithm1"),
+            default_algorithm_with_system_card("testalgorithm1"),
             default_task(algorithm_id=1, status_id=1),
             default_task(algorithm_id=1, status_id=1),
+            default_task(algorithm_id=1, status_id=1, type=TaskType.MEASURE, type_id="urn:nl:ak:mtr:dat-01"),
         ]
     )
     mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
@@ -76,7 +81,7 @@ async def test_move_task(client: AsyncClient, db: DatabaseTestUtils, mocker: Moc
 
     # All -1 flow
     move_task_json = MovedTask(taskId=1, statusId=1, previousSiblingId=-1, nextSiblingId=-1).model_dump(by_alias=True)
-    response = await client.patch("/algorithm/move_task", json=move_task_json, headers={"X-CSRF-Token": "1"})
+    response = await client.patch("/algorithm/1/move_task", json=move_task_json, headers={"X-CSRF-Token": "1"})
 
     # then
     assert response.status_code == 200
@@ -85,12 +90,21 @@ async def test_move_task(client: AsyncClient, db: DatabaseTestUtils, mocker: Moc
 
     # All 1 flow
     move_task_json = MovedTask(taskId=1, statusId=1, previousSiblingId=1, nextSiblingId=1).model_dump(by_alias=True)
-    response = await client.patch("/algorithm/move_task", json=move_task_json, headers={"X-CSRF-Token": "1"})
+    response = await client.patch("/algorithm/1/move_task", json=move_task_json, headers={"X-CSRF-Token": "1"})
 
     # then
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
     assert b"Default Task" in response.content
+
+    # All 1 flow
+    move_task_json = MovedTask(taskId=3, statusId=1, previousSiblingId=1, nextSiblingId=1).model_dump(by_alias=True)
+    response = await client.patch("/algorithm/1/move_task", json=move_task_json, headers={"X-CSRF-Token": "1"})
+
+    # then
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert b"Controleer de datakwaliteit" in response.content
 
 
 @pytest.mark.asyncio
@@ -725,3 +739,30 @@ def test_get_user_id_or_error_failure(mocker: MockFixture) -> None:
 
     with pytest.raises(AMTError):
         get_user_id_or_error(MockRequest(lang="nl"))
+
+
+@pytest.mark.asyncio
+async def test_redirect_to(client: AsyncClient, db: DatabaseTestUtils) -> None:
+    # given
+    await db.given([default_user(), default_algorithm()])
+
+    response = await client.get("/algorithm/1/redirect?to=/test/path")
+
+    assert response.status_code == 302
+    assert response.headers["location"] == "/test/path"
+
+
+@pytest.mark.asyncio
+async def test_resolve_and_enrich_measures(mocker: MockFixture) -> None:
+    users_service = UsersService(
+        repository=mocker.AsyncMock(spec=UsersRepository),
+    )
+    users_service.repository.find_by_id.return_value = default_user()  # pyright: ignore[reportFunctionMemberAccess]
+    urns = {"urn:nl:ak:mtr:dat-01"}
+    my_algorithm = default_algorithm_with_system_card()
+    result = await resolve_and_enrich_measures(my_algorithm, urns, users_service)
+    assert (
+        result["urn:nl:ak:mtr:dat-01"].description
+        == "Stel vast of de gebruikte data van voldoende kwaliteit is voor de beoogde toepassing.\n"
+    )
+    assert len(result["urn:nl:ak:mtr:dat-01"].users) == 3

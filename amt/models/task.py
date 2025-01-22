@@ -19,4 +19,5 @@ class Task(Base):
     ##       which is needed for alembic. This results in changing the migration file
     ##       manually to give the restrain a name.
     algorithm_id: Mapped[int | None] = mapped_column(ForeignKey("algorithm.id"))
-    # todo(robbert) Tasks probably are grouped (and sub-grouped), so we probably need a reference to a group_id
+    type: Mapped[str | None]
+    type_id: Mapped[str | None]

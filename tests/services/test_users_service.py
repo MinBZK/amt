@@ -18,7 +18,7 @@ async def test_get_user(mocker: MockFixture):
     users_service.repository.find_by_id.return_value = default_user(id=id, name=name)  # type: ignore
 
     # When
-    user = await users_service.get(id)
+    user = await users_service.find_by_id(id)
 
     # Then
     assert user is not None

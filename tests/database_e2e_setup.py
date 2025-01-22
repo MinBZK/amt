@@ -1,5 +1,5 @@
 from amt.api.lifecycles import Lifecycles
-from amt.enums.status import Status
+from amt.enums.tasks import Status
 from amt.models import Algorithm, Organization
 from sqlalchemy.ext.asyncio.session import AsyncSession
 

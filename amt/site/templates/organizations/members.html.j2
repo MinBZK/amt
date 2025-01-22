@@ -2,7 +2,7 @@
 {% import "macros/tabs.html.j2" as tabs with context %}
 {% extends "layouts/base.html.j2" %}
 {% block content %}
-    <div class="rvo-max-width-layout rvo-max-width-layout--md rvo-max-width-layout-inline-padding--none">
+    <div class="rvo-max-width-layout rvo-max-width-layout--lg rvo-max-width-layout-inline-padding--none">
         {{ tabs.show_tabs(tab_items) }}
         <div class="rvo-content" id="search-members-container">
             {% include 'organizations/parts/members_results.html.j2' %}

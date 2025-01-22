@@ -67,7 +67,12 @@ async def get_requirements_and_measures(
                 if measure_urn not in measure_urns:
                     measure = await measures_service.fetch_measures(measure_urn)
                     applicable_measures.append(
-                        MeasureTask(urn=measure_urn, state="to do", version=measure[0].schema_version)
+                        MeasureTask(
+                            urn=measure_urn,
+                            state="to do",
+                            version=measure[0].schema_version,
+                            lifecycle=measure[0].lifecycle,
+                        )
                     )
                     measure_urns.add(measure_urn)
 

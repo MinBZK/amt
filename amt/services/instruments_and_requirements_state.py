@@ -13,16 +13,16 @@ from amt.services.instruments import instruments_service
 logger = logging.getLogger(__name__)
 
 all_lifecycles = (
-    "Geen",
-    "Probleemanalyse",
-    "Ontwerp",
-    "Monitoren",
-    "Beheer",
-    "Ontwikkelen",
-    "Dataverkenning en -preparatie",
-    "Verificatie",
-    "Validatie",
-    "Implementatie",
+    "geen",
+    "organisatieverantwoordelijkheden",
+    "probleemanalyse",
+    "ontwerp",
+    "dataverkenning en datapreparatie",
+    "ontwikkelen",
+    "verificatie en validatie",
+    "implementatie",
+    "monitoring en beheer",
+    "uitfaseren",
 )
 
 
