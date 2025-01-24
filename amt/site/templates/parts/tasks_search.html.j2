@@ -1,0 +1,75 @@
+<form id="search-tasks-form"
+      hx-get="{{ base_href }}?skip=0"
+      hx-target="#tasks-search-results"
+      hx-trigger="change"
+      hx-include="this"
+      hx-swap="innerHTML">
+    <div class="amt-layout-grid rvo-layout-gap--md amt-layout-grid-columns--two">
+        <div>
+            <h1 class="utrecht-heading-1">{% trans %}Taken{% endtrans %}</h1>
+        </div>
+    </div>
+    <div class="utrecht-form-fieldset rvo-form-fieldset rvo-margin-block-start--lg">
+        <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
+            <div class="rvo-inline-form">
+                <div class="rvo-layout-grid-container margin-bottom-none">
+                    <div class="rvo-layout-grid rvo-layout-gap--sm rvo-layout-grid-columns--three rvo-layout-grid-layout--1fr">
+                        <div class="rvo-layout-column rvo-text--bold rvo-layout-gap--sm">
+                            <div>{% trans %}Search{% endtrans %}</div>
+                            <div class="form-input-container">
+                                <input id="tasks-search-input"
+                                       type="text"
+                                       class="utrecht-textbox utrecht-textbox--html-input"
+                                       dir="auto"
+                                       value="{{ search }}"
+                                       placeholder="{% trans %}Find tasks...{% endtrans %}"
+                                       name="search"
+                                       hx-get="{{ base_href }}?skip=0"
+                                       hx-trigger="input changed delay:500ms, search"
+                                       autocomplete="off"
+                                       onfocus="this.value=''" />
+                                <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--lg form-input-clear"
+                                      role="img"
+                                      aria-label="Kruis"
+                                      hx-trigger="click"
+                                      hx-get="{{ base_href }}?skip=0"
+                                      hx-swap="innerHTML"
+                                      onclick="document.getElementById('tasks-search-input').value = ''"></span>
+                            </div>
+                        </div>
+                        <div class="rvo-layout-column rvo-text--bold rvo-layout-gap--sm">
+                            <div>{% trans %}Lifecycle{% endtrans %}</div>
+                            <div class="rvo-select-wrapper">
+                                <select id="add-lifecycle"
+                                        name="add-filter-lifecycle"
+                                        class="utrecht-select utrecht-select--html-select">
+                                    <option value="">{% trans %}Select lifecycle{% endtrans %}</option>
+                                    {% for lifecycle in lifecycles %}
+                                        <option {% if "lifecycle" in filters and lifecycle.value == filters["lifecycle"].value %}selected="selected"{% endif %}
+                                                value="{{ lifecycle.value }}">{{ lifecycle.display_value }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="rvo-layout-column rvo-text--bold rvo-layout-gap--sm">
+                            <div>{% trans %}Assignee{% endtrans %}</div>
+                            <div class="rvo-select-wrapper">
+                                <select id="add-assignee"
+                                        name="add-filter-assignee"
+                                        class="utrecht-select utrecht-select--html-select">
+                                    <option value="">{% trans %}Select assignee{% endtrans %}</option>
+                                    {% for assignee in assignees %}
+                                        <option {% if "assignee" in filters and assignee.value==filters["assignee"].value %}selected="selected" {% endif
+                                            %} value="{{ assignee.value }}">{{ assignee.display_value }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</form>
+<div id="tasks-search-results">{% include 'parts/tasks_board.html.j2' %}</div>
+<div id="errorContainer"></div>

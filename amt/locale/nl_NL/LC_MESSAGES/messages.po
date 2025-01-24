@@ -53,6 +53,7 @@ msgstr "Rol"
 #: amt/site/templates/algorithms/new.html.j2:41
 #: amt/site/templates/parts/algorithm_search.html.j2:48
 #: amt/site/templates/parts/filter_list.html.j2:71
+#: amt/site/templates/parts/tasks_search.html.j2:41
 msgid "Lifecycle"
 msgstr "Levenscyclus"
 
@@ -219,6 +220,33 @@ msgstr "Verantwoordelijke"
 #: amt/api/forms/measure.py:57
 msgid "Status"
 msgstr "Status"
+
+#: amt/api/forms/measure.py:59
+#: amt/site/templates/algorithms/details_info.html.j2:44
+#: amt/site/templates/macros/tasks.html.j2:12
+msgid "To do"
+msgstr "Te doen"
+
+#: amt/api/forms/measure.py:60
+#: amt/site/templates/algorithms/details_info.html.j2:46
+#: amt/site/templates/macros/tasks.html.j2:19
+msgid "In progress"
+msgstr "Onderhanden"
+
+#: amt/api/forms/measure.py:61 amt/site/templates/macros/tasks.html.j2:26
+msgid "In review"
+msgstr "Beoordelen"
+
+#: amt/api/forms/measure.py:62
+#: amt/site/templates/algorithms/details_info.html.j2:20
+#: amt/site/templates/algorithms/details_info.html.j2:48
+#: amt/site/templates/macros/tasks.html.j2:33
+msgid "Done"
+msgstr "Afgerond"
+
+#: amt/api/forms/measure.py:63 amt/site/templates/macros/tasks.html.j2:40
+msgid "Not implemented"
+msgstr "Niet van toepassing"
 
 #: amt/api/forms/measure.py:72
 msgid "Information on how this measure is implemented"
@@ -408,29 +436,13 @@ msgstr "maatregelen uitgevoerd"
 #: amt/site/templates/algorithms/details_compliance.html.j2:69
 #: amt/site/templates/macros/editable.html.j2:28
 #: amt/site/templates/macros/editable.html.j2:33
-#: amt/site/templates/macros/tasks.html.j2:81
+#: amt/site/templates/macros/tasks.html.j2:82
 msgid "Edit"
 msgstr "Bewerk"
 
 #: amt/site/templates/algorithms/details_info.html.j2:17
 msgid "Does the algorithm meet the requirements?"
 msgstr "Voldoet het algoritme aan de vereisten?"
-
-#: amt/site/templates/algorithms/details_info.html.j2:20
-#: amt/site/templates/algorithms/details_info.html.j2:48
-#: amt/site/templates/macros/tasks.html.j2:33
-msgid "Done"
-msgstr "Afgerond"
-
-#: amt/site/templates/algorithms/details_info.html.j2:44
-#: amt/site/templates/macros/tasks.html.j2:12
-msgid "To do"
-msgstr "Te doen"
-
-#: amt/site/templates/algorithms/details_info.html.j2:46
-#: amt/site/templates/macros/tasks.html.j2:19
-msgid "In progress"
-msgstr "Onderhanden"
 
 #: amt/site/templates/algorithms/details_info.html.j2:65
 msgid "Go to all requirements"
@@ -667,14 +679,6 @@ msgstr "Weet u zeker dat u het bestand wilt verwijderen"
 msgid " ago"
 msgstr "geleden"
 
-#: amt/site/templates/macros/tasks.html.j2:26
-msgid "In review"
-msgstr "Beoordelen"
-
-#: amt/site/templates/macros/tasks.html.j2:40
-msgid "Not implemented"
-msgstr "Niet van toepassing"
-
 #: amt/site/templates/macros/tasks.html.j2:43
 msgid "Unknown"
 msgstr "Onbekend"
@@ -707,6 +711,7 @@ msgstr "Voeg personen toe"
 #: amt/site/templates/organizations/parts/members_results.html.j2:29
 #: amt/site/templates/organizations/parts/overview_results.html.j2:26
 #: amt/site/templates/parts/algorithm_search.html.j2:25
+#: amt/site/templates/parts/tasks_search.html.j2:18
 msgid "Search"
 msgstr "Zoek"
 
@@ -866,6 +871,7 @@ msgid "Find algorithm..."
 msgstr "Vind algoritme..."
 
 #: amt/site/templates/parts/algorithm_search.html.j2:53
+#: amt/site/templates/parts/tasks_search.html.j2:46
 msgid "Select lifecycle"
 msgstr "Selecteer levenscyclus"
 
@@ -927,4 +933,24 @@ msgid ""
 "  |  This website is under development  |  All versions are created in an"
 " open manner."
 msgstr "Deze website is in ontwikkeling. Alle versies ontstaan op een open manier."
+
+#: amt/site/templates/parts/tasks_board.html.j2:5
+msgid "Results for"
+msgstr "Resultaten voor"
+
+#: amt/site/templates/parts/tasks_search.html.j2:9
+msgid "Taken"
+msgstr "Taken"
+
+#: amt/site/templates/parts/tasks_search.html.j2:25
+msgid "Find tasks..."
+msgstr "Vind taken..."
+
+#: amt/site/templates/parts/tasks_search.html.j2:55
+msgid "Assignee"
+msgstr "Toegewezen aan"
+
+#: amt/site/templates/parts/tasks_search.html.j2:60
+msgid "Select assignee"
+msgstr "Selecteer toegewezen aan"
 
