@@ -104,7 +104,7 @@
 </div>
 <div id="amt-main-menu-desktop"
      class="rvo-topnav__background rvo-topnav__background--horizontal-rule navbar-fixed">
-    <div class="rvo-max-width-layout rvo-max-width-layout--md rvo-max-width-layout-inline-padding--none">
+    <div class="rvo-max-width-layout rvo-max-width-layout--lg rvo-max-width-layout-inline-padding--none">
         <nav class="rvo-topnav rvo-topnav--md">
             <ul class="rvo-topnav__list">
                 {% if user %}
@@ -162,7 +162,7 @@
 {% if sub_menu_items is defined and sub_menu_items|length > 0 %}
     <div id="amt-sub-menu-desktop"
          class="rvo-topnav__background rvo-topnav__background--horizontal-rule rvo-topnav--sub">
-        <div class="rvo-max-width-layout rvo-max-width-layout--md rvo-max-width-layout-inline-padding--none">
+        <div class="rvo-max-width-layout rvo-max-width-layout--lg rvo-max-width-layout-inline-padding--none">
             <nav class="rvo-topnav rvo-topnav--md">
                 <ul class="rvo-topnav__list">
                     {% for menu_item in sub_menu_items %}
@@ -181,7 +181,7 @@
 {% if breadcrumbs is defined %}
     <div>
         <!-- container needed to keep breadcrumbs from aligning in the center -->
-        <div class="rvo-max-width-layout rvo-max-width-layout--md rvo-max-width-layout-inline-padding--none margin-top-large margin-bottom-large">
+        <div class="rvo-max-width-layout rvo-max-width-layout--lg rvo-max-width-layout-inline-padding--none margin-top-large margin-bottom-large">
             <ol class="rvo-breadcrumbs rvo-breadcrumbs--md">
                 {% for breadcrumb in breadcrumbs %}
                     {% if loop.first %}

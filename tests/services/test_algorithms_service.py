@@ -4,6 +4,7 @@ from amt.core.exceptions import AMTNotFound
 from amt.models.algorithm import Algorithm
 from amt.repositories.algorithms import AlgorithmsRepository
 from amt.repositories.organizations import OrganizationsRepository
+from amt.repositories.tasks import TasksRepository
 from amt.schema.algorithm import AlgorithmNew
 from amt.schema.system_card import SystemCard
 from amt.services.algorithms import AlgorithmsService
@@ -21,6 +22,7 @@ async def test_get_algorithm(mocker: MockFixture):
     algorithms_service = AlgorithmsService(
         repository=mocker.AsyncMock(spec=AlgorithmsRepository),
         organizations_repository=mocker.AsyncMock(spec=OrganizationsRepository),
+        tasks_repository=mocker.AsyncMock(spec=TasksRepository),
     )
     algorithms_service.repository.find_by_id.return_value = Algorithm(  # type: ignore
         id=algorithm_id, name=algorithm_name, lifecycle=algorithm_lifecycle
@@ -49,6 +51,7 @@ async def test_create_algorithm(mocker: MockFixture):
     algorithms_service = AlgorithmsService(
         repository=mocker.AsyncMock(spec=AlgorithmsRepository),
         organizations_repository=organizations_repository,
+        tasks_repository=mocker.AsyncMock(spec=TasksRepository),
     )
     algorithms_service.repository.save.return_value = Algorithm(  # type: ignore
         id=algorithm_id, name=algorithm_name, lifecycle=algorithm_lifecycle, system_card=system_card
@@ -96,10 +99,12 @@ async def test_create_algorithm_unknown_template_id(mocker: MockFixture):
     )
 
     organizations_repository = mocker.AsyncMock(spec=OrganizationsRepository)
+    organizations_repository.find_by_id_and_user_id.return_value = default_organization()
 
     algorithms_service = AlgorithmsService(
         repository=mocker.AsyncMock(spec=AlgorithmsRepository),
         organizations_repository=organizations_repository,
+        tasks_repository=mocker.AsyncMock(spec=TasksRepository),
     )
 
     with pytest.raises(AMTNotFound):

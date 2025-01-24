@@ -3,13 +3,15 @@ from collections.abc import Sequence
 from typing import Annotated
 
 from fastapi import Depends
-from sqlalchemy import and_, select
+from sqlalchemy import and_, select, update
 from sqlalchemy.exc import NoResultFound
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from amt.core.exceptions import AMTRepositoryError
+from amt.enums.tasks import Status, TaskType
 from amt.models import Task
 from amt.repositories.deps import get_session
+from amt.schema.measure import MeasureTask
 
 logger = logging.getLogger(__name__)
 
@@ -108,3 +110,39 @@ class TasksRepository:
         except NoResultFound as e:
             logger.exception("Task not found")
             raise AMTRepositoryError from e
+
+    async def add_tasks(self, algorithm_id: int, task_type: TaskType, tasks: list[MeasureTask]) -> None:
+        insert_list = [
+            Task(
+                title="",
+                description="",
+                algorithm_id=algorithm_id,
+                type_id=task.urn,
+                type=task_type,
+                status_id=Status.TODO,
+                sort_order=(idx * 10),
+            )
+            for idx, task in enumerate(tasks)
+        ]
+        await self.save_all(insert_list)
+
+    async def find_by_algorithm_id_and_type(self, algorithm_id: int, task_type: TaskType | None) -> Sequence[Task]:
+        statement = select(Task).where(Task.algorithm_id == algorithm_id)
+        if task_type:
+            statement = statement.where(Task.type == task_type)
+        statement = statement.order_by(Task.sort_order)
+        try:
+            return (await self.session.execute(statement)).scalars().all()
+        except NoResultFound:
+            logger.exception("No tasks found for algorithm " + str(algorithm_id) + " of type " + str(task_type))
+            return []
+
+    async def update_tasks_status(self, algorithm_id: int, task_type: TaskType, type_id: str, status: Status) -> None:
+        statement = (
+            update(Task)
+            .where(Task.algorithm_id == algorithm_id)
+            .where(Task.type == task_type)
+            .where(Task.type_id == type_id)
+            .values(status_id=status)
+        )
+        await self.session.execute(statement)

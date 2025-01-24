@@ -118,9 +118,24 @@
       "state": "to do",
       "version": "",
       "value": "",
-      "accountable_persons": [{ "name": "Default User", "uuid": "1" }],
-      "reviewer_persons": [{ "name": "Default User", "uuid": "1" }],
-      "responsible_persons": [{ "name": "Default User", "uuid": "1" }]
+      "accountable_persons": [
+        {
+          "name": "Default User",
+          "uuid": "92714be3-f798-4461-ba83-55d6cfd889a6"
+        }
+      ],
+      "reviewer_persons": [
+        {
+          "name": "Default User",
+          "uuid": "92714be3-f798-4461-ba83-55d6cfd889a6"
+        }
+      ],
+      "responsible_persons": [
+        {
+          "name": "Default User",
+          "uuid": "92714be3-f798-4461-ba83-55d6cfd889a6"
+        }
+      ]
     },
     {
       "urn": "urn:nl:ak:mtr:fur-01",

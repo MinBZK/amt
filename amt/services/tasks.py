@@ -4,7 +4,7 @@ from typing import Annotated
 
 from fastapi import Depends
 
-from amt.enums.status import Status
+from amt.enums.tasks import Status, TaskType
 from amt.models.algorithm import Algorithm
 from amt.models.task import Task
 from amt.models.user import User
@@ -29,14 +29,12 @@ class TasksService:
         task = await self.repository.find_by_status_id(status_id)
         return task
 
-    async def get_tasks_for_algorithm(self, algorithm_id: int, status_id: int) -> Sequence[Task]:
-        tasks = await self.repository.find_by_algorithm_id_and_status_id(algorithm_id, status_id)
-        return tasks
+    async def get_tasks_for_algorithm(self, algorithm_id: int, task_type: TaskType | None) -> Sequence[Task]:
+        return await self.repository.find_by_algorithm_id_and_type(algorithm_id, task_type)
 
     async def assign_task(self, task: Task, user: User) -> Task:
         task.user_id = user.id
-        task = await self.repository.save(task)
-        return task
+        return await self.repository.save(task)
 
     async def create_instrument_tasks(self, tasks: Sequence[InstrumentTask], algorithm: Algorithm) -> None:
         # TODO: (Christopher) At this moment a status has to be retrieved from the DB. In the future
@@ -76,11 +74,6 @@ class TasksService:
             raise ValueError("task_id or status_id must not be None")
         task = await self.repository.find_by_id(task_id)
 
-        if status_id == Status.DONE:
-            # TODO: This seems off, tasks should be written to the correct location in the system card.
-            self.system_card.name = task.title
-            self.storage_writer.write(self.system_card.model_dump())
-
         # update the status for the task (this may not be needed if the status has not changed)
         task.status_id = status_id
 
@@ -99,5 +92,10 @@ class TasksService:
         else:
             task.sort_order = 10
 
-        task = await self.repository.save(task)
-        return task
+        return await self.repository.save(task)
+
+    async def update_tasks_status(self, algorithm_id: int, task_type: TaskType, type_id: str, status: Status) -> None:
+        await self.repository.update_tasks_status(algorithm_id, task_type, type_id, status)
+
+    async def find_by_algorithm_id_and_status_id(self, algorithm_id: int, status_id: int) -> Sequence[Task]:
+        return await self.repository.find_by_algorithm_id_and_status_id(algorithm_id, status_id)

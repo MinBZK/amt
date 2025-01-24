@@ -16,7 +16,6 @@ from amt.api.risk_group import (
 )
 from amt.api.routes.shared import get_filters_and_sort_by
 from amt.core.authorization import AuthorizationResource, AuthorizationVerb, get_user
-from amt.core.exceptions import AMTAuthorizationError
 from amt.core.internationalization import get_current_translation
 from amt.models import Algorithm
 from amt.schema.algorithm import AlgorithmNew
@@ -172,8 +171,6 @@ async def post_new(
 ) -> HTMLResponse:
     user: dict[str, Any] | None = get_user(request)
     # TODO (Robbert): we need to handle (show) repository or service errors in the forms
-    if user:
-        algorithm = await algorithms_service.create(algorithm_new, user["sub"])
-        response = templates.Redirect(request, f"/algorithm/{algorithm.id}/details")
-        return response
-    raise AMTAuthorizationError
+    algorithm = await algorithms_service.create(algorithm_new, user["sub"])  # pyright: ignore[reportOptionalSubscript, reportUnknownArgumentType]
+    response = templates.Redirect(request, f"/algorithm/{algorithm.id}/details")
+    return response

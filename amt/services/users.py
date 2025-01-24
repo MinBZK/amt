@@ -16,13 +16,14 @@ class UsersService:
         repository: Annotated[UsersRepository, Depends(UsersRepository)],
     ) -> None:
         self.repository = repository
-
-    async def get(self, id: str | UUID) -> User | None:
-        id = UUID(id) if isinstance(id, str) else id
-        return await self.repository.find_by_id(id)
+        self.cache: dict[UUID, User | None] = {}
 
     async def create_or_update(self, user: User) -> User:
         return await self.repository.upsert(user)
 
     async def find_by_id(self, id: UUID | str) -> User | None:
-        return await self.repository.find_by_id(id)
+        id = UUID(id) if isinstance(id, str) else id
+        if id not in self.cache:
+            new_user = await self.repository.find_by_id(id)
+            self.cache[id] = new_user
+        return self.cache[id]

@@ -4,7 +4,7 @@ from typing import Any, cast
 
 import pytest
 from amt.api.routes.shared import get_localized_value
-from amt.models import Algorithm
+from amt.models import Algorithm, Task
 from amt.models.base import Base
 from amt.schema.ai_act_profile import AiActProfile
 from amt.schema.algorithm import AlgorithmNew
@@ -89,6 +89,7 @@ async def test_get_new_algorithms(client: AsyncClient, mocker: MockFixture, db: 
 
     # when
     response = await client.get("/algorithms/new")
+
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
 
@@ -207,6 +208,10 @@ async def test_post_new_algorithms_write_system_card(
     assert any(
         algorithm.system_card.name == system_card.name for algorithm in algorithms if algorithm.system_card is not None
     )
+
+    assert len(await db.get(Algorithm, "id", 1)) == 1
+
+    assert len(await db.get(Task, "algorithm_id", 1)) > 1
 
 
 class MockRequest(Request):

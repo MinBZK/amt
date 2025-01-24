@@ -1,4 +1,3 @@
-import asyncio
 import datetime
 import logging
 import urllib.parse
@@ -30,17 +29,19 @@ from amt.api.navigation import (
 )
 from amt.api.routes.shared import UpdateFieldModel, get_filters_and_sort_by, replace_none_with_empty_string_inplace
 from amt.core.authorization import AuthorizationResource, AuthorizationVerb, get_user
-from amt.core.exceptions import AMTError, AMTNotFound, AMTRepositoryError
+from amt.core.exceptions import AMTError, AMTNotFound, AMTPermissionDenied, AMTRepositoryError
 from amt.core.internationalization import get_current_translation
-from amt.enums.status import Status
+from amt.enums.tasks import Status, TaskType, measure_state_to_status, status_mapper
 from amt.models import Algorithm, User
 from amt.models.task import Task
 from amt.repositories.organizations import OrganizationsRepository
 from amt.repositories.users import UsersRepository
 from amt.schema.measure import ExtendedMeasureTask, MeasureTask, Person
+from amt.schema.measure_display import DisplayMeasureTask
 from amt.schema.requirement import RequirementTask
 from amt.schema.system_card import SystemCard
-from amt.schema.task import MovedTask
+from amt.schema.task import DisplayTask, MovedTask
+from amt.schema.user import User as UserSchema
 from amt.services.algorithms import AlgorithmsService
 from amt.services.instruments_and_requirements_state import InstrumentStateService, RequirementsStateService
 from amt.services.measures import measures_service
@@ -48,6 +49,7 @@ from amt.services.object_storage import ObjectStorageService, create_object_stor
 from amt.services.organizations import OrganizationsService
 from amt.services.requirements import requirements_service
 from amt.services.tasks import TasksService
+from amt.services.users import UsersService
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -123,26 +125,41 @@ def get_algorithms_submenu_items() -> list[BaseNavigationItem]:
     ]
 
 
-async def gather_algorithm_tasks(algorithm_id: int, task_service: TasksService) -> dict[Status, Sequence[Task]]:
-    fetch_tasks = [task_service.get_tasks_for_algorithm(algorithm_id, status + 0) for status in Status]
-
-    results = await asyncio.gather(*fetch_tasks)
-
-    return dict(zip(Status, results, strict=True))
-
-
 @router.get("/{algorithm_id}/details/tasks")
 async def get_tasks(
     request: Request,
     algorithm_id: int,
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
+    users_service: Annotated[UsersService, Depends(UsersService)],
     tasks_service: Annotated[TasksService, Depends(TasksService)],
 ) -> HTMLResponse:
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
-    instrument_state = await get_instrument_state(algorithm.system_card)
-    requirements_state = await get_requirements_state(algorithm.system_card)
     tab_items = get_algorithm_details_tabs(request)
-    tasks_by_status = await gather_algorithm_tasks(algorithm_id, task_service=tasks_service)
+
+    tasks_db: Sequence[Task] = await tasks_service.get_tasks_for_algorithm(algorithm_id, None)
+
+    # resolve measure tasks
+    urns: set[str] = {task.type_id for task in tasks_db if task.type == TaskType.MEASURE and task.type_id is not None}
+    resolved_measures: dict[str, DisplayMeasureTask] = (
+        {} if len(urns) == 0 else await resolve_and_enrich_measures(algorithm, urns, users_service)
+    )
+
+    tasks_by_status: dict[Status, list[DisplayTask]] = {}
+    for status in Status:
+        tasks_by_status[status] = []
+        tasks_by_status[status] += [
+            # we create display task for Measures,
+            #  this could be extended in the future to support other types
+            DisplayTask.create_from_model(task, resolved_measures.get(task.type_id))
+            for task in tasks_db
+            if task.status_id == status and task.type == TaskType.MEASURE and task.type_id is not None
+        ]
+        # we also append all tasks that have no related object
+        tasks_by_status[status] += [
+            DisplayTask.create_from_model(task, None)
+            for task in tasks_db
+            if task.status_id == status and task.type is None
+        ]
 
     breadcrumbs = resolve_base_navigation_items(
         [
@@ -154,8 +171,6 @@ async def get_tasks(
     )
 
     context = {
-        "instrument_state": instrument_state,
-        "requirements_state": requirements_state,
         "tasks_by_status": tasks_by_status,
         "statuses": Status,
         "algorithm": algorithm,
@@ -167,24 +182,60 @@ async def get_tasks(
     return templates.TemplateResponse(request, "algorithms/tasks.html.j2", context)
 
 
-@router.patch("/move_task")
+async def resolve_and_enrich_measures(
+    algorithm: Algorithm, urns: set[str], users_service: UsersService
+) -> dict[str, DisplayMeasureTask]:
+    """
+    Using the given algorithm and list of measure urns, retrieve all those measures
+    and combine the information from the task registry with the system card information
+    and return it.
+    :param algorithm: the algorithm
+    :param urns: the list of measure urns
+    :param users_service: the user service
+    :return: a list of enriched measure tasks
+    """
+    enriched_resolved_measures: dict[str, DisplayMeasureTask] = {}
+    resolved_measures = await measures_service.fetch_measures(list(urns))
+    for resolved_measure in resolved_measures:
+        system_measure = find_measure_task(algorithm.system_card, resolved_measure.urn)
+        if system_measure is not None and system_measure.urn not in enriched_resolved_measures:
+            all_users: list[UserSchema] = []
+            for person_type in ["responsible_persons", "reviewer_persons", "accountable_persons"]:
+                persons = getattr(system_measure, person_type, [])
+                for person in persons if persons is not None else []:
+                    user = UserSchema.create_from_model(await users_service.find_by_id(person.uuid))
+                    if user is not None:
+                        all_users.append(user)
+            measure_task_display = DisplayMeasureTask(
+                name=resolved_measure.name,
+                description=resolved_measure.description,
+                urn=resolved_measure.urn,
+                state=system_measure.state,
+                value=system_measure.value,
+                version=system_measure.version,
+                users=all_users,
+            )
+            enriched_resolved_measures[system_measure.urn] = measure_task_display
+    return enriched_resolved_measures
+
+
+@router.patch("/{algorithm_id}/move_task")
+@permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.UPDATE]})
 async def move_task(
     request: Request,
+    algorithm_id: int,
+    algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
     moved_task: MovedTask,
+    users_service: Annotated[UsersService, Depends(UsersService)],
     tasks_service: Annotated[TasksService, Depends(TasksService)],
 ) -> HTMLResponse:
-    """
-    Move a task through an API call.
-    :param tasks_service: the task service
-    :param request: the request object
-    :param moved_task: the move task object
-    :return: a HTMLResponse object, in this case the html code of the card that was moved
-    """
     # because htmx form always sends a value and siblings are optional, we use -1 for None and convert it here
+
     if moved_task.next_sibling_id == -1:
         moved_task.next_sibling_id = None
     if moved_task.previous_sibling_id == -1:
         moved_task.previous_sibling_id = None
+
     task = await tasks_service.move_task(
         moved_task.id,
         moved_task.status_id,
@@ -192,7 +243,28 @@ async def move_task(
         moved_task.next_sibling_id,
     )
 
-    context = {"task": task}
+    algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
+
+    if task.type == TaskType.MEASURE and task.type_id is not None:
+        measure_task = get_measure_task_or_error(algorithm.system_card, task.type_id)
+        measure_task.update(state=status_mapper[Status(moved_task.status_id)])
+
+        await update_requirements_state(algorithm, measure_task.urn)
+
+        await algorithms_service.update(algorithm)
+
+        unique_resolved_measures: dict[str, DisplayMeasureTask] = await resolve_and_enrich_measures(
+            algorithm, {measure_task.urn}, users_service
+        )
+        resolved_measure: DisplayMeasureTask | None = unique_resolved_measures.get(measure_task.urn)
+        if resolved_measure is None:
+            raise AMTError(f"No measure found for {measure_task.urn}")
+
+        display_task: DisplayTask = DisplayTask.create_from_model(task, resolved_measure)
+    else:
+        display_task: DisplayTask = DisplayTask.create_from_model(task)
+
+    context: dict[str, int | DisplayTask] = {"algorithm_id": algorithm_id, "task": display_task}
 
     return templates.TemplateResponse(request, "parts/task.html.j2", context=context)
 
@@ -416,7 +488,7 @@ async def get_system_card_requirements(
     instrument_state = await get_instrument_state(algorithm.system_card)
     requirements_state = await get_requirements_state(algorithm.system_card)
     tab_items = get_algorithm_details_tabs(request)
-    filters, _, _, sort_by = get_filters_and_sort_by(request)
+    filters, _, _, _ = get_filters_and_sort_by(request)
     organization = await organizations_repository.find_by_id(algorithm.organization_id)
     filters["organization-id"] = str(organization.id)
 
@@ -458,9 +530,7 @@ async def get_system_card_requirements(
                 extended_linked_measures.append(ext_measure_task)
         requirements_and_measures.append((requirement, completed_measures_count, extended_linked_measures))  # pyright: ignore [reportUnknownMemberType]
 
-    measure_task_functions: dict[str, list[User]] = await get_measure_task_functions(
-        measure_tasks, users_repository, sort_by, filters
-    )
+    measure_task_functions: dict[str, list[User]] = await get_measure_task_functions(measure_tasks, users_repository)
 
     context = {
         "instrument_state": instrument_state,
@@ -476,21 +546,9 @@ async def get_system_card_requirements(
     return templates.TemplateResponse(request, "algorithms/details_compliance.html.j2", context)
 
 
-async def _fetch_members(
-    users_repository: UsersRepository,
-    search_name: str,
-    sort_by: dict[str, str],
-    filters: dict[str, str | list[str | int]],
-) -> User | None:
-    members = await users_repository.find_all(search=search_name, sort=sort_by, filters=filters)
-    return members[0] if members else None
-
-
 async def get_measure_task_functions(
     measure_tasks: list[MeasureTask],
     users_repository: Annotated[UsersRepository, Depends(UsersRepository)],
-    sort_by: dict[str, str],
-    filters: dict[str, str | list[str | int]],
 ) -> dict[str, list[User]]:
     measure_task_functions: dict[str, list[User]] = defaultdict(list)
 
@@ -499,7 +557,7 @@ async def get_measure_task_functions(
         for person_type in person_types:
             person_list = getattr(measure_task, person_type)
             if person_list:
-                member = await _fetch_members(users_repository, person_list[0].name, sort_by, filters)
+                member = await users_repository.find_by_id(person_list[0].uuid)
                 if member:
                     measure_task_functions[measure_task.urn].append(member)
     return measure_task_functions
@@ -631,9 +689,9 @@ async def update_measure_value(
     request: Request,
     algorithm_id: int,
     measure_urn: str,
-    organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
     users_repository: Annotated[UsersRepository, Depends(UsersRepository)],
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
+    tasks_service: Annotated[TasksService, Depends(TasksService)],
     object_storage_service: Annotated[ObjectStorageService, Depends(create_object_storage_service)],
     measure_state: Annotated[str, Form()],
     measure_responsible: Annotated[str | None, Form()] = None,
@@ -648,7 +706,6 @@ async def update_measure_value(
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
     user_id = get_user_id_or_error(request)
     measure_task = get_measure_task_or_error(algorithm.system_card, measure_urn)
-
     paths = (
         object_storage_service.upload_files(
             algorithm.organization_id, algorithm.id, measure_urn, user_id, measure_files
@@ -663,14 +720,40 @@ async def update_measure_value(
     measure_task.update(
         measure_state, measure_value, measure_links, paths, responsible_persons, accountable_persons, reviewer_persons
     )
-    organization = await organizations_repository.find_by_id(algorithm.organization_id)
-    filters["organization-id"] = str(organization.id)
 
+    # update the tasks
+    await tasks_service.update_tasks_status(
+        algorithm_id, TaskType.MEASURE, measure_task.urn, measure_state_to_status(measure_task.state)
+    )
+
+    await update_requirements_state(algorithm, measure_urn)
+
+    await algorithms_service.update(algorithm)
+
+    # the redirect 'to same page' does not trigger a javascript reload, so we let us redirect by a different server URL
+    encoded_url = urllib.parse.quote_plus(
+        f"/algorithm/{algorithm_id}/details/system_card/compliance#{requirement_urn.replace(":","_")}"
+    )
+    if request.headers.get("referer", "").endswith("/details/tasks"):
+        encoded_url = urllib.parse.urlparse(request.headers.get("referer")).path
+    return templates.Redirect(
+        request,
+        f"/algorithm/{algorithm_id}/redirect?to={encoded_url}",
+    )
+
+
+async def update_requirements_state(algorithm: Algorithm, measure_urn: str) -> Algorithm:
+    """
+    Update the state of requirements depending on the given measure. Note this method does not save the algorithm
+    but returns the updated algorithm.
+    :param algorithm: the algorithm to update
+    :param measure_urn: the measure urn
+    :return: the updated algorithm
+    """
     # update for the linked requirements the state based on all it's measures
     requirement_tasks = await find_requirement_tasks_by_measure_urn(algorithm.system_card, measure_urn)
     requirement_urns = [requirement_task.urn for requirement_task in requirement_tasks]
     requirements = await requirements_service.fetch_requirements(requirement_urns)
-
     state_order_list = set(MeasureStatusOptions)
     for requirement in requirements:
         state_count: dict[str, int] = {}
@@ -692,17 +775,7 @@ async def update_measure_value(
                 requirement_task.state = MeasureStatusOptions.IN_PROGRESS
             else:
                 requirement_task.state = MeasureStatusOptions.TODO
-
-    await algorithms_service.update(algorithm)
-
-    # the redirect 'to same page' does not trigger a javascript reload, so we let us redirect by a different server URL
-    encoded_url = urllib.parse.quote_plus(
-        f"/algorithm/{algorithm_id}/details/system_card/compliance#{requirement_urn.replace(":","_")}"
-    )
-    return templates.Redirect(
-        request,
-        f"/algorithm/{algorithm_id}/redirect?to={encoded_url}",
-    )
+    return algorithm
 
 
 @router.get("/{algorithm_id}/redirect")
@@ -712,10 +785,14 @@ async def redirect_to(request: Request, algorithm_id: str, to: str) -> RedirectR
     Redirects to the requested URL. We only have and use this because HTMX and javascript redirects do
     not work when redirecting to the same URL, even if query params are changed.
     """
-    return RedirectResponse(
-        status_code=302,
-        url=to,
-    )
+
+    if not to.startswith("/"):
+        raise AMTPermissionDenied
+
+    return RedirectResponse(  # NOSONAR
+        status_code=302,  # NOSONAR
+        url=to,  # NOSONAR
+    )  # NOSONAR
 
 
 @router.get("/{algorithm_id}/members")
@@ -870,10 +947,7 @@ async def download_algorithm_system_card_as_yaml(
     filename = algorithm.name + "_" + datetime.datetime.now(datetime.UTC).isoformat() + ".yaml"
     with open(filename, "w") as outfile:
         yaml.dump(algorithm.system_card.model_dump(), outfile, sort_keys=False)
-    try:
-        return FileResponse(filename, filename=filename, media_type="application/yaml; charset=utf-8")
-    except AMTRepositoryError as e:
-        raise AMTNotFound from e
+    return FileResponse(filename, filename=filename, media_type="application/yaml; charset=utf-8")
 
 
 @router.get("/{algorithm_id}/file/{ulid}")

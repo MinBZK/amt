@@ -1,4 +1,6 @@
-from amt.api.deps import custom_context_processor, permission
+from dataclasses import dataclass
+
+from amt.api.deps import custom_context_processor, hasattr_jinja, permission
 from amt.core.authorization import AuthorizationVerb
 
 from tests.constants import default_fastapi_request
@@ -53,3 +55,20 @@ def test_permissions_none_existing_resource():
     result = permission("badfadfb/1", AuthorizationVerb.READ, example_permissions)
 
     assert result is False
+
+
+def test_hasattr_jinja():
+    @dataclass
+    class Test2:
+        field3: str | None = None
+
+    @dataclass
+    class Test1:
+        field1: str | None = None
+        field2: Test2 | None = None
+
+    my_class = Test1(field1="test", field2=Test2(field3=None))
+    assert hasattr_jinja(my_class, "field2.field3") is False
+
+    my_class_2 = Test1(field1="test", field2=Test2(field3="Hello"))
+    assert hasattr_jinja(my_class_2, "field2.field3") is True

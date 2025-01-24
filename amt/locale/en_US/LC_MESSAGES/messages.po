@@ -165,7 +165,11 @@ msgstr ""
 msgid "Compliance"
 msgstr ""
 
-#: amt/api/organization_filter_options.py:16
+#: amt/api/organization_filter_options.py:17
+msgid "All organizations"
+msgstr ""
+
+#: amt/api/organization_filter_options.py:17
 msgid "My organizations"
 msgstr ""
 
@@ -362,14 +366,14 @@ msgstr ""
 
 #: amt/site/templates/algorithms/details_base.html.j2:28
 #: amt/site/templates/algorithms/new.html.j2:153
-#: amt/site/templates/macros/form_macros.html.j2:168
+#: amt/site/templates/macros/form_macros.html.j2:170
 #: amt/site/templates/organizations/members.html.j2:33
 msgid "Yes"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_base.html.j2:31
 #: amt/site/templates/algorithms/new.html.j2:163
-#: amt/site/templates/macros/form_macros.html.j2:173
+#: amt/site/templates/macros/form_macros.html.j2:175
 #: amt/site/templates/organizations/members.html.j2:36
 msgid "No"
 msgstr ""
@@ -385,6 +389,7 @@ msgstr ""
 #: amt/site/templates/algorithms/details_compliance.html.j2:69
 #: amt/site/templates/macros/editable.html.j2:28
 #: amt/site/templates/macros/editable.html.j2:33
+#: amt/site/templates/macros/tasks.html.j2:81
 msgid "Edit"
 msgstr ""
 
@@ -394,15 +399,17 @@ msgstr ""
 
 #: amt/site/templates/algorithms/details_info.html.j2:20
 #: amt/site/templates/algorithms/details_info.html.j2:48
-#: amt/site/templates/macros/tasks.html.j2:32
+#: amt/site/templates/macros/tasks.html.j2:33
 msgid "Done"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_info.html.j2:44
+#: amt/site/templates/macros/tasks.html.j2:12
 msgid "To do"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_info.html.j2:46
+#: amt/site/templates/macros/tasks.html.j2:19
 msgid "In progress"
 msgstr ""
 
@@ -610,27 +617,27 @@ msgstr ""
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr ""
 
-#: amt/site/templates/macros/form_macros.html.j2:58
+#: amt/site/templates/macros/form_macros.html.j2:60
 msgid "Are you sure you want to remove "
 msgstr ""
 
-#: amt/site/templates/macros/form_macros.html.j2:58
+#: amt/site/templates/macros/form_macros.html.j2:60
 msgid " from this organization? "
 msgstr ""
 
-#: amt/site/templates/macros/form_macros.html.j2:61
+#: amt/site/templates/macros/form_macros.html.j2:63
 msgid "Delete"
 msgstr ""
 
-#: amt/site/templates/macros/form_macros.html.j2:62
+#: amt/site/templates/macros/form_macros.html.j2:64
 msgid "Delete member"
 msgstr ""
 
-#: amt/site/templates/macros/form_macros.html.j2:150
+#: amt/site/templates/macros/form_macros.html.j2:152
 msgid "Delete file"
 msgstr ""
 
-#: amt/site/templates/macros/form_macros.html.j2:157
+#: amt/site/templates/macros/form_macros.html.j2:159
 msgid "Are you sure you want to delete"
 msgstr ""
 
@@ -638,19 +645,15 @@ msgstr ""
 msgid " ago"
 msgstr ""
 
-#: amt/site/templates/macros/tasks.html.j2:11
-msgid "Todo"
+#: amt/site/templates/macros/tasks.html.j2:26
+msgid "In review"
 msgstr ""
 
-#: amt/site/templates/macros/tasks.html.j2:18
-msgid "Doing"
+#: amt/site/templates/macros/tasks.html.j2:40
+msgid "Not implemented"
 msgstr ""
 
-#: amt/site/templates/macros/tasks.html.j2:25
-msgid "Reviewing"
-msgstr ""
-
-#: amt/site/templates/macros/tasks.html.j2:35
+#: amt/site/templates/macros/tasks.html.j2:43
 msgid "Unknown"
 msgstr ""
 

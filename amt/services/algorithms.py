@@ -12,12 +12,16 @@ from uuid import UUID
 from fastapi import Depends
 
 from amt.core.exceptions import AMTNotFound
+from amt.enums.tasks import TaskType
 from amt.models import Algorithm, Organization
 from amt.repositories.algorithms import AlgorithmsRepository
 from amt.repositories.organizations import OrganizationsRepository
+from amt.repositories.tasks import TasksRepository
 from amt.schema.algorithm import AlgorithmNew
 from amt.schema.instrument import InstrumentBase
+from amt.schema.measure import MeasureTask
 from amt.schema.system_card import AiActProfile, Owner, SystemCard
+from amt.services.instruments_and_requirements_state import get_first_lifecycle_idx
 from amt.services.task_registry import get_requirements_and_measures
 
 logger = logging.getLogger(__name__)
@@ -30,9 +34,11 @@ class AlgorithmsService:
         self,
         repository: Annotated[AlgorithmsRepository, Depends(AlgorithmsRepository)],
         organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
+        tasks_repository: Annotated[TasksRepository, Depends(TasksRepository)],
     ) -> None:
         self.repository = repository
         self.organizations_repository = organizations_repository
+        self.tasks_repository = tasks_repository
 
     async def get(self, algorithm_id: int) -> Algorithm:
         algorithm = await self.repository.find_by_id(algorithm_id)
@@ -110,6 +116,13 @@ class AlgorithmsService:
         algorithm.organization = organization
 
         algorithm = await self.update(algorithm)
+
+        measures_sorted_by_lifecycle: list[MeasureTask] = sorted(  # pyright: ignore[reportUnknownVariableType, reportCallIssue]
+            measures,
+            key=lambda measure: get_first_lifecycle_idx(measure.lifecycle),  # pyright: ignore[reportArgumentType]
+        )
+
+        await self.tasks_repository.add_tasks(algorithm.id, TaskType.MEASURE, measures_sorted_by_lifecycle)  # pyright: ignore[reportUnknownArgumentType]
 
         return algorithm
 
