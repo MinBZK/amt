@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 0001-01-01 00:00+0000\n"
+"POT-Creation-Date: 2025-01-28 08:58+0000\n"
 "PO-Revision-Date: 0001-01-01 00:00+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_NL\n"
@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.15.0\n"
+"Generated-By: Babel 2.16.0\n"
 
 #: amt/api/ai_act_profile.py:24
 msgid "Type"
@@ -408,7 +408,7 @@ msgstr "maatregelen uitgevoerd"
 #: amt/site/templates/algorithms/details_compliance.html.j2:69
 #: amt/site/templates/macros/editable.html.j2:28
 #: amt/site/templates/macros/editable.html.j2:33
-#: amt/site/templates/macros/tasks.html.j2:81
+#: amt/site/templates/macros/tasks.html.j2:82
 msgid "Edit"
 msgstr "Bewerk"
 
@@ -487,8 +487,8 @@ msgid "Cancel"
 msgstr "Annuleren"
 
 #: amt/site/templates/algorithms/new.html.j2:8
-msgid "Create a Algorithm"
-msgstr "Creëer een algoritme"
+msgid "Add an algorithm"
+msgstr "Algoritme toevoegen"
 
 #: amt/site/templates/algorithms/new.html.j2:26
 #: amt/site/templates/parts/filter_list.html.j2:67
@@ -536,8 +536,9 @@ msgid "Select Option"
 msgstr "Selecteer optie"
 
 #: amt/site/templates/algorithms/new.html.j2:176
-msgid "Create Algorithm"
-msgstr "Creëer algoritme"
+#: amt/site/templates/parts/algorithm_search.html.j2:15
+msgid "Add algorithm"
+msgstr "Algoritme toevoegen"
 
 #: amt/site/templates/algorithms/new.html.j2:193
 msgid "Copy results and close"
@@ -635,7 +636,7 @@ msgstr "Er zijn enkele fouten"
 msgid "There is one error:"
 msgstr "Er is één fout:"
 
-#: amt/site/templates/layouts/base.html.j2:1
+#: amt/site/templates/layouts/base.html.j2:11
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr "Algoritme Management Toolkit"
 
@@ -857,10 +858,6 @@ msgstr "In ontwikkeling"
 msgid "This page is yet to be build."
 msgstr "Deze pagina is nog niet klaar."
 
-#: amt/site/templates/parts/algorithm_search.html.j2:15
-msgid "New algorithm"
-msgstr "Nieuw algoritme"
-
 #: amt/site/templates/parts/algorithm_search.html.j2:32
 msgid "Find algorithm..."
 msgstr "Vind algoritme..."
@@ -927,4 +924,10 @@ msgid ""
 "  |  This website is under development  |  All versions are created in an"
 " open manner."
 msgstr "Deze website is in ontwikkeling. Alle versies ontstaan op een open manier."
+
+#~ msgid "Create Algorithm"
+#~ msgstr "Creëer algoritme"
+
+#~ msgid "New algorithm"
+#~ msgstr "Nieuw algoritme"
 

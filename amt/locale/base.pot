@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 0001-01-01 00:00+0000\n"
-"PO-Revision-Date: 0001-01-01 00:00+0000\n"
+"POT-Creation-Date: 2025-01-28 08:58+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.15.0\n"
+"Generated-By: Babel 2.16.0\n"
 
 #: amt/api/ai_act_profile.py:24
 msgid "Type"
@@ -388,7 +388,7 @@ msgstr ""
 #: amt/site/templates/algorithms/details_compliance.html.j2:69
 #: amt/site/templates/macros/editable.html.j2:28
 #: amt/site/templates/macros/editable.html.j2:33
-#: amt/site/templates/macros/tasks.html.j2:81
+#: amt/site/templates/macros/tasks.html.j2:82
 msgid "Edit"
 msgstr ""
 
@@ -467,7 +467,7 @@ msgid "Cancel"
 msgstr ""
 
 #: amt/site/templates/algorithms/new.html.j2:8
-msgid "Create a Algorithm"
+msgid "Add an algorithm"
 msgstr ""
 
 #: amt/site/templates/algorithms/new.html.j2:26
@@ -513,7 +513,8 @@ msgid "Select Option"
 msgstr ""
 
 #: amt/site/templates/algorithms/new.html.j2:176
-msgid "Create Algorithm"
+#: amt/site/templates/parts/algorithm_search.html.j2:15
+msgid "Add algorithm"
 msgstr ""
 
 #: amt/site/templates/algorithms/new.html.j2:193
@@ -612,7 +613,7 @@ msgstr ""
 msgid "There is one error:"
 msgstr ""
 
-#: amt/site/templates/layouts/base.html.j2:1
+#: amt/site/templates/layouts/base.html.j2:11
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr ""
 
@@ -825,10 +826,6 @@ msgstr ""
 
 #: amt/site/templates/pages/under_construction.html.j2:9
 msgid "This page is yet to be build."
-msgstr ""
-
-#: amt/site/templates/parts/algorithm_search.html.j2:15
-msgid "New algorithm"
 msgstr ""
 
 #: amt/site/templates/parts/algorithm_search.html.j2:32
