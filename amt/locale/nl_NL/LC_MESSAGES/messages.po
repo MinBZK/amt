@@ -499,8 +499,8 @@ msgid "Cancel"
 msgstr "Annuleren"
 
 #: amt/site/templates/algorithms/new.html.j2:8
-msgid "Create a Algorithm"
-msgstr "Creëer een algoritme"
+msgid "Add an algorithm"
+msgstr "Algoritme toevoegen"
 
 #: amt/site/templates/algorithms/new.html.j2:26
 #: amt/site/templates/parts/filter_list.html.j2:67
@@ -548,8 +548,9 @@ msgid "Select Option"
 msgstr "Selecteer optie"
 
 #: amt/site/templates/algorithms/new.html.j2:176
-msgid "Create Algorithm"
-msgstr "Creëer algoritme"
+#: amt/site/templates/parts/algorithm_search.html.j2:15
+msgid "Add algorithm"
+msgstr "Algoritme toevoegen"
 
 #: amt/site/templates/algorithms/new.html.j2:193
 msgid "Copy results and close"
@@ -647,7 +648,7 @@ msgstr "Er zijn enkele fouten"
 msgid "There is one error:"
 msgstr "Er is één fout:"
 
-#: amt/site/templates/layouts/base.html.j2:1
+#: amt/site/templates/layouts/base.html.j2:11
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr "Algoritme Management Toolkit"
 
@@ -862,10 +863,6 @@ msgstr "In ontwikkeling"
 msgid "This page is yet to be build."
 msgstr "Deze pagina is nog niet klaar."
 
-#: amt/site/templates/parts/algorithm_search.html.j2:15
-msgid "New algorithm"
-msgstr "Nieuw algoritme"
-
 #: amt/site/templates/parts/algorithm_search.html.j2:32
 msgid "Find algorithm..."
 msgstr "Vind algoritme..."
@@ -944,13 +941,12 @@ msgstr "Taken"
 
 #: amt/site/templates/parts/tasks_search.html.j2:25
 msgid "Find tasks..."
-msgstr "Vind taken..."
+msgstr "Vind algoritme..."
 
 #: amt/site/templates/parts/tasks_search.html.j2:55
 msgid "Assignee"
-msgstr "Toegewezen aan"
+msgstr "Verantwoordelijke"
 
 #: amt/site/templates/parts/tasks_search.html.j2:60
 msgid "Select assignee"
-msgstr "Selecteer toegewezen aan"
-
+msgstr "Selecteer verantwoordelijke"

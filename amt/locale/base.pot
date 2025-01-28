@@ -479,7 +479,7 @@ msgid "Cancel"
 msgstr ""
 
 #: amt/site/templates/algorithms/new.html.j2:8
-msgid "Create a Algorithm"
+msgid "Add an algorithm"
 msgstr ""
 
 #: amt/site/templates/algorithms/new.html.j2:26
@@ -525,7 +525,8 @@ msgid "Select Option"
 msgstr ""
 
 #: amt/site/templates/algorithms/new.html.j2:176
-msgid "Create Algorithm"
+#: amt/site/templates/parts/algorithm_search.html.j2:15
+msgid "Add algorithm"
 msgstr ""
 
 #: amt/site/templates/algorithms/new.html.j2:193
@@ -624,7 +625,7 @@ msgstr ""
 msgid "There is one error:"
 msgstr ""
 
-#: amt/site/templates/layouts/base.html.j2:1
+#: amt/site/templates/layouts/base.html.j2:11
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr ""
 
@@ -830,10 +831,6 @@ msgstr ""
 
 #: amt/site/templates/pages/under_construction.html.j2:9
 msgid "This page is yet to be build."
-msgstr ""
-
-#: amt/site/templates/parts/algorithm_search.html.j2:15
-msgid "New algorithm"
 msgstr ""
 
 #: amt/site/templates/parts/algorithm_search.html.j2:32
