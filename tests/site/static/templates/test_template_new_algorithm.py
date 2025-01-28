@@ -26,4 +26,4 @@ def test_tempate_algorithms_new(mocker: MockFixture):
 
     # then
     assert response.headers["Content-Type"] == "text/html; charset=utf-8"
-    assert b"Create Algorithm" in response.body
+    assert b"Add algorithm" in response.body
