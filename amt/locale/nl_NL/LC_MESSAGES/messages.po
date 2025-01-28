@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-01-28 09:28+0000\n"
+"POT-Creation-Date: 0001-01-01 00:00+0000\n"
 "PO-Revision-Date: 0001-01-01 00:00+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_NL\n"
@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.15.0\n"
 
 #: amt/api/ai_act_profile.py:24
 msgid "Type"
@@ -933,24 +933,20 @@ msgstr "Deze website is in ontwikkeling. Alle versies ontstaan op een open manie
 
 #: amt/site/templates/parts/tasks_board.html.j2:5
 msgid "Results for"
-msgstr ""
+msgstr "Resultaten voor"
 
 #: amt/site/templates/parts/tasks_search.html.j2:9
-#, fuzzy
 msgid "Taken"
 msgstr "Taken"
 
 #: amt/site/templates/parts/tasks_search.html.j2:25
-#, fuzzy
 msgid "Find tasks..."
 msgstr "Vind algoritme..."
 
 #: amt/site/templates/parts/tasks_search.html.j2:55
 msgid "Assignee"
-msgstr ""
+msgstr "Verantwoordelijke"
 
 #: amt/site/templates/parts/tasks_search.html.j2:60
-#, fuzzy
 msgid "Select assignee"
-msgstr "Taal"
-
+msgstr "Selecteer verantwoordelijke"
