@@ -3,8 +3,8 @@ import logging
 from amt.schema.measure import MeasureTask
 from amt.schema.requirement import Requirement, RequirementTask
 from amt.schema.system_card import AiActProfile
-from amt.services.measures import create_measures_service
-from amt.services.requirements import create_requirements_service
+from amt.services.measures import measures_service
+from amt.services.requirements import requirements_service
 
 logger = logging.getLogger(__name__)
 
@@ -53,8 +53,6 @@ def is_requirement_applicable(requirement: Requirement, ai_act_profile: AiActPro
 async def get_requirements_and_measures(
     ai_act_profile: AiActProfile,
 ) -> tuple[list[RequirementTask], list[MeasureTask]]:
-    requirements_service = create_requirements_service()
-    measure_service = create_measures_service()
     all_requirements = await requirements_service.fetch_requirements()
 
     applicable_requirements: list[RequirementTask] = []
@@ -67,9 +65,14 @@ async def get_requirements_and_measures(
 
             for measure_urn in requirement.links:
                 if measure_urn not in measure_urns:
-                    measure = await measure_service.fetch_measures(measure_urn)
+                    measure = await measures_service.fetch_measures(measure_urn)
                     applicable_measures.append(
-                        MeasureTask(urn=measure_urn, state="to do", version=measure[0].schema_version)
+                        MeasureTask(
+                            urn=measure_urn,
+                            state="to do",
+                            version=measure[0].schema_version,
+                            lifecycle=measure[0].lifecycle,
+                        )
                     )
                     measure_urns.add(measure_urn)
 

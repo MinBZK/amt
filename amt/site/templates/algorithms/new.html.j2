@@ -1,7 +1,7 @@
 {% import "macros/form_macros.html.j2" as macros with context %}
 {% extends "layouts/base.html.j2" %}
 {% block content %}
-    <div class="rvo-max-width-layout rvo-max-width-layout--md rvo-max-width-layout-inline-padding--none margin-bottom-large">
+    <div class="rvo-max-width-layout rvo-max-width-layout--lg rvo-max-width-layout-inline-padding--none margin-bottom-large">
         <div class="rvo-form">
             <div class="rvo-layout-column rvo-layout-gap--sm">
                 <div class="rvo-form-intro">
@@ -165,34 +165,6 @@
                                     </div>
                                 </div>
                             {% endfor %}
-                        </fieldset>
-                    </div>
-                    <h2 class="utrecht-heading-2 rvo-heading--no-margins">{% trans %}Instruments{% endtrans %}</h2>
-                    <p class="rvo-text rvo-text--no-margins">
-                        {% trans %}Overview of instruments for the responsible development, deployment, assessment, and monitoring of algorithms and AI-systems.{% endtrans %}
-                    </p>
-                    <div class="utrecht-form-fieldset rvo-form-fieldset">
-                        <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
-                            <div role="group"
-                                 aria-labelledby="fieldId-label"
-                                 class="utrecht-form-field utrecht-form-field--text rvo-form-field">
-                                <div class="rvo-form-field__label">
-                                    <label class="rvo-label">{% trans %}Choose one or more instruments{% endtrans %}</label>
-                                </div>
-                                {% for instrument in instruments %}
-                                    <div class="rvo-checkbox__group">
-                                        <label class="rvo-checkbox rvo-checkbox--not-checked"
-                                               for="{{ instrument.urn }}">
-                                            <input id="{{ instrument.urn }}"
-                                                   name="instruments"
-                                                   class="rvo-checkbox__input"
-                                                   type="checkbox"
-                                                   value="{{ instrument.urn }}" />
-                                            {{ instrument.name }}
-                                        </label>
-                                    </div>
-                                {% endfor %}
-                            </div>
                         </fieldset>
                     </div>
                     <div id="errorContainer"></div>

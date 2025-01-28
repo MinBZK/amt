@@ -52,7 +52,7 @@ def test_e2e_move_task_order_in_same_column(page: Page) -> None:
     # when we move the mouse like below, the mouse move is triggered correctly,
     #  just hover doesn't work for unknown reason
     page.mouse.move(x=10, y=10)
-    page.locator("#card-container-3").hover(position={"x": 10, "y": 50})
+    page.locator("#card-container-3").hover(position={"x": 10, "y": 25})
     page.mouse.up()
 
     page.reload()

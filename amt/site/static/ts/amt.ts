@@ -8,27 +8,45 @@ import "../scss/layout.scss";
 
 _hyperscript.browserInit();
 
-const keysToRemove = [
-  "labelsbysubcategory",
-  "answers",
-  "categoryState",
-  "categoryTrace",
-  "currentCategory",
-  "currentconclusion",
-  "currentquestion",
-  "currentSubCategory",
-  "labels",
-  "previousCategory",
-  "previousSubCategory",
-  "subCategoryTrace",
-];
+const currentSortables: Sortable[] = [];
+
 if (window.location.pathname === "/algorithms/new") {
+  const keysToRemove = [
+    "labelsbysubcategory",
+    "answers",
+    "categoryState",
+    "categoryTrace",
+    "currentCategory",
+    "currentconclusion",
+    "currentquestion",
+    "currentSubCategory",
+    "labels",
+    "previousCategory",
+    "previousSubCategory",
+    "subCategoryTrace",
+  ];
   keysToRemove.forEach((key) => {
     sessionStorage.removeItem(key);
   });
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("htmx:afterSwap", (e) => {
+  if (
+    ["tasks-search-results", "search-tasks-container"].includes(
+      (e.target as HTMLElement).getAttribute("id") as string,
+    )
+  ) {
+    while (currentSortables.length > 0) {
+      const sortable = currentSortables.shift();
+      sortable!.destroy();
+    }
+    initPage();
+  }
+});
+
+document.addEventListener("DOMContentLoaded", initPage);
+
+function initPage() {
   // TODO (robbert): we need (better) event handling and displaying of server errors
   document.body.addEventListener("htmx:sendError", function () {
     document.getElementById("errorContainer")!.innerHTML =
@@ -40,44 +58,45 @@ document.addEventListener("DOMContentLoaded", function () {
   ) as HTMLCollectionOf<HTMLDivElement>;
   for (const column of columns) {
     // prettier-ignore
-    new Sortable(column, { //NOSONAR
-      group: "shared", // set both lists to same group
-      animation: 150,
-      onEnd: function(evt) {
-        if (evt.oldIndex !== evt.newIndex || evt.from !== evt.to) {
-          const previousSiblingId = evt.item.previousElementSibling
-            ? evt.item.previousElementSibling.getAttribute("data-id")
-            : "-1";
-          const nextSiblingId = evt.item.nextElementSibling
-            ? evt.item.nextElementSibling.getAttribute("data-id")
-            : "-1";
-          const targetId = "#" + evt.item.getAttribute("data-target-id");
-          const toStatusId = evt.to.getAttribute("data-id");
-          const form = (document.getElementById("cardMovedForm") ??
-            "") as HTMLFormElement;
+    currentSortables.push(Sortable.create(column, { //NOSONAR
+        group: "shared", // set both lists to same group
+        animation: 150,
+        onEnd: function (evt) {
+          if (evt.oldIndex !== evt.newIndex || evt.from !== evt.to) {
+            const previousSiblingId = evt.item.previousElementSibling
+              ? evt.item.previousElementSibling.getAttribute("data-id")
+              : "-1";
+            const nextSiblingId = evt.item.nextElementSibling
+              ? evt.item.nextElementSibling.getAttribute("data-id")
+              : "-1";
+            const targetId = "#" + evt.item.getAttribute("data-target-id");
+            const toStatusId = evt.to.getAttribute("data-id");
+            const form = (document.getElementById("cardMovedForm") ??
+              "") as HTMLFormElement;
 
-          (document.getElementsByName("taskId")[0] as HTMLInputElement).value =
-            evt.item.getAttribute("data-id") ?? "";
-          (
-            document.getElementsByName("statusId")[0] as HTMLInputElement
-          ).value = toStatusId ?? "";
-          (
-            document.getElementsByName(
-              "previousSiblingId",
-            )[0] as HTMLInputElement
-          ).value = previousSiblingId ?? "";
-          (
-            document.getElementsByName("nextSiblingId")[0] as HTMLInputElement
-          ).value = nextSiblingId ?? "";
-          form.setAttribute("hx-target", targetId);
+            (document.getElementsByName("taskId")[0] as HTMLInputElement).value =
+              evt.item.getAttribute("data-id") ?? "";
+            (
+              document.getElementsByName("statusId")[0] as HTMLInputElement
+            ).value = toStatusId ?? "";
+            (
+              document.getElementsByName(
+                "previousSiblingId",
+              )[0] as HTMLInputElement
+            ).value = previousSiblingId ?? "";
+            (
+              document.getElementsByName("nextSiblingId")[0] as HTMLInputElement
+            ).value = nextSiblingId ?? "";
+            form.setAttribute("hx-target", targetId);
 
-          // @ts-expect-error Description: Ignoring type error because the htmx.trigger function is not recognized by TypeScript.
-          htmx.trigger("#cardMovedForm", "cardmoved");
-        }
-      },
-    });
+            // @ts-expect-error Description: Ignoring type error because the htmx.trigger function is not recognized by TypeScript.
+            htmx.trigger("#cardMovedForm", "cardmoved");
+          }
+        },
+      })
+    )
   }
-});
+}
 
 export function setCookie(
   cookieName: string,
@@ -425,6 +444,34 @@ export function getFiles(element: HTMLInputElement, target_id: string) {
       list.appendChild(li);
     }
   }
+}
+
+function getAnchor() {
+  const currentUrl = document.URL,
+    urlParts = currentUrl.split("#");
+  return urlParts.length > 1 ? urlParts[1] : null;
+}
+
+function scrollElementIntoViewClickAndBlur(id: string | null) {
+  if (!id) {
+    return;
+  }
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "start",
+    });
+    element.click();
+    element.blur();
+  }
+}
+
+export function showRequirementDetails() {
+  document.addEventListener("DOMContentLoaded", function () {
+    scrollElementIntoViewClickAndBlur(getAnchor());
+  });
 }
 
 // for debugging htmx use -> htmx.logAll();

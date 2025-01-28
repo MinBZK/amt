@@ -10,13 +10,17 @@ from amt.api.routes.algorithm import (
     get_algorithm_context,
     get_algorithm_or_error,
     get_user_id_or_error,
+    resolve_and_enrich_measures,
 )
 from amt.core.config import get_settings
 from amt.core.exceptions import AMTError, AMTNotFound, AMTRepositoryError
+from amt.enums.tasks import TaskType
 from amt.models import Algorithm
+from amt.repositories.users import UsersRepository
 from amt.schema.measure import MeasureTask
 from amt.schema.task import MovedTask
 from amt.services.object_storage import create_object_storage_service
+from amt.services.users import UsersService
 from fastapi import UploadFile
 from httpx import AsyncClient
 from minio import Minio
@@ -28,6 +32,7 @@ from tests.conftest import amt_vcr
 from tests.constants import (
     default_algorithm,
     default_algorithm_with_system_card,
+    default_not_found_no_permission_msg,
     default_task,
     default_user,
 )
@@ -42,7 +47,7 @@ async def test_get_unknown_algorithm(client: AsyncClient) -> None:
     # then
     assert response.status_code == 404
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"The requested page or resource could not be found." in response.content
+    assert default_not_found_no_permission_msg() in response.content
 
 
 @pytest.mark.asyncio
@@ -65,9 +70,10 @@ async def test_move_task(client: AsyncClient, db: DatabaseTestUtils, mocker: Moc
     await db.given(
         [
             default_user(),
-            default_algorithm("testalgorithm1"),
+            default_algorithm_with_system_card("testalgorithm1"),
             default_task(algorithm_id=1, status_id=1),
             default_task(algorithm_id=1, status_id=1),
+            default_task(algorithm_id=1, status_id=1, type=TaskType.MEASURE, type_id="urn:nl:ak:mtr:dat-01"),
         ]
     )
     mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
@@ -75,7 +81,7 @@ async def test_move_task(client: AsyncClient, db: DatabaseTestUtils, mocker: Moc
 
     # All -1 flow
     move_task_json = MovedTask(taskId=1, statusId=1, previousSiblingId=-1, nextSiblingId=-1).model_dump(by_alias=True)
-    response = await client.patch("/algorithm/move_task", json=move_task_json, headers={"X-CSRF-Token": "1"})
+    response = await client.patch("/algorithm/1/move_task", json=move_task_json, headers={"X-CSRF-Token": "1"})
 
     # then
     assert response.status_code == 200
@@ -84,12 +90,21 @@ async def test_move_task(client: AsyncClient, db: DatabaseTestUtils, mocker: Moc
 
     # All 1 flow
     move_task_json = MovedTask(taskId=1, statusId=1, previousSiblingId=1, nextSiblingId=1).model_dump(by_alias=True)
-    response = await client.patch("/algorithm/move_task", json=move_task_json, headers={"X-CSRF-Token": "1"})
+    response = await client.patch("/algorithm/1/move_task", json=move_task_json, headers={"X-CSRF-Token": "1"})
 
     # then
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
     assert b"Default Task" in response.content
+
+    # All 1 flow
+    move_task_json = MovedTask(taskId=3, statusId=1, previousSiblingId=1, nextSiblingId=1).model_dump(by_alias=True)
+    response = await client.patch("/algorithm/1/move_task", json=move_task_json, headers={"X-CSRF-Token": "1"})
+
+    # then
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert b"Controleer de datakwaliteit" in response.content
 
 
 @pytest.mark.asyncio
@@ -117,7 +132,7 @@ async def test_get_algorithm_non_existing_algorithm(client: AsyncClient, db: Dat
 
     # then
     assert response.status_code == 404
-    assert b"The requested page or resource could not be found." in response.content
+    assert default_not_found_no_permission_msg() in response.content
 
 
 @pytest.mark.asyncio
@@ -169,7 +184,7 @@ async def test_get_system_card_unknown_algorithm(client: AsyncClient) -> None:
     # then
     assert response.status_code == 404
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"The requested page or resource could not be found." in response.content
+    assert default_not_found_no_permission_msg() in response.content
 
 
 @pytest.mark.asyncio
@@ -198,7 +213,7 @@ async def test_get_assessment_card_unknown_algorithm(client: AsyncClient, db: Da
     # then
     assert response.status_code == 404
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"The requested page or resource could not be found." in response.content
+    assert default_not_found_no_permission_msg() in response.content
 
 
 @pytest.mark.asyncio
@@ -212,7 +227,7 @@ async def test_get_assessment_card_unknown_assessment(client: AsyncClient, db: D
     # then
     assert response.status_code == 404
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"The requested page or resource could not be found." in response.content
+    assert default_not_found_no_permission_msg() in response.content
 
 
 @pytest.mark.asyncio
@@ -237,7 +252,7 @@ async def test_get_model_card_unknown_algorithm(client: AsyncClient) -> None:
     # then
     assert response.status_code == 404
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"The requested page or resource could not be found." in response.content
+    assert default_not_found_no_permission_msg() in response.content
 
 
 @pytest.mark.asyncio
@@ -251,7 +266,7 @@ async def test_get_assessment_card_unknown_model_card(client: AsyncClient, db: D
     # then
     assert response.status_code == 404
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"The requested page or resource could not be found." in response.content
+    assert default_not_found_no_permission_msg() in response.content
 
 
 @pytest.mark.asyncio
@@ -635,7 +650,7 @@ async def test_download_algorithm_system_card_as_yaml(
     response = await client.get("/algorithm/1/details/system_card/download")
 
     assert response.status_code == 200
-    assert response.headers["content-type"] == "text/plain; charset=utf-8"
+    assert response.headers["content-type"] == "application/yaml; charset=utf-8"
 
 
 @pytest.mark.asyncio
@@ -724,3 +739,30 @@ def test_get_user_id_or_error_failure(mocker: MockFixture) -> None:
 
     with pytest.raises(AMTError):
         get_user_id_or_error(MockRequest(lang="nl"))
+
+
+@pytest.mark.asyncio
+async def test_redirect_to(client: AsyncClient, db: DatabaseTestUtils) -> None:
+    # given
+    await db.given([default_user(), default_algorithm()])
+
+    response = await client.get("/algorithm/1/redirect?to=/test/path")
+
+    assert response.status_code == 302
+    assert response.headers["location"] == "/test/path"
+
+
+@pytest.mark.asyncio
+async def test_resolve_and_enrich_measures(mocker: MockFixture) -> None:
+    users_service = UsersService(
+        repository=mocker.AsyncMock(spec=UsersRepository),
+    )
+    users_service.repository.find_by_id.return_value = default_user()  # pyright: ignore[reportFunctionMemberAccess]
+    urns = {"urn:nl:ak:mtr:dat-01"}
+    my_algorithm = default_algorithm_with_system_card()
+    result = await resolve_and_enrich_measures(my_algorithm, urns, users_service)
+    assert (
+        result["urn:nl:ak:mtr:dat-01"].description
+        == "Stel vast of de gebruikte data van voldoende kwaliteit is voor de beoogde toepassing.\n"
+    )
+    assert len(result["urn:nl:ak:mtr:dat-01"].users) == 3

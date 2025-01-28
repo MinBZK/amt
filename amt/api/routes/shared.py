@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Any
+from typing import Any, cast
 
 from pydantic import BaseModel
 from starlette.requests import Request
@@ -10,11 +10,12 @@ from amt.api.organization_filter_options import OrganizationFilterOptions, get_l
 from amt.api.risk_group import RiskGroup, get_localized_risk_group
 from amt.schema.localized_value_item import LocalizedValueItem
 from amt.schema.shared import IterMixin
+from amt.services.users import UsersService
 
 
-def get_filters_and_sort_by(
-    request: Request,
-) -> tuple[dict[str, str], list[str], dict[str, LocalizedValueItem], dict[str, str]]:
+async def get_filters_and_sort_by(
+    request: Request, users_service: UsersService
+) -> tuple[dict[str, str | list[str | int]], list[str], dict[str, LocalizedValueItem], dict[str, str]]:
     active_filters: dict[str, str] = {
         k.removeprefix("active-filter-"): v
         for k, v in request.query_params.items()
@@ -29,10 +30,18 @@ def get_filters_and_sort_by(
     if "organization-type" in add_filters and add_filters["organization-type"] == OrganizationFilterOptions.ALL.value:
         del add_filters["organization-type"]
     drop_filters: list[str] = [v for k, v in request.query_params.items() if k.startswith("drop-filter") and v != ""]
-    filters: dict[str, str] = {k: v for k, v in (active_filters | add_filters).items() if k not in drop_filters}
-    localized_filters: dict[str, LocalizedValueItem] = {
-        k: get_localized_value(k, v, request) for k, v in filters.items()
+    filters: dict[str, str | list[str | int]] = {
+        k: v for k, v in (active_filters | add_filters).items() if k not in drop_filters
     }
+    localized_filters: dict[str, LocalizedValueItem] = {}
+    if "assignee" in filters:
+        user_id = filters.get("assignee")
+        user = await users_service.find_by_id(cast(str, user_id))
+        if user is not None:
+            localized_filters["assignee"] = LocalizedValueItem(display_value=user.name, value=str(user_id))
+    localized_filters.update(
+        {k: get_localized_value(k, cast(str, v), request) for k, v in filters.items() if k != "assignee"}
+    )
     sort_by: dict[str, str] = {
         k.removeprefix("sort-by-"): v for k, v in request.query_params.items() if k.startswith("sort-by-") and v != ""
     }
@@ -109,21 +118,19 @@ def replace_none_with_empty_string_inplace(obj: dict[Any, Any] | list[Any] | Ite
     """
     if isinstance(obj, list):
         for i, item in enumerate(obj):
-            if item is None and isinstance(item, str):
+            if item is None:
                 obj[i] = ""
-            elif isinstance(item, list | dict | IterMixin):
+            else:
                 replace_none_with_empty_string_inplace(item)  # pyright: ignore[reportUnknownArgumentType]
-
     elif isinstance(obj, dict):
         for key, value in obj.items():
-            if value is None and isinstance(value, str):
+            if value is None:
                 obj[key] = ""
-            elif isinstance(value, (list, dict, IterMixin)):  # noqa: UP038
-                replace_none_with_empty_string_inplace(value)  # pyright: ignore[reportUnknownArgumentType]
-
+            else:
+                replace_none_with_empty_string_inplace(obj[key])  # pyright: ignore[reportUnknownArgumentType]
     elif isinstance(obj, IterMixin):
         for item in obj:
-            if isinstance(item, tuple) and item[1] is None:
+            if getattr(obj, item[0]) is None:
                 setattr(obj, item[0], "")
-            if isinstance(item, list | dict | IterMixin):
-                replace_none_with_empty_string_inplace(item)  # pyright: ignore[reportUnknownArgumentType]
+            else:
+                replace_none_with_empty_string_inplace(getattr(obj, item[0]))  # pyright: ignore[reportUnknownArgumentType]

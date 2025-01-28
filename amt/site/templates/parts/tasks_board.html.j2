@@ -1,0 +1,63 @@
+{% import 'macros/tasks.html.j2' as render with context %}
+{% if search or filters %}
+    <div class="margin-top-large rvo-layout-row rvo-layout-justify-content-space-between">
+        <div>
+            <span>{% trans %}Results for{% endtrans %}</span>
+            {% if search %}<span><em>'{{ search }}'</em></span>{% endif %}
+            <form name="htmx-remove-tags"
+                  hx-target="#search-tasks-container"
+                  hx-include="this"
+                  hx-swap="innerHTML"
+                  style="display: inline-block">
+                <input type="hidden" name="search" value="{{ search }}">
+                {% for key, localized_value in filters.items() %}
+                    <span target="_self"
+                          class="rvo-tag rvo-tag--default"
+                          hx-trigger="click"
+                          hx-get="{{ base_href }}?skip=0&drop-filter-={{ key }}"
+                          hx-swap="innerHTML"
+                          style="cursor: pointer;
+                                 display: inline-block">
+                        <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--sm form-input-clear"
+                              role="img"
+                              aria-label="Kruis"></span>
+                        {{ localized_value.display_value }}
+                        <input type="hidden"
+                               name="active-filter-{{ key }}"
+                               value="{{ localized_value.value }}">
+                    </span>
+                {% endfor %}
+            </form>
+        </div>
+    </div>
+{% endif %}
+<div id="measure-modal" class="minbzk-modal display-none">
+    <div class="modal-underlay" onclick="amt.closeModal('measure-modal')"></div>
+    <div class="modal-content rvo-layout-column rvo-layout-gap--md"
+         style="height: auto">
+        <div id="dynamic-modal-content"></div>
+    </div>
+</div>
+<div class="container margin-top-large">
+    <form id="cardMovedForm"
+          hx-patch="/algorithm/{{ algorithm_id }}/move_task"
+          hx-ext="json-enc"
+          hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
+          hx-target-5
+          None="#errorContainer"
+          hx-trigger="cardmoved"
+          hx-swap="outerHTML"
+          hx-target="#board"
+          class="">
+        <input type="hidden" name="taskId" value="">
+        <input type="hidden" name="statusId" value="">
+        <input type="hidden" name="previousSiblingId" value="">
+        <input type="hidden" name="nextSiblingId" value="">
+    </form>
+    <div id="errorContainer"></div>
+    <div class="rvo-layout-grid-container margin-bottom-large">
+        <div class="rvo-layout-grid rvo-layout-gap--sm rvo-layout-grid-columns--five rvo-layout-grid-layout--1fr">
+            {% for status in statuses %}{{ render.column(algorithm, status, translations, tasks_by_status) }}{% endfor %}
+        </div>
+    </div>
+</div>

@@ -7,6 +7,7 @@ from uuid import UUID
 from amt.api.lifecycles import Lifecycles
 from amt.api.navigation import BaseNavigationItem, DisplayText
 from amt.core.authorization import AuthorizationResource, AuthorizationVerb
+from amt.enums.tasks import TaskType
 from amt.models import Algorithm, Authorization, Organization, Role, Rule, Task, User
 from amt.schema.instrument import Instrument, InstrumentTask, Owner
 from amt.schema.system_card import SystemCard
@@ -168,6 +169,8 @@ def default_task(
     status_id: int | None = None,
     user_id: int | None = None,
     algorithm_id: int | None = None,
+    type: TaskType | None = None,
+    type_id: str | None = None,
 ) -> Task:
     return Task(
         title=title,
@@ -176,6 +179,8 @@ def default_task(
         status_id=status_id,
         user_id=user_id,
         algorithm_id=algorithm_id,
+        type=type,
+        type_id=type_id,
     )
 
 
@@ -339,3 +344,7 @@ def default_systemcard_dic() -> dict[str, str | list[Any] | None]:
         "references": [],
         "models": [],
     }
+
+
+def default_not_found_no_permission_msg() -> bytes:
+    return b"We couldn't find what you were looking for. This might be because:"

@@ -12,13 +12,16 @@ from uuid import UUID
 from fastapi import Depends
 
 from amt.core.exceptions import AMTNotFound
+from amt.enums.tasks import TaskType
 from amt.models import Algorithm, Organization
 from amt.repositories.algorithms import AlgorithmsRepository
 from amt.repositories.organizations import OrganizationsRepository
+from amt.repositories.tasks import TasksRepository
 from amt.schema.algorithm import AlgorithmNew
 from amt.schema.instrument import InstrumentBase
+from amt.schema.measure import MeasureTask
 from amt.schema.system_card import AiActProfile, Owner, SystemCard
-from amt.services.instruments import InstrumentsService, create_instrument_service
+from amt.services.instruments_and_requirements_state import get_first_lifecycle_idx
 from amt.services.task_registry import get_requirements_and_measures
 
 logger = logging.getLogger(__name__)
@@ -30,12 +33,12 @@ class AlgorithmsService:
     def __init__(
         self,
         repository: Annotated[AlgorithmsRepository, Depends(AlgorithmsRepository)],
-        instrument_service: Annotated[InstrumentsService, Depends(create_instrument_service)],
         organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
+        tasks_repository: Annotated[TasksRepository, Depends(TasksRepository)],
     ) -> None:
         self.repository = repository
-        self.instrument_service = instrument_service
         self.organizations_repository = organizations_repository
+        self.tasks_repository = tasks_repository
 
     async def get(self, algorithm_id: int) -> Algorithm:
         algorithm = await self.repository.find_by_id(algorithm_id)
@@ -114,18 +117,26 @@ class AlgorithmsService:
 
         algorithm = await self.update(algorithm)
 
+        measures_sorted_by_lifecycle: list[MeasureTask] = sorted(  # pyright: ignore[reportUnknownVariableType, reportCallIssue]
+            measures,
+            key=lambda measure: get_first_lifecycle_idx(measure.lifecycle),  # pyright: ignore[reportArgumentType]
+        )
+
+        await self.tasks_repository.add_tasks(algorithm.id, TaskType.MEASURE, measures_sorted_by_lifecycle)  # pyright: ignore[reportUnknownArgumentType]
+
         return algorithm
 
     async def paginate(
-        self, skip: int, limit: int, search: str, filters: dict[str, str], sort: dict[str, str]
+        self, skip: int, limit: int, search: str, filters: dict[str, str | list[str | int]], sort: dict[str, str]
     ) -> list[Algorithm]:
         algorithms = await self.repository.paginate(skip=skip, limit=limit, search=search, filters=filters, sort=sort)
         return algorithms
 
     async def update(self, algorithm: Algorithm) -> Algorithm:
         # TODO: Is this the right place to sync system cards: system_card and system_card_json?
+        algorithm.sync_system_card()
         # TODO: when system card is missing things break, so we call it here to make sure it exists??
-        dummy = algorithm.system_card  # noqa: F841 # pyright: ignore[reportUnusedVariable]
+        dummy = algorithm.system_card  #  noqa: F841 # pyright: ignore[reportUnusedVariable]
         algorithm = await self.repository.save(algorithm)
         return algorithm
 

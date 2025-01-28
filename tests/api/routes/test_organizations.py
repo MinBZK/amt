@@ -129,6 +129,24 @@ async def test_edit_organization_inline(client: AsyncClient, mocker: MockFixture
 
 
 @pytest.mark.asyncio
+async def test_edit_organization_inline_cancel(client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
+    # given
+    await db.given([default_user()])
+
+    client.cookies["fastapi-csrf-token"] = "1"
+
+    mocker.patch("amt.api.routes.organizations.get_user", return_value=default_auth_user())
+
+    # when
+    response = await client.get("/organizations/default-organization/cancel?full_resource_path=organization/1/name")
+
+    # then
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert b"Edit" in response.content
+
+
+@pytest.mark.asyncio
 async def test_organization_slug(client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
     # given
     await db.given([default_user()])

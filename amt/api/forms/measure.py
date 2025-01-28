@@ -1,8 +1,17 @@
 from collections.abc import Sequence
+from enum import StrEnum
 from gettext import NullTranslations
 
 from amt.models import User
 from amt.schema.webform import WebForm, WebFormField, WebFormFieldType, WebFormOption, WebFormTextCloneableField
+
+
+class MeasureStatusOptions(StrEnum):
+    TODO = "to do"
+    IN_PROGRESS = "in progress"
+    IN_REVIEW = "in review"
+    DONE = "done"
+    NOT_IMPLEMENTED = "not implemented"
 
 
 async def get_measure_form(
@@ -47,11 +56,11 @@ async def get_measure_form(
             name="measure_state",
             label=_("Status"),
             options=[
-                WebFormOption(value="to do", display_value="to do"),
-                WebFormOption(value="in progress", display_value="in progress"),
-                WebFormOption(value="in review", display_value="in review"),
-                WebFormOption(value="done", display_value="done"),
-                WebFormOption(value="not implemented", display_value="not implemented"),
+                WebFormOption(value=MeasureStatusOptions.TODO, display_value=_("To do")),
+                WebFormOption(value=MeasureStatusOptions.IN_PROGRESS, display_value=_("In progress")),
+                WebFormOption(value=MeasureStatusOptions.IN_REVIEW, display_value=_("In review")),
+                WebFormOption(value=MeasureStatusOptions.DONE, display_value=_("Done")),
+                WebFormOption(value=MeasureStatusOptions.NOT_IMPLEMENTED, display_value=_("Not implemented")),
             ],
             default_value=current_values.get("measure_state"),
             group="1",

@@ -138,6 +138,21 @@ def instance(obj: Class, type_string: str) -> bool:
             raise TypeError("Unsupported type: " + type_string)
 
 
+def hasattr_jinja(obj: object, attributes: str) -> bool:
+    """
+    Convenience method that checks whether an object has the given attributes.
+    :param obj: the object to check
+    :param attributes: the attributes, seperated by dots, like field1.field2.field3
+    :return: True if the object has the given attribute and its value is not None, False otherwise
+    """
+    for attribute in attributes.split("."):
+        if hasattr(obj, attribute) and getattr(obj, attribute) is not None:
+            obj = getattr(obj, attribute)
+        else:
+            return False
+    return True
+
+
 templates = LocaleJinja2Templates(
     directory="amt/site/templates/", context_processors=[custom_context_processor], undefined=get_undefined_behaviour()
 )
@@ -153,5 +168,6 @@ templates.env.globals.update(isinstance=instance)  # pyright: ignore [reportUnkn
 templates.env.globals.update(is_editable_resource=is_editable_resource)  # pyright: ignore [reportUnknownMemberType]
 templates.env.globals.update(replace_digits_in_brackets=replace_digits_in_brackets)  # pyright: ignore [reportUnknownMemberType]
 templates.env.globals.update(permission=permission)  # pyright: ignore [reportUnknownMemberType]
+templates.env.globals.update(hasattr=hasattr_jinja)  # pyright: ignore [reportUnknownMemberType]
 templates.env.tests["permission"] = permission  # pyright: ignore [reportUnknownMemberType]
 templates.env.add_extension("jinja2_base64_filters.Base64Filters")  # pyright: ignore [reportUnknownMemberType]

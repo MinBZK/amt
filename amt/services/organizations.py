@@ -28,9 +28,9 @@ class OrganizationsService:
         organization = Organization()
         organization.name = name
         organization.slug = slug
-        users: list[User | None] = [await self.users_service.get(user_id) for user_id in user_ids]
+        users: list[User | None] = [await self.users_service.find_by_id(user_id) for user_id in user_ids]
         organization.users = users
-        created_by_user = (await self.users_service.get(created_by_user_id)) if created_by_user_id else None
+        created_by_user = (await self.users_service.find_by_id(created_by_user_id)) if created_by_user_id else None
         organization.created_by = created_by_user
         return await self.organizations_repository.save(organization)
 

@@ -49,10 +49,11 @@ msgid "Role"
 msgstr "Rol"
 
 #: amt/api/group_by_category.py:15
-#: amt/site/templates/algorithms/details_info.html.j2:96
+#: amt/site/templates/algorithms/details_info.html.j2:101
 #: amt/site/templates/algorithms/new.html.j2:41
 #: amt/site/templates/parts/algorithm_search.html.j2:48
 #: amt/site/templates/parts/filter_list.html.j2:71
+#: amt/site/templates/parts/tasks_search.html.j2:41
 msgid "Lifecycle"
 msgstr "Levenscyclus"
 
@@ -148,7 +149,7 @@ msgstr "Data"
 msgid "Model"
 msgstr "Model"
 
-#: amt/api/navigation.py:62 amt/site/templates/algorithms/new.html.j2:170
+#: amt/api/navigation.py:62
 msgid "Instruments"
 msgstr "Instrumenten"
 
@@ -200,31 +201,58 @@ msgid "Select organization"
 msgstr "Selecteer organisatie"
 
 #: amt/api/forms/algorithm.py:42
-#: amt/site/templates/algorithms/details_info.html.j2:74
+#: amt/site/templates/algorithms/details_info.html.j2:79
 msgid "Organization"
 msgstr "Organisatie"
 
-#: amt/api/forms/measure.py:24
+#: amt/api/forms/measure.py:33
 msgid "Responsible"
 msgstr "Uitvoerende"
 
-#: amt/api/forms/measure.py:32
+#: amt/api/forms/measure.py:41
 msgid "Reviewer"
 msgstr "Controlerende"
 
-#: amt/api/forms/measure.py:40
+#: amt/api/forms/measure.py:49
 msgid "Accountable"
 msgstr "Verantwoordelijke"
 
-#: amt/api/forms/measure.py:48
+#: amt/api/forms/measure.py:57
 msgid "Status"
 msgstr "Status"
 
-#: amt/api/forms/measure.py:63
+#: amt/api/forms/measure.py:59
+#: amt/site/templates/algorithms/details_info.html.j2:44
+#: amt/site/templates/macros/tasks.html.j2:12
+msgid "To do"
+msgstr "Te doen"
+
+#: amt/api/forms/measure.py:60
+#: amt/site/templates/algorithms/details_info.html.j2:46
+#: amt/site/templates/macros/tasks.html.j2:19
+msgid "In progress"
+msgstr "Onderhanden"
+
+#: amt/api/forms/measure.py:61 amt/site/templates/macros/tasks.html.j2:26
+msgid "In review"
+msgstr "Beoordelen"
+
+#: amt/api/forms/measure.py:62
+#: amt/site/templates/algorithms/details_info.html.j2:20
+#: amt/site/templates/algorithms/details_info.html.j2:48
+#: amt/site/templates/macros/tasks.html.j2:33
+msgid "Done"
+msgstr "Afgerond"
+
+#: amt/api/forms/measure.py:63 amt/site/templates/macros/tasks.html.j2:40
+msgid "Not implemented"
+msgstr "Niet van toepassing"
+
+#: amt/api/forms/measure.py:72
 msgid "Information on how this measure is implemented"
 msgstr "Informatie over hoe deze maatregel is geïmplementeerd"
 
-#: amt/api/forms/measure.py:70
+#: amt/api/forms/measure.py:79
 msgid ""
 "Select one or more to upload. The files will be saved once you confirm "
 "changes by pressing the save button."
@@ -232,24 +260,24 @@ msgstr ""
 "Selecteer één of meer bestanden om te uploaden. De bestanden zullen "
 "worden opgeslagen wanneer de Opslaan knop wordt ingedrukt."
 
-#: amt/api/forms/measure.py:75
+#: amt/api/forms/measure.py:84
 msgid "Add files"
 msgstr "Bestanden toevoegen"
 
-#: amt/api/forms/measure.py:76
+#: amt/api/forms/measure.py:85
 msgid "No files selected."
 msgstr "Geen bestanden geselecteerd."
 
-#: amt/api/forms/measure.py:80
+#: amt/api/forms/measure.py:89
 msgid "Add URI"
 msgstr "Voeg URI toe"
 
-#: amt/api/forms/measure.py:83
+#: amt/api/forms/measure.py:92
 msgid "Add links to documents"
 msgstr "Voeg link naar bestanden toe"
 
 #: amt/api/forms/organization.py:23
-#: amt/site/templates/algorithms/details_info.html.j2:70
+#: amt/site/templates/algorithms/details_info.html.j2:75
 #: amt/site/templates/auth/profile.html.j2:34
 #: amt/site/templates/organizations/home.html.j2:13
 #: amt/site/templates/organizations/parts/members_results.html.j2:118
@@ -325,35 +353,37 @@ msgstr ""
 "Er is een fout opgetreden tijdens het verwerken van het instrument. "
 "Probeer het later opnieuw."
 
-#: amt/core/exceptions.py:40
+#: amt/core/exceptions.py:40 amt/core/exceptions.py:86
 msgid ""
-"The requested page or resource could not be found. Please check the URL "
-"or query and try again."
+"The requested page or resource could not be found, or you do not have the"
+" correct permissions to access it. Please check the URL or query and try "
+"again."
 msgstr ""
-"De gevraagde pagina of bron kon niet worden gevonden. Controleer de URL "
-"of query en probeer het opnieuw."
+"De gevraagde pagina of bron kon niet worden gevonden of u beschikt niet "
+"over de juiste machtigingen om deze bron te openen. Controleer de URL of "
+"query en probeer het opnieuw."
 
-#: amt/core/exceptions.py:48
+#: amt/core/exceptions.py:50
 msgid "CSRF check failed."
 msgstr "CSRF-controle mislukt."
 
-#: amt/core/exceptions.py:54
+#: amt/core/exceptions.py:56
 msgid "Only static files are supported."
 msgstr "Alleen statische bestanden worden ondersteund."
 
-#: amt/core/exceptions.py:60
+#: amt/core/exceptions.py:62
 msgid "Key not correct: {field}"
 msgstr "Sleutel niet correct: {field}"
 
-#: amt/core/exceptions.py:66
+#: amt/core/exceptions.py:68
 msgid "Value not correct: {field}"
 msgstr "Waarde is niet correct: {field}"
 
-#: amt/core/exceptions.py:72
+#: amt/core/exceptions.py:74
 msgid "Failed to authorize, please login and try again."
 msgstr "Autoriseren is mislukt. Meld u aan en probeer het opnieuw."
 
-#: amt/core/exceptions.py:78
+#: amt/core/exceptions.py:80
 msgid ""
 "Something went wrong during the authorization flow. Please try again "
 "later."
@@ -361,11 +391,7 @@ msgstr ""
 "Er is iets fout gegaan tijdens de autorisatiestroom. Probeer het later "
 "opnieuw"
 
-#: amt/core/exceptions.py:84
-msgid "You do not have the correct permissions to access this resource."
-msgstr "U beschikt niet over de juiste machtigingen om deze bron te openen."
-
-#: amt/core/exceptions.py:90
+#: amt/core/exceptions.py:96
 msgid "Something went wrong storing your file. PLease try again later."
 msgstr ""
 "Er is iets fout gegaan tijdens het opslaan van uw bestand. Probeer het "
@@ -387,14 +413,14 @@ msgstr ""
 
 #: amt/site/templates/algorithms/details_base.html.j2:28
 #: amt/site/templates/algorithms/new.html.j2:153
-#: amt/site/templates/macros/form_macros.html.j2:168
+#: amt/site/templates/macros/form_macros.html.j2:170
 #: amt/site/templates/organizations/members.html.j2:33
 msgid "Yes"
 msgstr "Ja"
 
 #: amt/site/templates/algorithms/details_base.html.j2:31
 #: amt/site/templates/algorithms/new.html.j2:163
-#: amt/site/templates/macros/form_macros.html.j2:173
+#: amt/site/templates/macros/form_macros.html.j2:175
 #: amt/site/templates/organizations/members.html.j2:36
 msgid "No"
 msgstr "Nee"
@@ -403,13 +429,14 @@ msgstr "Nee"
 msgid "Download as YAML"
 msgstr "Download naar YAML"
 
-#: amt/site/templates/algorithms/details_compliance.html.j2:34
+#: amt/site/templates/algorithms/details_compliance.html.j2:36
 msgid "measure executed"
 msgstr "maatregelen uitgevoerd"
 
-#: amt/site/templates/algorithms/details_compliance.html.j2:67
+#: amt/site/templates/algorithms/details_compliance.html.j2:69
 #: amt/site/templates/macros/editable.html.j2:28
 #: amt/site/templates/macros/editable.html.j2:33
+#: amt/site/templates/macros/tasks.html.j2:82
 msgid "Edit"
 msgstr "Bewerk"
 
@@ -417,38 +444,24 @@ msgstr "Bewerk"
 msgid "Does the algorithm meet the requirements?"
 msgstr "Voldoet het algoritme aan de vereisten?"
 
-#: amt/site/templates/algorithms/details_info.html.j2:20
-#: amt/site/templates/algorithms/details_info.html.j2:46
-#: amt/site/templates/macros/tasks.html.j2:32
-msgid "Done"
-msgstr "Afgerond"
-
-#: amt/site/templates/algorithms/details_info.html.j2:42
-msgid "To do"
-msgstr "Te doen"
-
-#: amt/site/templates/algorithms/details_info.html.j2:44
-msgid "In progress"
-msgstr "Onderhanden"
-
-#: amt/site/templates/algorithms/details_info.html.j2:60
+#: amt/site/templates/algorithms/details_info.html.j2:65
 msgid "Go to all requirements"
 msgstr "Ga naar alle Vereisten"
 
-#: amt/site/templates/algorithms/details_info.html.j2:80
+#: amt/site/templates/algorithms/details_info.html.j2:85
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:27
 msgid "Description"
 msgstr "Omschrijving"
 
-#: amt/site/templates/algorithms/details_info.html.j2:86
+#: amt/site/templates/algorithms/details_info.html.j2:91
 msgid "Repository"
 msgstr "Repository"
 
-#: amt/site/templates/algorithms/details_info.html.j2:92
+#: amt/site/templates/algorithms/details_info.html.j2:97
 msgid "Algorithm code"
 msgstr "Algoritme code"
 
-#: amt/site/templates/algorithms/details_info.html.j2:102
+#: amt/site/templates/algorithms/details_info.html.j2:107
 #: amt/site/templates/organizations/parts/overview_results.html.j2:134
 #: amt/site/templates/pages/assessment_card.html.j2:7
 #: amt/site/templates/pages/model_card.html.j2:6
@@ -458,11 +471,11 @@ msgstr "Algoritme code"
 msgid "Last updated"
 msgstr "Laatst bijgewerkt"
 
-#: amt/site/templates/algorithms/details_info.html.j2:106
+#: amt/site/templates/algorithms/details_info.html.j2:111
 msgid "Labels"
 msgstr "Labels"
 
-#: amt/site/templates/algorithms/details_info.html.j2:114
+#: amt/site/templates/algorithms/details_info.html.j2:119
 msgid "References"
 msgstr "Referenties"
 
@@ -534,23 +547,11 @@ msgstr "Vind uw AI Act profiel"
 msgid "Select Option"
 msgstr "Selecteer optie"
 
-#: amt/site/templates/algorithms/new.html.j2:172
-msgid ""
-"Overview of instruments for the responsible development, deployment, "
-"assessment, and monitoring of algorithms and AI-systems."
-msgstr ""
-"Overzicht van aanbevolen instrument voor het verantwoord ontwikkelen, "
-"gebruiken, beoordelen en monitoren van algoritmes en AI-systemen."
-
-#: amt/site/templates/algorithms/new.html.j2:180
-msgid "Choose one or more instruments"
-msgstr "Kies één of meerdere instrumenten"
-
-#: amt/site/templates/algorithms/new.html.j2:204
+#: amt/site/templates/algorithms/new.html.j2:176
 msgid "Create Algorithm"
 msgstr "Creëer algoritme"
 
-#: amt/site/templates/algorithms/new.html.j2:221
+#: amt/site/templates/algorithms/new.html.j2:193
 msgid "Copy results and close"
 msgstr "Resultaten overnemen en sluiten"
 
@@ -597,8 +598,41 @@ msgstr "Inloggen"
 
 #: amt/site/templates/errors/Exception.html.j2:5
 #: amt/site/templates/errors/RequestValidationError_400.html.j2:5
+#: amt/site/templates/errors/_404_Exception.html.j2:1
 msgid "An error occurred"
 msgstr "Er is een fout opgetreden"
+
+#: amt/site/templates/errors/_404_Exception.html.j2:3
+msgid "We couldn't find what you were looking for. This might be because:"
+msgstr "We konden niet vinden wat u zocht. Dit kan komen doordat:"
+
+#: amt/site/templates/errors/_404_Exception.html.j2:6
+msgid "The link isn't correct (anymore)"
+msgstr "De link niet (meer) correct is"
+
+#: amt/site/templates/errors/_404_Exception.html.j2:7
+msgid "The page has moved or been removed"
+msgstr "De pagina is verplaatst of verwijderd"
+
+#: amt/site/templates/errors/_404_Exception.html.j2:8
+msgid "You don't have access to this page"
+msgstr "U heeft geen toegang tot deze pagina"
+
+#: amt/site/templates/errors/_404_Exception.html.j2:10
+msgid "What now?"
+msgstr "Wat nu?"
+
+#: amt/site/templates/errors/_404_Exception.html.j2:12
+msgid "Double-check if you typed the URL correctly"
+msgstr "Controleer nogmaals of u de URL correct hebt getypt"
+
+#: amt/site/templates/errors/_404_Exception.html.j2:14
+msgid "Head back to the&nbsp;<a href=\"/\">overview page</a>"
+msgstr "Ga terug naar de&nbsp;<a href=\"/\">overzichtspagina</a>"
+
+#: amt/site/templates/errors/_404_Exception.html.j2:16
+msgid "Contact your admin"
+msgstr "Neem contact op met uw beheerder"
 
 #: amt/site/templates/errors/_AMTCSRFProtectError_401.html.j2:11
 #: amt/site/templates/errors/_Exception.html.j2:5
@@ -617,27 +651,27 @@ msgstr "Er is één fout:"
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr "Algoritme Management Toolkit"
 
-#: amt/site/templates/macros/form_macros.html.j2:58
+#: amt/site/templates/macros/form_macros.html.j2:60
 msgid "Are you sure you want to remove "
 msgstr "Weet u zeker dat u "
 
-#: amt/site/templates/macros/form_macros.html.j2:58
+#: amt/site/templates/macros/form_macros.html.j2:60
 msgid " from this organization? "
 msgstr " wilt verwijderen van deze organisatie?"
 
-#: amt/site/templates/macros/form_macros.html.j2:61
+#: amt/site/templates/macros/form_macros.html.j2:63
 msgid "Delete"
 msgstr "Verwijder"
 
-#: amt/site/templates/macros/form_macros.html.j2:62
+#: amt/site/templates/macros/form_macros.html.j2:64
 msgid "Delete member"
 msgstr "Verwijder persoon"
 
-#: amt/site/templates/macros/form_macros.html.j2:150
+#: amt/site/templates/macros/form_macros.html.j2:152
 msgid "Delete file"
 msgstr "Verwijder bestand"
 
-#: amt/site/templates/macros/form_macros.html.j2:157
+#: amt/site/templates/macros/form_macros.html.j2:159
 msgid "Are you sure you want to delete"
 msgstr "Weet u zeker dat u het bestand wilt verwijderen"
 
@@ -645,19 +679,7 @@ msgstr "Weet u zeker dat u het bestand wilt verwijderen"
 msgid " ago"
 msgstr "geleden"
 
-#: amt/site/templates/macros/tasks.html.j2:11
-msgid "Todo"
-msgstr "Te doen"
-
-#: amt/site/templates/macros/tasks.html.j2:18
-msgid "Doing"
-msgstr "Onderhanden"
-
-#: amt/site/templates/macros/tasks.html.j2:25
-msgid "Reviewing"
-msgstr "Beoordelen"
-
-#: amt/site/templates/macros/tasks.html.j2:35
+#: amt/site/templates/macros/tasks.html.j2:43
 msgid "Unknown"
 msgstr "Onbekend"
 
@@ -689,6 +711,7 @@ msgstr "Voeg personen toe"
 #: amt/site/templates/organizations/parts/members_results.html.j2:29
 #: amt/site/templates/organizations/parts/overview_results.html.j2:26
 #: amt/site/templates/parts/algorithm_search.html.j2:25
+#: amt/site/templates/parts/tasks_search.html.j2:18
 msgid "Search"
 msgstr "Zoek"
 
@@ -848,6 +871,7 @@ msgid "Find algorithm..."
 msgstr "Vind algoritme..."
 
 #: amt/site/templates/parts/algorithm_search.html.j2:53
+#: amt/site/templates/parts/tasks_search.html.j2:46
 msgid "Select lifecycle"
 msgstr "Selecteer levenscyclus"
 
@@ -909,4 +933,24 @@ msgid ""
 "  |  This website is under development  |  All versions are created in an"
 " open manner."
 msgstr "Deze website is in ontwikkeling. Alle versies ontstaan op een open manier."
+
+#: amt/site/templates/parts/tasks_board.html.j2:5
+msgid "Results for"
+msgstr "Resultaten voor"
+
+#: amt/site/templates/parts/tasks_search.html.j2:9
+msgid "Taken"
+msgstr "Taken"
+
+#: amt/site/templates/parts/tasks_search.html.j2:25
+msgid "Find tasks..."
+msgstr "Vind taken..."
+
+#: amt/site/templates/parts/tasks_search.html.j2:55
+msgid "Assignee"
+msgstr "Toegewezen aan"
+
+#: amt/site/templates/parts/tasks_search.html.j2:60
+msgid "Select assignee"
+msgstr "Selecteer toegewezen aan"
 

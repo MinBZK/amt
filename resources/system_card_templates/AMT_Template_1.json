@@ -87,8 +87,543 @@
       "snapshot": ""
     }
   ],
-  "measures": [],
-  "requirements": [],
+  "measures": [
+    {
+      "urn": "urn:nl:ak:mtr:dat-01",
+      "state": "to do",
+      "version": "",
+      "value": "",
+      "accountable_persons": [
+        {
+          "name": "Default User",
+          "uuid": "92714be3-f798-4461-ba83-55d6cfd889a6"
+        }
+      ],
+      "reviewer_persons": [
+        {
+          "name": "Default User",
+          "uuid": "92714be3-f798-4461-ba83-55d6cfd889a6"
+        }
+      ],
+      "responsible_persons": [
+        {
+          "name": "Default User",
+          "uuid": "92714be3-f798-4461-ba83-55d6cfd889a6"
+        }
+      ]
+    },
+    {
+      "urn": "urn:nl:ak:mtr:fur-01",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:gov-01",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:gov-02",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:gov-03",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:gov-04",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:gov-05",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:gov-06",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:gov-07",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:gov-08",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:gov-09",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:gov-10",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:gov-11",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:gov-12",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:gov-13",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:gov-14",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:gov-15",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:gov-16",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:gov-17",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:gov-18",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:gov-19",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:gov-20",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pgb-01",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pgb-02",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pgb-03",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pgb-04",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pgb-05",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pgb-06",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pgb-07",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pgb-08",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pin-01",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pin-02",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pin-03",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pin-04",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pin-05",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pin-06",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pin-07",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pin-08",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pin-09",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pin-10",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pin-11",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pin-14",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pin-15",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pin-16",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pin-17",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pin-18",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pin-19",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pin-20",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pin-21",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pin-22",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pin-23",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pin-24",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pin-25",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:tra-01",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    },
+    {
+      "urn": "urn:nl:ak:mtr:tra-02",
+      "state": "to do",
+      "version": "",
+      "value": ""
+    }
+  ],
+  "requirements": [
+    {
+      "urn": "urn:nl:ak:ver:awb-01",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-03",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-05",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-07",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-10",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-13",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-22",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-23",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-24",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-25",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-26",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-27",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-28",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-29",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-35",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:arc-01",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:aut-01",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:avg-01",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:avg-03",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:avg-04",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:avg-05",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:avg-06",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:avg-07",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:avg-08",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:avg-09",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:avg-10",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:avg-11",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:avg-12",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:avg-13",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:awb-01",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:awb-02",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:bio-01",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:bzk-01",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:dat-01",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:grw-01",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:grw-02",
+      "state": "to do",
+      "version": ""
+    },
+    {
+      "urn": "urn:nl:ak:ver:woo-01",
+      "state": "to do",
+      "version": ""
+    }
+  ],
   "models": [],
-  "assessments": []
+  "assessments": [],
 }

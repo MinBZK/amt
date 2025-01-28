@@ -15,6 +15,7 @@ from amt.api.editable_enforcers import EditableEnforcer, EditableEnforcerForOrga
 from amt.api.editable_validators import EditableValidator, EditableValidatorMinMaxLength, EditableValidatorSlug
 from amt.api.lifecycles import get_localized_lifecycles
 from amt.api.routes.shared import UpdateFieldModel, nested_value
+from amt.api.utils import SafeDict
 from amt.core.exceptions import AMTNotFound
 from amt.models import Algorithm, Organization
 from amt.models.base import Base
@@ -196,11 +197,6 @@ class Editables:
 
 
 editables = Editables()
-
-
-class SafeDict(dict[str, str | int]):
-    def __missing__(self, key: str) -> str:
-        return "{" + key + "}"
 
 
 class EditModes(StrEnum):

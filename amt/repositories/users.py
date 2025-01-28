@@ -1,6 +1,6 @@
 import logging
 from collections.abc import Sequence
-from typing import Annotated
+from typing import Annotated, cast
 from uuid import UUID
 
 from fastapi import Depends
@@ -29,7 +29,7 @@ class UsersRepository:
         self,
         search: str | None = None,
         sort: dict[str, str] | None = None,
-        filters: dict[str, str] | None = None,
+        filters: dict[str, str | list[str | int]] | None = None,
         skip: int | None = None,
         limit: int | None = None,
     ) -> Sequence[User]:
@@ -37,7 +37,9 @@ class UsersRepository:
         if search:
             statement = statement.filter(User.name.ilike(f"%{escape_like(search)}%"))
         if filters and "organization-id" in filters:
-            statement = statement.where(User.organizations.any(Organization.id == int(filters["organization-id"])))
+            statement = statement.where(
+                User.organizations.any(Organization.id == int(cast(str, filters["organization-id"])))
+            )
         if sort:
             if "name" in sort and sort["name"] == "ascending":
                 statement = statement.order_by(func.lower(User.name).asc())

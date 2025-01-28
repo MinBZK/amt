@@ -1,7 +1,7 @@
 import json
 
 import pytest
-from amt.clients.clients import TaskType, task_registry_api_client
+from amt.clients.clients import TaskRegistryAPIClient, TaskType
 from amt.core.exceptions import AMTNotFound
 from amt.schema.github import RepositoryContent
 from pytest_httpx import HTTPXMock
@@ -14,7 +14,7 @@ async def test_task_registry_api_client_get_instrument_list(httpx_mock: HTTPXMoc
         url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
     )
 
-    result = await task_registry_api_client.get_list_of_task(task=TaskType.INSTRUMENTS)
+    result = await TaskRegistryAPIClient().get_list_of_task(task=TaskType.INSTRUMENTS)
 
     assert result == RepositoryContent.model_validate(json.loads(TASK_REGISTRY_LIST_PAYLOAD)["entries"])
 
@@ -25,7 +25,7 @@ async def test_task_registry_api_client_get_instrument_list_not_succesfull(httpx
 
     # then
     with pytest.raises(AMTNotFound):
-        await task_registry_api_client.get_list_of_task()
+        await TaskRegistryAPIClient().get_list_of_task()
 
 
 @pytest.mark.asyncio
@@ -38,7 +38,7 @@ async def test_task_registry_api_client_get_instrument(httpx_mock: HTTPXMock):
 
     # when
     urn = "urn:nl:aivt:tr:iama:1.0"
-    result = await task_registry_api_client.get_task_by_urn(TaskType.INSTRUMENTS, urn)
+    result = await TaskRegistryAPIClient().get_task_by_urn(TaskType.INSTRUMENTS, urn)
 
     # then
     assert result == json.loads(TASK_REGISTRY_CONTENT_PAYLOAD)
@@ -55,4 +55,4 @@ async def test_task_registry_api_client_get_instrument_not_succesfull(httpx_mock
 
     # then
     with pytest.raises(AMTNotFound):
-        await task_registry_api_client.get_task_by_urn(TaskType.INSTRUMENTS, urn)
+        await TaskRegistryAPIClient().get_task_by_urn(TaskType.INSTRUMENTS, urn)

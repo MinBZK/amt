@@ -52,15 +52,15 @@ def test_get_all_next_tasks(system_card: SystemCard):
     instrument0 = default_instrument(
         urn="urn:instrument:assessment0",
         tasks=[
-            InstrumentTask(question="question", urn="urn:instrument:assessment:task", lifecycle=["Ontwerp"]),
-            InstrumentTask(question="question", urn="task_1_urn", lifecycle=["Ontwerp"]),
+            InstrumentTask(question="question", urn="urn:instrument:assessment:task", lifecycle=["ontwerp"]),
+            InstrumentTask(question="question", urn="task_1_urn", lifecycle=["ontwerp"]),
         ],
     )
     instrument1 = default_instrument(
         urn="urn:instrument:assessment1",
         tasks=[
-            InstrumentTask(question="question", urn="task_2_urn", lifecycle=["Ontwerp"]),
-            InstrumentTask(question="question", urn="task_3_urn", lifecycle=["Ontwerp"]),
+            InstrumentTask(question="question", urn="task_2_urn", lifecycle=["ontwerp"]),
+            InstrumentTask(question="question", urn="task_3_urn", lifecycle=["ontwerp"]),
         ],
     )
     instruments = {"urn:instrument:assessment": instrument0, "instrument1": instrument1}
@@ -117,15 +117,15 @@ def test_get_task_timestamp_from_assessment_card_non_existing(system_card: Syste
 
 
 def test_get_first_lifecycle_idx_ordered():
-    lifecycles = ["Ontwerp", "Monitoren"]
+    lifecycles = ["ontwerp", "monitoren"]
 
-    assert get_first_lifecycle_idx(lifecycles) == 2
+    assert get_first_lifecycle_idx(lifecycles) == 3
 
 
 def test_get_first_lifecycle_idx_unordered():
-    lifecycles = ["Monitoren", "Ontwerp"]
+    lifecycles = ["monitoren", "ontwerp"]
 
-    assert get_first_lifecycle_idx(lifecycles=lifecycles) == 2
+    assert get_first_lifecycle_idx(lifecycles=lifecycles) == 3
 
 
 def test_get_first_lifecycle_empty_list():
@@ -150,7 +150,7 @@ def test_get_next_tasks_per_instrument_correct_timestamp_default(system_card: Sy
     assert urn_0 is not None
     assert urn_1 is not None
 
-    instrument = default_instrument(urn=urn_0, tasks=[InstrumentTask(urn=urn_1, lifecycle=["Ontwerp"], question="")])
+    instrument = default_instrument(urn=urn_0, tasks=[InstrumentTask(urn=urn_1, lifecycle=["ontwerp"], question="")])
     tasks = get_next_tasks_per_instrument(instrument, assessment_card)
     assert tasks["last_modified_date"] == datetime(1970, 1, 1, tzinfo=timezone.utc)  # noqa UP017
 
@@ -175,12 +175,12 @@ def test_find_next_tasks_for_instrument_correct_lifecycle(system_card: SystemCar
     assert urn_0 is not None
     assert urn_1 is not None
 
-    test_tasks = [InstrumentTask(urn=urn_1, lifecycle=["Ontwerp"], question="")]
+    test_tasks = [InstrumentTask(urn=urn_1, lifecycle=["ontwerp"], question="")]
     instrument = default_instrument(urn=urn_0, tasks=test_tasks)
     tasks = get_next_tasks_per_instrument(instrument, assessment_card)
 
     assert len(tasks["tasks_per_lifecycle"]) > 0
-    assert tasks["tasks_per_lifecycle"][2] == test_tasks
+    assert tasks["tasks_per_lifecycle"][3] == test_tasks
 
 
 @pytest.mark.asyncio

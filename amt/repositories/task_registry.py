@@ -67,3 +67,6 @@ class TaskRegistryRepository:
             logger.warning("Cannot find all tasks")
 
         return tasks
+
+
+task_registry_repository = TaskRegistryRepository(client=TaskRegistryAPIClient())

@@ -8,21 +8,21 @@ from amt.schema.assessment_card import AssessmentCard
 from amt.schema.instrument import Instrument, InstrumentTask
 from amt.schema.requirement import Requirement
 from amt.schema.system_card import SystemCard
-from amt.services.instruments import create_instrument_service
+from amt.services.instruments import instruments_service
 
 logger = logging.getLogger(__name__)
 
 all_lifecycles = (
-    "Geen",
-    "Probleemanalyse",
-    "Ontwerp",
-    "Monitoren",
-    "Beheer",
-    "Ontwikkelen",
-    "Dataverkenning en -preparatie",
-    "Verificatie",
-    "Validatie",
-    "Implementatie",
+    "geen",
+    "organisatieverantwoordelijkheden",
+    "probleemanalyse",
+    "ontwerp",
+    "dataverkenning en datapreparatie",
+    "ontwikkelen",
+    "verificatie en validatie",
+    "implementatie",
+    "monitoring en beheer",
+    "uitfaseren",
 )
 
 
@@ -108,8 +108,9 @@ class RequirementsStateService:
 
         saved_requirements = self.system_card.requirements
         for requirement in saved_requirements:
-            urn = requirement.urn
-            self.requirements_state.append({"name": requirements_mapping[urn], "state": requirement.state})
+            self.requirements_state.append(
+                {"name": requirements_mapping[requirement.urn], "state": requirement.state, "urn": requirement.urn}
+            )
         return self.requirements_state
 
     def get_amount_total_requirements(self) -> int:
@@ -134,7 +135,6 @@ class InstrumentStateService:
         # Otherwise the instrument is completed as there are not any tasks left.
 
         urns = [instrument.urn for instrument in self.system_card.instruments]
-        instruments_service = create_instrument_service()
         instruments = await instruments_service.fetch_instruments(urns)
         # TODO: refactor this data structure in 3 lines below (also change in get_all_next_tasks + check_state.py)
         instruments_dict = {}

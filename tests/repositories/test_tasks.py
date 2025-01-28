@@ -1,6 +1,6 @@
 import pytest
 from amt.core.exceptions import AMTRepositoryError
-from amt.enums.status import Status
+from amt.enums.tasks import Status
 from amt.models import Task
 from amt.repositories.tasks import TasksRepository
 from tests.constants import default_algorithm, default_task, default_user

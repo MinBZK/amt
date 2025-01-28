@@ -1,23 +1,25 @@
 {% macro user_avatars(users) %}
-    <div class="amt-avatar-list">
-        {# this solution is not very elegant, a limit and count query would be better #}
-        {% for user in users[0:5] %}
-            <span class="amt-avatar-list__item amt-tooltip">
-                <img width="24"
-                     height="24"
-                     src="https://gravatar.com/avatar/{{ user.email_hash }}?r=g&s=48&d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/{{ user.name_encoded }}/48"
-                     alt="User icon {{ user.name }}">
-                <span class="amt-tooltip__text"
-                      style="left: -{{ (user.name | length / 2) | round }}ch;
-                             min-width: {{ user.name|length }}ch">{{ user.name }}</span>
-            </span>
-        {% endfor %}
-        {% if users|length > 5 %}
-            <span class="amt-avatar-list__item amt-tooltip">
-                <span class="amt-avatar-list__more">+{{ users|length - 5 }}</span>
-            </span>
-        {% endif %}
-    </div>
+    {% if users|length > 0 %}
+        <div class="amt-avatar-list">
+            {# this solution is not very elegant, a limit and count query would be better #}
+            {% for user in users[0:5] %}
+                <span class="amt-avatar-list__item amt-tooltip">
+                    <img width="24"
+                         height="24"
+                         src="https://gravatar.com/avatar/{{ user.email_hash }}?r=g&s=48&d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/{{ user.name_encoded }}/48"
+                         alt="User icon {{ user.name }}">
+                    <span class="amt-tooltip__text"
+                          style="left: -{{ (user.name | length / 2) | round }}ch;
+                                 min-width: {{ user.name|length }}ch">{{ user.name }}</span>
+                </span>
+            {% endfor %}
+            {% if users|length > 5 %}
+                <span class="amt-avatar-list__item amt-tooltip">
+                    <span class="amt-avatar-list__more">+{{ users|length - 5 }}</span>
+                </span>
+            {% endif %}
+        </div>
+    {% endif %}
 {% endmacro %}
 {% macro form_field(form, field) %}
     {% if field.type == WebFormFieldType.TEXT %}
@@ -293,7 +295,7 @@
         </div>
         <div id="error-{{ field.name }}" class="htmx-error-oob"></div>
         <div class="rvo-layout-column rvo-layout-gap--xs">
-            <textarea id="{{ prefix }}{{ field.name }}" name="{{ field.name }}" placeholder="{{ field.placeholder }}" aria-describedby="helperTextId" class="utrecht-textarea utrecht-textarea--html-textarea" dir="auto" onchange="amt.reset_errorfield('error-{{ field.name }}')" {% if isinstance(field.attributes, "dict") %} {% for key, value in field.attributes.items() %}{{ key }}="{{ value }}"{% endfor %}{% endif %}>{{ field.default_value }}</textarea>
+            <textarea id="{{ prefix }}{{ field.name }}" name="{{ field.name }}" placeholder="{{ field.placeholder }}" aria-describedby="helperTextId" class="utrecht-textbox utrecht-textarea utrecht-textarea--html-textarea" dir="auto" onchange="amt.reset_errorfield('error-{{ field.name }}')" {% if isinstance(field.attributes, "dict") %} {% for key, value in field.attributes.items() %}{{ key }}="{{ value }}"{% endfor %}{% endif %}>{{ field.default_value }}</textarea>
             {# TODO: Fix when we upgrade to higher @nl-rvo npm package #}
             {# <span class="utrecht-textbox-remaining-chars">{% trans %}Still{% endtrans %} <strong>300</strong> {% trans %}Characters remaining{% endtrans %}</span>#}
         </div>

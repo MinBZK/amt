@@ -1,6 +1,7 @@
 import logging
 from collections.abc import Sequence
-from typing import Annotated
+from typing import Annotated, cast
+from uuid import UUID
 
 from fastapi import Depends
 from sqlalchemy import func, select
@@ -10,7 +11,7 @@ from sqlalchemy_utils import escape_like  # pyright: ignore[reportMissingTypeStu
 
 from amt.api.risk_group import RiskGroup
 from amt.core.exceptions import AMTRepositoryError
-from amt.models import Algorithm
+from amt.models import Algorithm, Organization, User
 from amt.repositories.deps import get_session
 
 logger = logging.getLogger(__name__)
@@ -74,7 +75,7 @@ class AlgorithmsRepository:
             raise AMTRepositoryError from e
 
     async def paginate(  # noqa
-        self, skip: int, limit: int, search: str, filters: dict[str, str], sort: dict[str, str]
+        self, skip: int, limit: int, search: str, filters: dict[str, str | list[str | int]], sort: dict[str, str]
     ) -> list[Algorithm]:
         try:
             statement = select(Algorithm)
@@ -83,15 +84,18 @@ class AlgorithmsRepository:
             if filters:
                 for key, value in filters.items():
                     match key:
+                        case "id":
+                            statement = statement.where(Algorithm.id == int(cast(str, value)))
                         case "lifecycle":
                             statement = statement.filter(Algorithm.lifecycle == value)
                         case "risk-group":
                             statement = statement.filter(
                                 Algorithm.system_card_json["ai_act_profile"]["risk_group"].as_string()
-                                == RiskGroup[value].value
+                                == RiskGroup[cast(str, value)].value
                             )
                         case "organization-id":
-                            statement = statement.filter(Algorithm.organization_id == int(value))
+                            value = [int(value)] if not isinstance(value, list) else [int(v) for v in value]
+                            statement = statement.filter(Algorithm.organization_id.in_(value))
                         case _:
                             raise TypeError(f"Unknown filter type with key: {key}")  # noqa
             if sort:
@@ -120,3 +124,12 @@ class AlgorithmsRepository:
         except Exception as e:
             logger.exception("Error paginating algorithms")
             raise AMTRepositoryError from e
+
+    async def get_by_user(self, user_id: UUID) -> Sequence[Algorithm]:
+        statement = (
+            select(Algorithm)
+            .join(Organization, Organization.id == Algorithm.organization_id)
+            .where(Organization.users.any(User.id == user_id))  # pyright: ignore[reportUnknownMemberType]
+        )
+
+        return (await self.session.execute(statement)).scalars().all()

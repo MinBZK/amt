@@ -5,12 +5,12 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, Query, Request
 from fastapi.responses import HTMLResponse, JSONResponse, Response
 
+from amt.api.decorators import permission
 from amt.api.deps import templates
 from amt.api.editable import (
     Editables,
     EditModes,
     ResolvedEditable,
-    SafeDict,
     get_enriched_resolved_editable,
     save_editable,
 )
@@ -24,12 +24,13 @@ from amt.api.navigation import (
     resolve_base_navigation_items,
     resolve_navigation_items,
 )
-from amt.api.organization_filter_options import get_localized_organization_filters
+from amt.api.organization_filter_options import OrganizationFilterOptions, get_localized_organization_filters
 from amt.api.risk_group import get_localized_risk_groups
 from amt.api.routes.algorithm import get_user_id_or_error
 from amt.api.routes.algorithms import get_algorithms
 from amt.api.routes.shared import UpdateFieldModel, get_filters_and_sort_by
-from amt.core.authorization import get_user
+from amt.api.utils import SafeDict
+from amt.core.authorization import AuthorizationResource, AuthorizationVerb, get_user
 from amt.core.exceptions import AMTAuthorizationError, AMTNotFound, AMTRepositoryError
 from amt.core.internationalization import get_current_translation
 from amt.models import Organization, User
@@ -38,6 +39,7 @@ from amt.repositories.users import UsersRepository
 from amt.schema.organization import OrganizationNew, OrganizationUsers
 from amt.services.algorithms import AlgorithmsService
 from amt.services.organizations import OrganizationsService
+from amt.services.users import UsersService
 
 router = APIRouter()
 
@@ -90,23 +92,32 @@ async def get_new(
 
 
 @router.get("/")
+@permission({AuthorizationResource.ORGANIZATIONS: [AuthorizationVerb.LIST]})
 async def root(
     request: Request,
     organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
+    users_service: Annotated[UsersService, Depends(UsersService)],
     skip: int = Query(0, ge=0),
     limit: int = Query(5000, ge=1),  # todo: fix infinite scroll
     search: str = Query(""),
 ) -> HTMLResponse:
-    filters, drop_filters, localized_filters, sort_by = get_filters_and_sort_by(request)
+    filters, drop_filters, localized_filters, sort_by = await get_filters_and_sort_by(request, users_service)
 
     user = get_user(request)
 
     breadcrumbs = resolve_base_navigation_items(
         [Navigation.ORGANIZATIONS_ROOT, Navigation.ORGANIZATIONS_OVERVIEW], request
     )
+    # TODO: we only show organizations you are a member of (request for the pilots)
+    filters = {"organization-type": OrganizationFilterOptions.MY_ORGANIZATIONS.value}
     organizations: Sequence[Organization] = await organizations_repository.find_by(
         search=search, sort=sort_by, filters=filters, user_id=user["sub"] if user else None
     )
+
+    # we only can show organization you belong to, so the all organizations option is disabled
+    organization_filters = [
+        f for f in get_localized_organization_filters(request) if f and f.value != OrganizationFilterOptions.ALL.value
+    ]
 
     context: dict[str, Any] = {
         "breadcrumbs": breadcrumbs,
@@ -119,7 +130,7 @@ async def root(
         "organizations_length": len(organizations),
         "filters": localized_filters,
         "include_filters": False,
-        "organization_filters": get_localized_organization_filters(request),
+        "organization_filters": organization_filters,
     }
 
     if request.state.htmx:
@@ -132,6 +143,7 @@ async def root(
 
 
 @router.post("/new", response_class=HTMLResponse)
+@permission({AuthorizationResource.ORGANIZATIONS: [AuthorizationVerb.CREATE]})
 async def post_new(
     request: Request,
     organization_new: OrganizationNew,
@@ -150,13 +162,14 @@ async def post_new(
     return response
 
 
-@router.get("/{slug}")
+@router.get("/{organization_slug}")
+@permission({AuthorizationResource.ORGANIZATION_INFO_SLUG: [AuthorizationVerb.READ]})
 async def get_by_slug(
     request: Request,
-    slug: str,
+    organization_slug: str,
     organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
 ) -> HTMLResponse:
-    organization = await get_organization_or_error(organizations_service, request, slug)
+    organization = await get_organization_or_error(organizations_service, request, organization_slug)
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.ORGANIZATIONS_ROOT,
@@ -165,9 +178,9 @@ async def get_by_slug(
         request,
     )
 
-    tab_items = get_organization_tabs(request, organization_slug=slug)
+    tab_items = get_organization_tabs(request, organization_slug=organization_slug)
     context = {
-        "base_href": f"/organizations/{ slug }",
+        "base_href": f"/organizations/{ organization_slug }",
         "organization": organization,
         "organization_id": organization.id,
         "tab_items": tab_items,
@@ -177,24 +190,25 @@ async def get_by_slug(
 
 
 async def get_organization_or_error(
-    organizations_service: OrganizationsService, request: Request, slug: str
+    organizations_service: OrganizationsService, request: Request, organization_slug: str
 ) -> Organization:
     try:
-        organization = await organizations_service.find_by_slug(slug)
+        organization = await organizations_service.find_by_slug(organization_slug)
         request.state.path_variables = {"organization_slug": organization.slug}
     except AMTRepositoryError as e:
         raise AMTNotFound from e
     return organization
 
 
-@router.get("/{slug}/edit")
+@router.get("/{organization_slug}/edit")
+@permission({AuthorizationResource.ORGANIZATION_INFO_SLUG: [AuthorizationVerb.UPDATE]})
 async def get_organization_edit(
     request: Request,
     organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
-    slug: str,
+    organization_slug: str,
     full_resource_path: str,
 ) -> HTMLResponse:
-    organization = await get_organization_or_error(organizations_service, request, slug)
+    organization = await get_organization_or_error(organizations_service, request, organization_slug)
 
     editable: ResolvedEditable = await get_enriched_resolved_editable(
         context_variables={"organization_id": organization.id},
@@ -213,7 +227,7 @@ async def get_organization_edit(
         "relative_resource_path": editable.relative_resource_path.replace("/", ".")
         if editable.relative_resource_path
         else "",
-        "base_href": f"/organizations/{ slug }",
+        "base_href": f"/organizations/{ organization_slug }",
         "resource_object": editable.resource_object,
         "full_resource_path": full_resource_path,
         "editable_object": editable,
@@ -222,14 +236,15 @@ async def get_organization_edit(
     return templates.TemplateResponse(request, "parts/edit_cell.html.j2", context)
 
 
-@router.get("/{slug}/cancel")
+@router.get("/{organization_slug}/cancel")
+@permission({AuthorizationResource.ORGANIZATION_INFO_SLUG: [AuthorizationVerb.UPDATE]})
 async def get_organization_cancel(
     request: Request,
-    slug: str,
+    organization_slug: str,
     full_resource_path: str,
     organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
 ) -> HTMLResponse:
-    organization = await get_organization_or_error(organizations_service, request, slug)
+    organization = await get_organization_or_error(organizations_service, request, organization_slug)
 
     editable: ResolvedEditable = await get_enriched_resolved_editable(
         context_variables={"organization_id": organization.id},
@@ -247,7 +262,7 @@ async def get_organization_cancel(
         "relative_resource_path": editable.relative_resource_path.replace("/", ".")
         if editable.relative_resource_path
         else "",
-        "base_href": f"/organizations/{ slug }",
+        "base_href": f"/organizations/{ organization_slug }",
         "resource_object": None,  # TODO: this should become an optional parameter in the Jinja template
         "full_resource_path": full_resource_path,
         "editable_object": editable,
@@ -256,15 +271,16 @@ async def get_organization_cancel(
     return templates.TemplateResponse(request, "parts/view_cell.html.j2", context)
 
 
-@router.put("/{slug}/update")
+@router.put("/{organization_slug}/update")
+@permission({AuthorizationResource.ORGANIZATION_INFO_SLUG: [AuthorizationVerb.UPDATE]})
 async def get_organization_update(
     request: Request,
     organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
     update_data: UpdateFieldModel,
-    slug: str,
+    organization_slug: str,
     full_resource_path: str,
 ) -> HTMLResponse:
-    organization = await get_organization_or_error(organizations_service, request, slug)
+    organization = await get_organization_or_error(organizations_service, request, organization_slug)
 
     user_id = get_user_id_or_error(request)
 
@@ -299,7 +315,7 @@ async def get_organization_update(
         "relative_resource_path": editable.relative_resource_path.replace("/", ".")
         if editable.relative_resource_path
         else "",
-        "base_href": f"/organizations/{ slug }",
+        "base_href": f"/organizations/{ organization_slug }",
         "resource_object": None,
         "full_resource_path": full_resource_path,
         "editable_object": editable,
@@ -312,19 +328,21 @@ async def get_organization_update(
         return templates.TemplateResponse(request, "parts/view_cell.html.j2", context)
 
 
-@router.get("/{slug}/algorithms")
+@permission({AuthorizationResource.ORGANIZATION_INFO_SLUG: [AuthorizationVerb.LIST]})
+@router.get("/{organization_slug}/algorithms")
 async def show_algorithms(
     request: Request,
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
     organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
-    slug: str,
+    users_service: Annotated[UsersService, Depends(UsersService)],
+    organization_slug: str,
     skip: int = Query(0, ge=0),
     limit: int = Query(5000, ge=1),  # todo: fix infinite scroll
     search: str = Query(""),
     display_type: str = Query(""),
 ) -> HTMLResponse:
-    organization = await get_organization_or_error(organizations_service, request, slug)
-    filters, drop_filters, localized_filters, sort_by = get_filters_and_sort_by(request)
+    organization = await get_organization_or_error(organizations_service, request, organization_slug)
+    filters, drop_filters, localized_filters, sort_by = await get_filters_and_sort_by(request, users_service)
 
     filters["organization-id"] = str(organization.id)
     algorithms, amount_algorithm_systems = await get_algorithms(
@@ -332,7 +350,7 @@ async def show_algorithms(
     )
     next = skip + limit
 
-    tab_items = get_organization_tabs(request, organization_slug=slug)
+    tab_items = get_organization_tabs(request, organization_slug=organization_slug)
 
     breadcrumbs = resolve_base_navigation_items(
         [
@@ -359,7 +377,7 @@ async def show_algorithms(
         "filters": localized_filters,
         "sort_by": sort_by,
         "display_type": display_type,
-        "base_href": f"/organizations/{slug}/algorithms",
+        "base_href": f"/organizations/{organization_slug}/algorithms",
         "organization_id": organization.id,
     }
 
@@ -371,58 +389,62 @@ async def show_algorithms(
         return templates.TemplateResponse(request, "organizations/algorithms.html.j2", context)
 
 
-@router.delete("/{slug}/members/{user_id}")
+@router.delete("/{organization_slug}/members/{user_id}")
+@permission({AuthorizationResource.ORGANIZATION_INFO_SLUG: [AuthorizationVerb.UPDATE]})
 async def remove_member(
     request: Request,
-    slug: str,
+    organization_slug: str,
     user_id: UUID,
     organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
     users_repository: Annotated[UsersRepository, Depends(UsersRepository)],
 ) -> HTMLResponse:
     # TODO (Robbert): add authorization and check if user and organization exist?
-    organization = await get_organization_or_error(organizations_service, request, slug)
+    organization = await get_organization_or_error(organizations_service, request, organization_slug)
     user: User | None = await users_repository.find_by_id(user_id)
     if user:
         await organizations_service.remove_user(organization, user)
-        return templates.Redirect(request, f"/organizations/{slug}/members")
+        return templates.Redirect(request, f"/organizations/{organization_slug}/members")
     raise AMTAuthorizationError
 
 
-@router.get("/{slug}/members/form")
+@router.get("/{organization_slug}/members/form")
+@permission({AuthorizationResource.ORGANIZATION_INFO_SLUG: [AuthorizationVerb.UPDATE]})
 async def get_members_form(
     request: Request,
-    slug: str,
+    organization_slug: str,
 ) -> HTMLResponse:
     form = get_organization_form(id="organization", translations=get_current_translation(request), user=None)
-    context: dict[str, Any] = {"form": form, "slug": slug}
+    context: dict[str, Any] = {"form": form, "slug": organization_slug}
     return templates.TemplateResponse(request, "organizations/parts/add_members_modal.html.j2", context)
 
 
-@router.put("/{slug}/members", response_class=HTMLResponse)
+@router.put("/{organization_slug}/members", response_class=HTMLResponse)
+@permission({AuthorizationResource.ORGANIZATION_INFO_SLUG: [AuthorizationVerb.UPDATE]})
 async def add_new_members(
     request: Request,
-    slug: str,
+    organization_slug: str,
     organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
     organization_users: OrganizationUsers,
 ) -> HTMLResponse:
-    organization = await get_organization_or_error(organizations_service, request, slug)
+    organization = await get_organization_or_error(organizations_service, request, organization_slug)
     await organizations_service.add_users(organization, organization_users.user_ids)
-    return templates.Redirect(request, f"/organizations/{slug}/members")
+    return templates.Redirect(request, f"/organizations/{organization_slug}/members")
 
 
-@router.get("/{slug}/members")
+@router.get("/{organization_slug}/members")
+@permission({AuthorizationResource.ORGANIZATION_INFO_SLUG: [AuthorizationVerb.LIST]})
 async def get_members(
     request: Request,
-    slug: str,
+    organization_slug: str,
     organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
-    users_repository: Annotated[UsersRepository, Depends(UsersRepository)],
+    users_service: Annotated[UsersService, Depends(UsersService)],
     skip: int = Query(0, ge=0),
     limit: int = Query(5000, ge=1),  # todo: fix infinite scroll
     search: str = Query(""),
 ) -> HTMLResponse:
-    organization = await get_organization_or_error(organizations_service, request, slug)
-    filters, drop_filters, localized_filters, sort_by = get_filters_and_sort_by(request)
-    tab_items = get_organization_tabs(request, organization_slug=slug)
+    organization = await get_organization_or_error(organizations_service, request, organization_slug)
+    filters, drop_filters, localized_filters, sort_by = await get_filters_and_sort_by(request, users_service)
+    tab_items = get_organization_tabs(request, organization_slug=organization_slug)
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.ORGANIZATIONS_ROOT,
@@ -433,7 +455,7 @@ async def get_members(
     )
 
     filters["organization-id"] = str(organization.id)
-    members = await users_repository.find_all(search=search, sort=sort_by, filters=filters)
+    members = await users_service.find_all(search=search, sort=sort_by, filters=filters)
 
     context: dict[str, Any] = {
         "slug": organization.slug,

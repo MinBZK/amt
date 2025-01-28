@@ -63,8 +63,8 @@ main {
     min-height: 30em;
     background-color: var(--rvo-color-lichtblauw-150);
     border-radius: 10px;
-    overflow: hidden;
     height: calc(100% - 30px); /* todo (robbert): this is a display hack */
+    padding: 0.01px; /* this is an avoid margin collapse hack */
 }
 
 .progress-card-container {
