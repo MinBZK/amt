@@ -10,10 +10,11 @@ from amt.api.organization_filter_options import OrganizationFilterOptions, get_l
 from amt.api.risk_group import RiskGroup, get_localized_risk_group
 from amt.schema.localized_value_item import LocalizedValueItem
 from amt.schema.shared import IterMixin
+from amt.services.users import UsersService
 
 
-def get_filters_and_sort_by(
-    request: Request,
+async def get_filters_and_sort_by(
+    request: Request, users_service: UsersService
 ) -> tuple[dict[str, str | list[str | int]], list[str], dict[str, LocalizedValueItem], dict[str, str]]:
     active_filters: dict[str, str] = {
         k.removeprefix("active-filter-"): v
@@ -32,9 +33,15 @@ def get_filters_and_sort_by(
     filters: dict[str, str | list[str | int]] = {
         k: v for k, v in (active_filters | add_filters).items() if k not in drop_filters
     }
-    localized_filters: dict[str, LocalizedValueItem] = {
-        k: get_localized_value(k, cast(str, v), request) for k, v in filters.items()
-    }
+    localized_filters: dict[str, LocalizedValueItem] = {}
+    if "assignee" in filters:
+        user_id = filters.get("assignee")
+        user = await users_service.find_by_id(cast(str, user_id))
+        if user is not None:
+            localized_filters["assignee"] = LocalizedValueItem(display_value=user.name, value=str(user_id))
+    localized_filters.update(
+        {k: get_localized_value(k, cast(str, v), request) for k, v in filters.items() if k != "assignee"}
+    )
     sort_by: dict[str, str] = {
         k.removeprefix("sort-by-"): v for k, v in request.query_params.items() if k.startswith("sort-by-") and v != ""
     }

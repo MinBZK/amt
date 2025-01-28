@@ -39,6 +39,7 @@ from amt.repositories.users import UsersRepository
 from amt.schema.organization import OrganizationNew, OrganizationUsers
 from amt.services.algorithms import AlgorithmsService
 from amt.services.organizations import OrganizationsService
+from amt.services.users import UsersService
 
 router = APIRouter()
 
@@ -95,11 +96,12 @@ async def get_new(
 async def root(
     request: Request,
     organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
+    users_service: Annotated[UsersService, Depends(UsersService)],
     skip: int = Query(0, ge=0),
     limit: int = Query(5000, ge=1),  # todo: fix infinite scroll
     search: str = Query(""),
 ) -> HTMLResponse:
-    filters, drop_filters, localized_filters, sort_by = get_filters_and_sort_by(request)
+    filters, drop_filters, localized_filters, sort_by = await get_filters_and_sort_by(request, users_service)
 
     user = get_user(request)
 
@@ -332,6 +334,7 @@ async def show_algorithms(
     request: Request,
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
     organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
+    users_service: Annotated[UsersService, Depends(UsersService)],
     organization_slug: str,
     skip: int = Query(0, ge=0),
     limit: int = Query(5000, ge=1),  # todo: fix infinite scroll
@@ -339,7 +342,7 @@ async def show_algorithms(
     display_type: str = Query(""),
 ) -> HTMLResponse:
     organization = await get_organization_or_error(organizations_service, request, organization_slug)
-    filters, drop_filters, localized_filters, sort_by = get_filters_and_sort_by(request)
+    filters, drop_filters, localized_filters, sort_by = await get_filters_and_sort_by(request, users_service)
 
     filters["organization-id"] = str(organization.id)
     algorithms, amount_algorithm_systems = await get_algorithms(
@@ -434,13 +437,13 @@ async def get_members(
     request: Request,
     organization_slug: str,
     organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
-    users_repository: Annotated[UsersRepository, Depends(UsersRepository)],
+    users_service: Annotated[UsersService, Depends(UsersService)],
     skip: int = Query(0, ge=0),
     limit: int = Query(5000, ge=1),  # todo: fix infinite scroll
     search: str = Query(""),
 ) -> HTMLResponse:
     organization = await get_organization_or_error(organizations_service, request, organization_slug)
-    filters, drop_filters, localized_filters, sort_by = get_filters_and_sort_by(request)
+    filters, drop_filters, localized_filters, sort_by = await get_filters_and_sort_by(request, users_service)
     tab_items = get_organization_tabs(request, organization_slug=organization_slug)
     breadcrumbs = resolve_base_navigation_items(
         [
@@ -452,7 +455,7 @@ async def get_members(
     )
 
     filters["organization-id"] = str(organization.id)
-    members = await users_repository.find_all(search=search, sort=sort_by, filters=filters)
+    members = await users_service.find_all(search=search, sort=sort_by, filters=filters)
 
     context: dict[str, Any] = {
         "slug": organization.slug,

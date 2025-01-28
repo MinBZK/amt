@@ -3,7 +3,7 @@ import logging
 import urllib.parse
 from collections import defaultdict
 from collections.abc import Sequence
-from typing import Annotated, Any
+from typing import Annotated, Any, cast
 
 import yaml
 from fastapi import APIRouter, Depends, File, Form, Query, Request, Response, UploadFile
@@ -20,6 +20,7 @@ from amt.api.editable import (
     save_editable,
 )
 from amt.api.forms.measure import MeasureStatusOptions, get_measure_form
+from amt.api.lifecycles import Lifecycles, get_localized_lifecycles
 from amt.api.navigation import (
     BaseNavigationItem,
     Navigation,
@@ -31,11 +32,11 @@ from amt.api.routes.shared import UpdateFieldModel, get_filters_and_sort_by, rep
 from amt.core.authorization import AuthorizationResource, AuthorizationVerb, get_user
 from amt.core.exceptions import AMTError, AMTNotFound, AMTPermissionDenied, AMTRepositoryError
 from amt.core.internationalization import get_current_translation
-from amt.enums.tasks import Status, TaskType, measure_state_to_status, status_mapper
+from amt.enums.tasks import Status, TaskType, life_cycle_mapper, measure_state_to_status, status_mapper
 from amt.models import Algorithm, User
 from amt.models.task import Task
 from amt.repositories.organizations import OrganizationsRepository
-from amt.repositories.users import UsersRepository
+from amt.schema.localized_value_item import LocalizedValueItem
 from amt.schema.measure import ExtendedMeasureTask, MeasureTask, Person
 from amt.schema.measure_display import DisplayMeasureTask
 from amt.schema.requirement import RequirementTask
@@ -132,8 +133,14 @@ async def get_tasks(
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
     users_service: Annotated[UsersService, Depends(UsersService)],
     tasks_service: Annotated[TasksService, Depends(TasksService)],
+    search: str = Query(""),
 ) -> HTMLResponse:
+    filters, drop_filters, localized_filters, _ = await get_filters_and_sort_by(request, users_service)
+    if search:
+        filters["search"] = search
+
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
+
     tab_items = get_algorithm_details_tabs(request)
 
     tasks_db: Sequence[Task] = await tasks_service.get_tasks_for_algorithm(algorithm_id, None)
@@ -144,16 +151,53 @@ async def get_tasks(
         {} if len(urns) == 0 else await resolve_and_enrich_measures(algorithm, urns, users_service)
     )
 
+    def filters_match(display_task: DisplayTask) -> bool:
+        if len(filters) == 0:
+            return True
+        return all(
+            (
+                (
+                    "assignee" not in filters
+                    or any(
+                        str(user.id) == filters.get("assignee")
+                        for user in display_task.type_object.users  # pyright: ignore[reportOptionalMemberAccess]
+                        if "assignee" in filters and display_task.type_object is not None
+                    )
+                ),
+                (
+                    "lifecycle" not in filters
+                    or any(
+                        lifecycle == life_cycle_mapper[Lifecycles(filters.get("lifecycle"))]
+                        for lifecycle in display_task.type_object.lifecycle  # pyright: ignore[reportOptionalMemberAccess]
+                        if "lifecycle" in filters and display_task.type_object is not None
+                    )
+                ),
+                (
+                    "search" not in filters
+                    or (
+                        "search" in filters
+                        and display_task.type_object is not None
+                        and (
+                            cast(str, filters["search"]).casefold() in display_task.type_object.name.casefold()  # pyright: ignore[reportOptionalMemberAccess]
+                            or cast(str, filters["search"]).casefold()
+                            in display_task.type_object.description.casefold()  # pyright: ignore[reportOptionalMemberAccess]
+                        )
+                    )
+                ),
+            )
+        )
+
     tasks_by_status: dict[Status, list[DisplayTask]] = {}
     for status in Status:
         tasks_by_status[status] = []
-        tasks_by_status[status] += [
+        all_tasks = [
             # we create display task for Measures,
             #  this could be extended in the future to support other types
             DisplayTask.create_from_model(task, resolved_measures.get(task.type_id))
             for task in tasks_db
             if task.status_id == status and task.type == TaskType.MEASURE and task.type_id is not None
         ]
+        tasks_by_status[status] = [task for task in all_tasks if filters_match(task)]
         # we also append all tasks that have no related object
         tasks_by_status[status] += [
             DisplayTask.create_from_model(task, None)
@@ -170,6 +214,8 @@ async def get_tasks(
         request,
     )
 
+    members = await users_service.find_all(filters={"organization-id": str(algorithm.organization.id)})  # pyright: ignore[reportUnknownArgumentType, reportUnknownMemberType]
+
     context = {
         "tasks_by_status": tasks_by_status,
         "statuses": Status,
@@ -177,9 +223,21 @@ async def get_tasks(
         "algorithm_id": algorithm.id,
         "breadcrumbs": breadcrumbs,
         "tab_items": tab_items,
+        "base_href": f"/algorithm/{algorithm_id}/details/tasks",
+        "search": search,
+        "lifecycles": get_localized_lifecycles(request),
+        "assignees": [LocalizedValueItem(value=str(member.id), display_value=member.name) for member in members],
+        "filters": localized_filters,
     }
 
-    return templates.TemplateResponse(request, "algorithms/tasks.html.j2", context)
+    headers = {"HX-Replace-Url": request.url.path + "?" + request.url.query}
+
+    if request.state.htmx and drop_filters:
+        return templates.TemplateResponse(request, "parts/tasks_search.html.j2", context, headers=headers)
+    elif request.state.htmx:
+        return templates.TemplateResponse(request, "parts/tasks_board.html.j2", context, headers=headers)
+    else:
+        return templates.TemplateResponse(request, "algorithms/tasks.html.j2", context, headers=headers)
 
 
 async def resolve_and_enrich_measures(
@@ -214,6 +272,7 @@ async def resolve_and_enrich_measures(
                 value=system_measure.value,
                 version=system_measure.version,
                 users=all_users,
+                lifecycle=resolved_measure.lifecycle,
             )
             enriched_resolved_measures[system_measure.urn] = measure_task_display
     return enriched_resolved_measures
@@ -481,14 +540,14 @@ async def get_system_card_requirements(
     request: Request,
     algorithm_id: int,
     organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
-    users_repository: Annotated[UsersRepository, Depends(UsersRepository)],
+    users_service: Annotated[UsersService, Depends(UsersService)],
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
 ) -> HTMLResponse:
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
     instrument_state = await get_instrument_state(algorithm.system_card)
     requirements_state = await get_requirements_state(algorithm.system_card)
     tab_items = get_algorithm_details_tabs(request)
-    filters, _, _, _ = get_filters_and_sort_by(request)
+    filters, _, _, _ = await get_filters_and_sort_by(request, users_service)
     organization = await organizations_repository.find_by_id(algorithm.organization_id)
     filters["organization-id"] = str(organization.id)
 
@@ -530,7 +589,7 @@ async def get_system_card_requirements(
                 extended_linked_measures.append(ext_measure_task)
         requirements_and_measures.append((requirement, completed_measures_count, extended_linked_measures))  # pyright: ignore [reportUnknownMemberType]
 
-    measure_task_functions: dict[str, list[User]] = await get_measure_task_functions(measure_tasks, users_repository)
+    measure_task_functions: dict[str, list[User]] = await get_measure_task_functions(measure_tasks, users_service)
 
     context = {
         "instrument_state": instrument_state,
@@ -548,7 +607,7 @@ async def get_system_card_requirements(
 
 async def get_measure_task_functions(
     measure_tasks: list[MeasureTask],
-    users_repository: Annotated[UsersRepository, Depends(UsersRepository)],
+    users_service: Annotated[UsersService, Depends(UsersService)],
 ) -> dict[str, list[User]]:
     measure_task_functions: dict[str, list[User]] = defaultdict(list)
 
@@ -557,7 +616,7 @@ async def get_measure_task_functions(
         for person_type in person_types:
             person_list = getattr(measure_task, person_type)
             if person_list:
-                member = await users_repository.find_by_id(person_list[0].uuid)
+                member = await users_service.find_by_id(person_list[0].uuid)
                 if member:
                     measure_task_functions[measure_task.urn].append(member)
     return measure_task_functions
@@ -611,7 +670,7 @@ async def delete_algorithm(
 async def get_measure(
     request: Request,
     organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
-    users_repository: Annotated[UsersRepository, Depends(UsersRepository)],
+    users_service: Annotated[UsersService, Depends(UsersService)],
     algorithm_id: int,
     measure_urn: str,
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
@@ -619,7 +678,7 @@ async def get_measure(
     search: str = Query(""),
     requirement_urn: str = "",
 ) -> HTMLResponse:
-    filters, _, _, sort_by = get_filters_and_sort_by(request)
+    filters, _, _, sort_by = await get_filters_and_sort_by(request, users_service)
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
     measure = await measures_service.fetch_measures([measure_urn])
     measure_task = get_measure_task_or_error(algorithm.system_card, measure_urn)
@@ -631,7 +690,7 @@ async def get_measure(
 
     organization = await organizations_repository.find_by_id(algorithm.organization_id)
     filters["organization-id"] = str(organization.id)
-    members = await users_repository.find_all(search=search, sort=sort_by, filters=filters)
+    members = await users_service.find_all(search=search, sort=sort_by, filters=filters)
 
     measure_accountable = measure_task.accountable_persons[0].name if measure_task.accountable_persons else ""  # pyright: ignore [reportOptionalMemberAccess]
     measure_reviewer = measure_task.reviewer_persons[0].name if measure_task.reviewer_persons else ""  # pyright: ignore [reportOptionalMemberAccess]
@@ -666,19 +725,19 @@ async def get_users_from_function_name(
     measure_accountable: Annotated[str | None, Form()],
     measure_reviewer: Annotated[str | None, Form()],
     measure_responsible: Annotated[str | None, Form()],
-    users_repository: Annotated[UsersRepository, Depends(UsersRepository)],
+    users_service: Annotated[UsersService, Depends(UsersService)],
     sort_by: dict[str, str],
     filters: dict[str, str | list[str | int]],
 ) -> tuple[list[Person], list[Person], list[Person]]:
     accountable_persons, reviewer_persons, responsible_persons = [], [], []
     if measure_accountable:
-        accountable_member = await users_repository.find_all(search=measure_accountable, sort=sort_by, filters=filters)
+        accountable_member = await users_service.find_all(search=measure_accountable, sort=sort_by, filters=filters)
         accountable_persons = [Person(name=accountable_member[0].name, uuid=str(accountable_member[0].id))]  # pyright: ignore [reportOptionalMemberAccess]
     if measure_reviewer:
-        reviewer_member = await users_repository.find_all(search=measure_reviewer, sort=sort_by, filters=filters)
+        reviewer_member = await users_service.find_all(search=measure_reviewer, sort=sort_by, filters=filters)
         reviewer_persons = [Person(name=reviewer_member[0].name, uuid=str(reviewer_member[0].id))]  # pyright: ignore [reportOptionalMemberAccess]
     if measure_responsible:
-        responsible_member = await users_repository.find_all(search=measure_responsible, sort=sort_by, filters=filters)
+        responsible_member = await users_service.find_all(search=measure_responsible, sort=sort_by, filters=filters)
         responsible_persons = [Person(name=responsible_member[0].name, uuid=str(responsible_member[0].id))]  # pyright: ignore [reportOptionalMemberAccess]
     return accountable_persons, reviewer_persons, responsible_persons
 
@@ -689,7 +748,7 @@ async def update_measure_value(
     request: Request,
     algorithm_id: int,
     measure_urn: str,
-    users_repository: Annotated[UsersRepository, Depends(UsersRepository)],
+    users_service: Annotated[UsersService, Depends(UsersService)],
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
     tasks_service: Annotated[TasksService, Depends(TasksService)],
     object_storage_service: Annotated[ObjectStorageService, Depends(create_object_storage_service)],
@@ -702,7 +761,7 @@ async def update_measure_value(
     measure_files: Annotated[list[UploadFile] | None, File()] = None,
     requirement_urn: str = "",
 ) -> HTMLResponse:
-    filters, _, _, sort_by = get_filters_and_sort_by(request)
+    filters, _, _, sort_by = await get_filters_and_sort_by(request, users_service)
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
     user_id = get_user_id_or_error(request)
     measure_task = get_measure_task_or_error(algorithm.system_card, measure_urn)
@@ -714,7 +773,7 @@ async def update_measure_value(
         else None
     )
     accountable_persons, reviewer_persons, responsible_persons = await get_users_from_function_name(
-        measure_accountable, measure_reviewer, measure_responsible, users_repository, sort_by, filters
+        measure_accountable, measure_reviewer, measure_responsible, users_service, sort_by, filters
     )
 
     measure_task.update(
@@ -734,8 +793,10 @@ async def update_measure_value(
     encoded_url = urllib.parse.quote_plus(
         f"/algorithm/{algorithm_id}/details/system_card/compliance#{requirement_urn.replace(":","_")}"
     )
-    if request.headers.get("referer", "").endswith("/details/tasks"):
-        encoded_url = urllib.parse.urlparse(request.headers.get("referer")).path
+    referer = urllib.parse.urlparse(request.headers.get("referer", ""))
+
+    if referer.path.endswith("/details/tasks"):
+        encoded_url = urllib.parse.quote_plus(referer.path + "?" + referer.query)
     return templates.Redirect(
         request,
         f"/algorithm/{algorithm_id}/redirect?to={encoded_url}",
