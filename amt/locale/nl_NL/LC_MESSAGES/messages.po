@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-01-28 09:17+0000\n"
+"POT-Creation-Date: 2025-01-28 09:28+0000\n"
 "PO-Revision-Date: 0001-01-01 00:00+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: nl_NL\n"
@@ -53,6 +53,7 @@ msgstr "Rol"
 #: amt/site/templates/algorithms/new.html.j2:41
 #: amt/site/templates/parts/algorithm_search.html.j2:48
 #: amt/site/templates/parts/filter_list.html.j2:71
+#: amt/site/templates/parts/tasks_search.html.j2:41
 msgid "Lifecycle"
 msgstr "Levenscyclus"
 
@@ -219,6 +220,33 @@ msgstr "Verantwoordelijke"
 #: amt/api/forms/measure.py:57
 msgid "Status"
 msgstr "Status"
+
+#: amt/api/forms/measure.py:59
+#: amt/site/templates/algorithms/details_info.html.j2:44
+#: amt/site/templates/macros/tasks.html.j2:12
+msgid "To do"
+msgstr "Te doen"
+
+#: amt/api/forms/measure.py:60
+#: amt/site/templates/algorithms/details_info.html.j2:46
+#: amt/site/templates/macros/tasks.html.j2:19
+msgid "In progress"
+msgstr "Onderhanden"
+
+#: amt/api/forms/measure.py:61 amt/site/templates/macros/tasks.html.j2:26
+msgid "In review"
+msgstr "Beoordelen"
+
+#: amt/api/forms/measure.py:62
+#: amt/site/templates/algorithms/details_info.html.j2:20
+#: amt/site/templates/algorithms/details_info.html.j2:48
+#: amt/site/templates/macros/tasks.html.j2:33
+msgid "Done"
+msgstr "Afgerond"
+
+#: amt/api/forms/measure.py:63 amt/site/templates/macros/tasks.html.j2:40
+msgid "Not implemented"
+msgstr "Niet van toepassing"
 
 #: amt/api/forms/measure.py:72
 msgid "Information on how this measure is implemented"
@@ -415,22 +443,6 @@ msgstr "Bewerk"
 #: amt/site/templates/algorithms/details_info.html.j2:17
 msgid "Does the algorithm meet the requirements?"
 msgstr "Voldoet het algoritme aan de vereisten?"
-
-#: amt/site/templates/algorithms/details_info.html.j2:20
-#: amt/site/templates/algorithms/details_info.html.j2:48
-#: amt/site/templates/macros/tasks.html.j2:33
-msgid "Done"
-msgstr "Afgerond"
-
-#: amt/site/templates/algorithms/details_info.html.j2:44
-#: amt/site/templates/macros/tasks.html.j2:12
-msgid "To do"
-msgstr "Te doen"
-
-#: amt/site/templates/algorithms/details_info.html.j2:46
-#: amt/site/templates/macros/tasks.html.j2:19
-msgid "In progress"
-msgstr "Onderhanden"
 
 #: amt/site/templates/algorithms/details_info.html.j2:65
 msgid "Go to all requirements"
@@ -668,14 +680,6 @@ msgstr "Weet u zeker dat u het bestand wilt verwijderen"
 msgid " ago"
 msgstr "geleden"
 
-#: amt/site/templates/macros/tasks.html.j2:26
-msgid "In review"
-msgstr "Beoordelen"
-
-#: amt/site/templates/macros/tasks.html.j2:40
-msgid "Not implemented"
-msgstr "Niet van toepassing"
-
 #: amt/site/templates/macros/tasks.html.j2:43
 msgid "Unknown"
 msgstr "Onbekend"
@@ -708,6 +712,7 @@ msgstr "Voeg personen toe"
 #: amt/site/templates/organizations/parts/members_results.html.j2:29
 #: amt/site/templates/organizations/parts/overview_results.html.j2:26
 #: amt/site/templates/parts/algorithm_search.html.j2:25
+#: amt/site/templates/parts/tasks_search.html.j2:18
 msgid "Search"
 msgstr "Zoek"
 
@@ -863,6 +868,7 @@ msgid "Find algorithm..."
 msgstr "Vind algoritme..."
 
 #: amt/site/templates/parts/algorithm_search.html.j2:53
+#: amt/site/templates/parts/tasks_search.html.j2:46
 msgid "Select lifecycle"
 msgstr "Selecteer levenscyclus"
 
@@ -925,9 +931,26 @@ msgid ""
 " open manner."
 msgstr "Deze website is in ontwikkeling. Alle versies ontstaan op een open manier."
 
-#~ msgid "Create Algorithm"
-#~ msgstr "Creëer algoritme"
+#: amt/site/templates/parts/tasks_board.html.j2:5
+msgid "Results for"
+msgstr ""
 
-#~ msgid "New algorithm"
-#~ msgstr "Nieuw algoritme"
+#: amt/site/templates/parts/tasks_search.html.j2:9
+#, fuzzy
+msgid "Taken"
+msgstr "Taken"
+
+#: amt/site/templates/parts/tasks_search.html.j2:25
+#, fuzzy
+msgid "Find tasks..."
+msgstr "Vind algoritme..."
+
+#: amt/site/templates/parts/tasks_search.html.j2:55
+msgid "Assignee"
+msgstr ""
+
+#: amt/site/templates/parts/tasks_search.html.j2:60
+#, fuzzy
+msgid "Select assignee"
+msgstr "Taal"
 

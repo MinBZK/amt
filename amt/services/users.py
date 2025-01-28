@@ -1,4 +1,5 @@
 import logging
+from collections.abc import Sequence
 from typing import Annotated
 from uuid import UUID
 
@@ -27,3 +28,13 @@ class UsersService:
             new_user = await self.repository.find_by_id(id)
             self.cache[id] = new_user
         return self.cache[id]
+
+    async def find_all(
+        self,
+        search: str | None = None,
+        sort: dict[str, str] | None = None,
+        filters: dict[str, str | list[str | int]] | None = None,
+        skip: int | None = None,
+        limit: int | None = None,
+    ) -> Sequence[User]:
+        return await self.repository.find_all(search, sort, filters, skip, limit)

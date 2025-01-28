@@ -22,6 +22,7 @@ from amt.schema.algorithm import AlgorithmNew
 from amt.schema.webform import WebForm
 from amt.services.algorithms import AlgorithmsService, get_template_files
 from amt.services.organizations import OrganizationsService
+from amt.services.users import UsersService
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -33,12 +34,13 @@ async def get_root(
     request: Request,
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
     organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
+    users_service: Annotated[UsersService, Depends(UsersService)],
     skip: int = Query(0, ge=0),
     limit: int = Query(5000, ge=1),  # todo: fix infinite scroll
     search: str = Query(""),
     display_type: str = Query(""),
 ) -> HTMLResponse:
-    filters, drop_filters, localized_filters, sort_by = get_filters_and_sort_by(request)
+    filters, drop_filters, localized_filters, sort_by = await get_filters_and_sort_by(request, users_service)
 
     session_user = get_user(request)
     user_id: str | None = session_user["sub"] if session_user else None  # pyright: ignore[reportUnknownVariableType]

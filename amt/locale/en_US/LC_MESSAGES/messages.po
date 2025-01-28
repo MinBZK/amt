@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-01-28 09:17+0000\n"
+"POT-Creation-Date: 2025-01-28 09:28+0000\n"
 "PO-Revision-Date: 0001-01-01 00:00+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -51,6 +51,7 @@ msgstr ""
 #: amt/site/templates/algorithms/new.html.j2:41
 #: amt/site/templates/parts/algorithm_search.html.j2:48
 #: amt/site/templates/parts/filter_list.html.j2:71
+#: amt/site/templates/parts/tasks_search.html.j2:41
 msgid "Lifecycle"
 msgstr ""
 
@@ -216,6 +217,33 @@ msgstr ""
 
 #: amt/api/forms/measure.py:57
 msgid "Status"
+msgstr ""
+
+#: amt/api/forms/measure.py:59
+#: amt/site/templates/algorithms/details_info.html.j2:44
+#: amt/site/templates/macros/tasks.html.j2:12
+msgid "To do"
+msgstr ""
+
+#: amt/api/forms/measure.py:60
+#: amt/site/templates/algorithms/details_info.html.j2:46
+#: amt/site/templates/macros/tasks.html.j2:19
+msgid "In progress"
+msgstr ""
+
+#: amt/api/forms/measure.py:61 amt/site/templates/macros/tasks.html.j2:26
+msgid "In review"
+msgstr ""
+
+#: amt/api/forms/measure.py:62
+#: amt/site/templates/algorithms/details_info.html.j2:20
+#: amt/site/templates/algorithms/details_info.html.j2:48
+#: amt/site/templates/macros/tasks.html.j2:33
+msgid "Done"
+msgstr ""
+
+#: amt/api/forms/measure.py:63 amt/site/templates/macros/tasks.html.j2:40
+msgid "Not implemented"
 msgstr ""
 
 #: amt/api/forms/measure.py:72
@@ -395,22 +423,6 @@ msgstr ""
 
 #: amt/site/templates/algorithms/details_info.html.j2:17
 msgid "Does the algorithm meet the requirements?"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_info.html.j2:20
-#: amt/site/templates/algorithms/details_info.html.j2:48
-#: amt/site/templates/macros/tasks.html.j2:33
-msgid "Done"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_info.html.j2:44
-#: amt/site/templates/macros/tasks.html.j2:12
-msgid "To do"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_info.html.j2:46
-#: amt/site/templates/macros/tasks.html.j2:19
-msgid "In progress"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_info.html.j2:65
@@ -646,14 +658,6 @@ msgstr ""
 msgid " ago"
 msgstr ""
 
-#: amt/site/templates/macros/tasks.html.j2:26
-msgid "In review"
-msgstr ""
-
-#: amt/site/templates/macros/tasks.html.j2:40
-msgid "Not implemented"
-msgstr ""
-
 #: amt/site/templates/macros/tasks.html.j2:43
 msgid "Unknown"
 msgstr ""
@@ -686,6 +690,7 @@ msgstr ""
 #: amt/site/templates/organizations/parts/members_results.html.j2:29
 #: amt/site/templates/organizations/parts/overview_results.html.j2:26
 #: amt/site/templates/parts/algorithm_search.html.j2:25
+#: amt/site/templates/parts/tasks_search.html.j2:18
 msgid "Search"
 msgstr ""
 
@@ -834,6 +839,7 @@ msgid "Find algorithm..."
 msgstr ""
 
 #: amt/site/templates/parts/algorithm_search.html.j2:53
+#: amt/site/templates/parts/tasks_search.html.j2:46
 msgid "Select lifecycle"
 msgstr ""
 
@@ -886,5 +892,25 @@ msgstr ""
 msgid ""
 "  |  This website is under development  |  All versions are created in an"
 " open manner."
+msgstr ""
+
+#: amt/site/templates/parts/tasks_board.html.j2:5
+msgid "Results for"
+msgstr ""
+
+#: amt/site/templates/parts/tasks_search.html.j2:9
+msgid "Taken"
+msgstr ""
+
+#: amt/site/templates/parts/tasks_search.html.j2:25
+msgid "Find tasks..."
+msgstr ""
+
+#: amt/site/templates/parts/tasks_search.html.j2:55
+msgid "Assignee"
+msgstr ""
+
+#: amt/site/templates/parts/tasks_search.html.j2:60
+msgid "Select assignee"
 msgstr ""
 
