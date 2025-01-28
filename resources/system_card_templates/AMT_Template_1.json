@@ -1,115 +1,90 @@
 {
   "version": "0.1a10",
   "provenance": {
-    "git_commit_hash": "3eb1f1b",
-    "timestamp": "2024-10-15T16:48:14+00:00",
-    "uri": "https://github.com/Oirschot/woz",
-    "author": "Wouter Beek"
+    "git_commit_hash": "",
+    "timestamp": "2025-02-01T17:48:14+00:00",
+    "uri": "",
+    "author": "Dummy author"
   },
-  "name": "Waarderen WOZ-objecten",
+  "name": "",
   "ai_act_profile": {
-    "type": "AI-systeem",
-    "open_source": "open-source",
+    "type": "niet van toepassing",
+    "open_source": "niet van toepassing",
     "risk_group": "hoog-risico AI",
     "conformity_assessment_body": "niet van toepassing",
-    "systemic_risk": "geen systeemrisico",
-    "transparency_obligations": "geen transparantieverplichting",
-    "role": "gebruiksverantwoordelijke"
+    "systemic_risk": "niet van toepassing",
+    "transparency_obligations": "niet van toepassing",
+    "role": "niet van toepassing"
   },
-  "instruments": [
-    {
-      "urn": "urn:nl:aivt:tr:iama:1.0",
-      "version": "1.0",
-      "required": true
-    },
-    {
-      "urn": "urn:nl:aivt:tr:aiia:1.0",
-      "version": "1.0",
-      "required": true
-    }
-  ],
-  "upl": "https://standaarden.overheid.nl/owms/terms/woz-beschikking",
+  "instruments": [],
+  "upl": "",
   "owners": [
     {
-      "oin": "00000003273808340000",
-      "organization": "Gemeente Oirschot - Directie Belastingen, afdeling Waarderen, Heffen en Toezicht",
-      "name": "Piet van Haaren",
-      "email": "p.vanhaaren@oirschot.nl",
-      "role": "Manager WOZ beschikking"
+      "oin": "",
+      "organization": "",
+      "name": "",
+      "email": "",
+      "role": ""
     },
     {
-      "oin": "00000003273808340000",
-      "organization": "Gemeente Oirschot",
-      "name": "Ellen Rokven",
-      "email": "info@oirschot.nl",
-      "role": "Medewerkster Klantcontactcentrum"
+      "oin": "",
+      "organization": "",
+      "name": "",
+      "email": "",
+      "role": ""
     }
   ],
-  "description": "Het bepalen en fiatteren van de WOZ-waarde.",
+  "description": "",
   "labels": [
     {
-      "name": "WOZ Waardering",
-      "value": "Automatiseert het proces van waardebepaling van onroerend goed op basis van marktontwikkelingen."
+      "name": "Dummy Label 1",
+      "value": "Dummy Waarde 1"
     },
     {
-      "name": "Marktanalyse",
-      "value": "Maakt gebruik van marktgegevens en statistische modellen om de WOZ-waarde te bepalen."
-    },
-    {
-      "name": "Juridische Naleving",
-      "value": "Voldoet aan de Wet WOZ en relevante regelgeving omtrent waardebepaling en proceskostenvergoedingen."
+      "name": "Dummy Label 2",
+      "value": "Dummy Waarde 2"
     }
   ],
-  "status": "ontwikkeling",
-  "publication_category": "Hoog-risico AI",
-  "begin_date": "2023-10-01",
-  "goal_and_impact": "Automatisering van de werkprocessen; de applicatie ondersteunt in het taxatieproces ten behoeve van de uitvoering van de wet WOZ.",
-  "considerations": "Bij het bepalen van de WOZ-waarde worden de marktontwikkelingen nauwkeurig geanalyseerd en verwerkt in een taxatiemodel. Dit model zorgt ervoor dat de WOZ-waarde van een groot aantal woningen effici\u00ebnt kan worden berekend. De berekende modelwaarden worden vervolgens gecontroleerd door een taxateur en door statistische tests, zoals ratio-analyses. Het streven is om de WOZ-waarden zo dicht mogelijk bij de marktwaarde te laten aansluiten, binnen een toegestane bandbreedte.",
-  "risk_management": "Transactieruis en afwijkende ratio\u2019s worden beheerst door het gebruik van meerdere verkoopprijzen en de voortdurende aanpassing van het taxatiemodel, om fouten in de waardebepaling te minimaliseren.",
-  "human_intervention": "Na berekening van de modelwaarde wordt deze gecontroleerd door een taxateur, die waar nodig aanpassingen maakt op basis van specifieke kenmerken van het object\u200b.",
+  "status": "",
+  "publication_category": "",
+  "begin_date": "2025-02-01",
+  "goal_and_impact": "",
+  "considerations": "",
+  "risk_management": "",
+  "human_intervention": "",
   "legal_base": [
     {
-      "name": "Wet waardering onroerende zaken",
-      "link": "https://wetten.overheid.nl/BWBR0007119/2024-01-01/0"
+      "name": "Dummy wet 1",
+      "link": "https://wetten.overheid.nl/"
     },
     {
-      "name": "Wet herwaardering proceskostenvergoedingen WOZ en bpm",
-      "link": "https://wetten.overheid.nl/BWBR0049132/2024-01-01/0"
+      "name": "Dummy wet 1",
+      "link": "https://wetten.overheid.nl/"
     }
   ],
-  "used_data": "WOZ-waarde: grootte, bouwjaar, adres, type objecten en bijgebouwen",
-  "technical_design": "De iObjecten-WOZ/WOZ Raadplegen is een computermodel dat grote hoeveelheden gegevens verwerkt om voor elk object een modelwaarde te berekenen, met correcties voor objectkenmerken zoals grootte en ligging\u200b.",
-  "external_providers": ["Civision Pink Roccade"],
+  "used_data": "",
+  "technical_design": "",
+  "external_providers": [""],
   "references": [
     {
-      "name": "Civision Pink Roccade",
-      "link": "https://www.pinkroccadelocalgovernment.nl/beleidsterreinen/ruimte-omgeving/iobjecten/woz-raadplegen/?bu=1250"
+      "name": "Dummy reference 1",
+      "link": "https://data.overheid.nl/"
     },
     {
-      "name": "Algoritmeregister Overheid.nl",
-      "link": "https://algoritmes.overheid.nl/nl/algoritme/wozwaarde-uitrekenen-gemeente-oirschot/12626742#algemeneInformatie"
+      "name": "Dummy reference 2",
+      "link": "https://algoritmes.overheid.nl/nl"
     }
   ],
-  "interaction_details": [
-    "Met iObjecten-WOZ/WOZ Raadplegen doorzoek, raadpleeg \u00e9n vergelijk je heel eenvoudig WOZ-objecten, sluimerende objecten en WOZ-waarden."
-  ],
-  "version_requirements": ["v0.1a0"],
-  "deployment_variants": ["Webtoepassing", "Mobiele applicatie"],
-  "hardware_requirements": [
-    "2.0 GHz dual-core+ processor",
-    "4 GB RAM geheugen",
-    "500 MB vrije schijfruimte"
-  ],
-  "product_markings": [
-    "Algemene gebruiksvoorwaarden",
-    "Privacyverklaring",
-    "ISO"
-  ],
+  "interaction_details": [""],
+  "version_requirements": [""],
+  "deployment_variants": ["", ""],
+  "hardware_requirements": ["Dummy requirement"],
+  "product_markings": ["Dummy product marking"],
   "user_interface": [
     {
-      "description": "Een intu\u00eftieve gebruikersinterface waarmee WOZ-objecten op een effici\u00ebnte, betrouwbare en transparante wijze worden gewaardeerd.",
-      "link": "https://www.pinkroccadelocalgovernment.nl/beleidsterreinen/ruimte-omgeving/iobjecten/woz-raadplegen/?bu=1250",
-      "snapshot": "https://www.pinkroccadelocalgovernment.nl/beleidsterreinen/ruimte-omgeving/iobjecten/woz-raadplegen/?bu=1250"
+      "description": "Dummy description",
+      "link": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202401689#anx_IV",
+      "snapshot": ""
     }
   ],
   "measures": [
