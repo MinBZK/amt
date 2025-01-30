@@ -28,7 +28,7 @@ from amt.api.navigation import (
     resolve_base_navigation_items,
     resolve_navigation_items,
 )
-from amt.api.routes.shared import UpdateFieldModel, get_filters_and_sort_by, replace_none_with_empty_string_inplace
+from amt.api.routes.shared import get_filters_and_sort_by, replace_none_with_empty_string_inplace
 from amt.core.authorization import AuthorizationResource, AuthorizationVerb, get_user
 from amt.core.exceptions import AMTError, AMTNotFound, AMTPermissionDenied, AMTRepositoryError
 from amt.core.internationalization import get_current_translation
@@ -393,6 +393,8 @@ async def get_algorithm_edit(
         "organizations_service": organizations_service,
     }
 
+    # TODO: convertors should also be applied to child elements, maybe resolve should be done with a 'mode' parameter
+    #  instead of doing it here now
     if editable.converter:
         editable.value = await editable.converter.read(editable.value, **editable_context)
 
@@ -446,10 +448,10 @@ async def get_algorithm_update(
     algorithm_id: int,
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
     organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
-    update_data: UpdateFieldModel,
-    full_resource_path: str,
+    full_resource_path: str = Query(""),
 ) -> HTMLResponse:
     user_id = get_user_id_or_error(request)
+    new_values = await request.json()
 
     editable: ResolvedEditable = await get_enriched_resolved_editable(
         context_variables={"algorithm_id": algorithm_id},
@@ -461,13 +463,12 @@ async def get_algorithm_update(
 
     editable_context = {
         "user_id": user_id,
-        "new_value": update_data.value,
+        "new_values": new_values,
         "organizations_service": organizations_service,
     }
 
     editable = await save_editable(
         editable,
-        update_data=update_data,
         editable_context=editable_context,
         algorithms_service=algorithms_service,
         organizations_service=organizations_service,
@@ -475,6 +476,7 @@ async def get_algorithm_update(
     )
 
     # set the value back to view mode if needed
+    # TODO: this needs to be fixed, because it only works for 'editables without children'
     if editable.converter:
         editable.value = await editable.converter.view(editable.value, **editable_context)
 

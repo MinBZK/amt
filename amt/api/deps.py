@@ -1,5 +1,4 @@
 import logging
-import re
 from collections.abc import Sequence
 from enum import Enum
 from os import PathLike
@@ -13,11 +12,18 @@ from jinja2 import Environment, StrictUndefined, Undefined
 from starlette.background import BackgroundTask
 from starlette.templating import _TemplateResponse  # pyright: ignore [reportPrivateUsage]
 
-from amt.api.editable import ResolvedEditable
+from amt.api.editable import is_editable_resource
+from amt.api.editable_util import replace_digits_in_brackets, resolve_resource_list_path
 from amt.api.http_browser_caching import url_for_cache
 from amt.api.localizable import LocalizableEnum
 from amt.api.navigation import NavigationItem, get_main_menu
-from amt.api.routes.shared import is_nested_enum, nested_enum, nested_enum_value, nested_value
+from amt.api.routes.shared import (
+    is_nested_enum,
+    is_path_with_list,
+    nested_enum,
+    nested_enum_value,
+    nested_value,
+)
 from amt.core.authorization import AuthorizationVerb, get_user
 from amt.core.config import VERSION, get_settings
 from amt.core.internationalization import (
@@ -60,14 +66,6 @@ def custom_context_processor(
 
 def get_undefined_behaviour() -> type[Undefined]:
     return StrictUndefined if get_settings().DEBUG else Undefined
-
-
-def replace_digits_in_brackets(string: str) -> str:
-    return re.sub(r"\[(\d+)]", "[*]", string)
-
-
-def is_editable_resource(full_resource_path: str, editables: dict[str, ResolvedEditable]) -> bool:
-    return replace_digits_in_brackets(full_resource_path) in editables
 
 
 def permission(permission: str, verb: AuthorizationVerb, permissions: dict[str, list[AuthorizationVerb]]) -> bool:
@@ -169,5 +167,7 @@ templates.env.globals.update(is_editable_resource=is_editable_resource)  # pyrig
 templates.env.globals.update(replace_digits_in_brackets=replace_digits_in_brackets)  # pyright: ignore [reportUnknownMemberType]
 templates.env.globals.update(permission=permission)  # pyright: ignore [reportUnknownMemberType]
 templates.env.globals.update(hasattr=hasattr_jinja)  # pyright: ignore [reportUnknownMemberType]
+templates.env.globals.update(is_path_with_list=is_path_with_list)  # pyright: ignore [reportUnknownMemberType]
+templates.env.globals.update(resolve_resource_list_path=resolve_resource_list_path)  # pyright: ignore [reportUnknownMemberType]
 templates.env.tests["permission"] = permission  # pyright: ignore [reportUnknownMemberType]
 templates.env.add_extension("jinja2_base64_filters.Base64Filters")  # pyright: ignore [reportUnknownMemberType]

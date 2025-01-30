@@ -12,9 +12,14 @@ from amt.api.editable_converters import (
     StatusConverterForSystemcard,
 )
 from amt.api.editable_enforcers import EditableEnforcer, EditableEnforcerForOrganizationInAlgorithm
+from amt.api.editable_util import (
+    extract_number_and_string,
+    replace_digits_in_brackets,
+    replace_wildcard_with_digits_in_brackets,
+)
 from amt.api.editable_validators import EditableValidator, EditableValidatorMinMaxLength, EditableValidatorSlug
 from amt.api.lifecycles import get_localized_lifecycles
-from amt.api.routes.shared import UpdateFieldModel, nested_value
+from amt.api.routes.shared import nested_value
 from amt.api.utils import SafeDict
 from amt.core.exceptions import AMTNotFound
 from amt.models import Algorithm, Organization
@@ -48,7 +53,7 @@ class Editable:
         full_resource_path: str,
         implementation_type: WebFormFieldImplementationTypeFields,
         couples: set[EditableType] | None = None,
-        children: set[EditableType] | None = None,
+        children: list[EditableType] | None = None,
         converter: EditableConverter | None = None,
         enforcer: EditableEnforcer | None = None,
         validator: EditableValidator | None = None,
@@ -56,7 +61,7 @@ class Editable:
         self.full_resource_path = full_resource_path
         self.implementation_type = implementation_type
         self.couples = set[EditableType]() if couples is None else couples
-        self.children = set[EditableType]() if children is None else children
+        self.children = list[EditableType]() if children is None else children
         self.converter = converter
         self.enforcer = enforcer
         self.validator = validator
@@ -78,7 +83,7 @@ class Editable:
         :param target: the target editable type
         :return: None
         """
-        self.children.add(target)
+        self.children.append(target)
 
 
 class ResolvedEditable:
@@ -94,7 +99,7 @@ class ResolvedEditable:
         full_resource_path: str,
         implementation_type: WebFormFieldImplementationTypeFields,
         couples: set[ResolvedEditableType] | None = None,
-        children: set[ResolvedEditableType] | None = None,
+        children: list[ResolvedEditableType] | None = None,
         converter: EditableConverter | None = None,
         enforcer: EditableEnforcer | None = None,
         validator: EditableValidator | None = None,
@@ -106,7 +111,7 @@ class ResolvedEditable:
         self.full_resource_path = full_resource_path
         self.implementation_type = implementation_type
         self.couples = set[ResolvedEditableType]() if couples is None else couples
-        self.children = set[ResolvedEditableType]() if children is None else children
+        self.children = list[ResolvedEditableType]() if children is None else children
         self.converter = converter
         self.enforcer = enforcer
         self.validator = validator
@@ -114,6 +119,9 @@ class ResolvedEditable:
         self.value = value
         self.resource_object = resource_object
         self.relative_resource_path = relative_resource_path
+
+    def last_path_item(self) -> str:
+        return self.full_resource_path.split("/")[-1]
 
 
 class Editables:
@@ -139,11 +147,12 @@ class Editables:
         full_resource_path="algorithm/{algorithm_id}/system_card/provenance/author",
         implementation_type=WebFormFieldImplementationType.TEXT,
     )
+
     # TODO: parent below is not yet implemented
     ALGORITHM_EDITABLE_SYSTEMCARD_OWNERS = Editable(
         full_resource_path="DISABLED_algorithm/{algorithm_id}/system_card/owners[*]",
         implementation_type=WebFormFieldImplementationType.PARENT,
-        children={
+        children=[
             Editable(
                 full_resource_path="algorithm/{algorithm_id}/system_card/owners[*]/organization",
                 implementation_type=WebFormFieldImplementationType.TEXT,
@@ -152,7 +161,22 @@ class Editables:
                 full_resource_path="algorithm/{algorithm_id}/system_card/owners[*]/oin",
                 implementation_type=WebFormFieldImplementationType.TEXT,
             ),
-        },
+        ],
+    )
+
+    ALGORITHM_EDITABLE_SYSTEMCARD_LABELS = Editable(
+        full_resource_path="algorithm/{algorithm_id}/system_card/labels[*]",
+        implementation_type=WebFormFieldImplementationType.PARENT,
+        children=[
+            Editable(
+                full_resource_path="algorithm/{algorithm_id}/system_card/labels[*]/name",
+                implementation_type=WebFormFieldImplementationType.TEXT,
+            ),
+            Editable(
+                full_resource_path="algorithm/{algorithm_id}/system_card/labels[*]/value",
+                implementation_type=WebFormFieldImplementationType.TEXT,
+            ),
+        ],
     )
 
     ALGORITHM_EDITABLE_ORGANIZATION = Editable(
@@ -232,6 +256,12 @@ async def get_enriched_resolved_editable(
     :return: a ResolvedEditable instance enriched with the requested resource and current value
     """
 
+    _, list_index = extract_number_and_string(full_resource_path)
+
+    if list_index is not None:
+        context_variables["list_index"] = list_index
+
+    # TODO: it would be better to only resolve the required / requested editable and not everything
     editable = get_resolved_editables(context_variables=context_variables).get(full_resource_path)
     if not editable:
         logging.error(f"Unknown editable for path: {full_resource_path}")
@@ -270,7 +300,9 @@ async def enrich_editable(  # noqa: C901
             logging.error(f"Unknown resource: {resource_name}")
             raise AMTNotFound()
 
-    editable.value = nested_value(editable.resource_object, relative_resource_path)
+    if editable.implementation_type != WebFormFieldImplementationType.PARENT:
+        editable.value = nested_value(editable.resource_object, relative_resource_path)
+
     for child_editable in editable.children:
         await enrich_editable(
             child_editable,
@@ -320,7 +352,6 @@ def get_resolved_editables(context_variables: dict[str, str | int]) -> dict[str,
     :param context_variables: a dictionary of context variables, f.e. {'algorithm_id': 1}
     :return: a dict of resolved editables, with the resolved path as key
     """
-    editables_resolved: list[ResolvedEditable] = []
 
     def resolve_editable_path(
         editable: Editable, context_variables: dict[str, str | int], include_couples: bool
@@ -328,10 +359,21 @@ def get_resolved_editables(context_variables: dict[str, str | int]) -> dict[str,
         couples = None
         if include_couples:
             couples = {resolve_editable_path(couple, context_variables, False) for couple in editable.couples}
-        children = {resolve_editable_path(child, context_variables, True) for child in editable.children}
+        children = [resolve_editable_path(child, context_variables, True) for child in editable.children]
+
+        full_resource_path = editable.full_resource_path.format_map(SafeDict(context_variables))
+        # TODO: maybe the list index should not be resolved here (for all possible editables)
+        if "list_index" in context_variables:
+            full_resource_path = replace_wildcard_with_digits_in_brackets(
+                full_resource_path, context_variables["list_index"]
+            )
+
+        resource_name, resource_id, relative_resource_path = full_resource_path.split("/", 2)
+        editable.relative_resource_path = relative_resource_path
 
         return ResolvedEditable(
-            full_resource_path=editable.full_resource_path.format_map(SafeDict(context_variables)),
+            full_resource_path=full_resource_path,
+            relative_resource_path=relative_resource_path,
             implementation_type=editable.implementation_type,
             couples=couples,
             children=children,
@@ -339,6 +381,8 @@ def get_resolved_editables(context_variables: dict[str, str | int]) -> dict[str,
             enforcer=editable.enforcer,
             validator=editable.validator,
         )
+
+    editables_resolved: list[ResolvedEditable] = []
 
     for editable in editables:
         editables_resolved.append(
@@ -351,36 +395,55 @@ def get_resolved_editables(context_variables: dict[str, str | int]) -> dict[str,
 
 async def save_editable(  # noqa: C901
     editable: ResolvedEditable,
-    update_data: UpdateFieldModel,
     editable_context: dict[str, Any],
     do_save: bool,
     algorithms_service: AlgorithmsService | None = None,
     organizations_service: OrganizationsService | None = None,
 ) -> ResolvedEditable:
-    # we validate on 'raw' form fields, so validation is done before the converter
-    # TODO: validate all fields (child and couples) before saving!
-    if editable.validator and editable.relative_resource_path is not None:
-        await editable.validator.validate(update_data.value, editable.relative_resource_path)
+    if editable.children:
+        for child_editable in editable.children:
+            # if couples are within the same resource_object, only 1 save is required
+            do_save_child = editable.resource_object != child_editable.resource_object
+            await save_editable(
+                child_editable,
+                editable_context=editable_context,
+                algorithms_service=algorithms_service,
+                organizations_service=organizations_service,
+                do_save=do_save_child,
+            )
+    else:
+        new_value = editable_context.get("new_values", {}).get(editable.last_path_item())
 
-    if editable.enforcer:
-        await editable.enforcer.enforce(**editable_context)
+        # we validate on 'raw' form fields, so validation is done before the converter
+        # TODO: validate all fields (child and couples) before saving!
+        if editable.validator and editable.relative_resource_path is not None:
+            await editable.validator.validate(new_value, editable.relative_resource_path)
 
-    editable.value = update_data.value
-    if editable.converter:
-        editable.value = await editable.converter.write(editable.value, **editable_context)
+        if editable.enforcer:
+            await editable.enforcer.enforce(**editable_context)
 
-    if editable.relative_resource_path is None or editable.value is None:
-        raise TypeError("Cannot save editable without a relative_resource_path or value")
-    set_path(editable.resource_object, editable.relative_resource_path, editable.value)
+        editable.value = new_value
+        if editable.converter:
+            editable.value = await editable.converter.write(editable.value, **editable_context)
 
-    # TODO: child objects not implemented, this should be done later
+        if editable.relative_resource_path is None or editable.value is None:
+            raise TypeError("Cannot save editable without a relative_resource_path or value")
+        set_path(editable.resource_object, editable.relative_resource_path, editable.value)
 
     for couple_editable in editable.couples:
         # if couples are within the same resource_object, only 1 save is required
         do_save_couple = editable.resource_object != couple_editable.resource_object
+        # couples may not have the same resource name, so we copy the new value with the associated resource name
+        if couple_editable.last_path_item() not in editable_context.get("new_values", {}):
+            editable_context.get("new_values", {}).update(
+                {
+                    couple_editable.last_path_item(): editable_context.get("new_values", {}).get(
+                        editable.last_path_item()
+                    ),
+                }
+            )
         await save_editable(
             couple_editable,
-            update_data=update_data,
             editable_context=editable_context,
             algorithms_service=algorithms_service,
             organizations_service=organizations_service,
@@ -404,13 +467,13 @@ async def save_editable(  # noqa: C901
     return editable
 
 
-def set_path(algorithm: dict[str, Any] | object, path: str, value: typing.Any) -> None:  # noqa: ANN401
+def set_path(obj: dict[str, Any] | object, path: str, value: typing.Any) -> None:  # noqa: ANN401
     if not path:
         raise ValueError("Path cannot be empty")
 
     attrs = path.lstrip("/").split("/")
-    obj: Any = algorithm
     for attr in attrs[:-1]:
+        attr, index = extract_number_and_string(attr)
         if isinstance(obj, dict):
             obj = cast(dict[str, Any], obj)
             if attr not in obj:
@@ -420,8 +483,14 @@ def set_path(algorithm: dict[str, Any] | object, path: str, value: typing.Any) -
             if not hasattr(obj, attr):
                 setattr(obj, attr, {})
             obj = getattr(obj, attr)
+        if obj and index is not None:
+            obj = obj[index]
 
     if isinstance(obj, dict):
         obj[attrs[-1]] = value
     else:
         setattr(obj, attrs[-1], value)
+
+
+def is_editable_resource(full_resource_path: str, editables: dict[str, ResolvedEditable]) -> bool:
+    return editables.get(replace_digits_in_brackets(full_resource_path), None) is not None

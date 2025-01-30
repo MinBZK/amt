@@ -1,9 +1,11 @@
+import re
 from enum import Enum
 from typing import Any, cast
 
 from pydantic import BaseModel
 from starlette.requests import Request
 
+from amt.api.editable_util import extract_number_and_string
 from amt.api.lifecycles import Lifecycles, get_localized_lifecycle
 from amt.api.localizable import LocalizableEnum
 from amt.api.organization_filter_options import OrganizationFilterOptions, get_localized_organization_filter
@@ -68,6 +70,7 @@ def get_localized_value(key: str, value: str, request: Request) -> LocalizedValu
 def get_nested(obj: Any, attr_path: str) -> Any:  # noqa: ANN401
     attrs = attr_path.lstrip("/").split("/") if "/" in attr_path else attr_path.lstrip(".").split(".")
     for attr in attrs:
+        attr, index = extract_number_and_string(attr)
         if hasattr(obj, attr):
             obj = getattr(obj, attr)
         elif isinstance(obj, dict) and attr in obj:
@@ -75,6 +78,8 @@ def get_nested(obj: Any, attr_path: str) -> Any:  # noqa: ANN401
         else:
             obj = None
             break
+        if obj and index is not None:
+            obj = obj[index]
     return obj
 
 
@@ -100,6 +105,16 @@ def nested_enum(obj: Any, attr_path: str, language: str) -> list[LocalizedValueI
 
 def nested_enum_value(obj: Any, attr_path: str, language: str) -> Any:  # noqa: ANN401
     return get_nested(obj, attr_path).localize(language)
+
+
+def is_path_with_list(input_string: str) -> bool:
+    """
+    Checks if a string contains a number or wildcard within square brackets. Like /algorithm/1/labels[*].
+
+    Returns:
+        True if the string contains a number or wildcard in brackets, False otherwise.
+    """
+    return bool(re.search(r"\[(\d+|\*)]", input_string))
 
 
 class UpdateFieldModel(BaseModel):

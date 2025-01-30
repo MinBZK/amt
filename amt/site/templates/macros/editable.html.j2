@@ -1,10 +1,15 @@
+{% macro render_attribute(attribute) -%}
+    {{ attribute.capitalize().replace("_", " ") }}
+{%- endmacro %}
 {% macro editable(obj, relative_resource_path, full_resource_path, editable_object = None) %}
-    <span hx-target="this">
+    <div hx-target="this">
+
         {% if editable_object is not none %}
             {% set value = editable_object.value %}
         {% else %}
             {% set value = nested_value(obj, relative_resource_path) %}
         {% endif %}
+
         {% if value is string and value.startswith('http') %}
             <a href="{{ value }}" target="_blank" rel="noopener noreferrer">{{ value }}</a>
         {% else %}
@@ -14,14 +19,31 @@
                           role="img"></span>
                     {{ nested_enum_value(obj, relative_resource_path, language).display_value }}
                 </span>
+                {{ edit_link(base_href, full_resource_path) }}
+
+            {% elif is_path_with_list(full_resource_path) %}
+                {# we know it is a list, but not what is in the list.. this now only works for editables with children #}
+                {% if editable_object is none %}
+                    {% set editable_object = editables[replace_digits_in_brackets(full_resource_path)] %}
+                {% endif %}
+                {% for child_editable in editable_object.children %}
+                    <strong>{{ render_attribute(child_editable.last_path_item()) }}</strong>:
+                    {{ nested_value(obj, resolve_resource_list_path(full_resource_path, child_editable.relative_resource_path)) }}
+                    {% if not loop.last %}<br/>{% endif %}
+                {% endfor %}
+                {{ edit_link(base_href, full_resource_path) }}
             {% else %}
                 {{ value }}
+                {{ edit_link(base_href, full_resource_path) }}
             {% endif %}
         {% endif %}
-        <span class="rvo-link rvo-link--hover rvo-link--with-icon"
-              hx-get="{{ base_href }}/edit?full_resource_path={{ full_resource_path }}"
-              hx-swap="outerHTML"
-              style="cursor: pointer;
+    </div>
+{% endmacro %}
+{% macro edit_link(base_href, full_resource_path) %}
+    <span class="rvo-link rvo-link--hover rvo-link--with-icon"
+          hx-get="{{ base_href }}/edit?full_resource_path={{ full_resource_path }}"
+          hx-swap="outerHTML"
+          style="cursor: pointer;
                      float:right">
             <span class="utrecht-icon rvo-icon rvo-icon-bewerken rvo-icon--md rvo-icon--hemelblauw"
                   role="img"
@@ -32,7 +54,6 @@
                style="font-size: 14px !important;
                       color: rgb(0, 123, 199) !important">{% trans %}Edit{% endtrans %}</a>
         </span>
-    </span>
 {% endmacro %}
 {% macro edit(editable_object) %}
     <div hx-target="this">
@@ -44,73 +65,93 @@
               hx-swap="innerHTML"
               method="post"
               hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
-              hx-swap="outerHTML">
+              hx-swap="outerHTML"
+              autocomplete="off"
+        >
             <div class="rvo-layout-grid-container">
-                {% if editable_object.implementation_type.type == WebFormFieldType.TEXTAREA %}
-                    <div>
-                        <!-- TODO: classes utrecht-textarea seem to be missing? wrong NL design version? -->
-                        <textarea id="field"
-                                  name="value"
-                                  placeholder=""
-                                  class="utrecht-textbox utrecht-textarea utrecht-textarea--html-textarea"
-                                  dir="auto">{{ editable_object.value }}</textarea>
+                {% if editable_object.implementation_type.type is none %}
+                    <div class="amt-blocks-with-vertical-spacing">
+                        {% for child_editable in editable_object.children %}
+                            <div>
+                                {{ render_attribute(child_editable.last_path_item()) }}:<br/>
+                                {{ inline_editor_form_field(child_editable) }}
+                            </div>
+                        {% endfor %}
                     </div>
+                    <div style="text-align: right" class="margin-top-middle">
+                        {{ inline_editor_form_buttons(editable_object.full_resource_path) }}
+                    </div>
+                {% elif editable_object.implementation_type.type == WebFormFieldType.TEXTAREA %}
+                    {{ inline_editor_form_field(editable_object) }}
                     <div style="text-align: right" class="margin-top-middle">
                         {{ inline_editor_form_buttons(editable_object.full_resource_path) }}
                     </div>
                 {% else %}
                     <div class="rvo-layout-grid rvo-layout-gap--md rvo-layout-grid--division"
                          style="grid-template-columns: 2fr 1fr">
-                        {% if editable_object.implementation_type.type == WebFormFieldType.SELECT %}
-                            <div class="rvo-select-wrapper">
-                                <select id="field"
-                                        name="value"
-                                        class="utrecht-select utrecht-select--html-select">
-                                    {% for e in editable_object.form_options %}
-                                        <option value="{{ e.value }}"
-                                                {% if e.value == editable_object.value|string %}selected="selected"{% endif %}>
-                                            {{ e.display_value }}
-                                        </option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        {% elif is_nested_enum(editable_object.resource_object, editable_object.relative_resource_path) %}
-                            {% set value = nested_value(editable_object.resource_object, editable_object.relative_resource_path) %}
-                            <div class="rvo-select-wrapper">
-                                <select id="field"
-                                        name="value"
-                                        class="utrecht-select utrecht-select--html-select">
-                                    {% for e in nested_enum(editable_object.resource_object, editable_object.relative_resource_path, language) %}
-                                        <option value="{{ e.value }}"
-                                                {% if e.value == value %}selected="selected"{% endif %}>
-                                            {{ e.display_value }}
-                                        </option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        {% else %}
-                            {% set value = nested_value(editable_object.resource_object, editable_object.relative_resource_path) %}
-                            <input type="text"
-                                   name="value"
-                                   value="{{ value }}"
-                                   class="utrecht-textbox utrecht-textbox--html-input" />
-                        {% endif %}
-                        <div style="text-align: right">{{ inline_editor_form_buttons(editable_object.full_resource_path) }}</div>
+                        {{ inline_editor_form_field(editable_object) }}
+                        <div
+                            style="text-align: right">{{ inline_editor_form_buttons(editable_object.full_resource_path) }}</div>
                     </div>
                 {% endif %}
-            </form>
-            {#    we need the errorContainer to keep htmx happy, so we hide te contents#}
-            <div id="errorContainer" class="display-none"></div>
-        </div>
-    {% endmacro %}
-    {% macro inline_editor_form_buttons(full_resource_path) %}
-        <button type="submit"
-                class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md">
-            {% trans %}Save{% endtrans %}
-        </button>
-        <button hx-get="{{ base_href }}/cancel?full_resource_path={{ full_resource_path }}"
-                hx-swap="outerHTML"
-                class="utrecht-button utrecht-button--secondary-action utrecht-button-group__align-right utrecht-button--rvo-md">
-            {% trans %}Cancel{% endtrans %}
-        </button>
-    {% endmacro %}
+            </div>
+        </form>
+        {#    we need the errorContainer to keep htmx happy, so we hide te contents#}
+        <div id="errorContainer" class="display-none"></div>
+    </div>
+{% endmacro %}
+{% macro inline_editor_form_field(editable_object) %}
+    <div>
+        {% if editable_object.implementation_type.type == WebFormFieldType.TEXTAREA %}
+            <!-- TODO: classes utrecht-textarea seem to be missing? wrong NL design version? -->
+            <textarea id="field"
+                      name="{{ editable_object.last_path_item() }}"
+                      placeholder=""
+                      class="utrecht-textbox utrecht-textarea utrecht-textarea--html-textarea"
+                      dir="auto">{{ editable_object.value }}</textarea>
+        {% elif editable_object.implementation_type.type == WebFormFieldType.SELECT %}
+            <div class="rvo-select-wrapper">
+                <select id="field"
+                        name="{{ editable_object.last_path_item() }}"
+                        class="utrecht-select utrecht-select--html-select">
+                    {% for e in editable_object.form_options %}
+                        <option value="{{ e.value }}"
+                                {% if e.value == editable_object.value|string %}selected="selected"{% endif %}>
+                            {{ e.display_value }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+        {% elif is_nested_enum(editable_object.resource_object, editable_object.relative_resource_path) %}
+            {% set value = nested_value(editable_object.resource_object, editable_object.relative_resource_path) %}
+            <div class="rvo-select-wrapper">
+                <select id="field"
+                        name="{{ editable_object.last_path_item() }}"
+                        class="utrecht-select utrecht-select--html-select">
+                    {% for e in nested_enum(editable_object.resource_object, editable_object.relative_resource_path, language) %}
+                        <option value="{{ e.value }}"
+                                {% if e.value == value %}selected="selected"{% endif %}>
+                            {{ e.display_value }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+        {% else %}
+            <input type="text"
+                   name="{{ editable_object.last_path_item() }}"
+                   value="{{ nested_value(editable_object.resource_object, editable_object.relative_resource_path) }}"
+                   class="utrecht-textbox utrecht-textbox--html-input"/>
+        {% endif %}
+    </div>
+{% endmacro %}
+{% macro inline_editor_form_buttons(full_resource_path) %}
+    <button type="submit"
+            class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md">
+        {% trans %}Save{% endtrans %}
+    </button>
+    <button hx-get="{{ base_href }}/cancel?full_resource_path={{ full_resource_path }}"
+            hx-swap="outerHTML"
+            class="utrecht-button utrecht-button--secondary-action utrecht-button-group__align-right utrecht-button--rvo-md">
+        {% trans %}Cancel{% endtrans %}
+    </button>
+{% endmacro %}

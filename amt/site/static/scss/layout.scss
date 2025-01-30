@@ -479,4 +479,10 @@ main {
     gap: 0 !important;
 }
 
+.amt-blocks-with-vertical-spacing {
+    & > *:not(:last-child) {
+        margin-bottom: var(--rvo-size-lg);
+    }
+}
+
 /* stylelint-enable */

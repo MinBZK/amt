@@ -42,11 +42,23 @@
         {% elif key == "models" %}
             {% for model in value %}{{ model["name"] }}{% endfor %}
         {% else %}
-            <div style="margin-left: {{ depth * 10 }}px;">
-                {% for item in value %}
-                    {{ render_value("", item, depth+1, base_resource_path, path + "/" + key + "[" + (loop.index-1) |string + "]") }}
-                {% endfor %}
-            </div>
+            {% if is_editable_resource(full_resource_path + "[*]", editables) %}
+
+                <div class="amt-blocks-with-vertical-spacing">
+                    {% for item in value %}
+                        {{ editable(algorithm, relative_resource_path + "[" + (loop.index-1) | string + "]", full_resource_path + "[" + (loop.index-1) | string + "]") }}
+    {#                    {{ render_value("", item, depth+1, base_resource_path, path + "/" + key + "[" + (loop.index-1) |string + "]") }}#}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div style="margin-left: {{ depth * 10 }}px;">
+                    {% for item in value %}
+                        {{ render_value("", item, depth+1, base_resource_path, path + "/" + key + "[" + (loop.index-1) |string + "]") }}
+                    {% endfor %}
+                </div>
+
+            {% endif %}
+
         {% endif %}
     {% else %}
         {% if key == "uri" or key == "link" or key == "upl" %}
