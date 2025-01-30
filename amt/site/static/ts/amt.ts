@@ -365,9 +365,7 @@ export async function download_as_yaml(
   algorithm_name: string,
 ): Promise<void> {
   try {
-    const response = await fetch(
-      `/algorithm/${algorithm_id}/details/system_card/download`,
-    );
+    const response = await fetch(`/algorithm/${algorithm_id}/download`);
     const blob = await response.blob(); // Get the response as a Blob
 
     const url = window.URL.createObjectURL(blob);

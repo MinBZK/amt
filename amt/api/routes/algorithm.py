@@ -110,7 +110,7 @@ def get_algorithm_details_tabs(request: Request) -> list[NavigationItem]:
     return resolve_navigation_items(
         [
             Navigation.ALGORITHM_INFO,
-            Navigation.ALGORITHM_ALGORITHM_DETAILS,
+            Navigation.ALGORITHM_DETAILS,
             Navigation.ALGORITHM_COMPLIANCE,
             Navigation.ALGORITHM_TASKS,
         ],
@@ -119,14 +119,10 @@ def get_algorithm_details_tabs(request: Request) -> list[NavigationItem]:
 
 
 def get_algorithms_submenu_items() -> list[BaseNavigationItem]:
-    return [
-        Navigation.ALGORITHMS_OVERVIEW,
-        Navigation.ALGORITHM_TASKS,
-        Navigation.ALGORITHM_SYSTEM_CARD,
-    ]
+    return [Navigation.ALGORITHMS_OVERVIEW, Navigation.ALGORITHM_TASKS]
 
 
-@router.get("/{algorithm_id}/details/tasks")
+@router.get("/{algorithm_id}/tasks")
 async def get_tasks(
     request: Request,
     algorithm_id: int,
@@ -346,7 +342,7 @@ async def get_algorithm_context(
     }
 
 
-@router.get("/{algorithm_id}/details")
+@router.get("/{algorithm_id}/info")
 @permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
 async def get_algorithm_details(
     request: Request, algorithm_id: int, algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)]
@@ -357,7 +353,7 @@ async def get_algorithm_details(
         [
             Navigation.ALGORITHMS_ROOT,
             BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details/system_card"),
-            Navigation.ALGORITHM_DETAILS,
+            Navigation.ALGORITHM_INFO,
         ],
         request,
     )
@@ -493,7 +489,7 @@ async def get_algorithm_update(
     return templates.TemplateResponse(request, "parts/view_cell.html.j2", context)
 
 
-@router.get("/{algorithm_id}/details/system_card")
+@router.get("/{algorithm_id}/details")
 @permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
 async def get_system_card(
     request: Request,
@@ -512,7 +508,7 @@ async def get_system_card(
         [
             Navigation.ALGORITHMS_ROOT,
             BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details/system_card"),
-            Navigation.ALGORITHM_SYSTEM_CARD,
+            Navigation.ALGORITHM_DETAILS,
         ],
         request,
     )
@@ -536,7 +532,7 @@ async def get_system_card(
     return templates.TemplateResponse(request, "pages/system_card.html.j2", context)
 
 
-@router.get("/{algorithm_id}/details/system_card/compliance")
+@router.get("/{algorithm_id}/compliance")
 @permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
 async def get_system_card_requirements(
     request: Request,
@@ -1001,7 +997,7 @@ async def get_model_card(
     return templates.TemplateResponse(request, "pages/model_card.html.j2", context)
 
 
-@router.get("/{algorithm_id}/details/system_card/download")
+@router.get("/{algorithm_id}/download")
 @permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
 async def download_algorithm_system_card_as_yaml(
     algorithm_id: int, algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)], request: Request

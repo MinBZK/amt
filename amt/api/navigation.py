@@ -102,18 +102,13 @@ class Navigation:
         icon="rvo-icon-publicatie",
     )
     ALGORITHMS_OVERVIEW = BaseNavigationItem(display_text=DisplayText.OVERVIEW, url="/algorithms/")
-    ALGORITHM_TASKS = BaseNavigationItem(display_text=DisplayText.TASKS, url="/algorithm/{algorithm_id}/details/tasks")
+    ALGORITHM_TASKS = BaseNavigationItem(display_text=DisplayText.TASKS, url="/algorithm/{algorithm_id}/tasks")
     ALGORITHM_DETAILS = BaseNavigationItem(
-        display_text=DisplayText.DETAILS, url="/algorithm/{algorithm_id}/details/system_card"
+        display_text=DisplayText.ALGORITHM_DETAILS, url="/algorithm/{algorithm_id}/details"
     )
     ALGORITHM_NEW = BaseNavigationItem(display_text=DisplayText.NEW, url="/algorithms/new")
-    ALGORITHM_INFO = BaseNavigationItem(display_text=DisplayText.INFO, url="/algorithm/{algorithm_id}/details")
-    ALGORITHM_ALGORITHM_DETAILS = BaseNavigationItem(
-        display_text=DisplayText.ALGORITHM_DETAILS, url="/algorithm/{algorithm_id}/details/system_card"
-    )
-    ALGORITHM_SYSTEM_CARD = BaseNavigationItem(
-        display_text=DisplayText.SYSTEMCARD, url="/algorithm/{algorithm_id}/details/system_card"
-    )
+    ALGORITHM_INFO = BaseNavigationItem(display_text=DisplayText.INFO, url="/algorithm/{algorithm_id}/info")
+
     ALGORITHM_MODEL_CARD = BaseNavigationItem(
         display_text=DisplayText.MODELCARD,
         url="/algorithm/{algorithm_id}/details/system_card/models/{model_card}",
@@ -123,7 +118,7 @@ class Navigation:
         url="/algorithm/{algorithm_id}/details/system_card/assessment/{assessment_card}",
     )
     ALGORITHM_COMPLIANCE = BaseNavigationItem(
-        display_text=DisplayText.COMPLIANCE, url="/algorithm/{algorithm_id}/details/system_card/compliance"
+        display_text=DisplayText.COMPLIANCE, url="/algorithm/{algorithm_id}/compliance"
     )
     ALGORITHM_MEMBERS = BaseNavigationItem(display_text=DisplayText.MEMBERS, url="/algorithm/{algorithm_id}/members")
     ORGANIZATIONS_ROOT = BaseNavigationItem(

@@ -4,11 +4,6 @@
       hx-trigger="change"
       hx-include="this"
       hx-swap="innerHTML">
-    <div class="amt-layout-grid rvo-layout-gap--md amt-layout-grid-columns--two">
-        <div>
-            <h1 class="utrecht-heading-1">{% trans %}Taken{% endtrans %}</h1>
-        </div>
-    </div>
     <div class="utrecht-form-fieldset rvo-form-fieldset rvo-margin-block-start--lg">
         <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
             <div class="rvo-inline-form">
@@ -22,7 +17,6 @@
                                        class="utrecht-textbox utrecht-textbox--html-input"
                                        dir="auto"
                                        value="{{ search }}"
-                                       placeholder="{% trans %}Find tasks...{% endtrans %}"
                                        name="search"
                                        hx-get="{{ base_href }}?skip=0"
                                        hx-trigger="input changed delay:500ms, search"
@@ -43,7 +37,7 @@
                                 <select id="add-lifecycle"
                                         name="add-filter-lifecycle"
                                         class="utrecht-select utrecht-select--html-select">
-                                    <option value="">{% trans %}Select lifecycle{% endtrans %}</option>
+                                    <option value=""></option>
                                     {% for lifecycle in lifecycles %}
                                         <option {% if "lifecycle" in filters and lifecycle.value == filters["lifecycle"].value %}selected="selected"{% endif %}
                                                 value="{{ lifecycle.value }}">{{ lifecycle.display_value }}</option>
@@ -57,7 +51,7 @@
                                 <select id="add-assignee"
                                         name="add-filter-assignee"
                                         class="utrecht-select utrecht-select--html-select">
-                                    <option value="">{% trans %}Select assignee{% endtrans %}</option>
+                                    <option value=""></option>
                                     {% for assignee in assignees %}
                                         <option {% if "assignee" in filters and assignee.value==filters["assignee"].value %}selected="selected" {% endif
                                             %} value="{{ assignee.value }}">{{ assignee.display_value }}</option>

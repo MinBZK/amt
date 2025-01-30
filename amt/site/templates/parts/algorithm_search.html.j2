@@ -29,7 +29,6 @@
                                        class="utrecht-textbox utrecht-textbox--html-input"
                                        dir="auto"
                                        value="{{ search }}"
-                                       placeholder="{% trans %}Find algorithm...{% endtrans %}"
                                        name="search"
                                        hx-get="{{ base_href }}?skip=0"
                                        hx-trigger="input changed delay:500ms, search"
@@ -50,7 +49,7 @@
                                 <select id="add-lifecycle"
                                         name="add-filter-lifecycle"
                                         class="utrecht-select utrecht-select--html-select">
-                                    <option value="">{% trans %}Select lifecycle{% endtrans %}</option>
+                                    <option value=""></option>
                                     {% for lifecycle in lifecycles %}
                                         <option {% if "lifecycle" in filters and lifecycle.value == filters["lifecycle"].value %}selected="selected"{% endif %}
                                                 value="{{ lifecycle.value }}">{{ lifecycle.display_value }}</option>
@@ -64,7 +63,7 @@
                                 <select id="add-risk-group"
                                         name="add-filter-risk-group"
                                         class="utrecht-select utrecht-select--html-select">
-                                    <option value="">{% trans %}Select risk group{% endtrans %}</option>
+                                    <option value=""></option>
                                     {% for risk_group in risk_groups %}
                                         <option {% if "risk-group" in filters and risk_group.value==filters["risk-group"].value %}selected="selected" {% endif
                                             %} value="{{ risk_group.value }}">{{ risk_group.display_value }}</option>
@@ -85,7 +84,7 @@
             <select id="display_type"
                     name="display_type"
                     class="utrecht-select utrecht-select--html-select">
-                <option value="">{% trans %}Select group by{% endtrans %}</option>
+                <option value=""></option>
                 {% for group_by_category in group_by_categories %}
                     <option {% if "group-by-category" in filters and group_by_category.value == filters["group-by-category"].value %}selected="selected"{% endif %}
                             value="{{ group_by_category.value }}">{{ group_by_category.display_value }}</option>
