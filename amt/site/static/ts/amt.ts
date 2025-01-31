@@ -472,4 +472,29 @@ export function showRequirementDetails() {
   });
 }
 
+export function searchInputChanged() {
+  const clearElement: HTMLElement | null = (<HTMLElement>(
+    (<HTMLElement>event!.currentTarget).parentNode
+  )).querySelector(".form-input-clear");
+  if (!clearElement) {
+    return;
+  }
+  if ((event!.target as HTMLInputElement).value != "") {
+    clearElement.classList.remove("display-none");
+  } else {
+    clearElement.classList.add("display-none");
+  }
+}
+
+export function resetSearchInput() {
+  (<HTMLElement>event!.currentTarget).classList.add("display-none");
+  const inputElement: HTMLInputElement | null = (<HTMLInputElement>(
+    (<HTMLElement>event!.currentTarget).parentNode
+  )).querySelector(".form-input-search");
+  if (!inputElement) {
+    return;
+  }
+  inputElement.value = "";
+}
+
 // for debugging htmx use -> htmx.logAll();

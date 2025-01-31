@@ -113,6 +113,8 @@ async def root(
     organizations: Sequence[Organization] = await organizations_repository.find_by(
         search=search, sort=sort_by, filters=filters, user_id=user["sub"] if user else None
     )
+    # TODO: we remove the organization filter again, otherwise it shows up as 'filter option you can remove'
+    localized_filters.pop("organization-type", None)
 
     # we only can show organization you belong to, so the all organizations option is disabled
     organization_filters = [

@@ -29,8 +29,9 @@
                                 <div>{% trans %}Search{% endtrans %}</div>
                                 <div class="form-input-container">
                                     <input id="members-search-input"
+                                           onkeyup="amt.searchInputChanged()"
                                            type="text"
-                                           class="utrecht-textbox utrecht-textbox--html-input"
+                                           class="utrecht-textbox utrecht-textbox--html-input form-input-search"
                                            dir="auto"
                                            value="{{ search }}"
                                            placeholder="{% trans %}Find member...{% endtrans %}"
@@ -39,13 +40,13 @@
                                            hx-trigger="input changed delay:500ms, search"
                                            autocomplete="off"
                                            onfocus="this.value=''" />
-                                    <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--lg form-input-clear"
+                                    <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--lg form-input-clear display-none"
                                           role="img"
                                           aria-label="Kruis"
                                           hx-trigger="click"
                                           hx-get="/organizations/{{ slug }}/members?skip=0"
                                           hx-swap="innerHTML"
-                                          onclick="document.getElementById('members-search-input').value = ''"></span>
+                                          onclick="amt.resetSearchInput()"></span>
                                 </div>
                             </div>
                         </div>

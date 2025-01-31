@@ -242,7 +242,7 @@ main {
 }
 
 .display-none {
-    display: none;
+    display: none !important;
 }
 
 @keyframes fade-in {
