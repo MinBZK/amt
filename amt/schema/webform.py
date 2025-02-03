@@ -14,6 +14,7 @@ class WebFormFieldType(Enum):
     DISABLED = "disabled"
     SEARCH_SELECT = "search_select"
     SUBMIT = "submit"
+    DATE = "date"
 
 
 @dataclass
@@ -28,6 +29,7 @@ class WebFormFieldImplementationType:
     TEXTAREA = WebFormFieldImplementationTypeFields("textarea", WebFormFieldType.TEXTAREA)
     SELECT_MY_ORGANIZATIONS = WebFormFieldImplementationTypeFields("select_my_organizations", WebFormFieldType.SELECT)
     SELECT_LIFECYCLE = WebFormFieldImplementationTypeFields("select_lifecycle", WebFormFieldType.SELECT)
+    DATE = WebFormFieldImplementationTypeFields("date", WebFormFieldType.DATE)
 
 
 class WebFormOption:

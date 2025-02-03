@@ -87,6 +87,8 @@ def nested_value(obj: Any, attr_path: str) -> Any:  # noqa: ANN401
     obj = get_nested(obj, attr_path)
     if isinstance(obj, Enum):
         return obj.value
+    if obj is None:
+        return ""
     return obj
 
 

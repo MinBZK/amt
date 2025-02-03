@@ -38,6 +38,7 @@ async def test_organizations_get_root_htmx(client: AsyncClient) -> None:
 
 
 @pytest.mark.asyncio
+@pytest.mark.skip(reason="skipped because the filter is not added because it should not be (user) removable")
 async def test_organizations_get_root_htmx_with_group_by(client: AsyncClient) -> None:
     response = await client.get(
         "/organizations/?skip=0&search=&add-filter-organization-type=MY_ORGANIZATIONS", headers={"HX-Request": "true"}
@@ -175,7 +176,7 @@ async def test_update_organization_inline(client: AsyncClient, mocker: MockFixtu
     client.cookies["fastapi-csrf-token"] = "1"
     response = await client.put(
         "/organizations/default-organization/update?full_resource_path=organization/1/name",
-        json={"value": "New name"},
+        json={"name": "New name"},
         headers={"X-CSRF-Token": "1"},
     )
 

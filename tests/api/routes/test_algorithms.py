@@ -143,7 +143,7 @@ async def test_post_new_algorithms(client: AsyncClient, mocker: MockFixture, db:
     # then
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert response.headers["HX-Redirect"] == "/algorithm/1/details"
+    assert response.headers["HX-Redirect"] == "/algorithm/1/info"
 
 
 @amt_vcr.use_cassette("tests/fixtures/vcr_cassettes/test_post_new_algorithms_write_system_card.yml")  # type: ignore

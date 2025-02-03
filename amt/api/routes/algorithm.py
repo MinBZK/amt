@@ -13,12 +13,11 @@ from ulid import ULID
 from amt.api.decorators import permission
 from amt.api.deps import templates
 from amt.api.editable import (
-    EditModes,
-    ResolvedEditable,
     get_enriched_resolved_editable,
     get_resolved_editables,
     save_editable,
 )
+from amt.api.editable_classes import EditModes, ResolvedEditable
 from amt.api.forms.measure import MeasureStatusOptions, get_measure_form
 from amt.api.lifecycles import Lifecycles, get_localized_lifecycles
 from amt.api.navigation import (
@@ -425,10 +424,8 @@ async def get_algorithm_cancel(
         editable.value = await editable.converter.view(editable.value, **editable_context)
 
     context = {
-        "relative_resource_path": editable.relative_resource_path.replace("/", ".")
-        if editable.relative_resource_path
-        else "",
-        "base_href": f"/algorithm/{algorithm_id}",
+        "relative_resource_path": editable.relative_resource_path if editable.relative_resource_path else "",
+        "base_href": f"/algorithm/{ algorithm_id }",
         "resource_object": editable.resource_object,
         "full_resource_path": full_resource_path,
         "editable_object": editable,
@@ -477,10 +474,8 @@ async def get_algorithm_update(
         editable.value = await editable.converter.view(editable.value, **editable_context)
 
     context = {
-        "relative_resource_path": editable.relative_resource_path.replace("/", ".")
-        if editable.relative_resource_path
-        else "",
-        "base_href": f"/algorithm/{algorithm_id}",
+        "relative_resource_path": editable.relative_resource_path if editable.relative_resource_path else "",
+        "base_href": f"/algorithm/{ algorithm_id }",
         "resource_object": editable.resource_object,
         "full_resource_path": full_resource_path,
         "editable_object": editable,

@@ -5,16 +5,21 @@ def replace_digits_in_brackets(string: str) -> str:
     return re.sub(r"\[(\d+)]", "[*]", string)
 
 
-def replace_wildcard_with_digits_in_brackets(string: str, index: int) -> str:
-    return re.sub(r"\[\*]", "[" + str(index) + "]", string)
+def replace_wildcard_with_digits_in_brackets(string: str, index: int | None) -> str:
+    if index is not None:
+        return re.sub(r"\[\*]", "[" + str(index) + "]", string)
+    else:
+        return string
 
 
 def resolve_resource_list_path(full_resource_path_resolved: str, relative_resource_path: str) -> str:
     """
     Given a full_resource_path_resolved that contains a list, like /algorithm/1/system_card/list[1], resolves
-    a relative_resource_path like /algorithm/1/system_card/list[*]/name so the result is /algorithm/1/system_card/list[1]/name.
+    a relative_resource_path like /algorithm/1/system_card/list[*]/name
+    so the result is /algorithm/1/system_card/list[1]/name.
+    Note this method assumes and only works with 1 list item, nested lists are not supported.
     """
-    full_resource_path, index = extract_number_and_string(full_resource_path_resolved)
+    _, index = extract_number_and_string(full_resource_path_resolved)
     return replace_wildcard_with_digits_in_brackets(relative_resource_path, index)
 
 

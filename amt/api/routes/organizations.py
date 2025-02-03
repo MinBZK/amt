@@ -9,11 +9,10 @@ from amt.api.decorators import permission
 from amt.api.deps import templates
 from amt.api.editable import (
     Editables,
-    EditModes,
-    ResolvedEditable,
     get_enriched_resolved_editable,
     save_editable,
 )
+from amt.api.editable_classes import EditModes, ResolvedEditable
 from amt.api.forms.organization import get_organization_form
 from amt.api.group_by_category import get_localized_group_by_categories
 from amt.api.lifecycles import get_localized_lifecycles
@@ -28,7 +27,7 @@ from amt.api.organization_filter_options import OrganizationFilterOptions, get_l
 from amt.api.risk_group import get_localized_risk_groups
 from amt.api.routes.algorithm import get_user_id_or_error
 from amt.api.routes.algorithms import get_algorithms
-from amt.api.routes.shared import UpdateFieldModel, get_filters_and_sort_by
+from amt.api.routes.shared import get_filters_and_sort_by
 from amt.api.utils import SafeDict
 from amt.core.authorization import AuthorizationResource, AuthorizationVerb, get_user
 from amt.core.exceptions import AMTAuthorizationError, AMTNotFound, AMTRepositoryError
@@ -278,11 +277,11 @@ async def get_organization_cancel(
 async def get_organization_update(
     request: Request,
     organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
-    update_data: UpdateFieldModel,
     organization_slug: str,
     full_resource_path: str,
 ) -> HTMLResponse:
     organization = await get_organization_or_error(organizations_service, request, organization_slug)
+    new_values = await request.json()
 
     user_id = get_user_id_or_error(request)
 
@@ -297,13 +296,12 @@ async def get_organization_update(
 
     editable_context = {
         "user_id": user_id,
-        "new_value": update_data.value,
+        "new_values": new_values,
         "organizations_service": organizations_service,
     }
 
     editable = await save_editable(
         editable,
-        update_data=update_data,
         editable_context=editable_context,
         organizations_service=organizations_service,
         do_save=True,

@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-01-30 16:10+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 0001-01-01 00:00+0000\n"
+"PO-Revision-Date: 0001-01-01 00:00+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.15.0\n"
 
 #: amt/api/ai_act_profile.py:24
 msgid "Type"
@@ -46,11 +46,11 @@ msgid "Role"
 msgstr ""
 
 #: amt/api/group_by_category.py:15
-#: amt/site/templates/algorithms/details_info.html.j2:101
+#: amt/site/templates/algorithms/details_info.html.j2:97
 #: amt/site/templates/algorithms/new.html.j2:41
-#: amt/site/templates/parts/algorithm_search.html.j2:47
+#: amt/site/templates/parts/algorithm_search.html.j2:48
 #: amt/site/templates/parts/filter_list.html.j2:71
-#: amt/site/templates/parts/tasks_search.html.j2:35
+#: amt/site/templates/parts/tasks_search.html.j2:36
 msgid "Lifecycle"
 msgstr ""
 
@@ -275,7 +275,7 @@ msgstr ""
 #: amt/site/templates/algorithms/details_info.html.j2:75
 #: amt/site/templates/auth/profile.html.j2:34
 #: amt/site/templates/organizations/home.html.j2:13
-#: amt/site/templates/organizations/parts/members_results.html.j2:118
+#: amt/site/templates/organizations/parts/members_results.html.j2:119
 msgid "Name"
 msgstr ""
 
@@ -414,8 +414,8 @@ msgid "measure executed"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_compliance.html.j2:69
-#: amt/site/templates/macros/editable.html.j2:50
-#: amt/site/templates/macros/editable.html.j2:55
+#: amt/site/templates/macros/editable.html.j2:67
+#: amt/site/templates/macros/editable.html.j2:72
 #: amt/site/templates/macros/tasks.html.j2:82
 msgid "Edit"
 msgstr ""
@@ -437,11 +437,7 @@ msgstr ""
 msgid "Repository"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:97
-msgid "Algorithm code"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_info.html.j2:107
+#: amt/site/templates/algorithms/details_info.html.j2:103
 #: amt/site/templates/organizations/parts/overview_results.html.j2:133
 #: amt/site/templates/pages/assessment_card.html.j2:7
 #: amt/site/templates/pages/model_card.html.j2:6
@@ -451,11 +447,11 @@ msgstr ""
 msgid "Last updated"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:111
+#: amt/site/templates/algorithms/details_info.html.j2:107
 msgid "Labels"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:119
+#: amt/site/templates/algorithms/details_info.html.j2:115
 msgid "References"
 msgstr ""
 
@@ -468,12 +464,12 @@ msgid "Read more on the algoritmekader"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:64
-#: amt/site/templates/macros/editable.html.j2:150
+#: amt/site/templates/macros/editable.html.j2:174
 msgid "Save"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:68
-#: amt/site/templates/macros/editable.html.j2:155
+#: amt/site/templates/macros/editable.html.j2:179
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:26
 msgid "Cancel"
 msgstr ""
@@ -693,11 +689,11 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: amt/site/templates/organizations/parts/members_results.html.j2:36
+#: amt/site/templates/organizations/parts/members_results.html.j2:37
 msgid "Find member..."
 msgstr ""
 
-#: amt/site/templates/organizations/parts/members_results.html.j2:65
+#: amt/site/templates/organizations/parts/members_results.html.j2:66
 #, python-format
 msgid ""
 "%(members_length)s result\n"
@@ -708,13 +704,13 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: amt/site/templates/organizations/parts/members_results.html.j2:70
+#: amt/site/templates/organizations/parts/members_results.html.j2:71
 #: amt/site/templates/organizations/parts/overview_results.html.j2:85
 #: amt/site/templates/parts/filter_list.html.j2:16
 msgid "for"
 msgstr ""
 
-#: amt/site/templates/organizations/parts/members_results.html.j2:121
+#: amt/site/templates/organizations/parts/members_results.html.j2:122
 msgid "Action"
 msgstr ""
 
@@ -829,11 +825,11 @@ msgstr ""
 msgid "This page is yet to be build."
 msgstr ""
 
-#: amt/site/templates/parts/algorithm_search.html.j2:61
+#: amt/site/templates/parts/algorithm_search.html.j2:62
 msgid "Category"
 msgstr ""
 
-#: amt/site/templates/parts/algorithm_search.html.j2:82
+#: amt/site/templates/parts/algorithm_search.html.j2:83
 msgid "Group by"
 msgstr ""
 
@@ -876,7 +872,7 @@ msgstr ""
 msgid "Results for"
 msgstr ""
 
-#: amt/site/templates/parts/tasks_search.html.j2:49
+#: amt/site/templates/parts/tasks_search.html.j2:50
 msgid "Assignee"
 msgstr ""
 

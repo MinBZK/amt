@@ -1,127 +1,26 @@
 import logging
 import typing
-from collections.abc import Generator
-from enum import StrEnum
-from typing import Any, Final, cast
+from typing import Any, cast
 
 from starlette.requests import Request
 
-from amt.api.editable_converters import (
-    EditableConverter,
-    EditableConverterForOrganizationInAlgorithm,
-    StatusConverterForSystemcard,
-)
-from amt.api.editable_enforcers import EditableEnforcer, EditableEnforcerForOrganizationInAlgorithm
+from amt.api.editable_classes import Editable, EditableType, EditModes, ResolvedEditable
+from amt.api.editable_converters import EditableConverterForOrganizationInAlgorithm, StatusConverterForSystemcard
+from amt.api.editable_enforcers import EditableEnforcerForOrganizationInAlgorithm
 from amt.api.editable_util import (
     extract_number_and_string,
     replace_digits_in_brackets,
     replace_wildcard_with_digits_in_brackets,
 )
-from amt.api.editable_validators import EditableValidator, EditableValidatorMinMaxLength, EditableValidatorSlug
+from amt.api.editable_validators import EditableValidatorMinMaxLength, EditableValidatorSlug
 from amt.api.lifecycles import get_localized_lifecycles
 from amt.api.routes.shared import nested_value
 from amt.api.utils import SafeDict
 from amt.core.exceptions import AMTNotFound
 from amt.models import Algorithm, Organization
-from amt.models.base import Base
-from amt.schema.webform import WebFormFieldImplementationType, WebFormFieldImplementationTypeFields, WebFormOption
+from amt.schema.webform import WebFormFieldImplementationType, WebFormOption
 from amt.services.algorithms import AlgorithmsService
 from amt.services.organizations import OrganizationsService
-
-type EditableType = Editable
-type ResolvedEditableType = ResolvedEditable
-
-
-class Editable:
-    """
-    Editable contains all basic information for editing a field in a resources, like changing the name
-    of an algorithm.
-
-    It requires the 'full_resource_path' in a resolvable format, like algorithm/{algorithm_id}/system_card/name.
-    The implementation_type tells how this field can be edited using WebFormFieldImplementationType, like a 'plain'
-    TEXT field or SELECT_MY_ORGANIZATIONS.
-    The couples links fields together, if one is changed, so is the other.
-    The children field is for editing multiple fields at one (to be implemented).
-    The enforcer checks permissions and business rules.
-    The converter converts data between read and write when needed.
-    """
-
-    full_resource_path: Final[str]
-
-    def __init__(
-        self,
-        full_resource_path: str,
-        implementation_type: WebFormFieldImplementationTypeFields,
-        couples: set[EditableType] | None = None,
-        children: list[EditableType] | None = None,
-        converter: EditableConverter | None = None,
-        enforcer: EditableEnforcer | None = None,
-        validator: EditableValidator | None = None,
-    ) -> None:
-        self.full_resource_path = full_resource_path
-        self.implementation_type = implementation_type
-        self.couples = set[EditableType]() if couples is None else couples
-        self.children = list[EditableType]() if children is None else children
-        self.converter = converter
-        self.enforcer = enforcer
-        self.validator = validator
-
-    def add_bidirectional_couple(self, target: EditableType) -> None:
-        """
-        Changing an editable may require an update on another field as well, like when changing the name
-        of an algorithm; this is stored in two different places. Making it a couple ensures both values are
-        updated when one is changed.
-        :param target: the target editable type
-        :return: None
-        """
-        self.couples.add(target)
-        target.couples.add(self)
-
-    def add_child(self, target: EditableType) -> None:
-        """
-        An editable can be a container (parent) for other elements.
-        :param target: the target editable type
-        :return: None
-        """
-        self.children.append(target)
-
-
-class ResolvedEditable:
-    value: Any | None
-    # TODO: find out of holding resource_object in memory for many editables is wise / needed
-    resource_object: Any | None
-    relative_resource_path: str | None
-    form_options: list[WebFormOption] | None
-
-    def __init__(
-        self,
-        # fields copied from the Editable class
-        full_resource_path: str,
-        implementation_type: WebFormFieldImplementationTypeFields,
-        couples: set[ResolvedEditableType] | None = None,
-        children: list[ResolvedEditableType] | None = None,
-        converter: EditableConverter | None = None,
-        enforcer: EditableEnforcer | None = None,
-        validator: EditableValidator | None = None,
-        # resolved only fields
-        value: str | None = None,
-        resource_object: Base | None = None,
-        relative_resource_path: str | None = None,
-    ) -> None:
-        self.full_resource_path = full_resource_path
-        self.implementation_type = implementation_type
-        self.couples = set[ResolvedEditableType]() if couples is None else couples
-        self.children = list[ResolvedEditableType]() if children is None else children
-        self.converter = converter
-        self.enforcer = enforcer
-        self.validator = validator
-        # resolved only fields
-        self.value = value
-        self.resource_object = resource_object
-        self.relative_resource_path = relative_resource_path
-
-    def last_path_item(self) -> str:
-        return self.full_resource_path.split("/")[-1]
 
 
 class Editables:
@@ -148,17 +47,29 @@ class Editables:
         implementation_type=WebFormFieldImplementationType.TEXT,
     )
 
-    # TODO: parent below is not yet implemented
     ALGORITHM_EDITABLE_SYSTEMCARD_OWNERS = Editable(
-        full_resource_path="DISABLED_algorithm/{algorithm_id}/system_card/owners[*]",
+        full_resource_path="algorithm/{algorithm_id}/system_card/owners[*]",
         implementation_type=WebFormFieldImplementationType.PARENT,
         children=[
             Editable(
                 full_resource_path="algorithm/{algorithm_id}/system_card/owners[*]/organization",
                 implementation_type=WebFormFieldImplementationType.TEXT,
+                validator=EditableValidatorMinMaxLength(min_length=3, max_length=100),
             ),
             Editable(
                 full_resource_path="algorithm/{algorithm_id}/system_card/owners[*]/oin",
+                implementation_type=WebFormFieldImplementationType.TEXT,
+            ),
+            Editable(
+                full_resource_path="algorithm/{algorithm_id}/system_card/owners[*]/name",
+                implementation_type=WebFormFieldImplementationType.TEXT,
+            ),
+            Editable(
+                full_resource_path="algorithm/{algorithm_id}/system_card/owners[*]/email",
+                implementation_type=WebFormFieldImplementationType.TEXT,
+            ),
+            Editable(
+                full_resource_path="algorithm/{algorithm_id}/system_card/owners[*]/role",
                 implementation_type=WebFormFieldImplementationType.TEXT,
             ),
         ],
@@ -171,9 +82,43 @@ class Editables:
             Editable(
                 full_resource_path="algorithm/{algorithm_id}/system_card/labels[*]/name",
                 implementation_type=WebFormFieldImplementationType.TEXT,
+                validator=EditableValidatorMinMaxLength(min_length=3, max_length=100),
             ),
             Editable(
                 full_resource_path="algorithm/{algorithm_id}/system_card/labels[*]/value",
+                implementation_type=WebFormFieldImplementationType.TEXT,
+                validator=EditableValidatorMinMaxLength(min_length=3, max_length=100),
+            ),
+        ],
+    )
+
+    ALGORITHM_EDITABLE_SYSTEMCARD_REFERENCES = Editable(
+        full_resource_path="algorithm/{algorithm_id}/system_card/references[*]",
+        implementation_type=WebFormFieldImplementationType.PARENT,
+        children=[
+            Editable(
+                full_resource_path="algorithm/{algorithm_id}/system_card/references[*]/name",
+                implementation_type=WebFormFieldImplementationType.TEXT,
+                validator=EditableValidatorMinMaxLength(min_length=3, max_length=100),
+            ),
+            Editable(
+                full_resource_path="algorithm/{algorithm_id}/system_card/references[*]/link",
+                implementation_type=WebFormFieldImplementationType.TEXT,
+                validator=EditableValidatorMinMaxLength(min_length=3, max_length=100),
+            ),
+        ],
+    )
+
+    ALGORITHM_EDITABLE_SYSTEMCARD_LEGAL_BASE = Editable(
+        full_resource_path="algorithm/{algorithm_id}/system_card/legal_base[*]",
+        implementation_type=WebFormFieldImplementationType.PARENT,
+        children=[
+            Editable(
+                full_resource_path="algorithm/{algorithm_id}/system_card/legal_base[*]/name",
+                implementation_type=WebFormFieldImplementationType.TEXT,
+            ),
+            Editable(
+                full_resource_path="algorithm/{algorithm_id}/system_card/legal_base[*]/link",
                 implementation_type=WebFormFieldImplementationType.TEXT,
             ),
         ],
@@ -200,6 +145,115 @@ class Editables:
     )
     ALGORITHM_EDITABLE_LIFECYCLE.add_bidirectional_couple(ALGORITHM_EDITABLE_SYSTEMCARD_STATUS)
 
+    ALGORITHM_EDITABLE_PROVENANCE_GIT_COMMIT_HASH = Editable(
+        full_resource_path="algorithm/{algorithm_id}/system_card/provenance/git_commit_hash",
+        implementation_type=WebFormFieldImplementationType.TEXT,
+    )
+
+    ALGORITHM_EDITABLE_PROVENANCE_URI = Editable(
+        full_resource_path="algorithm/{algorithm_id}/system_card/provenance/uri",
+        implementation_type=WebFormFieldImplementationType.TEXT,
+    )
+
+    ALGORITHM_EDITABLE_VERSION = Editable(
+        full_resource_path="algorithm/{algorithm_id}/system_card/version",
+        implementation_type=WebFormFieldImplementationType.TEXT,
+    )
+
+    ALGORITHM_EDITABLE_UPL = Editable(
+        full_resource_path="algorithm/{algorithm_id}/system_card/upl",
+        implementation_type=WebFormFieldImplementationType.TEXT,
+    )
+
+    ALGORITHM_EDITABLE_BEGIN_DATE = Editable(
+        full_resource_path="algorithm/{algorithm_id}/system_card/begin_date",
+        implementation_type=WebFormFieldImplementationType.DATE,
+    )
+
+    ALGORITHM_EDITABLE_END_DATE = Editable(
+        full_resource_path="algorithm/{algorithm_id}/system_card/end_date",
+        implementation_type=WebFormFieldImplementationType.DATE,
+    )
+
+    ALGORITHM_EDITABLE_GOAL_AND_IMPACT = Editable(
+        full_resource_path="algorithm/{algorithm_id}/system_card/goal_and_impact",
+        implementation_type=WebFormFieldImplementationType.TEXTAREA,
+    )
+
+    ALGORITHM_EDITABLE_CONSIDERATIONS = Editable(
+        full_resource_path="algorithm/{algorithm_id}/system_card/considerations",
+        implementation_type=WebFormFieldImplementationType.TEXTAREA,
+    )
+
+    ALGORITHM_EDITABLE_RISK_MANAGEMENT = Editable(
+        full_resource_path="algorithm/{algorithm_id}/system_card/risk_management",
+        implementation_type=WebFormFieldImplementationType.TEXTAREA,
+    )
+
+    ALGORITHM_EDITABLE_RISK_HUMAN_INTERVENTION = Editable(
+        full_resource_path="algorithm/{algorithm_id}/system_card/human_intervention",
+        implementation_type=WebFormFieldImplementationType.TEXTAREA,
+    )
+
+    ALGORITHM_EDITABLE_PRODUCT_MARKINGS = Editable(
+        full_resource_path="algorithm/{algorithm_id}/system_card/product_markings[*]",
+        implementation_type=WebFormFieldImplementationType.TEXTAREA,
+    )
+
+    ALGORITHM_EDITABLE_HARDWARE_REQUIREMENTS = Editable(
+        full_resource_path="algorithm/{algorithm_id}/system_card/hardware_requirements[*]",
+        implementation_type=WebFormFieldImplementationType.TEXTAREA,
+    )
+
+    ALGORITHM_EDITABLE_DEPLOYMENT_VARIANTS = Editable(
+        full_resource_path="algorithm/{algorithm_id}/system_card/deployment_variants[*]",
+        implementation_type=WebFormFieldImplementationType.TEXTAREA,
+    )
+
+    ALGORITHM_EDITABLE_RISK_VERSION_REQUIREMENTS = Editable(
+        full_resource_path="algorithm/{algorithm_id}/system_card/version_requirements[*]",
+        implementation_type=WebFormFieldImplementationType.TEXTAREA,
+    )
+
+    ALGORITHM_EDITABLE_RISK_INTERACTION_DETAILS = Editable(
+        full_resource_path="algorithm/{algorithm_id}/system_card/interaction_details[*]",
+        implementation_type=WebFormFieldImplementationType.TEXT,
+    )
+
+    ALGORITHM_EDITABLE_EXTERNAL_PROVIDERS = Editable(
+        full_resource_path="algorithm/{algorithm_id}/system_card/external_providers[*]",
+        implementation_type=WebFormFieldImplementationType.TEXTAREA,
+    )
+
+    ALGORITHM_EDITABLE_TECHNICAL_DESIGN = Editable(
+        full_resource_path="algorithm/{algorithm_id}/system_card/technical_design",
+        implementation_type=WebFormFieldImplementationType.TEXTAREA,
+    )
+
+    ALGORITHM_EDITABLE_USED_DATA = Editable(
+        full_resource_path="algorithm/{algorithm_id}/system_card/used_data",
+        implementation_type=WebFormFieldImplementationType.TEXTAREA,
+    )
+
+    ALGORITHM_EDITABLE_USER_INTERFACE = Editable(
+        full_resource_path="algorithm/{algorithm_id}/system_card/user_interface[*]",
+        implementation_type=WebFormFieldImplementationType.PARENT,
+        children=[
+            Editable(
+                full_resource_path="algorithm/{algorithm_id}/system_card/user_interface[*]/description",
+                implementation_type=WebFormFieldImplementationType.TEXTAREA,
+            ),
+            Editable(
+                full_resource_path="algorithm/{algorithm_id}/system_card/user_interface[*]/link",
+                implementation_type=WebFormFieldImplementationType.TEXT,
+            ),
+            Editable(
+                full_resource_path="algorithm/{algorithm_id}/system_card/user_interface[*]/snapshot",
+                implementation_type=WebFormFieldImplementationType.TEXT,
+            ),
+        ],
+    )
+
     ORGANIZATION_NAME = Editable(
         full_resource_path="organization/{organization_id}/name",
         implementation_type=WebFormFieldImplementationType.TEXT,
@@ -214,19 +268,13 @@ class Editables:
 
     # TODO: rethink if this is a wise solution.. we do this to keep all elements in 1 class and still
     #  be able to execute other code (like making relationships)
-    def __iter__(self) -> Generator[tuple[str, Any], Any, Any]:
+    def __iter__(self) -> typing.Generator[tuple[str, Any], Any, Any]:
         yield from [
             getattr(self, attr) for attr in dir(self) if not attr.startswith("__") and not callable(getattr(self, attr))
         ]
 
 
 editables = Editables()
-
-
-class EditModes(StrEnum):
-    EDIT = "EDIT"
-    VIEW = "VIEW"
-    SAVE = "SAVE"
 
 
 async def get_enriched_resolved_editable(
@@ -365,10 +413,10 @@ def get_resolved_editables(context_variables: dict[str, str | int]) -> dict[str,
         # TODO: maybe the list index should not be resolved here (for all possible editables)
         if "list_index" in context_variables:
             full_resource_path = replace_wildcard_with_digits_in_brackets(
-                full_resource_path, context_variables["list_index"]
+                full_resource_path, int(context_variables["list_index"])
             )
 
-        resource_name, resource_id, relative_resource_path = full_resource_path.split("/", 2)
+        _, _, relative_resource_path = full_resource_path.split("/", 2)
         editable.relative_resource_path = relative_resource_path
 
         return ResolvedEditable(
@@ -417,7 +465,7 @@ async def save_editable(  # noqa: C901
         # we validate on 'raw' form fields, so validation is done before the converter
         # TODO: validate all fields (child and couples) before saving!
         if editable.validator and editable.relative_resource_path is not None:
-            await editable.validator.validate(new_value, editable.relative_resource_path)
+            await editable.validator.validate(new_value, editable)  # pyright: ignore[reportUnknownMemberType]
 
         if editable.enforcer:
             await editable.enforcer.enforce(**editable_context)
@@ -467,7 +515,7 @@ async def save_editable(  # noqa: C901
     return editable
 
 
-def set_path(obj: dict[str, Any] | object, path: str, value: typing.Any) -> None:  # noqa: ANN401
+def set_path(obj: dict[str, Any] | object, path: str, value: typing.Any) -> None:  # noqa: ANN401, C901
     if not path:
         raise ValueError("Path cannot be empty")
 
@@ -480,16 +528,20 @@ def set_path(obj: dict[str, Any] | object, path: str, value: typing.Any) -> None
                 obj[attr] = {}
             obj = obj[attr]
         else:
-            if not hasattr(obj, attr):
-                setattr(obj, attr, {})
-            obj = getattr(obj, attr)
+            if not hasattr(obj, attr):  # pyright: ignore[reportUnknownArgumentType]
+                setattr(obj, attr, {})  # pyright: ignore[reportUnknownArgumentType]
+            obj = getattr(obj, attr)  # pyright: ignore[reportUnknownArgumentType]
         if obj and index is not None:
-            obj = obj[index]
+            obj = cast(list[Any], obj)[index]  # pyright: ignore[reportArgumentType, reportUnknownVariableType, reportUnknownArgumentType]
 
     if isinstance(obj, dict):
         obj[attrs[-1]] = value
     else:
-        setattr(obj, attrs[-1], value)
+        attr, index = extract_number_and_string(attrs[-1])
+        if index is not None:
+            cast(list[Any], getattr(obj, attr))[index] = value
+        else:
+            setattr(obj, attrs[-1], value)
 
 
 def is_editable_resource(full_resource_path: str, editables: dict[str, ResolvedEditable]) -> bool:

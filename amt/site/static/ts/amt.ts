@@ -473,9 +473,9 @@ export function showRequirementDetails() {
 }
 
 export function searchInputChanged() {
-  const clearElement: HTMLElement | null = (<HTMLElement>(
-    (<HTMLElement>event!.currentTarget).parentNode
-  )).querySelector(".form-input-clear");
+  const clearElement: HTMLElement | null = (
+    (event!.currentTarget as HTMLElement).parentNode as HTMLElement
+  ).querySelector(".form-input-clear");
   if (!clearElement) {
     return;
   }
@@ -487,10 +487,10 @@ export function searchInputChanged() {
 }
 
 export function resetSearchInput() {
-  (<HTMLElement>event!.currentTarget).classList.add("display-none");
-  const inputElement: HTMLInputElement | null = (<HTMLInputElement>(
-    (<HTMLElement>event!.currentTarget).parentNode
-  )).querySelector(".form-input-search");
+  (event!.currentTarget as HTMLElement).classList.add("display-none");
+  const inputElement: HTMLInputElement | null = (
+    (event!.currentTarget as HTMLElement).parentNode as HTMLElement
+  ).querySelector(".form-input-search");
   if (!inputElement) {
     return;
   }
