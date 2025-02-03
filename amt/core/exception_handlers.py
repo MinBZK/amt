@@ -56,6 +56,9 @@ async def general_exception_handler(request: Request, exc: Exception) -> HTMLRes
         message = exc.errors()
         for err in message:
             err["msg"] = translate_pydantic_exception(err, translations)
+        # Errors should be handled in appropriate "containers",
+        #  so we always want to replace to content and not the container
+        response_headers["HX-Reswap"] = "innerHTML"
 
     status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
     if isinstance(exc, StarletteHTTPException):

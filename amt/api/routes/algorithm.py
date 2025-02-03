@@ -357,8 +357,13 @@ async def get_algorithm_details(
         request,
     )
 
-    context["breadcrumbs"] = breadcrumbs
-    context["base_href"] = f"/algorithm/{algorithm_id}"
+    context.update(
+        {
+            "breadcrumbs": breadcrumbs,
+            "base_href": f"/algorithm/{algorithm_id}",
+            "editables": get_resolved_editables(context_variables={"algorithm_id": algorithm_id}),
+        }
+    )
 
     return templates.TemplateResponse(request, "algorithms/details_info.html.j2", context)
 
@@ -429,6 +434,7 @@ async def get_algorithm_cancel(
         "resource_object": editable.resource_object,
         "full_resource_path": full_resource_path,
         "editable_object": editable,
+        "editables": get_resolved_editables(context_variables={"algorithm_id": algorithm_id}),
     }
 
     return templates.TemplateResponse(request, "parts/view_cell.html.j2", context)
@@ -479,6 +485,7 @@ async def get_algorithm_update(
         "resource_object": editable.resource_object,
         "full_resource_path": full_resource_path,
         "editable_object": editable,
+        "editables": get_resolved_editables(context_variables={"algorithm_id": algorithm_id}),
     }
 
     return templates.TemplateResponse(request, "parts/view_cell.html.j2", context)

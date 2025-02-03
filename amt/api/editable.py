@@ -42,11 +42,6 @@ class Editables:
         validator=EditableValidatorMinMaxLength(min_length=3, max_length=100),
     )
 
-    ALGORITHM_EDITABLE_AUTHOR = Editable(
-        full_resource_path="algorithm/{algorithm_id}/system_card/provenance/author",
-        implementation_type=WebFormFieldImplementationType.TEXT,
-    )
-
     ALGORITHM_EDITABLE_SYSTEMCARD_OWNERS = Editable(
         full_resource_path="algorithm/{algorithm_id}/system_card/owners[*]",
         implementation_type=WebFormFieldImplementationType.PARENT,
@@ -145,14 +140,23 @@ class Editables:
     )
     ALGORITHM_EDITABLE_LIFECYCLE.add_bidirectional_couple(ALGORITHM_EDITABLE_SYSTEMCARD_STATUS)
 
-    ALGORITHM_EDITABLE_PROVENANCE_GIT_COMMIT_HASH = Editable(
-        full_resource_path="algorithm/{algorithm_id}/system_card/provenance/git_commit_hash",
-        implementation_type=WebFormFieldImplementationType.TEXT,
-    )
-
-    ALGORITHM_EDITABLE_PROVENANCE_URI = Editable(
-        full_resource_path="algorithm/{algorithm_id}/system_card/provenance/uri",
-        implementation_type=WebFormFieldImplementationType.TEXT,
+    ALGORITHM_EDITABLE_PROVENANCE = Editable(
+        full_resource_path="algorithm/{algorithm_id}/system_card/provenance",
+        implementation_type=WebFormFieldImplementationType.PARENT,
+        children=[
+            Editable(
+                full_resource_path="algorithm/{algorithm_id}/system_card/provenance/author",
+                implementation_type=WebFormFieldImplementationType.TEXT,
+            ),
+            Editable(
+                full_resource_path="algorithm/{algorithm_id}/system_card/provenance/git_commit_hash",
+                implementation_type=WebFormFieldImplementationType.TEXT,
+            ),
+            Editable(
+                full_resource_path="algorithm/{algorithm_id}/system_card/provenance/uri",
+                implementation_type=WebFormFieldImplementationType.TEXT,
+            ),
+        ],
     )
 
     ALGORITHM_EDITABLE_VERSION = Editable(
@@ -546,3 +550,14 @@ def set_path(obj: dict[str, Any] | object, path: str, value: typing.Any) -> None
 
 def is_editable_resource(full_resource_path: str, editables: dict[str, ResolvedEditable]) -> bool:
     return editables.get(replace_digits_in_brackets(full_resource_path), None) is not None
+
+
+def is_parent_editable(editables: dict[str, ResolvedEditable], full_resource_path: str) -> bool:
+    full_resource_path = replace_digits_in_brackets(full_resource_path)
+    editable = editables.get(full_resource_path)
+    if editable is None:
+        print(full_resource_path + " : " + "false, no match")
+        return False
+    result = editable.implementation_type == WebFormFieldImplementationType.PARENT
+    print(full_resource_path + " : " + str(result))
+    return result

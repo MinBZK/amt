@@ -30,6 +30,20 @@ if (window.location.pathname === "/algorithms/new") {
   });
 }
 
+/**
+ * Before we send a (form) request, we want to make sure all "error messages" are cleared.
+ */
+document.addEventListener("htmx:beforeRequest", (e) => {
+  if ((e.target as HTMLElement).nodeName === "FORM") {
+    document.querySelectorAll(".htmx-error-oob").forEach((e) => {
+      e.innerHTML = "";
+    });
+  }
+});
+
+/**
+ * Sortable breaks with dynamic elements, so when tasks are 'swapped', we re-initialize the sortable elements
+ */
 document.addEventListener("htmx:afterSwap", (e) => {
   if (
     ["tasks-search-results", "search-tasks-container"].includes(
@@ -51,6 +65,18 @@ function initPage() {
   document.body.addEventListener("htmx:sendError", function () {
     document.getElementById("errorContainer")!.innerHTML =
       "<h1>Placeholder: Error while connecting to server</h1";
+  });
+
+  /* we register the click on the body to avoid having to dynamically add it to each element, especially after a htmlx swap event */
+  document.querySelector("body")!.addEventListener("click", (e) => {
+    if ((e.target as HTMLElement).classList.contains("amt-editable-block")) {
+      const linkEl = (e.target as HTMLElement)!.querySelectorAll(
+        ".amt-edit-link",
+      )[0];
+      if (linkEl) {
+        (linkEl as HTMLElement).click();
+      }
+    }
   });
 
   const columns = document.getElementsByClassName(

@@ -12,7 +12,7 @@ from jinja2 import Environment, StrictUndefined, Undefined
 from starlette.background import BackgroundTask
 from starlette.templating import _TemplateResponse  # pyright: ignore [reportPrivateUsage]
 
-from amt.api.editable import is_editable_resource
+from amt.api.editable import is_editable_resource, is_parent_editable
 from amt.api.editable_util import replace_digits_in_brackets, resolve_resource_list_path
 from amt.api.http_browser_caching import url_for_cache
 from amt.api.localizable import LocalizableEnum
@@ -168,6 +168,7 @@ templates.env.globals.update(replace_digits_in_brackets=replace_digits_in_bracke
 templates.env.globals.update(permission=permission)  # pyright: ignore [reportUnknownMemberType]
 templates.env.globals.update(hasattr=hasattr_jinja)  # pyright: ignore [reportUnknownMemberType]
 templates.env.globals.update(is_path_with_list=is_path_with_list)  # pyright: ignore [reportUnknownMemberType]
+templates.env.globals.update(is_parent_editable=is_parent_editable)  # pyright: ignore [reportUnknownMemberType]
 templates.env.globals.update(resolve_resource_list_path=resolve_resource_list_path)  # pyright: ignore [reportUnknownMemberType]
 templates.env.tests["permission"] = permission  # pyright: ignore [reportUnknownMemberType]
 templates.env.add_extension("jinja2_base64_filters.Base64Filters")  # pyright: ignore [reportUnknownMemberType]

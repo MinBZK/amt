@@ -16,19 +16,20 @@
         <div class="{% if depth == 1 %}margin-bottom-large{% endif %}">
             {% if is_editable_resource(full_resource_path, editables) %}
                 {{ editable(algorithm, relative_resource_path, full_resource_path) }}
-            {% endif %}
-            {% if value.__class__.__name__ == 'dict' %}
-                {% set value = value.items() %}
-            {% endif %}
-            {% for subkey, subvalue in value %}
-                <strong>{{ render_attribute(subkey) }}</strong>:
-                {% if is_editable_resource(full_resource_path + "/" + subkey, editables) %}
-                    {{ editable(algorithm, relative_resource_path + "/" + subkey, full_resource_path + "/" + subkey) }}
-                {% else %}
-                    {{ render_value(subkey, subvalue, depth+1, base_resource_path, path) }}
+            {% else %}
+                {% if value.__class__.__name__ == 'dict' %}
+                    {% set value = value.items() %}
                 {% endif %}
-                {% if not loop.last %}<br />{% endif %}
-            {% endfor %}
+                {% for subkey, subvalue in value %}
+                    <strong>{{ render_attribute(subkey) }}</strong>:
+                    {% if is_editable_resource(full_resource_path + "/" + subkey, editables) %}
+                        {{ editable(algorithm, relative_resource_path + "/" + subkey, full_resource_path + "/" + subkey) }}
+                    {% else %}
+                        {{ render_value(subkey, subvalue, depth+1, base_resource_path, path) }}
+                    {% endif %}
+                    {% if not loop.last %}<br />{% endif %}
+                {% endfor %}
+            {% endif %}
         </div>
     {% elif isinstance(value, 'list') %}
         {% if key == "assessments" %}
@@ -61,7 +62,7 @@
         {% endif %}
     {% else %}
         {% if is_editable_resource(full_resource_path, editables) %}
-            {{ editable(algorithm, relative_resource_path, full_resource_path) }}
+            <div class="amt-editable-block">{{ editable(algorithm, relative_resource_path, full_resource_path) }}</div>
         {% else %}
             {{ value }}
         {% endif %}

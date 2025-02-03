@@ -10,6 +10,7 @@ from amt.api.deps import templates
 from amt.api.editable import (
     Editables,
     get_enriched_resolved_editable,
+    get_resolved_editables,
     save_editable,
 )
 from amt.api.editable_classes import EditModes, ResolvedEditable
@@ -186,6 +187,7 @@ async def get_by_slug(
         "organization_id": organization.id,
         "tab_items": tab_items,
         "breadcrumbs": breadcrumbs,
+        "editables": get_resolved_editables(context_variables={"organization_id": organization.id}),
     }
     return templates.TemplateResponse(request, "organizations/home.html.j2", context)
 
@@ -267,6 +269,7 @@ async def get_organization_cancel(
         "resource_object": None,  # TODO: this should become an optional parameter in the Jinja template
         "full_resource_path": full_resource_path,
         "editable_object": editable,
+        "editables": get_resolved_editables(context_variables={"organization_id": organization.id}),
     }
 
     return templates.TemplateResponse(request, "parts/view_cell.html.j2", context)
@@ -319,6 +322,7 @@ async def get_organization_update(
         "resource_object": None,
         "full_resource_path": full_resource_path,
         "editable_object": editable,
+        "editables": get_resolved_editables(context_variables={"organization_id": organization.id}),
     }
 
     # TODO: add a 'next action' to editable for f.e. redirect options, THIS IS A HACK
@@ -455,6 +459,8 @@ async def get_members(
     )
 
     filters["organization-id"] = str(organization.id)
+    if "name" not in sort_by:
+        sort_by["name"] = "ascending"
     members = await users_service.find_all(search=search, sort=sort_by, filters=filters)
 
     context: dict[str, Any] = {

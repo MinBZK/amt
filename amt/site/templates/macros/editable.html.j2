@@ -2,17 +2,15 @@
     {{ attribute.capitalize().replace("_", " ") }}
 {%- endmacro %}
 {% macro editable(obj, relative_resource_path, full_resource_path, editable_object = None) %}
-    {#    TODO: maybe editable self should contain the type of container?#}
-    {% if is_path_with_list(full_resource_path) %}
-        {# we know it is a list, but not what is in the list.. this now only works for editables with children #}
+    {% if is_parent_editable(editables, full_resource_path) %}
         {% if editable_object is none %}
             {% set editable_object = editables[replace_digits_in_brackets(full_resource_path)] %}
         {% endif %}
-        <div hx-target="this">
+        <div hx-target="this" class="amt-editable-block">
             {% if editable_object.children is not none and editable_object.children | length > 0 %}
                 {% for child_editable in editable_object.children %}
                     <strong>{{ render_attribute(child_editable.last_path_item() ) }}</strong>:
-                    {{ nested_value(obj, resolve_resource_list_path(full_resource_path, child_editable.relative_resource_path) ) }}
+                    {{ display_value(child_editable.last_path_item() , nested_value(obj, resolve_resource_list_path(full_resource_path, child_editable.relative_resource_path))) }}
                     {% if not loop.last %}<br />{% endif %}
                 {% endfor %}
             {% else %}
@@ -21,7 +19,7 @@
             {{ edit_link(base_href, full_resource_path) }}
         </div>
     {% else %}
-        <span hx-target="this">
+        <div hx-target="this" class="amt-editable-block">
             {% if editable_object is not none %}
                 {% set value = editable_object.value %}
             {% else %}
@@ -36,30 +34,33 @@
                 </span>
                 {{ edit_link(base_href, full_resource_path) }}
             {% else %}
-                {% if key == "uri" or key == "link" or key == "upl" %}
-                    <a class="rvo-link rvo-link--normal" href="{{ value }}">{{ value }}</a>
-                {% elif key == "oin" %}
-                    <a class="rvo-link rvo-link--normal"
-                       href="https://oinregister.logius.nl/oin-register/{{ value }}">{{ value }}</a>
-                {% elif key == "email" %}
-                    <a class="rvo-link rvo-link--normal" href="mailto:{{ value }}">{{ value }}</a>
-                {% elif key == "urn" %}
-                    <a class="rvo-link rvo-link--normal"
-                       href="https://task-registry.apps.digilab.network/urns/?version=latest&urn={{ value }}">{{ value }}</a>
-                {% elif value is string and value.startswith('http') %}
-                    <a href="{{ value }}" target="_blank" rel="noopener noreferrer">{{ value }}</a>
-                {% else %}
-                    {{ value }}
-                {% endif %}
+                {{ display_value(key, value) }}
                 {{ edit_link(base_href, full_resource_path) }}
             {% endif %}
-        </span>
+        </div>
+    {% endif %}
+{% endmacro %}
+{% macro display_value(key, value) %}
+    {% if key == "uri" or key == "link" or key == "upl" %}
+        <a class="rvo-link rvo-link--normal" href="{{ value }}">{{ value }}</a>
+    {% elif key == "oin" %}
+        <a class="rvo-link rvo-link--normal"
+           href="https://oinregister.logius.nl/oin-register/{{ value }}">{{ value }}</a>
+    {% elif key == "email" %}
+        <a class="rvo-link rvo-link--normal" href="mailto:{{ value }}">{{ value }}</a>
+    {% elif key == "urn" %}
+        <a class="rvo-link rvo-link--normal"
+           href="https://task-registry.apps.digilab.network/urns/?version=latest&urn={{ value }}">{{ value }}</a>
+    {% elif value is string and value.startswith('http') %}
+        <a href="{{ value }}" target="_blank" rel="noopener noreferrer">{{ value }}</a>
+    {% else %}
+        {{ value }}
     {% endif %}
 {% endmacro %}
 {% macro edit_link(base_href, full_resource_path) %}
-    <span class="rvo-link rvo-link--hover rvo-link--with-icon"
+    <span class="rvo-link rvo-link--hover rvo-link--with-icon amt-edit-link"
           hx-get="{{ base_href }}/edit?full_resource_path={{ full_resource_path }}"
-          hx-swap="innerHTML"
+          hx-swap="outerHTML"
           style="cursor: pointer;
                  float:right">
         <span class="utrecht-icon rvo-icon rvo-icon-bewerken rvo-icon--md rvo-icon--hemelblauw"
@@ -77,7 +78,7 @@
         <form hx-put="{{ base_href }}/update?full_resource_path={{ editable_object.full_resource_path }}"
               hx-ext="json-enc"
               hx-target-error="#errorContainer"
-              hx-swap="innerHTML"
+              hx-swap="outerHTML"
               method="post"
               hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
               hx-swap="outerHTML"
@@ -89,7 +90,7 @@
                             <div>
                                 <div id="error-{{ child_editable.safe_html_path() }}"
                                      class="htmx-error-oob margin-top-middle"></div>
-                                {{ render_attribute(child_editable.last_path_item() ) }}:
+                                <strong>{{ render_attribute(child_editable.last_path_item() ) }}</strong>:
                                 <br />
                                 {{ inline_editor_form_field(child_editable) }}
                             </div>

@@ -13,7 +13,7 @@ async def test_editable_enforcer_for_organization_in_algorithm():
 
     mock_organization_service = AsyncMock()
     mock_organization_service.find_by_id_and_user_id.return_value = organization
-    context = {"organizations_service": mock_organization_service, "user_id": 1, "new_value": 2}
+    context = {"organizations_service": mock_organization_service, "user_id": 1, "new_values": {"organization": 2}}
     try:
         await editable_enforcer.enforce(**context)
     except AMTAuthorizationError:

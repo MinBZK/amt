@@ -434,8 +434,8 @@ msgid "measure executed"
 msgstr "maatregelen uitgevoerd"
 
 #: amt/site/templates/algorithms/details_compliance.html.j2:69
-#: amt/site/templates/macros/editable.html.j2:67
-#: amt/site/templates/macros/editable.html.j2:72
+#: amt/site/templates/macros/editable.html.j2:68
+#: amt/site/templates/macros/editable.html.j2:73
 #: amt/site/templates/macros/tasks.html.j2:82
 msgid "Edit"
 msgstr "Bewerk"
@@ -484,12 +484,12 @@ msgid "Read more on the algoritmekader"
 msgstr "Lees meer op het algoritmekader"
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:64
-#: amt/site/templates/macros/editable.html.j2:174
+#: amt/site/templates/macros/editable.html.j2:175
 msgid "Save"
 msgstr "Opslaan"
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:68
-#: amt/site/templates/macros/editable.html.j2:179
+#: amt/site/templates/macros/editable.html.j2:180
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:26
 msgid "Cancel"
 msgstr "Annuleren"
@@ -712,10 +712,6 @@ msgstr "Voeg personen toe"
 msgid "Search"
 msgstr "Zoek"
 
-#: amt/site/templates/organizations/parts/members_results.html.j2:37
-msgid "Find member..."
-msgstr "Voeg personen toe"
-
 #: amt/site/templates/organizations/parts/members_results.html.j2:66
 #, python-format
 msgid ""
@@ -912,5 +908,5 @@ msgstr "Resultaten voor"
 
 #: amt/site/templates/parts/tasks_search.html.j2:50
 msgid "Assignee"
-msgstr "Verantwoordelijke"
+msgstr "Toegewezen aan"
 
