@@ -57,15 +57,15 @@ class Settings(BaseSettings):
 
     # FastAPI CSRF Protect Settings
     CSRF_PROTECT_SECRET_KEY: str = secrets.token_urlsafe(32)
-    CSRF_TOKEN_LOCATION: str = "header"
-    CSRF_TOKEN_KEY: str = "csrf-token"
+    CSRF_TOKEN_LOCATION: str = "header"  # noqa: S105
+    CSRF_TOKEN_KEY: str = "csrf-token"  # noqa: S105
     CSRF_COOKIE_SAMESITE: str = "strict"
 
     TASK_REGISTRY_URL: str = "https://task-registry.apps.digilab.network"
 
     OBJECT_STORE_URL: str = "localhost:9000"
     OBJECT_STORE_USER: str = "amt"
-    OBJECT_STORE_PASSWORD: str = "changeme"
+    OBJECT_STORE_PASSWORD: str = "changeme"  # noqa: S105
     OBJECT_STORE_BUCKET_NAME: str = "amt"
 
     @computed_field

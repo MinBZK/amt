@@ -160,8 +160,7 @@ class SystemCard(BaseModel):
     )
     version_requirements: list[str] | None = Field(
         None,
-        description="The versions of the relevant software or firmware,"
-        "and any requirements related to version updates",
+        description="The versions of the relevant software or firmware,and any requirements related to version updates",
     )
     deployment_variants: list[str] | None = Field(
         None,
