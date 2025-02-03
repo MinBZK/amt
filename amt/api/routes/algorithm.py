@@ -218,7 +218,7 @@ async def get_tasks(
         "algorithm_id": algorithm.id,
         "breadcrumbs": breadcrumbs,
         "tab_items": tab_items,
-        "base_href": f"/algorithm/{algorithm_id}/details/tasks",
+        "base_href": f"/algorithm/{algorithm_id}/tasks",
         "search": search,
         "lifecycles": get_localized_lifecycles(request),
         "assignees": [LocalizedValueItem(value=str(member.id), display_value=member.name) for member in members],
@@ -425,7 +425,7 @@ async def get_algorithm_cancel(
 
     context = {
         "relative_resource_path": editable.relative_resource_path if editable.relative_resource_path else "",
-        "base_href": f"/algorithm/{ algorithm_id }",
+        "base_href": f"/algorithm/{algorithm_id}",
         "resource_object": editable.resource_object,
         "full_resource_path": full_resource_path,
         "editable_object": editable,
@@ -475,7 +475,7 @@ async def get_algorithm_update(
 
     context = {
         "relative_resource_path": editable.relative_resource_path if editable.relative_resource_path else "",
-        "base_href": f"/algorithm/{ algorithm_id }",
+        "base_href": f"/algorithm/{algorithm_id}",
         "resource_object": editable.resource_object,
         "full_resource_path": full_resource_path,
         "editable_object": editable,
@@ -783,12 +783,10 @@ async def update_measure_value(
     await algorithms_service.update(algorithm)
 
     # the redirect 'to same page' does not trigger a javascript reload, so we let us redirect by a different server URL
-    encoded_url = urllib.parse.quote_plus(
-        f"/algorithm/{algorithm_id}/details/system_card/compliance#{requirement_urn.replace(':', '_')}"
-    )
+    encoded_url = urllib.parse.quote_plus(f"/algorithm/{algorithm_id}/compliance#{requirement_urn.replace(':', '_')}")
     referer = urllib.parse.urlparse(request.headers.get("referer", ""))
 
-    if referer.path.endswith("/details/tasks"):
+    if referer.path.endswith("/tasks"):
         encoded_url = urllib.parse.quote_plus(referer.path + "?" + referer.query)
     return templates.Redirect(
         request,

@@ -36,7 +36,7 @@
                                             <div class="rvo-status-indicator rvo-status-indicator--groen"></div>
                                         {% endif %}
                                         <a class="rvo-link rvo-link--no-underline rvo-link--zwart"
-                                           href="details/system_card/compliance#{{ requirement.urn | replace(':', '_') }}">{{ requirement.name }}</a>
+                                           href="compliance#{{ requirement.urn | replace(':', '_') }}">{{ requirement.name }}</a>
                                     </div>
                                     <div style="white-space: nowrap">
                                         <span class="rvo-text--subtle">
@@ -57,7 +57,7 @@
                     {% endfor %}
                 </ul>
                 <a class="rvo-link rvo-link--normal rvo-link--with-icon"
-                   href="/algorithm/{{ algorithm_id }}/details/system_card/compliance"
+                   href="/algorithm/{{ algorithm_id }}/compliance"
                    style="margin-top: auto">
                     <span class="utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
                           role="img"
