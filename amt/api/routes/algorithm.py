@@ -363,7 +363,7 @@ async def get_algorithm_details(
     )
 
     context["breadcrumbs"] = breadcrumbs
-    context["base_href"] = f"/algorithm/{ algorithm_id }"
+    context["base_href"] = f"/algorithm/{algorithm_id}"
 
     return templates.TemplateResponse(request, "algorithms/details_info.html.j2", context)
 
@@ -397,7 +397,7 @@ async def get_algorithm_edit(
         editable.value = await editable.converter.read(editable.value, **editable_context)
 
     context = {
-        "base_href": f"/algorithm/{ algorithm_id }",
+        "base_href": f"/algorithm/{algorithm_id}",
         "editable_object": editable,
     }
 
@@ -430,7 +430,7 @@ async def get_algorithm_cancel(
         "relative_resource_path": editable.relative_resource_path.replace("/", ".")
         if editable.relative_resource_path
         else "",
-        "base_href": f"/algorithm/{ algorithm_id }",
+        "base_href": f"/algorithm/{algorithm_id}",
         "resource_object": editable.resource_object,
         "full_resource_path": full_resource_path,
         "editable_object": editable,
@@ -482,7 +482,7 @@ async def get_algorithm_update(
         "relative_resource_path": editable.relative_resource_path.replace("/", ".")
         if editable.relative_resource_path
         else "",
-        "base_href": f"/algorithm/{ algorithm_id }",
+        "base_href": f"/algorithm/{algorithm_id}",
         "resource_object": editable.resource_object,
         "full_resource_path": full_resource_path,
         "editable_object": editable,
@@ -528,7 +528,7 @@ async def get_system_card(
         "tab_items": tab_items,
         "breadcrumbs": breadcrumbs,
         "editables": editables,
-        "base_href": f"/algorithm/{ algorithm_id }",
+        "base_href": f"/algorithm/{algorithm_id}",
     }
 
     return templates.TemplateResponse(request, "pages/system_card.html.j2", context)
@@ -791,7 +791,7 @@ async def update_measure_value(
 
     # the redirect 'to same page' does not trigger a javascript reload, so we let us redirect by a different server URL
     encoded_url = urllib.parse.quote_plus(
-        f"/algorithm/{algorithm_id}/details/system_card/compliance#{requirement_urn.replace(":","_")}"
+        f"/algorithm/{algorithm_id}/details/system_card/compliance#{requirement_urn.replace(':', '_')}"
     )
     referer = urllib.parse.urlparse(request.headers.get("referer", ""))
 
@@ -984,7 +984,7 @@ async def get_model_card(
     editables = get_resolved_editables(context_variables={"algorithm_id": algorithm_id})
 
     context = {
-        "base_href": f"/algorithm/{ algorithm_id }",
+        "base_href": f"/algorithm/{algorithm_id}",
         "instrument_state": instrument_state,
         "requirements_state": requirements_state,
         "model_card": model_card_data,

@@ -213,7 +213,17 @@
             {% if field.description %}<div class="utrecht-form-field-description">{{ field.description }}</div>{% endif %}
         </div>
         <div id="error-{{ field.name }}" class="htmx-error-oob"></div>
-        <input id="{{ prefix }}{{ field.name }}" placeholder="{{ field.placeholder }}" name="{{ field.name }}" type="text" class="utrecht-textbox utrecht-textbox--html-input" dir="auto" autocomplete="off" onchange="amt.reset_errorfield('error-{{ field.name }}')" {% if isinstance(field.attributes, "dict") %} {% for key, value in field.attributes.items() %}{{ key }}="{{ value }}"{% endfor %} {% endif %} {% if field.default_value %}value="{{ field.default_value }}"{% endif %} />
+        <input id="{{ prefix }}{{ field.name }}"
+               placeholder="{{ field.placeholder }}"
+               name="{{ field.name }}"
+               type="text"
+               class="utrecht-textbox utrecht-textbox--html-input"
+               dir="auto"
+               autocomplete="off"
+               onchange="amt.reset_errorfield('error-{{ field.name }}')"
+               {% if isinstance(field.attributes, "dict") %} {% for key, value in field.attributes.items() %}{{ key }}="{{ value }}"{% endfor %}
+               {% endif %}
+               {% if field.default_value %}value="{{ field.default_value }}"{% endif %} />
     </div>
 {% endmacro %}
 {% macro form_field_text_cloneable(prefix, field) %}
@@ -232,7 +242,18 @@
                 {% for value in field.default_value %}
                     <div class="rvo-margin-block-end--md">
                         <div class="rvo-layout-row rvo-layout-justify-content-space-between rvo-layout-gap--md">
-                            <input id="{{ prefix }}{{ field.name }}" placeholder="{{ field.placeholder }}" name="{{ field.name }}" type="text" class="utrecht-textbox utrecht-textbox--html-input utrecht-textbox--lg" dir="auto" autocomplete="off" onchange="amt.reset_errorfield('error-{{ field.name }}')" {% if isinstance(field.attributes, "dict") %} {% for key, value in field.attributes.items() %}{{ key }}="{{ value }}"{% endfor %} {% endif %} value="{{ value }}" onkeydown="if (event.key === 'Enter') event.preventDefault();" />
+                            <input id="{{ prefix }}{{ field.name }}"
+                                   placeholder="{{ field.placeholder }}"
+                                   name="{{ field.name }}"
+                                   type="text"
+                                   class="utrecht-textbox utrecht-textbox--html-input utrecht-textbox--lg"
+                                   dir="auto"
+                                   autocomplete="off"
+                                   onchange="amt.reset_errorfield('error-{{ field.name }}')"
+                                   {% if isinstance(field.attributes, "dict") %} {% for key, value in field.attributes.items() %}{{ key }}="{{ value }}"{% endfor %}
+                                   {% endif %}
+                                   value="{{ value }}"
+                                   onkeydown="if (event.key === 'Enter') event.preventDefault();" />
                             <a id="document-link-delete"
                                class="rvo-link rvo-link--normal rvo-link--no-underline rvo-link--with-icon"
                                onclick="this.parentNode.remove()">
@@ -246,7 +267,15 @@
             {% else %}
                 <div class="rvo-margin-block-end--md">
                     <div class="rvo-layout-row rvo-layout-justify-content-space-between rvo-layout-gap--md">
-                        <input placeholder="{{ field.placeholder }}" name="{{ field.name }}" type="text" class="utrecht-textbox utrecht-textbox--html-input utrecht-textbox--html-input utrecht-textbox--lg" dir="auto" autocomplete="off" onchange="amt.reset_errorfield('error-{{ field.name }}')" {% if isinstance(field.attributes, "dict") %} {% for key, value in field.attributes.items() %}{{ key }}="{{ value }}"{% endfor %} {% endif %} />
+                        <input placeholder="{{ field.placeholder }}"
+                               name="{{ field.name }}"
+                               type="text"
+                               class="utrecht-textbox utrecht-textbox--html-input utrecht-textbox--html-input utrecht-textbox--lg"
+                               dir="auto"
+                               autocomplete="off"
+                               onchange="amt.reset_errorfield('error-{{ field.name }}')"
+                               {% if isinstance(field.attributes, "dict") %} {% for key, value in field.attributes.items() %}{{ key }}="{{ value }}"{% endfor %}
+                               {% endif %} />
                         <a id="document-link-delete"
                            class="rvo-link rvo-link--normal rvo-link--no-underline rvo-link--with-icon"
                            onclick="this.parentNode.remove()">
@@ -260,7 +289,16 @@
             <template id="{{ prefix }}{{ field.name }}-template">
                 <div class="rvo-margin-block-end--md">
                     <div class="rvo-layout-row rvo-layout-justify-content-space-between rvo-layout-gap--md">
-                        <input placeholder="{{ field.placeholder }}" name="{{ field.name }}" type="text" class="utrecht-textbox utrecht-textbox--html-input utrecht-textbox--html-input utrecht-textbox--lg" dir="auto" autocomplete="off" onchange="amt.reset_errorfield('error-{{ field.name }}')" {% if isinstance(field.attributes, "dict") %} {% for key, value in field.attributes.items() %}{{ key }}="{{ value }}"{% endfor %} {% endif %} onkeydown="if (event.key === 'Enter') event.preventDefault();" />
+                        <input placeholder="{{ field.placeholder }}"
+                               name="{{ field.name }}"
+                               type="text"
+                               class="utrecht-textbox utrecht-textbox--html-input utrecht-textbox--html-input utrecht-textbox--lg"
+                               dir="auto"
+                               autocomplete="off"
+                               onchange="amt.reset_errorfield('error-{{ field.name }}')"
+                               {% if isinstance(field.attributes, "dict") %} {% for key, value in field.attributes.items() %}{{ key }}="{{ value }}"{% endfor %}
+                               {% endif %}
+                               onkeydown="if (event.key === 'Enter') event.preventDefault();" />
                         <a id="document-link-delete"
                            class="rvo-link rvo-link--normal rvo-link--no-underline rvo-link--with-icon"
                            onclick="this.parentNode.remove()">
@@ -295,7 +333,15 @@
         </div>
         <div id="error-{{ field.name }}" class="htmx-error-oob"></div>
         <div class="rvo-layout-column rvo-layout-gap--xs">
-            <textarea id="{{ prefix }}{{ field.name }}" name="{{ field.name }}" placeholder="{{ field.placeholder }}" aria-describedby="helperTextId" class="utrecht-textbox utrecht-textarea utrecht-textarea--html-textarea" dir="auto" onchange="amt.reset_errorfield('error-{{ field.name }}')" {% if isinstance(field.attributes, "dict") %} {% for key, value in field.attributes.items() %}{{ key }}="{{ value }}"{% endfor %}{% endif %}>{{ field.default_value }}</textarea>
+            <textarea id="{{ prefix }}{{ field.name }}"
+                      name="{{ field.name }}"
+                      placeholder="{{ field.placeholder }}"
+                      aria-describedby="helperTextId"
+                      class="utrecht-textbox utrecht-textarea utrecht-textarea--html-textarea"
+                      dir="auto"
+                      onchange="amt.reset_errorfield('error-{{ field.name }}')"
+                      {% if isinstance(field.attributes, "dict") %} {% for key, value in field.attributes.items() %}{{ key }}="{{ value }}"{% endfor %}
+                      {% endif %}>{{ field.default_value }}</textarea>
             {# TODO: Fix when we upgrade to higher @nl-rvo npm package #}
             {# <span class="utrecht-textbox-remaining-chars">{% trans %}Still{% endtrans %} <strong>300</strong> {% trans %}Characters remaining{% endtrans %}</span>#}
         </div>

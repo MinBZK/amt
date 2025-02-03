@@ -180,7 +180,7 @@ async def get_by_slug(
 
     tab_items = get_organization_tabs(request, organization_slug=organization_slug)
     context = {
-        "base_href": f"/organizations/{ organization_slug }",
+        "base_href": f"/organizations/{organization_slug}",
         "organization": organization,
         "organization_id": organization.id,
         "tab_items": tab_items,
@@ -227,7 +227,7 @@ async def get_organization_edit(
         "relative_resource_path": editable.relative_resource_path.replace("/", ".")
         if editable.relative_resource_path
         else "",
-        "base_href": f"/organizations/{ organization_slug }",
+        "base_href": f"/organizations/{organization_slug}",
         "resource_object": editable.resource_object,
         "full_resource_path": full_resource_path,
         "editable_object": editable,
@@ -262,7 +262,7 @@ async def get_organization_cancel(
         "relative_resource_path": editable.relative_resource_path.replace("/", ".")
         if editable.relative_resource_path
         else "",
-        "base_href": f"/organizations/{ organization_slug }",
+        "base_href": f"/organizations/{organization_slug}",
         "resource_object": None,  # TODO: this should become an optional parameter in the Jinja template
         "full_resource_path": full_resource_path,
         "editable_object": editable,
@@ -315,7 +315,7 @@ async def get_organization_update(
         "relative_resource_path": editable.relative_resource_path.replace("/", ".")
         if editable.relative_resource_path
         else "",
-        "base_href": f"/organizations/{ organization_slug }",
+        "base_href": f"/organizations/{organization_slug}",
         "resource_object": None,
         "full_resource_path": full_resource_path,
         "editable_object": editable,
