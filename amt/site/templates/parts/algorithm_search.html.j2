@@ -53,7 +53,9 @@
                                     <option value=""></option>
                                     {% for lifecycle in lifecycles %}
                                         <option {% if "lifecycle" in filters and lifecycle.value == filters["lifecycle"].value %}selected="selected"{% endif %}
-                                                value="{{ lifecycle.value }}">{{ lifecycle.display_value }}</option>
+                                                value="{{ lifecycle.value }}">
+                                            {{ lifecycle.display_value | safe }}
+                                        </option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -88,7 +90,7 @@
                 <option value=""></option>
                 {% for group_by_category in group_by_categories %}
                     <option {% if "group-by-category" in filters and group_by_category.value == filters["group-by-category"].value %}selected="selected"{% endif %}
-                            value="{{ group_by_category.value }}">{{ group_by_category.display_value }}</option>
+                            value="{{ group_by_category.value }}">{{ group_by_category.display_value | safe }}</option>
                 {% endfor %}
             </select>
         </div>

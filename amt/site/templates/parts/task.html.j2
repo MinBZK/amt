@@ -1,2 +1,2 @@
-{% import 'macros/tasks.html.j2' as render %}
+{% import 'macros/tasks.html.j2' as render with context %}
 {{ render.render_task_card_content(algorithm_id, task) }}

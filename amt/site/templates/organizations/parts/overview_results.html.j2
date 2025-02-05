@@ -102,7 +102,7 @@
                             <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--sm form-input-clear"
                                   role="img"
                                   aria-label="Kruis"></span>
-                            {{ localized_value.display_value }}
+                            {{ localized_value.display_value | safe }}
                             <input type="hidden"
                                    name="active-filter-{{ key }}"
                                    value="{{ localized_value.value }}">

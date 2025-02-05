@@ -119,7 +119,8 @@ class AlgorithmsService:
 
         def sort_by_measure_name(measure_task: MeasureTask) -> tuple[int, int]:
             """
-            Sorts measures according to their prefix index (like org- or pba-), and then the index number, like org-1, org2.
+            Sorts measures according to their prefix index (like org- or pba-), and then the index number,
+            like org-1, org2.
             :param measure_task: the measure task to sort
             :return: a tuple with the sort values
             """

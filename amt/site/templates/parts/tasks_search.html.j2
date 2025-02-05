@@ -41,7 +41,9 @@
                                     <option value=""></option>
                                     {% for lifecycle in lifecycles %}
                                         <option {% if "lifecycle" in filters and lifecycle.value == filters["lifecycle"].value %}selected="selected"{% endif %}
-                                                value="{{ lifecycle.value }}">{{ lifecycle.display_value }}</option>
+                                                value="{{ lifecycle.value }}">
+                                            {{ lifecycle.display_value | safe }}
+                                        </option>
                                     {% endfor %}
                                 </select>
                             </div>

@@ -48,6 +48,7 @@ msgstr ""
 #: amt/api/group_by_category.py:15
 #: amt/site/templates/algorithms/details_info.html.j2:97
 #: amt/site/templates/algorithms/new.html.j2:41
+#: amt/site/templates/macros/tasks.html.j2:80
 #: amt/site/templates/parts/algorithm_search.html.j2:48
 #: amt/site/templates/parts/filter_list.html.j2:71
 #: amt/site/templates/parts/tasks_search.html.j2:36
@@ -416,7 +417,7 @@ msgstr ""
 #: amt/site/templates/algorithms/details_compliance.html.j2:69
 #: amt/site/templates/macros/editable.html.j2:68
 #: amt/site/templates/macros/editable.html.j2:73
-#: amt/site/templates/macros/tasks.html.j2:82
+#: amt/site/templates/macros/tasks.html.j2:98
 msgid "Edit"
 msgstr ""
 
@@ -868,7 +869,7 @@ msgstr ""
 msgid "Results for"
 msgstr ""
 
-#: amt/site/templates/parts/tasks_search.html.j2:50
+#: amt/site/templates/parts/tasks_search.html.j2:52
 msgid "Assignee"
 msgstr ""
 

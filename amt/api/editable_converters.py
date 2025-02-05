@@ -53,8 +53,11 @@ class StatusConverterForSystemcard(EditableConverter):
     }
 
     async def read(self, in_value: str, **kwargs: Any) -> Any:  # noqa: ANN401
-        resolved = self.phases.get(in_value)
-        return resolved.value if resolved is not None else in_value
+        # we want to do a case-insensitive lookup, so we make own loop
+        for key, lifecycle in self.phases.items():
+            if key.casefold() == in_value.casefold():
+                return lifecycle.value
+        return None
 
     async def write(self, in_value: str, **kwargs: Any) -> str:  # noqa: ANN401
         return next((k for k, v in self.phases.items() if v.value == in_value), "Unknown")

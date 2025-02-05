@@ -14,7 +14,7 @@
                     {% if not loop.last %}<br />{% endif %}
                 {% endfor %}
             {% else %}
-                {{ nested_value(obj, relative_resource_path) }}
+                {{ nested_value(obj, relative_resource_path) | safe }}
             {% endif %}
             {{ edit_link(base_href, full_resource_path) }}
         </div>
@@ -30,7 +30,7 @@
                 <span class="rvo-tag rvo-tag--with-icon rvo-tag--active rvo-tag--success">
                     <span class="utrecht-icon rvo-icon rvo-icon-bevestiging rvo-icon--lg"
                           role="img"></span>
-                    {{ nested_enum_value(obj, relative_resource_path, language).display_value }}
+                    {{ nested_enum_value(obj, relative_resource_path, language).display_value | safe }}
                 </span>
                 {{ edit_link(base_href, full_resource_path) }}
             {% else %}
@@ -138,7 +138,7 @@
                     {% for e in editable_object.form_options %}
                         <option value="{{ e.value }}"
                                 {% if e.value == editable_object.value|string %}selected="selected"{% endif %}>
-                            {{ e.display_value }}
+                            {{ e.display_value | safe }}
                         </option>
                     {% endfor %}
                 </select>
@@ -151,7 +151,9 @@
                         class="utrecht-select utrecht-select--html-select">
                     {% for e in nested_enum(editable_object.resource_object, editable_object.relative_resource_path, language) %}
                         <option value="{{ e.value }}"
-                                {% if e.value == value %}selected="selected"{% endif %}>{{ e.display_value }}</option>
+                                {% if e.value == value %}selected="selected"{% endif %}>
+                            {{ e.display_value | safe }}
+                        </option>
                     {% endfor %}
                 </select>
             </div>

@@ -62,7 +62,7 @@
         {% endif %}
     {% else %}
         {% if is_editable_resource(full_resource_path, editables) %}
-            <div class="amt-editable-block">{{ editable(algorithm, relative_resource_path, full_resource_path) }}</div>
+            {{ editable(algorithm, relative_resource_path, full_resource_path) }}
         {% else %}
             {{ value }}
         {% endif %}

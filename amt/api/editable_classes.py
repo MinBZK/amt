@@ -23,9 +23,10 @@ class Editable:
     The implementation_type tells how this field can be edited using WebFormFieldImplementationType, like a 'plain'
     TEXT field or SELECT_MY_ORGANIZATIONS.
     The couples links fields together, if one is changed, so is the other.
-    The children field is for editing multiple fields at one (to be implemented).
+    The children field is for grouping multiple fields as one 'action',
+      it requires a WebFormFieldImplementationType.PARENT parent editable
     The enforcer checks permissions and business rules.
-    The converter converts data between read and write when needed.
+    The converter converts data between read, write and display (view) when needed.
     """
 
     full_resource_path: Final[str]

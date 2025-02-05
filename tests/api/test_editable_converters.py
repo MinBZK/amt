@@ -31,10 +31,8 @@ async def test_editable_converter_for_organization_in_algorithm():
 @pytest.mark.asyncio
 async def test_editable_status_converter_for_systemcard():
     editable_converter = editable_converters.StatusConverterForSystemcard()
-    assert (
-        await editable_converter.read(in_value="Organisatieverantwoordelijkheden")
-        == Lifecycles.ORGANIZATIONAL_RESPONSIBILITIES.value
-    )
+    result = await editable_converter.read(in_value="Organisatieverantwoordelijkheden")
+    assert result == Lifecycles.ORGANIZATIONAL_RESPONSIBILITIES.value
     assert (
         await editable_converter.write(in_value=Lifecycles.ORGANIZATIONAL_RESPONSIBILITIES.value)
         == "Organisatieverantwoordelijkheden"

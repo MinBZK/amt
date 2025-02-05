@@ -11,7 +11,7 @@
                 <div class="rvo-layout-row"
                      style="display: flex;
                             justify-content: space-between">
-                    <h5 class="amt-widget-title rvo-link--with-icon">
+                    <h5 class="amt-widget-title rvo-link--with-icon margin-bottom-small">
                         <span class="utrecht-icon rvo-icon rvo-icon-vinkje rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
                               role="img"
                               aria-label=""></span>{% trans %}Does the algorithm meet the requirements?{% endtrans %}
@@ -58,7 +58,7 @@
                 </ul>
                 <a class="rvo-link rvo-link--normal rvo-link--with-icon"
                    href="/algorithm/{{ algorithm_id }}/compliance"
-                   style="margin-top: auto">
+                   style="margin-top: 1em">
                     <span class="utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
                           role="img"
                           aria-label="Home"></span>
@@ -114,10 +114,11 @@
                 <tr class="rvo-table-row">
                     <td class="rvo-table-cell">{% trans %}References{% endtrans %}</td>
                     <td class="rvo-table-cell">
-                        {% for reference in system_card.references %}
-                            <a href={{ reference.link }} target="_blank">{{ reference.name }}</a>
-                            {% if not loop.last %}<br \>{% endif %}
-                        {% endfor %}
+                        <div class="amt-blocks-with-vertical-spacing">
+                            {% for reference in system_card.references %}
+                                {{ editable(algorithm, "system_card.references[" + (loop.index-1) |string + "]", "algorithm/" + algorithm_id|string + "/system_card/references[" + (loop.index-1)|string + "]") }}
+                            {% endfor %}
+                        </div>
                     </td>
                 </tr>
             </tbody>

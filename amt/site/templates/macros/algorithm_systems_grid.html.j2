@@ -9,7 +9,7 @@
                 <summary class="rvo-accordion__item-summary">
                     <div class="rvo-layout-grid-container">
                         <div class="rvo-layout-grid rvo-layout-gap--md rvo-layout-grid-columns--two rvo-layout-grid-layout--1fr">
-                            <div title="{{ lifecycle.display_value }}">
+                            <div title="{{ lifecycle.display_value | safe }}">
                                 {% if algorithms | length > 0 %}
                                     <h3 class="rvo-accordion__item-title utrecht-heading-3 rvo-heading--no-margins rvo-heading--mixed">
                                         <span class="utrecht-icon rvo-icon rvo-icon-delta-omlaag rvo-icon--md rvo-icon--hemelblauw rvo-accordion__item-icon--closed"
@@ -25,7 +25,7 @@
                                                   role="img"
                                                   aria-label="Delta omlaag"></span>
                                         {% endif %}
-                                        {{ lifecycle.display_value }} ({{ algorithms | length }})
+                                        {{ lifecycle.display_value | safe }} ({{ algorithms | length }})
                                     </h3>
                                 </div>
                             </div>

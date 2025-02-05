@@ -11,7 +11,7 @@
             </td>
             {% if show_lifecycles %}
                 <td class="rvo-table-cell">
-                    <span class="rvo-text--subtle">{{ algorithm.lifecycle.display_value }}</span>
+                    <span class="rvo-text--subtle">{{ algorithm.lifecycle.display_value | safe }}</span>
                 </td>
             {% endif %}
             <td class="rvo-table-cell">

@@ -21,7 +21,7 @@
                         <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--sm form-input-clear"
                               role="img"
                               aria-label="Kruis"></span>
-                        {{ localized_value.display_value }}
+                        {{ localized_value.display_value | safe }}
                         <input type="hidden"
                                name="active-filter-{{ key }}"
                                value="{{ localized_value.value }}">
@@ -56,7 +56,8 @@
     </form>
     <div id="errorContainer"></div>
     <div class="rvo-layout-grid-container margin-bottom-large">
-        <div class="rvo-layout-grid rvo-layout-gap--sm rvo-layout-grid-columns--five rvo-layout-grid-layout--1fr">
+        <div class="rvo-layout-grid rvo-layout-gap--sm rvo-layout-grid-layout--1fr"
+             style="grid-template-columns: repeat(5, minmax(0, 1fr))">
             {% for status in statuses %}{{ render.column(algorithm, status, translations, tasks_by_status) }}{% endfor %}
         </div>
     </div>

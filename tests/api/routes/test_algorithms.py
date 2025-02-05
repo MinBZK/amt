@@ -247,4 +247,4 @@ def test_get_localized_value():
 
     request = MockRequest("en")
     localized = get_localized_value("other key", "", request)
-    assert localized.display_value == "Unknown filter option"
+    assert localized.display_value == "Unknown []"

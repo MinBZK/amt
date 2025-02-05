@@ -318,7 +318,11 @@ async def move_task(
     else:
         display_task: DisplayTask = DisplayTask.create_from_model(task)
 
-    context: dict[str, int | DisplayTask] = {"algorithm_id": algorithm_id, "task": display_task}
+    context: dict[str, int | DisplayTask | Request] = {
+        "algorithm_id": algorithm_id,
+        "task": display_task,
+        "request": request,
+    }
 
     return templates.TemplateResponse(request, "parts/task.html.j2", context=context)
 

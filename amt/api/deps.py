@@ -18,6 +18,7 @@ from amt.api.http_browser_caching import url_for_cache
 from amt.api.localizable import LocalizableEnum
 from amt.api.navigation import NavigationItem, get_main_menu
 from amt.api.routes.shared import (
+    get_localized_value,
     is_nested_enum,
     is_path_with_list,
     nested_enum,
@@ -170,5 +171,6 @@ templates.env.globals.update(hasattr=hasattr_jinja)  # pyright: ignore [reportUn
 templates.env.globals.update(is_path_with_list=is_path_with_list)  # pyright: ignore [reportUnknownMemberType]
 templates.env.globals.update(is_parent_editable=is_parent_editable)  # pyright: ignore [reportUnknownMemberType]
 templates.env.globals.update(resolve_resource_list_path=resolve_resource_list_path)  # pyright: ignore [reportUnknownMemberType]
+templates.env.globals.update(get_localized_value=get_localized_value)  # pyright: ignore [reportUnknownMemberType]
 templates.env.tests["permission"] = permission  # pyright: ignore [reportUnknownMemberType]
 templates.env.add_extension("jinja2_base64_filters.Base64Filters")  # pyright: ignore [reportUnknownMemberType]

@@ -51,6 +51,7 @@ msgstr "Rol"
 #: amt/api/group_by_category.py:15
 #: amt/site/templates/algorithms/details_info.html.j2:97
 #: amt/site/templates/algorithms/new.html.j2:41
+#: amt/site/templates/macros/tasks.html.j2:80
 #: amt/site/templates/parts/algorithm_search.html.j2:48
 #: amt/site/templates/parts/filter_list.html.j2:71
 #: amt/site/templates/parts/tasks_search.html.j2:36
@@ -59,7 +60,7 @@ msgstr "Levenscyclus"
 
 #: amt/api/lifecycles.py:23
 msgid "Organizational Responsibilities"
-msgstr "Organisatieverantwoordelijkheden"
+msgstr "Organisatie&#x200B;verantwoordelijkheden"
 
 #: amt/api/lifecycles.py:24
 msgid "Problem Analysis"
@@ -436,7 +437,7 @@ msgstr "maatregelen uitgevoerd"
 #: amt/site/templates/algorithms/details_compliance.html.j2:69
 #: amt/site/templates/macros/editable.html.j2:68
 #: amt/site/templates/macros/editable.html.j2:73
-#: amt/site/templates/macros/tasks.html.j2:82
+#: amt/site/templates/macros/tasks.html.j2:98
 msgid "Edit"
 msgstr "Bewerk"
 
@@ -446,7 +447,7 @@ msgstr "Voldoet het algoritme aan de vereisten?"
 
 #: amt/site/templates/algorithms/details_info.html.j2:65
 msgid "Go to all requirements"
-msgstr "Ga naar alle Vereisten"
+msgstr "Ga naar voldoen aan wetten en regels"
 
 #: amt/site/templates/algorithms/details_info.html.j2:85
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:27
@@ -906,7 +907,7 @@ msgstr "Deze website is in ontwikkeling. Alle versies ontstaan op een open manie
 msgid "Results for"
 msgstr "Resultaten voor"
 
-#: amt/site/templates/parts/tasks_search.html.j2:50
+#: amt/site/templates/parts/tasks_search.html.j2:52
 msgid "Assignee"
 msgstr "Toegewezen aan"
 

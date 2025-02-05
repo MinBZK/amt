@@ -479,6 +479,14 @@ main {
     gap: 0 !important;
 }
 
+.amt-clear-float {
+    &::after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+}
+
 .amt-blocks-with-vertical-spacing {
     /* if floats are used in the child, we want to 'clear' in the after element so the block sizes to the float */
     & > *::after {
@@ -489,6 +497,16 @@ main {
 
     & > *:not(:last-child) {
         margin-bottom: var(--rvo-size-lg);
+    }
+}
+
+.amt-editable-block {
+    position: relative;
+
+    &:last-child::after {
+        content: "";
+        display: block;
+        clear: both;
     }
 }
 
