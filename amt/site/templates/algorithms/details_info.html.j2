@@ -11,7 +11,7 @@
                 <div class="rvo-layout-row"
                      style="display: flex;
                             justify-content: space-between">
-                    <h5 class="amt-widget-title rvo-link--with-icon">
+                    <h5 class="amt-widget-title rvo-link--with-icon margin-bottom-small">
                         <span class="utrecht-icon rvo-icon rvo-icon-vinkje rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
                               role="img"
                               aria-label=""></span>{% trans %}Does the algorithm meet the requirements?{% endtrans %}
@@ -36,7 +36,7 @@
                                             <div class="rvo-status-indicator rvo-status-indicator--groen"></div>
                                         {% endif %}
                                         <a class="rvo-link rvo-link--no-underline rvo-link--zwart"
-                                           href="details/system_card/compliance#{{ requirement.urn | replace(':', '_') }}">{{ requirement.name }}</a>
+                                           href="compliance#{{ requirement.urn | replace(':', '_') }}">{{ requirement.name }}</a>
                                     </div>
                                     <div style="white-space: nowrap">
                                         <span class="rvo-text--subtle">
@@ -57,8 +57,8 @@
                     {% endfor %}
                 </ul>
                 <a class="rvo-link rvo-link--normal rvo-link--with-icon"
-                   href="/algorithm/{{ algorithm_id }}/details/system_card/compliance"
-                   style="margin-top: auto">
+                   href="/algorithm/{{ algorithm_id }}/compliance"
+                   style="margin-top: 1em">
                     <span class="utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
                           role="img"
                           aria-label="Home"></span>
@@ -93,10 +93,6 @@
                         {{ editable(algorithm, "system_card.provenance.uri", "algorithm/" + algorithm_id|string + "/systemcard/provenance/uri") }}
                     </td>
                 </tr>
-                <tr class="rvo-table-row rvo-max-width-layout--sm">
-                    <td class="rvo-table-cell">{% trans %}Algorithm code{% endtrans %}</td>
-                    <td class="rvo-table-cell">NL-AI-VALIDATIE-383672821-PI234</td>
-                </tr>
                 <tr class="rvo-table-row">
                     <td class="rvo-table-cell">{% trans %}Lifecycle{% endtrans %}</td>
                     <td class="rvo-table-cell">
@@ -118,10 +114,11 @@
                 <tr class="rvo-table-row">
                     <td class="rvo-table-cell">{% trans %}References{% endtrans %}</td>
                     <td class="rvo-table-cell">
-                        {% for reference in system_card.references %}
-                            <a href={{ reference.link }} target="_blank">{{ reference.name }}</a>
-                            {% if not loop.last %}<br \>{% endif %}
-                        {% endfor %}
+                        <div class="amt-blocks-with-vertical-spacing">
+                            {% for reference in system_card.references %}
+                                {{ editable(algorithm, "system_card.references[" + (loop.index-1) |string + "]", "algorithm/" + algorithm_id|string + "/system_card/references[" + (loop.index-1)|string + "]") }}
+                            {% endfor %}
+                        </div>
                     </td>
                 </tr>
             </tbody>

@@ -15,17 +15,21 @@
     {% if isinstance(value, 'IterMixin') or isinstance(value, 'dict') %}
         <div class="{% if depth == 1 %}margin-bottom-large{% endif %}">
             {% if is_editable_resource(full_resource_path, editables) %}
-                {{ editable(algorithm, relative_resource_path, editables[replace_digits_in_brackets(full_resource_path) ].full_resource_path) }}
-            {% endif %}
-            {% if value.__class__.__name__ == 'dict' %}
-                {% set value = value.items() %}
-            {% endif %}
-            {% for subkey, subvalue in value %}
-                {% if subvalue %}
-                    <strong>{{ render_attribute(subkey) }}</strong>: {{ render_value(subkey, subvalue, depth+1, base_resource_path, path) }}
-                    {% if not loop.last %}<br />{% endif %}
+                {{ editable(algorithm, relative_resource_path, full_resource_path) }}
+            {% else %}
+                {% if value.__class__.__name__ == 'dict' %}
+                    {% set value = value.items() %}
                 {% endif %}
-            {% endfor %}
+                {% for subkey, subvalue in value %}
+                    <strong>{{ render_attribute(subkey) }}</strong>:
+                    {% if is_editable_resource(full_resource_path + "/" + subkey, editables) %}
+                        {{ editable(algorithm, relative_resource_path + "/" + subkey, full_resource_path + "/" + subkey) }}
+                    {% else %}
+                        {{ render_value(subkey, subvalue, depth+1, base_resource_path, path) }}
+                    {% endif %}
+                    {% if not loop.last %}<br />{% endif %}
+                {% endfor %}
+            {% endif %}
         </div>
     {% elif isinstance(value, 'list') %}
         {% if key == "assessments" %}
@@ -42,29 +46,25 @@
         {% elif key == "models" %}
             {% for model in value %}{{ model["name"] }}{% endfor %}
         {% else %}
-            <div style="margin-left: {{ depth * 10 }}px;">
-                {% for item in value %}
-                    {{ render_value("", item, depth+1, base_resource_path, path + "/" + key + "[" + (loop.index-1) |string + "]") }}
-                {% endfor %}
-            </div>
+            {% if is_editable_resource(full_resource_path + "[*]", editables) %}
+                <div class="amt-blocks-with-vertical-spacing">
+                    {% for item in value %}
+                        {{ editable(algorithm, relative_resource_path + "[" + (loop.index-1) | string + "]", full_resource_path + "[" + (loop.index-1) | string + "]") }}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div style="margin-left: {{ depth * 10 }}px;">
+                    {% for item in value %}
+                        {{ render_value("", item, depth+1, base_resource_path, path + "/" + key + "[" + (loop.index-1) |string + "]") }}
+                    {% endfor %}
+                </div>
+            {% endif %}
         {% endif %}
     {% else %}
-        {% if key == "uri" or key == "link" or key == "upl" %}
-            <a class="rvo-link rvo-link--normal" href="{{ value }}">{{ value }}</a>
-        {% elif key == "oin" %}
-            <a class="rvo-link rvo-link--normal"
-               href="https://oinregister.logius.nl/oin-register/{{ value }}">{{ value }}</a>
-        {% elif key == "email" %}
-            <a class="rvo-link rvo-link--normal" href="mailto:{{ value }}">{{ value }}</a>
-        {% elif key == "urn" %}
-            <a class="rvo-link rvo-link--normal"
-               href="https://task-registry.apps.digilab.network/urns/?version=latest&urn={{ value }}">{{ value }}</a>
+        {% if is_editable_resource(full_resource_path, editables) %}
+            {{ editable(algorithm, relative_resource_path, full_resource_path) }}
         {% else %}
-            {% if is_editable_resource(full_resource_path, editables) %}
-                {{ editable(algorithm, relative_resource_path, editables[full_resource_path].full_resource_path) }}
-            {% else %}
-                {{ value }}
-            {% endif %}
+            {{ value }}
         {% endif %}
     {% endif %}
 {%- endmacro %}

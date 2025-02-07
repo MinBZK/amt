@@ -56,7 +56,7 @@ async def test_get_algorithm_tasks(client: AsyncClient, db: DatabaseTestUtils) -
     await db.given([default_user(), default_algorithm("testalgorithm1"), default_task(algorithm_id=1, status_id=1)])
 
     # when
-    response = await client.get("/algorithm/1/details/tasks")
+    response = await client.get("/algorithm/1/tasks")
 
     # then
     assert response.status_code == 200
@@ -156,21 +156,18 @@ async def test_get_algorithm_or_error(client: AsyncClient, db: DatabaseTestUtils
         )
 
 
-# TODO: Test are now have hard coded URL paths because the system card
-# is fixed for now. Tests need to be refactored and made proper once
-# the actual stored system card in a algorithm is being rendered.
 @pytest.mark.asyncio
 async def test_get_system_card(client: AsyncClient, db: DatabaseTestUtils) -> None:
     # given
     await db.given([default_user(), default_algorithm("testalgorithm1")])
 
     # when
-    response = await client.get("/algorithm/1/details/system_card")
+    response = await client.get("/algorithm/1/info")
 
     # then
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"System card" in response.content
+    assert b"Does the algorithm meet the requirements?" in response.content
 
 
 # TODO: Test are now have hard coded URL paths because the system card
@@ -280,7 +277,7 @@ async def test_get_algorithm_details(client: AsyncClient, db: DatabaseTestUtils)
     # then
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"Details" in response.content
+    assert b"Last updated" in response.content
 
 
 @pytest.mark.asyncio
@@ -296,7 +293,7 @@ async def test_get_system_card_compliance(client: AsyncClient, db: DatabaseTestU
     )
 
     # when
-    response = await client.get("/algorithm/1/details/system_card/compliance")
+    response = await client.get("/algorithm/1/compliance")
 
     # then
     assert response.status_code == 200
@@ -422,7 +419,7 @@ async def test_get_algorithm_update(client: AsyncClient, mocker: MockFixture, db
     # when
     response = await client.put(
         "/algorithm/1/update?full_resource_path=algorithm/1/system_card/name",
-        json={"value": "Test Name"},
+        json={"name": "Test Name"},
         headers={"X-CSRF-Token": "1"},
     )
 
@@ -647,7 +644,7 @@ async def test_download_algorithm_system_card_as_yaml(
     mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
 
     # happy flow
-    response = await client.get("/algorithm/1/details/system_card/download")
+    response = await client.get("/algorithm/1/download")
 
     assert response.status_code == 200
     assert response.headers["content-type"] == "application/yaml; charset=utf-8"

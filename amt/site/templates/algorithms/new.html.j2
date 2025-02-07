@@ -56,7 +56,7 @@
                                                    value="{{ lifecycle.value }}"
                                                    type="radio"
                                                    class="utrecht-radio-button" />
-                                            {{ lifecycle.display_value }}
+                                            {{ lifecycle.display_value | safe }}
                                         </label>
                                     </div>
                                 {% endfor %}

@@ -14,7 +14,7 @@ class EditableValidator(ABC):
     """
 
     @abstractmethod
-    async def validate(self, in_value: Any, relative_resource_path: str) -> None:  # noqa: ANN401
+    async def validate(self, in_value: Any, editable: "ResolvedEditable") -> None:  # noqa: ANN401, F821 # pyright: ignore[reportUndefinedVariable, reportUnknownParameterType]
         pass
 
 
@@ -25,21 +25,21 @@ class EditableValidatorMinMaxLength(EditableValidator):
 
         self.field_validator: type[FieldValidator] = FieldValidator
 
-    async def validate(self, in_value: str, relative_resource_path: str) -> None:
+    async def validate(self, in_value: str, editable: "ResolvedEditable") -> None:  # noqa: F821 # pyright: ignore[reportUndefinedVariable, reportUnknownParameterType]
         try:
             self.field_validator(value=in_value)
         except ValidationError as e:
             errors = e.errors()
-            errors[0]["loc"] = (relative_resource_path.replace("/", "_"),)
+            errors[0]["loc"] = (editable.safe_html_path(),)  # pyright: ignore[reportUnknownMemberType]
             raise RequestValidationError(errors) from e
 
 
 class EditableValidatorSlug(EditableValidator):
-    async def validate(self, in_value: str, relative_resource_path: str) -> None:
+    async def validate(self, in_value: str, editable: "ResolvedEditable") -> None:  # noqa: F821 # pyright: ignore[reportUndefinedVariable, reportUnknownParameterType]
         try:
             organization_slug: OrganizationSlug = OrganizationSlug(slug=in_value)
             OrganizationSlug.model_validate(organization_slug)
         except ValidationError as e:
             errors = e.errors()
-            errors[0]["loc"] = (relative_resource_path.replace("/", "_"),)
+            errors[0]["loc"] = (editable.safe_html_path(),)  # pyright: ignore[reportUnknownMemberType]
             raise RequestValidationError(errors) from e

@@ -64,7 +64,7 @@ main {
     background-color: var(--rvo-color-lichtblauw-150);
     border-radius: 10px;
     height: calc(100% - 30px); /* todo (robbert): this is a display hack */
-    padding: 0.01px; /* this is an avoid margin collapse hack */
+    padding-top: 5px;
 }
 
 .progress-card-container {
@@ -242,7 +242,7 @@ main {
 }
 
 .display-none {
-    display: none;
+    display: none !important;
 }
 
 @keyframes fade-in {
@@ -477,6 +477,45 @@ main {
 
 .rvo-layout-gap--0 {
     gap: 0 !important;
+}
+
+.amt-clear-float {
+    &::after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+}
+
+.amt-blocks-with-vertical-spacing {
+    /* if floats are used in the child, we want to 'clear' in the after element so the block sizes to the float */
+    & > *::after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    & > *:not(:last-child) {
+        margin-bottom: var(--rvo-size-lg);
+    }
+}
+
+.amt-editable-block {
+    position: relative;
+
+    &:last-child::after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+}
+
+.amt-editable-block:not(:has(form)) {
+    &:hover {
+        background-color: var(--rvo-color-grijs-100);
+        box-shadow: 0 0 5px 5px var(--rvo-color-grijs-100);
+        cursor: pointer;
+    }
 }
 
 /* stylelint-enable */

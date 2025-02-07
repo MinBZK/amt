@@ -49,17 +49,18 @@ msgid "Role"
 msgstr "Rol"
 
 #: amt/api/group_by_category.py:15
-#: amt/site/templates/algorithms/details_info.html.j2:101
+#: amt/site/templates/algorithms/details_info.html.j2:97
 #: amt/site/templates/algorithms/new.html.j2:41
+#: amt/site/templates/macros/tasks.html.j2:80
 #: amt/site/templates/parts/algorithm_search.html.j2:48
 #: amt/site/templates/parts/filter_list.html.j2:71
-#: amt/site/templates/parts/tasks_search.html.j2:41
+#: amt/site/templates/parts/tasks_search.html.j2:36
 msgid "Lifecycle"
 msgstr "Levenscyclus"
 
 #: amt/api/lifecycles.py:23
 msgid "Organizational Responsibilities"
-msgstr "Organisatieverantwoordelijkheden"
+msgstr "Organisatie&#x200B;verantwoordelijkheden"
 
 #: amt/api/lifecycles.py:24
 msgid "Problem Analysis"
@@ -160,7 +161,7 @@ msgstr "Organisaties"
 
 #: amt/api/navigation.py:64 amt/site/templates/organizations/home.html.j2:37
 #: amt/site/templates/organizations/parts/members_results.html.j2:6
-#: amt/site/templates/organizations/parts/overview_results.html.j2:132
+#: amt/site/templates/organizations/parts/overview_results.html.j2:131
 msgid "Members"
 msgstr "Leden"
 
@@ -280,7 +281,7 @@ msgstr "Voeg link naar bestanden toe"
 #: amt/site/templates/algorithms/details_info.html.j2:75
 #: amt/site/templates/auth/profile.html.j2:34
 #: amt/site/templates/organizations/home.html.j2:13
-#: amt/site/templates/organizations/parts/members_results.html.j2:118
+#: amt/site/templates/organizations/parts/members_results.html.j2:119
 msgid "Name"
 msgstr "Naam"
 
@@ -434,9 +435,9 @@ msgid "measure executed"
 msgstr "maatregelen uitgevoerd"
 
 #: amt/site/templates/algorithms/details_compliance.html.j2:69
-#: amt/site/templates/macros/editable.html.j2:28
-#: amt/site/templates/macros/editable.html.j2:33
-#: amt/site/templates/macros/tasks.html.j2:82
+#: amt/site/templates/macros/editable.html.j2:68
+#: amt/site/templates/macros/editable.html.j2:73
+#: amt/site/templates/macros/tasks.html.j2:98
 msgid "Edit"
 msgstr "Bewerk"
 
@@ -446,7 +447,7 @@ msgstr "Voldoet het algoritme aan de vereisten?"
 
 #: amt/site/templates/algorithms/details_info.html.j2:65
 msgid "Go to all requirements"
-msgstr "Ga naar alle Vereisten"
+msgstr "Ga naar voldoen aan wetten en regels"
 
 #: amt/site/templates/algorithms/details_info.html.j2:85
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:27
@@ -457,12 +458,8 @@ msgstr "Omschrijving"
 msgid "Repository"
 msgstr "Repository"
 
-#: amt/site/templates/algorithms/details_info.html.j2:97
-msgid "Algorithm code"
-msgstr "Algoritme code"
-
-#: amt/site/templates/algorithms/details_info.html.j2:107
-#: amt/site/templates/organizations/parts/overview_results.html.j2:134
+#: amt/site/templates/algorithms/details_info.html.j2:103
+#: amt/site/templates/organizations/parts/overview_results.html.j2:133
 #: amt/site/templates/pages/assessment_card.html.j2:7
 #: amt/site/templates/pages/model_card.html.j2:6
 #: amt/site/templates/pages/system_card.html.j2:5
@@ -471,11 +468,11 @@ msgstr "Algoritme code"
 msgid "Last updated"
 msgstr "Laatst bijgewerkt"
 
-#: amt/site/templates/algorithms/details_info.html.j2:111
+#: amt/site/templates/algorithms/details_info.html.j2:107
 msgid "Labels"
 msgstr "Labels"
 
-#: amt/site/templates/algorithms/details_info.html.j2:119
+#: amt/site/templates/algorithms/details_info.html.j2:115
 msgid "References"
 msgstr "Referenties"
 
@@ -488,12 +485,12 @@ msgid "Read more on the algoritmekader"
 msgstr "Lees meer op het algoritmekader"
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:64
-#: amt/site/templates/macros/editable.html.j2:109
+#: amt/site/templates/macros/editable.html.j2:175
 msgid "Save"
 msgstr "Opslaan"
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:68
-#: amt/site/templates/macros/editable.html.j2:114
+#: amt/site/templates/macros/editable.html.j2:180
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:26
 msgid "Cancel"
 msgstr "Annuleren"
@@ -591,7 +588,7 @@ msgid "Please login to view this page"
 msgstr "Meld u aan om deze pagina te bekijken"
 
 #: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:11
-#: amt/site/templates/pages/landingpage.html.j2:16
+#: amt/site/templates/pages/landingpage.html.j2:14
 #: amt/site/templates/parts/header.html.j2:86
 #: amt/site/templates/parts/header.html.j2:145
 msgid "Login"
@@ -648,7 +645,7 @@ msgstr "Er zijn enkele fouten"
 msgid "There is one error:"
 msgstr "Er is één fout:"
 
-#: amt/site/templates/layouts/base.html.j2:11
+#: amt/site/templates/layouts/base.html.j2:1
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr "Algoritme Management Toolkit"
 
@@ -712,15 +709,11 @@ msgstr "Voeg personen toe"
 #: amt/site/templates/organizations/parts/members_results.html.j2:29
 #: amt/site/templates/organizations/parts/overview_results.html.j2:26
 #: amt/site/templates/parts/algorithm_search.html.j2:25
-#: amt/site/templates/parts/tasks_search.html.j2:18
+#: amt/site/templates/parts/tasks_search.html.j2:13
 msgid "Search"
 msgstr "Zoek"
 
-#: amt/site/templates/organizations/parts/members_results.html.j2:36
-msgid "Find member..."
-msgstr "Voeg personen toe"
-
-#: amt/site/templates/organizations/parts/members_results.html.j2:65
+#: amt/site/templates/organizations/parts/members_results.html.j2:66
 #, python-format
 msgid ""
 "%(members_length)s result\n"
@@ -731,13 +724,13 @@ msgid_plural ""
 msgstr[0] "%(members_length)s resultaat"
 msgstr[1] "%(members_length)s resultaten"
 
-#: amt/site/templates/organizations/parts/members_results.html.j2:70
-#: amt/site/templates/organizations/parts/overview_results.html.j2:86
+#: amt/site/templates/organizations/parts/members_results.html.j2:71
+#: amt/site/templates/organizations/parts/overview_results.html.j2:85
 #: amt/site/templates/parts/filter_list.html.j2:16
 msgid "for"
 msgstr "voor"
 
-#: amt/site/templates/organizations/parts/members_results.html.j2:121
+#: amt/site/templates/organizations/parts/members_results.html.j2:122
 msgid "Action"
 msgstr "Actie"
 
@@ -745,15 +738,11 @@ msgstr "Actie"
 msgid "New organization"
 msgstr "Nieuwe organisatie"
 
-#: amt/site/templates/organizations/parts/overview_results.html.j2:33
-msgid "Find organizations..."
-msgstr "Zoek een organisatie..."
-
-#: amt/site/templates/organizations/parts/overview_results.html.j2:50
+#: amt/site/templates/organizations/parts/overview_results.html.j2:49
 msgid "Organisation Type"
 msgstr "Organisatie Type"
 
-#: amt/site/templates/organizations/parts/overview_results.html.j2:81
+#: amt/site/templates/organizations/parts/overview_results.html.j2:80
 #, python-format
 msgid ""
 "%(organizations_length)s result\n"
@@ -764,7 +753,7 @@ msgid_plural ""
 msgstr[0] "%(organizations_length)s resultaat"
 msgstr[1] "%(organizations_length)s resultaten"
 
-#: amt/site/templates/organizations/parts/overview_results.html.j2:129
+#: amt/site/templates/organizations/parts/overview_results.html.j2:128
 msgid "Organization name"
 msgstr "Organisatie naam"
 
@@ -801,20 +790,20 @@ msgstr "Antwoord"
 msgid "AMT Placeholder informatie pagina's"
 msgstr "AMT Placeholder informatie pagina's"
 
-#: amt/site/templates/pages/landingpage.html.j2:11
+#: amt/site/templates/pages/landingpage.html.j2:10
 #: amt/site/templates/parts/header.html.j2:18
 msgid "Algorithm Management Toolkit"
 msgstr "Algoritme Management Toolkit"
 
-#: amt/site/templates/pages/landingpage.html.j2:24
+#: amt/site/templates/pages/landingpage.html.j2:22
 msgid "Grip on algorithms with the Algorithm Management Toolkit"
 msgstr "Grip op algoritmes met de Algoritme Management Toolkit"
 
-#: amt/site/templates/pages/landingpage.html.j2:26
+#: amt/site/templates/pages/landingpage.html.j2:24
 msgid "The AI Validation team"
 msgstr "Het AI Validatie team"
 
-#: amt/site/templates/pages/landingpage.html.j2:27
+#: amt/site/templates/pages/landingpage.html.j2:25
 msgid ""
 "has developed the Algorithm Management Toolkit on behalf of the Ministry "
 "of Interior Affairs.\n"
@@ -831,19 +820,19 @@ msgstr ""
 "                    In samenwerking met (internationale) partners zorgt "
 "het voor uniformiteit, transparantie en reproduceerbaarheid."
 
-#: amt/site/templates/pages/landingpage.html.j2:33
+#: amt/site/templates/pages/landingpage.html.j2:31
 msgid "Log in"
 msgstr "Log in"
 
-#: amt/site/templates/pages/landingpage.html.j2:34
+#: amt/site/templates/pages/landingpage.html.j2:32
 msgid "or"
 msgstr "of"
 
-#: amt/site/templates/pages/landingpage.html.j2:35
+#: amt/site/templates/pages/landingpage.html.j2:33
 msgid "contact us"
 msgstr "neem contact op"
 
-#: amt/site/templates/pages/landingpage.html.j2:36
+#: amt/site/templates/pages/landingpage.html.j2:34
 msgid "for more information on how the toolkit can support your organization."
 msgstr "voor meer informatie over hoe de toolkit uw organisatie kan ondersteunen."
 
@@ -863,30 +852,13 @@ msgstr "In ontwikkeling"
 msgid "This page is yet to be build."
 msgstr "Deze pagina is nog niet klaar."
 
-#: amt/site/templates/parts/algorithm_search.html.j2:32
-msgid "Find algorithm..."
-msgstr "Vind algoritme..."
-
-#: amt/site/templates/parts/algorithm_search.html.j2:53
-#: amt/site/templates/parts/tasks_search.html.j2:46
-msgid "Select lifecycle"
-msgstr "Selecteer levenscyclus"
-
 #: amt/site/templates/parts/algorithm_search.html.j2:62
 msgid "Category"
 msgstr "Categorie"
 
-#: amt/site/templates/parts/algorithm_search.html.j2:67
-msgid "Select risk group"
-msgstr "Selecteer groepering"
-
 #: amt/site/templates/parts/algorithm_search.html.j2:83
 msgid "Group by"
 msgstr "Groeperen op"
-
-#: amt/site/templates/parts/algorithm_search.html.j2:88
-msgid "Select group by"
-msgstr "Selecteer groepering"
 
 #: amt/site/templates/parts/filter_list.html.j2:9
 #, python-format
@@ -935,18 +907,7 @@ msgstr "Deze website is in ontwikkeling. Alle versies ontstaan op een open manie
 msgid "Results for"
 msgstr "Resultaten voor"
 
-#: amt/site/templates/parts/tasks_search.html.j2:9
-msgid "Taken"
-msgstr "Taken"
-
-#: amt/site/templates/parts/tasks_search.html.j2:25
-msgid "Find tasks..."
-msgstr "Vind algoritme..."
-
-#: amt/site/templates/parts/tasks_search.html.j2:55
+#: amt/site/templates/parts/tasks_search.html.j2:52
 msgid "Assignee"
-msgstr "Verantwoordelijke"
+msgstr "Toegewezen aan"
 
-#: amt/site/templates/parts/tasks_search.html.j2:60
-msgid "Select assignee"
-msgstr "Selecteer verantwoordelijke"

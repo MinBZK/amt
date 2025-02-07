@@ -110,7 +110,7 @@
                 {% for option in field.options %}
                     <option value="{{ option.value }}"
                             {% if option.value == field.default_value %}selected=""{% endif %}>
-                        {{ option.display_value }}
+                        {{ option.display_value | safe }}
                     </option>
                 {% endfor %}
             </select>

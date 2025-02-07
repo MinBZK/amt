@@ -63,24 +63,42 @@
 {% endmacro %}
 {% macro render_task_card_content(algorithm_id, task) -%}
     <div id="card-content-{{ task.id }}" data-id="{{ task.id }}">
-        <div class="rvo-label--sm">
+        <div class="rvo-label--md">
             {{ task.title | truncate(100) }}
-            {% if hasattr(task, "type_object.users") and task.type_object.users | length > 0 %}
-                <div class="margin-top-middle">{{ macros.user_avatars(task.type_object.users) }}</div>
-            {% endif %}
             {% if hasattr(task, "type_object") and task.type == "measure" %}
                 <div class="margin-top-middle">
-                    <a class="rvo-link rvo-link--normal rvo-link--with-icon"
-                       hx-trigger="click"
-                       hx-target="#dynamic-modal-content"
-                       hx-get="/algorithm/{{ algorithm_id }}/measure/{{ task.type_object.urn }}"
-                       hx-swap="innerHTML"
-                       onclick="amt.openModal('measure-modal')">
-                        <span class="utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
-                              role="img"
-                              aria-label="Home"></span>
-                        {% trans %}Edit{% endtrans %}
-                    </a>
+                    <div class="rvo-layout-row rvo-layout--wrap rvo-layout-gap--xs">
+                        {% for lifecycle in task.type_object.lifecycle %}
+                            <span class="rvo-text--subtle rvo-tag rvo-tag--with-icon rvo-tag--active rvo-tag--info"
+                                  style="gap: 0.5em;
+                                         word-break: break-word;
+                                         font-size: 0.75em;
+                                         padding-block-start: 0;
+                                         padding-block-end: 0">
+                                <span class="utrecht-icon rvo-icon rvo-icon-refresh rvo-icon--md rvo-link__icon--before"
+                                      role="img"
+                                      aria-label="{% trans %}Lifecycle{% endtrans %}"></span>
+                                {{ get_localized_value("lifecycle", lifecycle, request).display_value | safe }}
+                            </span>
+                        {% endfor %}
+                    </div>
+                    <div class="margin-top-middle amt-clear-float">
+                        {% if hasattr(task, "type_object.users") and task.type_object.users | length > 0 %}
+                            {{ macros.user_avatars(task.type_object.users) }}
+                        {% endif %}
+                        <div style="float: right; margin-top: 0.4em;">
+                            <a class="rvo-link rvo-link--normal rvo-link--with-icon"
+                               hx-trigger="click"
+                               hx-target="#dynamic-modal-content"
+                               hx-get="/algorithm/{{ algorithm_id }}/measure/{{ task.type_object.urn }}"
+                               hx-swap="innerHTML"
+                               onclick="amt.openModal('measure-modal')">
+                                <span class="utrecht-icon rvo-icon rvo-icon-bewerken rvo-icon--lg rvo-icon--hemelblauw rvo-link__icon--before"
+                                      role="img"
+                                      aria-label="{% trans %}Edit{% endtrans %}"></span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             {% endif %}
         </div>

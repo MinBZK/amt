@@ -7,11 +7,11 @@
                 <td class="rvo-table-cell" style="padding-left: 0">
                 {% endif %}
                 <a class="rvo-link rvo-link--no-underline rvo-link--zwart"
-                   href="/algorithm/{{ algorithm.id }}/details/">{{ algorithm.name }}</a>
+                   href="/algorithm/{{ algorithm.id }}/info">{{ algorithm.name }}</a>
             </td>
             {% if show_lifecycles %}
                 <td class="rvo-table-cell">
-                    <span class="rvo-text--subtle">{{ algorithm.lifecycle.display_value }}</span>
+                    <span class="rvo-text--subtle">{{ algorithm.lifecycle.display_value | safe }}</span>
                 </td>
             {% endif %}
             <td class="rvo-table-cell">

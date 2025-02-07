@@ -13,12 +13,11 @@ from ulid import ULID
 from amt.api.decorators import permission
 from amt.api.deps import templates
 from amt.api.editable import (
-    EditModes,
-    ResolvedEditable,
     get_enriched_resolved_editable,
     get_resolved_editables,
     save_editable,
 )
+from amt.api.editable_classes import EditModes, ResolvedEditable
 from amt.api.forms.measure import MeasureStatusOptions, get_measure_form
 from amt.api.lifecycles import Lifecycles, get_localized_lifecycles
 from amt.api.navigation import (
@@ -28,7 +27,7 @@ from amt.api.navigation import (
     resolve_base_navigation_items,
     resolve_navigation_items,
 )
-from amt.api.routes.shared import UpdateFieldModel, get_filters_and_sort_by, replace_none_with_empty_string_inplace
+from amt.api.routes.shared import get_filters_and_sort_by, replace_none_with_empty_string_inplace
 from amt.core.authorization import AuthorizationResource, AuthorizationVerb, get_user
 from amt.core.exceptions import AMTError, AMTNotFound, AMTPermissionDenied, AMTRepositoryError
 from amt.core.internationalization import get_current_translation
@@ -110,7 +109,7 @@ def get_algorithm_details_tabs(request: Request) -> list[NavigationItem]:
     return resolve_navigation_items(
         [
             Navigation.ALGORITHM_INFO,
-            Navigation.ALGORITHM_ALGORITHM_DETAILS,
+            Navigation.ALGORITHM_DETAILS,
             Navigation.ALGORITHM_COMPLIANCE,
             Navigation.ALGORITHM_TASKS,
         ],
@@ -119,14 +118,10 @@ def get_algorithm_details_tabs(request: Request) -> list[NavigationItem]:
 
 
 def get_algorithms_submenu_items() -> list[BaseNavigationItem]:
-    return [
-        Navigation.ALGORITHMS_OVERVIEW,
-        Navigation.ALGORITHM_TASKS,
-        Navigation.ALGORITHM_SYSTEM_CARD,
-    ]
+    return [Navigation.ALGORITHMS_OVERVIEW, Navigation.ALGORITHM_TASKS]
 
 
-@router.get("/{algorithm_id}/details/tasks")
+@router.get("/{algorithm_id}/tasks")
 async def get_tasks(
     request: Request,
     algorithm_id: int,
@@ -223,7 +218,7 @@ async def get_tasks(
         "algorithm_id": algorithm.id,
         "breadcrumbs": breadcrumbs,
         "tab_items": tab_items,
-        "base_href": f"/algorithm/{algorithm_id}/details/tasks",
+        "base_href": f"/algorithm/{algorithm_id}/tasks",
         "search": search,
         "lifecycles": get_localized_lifecycles(request),
         "assignees": [LocalizedValueItem(value=str(member.id), display_value=member.name) for member in members],
@@ -323,7 +318,11 @@ async def move_task(
     else:
         display_task: DisplayTask = DisplayTask.create_from_model(task)
 
-    context: dict[str, int | DisplayTask] = {"algorithm_id": algorithm_id, "task": display_task}
+    context: dict[str, int | DisplayTask | Request] = {
+        "algorithm_id": algorithm_id,
+        "task": display_task,
+        "request": request,
+    }
 
     return templates.TemplateResponse(request, "parts/task.html.j2", context=context)
 
@@ -346,7 +345,7 @@ async def get_algorithm_context(
     }
 
 
-@router.get("/{algorithm_id}/details")
+@router.get("/{algorithm_id}/info")
 @permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
 async def get_algorithm_details(
     request: Request, algorithm_id: int, algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)]
@@ -357,13 +356,18 @@ async def get_algorithm_details(
         [
             Navigation.ALGORITHMS_ROOT,
             BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details/system_card"),
-            Navigation.ALGORITHM_DETAILS,
+            Navigation.ALGORITHM_INFO,
         ],
         request,
     )
 
-    context["breadcrumbs"] = breadcrumbs
-    context["base_href"] = f"/algorithm/{algorithm_id}"
+    context.update(
+        {
+            "breadcrumbs": breadcrumbs,
+            "base_href": f"/algorithm/{algorithm_id}",
+            "editables": get_resolved_editables(context_variables={"algorithm_id": algorithm_id}),
+        }
+    )
 
     return templates.TemplateResponse(request, "algorithms/details_info.html.j2", context)
 
@@ -393,6 +397,8 @@ async def get_algorithm_edit(
         "organizations_service": organizations_service,
     }
 
+    # TODO: convertors should also be applied to child elements, maybe resolve should be done with a 'mode' parameter
+    #  instead of doing it here now
     if editable.converter:
         editable.value = await editable.converter.read(editable.value, **editable_context)
 
@@ -427,13 +433,12 @@ async def get_algorithm_cancel(
         editable.value = await editable.converter.view(editable.value, **editable_context)
 
     context = {
-        "relative_resource_path": editable.relative_resource_path.replace("/", ".")
-        if editable.relative_resource_path
-        else "",
+        "relative_resource_path": editable.relative_resource_path if editable.relative_resource_path else "",
         "base_href": f"/algorithm/{algorithm_id}",
         "resource_object": editable.resource_object,
         "full_resource_path": full_resource_path,
         "editable_object": editable,
+        "editables": get_resolved_editables(context_variables={"algorithm_id": algorithm_id}),
     }
 
     return templates.TemplateResponse(request, "parts/view_cell.html.j2", context)
@@ -446,10 +451,10 @@ async def get_algorithm_update(
     algorithm_id: int,
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
     organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
-    update_data: UpdateFieldModel,
-    full_resource_path: str,
+    full_resource_path: str = Query(""),
 ) -> HTMLResponse:
     user_id = get_user_id_or_error(request)
+    new_values = await request.json()
 
     editable: ResolvedEditable = await get_enriched_resolved_editable(
         context_variables={"algorithm_id": algorithm_id},
@@ -461,13 +466,12 @@ async def get_algorithm_update(
 
     editable_context = {
         "user_id": user_id,
-        "new_value": update_data.value,
+        "new_values": new_values,
         "organizations_service": organizations_service,
     }
 
     editable = await save_editable(
         editable,
-        update_data=update_data,
         editable_context=editable_context,
         algorithms_service=algorithms_service,
         organizations_service=organizations_service,
@@ -475,23 +479,23 @@ async def get_algorithm_update(
     )
 
     # set the value back to view mode if needed
+    # TODO: this needs to be fixed, because it only works for 'editables without children'
     if editable.converter:
         editable.value = await editable.converter.view(editable.value, **editable_context)
 
     context = {
-        "relative_resource_path": editable.relative_resource_path.replace("/", ".")
-        if editable.relative_resource_path
-        else "",
+        "relative_resource_path": editable.relative_resource_path if editable.relative_resource_path else "",
         "base_href": f"/algorithm/{algorithm_id}",
         "resource_object": editable.resource_object,
         "full_resource_path": full_resource_path,
         "editable_object": editable,
+        "editables": get_resolved_editables(context_variables={"algorithm_id": algorithm_id}),
     }
 
     return templates.TemplateResponse(request, "parts/view_cell.html.j2", context)
 
 
-@router.get("/{algorithm_id}/details/system_card")
+@router.get("/{algorithm_id}/details")
 @permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
 async def get_system_card(
     request: Request,
@@ -510,7 +514,7 @@ async def get_system_card(
         [
             Navigation.ALGORITHMS_ROOT,
             BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details/system_card"),
-            Navigation.ALGORITHM_SYSTEM_CARD,
+            Navigation.ALGORITHM_DETAILS,
         ],
         request,
     )
@@ -534,7 +538,7 @@ async def get_system_card(
     return templates.TemplateResponse(request, "pages/system_card.html.j2", context)
 
 
-@router.get("/{algorithm_id}/details/system_card/compliance")
+@router.get("/{algorithm_id}/compliance")
 @permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
 async def get_system_card_requirements(
     request: Request,
@@ -790,12 +794,10 @@ async def update_measure_value(
     await algorithms_service.update(algorithm)
 
     # the redirect 'to same page' does not trigger a javascript reload, so we let us redirect by a different server URL
-    encoded_url = urllib.parse.quote_plus(
-        f"/algorithm/{algorithm_id}/details/system_card/compliance#{requirement_urn.replace(':', '_')}"
-    )
+    encoded_url = urllib.parse.quote_plus(f"/algorithm/{algorithm_id}/compliance#{requirement_urn.replace(':', '_')}")
     referer = urllib.parse.urlparse(request.headers.get("referer", ""))
 
-    if referer.path.endswith("/details/tasks"):
+    if referer.path.endswith("/tasks"):
         encoded_url = urllib.parse.quote_plus(referer.path + "?" + referer.query)
     return templates.Redirect(
         request,
@@ -999,7 +1001,7 @@ async def get_model_card(
     return templates.TemplateResponse(request, "pages/model_card.html.j2", context)
 
 
-@router.get("/{algorithm_id}/details/system_card/download")
+@router.get("/{algorithm_id}/download")
 @permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
 async def download_algorithm_system_card_as_yaml(
     algorithm_id: int, algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)], request: Request

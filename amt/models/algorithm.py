@@ -3,7 +3,7 @@ from datetime import date, datetime
 from enum import Enum
 from typing import Any, TypeVar
 
-from sqlalchemy import ForeignKey, String, func
+from sqlalchemy import ForeignKey, String, func, orm
 from sqlalchemy.dialects.postgresql import ENUM
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.types import JSON
@@ -71,6 +71,10 @@ class Algorithm(Base):
         self._system_card: AlgorithmSystemCard | None = None
         if system_card is not None:
             self.system_card = system_card
+
+    @orm.reconstructor  # pyright: ignore[reportUnknownMemberType]
+    def init_on_load(self) -> None:
+        self._system_card: AlgorithmSystemCard | None = None
 
     @property
     def system_card(self) -> AlgorithmSystemCard:

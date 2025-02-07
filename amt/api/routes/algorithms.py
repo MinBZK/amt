@@ -174,5 +174,5 @@ async def post_new(
     user: dict[str, Any] | None = get_user(request)
     # TODO (Robbert): we need to handle (show) repository or service errors in the forms
     algorithm = await algorithms_service.create(algorithm_new, user["sub"])  # pyright: ignore[reportOptionalSubscript, reportUnknownArgumentType]
-    response = templates.Redirect(request, f"/algorithm/{algorithm.id}/details")
+    response = templates.Redirect(request, f"/algorithm/{algorithm.id}/info")
     return response

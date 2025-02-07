@@ -9,11 +9,11 @@ from amt.api.decorators import permission
 from amt.api.deps import templates
 from amt.api.editable import (
     Editables,
-    EditModes,
-    ResolvedEditable,
     get_enriched_resolved_editable,
+    get_resolved_editables,
     save_editable,
 )
+from amt.api.editable_classes import EditModes, ResolvedEditable
 from amt.api.forms.organization import get_organization_form
 from amt.api.group_by_category import get_localized_group_by_categories
 from amt.api.lifecycles import get_localized_lifecycles
@@ -28,7 +28,7 @@ from amt.api.organization_filter_options import OrganizationFilterOptions, get_l
 from amt.api.risk_group import get_localized_risk_groups
 from amt.api.routes.algorithm import get_user_id_or_error
 from amt.api.routes.algorithms import get_algorithms
-from amt.api.routes.shared import UpdateFieldModel, get_filters_and_sort_by
+from amt.api.routes.shared import get_filters_and_sort_by
 from amt.api.utils import SafeDict
 from amt.core.authorization import AuthorizationResource, AuthorizationVerb, get_user
 from amt.core.exceptions import AMTAuthorizationError, AMTNotFound, AMTRepositoryError
@@ -113,6 +113,8 @@ async def root(
     organizations: Sequence[Organization] = await organizations_repository.find_by(
         search=search, sort=sort_by, filters=filters, user_id=user["sub"] if user else None
     )
+    # TODO: we remove the organization filter again, otherwise it shows up as 'filter option you can remove'
+    localized_filters.pop("organization-type", None)
 
     # we only can show organization you belong to, so the all organizations option is disabled
     organization_filters = [
@@ -185,6 +187,7 @@ async def get_by_slug(
         "organization_id": organization.id,
         "tab_items": tab_items,
         "breadcrumbs": breadcrumbs,
+        "editables": get_resolved_editables(context_variables={"organization_id": organization.id}),
     }
     return templates.TemplateResponse(request, "organizations/home.html.j2", context)
 
@@ -266,6 +269,7 @@ async def get_organization_cancel(
         "resource_object": None,  # TODO: this should become an optional parameter in the Jinja template
         "full_resource_path": full_resource_path,
         "editable_object": editable,
+        "editables": get_resolved_editables(context_variables={"organization_id": organization.id}),
     }
 
     return templates.TemplateResponse(request, "parts/view_cell.html.j2", context)
@@ -276,11 +280,11 @@ async def get_organization_cancel(
 async def get_organization_update(
     request: Request,
     organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
-    update_data: UpdateFieldModel,
     organization_slug: str,
     full_resource_path: str,
 ) -> HTMLResponse:
     organization = await get_organization_or_error(organizations_service, request, organization_slug)
+    new_values = await request.json()
 
     user_id = get_user_id_or_error(request)
 
@@ -295,13 +299,12 @@ async def get_organization_update(
 
     editable_context = {
         "user_id": user_id,
-        "new_value": update_data.value,
+        "new_values": new_values,
         "organizations_service": organizations_service,
     }
 
     editable = await save_editable(
         editable,
-        update_data=update_data,
         editable_context=editable_context,
         organizations_service=organizations_service,
         do_save=True,
@@ -319,6 +322,7 @@ async def get_organization_update(
         "resource_object": None,
         "full_resource_path": full_resource_path,
         "editable_object": editable,
+        "editables": get_resolved_editables(context_variables={"organization_id": organization.id}),
     }
 
     # TODO: add a 'next action' to editable for f.e. redirect options, THIS IS A HACK
@@ -455,6 +459,8 @@ async def get_members(
     )
 
     filters["organization-id"] = str(organization.id)
+    if "name" not in sort_by:
+        sort_by["name"] = "ascending"
     members = await users_service.find_all(search=search, sort=sort_by, filters=filters)
 
     context: dict[str, Any] = {

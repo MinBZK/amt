@@ -307,7 +307,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: [build]
-    if: ${{ github.event_name == 'push' && !github.event.act}}
     permissions:
       actions: write
     steps:
@@ -327,7 +326,11 @@ jobs:
 
       - name: Trigger deployment
         run: |
-          gh workflow run deploy.yml -f image_tag=${{ fromJSON(steps.meta.outputs.json).tags[0] }} -f environment=production
+          if [ "${{ github.event_name }}" == "push" ]; then
+            gh workflow run deploy.yml -f image_tag=${{ fromJSON(steps.meta.outputs.json).tags[0] }} -f environment=production
+          else
+            gh workflow run deploy.yml -f image_tag=${{ fromJSON(steps.meta.outputs.json).tags[0] }} -f environment=sandbox
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
