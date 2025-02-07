@@ -15,6 +15,7 @@ on:
         options:
           - sandbox
           - production
+          - bzk
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
