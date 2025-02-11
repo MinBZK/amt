@@ -33,12 +33,14 @@
         Menu
     </button>
     <div id="mobile-menu-container"
-         class="display-none rvo-topnav__background">
-        <nav class="rvo-topnav rvo-topnav--md">
-            <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--md rvo-icon--hemelblauw rvo-mobile-menu__close-icon"
+         class="display-none rvo-topnav--sub rvo-topnav__background" style="position: relative;">
+        <nav class="rvo-topnav rvo-topnav--md" style="padding: 1em">
+            <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--md rvo-icon--hemelblauw rvo-dialog__close-icon"
                   role="img"
                   aria-label="Kruis"
-                  onclick="amt.hideMobileMenu()"></span>
+                  onclick="amt.hideMobileMenu()"
+                  style="position: absolute; right: 1em; top: 1em; cursor: pointer;">"
+            ></span>
             <ul class="rvo-topnav__list rvo-topnav__list--vertical">
                 {% if user %}
                     {% for menu_item in main_menu_items %}
