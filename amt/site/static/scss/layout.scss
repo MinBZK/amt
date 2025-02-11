@@ -337,6 +337,12 @@ main {
 
 /* we override the default ROOS style because we want to display as column, not rows */
 .amt-theme {
+    --rvo-table-cell-border-bottom-color: var(--rvo-color-grijs-300) !important;
+    --rvo-table-header-background-color: var(--rvo-color-grijs-050) !important;
+    --rvo-table-header-border-bottom-color: var(
+        --rvo-color-grijs-200
+    ) !important;
+
     & .rvo-accordion__item > .rvo-accordion__item-summary {
         align-items: initial;
         flex-direction: column;
@@ -519,3 +525,7 @@ main {
 }
 
 /* stylelint-enable */
+
+:root {
+    --rvo-table-cell-border-bottom-color: var(--rvo-color-grijs-300) !important;
+}

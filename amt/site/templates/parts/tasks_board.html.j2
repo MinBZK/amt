@@ -56,7 +56,7 @@
     </form>
     <div id="errorContainer"></div>
     <div class="rvo-layout-grid-container margin-bottom-large">
-        <div class="rvo-layout-grid rvo-layout-gap--sm rvo-layout-grid-columns--five">
+        <div class="rvo-layout-grid rvo-layout-gap--sm rvo-layout-grid-columns--five" style="grid-template-columns: repeat(5, minmax(0, 1fr))">
             {% for status in statuses %}{{ render.column(algorithm, status, translations, tasks_by_status) }}{% endfor %}
         </div>
     </div>
