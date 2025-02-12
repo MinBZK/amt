@@ -328,8 +328,10 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" == "push" ]; then
             gh workflow run deploy.yml -f image_tag=${{ fromJSON(steps.meta.outputs.json).tags[0] }} -f environment=production
-          else
+          elif [ "${{ github.actor }}" == "uittenbroekrobbert" ]; then
             gh workflow run deploy.yml -f image_tag=${{ fromJSON(steps.meta.outputs.json).tags[0] }} -f environment=sandbox
+          else
+            echo "Not deploying changes, there is no trigger for ${{ github.event_name }} or ${{ github.actor }}"
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
