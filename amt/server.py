@@ -27,6 +27,8 @@ configure_logging(get_settings().LOGGING_LEVEL, get_settings().LOGGING_CONFIG)
 
 logger = logging.getLogger(__name__)
 
+# todo: remove this line
+
 
 # todo(berry): move lifespan to own file
 @asynccontextmanager
