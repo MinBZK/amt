@@ -118,7 +118,7 @@ async def test_is_requirement_applicable_with_profile_with_2_roles():
     ai_act_profile = AiActProfile(
         type="AI-model voor algemene doeleinden",
         risk_group="hoog-risico AI",
-        role="aanbieder + gebruiksverantwoordelijke",
+        role=["aanbieder", "gebruiksverantwoordelijke"],
         open_source="geen open-source",
         systemic_risk="systeemrisico",
         transparency_obligations="transparantieverplichting",

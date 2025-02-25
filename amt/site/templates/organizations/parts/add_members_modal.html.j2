@@ -7,7 +7,10 @@
                   role="img"
                   aria-label="{% trans %}Close{% endtrans %}"></span></a>
     </div>
+    <!-- padding in the form is needed, otherwise the outline of the selected input field is cut off -->
     <form class="rvo-layout-column rvo-layout-gap--sm"
+          style="padding-left: 0.5em;
+                 padding-right: 0.5em"
           onkeydown="amt.prevent_submit_on_enter()"
           hx-ext="json-enc"
           hx-put="/organizations/{{ slug }}/members"
