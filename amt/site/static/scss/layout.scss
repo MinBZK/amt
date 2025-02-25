@@ -201,42 +201,52 @@ main {
     right: 0;
 }
 
-.minbzk-modal > .modal-content {
+.model-content-auto-size {
+    width: auto !important;
+    height: auto !important;
+}
+
+.modal-content {
     overflow: auto;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.modal-content-close {
+    position: absolute;
+    right: 30px;
+    top: 10px;
+    z-index: 1000;
+    cursor: pointer;
+    font-size: 40px;
+}
+
+.modal-content-container {
+    overflow: hidden;
+    position: relative;
 
     /* Position visible dialog near the top of the window */
-    margin-top: 10vh;
+    margin-top: 5vh;
+    transition:
+        height 0.3s ease,
+        width 0.3s ease;
 
     /* Sizing for visible dialog */
     width: 80%;
     height: 80%;
-    max-width: var(--rvo-layout-max-width-lg);
 
     /* Display properties for visible dialog */
     border: solid 1px #999;
-    border-radius: var(--rvo-border-radius-xl);
+    border-radius: 1em;
 
     /* Change to appropriate color from NLDS. */
-    box-shadow: 0 0 var(--rvo-space-lg) 0 rgba(0 0 0 / 30%);
-    background-color: var(--rvo-color-wit);
-    padding: var(--rvo-space-lg);
+    box-shadow: 0 0 1em 0 rgba(0 0 0 / 30%);
+    background-color: #fff;
+    padding: 1em;
 
     /* Animate when opening */
     animation-name: zoom-in;
-    animation-duration: 150ms;
-    animation-timing-function: ease;
-}
-
-.minbzk-modal.closing {
-    /* Animate when closing */
-    animation-name: fade-out;
-    animation-duration: 150ms;
-    animation-timing-function: ease;
-}
-
-.minbzk-modal.closing > .modal-content {
-    /* Animate when closing */
-    animation-name: zoom-out;
     animation-duration: 150ms;
     animation-timing-function: ease;
 }

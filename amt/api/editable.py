@@ -13,6 +13,7 @@ from amt.api.editable_util import (
     replace_wildcard_with_digits_in_brackets,
 )
 from amt.api.editable_validators import EditableValidatorMinMaxLength, EditableValidatorSlug
+from amt.api.editable_value_providers import AIActValuesProvider
 from amt.api.lifecycles import get_localized_lifecycles
 from amt.api.routes.shared import nested_value
 from amt.api.utils import SafeDict
@@ -270,6 +271,48 @@ class Editables:
         validator=EditableValidatorSlug(),
     )
 
+    ALGORITHM_EDITABLE_AIACT = Editable(
+        full_resource_path="algorithm/{algorithm_id}/system_card/ai_act_profile",
+        implementation_type=WebFormFieldImplementationType.PARENT,
+        children=[
+            Editable(
+                full_resource_path="algorithm/{algorithm_id}/system_card/ai_act_profile/role",
+                implementation_type=WebFormFieldImplementationType.MULTIPLE_CHECKBOX_AI_ACT,
+                values_provider=AIActValuesProvider(type="role"),
+            ),
+            Editable(
+                full_resource_path="algorithm/{algorithm_id}/system_card/ai_act_profile/type",
+                implementation_type=WebFormFieldImplementationType.SELECT_AI_ACT,
+                values_provider=AIActValuesProvider(type="type"),
+            ),
+            Editable(
+                full_resource_path="algorithm/{algorithm_id}/system_card/ai_act_profile/open_source",
+                implementation_type=WebFormFieldImplementationType.SELECT_AI_ACT,
+                values_provider=AIActValuesProvider(type="open_source"),
+            ),
+            Editable(
+                full_resource_path="algorithm/{algorithm_id}/system_card/ai_act_profile/risk_group",
+                implementation_type=WebFormFieldImplementationType.SELECT_AI_ACT,
+                values_provider=AIActValuesProvider(type="risk_group"),
+            ),
+            Editable(
+                full_resource_path="algorithm/{algorithm_id}/system_card/ai_act_profile/conformity_assessment_body",
+                implementation_type=WebFormFieldImplementationType.SELECT_AI_ACT,
+                values_provider=AIActValuesProvider(type="conformity_assessment_body"),
+            ),
+            Editable(
+                full_resource_path="algorithm/{algorithm_id}/system_card/ai_act_profile/systemic_risk",
+                implementation_type=WebFormFieldImplementationType.SELECT_AI_ACT,
+                values_provider=AIActValuesProvider(type="systemic_risk"),
+            ),
+            Editable(
+                full_resource_path="algorithm/{algorithm_id}/system_card/ai_act_profile/transparency_obligations",
+                implementation_type=WebFormFieldImplementationType.SELECT_AI_ACT,
+                values_provider=AIActValuesProvider(type="transparency_obligations"),
+            ),
+        ],
+    )
+
     # TODO: rethink if this is a wise solution.. we do this to keep all elements in 1 class and still
     #  be able to execute other code (like making relationships)
     def __iter__(self) -> typing.Generator[tuple[str, Any], Any, Any]:
@@ -375,8 +418,13 @@ async def enrich_editable(  # noqa: C901
         )
 
     # TODO: can we move this to the editable object instead of here?
+    # TODO: consider if values_providers could solve & replace the specific conditions below
     if edit_mode == EditModes.EDIT:
-        if editable.implementation_type == WebFormFieldImplementationType.SELECT_MY_ORGANIZATIONS:
+        if editable.values_provider:
+            if request is None:
+                raise ValueError("Request is required when resolving a 'editable values provider'")
+            editable.form_options = await editable.values_provider.get_values(request)
+        elif editable.implementation_type == WebFormFieldImplementationType.SELECT_MY_ORGANIZATIONS:
             if organizations_service is None:
                 raise ValueError("Organization service is required when resolving an organization")
             my_organizations = await organizations_service.get_organizations_for_user(user_id=user_id)
@@ -427,6 +475,7 @@ def get_resolved_editables(context_variables: dict[str, str | int]) -> dict[str,
             full_resource_path=full_resource_path,
             relative_resource_path=relative_resource_path,
             implementation_type=editable.implementation_type,
+            values_provider=editable.values_provider,
             couples=couples,
             children=children,
             converter=editable.converter,
@@ -556,8 +605,6 @@ def is_parent_editable(editables: dict[str, ResolvedEditable], full_resource_pat
     full_resource_path = replace_digits_in_brackets(full_resource_path)
     editable = editables.get(full_resource_path)
     if editable is None:
-        print(full_resource_path + " : " + "false, no match")
         return False
     result = editable.implementation_type == WebFormFieldImplementationType.PARENT
-    print(full_resource_path + " : " + str(result))
     return result

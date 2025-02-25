@@ -1,10 +1,8 @@
 {% import "macros/form_macros.html.j2" as macros with context %}
 <div class="rvo-layout-column rvo-layout-gap--xl">
     <div class="amt-flex-container">
-        <h1 class="utrecht-heading-1 rvo-heading--no-margins">{{ measure.name }}</h1>
-        <a onclick="amt.closeModal('measure-modal')"><span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--md rvo-icon--hemelblauw"
-      role="img"
-      aria-label="Close"></span></a>
+        <h1 class="utrecht-heading-1 rvo-heading--no-margins"
+            style="margin-right: 2em">{{ measure.name }}</h1>
     </div>
     <hr class="rvo-hr" />
     <form hx-encoding="multipart/form-data"

@@ -7,6 +7,7 @@ from amt.api.editable_converters import (
 )
 from amt.api.editable_enforcers import EditableEnforcer
 from amt.api.editable_validators import EditableValidator
+from amt.api.editable_value_providers import EditableValuesProvider
 from amt.models.base import Base
 from amt.schema.webform import WebFormFieldImplementationTypeFields, WebFormOption
 
@@ -35,6 +36,7 @@ class Editable:
         self,
         full_resource_path: str,
         implementation_type: WebFormFieldImplementationTypeFields,
+        values_provider: EditableValuesProvider | None = None,
         couples: set[EditableType] | None = None,
         children: list[EditableType] | None = None,
         converter: EditableConverter | None = None,
@@ -45,6 +47,7 @@ class Editable:
     ) -> None:
         self.full_resource_path = full_resource_path
         self.implementation_type = implementation_type
+        self.values_provider = values_provider
         self.couples = set[EditableType]() if couples is None else couples
         self.children = list[EditableType]() if children is None else children
         self.converter = converter
@@ -84,6 +87,7 @@ class ResolvedEditable:
         # fields copied from the Editable class
         full_resource_path: str,
         implementation_type: WebFormFieldImplementationTypeFields,
+        values_provider: EditableValuesProvider | None = None,
         couples: set[ResolvedEditableType] | None = None,
         children: list[ResolvedEditableType] | None = None,
         converter: EditableConverter | None = None,
@@ -96,6 +100,7 @@ class ResolvedEditable:
     ) -> None:
         self.full_resource_path = full_resource_path
         self.implementation_type = implementation_type
+        self.values_provider = values_provider
         self.couples = set[ResolvedEditableType]() if couples is None else couples
         self.children = list[ResolvedEditableType]() if children is None else children
         self.converter = converter

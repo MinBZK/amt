@@ -172,6 +172,17 @@ export function openModal(id: string) {
   }
 }
 
+export function openDynamicModal(modalId: string) {
+  if (modalId == "ai-act-support-tool") {
+    document.getElementById("dynamic-modal-content")!.innerHTML = `<iframe
+          style="display: block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; overflow: hidden;"
+          src="/static/beslishulp.html"></iframe>`;
+  } else {
+    console.error("Unkown dynamic modalId: " + modalId);
+  }
+  openModal("modal");
+}
+
 export function openConfirmModal(
   title: string,
   content: string,
@@ -212,7 +223,6 @@ class AiActProfile {
 }
 
 export function closeModal(id: string) {
-  // Do not show modal.
   const el: Element | null = document.getElementById(id);
   if (el != null) {
     el.classList.add("display-none");
@@ -522,5 +532,65 @@ export function resetSearchInput() {
   }
   inputElement.value = "";
 }
+
+export function updateInlineEditorAIActProfile() {
+  const jsonObject = JSON.parse(
+    sessionStorage.getItem("labelsbysubcategory") as string,
+  );
+  const groupToFieldName = new Map<string, string>()
+    .set("Rol", "role")
+    .set("Soort toepassing", "type")
+    .set("Risicogroep", "risk_group")
+    .set("Conformiteitsbeoordelingsinstantie", "conformity_assessment_body")
+    .set("Systeemrisico", "systemic_risk")
+    .set("Transparantieverplichting", "transparency_obligations")
+    .set("Open source", "open_source");
+  for (const [groupName, formFieldName] of groupToFieldName) {
+    const groupValues = jsonObject[groupName];
+    const elements = document.querySelectorAll(
+      '[name="' + formFieldName + '"]',
+    );
+    if (elements && elements.length > 1) {
+      elements.forEach((element) => {
+        if (
+          element.getAttribute("type") === "radio" ||
+          element.getAttribute("type") === "checkbox"
+        ) {
+          const labelValue = element.getAttribute("value");
+          if (groupValues.includes(labelValue)) {
+            element.setAttribute("checked", "checked");
+          } else {
+            element.removeAttribute("checked");
+          }
+        }
+      });
+    } else if (elements) {
+      elements[0].querySelectorAll("option").forEach((optionElement) => {
+        const labelValue = optionElement.getAttribute("value");
+        if (groupValues.includes(labelValue)) {
+          optionElement.setAttribute("selected", "selected");
+        } else {
+          optionElement.removeAttribute("selected");
+        }
+      });
+    } else {
+      console.error(`Element with name ${formFieldName} not found.`);
+    }
+  }
+}
+
+window.addEventListener("message", (event) => {
+  if (event.data.event === "beslishulp-done") {
+    console.log("Received beslishulp-done:", event.data.value);
+    if (window.location.pathname == "/algorithms/new") {
+      closeModalSave("modal");
+    } else if (/\/algorithm\/\d+\/details/.test(window.location.pathname)) {
+      updateInlineEditorAIActProfile();
+      closeAndResetDynamicModal("modal");
+    } else {
+      console.error("No handle found for location " + window.location.pathname);
+    }
+  }
+});
 
 // for debugging htmx use -> htmx.logAll();

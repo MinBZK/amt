@@ -4,6 +4,7 @@ from typing import Any
 
 
 class WebFormFieldType(Enum):
+    CHECKBOX_MULTIPLE = "checkbox_multiple"
     HIDDEN = "hidden"
     TEXT = "text"
     TEXT_CLONEABLE = "text_cloneable"
@@ -24,11 +25,13 @@ class WebFormFieldImplementationTypeFields:
 
 
 class WebFormFieldImplementationType:
+    MULTIPLE_CHECKBOX_AI_ACT = WebFormFieldImplementationTypeFields("checkbox", WebFormFieldType.CHECKBOX_MULTIPLE)
     TEXT = WebFormFieldImplementationTypeFields("text", WebFormFieldType.TEXT)
     PARENT = WebFormFieldImplementationTypeFields("parent", None)
     TEXTAREA = WebFormFieldImplementationTypeFields("textarea", WebFormFieldType.TEXTAREA)
     SELECT_MY_ORGANIZATIONS = WebFormFieldImplementationTypeFields("select_my_organizations", WebFormFieldType.SELECT)
     SELECT_LIFECYCLE = WebFormFieldImplementationTypeFields("select_lifecycle", WebFormFieldType.SELECT)
+    SELECT_AI_ACT = WebFormFieldImplementationTypeFields("select", WebFormFieldType.SELECT)
     DATE = WebFormFieldImplementationTypeFields("date", WebFormFieldType.DATE)
 
 

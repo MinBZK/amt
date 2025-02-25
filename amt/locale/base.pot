@@ -299,7 +299,7 @@ msgstr ""
 
 #: amt/api/forms/organization.py:40
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:4
-#: amt/site/templates/organizations/parts/add_members_modal.html.j2:23
+#: amt/site/templates/organizations/parts/add_members_modal.html.j2:26
 msgid "Add members"
 msgstr ""
 
@@ -380,43 +380,43 @@ msgstr ""
 msgid "Something went wrong storing your file. PLease try again later."
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:12
+#: amt/site/templates/algorithms/details_base.html.j2:13
 msgid "Delete algoritmic system"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:19
+#: amt/site/templates/algorithms/details_base.html.j2:17
 msgid "Are you sure you want to delete your algoritmic system "
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:22
+#: amt/site/templates/algorithms/details_base.html.j2:20
 msgid "Data will be stored for at least 45 days before permanent deletion."
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:28
+#: amt/site/templates/algorithms/details_base.html.j2:26
 #: amt/site/templates/algorithms/new.html.j2:153
-#: amt/site/templates/macros/form_macros.html.j2:170
-#: amt/site/templates/organizations/members.html.j2:33
+#: amt/site/templates/macros/form_macros.html.j2:168
+#: amt/site/templates/organizations/members.html.j2:34
 msgid "Yes"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:31
+#: amt/site/templates/algorithms/details_base.html.j2:29
 #: amt/site/templates/algorithms/new.html.j2:163
-#: amt/site/templates/macros/form_macros.html.j2:175
-#: amt/site/templates/organizations/members.html.j2:36
+#: amt/site/templates/macros/form_macros.html.j2:173
+#: amt/site/templates/organizations/members.html.j2:37
 msgid "No"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:50
+#: amt/site/templates/algorithms/details_base.html.j2:49
 msgid "Download as YAML"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_compliance.html.j2:36
+#: amt/site/templates/algorithms/details_compliance.html.j2:29
 msgid "measure executed"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_compliance.html.j2:69
-#: amt/site/templates/macros/editable.html.j2:68
-#: amt/site/templates/macros/editable.html.j2:73
+#: amt/site/templates/algorithms/details_compliance.html.j2:62
+#: amt/site/templates/macros/editable.html.j2:77
+#: amt/site/templates/macros/editable.html.j2:82
 #: amt/site/templates/macros/tasks.html.j2:98
 msgid "Edit"
 msgstr ""
@@ -430,7 +430,7 @@ msgid "Go to all requirements"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_info.html.j2:85
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:27
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:25
 msgid "Description"
 msgstr ""
 
@@ -460,18 +460,18 @@ msgstr ""
 msgid "To be implemented"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:37
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:35
 msgid "Read more on the algoritmekader"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:64
-#: amt/site/templates/macros/editable.html.j2:175
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:62
+#: amt/site/templates/macros/editable.html.j2:205
 msgid "Save"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_measure_modal.html.j2:68
-#: amt/site/templates/macros/editable.html.j2:180
-#: amt/site/templates/organizations/parts/add_members_modal.html.j2:26
+#: amt/site/templates/algorithms/details_measure_modal.html.j2:66
+#: amt/site/templates/macros/editable.html.j2:210
+#: amt/site/templates/organizations/parts/add_members_modal.html.j2:29
 msgid "Cancel"
 msgstr ""
 
@@ -514,6 +514,7 @@ msgid ""
 msgstr ""
 
 #: amt/site/templates/algorithms/new.html.j2:76
+#: amt/site/templates/macros/editable.html.j2:9
 msgid "Find your AI Act profile"
 msgstr ""
 
@@ -524,10 +525,6 @@ msgstr ""
 #: amt/site/templates/algorithms/new.html.j2:176
 #: amt/site/templates/parts/algorithm_search.html.j2:15
 msgid "Add algorithm"
-msgstr ""
-
-#: amt/site/templates/algorithms/new.html.j2:193
-msgid "Copy results and close"
 msgstr ""
 
 #: amt/site/templates/auth/profile.html.j2:10
@@ -642,11 +639,11 @@ msgstr ""
 msgid "Delete member"
 msgstr ""
 
-#: amt/site/templates/macros/form_macros.html.j2:152
+#: amt/site/templates/macros/form_macros.html.j2:153
 msgid "Delete file"
 msgstr ""
 
-#: amt/site/templates/macros/form_macros.html.j2:159
+#: amt/site/templates/macros/form_macros.html.j2:157
 msgid "Are you sure you want to delete"
 msgstr ""
 
@@ -670,7 +667,7 @@ msgstr ""
 msgid "Modified at"
 msgstr ""
 
-#: amt/site/templates/organizations/members.html.j2:24
+#: amt/site/templates/organizations/members.html.j2:25
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:8
 msgid "Close"
 msgstr ""
@@ -822,11 +819,11 @@ msgstr ""
 msgid "This page is yet to be build."
 msgstr ""
 
-#: amt/site/templates/parts/algorithm_search.html.j2:62
+#: amt/site/templates/parts/algorithm_search.html.j2:64
 msgid "Category"
 msgstr ""
 
-#: amt/site/templates/parts/algorithm_search.html.j2:83
+#: amt/site/templates/parts/algorithm_search.html.j2:85
 msgid "Group by"
 msgstr ""
 

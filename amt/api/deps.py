@@ -152,6 +152,15 @@ def hasattr_jinja(obj: object, attributes: str) -> bool:
     return True
 
 
+def equal_or_includes(my_value: str, check_against_value: str | list[str] | tuple[str]) -> bool:
+    """Test if my_value equals or exists in check_against_value"""
+    if isinstance(check_against_value, list | tuple):
+        return my_value in check_against_value
+    elif isinstance(check_against_value, str):
+        return my_value == check_against_value
+    return False
+
+
 templates = LocaleJinja2Templates(
     directory="amt/site/templates/", context_processors=[custom_context_processor], undefined=get_undefined_behaviour()
 )
@@ -172,5 +181,7 @@ templates.env.globals.update(is_path_with_list=is_path_with_list)  # pyright: ig
 templates.env.globals.update(is_parent_editable=is_parent_editable)  # pyright: ignore [reportUnknownMemberType]
 templates.env.globals.update(resolve_resource_list_path=resolve_resource_list_path)  # pyright: ignore [reportUnknownMemberType]
 templates.env.globals.update(get_localized_value=get_localized_value)  # pyright: ignore [reportUnknownMemberType]
+# env tests allows for usage in templates like: if value is test_name(other_value)
 templates.env.tests["permission"] = permission  # pyright: ignore [reportUnknownMemberType]
+templates.env.tests["equal_or_includes"] = equal_or_includes  # pyright: ignore [reportUnknownMemberType]
 templates.env.add_extension("jinja2_base64_filters.Base64Filters")  # pyright: ignore [reportUnknownMemberType]
