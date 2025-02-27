@@ -2,13 +2,6 @@
 {% import "macros/form_macros.html.j2" as macros with context %}
 {% block detail_content %}
     <div class="rvo-accordion">
-        <div id="measure-modal" class="minbzk-modal display-none">
-            <div class="modal-underlay" onclick="amt.closeModal('measure-modal')"></div>
-            <div class="modal-content rvo-layout-column rvo-layout-gap--md"
-                 style="height: auto">
-                <div id="dynamic-modal-content"></div>
-            </div>
-        </div>
         {% for (requirement, completed_measures_count, measures) in requirements_and_measures %}
             <details class="rvo-accordion__item">
                 <summary style="scroll-margin-top: 75px"
@@ -62,7 +55,7 @@
                                    hx-target="#dynamic-modal-content"
                                    hx-get="/algorithm/{{ algorithm_id }}/measure/{{ measure.urn }}?requirement_urn={{ requirement.urn }}"
                                    hx-swap="innerHTML"
-                                   onclick="amt.openModal('measure-modal')">
+                                   onclick="amt.openModal('modal')">
                                     <span class="utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
                                           role="img"
                                           aria-label="Home"></span>
