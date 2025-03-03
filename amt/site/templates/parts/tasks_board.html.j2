@@ -31,13 +31,6 @@
         </div>
     </div>
 {% endif %}
-<div id="measure-modal" class="minbzk-modal display-none">
-    <div class="modal-underlay" onclick="amt.closeModal('measure-modal')"></div>
-    <div class="modal-content rvo-layout-column rvo-layout-gap--md"
-         style="height: auto">
-        <div id="dynamic-modal-content"></div>
-    </div>
-</div>
 <div class="container margin-top-large">
     <form id="cardMovedForm"
           hx-patch="/algorithm/{{ algorithm_id }}/move_task"
