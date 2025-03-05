@@ -28,6 +28,7 @@ class AuthorizationRepository:
     async def init_session(self) -> None:
         if self.session is None:
             self.session = await get_session_non_generator()
+        logger.debug(f"Repository {self.__class__.__name__} using session ID: {self.session.info.get('id', 'unknown')}")
 
     async def get_user(self, user_id: UUID) -> User | None:
         try:

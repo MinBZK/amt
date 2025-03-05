@@ -1,19 +1,17 @@
 import logging
-from collections.abc import Sequence
 from enum import Enum
-from os import PathLike
 from pyclbr import Class
-from typing import Any, AnyStr, TypeVar
+from typing import TypeVar
 
-from fastapi import Request
-from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
-from jinja2 import Environment, StrictUndefined, Undefined
-from starlette.background import BackgroundTask
-from starlette.templating import _TemplateResponse  # pyright: ignore [reportPrivateUsage]
+from jinja2 import StrictUndefined, Undefined
+from starlette.requests import Request
 
-from amt.api.editable import is_editable_resource, is_parent_editable
-from amt.api.editable_util import replace_digits_in_brackets, resolve_resource_list_path
+from amt.api.editable_util import (
+    is_editable_resource,
+    is_parent_editable,
+    replace_digits_in_brackets,
+    resolve_resource_list_path,
+)
 from amt.api.http_browser_caching import url_for_cache
 from amt.api.localizable import LocalizableEnum
 from amt.api.navigation import NavigationItem, get_main_menu
@@ -25,6 +23,7 @@ from amt.api.routes.shared import (
     nested_enum_value,
     nested_value,
 )
+from amt.api.template_classes import LocaleJinja2Templates
 from amt.core.authorization import AuthorizationVerb, get_user
 from amt.core.config import VERSION, get_settings
 from amt.core.internationalization import (
@@ -33,8 +32,6 @@ from amt.core.internationalization import (
     get_current_translation,
     get_dynamic_field_translations,
     get_requested_language,
-    get_supported_translation,
-    get_translation,
     supported_translations,
     time_ago,
 )
@@ -76,51 +73,6 @@ def permission(permission: str, verb: AuthorizationVerb, permissions: dict[str, 
         authorized = True
 
     return authorized
-
-
-# we use a custom override so we can add the translation per request, which is parsed in the Request object in kwargs
-class LocaleJinja2Templates(Jinja2Templates):
-    def _create_env(
-        self,
-        directory: str | PathLike[AnyStr] | Sequence[str | PathLike[AnyStr]],
-        **env_options: Any,  # noqa: ANN401
-    ) -> Environment:
-        env: Environment = super()._create_env(directory, **env_options)  # pyright: ignore [reportUnknownMemberType, reportUnknownVariableType, reportArgumentType]
-        env.add_extension("jinja2.ext.i18n")  # pyright: ignore [reportUnknownMemberType]
-        return env  # pyright: ignore [reportUnknownVariableType]
-
-    def TemplateResponse(  # pyright: ignore [reportIncompatibleMethodOverride]
-        self,
-        request: Request,
-        name: str,
-        context: dict[str, Any] | None = None,
-        status_code: int = 200,
-        headers: dict[str, str] | None = None,
-        media_type: str | None = None,
-        background: BackgroundTask | None = None,
-    ) -> _TemplateResponse:
-        content_language = get_supported_translation(get_requested_language(request))
-        translations = get_translation(content_language)
-        if headers is None:
-            headers = {}
-        headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
-        if "Content-Language" not in headers:
-            headers["Content-Language"] = ",".join(supported_translations)
-        self.env.install_gettext_translations(translations, newstyle=True)  # pyright: ignore [reportUnknownMemberType]
-
-        if context is None:
-            context = {}
-
-        if hasattr(request.state, "csrftoken"):
-            context["csrftoken"] = request.state.csrftoken
-        else:
-            context["csrftoken"] = ""
-
-        return super().TemplateResponse(request, name, context, status_code, headers, media_type, background)
-
-    def Redirect(self, request: Request, url: str) -> HTMLResponse:
-        headers = {"HX-Redirect": url}
-        return self.TemplateResponse(request, "redirect.html.j2", headers=headers)
 
 
 def instance(obj: Class, type_string: str) -> bool:

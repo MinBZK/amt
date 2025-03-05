@@ -1,0 +1,62 @@
+<h1 class="utrecht-heading-1">{% trans %}Update requirements and measures{% endtrans %}</h1>
+<p>
+    {% trans %}Changing the AI-Act profile will lead to the following changes in requirements and measures.{% endtrans %}
+</p>
+{% if added_requirements|length > 0 %}
+    <h2 class="utrecht-heading-2 margin-bottom-small margin-top-large">{% trans %}New requirements{% endtrans %}</h2>
+    <ul class="rvo-item-list">
+        {% for requirement in added_requirements %}
+            <li class="rvo-item-list__item">
+                <div class="rvo-layout-row rvo-layout-gap--sm">
+                    <div class="rvo-status-indicator rvo-status-indicator--groen"></div>
+                    <span>{{ requirement.name }}</span>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% if removed_requirements|length > 0 %}
+    <h2 class="utrecht-heading-2 margin-bottom-small margin-top-large">{% trans %}Removed requirements{% endtrans %}</h2>
+    <ul class="rvo-item-list">
+        {% for requirement in removed_requirements %}
+            <li class="rvo-item-list__item">
+                <div class="rvo-layout-row rvo-layout-gap--sm">
+                    <div class="rvo-status-indicator rvo-status-indicator--rood"></div>
+                    <span>{{ requirement.name }}</span>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% if added_measures|length > 0 %}
+    <h2 class="utrecht-heading-2 margin-bottom-small margin-top-large">{% trans %}New measures{% endtrans %}</h2>
+    <ul class="rvo-item-list">
+        {% for measure in added_measures %}
+            <li class="rvo-item-list__item">
+                <div class="rvo-layout-row rvo-layout-gap--sm">
+                    <div class="rvo-status-indicator rvo-status-indicator--groen"></div>
+                    <span>{{ measure.name }}</span>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% if removed_measures|length > 0 %}
+    <h2 class="utrecht-heading-2 margin-bottom-small margin-top-large">{% trans %}Removed measures{% endtrans %}</h2>
+    <ul class="rvo-item-list">
+        {% for measure in removed_measures %}
+            <li class="rvo-item-list__item">
+                <div class="rvo-layout-row rvo-layout-gap--sm">
+                    <div class="rvo-status-indicator rvo-status-indicator--rood"></div>
+                    <span>{{ measure.name }}</span>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+<div class="margin-top-large">
+    <button class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
+            onclick="amt.updateFormStateAndSubmit('{{ new_values["form-id"] }}','CONFIRM_SAVE'); amt.closeAndResetDynamicModal('modal'); return false;">
+        {% trans %}Apply changes{% endtrans %}
+    </button>
+</div>

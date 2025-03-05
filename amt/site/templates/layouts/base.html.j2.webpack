@@ -39,7 +39,7 @@
     {% block footer %}
     {% endblock %}
 
-    <!-- reusable modal, titel is missing but preferable we use one-modal-for-all-modal-actions -->
+    <!-- reusable modal, titel is missing but preferably we use one-modal-for-all-modal-actions -->
     <div id="modal" class="minbzk-modal display-none">
       <div class="modal-underlay" onclick="amt.closeAndResetDynamicModal('modal')"></div>
       <div class="modal-content-container">

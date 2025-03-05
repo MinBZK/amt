@@ -3,14 +3,13 @@ from collections.abc import Sequence
 from typing import Annotated
 
 from fastapi import Depends
-from sqlalchemy import and_, select, update
+from sqlalchemy import and_, delete, desc, select, update
 from sqlalchemy.exc import NoResultFound
-from sqlalchemy.ext.asyncio import AsyncSession
 
 from amt.core.exceptions import AMTRepositoryError
 from amt.enums.tasks import Status, TaskType
 from amt.models import Task
-from amt.repositories.deps import get_session
+from amt.repositories.deps import AsyncSessionWithCommitFlag, get_session
 from amt.schema.measure import MeasureTask
 
 logger = logging.getLogger(__name__)
@@ -21,8 +20,9 @@ class TasksRepository:
     The TasksRepository provides access to the repository layer.
     """
 
-    def __init__(self, session: Annotated[AsyncSession, Depends(get_session)]) -> None:
+    def __init__(self, session: Annotated[AsyncSessionWithCommitFlag, Depends(get_session)]) -> None:
         self.session = session
+        logger.debug(f"Repository {self.__class__.__name__} using session ID: {self.session.info.get('id', 'unknown')}")
 
     async def find_all(self) -> Sequence[Task]:
         """
@@ -59,14 +59,9 @@ class TasksRepository:
         :param task: the task to store
         :return: the updated task after storing
         """
-        try:
-            self.session.add(task)
-            await self.session.commit()
-            await self.session.refresh(task)
-        except Exception as e:
-            logger.exception("Could not store task")
-            await self.session.rollback()
-            raise AMTRepositoryError from e
+        self.session.add(task)
+        await self.session.flush()
+        self.session.should_commit = True
         return task
 
     async def save_all(self, tasks: Sequence[Task]) -> None:
@@ -75,13 +70,9 @@ class TasksRepository:
         :param tasks: the tasks to store
         :return: the updated tasks after storing
         """
-        try:
-            self.session.add_all(tasks)
-            await self.session.commit()
-        except Exception as e:
-            logger.exception("Could not store all tasks")
-            await self.session.rollback()
-            raise AMTRepositoryError from e
+        self.session.add_all(tasks)
+        await self.session.flush()
+        self.session.should_commit = True
 
     async def delete(self, task: Task) -> None:
         """
@@ -89,14 +80,9 @@ class TasksRepository:
         :param task: the task to store
         :return: the updated task after storing
         """
-        try:
-            await self.session.delete(task)
-            await self.session.commit()
-        except Exception as e:
-            logger.exception("Could not delete task")
-            await self.session.rollback()
-            raise AMTRepositoryError from e
-        return None
+        await self.session.delete(task)
+        await self.session.flush()
+        self.session.should_commit = True
 
     async def find_by_id(self, task_id: int) -> Task:
         """
@@ -111,20 +97,43 @@ class TasksRepository:
             logger.exception("Task not found")
             raise AMTRepositoryError from e
 
-    async def add_tasks(self, algorithm_id: int, task_type: TaskType, tasks: list[MeasureTask]) -> None:
-        insert_list = [
-            Task(
-                title="",
-                description="",
-                algorithm_id=algorithm_id,
-                type_id=task.urn,
-                type=task_type,
-                status_id=Status.TODO,
-                sort_order=(idx * 10),
+    async def get_last_task(self, algorithm_id: int) -> Task | None:
+        statement = select(Task).where(Task.algorithm_id == algorithm_id).order_by(desc(Task.sort_order)).limit(1)
+        return (await self.session.execute(statement)).scalar_one_or_none()
+
+    async def add_tasks(
+        self, algorithm_id: int, task_type: TaskType, tasks: list[MeasureTask], start_at: float = 0
+    ) -> None:
+        if tasks:
+            insert_list = [
+                Task(
+                    title="",
+                    description="",
+                    algorithm_id=algorithm_id,
+                    type_id=task.urn,
+                    type=task_type,
+                    status_id=Status.TODO,
+                    sort_order=(start_at + idx * 10),
+                )
+                for idx, task in enumerate(tasks)
+            ]
+            await self.save_all(insert_list)
+            self.session.should_commit = True
+
+    async def remove_tasks(self, algorithm_id: int, task_type: TaskType, tasks: list[MeasureTask]) -> None:
+        task_urns = [task.urn for task in tasks]
+        if task_urns:
+            statement = (
+                delete(Task)
+                .where(Task.type_id.in_(task_urns))
+                .where(Task.algorithm_id == algorithm_id)
+                .where(Task.type == task_type)
             )
-            for idx, task in enumerate(tasks)
-        ]
-        await self.save_all(insert_list)
+            # reminder: session.execute does NOT commit changes
+            # this repository uses the get_session which commits for us
+            delete_result = await self.session.execute(statement)
+            logger.info(f"Removed {delete_result.rowcount} tasks for algorithm_id = {algorithm_id}")
+            self.session.should_commit = True
 
     async def find_by_algorithm_id_and_type(self, algorithm_id: int, task_type: TaskType | None) -> Sequence[Task]:
         statement = select(Task).where(Task.algorithm_id == algorithm_id)
@@ -146,3 +155,4 @@ class TasksRepository:
             .values(status_id=status)
         )
         await self.session.execute(statement)
+        self.session.should_commit = True

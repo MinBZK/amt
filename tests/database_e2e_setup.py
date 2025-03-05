@@ -1,13 +1,13 @@
 from amt.api.lifecycles import Lifecycles
 from amt.enums.tasks import Status
 from amt.models import Algorithm, Organization
-from sqlalchemy.ext.asyncio.session import AsyncSession
+from amt.repositories.deps import AsyncSessionWithCommitFlag
 
 from tests.constants import default_algorithm_with_lifecycle, default_task, default_user
 from tests.database_test_utils import DatabaseTestUtils
 
 
-async def setup_database_e2e(session: AsyncSession) -> None:
+async def setup_database_e2e(session: AsyncSessionWithCommitFlag) -> None:
     db_e2e = DatabaseTestUtils(session)
 
     await db_e2e.given([default_user()])
