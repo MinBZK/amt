@@ -1,6 +1,11 @@
+import logging
 import re
-from enum import StrEnum
-from typing import Any, Final
+from abc import ABC, abstractmethod
+from enum import Enum, StrEnum, auto
+from typing import Any, Final, cast
+
+from fastapi import Request
+from starlette.responses import HTMLResponse
 
 from amt.api.editable_converters import (
     EditableConverter,
@@ -8,11 +13,86 @@ from amt.api.editable_converters import (
 from amt.api.editable_enforcers import EditableEnforcer
 from amt.api.editable_validators import EditableValidator
 from amt.api.editable_value_providers import EditableValuesProvider
+from amt.api.template_classes import LocaleJinja2Templates
 from amt.models.base import Base
 from amt.schema.webform import WebFormFieldImplementationTypeFields, WebFormOption
 
 type EditableType = Editable
+type FormStateType = FormState
 type ResolvedEditableType = ResolvedEditable
+
+logger = logging.getLogger(__name__)
+
+
+class FormState(Enum):
+    """
+    The FormState is used to streamline the form flow for
+    the inline editor. States can have a hook attacked to it, which is
+    registered in the Editable object.
+    """
+
+    VALIDATE = auto()
+    PRE_CONFIRM = auto()
+    CONFIRM_SAVE = auto()
+    PRE_SAVE = auto()
+    SAVE = auto()
+    POST_SAVE = auto()
+    COMPLETED = auto()
+
+    @classmethod
+    def pre_save_states(cls) -> frozenset[FormStateType]:
+        return frozenset({cls.PRE_CONFIRM, cls.CONFIRM_SAVE, cls.PRE_SAVE})
+
+    @classmethod
+    def post_save_states(cls) -> frozenset[FormStateType]:
+        return frozenset({cls.POST_SAVE, cls.COMPLETED})
+
+    def is_before_save(self) -> bool:
+        return self in self.pre_save_states()
+
+    def is_validate(self) -> bool:
+        return self == self.VALIDATE
+
+    def is_after_save(self) -> bool:
+        return self in self.post_save_states()
+
+    def is_save(self) -> bool:
+        return self == self.SAVE
+
+    @classmethod
+    def get_next_state(cls, state: FormStateType) -> FormStateType:
+        if state.value >= cls.COMPLETED.value:
+            return cls.COMPLETED
+        next_state = cls(state.value + 1)
+        logger.info(f"FormState is moving to next state: {next_state}")
+        return next_state
+
+    @classmethod
+    def all_states_after(cls, state: FormStateType) -> list[FormStateType]:
+        return [s for s in cls if s.value > state.value]
+
+    @classmethod
+    def from_string(cls, state_name: str) -> FormStateType:
+        try:
+            return cast(FormState, cls[state_name])
+        except KeyError as e:
+            raise ValueError(f"Invalid state name: {state_name}") from e
+
+
+class EditableHook(ABC):
+    """
+    Hooks can be used to run a function at a specific moment in the FormState flow.
+    """
+
+    @abstractmethod
+    async def execute(
+        self,
+        request: Request,
+        templates: LocaleJinja2Templates,
+        editable: ResolvedEditableType,
+        editable_context: dict[str, str | dict[str, str]],
+    ) -> HTMLResponse | None:
+        pass
 
 
 class Editable:
@@ -37,23 +117,25 @@ class Editable:
         full_resource_path: str,
         implementation_type: WebFormFieldImplementationTypeFields,
         values_provider: EditableValuesProvider | None = None,
-        couples: set[EditableType] | None = None,
+        couples: list[EditableType] | None = None,
         children: list[EditableType] | None = None,
         converter: EditableConverter | None = None,
         enforcer: EditableEnforcer | None = None,
         validator: EditableValidator | None = None,
+        hooks: dict[FormState, EditableHook] | None = None,
         # TODO: determine if relative resource path is really required for editable
         relative_resource_path: str | None = None,
     ) -> None:
         self.full_resource_path = full_resource_path
         self.implementation_type = implementation_type
         self.values_provider = values_provider
-        self.couples = set[EditableType]() if couples is None else couples
+        self.couples = list[EditableType]() if couples is None else couples
         self.children = list[EditableType]() if children is None else children
         self.converter = converter
         self.enforcer = enforcer
         self.validator = validator
         self.relative_resource_path = relative_resource_path
+        self.hooks = hooks
 
     def add_bidirectional_couple(self, target: EditableType) -> None:
         """
@@ -63,16 +145,8 @@ class Editable:
         :param target: the target editable type
         :return: None
         """
-        self.couples.add(target)
-        target.couples.add(self)
-
-    def add_child(self, target: EditableType) -> None:
-        """
-        An editable can be a container (parent) for other elements.
-        :param target: the target editable type
-        :return: None
-        """
-        self.children.append(target)
+        self.couples.append(target)
+        target.couples.append(self)
 
 
 class ResolvedEditable:
@@ -88,7 +162,7 @@ class ResolvedEditable:
         full_resource_path: str,
         implementation_type: WebFormFieldImplementationTypeFields,
         values_provider: EditableValuesProvider | None = None,
-        couples: set[ResolvedEditableType] | None = None,
+        couples: list[ResolvedEditableType] | None = None,
         children: list[ResolvedEditableType] | None = None,
         converter: EditableConverter | None = None,
         enforcer: EditableEnforcer | None = None,
@@ -97,11 +171,12 @@ class ResolvedEditable:
         value: str | None = None,
         resource_object: Base | None = None,
         relative_resource_path: str | None = None,
+        hooks: dict[FormState, EditableHook] | None = None,
     ) -> None:
         self.full_resource_path = full_resource_path
         self.implementation_type = implementation_type
         self.values_provider = values_provider
-        self.couples = set[ResolvedEditableType]() if couples is None else couples
+        self.couples = list[ResolvedEditableType]() if couples is None else couples
         self.children = list[ResolvedEditableType]() if children is None else children
         self.converter = converter
         self.enforcer = enforcer
@@ -110,6 +185,8 @@ class ResolvedEditable:
         self.value = value
         self.resource_object = resource_object
         self.relative_resource_path = relative_resource_path
+        self.hooks = hooks
+        self.form_options = []
 
     def last_path_item(self) -> str:
         return self.full_resource_path.split("/")[-1]
@@ -121,6 +198,41 @@ class ResolvedEditable:
         if self.relative_resource_path is not None:
             return re.sub(r"[\[\]/*]", "_", self.relative_resource_path)  # pyright: ignore[reportUnknownVariableType, reportCallIssue]
         raise ValueError("Can not convert path to save html path as it is None")
+
+    def has_hook(self, state: FormState) -> bool:
+        if self.hooks is None:
+            return False
+        return state in self.hooks
+
+    def get_hook(self, state: FormState) -> EditableHook | None:
+        if self.hooks is None:
+            return None
+        return self.hooks.get(state)
+
+    async def run_hook(
+        self,
+        state: FormState,
+        request: Request,
+        templates: LocaleJinja2Templates,
+        editable: ResolvedEditableType,
+        editable_context: dict[str, str | dict[str, str]],
+    ) -> HTMLResponse | None:
+        if self.hooks is not None and self.has_hook(state):
+            logger.debug(f"Running hook for state {state} for editable {self.full_resource_path}")
+            return await self.hooks[state].execute(request, templates, editable, editable_context)
+        return None
+
+    async def validate(self, editable_context: dict[str, Any]) -> None:
+        # TODO: there may be cases, when validating couples, that a couple raises a validation error
+        #  but because it is not part of the current form, we can not display the error, so an error
+        #  from a coupled field, should be displayed in its current editable error path (last_path_item).
+        editables_to_validate = [self] + (self.couples or []) + (self.children or [])
+        for editable in editables_to_validate:
+            new_value = editable_context.get("new_values", {}).get(editable.last_path_item())
+            if editable.validator and editable.relative_resource_path is not None:
+                await editable.validator.validate(new_value, editable)  # pyright: ignore[reportUnknownMemberType]
+            if editable.enforcer:
+                await editable.enforcer.enforce(**editable_context)
 
 
 class EditModes(StrEnum):

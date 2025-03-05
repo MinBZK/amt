@@ -5,14 +5,13 @@ from uuid import UUID
 
 from fastapi import Depends
 from sqlalchemy import func, select
-from sqlalchemy.exc import NoResultFound, SQLAlchemyError
-from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.exc import NoResultFound
 from sqlalchemy_utils import escape_like  # pyright: ignore[reportMissingTypeStubs, reportUnknownVariableType]
 
 from amt.api.risk_group import RiskGroup
 from amt.core.exceptions import AMTRepositoryError
 from amt.models import Algorithm, Organization, User
-from amt.repositories.deps import get_session
+from amt.repositories.deps import AsyncSessionWithCommitFlag, get_session
 
 logger = logging.getLogger(__name__)
 
@@ -32,8 +31,9 @@ def sort_by_lifecycle_reversed(algorithm: Algorithm) -> int:
 
 
 class AlgorithmsRepository:
-    def __init__(self, session: Annotated[AsyncSession, Depends(get_session)]) -> None:
+    def __init__(self, session: Annotated[AsyncSessionWithCommitFlag, Depends(get_session)]) -> None:
         self.session = session
+        logger.debug(f"Repository {self.__class__.__name__} using session ID: {self.session.info.get('id', 'unknown')}")
 
     async def find_all(self) -> Sequence[Algorithm]:
         result = await self.session.execute(select(Algorithm).where(Algorithm.deleted_at.is_(None)))
@@ -45,24 +45,13 @@ class AlgorithmsRepository:
         :param status: the status to store
         :return: the updated status after storing
         """
-        try:
-            await self.session.delete(algorithm)
-            await self.session.commit()
-        except Exception as e:
-            logger.exception("Error deleting algorithm")
-            await self.session.rollback()
-            raise AMTRepositoryError from e
-        return None
+        await self.session.delete(algorithm)
+        self.session.should_commit = True
 
     async def save(self, algorithm: Algorithm) -> Algorithm:
-        try:
-            self.session.add(algorithm)
-            await self.session.commit()
-            await self.session.refresh(algorithm)
-        except SQLAlchemyError as e:
-            logger.exception("Error saving algorithm")
-            await self.session.rollback()
-            raise AMTRepositoryError from e
+        self.session.add(algorithm)
+        await self.session.flush()
+        self.session.should_commit = True
         return algorithm
 
     async def find_by_id(self, algorithm_id: int) -> Algorithm:

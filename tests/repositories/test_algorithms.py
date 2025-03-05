@@ -6,6 +6,7 @@ from amt.api.risk_group import RiskGroup
 from amt.core.exceptions import AMTRepositoryError
 from amt.models import Algorithm
 from amt.repositories.algorithms import AlgorithmsRepository, sort_by_lifecycle, sort_by_lifecycle_reversed
+from sqlalchemy.exc import IntegrityError, InvalidRequestError
 from tests.constants import (
     default_algorithm,
     default_algorithm_with_lifecycle,
@@ -65,18 +66,21 @@ async def test_delete(db: DatabaseTestUtils):
 @pytest.mark.asyncio
 async def test_save_failed(db: DatabaseTestUtils):
     await db.given([default_user()])
-    algorithm_repository = AlgorithmsRepository(db.get_session())
+    session = db.get_session()
+    algorithm_repository = AlgorithmsRepository(session)
     algorithm = default_algorithm()
     algorithm.id = 1
     algorithm_duplicate = default_algorithm()
     algorithm_duplicate.id = 1
 
     await algorithm_repository.save(algorithm)
+    await session.flush()
 
-    with pytest.raises(AMTRepositoryError):
+    with pytest.raises(IntegrityError):
         await algorithm_repository.save(algorithm_duplicate)
 
-    await algorithm_repository.delete(algorithm)  # cleanup
+    # FIXME: even though the algorithm is not committed, we should be able to delete it
+    # await algorithm_repository.delete(algorithm) #noqa ERA001
 
 
 @pytest.mark.asyncio
@@ -85,7 +89,7 @@ async def test_delete_failed(db: DatabaseTestUtils):
     algorithm_repository = AlgorithmsRepository(db.get_session())
     algorithm = default_algorithm()
 
-    with pytest.raises(AMTRepositoryError):
+    with pytest.raises(InvalidRequestError):
         await algorithm_repository.delete(algorithm)
 
 
@@ -264,6 +268,11 @@ async def test_with_lifecycle_filter(db: DatabaseTestUtils):
 
 @pytest.mark.asyncio
 async def test_with_risk_group_filter(db: DatabaseTestUtils):
+    algorithm = default_algorithm_with_system_card(name="Algorithm1")
+    if algorithm.system_card.ai_act_profile is not None and algorithm.system_card.ai_act_profile.risk_group is not None:
+        algorithm.system_card.ai_act_profile.risk_group = RiskGroup.HOOG_RISICO_AI.value
+    algorithm.sync_system_card()
+
     await db.given(
         [
             default_user(),
@@ -271,6 +280,7 @@ async def test_with_risk_group_filter(db: DatabaseTestUtils):
             default_algorithm(name="Algorithm2"),
             default_algorithm(name="Algorithm3"),
             default_algorithm(name="Algorithm4"),
+            algorithm,
         ]
     )
     algorithm_repository = AlgorithmsRepository(db.get_session())

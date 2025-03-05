@@ -2,9 +2,7 @@ from collections.abc import Callable
 from enum import Enum
 
 import pytest
-from amt.api.deps import (
-    custom_context_processor,
-)
+from amt.api.deps import custom_context_processor
 from amt.api.localizable import LocalizableEnum
 from amt.api.routes.shared import get_nested, is_nested_enum, nested_enum, nested_enum_value, nested_value
 from amt.core.config import VERSION

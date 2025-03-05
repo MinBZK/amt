@@ -50,7 +50,7 @@ msgstr "Rol"
 
 #: amt/api/group_by_category.py:15
 #: amt/site/templates/algorithms/details_info.html.j2:97
-#: amt/site/templates/algorithms/new.html.j2:41
+#: amt/site/templates/algorithms/new.html.j2:42
 #: amt/site/templates/macros/tasks.html.j2:80
 #: amt/site/templates/parts/algorithm_search.html.j2:48
 #: amt/site/templates/parts/filter_list.html.j2:71
@@ -343,10 +343,8 @@ msgstr ""
 "'{field}'. Controleer de instellingen en probeer het opnieuw."
 
 #: amt/core/exceptions.py:28
-msgid ""
-"An internal server error occurred while processing your request. Please "
-"try again later."
-msgstr "Er is een fout opgetreden. Probeer het later opnieuw."
+msgid "An unexpected error occurred while trying to persist your changes."
+msgstr "Er is een onverwachte fout opgetreden bij het opslaan van uw wijzigingen."
 
 #: amt/core/exceptions.py:34
 msgid "An error occurred while processing the instrument. Please try again later."
@@ -398,6 +396,38 @@ msgstr ""
 "Er is iets fout gegaan tijdens het opslaan van uw bestand. Probeer het "
 "later opnieuw."
 
+#: amt/site/templates/algorithms/ai_act_changes_modal.html.j2:1
+msgid "Update requirements and measures"
+msgstr "Vereisten en maatregelen bijwerken"
+
+#: amt/site/templates/algorithms/ai_act_changes_modal.html.j2:3
+msgid ""
+"Changing the AI-Act profile will lead to the following changes in "
+"requirements and measures."
+msgstr ""
+"Het wijzigen van het AI-Act profiel zal leiden tot de volgende "
+"wijzigingen in vereisten en maatregelen"
+
+#: amt/site/templates/algorithms/ai_act_changes_modal.html.j2:6
+msgid "New requirements"
+msgstr "Nieuwe vereisten"
+
+#: amt/site/templates/algorithms/ai_act_changes_modal.html.j2:19
+msgid "Removed requirements"
+msgstr "Vervallen vereisten"
+
+#: amt/site/templates/algorithms/ai_act_changes_modal.html.j2:32
+msgid "New measures"
+msgstr "Nieuwe maatregelen"
+
+#: amt/site/templates/algorithms/ai_act_changes_modal.html.j2:45
+msgid "Removed measures"
+msgstr "Vervallen maatregelen"
+
+#: amt/site/templates/algorithms/ai_act_changes_modal.html.j2:60
+msgid "Apply changes"
+msgstr "Wijzigingen doorvoeren"
+
 #: amt/site/templates/algorithms/details_base.html.j2:13
 msgid "Delete algoritmic system"
 msgstr "Verwijder algoritme"
@@ -413,14 +443,14 @@ msgstr ""
 "                verwijderd."
 
 #: amt/site/templates/algorithms/details_base.html.j2:26
-#: amt/site/templates/algorithms/new.html.j2:153
+#: amt/site/templates/algorithms/new.html.j2:154
 #: amt/site/templates/macros/form_macros.html.j2:168
 #: amt/site/templates/organizations/members.html.j2:34
 msgid "Yes"
 msgstr "Ja"
 
 #: amt/site/templates/algorithms/details_base.html.j2:29
-#: amt/site/templates/algorithms/new.html.j2:163
+#: amt/site/templates/algorithms/new.html.j2:164
 #: amt/site/templates/macros/form_macros.html.j2:173
 #: amt/site/templates/organizations/members.html.j2:37
 msgid "No"
@@ -485,12 +515,12 @@ msgid "Read more on the algoritmekader"
 msgstr "Lees meer op het algoritmekader"
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:62
-#: amt/site/templates/macros/editable.html.j2:205
+#: amt/site/templates/macros/editable.html.j2:210
 msgid "Save"
 msgstr "Opslaan"
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:66
-#: amt/site/templates/macros/editable.html.j2:210
+#: amt/site/templates/macros/editable.html.j2:215
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:29
 msgid "Cancel"
 msgstr "Annuleren"
@@ -499,33 +529,33 @@ msgstr "Annuleren"
 msgid "Add an algorithm"
 msgstr "Algoritme toevoegen"
 
-#: amt/site/templates/algorithms/new.html.j2:26
+#: amt/site/templates/algorithms/new.html.j2:27
 #: amt/site/templates/parts/filter_list.html.j2:67
 #: amt/site/templates/parts/filter_list.html.j2:93
 msgid "Algorithm name"
 msgstr "Algoritme naam"
 
-#: amt/site/templates/algorithms/new.html.j2:30
+#: amt/site/templates/algorithms/new.html.j2:31
 msgid "Name of the algorithm"
 msgstr "Nieuw algoritme"
 
-#: amt/site/templates/algorithms/new.html.j2:44
+#: amt/site/templates/algorithms/new.html.j2:45
 msgid "Select the lifecycle your algorithm is currently in."
 msgstr "Selecteer de levenscyclus waarin uw algoritme zich momenteel bevindt."
 
-#: amt/site/templates/algorithms/new.html.j2:45
+#: amt/site/templates/algorithms/new.html.j2:46
 msgid "For more information on lifecycle, read the"
 msgstr "Lees voor meer meer informatie over levenscyclus het"
 
-#: amt/site/templates/algorithms/new.html.j2:48
+#: amt/site/templates/algorithms/new.html.j2:49
 msgid "Algorithm Framework"
 msgstr "Algoritmekader"
 
-#: amt/site/templates/algorithms/new.html.j2:67
+#: amt/site/templates/algorithms/new.html.j2:68
 msgid "AI Act Profile"
 msgstr "AI Verordening Profiel"
 
-#: amt/site/templates/algorithms/new.html.j2:69
+#: amt/site/templates/algorithms/new.html.j2:70
 msgid ""
 "The AI Act profile provides insight into, among other things, the type of"
 " AI system and the associated obligations from the European AI Act. If "
@@ -536,16 +566,16 @@ msgstr ""
 "onder andere het type AI systeem, de regelgeving die van toepassing is en"
 " de risicocategorie."
 
-#: amt/site/templates/algorithms/new.html.j2:76
+#: amt/site/templates/algorithms/new.html.j2:77
 #: amt/site/templates/macros/editable.html.j2:9
 msgid "Find your AI Act profile"
 msgstr "Vind uw AI Act profiel"
 
-#: amt/site/templates/algorithms/new.html.j2:112
+#: amt/site/templates/algorithms/new.html.j2:113
 msgid "Select Option"
 msgstr "Selecteer optie"
 
-#: amt/site/templates/algorithms/new.html.j2:176
+#: amt/site/templates/algorithms/new.html.j2:177
 #: amt/site/templates/parts/algorithm_search.html.j2:15
 msgid "Add algorithm"
 msgstr "Algoritme toevoegen"

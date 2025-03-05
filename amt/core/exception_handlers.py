@@ -49,6 +49,9 @@ async def general_exception_handler(request: Request, exc: Exception) -> HTMLRes
         response_headers["HX-Retarget"] = "#general-error-container"
     elif isinstance(exc, AMTRepositoryError | AMTHTTPException):
         message = exc.getmessage(translations)
+        # we assume a generic error div is targeted by id, so we want to replace the inner content
+        response_headers["HX-Reswap"] = "innerHTML"
+        response_headers["HX-Retarget"] = "#general-error-container"
     elif isinstance(exc, StarletteHTTPException):
         message = AMTNotFound().getmessage(translations) if exc.status_code == status.HTTP_404_NOT_FOUND else exc.detail
     elif isinstance(exc, RequestValidationError):
@@ -57,7 +60,7 @@ async def general_exception_handler(request: Request, exc: Exception) -> HTMLRes
         for err in message:
             err["msg"] = translate_pydantic_exception(err, translations)
         # Errors should be handled in appropriate "containers",
-        #  so we always want to replace to content and not the container
+        #  so we always want to replace the content and not the container
         response_headers["HX-Reswap"] = "innerHTML"
 
     status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
@@ -90,6 +93,7 @@ async def general_exception_handler(request: Request, exc: Exception) -> HTMLRes
             fallback_template_name,
             {"message": message},
             status_code=status_code,
+            headers=response_headers,
         )
 
     return response

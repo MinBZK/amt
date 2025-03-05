@@ -2,7 +2,7 @@
 <div class="rvo-layout-column rvo-layout-gap--xl">
     <div class="amt-flex-container">
         <h1 class="utrecht-heading-1 rvo-heading--no-margins">{% trans %}Add members{% endtrans %}</h1>
-        <a onclick="amt.closeAndResetDynamicModal('members-modal');">
+        <a onclick="amt.closeAndResetDynamicModal('modal');">
             <span class="amt-cursor-pointer utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--md rvo-icon--hemelblauw"
                   role="img"
                   aria-label="{% trans %}Close{% endtrans %}"></span></a>
@@ -25,7 +25,7 @@
                     class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
                     type="submit">{% trans %}Add members{% endtrans %}</button>
             <button class="utrecht-button utrecht-button--secondary-action utrecht-button--rvo-md"
-                    onclick="amt.closeAndResetDynamicModal('members-modal'); return false"
+                    onclick="amt.closeAndResetDynamicModal('modal'); return false"
                     type="button">{% trans %}Cancel{% endtrans %}</button>
         </p>
     </form>

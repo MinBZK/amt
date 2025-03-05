@@ -14,6 +14,7 @@ import pytest_asyncio
 import uvicorn
 import vcr  # pyright: ignore[reportMissingTypeStubs]
 from amt.models.base import Base
+from amt.repositories.deps import AsyncSessionWithCommitFlag
 from amt.server import create_app
 from httpx import ASGITransport, AsyncClient
 from playwright.sync_api import Browser, BrowserContext, Page
@@ -67,7 +68,7 @@ async def setup_db_and_server(
     async with engine.begin() as connection:
         await connection.run_sync(metadata.create_all)
 
-    async_session = async_sessionmaker(engine, expire_on_commit=False)
+    async_session = async_sessionmaker(engine, expire_on_commit=False, class_=AsyncSessionWithCommitFlag)
 
     async with async_session() as session:
         await setup_database_e2e(session)
@@ -243,7 +244,7 @@ async def db(
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
 
-    async_session = async_sessionmaker(engine, expire_on_commit=False)
+    async_session = async_sessionmaker(engine, expire_on_commit=False, class_=AsyncSessionWithCommitFlag)
     async with async_session() as session:
         yield DatabaseTestUtils(session, database_file)
 

@@ -1,21 +1,21 @@
 import logging
-import typing
+from collections.abc import Generator
 from typing import Any, cast
 
 from starlette.requests import Request
 
-from amt.api.editable_classes import Editable, EditableType, EditModes, ResolvedEditable
+from amt.api.editable_classes import Editable, EditableType, EditModes, FormState, ResolvedEditable
 from amt.api.editable_converters import EditableConverterForOrganizationInAlgorithm, StatusConverterForSystemcard
 from amt.api.editable_enforcers import EditableEnforcerForOrganizationInAlgorithm
+from amt.api.editable_hooks import PreConfirmAIActHook, RedirectOrganizationHook, UpdateAIActHook
 from amt.api.editable_util import (
-    extract_number_and_string,
-    replace_digits_in_brackets,
     replace_wildcard_with_digits_in_brackets,
 )
 from amt.api.editable_validators import EditableValidatorMinMaxLength, EditableValidatorSlug
 from amt.api.editable_value_providers import AIActValuesProvider
 from amt.api.lifecycles import get_localized_lifecycles
 from amt.api.routes.shared import nested_value
+from amt.api.update_utils import extract_number_and_string, set_path
 from amt.api.utils import SafeDict
 from amt.core.exceptions import AMTNotFound
 from amt.models import Algorithm, Organization
@@ -269,11 +269,13 @@ class Editables:
         full_resource_path="organization/{organization_id}/slug",
         implementation_type=WebFormFieldImplementationType.TEXT,
         validator=EditableValidatorSlug(),
+        hooks={FormState.POST_SAVE: RedirectOrganizationHook()},
     )
 
     ALGORITHM_EDITABLE_AIACT = Editable(
         full_resource_path="algorithm/{algorithm_id}/system_card/ai_act_profile",
         implementation_type=WebFormFieldImplementationType.PARENT,
+        hooks={FormState.PRE_CONFIRM: PreConfirmAIActHook(), FormState.POST_SAVE: UpdateAIActHook()},
         children=[
             Editable(
                 full_resource_path="algorithm/{algorithm_id}/system_card/ai_act_profile/role",
@@ -315,7 +317,7 @@ class Editables:
 
     # TODO: rethink if this is a wise solution.. we do this to keep all elements in 1 class and still
     #  be able to execute other code (like making relationships)
-    def __iter__(self) -> typing.Generator[tuple[str, Any], Any, Any]:
+    def __iter__(self) -> Generator[tuple[str, Any], Any, Any]:
         yield from [
             getattr(self, attr) for attr in dir(self) if not attr.startswith("__") and not callable(getattr(self, attr))
         ]
@@ -458,7 +460,7 @@ def get_resolved_editables(context_variables: dict[str, str | int]) -> dict[str,
     ) -> ResolvedEditable:
         couples = None
         if include_couples:
-            couples = {resolve_editable_path(couple, context_variables, False) for couple in editable.couples}
+            couples = [resolve_editable_path(couple, context_variables, False) for couple in editable.couples]
         children = [resolve_editable_path(child, context_variables, True) for child in editable.children]
 
         full_resource_path = editable.full_resource_path.format_map(SafeDict(context_variables))
@@ -481,6 +483,7 @@ def get_resolved_editables(context_variables: dict[str, str | int]) -> dict[str,
             converter=editable.converter,
             enforcer=editable.enforcer,
             validator=editable.validator,
+            hooks=editable.hooks,
         )
 
     editables_resolved: list[ResolvedEditable] = []
@@ -494,6 +497,7 @@ def get_resolved_editables(context_variables: dict[str, str | int]) -> dict[str,
     return {editable.full_resource_path: editable for editable in editables_resolved}
 
 
+# TODO: this probably should be a method of ResolvedEditable
 async def save_editable(  # noqa: C901
     editable: ResolvedEditable,
     editable_context: dict[str, Any],
@@ -516,7 +520,6 @@ async def save_editable(  # noqa: C901
         new_value = editable_context.get("new_values", {}).get(editable.last_path_item())
 
         # we validate on 'raw' form fields, so validation is done before the converter
-        # TODO: validate all fields (child and couples) before saving!
         if editable.validator and editable.relative_resource_path is not None:
             await editable.validator.validate(new_value, editable)  # pyright: ignore[reportUnknownMemberType]
 
@@ -566,45 +569,3 @@ async def save_editable(  # noqa: C901
                 raise AMTNotFound()
 
     return editable
-
-
-def set_path(obj: dict[str, Any] | object, path: str, value: typing.Any) -> None:  # noqa: ANN401, C901
-    if not path:
-        raise ValueError("Path cannot be empty")
-
-    attrs = path.lstrip("/").split("/")
-    for attr in attrs[:-1]:
-        attr, index = extract_number_and_string(attr)
-        if isinstance(obj, dict):
-            obj = cast(dict[str, Any], obj)
-            if attr not in obj:
-                obj[attr] = {}
-            obj = obj[attr]
-        else:
-            if not hasattr(obj, attr):  # pyright: ignore[reportUnknownArgumentType]
-                setattr(obj, attr, {})  # pyright: ignore[reportUnknownArgumentType]
-            obj = getattr(obj, attr)  # pyright: ignore[reportUnknownArgumentType]
-        if obj and index is not None:
-            obj = cast(list[Any], obj)[index]  # pyright: ignore[reportArgumentType, reportUnknownVariableType, reportUnknownArgumentType]
-
-    if isinstance(obj, dict):
-        obj[attrs[-1]] = value
-    else:
-        attr, index = extract_number_and_string(attrs[-1])
-        if index is not None:
-            cast(list[Any], getattr(obj, attr))[index] = value
-        else:
-            setattr(obj, attrs[-1], value)
-
-
-def is_editable_resource(full_resource_path: str, editables: dict[str, ResolvedEditable]) -> bool:
-    return editables.get(replace_digits_in_brackets(full_resource_path), None) is not None
-
-
-def is_parent_editable(editables: dict[str, ResolvedEditable], full_resource_path: str) -> bool:
-    full_resource_path = replace_digits_in_brackets(full_resource_path)
-    editable = editables.get(full_resource_path)
-    if editable is None:
-        return False
-    result = editable.implementation_type == WebFormFieldImplementationType.PARENT
-    return result

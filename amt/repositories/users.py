@@ -6,13 +6,12 @@ from uuid import UUID
 from fastapi import Depends
 from sqlalchemy import func, select
 from sqlalchemy.exc import NoResultFound, SQLAlchemyError
-from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import lazyload
 from sqlalchemy_utils import escape_like  # pyright: ignore[reportMissingTypeStubs, reportUnknownVariableType]
 
 from amt.core.exceptions import AMTRepositoryError
 from amt.models import Organization, User
-from amt.repositories.deps import get_session
+from amt.repositories.deps import AsyncSessionWithCommitFlag, get_session
 
 logger = logging.getLogger(__name__)
 
@@ -22,8 +21,9 @@ class UsersRepository:
     The UsersRepository provides access to the repository layer.
     """
 
-    def __init__(self, session: Annotated[AsyncSession, Depends(get_session)]) -> None:
+    def __init__(self, session: Annotated[AsyncSessionWithCommitFlag, Depends(get_session)]) -> None:
         self.session = session
+        logger.debug(f"Repository {self.__class__.__name__} using session ID: {self.session.info.get('id', 'unknown')}")
 
     async def find_all(
         self,
@@ -85,7 +85,7 @@ class UsersRepository:
                 self.session.add(existing_user)
             else:
                 self.session.add(user)
-            await self.session.commit()
+            self.session.should_commit = True
         except SQLAlchemyError as e:  # pragma: no cover
             logger.exception("Error saving user")
             await self.session.rollback()

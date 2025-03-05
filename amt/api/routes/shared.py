@@ -9,11 +9,11 @@ from pydantic import BaseModel
 from starlette.requests import Request
 
 from amt.api.editable_converters import StatusConverterForSystemcard
-from amt.api.editable_util import extract_number_and_string
 from amt.api.lifecycles import Lifecycles, get_localized_lifecycle
 from amt.api.localizable import LocalizableEnum
 from amt.api.organization_filter_options import OrganizationFilterOptions, get_localized_organization_filter
 from amt.api.risk_group import RiskGroup, get_localized_risk_group
+from amt.api.update_utils import extract_number_and_string
 from amt.schema.localized_value_item import LocalizedValueItem
 from amt.schema.shared import IterMixin
 from amt.services.users import UsersService
@@ -96,12 +96,12 @@ def get_nested(obj: Any, attr_path: str) -> Any:  # noqa: ANN401
     return obj
 
 
-def nested_value(obj: Any, attr_path: str) -> Any:  # noqa: ANN401
+def nested_value(obj: Any, attr_path: str, default_value: str | list[str] | None = "") -> Any:  # noqa: ANN401
     obj = get_nested(obj, attr_path)
     if isinstance(obj, Enum):
         return obj.value
     if obj is None:
-        return ""
+        return default_value
     return obj
 
 

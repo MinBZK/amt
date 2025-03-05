@@ -86,12 +86,15 @@
     <span hx-target="this">
         <form hx-put="{{ base_href }}/update?full_resource_path={{ editable_object.full_resource_path }}"
               hx-ext="json-enc"
-              hx-target-error="#errorContainer"
-              hx-swap="outerHTML"
+              hx-target-error="#errorContainer-{{ editable_object.safe_html_path() }}"
               method="post"
               hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
               hx-swap="outerHTML"
+              id="form-for-{{ editable_object.safe_html_path() }}"
               autocomplete="off">
+            <input type="hidden"
+                   name="form-id"
+                   value="form-for-{{ editable_object.safe_html_path() }}">
             <div class="rvo-layout-grid-container">
                 {% if editable_object.implementation_type.type is none %}
                     {# TODO: hardcoded check could be made more elegant #}
@@ -128,8 +131,9 @@
                 {% endif %}
             </div>
         </form>
-        {#    we need the errorContainer to keep htmx happy, so we hide te contents#}
-        <div id="errorContainer" class="display-none"></div>
+        {# we need the errorContainer to keep htmx happy, but we hide the contents #}
+        <div id="errorContainer-{{ editable_object.safe_html_path() }}"
+             class="display-none"></div>
     </span>
 {% endmacro %}
 {% macro inline_editor_form_field(editable_object) %}
@@ -142,7 +146,8 @@
                       class="utrecht-textbox utrecht-textarea utrecht-textarea--html-textarea"
                       dir="auto">{{ editable_object.value }}</textarea>
         {% elif editable_object.implementation_type.type == WebFormFieldType.SELECT %}
-            <div class="rvo-select-wrapper">
+            <div class="rvo-select-wrapper"
+                 style="max-inline-size: clamp(20rem, 40%, 50rem)">
                 <select id="field-{{ editable_object.last_path_item() }}"
                         name="{{ editable_object.last_path_item() }}"
                         class="utrecht-select utrecht-select--html-select">
