@@ -1,4 +1,5 @@
 import logging
+from copy import deepcopy
 from typing import Annotated, Any, cast
 
 from fastapi import APIRouter, Depends, Query, Request
@@ -118,6 +119,8 @@ async def get_algorithms(
             skip=skip, limit=limit, search=search, filters=filters, sort=sort_by
         )  # pyright: ignore [reportAssignmentType]
         # todo: the lifecycle has to be 'localized', maybe for display 'Algorithm' should become a different object
+        # fixme: detach algorithms from the database to prevent commits back by the auto-commit
+        algorithms = deepcopy(algorithms)
         for algorithm in algorithms:
             algorithm.lifecycle = get_localized_lifecycle(algorithm.lifecycle, request)  # pyright: ignore [reportAttributeAccessIssue, reportUnknownMemberType, reportUnknownArgumentType]
         amount_algorithm_systems += len(algorithms)

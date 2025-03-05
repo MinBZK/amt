@@ -1,5 +1,9 @@
 import re
 
+from amt.api.editable_classes import ResolvedEditable
+from amt.api.update_utils import extract_number_and_string
+from amt.schema.webform import WebFormFieldImplementationType
+
 
 def replace_digits_in_brackets(string: str) -> str:
     return re.sub(r"\[(\d+)]", "[*]", string)
@@ -23,20 +27,14 @@ def resolve_resource_list_path(full_resource_path_resolved: str, relative_resour
     return replace_wildcard_with_digits_in_brackets(relative_resource_path, index)
 
 
-def extract_number_and_string(input_string: str) -> tuple[str, int | None]:
-    """
-    Extracts the number within square brackets and the string before the brackets
-    from a given input string.
+def is_editable_resource(full_resource_path: str, editables: dict[str, ResolvedEditable]) -> bool:
+    return editables.get(replace_digits_in_brackets(full_resource_path), None) is not None
 
-    Returns:
-      A tuple containing:
-        - The string before the brackets.
-        - The number within the brackets (as an integer) or None if no number is found within brackets.
-    """
-    match = re.search(r"(.+)\[(\d+)]", input_string)
-    if match:
-        string_before = match.group(1)
-        number_in_brackets = int(match.group(2))
-        return string_before, number_in_brackets
-    else:
-        return input_string, None
+
+def is_parent_editable(editables: dict[str, ResolvedEditable], full_resource_path: str) -> bool:
+    full_resource_path = replace_digits_in_brackets(full_resource_path)
+    editable = editables.get(full_resource_path)
+    if editable is None:
+        return False
+    result = editable.implementation_type == WebFormFieldImplementationType.PARENT
+    return result

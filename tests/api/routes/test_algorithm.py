@@ -2,16 +2,16 @@ from io import BytesIO
 from typing import Any
 
 import pytest
-from amt.api.editable import set_path
+from amt.api.editable_route_utils import get_user_id_or_error
 from amt.api.routes.algorithm import (
     find_measure_task,
     find_requirement_task,
     find_requirement_tasks_by_measure_urn,
     get_algorithm_context,
     get_algorithm_or_error,
-    get_user_id_or_error,
     resolve_and_enrich_measures,
 )
+from amt.api.update_utils import set_path
 from amt.core.config import get_settings
 from amt.core.exceptions import AMTError, AMTNotFound, AMTRepositoryError
 from amt.enums.tasks import TaskType
@@ -723,7 +723,7 @@ async def test_delete_file(
 
 @pytest.mark.asyncio
 def test_get_user_id_or_error_success(mocker: MockFixture) -> None:
-    mock_get_user = mocker.patch("amt.api.routes.algorithm.get_user")
+    mock_get_user = mocker.patch("amt.api.editable_route_utils.get_user")
     mock_get_user.return_value = {"sub": "user_uuid"}
 
     assert get_user_id_or_error(MockRequest(lang="nl")) == "user_uuid"
@@ -731,7 +731,7 @@ def test_get_user_id_or_error_success(mocker: MockFixture) -> None:
 
 @pytest.mark.asyncio
 def test_get_user_id_or_error_failure(mocker: MockFixture) -> None:
-    mock_get_user = mocker.patch("amt.api.routes.algorithm.get_user")
+    mock_get_user = mocker.patch("amt.api.editable_route_utils.get_user")
     mock_get_user.return_value = None
 
     with pytest.raises(AMTError):
