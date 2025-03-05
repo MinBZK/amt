@@ -39,222 +39,6 @@ main {
     line-height: var(--utrecht-document-line-height);
 }
 
-.margin-bottom-large {
-    margin-bottom: 1em;
-}
-
-.margin-top-large {
-    margin-top: 1em;
-}
-
-.margin-top-middle {
-    margin-top: 0.5em;
-}
-
-.margin-bottom-small {
-    margin-bottom: 0.5em;
-}
-
-.margin-bottom-extra-small {
-    margin-bottom: 0.25em;
-}
-
-.progress-cards-container {
-    min-height: 30em;
-    background-color: var(--rvo-color-lichtblauw-150);
-    border-radius: 10px;
-    height: calc(100% - 30px); /* todo (robbert): this is a display hack */
-    padding-top: 5px;
-}
-
-.progress-card-container {
-    margin: 0.5em;
-    border: 1px solid;
-    filter: drop-shadow(0 4px 4px rgb(115 142 171 / 50%));
-    border-color: var(--rvo-color-wit);
-    padding: 0.5em;
-    border-radius: 10px;
-    background-color: var(--rvo-color-wit);
-    cursor: move;
-    user-select: none;
-}
-
-.algorithm-system-card-container {
-    margin: 0.5em;
-    border: 1px solid;
-    filter: drop-shadow(0 4px 4px rgb(115 142 171 / 50%));
-    border-color: var(--rvo-color-wit);
-    padding: 0.5em;
-    border-radius: 10px;
-    background-color: var(--rvo-color-wit);
-    cursor: move;
-    user-select: none;
-}
-
-.progress-card-assignees-container {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.progress-card-assignees-image {
-    border-radius: 50%;
-    height: 35px;
-}
-
-.text-center-horizontal {
-    text-align: center;
-}
-
-.as-inline-block {
-    display: inline-block;
-}
-
-.navbar-fixed {
-    top: 0;
-    z-index: 100;
-    position: sticky;
-    background: #fff;
-}
-
-.form-input-container {
-    position: relative;
-}
-
-.form-input-container .form-input-clear {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    cursor: pointer;
-}
-
-/* remove input clear button in certain browsers */
-[type="search"]::-webkit-search-cancel-button,
-[type="search"]::-webkit-search-decoration {
-    appearance: none;
-}
-
-#amt-main-menu-mobile {
-    @media only screen and (width <= 912px) {
-        display: flex;
-    }
-
-    @media only screen and (width > 912px) {
-        display: none;
-    }
-}
-
-#amt-main-menu-desktop,
-#amt-sub-menu-desktop {
-    @media only screen and (width <= 912px) {
-        display: none;
-    }
-
-    @media only screen and (width > 912px) {
-        display: block;
-    }
-}
-
-.amt-layout-grid {
-    display: grid;
-
-    /* ROOS only has responsive grid, but here we want a fixed grid */
-    /* stylelint-disable selector-class-pattern */
-    &.amt-layout-grid-columns--two {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    /* stylelint-enable */
-}
-
-/* Modal is not implemented in NLDS yet, so we implement it here. */
-.minbzk-modal {
-    /* Underlay covers entire screen. */
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    /* Change to appropriate color from NLDS. */
-    background-color: rgba(0 0 0 / 50%);
-    z-index: 1000;
-
-    /* Flexbox centers the .modal-content vertically and horizontally */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    /* Animate when opening */
-    animation-name: fade-in;
-    animation-duration: 150ms;
-    animation-timing-function: ease;
-}
-
-.minbzk-modal > .modal-underlay {
-    /* underlay takes up the entire viewport. This is only
-	required if you want to click to dismiss the popup */
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-}
-
-.model-content-auto-size {
-    width: auto !important;
-    height: auto !important;
-}
-
-.modal-content {
-    overflow: auto;
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.modal-content-close {
-    position: absolute;
-    right: 30px;
-    top: 10px;
-    z-index: 1000;
-    cursor: pointer;
-    font-size: 40px;
-}
-
-.modal-content-container {
-    overflow: hidden;
-    position: relative;
-
-    /* Position visible dialog near the top of the window */
-    margin-top: 5vh;
-    transition:
-        height 0.3s ease,
-        width 0.3s ease;
-
-    /* Sizing for visible dialog */
-    width: 80%;
-    height: 80%;
-
-    /* Display properties for visible dialog */
-    border: solid 1px #999;
-    border-radius: 1em;
-
-    /* Change to appropriate color from NLDS. */
-    box-shadow: 0 0 1em 0 rgba(0 0 0 / 30%);
-    background-color: #fff;
-    padding: 1em;
-
-    /* Animate when opening */
-    animation-name: zoom-in;
-    animation-duration: 150ms;
-    animation-timing-function: ease;
-}
-
-.display-none {
-    display: none !important;
-}
-
 @keyframes fade-in {
     0% {
         opacity: 0;
@@ -295,57 +79,8 @@ main {
     }
 }
 
-.amt-widget-title {
-    color: var(--rvo-color-hemelblauw);
-    font-weight: bold;
-}
-
-.rvo-card {
-    /* Overwrite the border of rvo-card to remove the hover function */
-    border: var(--rvo-card-outline-border-width) solid
-        var(--rvo-card-outline-border-color);
-}
-
-.rvo-table-row td:first-child {
-    width: 20%;
-    vertical-align: top;
-}
-
-.amt-error-message {
-    color: var(--rvo-form-feedback-error-color);
-    font-weight: var(--rvo-form-feedback-error-font-weight);
-}
-
-/* stylelint-disable selector-class-pattern */
-
-.amt-item-list__as_select {
-    border-width: var(--utrecht-form-control-border-width);
-    border-color: var(--utrecht-form-control-focus-border-color);
-    border-radius: var(--utrecht-form-control-border-radius, 0);
-    border-style: solid;
-    position: absolute;
-    background-color: var(--rvo-color-wit);
-    width: 100%;
-    top: 45px;
-    z-index: 100;
-}
-
-.amt-item-list__item_as_select {
-    &:hover {
-        background-color: var(--rvo-color-logoblauw-150);
-    }
-}
-
-.amt-position-relative {
-    position: relative;
-}
-
-.amt-flex-container {
-    display: flex;
-    justify-content: space-between;
-}
-
 /* we override the default ROOS style because we want to display as column, not rows */
+/* stylelint-disable selector-class-pattern */
 .amt-theme {
     & .rvo-accordion__item > .rvo-accordion__item-summary {
         align-items: initial;
@@ -364,168 +99,433 @@ main {
     & main {
         margin-bottom: var(--rvo-size-2xl);
     }
-}
 
-.amt-avatar-list {
-    display: inline-flex;
-}
-
-.amt-avatar-list__item {
-    img {
-        border: 1px solid var(--rvo-color-hemelblauw-750);
-        border-radius: 50%;
+    & .margin-bottom-large {
+        margin-bottom: 1em;
     }
 
-    .amt-avatar-list__more {
-        display: inline-block;
-        min-width: 24px;
-        font-size: var(--rvo-size-sm);
-        height: 24px;
-        border: 1px solid var(--rvo-color-hemelblauw-750);
+    & .margin-top-large {
+        margin-top: 1em;
+    }
+
+    & .margin-top-middle {
+        margin-top: 0.5em;
+    }
+
+    & .margin-bottom-small {
+        margin-bottom: 0.5em;
+    }
+
+    & .margin-bottom-extra-small {
+        margin-bottom: 0.25em;
+    }
+
+    & .progress-cards-container {
+        min-height: 30em;
+        background-color: var(--rvo-color-lichtblauw-150);
+        border-radius: 10px;
+        height: calc(100% - 30px); /* todo (robbert): this is a display hack */
+        padding-top: 5px;
+    }
+
+    & .progress-card-container {
+        margin: 0.5em;
+        border: 1px solid;
+        filter: drop-shadow(0 4px 4px rgb(115 142 171 / 50%));
+        border-color: var(--rvo-color-wit);
+        padding: 0.5em;
+        border-radius: 10px;
+        background-color: var(--rvo-color-wit);
+        cursor: move;
+        user-select: none;
+    }
+
+    & .algorithm-system-card-container {
+        margin: 0.5em;
+        border: 1px solid;
+        filter: drop-shadow(0 4px 4px rgb(115 142 171 / 50%));
+        border-color: var(--rvo-color-wit);
+        padding: 0.5em;
+        border-radius: 10px;
+        background-color: var(--rvo-color-wit);
+        cursor: move;
+        user-select: none;
+    }
+
+    & .progress-card-assignees-container {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    & .progress-card-assignees-image {
         border-radius: 50%;
+        height: 35px;
+    }
+
+    & .text-center-horizontal {
         text-align: center;
-        background-color: var(--rvo-color-grijs-300);
-    }
-}
-
-.amt-avatar-list__item:not(:first-child) {
-    margin-left: -10px;
-}
-
-.amt-tooltip {
-    position: relative;
-}
-
-.amt-tooltip .amt-tooltip__text {
-    visibility: hidden;
-    background-color: var(--rvo-color-hemelblauw);
-    color: #fff;
-    border-radius: 5px;
-    padding: 5px;
-    position: absolute;
-    z-index: 1;
-    top: -2em;
-    text-align: center;
-}
-
-.amt-tooltip:hover .amt-tooltip__text {
-    visibility: visible;
-}
-
-.measure-function-circle {
-    display: flex;
-    align-items: center;
-}
-
-.measure-function-icon {
-    width: 25px;
-    height: 25px;
-    object-fit: cover;
-    border-radius: 50%;
-    z-index: 0;
-    filter: drop-shadow(0 4px 4px rgb(115 142 171 / 50%));
-}
-
-.member-container {
-    position: relative;
-    display: inline-block;
-    align-items: center;
-}
-
-.member-container a {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0 8px 16px 0 rgb(0 0 0 / 20%);
-    z-index: 1;
-    white-space: nowrap;
-    filter: drop-shadow(0 4px 4px rgb(115 142 171 / 50%));
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.member-container:hover a {
-    display: block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0 8px 16px 0 rgb(0 0 0 / 20%);
-    z-index: 1;
-}
-
-.dropdown-content a:hover {
-    background-color: #f1f1f1;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown-underlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
-
-.amt-cursor-pointer {
-    cursor: pointer;
-}
-
-.rvo-layout-gap--0 {
-    gap: 0 !important;
-}
-
-.amt-clear-float {
-    &::after {
-        content: "";
-        display: block;
-        clear: both;
-    }
-}
-
-.amt-blocks-with-vertical-spacing {
-    /* if floats are used in the child, we want to 'clear' in the after element so the block sizes to the float */
-    & > *::after {
-        content: "";
-        display: block;
-        clear: both;
     }
 
-    & > *:not(:last-child) {
-        margin-bottom: var(--rvo-size-lg);
+    & .as-inline-block {
+        display: inline-block;
     }
-}
 
-.amt-editable-block {
-    position: relative;
-
-    &:last-child::after {
-        content: "";
-        display: block;
-        clear: both;
+    & .navbar-fixed {
+        top: 0;
+        z-index: 100;
+        position: sticky;
+        background: #fff;
     }
-}
 
-.amt-editable-block:not(:has(form)) {
-    &:hover {
-        background-color: var(--rvo-color-grijs-100);
-        box-shadow: 0 0 5px 5px var(--rvo-color-grijs-100);
+    & .form-input-container {
+        position: relative;
+    }
+
+    & .form-input-container .form-input-clear {
+        position: absolute;
+        top: 15px;
+        right: 15px;
         cursor: pointer;
     }
-}
 
-/* stylelint-enable */
+    /* remove input clear button in certain browsers */
+    & [type="search"]::-webkit-search-cancel-button,
+    & [type="search"]::-webkit-search-decoration {
+        appearance: none;
+    }
+
+    & #amt-main-menu-mobile {
+        @media only screen and (width <= 912px) {
+            display: flex;
+        }
+
+        @media only screen and (width > 912px) {
+            display: none;
+        }
+    }
+
+    & #amt-main-menu-desktop,
+    & #amt-sub-menu-desktop {
+        @media only screen and (width <= 912px) {
+            display: none;
+        }
+
+        @media only screen and (width > 912px) {
+            display: block;
+        }
+    }
+
+    & .amt-layout-grid {
+        display: grid;
+
+        /* ROOS only has responsive grid, but here we want a fixed grid */
+        &.amt-layout-grid-columns--two {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        /* stylelint-enable */
+    }
+
+    /* Modal is not implemented in NLDS yet, so we implement it here. */
+    & .minbzk-modal {
+        /* Underlay covers entire screen. */
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+
+        /* Change to appropriate color from NLDS. */
+        background-color: rgba(0 0 0 / 50%);
+        z-index: 1000;
+
+        /* Flexbox centers the .modal-content vertically and horizontally */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        /* Animate when opening */
+        animation-name: fade-in;
+        animation-duration: 150ms;
+        animation-timing-function: ease;
+    }
+
+    & .minbzk-modal > .modal-underlay {
+        /* underlay takes up the entire viewport. This is only
+        required if you want to click to dismiss the popup */
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    & .model-content-auto-size {
+        width: auto !important;
+        height: auto !important;
+    }
+
+    & .modal-content {
+        overflow: auto;
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    & .modal-content-close {
+        position: absolute;
+        right: 30px;
+        top: 10px;
+        z-index: 1000;
+        cursor: pointer;
+        font-size: 40px;
+    }
+
+    & .modal-content-container {
+        overflow: hidden;
+        position: relative;
+
+        /* Position visible dialog near the top of the window */
+        margin-top: 5vh;
+        transition:
+            height 0.3s ease,
+            width 0.3s ease;
+
+        /* Sizing for visible dialog */
+        width: 80%;
+        height: 80%;
+
+        /* Display properties for visible dialog */
+        border: solid 1px #999;
+        border-radius: 1em;
+
+        /* Change to appropriate color from NLDS. */
+        box-shadow: 0 0 1em 0 rgba(0 0 0 / 30%);
+        background-color: #fff;
+        padding: 1em;
+
+        /* Animate when opening */
+        animation-name: zoom-in;
+        animation-duration: 150ms;
+        animation-timing-function: ease;
+    }
+
+    & .display-none {
+        display: none !important;
+    }
+
+    & .amt-widget-title {
+        color: var(--rvo-color-hemelblauw);
+        font-weight: bold;
+    }
+
+    & .rvo-card {
+        /* Overwrite the border of rvo-card to remove the hover function */
+        border: var(--rvo-card-outline-border-width) solid
+            var(--rvo-card-outline-border-color);
+    }
+
+    & .rvo-table-row td:first-child {
+        width: 20%;
+        vertical-align: top;
+    }
+
+    & .amt-error-message {
+        color: var(--rvo-form-feedback-error-color);
+        font-weight: var(--rvo-form-feedback-error-font-weight);
+    }
+
+    /* stylelint-disable selector-class-pattern */
+
+    & .amt-item-list__as_select {
+        border-width: var(--utrecht-form-control-border-width);
+        border-color: var(--utrecht-form-control-focus-border-color);
+        border-radius: var(--utrecht-form-control-border-radius, 0);
+        border-style: solid;
+        position: absolute;
+        background-color: var(--rvo-color-wit);
+        width: 100%;
+        top: 45px;
+        z-index: 100;
+    }
+
+    & .amt-item-list__item_as_select {
+        &:hover {
+            background-color: var(--rvo-color-logoblauw-150);
+        }
+    }
+
+    & .amt-position-relative {
+        position: relative;
+    }
+
+    & .amt-flex-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    & .amt-avatar-list {
+        display: inline-flex;
+    }
+
+    & .amt-avatar-list__item {
+        img {
+            border: 1px solid var(--rvo-color-hemelblauw-750);
+            border-radius: 50%;
+        }
+
+        .amt-avatar-list__more {
+            display: inline-block;
+            min-width: 24px;
+            font-size: var(--rvo-size-sm);
+            height: 24px;
+            border: 1px solid var(--rvo-color-hemelblauw-750);
+            border-radius: 50%;
+            text-align: center;
+            background-color: var(--rvo-color-grijs-300);
+        }
+    }
+
+    & .amt-avatar-list__item:not(:first-child) {
+        margin-left: -10px;
+    }
+
+    & .amt-tooltip {
+        position: relative;
+    }
+
+    & .amt-tooltip .amt-tooltip__text {
+        visibility: hidden;
+        background-color: var(--rvo-color-hemelblauw);
+        color: #fff;
+        border-radius: 5px;
+        padding: 5px;
+        position: absolute;
+        z-index: 1;
+        top: -2em;
+        text-align: center;
+    }
+
+    & .amt-tooltip:hover .amt-tooltip__text {
+        visibility: visible;
+    }
+
+    & .measure-function-circle {
+        display: flex;
+        align-items: center;
+    }
+
+    & .measure-function-icon {
+        width: 25px;
+        height: 25px;
+        object-fit: cover;
+        border-radius: 50%;
+        z-index: 0;
+        filter: drop-shadow(0 4px 4px rgb(115 142 171 / 50%));
+    }
+
+    & .member-container {
+        position: relative;
+        display: inline-block;
+        align-items: center;
+    }
+
+    & .member-container a {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0 8px 16px 0 rgb(0 0 0 / 20%);
+        z-index: 1;
+        white-space: nowrap;
+        filter: drop-shadow(0 4px 4px rgb(115 142 171 / 50%));
+    }
+
+    & .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    & .member-container:hover a {
+        display: block;
+    }
+
+    & .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0 8px 16px 0 rgb(0 0 0 / 20%);
+        z-index: 1;
+    }
+
+    & .dropdown-content a:hover {
+        background-color: #f1f1f1;
+    }
+
+    & .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    & .dropdown-underlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    & .amt-cursor-pointer {
+        cursor: pointer;
+    }
+
+    & .rvo-layout-gap--0 {
+        gap: 0 !important;
+    }
+
+    & .amt-clear-float {
+        &::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+    }
+
+    & .amt-blocks-with-vertical-spacing {
+        /* if floats are used in the child, we want to 'clear' in the after element so the block sizes to the float */
+        & > *::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        & > *:not(:last-child) {
+            margin-bottom: var(--rvo-size-lg);
+        }
+    }
+
+    & .amt-editable-block {
+        position: relative;
+
+        &:last-child::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+    }
+
+    & .amt-editable-block:not(:has(form)) {
+        &:hover {
+            background-color: var(--rvo-color-grijs-100);
+            box-shadow: 0 0 5px 5px var(--rvo-color-grijs-100);
+            cursor: pointer;
+        }
+    }
+
+    /* stylelint-enable */
+}

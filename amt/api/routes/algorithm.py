@@ -6,7 +6,7 @@ from collections.abc import Sequence
 from typing import Annotated, Any, cast
 
 import yaml
-from fastapi import APIRouter, Depends, File, Form, Query, Request, Response, UploadFile
+from fastapi import APIRouter, Depends, File, Form, Header, Query, Request, Response, UploadFile
 from fastapi.responses import FileResponse, HTMLResponse, RedirectResponse
 from ulid import ULID
 
@@ -15,9 +15,9 @@ from amt.api.deps import templates
 from amt.api.editable import (
     get_enriched_resolved_editable,
     get_resolved_editables,
-    save_editable,
 )
 from amt.api.editable_classes import EditModes, ResolvedEditable
+from amt.api.editable_route_utils import get_user_id_or_error, update_handler
 from amt.api.forms.measure import MeasureStatusOptions, get_measure_form
 from amt.api.lifecycles import Lifecycles, get_localized_lifecycles
 from amt.api.navigation import (
@@ -28,7 +28,7 @@ from amt.api.navigation import (
     resolve_navigation_items,
 )
 from amt.api.routes.shared import get_filters_and_sort_by, replace_none_with_empty_string_inplace
-from amt.core.authorization import AuthorizationResource, AuthorizationVerb, get_user
+from amt.core.authorization import AuthorizationResource, AuthorizationVerb
 from amt.core.exceptions import AMTError, AMTNotFound, AMTPermissionDenied, AMTRepositoryError
 from amt.core.internationalization import get_current_translation
 from amt.enums.tasks import Status, TaskType, life_cycle_mapper, measure_state_to_status, status_mapper
@@ -89,13 +89,6 @@ async def get_algorithm_or_error(
     except AMTRepositoryError as e:
         raise AMTNotFound from e
     return algorithm
-
-
-def get_user_id_or_error(request: Request) -> str:
-    user = get_user(request)
-    if user is None or user["sub"] is None:
-        raise AMTError
-    return user["sub"]
 
 
 def get_measure_task_or_error(system_card: SystemCard, measure_urn: str) -> MeasureTask:
@@ -203,7 +196,7 @@ async def get_tasks(
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.ALGORITHMS_ROOT,
-            BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details/system_card"),
+            BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details"),
             Navigation.ALGORITHM_TASKS,
         ],
         request,
@@ -355,7 +348,7 @@ async def get_algorithm_details(
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.ALGORITHMS_ROOT,
-            BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details/system_card"),
+            BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details"),
             Navigation.ALGORITHM_INFO,
         ],
         request,
@@ -451,48 +444,23 @@ async def get_algorithm_update(
     algorithm_id: int,
     algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
     organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
+    tasks_service: Annotated[TasksService, Depends(TasksService)],
     full_resource_path: str = Query(""),
+    current_state_str: str = Header("VALIDATE", alias="X-Current-State"),
 ) -> HTMLResponse:
-    user_id = get_user_id_or_error(request)
-    new_values = await request.json()
+    context_variables: dict[str, str | int] = {"algorithm_id": algorithm_id}
+    base_href = f"/algorithm/{algorithm_id}"
 
-    editable: ResolvedEditable = await get_enriched_resolved_editable(
-        context_variables={"algorithm_id": algorithm_id},
-        full_resource_path=full_resource_path,
-        algorithms_service=algorithms_service,
-        organizations_service=organizations_service,
-        edit_mode=EditModes.SAVE,
+    return await update_handler(
+        request,
+        full_resource_path,
+        base_href,
+        current_state_str,
+        context_variables,
+        algorithms_service,
+        organizations_service,
+        tasks_service,
     )
-
-    editable_context = {
-        "user_id": user_id,
-        "new_values": new_values,
-        "organizations_service": organizations_service,
-    }
-
-    editable = await save_editable(
-        editable,
-        editable_context=editable_context,
-        algorithms_service=algorithms_service,
-        organizations_service=organizations_service,
-        do_save=True,
-    )
-
-    # set the value back to view mode if needed
-    # TODO: this needs to be fixed, because it only works for 'editables without children'
-    if editable.converter:
-        editable.value = await editable.converter.view(editable.value, **editable_context)
-
-    context = {
-        "relative_resource_path": editable.relative_resource_path if editable.relative_resource_path else "",
-        "base_href": f"/algorithm/{algorithm_id}",
-        "resource_object": editable.resource_object,
-        "full_resource_path": full_resource_path,
-        "editable_object": editable,
-        "editables": get_resolved_editables(context_variables={"algorithm_id": algorithm_id}),
-    }
-
-    return templates.TemplateResponse(request, "parts/view_cell.html.j2", context)
 
 
 @router.get("/{algorithm_id}/details")
@@ -513,7 +481,7 @@ async def get_system_card(
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.ALGORITHMS_ROOT,
-            BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details/system_card"),
+            BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details"),
             Navigation.ALGORITHM_DETAILS,
         ],
         request,
@@ -558,7 +526,7 @@ async def get_system_card_requirements(
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.ALGORITHMS_ROOT,
-            BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details/system_card"),
+            BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details"),
             Navigation.ALGORITHM_COMPLIANCE,
         ],
         request,
@@ -874,7 +842,7 @@ async def get_algorithm_members(
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.ALGORITHMS_ROOT,
-            BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details/system_card"),
+            BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details"),
             Navigation.ALGORITHM_MEMBERS,
         ],
         request,
@@ -911,7 +879,7 @@ async def get_assessment_card(
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.ALGORITHMS_ROOT,
-            BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details/system_card"),
+            BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details"),
             Navigation.ALGORITHM_ASSESSMENT_CARD,
         ],
         request,
@@ -964,7 +932,7 @@ async def get_model_card(
     breadcrumbs = resolve_base_navigation_items(
         [
             Navigation.ALGORITHMS_ROOT,
-            BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details/system_card"),
+            BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details"),
             Navigation.ALGORITHM_MODEL_CARD,
         ],
         request,

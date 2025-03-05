@@ -168,6 +168,14 @@ window.htmx = htmx;
 export function openModal(id: string) {
   const el: Element | null = document.getElementById(id);
   if (el != null) {
+    const contentEl = el.querySelector(".modal-content");
+    if (contentEl) {
+      const observer = new MutationObserver(() => {
+        contentEl.scrollTop = 0;
+        observer.disconnect();
+      });
+      observer.observe(el, { childList: true, subtree: true });
+    }
     el.classList.remove("display-none");
   }
 }
@@ -579,7 +587,50 @@ export function updateInlineEditorAIActProfile() {
   }
 }
 
+/**
+ * Updates the hx-headers attribute of an element
+ */
+export function updateHxHeaders(
+  elementId: string,
+  key: string,
+  value: string | number | boolean,
+): void {
+  const element: HTMLElement | null = document.getElementById(elementId);
+  if (!element) {
+    console.error(`Element with ID "${elementId}" not found`);
+    return;
+  }
+
+  // Get the current hx-headers attribute
+  const headersAttr: string | null = element.getAttribute("hx-headers");
+  let headers: Record<string, string | number | boolean> = {};
+
+  // Parse the existing headers if present
+  if (headersAttr) {
+    try {
+      headers = JSON.parse(headersAttr) as Record<
+        string,
+        string | number | boolean
+      >;
+    } catch (error) {
+      console.error("Invalid hx-headers JSON format:", error);
+      return;
+    }
+  }
+  headers[key] = value;
+  element.setAttribute("hx-headers", JSON.stringify(headers));
+}
+
+export function updateFormStateAndSubmit(formId: string, nextState: string) {
+  updateHxHeaders(formId, "X-Current-State", nextState);
+  const currentForm = document.getElementById(formId);
+  if (currentForm) {
+    htmx.trigger(currentForm, "submit", {});
+  }
+}
+
 window.addEventListener("message", (event) => {
+  //NOSONAR
   if (event.data.event === "beslishulp-done") {
     console.log("Received beslishulp-done:", event.data.value);
     if (window.location.pathname == "/algorithms/new") {
@@ -591,6 +642,10 @@ window.addEventListener("message", (event) => {
       console.error("No handle found for location " + window.location.pathname);
     }
   }
+});
+
+window.addEventListener("openModal", () => {
+  openModal("modal");
 });
 
 // for debugging htmx use -> htmx.logAll();
