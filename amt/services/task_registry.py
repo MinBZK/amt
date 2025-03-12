@@ -1,4 +1,5 @@
 import logging
+from typing import Any
 
 from amt.schema.measure import MeasureTask
 from amt.schema.requirement import Requirement, RequirementTask
@@ -79,14 +80,12 @@ async def get_requirements_and_measures(
     return applicable_requirements, applicable_measures
 
 
-def _parse_attribute_values(attr: str, ai_act_profile: AiActProfile) -> set[str]:
+def _parse_attribute_values(attr: str, ai_act_profile: AiActProfile) -> set[str] | set[Any]:
     """
-    Helper function needed in `is_requirement_applicable`, handling special case for 'role'
-    and 'publication_category'.
+    Helper function needed in `is_requirement_applicable`, handling special case for 'publication_category'.
     """
-    if attr == "role":
-        return {s.strip() for s in getattr(ai_act_profile, attr, "").split("+")}
-    if attr == "risk_group":
-        return {getattr(ai_act_profile, "risk_group", "")}
-
-    return {getattr(ai_act_profile, attr, "")}
+    value = getattr(ai_act_profile, attr, "")
+    if isinstance(value, str):
+        return {value}
+    else:
+        return set(value)

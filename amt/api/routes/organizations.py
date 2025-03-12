@@ -2,18 +2,17 @@ from collections.abc import Sequence
 from typing import Annotated, Any
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, Query, Request
+from fastapi import APIRouter, Depends, Header, Query, Request
 from fastapi.responses import HTMLResponse, JSONResponse, Response
 
 from amt.api.decorators import permission
 from amt.api.deps import templates
 from amt.api.editable import (
-    Editables,
     get_enriched_resolved_editable,
     get_resolved_editables,
-    save_editable,
 )
 from amt.api.editable_classes import EditModes, ResolvedEditable
+from amt.api.editable_route_utils import update_handler
 from amt.api.forms.organization import get_organization_form
 from amt.api.group_by_category import get_localized_group_by_categories
 from amt.api.lifecycles import get_localized_lifecycles
@@ -26,10 +25,8 @@ from amt.api.navigation import (
 )
 from amt.api.organization_filter_options import OrganizationFilterOptions, get_localized_organization_filters
 from amt.api.risk_group import get_localized_risk_groups
-from amt.api.routes.algorithm import get_user_id_or_error
 from amt.api.routes.algorithms import get_algorithms
 from amt.api.routes.shared import get_filters_and_sort_by
-from amt.api.utils import SafeDict
 from amt.core.authorization import AuthorizationResource, AuthorizationVerb, get_user
 from amt.core.exceptions import AMTAuthorizationError, AMTNotFound, AMTRepositoryError
 from amt.core.internationalization import get_current_translation
@@ -282,54 +279,21 @@ async def get_organization_update(
     organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
     organization_slug: str,
     full_resource_path: str,
+    current_state_str: str = Header("VALIDATE", alias="X-Current-State"),
 ) -> HTMLResponse:
     organization = await get_organization_or_error(organizations_service, request, organization_slug)
-    new_values = await request.json()
-
-    user_id = get_user_id_or_error(request)
-
     context_variables: dict[str, str | int] = {"organization_id": organization.id}
 
-    editable: ResolvedEditable = await get_enriched_resolved_editable(
-        context_variables=context_variables,
-        full_resource_path=full_resource_path,
-        organizations_service=organizations_service,
-        edit_mode=EditModes.SAVE,
+    return await update_handler(
+        request,
+        full_resource_path,
+        f"/organizations/{organization_slug}",
+        current_state_str,
+        context_variables,
+        None,
+        organizations_service,
+        None,
     )
-
-    editable_context = {
-        "user_id": user_id,
-        "new_values": new_values,
-        "organizations_service": organizations_service,
-    }
-
-    editable = await save_editable(
-        editable,
-        editable_context=editable_context,
-        organizations_service=organizations_service,
-        do_save=True,
-    )
-
-    # set the value back to view mode if needed
-    if editable.converter:
-        editable.value = await editable.converter.view(editable.value, **editable_context)
-
-    context = {
-        "relative_resource_path": editable.relative_resource_path.replace("/", ".")
-        if editable.relative_resource_path
-        else "",
-        "base_href": f"/organizations/{organization_slug}",
-        "resource_object": None,
-        "full_resource_path": full_resource_path,
-        "editable_object": editable,
-        "editables": get_resolved_editables(context_variables={"organization_id": organization.id}),
-    }
-
-    # TODO: add a 'next action' to editable for f.e. redirect options, THIS IS A HACK
-    if full_resource_path == Editables.ORGANIZATION_SLUG.full_resource_path.format_map(SafeDict(context_variables)):
-        return templates.Redirect(request, f"/organizations/{editable.value}")
-    else:
-        return templates.TemplateResponse(request, "parts/view_cell.html.j2", context)
 
 
 @permission({AuthorizationResource.ORGANIZATION_INFO_SLUG: [AuthorizationVerb.LIST]})

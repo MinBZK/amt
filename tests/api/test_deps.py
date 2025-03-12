@@ -1,9 +1,11 @@
-from dataclasses import dataclass
+from dataclasses import dataclass  # noqa: I001
 
-from amt.api.deps import custom_context_processor, hasattr_jinja, permission
+from amt.api.deps import custom_context_processor, hasattr_jinja, permission, instance, equal_or_includes
 from amt.core.authorization import AuthorizationVerb
+from amt.schema.shared import IterMixin
 
 from tests.constants import default_fastapi_request
+import pytest
 
 example_permissions = {
     "organization/1": [AuthorizationVerb.CREATE, AuthorizationVerb.READ, AuthorizationVerb.UPDATE],
@@ -72,3 +74,19 @@ def test_hasattr_jinja():
 
     my_class_2 = Test1(field1="test", field2=Test2(field3="Hello"))
     assert hasattr_jinja(my_class_2, "field2.field3") is True
+
+
+def test_instance():
+    assert instance("str", "str")
+    assert instance(["1", "2"], "list")
+    assert instance({"k": "v"}, "dict")
+    assert instance(IterMixin(), "IterMixin")
+    with pytest.raises(TypeError):
+        instance("str", "unknown")
+
+
+def test_equal_or_includes():
+    assert equal_or_includes("abc", "abc")
+    assert equal_or_includes("abc", ["abc", "def"])
+    assert False is equal_or_includes("abcd", ["abc", "def"])
+    assert False is equal_or_includes("abcd", IterMixin())  # pyright: ignore[reportArgumentType]

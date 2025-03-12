@@ -117,17 +117,6 @@ class AlgorithmsService:
 
         algorithm = await self.update(algorithm)
 
-        def sort_by_measure_name(measure_task: MeasureTask) -> tuple[int, int]:
-            """
-            Sorts measures according to their prefix index (like org- or pba-), and then the index number,
-            like org-1, org2.
-            :param measure_task: the measure task to sort
-            :return: a tuple with the sort values
-            """
-            key_index = {"org": 1, "pba": 2, "owp": 3, "dat": 4, "owk": 5, "ver": 6, "imp": 7, "mon": 8, "uit": 9}
-            name, index = measure_task.urn.split(":")[-1].split("-")
-            return key_index.get(name, 0), int(index)
-
         measures_sorted: list[MeasureTask] = sorted(  # pyright: ignore[reportUnknownVariableType, reportCallIssue]
             measures,
             key=lambda measure: (get_first_lifecycle_idx(measure.lifecycle), sort_by_measure_name(measure)),  # pyright: ignore[reportArgumentType]
@@ -159,3 +148,15 @@ def get_template_files() -> dict[str, dict[str, str]]:
         for i, k in enumerate(listdir(template_path))
         if isfile(join(template_path, k))
     }
+
+
+def sort_by_measure_name(measure_task: MeasureTask) -> tuple[int, int]:
+    """
+    Sorts measures according to their prefix index (like org- or pba-), and then the index number,
+    like org-1, org2.
+    :param measure_task: the measure task to sort
+    :return: a tuple with the sort values
+    """
+    key_index = {"org": 1, "pba": 2, "owp": 3, "dat": 4, "owk": 5, "ver": 6, "imp": 7, "mon": 8, "uit": 9}
+    name, index = measure_task.urn.split(":")[-1].split("-")
+    return key_index.get(name, 0), int(index)
