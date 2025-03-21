@@ -3,15 +3,15 @@ from pathlib import Path
 from typing import TypeVar
 
 from amt.models.base import Base
+from amt.repositories.deps import AsyncSessionWithCommitFlag
 from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
 
 logger = logging.getLogger(__name__)
 
 
 class DatabaseTestUtils:
-    def __init__(self, session: AsyncSession, database_file: Path | None = None) -> None:
-        self.session: AsyncSession = session
+    def __init__(self, session: AsyncSessionWithCommitFlag, database_file: Path | None = None) -> None:
+        self.session = session
         self.database_file: Path | None = database_file
 
     async def given(self, models: list[Base]) -> None:
@@ -25,7 +25,7 @@ class DatabaseTestUtils:
         for model in models:
             await session.refresh(model)  # inefficient, but needed to create correlations between models
 
-    def get_session(self) -> AsyncSession:
+    def get_session(self) -> AsyncSessionWithCommitFlag:
         return self.session
 
     def get_database_file(self) -> Path | None:

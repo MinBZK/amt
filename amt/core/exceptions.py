@@ -25,7 +25,7 @@ class AMTSettingsError(AMTError):
 
 class AMTRepositoryError(AMTHTTPException):
     def __init__(self, detail: str | None = "Repository error") -> None:
-        self.detail: str = _("An internal server error occurred while processing your request. Please try again later.")
+        self.detail: str = _("An unexpected error occurred while trying to persist your changes.")
         super().__init__(status.HTTP_500_INTERNAL_SERVER_ERROR, self.detail)
 
 

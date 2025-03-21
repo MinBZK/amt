@@ -1,6 +1,13 @@
 {% macro render_attribute(attribute) -%}
     {{ attribute.capitalize().replace("_", " ") }}
 {%- endmacro %}
+{% macro show_ai_act_button() %}
+    <button id="ai-act-support-tool-modal-button"
+            class="utrecht-button utrecht-button--secondary-action utrecht-button--rvo-md utrecht-button-group__align-right"
+            onclick="amt.openDynamicModal('ai-act-support-tool')"
+            type="button"
+            style="float: right">{% trans %}Find your AI Act profile{% endtrans %}</button>
+{% endmacro %}
 {% macro editable(obj, relative_resource_path, full_resource_path, editable_object = None) %}
     {% if is_parent_editable(editables, full_resource_path) %}
         {% if editable_object is none %}
@@ -53,6 +60,8 @@
            href="https://task-registry.apps.digilab.network/urns/?version=latest&urn={{ value }}">{{ value }}</a>
     {% elif value is string and value.startswith('http') %}
         <a href="{{ value }}" target="_blank" rel="noopener noreferrer">{{ value }}</a>
+    {% elif value is iterable and value is not string %}
+        {{ value|join(", ") }}
     {% else %}
         {{ value }}
     {% endif %}
@@ -77,14 +86,19 @@
     <span hx-target="this">
         <form hx-put="{{ base_href }}/update?full_resource_path={{ editable_object.full_resource_path }}"
               hx-ext="json-enc"
-              hx-target-error="#errorContainer"
-              hx-swap="outerHTML"
+              hx-target-error="#errorContainer-{{ editable_object.safe_html_path() }}"
               method="post"
               hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
               hx-swap="outerHTML"
+              id="form-for-{{ editable_object.safe_html_path() }}"
               autocomplete="off">
+            <input type="hidden"
+                   name="form-id"
+                   value="form-for-{{ editable_object.safe_html_path() }}">
             <div class="rvo-layout-grid-container">
                 {% if editable_object.implementation_type.type is none %}
+                    {# TODO: hardcoded check could be made more elegant #}
+                    {% if editable_object.last_path_item() == "ai_act_profile" %}{{ show_ai_act_button() }}{% endif %}
                     <div class="amt-blocks-with-vertical-spacing">
                         {% for child_editable in editable_object.children %}
                             <div>
@@ -117,22 +131,24 @@
                 {% endif %}
             </div>
         </form>
-        {#    we need the errorContainer to keep htmx happy, so we hide te contents#}
-        <div id="errorContainer" class="display-none"></div>
+        {# we need the errorContainer to keep htmx happy, but we hide the contents #}
+        <div id="errorContainer-{{ editable_object.safe_html_path() }}"
+             class="display-none"></div>
     </span>
 {% endmacro %}
 {% macro inline_editor_form_field(editable_object) %}
     <div>
         {% if editable_object.implementation_type.type == WebFormFieldType.TEXTAREA %}
             <!-- TODO: classes utrecht-textarea seem to be missing? wrong NL design version? -->
-            <textarea id="field"
+            <textarea id="field-{{ editable_object.last_path_item() }}"
                       name="{{ editable_object.last_path_item() }}"
                       placeholder=""
                       class="utrecht-textbox utrecht-textarea utrecht-textarea--html-textarea"
                       dir="auto">{{ editable_object.value }}</textarea>
         {% elif editable_object.implementation_type.type == WebFormFieldType.SELECT %}
-            <div class="rvo-select-wrapper">
-                <select id="field"
+            <div class="rvo-select-wrapper"
+                 style="max-inline-size: clamp(20rem, 40%, 50rem)">
+                <select id="field-{{ editable_object.last_path_item() }}"
                         name="{{ editable_object.last_path_item() }}"
                         class="utrecht-select utrecht-select--html-select">
                     {% for e in editable_object.form_options %}
@@ -146,13 +162,13 @@
         {% elif is_nested_enum(editable_object.resource_object, editable_object.relative_resource_path) %}
             {% set value = nested_value(editable_object.resource_object, editable_object.relative_resource_path) %}
             <div class="rvo-select-wrapper">
-                <select id="field"
+                <select id="field-{{ editable_object.last_path_item() }}"
                         name="{{ editable_object.last_path_item() }}"
                         class="utrecht-select utrecht-select--html-select">
-                    {% for e in nested_enum(editable_object.resource_object, editable_object.relative_resource_path, language) %}
-                        <option value="{{ e.value }}"
-                                {% if e.value == value %}selected="selected"{% endif %}>
-                            {{ e.display_value | safe }}
+                    {% for option in nested_enum(editable_object.resource_object, editable_object.relative_resource_path, language) %}
+                        <option value="{{ option.value }}"
+                                {% if option.value == value %}selected="selected"{% endif %}>
+                            {{ option.display_value | safe }}
                         </option>
                     {% endfor %}
                 </select>
@@ -163,6 +179,23 @@
                    value="{{ nested_value(editable_object.resource_object, editable_object.relative_resource_path) }}"
                    class="utrecht-textbox utrecht-textbox--html-input utrecht-textbox--md"
                    dir="auto">
+        {% elif editable_object.implementation_type.type == WebFormFieldType.CHECKBOX_MULTIPLE %}
+            <div class="utrecht-form-field utrecht-form-field--text rvo-form-field">
+                {% set value = nested_value(editable_object.resource_object, editable_object.relative_resource_path) %}
+                {% for option in editable_object.form_options %}
+                    <div class="rvo-checkbox__group">
+                        <label class="rvo-checkbox rvo-checkbox--not-checked" for="{{ option }}">
+                            <input id="{{ editable_object.last_path_item() }}-{{ loop.index }}"
+                                   name="{{ editable_object.last_path_item() }}"
+                                   class="rvo-checkbox__input"
+                                   type="checkbox"
+                                   {% if option.value is equal_or_includes(value) %}checked="checked"{% endif %}
+                                   value="{{ option.value }}" />
+                            {{ option.display_value | safe }}
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
         {% else %}
             <input type="text"
                    name="{{ editable_object.last_path_item() }}"

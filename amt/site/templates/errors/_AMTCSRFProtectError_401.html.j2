@@ -21,12 +21,17 @@
               aria-label="Kruis"></span>
     </button>
     <script type="text/javascript">
-        window.setTimeout(function() {
+        window.setTimeout(function () {
             try {
                 document.getElementById('general-error-content').remove()
             } catch (e) {
                 // ok
             }
         }, 5000)
+        document.getElementById('general-error-container').scrollIntoView({
+            behavior: "smooth",
+            block: "end",
+            inline: "nearest"
+        });
     </script>
 </div>

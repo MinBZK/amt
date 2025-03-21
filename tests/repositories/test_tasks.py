@@ -3,6 +3,7 @@ from amt.core.exceptions import AMTRepositoryError
 from amt.enums.tasks import Status
 from amt.models import Task
 from amt.repositories.tasks import TasksRepository
+from sqlalchemy.exc import IntegrityError, InvalidRequestError
 from tests.constants import default_algorithm, default_task, default_user
 from tests.database_test_utils import DatabaseTestUtils
 
@@ -46,6 +47,7 @@ async def test_save_all(db: DatabaseTestUtils):
     task_1: Task = Task(id=1, title="Test title 1", description="Test description 1", sort_order=10)
     task_2: Task = Task(id=2, title="Test title 2", description="Test description 2", sort_order=11)
     await tasks_repository.save_all([task_1, task_2])
+    await tasks_repository.session.commit()
     result_1 = await tasks_repository.find_by_id(1)
     result_2 = await tasks_repository.find_by_id(2)
 
@@ -68,11 +70,10 @@ async def test_save_all_failed(db: DatabaseTestUtils):
     tasks_repository: TasksRepository = TasksRepository(db.get_session())
     task: Task = Task(id=1, title="Test title", description="Test description", sort_order=10)
     await tasks_repository.save_all([task])
-    task_duplicate: Task = Task(id=1, title="Test title duplicate", description="Test description", sort_order=10)
-    with pytest.raises(AMTRepositoryError):
-        await tasks_repository.save_all([task_duplicate])
 
-    await tasks_repository.delete(task)  # cleanup
+    task_duplicate: Task = Task(id=1, title="Test title duplicate", description="Test description", sort_order=10)
+    with pytest.raises(IntegrityError):
+        await tasks_repository.save_all([task_duplicate])
 
 
 @pytest.mark.asyncio
@@ -94,17 +95,15 @@ async def test_save_failed(db: DatabaseTestUtils):
     task: Task = Task(id=1, title="Test title", description="Test description", sort_order=10)
     await tasks_repository.save(task)
     task_duplicate: Task = Task(id=1, title="Test title duplicate", description="Test description", sort_order=10)
-    with pytest.raises(AMTRepositoryError):
+    with pytest.raises(IntegrityError):
         await tasks_repository.save(task_duplicate)
-
-    await tasks_repository.delete(task)  # cleanup
 
 
 @pytest.mark.asyncio
 async def test_delete_failed(db: DatabaseTestUtils):
     tasks_repository: TasksRepository = TasksRepository(db.get_session())
     task: Task = Task(id=1, title="Test title", description="Test description", sort_order=10)
-    with pytest.raises(AMTRepositoryError):
+    with pytest.raises(InvalidRequestError):
         await tasks_repository.delete(task)
 
 

@@ -2,12 +2,11 @@ import logging
 from uuid import UUID
 
 from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
 
 from amt.core.authorization import AuthorizationResource, AuthorizationType, AuthorizationVerb
 from amt.models import Authorization, Role, Rule, User
 from amt.repositories.algorithms import AlgorithmsRepository
-from amt.repositories.deps import get_session_non_generator
+from amt.repositories.deps import AsyncSessionWithCommitFlag, get_session_non_generator
 from amt.repositories.organizations import OrganizationsRepository
 from amt.repositories.users import UsersRepository
 
@@ -22,12 +21,13 @@ class AuthorizationRepository:
     The AuthorizationRepository provides access to the repository layer.
     """
 
-    def __init__(self, session: AsyncSession | None = None) -> None:
+    def __init__(self, session: AsyncSessionWithCommitFlag | None = None) -> None:
         self.session = session
 
     async def init_session(self) -> None:
         if self.session is None:
             self.session = await get_session_non_generator()
+        logger.debug(f"Repository {self.__class__.__name__} using session ID: {self.session.info.get('id', 'unknown')}")
 
     async def get_user(self, user_id: UUID) -> User | None:
         try:

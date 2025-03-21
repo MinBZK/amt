@@ -143,36 +143,35 @@
                             <div id="delete-file-modal-{{ ulid }}" class="minbzk-modal display-none">
                                 <div class="modal-underlay"
                                      onclick="amt.closeModal('delete-file-modal-{{ ulid }}')"></div>
-                                <div class="modal-content rvo-layout-column rvo-layout-align-content-space-between"
-                                     style="overflow-x: hidden;
-                                            min-height: 240px;
-                                            height: auto;
-                                            width: auto">
-                                    <div class="amt-flex-container">
-                                        <h3 class="utrecht-heading-3 rvo-heading--no-margins">{% trans %}Delete file{% endtrans %}</h3>
-                                        <a onclick="amt.closeModal('delete-file-modal-{{ ulid }}')"><span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--md rvo-icon--hemelblauw"
-      role="img"
-      aria-label="Close"></span></a>
-                                    </div>
-                                    <hr class="rvo-hr" />
-                                    <p style="min-height: 54%; padding-block: 0.5em 0.4em;">
-                                        {% trans %}Are you sure you want to delete{% endtrans %}
-                                        <strong>{{ file }}?</strong>
-                                    </p>
-                                    <div class="utrecht-button-group">
-                                        <button hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
-                                                hx-delete="/algorithm/{{ algorithm_id }}/file/{{ ulid }}"
-                                                hx-target="#file-{{ ulid }}"
-                                                hx-swap="delete"
-                                                hx-on::after-request="amt.closeModal('delete-file-modal-{{ ulid }}')"
-                                                class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
-                                                type="button">
-                                            {% trans %}Yes{%
-                                            endtrans %}
-                                        </button>
-                                        <button class="utrecht-button utrecht-button--secondary-action utrecht-button--rvo-md"
-                                                onclick="amt.closeModal('delete-file-modal-{{ ulid }}')"
-                                                type="button">{% trans %}No{% endtrans %}</button>
+                                <div class="modal-content-container">
+                                    <div class="modal-content rvo-layout-column rvo-layout-align-content-space-between"
+                                         style="overflow-x: hidden;
+                                                min-height: 240px;
+                                                height: auto;
+                                                width: auto">
+                                        <div class="amt-flex-container">
+                                            <h3 class="utrecht-heading-3 rvo-heading--no-margins">{% trans %}Delete file{% endtrans %}</h3>
+                                        </div>
+                                        <hr class="rvo-hr" />
+                                        <p style="min-height: 54%; padding-block: 0.5em 0.4em;">
+                                            {% trans %}Are you sure you want to delete{% endtrans %}
+                                            <strong>{{ file }}?</strong>
+                                        </p>
+                                        <div class="utrecht-button-group">
+                                            <button hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
+                                                    hx-delete="/algorithm/{{ algorithm_id }}/file/{{ ulid }}"
+                                                    hx-target="#file-{{ ulid }}"
+                                                    hx-swap="delete"
+                                                    hx-on::after-request="amt.closeModal('delete-file-modal-{{ ulid }}')"
+                                                    class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
+                                                    type="button">
+                                                {% trans %}Yes{%
+                                                endtrans %}
+                                            </button>
+                                            <button class="utrecht-button utrecht-button--secondary-action utrecht-button--rvo-md"
+                                                    onclick="amt.closeModal('delete-file-modal-{{ ulid }}')"
+                                                    type="button">{% trans %}No{% endtrans %}</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -354,9 +353,7 @@
         <div class="rvo-form-field__label rvo-layout-gap--0">
             <label id="label-{{ prefix }}{{ field.name }}"
                    class="rvo-label {% if field.required %}rvo-label--required{% endif %}">{{ field.label }}</label>
-            {% if field.description %}
-                <div class="utrecht-form-field-description">{{ field.description }}</div>
-            {% endif %}
+            {% if field.description %}<div class="utrecht-form-field-description">{{ field.description }}</div>{% endif %}
         </div>
         <div id="error-{{ field.name }}" class="htmx-error-oob"></div>
         <div class="amt-position-relative">

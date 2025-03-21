@@ -5,22 +5,22 @@ from uuid import UUID
 
 from fastapi import Depends
 from sqlalchemy import Select, func, select
-from sqlalchemy.exc import NoResultFound, SQLAlchemyError
-from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.exc import NoResultFound
 from sqlalchemy.orm import lazyload
 from sqlalchemy_utils import escape_like  # pyright: ignore[reportMissingTypeStubs, reportUnknownVariableType]
 
 from amt.api.organization_filter_options import OrganizationFilterOptions
 from amt.core.exceptions import AMTRepositoryError
 from amt.models import Organization, User
-from amt.repositories.deps import get_session
+from amt.repositories.deps import AsyncSessionWithCommitFlag, get_session
 
 logger = logging.getLogger(__name__)
 
 
 class OrganizationsRepository:
-    def __init__(self, session: Annotated[AsyncSession, Depends(get_session)]) -> None:
+    def __init__(self, session: Annotated[AsyncSessionWithCommitFlag, Depends(get_session)]) -> None:
         self.session = session
+        logger.debug(f"Repository {self.__class__.__name__} using session ID: {self.session.info.get('id', 'unknown')}")
 
     def _as_count_query(self, statement: Select[Any]) -> Select[Any]:
         statement = statement.with_only_columns(func.count()).order_by(None)
@@ -93,14 +93,9 @@ class OrganizationsRepository:
         return (await self.session.execute(statement)).scalars().first()
 
     async def save(self, organization: Organization) -> Organization:
-        try:
-            self.session.add(organization)
-            await self.session.commit()
-            await self.session.refresh(organization)
-        except SQLAlchemyError as e:
-            logger.exception("Error saving organization")
-            await self.session.rollback()
-            raise AMTRepositoryError from e
+        self.session.add(organization)
+        await self.session.flush()
+        self.session.should_commit = True
         return organization
 
     async def find_by_slug(self, slug: str) -> Organization:

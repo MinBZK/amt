@@ -10,6 +10,7 @@ from amt.models.task import Task
 from amt.models.user import User
 from amt.repositories.tasks import TasksRepository
 from amt.schema.instrument import InstrumentTask
+from amt.schema.measure import MeasureTask
 from amt.schema.system_card import SystemCard
 from amt.services.storage import StorageFactory
 
@@ -99,3 +100,14 @@ class TasksService:
 
     async def find_by_algorithm_id_and_status_id(self, algorithm_id: int, status_id: int) -> Sequence[Task]:
         return await self.repository.find_by_algorithm_id_and_status_id(algorithm_id, status_id)
+
+    async def add_tasks(
+        self, algorithm_id: int, task_type: TaskType, tasks: list[MeasureTask], start_at: float = 0
+    ) -> None:
+        return await self.repository.add_tasks(algorithm_id, task_type, tasks, start_at)
+
+    async def get_last_task(self, algorithm_id: int) -> Task | None:
+        return await self.repository.get_last_task(algorithm_id)
+
+    async def remove_tasks(self, algorithm_id: int, task_type: TaskType, tasks: list[MeasureTask]) -> None:
+        return await self.repository.remove_tasks(algorithm_id, task_type, tasks)

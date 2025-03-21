@@ -12,39 +12,32 @@
         <div class="minbzk-modal">
             <div class="modal-underlay"
                  onclick="this.closest('.minbzk-modal').remove()"></div>
-            <div class="modal-content rvo-layout-column"
-                 style="overflow-x: hidden;
-                        height: auto;
-                        width: auto">
-                <div class="amt-flex-container">
-                    <h3 class="utrecht-heading-3 rvo-heading--no-margins" data-target="title">__TITLE__</h3>
-                    <a onclick="this.closest('.minbzk-modal').remove()">
-                        <span class="amt-cursor-pointer utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--md rvo-icon--hemelblauw"
-                              role="img"
-                              aria-label="{% trans %}Close{% endtrans %}"></span></a>
+            <div class="modal-content-container model-content-auto-size">
+                <div class="modal-content rvo-layout-column"
+                     style="overflow-x: hidden;
+                            height: auto;
+                            width: auto">
+                    <div class="amt-flex-container">
+                        <h3 class="utrecht-heading-3 rvo-heading--no-margins" data-target="title">__TITLE__</h3>
+                        <a onclick="this.closest('.minbzk-modal').remove()">
+                            <span class="amt-cursor-pointer utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--md rvo-icon--hemelblauw"
+                                  role="img"
+                                  aria-label="{% trans %}Close{% endtrans %}"></span></a>
+                    </div>
+                    <hr class="rvo-hr" />
+                    <div data-target="content"
+                         class="rvo-margin-block-start--lg rvo-margin-block-end--lg">__CONTENT__</div>
+                    <p class="utrecht-button-group">
+                        <button data-target="confirm-button"
+                                hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
+                                class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
+                                type="button">{% trans %}Yes{% endtrans %}</button>
+                        <button class="utrecht-button utrecht-button--secondary-action utrecht-button--rvo-md"
+                                onclick="this.closest('.minbzk-modal').remove()"
+                                type="button">{% trans %}No{% endtrans %}</button>
+                    </p>
                 </div>
-                <hr class="rvo-hr" />
-                <div data-target="content"
-                     class="rvo-margin-block-start--lg rvo-margin-block-end--lg">__CONTENT__</div>
-                <p class="utrecht-button-group">
-                    <button data-target="confirm-button"
-                            hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
-                            class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
-                            type="button">{% trans %}Yes{% endtrans %}</button>
-                    <button class="utrecht-button utrecht-button--secondary-action utrecht-button--rvo-md"
-                            onclick="this.closest('.minbzk-modal').remove()"
-                            type="button">{% trans %}No{% endtrans %}</button>
-                </p>
             </div>
         </div>
     </template>
-    <div id="members-modal" class="minbzk-modal display-none">
-        <div class="modal-underlay"
-             onclick="amt.closeAndResetDynamicModal('members-modal');"></div>
-        <div class="modal-content rvo-layout-column rvo-layout-gap--md"
-             style="height: auto;
-                    min-height: 50%">
-            <div id="dynamic-modal-content"></div>
-        </div>
-    </div>
 {% endblock content %}
