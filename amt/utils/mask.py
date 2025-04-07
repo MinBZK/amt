@@ -11,7 +11,7 @@ class Mask:
         self.keywords: list[str] = ["password", "secret"]
         self.keywords.extend(mask_keywords or [])
 
-    def secrets(  # noqa: C901ß
+    def secrets(  # noqa: C901
         self, data: str | list[Any] | dict[Any, Any] | set[Any]
     ) -> str | list[Any] | dict[Any, Any] | set[Any]:
         if isinstance(data, dict):

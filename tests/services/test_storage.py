@@ -19,7 +19,7 @@ def test_file_system_writer_empty_yaml(setup_and_teardown: tuple[str, Path]) -> 
     storage_writer = StorageFactory.init(storage_type="file", location=location, filename=filename)
     storage_writer.write({})
 
-    assert Path.is_file(Path(location) / filename), True
+    assert Path.is_file(Path(location) / filename)
 
 
 def test_file_system_writer_no_location_variable(setup_and_teardown: tuple[str, Path]) -> None:
@@ -41,7 +41,7 @@ def test_file_system_writer_yaml_with_content(setup_and_teardown: tuple[str, Pat
     storage_writer.write(data)
 
     with open(Path(location) / filename) as f:
-        assert safe_load(f) == data, True
+        assert safe_load(f) == data
 
 
 def test_file_system_writer_yaml_with_content_in_dir(setup_and_teardown: tuple[str, Path]) -> None:
@@ -53,7 +53,7 @@ def test_file_system_writer_yaml_with_content_in_dir(setup_and_teardown: tuple[s
     storage_writer.write(data)
 
     with open(new_location / filename) as f:
-        assert safe_load(f) == data, True
+        assert safe_load(f) == data
 
 
 def test_file_system_writer_with_system_card(setup_and_teardown: tuple[str, Path]) -> None:
@@ -66,7 +66,7 @@ def test_file_system_writer_with_system_card(setup_and_teardown: tuple[str, Path
     storage_writer.write(data_dict)
 
     with open(Path(location) / filename) as f:
-        assert safe_load(f) == data_dict, True
+        assert safe_load(f) == data_dict
 
 
 def test_abstract_writer_non_yaml_filename(setup_and_teardown: tuple[str, Path]) -> None:

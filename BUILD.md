@@ -121,10 +121,10 @@ pip install --upgrade setuptools
 
 For testing, linting and other feature we use several tools. You can look up the documentation on how to use these:
 
-- [pytest](https://docs.pytest.org/en/) `poetry run pytest`
-- [ruff](https://docs.astral.sh/ruff/) `poetry run ruff format` or `poetry run ruff check --fix`
-- [coverage](https://coverage.readthedocs.io/en/) `poetry run coverage report`
-- [pyright](https://microsoft.github.io/pyright/#/) `poetry run pyright`
+-   [pytest](https://docs.pytest.org/en/) `poetry run pytest`
+-   [ruff](https://docs.astral.sh/ruff/) `poetry run ruff format` or `poetry run ruff check --fix`
+-   [coverage](https://coverage.readthedocs.io/en/) `poetry run coverage report`
+-   [pyright](https://microsoft.github.io/pyright/#/) `poetry run pyright`
 
 ## Devcontainers
 
