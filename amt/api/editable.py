@@ -23,6 +23,8 @@ from amt.schema.webform import WebFormFieldImplementationType, WebFormOption
 from amt.services.algorithms import AlgorithmsService
 from amt.services.organizations import OrganizationsService
 
+logger = logging.getLogger(__name__)
+
 
 class Editables:
     ALGORITHM_EDITABLE_NAME: Editable = Editable(
@@ -361,7 +363,7 @@ async def get_enriched_resolved_editable(
     # TODO: it would be better to only resolve the required / requested editable and not everything
     editable = get_resolved_editables(context_variables=context_variables).get(full_resource_path)
     if not editable:
-        logging.error(f"Unknown editable for path: {full_resource_path}")
+        logger.error(f"Unknown editable for path: {full_resource_path}")
         raise AMTNotFound()
 
     return await enrich_editable(
@@ -394,7 +396,7 @@ async def enrich_editable(  # noqa: C901
                 raise ValueError("Organization service is required when resolving an organization")
             editable.resource_object = await organizations_service.get_by_id(int(resource_id))
         case _:
-            logging.error(f"Unknown resource: {resource_name}")
+            logger.error(f"Unknown resource: {resource_name}")
             raise AMTNotFound()
 
     if editable.implementation_type != WebFormFieldImplementationType.PARENT:
@@ -565,7 +567,7 @@ async def save_editable(  # noqa: C901
                     raise ValueError("Organization service is required when saving an organization")
                 editable.resource_object = await organizations_service.update(editable.resource_object)
             case _:
-                logging.error(f"Unknown resource type: {type(editable.resource_object)}")
+                logger.error(f"Unknown resource type: {type(editable.resource_object)}")
                 raise AMTNotFound()
 
     return editable
