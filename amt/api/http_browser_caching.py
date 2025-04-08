@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import NamedTuple
 from urllib.parse import ParseResult, urlencode
 
-from starlette._compat import md5_hexdigest
+from starlette._compat import md5_hexdigest  # pyright: ignore[reportPrivateImportUsage]
 from starlette.responses import Response
 from starlette.staticfiles import StaticFiles
 from starlette.types import Scope

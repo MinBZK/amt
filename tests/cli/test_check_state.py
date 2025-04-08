@@ -1,10 +1,8 @@
-# pyright: reportUnknownMemberType=false, reportUnknownVariableType=false, reportAttributeAccessIssue=false
 from pathlib import Path
 from typing import Any
 
-import amt.services.instruments_and_requirements_state
 import pytest
-from amt.cli.check_state import get_requested_instruments, get_tasks_by_priority
+from amt.cli.check_state import get_requested_instruments, get_system_card, get_tasks_by_priority
 from amt.core.exceptions import AMTInstrumentError
 from amt.schema.instrument import InstrumentTask
 from amt.schema.system_card import SystemCard
@@ -40,7 +38,7 @@ def test_get_system_card(system_card: SystemCard, system_card_data: dict[str, An
         "amt.services.storage.StorageFactory.init",
         return_value=mocker.Mock(read=mocker.Mock(return_value=system_card_data)),
     )
-    assert system_card == amt.cli.check_state.get_system_card(Path("dummy"))
+    assert system_card == get_system_card(Path("dummy"))
 
 
 def test_get_requested_instruments():
