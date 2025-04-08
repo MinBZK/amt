@@ -84,16 +84,16 @@ def get_nested(obj: Any, attr_path: str) -> Any:  # noqa: ANN401
     attrs = attr_path.lstrip("/").split("/") if "/" in attr_path else attr_path.lstrip(".").split(".")
     for attr in attrs:
         attr, index = extract_number_and_string(attr)
-        if hasattr(obj, attr):
-            obj = getattr(obj, attr)
+        if hasattr(obj, attr):  # pyright: ignore[reportUnknownVariableType, reportUnknownArgumentType]
+            obj = getattr(obj, attr)  # pyright: ignore[reportUnknownVariableType, reportUnknownArgumentType]
         elif isinstance(obj, dict) and attr in obj:
-            obj = obj[attr]
+            obj = obj[attr]  # pyright: ignore[reportUnknownVariableType]
         else:
             obj = None
             break
         if obj and index is not None:
-            obj = obj[index]
-    return obj
+            obj = obj[index]  # pyright: ignore[reportUnknownVariableType]
+    return obj  # pyright: ignore[reportUnknownVariableType]
 
 
 def nested_value(obj: Any, attr_path: str, default_value: str | list[str] | None = "") -> Any:  # noqa: ANN401

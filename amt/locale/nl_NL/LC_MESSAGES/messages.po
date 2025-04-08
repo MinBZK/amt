@@ -253,7 +253,7 @@ msgstr "Niet van toepassing"
 msgid "Information on how this measure is implemented"
 msgstr "Informatie over hoe deze maatregel is geïmplementeerd"
 
-#: amt/api/forms/measure.py:79
+#: amt/api/forms/measure.py:80
 msgid ""
 "Select one or more to upload. The files will be saved once you confirm "
 "changes by pressing the save button."
@@ -319,6 +319,7 @@ msgid "Add organization"
 msgstr "Organisatie toevoegen"
 
 #: amt/core/exception_handlers.py:20
+#, python-brace-format
 msgid "String should have at least {min_length} characters"
 msgstr "Tekst moet minimaal {min_length} tekens bevatten"
 
@@ -327,6 +328,7 @@ msgid "Field required"
 msgstr "Veld verplicht"
 
 #: amt/core/exception_handlers.py:23
+#, python-brace-format
 msgid "String should match pattern '{pattern}'"
 msgstr "De waarde moet voldoen aan het patroon '{pattern}'"
 
@@ -334,7 +336,8 @@ msgstr "De waarde moet voldoen aan het patroon '{pattern}'"
 msgid "Input should be a valid integer."
 msgstr "Invoer moet een valide getal zijn."
 
-#: amt/core/exceptions.py:20
+#: amt/core/exceptions.py:21
+#, python-brace-format
 msgid ""
 "An error occurred while configuring the options for '{field}'. Please "
 "check the settings and try again."
@@ -352,7 +355,7 @@ msgstr ""
 "Er is een fout opgetreden tijdens het verwerken van het instrument. "
 "Probeer het later opnieuw."
 
-#: amt/core/exceptions.py:40 amt/core/exceptions.py:86
+#: amt/core/exceptions.py:41 amt/core/exceptions.py:87
 msgid ""
 "The requested page or resource could not be found, or you do not have the"
 " correct permissions to access it. Please check the URL or query and try "
@@ -371,10 +374,12 @@ msgid "Only static files are supported."
 msgstr "Alleen statische bestanden worden ondersteund."
 
 #: amt/core/exceptions.py:62
+#, python-brace-format
 msgid "Key not correct: {field}"
 msgstr "Sleutel niet correct: {field}"
 
 #: amt/core/exceptions.py:68
+#, python-brace-format
 msgid "Value not correct: {field}"
 msgstr "Waarde is niet correct: {field}"
 

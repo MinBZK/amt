@@ -250,7 +250,7 @@ msgstr ""
 msgid "Information on how this measure is implemented"
 msgstr ""
 
-#: amt/api/forms/measure.py:79
+#: amt/api/forms/measure.py:80
 msgid ""
 "Select one or more to upload. The files will be saved once you confirm "
 "changes by pressing the save button."
@@ -312,6 +312,7 @@ msgid "Add organization"
 msgstr ""
 
 #: amt/core/exception_handlers.py:20
+#, python-brace-format
 msgid "String should have at least {min_length} characters"
 msgstr ""
 
@@ -320,6 +321,7 @@ msgid "Field required"
 msgstr ""
 
 #: amt/core/exception_handlers.py:23
+#, python-brace-format
 msgid "String should match pattern '{pattern}'"
 msgstr ""
 
@@ -327,7 +329,8 @@ msgstr ""
 msgid "Input should be a valid integer."
 msgstr ""
 
-#: amt/core/exceptions.py:20
+#: amt/core/exceptions.py:21
+#, python-brace-format
 msgid ""
 "An error occurred while configuring the options for '{field}'. Please "
 "check the settings and try again."
@@ -341,7 +344,7 @@ msgstr ""
 msgid "An error occurred while processing the instrument. Please try again later."
 msgstr ""
 
-#: amt/core/exceptions.py:40 amt/core/exceptions.py:86
+#: amt/core/exceptions.py:41 amt/core/exceptions.py:87
 msgid ""
 "The requested page or resource could not be found, or you do not have the"
 " correct permissions to access it. Please check the URL or query and try "
@@ -357,10 +360,12 @@ msgid "Only static files are supported."
 msgstr ""
 
 #: amt/core/exceptions.py:62
+#, python-brace-format
 msgid "Key not correct: {field}"
 msgstr ""
 
 #: amt/core/exceptions.py:68
+#, python-brace-format
 msgid "Value not correct: {field}"
 msgstr ""
 
