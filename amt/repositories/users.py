@@ -1,30 +1,35 @@
 import logging
 from collections.abc import Sequence
-from typing import Annotated, cast
+from typing import Annotated
 from uuid import UUID
 
 from fastapi import Depends
 from sqlalchemy import func, select
 from sqlalchemy.exc import NoResultFound, SQLAlchemyError
-from sqlalchemy.orm import lazyload
 from sqlalchemy_utils import escape_like  # pyright: ignore[reportMissingTypeStubs, reportUnknownVariableType]
+from typing_extensions import deprecated
 
 from amt.core.exceptions import AMTRepositoryError
-from amt.models import Organization, User
+from amt.models import User
 from amt.repositories.deps import AsyncSessionWithCommitFlag, get_session
+from amt.repositories.repository_classes import BaseRepository
 
 logger = logging.getLogger(__name__)
 
 
-class UsersRepository:
+class UsersRepository(BaseRepository):
     """
     The UsersRepository provides access to the repository layer.
     """
 
     def __init__(self, session: Annotated[AsyncSessionWithCommitFlag, Depends(get_session)]) -> None:
-        self.session = session
-        logger.debug(f"Repository {self.__class__.__name__} using session ID: {self.session.info.get('id', 'unknown')}")
+        super().__init__(session)
+        self.cache: dict[UUID, User | None] = {}
 
+    @deprecated(
+        "This method can only be used to find all users."
+        "Use the authorizations service to get organization or algorithm users"
+    )
     async def find_all(
         self,
         search: str | None = None,
@@ -36,17 +41,12 @@ class UsersRepository:
         statement = select(User)
         if search:
             statement = statement.filter(User.name.ilike(f"%{escape_like(search)}%"))
-        if filters and "organization-id" in filters:
-            statement = statement.where(
-                User.organizations.any(Organization.id == int(cast(str, filters["organization-id"])))
-            )
         if sort:
             if "name" in sort and sort["name"] == "ascending":
                 statement = statement.order_by(func.lower(User.name).asc())
             elif "name" in sort and sort["name"] == "descending":
                 statement = statement.order_by(func.lower(User.name).desc())
         # https://docs.sqlalchemy.org/en/14/orm/loading_relationships.html#lazy-loading
-        statement = statement.options(lazyload(User.organizations))
         if skip:
             statement = statement.offset(skip)
         if limit:
@@ -61,13 +61,15 @@ class UsersRepository:
         :return: the user with the given id or an exception if no user was found
         """
         id = UUID(id) if isinstance(id, str) else id
-        statement = select(User).where(User.id == id)
-        # https://docs.sqlalchemy.org/en/14/orm/loading_relationships.html#lazy-loading
-        statement = statement.options(lazyload(User.organizations))
-        try:
-            return (await self.session.execute(statement)).scalars().one()
-        except NoResultFound:
-            return None
+        if id not in self.cache:
+            try:
+                # only cache existing users
+                statement = select(User).where(User.id == id)
+                new_user = (await self.session.execute(statement)).scalars().one()
+                self.cache[id] = new_user
+            except NoResultFound:
+                return None
+        return self.cache[id]
 
     async def upsert(self, user: User) -> User:
         """

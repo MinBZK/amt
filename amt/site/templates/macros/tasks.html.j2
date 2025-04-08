@@ -43,7 +43,12 @@
                 {% trans %}Unknown{% endtrans %}
             {% endif %}
         </h5>
-        <div class="progress-cards-container sortable"
+        {% if permission(permission_path, 'Update', permissions) == True %}
+            {% set column_class = "progress-cards-container sortable" %}
+        {% else %}
+            {% set column_class = "progress-cards-container" %}
+        {% endif %}
+        <div class="{{ column_class }}"
              data-id="{{ status.value }}"
              id="column-{{ status.value }}">
             {% if algorithm is defined %}
@@ -55,7 +60,7 @@
     </div>
 {% endmacro -%}
 {% macro render_task_card_full(task) -%}
-    <div draggable="true"
+    <div {% if permission(permission_path, 'Update', permissions) == True %}draggable="true"{% endif %}
          class="progress-card-container"
          data-target-id="card-content-{{ task.id }}"
          id="card-container-{{ task.id }}"
@@ -86,18 +91,20 @@
                         {% if hasattr(task, "type_object.users") and task.type_object.users | length > 0 %}
                             {{ macros.user_avatars(task.type_object.users) }}
                         {% endif %}
-                        <div style="float: right; margin-top: 0.4em;">
-                            <a class="rvo-link rvo-link--normal rvo-link--with-icon"
-                               hx-trigger="click"
-                               hx-target="#dynamic-modal-content"
-                               hx-get="/algorithm/{{ algorithm_id }}/measure/{{ task.type_object.urn }}"
-                               hx-swap="innerHTML"
-                               onclick="amt.openModal('modal')">
-                                <span class="utrecht-icon rvo-icon rvo-icon-bewerken rvo-icon--lg rvo-icon--hemelblauw rvo-link__icon--before"
-                                      role="img"
-                                      aria-label="{% trans %}Edit{% endtrans %}"></span>
-                            </a>
-                        </div>
+                        {% if permission(permission_path, 'Update', permissions) == True %}
+                            <div style="float: right; margin-top: 0.4em;">
+                                <a class="rvo-link rvo-link--normal rvo-link--with-icon"
+                                   hx-trigger="click"
+                                   hx-target="#dynamic-modal-content"
+                                   hx-get="/algorithm/{{ algorithm_id }}/measure/{{ task.type_object.urn }}"
+                                   hx-swap="innerHTML"
+                                   onclick="amt.openModal('modal')">
+                                    <span class="utrecht-icon rvo-icon rvo-icon-bewerken rvo-icon--lg rvo-icon--hemelblauw rvo-link__icon--before"
+                                          role="img"
+                                          aria-label="{% trans %}Edit{% endtrans %}"></span>
+                                </a>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             {% endif %}

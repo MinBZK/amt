@@ -4,13 +4,14 @@ import pytest
 from amt.core.exceptions import AMTRepositoryError
 from amt.repositories.users import UsersRepository
 from sqlalchemy.exc import SQLAlchemyError
-from tests.constants import default_user
+from tests.constants import default_organization, default_user
 from tests.database_test_utils import DatabaseTestUtils
 
 
 @pytest.mark.asyncio
 async def test_find_by_id(db: DatabaseTestUtils):
-    await db.given([default_user()])
+    await db.given([default_user(), default_organization()])
+    await db.init_authorizations_and_roles()
     users_repository = UsersRepository(db.get_session())
     result = await users_repository.find_by_id(default_user().id)
     assert result is not None
@@ -31,7 +32,8 @@ async def test_upsert_new(db: DatabaseTestUtils):
 
 @pytest.mark.asyncio
 async def test_upsert_existing(db: DatabaseTestUtils):
-    await db.given([default_user()])
+    await db.given([default_user(), default_organization()])
+    await db.init_authorizations_and_roles()
     new_user = default_user(name="John Smith New")
     users_repository = UsersRepository(db.get_session())
     await users_repository.upsert(new_user)

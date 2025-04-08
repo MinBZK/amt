@@ -10,19 +10,19 @@ from amt.core.exceptions import AMTRepositoryError
 from amt.enums.tasks import Status, TaskType
 from amt.models import Task
 from amt.repositories.deps import AsyncSessionWithCommitFlag, get_session
+from amt.repositories.repository_classes import BaseRepository
 from amt.schema.measure import MeasureTask
 
 logger = logging.getLogger(__name__)
 
 
-class TasksRepository:
+class TasksRepository(BaseRepository):
     """
     The TasksRepository provides access to the repository layer.
     """
 
     def __init__(self, session: Annotated[AsyncSessionWithCommitFlag, Depends(get_session)]) -> None:
-        self.session = session
-        logger.debug(f"Repository {self.__class__.__name__} using session ID: {self.session.info.get('id', 'unknown')}")
+        super().__init__(session)
 
     async def find_all(self) -> Sequence[Task]:
         """

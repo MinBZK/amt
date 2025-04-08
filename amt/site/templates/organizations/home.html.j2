@@ -1,24 +1,25 @@
 {% extends 'layouts/base.html.j2' %}
-{% from "macros/editable.html.j2" import editable with context %}
+{% from "macros/editable_macros.html.j2" import editable with context %}
 {% import "macros/form_macros.html.j2" as macros with context %}
 {% import "macros/tabs.html.j2" as tabs with context %}
 {% block content %}
     <div class="rvo-max-width-layout rvo-max-width-layout--lg rvo-max-width-layout-inline-padding--none">
         {{ tabs.show_tabs(tab_items) }}
         <h1 class="utrecht-heading-1 rvo-margin-block-start--lg">{% trans %}Info{% endtrans %}</h1>
+        {% set has_permission = permission("organization/" ~ organization_id, 'Update', permissions) %}
         <div class="rvo-table--responsive rvo-alert--padding-md">
             <table class="rvo-table">
                 <tbody class="rvo-table-body">
                     <tr class="rvo-table-row">
                         <td class="rvo-table-cell">{% trans %}Name{% endtrans %}</td>
                         <td class="rvo-table-cell">
-                            {{ editable(organization, "name", "organization/" + organization_id|string + "/name") }}
+                            {{ editable(organization, "name", "organization/" + organization_id|string + "/name", None, has_permission) }}
                         </td>
                     </tr>
                     <tr class="rvo-table-row">
                         <td class="rvo-table-cell">{% trans %}Slug{% endtrans %}</td>
                         <td class="rvo-table-cell">
-                            {{ editable(organization, "slug", "organization/" + organization_id|string + "/slug") }}
+                            {{ editable(organization, "slug", "organization/" + organization_id|string + "/slug", None, has_permission) }}
                         </td>
                     </tr>
                     <tr class="rvo-table-row">
