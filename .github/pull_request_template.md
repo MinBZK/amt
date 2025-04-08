@@ -12,8 +12,8 @@ Resolves #
 
 Please check all the boxes that apply to this pull request using "x":
 
--   [ ] I have tested the changes locally and verified that they work as expected.
--   [ ] I have followed the project's coding conventions and style guidelines.
--   [ ] I have rebased my branch onto the latest commit of the main branch.
--   [ ] I have squashed or reorganized my commits into logical units.
--   [ ] I have read, understood and agree to the [Developer Certificate of Origin](../blob/main/DCO.md), which this project utilizes.
+- [ ] I have tested the changes locally and verified that they work as expected.
+- [ ] I have followed the project's coding conventions and style guidelines.
+- [ ] I have rebased my branch onto the latest commit of the main branch.
+- [ ] I have squashed or reorganized my commits into logical units.
+- [ ] I have read, understood and agree to the [Developer Certificate of Origin](../blob/main/DCO.md), which this project utilizes.

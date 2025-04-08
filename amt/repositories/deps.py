@@ -3,7 +3,7 @@ from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
 from typing import Any
 
-from sqlalchemy.exc import DatabaseError
+from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 
 from amt.core.db import get_engine
@@ -68,12 +68,12 @@ async def transaction_context(session: AsyncSessionWithCommitFlag) -> AsyncGener
         yield session
         if session.should_commit:
             await session.commit()
-        else:
-            logger.warning("No commit flag found, not committing transaction")
-    except Exception as e:
+        elif session.dirty or session.new or session.deleted:
+            logger.warning("Session changes detected, but no commit flag found. This is undesirable, check your code.")
+    except SQLAlchemyError as e:
         if session.should_commit:
+            logger.exception("Failed to commit transaction, rolling back session changes.")
             await session.rollback()
-        if isinstance(e, DatabaseError):
-            raise AMTRepositoryError from e
-        else:
-            raise
+        raise AMTRepositoryError from e
+    finally:
+        logger.debug(f"Transaction asynccontextmanager released session {id(session)}")

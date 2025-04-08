@@ -1,18 +1,34 @@
 from gettext import NullTranslations
 
-from amt.models import User
+from amt.api.editable_route_utils import create_editable_for_role_in_organization
+from amt.core.authorization import AuthorizationType
+from amt.models import Organization, User
 from amt.schema.webform import (
     WebForm,
     WebFormField,
-    WebFormFieldType,
-    WebFormOption,
     WebFormSearchField,
     WebFormSubmitButton,
 )
+from amt.schema.webform_classes import WebFormFieldType
+from fastapi import Request
 
 
-def get_organization_form(id: str, translations: NullTranslations, user: User | None) -> WebForm:
+async def get_organization_form(
+    id: str, request: Request, translations: NullTranslations, user: User | None, organization: Organization | None
+) -> WebForm:
     _ = translations.gettext
+
+    if user is None:
+        default_role = None
+    else:
+        organization_id = organization.id if organization else None
+        default_role = await create_editable_for_role_in_organization(
+            request, user, AuthorizationType.ORGANIZATION, organization_id
+        )
+
+    search_url = "/organizations/users?returnType=search_select_field"
+    if organization:
+        search_url += f"&organization_id={organization.id}"
 
     organization_form: WebForm = WebForm(id=id, post_url="/organizations/new")
 
@@ -39,9 +55,10 @@ def get_organization_form(id: str, translations: NullTranslations, user: User | 
             name="user_ids",
             label=_("Add members"),
             placeholder=_("Search for a person..."),
-            search_url="/organizations/users?returnType=search_select_field",
+            # TODO: fix this URL with dynamic slug
+            search_url=search_url,
             query_var_name="query",
-            default_value=WebFormOption(str(user.id), user.name) if user else None,
+            default_value=default_role,
             group="1",
         ),
         WebFormSubmitButton(label=_("Add organization"), group="1", name="submit"),
