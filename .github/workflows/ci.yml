@@ -158,7 +158,7 @@ jobs:
 
       - name: Upload playwright tracing
         if: failure()
-        uses: actions/upload-artifact@v4.6.1
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: playwright-${{ github.sha }}
           path: test-results/
@@ -173,7 +173,7 @@ jobs:
 
       - name: Upload code coverage report
         if: matrix.python-version == '3.12'
-        uses: actions/upload-artifact@v4.6.1
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: codecoverage-${{ github.sha }}
           path: htmlcov/
@@ -295,7 +295,7 @@ jobs:
           TRIVY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload SBOM & License
-        uses: actions/upload-artifact@v4.6.1
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: sbom-licence-${{ github.sha }}.json
           path: |
