@@ -2,7 +2,13 @@ from collections.abc import Callable
 from gettext import NullTranslations
 from uuid import UUID
 
-from amt.schema.webform import WebForm, WebFormField, WebFormFieldType, WebFormOption
+from amt.models import Algorithm
+from amt.schema.webform import (
+    WebForm,
+    WebFormField,
+    WebFormSearchField,
+)
+from amt.schema.webform_classes import WebFormFieldType, WebFormOption
 from amt.services.organizations import OrganizationsService
 
 
@@ -49,3 +55,32 @@ async def get_organization_select_field(
         group="1",
     )
     return organization_select_field
+
+
+async def get_algorithm_members_form(
+    id: str,
+    translations: NullTranslations,
+    algorithm: Algorithm,
+) -> WebForm:
+    _ = translations.gettext
+
+    search_url = f"/algorithm/{algorithm.id}/users?returnType=search_select_field"
+
+    add_members_form: WebForm = WebForm(id=id, post_url="/organizations/new")
+
+    # TODO: this is a hack, because it is based on the organization form
+    #  and it targets the 3rd field.. good enough for now
+    add_members_form.fields = [
+        None,
+        None,
+        WebFormSearchField(
+            name="user_ids",
+            label=_("Add members"),
+            placeholder=_("Search for a person..."),
+            search_url=search_url,
+            query_var_name="query",
+            default_value=None,
+            group="1",
+        ),
+    ]
+    return add_members_form

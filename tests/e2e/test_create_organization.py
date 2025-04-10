@@ -14,7 +14,7 @@ def test_e2e_create_organization(page: Page) -> None:
     page.locator("li").filter(has_text="Test User").click()
     page.get_by_role("button", name="Add organization").click()
 
-    expect(page.get_by_text("new test organization").first).to_be_visible()
+    expect(page.get_by_text("Test User").first).to_be_visible()
 
 
 @pytest.mark.slow

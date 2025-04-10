@@ -1,3 +1,4 @@
+{% import "macros/editable_macros.html.j2" as editable_macro with context %}
 {% macro user_avatars(users) %}
     {% if users|length > 0 %}
         <div class="amt-avatar-list">
@@ -51,23 +52,40 @@
         <td class="rvo-table-cell">{{ organization.modified_at | time_ago(language) }}</td>
     </tr>
 {% endmacro %}
-{% macro overview_table_row_member(loop, member) -%}
+{% macro overview_table_row_member(loop, user, authorization, role, permission_path) -%}
     <tr class="rvo-table-row"
-        {% if loop.last and members|length == limit %} data-marker="last-element" hx-get="/organizations/?skip={{ next }}" hx-swap="beforeend" hx-trigger="revealed" {% endif %}>
-        <td class="rvo-table-cell">{{ member.name }}</td>
+        {% if loop.last and members|length == limit %} data-marker="last-element" hx-get="{{ base_href }}/members/?skip={{ next }}" hx-swap="beforeend" hx-trigger="revealed" {% endif %}>
+        <td class="rvo-table-cell">{{ user.name }}</td>
         <td class="rvo-table-cell">
-            <a class="rvo-link rvo-link--normal rvo-link--with-icon"
-               onclick="amt.openConfirmModal('Remove member {{ member.name }}','{% trans %}Are you sure you want to remove {% endtrans %} {{ member.name }} {% trans %} from this organization? {% endtrans %}', 'hx-delete','/organizations/{{ slug }}/members/{{ member.id }}')">
-                <span class="utrecht-icon rvo-icon rvo-icon-verwijderen rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
-                      role="img"
-                      aria-label="{% trans %}Delete{% endtrans %}"></span>
-                {% trans %}Delete member{% endtrans %}
-            </a>
+            {% if permission(permission_path, 'Update', permissions) == True %}
+                {{ editable_macro.editable_from_path("authorization/" + authorization.id|string + "/role_id", {"authorization_id": authorization.id}, True) }}
+            {% else %}
+                {{ role.name }}
+            {% endif %}
         </td>
+        {% if permission(permission_path, 'Update', permissions) == True %}
+            <td class="rvo-table-cell">
+                <span class="rvo-link rvo-link--hover rvo-link--with-icon amt-edit-link"
+                      onclick="amt.openConfirmModal('Remove member {{ user.name }}','{% trans %}Are you sure you want to remove {% endtrans %} {{ user.name }}', 'hx-delete','{{ base_href }}/members/{{ user.id }}')"
+                      style="cursor: pointer;
+                             vertical-align: top">
+                    <span class="utrecht-icon rvo-icon rvo-icon-bewerken rvo-icon--md rvo-icon--hemelblauw"
+                          role="img"
+                          aria-label="{% trans %}Delete{% endtrans %}"></span>
+                    <a class="rvo-link"
+                       href="#"
+                       onclick="event.preventDefault()"
+                       style="font-size: 14px !important;
+                              color: rgb(0, 123, 199) !important">{% trans %}Delete{% endtrans %}</a>
+                </span>
+            </td>
+        {% endif %}
     </tr>
 {% endmacro %}
-{% macro render_form_field_search_result(value, display_value) -%}
-    {% set list_result = render_form_field_list_result("user_ids", value, display_value) %}
+{% macro render_form_field_search_result(editable_object) -%}
+    {% set list_result = render_form_field_list_result(editable_object) %}
+    {% set value = editable_object.children[0].value.value %}
+    {% set display_value = editable_object.children[0].value.display_value %}
     <li data-list-result="{{ list_result | b64encode }}"
         onkeyup="amt.add_field_on_enter()"
         onclick="amt.add_field(this)"
@@ -76,7 +94,7 @@
         <span style="padding-inline-start: 1em">{{ display_value }}</span>
     </li>
 {% endmacro %}
-{% macro render_form_field_list_result(name, value, display_value) -%}
+{% macro render_form_field_list_result_OLD(name, value, display_value) -%}
     <li class="rvo-item-list__item" data-value="{{ value }}">
         <input type="hidden" name="{{ name }}" value="{{ value }}">
         <span>{{ display_value }}</span>
@@ -86,6 +104,21 @@
               role="img"
               aria-label="Kruis"
               onclick="this.parentNode.remove()"></span>
+    </li>
+{% endmacro %}
+{% macro render_form_field_list_result(editable_object) -%}
+    <li class="rvo-item-list__item amt-position-relative">
+        <span class="inline-close-button utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--lg form-input-clear"
+              role="img"
+              title="{% trans %}Remove this item{% endtrans %}"
+              aria-label="Kruis"
+              onclick="this.parentNode.remove()"></span>
+        <div class="rvo-layout-row rvo-layout-justify-content-space-between rvo-layout-gap--md">
+            {% set field_prefix = editable_object.first_path_item() + "[" + get_random_number() + "]" %}
+            {% for child_editable in editable_object.children %}
+                {{ editable_macro.inline_editor_form_field(child_editable, field_prefix) }}
+            {% endfor %}
+        </div>
     </li>
 {% endmacro %}
 {% macro form_field_select(prefix, field) %}
@@ -379,9 +412,7 @@
             </ul>
         </div>
         <ul id="{{ prefix }}{{ field.name }}-results-list">
-            {% if field.default_value %}
-                {{ render_form_field_list_result("user_ids", field.default_value.value, field.default_value.display_value) }}
-            {% endif %}
+            {% if field.default_value %}{{ render_form_field_list_result(field.default_value) }}{% endif %}
         </ul>
     </div>
 {% endmacro %}
