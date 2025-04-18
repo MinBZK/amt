@@ -1,5 +1,5 @@
 {% extends 'layouts/base.html.j2' %}
-{% from "macros/editable.html.j2" import editable with context %}
+{% from "macros/editable_macros.html.j2" import editable with context %}
 {% block title %}{{ algorithm.name }} | AMT{% endblock %}
 {% block content %}
     <div id="delete-modal" class="minbzk-modal display-none">
@@ -49,11 +49,13 @@
                             <a>{% trans %}Download as YAML{% endtrans %}</a>
                         </div>
                     </div>
-                    <a onclick="amt.openModal('delete-modal')">
-                        <span class="utrecht-icon rvo-icon rvo-icon-verwijderen rvo-icon--xl rvo-icon--hemelblauw rvo-link__icon--before"
-                              role="img"
-                              aria-label="Home"></span>
-                    </a>
+                    {% if permission("algorithm/" ~ algorithm_id, 'Delete', permissions) == True %}
+                        <a onclick="amt.openModal('delete-modal')">
+                            <span class="utrecht-icon rvo-icon rvo-icon-verwijderen rvo-icon--xl rvo-icon--hemelblauw rvo-link__icon--before"
+                                  role="img"
+                                  aria-label="Home"></span>
+                        </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
