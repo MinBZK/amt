@@ -23,10 +23,10 @@ class EditableConverterForAuthorizationRole(EditableConverter):
         if services_provider is None:
             raise TypeError("Services provider must be provided")
         authorizations_service = await services_provider.get(AuthorizationsService)
-        role = await authorizations_service.get_role_by_id(in_value)
+        role = await authorizations_service.get_role_by_id(int(in_value))
         display_value = role.name if role else "Unknown"
         return WebFormOption(
-            value=in_value,
+            value=int(in_value),
             display_value=display_value,
         )
 
@@ -41,7 +41,7 @@ class EditableConverterForAuthorizationRole(EditableConverter):
         if services_provider is None:
             raise TypeError("Services provider must be provided")
         authorizations_service = await services_provider.get(AuthorizationsService)
-        role = await authorizations_service.get_role_by_id(in_value)
+        role = await authorizations_service.get_role_by_id(int(in_value))
         display_value = role.name if role else "Unknown"
         return WebFormOption(
             value=in_value,
