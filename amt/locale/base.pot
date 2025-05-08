@@ -250,7 +250,7 @@ msgstr ""
 msgid "Information on how this measure is implemented"
 msgstr ""
 
-#: amt/api/forms/measure.py:80
+#: amt/api/forms/measure.py:79
 msgid ""
 "Select one or more to upload. The files will be saved once you confirm "
 "changes by pressing the save button."
@@ -312,7 +312,6 @@ msgid "Add organization"
 msgstr ""
 
 #: amt/core/exception_handlers.py:20
-#, python-brace-format
 msgid "String should have at least {min_length} characters"
 msgstr ""
 
@@ -321,7 +320,6 @@ msgid "Field required"
 msgstr ""
 
 #: amt/core/exception_handlers.py:23
-#, python-brace-format
 msgid "String should match pattern '{pattern}'"
 msgstr ""
 
@@ -329,8 +327,7 @@ msgstr ""
 msgid "Input should be a valid integer."
 msgstr ""
 
-#: amt/core/exceptions.py:21
-#, python-brace-format
+#: amt/core/exceptions.py:20
 msgid ""
 "An error occurred while configuring the options for '{field}'. Please "
 "check the settings and try again."
@@ -344,7 +341,7 @@ msgstr ""
 msgid "An error occurred while processing the instrument. Please try again later."
 msgstr ""
 
-#: amt/core/exceptions.py:41 amt/core/exceptions.py:87
+#: amt/core/exceptions.py:40 amt/core/exceptions.py:86
 msgid ""
 "The requested page or resource could not be found, or you do not have the"
 " correct permissions to access it. Please check the URL or query and try "
@@ -360,12 +357,10 @@ msgid "Only static files are supported."
 msgstr ""
 
 #: amt/core/exceptions.py:62
-#, python-brace-format
 msgid "Key not correct: {field}"
 msgstr ""
 
 #: amt/core/exceptions.py:68
-#, python-brace-format
 msgid "Value not correct: {field}"
 msgstr ""
 
@@ -595,7 +590,7 @@ msgid "Please login to view this page"
 msgstr ""
 
 #: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:11
-#: amt/site/templates/pages/landingpage.html.j2:14
+#: amt/site/templates/pages/landingpage.html.j2:18
 #: amt/site/templates/parts/header.html.j2:86
 #: amt/site/templates/parts/header.html.j2:145
 msgid "Login"
@@ -794,46 +789,99 @@ msgstr ""
 
 #: amt/site/templates/pages/index.html.j2:3
 #: amt/site/templates/pages/under_construction.html.j2:3
-msgid "AMT Placeholder informatie pagina's"
+msgid "AMT Placeholder information pages"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:10
-#: amt/site/templates/parts/header.html.j2:18
-msgid "Algorithm Management Toolkit"
+#: amt/site/templates/pages/landingpage.html.j2:13
+msgid "Get a grip on algorithms with the Algorithm Management Toolkit"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:22
-msgid "Grip on algorithms with the Algorithm Management Toolkit"
+#: amt/site/templates/pages/landingpage.html.j2:29
+msgid "Why work with the Algorithm Management Toolkit?"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:24
-msgid "The AI Validation team"
+#: amt/site/templates/pages/landingpage.html.j2:39
+msgid "Risk management"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:25
+#: amt/site/templates/pages/landingpage.html.j2:41
 msgid ""
-"has developed the Algorithm Management Toolkit on behalf of the Ministry "
-"of Interior Affairs.\n"
-"                This toolkit offers organizations a standardized way to "
-"develop, validate, manage, control, and publish algorithms.\n"
-"                In collaboration with (international) partners, it "
-"ensures uniformity, transparency, and reproducibility."
+"Identify, classify and manage algorithm risks. Prevent errors and "
+"increase reliability across your organisation."
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:31
-msgid "Log in"
+#: amt/site/templates/pages/landingpage.html.j2:50
+msgid "Standardization & collaboration"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:32
-msgid "or"
+#: amt/site/templates/pages/landingpage.html.j2:52
+msgid ""
+"Use structured formats to avoid inefficiency. Align data science, policy "
+"and governance in one clear process."
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:33
-msgid "contact us"
+#: amt/site/templates/pages/landingpage.html.j2:61
+msgid "Everything in one place"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:34
-msgid "for more information on how the toolkit can support your organization."
+#: amt/site/templates/pages/landingpage.html.j2:63
+msgid ""
+"Manage, document and review all algorithms centrally. No scattered files "
+"or disconnected notes anymore."
+msgstr ""
+
+#: amt/site/templates/pages/landingpage.html.j2:72
+msgid "Stepwise compliance with legislation"
+msgstr ""
+
+#: amt/site/templates/pages/landingpage.html.j2:74
+msgid "Ensure compliance with AI laws like the AI Act and"
+msgstr ""
+
+#: amt/site/templates/pages/landingpage.html.j2:76
+msgid "Quickly check which legal frameworks apply to you."
+msgstr ""
+
+#: amt/site/templates/pages/landingpage.html.j2:93
+msgid "Transparency & accountability"
+msgstr ""
+
+#: amt/site/templates/pages/landingpage.html.j2:95
+msgid ""
+"Meet internal and legal requirements. Generate standard reports for "
+"audits and responsible oversight."
+msgstr ""
+
+#: amt/site/templates/pages/landingpage.html.j2:104
+msgid "Document algorithms"
+msgstr ""
+
+#: amt/site/templates/pages/landingpage.html.j2:106
+msgid ""
+"Capture metadata, context and risks clearly. Ensure each algorithm is "
+"fully and consistently documented."
+msgstr ""
+
+#: amt/site/templates/pages/landingpage.html.j2:118
+msgid "Start documenting your algorithms today"
+msgstr ""
+
+#: amt/site/templates/pages/landingpage.html.j2:124
+msgid ""
+"Get started in 5 minutes with direct access via Single Sign On Rijk, "
+"Github or email"
+msgstr ""
+
+#: amt/site/templates/pages/landingpage.html.j2:130
+msgid "Personal demo available"
+msgstr ""
+
+#: amt/site/templates/pages/landingpage.html.j2:136
+msgid "Mail us:"
+msgstr ""
+
+#: amt/site/templates/pages/landingpage.html.j2:142
+msgid "Bekijk de gebruikershandleiding"
 msgstr ""
 
 #: amt/site/templates/pages/system_card.html.j2:10
@@ -893,6 +941,10 @@ msgstr ""
 msgid ""
 "  |  This website is under development  |  All versions are created in an"
 " open manner."
+msgstr ""
+
+#: amt/site/templates/parts/header.html.j2:18
+msgid "Algorithm Management Toolkit"
 msgstr ""
 
 #: amt/site/templates/parts/tasks_board.html.j2:5

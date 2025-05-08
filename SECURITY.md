@@ -14,5 +14,5 @@ CVSS (Common Vulnerability Scoring System) v4.0 Rating:
 
 Please report (suspected) security vulnerabilities to NCSC:
 
--   Nederlands: **[NCSC Kwetsbaarheid melden](https://www.ncsc.nl/contact/kwetsbaarheid-melden)**
--   English: **[NCSC report vulnerability](https://english.ncsc.nl/contact/reporting-a-vulnerability-cvd)**
+- Nederlands: **[NCSC Kwetsbaarheid melden](https://www.ncsc.nl/contact/kwetsbaarheid-melden)**
+- English: **[NCSC report vulnerability](https://english.ncsc.nl/contact/reporting-a-vulnerability-cvd)**

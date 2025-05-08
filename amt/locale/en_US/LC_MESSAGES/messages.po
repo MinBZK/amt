@@ -20,31 +20,31 @@ msgstr ""
 
 #: amt/api/ai_act_profile.py:24
 msgid "Type"
-msgstr ""
+msgstr "AI Application Type"
 
 #: amt/api/ai_act_profile.py:26
 msgid "Is the application open source?"
-msgstr ""
+msgstr "Is the application open source?"
 
 #: amt/api/ai_act_profile.py:28
 msgid "In what risk group falls the application?"
-msgstr ""
+msgstr "In which risk group does the application fall?"
 
 #: amt/api/ai_act_profile.py:30
 msgid "Does a conformity assessment need to be performed by an accredited body"
-msgstr ""
+msgstr "Does a conformity assessment need to be performed by an accredited body?"
 
 #: amt/api/ai_act_profile.py:32
 msgid "Is there a systemic risk?"
-msgstr ""
+msgstr "Is there a systemic risk?"
 
 #: amt/api/ai_act_profile.py:34
 msgid "Is there a transparency obligation?"
-msgstr ""
+msgstr "Are there transparency obligations?"
 
 #: amt/api/ai_act_profile.py:36
 msgid "Role"
-msgstr ""
+msgstr "Role"
 
 #: amt/api/group_by_category.py:15
 #: amt/site/templates/algorithms/details_info.html.j2:97
@@ -54,126 +54,126 @@ msgstr ""
 #: amt/site/templates/parts/filter_list.html.j2:71
 #: amt/site/templates/parts/tasks_search.html.j2:36
 msgid "Lifecycle"
-msgstr ""
+msgstr "Lifecycle"
 
 #: amt/api/lifecycles.py:23
 msgid "Organizational Responsibilities"
-msgstr ""
+msgstr "Organizational Responsibilities"
 
 #: amt/api/lifecycles.py:24
 msgid "Problem Analysis"
-msgstr ""
+msgstr "Problem Analysis"
 
 #: amt/api/lifecycles.py:25
 msgid "Design"
-msgstr ""
+msgstr "Design"
 
 #: amt/api/lifecycles.py:26
 msgid "Data Exploration and Preparation"
-msgstr ""
+msgstr "Data Exploration and Preparation"
 
 #: amt/api/lifecycles.py:27
 msgid "Development"
-msgstr ""
+msgstr "Development"
 
 #: amt/api/lifecycles.py:28
 msgid "Verification and Validation"
-msgstr ""
+msgstr "Verification and Validation"
 
 #: amt/api/lifecycles.py:29
 msgid "Implementation"
-msgstr ""
+msgstr "Implementation"
 
 #: amt/api/lifecycles.py:30
 msgid "Monitoring and Management"
-msgstr ""
+msgstr "Monitoring and Management"
 
 #: amt/api/lifecycles.py:31
 msgid "Phasing Out"
-msgstr ""
+msgstr "Phasing Out"
 
 #: amt/api/navigation.py:48
 msgid "Home"
-msgstr ""
+msgstr "Home"
 
 #: amt/api/navigation.py:49 amt/site/templates/parts/algorithm_search.html.j2:9
 msgid "Algorithms"
-msgstr ""
+msgstr "Algorithms"
 
 #: amt/api/navigation.py:50 amt/site/templates/auth/profile.html.j2:10
 msgid "Overview"
-msgstr ""
+msgstr "Overview"
 
 #: amt/api/navigation.py:51
 msgid "Tasks"
-msgstr ""
+msgstr "Tasks"
 
 #: amt/api/navigation.py:52
 msgid "New"
-msgstr ""
+msgstr "New"
 
 #: amt/api/navigation.py:53
 msgid "System card"
-msgstr ""
+msgstr "System Card"
 
 #: amt/api/navigation.py:54
 msgid "Assessment card"
-msgstr ""
+msgstr "Assessment Card"
 
 #: amt/api/navigation.py:55
 msgid "Model card"
-msgstr ""
+msgstr "Model Card"
 
 #: amt/api/navigation.py:56
 msgid "Details"
-msgstr ""
+msgstr "Details"
 
 #: amt/api/navigation.py:57 amt/site/templates/organizations/home.html.j2:8
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #: amt/api/navigation.py:58
 msgid "Algorithm details"
-msgstr ""
+msgstr "Algorithm Details"
 
 #: amt/api/navigation.py:59
 msgid "Requirements"
-msgstr ""
+msgstr "Requirements"
 
 #: amt/api/navigation.py:60
 msgid "Data"
-msgstr ""
+msgstr "Data"
 
 #: amt/api/navigation.py:61
 msgid "Model"
-msgstr ""
+msgstr "Model"
 
 #: amt/api/navigation.py:62
 msgid "Instruments"
-msgstr ""
+msgstr "Instruments"
 
 #: amt/api/navigation.py:63
 #: amt/site/templates/organizations/parts/overview_results.html.j2:6
 msgid "Organizations"
-msgstr ""
+msgstr "Organizations"
 
 #: amt/api/navigation.py:64 amt/site/templates/organizations/home.html.j2:37
 #: amt/site/templates/organizations/parts/members_results.html.j2:6
 #: amt/site/templates/organizations/parts/overview_results.html.j2:131
 msgid "Members"
-msgstr ""
+msgstr "Members"
 
 #: amt/api/navigation.py:65
 msgid "Compliance"
-msgstr ""
+msgstr "Compliance"
 
 #: amt/api/organization_filter_options.py:17
 msgid "All organizations"
-msgstr ""
+msgstr "All Organizations"
 
 #: amt/api/organization_filter_options.py:17
 msgid "My organizations"
-msgstr ""
+msgstr "My Organizations"
 
 #: amt/api/risk_group.py:19
 msgid "hoog-risico AI"
@@ -197,81 +197,83 @@ msgstr "Not applicable"
 
 #: amt/api/forms/algorithm.py:38
 msgid "Select organization"
-msgstr ""
+msgstr "Select Organization"
 
 #: amt/api/forms/algorithm.py:42
 #: amt/site/templates/algorithms/details_info.html.j2:79
 msgid "Organization"
-msgstr ""
+msgstr "Organization"
 
 #: amt/api/forms/measure.py:33
 msgid "Responsible"
-msgstr ""
+msgstr "Responsible"
 
 #: amt/api/forms/measure.py:41
 msgid "Reviewer"
-msgstr ""
+msgstr "Reviewer"
 
 #: amt/api/forms/measure.py:49
 msgid "Accountable"
-msgstr ""
+msgstr "Accountable"
 
 #: amt/api/forms/measure.py:57
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: amt/api/forms/measure.py:59
 #: amt/site/templates/algorithms/details_info.html.j2:44
 #: amt/site/templates/macros/tasks.html.j2:12
 msgid "To do"
-msgstr ""
+msgstr "To Do"
 
 #: amt/api/forms/measure.py:60
 #: amt/site/templates/algorithms/details_info.html.j2:46
 #: amt/site/templates/macros/tasks.html.j2:19
 msgid "In progress"
-msgstr ""
+msgstr "In Progress"
 
 #: amt/api/forms/measure.py:61 amt/site/templates/macros/tasks.html.j2:26
 msgid "In review"
-msgstr ""
+msgstr "In Review"
 
 #: amt/api/forms/measure.py:62
 #: amt/site/templates/algorithms/details_info.html.j2:20
 #: amt/site/templates/algorithms/details_info.html.j2:48
 #: amt/site/templates/macros/tasks.html.j2:33
 msgid "Done"
-msgstr ""
+msgstr "Done"
 
 #: amt/api/forms/measure.py:63 amt/site/templates/macros/tasks.html.j2:40
 msgid "Not implemented"
-msgstr ""
+msgstr "Not Implemented"
 
 #: amt/api/forms/measure.py:72
 msgid "Information on how this measure is implemented"
-msgstr ""
+msgstr "Information on how this measure is implemented"
 
-#: amt/api/forms/measure.py:80
+#: amt/api/forms/measure.py:79
 msgid ""
 "Select one or more to upload. The files will be saved once you confirm "
 "changes by pressing the save button."
 msgstr ""
+"Select one or more to upload. The files will be saved once you confirm "
+"changes by pressing the save button."
 
 #: amt/api/forms/measure.py:84
 msgid "Add files"
-msgstr ""
+msgstr "Add files"
 
 #: amt/api/forms/measure.py:85
 msgid "No files selected."
-msgstr ""
+msgstr "No files selected."
 
 #: amt/api/forms/measure.py:89
 msgid "Add URI"
-msgstr ""
+msgstr "Add URI"
 
 #: amt/api/forms/measure.py:92
 msgid "Add links to documents"
-msgstr ""
+msgstr "Add links to documents"
 
 #: amt/api/forms/organization.py:23
 #: amt/site/templates/algorithms/details_info.html.j2:75
@@ -279,11 +281,11 @@ msgstr ""
 #: amt/site/templates/organizations/home.html.j2:13
 #: amt/site/templates/organizations/parts/members_results.html.j2:119
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: amt/api/forms/organization.py:24
 msgid "Name of the organization"
-msgstr ""
+msgstr "Name of the organization"
 
 #: amt/api/forms/organization.py:32
 msgid "The slug is the web path, like /organizations/my-organization-name"
@@ -330,7 +332,7 @@ msgstr ""
 msgid "Input should be a valid integer."
 msgstr ""
 
-#: amt/core/exceptions.py:21
+#: amt/core/exceptions.py:20
 #, python-brace-format
 msgid ""
 "An error occurred while configuring the options for '{field}'. Please "
@@ -345,7 +347,7 @@ msgstr ""
 msgid "An error occurred while processing the instrument. Please try again later."
 msgstr ""
 
-#: amt/core/exceptions.py:41 amt/core/exceptions.py:87
+#: amt/core/exceptions.py:40 amt/core/exceptions.py:86
 msgid ""
 "The requested page or resource could not be found, or you do not have the"
 " correct permissions to access it. Please check the URL or query and try "
@@ -501,43 +503,43 @@ msgstr ""
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:62
 #: amt/site/templates/macros/editable.html.j2:210
 msgid "Save"
-msgstr ""
+msgstr "Save"
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:66
 #: amt/site/templates/macros/editable.html.j2:215
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:29
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel"
 
 #: amt/site/templates/algorithms/new.html.j2:8
 msgid "Add an algorithm"
-msgstr ""
+msgstr "Add an algorithm"
 
 #: amt/site/templates/algorithms/new.html.j2:27
 #: amt/site/templates/parts/filter_list.html.j2:67
 #: amt/site/templates/parts/filter_list.html.j2:93
 msgid "Algorithm name"
-msgstr ""
+msgstr "Algorithm name"
 
 #: amt/site/templates/algorithms/new.html.j2:31
 msgid "Name of the algorithm"
-msgstr ""
+msgstr "Name of the algorithm"
 
 #: amt/site/templates/algorithms/new.html.j2:45
 msgid "Select the lifecycle your algorithm is currently in."
-msgstr ""
+msgstr "Select the lifecycle your algorithm is currently in."
 
 #: amt/site/templates/algorithms/new.html.j2:46
 msgid "For more information on lifecycle, read the"
-msgstr ""
+msgstr "For more information on lifecycle, read the"
 
 #: amt/site/templates/algorithms/new.html.j2:49
 msgid "Algorithm Framework"
-msgstr ""
+msgstr "Algorithm Framework"
 
 #: amt/site/templates/algorithms/new.html.j2:68
 msgid "AI Act Profile"
-msgstr ""
+msgstr "AI Act Profile"
 
 #: amt/site/templates/algorithms/new.html.j2:70
 msgid ""
@@ -546,180 +548,184 @@ msgid ""
 "you already know the type of AI system you can fill in the below fields. "
 "Otherwise, you can find your AI Act Profile with the AI Act Support Tool."
 msgstr ""
+"The AI Act profile provides insight into, among other things, the type of"
+" AI system and the associated obligations from the European AI Act. If "
+"you already know the type of AI system you can fill in the below fields. "
+"Otherwise, you can find your AI Act Profile with the AI Act Support Tool."
 
 #: amt/site/templates/algorithms/new.html.j2:77
 #: amt/site/templates/macros/editable.html.j2:9
 msgid "Find your AI Act profile"
-msgstr ""
+msgstr "Find your AI Act profile"
 
 #: amt/site/templates/algorithms/new.html.j2:113
 msgid "Select Option"
-msgstr ""
+msgstr "Select Option"
 
 #: amt/site/templates/algorithms/new.html.j2:177
 #: amt/site/templates/parts/algorithm_search.html.j2:15
 msgid "Add algorithm"
-msgstr ""
+msgstr "Add algorithm"
 
 #: amt/site/templates/auth/profile.html.j2:10
 msgid "of"
-msgstr ""
+msgstr "of"
 
 #: amt/site/templates/auth/profile.html.j2:18
 msgid "Logout"
-msgstr ""
+msgstr "Logout"
 
 #: amt/site/templates/auth/profile.html.j2:30
 msgid "Edit image"
-msgstr ""
+msgstr "Edit image"
 
 #: amt/site/templates/auth/profile.html.j2:37
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #: amt/site/templates/auth/profile.html.j2:49
 #: amt/site/templates/parts/header.html.j2:75
 #: amt/site/templates/parts/header.html.j2:134
 msgid "Language"
-msgstr ""
+msgstr "Language"
 
 #: amt/site/templates/auth/profile.html.j2:54
 msgid "Select language"
-msgstr ""
+msgstr "Select language"
 
 #: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:5
 msgid "Not logged in"
-msgstr ""
+msgstr "Not logged in"
 
 #: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:7
 msgid "Please login to view this page"
-msgstr ""
+msgstr "Please login to view this page"
 
 #: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:11
-#: amt/site/templates/pages/landingpage.html.j2:14
+#: amt/site/templates/pages/landingpage.html.j2:18
 #: amt/site/templates/parts/header.html.j2:86
 #: amt/site/templates/parts/header.html.j2:145
 msgid "Login"
-msgstr ""
+msgstr "Login"
 
 #: amt/site/templates/errors/Exception.html.j2:5
 #: amt/site/templates/errors/RequestValidationError_400.html.j2:5
 #: amt/site/templates/errors/_404_Exception.html.j2:1
 msgid "An error occurred"
-msgstr ""
+msgstr "An error occurred"
 
 #: amt/site/templates/errors/_404_Exception.html.j2:3
 msgid "We couldn't find what you were looking for. This might be because:"
-msgstr ""
+msgstr "We couldn't find what you were looking for. This might be because:"
 
 #: amt/site/templates/errors/_404_Exception.html.j2:6
 msgid "The link isn't correct (anymore)"
-msgstr ""
+msgstr "The link isn't correct (anymore)"
 
 #: amt/site/templates/errors/_404_Exception.html.j2:7
 msgid "The page has moved or been removed"
-msgstr ""
+msgstr "The page has moved or been removed"
 
 #: amt/site/templates/errors/_404_Exception.html.j2:8
 msgid "You don't have access to this page"
-msgstr ""
+msgstr "You don't have access to this page"
 
 #: amt/site/templates/errors/_404_Exception.html.j2:10
 msgid "What now?"
-msgstr ""
+msgstr "What now?"
 
 #: amt/site/templates/errors/_404_Exception.html.j2:12
 msgid "Double-check if you typed the URL correctly"
-msgstr ""
+msgstr "Double-check if you typed the URL correctly"
 
 #: amt/site/templates/errors/_404_Exception.html.j2:14
 msgid "Head back to the&nbsp;<a href=\"/\">overview page</a>"
-msgstr ""
+msgstr "Head back to the&nbsp;<a href=\"/\">overview page</a>"
 
 #: amt/site/templates/errors/_404_Exception.html.j2:16
 msgid "Contact your admin"
-msgstr ""
+msgstr "Contact your admin"
 
 #: amt/site/templates/errors/_AMTCSRFProtectError_401.html.j2:11
 #: amt/site/templates/errors/_Exception.html.j2:5
 msgid "An error occurred. Please try again later"
-msgstr ""
+msgstr "An error occurred. Please try again later"
 
 #: amt/site/templates/errors/_RequestValidationError_400.html.j2:3
 msgid "There are some errors"
-msgstr ""
+msgstr "There are some errors"
 
 #: amt/site/templates/errors/_RequestValidationError_400.html.j2:5
 msgid "There is one error:"
-msgstr ""
+msgstr "There is one error:"
 
 #: amt/site/templates/layouts/base.html.j2:1
 msgid "Algorithmic Management Toolkit (AMT)"
-msgstr ""
+msgstr "Algorithmic Management Toolkit (AMT)"
 
 #: amt/site/templates/macros/form_macros.html.j2:60
 msgid "Are you sure you want to remove "
-msgstr ""
+msgstr "Are you sure you want to remove "
 
 #: amt/site/templates/macros/form_macros.html.j2:60
 msgid " from this organization? "
-msgstr ""
+msgstr " from this organization? "
 
 #: amt/site/templates/macros/form_macros.html.j2:63
 msgid "Delete"
-msgstr ""
+msgstr "Delete"
 
 #: amt/site/templates/macros/form_macros.html.j2:64
 msgid "Delete member"
-msgstr ""
+msgstr "Delete member"
 
 #: amt/site/templates/macros/form_macros.html.j2:153
 msgid "Delete file"
-msgstr ""
+msgstr "Delete file"
 
 #: amt/site/templates/macros/form_macros.html.j2:157
 msgid "Are you sure you want to delete"
-msgstr ""
+msgstr "Are you sure you want to delete"
 
 #: amt/site/templates/macros/table_row.html.j2:19
 msgid " ago"
-msgstr ""
+msgstr " ago"
 
 #: amt/site/templates/macros/tasks.html.j2:43
 msgid "Unknown"
-msgstr ""
+msgstr "Unknown"
 
 #: amt/site/templates/organizations/home.html.j2:25
 msgid "Created at"
-msgstr ""
+msgstr "Created at"
 
 #: amt/site/templates/organizations/home.html.j2:29
 msgid "Created by"
-msgstr ""
+msgstr "Created by"
 
 #: amt/site/templates/organizations/home.html.j2:33
 msgid "Modified at"
-msgstr ""
+msgstr "Modified at"
 
 #: amt/site/templates/organizations/members.html.j2:25
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:8
 msgid "Close"
-msgstr ""
+msgstr "Close"
 
 #: amt/site/templates/organizations/new.html.j2:8
 msgid "Create an organization"
-msgstr ""
+msgstr "Create an organization"
 
 #: amt/site/templates/organizations/parts/members_results.html.j2:15
 msgid "Add member"
-msgstr ""
+msgstr "Add member"
 
 #: amt/site/templates/organizations/parts/members_results.html.j2:29
 #: amt/site/templates/organizations/parts/overview_results.html.j2:26
 #: amt/site/templates/parts/algorithm_search.html.j2:25
 #: amt/site/templates/parts/tasks_search.html.j2:13
 msgid "Search"
-msgstr ""
+msgstr "Search"
 
 #: amt/site/templates/organizations/parts/members_results.html.j2:66
 #, python-format
@@ -736,19 +742,19 @@ msgstr[1] ""
 #: amt/site/templates/organizations/parts/overview_results.html.j2:85
 #: amt/site/templates/parts/filter_list.html.j2:16
 msgid "for"
-msgstr ""
+msgstr "for"
 
 #: amt/site/templates/organizations/parts/members_results.html.j2:122
 msgid "Action"
-msgstr ""
+msgstr "Action"
 
 #: amt/site/templates/organizations/parts/overview_results.html.j2:11
 msgid "New organization"
-msgstr ""
+msgstr "New organization"
 
 #: amt/site/templates/organizations/parts/overview_results.html.j2:49
 msgid "Organisation Type"
-msgstr ""
+msgstr "Organization Type"
 
 #: amt/site/templates/organizations/parts/overview_results.html.j2:80
 #, python-format
@@ -763,103 +769,174 @@ msgstr[1] ""
 
 #: amt/site/templates/organizations/parts/overview_results.html.j2:128
 msgid "Organization name"
-msgstr ""
+msgstr "Organization name"
 
 #: amt/site/templates/pages/assessment_card.html.j2:7
 #: amt/site/templates/pages/model_card.html.j2:7
 #: amt/site/templates/pages/system_card.html.j2:6
 msgid "ago"
-msgstr ""
+msgstr "ago"
 
 #: amt/site/templates/pages/assessment_card.html.j2:12
 #: amt/site/templates/pages/model_card.html.j2:12
 #: amt/site/templates/pages/model_card.html.j2:39
 #: amt/site/templates/pages/system_card.html.j2:49
 msgid "Attribute"
-msgstr ""
+msgstr "Attribute"
 
 #: amt/site/templates/pages/assessment_card.html.j2:13
 #: amt/site/templates/pages/model_card.html.j2:13
 #: amt/site/templates/pages/model_card.html.j2:40
 #: amt/site/templates/pages/system_card.html.j2:50
 msgid "Value"
-msgstr ""
+msgstr "Value"
 
 #: amt/site/templates/pages/assessment_card.html.j2:37
 msgid "Question"
-msgstr ""
+msgstr "Question"
 
 #: amt/site/templates/pages/assessment_card.html.j2:38
 msgid "Answer"
-msgstr ""
+msgstr "Answer"
 
 #: amt/site/templates/pages/index.html.j2:3
 #: amt/site/templates/pages/under_construction.html.j2:3
-msgid "AMT Placeholder informatie pagina's"
-msgstr ""
+#, fuzzy
+msgid "AMT Placeholder information pages"
+msgstr "AMT Information pages"
 
-#: amt/site/templates/pages/landingpage.html.j2:10
-#: amt/site/templates/parts/header.html.j2:18
-msgid "Algorithm Management Toolkit"
-msgstr ""
+#: amt/site/templates/pages/landingpage.html.j2:13
+msgid "Get a grip on algorithms with the Algorithm Management Toolkit"
+msgstr "Get a grip on algorithms with the Algorithm Management Toolkit"
 
-#: amt/site/templates/pages/landingpage.html.j2:22
-msgid "Grip on algorithms with the Algorithm Management Toolkit"
-msgstr ""
+#: amt/site/templates/pages/landingpage.html.j2:29
+msgid "Why work with the Algorithm Management Toolkit?"
+msgstr "Why work with the Algorithm Management Toolkit?"
 
-#: amt/site/templates/pages/landingpage.html.j2:24
-msgid "The AI Validation team"
-msgstr ""
+#: amt/site/templates/pages/landingpage.html.j2:39
+#, fuzzy
+msgid "Risk management"
+msgstr "Monitoring and Management"
 
-#: amt/site/templates/pages/landingpage.html.j2:25
+#: amt/site/templates/pages/landingpage.html.j2:41
+#, fuzzy
 msgid ""
-"has developed the Algorithm Management Toolkit on behalf of the Ministry "
-"of Interior Affairs.\n"
-"                This toolkit offers organizations a standardized way to "
-"develop, validate, manage, control, and publish algorithms.\n"
-"                In collaboration with (international) partners, it "
-"ensures uniformity, transparency, and reproducibility."
+"Identify, classify and manage algorithm risks. Prevent errors and "
+"increase reliability across your organisation."
+msgstr ""
+"Identify, classify and manage risks of algorithms. Prevent unwanted "
+"outcomes and increase the reliability of AI applications in your "
+"organization."
+
+#: amt/site/templates/pages/landingpage.html.j2:50
+msgid "Standardization & collaboration"
+msgstr "Standardization & collaboration"
+
+#: amt/site/templates/pages/landingpage.html.j2:52
+msgid ""
+"Use structured formats to avoid inefficiency. Align data science, policy "
+"and governance in one clear process."
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:31
-msgid "Log in"
+#: amt/site/templates/pages/landingpage.html.j2:61
+msgid "Everything in one place"
+msgstr "Everything in one place"
+
+#: amt/site/templates/pages/landingpage.html.j2:63
+#, fuzzy
+msgid ""
+"Manage, document and review all algorithms centrally. No scattered files "
+"or disconnected notes anymore."
+msgstr ""
+"Manage, document and control all your algorithms centrally. No more "
+"scattered Excel files or loose notes. An overview for audits, "
+"accountability and collaboration."
+
+#: amt/site/templates/pages/landingpage.html.j2:72
+msgid "Stepwise compliance with legislation"
+msgstr "Stepwise compliance with legislation"
+
+#: amt/site/templates/pages/landingpage.html.j2:74
+#, fuzzy
+msgid "Ensure compliance with AI laws like the AI Act and"
+msgstr ""
+"Work step by step towards compliance with, among others, the AI Act and "
+"the Algorithm Framework. Use decision trees to find out which laws and "
+"regulations are relevant for your algorithm."
+
+#: amt/site/templates/pages/landingpage.html.j2:76
+msgid "Quickly check which legal frameworks apply to you."
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:32
-msgid "or"
+#: amt/site/templates/pages/landingpage.html.j2:93
+msgid "Transparency & accountability"
+msgstr "Transparency & accountability"
+
+#: amt/site/templates/pages/landingpage.html.j2:95
+msgid ""
+"Meet internal and legal requirements. Generate standard reports for "
+"audits and responsible oversight."
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:33
-msgid "contact us"
-msgstr ""
+#: amt/site/templates/pages/landingpage.html.j2:104
+#, fuzzy
+msgid "Document algorithms"
+msgstr "Algorithms"
 
-#: amt/site/templates/pages/landingpage.html.j2:34
-msgid "for more information on how the toolkit can support your organization."
+#: amt/site/templates/pages/landingpage.html.j2:106
+#, fuzzy
+msgid ""
+"Capture metadata, context and risks clearly. Ensure each algorithm is "
+"fully and consistently documented."
+msgstr "Record metadata, context and risks for each algorithm."
+
+#: amt/site/templates/pages/landingpage.html.j2:118
+msgid "Start documenting your algorithms today"
+msgstr "Start documenting your algorithms today"
+
+#: amt/site/templates/pages/landingpage.html.j2:124
+msgid ""
+"Get started in 5 minutes with direct access via Single Sign On Rijk, "
+"Github or email"
 msgstr ""
+"Get started in 5 minutes with direct access via Single Sign On Rijk, "
+"Github or email"
+
+#: amt/site/templates/pages/landingpage.html.j2:130
+msgid "Personal demo available"
+msgstr "Personal demo available"
+
+#: amt/site/templates/pages/landingpage.html.j2:136
+msgid "Mail us:"
+msgstr "Mail us:"
+
+#: amt/site/templates/pages/landingpage.html.j2:142
+msgid "Bekijk de gebruikershandleiding"
+msgstr "View the user manual"
 
 #: amt/site/templates/pages/system_card.html.j2:10
 msgid "Assessment cards "
-msgstr ""
+msgstr "Assessment cards"
 
 #: amt/site/templates/pages/system_card.html.j2:28
 msgid "Model cards"
-msgstr ""
+msgstr "Model cards"
 
 #: amt/site/templates/pages/under_construction.html.j2:8
 msgid "Under construction"
-msgstr ""
+msgstr "Under construction"
 
 #: amt/site/templates/pages/under_construction.html.j2:9
 msgid "This page is yet to be build."
-msgstr ""
+msgstr "This page is yet to be built."
 
 #: amt/site/templates/parts/algorithm_search.html.j2:64
 msgid "Category"
-msgstr ""
+msgstr "Category"
 
 #: amt/site/templates/parts/algorithm_search.html.j2:85
 msgid "Group by"
-msgstr ""
+msgstr "Group by"
 
 #: amt/site/templates/parts/filter_list.html.j2:9
 #, python-format
@@ -881,26 +958,34 @@ msgid ""
 "        see more\n"
 "        algorithms."
 msgstr ""
+"No Algorithm matches your selected filters. Try adjusting your filters or"
+" clearing them to see more algorithms."
 
 #: amt/site/templates/parts/filter_list.html.j2:116
 msgid "Does not exist"
-msgstr ""
+msgstr "Does not exist"
 
 #: amt/site/templates/parts/header.html.j2:7
 msgid "Beta Version"
-msgstr ""
+msgstr "Beta Version"
 
 #: amt/site/templates/parts/header.html.j2:7
 msgid ""
 "  |  This website is under development  |  All versions are created in an"
 " open manner."
 msgstr ""
+"  |  This website is under development  |  All versions are created in an"
+" open manner."
+
+#: amt/site/templates/parts/header.html.j2:18
+msgid "Algorithm Management Toolkit"
+msgstr "Algorithm Management Toolkit"
 
 #: amt/site/templates/parts/tasks_board.html.j2:5
 msgid "Results for"
-msgstr ""
+msgstr "Results for"
 
 #: amt/site/templates/parts/tasks_search.html.j2:52
 msgid "Assignee"
-msgstr ""
+msgstr "Assignee"
 
