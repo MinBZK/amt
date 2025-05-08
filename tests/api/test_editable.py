@@ -1,4 +1,6 @@
 from typing import Any  # noqa: I001
+from dataclasses import dataclass
+from uuid import UUID
 
 import pytest
 import re
@@ -14,6 +16,7 @@ from amt.api.editable import (
     get_resolved_editables,
     compile_extraction_pattern,
 )
+from amt.api.update_utils import convert_value_if_needed, extract_type_from_union, get_all_annotations
 from amt.api.editable_classes import Editable, EditModes, ResolvedEditable
 from amt.api.editable_enforcers import EditableEnforcer
 from amt.api.editable_validators import EditableValidatorMinMaxLength
@@ -227,7 +230,7 @@ async def test_enrich_editable_algorithm(mocker: MockerFixture):
 @pytest.mark.asyncio
 async def test_enrich_editable_authorization(mocker: MockerFixture):
     # given
-    auth = Authorization(id=1, user_id="user1", role_id=2)
+    auth = Authorization(id=1, user_id=UUID(default_auth_user()["sub"]), role_id=2)
 
     services_provider = mocker.Mock(spec=ServicesProvider)
     auth_service = mocker.Mock(spec=AuthorizationsService)
@@ -344,3 +347,108 @@ async def test_get_resolved_editables(mocker: MockerFixture):
     assert "organization/2/name" in result
     # Our mocked TestEditables doesn't have authorization with resource path that doesn't have parameters
     assert not any(key == "authorization/role_id" for key in result)
+
+
+@dataclass
+class TestModel:
+    id: int | None = None
+    name: str | None = None
+    active: bool | None = None
+    score: float | None = None
+    identifier: UUID | None = None
+
+
+class TestModelWithMethods:
+    def __init__(self) -> None:
+        self.id = None
+        self.name = None
+        self.active = None
+        self.score = None
+        self.identifier = None
+        self.metadata = "Should be ignored"
+        self.registry = "Should be ignored"
+
+    def method(self):
+        """This method should be ignored during conversion."""
+        return "Test"
+
+
+class TestObjectWithAttributes:
+    def __init__(self) -> None:
+        self.id = 123
+        self.name = "Original Name"
+        self.active = True
+        self.score = 95.5
+        self._private = "Should be ignored"
+        self.not_in_model = "Should be ignored"
+
+
+def test_convert_value_from_dict():
+    # given
+    # We need to create an instance of TestModel to pass as the obj parameter
+    test_obj = TestModel()
+
+    # when/then
+    # int conversion
+    assert convert_value_if_needed("id", test_obj, "42") == 42
+
+    # str conversion
+    assert convert_value_if_needed("name", test_obj, 123) == "123"
+
+    # bool conversion
+    assert convert_value_if_needed("active", test_obj, "true") is True
+
+    # float conversion
+    assert convert_value_if_needed("score", test_obj, "88.5") == 88.5
+
+    # UUID conversion
+    uuid_val = convert_value_if_needed("identifier", test_obj, "123e4567-e89b-12d3-a456-426614174000")
+    assert isinstance(uuid_val, UUID)
+    assert str(uuid_val) == "123e4567-e89b-12d3-a456-426614174000"
+
+
+def test_convert_null_values():
+    # given
+    test_obj = TestModel()
+
+    # when/then
+    assert convert_value_if_needed("id", test_obj, None) is None
+    assert convert_value_if_needed("name", test_obj, "") == ""
+    assert convert_value_if_needed("active", test_obj, None) is None
+    assert convert_value_if_needed("score", test_obj, None) is None
+    assert convert_value_if_needed("identifier", test_obj, None) is None
+
+
+def test_extract_type_from_union():
+    assert extract_type_from_union(int | None) is int
+    assert extract_type_from_union(str | None) is str
+    assert extract_type_from_union(int) is int
+    assert extract_type_from_union(str | int | None) is None
+
+
+def test_get_all_annotations():
+    # given
+
+    class BaseClass:
+        a: int
+        b: Any  # Use Any to allow any type for overriding
+
+    class ChildClass(BaseClass):
+        b: float  # Can now override Any type
+        c: bool
+
+    # when
+    annotations = get_all_annotations(ChildClass)
+
+    # then
+    assert annotations == {"a": int, "b": float, "c": bool}
+
+
+def test_convert_value_error_handling():
+    # given
+    test_obj = TestModel()
+
+    # when/then
+    # The function raises ValueError as it doesn't have try/except blocks
+    with pytest.raises(ValueError):  # noqa: PT011
+        convert_value_if_needed("id", test_obj, "not_an_int")
