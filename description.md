@@ -4,4 +4,4 @@ This document describes architectural decisions related to the Algorithm Managem
 
 TODO's:
 
--   Can AI Verify be used to execute tasks?
+- Can AI Verify be used to execute tasks?
