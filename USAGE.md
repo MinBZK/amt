@@ -9,8 +9,8 @@ on [github](https://github.com/MinBZK/amt/pkgs/container/amt).
 
 You can deploy AMT to kubernetes or run the container locally using docker compose.
 
--   Example [kubernetes](https://github.com/MinBZK/ai-validation-infra/tree/main/apps/amt)
--   Example [docker compose](./compose.yml)
+- Example [kubernetes](https://github.com/MinBZK/ai-validation-infra/tree/main/apps/amt)
+- Example [docker compose](./compose.yml)
 
 To run amt locally create a compose.yml file and
 install [docker desktop](https://www.docker.com/products/docker-desktop/). Once you have install docker you can run the
@@ -66,11 +66,11 @@ volumes:
 
 it is possible to run AMT with the following databases:
 
--   SQLite (tested)
--   Postgresql (tested)
--   MySQL
--   MariaDB
--   Oracle
+- SQLite (tested)
+- Postgresql (tested)
+- MySQL
+- MariaDB
+- Oracle
 
 We recommend using postgresql for production grade deployments because that one is tested in our CI/CD. By default AMT
 will use SQLite which will create a local database within the AMT container.

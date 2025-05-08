@@ -8,13 +8,15 @@
         <div>
             <h1 class="utrecht-heading-1">{% trans %}Algorithms{% endtrans %}</h1>
         </div>
-        <div style="margin-left: auto">
-            <a data-navigation="button:/algorithms/new"
-               href="/algorithms/new{% if organization_id is defined %}?organization_id={{ organization_id }}{% endif %}">
-                <button class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
-                        type="button">{% trans %}Add algorithm{% endtrans %}</button>
-            </a>
-        </div>
+        {% if permission(permission_path, 'Create', permissions) == True %}
+            <div style="margin-left: auto">
+                <a data-navigation="button:/algorithms/new"
+                   href="/algorithms/new{% if organization_id is defined %}?organization_id={{ organization_id }}{% endif %}">
+                    <button class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
+                            type="button">{% trans %}Add algorithm{% endtrans %}</button>
+                </a>
+            </div>
+        {% endif %}
     </div>
     <div class="utrecht-form-fieldset rvo-form-fieldset rvo-margin-block-start--lg">
         <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">

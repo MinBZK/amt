@@ -59,6 +59,18 @@
                         </div>
                     </div>
                 </li>
+                <li class="rvo-item-list__item">
+                    <strong style="width: 12em; display: inline-block">{% trans %}Authorizations{% endtrans %}</strong>
+                    <br />
+                    {% for user, authorization, role in organizations %}
+                        {{ role.name }} : {{ authorization.type }} : {{ authorization.type_id }}
+                        <br />
+                    {% endfor %}
+                    {% for user, authorization, role in algorithms %}
+                        {{ role.name }} : {{ authorization.type }} : {{ authorization.type_id }}
+                        <br />
+                    {% endfor %}
+                </li>
             </ul>
         </div>
     </div>

@@ -80,7 +80,7 @@ function initPage() {
   });
 
   const columns = document.getElementsByClassName(
-    "progress-cards-container",
+    "sortable",
   ) as HTMLCollectionOf<HTMLDivElement>;
   for (const column of columns) {
     // prettier-ignore

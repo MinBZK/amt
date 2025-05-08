@@ -77,22 +77,39 @@ def default_role() -> Role:
     return Role(name="default role")
 
 
-def default_authorization() -> Authorization:
+def default_authorization(
+    user_id: str | None = None, role_id: int | None = None, type: str | None = None, type_id: int | None = None
+) -> Authorization:
     return Authorization(
-        user_id=UUID(default_auth_user()["sub"]),
-        role_id=1,
-        type="Organization",
-        type_id=1,
+        user_id=UUID(user_id) if user_id else UUID(default_auth_user()["sub"]),
+        role_id=role_id if role_id else 1,
+        type=type if type else "Organization",
+        type_id=type_id if type_id else 1,
     )
+
+
+def default_authorizations() -> list[Authorization]:
+    return [
+        Authorization(
+            user_id=UUID(default_auth_user()["sub"]),
+            role_id=1,
+            type="Organization",
+            type_id=1,
+        ),
+        Authorization(
+            user_id=UUID(default_auth_user()["sub"]),
+            role_id=4,
+            type="Algorithm",
+            type_id=1,
+        ),
+    ]
 
 
 def default_user(
     id: str | UUID | None = None,
     name: str | None = None,
-    organizations: list[Organization] | None = None,
 ) -> User:
     user_name = name if name else default_auth_user()["name"]
-    organizations = [default_organization()] if organizations is None else organizations
     user_id = UUID(default_auth_user()["sub"]) if id is None else UUID(id) if isinstance(id, str) else id
 
     return User(
@@ -101,17 +118,14 @@ def default_user(
         email=default_auth_user()["email"],
         name_encoded=quote_plus(user_name.strip().lower()),
         email_hash=default_auth_user()["email_hash"],
-        organizations=organizations,
     )
 
 
 def default_user_without_default_organization(
     id: str | UUID | None = None,
     name: str | None = None,
-    organizations: list[Organization] | None = None,
 ) -> User:
     user_name = name if name else default_auth_user()["name"]
-    organizations = [] if organizations is None else organizations
     user_id = UUID(default_auth_user()["sub"]) if id is None else UUID(id) if isinstance(id, str) else id
 
     return User(
@@ -120,7 +134,6 @@ def default_user_without_default_organization(
         email=default_auth_user()["email"],
         name_encoded=quote_plus(user_name.strip().lower()),
         email_hash=default_auth_user()["email_hash"],
-        organizations=organizations,
     )
 
 
