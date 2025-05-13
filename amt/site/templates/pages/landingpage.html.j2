@@ -2,37 +2,138 @@
 {% block content %}
     <div class="rvo-max-width-layout rvo-max-width-layout--lg rvo-hero">
         <div class="rvo-hero__image-container">
-            <img src="static/images/berichtenbox-bedrijven.jpg"
+            <img src="static/images/hero.jpg"
                  class="rvo-hero__image"
                  alt="Hero image for Algorithm Management Toolkit" />
         </div>
         <div class="rvo-hero__content">
-            <h2 class="rvo-hero__title utrecht-heading-2">{% trans %}Algorithm Management Toolkit{% endtrans %}</h2>
-            {% if not user %}
-                <a href="/auth/login"
-                   class="utrecht-button utrecht-button--secondary-action utrecht-button--rvo-md rvo-link--no-underline">
-                    {% trans %}Login{% endtrans %}
-                </a>
-            {% endif %}
+            <h1 class="rvo-hero__title utrecht-heading-1 rvo-heading--no-margins">
+                {% trans %}Get a grip on algorithms with the Algorithm Management Toolkit{% endtrans %}
+            </h1>
+            <span class="rvo-hero__subtitle rvo-padding-block-end--md">Ontwikkeld voor de overheid, door de overheid.</span>
+            <a href="/auth/login"
+               class="utrecht-button utrecht-button--secondary-action utrecht-button--rvo-md rvo-link--no-underline">
+                {% trans %}Login{% endtrans %}
+            </a>
         </div>
     </div>
     <div class="rvo-content">
+        <div class="rvo-max-width-layout rvo-max-width-layout--lg rvo-margin-block-start--2xl">
+            <div class="rvo-cards">
+                <div class="rvo-layout-column rvo-layout-gap--md">
+                    <div class="rvo-heading-w-tag">
+                        <div class="rvo-layout-row rvo-layout-gap--md">
+                            <h2 class="utrecht-heading-2 rvo-heading--no-margins">
+                                {% trans %}Why work with the Algorithm Management Toolkit?{% endtrans %}
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="rvo-layout-grid-container">
+                        <div class="rvo-layout-grid rvo-layout-gap--2xl rvo-layout-grid-columns--two">
+                            <!-- Card 1 -->
+                            <div class="rvo-card rvo-card--outline rvo-card--padding-lg">
+                                <div class="rvo-card__content">
+                                    <div class="rvo-layout-column rvo-layout-gap--md">
+                                        <span class="rvo-text rvo-text--bold rvo-text--xl">{% trans %}Risk management{% endtrans %}</span>
+                                        <span class="rvo-text rvo-text--subtle">
+                                            {% trans %}Identify, classify and manage risks of algorithms. Prevent unwanted outcomes and increase the reliability of AI applications in your organization.{% endtrans %}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 2 -->
+                            <div class="rvo-card rvo-card--outline rvo-card--padding-lg">
+                                <div class="rvo-card__content">
+                                    <div class="rvo-layout-column rvo-layout-gap--md">
+                                        <span class="rvo-text rvo-text--bold rvo-text--xl">{% trans %}Standardization & collaboration{% endtrans %}</span>
+                                        <span class="rvo-text rvo-text--subtle">
+                                            {% trans %}Work with standardized formats that prevent duplicate work and inefficiency. Bring data scientists, governance officers and policy together in one clear structure.{% endtrans %}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 3 -->
+                            <div class="rvo-card rvo-card--outline rvo-card--padding-lg">
+                                <div class="rvo-card__content">
+                                    <div class="rvo-layout-column rvo-layout-gap--md">
+                                        <span class="rvo-text rvo-text--bold rvo-text--xl">{% trans %}Everything in one place{% endtrans %}</span>
+                                        <span class="rvo-text rvo-text--subtle">
+                                            {% trans %}Manage, document and control all your algorithms centrally. No more scattered Excel files or loose notes. An overview for audits, accountability and collaboration.{% endtrans %}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 4 -->
+                            <div class="rvo-card rvo-card--outline rvo-card--padding-lg">
+                                <div class="rvo-card__content">
+                                    <div class="rvo-layout-column rvo-layout-gap--md">
+                                        <span class="rvo-text rvo-text--bold rvo-text--xl">{% trans %}Stepwise compliance with legislation{% endtrans %}</span>
+                                        <span class="rvo-text rvo-text--subtle">
+                                            {% trans %}Work step by step towards compliance with, among others, the AI Act and <a href=\"https://minbzk.github.io/Algoritmekader/" target=\"_blank\">"het Algoritmekader"</a>. Use decision trees to find out which laws and regulations are relevant for your algorithm.{% endtrans %}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Full-width image placeholder (spans both columns) -->
+                            <div class="rvo-layout-grid__item--span-all-2" style="grid-column: 1 / -1">
+                                <img src="/static/images/mockup-maatregel.jpg"
+                                     alt="Placeholder afbeelding"
+                                     style="width: 100%;
+                                            object-fit: cover;
+                                            display: block" />
+                            </div>
+                            <!-- Card 5 -->
+                            <div class="rvo-card rvo-card--outline rvo-card--padding-lg">
+                                <div class="rvo-card__content">
+                                    <div class="rvo-layout-column rvo-layout-gap--md">
+                                        <span class="rvo-text rvo-text--bold rvo-text--xl">{% trans %}Transparency & accountability{% endtrans %}</span>
+                                        <span class="rvo-text rvo-text--subtle">
+                                            {% trans %}Easily meet internal requirements and legislation such as the Algorithm Framework and the AI Act. Generate uniform reports for auditors and administrators.{% endtrans %}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 6 -->
+                            <div class="rvo-card rvo-card--outline rvo-card--padding-lg">
+                                <div class="rvo-card__content">
+                                    <div class="rvo-layout-column rvo-layout-gap--md">
+                                        <span class="rvo-text rvo-text--bold rvo-text--xl">{% trans %}Document algorithms{% endtrans %}</span>
+                                        <span class="rvo-text rvo-text--subtle">
+                                            {% trans %}Record metadata, context and risks for each algorithm.{% endtrans %}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="rvo-max-width-layout rvo-max-width-layout--lg"
              style="padding: 1.5em">
-            <h3 class="utrecht-heading-3">{% trans %}Grip on algorithms with the Algorithm Management Toolkit{% endtrans %}</h3>
-            <p>
-                <a href="https://minbzk.github.io/ai-validation/" class="rvo-link">{% trans %}The AI Validation team{% endtrans %}</a>
-                {% trans %}has developed the Algorithm Management Toolkit on behalf of the Ministry of Interior Affairs.
-                This toolkit offers organizations a standardized way to develop, validate, manage, control, and publish algorithms.
-                In collaboration with (international) partners, it ensures uniformity, transparency, and reproducibility.{% endtrans %}
-            </p>
-            <br>
-            <p>
-                <a href="/auth/login" class="rvo-link">{% trans %}Log in{% endtrans %}</a>
-                {% trans %}or{% endtrans %}
-                <a href="mailto:ai-validatie@minbzk.nl" class="rvo-link">{% trans %}contact us{% endtrans %}</a>
-                {% trans %}for more information on how the toolkit can support your organization.{% endtrans %}
-            </p>
+            <div class="rvo-snel-naar rvo-margin-block-end--2xl">
+                <h2 class="utrecht-heading-2">{% trans %}Start documenting your algorithms today{% endtrans %}</h2>
+                <div class="rvo-layout-column rvo-layout-gap--xs rvo-layout--wrap ">
+                    <span class="rvo-layout-column rvo-layout-align-content-center rvo-layout-row rvo-layout-gap--2xs">
+                        <span class="utrecht-icon rvo-icon rvo-icon-bevestiging rvo-icon--md rvo-status-icon-bevestiging rvo-icon--hemelblauw rvo-link__icon--before"
+                              role="img"
+                              aria-label="Pijl naar rechts"></span>
+                        {% trans %}Get started in 5 minutes with direct access via Single Sign On Rijk, Github or email{% endtrans %}
+                    </span>
+                    <span class="rvo-layout-column rvo-layout-align-content-center rvo-layout-row rvo-layout-gap--2xs">
+                        <span class="utrecht-icon rvo-icon rvo-icon-bevestiging rvo-icon--md rvo-status-icon-bevestiging rvo-icon--hemelblauw rvo-link__icon--before"
+                              role="img"
+                              aria-label="Pijl naar rechts"></span>
+                        {% trans %}Personal demo available{% endtrans %}
+                    </span>
+                    <span class="rvo-layout-column rvo-layout-align-content-center rvo-layout-row rvo-layout-gap--2xs">
+                        <span class="utrecht-icon rvo-icon rvo-icon-bevestiging rvo-icon--md rvo-status-icon-bevestiging rvo-icon--hemelblauw rvo-link__icon--before"
+                              role="img"
+                              aria-label="Pijl naar rechts"></span>
+                        {% trans %}Mail us:{% endtrans %} <a href="mailto:ai-validatie@minbzk.nl" class="rvo-link">ai-validatie@minbzk.nl</a>
+                    </span>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
