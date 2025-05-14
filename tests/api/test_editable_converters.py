@@ -134,10 +134,16 @@ async def test_editable_converter_for_authorization_role(mocker: MockerFixture):
 
     editable_context = {"user_id": default_user().id}
 
+    # Mock request and translations
+    mock_request = mocker.Mock()
+    mock_translations = mocker.Mock()
+    mock_translations.gettext.return_value = "Admin Role"
+    mocker.patch("amt.core.dynamic_translations.get_current_translation", return_value=mock_translations)
+
     # When - test view method
     result = await editable_converter.view(
         in_value=role_id,
-        request=None,
+        request=mock_request,
         editable=resolved_editable,
         editable_context=editable_context,
         services_provider=services_provider,
@@ -154,7 +160,7 @@ async def test_editable_converter_for_authorization_role(mocker: MockerFixture):
     # When - test write method
     result = await editable_converter.write(
         in_value=role_id,
-        request=None,
+        request=mock_request,
         editable=resolved_editable,
         editable_context=editable_context,
         services_provider=services_provider,
@@ -180,10 +186,16 @@ async def test_editable_converter_for_authorization_role_unknown_role(mocker: Mo
 
     editable_context = {"user_id": default_user().id}
 
+    # Mock request and translations
+    mock_request = mocker.Mock()
+    mock_translations = mocker.Mock()
+    mock_translations.gettext.return_value = "Unknown"
+    mocker.patch("amt.core.dynamic_translations.get_current_translation", return_value=mock_translations)
+
     # When - test view method with unknown role
     result = await editable_converter.view(
         in_value=role_id,
-        request=None,
+        request=mock_request,
         editable=resolved_editable,
         editable_context=editable_context,
         services_provider=services_provider,
@@ -204,11 +216,14 @@ async def test_editable_converter_for_authorization_role_no_services_provider(mo
 
     editable_context = {"user_id": default_user().id}
 
+    # Mock request
+    mock_request = mocker.Mock()
+
     # When/Then - test with missing services provider
     with pytest.raises(TypeError, match="Services provider must be provided"):
         await editable_converter.view(
             in_value=role_id,
-            request=None,
+            request=mock_request,
             editable=resolved_editable,
             editable_context=editable_context,
             services_provider=None,
@@ -218,7 +233,7 @@ async def test_editable_converter_for_authorization_role_no_services_provider(mo
     with pytest.raises(TypeError, match="Services provider must be provided"):
         await editable_converter.write(
             in_value=role_id,
-            request=None,
+            request=mock_request,
             editable=resolved_editable,
             editable_context=editable_context,
             services_provider=None,

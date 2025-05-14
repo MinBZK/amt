@@ -22,7 +22,7 @@ from amt.api.editable import (
 )
 from amt.api.editable_classes import EditModes, ResolvedEditable
 from amt.api.editable_enforcers import EditableEnforcerMustHaveMaintainer
-from amt.api.editable_route_utils import create_editable_for_role_in_organization, get_user_id_or_error, update_handler
+from amt.api.editable_route_utils import create_editable_for_role, get_user_id_or_error, update_handler
 from amt.api.forms.algorithm import get_algorithm_members_form
 from amt.api.forms.measure import MeasureStatusOptions, get_measure_form
 from amt.api.lifecycles import Lifecycles, get_localized_lifecycles
@@ -1078,6 +1078,7 @@ async def get_members(
         "members_length": len(members),
         "filters": localized_filters,
         "include_filters": False,
+        "algorithm": algorithm,
     }
 
     if request.state.htmx:
@@ -1121,26 +1122,29 @@ async def get_users(
     authorizations_service = await services_provider.get(AuthorizationsService)
     query = request.query_params.get("query", None)
     return_type = request.query_params.get("returnType", "json")
-    if query and len(query) >= 2:
-        filters: dict[str, int | str | list[str | int]] = {
-            "type": AuthorizationType.ORGANIZATION,
-            "type_id": algorithm.organization_id,
-        }
-        search_results = await authorizations_service.find_all(search=query, filters=filters, limit=5)
+    filters: dict[str, int | str | list[str | int]] = {
+        "type": AuthorizationType.ORGANIZATION,
+        "type_id": algorithm.organization_id,
+    }
+    search_results = await authorizations_service.find_all(search=query, filters=filters, limit=25)
 
-        match return_type:
-            case "search_select_field":
-                editables: list[ResolvedEditable] = []
-                for user, _, _ in search_results:
-                    enriched_editable = await create_editable_for_role_in_organization(
-                        request, user, AuthorizationType.ALGORITHM, algorithm.id
-                    )
-                    editables.append(enriched_editable)
-                context = {"editables": editables}
-                return templates.TemplateResponse(request, "organizations/parts/search_select_field.html.j2", context)
-            case _:
-                return JSONResponse(content=search_results)
-    return JSONResponse(content=[])
+    match return_type:
+        case "search_select_field":
+            editables: list[ResolvedEditable] = []
+            for user, _, _ in search_results:
+                enriched_editable = await create_editable_for_role(
+                    request,
+                    services_provider,
+                    user,
+                    AuthorizationType.ALGORITHM,
+                    algorithm.id,
+                    (await authorizations_service.get_role("Algorithm Member")).id,
+                )
+                editables.append(enriched_editable)
+            context = {"editables": editables, "show_no_results": len(search_results) == 0}
+            return templates.TemplateResponse(request, "organizations/parts/search_select_field.html.j2", context)
+        case _:
+            return JSONResponse(content=search_results)
 
 
 @router.put("/{algorithm_id}/members", response_class=HTMLResponse)

@@ -207,13 +207,13 @@ msgstr "Selecteer organisatie"
 msgid "Organization"
 msgstr "Organisatie"
 
-#: amt/api/forms/algorithm.py:78 amt/api/forms/organization.py:56
+#: amt/api/forms/algorithm.py:78 amt/api/forms/organization.py:66
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:4
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:23
 msgid "Add members"
 msgstr "Voeg personen toe"
 
-#: amt/api/forms/algorithm.py:79 amt/api/forms/organization.py:57
+#: amt/api/forms/algorithm.py:79
 msgid "Search for a person..."
 msgstr "Zoek een persoon..."
 
@@ -288,7 +288,7 @@ msgstr "Voeg URI toe"
 msgid "Add links to documents"
 msgstr "Voeg link naar bestanden toe"
 
-#: amt/api/forms/organization.py:39
+#: amt/api/forms/organization.py:49
 #: amt/site/templates/algorithms/details_info.html.j2:76
 #: amt/site/templates/auth/profile.html.j2:34
 #: amt/site/templates/organizations/home.html.j2:14
@@ -296,28 +296,44 @@ msgstr "Voeg link naar bestanden toe"
 msgid "Name"
 msgstr "Naam"
 
-#: amt/api/forms/organization.py:40
-msgid "Name of the organization"
-msgstr "Naam van de organisatie"
-
-#: amt/api/forms/organization.py:48
+#: amt/api/forms/organization.py:58
 msgid "The slug is the web path, like /organizations/my-organization-name"
 msgstr ""
 "Een slug is het pad in het webadres, zoals /organizations/mijn-"
 "organisatie-naam"
 
-#: amt/api/forms/organization.py:49
+#: amt/api/forms/organization.py:59
 #: amt/site/templates/organizations/home.html.j2:20
 msgid "Slug"
 msgstr "Slug"
 
-#: amt/api/forms/organization.py:50
-msgid "The slug for this organization"
-msgstr "Het web-pad (slug) voor deze organisatie"
-
-#: amt/api/forms/organization.py:64
+#: amt/api/forms/organization.py:74
 msgid "Add organization"
 msgstr "Organisatie toevoegen"
+
+#: amt/core/dynamic_translations.py:11
+msgid "Organization Maintainer"
+msgstr "Organisatie beheerder"
+
+#: amt/core/dynamic_translations.py:12
+msgid "Organization Member"
+msgstr "Organisatie lid"
+
+#: amt/core/dynamic_translations.py:13
+msgid "Organization Viewer"
+msgstr "Organisatie lezer"
+
+#: amt/core/dynamic_translations.py:14
+msgid "Algorithm Maintainer"
+msgstr "Algoritme beheerder"
+
+#: amt/core/dynamic_translations.py:15
+msgid "Algorithm Member"
+msgstr "Algoritme lid"
+
+#: amt/core/dynamic_translations.py:16
+msgid "Algorithm Viewer"
+msgstr "Algoritme lezer"
 
 #: amt/core/exception_handlers.py:21
 #, python-brace-format
@@ -438,37 +454,33 @@ msgstr "Vervallen maatregelen"
 msgid "Apply changes"
 msgstr "Wijzigingen doorvoeren"
 
-#: amt/site/templates/algorithms/details_base.html.j2:13
+#: amt/site/templates/algorithms/details_base.html.j2:14
 msgid "Delete algoritmic system"
 msgstr "Verwijder algoritme"
 
-#: amt/site/templates/algorithms/details_base.html.j2:17
+#: amt/site/templates/algorithms/details_base.html.j2:18
 msgid "Are you sure you want to delete your algoritmic system "
 msgstr "Weet u zeker dat u uw algoritmische systeem wilt verwijderen "
 
-#: amt/site/templates/algorithms/details_base.html.j2:20
+#: amt/site/templates/algorithms/details_base.html.j2:21
 msgid "Data will be stored for at least 45 days before permanent deletion."
 msgstr ""
 "gegevens worden minimaal 45 dagen bewaard voordat ze definitief worden\n"
 "                verwijderd."
 
-#: amt/site/templates/algorithms/details_base.html.j2:26
+#: amt/site/templates/algorithms/details_base.html.j2:27
 #: amt/site/templates/algorithms/new.html.j2:154
-#: amt/site/templates/macros/form_macros.html.j2:201
-#: amt/site/templates/organizations/members.html.j2:34
+#: amt/site/templates/macros/form_macros.html.j2:191
+#: amt/site/templates/organizations/members.html.j2:35
 msgid "Yes"
 msgstr "Ja"
 
-#: amt/site/templates/algorithms/details_base.html.j2:29
+#: amt/site/templates/algorithms/details_base.html.j2:30
 #: amt/site/templates/algorithms/new.html.j2:164
-#: amt/site/templates/macros/form_macros.html.j2:206
-#: amt/site/templates/organizations/members.html.j2:37
+#: amt/site/templates/macros/form_macros.html.j2:196
+#: amt/site/templates/organizations/members.html.j2:38
 msgid "No"
 msgstr "Nee"
-
-#: amt/site/templates/algorithms/details_base.html.j2:49
-msgid "Download as YAML"
-msgstr "Download naar YAML"
 
 #: amt/site/templates/algorithms/details_compliance.html.j2:29
 msgid "measure executed"
@@ -690,38 +702,42 @@ msgstr "Er is één fout:"
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr "Algoritme Management Toolkit"
 
-#: amt/site/templates/macros/form_macros.html.j2:69
+#: amt/site/templates/macros/form_macros.html.j2:70
 msgid "Remove member"
 msgstr "Verwijder gebruiker"
 
-#: amt/site/templates/macros/form_macros.html.j2:69
+#: amt/site/templates/macros/form_macros.html.j2:70
 msgid "Are you sure you want to remove "
 msgstr "Weet u zeker dat u "
 
-#: amt/site/templates/macros/form_macros.html.j2:69
+#: amt/site/templates/macros/form_macros.html.j2:70
 msgid "?"
 msgstr " wilt verwijderen?"
 
-#: amt/site/templates/macros/form_macros.html.j2:74
-#: amt/site/templates/macros/form_macros.html.j2:79
+#: amt/site/templates/macros/form_macros.html.j2:75
+#: amt/site/templates/macros/form_macros.html.j2:80
 msgid "Delete"
 msgstr "Verwijder"
 
-#: amt/site/templates/macros/form_macros.html.j2:113
+#: amt/site/templates/macros/form_macros.html.j2:103
 msgid "Remove this item"
 msgstr "Verwijder dit item"
 
-#: amt/site/templates/macros/form_macros.html.j2:186
+#: amt/site/templates/macros/form_macros.html.j2:176
 msgid "Delete file"
 msgstr "Verwijder bestand"
 
-#: amt/site/templates/macros/form_macros.html.j2:190
+#: amt/site/templates/macros/form_macros.html.j2:180
 msgid "Are you sure you want to delete"
 msgstr "Weet u zeker dat u het bestand wilt verwijderen"
 
 #: amt/site/templates/macros/table_row.html.j2:19
 msgid " ago"
 msgstr "geleden"
+
+#: amt/site/templates/macros/tabs.html.j2:33
+msgid "Download as YAML"
+msgstr "Download naar YAML"
 
 #: amt/site/templates/macros/tasks.html.j2:43
 msgid "Unknown"
@@ -797,6 +813,10 @@ msgstr[1] "%(organizations_length)s resultaten"
 #: amt/site/templates/organizations/parts/overview_results.html.j2:128
 msgid "Organization name"
 msgstr "Organisatie naam"
+
+#: amt/site/templates/organizations/parts/search_select_field.html.j2:6
+msgid "No persons found..."
+msgstr "Geen personen gevonden..."
 
 #: amt/site/templates/pages/assessment_card.html.j2:7
 #: amt/site/templates/pages/model_card.html.j2:7

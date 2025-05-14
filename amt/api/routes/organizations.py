@@ -16,7 +16,7 @@ from amt.api.editable import (
 )
 from amt.api.editable_classes import EditModes, ResolvedEditable
 from amt.api.editable_enforcers import EditableEnforcerMustHaveMaintainer
-from amt.api.editable_route_utils import create_editable_for_role_in_organization, get_user_id_or_error, update_handler
+from amt.api.editable_route_utils import create_editable_for_role, get_user_id_or_error, update_handler
 from amt.api.forms.organization import get_organization_form
 from amt.api.group_by_category import get_localized_group_by_categories
 from amt.api.lifecycles import get_localized_lifecycles
@@ -72,24 +72,32 @@ async def get_users(
     services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
 ) -> Response:
     organizations_service = await services_provider.get(OrganizationsService)
+    authorizations_service = await services_provider.get(AuthorizationsService)
     users_service = await services_provider.get(UsersService)
     query = request.query_params.get("query", None)
     organization_id = request.query_params.get("organization_id", None)
     return_type = request.query_params.get("returnType", "json")
     search_results = []
     organization = None if organization_id is None else await organizations_service.get_by_id(int(organization_id))
+    show_no_results = False
     if query and len(query) >= 2:
         search_results: Sequence[User] = await users_service.find_all(search=query, limit=5)  # pyright: ignore[reportDeprecated]
+        show_no_results = len(search_results) == 0
     match return_type:
         case "search_select_field":
             organization_id = organization.id if organization else None
             editables: list[ResolvedEditable] = []
             for user in search_results:
-                enriched_editable = await create_editable_for_role_in_organization(
-                    request, user, AuthorizationType.ORGANIZATION, organization_id
+                enriched_editable = await create_editable_for_role(
+                    request,
+                    services_provider,
+                    user,
+                    AuthorizationType.ORGANIZATION,
+                    organization_id,
+                    (await authorizations_service.get_role("Organization Member")).id,
                 )
                 editables.append(enriched_editable)
-            context = {"editables": editables}
+            context = {"editables": editables, "show_no_results": show_no_results}
             return templates.TemplateResponse(request, "organizations/parts/search_select_field.html.j2", context)
         case _:
             json_results: list[dict[str, str | UUID]] = [

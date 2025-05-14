@@ -354,6 +354,8 @@ main {
     }
 
     & .amt-item-list__item_as_select {
+        cursor: pointer;
+
         &:hover {
             background-color: var(--rvo-color-logoblauw-150);
         }

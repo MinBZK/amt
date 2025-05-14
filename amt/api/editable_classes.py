@@ -13,9 +13,9 @@ from amt.models.base import Base
 from amt.schema.webform_classes import WebFormFieldImplementationTypeFields, WebFormOption
 from amt.services.services_provider import ServicesProvider
 
-type EditableType = Editable
-type FormStateType = FormState
-type ResolvedEditableType = ResolvedEditable
+EditableType = TypeVar("EditableType", bound="Editable")
+FormStateType = TypeVar("FormStateType", bound="FormState")
+ResolvedEditableType = TypeVar("ResolvedEditableType", bound="ResolvedEditable")
 
 logger = logging.getLogger(__name__)
 
@@ -44,11 +44,11 @@ class FormState(Enum):
     COMPLETED = auto()
 
     @classmethod
-    def pre_save_states(cls) -> frozenset[FormStateType]:
+    def pre_save_states(cls) -> frozenset["FormState"]:
         return frozenset({cls.PRE_CONFIRM, cls.CONFIRM_SAVE, cls.PRE_SAVE})
 
     @classmethod
-    def post_save_states(cls) -> frozenset[FormStateType]:
+    def post_save_states(cls) -> frozenset["FormState"]:
         return frozenset({cls.POST_SAVE, cls.COMPLETED})
 
     def is_before_save(self) -> bool:
@@ -64,7 +64,7 @@ class FormState(Enum):
         return self == self.SAVE
 
     @classmethod
-    def get_next_state(cls, state: FormStateType) -> FormStateType:
+    def get_next_state(cls, state: "FormState") -> "FormState":
         if state.value >= cls.COMPLETED.value:
             return cls.COMPLETED
         next_state = cls(state.value + 1)
@@ -72,11 +72,11 @@ class FormState(Enum):
         return next_state
 
     @classmethod
-    def all_states_after(cls, state: FormStateType) -> list[FormStateType]:
+    def all_states_after(cls, state: "FormState") -> list["FormState"]:
         return [s for s in cls if s.value > state.value]
 
     @classmethod
-    def from_string(cls, state_name: str) -> FormStateType:
+    def from_string(cls, state_name: str) -> "FormState":
         try:
             return cast(FormState, cls[state_name])
         except KeyError as e:
@@ -92,7 +92,7 @@ class EditableValidator(ABC):
     async def validate(
         self,
         request: Request,
-        editable: ResolvedEditableType,
+        editable: "ResolvedEditable",
         editable_context: dict[str, Any],
         edit_mode: EditModes,
         services_provider: ServicesProvider,
@@ -101,7 +101,7 @@ class EditableValidator(ABC):
 
     @staticmethod
     def get_new_value(
-        editable: ResolvedEditableType,
+        editable: "ResolvedEditable",
         editable_context: dict[str, Any],
     ) -> Any:  # noqa: ANN401
         return editable_context.get("new_values", {}).get(editable.last_path_item())
@@ -116,7 +116,7 @@ class EditableEnforcer(ABC):
     async def enforce(
         self,
         request: Request,
-        editable: ResolvedEditableType,
+        editable: "ResolvedEditable",
         editable_context: dict[str, Any],
         edit_mode: EditModes,
         services_provider: ServicesProvider,
@@ -134,7 +134,7 @@ class EditableHook(ABC):
         self,
         request: Request,
         templates: LocaleJinja2Templates,
-        editable: ResolvedEditableType,
+        editable: "ResolvedEditable",
         editable_context: dict[str, Any],
         service_provider: ServicesProvider,
     ) -> HTMLResponse | None:
@@ -153,7 +153,7 @@ class EditableConverter:
         self,
         in_value: Any,  # noqa: ANN401
         request: Request | None,
-        editable: ResolvedEditableType,
+        editable: "ResolvedEditable",
         editable_context: dict[str, Any],
         services_provider: ServicesProvider | None,
     ) -> WebFormOption:
@@ -163,7 +163,7 @@ class EditableConverter:
         self,
         in_value: Any,  # noqa: ANN401
         request: Request | None,
-        editable: ResolvedEditableType,
+        editable: "ResolvedEditable",
         editable_context: dict[str, Any],
         services_provider: ServicesProvider | None,
     ) -> WebFormOption:
@@ -173,7 +173,7 @@ class EditableConverter:
         self,
         in_value: Any,  # noqa: ANN401
         request: Request | None,
-        editable: ResolvedEditableType,
+        editable: "ResolvedEditable",
         editable_context: dict[str, Any],
         services_provider: ServicesProvider | None,
     ) -> WebFormOption:
@@ -202,8 +202,8 @@ class Editable:
         full_resource_path: str,
         implementation_type: WebFormFieldImplementationTypeFields,
         values_provider: EditableValuesProvider | None = None,
-        couples: list[EditableType] | None = None,
-        children: list[EditableType] | None = None,
+        couples: list["Editable"] | None = None,
+        children: list["Editable"] | None = None,
         converter: EditableConverter | None = None,
         enforcer: EditableEnforcer | None = None,
         validator: EditableValidator | None = None,
@@ -214,15 +214,15 @@ class Editable:
         self.full_resource_path = full_resource_path
         self.implementation_type = implementation_type
         self.values_provider = values_provider
-        self.couples = list[EditableType]() if couples is None else couples
-        self.children = list[EditableType]() if children is None else children
+        self.couples = list["Editable"]() if couples is None else couples
+        self.children = list["Editable"]() if children is None else children
         self.converter = converter
         self.enforcer = enforcer
         self.validator = validator
         self.relative_resource_path = relative_resource_path
         self.hooks = hooks
 
-    def add_bidirectional_couple(self, target: EditableType) -> None:
+    def add_bidirectional_couple(self, target: "Editable") -> None:
         """
         Changing an editable may require an update on another field as well, like when changing the name
         of an algorithm; this is stored in two different places. Making it a couple ensures both values are
@@ -250,8 +250,8 @@ class ResolvedEditable:
         full_resource_path: str,
         implementation_type: WebFormFieldImplementationTypeFields,
         values_provider: EditableValuesProvider | None = None,
-        couples: list[ResolvedEditableType] | None = None,
-        children: list[ResolvedEditableType] | None = None,
+        couples: list["ResolvedEditable"] | None = None,
+        children: list["ResolvedEditable"] | None = None,
         converter: EditableConverter | None = None,
         enforcer: EditableEnforcer | None = None,
         validator: EditableValidator | None = None,
@@ -264,8 +264,8 @@ class ResolvedEditable:
         self.full_resource_path = full_resource_path
         self.implementation_type = implementation_type
         self.values_provider = values_provider
-        self.couples = list[ResolvedEditableType]() if couples is None else couples
-        self.children = list[ResolvedEditableType]() if children is None else children
+        self.couples = list["ResolvedEditable"]() if couples is None else couples
+        self.children = list["ResolvedEditable"]() if children is None else children
         self.converter = converter
         self.enforcer = enforcer
         self.validator = validator
@@ -313,7 +313,7 @@ class ResolvedEditable:
         state: FormState,
         request: Request,
         templates: LocaleJinja2Templates,
-        editable: ResolvedEditableType,
+        editable: "ResolvedEditable",
         editable_context: dict[str, Any],
         service_provider: ServicesProvider,
     ) -> HTMLResponse | None:

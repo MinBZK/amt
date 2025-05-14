@@ -6,7 +6,7 @@ from typing import Any, cast
 
 from starlette.requests import Request
 
-from amt.api.editable_classes import Editable, EditableType, EditModes, FormState, ResolvedEditable
+from amt.api.editable_classes import Editable, EditModes, FormState, ResolvedEditable
 from amt.api.editable_converters import (
     EditableConverterForAuthorizationRole,
     EditableConverterForOrganizationInAlgorithm,
@@ -67,6 +67,7 @@ class Editables:
                 full_resource_path="authorization/role_id",
                 implementation_type=WebFormFieldImplementationType.SELECT,
                 values_provider=RolesValuesProvider(),
+                converter=EditableConverterForAuthorizationRole(),
             ),
             Editable(
                 full_resource_path="authorization/type", implementation_type=WebFormFieldImplementationType.HIDDEN
@@ -473,7 +474,7 @@ async def enrich_editable(  # noqa: C901
         if relative_resource_path is None:
             raise TypeError("relative_resource_path can not be None")
         current_value = nested_value(editable.resource_object, relative_resource_path)
-        if editable.converter:
+        if editable.converter and current_value:
             current_value = await editable.converter.view(
                 current_value, request, editable, editable_context, services_provider
             )
@@ -596,7 +597,7 @@ def get_resolved_editables(context_variables: dict[str, str | int]) -> dict[str,
     for editable in editables:
         editables_resolved.append(
             get_resolved_editable(
-                editable=cast(EditableType, editable), context_variables=context_variables, include_couples=True
+                editable=cast(Editable, editable), context_variables=context_variables, include_couples=True
             )
         )
     return {editable.full_resource_path: editable for editable in editables_resolved}

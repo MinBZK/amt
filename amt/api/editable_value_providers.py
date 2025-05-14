@@ -4,6 +4,7 @@ from starlette.requests import Request
 
 from amt.api.ai_act_profile import SelectAiProfileItem, get_ai_act_profile_selector
 from amt.core.authorization import AuthorizationType
+from amt.core.dynamic_translations import ExternalFieldsTranslations
 from amt.schema.webform_classes import WebFormOption
 
 
@@ -29,7 +30,10 @@ class RolesValuesProvider(EditableValuesProvider):
                 "5": "Algorithm Member",
                 "6": "Algorithm Viewer",
             }
-        return [WebFormOption(value=key, display_value=value) for key, value in options.items()]
+        return [
+            WebFormOption(value=key, display_value=ExternalFieldsTranslations.translate(value, request))
+            for key, value in options.items()
+        ]
 
 
 class AIActValuesProvider(EditableValuesProvider):

@@ -205,13 +205,13 @@ msgstr ""
 msgid "Organization"
 msgstr ""
 
-#: amt/api/forms/algorithm.py:78 amt/api/forms/organization.py:56
+#: amt/api/forms/algorithm.py:78 amt/api/forms/organization.py:66
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:4
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:23
 msgid "Add members"
 msgstr ""
 
-#: amt/api/forms/algorithm.py:79 amt/api/forms/organization.py:57
+#: amt/api/forms/algorithm.py:79
 msgid "Search for a person..."
 msgstr ""
 
@@ -284,7 +284,7 @@ msgstr ""
 msgid "Add links to documents"
 msgstr ""
 
-#: amt/api/forms/organization.py:39
+#: amt/api/forms/organization.py:49
 #: amt/site/templates/algorithms/details_info.html.j2:76
 #: amt/site/templates/auth/profile.html.j2:34
 #: amt/site/templates/organizations/home.html.j2:14
@@ -292,25 +292,41 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: amt/api/forms/organization.py:40
-msgid "Name of the organization"
-msgstr ""
-
-#: amt/api/forms/organization.py:48
+#: amt/api/forms/organization.py:58
 msgid "The slug is the web path, like /organizations/my-organization-name"
 msgstr ""
 
-#: amt/api/forms/organization.py:49
+#: amt/api/forms/organization.py:59
 #: amt/site/templates/organizations/home.html.j2:20
 msgid "Slug"
 msgstr ""
 
-#: amt/api/forms/organization.py:50
-msgid "The slug for this organization"
+#: amt/api/forms/organization.py:74
+msgid "Add organization"
 msgstr ""
 
-#: amt/api/forms/organization.py:64
-msgid "Add organization"
+#: amt/core/dynamic_translations.py:11
+msgid "Organization Maintainer"
+msgstr ""
+
+#: amt/core/dynamic_translations.py:12
+msgid "Organization Member"
+msgstr ""
+
+#: amt/core/dynamic_translations.py:13
+msgid "Organization Viewer"
+msgstr ""
+
+#: amt/core/dynamic_translations.py:14
+msgid "Algorithm Maintainer"
+msgstr ""
+
+#: amt/core/dynamic_translations.py:15
+msgid "Algorithm Member"
+msgstr ""
+
+#: amt/core/dynamic_translations.py:16
+msgid "Algorithm Viewer"
 msgstr ""
 
 #: amt/core/exception_handlers.py:21
@@ -419,34 +435,30 @@ msgstr ""
 msgid "Apply changes"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:13
+#: amt/site/templates/algorithms/details_base.html.j2:14
 msgid "Delete algoritmic system"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:17
+#: amt/site/templates/algorithms/details_base.html.j2:18
 msgid "Are you sure you want to delete your algoritmic system "
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:20
+#: amt/site/templates/algorithms/details_base.html.j2:21
 msgid "Data will be stored for at least 45 days before permanent deletion."
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:26
+#: amt/site/templates/algorithms/details_base.html.j2:27
 #: amt/site/templates/algorithms/new.html.j2:154
-#: amt/site/templates/macros/form_macros.html.j2:201
-#: amt/site/templates/organizations/members.html.j2:34
+#: amt/site/templates/macros/form_macros.html.j2:191
+#: amt/site/templates/organizations/members.html.j2:35
 msgid "Yes"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:29
+#: amt/site/templates/algorithms/details_base.html.j2:30
 #: amt/site/templates/algorithms/new.html.j2:164
-#: amt/site/templates/macros/form_macros.html.j2:206
-#: amt/site/templates/organizations/members.html.j2:37
+#: amt/site/templates/macros/form_macros.html.j2:196
+#: amt/site/templates/organizations/members.html.j2:38
 msgid "No"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_base.html.j2:49
-msgid "Download as YAML"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_compliance.html.j2:29
@@ -666,37 +678,41 @@ msgstr ""
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr ""
 
-#: amt/site/templates/macros/form_macros.html.j2:69
+#: amt/site/templates/macros/form_macros.html.j2:70
 msgid "Remove member"
 msgstr ""
 
-#: amt/site/templates/macros/form_macros.html.j2:69
+#: amt/site/templates/macros/form_macros.html.j2:70
 msgid "Are you sure you want to remove "
 msgstr ""
 
-#: amt/site/templates/macros/form_macros.html.j2:69
+#: amt/site/templates/macros/form_macros.html.j2:70
 msgid "?"
 msgstr ""
 
-#: amt/site/templates/macros/form_macros.html.j2:74
-#: amt/site/templates/macros/form_macros.html.j2:79
+#: amt/site/templates/macros/form_macros.html.j2:75
+#: amt/site/templates/macros/form_macros.html.j2:80
 msgid "Delete"
 msgstr ""
 
-#: amt/site/templates/macros/form_macros.html.j2:113
+#: amt/site/templates/macros/form_macros.html.j2:103
 msgid "Remove this item"
 msgstr ""
 
-#: amt/site/templates/macros/form_macros.html.j2:186
+#: amt/site/templates/macros/form_macros.html.j2:176
 msgid "Delete file"
 msgstr ""
 
-#: amt/site/templates/macros/form_macros.html.j2:190
+#: amt/site/templates/macros/form_macros.html.j2:180
 msgid "Are you sure you want to delete"
 msgstr ""
 
 #: amt/site/templates/macros/table_row.html.j2:19
 msgid " ago"
+msgstr ""
+
+#: amt/site/templates/macros/tabs.html.j2:33
+msgid "Download as YAML"
 msgstr ""
 
 #: amt/site/templates/macros/tasks.html.j2:43
@@ -772,6 +788,10 @@ msgstr[1] ""
 
 #: amt/site/templates/organizations/parts/overview_results.html.j2:128
 msgid "Organization name"
+msgstr ""
+
+#: amt/site/templates/organizations/parts/search_select_field.html.j2:6
+msgid "No persons found..."
 msgstr ""
 
 #: amt/site/templates/pages/assessment_card.html.j2:7

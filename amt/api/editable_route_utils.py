@@ -126,17 +126,19 @@ def get_user_id_or_error(request: Request) -> str:
     return user["sub"]
 
 
-async def create_editable_for_role_in_organization(
+async def create_editable_for_role(
     request: Request,
+    services_provider: ServicesProvider,
     user: User,
     type: AuthorizationType,
     type_id: int | None,
+    role_id: int,
 ) -> ResolvedEditable:
     request.state.authorization_type = type
     user_id = get_user_id_or_error(request)
     custom_resource_object = {
         "user_id": WebFormOption(value=str(user.id), display_value=str(user.name)),
-        "role_id": "",
+        "role_id": role_id,
         "type": type.value,
         "type_id": type_id,
     }
@@ -146,7 +148,7 @@ async def create_editable_for_role_in_organization(
         resolved_editable,
         EditModes.EDIT,
         {"user_id": user_id},
-        None,
+        services_provider,
         request,
         resource_object=custom_resource_object,
     )

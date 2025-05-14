@@ -1,6 +1,6 @@
 from gettext import NullTranslations
 
-from amt.api.editable_route_utils import create_editable_for_role_in_organization
+from amt.api.editable_route_utils import create_editable_for_role
 from amt.core.authorization import AuthorizationType
 from amt.models import Organization, User
 from amt.schema.webform import (
@@ -10,6 +10,7 @@ from amt.schema.webform import (
     WebFormSubmitButton,
 )
 from amt.schema.webform_classes import WebFormFieldType
+from amt.services.authorization import AuthorizationsService
 from fastapi import Request
 
 
@@ -22,8 +23,17 @@ async def get_organization_form(
         default_role = None
     else:
         organization_id = organization.id if organization else None
-        default_role = await create_editable_for_role_in_organization(
-            request, user, AuthorizationType.ORGANIZATION, organization_id
+        from amt.services.services_provider import get_service_provider
+
+        services_provider = await get_service_provider()
+        authorizations_service = await services_provider.get(AuthorizationsService)
+        default_role = await create_editable_for_role(
+            request,
+            services_provider,
+            user,
+            AuthorizationType.ORGANIZATION,
+            organization_id,
+            (await authorizations_service.get_role("Organization Maintainer")).id,
         )
 
     search_url = "/organizations/users?returnType=search_select_field"
@@ -37,7 +47,7 @@ async def get_organization_form(
             type=WebFormFieldType.TEXT,
             name="name",
             label=_("Name"),
-            placeholder=_("Name of the organization"),
+            placeholder="",
             attributes={"onkeyup": "amt.generate_slug('" + id + "name', '" + id + "slug')"},
             group="1",
             required=True,
@@ -47,14 +57,14 @@ async def get_organization_form(
             name="slug",
             description=_("The slug is the web path, like /organizations/my-organization-name"),
             label=_("Slug"),
-            placeholder=_("The slug for this organization"),
+            placeholder="",
             group="1",
             required=True,
         ),
         WebFormSearchField(
             name="user_ids",
             label=_("Add members"),
-            placeholder=_("Search for a person..."),
+            placeholder="",
             # TODO: fix this URL with dynamic slug
             search_url=search_url,
             query_var_name="query",

@@ -28,6 +28,7 @@ from amt.api.routes.shared import (
 from amt.api.template_classes import LocaleJinja2Templates
 from amt.core.authorization import AuthorizationVerb, get_user
 from amt.core.config import VERSION, get_settings
+from amt.core.dynamic_translations import ExternalFieldsTranslations
 from amt.core.internationalization import (
     format_datetime,
     format_timedelta,
@@ -164,6 +165,7 @@ templates.env.globals.update(  # pyright: ignore [reportUnknownMemberType]
         "get_random_number": get_random_number,
         "sanitize_html_id": sanitize_html_id,
         "resolve_editable_from_path": resolve_editable_from_path,
+        "ExternalFieldsTranslations": ExternalFieldsTranslations,
     }
 )
 # env tests allows for usage in templates like: if value is test_name(other_value)

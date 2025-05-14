@@ -4,7 +4,7 @@ from fastapi import Request
 from fastapi.exceptions import RequestValidationError
 from pydantic import Field, ValidationError
 
-from amt.api.editable_classes import EditableValidator, EditModes, ResolvedEditableType
+from amt.api.editable_classes import EditableValidator, EditModes, ResolvedEditable
 from amt.schema.organization import OrganizationSlug
 from amt.schema.shared import BaseModel
 from amt.services.services_provider import ServicesProvider
@@ -14,7 +14,7 @@ class EditableValidatorMustHaveItems(EditableValidator):
     async def validate(
         self,
         request: Request,
-        editable: ResolvedEditableType,
+        editable: ResolvedEditable,
         editable_context: dict[str, str | dict[str, str]],
         edit_mode: EditModes,
         services_provider: ServicesProvider,
@@ -35,7 +35,7 @@ class EditableValidatorMinMaxLength(EditableValidator):
     async def validate(
         self,
         request: Request,
-        editable: ResolvedEditableType,
+        editable: ResolvedEditable,
         editable_context: dict[str, str | dict[str, str]],
         edit_mode: EditModes,
         services_provider: ServicesProvider,
@@ -53,7 +53,7 @@ class EditableValidatorSlug(EditableValidator):
     async def validate(
         self,
         request: Request,
-        editable: ResolvedEditableType,
+        editable: ResolvedEditable,
         editable_context: dict[str, str | dict[str, str]],
         edit_mode: EditModes,
         services_provider: ServicesProvider,

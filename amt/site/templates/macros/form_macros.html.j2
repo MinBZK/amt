@@ -54,13 +54,14 @@
 {% endmacro %}
 {% macro overview_table_row_member(loop, user, authorization, role, permission_path) -%}
     <tr class="rvo-table-row"
+        data-value="{{ user.id }}"
         {% if loop.last and members|length == limit %} data-marker="last-element" hx-get="{{ base_href }}/members/?skip={{ next }}" hx-swap="beforeend" hx-trigger="revealed" {% endif %}>
         <td class="rvo-table-cell">{{ user.name }}</td>
         <td class="rvo-table-cell">
             {% if permission(permission_path, 'Update', permissions) == True %}
                 {{ editable_macro.editable_from_path("authorization/" + authorization.id|string + "/role_id", {"authorization_id": authorization.id}, True) }}
             {% else %}
-                {{ role.name }}
+                {{ ExternalFieldsTranslations.translate(role.name, request) }}
             {% endif %}
         </td>
         {% if permission(permission_path, 'Update', permissions) == True %}
@@ -94,20 +95,9 @@
         <span style="padding-inline-start: 1em">{{ display_value }}</span>
     </li>
 {% endmacro %}
-{% macro render_form_field_list_result_OLD(name, value, display_value) -%}
-    <li class="rvo-item-list__item" data-value="{{ value }}">
-        <input type="hidden" name="{{ name }}" value="{{ value }}">
-        <span>{{ display_value }}</span>
-        <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--lg form-input-clear"
-              style="float: right;
-                     cursor: pointer"
-              role="img"
-              aria-label="Kruis"
-              onclick="this.parentNode.remove()"></span>
-    </li>
-{% endmacro %}
 {% macro render_form_field_list_result(editable_object) -%}
-    <li class="rvo-item-list__item amt-position-relative">
+    <li class="rvo-item-list__item amt-position-relative"
+        data-value="{{ editable_object.children[0].value.value }}">
         <span class="inline-close-button utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--lg form-input-clear"
               role="img"
               title="{% trans %}Remove this item{% endtrans %}"
@@ -390,7 +380,9 @@
         </div>
         <div id="error-{{ field.name }}" class="htmx-error-oob"></div>
         <div class="amt-position-relative">
-            <input id="{{ prefix }}{{ field.name }}-search"
+            <input data-type="{{ prefix }}"
+                   id="{{ prefix }}{{ field.name }}-search"
+                   data-preprocess="exclude-if-exists-in:#{{ prefix }}{{ field.name }}-results-list,#search-results-table-body"
                    autocomplete="off"
                    placeholder="{{ field.placeholder }}"
                    name="{{ field.query_var_name }}"
@@ -401,8 +393,7 @@
                    onkeyup="amt.add_field_on_enter('{{ prefix }}{{ field.name }}-options-list')"
                    hx-get="{{ field.search_url }}"
                    hx-target="#{{ prefix }}{{ field.name }}-options-list"
-                   hx-trigger="input changed delay:250ms"
-                   hx-include="this"
+                   hx-trigger="focus, input changed delay:250ms"
                    hx-swap="innerHTML"
                    value="" />
             <ul id="{{ prefix }}{{ field.name }}-options-list"

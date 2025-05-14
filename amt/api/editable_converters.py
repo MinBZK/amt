@@ -4,6 +4,7 @@ from starlette.requests import Request
 
 from amt.api.editable_classes import EditableConverter, ResolvedEditable
 from amt.api.lifecycles import Lifecycles
+from amt.core.dynamic_translations import ExternalFieldsTranslations
 from amt.models import Organization
 from amt.schema.webform_classes import WebFormOption
 from amt.services.authorization import AuthorizationsService
@@ -24,11 +25,21 @@ class EditableConverterForAuthorizationRole(EditableConverter):
             raise TypeError("Services provider must be provided")
         authorizations_service = await services_provider.get(AuthorizationsService)
         role = await authorizations_service.get_role_by_id(int(in_value))
-        display_value = role.name if role else "Unknown"
+        display_value = ExternalFieldsTranslations.translate(role.name, request) if role else "Unknown"
         return WebFormOption(
             value=int(in_value),
             display_value=display_value,
         )
+
+    async def read(
+        self,
+        in_value: Any,  # noqa: ANN401
+        request: Request | None,
+        editable: ResolvedEditable,
+        editable_context: dict[str, Any | dict[str, Any]],
+        services_provider: ServicesProvider | None,
+    ) -> WebFormOption:
+        return await self.view(in_value, request, editable, editable_context, services_provider)
 
     async def write(
         self,
@@ -38,15 +49,7 @@ class EditableConverterForAuthorizationRole(EditableConverter):
         editable_context: dict[str, Any | dict[str, Any]],
         services_provider: ServicesProvider | None,
     ) -> WebFormOption:
-        if services_provider is None:
-            raise TypeError("Services provider must be provided")
-        authorizations_service = await services_provider.get(AuthorizationsService)
-        role = await authorizations_service.get_role_by_id(int(in_value))
-        display_value = role.name if role else "Unknown"
-        return WebFormOption(
-            value=in_value,
-            display_value=display_value,
-        )
+        return await self.view(in_value, request, editable, editable_context, services_provider)
 
 
 class EditableConverterForOrganizationInAlgorithm(EditableConverter):

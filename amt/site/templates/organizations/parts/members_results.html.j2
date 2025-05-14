@@ -133,9 +133,11 @@
                             {% endif %}
                         </tr>
                     </thead>
-                    {% for user, authorization, role in members %}
-                        {{ macros.overview_table_row_member(loop, user, authorization, role, permission_path) }}
-                    {% endfor %}
+                    <tbody id="search-results-table-body">
+                        {% for user, authorization, role in members %}
+                            {{ macros.overview_table_row_member(loop, user, authorization, role, permission_path) }}
+                        {% endfor %}
+                    </tbody>
                 </table>
             {% endif %}
         </form>

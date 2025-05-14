@@ -230,6 +230,7 @@ class AuthorizationRepository(BaseRepository):
             statement = statement.offset(skip)
         if limit:
             statement = statement.limit(limit)
+        statement = statement.order_by(User.name.asc())
         return cast(list[tuple[User, Authorization, Role]], (await self.session.execute(statement)).fetchall())
 
     async def find_by_user_and_type(
