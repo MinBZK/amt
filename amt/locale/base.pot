@@ -590,7 +590,7 @@ msgid "Please login to view this page"
 msgstr ""
 
 #: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:11
-#: amt/site/templates/pages/landingpage.html.j2:16
+#: amt/site/templates/pages/landingpage.html.j2:18
 #: amt/site/templates/parts/header.html.j2:86
 #: amt/site/templates/parts/header.html.j2:145
 msgid "Login"
@@ -792,94 +792,95 @@ msgstr ""
 msgid "AMT Placeholder information pages"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:11
+#: amt/site/templates/pages/landingpage.html.j2:13
 msgid "Get a grip on algorithms with the Algorithm Management Toolkit"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:27
+#: amt/site/templates/pages/landingpage.html.j2:29
 msgid "Why work with the Algorithm Management Toolkit?"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:37
+#: amt/site/templates/pages/landingpage.html.j2:39
 msgid "Risk management"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:39
+#: amt/site/templates/pages/landingpage.html.j2:41
 msgid ""
-"Identify, classify and manage risks of algorithms. Prevent unwanted "
-"outcomes and increase the reliability of AI applications in your "
-"organization."
-msgstr ""
-
-#: amt/site/templates/pages/landingpage.html.j2:48
-msgid "Standardization & collaboration"
+"Identify, classify and manage algorithm risks. Prevent errors and "
+"increase reliability across your organisation."
 msgstr ""
 
 #: amt/site/templates/pages/landingpage.html.j2:50
-msgid ""
-"Work with standardized formats that prevent duplicate work and "
-"inefficiency. Bring data scientists, governance officers and policy "
-"together in one clear structure."
+msgid "Standardization & collaboration"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:59
-msgid "Everything in one place"
+#: amt/site/templates/pages/landingpage.html.j2:52
+msgid ""
+"Use structured formats to avoid inefficiency. Align data science, policy "
+"and governance in one clear process."
 msgstr ""
 
 #: amt/site/templates/pages/landingpage.html.j2:61
-msgid ""
-"Manage, document and control all your algorithms centrally. No more "
-"scattered Excel files or loose notes. An overview for audits, "
-"accountability and collaboration."
+msgid "Everything in one place"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:70
-msgid "Stepwise compliance with legislation"
+#: amt/site/templates/pages/landingpage.html.j2:63
+msgid ""
+"Manage, document and review all algorithms centrally. No scattered files "
+"or disconnected notes anymore."
 msgstr ""
 
 #: amt/site/templates/pages/landingpage.html.j2:72
-msgid ""
-"Work step by step towards compliance with, among others, the AI Act and "
-"<a href=\\\"https://minbzk.github.io/Algoritmekader/\" "
-"target=\\\"_blank\\\">\"het Algoritmekader\"</a>. Use decision trees to "
-"find out which laws and regulations are relevant for your algorithm."
+msgid "Stepwise compliance with legislation"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:89
+#: amt/site/templates/pages/landingpage.html.j2:74
+msgid ""
+"Ensure compliance with AI laws like the AI Act and <a "
+"href=\"https://minbzk.github.io/Algoritmekader/\" target=\"_blank\">het "
+"Algoritmekader</a>. Use decision trees per algorithm."
+msgstr ""
+
+#: amt/site/templates/pages/landingpage.html.j2:83
 msgid "Transparency & accountability"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:91
+#: amt/site/templates/pages/landingpage.html.j2:85
 msgid ""
-"Easily meet internal requirements and legislation such as the Algorithm "
-"Framework and the AI Act. Generate uniform reports for auditors and "
-"administrators."
+"Meet internal and legal requirements. Generate standard reports for "
+"audits and responsible oversight."
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:100
+#: amt/site/templates/pages/landingpage.html.j2:94
 msgid "Document algorithms"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:102
-msgid "Record metadata, context and risks for each algorithm."
+#: amt/site/templates/pages/landingpage.html.j2:96
+msgid ""
+"Capture metadata, context and risks clearly. Ensure each algorithm is "
+"fully and consistently documented."
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:115
+#: amt/site/templates/pages/landingpage.html.j2:116
 msgid "Start documenting your algorithms today"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:121
+#: amt/site/templates/pages/landingpage.html.j2:122
 msgid ""
 "Get started in 5 minutes with direct access via Single Sign On Rijk, "
 "Github or email"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:127
+#: amt/site/templates/pages/landingpage.html.j2:128
 msgid "Personal demo available"
 msgstr ""
 
-#: amt/site/templates/pages/landingpage.html.j2:133
+#: amt/site/templates/pages/landingpage.html.j2:134
 msgid "Mail us:"
+msgstr ""
+
+#: amt/site/templates/pages/landingpage.html.j2:140
+msgid "Bekijk de gebruikershandleiding"
 msgstr ""
 
 #: amt/site/templates/pages/system_card.html.j2:10

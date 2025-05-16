@@ -1,10 +1,12 @@
-{% extends 'layouts/base.html.j2' %}
+{% extends "layouts/base.html.j2" %}
 {% block content %}
     <div class="rvo-max-width-layout rvo-max-width-layout--lg rvo-hero">
         <div class="rvo-hero__image-container">
-            <img src="static/images/hero.jpg"
+            <img src="{{ url_for_cache('static', path='images/hero.jpg') }}"
                  class="rvo-hero__image"
-                 alt="Hero image for Algorithm Management Toolkit" />
+                 alt="Hero image for Algorithm Management Toolkit"
+                 width="600"
+                 height="300" />
         </div>
         <div class="rvo-hero__content">
             <h1 class="rvo-hero__title utrecht-heading-1 rvo-heading--no-margins">
@@ -36,7 +38,7 @@
                                     <div class="rvo-layout-column rvo-layout-gap--md">
                                         <span class="rvo-text rvo-text--bold rvo-text--xl">{% trans %}Risk management{% endtrans %}</span>
                                         <span class="rvo-text rvo-text--subtle">
-                                            {% trans %}Identify, classify and manage risks of algorithms. Prevent unwanted outcomes and increase the reliability of AI applications in your organization.{% endtrans %}
+                                            {% trans %}Identify, classify and manage algorithm risks. Prevent errors and increase reliability across your organisation.{% endtrans %}
                                         </span>
                                     </div>
                                 </div>
@@ -47,7 +49,7 @@
                                     <div class="rvo-layout-column rvo-layout-gap--md">
                                         <span class="rvo-text rvo-text--bold rvo-text--xl">{% trans %}Standardization & collaboration{% endtrans %}</span>
                                         <span class="rvo-text rvo-text--subtle">
-                                            {% trans %}Work with standardized formats that prevent duplicate work and inefficiency. Bring data scientists, governance officers and policy together in one clear structure.{% endtrans %}
+                                            {% trans %}Use structured formats to avoid inefficiency. Align data science, policy and governance in one clear process.{% endtrans %}
                                         </span>
                                     </div>
                                 </div>
@@ -58,7 +60,7 @@
                                     <div class="rvo-layout-column rvo-layout-gap--md">
                                         <span class="rvo-text rvo-text--bold rvo-text--xl">{% trans %}Everything in one place{% endtrans %}</span>
                                         <span class="rvo-text rvo-text--subtle">
-                                            {% trans %}Manage, document and control all your algorithms centrally. No more scattered Excel files or loose notes. An overview for audits, accountability and collaboration.{% endtrans %}
+                                            {% trans %}Manage, document and review all algorithms centrally. No scattered files or disconnected notes anymore.{% endtrans %}
                                         </span>
                                     </div>
                                 </div>
@@ -69,14 +71,14 @@
                                     <div class="rvo-layout-column rvo-layout-gap--md">
                                         <span class="rvo-text rvo-text--bold rvo-text--xl">{% trans %}Stepwise compliance with legislation{% endtrans %}</span>
                                         <span class="rvo-text rvo-text--subtle">
-                                            {% trans %}Work step by step towards compliance with, among others, the AI Act and <a href=\"https://minbzk.github.io/Algoritmekader/" target=\"_blank\">"het Algoritmekader"</a>. Use decision trees to find out which laws and regulations are relevant for your algorithm.{% endtrans %}
+                                            {% trans %}Ensure compliance with AI laws like the AI Act and <a href="https://minbzk.github.io/Algoritmekader/" target="_blank">het Algoritmekader</a>. Use decision trees per algorithm.{% endtrans %}
                                         </span>
                                     </div>
                                 </div>
                             </div>
                             <!-- Full-width image placeholder (spans both columns) -->
                             <div class="rvo-layout-grid__item--span-all-2" style="grid-column: 1 / -1">
-                                <img src="/static/images/mockup-maatregel.jpg"
+                                <img src="{{ url_for_cache('static', path='images/mockup-maatregel.jpg') }}"
                                      alt="Placeholder afbeelding"
                                      style="width: 100%;
                                             object-fit: cover;
@@ -88,7 +90,7 @@
                                     <div class="rvo-layout-column rvo-layout-gap--md">
                                         <span class="rvo-text rvo-text--bold rvo-text--xl">{% trans %}Transparency & accountability{% endtrans %}</span>
                                         <span class="rvo-text rvo-text--subtle">
-                                            {% trans %}Easily meet internal requirements and legislation such as the Algorithm Framework and the AI Act. Generate uniform reports for auditors and administrators.{% endtrans %}
+                                            {% trans %}Meet internal and legal requirements. Generate standard reports for audits and responsible oversight.{% endtrans %}
                                         </span>
                                     </div>
                                 </div>
@@ -99,7 +101,7 @@
                                     <div class="rvo-layout-column rvo-layout-gap--md">
                                         <span class="rvo-text rvo-text--bold rvo-text--xl">{% trans %}Document algorithms{% endtrans %}</span>
                                         <span class="rvo-text rvo-text--subtle">
-                                            {% trans %}Record metadata, context and risks for each algorithm.{% endtrans %}
+                                            {% trans %}Capture metadata, context and risks clearly. Ensure each algorithm is fully and consistently documented.{% endtrans %}
                                         </span>
                                     </div>
                                 </div>
@@ -109,8 +111,7 @@
                 </div>
             </div>
         </div>
-        <div class="rvo-max-width-layout rvo-max-width-layout--lg"
-             style="padding: 1.5em">
+        <div class="rvo-max-width-layout rvo-max-width-layout--lg rvo-margin-block-start--3xl">
             <div class="rvo-snel-naar rvo-margin-block-end--2xl">
                 <h2 class="utrecht-heading-2">{% trans %}Start documenting your algorithms today{% endtrans %}</h2>
                 <div class="rvo-layout-column rvo-layout-gap--xs rvo-layout--wrap ">
@@ -132,8 +133,17 @@
                               aria-label="Pijl naar rechts"></span>
                         {% trans %}Mail us:{% endtrans %} <a href="mailto:ai-validatie@minbzk.nl" class="rvo-link">ai-validatie@minbzk.nl</a>
                     </span>
+                    <span class="rvo-layout-column rvo-layout-align-content-center rvo-layout-row rvo-layout-gap--2xs">
+                        <span class="utrecht-icon rvo-icon rvo-icon-bevestiging rvo-icon--md rvo-status-icon-bevestiging rvo-icon--hemelblauw rvo-link__icon--before"
+                              role="img"
+                              aria-label="Pijl naar rechts"></span>
+                        {% trans %}Bekijk de gebruikershandleiding{% endtrans %} <a href="{{ url_for_cache('static', path='images/handleiding.pdf') }}"
+    class="rvo-link"
+    target="_blank"
+    rel="noopener">(PDF)</a>
+                    </span>
                 </div>
             </div>
         </div>
     </div>
-{% endblock %}
+{% endblock content %}
