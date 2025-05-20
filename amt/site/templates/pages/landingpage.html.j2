@@ -10,7 +10,7 @@
             <h1 class="rvo-hero__title utrecht-heading-1 rvo-heading--no-margins">
                 {% trans %}Get a grip on algorithms with the Algorithm Management Toolkit{% endtrans %}
             </h1>
-            <span class="rvo-hero__subtitle rvo-padding-block-end--md">Ontwikkeld voor de overheid, door de overheid.</span>
+            <span class="rvo-hero__subtitle rvo-padding-block-end--md">{% trans %}Built for government, by government.{% endtrans %}</span>
             <a href="/auth/login"
                class="utrecht-button utrecht-button--secondary-action utrecht-button--rvo-md rvo-link--no-underline">
                 {% trans %}Login{% endtrans %}
@@ -69,7 +69,7 @@
                                     <div class="rvo-layout-column rvo-layout-gap--md">
                                         <span class="rvo-text rvo-text--bold rvo-text--xl">{% trans %}Stepwise compliance with legislation{% endtrans %}</span>
                                         <span class="rvo-text rvo-text--subtle">
-                                            {% trans %}Work step by step towards compliance with, among others, the AI Act and <a href=\"https://minbzk.github.io/Algoritmekader/" target=\"_blank\">"het Algoritmekader"</a>. Use decision trees to find out which laws and regulations are relevant for your algorithm.{% endtrans %}
+                                            {% trans %}Ensure compliance with AI laws like the AI Act and{% endtrans %} <a href=\"https://minbzk.github.io/Algoritmekader/" target=\"_blank\">"het Algoritmekader"</a>. {% trans %} Quickly check which legal frameworks apply to you.{% endtrans %}
                                         </span>
                                     </div>
                                 </div>
@@ -131,6 +131,15 @@
                               role="img"
                               aria-label="Pijl naar rechts"></span>
                         {% trans %}Mail us:{% endtrans %} <a href="mailto:ai-validatie@minbzk.nl" class="rvo-link">ai-validatie@minbzk.nl</a>
+                    </span>
+                    <span class="rvo-layout-column rvo-layout-align-content-center rvo-layout-row rvo-layout-gap--2xs">
+                        <span class="utrecht-icon rvo-icon rvo-icon-bevestiging rvo-icon--md rvo-status-icon-bevestiging rvo-icon--hemelblauw rvo-link__icon--before"
+                              role="img"
+                              aria-label="Pijl naar rechts"></span>
+                        {% trans %}Checkout the user manual{% endtrans %} <a href="{{ url_for_cache('static', path='images/handleiding.pdf') }}"
+    class="rvo-link"
+    target="_blank"
+    rel="noopener">(PDF {% trans %}in Dutch{% endtrans %})</a>
                     </span>
                 </div>
             </div>
