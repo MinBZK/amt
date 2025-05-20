@@ -828,6 +828,10 @@ msgstr "AMT Informatiepagina's"
 msgid "Get a grip on algorithms with the Algorithm Management Toolkit"
 msgstr "Krijg grip op algoritmes met de Algoritme Management Toolkit"
 
+#: amt/site/templates/pages/landingpage.html.j2:13
+msgid "Built for government, by government."
+msgstr "Ontwikkeld voor de overheid, door de overheid"
+
 #: amt/site/templates/pages/landingpage.html.j2:27
 msgid "Why work with the Algorithm Management Toolkit?"
 msgstr "Waarom werken met de Algoritme Management Toolkit?"
@@ -879,16 +883,12 @@ msgid "Stepwise compliance with legislation"
 msgstr "Stapsgewijze naleving van wetgeving"
 
 #: amt/site/templates/pages/landingpage.html.j2:72
-msgid ""
-"Work step by step towards compliance with, among others, the AI Act and "
-"<a href=\\\"https://minbzk.github.io/Algoritmekader/\" "
-"target=\\\"_blank\\\">\"het Algoritmekader\"</a>. Use decision trees to "
-"find out which laws and regulations are relevant for your algorithm."
-msgstr ""
-"Werk stap voor stap toe naar naleving van onder andere de AI-verordening "
-"en <a href=\"https://minbzk.github.io/Algoritmekader/\" "
-"target=\"_blank\"> \"het Algoritmekader\"</a>. Gebruik beslissingsbomen "
-"om te achterhalen welke wetten en regels relevant zijn voor uw algoritme."
+msgid "Ensure compliance with AI laws like the AI Act and"
+msgstr "Voldoe aan AI-wetgeving zoals de AI Act en"
+
+#: amt/site/templates/pages/landingpage.html.j2:72
+msgid " Quickly check which legal frameworks apply to you."
+msgstr "Check snel welke wettelijke kaders voor jou gelden."
 
 #: amt/site/templates/pages/landingpage.html.j2:89
 msgid "Transparency & accountability"
@@ -931,6 +931,14 @@ msgstr "Persoonlijke demo beschikbaar"
 #: amt/site/templates/pages/landingpage.html.j2:133
 msgid "Mail us:"
 msgstr "Mail ons:"
+
+#: amt/site/templates/pages/landingpage.html.j2:139
+msgid "Checkout the user manual"
+msgstr "Bekijk de gebruikershandleiding"
+
+#: amt/site/templates/pages/landingpage.html.j2:142
+msgid "in Dutch"
+msgstr "in Nederlands"
 
 #: amt/site/templates/pages/system_card.html.j2:10
 msgid "Assessment cards "

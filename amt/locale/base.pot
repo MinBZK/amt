@@ -796,6 +796,10 @@ msgstr ""
 msgid "Get a grip on algorithms with the Algorithm Management Toolkit"
 msgstr ""
 
+#: amt/site/templates/pages/landingpage.html.j2:13
+msgid "Built for government, by government."
+msgstr ""
+
 #: amt/site/templates/pages/landingpage.html.j2:27
 msgid "Why work with the Algorithm Management Toolkit?"
 msgstr ""
@@ -838,11 +842,11 @@ msgid "Stepwise compliance with legislation"
 msgstr ""
 
 #: amt/site/templates/pages/landingpage.html.j2:72
-msgid ""
-"Work step by step towards compliance with, among others, the AI Act and "
-"<a href=\\\"https://minbzk.github.io/Algoritmekader/\" "
-"target=\\\"_blank\\\">\"het Algoritmekader\"</a>. Use decision trees to "
-"find out which laws and regulations are relevant for your algorithm."
+msgid "Ensure compliance with AI laws like the AI Act and"
+msgstr ""
+
+#: amt/site/templates/pages/landingpage.html.j2:72
+msgid " Quickly check which legal frameworks apply to you."
 msgstr ""
 
 #: amt/site/templates/pages/landingpage.html.j2:89
@@ -880,6 +884,14 @@ msgstr ""
 
 #: amt/site/templates/pages/landingpage.html.j2:133
 msgid "Mail us:"
+msgstr ""
+
+#: amt/site/templates/pages/landingpage.html.j2:139
+msgid "Checkout the user manual"
+msgstr ""
+
+#: amt/site/templates/pages/landingpage.html.j2:142
+msgid "in Dutch"
 msgstr ""
 
 #: amt/site/templates/pages/system_card.html.j2:10
