@@ -601,7 +601,7 @@ msgstr "Email"
 
 #: amt/site/templates/auth/profile.html.j2:49
 #: amt/site/templates/parts/header.html.j2:75
-#: amt/site/templates/parts/header.html.j2:134
+#: amt/site/templates/parts/header.html.j2:138
 msgid "Language"
 msgstr "Taal"
 
@@ -620,7 +620,7 @@ msgstr "Meld u aan om deze pagina te bekijken"
 #: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:11
 #: amt/site/templates/pages/landingpage.html.j2:16
 #: amt/site/templates/parts/header.html.j2:86
-#: amt/site/templates/parts/header.html.j2:145
+#: amt/site/templates/parts/header.html.j2:152
 msgid "Login"
 msgstr "Inloggen"
 
@@ -825,16 +825,17 @@ msgid "AMT Placeholder information pages"
 msgstr "AMT Informatiepagina's"
 
 #: amt/site/templates/pages/landingpage.html.j2:11
-msgid "Get a grip on algorithms with the Algorithm Management Toolkit"
-msgstr "Krijg grip op algoritmes met de Algoritme Management Toolkit"
+#: amt/site/templates/parts/header.html.j2:18
+msgid "Algorithm Management Toolkit"
+msgstr "Algoritme Management Toolkit"
 
 #: amt/site/templates/pages/landingpage.html.j2:13
 msgid "Built for government, by government."
 msgstr "Ontwikkeld voor de overheid, door de overheid"
 
 #: amt/site/templates/pages/landingpage.html.j2:27
-msgid "Why work with the Algorithm Management Toolkit?"
-msgstr "Waarom werken met de Algoritme Management Toolkit?"
+msgid "Get a grip on algorithms with the Algorithm Management Toolkit"
+msgstr "Krijg grip op algoritmes met de Algoritme Management Toolkit"
 
 #: amt/site/templates/pages/landingpage.html.j2:37
 msgid "Risk management"
@@ -1008,10 +1009,6 @@ msgid ""
 msgstr ""
 "Deze website is in ontwikkeling. Alle versies worden op een open manier "
 "gemaakt."
-
-#: amt/site/templates/parts/header.html.j2:18
-msgid "Algorithm Management Toolkit"
-msgstr "Algoritme Management Toolkit"
 
 #: amt/site/templates/parts/tasks_board.html.j2:5
 msgid "Results for"

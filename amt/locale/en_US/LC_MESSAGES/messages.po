@@ -585,7 +585,7 @@ msgstr "Email"
 
 #: amt/site/templates/auth/profile.html.j2:49
 #: amt/site/templates/parts/header.html.j2:75
-#: amt/site/templates/parts/header.html.j2:134
+#: amt/site/templates/parts/header.html.j2:138
 msgid "Language"
 msgstr "Language"
 
@@ -604,7 +604,7 @@ msgstr "Please login to view this page"
 #: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:11
 #: amt/site/templates/pages/landingpage.html.j2:16
 #: amt/site/templates/parts/header.html.j2:86
-#: amt/site/templates/parts/header.html.j2:145
+#: amt/site/templates/parts/header.html.j2:152
 msgid "Login"
 msgstr "Login"
 
@@ -801,24 +801,23 @@ msgstr "Answer"
 
 #: amt/site/templates/pages/index.html.j2:3
 #: amt/site/templates/pages/under_construction.html.j2:3
-#, fuzzy
 msgid "AMT Placeholder information pages"
 msgstr "AMT Information pages"
 
 #: amt/site/templates/pages/landingpage.html.j2:11
-msgid "Get a grip on algorithms with the Algorithm Management Toolkit"
-msgstr "Get a grip on algorithms with the Algorithm Management Toolkit"
+#: amt/site/templates/parts/header.html.j2:18
+msgid "Algorithm Management Toolkit"
+msgstr "Algorithm Management Toolkit"
 
 #: amt/site/templates/pages/landingpage.html.j2:13
 msgid "Built for government, by government."
-msgstr ""
+msgstr "Built for government, by government."
 
 #: amt/site/templates/pages/landingpage.html.j2:27
-msgid "Why work with the Algorithm Management Toolkit?"
-msgstr "Why work with the Algorithm Management Toolkit?"
+msgid "Get a grip on algorithms with the Algorithm Management Toolkit"
+msgstr "Get a grip on algorithms with the Algorithm Management Toolkit"
 
 #: amt/site/templates/pages/landingpage.html.j2:37
-#, fuzzy
 msgid "Risk management"
 msgstr "Monitoring and Management"
 
@@ -887,7 +886,6 @@ msgstr ""
 "administrators."
 
 #: amt/site/templates/pages/landingpage.html.j2:100
-#, fuzzy
 msgid "Document algorithms"
 msgstr "Algorithms"
 
@@ -985,10 +983,6 @@ msgid ""
 msgstr ""
 "  |  This website is under development  |  All versions are created in an"
 " open manner."
-
-#: amt/site/templates/parts/header.html.j2:18
-msgid "Algorithm Management Toolkit"
-msgstr "Algorithm Management Toolkit"
 
 #: amt/site/templates/parts/tasks_board.html.j2:5
 msgid "Results for"

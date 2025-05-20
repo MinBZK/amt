@@ -102,61 +102,71 @@
         </nav>
     </div>
 </div>
-<div id="amt-main-menu-desktop"
-     class="rvo-topnav__background rvo-topnav__background--horizontal-rule navbar-fixed">
-    <div class="rvo-max-width-layout rvo-max-width-layout--lg rvo-max-width-layout-inline-padding--none">
-        <nav class="rvo-topnav rvo-topnav--md">
-            <ul class="rvo-topnav__list">
-                {% if user %}
-                    {% for menu_item in main_menu_items %}
-                        <li class="rvo-topnav__item {% if menu_item.active %}rvo-topnav__item--active{% endif %}">
-                            <a data-navigation="main-menu:{{ menu_item.get_url() }}"
-                               class="rvo-link rvo-topnav__link rvo-link--logoblauw"
-                               href="{{ menu_item.get_url() }}">
-                                <span class="utrecht-icon rvo-icon {{ menu_item.icon }} rvo-icon--md rvo-icon--wit"
-                                      role="img"
-                                      aria-label="{{ menu_item.display_text }}"></span>
-                                {{ menu_item.display_text }}
-                            </a>
-                        </li>
-                    {% endfor %}
-                {% endif %}
-                <li class="rvo-topnav__item rvo-topnav__item--align-right"
-                    style="display: inline-flex">
-                    {% if not user %}
-                        {% for available_translation in available_translations %}
-                            {% if available_translation != language %}
-                                <a class="rvo-link rvo-topnav__link rvo-link--logoblauw"
-                                   id="langselect-{{ available_translation }}"
-                                   href="javascript:setCookie('lang', '{{ available_translation }}', 9999); window.location.reload()">
-                                    <span class="utrecht-icon rvo-icon rvo-icon-wereldbol rvo-icon--sm rvo-icon--wit rvo-link__icon--before"
-                                          role="img"
-                                          aria-label="{% trans %}Language{% endtrans %} {{ available_translation }}"></span>
-                                    {{ language_mappings.get(available_translation) }}
-                                </a>
+<div id="amt-main-menu-desktop">
+    <div class="rvo-menubar__background rvo-menubar__background--horizontal-rule">
+        <div class="rvo-max-width-layout rvo-max-width-layout--lg rvo-max-width-layout-inline-padding--none">
+            <nav class="rvo-menubar rvo-menubar--md">
+                <ul class="rvo-menubar__ul">
+                    <li class="rvo-menubar__list">
+                        <ul class="rvo-menubar__group--flex">
+                            {% if user %}
+                                {% for menu_item in main_menu_items %}
+                                    <li class="rvo-menubar__item {% if menu_item.active %}rvo-menubar__item--active{% endif %}">
+                                        <a data-navigation="main-menu:{{ menu_item.get_url() }}"
+                                           class="rvo-link rvo-menubar__link rvo-link--logoblauw"
+                                           href="{{ menu_item.get_url() }}">
+                                            {% if menu_item.icon %}
+                                                <span class="utrecht-icon rvo-icon {{ menu_item.icon }} rvo-icon--md rvo-icon--wit"
+                                                      role="img"
+                                                      aria-label="{{ menu_item.display_text }}"></span>
+                                            {% endif %}
+                                            {{ menu_item.display_text }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
                             {% endif %}
-                        {% endfor %}
-                        <a id="header-link-login"
-                           class="rvo-link rvo-topnav__link rvo-link--logoblauw"
-                           href="/auth/login">
-                            <span class="utrecht-icon rvo-icon rvo-icon-user rvo-icon--md rvo-icon--wit"
-                                  role="img"
-                                  aria-label="User"></span>
-                            {% trans %}Login{% endtrans %}
-                        </a>
-                    {% else %}
-                        <a class="rvo-link rvo-topnav__link rvo-link--logoblauw"
-                           href="/auth/profile">
-                            <img width="24"
-                                 height="24"
-                                 src="https://gravatar.com/avatar/{{ user['email_hash'] }}?r=g&s=48&d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/{{ user['name_encoded'] }}/48"
-                                 alt="User icon">
-                            {{ user['name'] }}
-                        </a>
-                    {% endif %}
-                </li>
-            </ul>
-        </nav>
+                        </ul>
+                        <ul class="rvo-menubar__group--flex">
+                            {% for available_translation in available_translations %}
+                                {% if available_translation != language %}
+                                    <li class="rvo-menubar__item">
+                                        <a class="rvo-link rvo-menubar__link rvo-link--logoblauw"
+                                           id="langselect-{{ available_translation }}"
+                                           href="javascript:setCookie('lang', '{{ available_translation }}', 9999); window.location.reload()">
+                                            <span class="utrecht-icon rvo-icon rvo-icon-wereldbol rvo-icon--sm rvo-icon--wit rvo-link__icon--before"
+                                                  role="img"
+                                                  aria-label="{% trans %}Language{% endtrans %} {{ available_translation }}"></span>
+                                            {{ language_mappings.get(available_translation) }}
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                            <li class="rvo-menubar__item">
+                                {% if not user %}
+                                    <a id="header-link-login"
+                                       class="rvo-link rvo-menubar__link rvo-link--logoblauw"
+                                       href="/auth/login">
+                                        <span class="utrecht-icon rvo-icon rvo-icon-user rvo-icon--md rvo-icon--wit"
+                                              role="img"
+                                              aria-label="User"></span>
+                                        {% trans %}Login{% endtrans %}
+                                    </a>
+                                {% else %}
+                                    <a class="rvo-link rvo-menubar__link rvo-link--logoblauw"
+                                       href="/auth/profile">
+                                        <img width="24"
+                                             height="24"
+                                             src="https://gravatar.com/avatar/{{ user['email_hash'] }}?r=g&s=48&d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/{{ user['name_encoded'] }}/48"
+                                             alt="User icon">
+                                        {{ user['name'] }}
+                                    </a>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
 </div>
 {% if sub_menu_items is defined and sub_menu_items|length > 0 %}
