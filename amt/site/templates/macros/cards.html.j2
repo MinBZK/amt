@@ -1,4 +1,4 @@
-{% from "macros/editable.html.j2" import editable with context %}
+{% from "macros/editable_macros.html.j2" import editable with context %}
 {% macro render_include_path(path) -%}
     {{ path.urlpath.split("/")[-1] .split(".")[0] }}
 {%- endmacro %}
@@ -6,6 +6,7 @@
     {{ attribute.capitalize().replace("_", " ") }}
 {%- endmacro %}
 {% macro render_value(key, value, depth, base_resource_path, path) -%}
+    {% set has_permission = permission(permission_path, 'Update', permissions) %}
     {% if key is defined and key != "" %}
         {% set relative_resource_path = path + "/" + key %}
     {% else %}
@@ -15,7 +16,7 @@
     {% if isinstance(value, 'IterMixin') or isinstance(value, 'dict') %}
         <div class="{% if depth == 1 %}margin-bottom-large{% endif %}">
             {% if is_editable_resource(full_resource_path, editables) %}
-                {{ editable(algorithm, relative_resource_path, full_resource_path) }}
+                {{ editable(algorithm, relative_resource_path, full_resource_path, None, has_permission) }}
             {% else %}
                 {% if value.__class__.__name__ == 'dict' %}
                     {% set value = value.items() %}
@@ -23,7 +24,7 @@
                 {% for subkey, subvalue in value %}
                     <strong>{{ render_attribute(subkey) }}</strong>:
                     {% if is_editable_resource(full_resource_path + "/" + subkey, editables) %}
-                        {{ editable(algorithm, relative_resource_path + "/" + subkey, full_resource_path + "/" + subkey) }}
+                        {{ editable(algorithm, relative_resource_path + "/" + subkey, full_resource_path + "/" + subkey, None, has_permission) }}
                     {% else %}
                         {{ render_value(subkey, subvalue, depth+1, base_resource_path, path) }}
                     {% endif %}
@@ -49,7 +50,7 @@
             {% if is_editable_resource(full_resource_path + "[*]", editables) %}
                 <div class="amt-blocks-with-vertical-spacing">
                     {% for item in value %}
-                        {{ editable(algorithm, relative_resource_path + "[" + (loop.index-1) | string + "]", full_resource_path + "[" + (loop.index-1) | string + "]") }}
+                        {{ editable(algorithm, relative_resource_path + "[" + (loop.index-1) | string + "]", full_resource_path + "[" + (loop.index-1) | string + "]", None, has_permission) }}
                     {% endfor %}
                 </div>
             {% else %}
@@ -62,7 +63,7 @@
         {% endif %}
     {% else %}
         {% if is_editable_resource(full_resource_path, editables) %}
-            {{ editable(algorithm, relative_resource_path, full_resource_path) }}
+            {{ editable(algorithm, relative_resource_path, full_resource_path, None, has_permission) }}
         {% else %}
             {{ value }}
         {% endif %}

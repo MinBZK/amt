@@ -2,11 +2,11 @@
     {% if message|length > 1 %}
         <h2 class="utrecht-heading-3">{% trans %}There are some errors{% endtrans %}</h2>
     {% else %}
-        <h2 class="utrecht-heading-3">{% trans %}There is one error:{% endtrans %}</h2>
+        <h2 class="utrecht-heading-3">{% trans %}There is an error{% endtrans %}</h2>
     {% endif %}
     {% for msg in message %}
         <div>
-            <span style="min-width: 70px; display: inline-block;">{{ msg['loc'][-1] | capitalize }}:</span>
+            {#            <span style="min-width: 70px; display: inline-block;">{{ msg['loc'][-1] | capitalize }}:</span>#}
             <span class="utrecht-icon rvo-icon rvo-icon-foutmelding rvo-icon--md rvo-status-icon-foutmelding rvo-status-icon-foutmelding"
                   role="img"
                   aria-label="Foutmelding"></span>

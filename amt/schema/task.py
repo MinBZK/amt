@@ -14,9 +14,6 @@ class MovedTask(BaseModel):
     next_sibling_id: int | None = PydanticField(None, alias="nextSiblingId", strict=False)
 
 
-type DisplayTaskType = DisplayTask
-
-
 class DisplayTask(BaseModel):
     id: int | None = None
     title: str | None = None
@@ -30,7 +27,7 @@ class DisplayTask(BaseModel):
     type_object: DisplayMeasureTask | None = None
 
     @staticmethod
-    def create_from_model(task: Task, type_object: DisplayMeasureTask | None = None) -> DisplayTaskType:
+    def create_from_model(task: Task, type_object: DisplayMeasureTask | None = None) -> "DisplayTask":
         display_task = DisplayTask()
         display_task.id = task.id
         display_task.title = task.title
