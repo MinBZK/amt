@@ -14,14 +14,18 @@ from amt.api.localizable import LocalizableEnum
 from amt.api.organization_filter_options import OrganizationFilterOptions, get_localized_organization_filter
 from amt.api.risk_group import RiskGroup, get_localized_risk_group
 from amt.api.update_utils import extract_number_and_string
+from amt.core.authorization import AuthorizationType
 from amt.schema.localized_value_item import LocalizedValueItem
 from amt.schema.shared import IterMixin
+from amt.schema.webform_classes import WebFormOption
 from amt.services.users import UsersService
 
 
 async def get_filters_and_sort_by(
     request: Request, users_service: UsersService
-) -> tuple[dict[str, str | list[str | int]], list[str], dict[str, LocalizedValueItem], dict[str, str]]:
+) -> tuple[
+    dict[str, AuthorizationType | str | int | list[str | int]], list[str], dict[str, LocalizedValueItem], dict[str, str]
+]:
     active_filters: dict[str, str] = {
         k.removeprefix("active-filter-"): v
         for k, v in request.query_params.items()
@@ -36,7 +40,7 @@ async def get_filters_and_sort_by(
     if "organization-type" in add_filters and add_filters["organization-type"] == OrganizationFilterOptions.ALL.value:
         del add_filters["organization-type"]
     drop_filters: list[str] = [v for k, v in request.query_params.items() if k.startswith("drop-filter") and v != ""]
-    filters: dict[str, str | list[str | int]] = {
+    filters: dict[str, AuthorizationType | str | int | list[str | int]] = {
         k: v for k, v in (active_filters | add_filters).items() if k not in drop_filters
     }
     localized_filters: dict[str, LocalizedValueItem] = {}
@@ -64,9 +68,9 @@ def get_localized_value(key: str, value: str, request: Request) -> LocalizedValu
                 # we may need to convert the input value first (this is REALLY not the best way)
                 convertor = StatusConverterForSystemcard()
                 # the replace is a fix for bad lifecycle annotation in the algoritmekader
-                converted_value: str = run_async_function(convertor.read, value.replace("-", " "))  # pyright: ignore[reportUnknownVariableType]
-                if converted_value in Lifecycles:
-                    localized = get_localized_lifecycle(Lifecycles(converted_value), request)
+                converted_value: WebFormOption = run_async_function(convertor.read, value.replace("-", " "))  # pyright: ignore[reportUnknownVariableType]
+                if converted_value.value in Lifecycles:  # pyright: ignore[reportUnknownMemberType]
+                    localized = get_localized_lifecycle(Lifecycles(converted_value.value), request)  # pyright: ignore[reportUnknownMemberType]
         case "risk-group":
             localized = get_localized_risk_group(RiskGroup[value], request)
         case "organization-type":
@@ -106,6 +110,8 @@ def nested_value(obj: Any, attr_path: str, default_value: str | list[str] | None
 
 
 def is_nested_enum(obj: Any, attr_path: str) -> bool:  # noqa: ANN401
+    if not attr_path:
+        return False
     obj = get_nested(obj, attr_path)
     return bool(isinstance(obj, Enum))
 
@@ -167,30 +173,16 @@ def replace_none_with_empty_string_inplace(obj: dict[Any, Any] | list[Any] | Ite
 
 
 def run_async_function(async_func: Callable[..., Awaitable[T]], *args: Any, **kwargs: Any) -> T:  # noqa: ANN401 # pyright: ignore[reportUnknownParameterType]
-    """
-    Runs an async function from a sync context and returns its result, handling various scenarios:
-    - No event loop running
-    - Event loop running in same thread
-    - Event loop running in different thread
-
-    Args:
-        async_func: The async function to be run
-        *args: Positional arguments to pass to the async function
-        **kwargs: Keyword arguments to pass to the async function
-
-    Returns:
-        The result of the async function
-
-    Raises:
-        RuntimeError: If unable to run the async function
-    """
     result: Any | None = None
     exception = None
 
     def run_in_thread() -> None:
         nonlocal result, exception
         try:
-            result = asyncio.run(async_func(*args, **kwargs))  # pyright: ignore[reportUnknownVariableType, reportArgumentType]
+            new_loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(new_loop)
+            result = new_loop.run_until_complete(async_func(*args, **kwargs))  # pyright: ignore[reportUnknownArgumentType, reportUnknownVariableType, reportArgumentType]
+            new_loop.close()
         except Exception as e:
             exception = e
 
@@ -198,16 +190,12 @@ def run_async_function(async_func: Callable[..., Awaitable[T]], *args: Any, **kw
         loop = asyncio.get_running_loop()
         if loop.is_running():
             if threading.current_thread() is threading.main_thread():
-                # We're in the main thread with a running loop
-                # Create a new loop in a separate thread
                 loop_thread = threading.Thread(target=run_in_thread)
                 loop_thread.start()
                 loop_thread.join()
             else:
-                # We're in a different thread, can create a new loop
-                result = asyncio.run(async_func(*args, **kwargs))  # pyright: ignore[reportUnknownVariableType, reportArgumentType]
+                result = asyncio.run(async_func(*args, **kwargs))  # pyright: ignore[reportUnknownArgumentType, reportUnknownVariableType, reportArgumentType]
     except RuntimeError:
-        # No event loop running, we can create one
         result = asyncio.run(async_func(*args, **kwargs))  # pyright: ignore[reportUnknownVariableType, reportArgumentType]
 
     if exception:

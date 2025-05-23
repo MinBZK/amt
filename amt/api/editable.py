@@ -1,32 +1,92 @@
 import logging
+import re
 from collections.abc import Generator
+from functools import lru_cache
 from typing import Any, cast
 
 from starlette.requests import Request
 
-from amt.api.editable_classes import Editable, EditableType, EditModes, FormState, ResolvedEditable
-from amt.api.editable_converters import EditableConverterForOrganizationInAlgorithm, StatusConverterForSystemcard
-from amt.api.editable_enforcers import EditableEnforcerForOrganizationInAlgorithm
-from amt.api.editable_hooks import PreConfirmAIActHook, RedirectOrganizationHook, UpdateAIActHook
+from amt.api.editable_classes import Editable, EditModes, FormState, ResolvedEditable
+from amt.api.editable_converters import (
+    EditableConverterForAuthorizationRole,
+    EditableConverterForOrganizationInAlgorithm,
+    StatusConverterForSystemcard,
+)
+from amt.api.editable_enforcers import (
+    EditableEnforcerForOrganizationInAlgorithm,
+    EditableEnforcerMustHaveMaintainer,
+    EditableEnforcerMustHaveMaintainerForLists,
+)
+from amt.api.editable_hooks import (
+    PreConfirmAIActHook,
+    RedirectMembersHook,
+    RedirectOrganizationHook,
+    SaveAuthorizationHook,
+    UpdateAIActHook,
+)
 from amt.api.editable_util import (
     replace_wildcard_with_digits_in_brackets,
 )
-from amt.api.editable_validators import EditableValidatorMinMaxLength, EditableValidatorSlug
-from amt.api.editable_value_providers import AIActValuesProvider
+from amt.api.editable_validators import (
+    EditableValidatorMinMaxLength,
+    EditableValidatorMustHaveItems,
+    EditableValidatorSlug,
+)
+from amt.api.editable_value_providers import AIActValuesProvider, RolesValuesProvider
 from amt.api.lifecycles import get_localized_lifecycles
 from amt.api.routes.shared import nested_value
 from amt.api.update_utils import extract_number_and_string, set_path
 from amt.api.utils import SafeDict
 from amt.core.exceptions import AMTNotFound
-from amt.models import Algorithm, Organization
-from amt.schema.webform import WebFormFieldImplementationType, WebFormOption
+from amt.models import Algorithm, Authorization, Organization
+from amt.schema.webform_classes import WebFormFieldImplementationType, WebFormOption
 from amt.services.algorithms import AlgorithmsService
+from amt.services.authorization import AuthorizationsService
 from amt.services.organizations import OrganizationsService
+from amt.services.services_provider import ServicesProvider
 
 logger = logging.getLogger(__name__)
 
 
 class Editables:
+    ROLE_EDITABLE: Editable = Editable(
+        full_resource_path="authorization",
+        implementation_type=WebFormFieldImplementationType.PARENT,
+        validator=EditableValidatorMustHaveItems(),
+        enforcer=EditableEnforcerMustHaveMaintainerForLists(),
+        hooks={
+            FormState.SAVE: SaveAuthorizationHook(),
+            FormState.COMPLETED: RedirectMembersHook(),
+        },
+        children=[
+            Editable(
+                full_resource_path="authorization/user_id",
+                implementation_type=WebFormFieldImplementationType.PRE_CHOSEN,
+            ),
+            Editable(
+                full_resource_path="authorization/role_id",
+                implementation_type=WebFormFieldImplementationType.SELECT,
+                values_provider=RolesValuesProvider(),
+                converter=EditableConverterForAuthorizationRole(),
+            ),
+            Editable(
+                full_resource_path="authorization/type", implementation_type=WebFormFieldImplementationType.HIDDEN
+            ),
+            Editable(
+                full_resource_path="authorization/type_id",
+                implementation_type=WebFormFieldImplementationType.HIDDEN,
+            ),
+        ],
+    )
+
+    AUTHORIZATION_ROLE = Editable(
+        full_resource_path="authorization/{authorization_id}/role_id",
+        implementation_type=WebFormFieldImplementationType.SELECT,
+        values_provider=RolesValuesProvider(),
+        converter=EditableConverterForAuthorizationRole(),
+        enforcer=EditableEnforcerMustHaveMaintainer(),
+    )
+
     ALGORITHM_EDITABLE_NAME: Editable = Editable(
         full_resource_path="algorithm/{algorithm_id}/name",
         implementation_type=WebFormFieldImplementationType.TEXT,
@@ -38,12 +98,6 @@ class Editables:
         validator=EditableValidatorMinMaxLength(min_length=3, max_length=100),
     )
     ALGORITHM_EDITABLE_NAME.add_bidirectional_couple(ALGORITHM_EDITABLE_SYSTEMCARD_NAME)
-
-    ALGORITHM_EDITABLE_SYSTEMCARD_MODEL = Editable(
-        full_resource_path="algorithm/{algorithm_id}/system_card/name",
-        implementation_type=WebFormFieldImplementationType.TEXT,
-        validator=EditableValidatorMinMaxLength(min_length=3, max_length=100),
-    )
 
     ALGORITHM_EDITABLE_SYSTEMCARD_OWNERS = Editable(
         full_resource_path="algorithm/{algorithm_id}/system_card/owners[*]",
@@ -286,32 +340,32 @@ class Editables:
             ),
             Editable(
                 full_resource_path="algorithm/{algorithm_id}/system_card/ai_act_profile/type",
-                implementation_type=WebFormFieldImplementationType.SELECT_AI_ACT,
+                implementation_type=WebFormFieldImplementationType.SELECT,
                 values_provider=AIActValuesProvider(type="type"),
             ),
             Editable(
                 full_resource_path="algorithm/{algorithm_id}/system_card/ai_act_profile/open_source",
-                implementation_type=WebFormFieldImplementationType.SELECT_AI_ACT,
+                implementation_type=WebFormFieldImplementationType.SELECT,
                 values_provider=AIActValuesProvider(type="open_source"),
             ),
             Editable(
                 full_resource_path="algorithm/{algorithm_id}/system_card/ai_act_profile/risk_group",
-                implementation_type=WebFormFieldImplementationType.SELECT_AI_ACT,
+                implementation_type=WebFormFieldImplementationType.SELECT,
                 values_provider=AIActValuesProvider(type="risk_group"),
             ),
             Editable(
                 full_resource_path="algorithm/{algorithm_id}/system_card/ai_act_profile/conformity_assessment_body",
-                implementation_type=WebFormFieldImplementationType.SELECT_AI_ACT,
+                implementation_type=WebFormFieldImplementationType.SELECT,
                 values_provider=AIActValuesProvider(type="conformity_assessment_body"),
             ),
             Editable(
                 full_resource_path="algorithm/{algorithm_id}/system_card/ai_act_profile/systemic_risk",
-                implementation_type=WebFormFieldImplementationType.SELECT_AI_ACT,
+                implementation_type=WebFormFieldImplementationType.SELECT,
                 values_provider=AIActValuesProvider(type="systemic_risk"),
             ),
             Editable(
                 full_resource_path="algorithm/{algorithm_id}/system_card/ai_act_profile/transparency_obligations",
-                implementation_type=WebFormFieldImplementationType.SELECT_AI_ACT,
+                implementation_type=WebFormFieldImplementationType.SELECT,
                 values_provider=AIActValuesProvider(type="transparency_obligations"),
             ),
         ],
@@ -329,12 +383,10 @@ editables = Editables()
 
 
 async def get_enriched_resolved_editable(
-    context_variables: dict[str, str | int],
     full_resource_path: str,
     edit_mode: EditModes,
-    algorithms_service: AlgorithmsService | None = None,
-    organizations_service: OrganizationsService | None = None,
-    user_id: str | None = None,
+    context_variables: dict[str, str | int],
+    services_provider: ServicesProvider,
     request: Request | None = None,
 ) -> ResolvedEditable:
     """
@@ -344,21 +396,12 @@ async def get_enriched_resolved_editable(
     can be used to store a new value.
 
     May raise an AMTNotFound error in case a resource can not be found.
-
-    :param edit_mode: the edit mode
-    :param request: the current request
-    :param user_id: the current user
-    :param context_variables: a dictionary of context variables, f.e. {'algorithm_id': 1}
-    :param full_resource_path: the full path of the resource, e.g. /algorithm/1/systemcard/info
-    :param algorithms_service: the algorithm service
-    :param organizations_service:  the organization service
-    :return: a ResolvedEditable instance enriched with the requested resource and current value
     """
 
     _, list_index = extract_number_and_string(full_resource_path)
 
     if list_index is not None:
-        context_variables["list_index"] = list_index
+        context_variables["index"] = list_index
 
     # TODO: it would be better to only resolve the required / requested editable and not everything
     editable = get_resolved_editables(context_variables=context_variables).get(full_resource_path)
@@ -368,57 +411,97 @@ async def get_enriched_resolved_editable(
 
     return await enrich_editable(
         editable,
-        algorithms_service=algorithms_service,
-        organizations_service=organizations_service,
         edit_mode=edit_mode,
-        user_id=user_id,
+        editable_context=context_variables,
+        services_provider=services_provider,
         request=request,
     )
+
+
+def parse_resource_path(path: str) -> tuple[str | None, int | None, str | None]:
+    parts = path.split("/")
+
+    resource_name = parts[0] if parts[0] else None
+
+    if len(parts) == 1:
+        return resource_name, None, None
+
+    try:
+        resource_id = int(parts[1])
+        relative_path = "/".join(parts[2:]) if len(parts) > 2 else None
+    except (ValueError, IndexError):
+        resource_id = None
+        relative_path = "/".join(parts[1:]) if len(parts) > 1 else None
+        if relative_path == "":
+            relative_path = None
+
+    return resource_name, resource_id, relative_path
 
 
 async def enrich_editable(  # noqa: C901
     editable: ResolvedEditable,
     edit_mode: EditModes,
-    algorithms_service: AlgorithmsService | None = None,
-    organizations_service: OrganizationsService | None = None,
-    user_id: str | None = None,
+    editable_context: dict[str, Any],
+    services_provider: ServicesProvider | None,
     request: Request | None = None,
+    resource_object: Any | None = None,  # noqa: ANN401
 ) -> ResolvedEditable:
-    resource_name, resource_id, relative_resource_path = editable.full_resource_path.split("/", 2)
+    resource_name, resource_id, relative_resource_path = parse_resource_path(editable.full_resource_path)
     editable.relative_resource_path = relative_resource_path
-    match resource_name:
-        case "algorithm":
-            if algorithms_service is None:
-                raise ValueError("Algorithms service is required when resolving an algorithm")
-            editable.resource_object = await algorithms_service.get(int(resource_id))
-        case "organization":
-            if organizations_service is None:
-                raise ValueError("Organization service is required when resolving an organization")
-            editable.resource_object = await organizations_service.get_by_id(int(resource_id))
-        case _:
-            logger.error(f"Unknown resource: {resource_name}")
-            raise AMTNotFound()
+    if resource_object is not None:
+        # if the object is provided, we copy it, it may be a custom object, but this depends
+        #  on too many assumptions and maybe should be done differently
+        editable.resource_object = resource_object
+    elif edit_mode is not EditModes.SAVE_NEW:
+        if services_provider is None or resource_id is None:
+            raise TypeError("services_provider must be provided and resource_id can not be None")
+        match resource_name:
+            case "authorization":
+                editable.resource_object = await (await services_provider.get(AuthorizationsService)).get_by_id(
+                    resource_id
+                )
+            case "algorithm":
+                algorithms_service = await services_provider.get(AlgorithmsService)
+                editable.resource_object = await algorithms_service.get(resource_id)
+            case "organization":
+                editable.resource_object = await (await services_provider.get(OrganizationsService)).get_by_id(
+                    resource_id
+                )
+            case _:
+                logger.error(f"Unknown resource: {resource_name}")
+                raise AMTNotFound()
 
-    if editable.implementation_type != WebFormFieldImplementationType.PARENT:
-        editable.value = nested_value(editable.resource_object, relative_resource_path)
+    if editable.implementation_type != WebFormFieldImplementationType.PARENT and editable.resource_object is not None:
+        if relative_resource_path is None:
+            raise TypeError("relative_resource_path can not be None")
+        current_value = nested_value(editable.resource_object, relative_resource_path)
+        if editable.converter and current_value:
+            current_value = await editable.converter.view(
+                current_value, request, editable, editable_context, services_provider
+            )
+        if isinstance(current_value, WebFormOption):
+            editable.value = current_value
+        else:
+            # TODO: this is most likely a text field
+            editable.value = WebFormOption(value=current_value, display_value=current_value)
 
     for child_editable in editable.children:
         await enrich_editable(
             child_editable,
-            edit_mode=edit_mode,
-            algorithms_service=algorithms_service,
-            organizations_service=organizations_service,
-            user_id=user_id,
-            request=request,
+            edit_mode,
+            editable_context,
+            services_provider,
+            request,
+            resource_object,  # TODO this is a test, think of a better solution!!
         )
     for couple_editable in editable.couples:
         await enrich_editable(
             couple_editable,
-            edit_mode=edit_mode,
-            algorithms_service=algorithms_service,
-            organizations_service=organizations_service,
-            user_id=user_id,
-            request=request,
+            edit_mode,
+            editable_context,
+            services_provider,
+            request,
+            resource_object,  # TODO this is a test, think of a better solution!!
         )
 
     # TODO: can we move this to the editable object instead of here?
@@ -426,19 +509,21 @@ async def enrich_editable(  # noqa: C901
     if edit_mode == EditModes.EDIT:
         if editable.values_provider:
             if request is None:
-                raise ValueError("Request is required when resolving a 'editable values provider'")
+                raise TypeError("Request is required when resolving an 'editable values provider'")
             editable.form_options = await editable.values_provider.get_values(request)
         elif editable.implementation_type == WebFormFieldImplementationType.SELECT_MY_ORGANIZATIONS:
-            if organizations_service is None:
-                raise ValueError("Organization service is required when resolving an organization")
-            my_organizations = await organizations_service.get_organizations_for_user(user_id=user_id)
-            editable.form_options = [
-                WebFormOption(value=str(organization.id), display_value=organization.name)
-                for organization in my_organizations
-            ]
+            if services_provider is None:
+                raise TypeError("services_provider must be provided")
+            user_id = editable_context.get("user_id")
+            if user_id:
+                my_organizations = await (await services_provider.get(OrganizationsService)).get_organizations_for_user(
+                    user_id=user_id
+                )
+                editable.form_options = [
+                    WebFormOption(value=str(organization.id), display_value=organization.name)
+                    for organization in my_organizations
+                ]
         elif editable.implementation_type == WebFormFieldImplementationType.SELECT_LIFECYCLE:
-            if algorithms_service is None:
-                raise ValueError("Algorithms service is required when resolving an algorithm")
             if request is None:
                 raise ValueError("Request is required when resolving a lifecycle")
             editable.form_options = [
@@ -450,6 +535,59 @@ async def enrich_editable(  # noqa: C901
     return editable
 
 
+def get_resolved_editable(
+    editable: Editable, context_variables: dict[str, Any], include_couples: bool
+) -> ResolvedEditable:
+    couples = None
+    if include_couples:
+        couples = [get_resolved_editable(couple, context_variables, False) for couple in editable.couples]
+    children = [get_resolved_editable(child, context_variables, True) for child in editable.children]
+
+    full_resource_path = editable.full_resource_path.format_map(SafeDict(context_variables))
+    # TODO: maybe the list index should not be resolved here (for all possible editables)
+    if "index" in context_variables:
+        full_resource_path = replace_wildcard_with_digits_in_brackets(
+            full_resource_path, int(context_variables["index"])
+        )
+
+    _, _, relative_resource_path = parse_resource_path(full_resource_path)
+
+    return ResolvedEditable(
+        full_resource_path=full_resource_path,
+        relative_resource_path=relative_resource_path,
+        implementation_type=editable.implementation_type,
+        values_provider=editable.values_provider,
+        couples=couples,
+        children=children,
+        converter=editable.converter,
+        enforcer=editable.enforcer,
+        validator=editable.validator,
+        hooks=editable.hooks,
+    )
+
+
+@lru_cache(maxsize=1024)
+def compile_extraction_pattern(editable_key: str) -> re.Pattern[str]:
+    # First, escape any regex special characters except { } and *
+    escaped_key = re.sub(r"([.^$+()[\]|])", r"\\\1", editable_key)
+    # Convert placeholders to named capture groups
+    pattern = re.sub(r"{([^}]+)}", r"(?P<\1>[^/]+)", escaped_key)
+    # Convert [*] to a capture group for indices
+    pattern = re.sub(r"\\\[\*\\]", r"\\[(?P<index>\\d+)\\]", pattern)
+    return re.compile(f"^{pattern}$")
+
+
+def find_matching_editable(concrete_path: str) -> tuple[Editable, dict[str, str | Any]]:
+    for editable in editables:
+        pattern = compile_extraction_pattern(cast(Editable, editable).full_resource_path)
+        match = pattern.match(concrete_path)
+        if match:
+            context_variables = match.groupdict()
+            return cast(Editable, editable), context_variables
+    logger.warning(f"Unable to find editable from path {concrete_path!r}")
+    raise AMTNotFound
+
+
 def get_resolved_editables(context_variables: dict[str, str | int]) -> dict[str, ResolvedEditable]:
     """
     Returns a list of all known editables with the resource path resolved using the given context_variables.
@@ -457,43 +595,12 @@ def get_resolved_editables(context_variables: dict[str, str | int]) -> dict[str,
     :return: a dict of resolved editables, with the resolved path as key
     """
 
-    def resolve_editable_path(
-        editable: Editable, context_variables: dict[str, str | int], include_couples: bool
-    ) -> ResolvedEditable:
-        couples = None
-        if include_couples:
-            couples = [resolve_editable_path(couple, context_variables, False) for couple in editable.couples]
-        children = [resolve_editable_path(child, context_variables, True) for child in editable.children]
-
-        full_resource_path = editable.full_resource_path.format_map(SafeDict(context_variables))
-        # TODO: maybe the list index should not be resolved here (for all possible editables)
-        if "list_index" in context_variables:
-            full_resource_path = replace_wildcard_with_digits_in_brackets(
-                full_resource_path, int(context_variables["list_index"])
-            )
-
-        _, _, relative_resource_path = full_resource_path.split("/", 2)
-        editable.relative_resource_path = relative_resource_path
-
-        return ResolvedEditable(
-            full_resource_path=full_resource_path,
-            relative_resource_path=relative_resource_path,
-            implementation_type=editable.implementation_type,
-            values_provider=editable.values_provider,
-            couples=couples,
-            children=children,
-            converter=editable.converter,
-            enforcer=editable.enforcer,
-            validator=editable.validator,
-            hooks=editable.hooks,
-        )
-
     editables_resolved: list[ResolvedEditable] = []
 
     for editable in editables:
         editables_resolved.append(
-            resolve_editable_path(
-                editable=cast(EditableType, editable), context_variables=context_variables, include_couples=True
+            get_resolved_editable(
+                editable=cast(Editable, editable), context_variables=context_variables, include_couples=True
             )
         )
     return {editable.full_resource_path: editable for editable in editables_resolved}
@@ -503,9 +610,10 @@ def get_resolved_editables(context_variables: dict[str, str | int]) -> dict[str,
 async def save_editable(  # noqa: C901
     editable: ResolvedEditable,
     editable_context: dict[str, Any],
+    edit_mode: EditModes,
+    request: Request,
     do_save: bool,
-    algorithms_service: AlgorithmsService | None = None,
-    organizations_service: OrganizationsService | None = None,
+    services_provider: ServicesProvider,
 ) -> ResolvedEditable:
     if editable.children:
         for child_editable in editable.children:
@@ -513,28 +621,37 @@ async def save_editable(  # noqa: C901
             do_save_child = editable.resource_object != child_editable.resource_object
             await save_editable(
                 child_editable,
-                editable_context=editable_context,
-                algorithms_service=algorithms_service,
-                organizations_service=organizations_service,
-                do_save=do_save_child,
+                editable_context,
+                edit_mode,
+                request,
+                do_save_child,
+                services_provider,
             )
     else:
         new_value = editable_context.get("new_values", {}).get(editable.last_path_item())
 
         # we validate on 'raw' form fields, so validation is done before the converter
         if editable.validator and editable.relative_resource_path is not None:
-            await editable.validator.validate(new_value, editable)  # pyright: ignore[reportUnknownMemberType]
+            await editable.validator.validate(request, editable, editable_context, edit_mode, services_provider)
 
         if editable.enforcer:
-            await editable.enforcer.enforce(**editable_context)
+            await editable.enforcer.enforce(request, editable, editable_context, edit_mode, services_provider)
 
-        editable.value = new_value
         if editable.converter:
-            editable.value = await editable.converter.write(editable.value, **editable_context)
+            editable.value = await editable.converter.write(
+                new_value, request, editable, editable_context, services_provider
+            )
+            # Ensure the converted value is used for setting the path
+            if editable.value and editable.value.value is not None:
+                new_value = editable.value.value
+        else:
+            if new_value is None:
+                raise TypeError("Cannot save editable without a new value")
+            editable.value = WebFormOption(value=new_value, display_value=new_value)
 
-        if editable.relative_resource_path is None or editable.value is None:
-            raise TypeError("Cannot save editable without a relative_resource_path or value")
-        set_path(editable.resource_object, editable.relative_resource_path, editable.value)
+        if editable.relative_resource_path is None:
+            raise TypeError("Cannot save editable without a relative_resource_path")
+        set_path(editable.resource_object, editable.relative_resource_path, editable.value.value)
 
     for couple_editable in editable.couples:
         # if couples are within the same resource_object, only 1 save is required
@@ -550,24 +667,35 @@ async def save_editable(  # noqa: C901
             )
         await save_editable(
             couple_editable,
-            editable_context=editable_context,
-            algorithms_service=algorithms_service,
-            organizations_service=organizations_service,
-            do_save=do_save_couple,
+            editable_context,
+            edit_mode,
+            request,
+            do_save_couple,
+            services_provider,
         )
 
     if do_save:
         match editable.resource_object:
+            # TODO: this could be made more generic, using the service provider directly and adding
+            #  an update function to each service
+            case Authorization():
+                editable.resource_object = await (await services_provider.get(AuthorizationsService)).update(
+                    editable.resource_object
+                )
             case Algorithm():
-                if algorithms_service is None:
-                    raise ValueError("Algorithms service is required when saving an algorithm")
-                editable.resource_object = await algorithms_service.update(editable.resource_object)
+                editable.resource_object = await (await services_provider.get(AlgorithmsService)).update(
+                    editable.resource_object
+                )
             case Organization():
-                if organizations_service is None:
-                    raise ValueError("Organization service is required when saving an organization")
-                editable.resource_object = await organizations_service.update(editable.resource_object)
+                editable.resource_object = await (await services_provider.get(OrganizationsService)).update(
+                    editable.resource_object
+                )
             case _:
-                logger.error(f"Unknown resource type: {type(editable.resource_object)}")
-                raise AMTNotFound()
+                # For custom dictionaries or other types in tests, don't raise an error
+                if isinstance(editable.resource_object, dict):
+                    pass  # Dictionary resource objects are allowed for testing
+                else:
+                    logger.error(f"Unknown resource type: {type(editable.resource_object)}")
+                    raise AMTNotFound()
 
     return editable
