@@ -19,7 +19,8 @@ def test_e2e_move_task_to_column(page: Page) -> None:
     expect(page.locator("#column-1")).to_be_visible()
     expect(page.locator("#column-3")).to_be_visible()
 
-    page.drag_and_drop("#card-container-1", "#column-3", target_position={"x": 50, "y": 50})
+    with page.expect_response(lambda response: "/algorithm/1/move_task" in response.url) as _:
+        page.drag_and_drop("#card-container-1", "#column-3", target_position={"x": 50, "y": 50})
 
     page.reload()
 
@@ -47,13 +48,14 @@ def test_e2e_move_task_order_in_same_column(page: Page) -> None:
     expect(card2).to_be_visible()
     expect(card3).to_be_visible()
 
-    page.locator("#card-container-1").hover()
-    page.mouse.down()
-    # when we move the mouse like below, the mouse move is triggered correctly,
-    #  just hover doesn't work for unknown reason
-    page.mouse.move(x=10, y=10)
-    page.locator("#card-container-3").hover(position={"x": 10, "y": 25})
-    page.mouse.up()
+    with page.expect_response(lambda response: "/algorithm/1/move_task" in response.url) as _:
+        page.locator("#card-container-1").hover()
+        page.mouse.down()
+        # when we move the mouse like below, the mouse move is triggered correctly,
+        #  just hover doesn't work for unknown reason
+        page.mouse.move(x=10, y=10)
+        page.locator("#card-container-3").hover(position={"x": 10, "y": 25})
+        page.mouse.up()
 
     page.reload()
 

@@ -19,7 +19,7 @@ from amt.server import create_app
 from httpx import ASGITransport, AsyncClient
 from playwright.sync_api import Browser, BrowserContext, Page
 from sqlalchemy import text
-from sqlalchemy.ext.asyncio import create_async_engine
+from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine
 from sqlalchemy.ext.asyncio.session import async_sessionmaker
 from vcr.config import RecordMode  # pyright: ignore[reportMissingTypeStubs]
 
@@ -36,6 +36,8 @@ logging.getLogger("vcr").setLevel(logging.WARNING)
 
 # we use a custom VCR as I could not find out how to use global settings
 amt_vcr = vcr.VCR(ignore_hosts=["127.0.0.1", "localhost", "testserver"], record_mode=RecordMode.NEW_EPISODES)
+
+global_e2e_engine: AsyncEngine | None = None
 
 
 def run_server_uvicorn(database_file: Path, host: str = "127.0.0.1", port: int = 3462) -> None:
@@ -55,6 +57,7 @@ def run_server_uvicorn(database_file: Path, host: str = "127.0.0.1", port: int =
 async def setup_db_and_server(
     tmp_path_factory: pytest.TempPathFactory, request: pytest.FixtureRequest
 ) -> AsyncIterator[str]:
+    global global_e2e_engine
     test_dir = tmp_path_factory.mktemp("e2e_database")
     database_file = test_dir / "test.sqlite3"
 
@@ -63,15 +66,9 @@ async def setup_db_and_server(
     else:
         engine = create_async_engine(f"sqlite+aiosqlite:///{database_file}", connect_args={"check_same_thread": False})
 
+    global_e2e_engine = engine
+
     metadata = Base.metadata
-
-    async with engine.begin() as connection:
-        await connection.run_sync(metadata.create_all)
-
-    async_session = async_sessionmaker(engine, expire_on_commit=False, class_=AsyncSessionWithCommitFlag)
-
-    async with async_session() as session:
-        await setup_database_e2e(session)
 
     process = Process(target=run_server_uvicorn, args=(database_file,))
     process.start()
@@ -148,14 +145,35 @@ def browser_context_args(browser_context_args: dict[str, Any]) -> dict[str, Any]
 
 
 @pytest.fixture
-def page(context: BrowserContext) -> Page:
+def reset_database() -> None:
+    loop = asyncio.get_event_loop()
+
+    async def async_reset() -> None:
+        if not global_e2e_engine:
+            raise ValueError("Engine should be available for E2E testing")
+
+        metadata = Base.metadata
+        async with global_e2e_engine.begin() as conn:
+            await conn.run_sync(metadata.drop_all)
+            await conn.run_sync(metadata.create_all)
+
+        async_session = async_sessionmaker(global_e2e_engine, expire_on_commit=False, class_=AsyncSessionWithCommitFlag)
+        async with async_session() as session:
+            await setup_database_e2e(session)
+
+    loop.run_until_complete(async_reset())
+
+
+@pytest.fixture
+def page(context: BrowserContext, reset_database: None) -> Page:
+    # Create and return the page
     page = context.new_page()
     do_e2e_login(page)
     return page
 
 
 @pytest.fixture
-def page_no_login(context: BrowserContext) -> Page:
+def page_no_login(context: BrowserContext, reset_database: None) -> Page:
     return context.new_page()
 
 
