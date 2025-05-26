@@ -22,10 +22,13 @@ def test_e2e_create_algorithm(page: Page) -> None:
     page.locator("#conformity_assessment_body").select_option("niet van toepassing")
     page.locator("#conformity_assessment_body").select_option("beoordeling door derde partij")
 
-    button = page.locator("#button-new-algorithm-create")
-    button.click()
+    with page.expect_response(
+        lambda response: "/algorithms/new" in response.url and response.request.method == "POST", timeout=90000
+    ) as _:
+        button = page.locator("#button-new-algorithm-create")
+        button.click()
 
-    expect(page.get_by_text("My new algorithm").first).to_be_visible(timeout=90000)
+    expect(page.get_by_text("My new algorithm").first).to_be_visible()
 
 
 @pytest.mark.slow
@@ -38,7 +41,10 @@ def test_e2e_create_algorithm_invalid(page: Page):
 
     page.locator("#systemic_risk").select_option("geen systeemrisico")
 
-    button = page.locator("#button-new-algorithm-create")
-    button.click()
+    with page.expect_response(
+        lambda response: "/algorithms/new" in response.url and response.request.method == "POST", timeout=90000
+    ) as _:
+        button = page.locator("#button-new-algorithm-create")
+        button.click()
 
     expect(page.get_by_text("name: String should have at")).to_be_visible()
