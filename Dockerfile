@@ -88,13 +88,9 @@ RUN npm run build
 # Production stage
 FROM project-base AS production
 
-# Create non-root user and set permissions
+# Create non-root user
 RUN groupadd amt && \
-    adduser --uid 100 --system --ingroup amt amt \
-    && mkdir -p ./amt/site/static/dist/ ./amt/site/templates/layouts/ \
-    && chown amt:amt /app/ \
-    && chown amt:amt -R ./amt/site/static/dist/ \
-    && chown amt:amt -R ./amt/site/templates/layouts/
+    adduser --uid 100 --system --ingroup amt amt
 
 # Copy application code and config files
 COPY --chown=root:root --chmod=755 amt /app/amt
@@ -102,7 +98,12 @@ COPY --chown=root:root --chmod=755 alembic.ini /app/alembic.ini
 COPY --chown=root:root --chmod=755 prod.env /app/.env
 COPY --chown=root:root --chmod=755 resources /app/resources
 COPY --chown=root:root --chmod=755 LICENSE /app/LICENSE
-COPY --chown=amt:amt --chmod=755 docker-entrypoint.sh /app/docker-entrypoint.sh
+COPY --chown=root:root --chmod=755 docker-entrypoint.sh /app/docker-entrypoint.sh
+
+# Setup directories and correct permissions for the amt user
+RUN mkdir -p ./amt/site/static/dist/ ./amt/site/templates/layouts/ && \
+    chown -R amt:amt /app/ && \
+    chmod -R 755 /app/
 
 # Build frontend assets as amt user
 USER amt

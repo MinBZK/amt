@@ -115,9 +115,18 @@ jobs:
           cache: "pip"
           cache-dependency-path: "**/pyproject.toml"
 
+      # Cache pip for dependencies
+      - name: Cache pip for dependencies
+        uses: actions/cache@v4
+        id: pip-cache
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ steps.cache-keys.outputs.poetry-key }}
+
       # Restore poetry environment
       - name: Cache poetry environment
         uses: actions/cache@v4
+        id: poetry-cache
         with:
           path: ~/.cache/pypoetry
           key: ${{ runner.os }}-poetry-${{ steps.cache-keys.outputs.poetry-key }}
@@ -134,8 +143,9 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-node-${{ steps.cache-keys.outputs.npm-key }}
 
-      # Install poetry (should use pip cache)
+      # Install poetry only if pip cache is missed
       - name: Install poetry
+        if: steps.pip-cache.outputs.cache-hit != 'true'
         run: pip install poetry
 
       # Run linting - no need to install dependencies again
@@ -164,15 +174,25 @@ jobs:
           cache: "pip"
           cache-dependency-path: "**/pyproject.toml"
 
+      # Cache pip for dependencies
+      - name: Cache pip for dependencies
+        uses: actions/cache@v4
+        id: pip-cache
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ steps.cache-keys.outputs.poetry-key }}
+
       # Restore poetry environment
       - name: Cache poetry environment
         uses: actions/cache@v4
+        id: poetry-cache
         with:
           path: ~/.cache/pypoetry
           key: ${{ runner.os }}-poetry-${{ steps.cache-keys.outputs.poetry-key }}
 
-      # Install poetry (should use pip cache)
+      # Install poetry only if pip cache is missed
       - name: Install poetry
+        if: steps.pip-cache.outputs.cache-hit != 'true'
         run: pip install poetry
 
       # Run security check - no need to install dependencies again
@@ -276,9 +296,18 @@ jobs:
           cache: "pip"
           cache-dependency-path: "**/pyproject.toml"
 
+      # Cache pip for dependencies
+      - name: Cache pip for dependencies
+        uses: actions/cache@v4
+        id: pip-cache
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ steps.cache-keys.outputs.poetry-key }}
+
       # Restore poetry environment
       - name: Cache poetry environment
         uses: actions/cache@v4
+        id: poetry-cache
         with:
           path: ~/.cache/pypoetry
           key: ${{ runner.os }}-poetry-${{ steps.cache-keys.outputs.poetry-key }}
@@ -310,8 +339,9 @@ jobs:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ hashFiles('**/pyproject.toml') }}
 
-      # Install poetry (should use pip cache)
+      # Install poetry only if pip cache is missed
       - name: Install poetry
+        if: steps.pip-cache.outputs.cache-hit != 'true'
         run: pip install poetry
 
       - name: Install Playwright browsers
