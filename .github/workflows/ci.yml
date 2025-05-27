@@ -17,6 +17,8 @@ concurrency:
 env:
   REGISTRY: ghcr.io
   POETRY_CACHE_DIR: ~/.cache/pypoetry
+  POETRY_VIRTUALENVS_IN_PROJECT: true
+  POETRY_HOME: /opt/poetry
   PIPX_BIN_DIR: /usr/local/bin
   IMAGE_NAME: ${{ github.repository }}
   PYTHON_VERSION: "3.12"
@@ -35,19 +37,7 @@ jobs:
         id: cache-keys
         uses: ./.github/actions/generate-cache-keys
 
-      # Setup pip cache first
-      - name: Cache pip for dependencies
-        uses: actions/cache@v4
-        id: pip-cache
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ steps.cache-keys.outputs.poetry-key }}
-
-      # Install poetry directly without pipx since we can't reliably cache pipx
-      - name: Install poetry
-        run: pip install poetry
-
-      # Setup Python with poetry and cache pip
+      # Setup Python first
       - name: Set up Python ${{ env.PYTHON_VERSION }}
         uses: actions/setup-python@v5
         with:
@@ -55,18 +45,41 @@ jobs:
           cache: "pip"
           cache-dependency-path: "**/pyproject.toml"
 
-      # Cache the entire poetry environment based on lock file
-      - name: Cache poetry environment
+      # Cache Poetry installation
+      - name: Cache Poetry installation
         uses: actions/cache@v4
-        id: poetry-cache
+        id: poetry-installation-cache
         with:
-          path: ~/.cache/pypoetry
-          key: ${{ runner.os }}-poetry-${{ steps.cache-keys.outputs.poetry-key }}
+          path: ${{ env.POETRY_HOME }}
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/pyproject.toml') }}
 
-      # Only install if cache miss
-      - name: Install poetry dependencies
-        if: steps.poetry-cache.outputs.cache-hit != 'true'
-        run: pip install poetry && poetry install
+      # Install Poetry if not cached
+      - name: Install Poetry
+        if: steps.poetry-installation-cache.outputs.cache-hit != 'true'
+        run: |
+          curl -sSL https://install.python-poetry.org | POETRY_HOME=${{ env.POETRY_HOME }} python3 -
+          echo "${{ env.POETRY_HOME }}/bin" >> $GITHUB_PATH
+
+      # Add Poetry to PATH
+      - name: Add Poetry to PATH
+        run: echo "${{ env.POETRY_HOME }}/bin" >> $GITHUB_PATH
+
+      # Verify Poetry installation
+      - name: Verify Poetry installation
+        run: poetry --version
+
+      # Cache the entire poetry environment (virtual env)
+      - name: Cache Poetry virtualenv
+        uses: actions/cache@v4
+        id: poetry-venv-cache
+        with:
+          path: ./.venv
+          key: ${{ runner.os }}-venv-${{ steps.cache-keys.outputs.poetry-key }}
+
+      # Install dependencies only if cache miss
+      - name: Install dependencies
+        if: steps.poetry-venv-cache.outputs.cache-hit != 'true'
+        run: poetry install
 
       # Setup Node.js from .nvmrc
       - uses: actions/setup-node@v4
@@ -107,7 +120,7 @@ jobs:
 
       # No need to download artifact - using job outputs instead
 
-      # Setup Python with cached poetry and pip
+      # Setup Python with caching
       - name: Set up Python ${{ env.PYTHON_VERSION }}
         uses: actions/setup-python@v5
         with:
@@ -115,21 +128,29 @@ jobs:
           cache: "pip"
           cache-dependency-path: "**/pyproject.toml"
 
-      # Cache pip for dependencies
-      - name: Cache pip for dependencies
+      # Cache Poetry installation
+      - name: Cache Poetry installation
         uses: actions/cache@v4
-        id: pip-cache
+        id: poetry-installation-cache
         with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ steps.cache-keys.outputs.poetry-key }}
+          path: ${{ env.POETRY_HOME }}
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/pyproject.toml') }}
 
-      # Restore poetry environment
-      - name: Cache poetry environment
+      # Add Poetry to PATH
+      - name: Add Poetry to PATH
+        run: echo "${{ env.POETRY_HOME }}/bin" >> $GITHUB_PATH
+
+      # Verify Poetry installation
+      - name: Verify Poetry installation
+        run: poetry --version
+
+      # Cache the poetry virtualenv
+      - name: Cache Poetry virtualenv
         uses: actions/cache@v4
-        id: poetry-cache
+        id: poetry-venv-cache
         with:
-          path: ~/.cache/pypoetry
-          key: ${{ runner.os }}-poetry-${{ steps.cache-keys.outputs.poetry-key }}
+          path: ./.venv
+          key: ${{ runner.os }}-venv-${{ steps.cache-keys.outputs.poetry-key }}
 
       # Setup Node.js with cached modules
       - uses: actions/setup-node@v4
@@ -143,12 +164,7 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-node-${{ steps.cache-keys.outputs.npm-key }}
 
-      # Install poetry only if pip cache is missed
-      - name: Install poetry
-        if: steps.pip-cache.outputs.cache-hit != 'true'
-        run: pip install poetry
-
-      # Run linting - no need to install dependencies again
+      # Run linting - using cached virtualenv
       - name: Run pyright
         run: poetry run pyright
 
@@ -166,7 +182,7 @@ jobs:
 
       # No need to download artifact - using job outputs instead
 
-      # Setup Python with cached poetry and pip
+      # Setup Python with caching
       - name: Set up Python ${{ env.PYTHON_VERSION }}
         uses: actions/setup-python@v5
         with:
@@ -174,28 +190,31 @@ jobs:
           cache: "pip"
           cache-dependency-path: "**/pyproject.toml"
 
-      # Cache pip for dependencies
-      - name: Cache pip for dependencies
+      # Cache Poetry installation
+      - name: Cache Poetry installation
         uses: actions/cache@v4
-        id: pip-cache
+        id: poetry-installation-cache
         with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ steps.cache-keys.outputs.poetry-key }}
+          path: ${{ env.POETRY_HOME }}
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/pyproject.toml') }}
 
-      # Restore poetry environment
-      - name: Cache poetry environment
+      # Add Poetry to PATH
+      - name: Add Poetry to PATH
+        run: echo "${{ env.POETRY_HOME }}/bin" >> $GITHUB_PATH
+
+      # Verify Poetry installation
+      - name: Verify Poetry installation
+        run: poetry --version
+
+      # Cache the poetry virtualenv
+      - name: Cache Poetry virtualenv
         uses: actions/cache@v4
-        id: poetry-cache
+        id: poetry-venv-cache
         with:
-          path: ~/.cache/pypoetry
-          key: ${{ runner.os }}-poetry-${{ steps.cache-keys.outputs.poetry-key }}
+          path: ./.venv
+          key: ${{ runner.os }}-venv-${{ steps.cache-keys.outputs.poetry-key }}
 
-      # Install poetry only if pip cache is missed
-      - name: Install poetry
-        if: steps.pip-cache.outputs.cache-hit != 'true'
-        run: pip install poetry
-
-      # Run security check - no need to install dependencies again
+      # Run security check - using cached virtualenv
       - name: check licenses used by project in pyproject.toml
         run: poetry run liccheck -s pyproject.toml
 
@@ -288,7 +307,7 @@ jobs:
 
       # No need to download artifact - using job outputs instead
 
-      # Setup Python with cached poetry and pip
+      # Setup Python with caching
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
@@ -296,21 +315,29 @@ jobs:
           cache: "pip"
           cache-dependency-path: "**/pyproject.toml"
 
-      # Cache pip for dependencies
-      - name: Cache pip for dependencies
+      # Cache Poetry installation
+      - name: Cache Poetry installation
         uses: actions/cache@v4
-        id: pip-cache
+        id: poetry-installation-cache
         with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ steps.cache-keys.outputs.poetry-key }}
+          path: ${{ env.POETRY_HOME }}
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/pyproject.toml') }}
 
-      # Restore poetry environment
-      - name: Cache poetry environment
+      # Add Poetry to PATH
+      - name: Add Poetry to PATH
+        run: echo "${{ env.POETRY_HOME }}/bin" >> $GITHUB_PATH
+
+      # Verify Poetry installation
+      - name: Verify Poetry installation
+        run: poetry --version
+
+      # Cache the poetry virtualenv
+      - name: Cache Poetry virtualenv
         uses: actions/cache@v4
-        id: poetry-cache
+        id: poetry-venv-cache
         with:
-          path: ~/.cache/pypoetry
-          key: ${{ runner.os }}-poetry-${{ steps.cache-keys.outputs.poetry-key }}
+          path: ./.venv
+          key: ${{ runner.os }}-venv-${{ steps.cache-keys.outputs.poetry-key }}
 
       # Setup Node.js with cached modules
       - uses: actions/setup-node@v4
@@ -338,11 +365,6 @@ jobs:
         with:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ hashFiles('**/pyproject.toml') }}
-
-      # Install poetry only if pip cache is missed
-      - name: Install poetry
-        if: steps.pip-cache.outputs.cache-hit != 'true'
-        run: pip install poetry
 
       - name: Install Playwright browsers
         if: steps.playwright-cache.outputs.cache-hit != 'true'
