@@ -25,6 +25,8 @@ jobs:
   # Create a dependency cache job that other jobs can depend on
   dependencies-cache:
     runs-on: ubuntu-latest
+    outputs:
+      cache-status: ${{ steps.cache-status.outputs.status }}
     steps:
       - uses: actions/checkout@v4
 
@@ -82,21 +84,17 @@ jobs:
         if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
 
-      # Create empty file to signal dependency caching is complete
-      - name: Mark dependencies cached
-        run: touch .dependencies-cached
+      # Nothing to do here - dependency caching is complete
 
-      # Upload marker file as artifact to signal to other jobs that caching is complete
-      - name: Upload dependency status
-        uses: actions/upload-artifact@v4
-        with:
-          name: dependencies-cache-marker
-          path: .dependencies-cached
-          retention-days: 1
+      # Set output to indicate cache job is complete
+      - name: Set cache status
+        id: cache-status
+        run: echo "status=complete" >> $GITHUB_OUTPUT
 
   lint:
     needs: dependencies-cache
     runs-on: ubuntu-latest
+    if: needs.dependencies-cache.outputs.cache-status == 'complete'
     steps:
       - uses: actions/checkout@v4
 
@@ -105,11 +103,7 @@ jobs:
         id: cache-keys
         uses: ./.github/actions/generate-cache-keys
 
-      # Download cache marker
-      - name: Download dependency status
-        uses: actions/download-artifact@v4
-        with:
-          name: dependencies-cache-marker
+      # No need to download artifact - using job outputs instead
 
       # Restore the cached pipx
       - name: Cache pipx
@@ -150,6 +144,7 @@ jobs:
   security:
     needs: dependencies-cache
     runs-on: ubuntu-latest
+    if: needs.dependencies-cache.outputs.cache-status == 'complete'
     steps:
       - uses: actions/checkout@v4
 
@@ -158,11 +153,7 @@ jobs:
         id: cache-keys
         uses: ./.github/actions/generate-cache-keys
 
-      # Download cache marker
-      - name: Download dependency status
-        uses: actions/download-artifact@v4
-        with:
-          name: dependencies-cache-marker
+      # No need to download artifact - using job outputs instead
 
       # Restore the cached pipx
       - name: Cache pipx
@@ -208,6 +199,7 @@ jobs:
   docker-build:
     needs: dependencies-cache
     runs-on: ubuntu-latest
+    if: needs.dependencies-cache.outputs.cache-status == 'complete'
     steps:
       - uses: actions/checkout@v4
 
@@ -308,6 +300,7 @@ jobs:
   test-local-frontend:
     needs: dependencies-cache
     runs-on: ubuntu-latest
+    if: needs.dependencies-cache.outputs.cache-status == 'complete'
     steps:
       - uses: actions/checkout@v4
 
@@ -316,11 +309,7 @@ jobs:
         id: cache-keys
         uses: ./.github/actions/generate-cache-keys
 
-      # Download cache marker
-      - name: Download dependency status
-        uses: actions/download-artifact@v4
-        with:
-          name: dependencies-cache-marker
+      # No need to download artifact - using job outputs instead
 
       # Setup Node.js with cached modules
       - uses: actions/setup-node@v4
@@ -341,6 +330,7 @@ jobs:
   test-local-backend:
     needs: dependencies-cache
     runs-on: ubuntu-latest
+    if: needs.dependencies-cache.outputs.cache-status == 'complete'
     strategy:
       matrix:
         python-version: ["3.12"] # When using ACT only use ["3.12"]
@@ -357,11 +347,7 @@ jobs:
         id: cache-keys
         uses: ./.github/actions/generate-cache-keys
 
-      # Download cache marker
-      - name: Download dependency status
-        uses: actions/download-artifact@v4
-        with:
-          name: dependencies-cache-marker
+      # No need to download artifact - using job outputs instead
 
       # Restore the cached pipx
       - name: Cache pipx
