@@ -22,52 +22,185 @@ env:
   PYTHON_VERSION: "3.12"
 
 jobs:
-  lint:
+  # Create a dependency cache job that other jobs can depend on
+  dependencies-cache:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
+      # Create hash of dependency files for more precise caching
+      - name: Generate dependency cache keys
+        id: cache-keys
+        run: |
+          echo "poetry-key=$(md5sum poetry.lock pyproject.toml | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+          echo "npm-key=$(md5sum package-lock.json package.json | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+
+      # Install pipx once and cache it
+      - name: Cache pipx
+        uses: actions/cache@v4
+        id: pipx-cache
+        with:
+          path: ~/.local/pipx
+          key: ${{ runner.os }}-pipx-${{ steps.cache-keys.outputs.poetry-key }}
+
       - name: Install poetry
+        if: steps.pipx-cache.outputs.cache-hit != 'true'
         run: pipx install poetry
 
+      # Setup Python with poetry
       - name: Set up Python ${{ env.PYTHON_VERSION }}
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-          cache: "poetry"
 
+      # Cache the entire poetry environment based on lock file
+      - name: Cache poetry environment
+        uses: actions/cache@v4
+        id: poetry-cache
+        with:
+          path: ~/.cache/pypoetry
+          key: ${{ runner.os }}-poetry-${{ steps.cache-keys.outputs.poetry-key }}
+
+      # Only install if cache miss
+      - name: Install poetry dependencies
+        if: steps.poetry-cache.outputs.cache-hit != 'true'
+        run: poetry install
+
+      # Setup Node.js from .nvmrc
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
-          cache: "npm"
 
-      - name: Install dependencies
-        run: |
-          poetry install
-          npm install
+      # Cache npm modules based on lock file
+      - name: Cache npm modules
+        uses: actions/cache@v4
+        id: npm-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ steps.cache-keys.outputs.npm-key }}
 
-      - name: Run pyright # There is no official pyright pre-commit hook
-        run: poetry run pyright
+      # Only install if cache miss
+      - name: Install npm dependencies
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm ci
 
-  security:
+      # Create empty file to signal dependency caching is complete
+      - name: Mark dependencies cached
+        run: touch .dependencies-cached
+
+      # Upload marker file as artifact to signal to other jobs that caching is complete
+      - name: Upload dependency status
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependencies-cache-marker
+          path: .dependencies-cached
+          retention-days: 1
+
+  lint:
+    needs: dependencies-cache
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install poetry
-        run: pipx install poetry
+      # Get the dependency cache keys
+      - name: Generate dependency cache keys
+        id: cache-keys
+        run: |
+          echo "poetry-key=$(md5sum poetry.lock pyproject.toml | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+          echo "npm-key=$(md5sum package-lock.json package.json | awk '{print $1}')" >> "$GITHUB_OUTPUT"
 
+      # Download cache marker
+      - name: Download dependency status
+        uses: actions/download-artifact@v4
+        with:
+          name: dependencies-cache-marker
+
+      # Restore the cached pipx
+      - name: Cache pipx
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/pipx
+          key: ${{ runner.os }}-pipx-${{ steps.cache-keys.outputs.poetry-key }}
+
+      # Setup Python with cached poetry
       - name: Set up Python ${{ env.PYTHON_VERSION }}
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-          cache: "poetry"
 
-      - name: Install dependencies
-        run: poetry install
+      # Restore poetry environment
+      - name: Cache poetry environment
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pypoetry
+          key: ${{ runner.os }}-poetry-${{ steps.cache-keys.outputs.poetry-key }}
 
+      # Setup Node.js with cached modules
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      # Restore npm cache
+      - name: Cache npm modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ steps.cache-keys.outputs.npm-key }}
+
+      # Run linting - no need to install dependencies again
+      - name: Run pyright
+        run: poetry run pyright
+
+  security:
+    needs: dependencies-cache
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Get the dependency cache keys
+      - name: Generate dependency cache keys
+        id: cache-keys
+        run: |
+          echo "poetry-key=$(md5sum poetry.lock pyproject.toml | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+
+      # Download cache marker
+      - name: Download dependency status
+        uses: actions/download-artifact@v4
+        with:
+          name: dependencies-cache-marker
+
+      # Restore the cached pipx
+      - name: Cache pipx
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/pipx
+          key: ${{ runner.os }}-pipx-${{ steps.cache-keys.outputs.poetry-key }}
+
+      # Setup Python with cached poetry
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      # Restore poetry environment
+      - name: Cache poetry environment
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pypoetry
+          key: ${{ runner.os }}-poetry-${{ steps.cache-keys.outputs.poetry-key }}
+
+      # Run security check - no need to install dependencies again
       - name: check licenses used by project in pyproject.toml
         run: poetry run liccheck -s pyproject.toml
+
+      # Cache Trivy database to avoid repeated downloads
+      - name: Cache Trivy DB
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/trivy
+          key: ${{ runner.os }}-trivy-${{ hashFiles('trivy.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-trivy-
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
@@ -76,70 +209,197 @@ jobs:
           scan-type: fs
           scan-ref: "."
 
-  test-compose:
+  # Cache Docker images to avoid rebuilding
+  docker-build:
+    needs: dependencies-cache
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: mv compose.test.yml compose.override.yml
+
       - name: Log in to the Container registry
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - run: docker compose build
+
+      # Set up Docker Buildx with caching
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          driver-opts: |
+            image=moby/buildkit:latest
+            network=host
+
+      # Create hash of Dockerfile and related files for cache key
+      - name: Generate Docker cache key
+        id: docker-key
+        run: |
+          echo "docker-key=$(md5sum Dockerfile poetry.lock pyproject.toml package-lock.json package.json | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+
+      # Cache Docker layers between runs
+      - name: Cache Docker layers
+        uses: actions/cache@v4
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ steps.docker-key.outputs.docker-key }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+
+      # Build and export Docker images for testing
+      - name: Build Docker images
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/ci-test:${{ github.sha }}
+            ghcr.io/${{ github.repository }}/ci-test:latest
+          target: test
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
+          build-args: |
+            BUILDKIT_INLINE_CACHE=1
+
+      # Move cache to prevent it from growing indefinitely
+      - name: Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+
+  test-compose:
+    runs-on: ubuntu-latest
+    needs: [docker-build]
+    steps:
+      - uses: actions/checkout@v4
+      - run: mv compose.test.yml compose.override.yml
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Use pre-built image for testing
+      - name: Update docker-compose to use pre-built image
+        run: |
+          sed -i 's|build:|image: ghcr.io/${{ github.repository }}/ci-test:${{ github.sha }}|g' compose.yml
+          sed -i '/context:/d' compose.yml
+          sed -i '/dockerfile:/d' compose.yml
+          sed -i '/target:/d' compose.override.yml
+          sed -i 's|build:|image: ghcr.io/${{ github.repository }}/ci-test:${{ github.sha }}|g' compose.override.yml
+
       - run: docker compose down -v --remove-orphans
       - run: docker compose up -d
+
       - name: test frontend
         run: docker compose run amt-test npm run test
+
       - name: test app
         run: docker compose run amt-test poetry run pytest -m 'not slow' --db postgresql
+
       - name: db downgrade test
         run: docker compose exec -T amt alembic downgrade -1
+
       - name: db upgrade test
         run: docker compose exec -T amt alembic upgrade head
+
       - run: docker compose down -v --remove-orphans
 
   test-local-frontend:
+    needs: dependencies-cache
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
+      # Get the dependency cache keys
+      - name: Generate dependency cache keys
+        id: cache-keys
+        run: |
+          echo "npm-key=$(md5sum package-lock.json package.json | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+
+      # Download cache marker
+      - name: Download dependency status
+        uses: actions/download-artifact@v4
+        with:
+          name: dependencies-cache-marker
+
+      # Setup Node.js with cached modules
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
-          cache: "npm"
 
-      - name: Install dependencies
-        run: npm install
+      # Restore npm cache
+      - name: Cache npm modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ steps.cache-keys.outputs.npm-key }}
 
+      # Run frontend tests - no need to install dependencies again
       - name: Run tests
         run: npm run test
 
   test-local-backend:
+    needs: dependencies-cache
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: ["3.12"] # When using ACT only use ["3.12"]
+      # Add fail-fast: false to continue other tests even if one fails
+      fail-fast: false
 
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Install poetry
-        run: pipx install poetry
+      # Get the dependency cache keys
+      - name: Generate dependency cache keys
+        id: cache-keys
+        run: |
+          echo "poetry-key=$(md5sum poetry.lock pyproject.toml | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+          echo "npm-key=$(md5sum package-lock.json package.json | awk '{print $1}')" >> "$GITHUB_OUTPUT"
 
+      # Download cache marker
+      - name: Download dependency status
+        uses: actions/download-artifact@v4
+        with:
+          name: dependencies-cache-marker
+
+      # Restore the cached pipx
+      - name: Cache pipx
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/pipx
+          key: ${{ runner.os }}-pipx-${{ steps.cache-keys.outputs.poetry-key }}
+
+      # Setup Python with cached poetry
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-          cache: "poetry"
 
+      # Restore poetry environment
+      - name: Cache poetry environment
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pypoetry
+          key: ${{ runner.os }}-poetry-${{ steps.cache-keys.outputs.poetry-key }}
+
+      # Setup Node.js with cached modules
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
-          cache: "npm"
+
+      # Restore npm cache
+      - name: Cache npm modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ steps.cache-keys.outputs.npm-key }}
 
       - name: Log in to the Container registry
         uses: docker/login-action@v3
@@ -148,18 +408,22 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      # Cache playwright browsers
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/pyproject.toml') }}
+
+      - name: Install Playwright browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: poetry run playwright install --with-deps
+
       - name: Start local task registry
         run: |
           docker pull ghcr.io/minbzk/task-registry@sha256:d3dc13c5352a2fc9ec835a574193ce6587d9ba85028f983b18dc75ddacc107e3
           docker run -d -p 8000:8000 --name task-registry ghcr.io/minbzk/task-registry@sha256:d3dc13c5352a2fc9ec835a574193ce6587d9ba85028f983b18dc75ddacc107e3
-
-      - name: Install dependencies
-        run: |
-          poetry install
-          npm install
-
-      - name: Install Playwright browsers
-        run: poetry run playwright install --with-deps
 
       - name: test migrations for sqlite
         run: |
@@ -247,8 +511,27 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
+      # Create hash of Dockerfile and related files for cache key
+      - name: Generate Docker cache key
+        id: docker-key
+        run: |
+          echo "docker-key=$(md5sum Dockerfile poetry.lock pyproject.toml package-lock.json package.json | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+        with:
+          driver-opts: |
+            image=moby/buildkit:latest
+            network=host
+
+      # Cache Docker layers between runs
+      - name: Cache Docker layers
+        uses: actions/cache@v4
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ steps.docker-key.outputs.docker-key }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
 
       - name: Extract metadata for Docker
         id: meta
@@ -275,6 +558,25 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           annotations: ${{ steps.meta.outputs.annotations }}
           platforms: linux/amd64,linux/arm64,darwin/amd64
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
+          build-args: |
+            BUILDKIT_INLINE_CACHE=1
+
+      # Move cache to prevent it from growing indefinitely
+      - name: Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+
+      # Cache Trivy database to avoid repeated downloads
+      - name: Cache Trivy DB
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/trivy
+          key: ${{ runner.os }}-trivy-${{ hashFiles('trivy.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-trivy-
 
       - name: Run Trivy vulnerability scanner sarif
         uses: aquasecurity/trivy-action@master

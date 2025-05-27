@@ -1,7 +1,7 @@
 ARG PYTHON_VERSION=3.12.7-slim
 ARG NVM_VERSION=0.40.0
 
-FROM  --platform=$BUILDPLATFORM python:${PYTHON_VERSION} AS project-base
+FROM --platform=$BUILDPLATFORM python:${PYTHON_VERSION} AS project-base
 ARG NVM_VERSION
 
 LABEL maintainer=ai-validatie@minbzk.nl \
@@ -21,28 +21,40 @@ ENV PYTHONUNBUFFERED=1 \
     POETRY_HOME='/usr/local' \
     NVM_DIR=/usr/local/nvm
 
+# Install dependencies in a single layer to reduce image size
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl libpq-dev \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && curl -sSL https://install.python-poetry.org | python3 - \
+    && mkdir -p $NVM_DIR
 
-RUN  curl -sSL https://install.python-poetry.org | python3 -
-
+# Copy dependency files first for better caching
 WORKDIR /app/
 COPY ./poetry.lock ./pyproject.toml ./
+
+# Install Python dependencies
+RUN poetry install --without dev,test
+
+# Copy node-related config files
 COPY ./package-lock.json ./package.json .nvmrc ./
 COPY ./webpack.config.js ./webpack.config.prod.js ./
 COPY ./tsconfig.json ./eslint.config.mjs ./
 COPY ./jest.config.ts ./
 
-RUN mkdir -p $NVM_DIR && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION}/install.sh | bash
+# Install Node.js with NVM
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION}/install.sh | bash \
+    && . "$NVM_DIR/nvm.sh" \
+    && nvm install \
+    && nvm use
 
-RUN . ~/.bashrc && nvm install && nvm use
+# Install Node.js dependencies
+RUN . "$NVM_DIR/nvm.sh" && npm ci
 
-RUN poetry install --without dev,test
-RUN . "$NVM_DIR/nvm.sh" && npm install
+# Set Node.js path
 ENV PATH="$NVM_DIR/versions/node/v20.16.0/bin:$PATH"
 ENV PATH="/app/.venv/bin:$PATH"
 
+# Development stage with test dependencies
 FROM project-base AS development
 
 COPY amt/ ./amt/
@@ -51,6 +63,7 @@ COPY ./script/ ./script/
 COPY ./README.md ./README.md
 RUN poetry install
 
+# Lint stage
 FROM development AS lint
 COPY ./.prettierrc ./.prettierignore ./
 RUN ruff format --check
@@ -59,40 +72,39 @@ RUN ruff check
 RUN npm run lint
 RUN pyright
 
+# Test stage
 FROM development AS test
 
 COPY ./example/ ./example/
 COPY ./resources/ ./resources/
 RUN npm run build
 
+# Production stage
 FROM project-base AS production
 
-
+# Create non-root user and set permissions
 RUN groupadd amt && \
-    adduser --uid 100 --system --ingroup amt amt
+    adduser --uid 100 --system --ingroup amt amt \
+    && mkdir -p ./amt/site/static/dist/ ./amt/site/templates/layouts/ \
+    && chown amt:amt /app/ \
+    && chown amt:amt -R ./amt/site/static/dist/ \
+    && chown amt:amt -R ./amt/site/templates/layouts/
 
-#todo(berry): create log folder so permissions can be set to root:root
-# currenlt problem is that i could not get the logger to accept a path in the filerotate handler
-RUN chown amt:amt /app/
-
-USER amt
-
+# Copy application code and config files
 COPY --chown=root:root --chmod=755 amt /app/amt
 COPY --chown=root:root --chmod=755 alembic.ini /app/alembic.ini
 COPY --chown=root:root --chmod=755 prod.env /app/.env
 COPY --chown=root:root --chmod=755 resources /app/resources
 COPY --chown=root:root --chmod=755 LICENSE /app/LICENSE
 COPY --chown=amt:amt --chmod=755 docker-entrypoint.sh /app/docker-entrypoint.sh
-USER root
-RUN mkdir -p ./amt/site/static/dist/
-RUN chown amt:amt -R ./amt/site/static/dist/
-RUN chown amt:amt -R ./amt/site/templates/layouts/
+
+# Build frontend assets as amt user
 USER amt
 RUN npm run build
 
+# Set environment and working directory
 ENV PYTHONPATH=/app/
 WORKDIR /app/
-
 ENV PATH="/app/:$PATH"
 
 CMD [ "docker-entrypoint.sh" ]
