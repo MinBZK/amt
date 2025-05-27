@@ -81,6 +81,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: mv compose.test.yml compose.override.yml
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - run: docker compose build
       - run: docker compose down -v --remove-orphans
       - run: docker compose up -d
@@ -135,6 +141,18 @@ jobs:
           node-version-file: .nvmrc
           cache: "npm"
 
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Start local task registry
+        run: |
+          docker pull ghcr.io/minbzk/task-registry@sha256:d3dc13c5352a2fc9ec835a574193ce6587d9ba85028f983b18dc75ddacc107e3
+          docker run -d -p 8000:8000 --name task-registry ghcr.io/minbzk/task-registry@sha256:d3dc13c5352a2fc9ec835a574193ce6587d9ba85028f983b18dc75ddacc107e3
+
       - name: Install dependencies
         run: |
           poetry install
@@ -154,7 +172,9 @@ jobs:
           npm run build
 
       - name: Run pytest
-        run: TZ=UTC poetry run coverage run -m pytest
+        run: |
+          export TASK_REGISTRY_URL=http://localhost:8000
+          TZ=UTC poetry run coverage run -m pytest
 
       - name: Upload playwright tracing
         if: failure()
@@ -164,6 +184,10 @@ jobs:
           path: test-results/
           if-no-files-found: error
           overwrite: true
+
+      - name: Stop task registry
+        if: always()
+        run: docker stop task-registry && docker rm task-registry
 
       - name: run coverage report
         run: poetry run coverage report

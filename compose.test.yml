@@ -1,4 +1,8 @@
 services:
+  amt:
+    environment:
+      - TASK_REGISTRY_URL=http://task-registry:8000
+
   amt-test:
     build:
       context: .
@@ -8,3 +12,10 @@ services:
     env_file:
       - path: prod.env
         required: true
+    environment:
+      - TASK_REGISTRY_URL=http://task-registry:8000
+
+  task-registry:
+    image: ghcr.io/minbzk/task-registry@sha256:d3dc13c5352a2fc9ec835a574193ce6587d9ba85028f983b18dc75ddacc107e3
+    ports:
+      - "8000:8000"

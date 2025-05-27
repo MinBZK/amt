@@ -3,7 +3,7 @@ from amt.clients.clients import TaskRegistryAPIClient, TaskType
 from amt.core.exceptions import AMTInstrumentError
 from amt.repositories.task_registry import TaskRegistryRepository
 from pytest_httpx import HTTPXMock
-from tests.conftest import amt_vcr
+from tests.conftest import TASK_REGISTRY_URL, amt_vcr
 
 
 @amt_vcr.use_cassette("tests/fixtures/vcr_cassettes/test_fetch_tasks_all.yml")  # type: ignore
@@ -106,7 +106,7 @@ async def test_fetch_tasks_invalid_response(httpx_mock: HTTPXMock):
     urn = "urn:nl:aivt:tr:td:1.0"
 
     httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:td:1.0?version=latest",
+        url=f"{TASK_REGISTRY_URL}/instruments/urn/urn:nl:aivt:tr:td:1.0?version=latest",
         content=b'{"test": 1}',
         is_optional=True,
     )

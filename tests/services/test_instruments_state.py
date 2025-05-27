@@ -14,6 +14,7 @@ from amt.services.instruments_and_requirements_state import (
     get_task_timestamp_from_assessment_card,
 )
 from pytest_httpx import HTTPXMock
+from tests.conftest import TASK_REGISTRY_URL
 from tests.constants import (
     TASK_REGISTRY_AIIA_CONTENT_PAYLOAD,
     TASK_REGISTRY_CONTENT_PAYLOAD,
@@ -187,17 +188,17 @@ def test_find_next_tasks_for_instrument_correct_lifecycle(system_card: SystemCar
 async def test_get_state_per_instrument(system_card: SystemCard, httpx_mock: HTTPXMock):
     instrument_state_service = InstrumentStateService(system_card)
     httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
+        url=f"{TASK_REGISTRY_URL}/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
         content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
         is_optional=True,
     )
     httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
+        url=f"{TASK_REGISTRY_URL}/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
         content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
         is_optional=True,
     )
     httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:instrument:assessment?version=latest",
+        url=f"{TASK_REGISTRY_URL}/instruments/urn/urn:instrument:assessment?version=latest",
         content=b'{"detail": "invalid urn: urn:instrument:assessment"}',
         status_code=400,
         is_optional=True,
@@ -217,17 +218,17 @@ async def test_get_state_per_instrument(system_card: SystemCard, httpx_mock: HTT
 async def test_get_amount_completed_instruments(system_card: SystemCard, httpx_mock: HTTPXMock):
     instrument_state_service = InstrumentStateService(system_card)
     httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
+        url=f"{TASK_REGISTRY_URL}/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
         content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
         is_optional=True,
     )
     httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
+        url=f"{TASK_REGISTRY_URL}/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
         content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
         is_optional=True,
     )
     httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:instrument:assessment?version=latest",
+        url=f"{TASK_REGISTRY_URL}/instruments/urn/urn:instrument:assessment?version=latest",
         content=b'{"detail": "invalid urn: urn:instrument:assessment"}',
         status_code=400,
         is_optional=True,
@@ -241,17 +242,17 @@ async def test_get_amount_completed_instruments(system_card: SystemCard, httpx_m
 async def test_get_amount_total_instruments(system_card: SystemCard, httpx_mock: HTTPXMock):
     instrument_state_service = InstrumentStateService(system_card)
     httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
+        url=f"{TASK_REGISTRY_URL}/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
         content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
         is_optional=True,
     )
     httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
+        url=f"{TASK_REGISTRY_URL}/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
         content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
         is_optional=True,
     )
     httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:instrument:assessment?version=latest",
+        url=f"{TASK_REGISTRY_URL}/instruments/urn/urn:instrument:assessment?version=latest",
         content=b'{"detail": "invalid urn: urn:instrument:assessment"}',
         status_code=400,
         is_optional=True,
@@ -265,17 +266,17 @@ async def test_get_amount_total_instruments(system_card: SystemCard, httpx_mock:
 async def test_get_amount_completed_instruments_one_completed(system_card: SystemCard, httpx_mock: HTTPXMock):
     instrument_state_service = InstrumentStateService(system_card)
     httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
+        url=f"{TASK_REGISTRY_URL}/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
         content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
         is_optional=True,
     )
     httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
+        url=f"{TASK_REGISTRY_URL}/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest",
         content=TASK_REGISTRY_AIIA_CONTENT_PAYLOAD.encode(),
         is_optional=True,
     )
     httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:instrument:assessment?version=latest",
+        url=f"{TASK_REGISTRY_URL}/instruments/urn/urn:instrument:assessment?version=latest",
         content=b'{"detail": "invalid urn: urn:instrument:assessment"}',
         status_code=400,
         is_optional=True,

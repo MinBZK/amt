@@ -27,6 +27,9 @@ from tests.constants import default_auth_user
 from tests.database_e2e_setup import setup_database_e2e
 from tests.database_test_utils import DatabaseTestUtils
 
+# Get the task registry URL from environment or use the default value
+TASK_REGISTRY_URL = os.environ.get("TASK_REGISTRY_URL", "https://task-registry.apps.digilab.network")
+
 logger = logging.getLogger(__name__)
 
 # Dubious choice here: allow nested event loops.
@@ -35,7 +38,14 @@ nest_asyncio.apply()  # type: ignore [(reportUnknownMemberType)]
 logging.getLogger("vcr").setLevel(logging.WARNING)
 
 # we use a custom VCR as I could not find out how to use global settings
-amt_vcr = vcr.VCR(ignore_hosts=["127.0.0.1", "localhost", "testserver"], record_mode=RecordMode.NEW_EPISODES)
+amt_vcr = vcr.VCR(
+    ignore_hosts=["127.0.0.1", "localhost", "testserver"],
+    record_mode=RecordMode.NONE,  # change if you want to record new cassettes
+    filter_headers=["host", "Host"],  # Ignore host header for matching
+    match_on=["uri", "method", "query", "body"],  # Don't match on host header
+)
+# VCR disables, using localhost seems faster than using VCR
+amt_vcr.use_cassette = lambda *args, **kwargs: lambda func: func  # pyright: ignore
 
 global_e2e_engine: AsyncEngine | None = None
 
