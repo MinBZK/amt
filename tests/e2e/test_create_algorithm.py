@@ -47,4 +47,4 @@ def test_e2e_create_algorithm_invalid(page: Page):
         button = page.locator("#button-new-algorithm-create")
         button.click()
 
-    expect(page.get_by_text("name: String should have at")).to_be_visible()
+    expect(page.get_by_text("String should have at").first).to_be_visible()

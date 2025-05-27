@@ -60,6 +60,60 @@
                     </div>
                 </li>
             </ul>
+            <h2 class="utrecht-heading-2 margin-top-large">{% trans %}Organizations{% endtrans %}</h2>
+            <table class="rvo-table">
+                <thead class="rvo-table-head">
+                    <tr class="rvo-table-row">
+                        <th style="width: 40%"
+                            scope="col"
+                            class="rvo-table-header rvo-table-header--md">{% trans %}Name{% endtrans %}</th>
+                        <th style="width: 60%"
+                            scope="col"
+                            class="rvo-table-header rvo-table-header--md">{% trans %}Role{% endtrans %}</th>
+                    </tr>
+                </thead>
+                <tbody class="rvo-table-body">
+                    {% for user, authorization, role, organization in organizations %}
+                        <tr class="rvo-table-row">
+                            <td class="rvo-table-cell">
+                                {% if organization %}
+                                    <a href="/organizations/{{ organization.slug }}">{{ organization.name }}</a>
+                                {% else %}
+                                    {% trans %}Unknown{% endtrans %}
+                                {% endif %}
+                            </td>
+                            <td class="rvo-table-cell">{{ ExternalFieldsTranslations.translate(role.name, request) }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <h2 class="utrecht-heading-2 margin-top-large">{% trans %}Algorithms{% endtrans %}</h2>
+            <table class="rvo-table">
+                <thead class="rvo-table-head">
+                    <tr class="rvo-table-row">
+                        <th style="width: 40%"
+                            scope="col"
+                            class="rvo-table-header rvo-table-header--md">{% trans %}Name{% endtrans %}</th>
+                        <th style="width: 60%"
+                            scope="col"
+                            class="rvo-table-header rvo-table-header--md">{% trans %}Role{% endtrans %}</th>
+                    </tr>
+                </thead>
+                <tbody class="rvo-table-body">
+                    {% for user, authorization, role, algorithm in algorithms %}
+                        <tr class="rvo-table-row">
+                            <td class="rvo-table-cell">
+                                {% if algorithm %}
+                                    <a href="/algorithm/{{ algorithm.id }}">{{ algorithm.name }}</a>
+                                {% else %}
+                                    {% trans %}Unknown{% endtrans %}
+                                {% endif %}
+                            </td>
+                            <td class="rvo-table-cell">{{ ExternalFieldsTranslations.translate(role.name, request) }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 {% endblock %}

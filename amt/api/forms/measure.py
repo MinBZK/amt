@@ -3,7 +3,8 @@ from enum import StrEnum
 from gettext import NullTranslations
 
 from amt.models import User
-from amt.schema.webform import WebForm, WebFormField, WebFormFieldType, WebFormOption, WebFormTextCloneableField
+from amt.schema.webform import WebForm, WebFormField, WebFormTextCloneableField
+from amt.schema.webform_classes import WebFormFieldType, WebFormOption
 
 
 class MeasureStatusOptions(StrEnum):

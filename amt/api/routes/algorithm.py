@@ -4,20 +4,26 @@ import urllib.parse
 from collections import defaultdict
 from collections.abc import Sequence
 from typing import Annotated, Any, cast
+from uuid import UUID
 
 import yaml
 from fastapi import APIRouter, Depends, File, Form, Header, Query, Request, Response, UploadFile
-from fastapi.responses import FileResponse, HTMLResponse, RedirectResponse
+from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 from ulid import ULID
 
 from amt.api.decorators import permission
 from amt.api.deps import templates
 from amt.api.editable import (
-    get_enriched_resolved_editable,
+    Editables,
+    enrich_editable,
+    find_matching_editable,
+    get_resolved_editable,
     get_resolved_editables,
 )
 from amt.api.editable_classes import EditModes, ResolvedEditable
-from amt.api.editable_route_utils import get_user_id_or_error, update_handler
+from amt.api.editable_enforcers import EditableEnforcerMustHaveMaintainer
+from amt.api.editable_route_utils import create_editable_for_role, get_user_id_or_error, update_handler
+from amt.api.forms.algorithm import get_algorithm_members_form
 from amt.api.forms.measure import MeasureStatusOptions, get_measure_form
 from amt.api.lifecycles import Lifecycles, get_localized_lifecycles
 from amt.api.navigation import (
@@ -28,13 +34,12 @@ from amt.api.navigation import (
     resolve_navigation_items,
 )
 from amt.api.routes.shared import get_filters_and_sort_by, replace_none_with_empty_string_inplace
-from amt.core.authorization import AuthorizationResource, AuthorizationVerb
+from amt.core.authorization import AuthorizationResource, AuthorizationType, AuthorizationVerb
 from amt.core.exceptions import AMTError, AMTNotFound, AMTPermissionDenied, AMTRepositoryError
 from amt.core.internationalization import get_current_translation
 from amt.enums.tasks import Status, TaskType, life_cycle_mapper, measure_state_to_status, status_mapper
-from amt.models import Algorithm, User
+from amt.models import Algorithm, Authorization, User
 from amt.models.task import Task
-from amt.repositories.organizations import OrganizationsRepository
 from amt.schema.localized_value_item import LocalizedValueItem
 from amt.schema.measure import ExtendedMeasureTask, MeasureTask, Person
 from amt.schema.measure_display import DisplayMeasureTask
@@ -43,11 +48,13 @@ from amt.schema.system_card import SystemCard
 from amt.schema.task import DisplayTask, MovedTask
 from amt.schema.user import User as UserSchema
 from amt.services.algorithms import AlgorithmsService
+from amt.services.authorization import AuthorizationsService
 from amt.services.instruments_and_requirements_state import InstrumentStateService, RequirementsStateService
 from amt.services.measures import measures_service
 from amt.services.object_storage import ObjectStorageService, create_object_storage_service
 from amt.services.organizations import OrganizationsService
 from amt.services.requirements import requirements_service
+from amt.services.services_provider import ServicesProvider, get_service_provider
 from amt.services.tasks import TasksService
 from amt.services.users import UsersService
 
@@ -105,6 +112,7 @@ def get_algorithm_details_tabs(request: Request) -> list[NavigationItem]:
             Navigation.ALGORITHM_DETAILS,
             Navigation.ALGORITHM_COMPLIANCE,
             Navigation.ALGORITHM_TASKS,
+            Navigation.ALGORITHM_MEMBERS,
         ],
         request,
     )
@@ -114,15 +122,19 @@ def get_algorithms_submenu_items() -> list[BaseNavigationItem]:
     return [Navigation.ALGORITHMS_OVERVIEW, Navigation.ALGORITHM_TASKS]
 
 
+@permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
 @router.get("/{algorithm_id}/tasks")
 async def get_tasks(
     request: Request,
     algorithm_id: int,
-    algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
-    users_service: Annotated[UsersService, Depends(UsersService)],
-    tasks_service: Annotated[TasksService, Depends(TasksService)],
+    services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
     search: str = Query(""),
 ) -> HTMLResponse:
+    algorithms_service = await services_provider.get(AlgorithmsService)
+    users_service = await services_provider.get(UsersService)
+    authorizations_service = await services_provider.get(AuthorizationsService)
+    tasks_service = await services_provider.get(TasksService)
+
     filters, drop_filters, localized_filters, _ = await get_filters_and_sort_by(request, users_service)
     if search:
         filters["search"] = search
@@ -202,10 +214,11 @@ async def get_tasks(
         request,
     )
 
-    members = await users_service.find_all(filters={"organization-id": str(algorithm.organization.id)})  # pyright: ignore[reportUnknownArgumentType, reportUnknownMemberType]
+    members = await get_algorithm_members(algorithm, authorizations_service)
 
     context = {
         "tasks_by_status": tasks_by_status,
+        "permission_path": AuthorizationResource.ALGORITHM_SYSTEMCARD.format_map({"algorithm_id": algorithm.id}),
         "statuses": Status,
         "algorithm": algorithm,
         "algorithm_id": algorithm.id,
@@ -226,6 +239,15 @@ async def get_tasks(
         return templates.TemplateResponse(request, "parts/tasks_board.html.j2", context, headers=headers)
     else:
         return templates.TemplateResponse(request, "algorithms/tasks.html.j2", context, headers=headers)
+
+
+async def get_algorithm_members(algorithm: Algorithm, authorizations_service: AuthorizationsService) -> list[User]:
+    return [
+        user
+        for user, _, _, _ in await authorizations_service.find_all(
+            filters={"type": AuthorizationType.ALGORITHM, "type_id": algorithm.id}
+        )
+    ]
 
 
 async def resolve_and_enrich_measures(
@@ -267,15 +289,16 @@ async def resolve_and_enrich_measures(
 
 
 @router.patch("/{algorithm_id}/move_task")
-@permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.UPDATE]})
+@permission({AuthorizationResource.ALGORITHM_SYSTEMCARD: [AuthorizationVerb.UPDATE]})
 async def move_task(
     request: Request,
     algorithm_id: int,
-    algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
     moved_task: MovedTask,
-    users_service: Annotated[UsersService, Depends(UsersService)],
-    tasks_service: Annotated[TasksService, Depends(TasksService)],
+    services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
 ) -> HTMLResponse:
+    algorithms_service = await services_provider.get(AlgorithmsService)
+    users_service = await services_provider.get(UsersService)
+    tasks_service = await services_provider.get(TasksService)
     # because htmx form always sends a value and siblings are optional, we use -1 for None and convert it here
 
     if moved_task.next_sibling_id == -1:
@@ -311,8 +334,9 @@ async def move_task(
     else:
         display_task: DisplayTask = DisplayTask.create_from_model(task)
 
-    context: dict[str, int | DisplayTask | Request] = {
+    context: dict[str, Any] = {
         "algorithm_id": algorithm_id,
+        "permission_path": AuthorizationResource.ALGORITHM_SYSTEMCARD.format_map({"algorithm_id": algorithm_id}),
         "task": display_task,
         "request": request,
     }
@@ -338,11 +362,21 @@ async def get_algorithm_context(
     }
 
 
+@router.get("/{algorithm_id}")
+async def get_algorithm_details_redirect(
+    algorithm_id: int,
+) -> RedirectResponse:
+    return RedirectResponse(url=f"/algorithm/{algorithm_id}/info")
+
+
 @router.get("/{algorithm_id}/info")
 @permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
 async def get_algorithm_details(
-    request: Request, algorithm_id: int, algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)]
+    request: Request,
+    algorithm_id: int,
+    services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
 ) -> HTMLResponse:
+    algorithms_service = await services_provider.get(AlgorithmsService)
     algorithm, context = await get_algorithm_context(algorithm_id, algorithms_service, request)
 
     breadcrumbs = resolve_base_navigation_items(
@@ -365,35 +399,25 @@ async def get_algorithm_details(
     return templates.TemplateResponse(request, "algorithms/details_info.html.j2", context)
 
 
+# TODO: permissions are now checked on the route path, but updates are done on the GET parameter
 @router.get("/{algorithm_id}/edit")
-@permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.UPDATE]})
+@permission({AuthorizationResource.ALGORITHM_SYSTEMCARD: [AuthorizationVerb.UPDATE]})
 async def get_algorithm_edit(
     request: Request,
     algorithm_id: int,
-    algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
-    organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
     full_resource_path: str,
+    services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
 ) -> HTMLResponse:
+    # TODO FIXME: this is too much of a hack! Find a better way
+    request.state.authorization_type = AuthorizationType.ALGORITHM
     user_id = get_user_id_or_error(request)
-
-    editable: ResolvedEditable = await get_enriched_resolved_editable(
-        context_variables={"algorithm_id": algorithm_id},
-        full_resource_path=full_resource_path,
-        algorithms_service=algorithms_service,
-        organizations_service=organizations_service,
-        edit_mode=EditModes.EDIT,
-        user_id=user_id,
-        request=request,
+    context_variables: dict[str, str | int] = {}
+    matched_editable, extracted_context_variables = find_matching_editable(full_resource_path)
+    context_variables.update(extracted_context_variables)
+    resolved_editable = get_resolved_editable(matched_editable, context_variables, False)
+    editable = await enrich_editable(
+        resolved_editable, EditModes.EDIT, {"user_id": user_id}, services_provider, request, None
     )
-
-    editable_context = {
-        "organizations_service": organizations_service,
-    }
-
-    # TODO: convertors should also be applied to child elements, maybe resolve should be done with a 'mode' parameter
-    #  instead of doing it here now
-    if editable.converter:
-        editable.value = await editable.converter.read(editable.value, **editable_context)
 
     context = {
         "base_href": f"/algorithm/{algorithm_id}",
@@ -404,29 +428,26 @@ async def get_algorithm_edit(
 
 
 @router.get("/{algorithm_id}/cancel")
-@permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.UPDATE]})
+@permission({AuthorizationResource.ALGORITHM_SYSTEMCARD: [AuthorizationVerb.UPDATE]})
 async def get_algorithm_cancel(
     request: Request,
     algorithm_id: int,
-    algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
-    organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
     full_resource_path: str,
+    services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
 ) -> HTMLResponse:
-    editable: ResolvedEditable = await get_enriched_resolved_editable(
-        context_variables={"algorithm_id": algorithm_id},
-        full_resource_path=full_resource_path,
-        algorithms_service=algorithms_service,
-        organizations_service=organizations_service,
-        edit_mode=EditModes.VIEW,
+    user_id = get_user_id_or_error(request)
+    context_variables: dict[str, Any] = {"algorithm_id": algorithm_id}
+    matched_editable, extracted_context_variables = find_matching_editable(full_resource_path)
+    context_variables.update(extracted_context_variables)
+    resolved_editable = get_resolved_editable(matched_editable, context_variables, False)
+    editable = await enrich_editable(
+        resolved_editable, EditModes.VIEW, {"user_id": user_id}, services_provider, request, None
     )
-
-    editable_context = {"organizations_service": organizations_service, "algorithms_service": algorithms_service}
-
-    if editable.converter:
-        editable.value = await editable.converter.view(editable.value, **editable_context)
 
     context = {
         "relative_resource_path": editable.relative_resource_path if editable.relative_resource_path else "",
+        # TODO: SET PERMISSION FOR EACH EDITABLE!!
+        "has_permission": True,
         "base_href": f"/algorithm/{algorithm_id}",
         "resource_object": editable.resource_object,
         "full_resource_path": full_resource_path,
@@ -438,13 +459,11 @@ async def get_algorithm_cancel(
 
 
 @router.put("/{algorithm_id}/update")
-@permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.UPDATE]})
+@permission({AuthorizationResource.ALGORITHM_SYSTEMCARD: [AuthorizationVerb.UPDATE]})
 async def get_algorithm_update(
     request: Request,
     algorithm_id: int,
-    algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
-    organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
-    tasks_service: Annotated[TasksService, Depends(TasksService)],
+    services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
     full_resource_path: str = Query(""),
     current_state_str: str = Header("VALIDATE", alias="X-Current-State"),
 ) -> HTMLResponse:
@@ -457,9 +476,8 @@ async def get_algorithm_update(
         base_href,
         current_state_str,
         context_variables,
-        algorithms_service,
-        organizations_service,
-        tasks_service,
+        EditModes.SAVE,
+        services_provider,
     )
 
 
@@ -468,8 +486,9 @@ async def get_algorithm_update(
 async def get_system_card(
     request: Request,
     algorithm_id: int,
-    algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
+    services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
 ) -> HTMLResponse:
+    algorithms_service = await services_provider.get(AlgorithmsService)
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
     instrument_state = await get_instrument_state(algorithm.system_card)
     requirements_state = await get_requirements_state(algorithm.system_card)
@@ -492,6 +511,7 @@ async def get_system_card(
 
     context = {
         "system_card": system_card,
+        "permission_path": AuthorizationResource.ALGORITHM_SYSTEMCARD.format_map({"algorithm_id": algorithm.id}),
         "instrument_state": instrument_state,
         "requirements_state": requirements_state,
         "last_edited": algorithm.last_edited,
@@ -511,16 +531,18 @@ async def get_system_card(
 async def get_system_card_requirements(
     request: Request,
     algorithm_id: int,
-    organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
-    users_service: Annotated[UsersService, Depends(UsersService)],
-    algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
+    services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
 ) -> HTMLResponse:
+    organizations_service = await services_provider.get(OrganizationsService)
+    users_service = await services_provider.get(UsersService)
+    algorithms_service = await services_provider.get(AlgorithmsService)
+
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
     instrument_state = await get_instrument_state(algorithm.system_card)
     requirements_state = await get_requirements_state(algorithm.system_card)
     tab_items = get_algorithm_details_tabs(request)
     filters, _, _, _ = await get_filters_and_sort_by(request, users_service)
-    organization = await organizations_repository.find_by_id(algorithm.organization_id)
+    organization = await organizations_service.get_by_id(algorithm.organization_id)  # pyright: ignore [reportUnknownMemberType]
     filters["organization-id"] = str(organization.id)
 
     breadcrumbs = resolve_base_navigation_items(
@@ -564,6 +586,7 @@ async def get_system_card_requirements(
     measure_task_functions: dict[str, list[User]] = await get_measure_task_functions(measure_tasks, users_service)
 
     context = {
+        "permission_path": AuthorizationResource.ALGORITHM_SYSTEMCARD.format_map({"algorithm_id": algorithm.id}),
         "instrument_state": instrument_state,
         "requirements_state": requirements_state,
         "algorithm": algorithm,
@@ -631,25 +654,28 @@ async def find_requirement_tasks_by_measure_urn(system_card: SystemCard, measure
 async def delete_algorithm(
     request: Request,
     algorithm_id: int,
-    algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
+    services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
 ) -> HTMLResponse:
+    algorithms_service = await services_provider.get(AlgorithmsService)
     await algorithms_service.delete(algorithm_id)
     return templates.Redirect(request, "/algorithms/")
 
 
 @router.get("/{algorithm_id}/measure/{measure_urn}")
-@permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
+@permission({AuthorizationResource.ALGORITHM_SYSTEMCARD: [AuthorizationVerb.UPDATE]})
 async def get_measure(
     request: Request,
-    organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
-    users_service: Annotated[UsersService, Depends(UsersService)],
     algorithm_id: int,
     measure_urn: str,
-    algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
+    services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
     object_storage_service: Annotated[ObjectStorageService, Depends(create_object_storage_service)],
     search: str = Query(""),
     requirement_urn: str = "",
 ) -> HTMLResponse:
+    users_service = await services_provider.get(UsersService)
+    authorizations_service = await services_provider.get(AuthorizationsService)
+    algorithms_service = await services_provider.get(AlgorithmsService)
+
     filters, _, _, sort_by = await get_filters_and_sort_by(request, users_service)
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
     measure = await measures_service.fetch_measures([measure_urn])
@@ -660,9 +686,10 @@ async def get_measure(
         metadata = object_storage_service.get_file_metadata_from_object_name(file)
         filenames.append((file.split("/")[-1], f"{metadata.filename}.{metadata.ext}"))
 
-    organization = await organizations_repository.find_by_id(algorithm.organization_id)
-    filters["organization-id"] = str(organization.id)
-    members = await users_service.find_all(search=search, sort=sort_by, filters=filters)
+    filters.update({"type": AuthorizationType.ALGORITHM, "type_id": algorithm.id})
+    members = [
+        user for user, _, _, _ in await authorizations_service.find_all(search=search, sort=sort_by, filters=filters)
+    ]
 
     measure_accountable = measure_task.accountable_persons[0].name if measure_task.accountable_persons else ""  # pyright: ignore [reportOptionalMemberAccess]
     measure_reviewer = measure_task.reviewer_persons[0].name if measure_task.reviewer_persons else ""  # pyright: ignore [reportOptionalMemberAccess]
@@ -702,27 +729,26 @@ async def get_users_from_function_name(
     filters: dict[str, str | list[str | int]],
 ) -> tuple[list[Person], list[Person], list[Person]]:
     accountable_persons, reviewer_persons, responsible_persons = [], [], []
+    # TODO: the user link must be done differently, search by name is going to give problems!!
     if measure_accountable:
-        accountable_member = await users_service.find_all(search=measure_accountable, sort=sort_by, filters=filters)
+        accountable_member = await users_service.find_all(search=measure_accountable, sort=sort_by, filters=filters)  # pyright: ignore[reportDeprecated]
         accountable_persons = [Person(name=accountable_member[0].name, uuid=str(accountable_member[0].id))]  # pyright: ignore [reportOptionalMemberAccess]
     if measure_reviewer:
-        reviewer_member = await users_service.find_all(search=measure_reviewer, sort=sort_by, filters=filters)
+        reviewer_member = await users_service.find_all(search=measure_reviewer, sort=sort_by, filters=filters)  # pyright: ignore[reportDeprecated]
         reviewer_persons = [Person(name=reviewer_member[0].name, uuid=str(reviewer_member[0].id))]  # pyright: ignore [reportOptionalMemberAccess]
     if measure_responsible:
-        responsible_member = await users_service.find_all(search=measure_responsible, sort=sort_by, filters=filters)
+        responsible_member = await users_service.find_all(search=measure_responsible, sort=sort_by, filters=filters)  # pyright: ignore[reportDeprecated]
         responsible_persons = [Person(name=responsible_member[0].name, uuid=str(responsible_member[0].id))]  # pyright: ignore [reportOptionalMemberAccess]
     return accountable_persons, reviewer_persons, responsible_persons
 
 
 @router.post("/{algorithm_id}/measure/{measure_urn}")
-@permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
+@permission({AuthorizationResource.ALGORITHM_SYSTEMCARD: [AuthorizationVerb.UPDATE]})
 async def update_measure_value(
     request: Request,
     algorithm_id: int,
     measure_urn: str,
-    users_service: Annotated[UsersService, Depends(UsersService)],
-    algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
-    tasks_service: Annotated[TasksService, Depends(TasksService)],
+    services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
     object_storage_service: Annotated[ObjectStorageService, Depends(create_object_storage_service)],
     measure_state: Annotated[str, Form()],
     measure_responsible: Annotated[str | None, Form()] = None,
@@ -733,6 +759,10 @@ async def update_measure_value(
     measure_files: Annotated[list[UploadFile] | None, File()] = None,
     requirement_urn: str = "",
 ) -> HTMLResponse:
+    tasks_service = await services_provider.get(TasksService)
+    users_service = await services_provider.get(UsersService)
+    algorithms_service = await services_provider.get(AlgorithmsService)
+
     filters, _, _, sort_by = await get_filters_and_sort_by(request, users_service)
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
     user_id = get_user_id_or_error(request)
@@ -745,7 +775,12 @@ async def update_measure_value(
         else None
     )
     accountable_persons, reviewer_persons, responsible_persons = await get_users_from_function_name(
-        measure_accountable, measure_reviewer, measure_responsible, users_service, sort_by, filters
+        measure_accountable,
+        measure_reviewer,
+        measure_responsible,
+        users_service,
+        sort_by,
+        filters,  # pyright: ignore[reportArgumentType]
     )
 
     measure_task.update(
@@ -826,48 +861,15 @@ async def redirect_to(request: Request, algorithm_id: str, to: str) -> RedirectR
     )  # NOSONAR
 
 
-@router.get("/{algorithm_id}/members")
-@permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
-async def get_algorithm_members(
-    request: Request,
-    algorithm_id: int,
-    algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
-) -> HTMLResponse:
-    algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
-    instrument_state = await get_instrument_state(algorithm.system_card)
-    requirements_state = await get_requirements_state(algorithm.system_card)
-
-    tab_items = get_algorithm_details_tabs(request)
-
-    breadcrumbs = resolve_base_navigation_items(
-        [
-            Navigation.ALGORITHMS_ROOT,
-            BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details"),
-            Navigation.ALGORITHM_MEMBERS,
-        ],
-        request,
-    )
-
-    context = {
-        "instrument_state": instrument_state,
-        "requirements_state": requirements_state,
-        "algorithm": algorithm,
-        "algorithm_id": algorithm.id,
-        "tab_items": tab_items,
-        "breadcrumbs": breadcrumbs,
-    }
-
-    return templates.TemplateResponse(request, "algorithms/members.html.j2", context)
-
-
 @router.get("/{algorithm_id}/details/system_card/assessments/{assessment_card}")
 @permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
 async def get_assessment_card(
     request: Request,
     algorithm_id: int,
     assessment_card: str,
-    algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
+    services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
 ) -> HTMLResponse:
+    algorithms_service = await services_provider.get(AlgorithmsService)
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
     instrument_state = await get_instrument_state(algorithm.system_card)
     requirements_state = await get_requirements_state(algorithm.system_card)
@@ -920,8 +922,9 @@ async def get_model_card(
     request: Request,
     algorithm_id: int,
     model_card: str,
-    algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
+    services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
 ) -> HTMLResponse:
+    algorithms_service = await services_provider.get(AlgorithmsService)
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
     request.state.path_variables.update({"model_card": model_card})
     instrument_state = await get_instrument_state(algorithm.system_card)
@@ -972,13 +975,25 @@ async def get_model_card(
 @router.get("/{algorithm_id}/download")
 @permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
 async def download_algorithm_system_card_as_yaml(
-    algorithm_id: int, algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)], request: Request
-) -> FileResponse:
+    algorithm_id: int,
+    request: Request,
+    services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
+) -> Response:
+    algorithms_service = await services_provider.get(AlgorithmsService)
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
+
+    # Create YAML content in memory
+    yaml_content = yaml.dump(algorithm.system_card.model_dump(), sort_keys=False)
     filename = algorithm.name + "_" + datetime.datetime.now(datetime.UTC).isoformat() + ".yaml"
-    with open(filename, "w") as outfile:
-        yaml.dump(algorithm.system_card.model_dump(), outfile, sort_keys=False)
-    return FileResponse(filename, filename=filename, media_type="application/yaml; charset=utf-8")
+
+    # Return the YAML content directly without saving to disk
+    return Response(
+        content=yaml_content,
+        headers={
+            "Content-Disposition": f"attachment; filename={filename}",
+            "Content-Type": "application/yaml; charset=utf-8",
+        },
+    )
 
 
 @router.get("/{algorithm_id}/file/{ulid}")
@@ -987,9 +1002,10 @@ async def get_file(
     request: Request,
     algorithm_id: int,
     ulid: ULID,
-    algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
+    services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
     object_storage_service: Annotated[ObjectStorageService, Depends(create_object_storage_service)],
 ) -> Response:
+    algorithms_service = await services_provider.get(AlgorithmsService)
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
     file = object_storage_service.get_file(algorithm.organization_id, algorithm_id, ulid)
     file_metadata = object_storage_service.get_file_metadata(algorithm.organization_id, algorithm_id, ulid)
@@ -1004,14 +1020,15 @@ async def get_file(
 
 
 @router.delete("/{algorithm_id}/file/{ulid}")
-@permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
+@permission({AuthorizationResource.ALGORITHM_SYSTEMCARD: [AuthorizationVerb.UPDATE]})
 async def delete_file(
     request: Request,
     algorithm_id: int,
     ulid: ULID,
-    algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
+    services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
     object_storage_service: Annotated[ObjectStorageService, Depends(create_object_storage_service)],
 ) -> HTMLResponse:
+    algorithms_service = await services_provider.get(AlgorithmsService)
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
     metadata = object_storage_service.get_file_metadata(algorithm.organization_id, algorithm_id, ulid)
     measure_task = get_measure_task_or_error(algorithm.system_card, metadata.measure_urn)
@@ -1021,3 +1038,182 @@ async def delete_file(
     await algorithms_service.update(algorithm)
 
     return HTMLResponse(content="", status_code=200)
+
+
+@router.get("/{algorithm_id}/members")
+@permission({AuthorizationResource.ALGORITHM_MEMBER: [AuthorizationVerb.READ]})
+async def get_members(
+    request: Request,
+    algorithm_id: int,
+    services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
+    skip: int = Query(0, ge=0),
+    limit: int = Query(5000, ge=1),  # todo: fix infinite scroll
+    search: str = Query(""),
+) -> HTMLResponse:
+    request.state.services_provider = services_provider
+    authorizations_service = await services_provider.get(AuthorizationsService)
+    algorithms_service = await services_provider.get(AlgorithmsService)
+    algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
+    users_service = await services_provider.get(UsersService)
+    filters, drop_filters, localized_filters, sort_by = await get_filters_and_sort_by(request, users_service)
+    tab_items = get_algorithm_details_tabs(request)
+    breadcrumbs = resolve_base_navigation_items(
+        [
+            Navigation.ALGORITHMS_ROOT,
+            BaseNavigationItem(custom_display_text=algorithm.name, url="/algorithm/{algorithm_id}/details"),
+            Navigation.ALGORITHM_MEMBERS,
+        ],
+        request,
+    )
+    if "name" not in sort_by:
+        sort_by["name"] = "ascending"
+
+    filters: dict[str, int | str | list[str | int]] = {"type": AuthorizationType.ALGORITHM, "type_id": algorithm.id}
+    members = await authorizations_service.find_all(search, sort_by, filters, skip, limit)
+
+    context: dict[str, Any] = {
+        "base_href": f"/algorithm/{algorithm.id}",
+        "permission_path": AuthorizationResource.ALGORITHM_MEMBER.format_map({"algorithm_id": algorithm.id}),
+        "breadcrumbs": breadcrumbs,
+        "tab_items": tab_items,
+        "members": members,
+        "next": next,
+        "limit": limit,
+        "start": skip,
+        "search": search,
+        "sort_by": sort_by,
+        "members_length": len(members),
+        "filters": localized_filters,
+        "include_filters": False,
+        "algorithm": algorithm,
+    }
+
+    if request.state.htmx:
+        if drop_filters:
+            context.update({"include_filters": True})
+        return templates.TemplateResponse(request, "organizations/parts/members_results.html.j2", context)
+    else:
+        context.update({"include_filters": True})
+        return templates.TemplateResponse(request, "organizations/members.html.j2", context)
+
+
+@router.get("/{algorithm_id}/members/form")
+@permission({AuthorizationResource.ALGORITHM_MEMBER: [AuthorizationVerb.UPDATE]})
+async def get_members_form(
+    request: Request,
+    algorithm_id: int,
+    services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
+) -> HTMLResponse:
+    algorithms_service = await services_provider.get(AlgorithmsService)
+    algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
+    form = await get_algorithm_members_form(
+        id="algorithm",
+        translations=get_current_translation(request),
+        algorithm=algorithm,
+    )
+    context: dict[str, Any] = {
+        "form": form,
+        "base_href": f"/algorithm/{algorithm.id}",
+    }
+    return templates.TemplateResponse(request, "organizations/parts/add_members_modal.html.j2", context)
+
+
+@router.get("/{algorithm_id}/users")
+async def get_users(
+    request: Request,
+    algorithm_id: int,
+    services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
+) -> Response:
+    algorithms_service = await services_provider.get(AlgorithmsService)
+    algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
+    authorizations_service = await services_provider.get(AuthorizationsService)
+    query = request.query_params.get("query", None)
+    return_type = request.query_params.get("returnType", "json")
+    filters: dict[str, int | str | list[str | int]] = {
+        "type": AuthorizationType.ORGANIZATION,
+        "type_id": algorithm.organization_id,
+    }
+    search_results = await authorizations_service.find_all(search=query, filters=filters, limit=25)
+
+    match return_type:
+        case "search_select_field":
+            editables: list[ResolvedEditable] = []
+            for user, _, _, _ in search_results:
+                enriched_editable = await create_editable_for_role(
+                    request,
+                    services_provider,
+                    user,
+                    AuthorizationType.ALGORITHM,
+                    algorithm.id,
+                    (await authorizations_service.get_role("Algorithm Member")).id,
+                )
+                editables.append(enriched_editable)
+            context = {"editables": editables, "show_no_results": len(search_results) == 0}
+            return templates.TemplateResponse(request, "organizations/parts/search_select_field.html.j2", context)
+        case _:
+            return JSONResponse(content=search_results)
+
+
+@router.put("/{algorithm_id}/members", response_class=HTMLResponse)
+@permission({AuthorizationResource.ALGORITHM_MEMBER: [AuthorizationVerb.UPDATE]})
+async def add_new_members(
+    request: Request,
+    algorithm_id: int,
+    services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
+    current_state_str: str = Header("VALIDATE", alias="X-Current-State"),
+) -> HTMLResponse:
+    algorithms_service = await services_provider.get(AlgorithmsService)
+    algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
+
+    context_variables: dict[str, Any] = {
+        "algorithm": algorithm,
+    }
+
+    return await update_handler(
+        request,
+        "authorization",
+        f"/{algorithm_id}/members",
+        current_state_str,
+        context_variables,
+        EditModes.SAVE_NEW,
+        services_provider,
+    )
+
+
+@router.delete("/{algorithm_id}/members/{user_id}", response_class=HTMLResponse)
+@permission({AuthorizationResource.ALGORITHM_MEMBER: [AuthorizationVerb.UPDATE]})
+async def remove_member(
+    request: Request,
+    algorithm_id: int,
+    user_id: UUID,
+    services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
+) -> HTMLResponse:
+    authorizations_service = await services_provider.get(AuthorizationsService)
+    users_service = await services_provider.get(UsersService)
+    algorithms_service = await services_provider.get(AlgorithmsService)
+    algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
+
+    user: User | None = await users_service.find_by_id(user_id)
+    if user is None:
+        raise AMTNotFound()
+    authorization = await authorizations_service.find_by_user_and_type(
+        user.id, algorithm.id, AuthorizationType.ALGORITHM
+    )
+
+    editable_context = {
+        "algorithm_id": algorithm.id,
+        "authorization_id": authorization.id,
+        "new_values": {"role_id": "0"},
+    }
+    resolved_editable = get_resolved_editable(Editables.AUTHORIZATION_ROLE, editable_context, False)
+    resolved_editable.resource_object = Authorization(user_id=user.id)
+    # TODO: this is a work-around and not very user-friendly, but ok for now
+    await EditableEnforcerMustHaveMaintainer().enforce(
+        request,
+        resolved_editable,
+        editable_context,
+        EditModes.DELETE,
+        services_provider,
+    )
+    await authorizations_service.remove_algorithm_roles(user_id, algorithm)
+    return templates.Redirect(request, f"/algorithm/{algorithm_id}/members")

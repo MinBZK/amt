@@ -19,7 +19,7 @@ from tests.database_test_utils import DatabaseTestUtils
 
 @pytest.mark.asyncio
 async def test_find_all(db: DatabaseTestUtils):
-    await db.given([default_user(), default_algorithm(), default_algorithm()])
+    await db.given([default_user(), default_organization(), default_algorithm(), default_algorithm()])
     algorithm_repository = AlgorithmsRepository(db.get_session())
     results = await algorithm_repository.find_all()
     assert results[0].id == 1
@@ -36,7 +36,7 @@ async def test_find_all_no_results(db: DatabaseTestUtils):
 
 @pytest.mark.asyncio
 async def test_save(db: DatabaseTestUtils):
-    await db.given([default_user()])
+    await db.given([default_user(), default_organization()])
 
     algorithm_repository = AlgorithmsRepository(db.get_session())
     algorithm = default_algorithm()
@@ -52,7 +52,7 @@ async def test_save(db: DatabaseTestUtils):
 
 @pytest.mark.asyncio
 async def test_delete(db: DatabaseTestUtils):
-    await db.given([default_user()])
+    await db.given([default_user(), default_organization()])
     algorithm_repository = AlgorithmsRepository(db.get_session())
     algorithm = default_algorithm()
     await algorithm_repository.save(algorithm)
@@ -65,7 +65,7 @@ async def test_delete(db: DatabaseTestUtils):
 
 @pytest.mark.asyncio
 async def test_save_failed(db: DatabaseTestUtils):
-    await db.given([default_user()])
+    await db.given([default_user(), default_organization()])
     session = db.get_session()
     algorithm_repository = AlgorithmsRepository(session)
     algorithm = default_algorithm()
@@ -74,18 +74,17 @@ async def test_save_failed(db: DatabaseTestUtils):
     algorithm_duplicate.id = 1
 
     await algorithm_repository.save(algorithm)
-    await session.flush()
+    await session.commit()
 
     with pytest.raises(IntegrityError):
         await algorithm_repository.save(algorithm_duplicate)
 
-    # FIXME: even though the algorithm is not committed, we should be able to delete it
-    # await algorithm_repository.delete(algorithm) #noqa ERA001
+    await algorithm_repository.delete(algorithm)
 
 
 @pytest.mark.asyncio
 async def test_delete_failed(db: DatabaseTestUtils):
-    await db.given([default_user()])
+    await db.given([default_user(), default_organization()])
     algorithm_repository = AlgorithmsRepository(db.get_session())
     algorithm = default_algorithm()
 
@@ -95,7 +94,7 @@ async def test_delete_failed(db: DatabaseTestUtils):
 
 @pytest.mark.asyncio
 async def test_find_by_id(db: DatabaseTestUtils):
-    await db.given([default_user(), default_algorithm()])
+    await db.given([default_user(), default_organization(), default_algorithm()])
     algorithm_repository = AlgorithmsRepository(db.get_session())
     result = await algorithm_repository.find_by_id(1)
     assert result.id == 1
@@ -111,7 +110,7 @@ async def test_find_by_id_failed(db: DatabaseTestUtils):
 
 @pytest.mark.asyncio
 async def test_paginate(db: DatabaseTestUtils):
-    await db.given([default_user(), default_algorithm()])
+    await db.given([default_user(), default_organization(), default_algorithm()])
     algorithm_repository = AlgorithmsRepository(db.get_session())
 
     result: list[Algorithm] = await algorithm_repository.paginate(skip=0, limit=3, search="", filters={}, sort={})
@@ -121,7 +120,16 @@ async def test_paginate(db: DatabaseTestUtils):
 
 @pytest.mark.asyncio
 async def test_paginate_more(db: DatabaseTestUtils):
-    await db.given([default_user(), default_algorithm(), default_algorithm(), default_algorithm(), default_algorithm()])
+    await db.given(
+        [
+            default_user(),
+            default_organization(),
+            default_algorithm(),
+            default_algorithm(),
+            default_algorithm(),
+            default_algorithm(),
+        ]
+    )
     algorithm_repository = AlgorithmsRepository(db.get_session())
 
     result: list[Algorithm] = await algorithm_repository.paginate(skip=0, limit=3, search="", filters={}, sort={})
@@ -134,6 +142,7 @@ async def test_paginate_capitalize(db: DatabaseTestUtils):
     await db.given(
         [
             default_user(),
+            default_organization(),
             default_algorithm(name="Algorithm1"),
             default_algorithm(name="bbb"),
             default_algorithm(name="Aaa"),
@@ -156,6 +165,7 @@ async def test_search(db: DatabaseTestUtils):
     await db.given(
         [
             default_user(),
+            default_organization(),
             default_algorithm(name="Algorithm1"),
             default_algorithm(name="bbb"),
             default_algorithm(name="Aaa"),
@@ -175,6 +185,7 @@ async def test_search_multiple(db: DatabaseTestUtils):
     await db.given(
         [
             default_user(),
+            default_organization(),
             default_algorithm(name="Algorithm1"),
             default_algorithm(name="bbb"),
             default_algorithm(name="Aaa"),
@@ -200,7 +211,7 @@ async def test_search_no_results(db: DatabaseTestUtils):
 
 @pytest.mark.asyncio
 async def test_raises_exception(db: DatabaseTestUtils):
-    await db.given([default_user(), default_algorithm()])
+    await db.given([default_user(), default_organization(), default_algorithm()])
     algorithm_repository = AlgorithmsRepository(db.get_session())
 
     with pytest.raises(AMTRepositoryError):
@@ -212,6 +223,7 @@ async def test_sort_by_lifecyle(db: DatabaseTestUtils):
     await db.given(
         [
             default_user(),
+            default_organization(),
             default_algorithm_with_lifecycle(name="Algorithm1", lifecycle=Lifecycles.DESIGN),
             default_algorithm(name="Algorithm2"),
         ]
@@ -231,6 +243,7 @@ async def test_sort_by_lifecycle_reversed(db: DatabaseTestUtils):
     await db.given(
         [
             default_user(),
+            default_organization(),
             default_algorithm_with_lifecycle(name="Algorithm1", lifecycle=Lifecycles.DESIGN),
             default_algorithm(name="Algorithm2"),
         ]
@@ -250,6 +263,7 @@ async def test_with_lifecycle_filter(db: DatabaseTestUtils):
     await db.given(
         [
             default_user(),
+            default_organization(),
             default_algorithm_with_lifecycle(name="Algorithm1"),
             default_algorithm(name="Algorithm2"),
             default_algorithm(name="Algorithm3"),
@@ -276,6 +290,7 @@ async def test_with_risk_group_filter(db: DatabaseTestUtils):
     await db.given(
         [
             default_user(),
+            default_organization(),
             default_algorithm_with_system_card(name="Algorithm1"),
             default_algorithm(name="Algorithm2"),
             default_algorithm(name="Algorithm3"),
@@ -298,6 +313,7 @@ async def test_with_sorting(db: DatabaseTestUtils):
     await db.given(
         [
             default_user(),
+            default_organization(),
             default_algorithm_with_lifecycle(name="Algorithm1", lifecycle=Lifecycles.DESIGN),
             default_algorithm_with_lifecycle(
                 name="Algorithm2",
@@ -350,6 +366,7 @@ async def test_with_organization_filter(db: DatabaseTestUtils):
     await db.given(
         [
             default_user(),
+            default_organization(),
             default_algorithm(name="Algorithm1"),
             default_organization(name="Organization 2", slug="organization-2"),
             default_algorithm(name="Algorithm2", organization_id=2),

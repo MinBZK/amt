@@ -1,10 +1,13 @@
 import logging
+import re
+import uuid
 from enum import Enum
 from typing import TypeVar
 
 from jinja2 import StrictUndefined, Undefined
 from starlette.requests import Request
 
+from amt.api.editable_resolve_util import resolve_editable_from_path
 from amt.api.editable_util import (
     is_editable_resource,
     is_parent_editable,
@@ -25,6 +28,7 @@ from amt.api.routes.shared import (
 from amt.api.template_classes import LocaleJinja2Templates
 from amt.core.authorization import AuthorizationVerb, get_user
 from amt.core.config import VERSION, get_settings
+from amt.core.dynamic_translations import ExternalFieldsTranslations
 from amt.core.internationalization import (
     format_datetime,
     format_timedelta,
@@ -35,11 +39,15 @@ from amt.core.internationalization import (
     time_ago,
 )
 from amt.schema.shared import IterMixin
-from amt.schema.webform import WebFormFieldType
+from amt.schema.webform_classes import WebFormFieldType, WebFormOption
 
 T = TypeVar("T", bound=Enum | LocalizableEnum)
 
 logger = logging.getLogger(__name__)
+
+
+def get_request_permissions(request: Request) -> dict[str, list[AuthorizationVerb]]:
+    return getattr(request.state, "permissions", {})
 
 
 def custom_context_processor(
@@ -84,6 +92,8 @@ def instance(obj: object, type_str: str) -> bool:
             return isinstance(obj, IterMixin)
         case "dict":
             return isinstance(obj, dict)
+        case "WebFormOption":
+            return isinstance(obj, WebFormOption)
         case _:
             raise TypeError("Unsupported type: " + type_str)
 
@@ -112,6 +122,24 @@ def equal_or_includes(my_value: str, check_against_value: str | list[str] | tupl
     return False
 
 
+def get_random_number() -> str:
+    return "".join(char for char in str(uuid.uuid4()) if char.isdigit())
+
+
+def sanitize_html_id(input_string: str) -> str:
+    pattern = r"[^a-zA-Z0-9\-_.:]"
+
+    sanitized_id = re.sub(pattern, "-", input_string)
+
+    if sanitized_id and sanitized_id[0].isdigit():
+        sanitized_id = f"id-{sanitized_id}"
+
+    if not sanitized_id:
+        sanitized_id = "empty-id"
+
+    return sanitized_id
+
+
 templates = LocaleJinja2Templates(
     directory="amt/site/templates/", context_processors=[custom_context_processor], undefined=get_undefined_behaviour()
 )
@@ -138,6 +166,10 @@ templates.env.globals.update(  # pyright: ignore [reportUnknownMemberType]
         "is_parent_editable": is_parent_editable,
         "resolve_resource_list_path": resolve_resource_list_path,
         "get_localized_value": get_localized_value,
+        "get_random_number": get_random_number,
+        "sanitize_html_id": sanitize_html_id,
+        "resolve_editable_from_path": resolve_editable_from_path,
+        "ExternalFieldsTranslations": ExternalFieldsTranslations,
     }
 )
 # env tests allows for usage in templates like: if value is test_name(other_value)

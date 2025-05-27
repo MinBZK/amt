@@ -145,3 +145,12 @@ Use pre-commit to update all hooks
 ```shell
 pre-commit autoupdate
 ```
+
+## Local Testing with Docker
+
+```shell
+docker compose -f compose.yml -f compose.test.yml build
+docker compose -f compose.yml -f compose.test.yml down -v --remove-orphans --volumes
+docker compose -f compose.yml -f compose.test.yml up -d
+docker compose -f compose.yml -f compose.test.yml run amt-test poetry run pytest -v -s -m 'not slow' --db postgresql
+```
