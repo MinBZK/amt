@@ -237,9 +237,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # Create cache directories
-      - name: Setup Docker cache directories
-        run: mkdir -p /tmp/.buildx-cache
+      # No cache directory setup needed with inline-only caching
 
       # Set up Docker Buildx with caching
       - name: Set up Docker Buildx
@@ -260,17 +258,12 @@ jobs:
           tags: |
             ci-test:${{ github.sha }}
           target: test
-          # Use local caching only to avoid registry permission issues
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
+          # Only enable inline caching for the current build
+          cache-to: type=inline
           build-args: |
             BUILDKIT_INLINE_CACHE=1
 
-      # Move cache to prevent it from growing indefinitely
-      - name: Move cache
-        run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+      # No cache management needed with inline-only caching
 
   test-compose:
     runs-on: ubuntu-latest
@@ -417,14 +410,6 @@ jobs:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ hashFiles('**/pyproject.toml') }}
 
-      # Cache playwright dependencies
-      - name: Cache playwright deps
-        uses: actions/cache@v4
-        id: playwright-deps-cache
-        with:
-          path: ~/.cache/ms-playwright-deps
-          key: ${{ runner.os }}-playwright-deps-${{ hashFiles('**/pyproject.toml') }}
-
       # Install poetry (should use pip cache)
       - name: Install poetry
         run: pip install poetry
@@ -532,9 +517,7 @@ jobs:
 
       # Docker layer caching is now handled by BuildKit directly
 
-      # Create cache directories
-      - name: Setup Docker cache directories
-        run: mkdir -p /tmp/.buildx-cache
+      # No cache directory setup needed with inline-only caching
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -570,17 +553,12 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           annotations: ${{ steps.meta.outputs.annotations }}
           platforms: linux/amd64,linux/arm64,darwin/amd64
-          # Use local caching only to avoid registry permission issues
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
+          # Only enable inline caching for the current build
+          cache-to: type=inline
           build-args: |
             BUILDKIT_INLINE_CACHE=1
 
-      # Move cache to prevent it from growing indefinitely
-      - name: Move cache
-        run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+      # No cache management needed with inline-only caching
 
       # Cache Trivy database to avoid repeated downloads
       - name: Cache Trivy DB
