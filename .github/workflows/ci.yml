@@ -31,12 +31,7 @@ jobs:
       # Create hash of dependency files for more precise caching - fixed output format
       - name: Generate dependency cache keys
         id: cache-keys
-        shell: bash
-        run: |
-          POETRY_KEY=$(md5sum poetry.lock pyproject.toml | awk '{print $1}' | sort | md5sum | awk '{print $1}')
-          NPM_KEY=$(md5sum package-lock.json package.json | awk '{print $1}' | sort | md5sum | awk '{print $1}')
-          echo "poetry-key=${POETRY_KEY}" >> $GITHUB_OUTPUT
-          echo "npm-key=${NPM_KEY}" >> $GITHUB_OUTPUT
+        uses: ./.github/actions/generate-cache-keys
 
       # Install pipx once and cache it
       - name: Cache pipx
@@ -108,12 +103,7 @@ jobs:
       # Get the dependency cache keys - fixed output format
       - name: Generate dependency cache keys
         id: cache-keys
-        shell: bash
-        run: |
-          POETRY_KEY=$(md5sum poetry.lock pyproject.toml | awk '{print $1}')
-          NPM_KEY=$(md5sum package-lock.json package.json | awk '{print $1}')
-          echo "poetry-key=${POETRY_KEY}" >> $GITHUB_OUTPUT
-          echo "npm-key=${NPM_KEY}" >> $GITHUB_OUTPUT
+        uses: ./.github/actions/generate-cache-keys
 
       # Download cache marker
       - name: Download dependency status
@@ -166,10 +156,7 @@ jobs:
       # Get the dependency cache keys - fixed output format
       - name: Generate dependency cache keys
         id: cache-keys
-        shell: bash
-        run: |
-          POETRY_KEY=$(md5sum poetry.lock pyproject.toml | awk '{print $1}')
-          echo "poetry-key=${POETRY_KEY}" >> $GITHUB_OUTPUT
+        uses: ./.github/actions/generate-cache-keys
 
       # Download cache marker
       - name: Download dependency status
@@ -327,10 +314,7 @@ jobs:
       # Get the dependency cache keys - fixed output format
       - name: Generate dependency cache keys
         id: cache-keys
-        shell: bash
-        run: |
-          NPM_KEY=$(md5sum package-lock.json package.json | awk '{print $1}')
-          echo "npm-key=${NPM_KEY}" >> $GITHUB_OUTPUT
+        uses: ./.github/actions/generate-cache-keys
 
       # Download cache marker
       - name: Download dependency status
@@ -371,12 +355,7 @@ jobs:
       # Get the dependency cache keys - fixed output format
       - name: Generate dependency cache keys
         id: cache-keys
-        shell: bash
-        run: |
-          POETRY_KEY=$(md5sum poetry.lock pyproject.toml | awk '{print $1}')
-          NPM_KEY=$(md5sum package-lock.json package.json | awk '{print $1}')
-          echo "poetry-key=${POETRY_KEY}" >> $GITHUB_OUTPUT
-          echo "npm-key=${NPM_KEY}" >> $GITHUB_OUTPUT
+        uses: ./.github/actions/generate-cache-keys
 
       # Download cache marker
       - name: Download dependency status

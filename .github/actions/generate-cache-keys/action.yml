@@ -1,0 +1,21 @@
+name: "Generate Cache Keys"
+description: "Consistently generate cache keys for Poetry and NPM dependencies"
+outputs:
+  poetry-key:
+    description: "Cache key for Poetry dependencies"
+    value: ${{ steps.generate-keys.outputs.poetry-key }}
+  npm-key:
+    description: "Cache key for NPM dependencies"
+    value: ${{ steps.generate-keys.outputs.npm-key }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Generate dependency cache keys
+      id: generate-keys
+      shell: bash
+      run: |
+        POETRY_KEY=$(md5sum poetry.lock pyproject.toml | awk '{print $1}' | sort | md5sum | awk '{print $1}')
+        NPM_KEY=$(md5sum package-lock.json package.json | awk '{print $1}' | sort | md5sum | awk '{print $1}')
+        echo "poetry-key=${POETRY_KEY}" >> $GITHUB_OUTPUT
+        echo "npm-key=${NPM_KEY}" >> $GITHUB_OUTPUT
