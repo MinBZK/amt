@@ -35,14 +35,7 @@ jobs:
         id: cache-keys
         uses: ./.github/actions/generate-cache-keys
 
-      # Install pipx once and cache it
-      - name: Cache pipx
-        uses: actions/cache@v4
-        id: pipx-cache
-        with:
-          path: ~/.local/pipx
-          key: ${{ runner.os }}-pipx-${{ steps.cache-keys.outputs.poetry-key }}
-
+      # Setup pip cache first
       - name: Cache pip for dependencies
         uses: actions/cache@v4
         id: pip-cache
@@ -50,11 +43,9 @@ jobs:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ steps.cache-keys.outputs.poetry-key }}
 
+      # Install poetry directly without pipx since we can't reliably cache pipx
       - name: Install poetry
-        if: steps.pipx-cache.outputs.cache-hit != 'true'
-        run: |
-          pip install pipx
-          pipx install poetry
+        run: pip install poetry
 
       # Setup Python with poetry and cache pip
       - name: Set up Python ${{ env.PYTHON_VERSION }}
@@ -116,13 +107,6 @@ jobs:
 
       # No need to download artifact - using job outputs instead
 
-      # Restore the cached pipx
-      - name: Cache pipx
-        uses: actions/cache@v4
-        with:
-          path: ~/.local/pipx
-          key: ${{ runner.os }}-pipx-${{ steps.cache-keys.outputs.poetry-key }}
-
       # Setup Python with cached poetry and pip
       - name: Set up Python ${{ env.PYTHON_VERSION }}
         uses: actions/setup-python@v5
@@ -171,13 +155,6 @@ jobs:
         uses: ./.github/actions/generate-cache-keys
 
       # No need to download artifact - using job outputs instead
-
-      # Restore the cached pipx
-      - name: Cache pipx
-        uses: actions/cache@v4
-        with:
-          path: ~/.local/pipx
-          key: ${{ runner.os }}-pipx-${{ steps.cache-keys.outputs.poetry-key }}
 
       # Setup Python with cached poetry and pip
       - name: Set up Python ${{ env.PYTHON_VERSION }}
@@ -258,10 +235,8 @@ jobs:
           tags: |
             ci-test:${{ github.sha }}
           target: test
-          # Only enable inline caching for the current build
-          cache-to: type=inline
-          build-args: |
-            BUILDKIT_INLINE_CACHE=1
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       # No cache management needed with inline-only caching
 
@@ -360,13 +335,6 @@ jobs:
         uses: ./.github/actions/generate-cache-keys
 
       # No need to download artifact - using job outputs instead
-
-      # Restore the cached pipx
-      - name: Cache pipx
-        uses: actions/cache@v4
-        with:
-          path: ~/.local/pipx
-          key: ${{ runner.os }}-pipx-${{ steps.cache-keys.outputs.poetry-key }}
 
       # Setup Python with cached poetry and pip
       - name: Set up Python ${{ matrix.python-version }}
@@ -553,12 +521,8 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           annotations: ${{ steps.meta.outputs.annotations }}
           platforms: linux/amd64,linux/arm64,darwin/amd64
-          # Only enable inline caching for the current build
-          cache-to: type=inline
-          build-args: |
-            BUILDKIT_INLINE_CACHE=1
-
-      # No cache management needed with inline-only caching
+          cache-from: type=gha
+          cache-to: type=gha,mode=max,scope=production
 
       # Cache Trivy database to avoid repeated downloads
       - name: Cache Trivy DB
