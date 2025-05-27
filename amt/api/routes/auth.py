@@ -1,6 +1,6 @@
 import hashlib
 import logging
-from typing import Annotated
+from typing import Annotated, Any
 from urllib.parse import quote_plus
 from uuid import UUID
 
@@ -9,9 +9,12 @@ from fastapi import APIRouter, Depends, Request
 from fastapi.responses import HTMLResponse, RedirectResponse, Response
 
 from amt.api.deps import templates
-from amt.core.authorization import get_user
+from amt.api.editable_route_utils import get_user_id_or_error
+from amt.core.authorization import AuthorizationType, get_user
 from amt.core.exceptions import AMTAuthorizationFlowError
 from amt.models.user import User
+from amt.services.authorization import AuthorizationsService
+from amt.services.services_provider import ServicesProvider, get_service_provider
 from amt.services.users import UsersService
 
 router = APIRouter()
@@ -83,7 +86,29 @@ async def auth_callback(
 
 
 @router.get("/profile", response_class=Response)
-async def auth_profile(request: Request) -> HTMLResponse:
-    user = get_user(request)
+async def auth_profile(
+    request: Request,
+    services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
+) -> HTMLResponse:
+    authorizations_service = await services_provider.get(AuthorizationsService)
+    user_id = get_user_id_or_error(request)
+    users_service = await services_provider.get(UsersService)
+    user = users_service.find_by_id(user_id)
+    filters: dict[str, Any] = {
+        "type": AuthorizationType.ORGANIZATION,
+        "user_id": UUID(user_id),
+    }
+    my_organizations = await authorizations_service.find_all(filters=filters)
+    filters: dict[str, Any] = {
+        "type": AuthorizationType.ALGORITHM,
+        "user_id": UUID(user_id),
+    }
+    my_algorithms = await authorizations_service.find_all(filters=filters)
 
-    return templates.TemplateResponse(request, "auth/profile.html.j2", {"user": user})
+    context = {
+        "user": user,
+        "algorithms": my_algorithms,
+        "organizations": my_organizations,
+    }
+
+    return templates.TemplateResponse(request, "auth/profile.html.j2", context)

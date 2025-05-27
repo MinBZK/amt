@@ -82,6 +82,10 @@ main {
 /* we override the default ROOS style because we want to display as column, not rows */
 /* stylelint-disable selector-class-pattern */
 .amt-theme {
+    & .utrecht-form-fieldset .rvo-table-header {
+        background-color: transparent;
+    }
+
     & .rvo-accordion__item > .rvo-accordion__item-summary {
         align-items: initial;
         flex-direction: column;
@@ -136,8 +140,11 @@ main {
         padding: 0.5em;
         border-radius: 10px;
         background-color: var(--rvo-color-wit);
-        cursor: move;
         user-select: none;
+
+        &[draggable="true"] {
+            cursor: move;
+        }
     }
 
     & .algorithm-system-card-container {
@@ -275,7 +282,7 @@ main {
 
     & .modal-content-close {
         position: absolute;
-        right: 30px;
+        right: 15px;
         top: 10px;
         z-index: 1000;
         cursor: pointer;
@@ -332,6 +339,7 @@ main {
     }
 
     & .amt-error-message {
+        vertical-align: text-bottom;
         color: var(--rvo-form-feedback-error-color);
         font-weight: var(--rvo-form-feedback-error-font-weight);
     }
@@ -351,6 +359,8 @@ main {
     }
 
     & .amt-item-list__item_as_select {
+        cursor: pointer;
+
         &:hover {
             background-color: var(--rvo-color-logoblauw-150);
         }
@@ -525,6 +535,20 @@ main {
             box-shadow: 0 0 5px 5px var(--rvo-color-grijs-100);
             cursor: pointer;
         }
+    }
+
+    & .inline-close-button {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+    }
+
+    & #general-error-container > p {
+        padding: 1em;
     }
 
     /* stylelint-enable */

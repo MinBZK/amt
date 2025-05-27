@@ -8,6 +8,7 @@ from amt.repositories.tasks import TasksRepository
 from amt.schema.algorithm import AlgorithmNew
 from amt.schema.system_card import SystemCard
 from amt.services.algorithms import AlgorithmsService
+from amt.services.authorization import AuthorizationsService
 from pytest_mock import MockFixture
 from tests.conftest import amt_vcr
 from tests.constants import default_organization, default_user
@@ -23,6 +24,7 @@ async def test_get_algorithm(mocker: MockFixture):
         repository=mocker.AsyncMock(spec=AlgorithmsRepository),
         organizations_repository=mocker.AsyncMock(spec=OrganizationsRepository),
         tasks_repository=mocker.AsyncMock(spec=TasksRepository),
+        authorizations_service=mocker.AsyncMock(spec=AuthorizationsService),
     )
     algorithms_service.repository.find_by_id.return_value = Algorithm(  # type: ignore
         id=algorithm_id, name=algorithm_name, lifecycle=algorithm_lifecycle
@@ -52,6 +54,7 @@ async def test_create_algorithm(mocker: MockFixture):
         repository=mocker.AsyncMock(spec=AlgorithmsRepository),
         organizations_repository=organizations_repository,
         tasks_repository=mocker.AsyncMock(spec=TasksRepository),
+        authorizations_service=mocker.AsyncMock(spec=AuthorizationsService),
     )
     algorithms_service.repository.save.return_value = Algorithm(  # type: ignore
         id=algorithm_id, name=algorithm_name, lifecycle=algorithm_lifecycle, system_card=system_card
@@ -105,6 +108,7 @@ async def test_create_algorithm_unknown_template_id(mocker: MockFixture):
         repository=mocker.AsyncMock(spec=AlgorithmsRepository),
         organizations_repository=organizations_repository,
         tasks_repository=mocker.AsyncMock(spec=TasksRepository),
+        authorizations_service=mocker.AsyncMock(spec=AuthorizationsService),
     )
 
     with pytest.raises(AMTNotFound):

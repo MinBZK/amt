@@ -1,5 +1,6 @@
 import logging
 from gettext import gettext as _
+from json import JSONDecodeError
 from typing import Any
 
 from babel.support import NullTranslations
@@ -22,6 +23,10 @@ CUSTOM_MESSAGES = {
     "value_error": _("Field required"),
     "string_pattern_mismatch": _("String should match pattern '{pattern}'"),
     "int_parsing": _("Input should be a valid integer."),
+    "maintainer_role_required_with_context": _(
+        "For {type} {type_name}, at least one member must have the maintainer role."
+    ),
+    "maintainer_role_required": _("At least one member must have the maintainer role."),
 }
 
 
@@ -38,7 +43,7 @@ def translate_pydantic_exception(err: dict[str, Any], translations: NullTranslat
 async def general_exception_handler(request: Request, exc: Exception) -> HTMLResponse:  # noqa
     exception_name = exc.__class__.__name__
 
-    logger.debug(f"general_exception_handler {exception_name}: {exc}")
+    logger.exception(f"general_exception_handler {exception_name}: {exc}")
 
     translations = get_current_translation(request)
 
@@ -68,6 +73,8 @@ async def general_exception_handler(request: Request, exc: Exception) -> HTMLRes
         status_code = exc.status_code
     elif isinstance(exc, RequestValidationError):
         status_code = status.HTTP_400_BAD_REQUEST
+    elif isinstance(exc, JSONDecodeError):
+        status_code = status.HTTP_422_UNPROCESSABLE_ENTITY
 
     # todo: what if request.state.htmx does not exist?
     template_name = (

@@ -9,9 +9,11 @@ from sqlalchemy.exc import NoResultFound
 from sqlalchemy_utils import escape_like  # pyright: ignore[reportMissingTypeStubs, reportUnknownVariableType]
 
 from amt.api.risk_group import RiskGroup
+from amt.core.authorization import AuthorizationType
 from amt.core.exceptions import AMTRepositoryError
-from amt.models import Algorithm, Organization, User
+from amt.models import Algorithm, Authorization
 from amt.repositories.deps import AsyncSessionWithCommitFlag, get_session
+from amt.repositories.repository_classes import BaseRepository
 
 logger = logging.getLogger(__name__)
 
@@ -30,10 +32,9 @@ def sort_by_lifecycle_reversed(algorithm: Algorithm) -> int:
         return 1
 
 
-class AlgorithmsRepository:
+class AlgorithmsRepository(BaseRepository):
     def __init__(self, session: Annotated[AsyncSessionWithCommitFlag, Depends(get_session)]) -> None:
-        self.session = session
-        logger.debug(f"Repository {self.__class__.__name__} using session ID: {self.session.info.get('id', 'unknown')}")
+        super().__init__(session)
 
     async def find_all(self) -> Sequence[Algorithm]:
         result = await self.session.execute(select(Algorithm).where(Algorithm.deleted_at.is_(None)))
@@ -73,6 +74,15 @@ class AlgorithmsRepository:
             if filters:
                 for key, value in filters.items():
                     match key:
+                        case "user_id":
+                            user_id = (
+                                UUID(filters["user_id"]) if isinstance(filters["user_id"], str) else filters["user_id"]
+                            )
+                            statement = (
+                                statement.where(Authorization.type_id == Algorithm.id)
+                                .where(Authorization.user_id == user_id)
+                                .where(Authorization.type == AuthorizationType.ALGORITHM)
+                            )
                         case "id":
                             statement = statement.where(Algorithm.id == int(cast(str, value)))
                         case "lifecycle":
@@ -114,11 +124,12 @@ class AlgorithmsRepository:
             logger.exception("Error paginating algorithms")
             raise AMTRepositoryError from e
 
-    async def get_by_user(self, user_id: UUID) -> Sequence[Algorithm]:
+    async def get_by_user_and_organization(self, user_id: UUID, organization_id: int) -> Sequence[Algorithm]:
         statement = (
             select(Algorithm)
-            .join(Organization, Organization.id == Algorithm.organization_id)
-            .where(Organization.users.any(User.id == user_id))  # pyright: ignore[reportUnknownMemberType]
+            .join(Authorization, Authorization.type_id == Algorithm.id)
+            .where(Authorization.type == AuthorizationType.ALGORITHM)
+            .where(Authorization.user_id == user_id)
+            .where(Algorithm.organization_id == organization_id)
         )
-
         return (await self.session.execute(statement)).scalars().all()

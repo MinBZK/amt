@@ -10,17 +10,18 @@ from sqlalchemy.orm import lazyload
 from sqlalchemy_utils import escape_like  # pyright: ignore[reportMissingTypeStubs, reportUnknownVariableType]
 
 from amt.api.organization_filter_options import OrganizationFilterOptions
+from amt.core.authorization import AuthorizationType
 from amt.core.exceptions import AMTRepositoryError
-from amt.models import Organization, User
+from amt.models import Authorization, Organization
 from amt.repositories.deps import AsyncSessionWithCommitFlag, get_session
+from amt.repositories.repository_classes import BaseRepository
 
 logger = logging.getLogger(__name__)
 
 
-class OrganizationsRepository:
+class OrganizationsRepository(BaseRepository):
     def __init__(self, session: Annotated[AsyncSessionWithCommitFlag, Depends(get_session)]) -> None:
-        self.session = session
-        logger.debug(f"Repository {self.__class__.__name__} using session ID: {self.session.info.get('id', 'unknown')}")
+        super().__init__(session)
 
     def _as_count_query(self, statement: Select[Any]) -> Select[Any]:
         statement = statement.with_only_columns(func.count()).order_by(None)
@@ -46,9 +47,12 @@ class OrganizationsRepository:
             and "organization-type" in filters
             and filters["organization-type"] == OrganizationFilterOptions.MY_ORGANIZATIONS.value
         ):
-            statement = statement.join(
-                Organization.users  # pyright: ignore[reportUnknownMemberType, reportUnknownArgumentType]
-            ).where(User.id == user_id)
+            statement = (
+                statement.where(Authorization.type_id == Organization.id)
+                .where(Authorization.user_id == user_id)
+                .where(Authorization.type == AuthorizationType.ORGANIZATION)
+            )
+
         if sort:
             if "name" in sort and sort["name"] == "ascending":
                 statement = statement.order_by(func.lower(Organization.name).asc())
@@ -122,7 +126,9 @@ class OrganizationsRepository:
         try:
             statement = (
                 select(Organization)
-                .where(Organization.users.any(User.id == user_id))  # pyright: ignore[reportUnknownMemberType]
+                .join(Authorization, Authorization.type_id == Organization.id)
+                .where(Authorization.user_id == user_id)
+                .where(Authorization.type == AuthorizationType.ORGANIZATION)
                 .where(Organization.id == organization_id)
                 .where(Organization.deleted_at.is_(None))
             )
@@ -131,12 +137,12 @@ class OrganizationsRepository:
             logger.exception("Organization not found")
             raise AMTRepositoryError from e
 
-    async def remove_user(self, organization: Organization, user: User) -> Organization:
-        organization.users.remove(user)  # pyright: ignore[reportUnknownMemberType]
-        await self.session.commit()
-        await self.session.refresh(organization)
-        return organization
-
     async def get_by_user(self, user_id: UUID) -> Sequence[Organization]:
-        statement = select(Organization).where(Organization.users.any(User.id == user_id))  # pyright: ignore[reportUnknownMemberType]
+        statement = (
+            select(Organization)
+            .join(Authorization, Authorization.type_id == Organization.id)
+            .where(Authorization.user_id == user_id)
+            .where(Authorization.type == AuthorizationType.ORGANIZATION)
+            .where(Organization.deleted_at.is_(None))
+        )
         return (await self.session.execute(statement)).scalars().all()

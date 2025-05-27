@@ -1,6 +1,6 @@
 {% extends 'algorithms/details_base.html.j2' %}
 {% import 'macros/cards.html.j2' as render with context %}
-{% from "macros/editable.html.j2" import editable with context %}
+{% from "macros/editable_macros.html.j2" import editable with context %}
 {% block detail_content %}
     <span class="rvo-text">{% trans %}Last updated{% endtrans %}: {{ last_edited | time_ago(language) }}
     {% trans %}ago{% endtrans %}</span>

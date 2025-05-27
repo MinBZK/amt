@@ -41,15 +41,18 @@ msgstr ""
 msgid "Is there a transparency obligation?"
 msgstr ""
 
-#: amt/api/ai_act_profile.py:36
+#: amt/api/ai_act_profile.py:36 amt/site/templates/auth/profile.html.j2:72
+#: amt/site/templates/auth/profile.html.j2:99
+#: amt/site/templates/macros/form_macros.html.j2:441
+#: amt/site/templates/organizations/parts/members_results.html.j2:133
 msgid "Role"
 msgstr ""
 
 #: amt/api/group_by_category.py:15
-#: amt/site/templates/algorithms/details_info.html.j2:97
+#: amt/site/templates/algorithms/details_info.html.j2:100
 #: amt/site/templates/algorithms/new.html.j2:42
-#: amt/site/templates/macros/tasks.html.j2:80
-#: amt/site/templates/parts/algorithm_search.html.j2:48
+#: amt/site/templates/macros/tasks.html.j2:85
+#: amt/site/templates/parts/algorithm_search.html.j2:50
 #: amt/site/templates/parts/filter_list.html.j2:71
 #: amt/site/templates/parts/tasks_search.html.j2:36
 msgid "Lifecycle"
@@ -95,7 +98,8 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: amt/api/navigation.py:49 amt/site/templates/parts/algorithm_search.html.j2:9
+#: amt/api/navigation.py:49 amt/site/templates/auth/profile.html.j2:90
+#: amt/site/templates/parts/algorithm_search.html.j2:9
 msgid "Algorithms"
 msgstr ""
 
@@ -151,12 +155,12 @@ msgstr ""
 msgid "Instruments"
 msgstr ""
 
-#: amt/api/navigation.py:63
+#: amt/api/navigation.py:63 amt/site/templates/auth/profile.html.j2:63
 #: amt/site/templates/organizations/parts/overview_results.html.j2:6
 msgid "Organizations"
 msgstr ""
 
-#: amt/api/navigation.py:64 amt/site/templates/organizations/home.html.j2:37
+#: amt/api/navigation.py:64 amt/site/templates/organizations/home.html.j2:38
 #: amt/site/templates/organizations/parts/members_results.html.j2:6
 #: amt/site/templates/organizations/parts/overview_results.html.j2:131
 msgid "Members"
@@ -194,59 +198,75 @@ msgstr ""
 msgid "niet van toepassing"
 msgstr ""
 
-#: amt/api/forms/algorithm.py:38
+#: amt/api/forms/algorithm.py:61
 msgid "Select organization"
 msgstr ""
 
-#: amt/api/forms/algorithm.py:42
-#: amt/site/templates/algorithms/details_info.html.j2:79
+#: amt/api/forms/algorithm.py:65
+#: amt/site/templates/algorithms/details_info.html.j2:82
 msgid "Organization"
 msgstr ""
 
-#: amt/api/forms/measure.py:33
+#: amt/api/forms/algorithm.py:66
+msgid ""
+"You do not have sufficient permissions to create an algorithm on any "
+"organization you are member of"
+msgstr ""
+
+#: amt/api/forms/algorithm.py:98 amt/api/forms/organization.py:67
+#: amt/site/templates/organizations/parts/add_members_modal.html.j2:4
+#: amt/site/templates/organizations/parts/add_members_modal.html.j2:23
+msgid "Add members"
+msgstr ""
+
+#: amt/api/forms/algorithm.py:99
+msgid "Search for a person..."
+msgstr ""
+
+#: amt/api/forms/measure.py:34
 msgid "Responsible"
 msgstr ""
 
-#: amt/api/forms/measure.py:41
+#: amt/api/forms/measure.py:42
 msgid "Reviewer"
 msgstr ""
 
-#: amt/api/forms/measure.py:49
+#: amt/api/forms/measure.py:50
 msgid "Accountable"
 msgstr ""
 
-#: amt/api/forms/measure.py:57
+#: amt/api/forms/measure.py:58
 msgid "Status"
 msgstr ""
 
-#: amt/api/forms/measure.py:59
+#: amt/api/forms/measure.py:60
 #: amt/site/templates/algorithms/details_info.html.j2:44
 #: amt/site/templates/macros/tasks.html.j2:12
 msgid "To do"
 msgstr ""
 
-#: amt/api/forms/measure.py:60
+#: amt/api/forms/measure.py:61
 #: amt/site/templates/algorithms/details_info.html.j2:46
 #: amt/site/templates/macros/tasks.html.j2:19
 msgid "In progress"
 msgstr ""
 
-#: amt/api/forms/measure.py:61 amt/site/templates/macros/tasks.html.j2:26
+#: amt/api/forms/measure.py:62 amt/site/templates/macros/tasks.html.j2:26
 msgid "In review"
 msgstr ""
 
-#: amt/api/forms/measure.py:62
+#: amt/api/forms/measure.py:63
 #: amt/site/templates/algorithms/details_info.html.j2:20
 #: amt/site/templates/algorithms/details_info.html.j2:48
 #: amt/site/templates/macros/tasks.html.j2:33
 msgid "Done"
 msgstr ""
 
-#: amt/api/forms/measure.py:63 amt/site/templates/macros/tasks.html.j2:40
+#: amt/api/forms/measure.py:64 amt/site/templates/macros/tasks.html.j2:40
 msgid "Not implemented"
 msgstr ""
 
-#: amt/api/forms/measure.py:72
+#: amt/api/forms/measure.py:73
 msgid "Information on how this measure is implemented"
 msgstr ""
 
@@ -256,81 +276,103 @@ msgid ""
 "changes by pressing the save button."
 msgstr ""
 
-#: amt/api/forms/measure.py:84
+#: amt/api/forms/measure.py:85
 msgid "Add files"
 msgstr ""
 
-#: amt/api/forms/measure.py:85
+#: amt/api/forms/measure.py:86
 msgid "No files selected."
 msgstr ""
 
-#: amt/api/forms/measure.py:89
+#: amt/api/forms/measure.py:90
 msgid "Add URI"
 msgstr ""
 
-#: amt/api/forms/measure.py:92
+#: amt/api/forms/measure.py:93
 msgid "Add links to documents"
 msgstr ""
 
-#: amt/api/forms/organization.py:23
-#: amt/site/templates/algorithms/details_info.html.j2:75
+#: amt/api/forms/organization.py:50
+#: amt/site/templates/algorithms/details_info.html.j2:76
 #: amt/site/templates/auth/profile.html.j2:34
-#: amt/site/templates/organizations/home.html.j2:13
-#: amt/site/templates/organizations/parts/members_results.html.j2:119
+#: amt/site/templates/auth/profile.html.j2:69
+#: amt/site/templates/auth/profile.html.j2:96
+#: amt/site/templates/macros/form_macros.html.j2:440
+#: amt/site/templates/organizations/home.html.j2:14
+#: amt/site/templates/organizations/parts/members_results.html.j2:130
 msgid "Name"
 msgstr ""
 
-#: amt/api/forms/organization.py:24
-msgid "Name of the organization"
-msgstr ""
-
-#: amt/api/forms/organization.py:32
+#: amt/api/forms/organization.py:59
 msgid "The slug is the web path, like /organizations/my-organization-name"
 msgstr ""
 
-#: amt/api/forms/organization.py:33
-#: amt/site/templates/organizations/home.html.j2:19
+#: amt/api/forms/organization.py:60
+#: amt/site/templates/organizations/home.html.j2:20
 msgid "Slug"
 msgstr ""
 
-#: amt/api/forms/organization.py:34
-msgid "The slug for this organization"
-msgstr ""
-
-#: amt/api/forms/organization.py:40
-#: amt/site/templates/organizations/parts/add_members_modal.html.j2:4
-#: amt/site/templates/organizations/parts/add_members_modal.html.j2:26
-msgid "Add members"
-msgstr ""
-
-#: amt/api/forms/organization.py:41
-msgid "Search for a person..."
-msgstr ""
-
-#: amt/api/forms/organization.py:47
+#: amt/api/forms/organization.py:75
 msgid "Add organization"
 msgstr ""
 
-#: amt/core/exception_handlers.py:20
-#, python-brace-format
+#: amt/core/dynamic_translations.py:13
+msgid "Organization Maintainer"
+msgstr ""
+
+#: amt/core/dynamic_translations.py:14
+msgid "Organization Member"
+msgstr ""
+
+#: amt/core/dynamic_translations.py:15
+msgid "Organization Viewer"
+msgstr ""
+
+#: amt/core/dynamic_translations.py:16
+msgid "Algorithm Maintainer"
+msgstr ""
+
+#: amt/core/dynamic_translations.py:17
+msgid "Algorithm Member"
+msgstr ""
+
+#: amt/core/dynamic_translations.py:18
+msgid "Algorithm Viewer"
+msgstr ""
+
+#: amt/core/dynamic_translations.py:19
+msgid "organization"
+msgstr ""
+
+#: amt/core/dynamic_translations.py:20
+msgid "algorithm"
+msgstr ""
+
+#: amt/core/exception_handlers.py:21
 msgid "String should have at least {min_length} characters"
 msgstr ""
 
-#: amt/core/exception_handlers.py:21 amt/core/exception_handlers.py:22
+#: amt/core/exception_handlers.py:22 amt/core/exception_handlers.py:23
 msgid "Field required"
 msgstr ""
 
-#: amt/core/exception_handlers.py:23
-#, python-brace-format
+#: amt/core/exception_handlers.py:24
 msgid "String should match pattern '{pattern}'"
 msgstr ""
 
-#: amt/core/exception_handlers.py:24
+#: amt/core/exception_handlers.py:25
 msgid "Input should be a valid integer."
 msgstr ""
 
-#: amt/core/exceptions.py:21
-#, python-brace-format
+#: amt/core/exception_handlers.py:26
+msgid "For {type} {type_name}, at least one member must have the maintainer role."
+msgstr ""
+
+#: amt/core/exception_handlers.py:29
+msgid "At least one member must have the maintainer role."
+msgstr ""
+
+#: amt/core/exceptions.py:20
 msgid ""
 "An error occurred while configuring the options for '{field}'. Please "
 "check the settings and try again."
@@ -344,7 +386,7 @@ msgstr ""
 msgid "An error occurred while processing the instrument. Please try again later."
 msgstr ""
 
-#: amt/core/exceptions.py:41 amt/core/exceptions.py:87
+#: amt/core/exceptions.py:40 amt/core/exceptions.py:86
 msgid ""
 "The requested page or resource could not be found, or you do not have the"
 " correct permissions to access it. Please check the URL or query and try "
@@ -360,12 +402,10 @@ msgid "Only static files are supported."
 msgstr ""
 
 #: amt/core/exceptions.py:62
-#, python-brace-format
 msgid "Key not correct: {field}"
 msgstr ""
 
 #: amt/core/exceptions.py:68
-#, python-brace-format
 msgid "Value not correct: {field}"
 msgstr ""
 
@@ -413,44 +453,40 @@ msgstr ""
 msgid "Apply changes"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:13
+#: amt/site/templates/algorithms/details_base.html.j2:14
 msgid "Delete algoritmic system"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:17
+#: amt/site/templates/algorithms/details_base.html.j2:18
 msgid "Are you sure you want to delete your algoritmic system "
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:20
+#: amt/site/templates/algorithms/details_base.html.j2:21
 msgid "Data will be stored for at least 45 days before permanent deletion."
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:26
+#: amt/site/templates/algorithms/details_base.html.j2:27
 #: amt/site/templates/algorithms/new.html.j2:154
-#: amt/site/templates/macros/form_macros.html.j2:168
-#: amt/site/templates/organizations/members.html.j2:34
+#: amt/site/templates/macros/form_macros.html.j2:223
+#: amt/site/templates/organizations/members.html.j2:35
 msgid "Yes"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_base.html.j2:29
+#: amt/site/templates/algorithms/details_base.html.j2:30
 #: amt/site/templates/algorithms/new.html.j2:164
-#: amt/site/templates/macros/form_macros.html.j2:173
-#: amt/site/templates/organizations/members.html.j2:37
+#: amt/site/templates/macros/form_macros.html.j2:228
+#: amt/site/templates/organizations/members.html.j2:38
 msgid "No"
-msgstr ""
-
-#: amt/site/templates/algorithms/details_base.html.j2:49
-msgid "Download as YAML"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_compliance.html.j2:29
 msgid "measure executed"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_compliance.html.j2:62
-#: amt/site/templates/macros/editable.html.j2:77
-#: amt/site/templates/macros/editable.html.j2:82
-#: amt/site/templates/macros/tasks.html.j2:98
+#: amt/site/templates/algorithms/details_compliance.html.j2:63
+#: amt/site/templates/macros/editable_macros.html.j2:92
+#: amt/site/templates/macros/editable_macros.html.j2:97
+#: amt/site/templates/macros/tasks.html.j2:104
 msgid "Edit"
 msgstr ""
 
@@ -462,16 +498,16 @@ msgstr ""
 msgid "Go to all requirements"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:85
+#: amt/site/templates/algorithms/details_info.html.j2:88
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:25
 msgid "Description"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:91
+#: amt/site/templates/algorithms/details_info.html.j2:94
 msgid "Repository"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:103
+#: amt/site/templates/algorithms/details_info.html.j2:106
 #: amt/site/templates/organizations/parts/overview_results.html.j2:133
 #: amt/site/templates/pages/assessment_card.html.j2:7
 #: amt/site/templates/pages/model_card.html.j2:6
@@ -481,11 +517,11 @@ msgstr ""
 msgid "Last updated"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:107
+#: amt/site/templates/algorithms/details_info.html.j2:110
 msgid "Labels"
 msgstr ""
 
-#: amt/site/templates/algorithms/details_info.html.j2:115
+#: amt/site/templates/algorithms/details_info.html.j2:118
 msgid "References"
 msgstr ""
 
@@ -498,13 +534,13 @@ msgid "Read more on the algoritmekader"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:62
-#: amt/site/templates/macros/editable.html.j2:210
+#: amt/site/templates/macros/editable_macros.html.j2:249
 msgid "Save"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:66
-#: amt/site/templates/macros/editable.html.j2:215
-#: amt/site/templates/organizations/parts/add_members_modal.html.j2:29
+#: amt/site/templates/macros/editable_macros.html.j2:254
+#: amt/site/templates/organizations/parts/add_members_modal.html.j2:26
 msgid "Cancel"
 msgstr ""
 
@@ -547,7 +583,7 @@ msgid ""
 msgstr ""
 
 #: amt/site/templates/algorithms/new.html.j2:77
-#: amt/site/templates/macros/editable.html.j2:9
+#: amt/site/templates/macros/editable_macros.html.j2:9
 msgid "Find your AI Act profile"
 msgstr ""
 
@@ -556,7 +592,7 @@ msgid "Select Option"
 msgstr ""
 
 #: amt/site/templates/algorithms/new.html.j2:177
-#: amt/site/templates/parts/algorithm_search.html.j2:15
+#: amt/site/templates/parts/algorithm_search.html.j2:16
 msgid "Add algorithm"
 msgstr ""
 
@@ -584,6 +620,12 @@ msgstr ""
 
 #: amt/site/templates/auth/profile.html.j2:54
 msgid "Select language"
+msgstr ""
+
+#: amt/site/templates/auth/profile.html.j2:82
+#: amt/site/templates/auth/profile.html.j2:109
+#: amt/site/templates/macros/tasks.html.j2:43
+msgid "Unknown"
 msgstr ""
 
 #: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:5
@@ -649,78 +691,84 @@ msgid "There are some errors"
 msgstr ""
 
 #: amt/site/templates/errors/_RequestValidationError_400.html.j2:5
-msgid "There is one error:"
+msgid "There is an error"
 msgstr ""
 
 #: amt/site/templates/layouts/base.html.j2:1
 msgid "Algorithmic Management Toolkit (AMT)"
 msgstr ""
 
-#: amt/site/templates/macros/form_macros.html.j2:60
+#: amt/site/templates/macros/form_macros.html.j2:79
+msgid "Remove member"
+msgstr ""
+
+#: amt/site/templates/macros/form_macros.html.j2:79
 msgid "Are you sure you want to remove "
 msgstr ""
 
-#: amt/site/templates/macros/form_macros.html.j2:60
-msgid " from this organization? "
+#: amt/site/templates/macros/form_macros.html.j2:79
+msgid "?"
 msgstr ""
 
-#: amt/site/templates/macros/form_macros.html.j2:63
+#: amt/site/templates/macros/form_macros.html.j2:84
+#: amt/site/templates/macros/form_macros.html.j2:89
+#: amt/site/templates/macros/form_macros.html.j2:125
+#: amt/site/templates/macros/form_macros.html.j2:130
 msgid "Delete"
 msgstr ""
 
-#: amt/site/templates/macros/form_macros.html.j2:64
-msgid "Delete member"
+#: amt/site/templates/macros/form_macros.html.j2:171
+msgid "Error"
 msgstr ""
 
-#: amt/site/templates/macros/form_macros.html.j2:153
+#: amt/site/templates/macros/form_macros.html.j2:208
 msgid "Delete file"
 msgstr ""
 
-#: amt/site/templates/macros/form_macros.html.j2:157
+#: amt/site/templates/macros/form_macros.html.j2:212
 msgid "Are you sure you want to delete"
+msgstr ""
+
+#: amt/site/templates/macros/form_macros.html.j2:442
+msgid "Options"
 msgstr ""
 
 #: amt/site/templates/macros/table_row.html.j2:19
 msgid " ago"
 msgstr ""
 
-#: amt/site/templates/macros/tasks.html.j2:43
-msgid "Unknown"
+#: amt/site/templates/macros/tabs.html.j2:33
+msgid "Download as YAML"
 msgstr ""
 
-#: amt/site/templates/organizations/home.html.j2:25
+#: amt/site/templates/organizations/home.html.j2:26
 msgid "Created at"
 msgstr ""
 
-#: amt/site/templates/organizations/home.html.j2:29
+#: amt/site/templates/organizations/home.html.j2:30
 msgid "Created by"
 msgstr ""
 
-#: amt/site/templates/organizations/home.html.j2:33
+#: amt/site/templates/organizations/home.html.j2:34
 msgid "Modified at"
-msgstr ""
-
-#: amt/site/templates/organizations/members.html.j2:25
-#: amt/site/templates/organizations/parts/add_members_modal.html.j2:8
-msgid "Close"
 msgstr ""
 
 #: amt/site/templates/organizations/new.html.j2:8
 msgid "Create an organization"
 msgstr ""
 
-#: amt/site/templates/organizations/parts/members_results.html.j2:15
+#: amt/site/templates/organizations/parts/members_results.html.j2:16
 msgid "Add member"
 msgstr ""
 
-#: amt/site/templates/organizations/parts/members_results.html.j2:29
+#: amt/site/templates/organizations/parts/members_results.html.j2:33
 #: amt/site/templates/organizations/parts/overview_results.html.j2:26
-#: amt/site/templates/parts/algorithm_search.html.j2:25
+#: amt/site/templates/parts/algorithm_search.html.j2:27
 #: amt/site/templates/parts/tasks_search.html.j2:13
 msgid "Search"
 msgstr ""
 
-#: amt/site/templates/organizations/parts/members_results.html.j2:66
+#: amt/site/templates/organizations/parts/members_results.html.j2:71
 #, python-format
 msgid ""
 "%(members_length)s result\n"
@@ -731,14 +779,10 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: amt/site/templates/organizations/parts/members_results.html.j2:71
+#: amt/site/templates/organizations/parts/members_results.html.j2:76
 #: amt/site/templates/organizations/parts/overview_results.html.j2:85
 #: amt/site/templates/parts/filter_list.html.j2:16
 msgid "for"
-msgstr ""
-
-#: amt/site/templates/organizations/parts/members_results.html.j2:122
-msgid "Action"
 msgstr ""
 
 #: amt/site/templates/organizations/parts/overview_results.html.j2:11
@@ -762,6 +806,10 @@ msgstr[1] ""
 
 #: amt/site/templates/organizations/parts/overview_results.html.j2:128
 msgid "Organization name"
+msgstr ""
+
+#: amt/site/templates/organizations/parts/search_select_field.html.j2:6
+msgid "No persons found..."
 msgstr ""
 
 #: amt/site/templates/pages/assessment_card.html.j2:7
@@ -916,11 +964,11 @@ msgstr ""
 msgid "This page is yet to be build."
 msgstr ""
 
-#: amt/site/templates/parts/algorithm_search.html.j2:64
+#: amt/site/templates/parts/algorithm_search.html.j2:66
 msgid "Category"
 msgstr ""
 
-#: amt/site/templates/parts/algorithm_search.html.j2:85
+#: amt/site/templates/parts/algorithm_search.html.j2:87
 msgid "Group by"
 msgstr ""
 

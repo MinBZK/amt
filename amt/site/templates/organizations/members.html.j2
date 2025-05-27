@@ -3,6 +3,7 @@
 {% extends "layouts/base.html.j2" %}
 {% block content %}
     <div class="rvo-max-width-layout rvo-max-width-layout--lg rvo-max-width-layout-inline-padding--none">
+        {% if algorithm is defined %}{{ tabs.show_algorithm_header() }}{% endif %}
         {{ tabs.show_tabs(tab_items) }}
         <div class="rvo-content" id="search-members-container">
             {% include 'organizations/parts/members_results.html.j2' %}
@@ -13,22 +14,22 @@
             <div class="modal-underlay"
                  onclick="this.closest('.minbzk-modal').remove()"></div>
             <div class="modal-content-container model-content-auto-size">
+                <div class="modal-content-close"
+                     onclick="this.closest('.minbzk-modal').remove()">×</div>
                 <div class="modal-content rvo-layout-column"
                      style="overflow-x: hidden;
                             height: auto;
                             width: auto">
                     <div class="amt-flex-container">
                         <h3 class="utrecht-heading-3 rvo-heading--no-margins" data-target="title">__TITLE__</h3>
-                        <a onclick="this.closest('.minbzk-modal').remove()">
-                            <span class="amt-cursor-pointer utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--md rvo-icon--hemelblauw"
-                                  role="img"
-                                  aria-label="{% trans %}Close{% endtrans %}"></span></a>
                     </div>
                     <hr class="rvo-hr" />
                     <div data-target="content"
                          class="rvo-margin-block-start--lg rvo-margin-block-end--lg">__CONTENT__</div>
-                    <p class="utrecht-button-group">
+                    <div id="modal-error-container"></div>
+                    <p class="utrecht-button-group margin-top-middle">
                         <button data-target="confirm-button"
+                                hx-target-error="#modal-error-container"
                                 hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
                                 class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
                                 type="button">{% trans %}Yes{% endtrans %}</button>

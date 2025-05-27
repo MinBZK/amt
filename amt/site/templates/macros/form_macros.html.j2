@@ -1,3 +1,4 @@
+{% import "macros/editable_macros.html.j2" as editable_macro with context %}
 {% macro user_avatars(users) %}
     {% if users|length > 0 %}
         <div class="amt-avatar-list">
@@ -51,23 +52,50 @@
         <td class="rvo-table-cell">{{ organization.modified_at | time_ago(language) }}</td>
     </tr>
 {% endmacro %}
-{% macro overview_table_row_member(loop, member) -%}
+{% macro overview_table_row_member(loop, user, authorization, role, permission_path) -%}
     <tr class="rvo-table-row"
-        {% if loop.last and members|length == limit %} data-marker="last-element" hx-get="/organizations/?skip={{ next }}" hx-swap="beforeend" hx-trigger="revealed" {% endif %}>
-        <td class="rvo-table-cell">{{ member.name }}</td>
+        data-value="{{ user.id }}"
+        {% if loop.last and members|length == limit %} data-marker="last-element" hx-get="{{ base_href }}/members/?skip={{ next }}" hx-swap="beforeend" hx-trigger="revealed" {% endif %}>
         <td class="rvo-table-cell">
-            <a class="rvo-link rvo-link--normal rvo-link--with-icon"
-               onclick="amt.openConfirmModal('Remove member {{ member.name }}','{% trans %}Are you sure you want to remove {% endtrans %} {{ member.name }} {% trans %} from this organization? {% endtrans %}', 'hx-delete','/organizations/{{ slug }}/members/{{ member.id }}')">
-                <span class="utrecht-icon rvo-icon rvo-icon-verwijderen rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
-                      role="img"
-                      aria-label="{% trans %}Delete{% endtrans %}"></span>
-                {% trans %}Delete member{% endtrans %}
-            </a>
+            <span class="amt-avatar-list__item" style="padding-right: 0.5em">
+                <img style="vertical-align: text-bottom"
+                     width="24"
+                     height="24"
+                     src="https://gravatar.com/avatar/{{ user.email_hash }}?r=g&s=48&d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/{{ user.name_encoded }}/48"
+                     alt="User icon {{ user.name }}">
+            </span>
+            {{ user.name }}
         </td>
+        <td class="rvo-table-cell">
+            {% if permission(permission_path, 'Update', permissions) == True %}
+                {{ editable_macro.editable_from_path("authorization/" + authorization.id|string + "/role_id", {"authorization_id": authorization.id}, True) }}
+            {% else %}
+                {{ ExternalFieldsTranslations.translate(role.name, request) }}
+            {% endif %}
+        </td>
+        {% if permission(permission_path, 'Update', permissions) == True %}
+            <td class="rvo-table-cell">
+                <span class="rvo-link rvo-link--hover rvo-link--with-icon amt-edit-link"
+                      onclick="amt.openConfirmModal('{% trans %}Remove member{% endtrans %} {{ user.name }}','{% trans %}Are you sure you want to remove {% endtrans %} {{ user.name }}{% trans %}?{% endtrans %}', 'hx-delete','{{ base_href }}/members/{{ user.id }}')"
+                      style="cursor: pointer;
+                             vertical-align: top">
+                    <span class="utrecht-icon rvo-icon rvo-icon-verwijderen rvo-icon--md rvo-icon--hemelblauw"
+                          role="img"
+                          aria-label="{% trans %}Delete{% endtrans %}"></span>
+                    <a class="rvo-link"
+                       href="#"
+                       onclick="event.preventDefault()"
+                       style="font-size: 14px !important;
+                              color: rgb(0, 123, 199) !important">{% trans %}Delete{% endtrans %}</a>
+                </span>
+            </td>
+        {% endif %}
     </tr>
 {% endmacro %}
-{% macro render_form_field_search_result(value, display_value) -%}
-    {% set list_result = render_form_field_list_result("user_ids", value, display_value) %}
+{% macro render_form_field_search_result(editable_object) -%}
+    {% set list_result = render_form_field_list_result(editable_object) %}
+    {% set value = editable_object.children[0].value.value %}
+    {% set display_value = editable_object.children[0].value.display_value %}
     <li data-list-result="{{ list_result | b64encode }}"
         onkeyup="amt.add_field_on_enter()"
         onclick="amt.add_field(this)"
@@ -76,17 +104,33 @@
         <span style="padding-inline-start: 1em">{{ display_value }}</span>
     </li>
 {% endmacro %}
-{% macro render_form_field_list_result(name, value, display_value) -%}
-    <li class="rvo-item-list__item" data-value="{{ value }}">
-        <input type="hidden" name="{{ name }}" value="{{ value }}">
-        <span>{{ display_value }}</span>
-        <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--lg form-input-clear"
-              style="float: right;
-                     cursor: pointer"
-              role="img"
-              aria-label="Kruis"
-              onclick="this.parentNode.remove()"></span>
-    </li>
+{% macro render_form_field_list_result(editable_object) -%}
+    <tr class="rvo-item-list__item amt-position-relative"
+        data-value="{{ editable_object.children[0].value.value }}">
+        {% set field_prefix = editable_object.first_path_item() + "[" + get_random_number() + "]" %}
+        {% for child_editable in editable_object.children %}
+            {% if child_editable.implementation_type.type != WebFormFieldType.HIDDEN %}
+                <td class="rvo-table-cell">{{ editable_macro.inline_editor_form_field(child_editable, field_prefix) }}</td>
+            {% else %}
+                {{ editable_macro.inline_editor_form_field(child_editable, field_prefix) }}
+            {% endif %}
+        {% endfor %}
+        <td class="rvo-table-cell amt-position-relative">
+            <span class="rvo-link rvo-link--hover rvo-link--with-icon amt-edit-link"
+                  onclick="this.parentNode.parentNode.remove()"
+                  style="cursor: pointer;
+                         vertical-align: top">
+                <span class="utrecht-icon rvo-icon rvo-icon-verwijderen rvo-icon--md rvo-icon--hemelblauw"
+                      role="img"
+                      aria-label="{% trans %}Delete{% endtrans %}"></span>
+                <a class="rvo-link"
+                   href="#"
+                   onclick="event.preventDefault()"
+                   style="font-size: 14px !important;
+                          color: rgb(0, 123, 199) !important">{% trans %}Delete{% endtrans %}</a>
+            </span>
+        </td>
+    </tr>
 {% endmacro %}
 {% macro form_field_select(prefix, field) %}
     <div role="group"
@@ -102,6 +146,9 @@
             {% endif %}
         </div>
         <div id="error-{{ field.name }}" class="htmx-error-oob"></div>
+        {% if field.options | length == 1 and field.no_options_msg %}
+            <div class="rvo-layout-margin-vertical--md">{{ show_form_warning(field.no_options_msg) }}</div>
+        {% endif %}
         <div class="rvo-select-wrapper">
             <select id="{{ prefix }}{{ field.name }}"
                     name="{{ field.name }}"
@@ -115,6 +162,14 @@
                 {% endfor %}
             </select>
         </div>
+    </div>
+{% endmacro %}
+{% macro show_form_warning(msg) %}
+    <div class="rvo-form-feedback rvo-form-feedback--error">
+        <span class="utrecht-icon rvo-icon rvo-icon-foutmelding rvo-icon--md rvo-status-icon-foutmelding rvo-status-icon-foutmelding"
+              role="img"
+              aria-label="{% trans %}Error{% endtrans %}"></span>
+        <span class="amt-error-message">{{ msg }}</span>
     </div>
 {% endmacro %}
 {% macro form_field_file(prefix, field) %}
@@ -357,7 +412,9 @@
         </div>
         <div id="error-{{ field.name }}" class="htmx-error-oob"></div>
         <div class="amt-position-relative">
-            <input id="{{ prefix }}{{ field.name }}-search"
+            <input data-type="{{ prefix }}"
+                   id="{{ prefix }}{{ field.name }}-search"
+                   data-preprocess="exclude-if-exists-in:#{{ prefix }}{{ field.name }}-results-list,#search-results-table-body"
                    autocomplete="off"
                    placeholder="{{ field.placeholder }}"
                    name="{{ field.query_var_name }}"
@@ -368,8 +425,7 @@
                    onkeyup="amt.add_field_on_enter('{{ prefix }}{{ field.name }}-options-list')"
                    hx-get="{{ field.search_url }}"
                    hx-target="#{{ prefix }}{{ field.name }}-options-list"
-                   hx-trigger="input changed delay:250ms"
-                   hx-include="this"
+                   hx-trigger="focus, input changed delay:250ms"
                    hx-swap="innerHTML"
                    value="" />
             <ul id="{{ prefix }}{{ field.name }}-options-list"
@@ -378,11 +434,18 @@
                 style="display: none">
             </ul>
         </div>
-        <ul id="{{ prefix }}{{ field.name }}-results-list">
-            {% if field.default_value %}
-                {{ render_form_field_list_result("user_ids", field.default_value.value, field.default_value.display_value) }}
-            {% endif %}
-        </ul>
+        <table class="margin-top-middle">
+            <thead>
+                <tr class="rvo-table-row">
+                    <th scope="col" class="rvo-table-header">{% trans %}Name{% endtrans %}</th>
+                    <th scope="col" class="rvo-table-header">{% trans %}Role{% endtrans %}</th>
+                    <th scope="col" class="rvo-table-header">{% trans %}Options{% endtrans %}</th>
+                </tr>
+            </thead>
+            <tbody id="{{ prefix }}{{ field.name }}-results-list">
+                {% if field.default_value %}{{ render_form_field_list_result(field.default_value) }}{% endif %}
+            </tbody>
+        </table>
     </div>
 {% endmacro %}
 {% macro form_field_submit(form, field) %}

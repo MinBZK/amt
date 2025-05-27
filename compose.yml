@@ -33,6 +33,10 @@ services:
       - PGDATA=/var/lib/postgresql/data/pgdata
     healthcheck:
       test: ["CMD", "pg_isready", "-q", "-d", "amt", "-U", "amt"]
+      interval: 2s
+      timeout: 1s
+      retries: 10
+      start_period: 2s
     ports:
       - 5432:5432
 

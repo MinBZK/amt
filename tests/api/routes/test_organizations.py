@@ -1,14 +1,16 @@
+from uuid import UUID
+
 import pytest
-from amt.models import Organization
-from amt.schema.organization import OrganizationNew
+from amt.models import Authorization
 from httpx import AsyncClient
 from pytest_mock import MockFixture
 
 from tests.constants import (
     default_algorithm,
     default_auth_user,
+    default_authorization,
+    default_organization,
     default_user,
-    default_user_without_default_organization,
 )
 from tests.database_test_utils import DatabaseTestUtils
 
@@ -60,6 +62,7 @@ async def test_organizations_get_search(client: AsyncClient) -> None:
 async def test_get_new_organizations(client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
     # given
     await db.given([default_user()])
+    await db.init_authorizations_and_roles()
 
     mocker.patch("amt.api.routes.organizations.get_user", return_value=default_auth_user())
 
@@ -74,7 +77,7 @@ async def test_get_new_organizations(client: AsyncClient, mocker: MockFixture, d
 @pytest.mark.asyncio
 async def test_post_new_organizations_bad_request(client: AsyncClient, mocker: MockFixture) -> None:
     # given
-    mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+    mocker.patch("amt.middleware.csrf.CookieOnlyCsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
     mocker.patch("amt.api.routes.organizations.get_user", return_value=default_auth_user())
 
     # when
@@ -89,29 +92,33 @@ async def test_post_new_organizations_bad_request(client: AsyncClient, mocker: M
 
 @pytest.mark.asyncio
 async def test_post_new_organizations(client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
-    await db.given([default_user()])
+    await db.given([default_user(), default_organization()])
+    await db.init_authorizations_and_roles()
 
     client.cookies["fastapi-csrf-token"] = "1"
-    new_organization = OrganizationNew(name="test-name", slug="test-slug", user_ids=[default_auth_user()["sub"]])
+    new_organization = {
+        "name": "test-name",
+        "slug": "test-slug",
+        "authorization": [{"user_id": default_auth_user()["sub"], "role_id": 1, "type": "Organization"}],
+    }
     # given
-    mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+    mocker.patch("amt.middleware.csrf.CookieOnlyCsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
     mocker.patch("amt.api.routes.organizations.get_user", return_value=default_auth_user())
 
     # when
-    response = await client.post(
-        "/organizations/new", json=new_organization.model_dump(), headers={"X-CSRF-Token": "1"}
-    )
+    response = await client.post("/organizations/new", json=new_organization, headers={"X-CSRF-Token": "1"})
 
     # then
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert response.headers["HX-Redirect"] == "/organizations/test-slug"
+    assert response.headers["HX-Redirect"] == "/organizations/test-slug/members"
 
 
 @pytest.mark.asyncio
 async def test_edit_organization_inline(client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_user()])
+    await db.given([default_user(), default_organization()])
+    await db.init_authorizations_and_roles()
 
     client.cookies["fastapi-csrf-token"] = "1"
 
@@ -132,7 +139,8 @@ async def test_edit_organization_inline(client: AsyncClient, mocker: MockFixture
 @pytest.mark.asyncio
 async def test_edit_organization_inline_cancel(client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_user()])
+    await db.given([default_user(), default_organization()])
+    await db.init_authorizations_and_roles()
 
     client.cookies["fastapi-csrf-token"] = "1"
 
@@ -150,7 +158,8 @@ async def test_edit_organization_inline_cancel(client: AsyncClient, mocker: Mock
 @pytest.mark.asyncio
 async def test_organization_slug(client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_user()])
+    await db.given([default_user(), default_organization()])
+    await db.init_authorizations_and_roles()
 
     client.cookies["fastapi-csrf-token"] = "1"
 
@@ -167,11 +176,12 @@ async def test_organization_slug(client: AsyncClient, mocker: MockFixture, db: D
 @pytest.mark.asyncio
 async def test_update_organization_inline(client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_user()])
+    await db.given([default_user(), default_organization()])
+    await db.init_authorizations_and_roles()
     client.cookies["fastapi-csrf-token"] = "1"
 
     mocker.patch("amt.api.routes.organizations.get_user", return_value=default_auth_user())
-    mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+    mocker.patch("amt.middleware.csrf.CookieOnlyCsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
 
     client.cookies["fastapi-csrf-token"] = "1"
     response = await client.put(
@@ -186,11 +196,12 @@ async def test_update_organization_inline(client: AsyncClient, mocker: MockFixtu
 @pytest.mark.asyncio
 async def test_get_users(client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_user()])
+    await db.given([default_user(), default_organization()])
+    await db.init_authorizations_and_roles()
     client.cookies["fastapi-csrf-token"] = "1"
 
     mocker.patch("amt.api.routes.organizations.get_user", return_value=default_auth_user())
-    mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+    mocker.patch("amt.middleware.csrf.CookieOnlyCsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
 
     # when
     response = await client.get("/organizations/users?query=Default")
@@ -217,11 +228,12 @@ async def test_get_users(client: AsyncClient, mocker: MockFixture, db: DatabaseT
 @pytest.mark.asyncio
 async def test_get_members(client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_user()])
+    await db.given([default_user(), default_organization()])
+    await db.init_authorizations_and_roles()
     client.cookies["fastapi-csrf-token"] = "1"
 
     mocker.patch("amt.api.routes.organizations.get_user", return_value=default_auth_user())
-    mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+    mocker.patch("amt.middleware.csrf.CookieOnlyCsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
 
     # when
     response = await client.get("/organizations/default-organization/members")
@@ -241,12 +253,17 @@ async def test_get_members(client: AsyncClient, mocker: MockFixture, db: Databas
 @pytest.mark.asyncio
 async def test_delete_member(client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_user()])
+    await db.given([default_user(), default_organization()])
+    await db.init_authorizations_and_roles()
+    # add 2nd maintainer member
+    user_id = "4738b1e151dc46219556a5662b26517c"
+    await db.given([default_user(id=user_id, name="Test User")])
+    await db.given([default_authorization(user_id=user_id)])
 
     client.cookies["fastapi-csrf-token"] = "1"
 
     mocker.patch("amt.api.routes.organizations.get_user", return_value=default_auth_user())
-    mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+    mocker.patch("amt.middleware.csrf.CookieOnlyCsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
     # when
     response = await client.delete(
         f"/organizations/default-organization/members/{default_user().id!s}", headers={"X-CSRF-Token": "1"}
@@ -264,25 +281,31 @@ async def test_add_member(client: AsyncClient, mocker: MockFixture, db: Database
     await db.given(
         [
             default_user(),
-            default_user_without_default_organization(
-                id="910edc25-135c-4a86-9cfb-58935c47db90", name="Another user", organizations=None
-            ),
+            default_organization(),
         ]
     )
+    await db.init_authorizations_and_roles()
+    user_id = "4738b1e151dc46219556a5662b26517c"
+    await db.given([default_user(id=user_id, name="Test User")])
 
     client.cookies["fastapi-csrf-token"] = "1"
 
     mocker.patch("amt.api.routes.organizations.get_user", return_value=default_auth_user())
-    mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+    mocker.patch("amt.middleware.csrf.CookieOnlyCsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
 
     client.cookies["fastapi-csrf-token"] = "1"
     response = await client.put(
         "/organizations/default-organization/members",
-        json={"user_ids": ["910edc25-135c-4a86-9cfb-58935c47db90"]},
+        json={
+            "authorization": [
+                {"user_id": user_id, "role_id": 1, "type": "Organization", "type_id": default_organization().id}
+            ]
+        },
         headers={"X-CSRF-Token": "1"},
     )
-    updated_organization: Organization = (await db.get(Organization, "id", 1))[0]
-    assert len(updated_organization.users) == 2  # pyright: ignore[reportUnknownMemberType, reportUnknownArgumentType]
+    authorization: Authorization = (await db.get(Authorization, "user_id", UUID(user_id)))[0]  # pyright: ignore[reportArgumentType]
+    assert authorization
+    assert authorization.type == "Organization"
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
     assert response.headers["HX-Redirect"] == "/organizations/default-organization/members"
@@ -294,14 +317,16 @@ async def test_get_algorithms(client: AsyncClient, mocker: MockFixture, db: Data
     await db.given(
         [
             default_user(),
+            default_organization(),
             default_algorithm(name="Algorithm1"),
             default_algorithm(name="Algorithm2", organization_id=1),
         ]
     )
+    await db.init_authorizations_and_roles()
     client.cookies["fastapi-csrf-token"] = "1"
 
     mocker.patch("amt.api.routes.organizations.get_user", return_value=default_auth_user())
-    mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+    mocker.patch("amt.middleware.csrf.CookieOnlyCsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
 
     # when
     response = await client.get("/organizations/default-organization/algorithms")

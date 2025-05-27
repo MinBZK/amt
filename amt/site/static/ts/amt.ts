@@ -80,7 +80,7 @@ function initPage() {
   });
 
   const columns = document.getElementsByClassName(
-    "progress-cards-container",
+    "sortable",
   ) as HTMLCollectionOf<HTMLDivElement>;
   for (const column of columns) {
     // prettier-ignore
@@ -368,7 +368,10 @@ export function show_form_search_options(id: string) {
 
 export function hide_form_search_options(id: string) {
   window.setTimeout(function () {
-    document.getElementById(id)!.style.display = "none";
+    const element = document.getElementById(id);
+    if (element) {
+      element.style.display = "none";
+    }
   }, 250);
 }
 
@@ -629,6 +632,15 @@ export function updateFormStateAndSubmit(formId: string, nextState: string) {
   }
 }
 
+interface HtmxBeforeSwapEvent extends Event {
+  detail: {
+    requestConfig: {
+      elt: HTMLElement;
+    };
+    serverResponse: string;
+  };
+}
+
 window.addEventListener("message", (event) => {
   //NOSONAR
   if (event.data.event === "beslishulp-done") {
@@ -647,5 +659,69 @@ window.addEventListener("message", (event) => {
 window.addEventListener("openModal", () => {
   openModal("modal");
 });
+
+/**
+ * This function is called when the htmx:beforeSwap event is triggered, checks if pre-processing is required and
+ * what action to take.
+ */
+// @ts-expect-error : ignore the event type overload error
+window.addEventListener(
+  "htmx:beforeSwap",
+  function (event: HtmxBeforeSwapEvent) {
+    const sourceElement = event.detail.requestConfig.elt;
+    if (sourceElement.hasAttribute("data-preprocess")) {
+      const instruction = sourceElement.getAttribute("data-preprocess")!;
+      const instructionParts = instruction.split(":");
+      if (
+        instructionParts.length === 2 &&
+        instructionParts[0] === "exclude-if-exists-in"
+      ) {
+        const excludeValues: string[] = [];
+        const targetIds = instructionParts[1].split(",");
+        document
+          .querySelectorAll(
+            targetIds.map((id: string) => `${id} > *`).join(","),
+          )
+          .forEach((element) => {
+            if (element.hasAttribute("data-value")) {
+              excludeValues.push(element.getAttribute("data-value")!);
+            }
+          });
+        const doc = new DOMParser().parseFromString(
+          `<div>${event.detail.serverResponse}</div>`,
+          "text/html",
+        );
+        let resultCount = 0;
+        let totalCount = 0;
+        doc.querySelectorAll("div > [data-value]").forEach((element) => {
+          totalCount++;
+          if (
+            excludeValues.includes(element.getAttribute("data-value") as string)
+          ) {
+            element.remove();
+          } else {
+            resultCount++;
+          }
+        });
+        const container = doc.body.querySelector("div");
+        const sourceType = sourceElement.getAttribute("data-type");
+        if (
+          ((sourceType == "organization" &&
+            totalCount > 0 &&
+            resultCount == 0) ||
+            (sourceType == "algorithm" && resultCount === 0)) &&
+          container
+        ) {
+          container
+            .querySelector("#no-persons-found-message")!
+            .classList.remove("display-none");
+        }
+        event.detail.serverResponse = container
+          ? container.innerHTML
+          : event.detail.serverResponse;
+      }
+    }
+  },
+);
 
 // for debugging htmx use -> htmx.logAll();

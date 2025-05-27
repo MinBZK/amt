@@ -7,7 +7,8 @@ from fastapi.responses import HTMLResponse
 
 from amt.api.ai_act_profile import get_ai_act_profile_selector
 from amt.api.decorators import permission
-from amt.api.deps import templates
+from amt.api.deps import get_request_permissions, templates
+from amt.api.editable_route_utils import get_user_id_or_error
 from amt.api.forms.algorithm import get_algorithm_form
 from amt.api.group_by_category import get_localized_group_by_categories
 from amt.api.lifecycles import Lifecycles, get_localized_lifecycle, get_localized_lifecycles
@@ -23,6 +24,7 @@ from amt.schema.algorithm import AlgorithmNew
 from amt.schema.webform import WebForm
 from amt.services.algorithms import AlgorithmsService, get_template_files
 from amt.services.organizations import OrganizationsService
+from amt.services.services_provider import ServicesProvider, get_service_provider
 from amt.services.users import UsersService
 
 router = APIRouter()
@@ -33,22 +35,17 @@ logger = logging.getLogger(__name__)
 @permission({AuthorizationResource.ALGORITHMS: [AuthorizationVerb.LIST]})
 async def get_root(
     request: Request,
-    algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
-    organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
-    users_service: Annotated[UsersService, Depends(UsersService)],
+    services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
     skip: int = Query(0, ge=0),
     limit: int = Query(5000, ge=1),  # todo: fix infinite scroll
     search: str = Query(""),
     display_type: str = Query(""),
 ) -> HTMLResponse:
+    algorithms_service = await services_provider.get(AlgorithmsService)
+    users_service = await services_provider.get(UsersService)
     filters, drop_filters, localized_filters, sort_by = await get_filters_and_sort_by(request, users_service)
 
-    session_user = get_user(request)
-    user_id: str | None = session_user["sub"] if session_user else None  # pyright: ignore[reportUnknownVariableType]
-
-    filters["organization-id"] = [
-        organization.id for organization in await organizations_service.get_organizations_for_user(user_id)
-    ]
+    filters["user_id"] = get_user_id_or_error(request)
 
     algorithms, amount_algorithm_systems = await get_algorithms(
         algorithms_service, display_type, filters, limit, request, search, skip, sort_by
@@ -63,6 +60,7 @@ async def get_root(
         "sub_menu_items": {},  # sub_menu_items disabled for now
         "algorithms": algorithms,
         "amount_algorithm_systems": amount_algorithm_systems,
+        "permission_path": AuthorizationResource.ALGORITHMS,
         "next": next,
         "limit": limit,
         "start": skip,
@@ -87,7 +85,7 @@ async def get_root(
 async def get_algorithms(
     algorithms_service: AlgorithmsService,
     display_type: str,
-    filters: dict[str, str | list[str | int]],
+    filters: dict[str, Any],
     limit: int,
     request: Request,
     search: str,
@@ -131,9 +129,10 @@ async def get_algorithms(
 @permission({AuthorizationResource.ALGORITHMS: [AuthorizationVerb.CREATE]})
 async def get_new(
     request: Request,
-    organizations_service: Annotated[OrganizationsService, Depends(OrganizationsService)],
+    services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
     organization_id: int = Query(None),
 ) -> HTMLResponse:
+    organizations_service = await services_provider.get(OrganizationsService)
     sub_menu_items = resolve_navigation_items([Navigation.ALGORITHMS_OVERVIEW], request)  # pyright: ignore [reportUnusedVariable] # noqa
     breadcrumbs = resolve_base_navigation_items([Navigation.ALGORITHMS_ROOT, Navigation.ALGORITHM_NEW], request)
 
@@ -143,12 +142,15 @@ async def get_new(
 
     user = get_user(request)
 
+    request_permissions: dict[str, list[AuthorizationVerb]] = get_request_permissions(request)
+
     algorithm_form: WebForm = await get_algorithm_form(
         id="algorithm",
         translations=get_current_translation(request),
         organizations_service=organizations_service,
         user_id=user["sub"] if user else None,
         organization_id=organization_id,
+        permissions=request_permissions,
     )
 
     template_files = get_template_files()
@@ -172,8 +174,9 @@ async def get_new(
 async def post_new(
     request: Request,
     algorithm_new: AlgorithmNew,
-    algorithms_service: Annotated[AlgorithmsService, Depends(AlgorithmsService)],
+    services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
 ) -> HTMLResponse:
+    algorithms_service = await services_provider.get(AlgorithmsService)
     user: dict[str, Any] | None = get_user(request)
     # TODO (Robbert): we need to handle (show) repository or service errors in the forms
     algorithm = await algorithms_service.create(algorithm_new, user["sub"])  # pyright: ignore[reportOptionalSubscript, reportUnknownArgumentType]

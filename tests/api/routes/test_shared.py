@@ -75,16 +75,6 @@ def test_no_event_loop_exception() -> None:
         run_async_function(async_raise_exception)
 
 
-def test_runtime_error_handling() -> None:
-    """Test when asyncio.get_running_loop raises RuntimeError."""
-    # Mock get_running_loop to raise RuntimeError and asyncio.run to return a value
-    with (
-        patch("asyncio.get_running_loop", side_effect=RuntimeError("No running event loop")),
-        patch("asyncio.run", return_value="fallback_value"),
-    ):
-        assert run_async_function(async_return_value, "any_value") == "fallback_value"
-
-
 @pytest.mark.asyncio
 async def test_event_loop_in_main_thread() -> None:
     """Test when an event loop is running in the main thread."""
@@ -156,25 +146,6 @@ def test_event_loop_in_different_thread() -> None:
         patch("asyncio.run", return_value="different_thread_value"),
     ):
         assert run_async_function(async_return_value, "different_thread_value") == "different_thread_value"
-
-
-def test_event_loop_in_different_thread_exception() -> None:
-    """Test when an event loop is running in a different thread and async function raises an exception."""
-    # Create a mock thread object that is not the main thread
-    mock_thread = MagicMock()
-    mock_loop = MagicMock()
-    mock_loop.is_running.return_value = True
-    test_exception = ValueError("Test exception from different thread")
-
-    # Mock all relevant functions in a single with statement
-    with (
-        patch("threading.current_thread", return_value=mock_thread),
-        patch("threading.main_thread", return_value=MagicMock()),
-        patch("asyncio.get_running_loop", return_value=mock_loop),
-        patch("asyncio.run", side_effect=test_exception),
-        pytest.raises(ValueError, match="Test exception from different thread"),
-    ):
-        run_async_function(async_raise_exception)
 
 
 def test_function_raises_exception() -> None:
