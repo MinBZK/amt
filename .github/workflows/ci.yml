@@ -45,7 +45,9 @@ jobs:
 
       - name: Install poetry
         if: steps.pipx-cache.outputs.cache-hit != 'true'
-        run: pipx install poetry
+        run: |
+          pip install pipx
+          pipx install poetry
 
       # Setup Python with poetry
       - name: Set up Python ${{ env.PYTHON_VERSION }}
@@ -64,7 +66,7 @@ jobs:
       # Only install if cache miss
       - name: Install poetry dependencies
         if: steps.poetry-cache.outputs.cache-hit != 'true'
-        run: poetry install
+        run: ~/.local/bin/poetry install
 
       # Setup Node.js from .nvmrc
       - uses: actions/setup-node@v4
@@ -139,7 +141,7 @@ jobs:
 
       # Run linting - no need to install dependencies again
       - name: Run pyright
-        run: poetry run pyright
+        run: ~/.local/bin/poetry run pyright
 
   security:
     needs: dependencies-cache
@@ -177,7 +179,7 @@ jobs:
 
       # Run security check - no need to install dependencies again
       - name: check licenses used by project in pyproject.toml
-        run: poetry run liccheck -s pyproject.toml
+        run: ~/.local/bin/poetry run liccheck -s pyproject.toml
 
       # Cache Trivy database to avoid repeated downloads
       - name: Cache Trivy DB
@@ -396,9 +398,17 @@ jobs:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ hashFiles('**/pyproject.toml') }}
 
+      # Cache playwright dependencies
+      - name: Cache playwright deps
+        uses: actions/cache@v4
+        id: playwright-deps-cache
+        with:
+          path: ~/.cache/ms-playwright-deps
+          key: ${{ runner.os }}-playwright-deps-${{ hashFiles('**/pyproject.toml') }}
+
       - name: Install Playwright browsers
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: poetry run playwright install --with-deps
+        run: ~/.local/bin/poetry run playwright install --with-deps
 
       - name: Start local task registry
         run: |
@@ -407,9 +417,9 @@ jobs:
 
       - name: test migrations for sqlite
         run: |
-          poetry run alembic upgrade head
-          poetry run alembic downgrade -1
-          poetry run alembic upgrade head
+          ~/.local/bin/poetry run alembic upgrade head
+          ~/.local/bin/poetry run alembic downgrade -1
+          ~/.local/bin/poetry run alembic upgrade head
 
       - name: Generate required files
         run: |
@@ -418,7 +428,7 @@ jobs:
       - name: Run pytest
         run: |
           export TASK_REGISTRY_URL=http://localhost:8000
-          TZ=UTC poetry run coverage run -m pytest
+          TZ=UTC ~/.local/bin/poetry run coverage run -m pytest
 
       - name: Upload playwright tracing
         if: failure()
@@ -434,10 +444,10 @@ jobs:
         run: docker stop task-registry && docker rm task-registry
 
       - name: run coverage report
-        run: poetry run coverage report
+        run: ~/.local/bin/poetry run coverage report
 
       - name: run coverage html
-        run: poetry run coverage html
+        run: ~/.local/bin/poetry run coverage html
 
       - name: Upload code coverage report
         if: matrix.python-version == '3.12'
@@ -449,7 +459,7 @@ jobs:
           overwrite: true
 
       - name: run coverage xml
-        run: poetry run coverage xml
+        run: ~/.local/bin/poetry run coverage xml
 
       - name: SonarCloud Scan
         if: matrix.python-version == '3.12' && github.actor != 'dependabot[bot]' && !env.ACT
