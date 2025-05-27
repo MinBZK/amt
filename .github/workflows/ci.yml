@@ -28,12 +28,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Create hash of dependency files for more precise caching
+      # Create hash of dependency files for more precise caching - fixed output format
       - name: Generate dependency cache keys
         id: cache-keys
+        shell: bash
         run: |
-          echo "poetry-key=$(md5sum poetry.lock pyproject.toml | awk '{print $1}')" >> "$GITHUB_OUTPUT"
-          echo "npm-key=$(md5sum package-lock.json package.json | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+          POETRY_KEY=$(md5sum poetry.lock pyproject.toml | awk '{print $1}')
+          NPM_KEY=$(md5sum package-lock.json package.json | awk '{print $1}')
+          echo "poetry-key=$POETRY_KEY" >> $GITHUB_OUTPUT
+          echo "npm-key=$NPM_KEY" >> $GITHUB_OUTPUT
 
       # Install pipx once and cache it
       - name: Cache pipx
@@ -102,12 +105,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Get the dependency cache keys
+      # Get the dependency cache keys - fixed output format
       - name: Generate dependency cache keys
         id: cache-keys
+        shell: bash
         run: |
-          echo "poetry-key=$(md5sum poetry.lock pyproject.toml | awk '{print $1}')" >> "$GITHUB_OUTPUT"
-          echo "npm-key=$(md5sum package-lock.json package.json | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+          POETRY_KEY=$(md5sum poetry.lock pyproject.toml | awk '{print $1}')
+          NPM_KEY=$(md5sum package-lock.json package.json | awk '{print $1}')
+          echo "poetry-key=$POETRY_KEY" >> $GITHUB_OUTPUT
+          echo "npm-key=$NPM_KEY" >> $GITHUB_OUTPUT
 
       # Download cache marker
       - name: Download dependency status
@@ -157,11 +163,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Get the dependency cache keys
+      # Get the dependency cache keys - fixed output format
       - name: Generate dependency cache keys
         id: cache-keys
+        shell: bash
         run: |
-          echo "poetry-key=$(md5sum poetry.lock pyproject.toml | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+          POETRY_KEY=$(md5sum poetry.lock pyproject.toml | awk '{print $1}')
+          echo "poetry-key=$POETRY_KEY" >> $GITHUB_OUTPUT
 
       # Download cache marker
       - name: Download dependency status
@@ -231,11 +239,13 @@ jobs:
             image=moby/buildkit:latest
             network=host
 
-      # Create hash of Dockerfile and related files for cache key
+      # Create hash of Dockerfile and related files for cache key - fixed output format
       - name: Generate Docker cache key
         id: docker-key
+        shell: bash
         run: |
-          echo "docker-key=$(md5sum Dockerfile poetry.lock pyproject.toml package-lock.json package.json | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+          DOCKER_KEY=$(md5sum Dockerfile poetry.lock pyproject.toml package-lock.json package.json | awk '{print $1}')
+          echo "docker-key=$DOCKER_KEY" >> $GITHUB_OUTPUT
 
       # Cache Docker layers between runs
       - name: Cache Docker layers
@@ -314,11 +324,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Get the dependency cache keys
+      # Get the dependency cache keys - fixed output format
       - name: Generate dependency cache keys
         id: cache-keys
+        shell: bash
         run: |
-          echo "npm-key=$(md5sum package-lock.json package.json | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+          NPM_KEY=$(md5sum package-lock.json package.json | awk '{print $1}')
+          echo "npm-key=$NPM_KEY" >> $GITHUB_OUTPUT
 
       # Download cache marker
       - name: Download dependency status
@@ -356,12 +368,15 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Get the dependency cache keys
+      # Get the dependency cache keys - fixed output format
       - name: Generate dependency cache keys
         id: cache-keys
+        shell: bash
         run: |
-          echo "poetry-key=$(md5sum poetry.lock pyproject.toml | awk '{print $1}')" >> "$GITHUB_OUTPUT"
-          echo "npm-key=$(md5sum package-lock.json package.json | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+          POETRY_KEY=$(md5sum poetry.lock pyproject.toml | awk '{print $1}')
+          NPM_KEY=$(md5sum package-lock.json package.json | awk '{print $1}')
+          echo "poetry-key=$POETRY_KEY" >> $GITHUB_OUTPUT
+          echo "npm-key=$NPM_KEY" >> $GITHUB_OUTPUT
 
       # Download cache marker
       - name: Download dependency status
@@ -494,8 +509,10 @@ jobs:
 
       - name: get commit hash
         id: get_commit_hash
+        shell: bash
         run: |
-          echo "commit_hash=$(git describe --tags)" >> "$GITHUB_OUTPUT"
+          COMMIT_HASH=$(git describe --tags)
+          echo "commit_hash=$COMMIT_HASH" >> $GITHUB_OUTPUT
 
       - name: Make changes to project to inject commit hash
         run: |
@@ -511,11 +528,13 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
-      # Create hash of Dockerfile and related files for cache key
+      # Create hash of Dockerfile and related files for cache key - fixed output format
       - name: Generate Docker cache key
         id: docker-key
+        shell: bash
         run: |
-          echo "docker-key=$(md5sum Dockerfile poetry.lock pyproject.toml package-lock.json package.json | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+          DOCKER_KEY=$(md5sum Dockerfile poetry.lock pyproject.toml package-lock.json package.json | awk '{print $1}')
+          echo "docker-key=$DOCKER_KEY" >> $GITHUB_OUTPUT
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
