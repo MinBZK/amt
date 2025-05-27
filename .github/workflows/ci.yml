@@ -437,12 +437,26 @@ jobs:
       - name: run coverage xml
         run: poetry run coverage xml
 
+      # Cache SonarCloud packages for faster scanning
+      - name: Cache SonarCloud packages
+        if: matrix.python-version == '3.12' && github.actor != 'dependabot[bot]' && !env.ACT
+        uses: actions/cache@v4
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
       - name: SonarCloud Scan
         if: matrix.python-version == '3.12' && github.actor != 'dependabot[bot]' && !env.ACT
-        uses: SonarSource/sonarcloud-github-action@master
+        uses: SonarSource/sonarqube-scan-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL || 'https://sonarcloud.io' }}
+        with:
+          args: >
+            -Dsonar.projectBaseDir=.
+            -Dsonar.scm.provider=git
 
   build:
     needs: [test-local-frontend, test-local-backend, test-compose]

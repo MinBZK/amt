@@ -3,6 +3,8 @@ ARG NVM_VERSION=0.40.0
 
 FROM --platform=$BUILDPLATFORM python:${PYTHON_VERSION} AS project-base
 ARG NVM_VERSION
+# Set NVM_VERSION again to make sure it's properly passed to this stage
+ENV NVM_VERSION=${NVM_VERSION}
 
 LABEL maintainer=ai-validatie@minbzk.nl \
     organization=MinBZK \
@@ -18,15 +20,13 @@ ENV PYTHONUNBUFFERED=1 \
     PIP_DEFAULT_TIMEOUT=100 \
     POETRY_VIRTUALENVS_IN_PROJECT=true \
     POETRY_NO_INTERACTION=1 \
-    POETRY_HOME='/usr/local' \
-    NVM_DIR=/usr/local/nvm
+    POETRY_HOME='/usr/local'
 
 # Install dependencies in a single layer to reduce image size
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl libpq-dev \
     && rm -rf /var/lib/apt/lists/* \
-    && curl -sSL https://install.python-poetry.org | python3 - \
-    && mkdir -p $NVM_DIR
+    && curl -sSL https://install.python-poetry.org | python3 -
 
 # Copy dependency files first for better caching
 WORKDIR /app/
@@ -41,17 +41,23 @@ COPY ./webpack.config.js ./webpack.config.prod.js ./
 COPY ./tsconfig.json ./eslint.config.mjs ./
 COPY ./jest.config.ts ./
 
-# Install Node.js with NVM
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION}/install.sh | bash \
-    && . "$NVM_DIR/nvm.sh" \
-    && nvm install \
-    && nvm use
+# Install Node.js directly instead of using NVM
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates gnupg && \
+    mkdir -p /etc/apt/keyrings && \
+    curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
+    echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" > /etc/apt/sources.list.d/nodesource.list && \
+    apt-get update && \
+    apt-get install -y nodejs && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    node --version && \
+    npm --version
 
 # Install Node.js dependencies
-RUN . "$NVM_DIR/nvm.sh" && npm ci
+RUN npm ci
 
-# Set Node.js path
-ENV PATH="$NVM_DIR/versions/node/v20.16.0/bin:$PATH"
+# Set Python path
 ENV PATH="/app/.venv/bin:$PATH"
 
 # Development stage with test dependencies
