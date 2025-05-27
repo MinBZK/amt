@@ -35,8 +35,8 @@ jobs:
         run: |
           POETRY_KEY=$(md5sum poetry.lock pyproject.toml | awk '{print $1}')
           NPM_KEY=$(md5sum package-lock.json package.json | awk '{print $1}')
-          echo "poetry-key=$POETRY_KEY" >> $GITHUB_OUTPUT
-          echo "npm-key=$NPM_KEY" >> $GITHUB_OUTPUT
+          echo "poetry-key=${POETRY_KEY}" >> $GITHUB_OUTPUT
+          echo "npm-key=${NPM_KEY}" >> $GITHUB_OUTPUT
 
       # Install pipx once and cache it
       - name: Cache pipx
@@ -112,8 +112,8 @@ jobs:
         run: |
           POETRY_KEY=$(md5sum poetry.lock pyproject.toml | awk '{print $1}')
           NPM_KEY=$(md5sum package-lock.json package.json | awk '{print $1}')
-          echo "poetry-key=$POETRY_KEY" >> $GITHUB_OUTPUT
-          echo "npm-key=$NPM_KEY" >> $GITHUB_OUTPUT
+          echo "poetry-key=${POETRY_KEY}" >> $GITHUB_OUTPUT
+          echo "npm-key=${NPM_KEY}" >> $GITHUB_OUTPUT
 
       # Download cache marker
       - name: Download dependency status
@@ -169,7 +169,7 @@ jobs:
         shell: bash
         run: |
           POETRY_KEY=$(md5sum poetry.lock pyproject.toml | awk '{print $1}')
-          echo "poetry-key=$POETRY_KEY" >> $GITHUB_OUTPUT
+          echo "poetry-key=${POETRY_KEY}" >> $GITHUB_OUTPUT
 
       # Download cache marker
       - name: Download dependency status
@@ -245,7 +245,7 @@ jobs:
         shell: bash
         run: |
           DOCKER_KEY=$(md5sum Dockerfile poetry.lock pyproject.toml package-lock.json package.json | awk '{print $1}')
-          echo "docker-key=$DOCKER_KEY" >> $GITHUB_OUTPUT
+          echo "docker-key=${DOCKER_KEY}" >> $GITHUB_OUTPUT
 
       # Cache Docker layers between runs
       - name: Cache Docker layers
@@ -330,7 +330,7 @@ jobs:
         shell: bash
         run: |
           NPM_KEY=$(md5sum package-lock.json package.json | awk '{print $1}')
-          echo "npm-key=$NPM_KEY" >> $GITHUB_OUTPUT
+          echo "npm-key=${NPM_KEY}" >> $GITHUB_OUTPUT
 
       # Download cache marker
       - name: Download dependency status
@@ -375,8 +375,8 @@ jobs:
         run: |
           POETRY_KEY=$(md5sum poetry.lock pyproject.toml | awk '{print $1}')
           NPM_KEY=$(md5sum package-lock.json package.json | awk '{print $1}')
-          echo "poetry-key=$POETRY_KEY" >> $GITHUB_OUTPUT
-          echo "npm-key=$NPM_KEY" >> $GITHUB_OUTPUT
+          echo "poetry-key=${POETRY_KEY}" >> $GITHUB_OUTPUT
+          echo "npm-key=${NPM_KEY}" >> $GITHUB_OUTPUT
 
       # Download cache marker
       - name: Download dependency status
@@ -512,7 +512,7 @@ jobs:
         shell: bash
         run: |
           COMMIT_HASH=$(git describe --tags)
-          echo "commit_hash=$COMMIT_HASH" >> $GITHUB_OUTPUT
+          echo "commit_hash=${COMMIT_HASH}" >> $GITHUB_OUTPUT
 
       - name: Make changes to project to inject commit hash
         run: |
@@ -534,7 +534,7 @@ jobs:
         shell: bash
         run: |
           DOCKER_KEY=$(md5sum Dockerfile poetry.lock pyproject.toml package-lock.json package.json | awk '{print $1}')
-          echo "docker-key=$DOCKER_KEY" >> $GITHUB_OUTPUT
+          echo "docker-key=${DOCKER_KEY}" >> $GITHUB_OUTPUT
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
