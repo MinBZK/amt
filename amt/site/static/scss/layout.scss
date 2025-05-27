@@ -236,7 +236,7 @@ main {
         right: 0;
 
         /* Change to appropriate color from NLDS. */
-        background-color: rgba(0 0 0 / 50%);
+        background-color: rgb(0 0 0 / 50%);
         z-index: 1000;
 
         /* Flexbox centers the .modal-content vertically and horizontally */
@@ -301,7 +301,7 @@ main {
         border-radius: 1em;
 
         /* Change to appropriate color from NLDS. */
-        box-shadow: 0 0 1em 0 rgba(0 0 0 / 30%);
+        box-shadow: 0 0 1em 0 rgb(0 0 0 / 30%);
         background-color: #fff;
         padding: 1em;
 

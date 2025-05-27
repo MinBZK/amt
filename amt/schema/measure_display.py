@@ -10,4 +10,4 @@ class DisplayMeasureTask(ExtendedMeasureTask):
     not be stored!
     """
 
-    users: list[User] = Field(default_factory=list)
+    users: list[User] = Field(default_factory=list[User])

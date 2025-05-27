@@ -10,14 +10,14 @@ class AlgorithmBase(BaseModel):
 
 
 class AlgorithmNew(AlgorithmBase):
-    instruments: list[str] | str = field(default_factory=list)
+    instruments: list[str] | str = field(default_factory=list[str])
     type: str | None = Field(default=None)
     open_source: str | None = Field(default=None)
     risk_group: str | None = Field(default=None)
     conformity_assessment_body: str | None = Field(default=None)
     systemic_risk: str | None = Field(default=None)
     transparency_obligations: str | None = Field(default=None)
-    role: list[str] | str = field(default_factory=list)
+    role: list[str] | str = field(default_factory=list[str])
     template_id: str | None = Field(default=None)
     organization_id: int = Field()
 
