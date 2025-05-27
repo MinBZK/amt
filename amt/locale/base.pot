@@ -578,7 +578,7 @@ msgstr ""
 
 #: amt/site/templates/auth/profile.html.j2:49
 #: amt/site/templates/parts/header.html.j2:75
-#: amt/site/templates/parts/header.html.j2:134
+#: amt/site/templates/parts/header.html.j2:138
 msgid "Language"
 msgstr ""
 
@@ -597,7 +597,7 @@ msgstr ""
 #: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:11
 #: amt/site/templates/pages/landingpage.html.j2:16
 #: amt/site/templates/parts/header.html.j2:86
-#: amt/site/templates/parts/header.html.j2:145
+#: amt/site/templates/parts/header.html.j2:152
 msgid "Login"
 msgstr ""
 
@@ -798,7 +798,8 @@ msgid "AMT Placeholder information pages"
 msgstr ""
 
 #: amt/site/templates/pages/landingpage.html.j2:11
-msgid "Get a grip on algorithms with the Algorithm Management Toolkit"
+#: amt/site/templates/parts/header.html.j2:18
+msgid "Algorithm Management Toolkit"
 msgstr ""
 
 #: amt/site/templates/pages/landingpage.html.j2:13
@@ -806,7 +807,7 @@ msgid "Built for government, by government."
 msgstr ""
 
 #: amt/site/templates/pages/landingpage.html.j2:27
-msgid "Why work with the Algorithm Management Toolkit?"
+msgid "Get a grip on algorithms with the Algorithm Management Toolkit"
 msgstr ""
 
 #: amt/site/templates/pages/landingpage.html.j2:37
@@ -956,10 +957,6 @@ msgstr ""
 msgid ""
 "  |  This website is under development  |  All versions are created in an"
 " open manner."
-msgstr ""
-
-#: amt/site/templates/parts/header.html.j2:18
-msgid "Algorithm Management Toolkit"
 msgstr ""
 
 #: amt/site/templates/parts/tasks_board.html.j2:5
