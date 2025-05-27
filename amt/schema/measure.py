@@ -18,9 +18,9 @@ class MeasureTask(MeasureBase):
     links: list[str] = Field(default_factory=list)
     files: list[str] = Field(default_factory=list)
     version: str
-    accountable_persons: list[Person] | None = Field(default_factory=list)
-    reviewer_persons: list[Person] | None = Field(default_factory=list)
-    responsible_persons: list[Person] | None = Field(default_factory=list)
+    accountable_persons: list[Person] | None = Field(default_factory=list[Person])
+    reviewer_persons: list[Person] | None = Field(default_factory=list[Person])
+    responsible_persons: list[Person] | None = Field(default_factory=list[Person])
     lifecycle: list[str] = Field(default_factory=list)
 
     def update(

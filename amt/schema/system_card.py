@@ -116,17 +116,17 @@ class SystemCard(BaseModel):
     version: str | None = Field(description="The version of the schema used", default="0.0.0")
     provenance: Provenance | None = None
     name: str | None = Field(None, description="Name used to describe the system")
-    instruments: list[InstrumentBase] = Field(default_factory=list)
+    instruments: list[InstrumentBase] = Field(default_factory=list[InstrumentBase])
     upl: str | None = Field(
         None,
         description="If this algorithm is part of a product offered by the Dutch Government,"
         "it should contain a URI from the Uniform Product List",
     )
-    owners: list[Owner] = Field(default_factory=list)
+    owners: list[Owner] = Field(default_factory=list[Owner])
     description: str | None = Field(None, description="A short description of the system")
     ai_act_profile: AiActProfile | None = None
     labels: list[Label] | None = Field(
-        default_factory=list, description="Labels to store meta information about the system"
+        default_factory=list[Label], description="Labels to store meta information about the system"
     )
     status: str | None = Field(None, description="Status of the system")
     begin_date: date | None = Field(

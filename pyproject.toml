@@ -153,6 +153,7 @@ authorized_licenses = [
     "Apache Software",
     "Artistic",
     "BSD",
+    "BSD-3-Clause",
     "GNU General Public License v2 or later (GPLv2+)",
     "GNU General Public License v3 or later (GPLv3+)",
     "GNU General Public License (GPL)",
