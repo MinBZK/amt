@@ -66,7 +66,7 @@ jobs:
       # Only install if cache miss
       - name: Install poetry dependencies
         if: steps.poetry-cache.outputs.cache-hit != 'true'
-        run: ~/.local/bin/poetry install
+        run: pip install poetry && poetry install
 
       # Setup Node.js from .nvmrc
       - uses: actions/setup-node@v4
@@ -139,9 +139,13 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-node-${{ steps.cache-keys.outputs.npm-key }}
 
+      # Install poetry in this job
+      - name: Install poetry
+        run: pip install poetry
+
       # Run linting - no need to install dependencies again
       - name: Run pyright
-        run: ~/.local/bin/poetry run pyright
+        run: poetry run pyright
 
   security:
     needs: dependencies-cache
@@ -177,9 +181,13 @@ jobs:
           path: ~/.cache/pypoetry
           key: ${{ runner.os }}-poetry-${{ steps.cache-keys.outputs.poetry-key }}
 
+      # Install poetry in this job
+      - name: Install poetry
+        run: pip install poetry
+
       # Run security check - no need to install dependencies again
       - name: check licenses used by project in pyproject.toml
-        run: ~/.local/bin/poetry run liccheck -s pyproject.toml
+        run: poetry run liccheck -s pyproject.toml
 
       # Cache Trivy database to avoid repeated downloads
       - name: Cache Trivy DB
@@ -225,7 +233,7 @@ jobs:
         id: docker-key
         shell: bash
         run: |
-          DOCKER_KEY=$(md5sum Dockerfile poetry.lock pyproject.toml package-lock.json package.json | awk '{print $1}')
+          DOCKER_KEY=$(md5sum Dockerfile poetry.lock pyproject.toml package-lock.json package.json | awk '{print $1}' | sort | md5sum | awk '{print $1}')
           echo "docker-key=${DOCKER_KEY}" >> $GITHUB_OUTPUT
 
       # Cache Docker layers between runs
@@ -406,9 +414,13 @@ jobs:
           path: ~/.cache/ms-playwright-deps
           key: ${{ runner.os }}-playwright-deps-${{ hashFiles('**/pyproject.toml') }}
 
+      # Install poetry in this job
+      - name: Install poetry
+        run: pip install poetry
+
       - name: Install Playwright browsers
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: ~/.local/bin/poetry run playwright install --with-deps
+        run: poetry run playwright install --with-deps
 
       - name: Start local task registry
         run: |
@@ -417,9 +429,9 @@ jobs:
 
       - name: test migrations for sqlite
         run: |
-          ~/.local/bin/poetry run alembic upgrade head
-          ~/.local/bin/poetry run alembic downgrade -1
-          ~/.local/bin/poetry run alembic upgrade head
+          poetry run alembic upgrade head
+          poetry run alembic downgrade -1
+          poetry run alembic upgrade head
 
       - name: Generate required files
         run: |
@@ -428,7 +440,7 @@ jobs:
       - name: Run pytest
         run: |
           export TASK_REGISTRY_URL=http://localhost:8000
-          TZ=UTC ~/.local/bin/poetry run coverage run -m pytest
+          TZ=UTC poetry run coverage run -m pytest
 
       - name: Upload playwright tracing
         if: failure()
@@ -444,10 +456,10 @@ jobs:
         run: docker stop task-registry && docker rm task-registry
 
       - name: run coverage report
-        run: ~/.local/bin/poetry run coverage report
+        run: poetry run coverage report
 
       - name: run coverage html
-        run: ~/.local/bin/poetry run coverage html
+        run: poetry run coverage html
 
       - name: Upload code coverage report
         if: matrix.python-version == '3.12'
@@ -459,7 +471,7 @@ jobs:
           overwrite: true
 
       - name: run coverage xml
-        run: ~/.local/bin/poetry run coverage xml
+        run: poetry run coverage xml
 
       - name: SonarCloud Scan
         if: matrix.python-version == '3.12' && github.actor != 'dependabot[bot]' && !env.ACT
@@ -508,7 +520,7 @@ jobs:
         id: docker-key
         shell: bash
         run: |
-          DOCKER_KEY=$(md5sum Dockerfile poetry.lock pyproject.toml package-lock.json package.json | awk '{print $1}')
+          DOCKER_KEY=$(md5sum Dockerfile poetry.lock pyproject.toml package-lock.json package.json | awk '{print $1}' | sort | md5sum | awk '{print $1}')
           echo "docker-key=${DOCKER_KEY}" >> $GITHUB_OUTPUT
 
       - name: Set up Docker Buildx
