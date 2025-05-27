@@ -33,8 +33,8 @@ jobs:
         id: cache-keys
         shell: bash
         run: |
-          POETRY_KEY=$(md5sum poetry.lock pyproject.toml | awk '{print $1}')
-          NPM_KEY=$(md5sum package-lock.json package.json | awk '{print $1}')
+          POETRY_KEY=$(md5sum poetry.lock pyproject.toml | awk '{print $1}' | sort | md5sum | awk '{print $1}')
+          NPM_KEY=$(md5sum package-lock.json package.json | awk '{print $1}' | sort | md5sum | awk '{print $1}')
           echo "poetry-key=${POETRY_KEY}" >> $GITHUB_OUTPUT
           echo "npm-key=${NPM_KEY}" >> $GITHUB_OUTPUT
 
