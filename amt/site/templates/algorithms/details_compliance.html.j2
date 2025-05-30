@@ -50,17 +50,19 @@
                             <div class="rvo-layout-column">
                                 <h4 class="utrecht-heading-4 rvo-heading--no-margins">{{ loop.index }}. {{ measure.name }}</h4>
                                 <p class="rvo-text">{{ measure.value }}</p>
-                                <a class="rvo-link rvo-link--normal rvo-link--with-icon"
-                                   hx-trigger="click"
-                                   hx-target="#dynamic-modal-content"
-                                   hx-get="/algorithm/{{ algorithm_id }}/measure/{{ measure.urn }}?requirement_urn={{ requirement.urn }}"
-                                   hx-swap="innerHTML"
-                                   onclick="amt.openModal('modal')">
-                                    <span class="utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
-                                          role="img"
-                                          aria-label="Home"></span>
-                                    {% trans %}Edit{% endtrans %}
-                                </a>
+                                {% if permission(permission_path, 'Update', permissions) == True %}
+                                    <a class="rvo-link rvo-link--normal rvo-link--with-icon"
+                                       hx-trigger="click"
+                                       hx-target="#dynamic-modal-content"
+                                       hx-get="/algorithm/{{ algorithm_id }}/measure/{{ measure.urn }}?requirement_urn={{ requirement.urn }}"
+                                       hx-swap="innerHTML"
+                                       onclick="amt.openModal('modal')">
+                                        <span class="utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
+                                              role="img"
+                                              aria-label="Home"></span>
+                                        {% trans %}Edit{% endtrans %}
+                                    </a>
+                                {% endif %}
                                 <div class="margin-top-middle">{{ macros.user_avatars(measure_task_functions[measure.urn]) }}</div>
                             </div>
                         </div>

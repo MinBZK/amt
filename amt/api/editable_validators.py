@@ -1,21 +1,28 @@
-from abc import ABC, abstractmethod
-from typing import Any
+from typing import Any, cast
 
+from fastapi import Request
 from fastapi.exceptions import RequestValidationError
 from pydantic import Field, ValidationError
 
+from amt.api.editable_classes import EditableValidator, EditModes, ResolvedEditable
 from amt.schema.organization import OrganizationSlug
 from amt.schema.shared import BaseModel
+from amt.services.services_provider import ServicesProvider
 
 
-class EditableValidator(ABC):
-    """
-    Validators are used to validate (input) data for logical rules, like length and allowed characters.
-    """
-
-    @abstractmethod
-    async def validate(self, in_value: Any, editable: "ResolvedEditable") -> None:  # noqa: ANN401, F821 # pyright: ignore[reportUndefinedVariable, reportUnknownParameterType]
-        pass
+class EditableValidatorMustHaveItems(EditableValidator):
+    async def validate(
+        self,
+        request: Request,
+        editable: ResolvedEditable,
+        editable_context: dict[str, str | dict[str, str]],
+        edit_mode: EditModes,
+        services_provider: ServicesProvider,
+    ) -> None:
+        in_value = self.get_new_value(editable, editable_context)
+        if not isinstance(in_value, list) or len(cast(list[Any], in_value)) == 0:
+            errors = [{"loc": [editable.safe_html_path()], "type": "missing"}]
+            raise RequestValidationError(errors)
 
 
 class EditableValidatorMinMaxLength(EditableValidator):
@@ -25,7 +32,15 @@ class EditableValidatorMinMaxLength(EditableValidator):
 
         self.field_validator: type[FieldValidator] = FieldValidator
 
-    async def validate(self, in_value: str, editable: "ResolvedEditable") -> None:  # noqa: F821 # pyright: ignore[reportUndefinedVariable, reportUnknownParameterType]
+    async def validate(
+        self,
+        request: Request,
+        editable: ResolvedEditable,
+        editable_context: dict[str, str | dict[str, str]],
+        edit_mode: EditModes,
+        services_provider: ServicesProvider,
+    ) -> None:
+        in_value = self.get_new_value(editable, editable_context)
         try:
             self.field_validator(value=in_value)
         except ValidationError as e:
@@ -35,7 +50,15 @@ class EditableValidatorMinMaxLength(EditableValidator):
 
 
 class EditableValidatorSlug(EditableValidator):
-    async def validate(self, in_value: str, editable: "ResolvedEditable") -> None:  # noqa: F821 # pyright: ignore[reportUndefinedVariable, reportUnknownParameterType]
+    async def validate(
+        self,
+        request: Request,
+        editable: ResolvedEditable,
+        editable_context: dict[str, str | dict[str, str]],
+        edit_mode: EditModes,
+        services_provider: ServicesProvider,
+    ) -> None:
+        in_value = self.get_new_value(editable, editable_context)
         try:
             organization_slug: OrganizationSlug = OrganizationSlug(slug=in_value)
             OrganizationSlug.model_validate(organization_slug)
