@@ -16,7 +16,7 @@ from pytest_mock import MockFixture
 from starlette.datastructures import URL
 
 from tests.conftest import amt_vcr
-from tests.constants import default_algorithm, default_auth_user, default_instrument, default_user
+from tests.constants import default_algorithm, default_auth_user, default_instrument, default_organization, default_user
 from tests.database_test_utils import DatabaseTestUtils
 
 
@@ -79,7 +79,8 @@ async def test_algorithms_get_root_htmx_with_algorithms_mock(client: AsyncClient
 @pytest.mark.asyncio
 async def test_get_new_algorithms(client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
     # given
-    await db.given([default_user()])
+    await db.given([default_user(), default_organization()])
+    await db.init_authorizations_and_roles()
 
     mocker.patch(
         "amt.services.instruments.InstrumentsService.fetch_instruments",
@@ -97,7 +98,7 @@ async def test_get_new_algorithms(client: AsyncClient, mocker: MockFixture, db: 
 @pytest.mark.asyncio
 async def test_post_new_algorithms_bad_request(client: AsyncClient, mocker: MockFixture) -> None:
     # given
-    mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+    mocker.patch("amt.middleware.csrf.CookieOnlyCsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
     mocker.patch("amt.core.authorization.get_user", return_value=default_auth_user())
 
     # when
@@ -113,7 +114,8 @@ async def test_post_new_algorithms_bad_request(client: AsyncClient, mocker: Mock
 @amt_vcr.use_cassette("tests/fixtures/vcr_cassettes/test_post_new_algorithms.yml")  # type: ignore
 @pytest.mark.asyncio
 async def test_post_new_algorithms(client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils) -> None:
-    await db.given([default_user()])
+    await db.given([default_user(), default_organization()])
+    await db.init_authorizations_and_roles()
 
     client.cookies["fastapi-csrf-token"] = "1"
     new_algorithm = AlgorithmNew(
@@ -130,7 +132,7 @@ async def test_post_new_algorithms(client: AsyncClient, mocker: MockFixture, db:
         organization_id=1,
     )
     # given
-    mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+    mocker.patch("amt.middleware.csrf.CookieOnlyCsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
     mocker.patch(
         "amt.services.instruments.InstrumentsService.fetch_instruments",
         return_value=[default_instrument(urn="urn1", name="name1"), default_instrument(urn="urn2", name="name2")],
@@ -155,14 +157,15 @@ async def test_post_new_algorithms_write_system_card(
 ) -> None:
     # Given
     client.cookies["fastapi-csrf-token"] = "1"
-    mocker.patch("fastapi_csrf_protect.CsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+    mocker.patch("amt.middleware.csrf.CookieOnlyCsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
     mocker.patch(
         "amt.services.instruments.InstrumentsService.fetch_instruments",
         return_value=[default_instrument(urn="urn1", name="name1"), default_instrument(urn="urn2", name="name2")],
     )
     mocker.patch("amt.api.routes.algorithms.get_user", return_value=default_auth_user())
 
-    await db.given([default_user()])
+    await db.given([default_user(), default_organization()])
+    await db.init_authorizations_and_roles()
 
     name = "name1"
     algorithm_new = AlgorithmNew(

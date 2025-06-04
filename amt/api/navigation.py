@@ -103,6 +103,7 @@ class Navigation:
     )
     ALGORITHMS_OVERVIEW = BaseNavigationItem(display_text=DisplayText.OVERVIEW, url="/algorithms/")
     ALGORITHM_TASKS = BaseNavigationItem(display_text=DisplayText.TASKS, url="/algorithm/{algorithm_id}/tasks")
+    ALGORITHM_MEMBERS = BaseNavigationItem(display_text=DisplayText.MEMBERS, url="/algorithm/{algorithm_id}/members")
     ALGORITHM_DETAILS = BaseNavigationItem(
         display_text=DisplayText.ALGORITHM_DETAILS, url="/algorithm/{algorithm_id}/details"
     )
@@ -120,7 +121,6 @@ class Navigation:
     ALGORITHM_COMPLIANCE = BaseNavigationItem(
         display_text=DisplayText.COMPLIANCE, url="/algorithm/{algorithm_id}/compliance"
     )
-    ALGORITHM_MEMBERS = BaseNavigationItem(display_text=DisplayText.MEMBERS, url="/algorithm/{algorithm_id}/members")
     ORGANIZATIONS_ROOT = BaseNavigationItem(
         display_text=DisplayText.ORGANIZATIONS, url="/organizations", icon="rvo-icon-man-torso-voor-hoogbouw"
     )

@@ -1,47 +1,7 @@
-from dataclasses import dataclass
-from enum import Enum
 from typing import Any
 
-
-class WebFormFieldType(Enum):
-    CHECKBOX_MULTIPLE = "checkbox_multiple"
-    HIDDEN = "hidden"
-    TEXT = "text"
-    TEXT_CLONEABLE = "text_cloneable"
-    FILE = "file"
-    RADIO = "radio"
-    SELECT = "select"
-    TEXTAREA = "textarea"
-    DISABLED = "disabled"
-    SEARCH_SELECT = "search_select"
-    SUBMIT = "submit"
-    DATE = "date"
-
-
-@dataclass
-class WebFormFieldImplementationTypeFields:
-    name: str
-    type: WebFormFieldType | None
-
-
-class WebFormFieldImplementationType:
-    MULTIPLE_CHECKBOX_AI_ACT = WebFormFieldImplementationTypeFields("checkbox", WebFormFieldType.CHECKBOX_MULTIPLE)
-    TEXT = WebFormFieldImplementationTypeFields("text", WebFormFieldType.TEXT)
-    PARENT = WebFormFieldImplementationTypeFields("parent", None)
-    TEXTAREA = WebFormFieldImplementationTypeFields("textarea", WebFormFieldType.TEXTAREA)
-    SELECT_MY_ORGANIZATIONS = WebFormFieldImplementationTypeFields("select_my_organizations", WebFormFieldType.SELECT)
-    SELECT_LIFECYCLE = WebFormFieldImplementationTypeFields("select_lifecycle", WebFormFieldType.SELECT)
-    SELECT_AI_ACT = WebFormFieldImplementationTypeFields("select", WebFormFieldType.SELECT)
-    DATE = WebFormFieldImplementationTypeFields("date", WebFormFieldType.DATE)
-
-
-class WebFormOption:
-    value: str
-    display_value: str
-
-    def __init__(self, value: str, display_value: str) -> None:
-        self.value = value
-        self.display_value = display_value
+from amt.api.editable_classes import ResolvedEditable
+from amt.schema.webform_classes import WebFormFieldType, WebFormOption
 
 
 class WebFormBaseField:
@@ -60,7 +20,7 @@ class WebFormBaseField:
 
 class WebFormField(WebFormBaseField):
     placeholder: str | None
-    default_value: str | list[str] | WebFormOption | list[tuple[str, str]] | None
+    default_value: str | list[str] | list[tuple[str, str]] | WebFormOption | ResolvedEditable | None
     options: list[WebFormOption] | None
     validators: list[Any]
     description: str | None
@@ -73,12 +33,13 @@ class WebFormField(WebFormBaseField):
         name: str,
         label: str,
         placeholder: str | None = None,
-        default_value: str | list[str] | list[tuple[str, str]] | WebFormOption | None = None,
+        default_value: str | list[str] | list[tuple[str, str]] | WebFormOption | ResolvedEditable | None = None,
         options: list[WebFormOption] | None = None,
         attributes: dict[str, str] | None = None,
         description: str | None = None,
         group: str | None = None,
         required: bool = False,
+        no_options_msg: str | None = None,
     ) -> None:
         super().__init__(type=type, name=name, label=label, group=group)
         self.placeholder = placeholder
@@ -87,6 +48,7 @@ class WebFormField(WebFormBaseField):
         self.attributes = attributes
         self.description = description
         self.required = required
+        self.no_options_msg = no_options_msg
 
 
 class WebFormSearchField(WebFormField):
@@ -100,7 +62,7 @@ class WebFormSearchField(WebFormField):
         name: str,
         label: str,
         placeholder: str | None = None,
-        default_value: str | list[str] | list[tuple[str, str]] | WebFormOption | None = None,
+        default_value: str | list[str] | list[tuple[str, str]] | WebFormOption | ResolvedEditable | None = None,
         options: list[WebFormOption] | None = None,
         attributes: dict[str, str] | None = None,
         group: str | None = None,
@@ -130,7 +92,7 @@ class WebFormTextCloneableField(WebFormField):
         name: str,
         label: str,
         placeholder: str | None = None,
-        default_value: str | list[str] | list[tuple[str, str]] | None = None,
+        default_value: str | list[str] | list[tuple[str, str]] | WebFormOption | ResolvedEditable | None = None,
         options: list[WebFormOption] | None = None,
         attributes: dict[str, str] | None = None,
         group: str | None = None,
@@ -154,12 +116,13 @@ class WebForm:
     id: str
     legend: str | None
     post_url: str
-    fields: list[WebFormBaseField]
+    fields: list[WebFormBaseField | None]
 
     def __init__(self, id: str, post_url: str, legend: str | None = None) -> None:
         self.id = id
         self.legend = legend
         self.post_url = post_url
+        self.fields: list[WebFormBaseField | None] = []
 
 
 class WebFormSubmitButton(WebFormBaseField):

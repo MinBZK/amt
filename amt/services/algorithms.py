@@ -1,6 +1,7 @@
 import json
 import logging
 import sys
+from collections.abc import Sequence
 from datetime import datetime
 from functools import lru_cache
 from os import listdir
@@ -11,9 +12,10 @@ from uuid import UUID
 
 from fastapi import Depends
 
+from amt.core.authorization import AuthorizationType
 from amt.core.exceptions import AMTNotFound
 from amt.enums.tasks import TaskType
-from amt.models import Algorithm, Organization
+from amt.models import Algorithm, Organization, Role
 from amt.repositories.algorithms import AlgorithmsRepository
 from amt.repositories.organizations import OrganizationsRepository
 from amt.repositories.tasks import TasksRepository
@@ -21,7 +23,9 @@ from amt.schema.algorithm import AlgorithmNew
 from amt.schema.instrument import InstrumentBase
 from amt.schema.measure import MeasureTask
 from amt.schema.system_card import AiActProfile, Owner, SystemCard
+from amt.services.authorization import AuthorizationsService
 from amt.services.instruments_and_requirements_state import get_first_lifecycle_idx
+from amt.services.service_classes import BaseService
 from amt.services.task_registry import get_requirements_and_measures
 
 logger = logging.getLogger(__name__)
@@ -29,16 +33,18 @@ logger = logging.getLogger(__name__)
 template_path = "resources/system_card_templates"
 
 
-class AlgorithmsService:
+class AlgorithmsService(BaseService):
     def __init__(
         self,
         repository: Annotated[AlgorithmsRepository, Depends(AlgorithmsRepository)],
         organizations_repository: Annotated[OrganizationsRepository, Depends(OrganizationsRepository)],
         tasks_repository: Annotated[TasksRepository, Depends(TasksRepository)],
+        authorizations_service: Annotated[AuthorizationsService, Depends(AuthorizationsService)],
     ) -> None:
         self.repository = repository
         self.organizations_repository = organizations_repository
         self.tasks_repository = tasks_repository
+        self.authorizations_service = authorizations_service
 
     async def get(self, algorithm_id: int) -> Algorithm:
         algorithm = await self.repository.find_by_id(algorithm_id)
@@ -86,6 +92,7 @@ class AlgorithmsService:
             name=algorithm_new.name,
             ai_act_profile=ai_act_profile,
             instruments=instruments,
+            status=algorithm_new.lifecycle,
             requirements=requirements,
             measures=measures,
             owners=[Owner(organization=organization.name)],  # pyright: ignore[reportCallIssue]
@@ -117,6 +124,9 @@ class AlgorithmsService:
 
         algorithm = await self.update(algorithm)
 
+        role: Role = await self.authorizations_service.get_role("Algorithm Maintainer")
+        await self.authorizations_service.add_authorization(user_id, algorithm.id, AuthorizationType.ALGORITHM, role.id)
+
         measures_sorted: list[MeasureTask] = sorted(  # pyright: ignore[reportUnknownVariableType, reportCallIssue]
             measures,
             key=lambda measure: (get_first_lifecycle_idx(measure.lifecycle), sort_by_measure_name(measure)),  # pyright: ignore[reportArgumentType]
@@ -139,6 +149,9 @@ class AlgorithmsService:
         dummy = algorithm.system_card  #  noqa: F841 # pyright: ignore[reportUnusedVariable]
         algorithm = await self.repository.save(algorithm)
         return algorithm
+
+    async def get_by_user_and_organization(self, user_id: UUID, organization_id: int) -> Sequence[Algorithm]:
+        return await self.repository.get_by_user_and_organization(user_id, organization_id)
 
 
 @lru_cache(maxsize=0 if "pytest" in sys.modules else 256)

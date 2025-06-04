@@ -1,5 +1,5 @@
 {% extends 'algorithms/details_base.html.j2' %}
-{% from "macros/editable.html.j2" import editable with context %}
+{% from "macros/editable_macros.html.j2" import editable with context %}
 {% block detail_content %}
     <!-- Requirements Widget -->
     <div class="rvo-layout-grid-container">
@@ -69,34 +69,37 @@
     </div>
     <!-- Table with Information on the Algorithm -->
     <div class="rvo-table--responsive rvo-alert--padding-md">
+        {% set has_permission = permission("algorithm/" ~ algorithm_id ~ "/systemcard", 'Update', permissions) %}
         <table class="rvo-table">
             <tbody class="rvo-table-body">
                 <tr class="rvo-table-row">
                     <td class="rvo-table-cell">{% trans %}Name{% endtrans %}</td>
-                    <td class="rvo-table-cell">{{ editable(algorithm, "name", "algorithm/" + algorithm_id|string  + "/name") }}</td>
+                    <td class="rvo-table-cell">
+                        {{ editable(algorithm, "name", "algorithm/" + algorithm_id|string  + "/name", None, has_permission) }}
+                    </td>
                 </tr>
                 <tr class="rvo-table-row">
                     <td class="rvo-table-cell">{% trans %}Organization{% endtrans %}</td>
                     <td class="rvo-table-cell">
-                        {{ editable(algorithm, "organization.name", "algorithm/" + algorithm_id|string  + "/organization") }}
+                        {{ editable(algorithm, "organization.name", "algorithm/" + algorithm_id|string  + "/organization", None, has_permission) }}
                     </td>
                 </tr>
                 <tr class="rvo-table-row">
                     <td class="rvo-table-cell">{% trans %}Description{% endtrans %}</td>
                     <td class="rvo-table-cell">
-                        {{ editable(algorithm, "system_card.description", "algorithm/" + algorithm_id|string + "/system_card/description") }}
+                        {{ editable(algorithm, "system_card.description", "algorithm/" + algorithm_id|string + "/system_card/description", None, has_permission) }}
                     </td>
                 </tr>
                 <tr class="rvo-table-row">
                     <td class="rvo-table-cell">{% trans %}Repository{% endtrans %}</td>
                     <td class="rvo-table-cell">
-                        {{ editable(algorithm, "system_card.provenance.uri", "algorithm/" + algorithm_id|string + "/systemcard/provenance/uri") }}
+                        {{ editable(algorithm, "system_card.provenance.uri", "algorithm/" + algorithm_id|string + "/systemcard/provenance/uri", None, has_permission) }}
                     </td>
                 </tr>
                 <tr class="rvo-table-row">
                     <td class="rvo-table-cell">{% trans %}Lifecycle{% endtrans %}</td>
                     <td class="rvo-table-cell">
-                        {{ editable(algorithm, "lifecycle", "algorithm/" + algorithm_id|string + "/lifecycle") }}
+                        {{ editable(algorithm, "lifecycle", "algorithm/" + algorithm_id|string + "/lifecycle", None, has_permission) }}
                     </td>
                 </tr>
                 <tr class="rvo-table-row">
@@ -116,7 +119,7 @@
                     <td class="rvo-table-cell">
                         <div class="amt-blocks-with-vertical-spacing">
                             {% for reference in system_card.references %}
-                                {{ editable(algorithm, "system_card.references[" + (loop.index-1) |string + "]", "algorithm/" + algorithm_id|string + "/system_card/references[" + (loop.index-1)|string + "]") }}
+                                {{ editable(algorithm, "system_card.references[" + (loop.index-1) |string + "]", "algorithm/" + algorithm_id|string + "/system_card/references[" + (loop.index-1)|string + "]", None, has_permission) }}
                             {% endfor %}
                         </div>
                     </td>

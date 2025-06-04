@@ -1,8 +1,10 @@
 import re
 
+from jinja2 import StrictUndefined
+
 from amt.api.editable_classes import ResolvedEditable
 from amt.api.update_utils import extract_number_and_string
-from amt.schema.webform import WebFormFieldImplementationType
+from amt.schema.webform_classes import WebFormFieldImplementationType
 
 
 def replace_digits_in_brackets(string: str) -> str:
@@ -31,10 +33,14 @@ def is_editable_resource(full_resource_path: str, editables: dict[str, ResolvedE
     return editables.get(replace_digits_in_brackets(full_resource_path), None) is not None
 
 
-def is_parent_editable(editables: dict[str, ResolvedEditable], full_resource_path: str) -> bool:
-    full_resource_path = replace_digits_in_brackets(full_resource_path)
-    editable = editables.get(full_resource_path)
-    if editable is None:
+def is_parent_editable(editables: dict[str, ResolvedEditable] | None, full_resource_path: str) -> bool:
+    if isinstance(editables, StrictUndefined) or not editables:
         return False
-    result = editable.implementation_type == WebFormFieldImplementationType.PARENT
-    return result
+    editable = editables.get(full_resource_path)
+    # FIXME: this method is used in list cases /algoritmes/list[*] as resolved /algoritmes/list[1]
+    #  this causes problems for the matching of the right editable element
+    if editable is None:
+        editable = editables.get(replace_digits_in_brackets(full_resource_path))
+        if editable is None:
+            return False
+    return editable.implementation_type == WebFormFieldImplementationType.PARENT

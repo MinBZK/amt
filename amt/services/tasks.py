@@ -12,12 +12,13 @@ from amt.repositories.tasks import TasksRepository
 from amt.schema.instrument import InstrumentTask
 from amt.schema.measure import MeasureTask
 from amt.schema.system_card import SystemCard
+from amt.services.service_classes import BaseService
 from amt.services.storage import StorageFactory
 
 logger = logging.getLogger(__name__)
 
 
-class TasksService:
+class TasksService(BaseService):
     def __init__(
         self,
         repository: Annotated[TasksRepository, Depends(TasksRepository)],

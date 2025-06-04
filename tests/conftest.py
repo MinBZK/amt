@@ -264,7 +264,12 @@ async def db(
 
     async_session = async_sessionmaker(engine, expire_on_commit=False, class_=AsyncSessionWithCommitFlag)
     async with async_session() as session:
-        yield DatabaseTestUtils(session, database_file)
+        thread = (await session.connection()).sync_connection.connection.connection  # pyright: ignore[reportUnknownVariableType, reportUnknownMemberType, reportOptionalMemberAccess, reportAttributeAccessIssue]
+        logger.debug(f"Creating session on thread {thread}")
+        session.info["id"] = str(id(session)) + " (pytest)"
+        db = DatabaseTestUtils(session, database_file)
+        yield db
+        await db.close()
 
 
 def do_e2e_login(page: Page):

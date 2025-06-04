@@ -3,8 +3,6 @@ from uuid import UUID
 from amt.models import User as UserModel
 from amt.schema.shared import BaseModel
 
-type UserSchema = User
-
 
 class User(BaseModel):
     id: UUID | None = None
@@ -14,7 +12,7 @@ class User(BaseModel):
     email: str | None = None
 
     @staticmethod
-    def create_from_model(user_model: UserModel | None) -> UserSchema | None:
+    def create_from_model(user_model: UserModel | None) -> "User | None":
         if user_model is None:
             return None
         user_schema = User()

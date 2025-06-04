@@ -3,13 +3,37 @@ from abc import ABC, abstractmethod
 from starlette.requests import Request
 
 from amt.api.ai_act_profile import SelectAiProfileItem, get_ai_act_profile_selector
-from amt.schema.webform import WebFormOption
+from amt.core.authorization import AuthorizationType
+from amt.core.dynamic_translations import ExternalFieldsTranslations
+from amt.schema.webform_classes import WebFormOption
 
 
 class EditableValuesProvider(ABC):
     @abstractmethod
     async def get_values(self, request: Request) -> list[WebFormOption]:
         pass
+
+
+class RolesValuesProvider(EditableValuesProvider):
+    async def get_values(self, request: Request) -> list[WebFormOption]:
+        # TODO: this is a bit of a hack but we have no other way to pass variables
+        options = {}
+        if request.state.authorization_type == AuthorizationType.ORGANIZATION:
+            options = {
+                "1": "Organization Maintainer",
+                "2": "Organization Member",
+                "3": "Organization Viewer",
+            }
+        elif request.state.authorization_type == AuthorizationType.ALGORITHM:
+            options = {
+                "4": "Algorithm Maintainer",
+                "5": "Algorithm Member",
+                "6": "Algorithm Viewer",
+            }
+        return [
+            WebFormOption(value=key, display_value=ExternalFieldsTranslations.translate(value, request))
+            for key, value in options.items()
+        ]
 
 
 class AIActValuesProvider(EditableValuesProvider):

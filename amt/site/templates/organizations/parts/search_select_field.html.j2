@@ -1,4 +1,7 @@
 {% import "macros/form_macros.html.j2" as macros with context %}
-{% for result in search_results %}
-    {{ macros.render_form_field_search_result(result.value, result.display_value) }}
-{% endfor %}
+{% for editable_object in editables %}{{ macros.render_form_field_search_result(editable_object) }}{% endfor %}
+<div id="no-persons-found-message"
+     style="padding: 10px"
+     {% if show_no_results == False %}class="display-none"{% endif %}>
+    {% trans %}No persons found...{% endtrans %}
+</div>

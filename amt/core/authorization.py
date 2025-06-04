@@ -31,6 +31,7 @@ class AuthorizationResource(StrEnum):
     ALGORITHMS = "algorithms/"
     ALGORITHM = "algorithm/{algorithm_id}"
     ALGORITHM_SYSTEMCARD = "algorithm/{algorithm_id}/systemcard"
+    # TODO: user should be renamed to member
     ALGORITHM_MEMBER = "algorithm/{algorithm_id}/user"
 
 
