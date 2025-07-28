@@ -115,7 +115,6 @@ function initPage() {
             ).value = nextSiblingId ?? "";
             form.setAttribute("hx-target", targetId);
 
-            // @ts-expect-error Description: Ignoring type error because the htmx.trigger function is not recognized by TypeScript.
             htmx.trigger("#cardMovedForm", "cardmoved");
           }
         },
