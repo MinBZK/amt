@@ -2,7 +2,7 @@ import asyncio
 import contextlib
 import threading
 from dataclasses import dataclass
-from typing import Any, TypeVar
+from typing import Any
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -42,11 +42,8 @@ def test_replace_none_with_empty_string_inplace() -> None:
     assert my_obj.test_itermixin.test_list == [["a"], ["b"], [""]]  # pyright: ignore[reportUnknownMemberType, reportAttributeAccessIssue, reportOptionalMemberAccess]
 
 
-T = TypeVar("T")
-
-
 # Test async functions to be used in tests
-async def async_return_value(value: T) -> T:
+async def async_return_value[T](value: T) -> T:
     """Simple async function that returns a value."""
     return value
 
@@ -56,7 +53,7 @@ async def async_raise_exception() -> None:
     raise ValueError("Test exception")
 
 
-async def async_sleep_and_return(sleep_time: float, value: T) -> T:
+async def async_sleep_and_return[T](sleep_time: float, value: T) -> T:
     """Async function that sleeps and then returns a value."""
     await asyncio.sleep(sleep_time)
     return value

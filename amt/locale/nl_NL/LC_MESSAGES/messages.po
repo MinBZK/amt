@@ -210,7 +210,7 @@ msgstr "Selecteer organisatie"
 msgid "Organization"
 msgstr "Organisatie"
 
-#: amt/api/forms/algorithm.py:66
+#: amt/api/forms/algorithm.py:67
 msgid ""
 "You do not have sufficient permissions to create an algorithm on any "
 "organization you are member of"
@@ -275,7 +275,7 @@ msgstr "Niet van toepassing"
 msgid "Information on how this measure is implemented"
 msgstr "Informatie over hoe deze maatregel is geïmplementeerd"
 
-#: amt/api/forms/measure.py:80
+#: amt/api/forms/measure.py:81
 msgid ""
 "Select one or more to upload. The files will be saved once you confirm "
 "changes by pressing the save button."
@@ -373,7 +373,7 @@ msgstr "De waarde moet voldoen aan het patroon '{pattern}'"
 msgid "Input should be a valid integer."
 msgstr "Invoer moet een valide getal zijn."
 
-#: amt/core/exception_handlers.py:26
+#: amt/core/exception_handlers.py:27
 #, python-brace-format
 msgid "For {type} {type_name}, at least one member must have the maintainer role."
 msgstr ""
@@ -384,7 +384,7 @@ msgstr ""
 msgid "At least one member must have the maintainer role."
 msgstr "Tenminste één persoon moet de rol moet de rol 'beheerder' hebben."
 
-#: amt/core/exceptions.py:20
+#: amt/core/exceptions.py:21
 #, python-brace-format
 msgid ""
 "An error occurred while configuring the options for '{field}'. Please "
@@ -403,7 +403,7 @@ msgstr ""
 "Er is een fout opgetreden tijdens het verwerken van het instrument. "
 "Probeer het later opnieuw."
 
-#: amt/core/exceptions.py:40 amt/core/exceptions.py:86
+#: amt/core/exceptions.py:41 amt/core/exceptions.py:87
 msgid ""
 "The requested page or resource could not be found, or you do not have the"
 " correct permissions to access it. Please check the URL or query and try "

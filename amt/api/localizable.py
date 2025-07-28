@@ -39,5 +39,5 @@ def get_localized_enum(key: LocalizableEnum | None, request: Request) -> Localiz
     return key.localize(get_requested_language(request))
 
 
-def get_localized_enums(enum_class: type[T], request: Request) -> list[LocalizedValueItem | None]:
+def get_localized_enums(enum_class: type[T], request: Request) -> list[LocalizedValueItem | None]:  # noqa UP047
     return [get_localized_enum(enum_value, request) for enum_value in enum_class]
