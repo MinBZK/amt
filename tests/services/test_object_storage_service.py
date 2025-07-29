@@ -10,8 +10,8 @@ from amt.services.object_storage import (
     ObjectStorageService,
 )
 from fastapi import UploadFile
-from minio import Minio
-from minio.datatypes import Object
+from minio import Minio  # pyright: ignore[reportMissingTypeStubs]
+from minio.datatypes import Object  # pyright: ignore[reportMissingTypeStubs]
 from pytest_mock import MockerFixture
 from ulid import ULID
 from urllib3 import BaseHTTPResponse
