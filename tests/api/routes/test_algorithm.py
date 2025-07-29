@@ -260,6 +260,7 @@ async def test_get_model_card(client: AsyncClient, db: DatabaseTestUtils) -> Non
     assert b"Model card" in response.content
 
 
+@pytest.mark.asyncio
 async def test_get_model_card_unknown_algorithm(client: AsyncClient) -> None:
     # when
     response = await client.get("/algorithm/1/details/system_card/models/logres_iris")
