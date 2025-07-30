@@ -4,8 +4,8 @@ from collections.abc import Iterable
 from datetime import UTC, datetime
 
 from fastapi import UploadFile
-from minio import Minio
-from minio.datatypes import Object
+from minio import Minio  # pyright: ignore[reportMissingTypeStubs]
+from minio.datatypes import Object  # pyright: ignore[reportMissingTypeStubs]
 from ulid import ULID
 from urllib3 import BaseHTTPResponse
 

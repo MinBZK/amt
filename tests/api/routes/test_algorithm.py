@@ -23,7 +23,7 @@ from amt.services.object_storage import create_object_storage_service
 from amt.services.users import UsersService
 from fastapi import UploadFile
 from httpx import AsyncClient
-from minio import Minio
+from minio import Minio  # pyright: ignore[reportMissingTypeStubs]
 from pytest_minio_mock.plugin import MockMinioClient  # pyright: ignore [reportMissingTypeStubs]
 from pytest_mock import MockFixture
 
@@ -260,6 +260,7 @@ async def test_get_model_card(client: AsyncClient, db: DatabaseTestUtils) -> Non
     assert b"Model card" in response.content
 
 
+@pytest.mark.asyncio
 async def test_get_model_card_unknown_algorithm(client: AsyncClient) -> None:
     # when
     response = await client.get("/algorithm/1/details/system_card/models/logres_iris")
@@ -1177,7 +1178,7 @@ async def test_resolve_and_enrich_measures(mocker: MockFixture) -> None:
     users_service = UsersService(
         repository=mocker.AsyncMock(spec=UsersRepository),
     )
-    users_service.repository.find_by_id.return_value = default_user()  # pyright: ignore[reportFunctionMemberAccess]
+    users_service.repository.find_by_id = mocker.AsyncMock(return_value=default_user())
     urns = {"urn:nl:ak:mtr:dat-01"}
     my_algorithm = default_algorithm_with_system_card()
     result = await resolve_and_enrich_measures(my_algorithm, urns, users_service)
