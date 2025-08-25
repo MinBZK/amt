@@ -31,12 +31,12 @@ babel = "^2.17.0"
 httpx = "^0.28.1"
 pyyaml-include = "^2.2"
 click = "^8.2.1"
-python-ulid = {extras = ["pydantic"], version = "^3.0.0"}
-fastapi-csrf-protect = "^1.0.3"
+python-ulid = {extras = ["pydantic"], version = "^3.1.0"}
+fastapi-csrf-protect = "^1.0.6"
 sqlalchemy = {extras = ["asyncio"], version = "^2.0.43"}
 sqlalchemy-utils = "^0.41.2"
 liccheck = "^0.9.2"
-authlib = "^1.6.1"
+authlib = "^1.6.2"
 aiosqlite = "^0.21.0"
 asyncpg = "^0.30.0"
 async-lru = "^2.0.5"
@@ -51,7 +51,7 @@ pytest = "^8.4.1"
 pytest-asyncio = "^1.1.0"
 nest-asyncio = "^1.6.0"
 pytest-mock = "^3.14.1"
-coverage = "^7.10.4"
+coverage = "^7.10.5"
 playwright = "^1.54.0"
 pytest-playwright = "^0.7.0"
 pytest-httpx = "^0.35.0"
@@ -61,13 +61,13 @@ pytest-minio-mock = "^0.4.19"
 
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.12.9"
+ruff = "^0.12.10"
 pre-commit = "^4.3.0"
 polib = "^1.2.0"
-pyright = "^1.1.403"
+pyright = "^1.1.404"
 liccheck = "^0.9.2"
 setuptools = "^80.9.0"
-types-pyyaml = "^6.0.12.20250809"
+types-pyyaml = "^6.0.12.20250822"
 djlint = "^1.36.1"
 
 
