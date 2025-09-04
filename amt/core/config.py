@@ -67,6 +67,7 @@ class Settings(BaseSettings):
     OBJECT_STORE_USER: str = "amt"
     OBJECT_STORE_PASSWORD: str = "changeme"  # noqa: S105
     OBJECT_STORE_BUCKET_NAME: str = "amt"
+    OBJECT_STORE_REGION: str = "us-east-1"
 
     @computed_field
     def SQLALCHEMY_ECHO(self) -> bool:
