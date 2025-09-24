@@ -115,7 +115,10 @@ function initPage() {
             ).value = nextSiblingId ?? "";
             form.setAttribute("hx-target", targetId);
 
-            htmx.trigger("#cardMovedForm", "cardmoved");
+            const cardMovedForm = document.getElementById("cardMovedForm");
+            if (cardMovedForm) {
+              htmx.trigger(cardMovedForm, "cardmoved", {});
+            }
           }
         },
       })
