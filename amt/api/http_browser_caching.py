@@ -1,3 +1,4 @@
+import hashlib
 import os
 import sys
 import urllib
@@ -7,7 +8,6 @@ from pathlib import Path
 from typing import NamedTuple
 from urllib.parse import ParseResult, urlencode
 
-from starlette._compat import md5_hexdigest  # pyright: ignore[reportPrivateImportUsage]
 from starlette.responses import Response
 from starlette.staticfiles import StaticFiles
 from starlette.types import Scope
@@ -78,7 +78,7 @@ def url_for_cache(name: str, /, **path_params: str) -> str:
         raise AMTNotFound()
 
     etag_base = str(stat_result.st_mtime) + "-" + str(stat_result.st_size)
-    etag = f"{md5_hexdigest(etag_base.encode(), usedforsecurity=False)}"
+    etag = hashlib.md5(etag_base.encode(), usedforsecurity=False).hexdigest()
     query_list["etag"] = etag
 
     return_url = urllib.parse.urlunparse(  # type: ignore
