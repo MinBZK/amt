@@ -13,7 +13,7 @@ from amt.services.task_registry import get_requirements_and_measures
 from fastapi.requests import Request
 from httpx import AsyncClient
 from pytest_mock import MockFixture
-from starlette.datastructures import Headers, URL
+from starlette.datastructures import URL, Headers
 
 from tests.conftest import amt_vcr
 from tests.constants import default_algorithm, default_auth_user, default_instrument, default_organization, default_user
