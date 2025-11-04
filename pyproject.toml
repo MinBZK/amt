@@ -151,9 +151,11 @@ level = "PARANOID"
 dependencies = true
 authorized_licenses = [
     "Apache Software",
+    "Apache-2.0",
     "Artistic",
     "BSD",
     "BSD-3-Clause",
+    "GPL-2.0-or-later",
     "GNU General Public License v2 or later (GPLv2+)",
     "GNU General Public License v3 or later (GPLv3+)",
     "GNU General Public License (GPL)",
