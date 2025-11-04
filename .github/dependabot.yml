@@ -26,6 +26,8 @@ updates:
       timezone: "Europe/Amsterdam"
     labels:
       - "dependencies"
+    allow:
+      - dependency-type: "all"
     groups:
       allpip:
         patterns:
