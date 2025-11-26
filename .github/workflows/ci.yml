@@ -297,7 +297,7 @@ jobs:
           TRIVY_USERNAME: ${{ github.actor }}
           TRIVY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload SBOM & License
+      - name: Upload SBOM & License ROBBERT TEST
         uses: actions/upload-artifact@v4.6.2
         with:
           name: sbom-licence-${{ github.sha }}.json
