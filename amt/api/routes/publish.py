@@ -74,6 +74,7 @@ async def ar_login(
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
     publication = await publication_service.get_by_algorithm_id(algorithm_id)
 
+    publication_status = None
     if publication is not None:
         algorithm_summary: list[AlgorithmSummary] = await get_algorithms_status(
             username, password, publication.organization_code, publication.lars
@@ -113,6 +114,7 @@ async def pre_publish(
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
     publication = await publication_service.get_by_algorithm_id(algorithm_id)
 
+    publication_status = None
     if publication is not None:
         algorithm_summary: list[AlgorithmSummary] = await get_algorithms_status(
             username, password, publication.organization_code, publication.lars
