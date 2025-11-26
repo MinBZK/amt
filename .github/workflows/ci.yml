@@ -307,7 +307,7 @@ jobs:
           if-no-files-found: error
           overwrite: true
 
-      - name: Call API to upsert deployment
+      - name: Call API to upsert deployment AGAIN
         if: github.event_name == 'pull_request'
         run: |
           curl -X POST "https://operations-manager.rig.prd1.gn2.quattro.rijksapps.nl/api/projects/amt-odcn/:upsert-deployment" \
