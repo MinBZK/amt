@@ -50,3 +50,4 @@ def upgrade() -> None:
 def downgrade() -> None:
     op.drop_index(op.f("ix_publication_lars"), table_name="publication")
     op.drop_table("publication")
+    postgresql.ENUM(name="publication_status").drop(op.get_bind(), checkfirst=True)

@@ -255,6 +255,19 @@ jobs:
           annotations: ${{ steps.meta.outputs.annotations }}
           platforms: linux/amd64,linux/arm64,darwin/amd64
 
+      - name: Call API to upsert deployment
+        if: github.event_name == 'pull_request'
+        run: |
+          curl -X POST "https://operations-manager.rig.prd1.gn2.quattro.rijksapps.nl/api/projects/amt-odc/:upsert-deployment" \
+            -H "Content-Type: application/json" \
+            -H "X-API-Key: ${{ secrets.OPERATIONS_MANAGER_API_KEY }}" \
+            -d '{
+              "deploymentName": "pr-${{ github.event.pull_request.number }}",
+              "components": [
+                {"reference": "component-1", "image": "${{ fromJSON(steps.meta.outputs.json).tags[0] }}"}
+              ]
+            }'
+
       - name: Run Trivy vulnerability scanner sarif
         uses: aquasecurity/trivy-action@master
         with:
@@ -297,7 +310,7 @@ jobs:
           TRIVY_USERNAME: ${{ github.actor }}
           TRIVY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload SBOM & License ROBBERT TEST
+      - name: Upload SBOM & License
         uses: actions/upload-artifact@v4.6.2
         with:
           name: sbom-licence-${{ github.sha }}.json
@@ -306,20 +319,6 @@ jobs:
             trivy-license.json
           if-no-files-found: error
           overwrite: true
-
-      - name: Call API to upsert deployment AGAIN
-        if: github.event_name == 'pull_request'
-        run: |
-          curl -X POST "https://operations-manager.rig.prd1.gn2.quattro.rijksapps.nl/api/projects/amt-odcn/:upsert-deployment" \
-            -H "Content-Type: application/json" \
-            -H "X-API-Key: ${{ secrets.OPERATIONS_MANAGER_API_KEY }}" \
-            -d '{
-              "deploymentName": "pr-${{ github.event.pull_request.number }}",
-              "components": [
-                {"reference": "component-1", "image": "${{ fromJSON(steps.meta.outputs.json).tags[0] }}"}
-              ],
-              "cloneFrom": "staging"
-            }'
 
   deploy:
     runs-on: ubuntu-latest
