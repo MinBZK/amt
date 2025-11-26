@@ -27,7 +27,7 @@ LOGGING_CONFIG = {
         "": {"handlers": ["console"], "level": "DEBUG", "propagate": False},
         "httpcore": {"handlers": ["console"], "level": "ERROR", "propagate": False},
         "aiosqlite": {"handlers": ["console"], "level": "INFO", "propagate": False},
-        "jinja_roos_components": {"handlers": ["console", "file"], "level": "WARN", "propagate": False},
+        "jinja_roos_components": {"handlers": ["console"], "level": "WARN", "propagate": False},
     },
 }
 
