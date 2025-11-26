@@ -113,6 +113,7 @@ def get_algorithm_details_tabs(request: Request) -> list[NavigationItem]:
             Navigation.ALGORITHM_COMPLIANCE,
             Navigation.ALGORITHM_TASKS,
             Navigation.ALGORITHM_MEMBERS,
+            Navigation.ALGORITHM_PUBLISH,
         ],
         request,
     )

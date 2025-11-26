@@ -1,0 +1,100 @@
+{% extends 'layouts/base.html.j2' %}
+{% from "macros/editable_macros.html.j2" import editable with context %}
+{% import "macros/tabs.html.j2" as tabs with context %}
+{% block title %}{{ algorithm.name }} | AMT{% endblock %}
+{% block content %}
+    <c-max-width-layout size="lg">
+    <c-grid columns="two" division="1fr 3fr">
+    <c-progress-tracker :steps="[lalalla,lalala]">
+    </c-progress-tracker>
+    <div>
+        <c-heading type="h1" class="rvo-layout-margin-vertical--xl">Publicatie voorbereiden</c-heading>
+        <c-form-fieldset>
+        <c-heading type="h5">
+        Wat is belangrijk bij publicatie?
+        </c-heading>
+        <c-p>
+        Voordat u verder gaat met het publiceren van uw algoritme, is het belangrijk om te weten aan welke
+        criteria uw algoritme moet voldoen. Publicatie in het Algoritmeregister draagt bij aan transparantie
+        en verantwoording over de inzet van algoritmes binnen de overheid.
+        </c-p>
+        <c-p text-style="bold" class="rvo-layout-margin-vertical--sm">
+        Let op de volgende punten:
+        </c-p>
+        <c-ul>
+        <c-li class="rvo-layout-margin-vertical--sm">
+        <c-div class="display-block">
+        <c-strong>Volledigheid van gegevens:</c-strong>
+        Zorg ervoor dat alle relevante metadata, zoals doel, werking, gebruikte
+        data en impacttoetsen, volledig en accuraat zijn ingevuld in uw algoritmebeschrijving.
+        Onvolledige informatie kan leiden tot vertraging of afwijzing van publicatie.
+        </c-div>
+        </c-li>
+        <c-li>
+        <c-div class="display-block">
+        <c-strong>Noodzaak van publicatie:</c-strong>
+        Bepaal of uw algoritme valt onder de publicatieplicht, bijvoorbeeld omdat
+        het een hoog-risico algoritme is volgens de Europese AI-verordening, of een directe impact heeft
+        op burgers.
+        Zorg dat u al deze informatie bij de hand heeft of reeds heeft ingevuld in de voorgaande
+        tabbladen.
+        </c-div>
+        </c-li>
+        </c-ul>
+        </c-form-fieldset>
+        <c-card outline="true" class="rvo-layout-margin-vertical--xl">
+        <c-heading type="h2">
+        {{ publication_model.name }}
+        </c-heading>
+        <c-grid columns="two">
+        <div>
+            <c-link href="#">{{ publication_model.organization }}</c-link>
+            <c-p>
+            {{ publication_model.description_short }}
+            </c-p>
+        </div>
+        <div>
+            <c-p text-style="bold">Publicatiecategorie</c-p>
+            <c-p>{{ publication_model.publication_category }}</c-p>
+            <c-p text-style="bold">Impacttoetsen</c-p>
+            <c-p>{{ publication_model.impacttoetsen_grouping | map(attribute='title') | join(', ') }}</c-p>
+            <c-p text-style="bold">Status</c-p>
+            <c-p>{{ publication_model.status }}</c-p>
+        </div>
+        </c-grid>
+        </c-card>
+        <c-tabs>
+        <c-tab-item @click="applyRules('#tab-content-container > *: +display-none; #{id}-content: -display-none; siblings > a: -rvo-link--active -rvo-tabs__item-link--active; self > a: +rvo-link--active +rvo-tabs__item-link--active', event, { preventDefault: true, stopPropagation: true })" id="tab1" href="#" label="Algemene informatie" :selected="true" />
+        <c-tab-item @click="applyRules('#tab-content-container > *: +display-none; #{id}-content: -display-none; siblings > a: -rvo-link--active -rvo-tabs__item-link--active; self > a: +rvo-link--active +rvo-tabs__item-link--active', event, { preventDefault: true, stopPropagation: true })" id="tab2" href="#" label="Verantwoord gebruik" />
+        <c-tab-item @click="applyRules('#tab-content-container > *: +display-none; #{id}-content: -display-none; siblings > a: -rvo-link--active -rvo-tabs__item-link--active; self > a: +rvo-link--active +rvo-tabs__item-link--active', event, { preventDefault: true, stopPropagation: true })" id="tab3" href="#" label="Werking" />
+        </c-tabs>
+        <div id="tab-content-container">
+            <div id="tab1-content">
+                <c-table>
+                <colgroup>
+                    <col style="width: 20%">
+                    <col style="width: 80%">
+                </colgroup>
+                <c-tr>
+                <c-td><c-strong>Option 1</c-strong></c-td>
+                <c-td>Option 2</c-td>
+                </c-tr>
+                <c-tr>
+                <c-td>Option 1</c-td>
+                <c-td>Option 2</c-td>
+                </c-tr>
+                <c-tr>
+                <c-td>Option 1</c-td>
+                <c-td>Option 2</c-td>
+                </c-tr>
+                </c-table>
+            </div>
+            <div id="tab2-content" class="display-none">Block 2</div>
+            <div id="tab3-content" class="display-none">Block 3</div>
+        </div>
+        <p>Hello world</p>
+        {{ publication_model_json }}
+    </div>
+    </c-grid>
+    </c-max-width-layout>
+{% endblock %}

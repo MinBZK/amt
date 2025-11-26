@@ -192,7 +192,10 @@ jobs:
 
   build:
     needs: [test-local-frontend, test-local-backend, test-compose]
-    if: ${{ !github.event.act }}
+    if: >-
+      always() &&
+      !github.event.act &&
+      (github.event_name == 'pull_request' || !contains(needs.*.result, 'failure'))
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -303,6 +306,20 @@ jobs:
             trivy-license.json
           if-no-files-found: error
           overwrite: true
+
+      - name: Call API to upsert deployment
+        if: github.event_name == 'pull_request'
+        run: |
+          curl -X POST "https://operations-manager.rig.prd1.gn2.quattro.rijksapps.nl/api/projects/amt-odcn/:upsert-deployment" \
+            -H "Content-Type: application/json" \
+            -H "X-API-Key: ${{ secrets.OPERATIONS_MANAGER_API_KEY }}" \
+            -d '{
+              "deploymentName": "pr-${{ github.event.pull_request.number }}",
+              "components": [
+                {"reference": "component-1", "image": "${{ fromJSON(steps.meta.outputs.json).tags[0] }}"}
+              ],
+              "cloneFrom": "staging"
+            }'
 
   deploy:
     runs-on: ubuntu-latest

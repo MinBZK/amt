@@ -1,11 +1,14 @@
 import logging
 from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
+from pathlib import Path
 
+import jinja_roos_components
 from authlib.integrations.starlette_client import OAuth  # type: ignore
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from starlette.middleware.sessions import SessionMiddleware
 
@@ -31,6 +34,8 @@ configure_logging(
 )
 
 logger = logging.getLogger(__name__)
+
+STATIC_DIR_ROOS = Path(jinja_roos_components.__file__).parent / "static" / "roos" / "dist"
 
 
 # todo(berry): move lifespan to own file
@@ -78,6 +83,7 @@ def create_app() -> FastAPI:
     )
 
     app.mount("/static", static_files, name="static")
+    # app.mount("/static/roos/dist", StaticFiles(directory=STATIC_DIR_ROOS), name="roos")
 
     @app.exception_handler(StarletteHTTPException)
     async def HTTPException_exception_handler(request: Request, exc: Exception) -> HTMLResponse:  # type: ignore

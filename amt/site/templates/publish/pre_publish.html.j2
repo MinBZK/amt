@@ -1,0 +1,11 @@
+{% extends 'algorithms/details_base.html.j2' %}
+{% from "macros/editable_macros.html.j2" import editable with context %}
+{% block detail_content %}
+    <div id="publish-content-container">
+        {% if not is_ar_logged_in %}
+            {% include "publish/parts/ar_login_form.html.j2" %}
+        {% else %}
+            {% include "publish/parts/ar_status.html.j2" %}
+        {% endif %}
+    </div>
+{% endblock %}

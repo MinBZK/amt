@@ -1,0 +1,1667 @@
+{
+  "schema_version": "0.1a10",
+  "name": "Berekening van Alimentatie ",
+  "ai_act_profile": {
+    "type": "AI-systeem",
+    "open_source": "geen open-source",
+    "publication_category": "hoog-risico AI",
+    "systemic_risk": "niet van toepassing",
+    "transparency_obligations": "niet van toepassing",
+    "role": "gebruiksverantwoordelijke"
+  },
+  "provenance": {
+    "git_commit_hash": "3eb1f1b",
+    "timestamp": "2024-10-15T16:48:14+00:00",
+    "uri": "https://github.com/Oirschot/woz",
+    "author": "Wouter Beek"
+  },
+  "description": "Het bepalen en fiatteren van de WOZ-waarde.",
+  "labels": [
+    {
+      "name": "WOZ Waardering",
+      "value": "Automatiseert het proces van waardebepaling van onroerend goed op basis van marktontwikkelingen."
+    },
+    {
+      "name": "Marktanalyse",
+      "value": "Maakt gebruik van marktgegevens en statistische modellen om de WOZ-waarde te bepalen."
+    },
+    {
+      "name": "Juridische Naleving",
+      "value": "Voldoet aan de Wet WOZ en relevante regelgeving omtrent waardebepaling en proceskostenvergoedingen."
+    }
+  ],
+  "status": "ontwikkeling",
+  "instruments": [
+    {
+      "urn": "urn:nl:aivt:tr:iama:1.0"
+    },
+    {
+      "urn": "urn:nl:aivt:tr:aiia:1.0"
+    }
+  ],
+  "requirements": [
+    {
+      "urn": "urn:nl:ak:ver:aia-19",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-36",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-27",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:avg-10",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-39",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:avg-13",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-28",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-12",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-23",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:avg-08",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:grw-01",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-17",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-15",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:avg-07",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:avg-12",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-14",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:bio-01",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:arc-01",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:awb-02",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-30",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:avg-02",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-10",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-11",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:awb-01",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-16",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:avg-11",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:woo-01",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-37",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-24",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:avg-05",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-25",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-03",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:bzk-01",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-35",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-07",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-29",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-01",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-13",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-05",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:avg-04",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-22",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:avg-01",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-08",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:grw-02",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-04",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-09",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-38",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-18",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aut-01",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:dat-01",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-26",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:avg-03",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:avg-09",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:avg-06",
+      "state": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:ver:aia-06",
+      "state": "",
+      "version": "1.1.0"
+    }
+  ],
+  "measures": [
+    {
+      "urn": "urn:nl:ak:mtr:org-02",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:owk-02",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:bespreek_vereiste_met_aanbieder",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:creeer_ruimte_voor_samenwerking_in_contract",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:leveren_bewijs_onderdeel_beoordeling_inschrijving",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:maak_de_vereiste_onderdeel_van_programma_van_eisen",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:maak_vereiste_onderdeel_van_contractovereenkomst",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:maak_vereiste_onderdeel_van_service_level_agreement",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:maak_vereisten_voor_algoritmes_en_AI-systemen_onder_van_contractvoorwaarden",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:neem_vereiste_op_als_subgunningscriteria",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:uitvoeren_audit_voor_naleving_vereiste",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:imp-03",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:bepalende_invloed_besluit_richting_personen",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:menselijke_tussenkomst_projectplan_en_dchargedocument",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:owp-09",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:owk-03",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:imp-09",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:owp-08",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:dat-04",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:owp-06",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:owp-07",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:ver-01",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:imp-04",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:imp-07",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:imp-08",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:dat-05",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:owk-01",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:mon-02",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:mon-03",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:org-04",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:org-05",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:org-06",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:owk-04",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:mon-01",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:risico-analyse_informatiebeveiliging_leverancier",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:ver-03",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:imp-01",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:owp-04",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:owp-10",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:imp-02",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:org-07",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:org-01",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:org-03",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pba-01",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pba-02",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pba-03",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pba-04",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:pba-05",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:owp-01",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:owp-03",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:dat-01",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:vaststellen_benodigde_kennisoverdracht_en_ondersteuning",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:vaststellen_passend_trainingsniveau_door_aanbieder",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:owp-02",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:owp-05",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:dat-03",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:imp-05",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:dat-06",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:aansprakelijkheidsvoorwaarden_aanbieder_onderdeel_beoordelingsmatrix",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:contractuele_afspraken_data_en_artefacten",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:getroffen_maatregelen_van_aanbieder_voorkomen_schending_auteursrechten",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:leveren_bewijs_niet_schenden_auteursrechten_output",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:leveren_bewijs_niet_schenden_auteursrechten_trainingsdata",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:omgaan_restrisico's_aanbiede_onderdeel_beoordelingsmaatrix",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:schending_auteursrechten_output_onderdeel_conceptovereenkomst",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:schending_auteursrechten_trainingsdata_onderdeel_conceptovereenkomst",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    },
+    {
+      "urn": "urn:nl:ak:mtr:imp-06",
+      "state": "",
+      "value": "",
+      "version": "1.1.0"
+    }
+  ],
+  "assessments": [
+    {
+      "name": "IAMA",
+      "urn": "urn:nl:aivt:tr:iama:1.0",
+      "date": "2025-03-25T00:00:00",
+      "contents": [
+        {
+          "question": "Licht uw voorstel voor het gebruik/de inzet van een algoritme toe. Wat is de aanleiding hiervoor geweest? Voor welk probleem moet het algoritme een oplossing bieden?",
+          "answer": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "Remark",
+          "authors": [
+            {
+              "name": "John Doe"
+            },
+            {
+              "name": "Jane Doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Wat is het doel dat bereikt dient te worden met de inzet van het algoritme? Wat is hierbij het hoofddoel en wat zijn subdoelen?",
+          "answer": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "Remark",
+          "authors": [
+            {
+              "name": "John Doe"
+            },
+            {
+              "name": "Jane Doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Wat zijn de publieke waarden die de inzet van het algoritme ingeven? Indien meerdere publieke waarden de inzet van het algoritme ingeven, kan daar een rangschikking in aangebracht worden?",
+          "answer": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "Remark",
+          "authors": [
+            {
+              "name": "John Doe"
+            },
+            {
+              "name": "Jane Doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Wat zijn de publieke waarden die mogelijk in het gedrang komen door de inzet van het algoritme?",
+          "answer": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "Remark",
+          "authors": [
+            {
+              "name": "John Doe"
+            },
+            {
+              "name": "Jane Doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Wat is de wettelijke grondslag van de inzet van dit algoritme en van de beoogde besluiten die genomen zullen worden op basis van dit algoritme?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Welke partijen en personen zijn er bij de ontwikkeling/het gebruik/het onderhoud van het algoritme betrokken?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Hoe zijn de verantwoordelijkheden belegd ten aanzien van de ontwikkeling en de inzet van het algoritme, ook nadat het algoritme eenmaal is afgerond?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Wie is eindverantwoordelijk voor het algoritme?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": " Wat voor type algoritme wordt gebruikt, of wat voor type algoritme gaat ontwikkeld worden?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Wat voor type data gaat gebruikt worden als input voor het algoritme en uit welke bronnen is de data afkomstig? Indien geen gebruik wordt gemaakt van inputdata, ga door naar onderwerp 2A.4",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Is de kwaliteit en betrouwbaarheid van de data voldoende voor de beoogde datatoepassing? Leg uit.",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Welke aannames en bias liggen in de data besloten en hoe wordt de invloed daarvan op de output van het algoritme gecorrigeerd of anderszins ondervangen of gemitigeerd (zie ook bijlage 2)?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Indien gebruik wordt gemaakt van trainingsdata: is de data representatief voor de context waarin het algoritme ingezet gaat worden?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Is de data voldoende beveiligd? Maak hierin onderscheid tussen de inputdata en de outputdata.",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Is er controle op de toegang tot de data? Maak hierin onderscheid tussen de inputdata en de outputdata.",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Hoe worden relevante regels over archivering in acht genomen, zoals die in de Archiefwet zijn vastgelegd?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Type algoritme: wat voor soort algoritme wordt gebruikt of gaat worden gebruikt? Hoe werkt het?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Waarom wordt voor dit type algoritme gekozen?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Waarom is dit type algoritme het meest geschikt om de bij vraag 1.2 geformuleerde doelstellingen te bereiken?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Welke alternatieven zijn er en waarom zijn die minder passend of bruikbaar?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Indien het algoritme is ontwikkeld door een externe partij: zijn er heldere afspraken gemaakt over eigenaarschap en beheer van het algoritme? Wat zijn die afspraken?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Welke maatregelen kunnen worden getroffen om de risico\u2019s van reproductie of zelfs versterking van biases tegen te gaan (bijv. andere samplingstrategie, feature modification, ...)?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Welke aannames liggen ten grondslag aan de selectie en weging van de indicatoren? Zijn die aannames terecht? Waarom wel/niet?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Hoe vaak/erg zit het algoritme ernaast? (bijv. in termen van aantal false positives, false negatives, R-squared, ...)",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Is het duidelijk wat het algoritme doet, hoe het dit doet, en op basis waarvan (welke data) het dit doet? Leg uit.",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Voor welke personen en groepen binnen en buiten de eigen organisatie wordt de werking van het algoritme transparant gemaakt en hoe gebeurt dit?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Voor welke doelgroepen moet het algoritme uitlegbaar zijn?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Kan de werking van het algoritme voor de bij vraag B.4.3 ge\u00efdentificeerde doelgroepen op een voldoende begrijpelijke manier worden uitgelegd?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Wat gebeurt er met de uitkomsten van het algoritme? Welke beslissingen worden daarop gebaseerd?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Welke rol spelen mensen bij het nemen van beslissingen op basis van de output van het algoritme (\u2018human in the loop\u2019) en hoe worden zij in staat gesteld om die rol te spelen?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Is er nu en in de toekomst voldoende gekwalificeerd personeel aanwezig om het algoritme te beheren, te herzien en aan te passen indien gewenst/nodig?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Wat zullen de effecten zijn van de inzet van het algoritme voor burgersen hoe wordt rekening gehouden met de \u2018menselijke maat\u2019 bij het nemen van beslissingen op basis van de output van het algoritme?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Welke risico\u2019s voor stigmatiserende, discriminerende of anderszins schadelijke of nadelige effecten zijn er voor de burger en hoe zullen die worden bestreden of gemitigeerd?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Hoe zullen de verwachte effecten bijdragen aan de oplossing van het probleem dat de aanleiding is voor de ontwikkeling/inzet van het algoritme (zie vraag 1.1) en het bereiken van de daarbij gestelde doelen (zie vraag 1.2)?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Hoe verhouden de verwachte effecten zich tot de waarden die worden gediend (zie vraag 1.3)? Welke risico\u2019s zijn er dat bepaalde waarden onder druk komen te staan en hoe wordt daarmee dan omgegaan?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Via welke procedures zullen beslissingen op basis van het algoritme worden genomen?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Hoe worden verschillende relevante actoren (bestuurlijke en politiek verantwoordelijken, burgers) bij de besluitvorming betrokken?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Hoe wordt gegarandeerd dat in deze procedures wordt voldaan aan de eisen van goed en behoorlijk bestuur en \u2013 waar nodig \u2013 rechtsbescherming? Hebben burgers een effectieve mogelijkheid om een klacht in te dienen of bezwaar te maken? Zo ja, op welke manier?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Tijd/periode: wanneer gaat het algoritme ingezet worden? Hoe lang is de periode dat het ingezet wordt?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Plaats: waar vindt inzet van het algoritme plaats? Is dat in een bepaald geografisch gebied, is dat bij een bepaalde groep personen of dossiers?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Kan het algoritme ook nog worden ingezet als contextfactoren veranderen of als het algoritme gebruikt wordt in een andere context dan waarvoor het is ontwikkeld?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Hoe open kunt u zijn over de werking van het algoritme in het licht van de doelstellingen en context van de inzet ervan?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Op welke manier beoogt u te communiceren over de inzet van het algoritme?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Wordt de output van het algoritme gevisualiseerd, bijvoorbeeld in een tabel, grafiek of dashboard? Zo ja: is de vorm van visualisatie of weergave een correcte representatie van de output van het algoritme? Is de visualisatie makkelijk te lezen voor verschillende gebruikersgroepen?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Is voorzien in goede instrumenten voor evaluatie, auditing en borging van het algoritme?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Zijn er voldoende mogelijkheden om rekenschap en verantwoording af te leggen over het algoritme?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Welke mogelijkheden zijn er voor auditors en toezichthouders om (formele) consequenties te verbinden aan de inzet van een algoritme door de overheid (bijv. terugkoppeling van bevindingen, doen van aanbevelingen, budgettaire consequenties, ...)",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Wordt er een grondrecht geraakt door het in te zetten algoritme?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Zijn er specifieke wettelijke bepalingen of richtsnoeren van toepassing op de grondrechteninbreuk?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Hoe zwaar wordt een grondrecht geraakt door het algoritme?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Welke doelen worden met inzet van het algoritme nagestreefd? Kijk hierbij naar uw antwoord op vraag 1.2",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Vormt het in te zetten algoritme een doeltreffend middel om de gestelde doelen te realiseren? Leg uit.",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Is inzet van dit specifieke algoritme noodzakelijk om dit doel te bereiken en zijn er geen andere of mitigerende maatregelen beschikbaar om dit te doen? Leg uit",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        },
+        {
+          "question": "Levert inzet van het algoritme een redelijk evenwicht op tussen de te realiseren doelen en de grondrechten die worden geraakt, en waarom is dat zo?",
+          "answer": "lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi lorem pariatur mollit ex esse exercitation amet. nisi anim cupidatat excepteur officia. reprehenderit nostrud nostrud ipsum lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. nostrud officia pariatur ut officia. sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor lorem duis laboris cupidatat officia voluptate. culpa proident adipisicing id nulla nisi laboris ex in lorem sunt duis officia eiusmod. aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "remark",
+          "authors": [
+            {
+              "name": "john doe"
+            },
+            {
+              "name": "jane doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        }
+      ]
+    },
+    {
+      "name": "AIIA",
+      "urn": "urn:nl:aivt:tr:aiia:1.0",
+      "date": "2025-03-25T00:00:00",
+      "contents": [
+        {
+          "question": "Geef een korte beschrijving van het beoogde AI-systeem (titel, algemene omschrijving, probleemstelling, en het domein)",
+          "answer": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+          "remarks": "Remark",
+          "authors": [
+            {
+              "name": "John Doe"
+            },
+            {
+              "name": "Jane Doe"
+            }
+          ],
+          "timestamp": "2024-04-17T12:03:23+00:00"
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "name": "Civision Pink Roccade",
+      "link": "https://www.pinkroccadelocalgovernment.nl/beleidsterreinen/ruimte-omgeving/iobjecten/woz-raadplegen/?bu=1250"
+    },
+    {
+      "name": "Algoritmeregister Overheid.nl",
+      "link": "https://algoritmes.overheid.nl/nl/algoritme/wozwaarde-uitrekenen-gemeente-oirschot/12626742#algemeneInformatie"
+    }
+  ],
+  "models": [
+    {
+      "name": "logres_iris",
+      "language": ["nl"],
+      "license": {
+        "license_name": "EUPL-1.2"
+      },
+      "tags": ["Iris Flower Classifcation", "Logistic Regression"],
+      "owners": [
+        {
+          "oin": "0000001003214345000",
+          "organization": "Ministerie van Binnenlandse Zaken en Koninkrijksrelaties",
+          "name": "John Doe",
+          "email": "johndoe@email.com",
+          "role": "Engineer"
+        }
+      ],
+      "model-index": [
+        {
+          "name": "Logistic Regression Iris",
+          "model": "https://github.com/MinBZK/poc-kijkdoos-wasm-models",
+          "artifacts": [
+            {
+              "uri": "https://raw.githubusercontent.com/MinBZK/poc-kijkdoos-wasm-models/main/logres_iris/logreg_iris.onnx"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "epochs",
+              "dtype": "int",
+              "value": "100",
+              "labels": [
+                {
+                  "name": "param_label_name",
+                  "dtype": "param_label_dtype",
+                  "value": "param_label_value"
+                }
+              ]
+            }
+          ],
+          "results": [
+            {
+              "task": [
+                {
+                  "type": "tabular-classification",
+                  "name": "Classification of Iris Flowers"
+                }
+              ],
+              "datasets": [
+                {
+                  "type": "https://huggingface.co/datasets/scikit-learn/iris/viewer",
+                  "name": "Iris Species Dataset",
+                  "split": "train",
+                  "features": [
+                    "sepal_length",
+                    "sepal_width",
+                    "petal_length",
+                    "petal_width"
+                  ],
+                  "revision": "5503434ddd753f426f4b38109466949a1217c2bb"
+                }
+              ],
+              "metrics": [
+                {
+                  "type": "accuracy",
+                  "name": "Training Accuracy",
+                  "dtype": "float",
+                  "value": "1.0",
+                  "labels": [
+                    {
+                      "name": "split",
+                      "type": "metadata",
+                      "dtype": "string",
+                      "value": "training"
+                    }
+                  ]
+                }
+              ],
+              "measurements": {
+                "bar_plots": [
+                  {
+                    "type": "SHAP",
+                    "name": "Mean Absolute Shap Values",
+                    "results": [
+                      {
+                        "name": "age",
+                        "value": 2.7313991690892594e-8
+                      },
+                      {
+                        "name": "gender",
+                        "value": 2.1010905880210835e-11
+                      },
+                      {
+                        "name": "income",
+                        "value": 0.027878870612476556
+                      },
+                      {
+                        "name": "race",
+                        "value": 1.9742755605937866e-11
+                      },
+                      {
+                        "name": "home_ownership",
+                        "value": 4.98389997821369e-12
+                      },
+                      {
+                        "name": "prior_count",
+                        "value": 2.7000142407680143e-8
+                      },
+                      {
+                        "name": "loan_amount",
+                        "value": 0.03782010359850043
+                      },
+                      {
+                        "name": "loan_interests",
+                        "value": 3.5613580001571624e-12
+                      }
+                    ]
+                  }
+                ],
+                "graph_plots": [
+                  {
+                    "type": "partial_dependence",
+                    "name": "Partial Dependence Plot",
+                    "results": [
+                      {
+                        "class": "1",
+                        "feature": "gender",
+                        "data": [
+                          {
+                            "x_value": 0.0,
+                            "y_value": 1.0
+                          },
+                          {
+                            "x_value": 1.0,
+                            "y_value": 1.0
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

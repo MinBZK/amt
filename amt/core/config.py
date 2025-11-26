@@ -66,6 +66,11 @@ class Settings(BaseSettings):
 
     TASK_REGISTRY_URL: str = "https://task-registry.apps.digilab.network"
 
+    # ALGORITMEREGISTER_API_URL: str = "http://localhost:8000/aanleverapi/v1_0"
+    ALGORITMEREGISTER_API_URL: str = "http://deployment-1-algor-dev.kind/aanleverapi/v1_0"
+    ALGORITMEREGISTER_TOKEN_URL: str = "http://keycloak.kind/realms/algor-dev-local/protocol/openid-connect/token"
+    ALGORITMEREGISTER_CLIENT_ID: str = "authentication-client"
+
     OBJECT_STORE_URL: str = "localhost:9000"
     OBJECT_STORE_USER: str = "amt"
     OBJECT_STORE_PASSWORD: str = "changeme"  # noqa: S105
