@@ -185,11 +185,12 @@ def create_object_storage_service(
     username: str = get_settings().OBJECT_STORE_USER,
     password: str = get_settings().OBJECT_STORE_PASSWORD,
     bucket_name: str = get_settings().OBJECT_STORE_BUCKET_NAME,
+    region: str = get_settings().OBJECT_STORE_REGION,
     secure: bool = False,
 ) -> ObjectStorageService:
     """
     Creates an instance of the ObjectStorageService.
     """
     metadata_extractor = MinioMetadataExtractor()
-    client = Minio(endpoint=url, access_key=username, secret_key=password, secure=secure)
+    client = Minio(endpoint=url, access_key=username, secret_key=password, secure=secure, region=region)
     return ObjectStorageService(client, metadata_extractor, bucket_name=bucket_name)
