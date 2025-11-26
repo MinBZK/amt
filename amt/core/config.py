@@ -1,5 +1,6 @@
 import logging
 import secrets
+import tempfile
 from pathlib import Path
 from typing import Any, TypeVar
 
@@ -31,6 +32,8 @@ class Settings(BaseSettings):
 
     LOGGING_LEVEL: LoggingLevelType = "INFO"
     LOGGING_CONFIG: dict[str, Any] | None = None
+    LOG_TO_FILE: bool = False
+    LOGFILE_LOCATION: Path = Path(tempfile.gettempdir())
 
     DEBUG: bool = False
     AUTO_CREATE_SCHEMA: bool = False

@@ -103,6 +103,8 @@ AMT uses environmental options that you can set when running the application.
 | ENVIRONMENT             | local or production                                                   | local                       |
 | LOGGING_LEVEL           | default Logging level "DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL" | INFO                        |
 | LOGGING_CONFIG          | json dict of extra logging config                                     |                             |
+| LOG_TO_FILE             | enable logging to file (amt.log)                                      | False                       |
+| LOGFILE_LOCATION        | directory path where log file should be written                       | OS temp directory           |
 | DEBUG                   | enable debugging with trace dumps                                     | False                       |
 | AUTO_CREATE_SCHEMA      | Auto create schema, not recommended for production                    | False                       |
 | CARD_DIR                | Directory to Card storage                                             | /tmp/                       |
