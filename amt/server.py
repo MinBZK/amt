@@ -23,7 +23,12 @@ from .middleware.htmx import HTMXMiddleware
 from .middleware.route_logging import RequestLoggingMiddleware
 from .middleware.security import SecurityMiddleware
 
-configure_logging(get_settings().LOGGING_LEVEL, get_settings().LOGGING_CONFIG)
+configure_logging(
+    get_settings().LOGGING_LEVEL,
+    get_settings().LOGGING_CONFIG,
+    get_settings().LOG_TO_FILE,
+    get_settings().LOGFILE_LOCATION,
+)
 
 logger = logging.getLogger(__name__)
 
