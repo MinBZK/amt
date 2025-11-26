@@ -47,6 +47,7 @@ poetry = "^2.2.1"
 jinja-roos-components = {git = "https://github.com/RijksICTGilde/jinja-roos-components.git", branch = "table-and-more-conversion"}
 #jinja-roos-components = {path = "../jinja-roos-components", develop = true}
 aenum = "^3.1.16"
+python-dateutil = "^2.9.0.post0"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.4.2"
