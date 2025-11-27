@@ -1,25 +1,25 @@
-<c-card outline="true" padding="sm">
 <c-layout-flow gap="md">
-<c-alert class="rvo-layout-justify-content-start" maxWidth="sm" kind="info" heading="Publiceren in het Algoritmeregister">
-<c-layout-flow gap="md">
-<c-p>{% trans %}In het centrale algoritmeregister van de Nederlandse overheid publiceren
-overheden
-informatie over hun algoritmes op één plek, zodat het doorzoekbaar is voor
-iedereen.{% endtrans %}</c-p>
-<c-p>{% trans %}Via AMT kan een algoritme aangeboden worden in het
-algoritmeregister.{% endtrans %}</c-p>
-<c-p>{% trans %}Het algoritmeregister is geen onderdeel van AMT en om een algoritme te kunnen
-aanleveren is aanmelden bij het register noodzakelijk.{% endtrans %}</c-p>
-<c-p>{% trans %}Het aanleveren van een algoritme is enkel mogelijk indien u al over
-aanmeldgegevens
-voor het register beschikt.{% endtrans %}</c-p>
-<c-p>
-<c-link target="_blank" href="https://www.digitaleoverheid.nl/overzicht-van-alle-onderwerpen/algoritmes/algoritmes-publiceren/">
-Lees hier meer over het Algoritmeregisiter
-</c-link>
-</c-p>
+    <c-alert class="rvo-layout-justify-content-start" maxWidth="sm" kind="info"
+             heading="Publiceren in het Algoritmeregister">
+        <c-layout-flow gap="md">
+            <c-p>{% trans %}In het centrale algoritmeregister van de Nederlandse overheid publiceren
+                overheden
+                informatie over hun algoritmes op één plek, zodat het doorzoekbaar is voor
+                iedereen.{% endtrans %}</c-p>
+            <c-p>{% trans %}Via AMT kan een algoritme aangeboden worden in het
+                algoritmeregister.{% endtrans %}</c-p>
+            <c-p>{% trans %}Het algoritmeregister is geen onderdeel van AMT en om een algoritme te kunnen
+                aanleveren is aanmelden bij het register noodzakelijk.{% endtrans %}</c-p>
+            <c-p>{% trans %}Het aanleveren van een algoritme is enkel mogelijk indien u al over
+                aanmeldgegevens
+                voor het register beschikt.{% endtrans %}</c-p>
+            <c-p>
+                <c-link target="_blank"
+                        href="https://www.digitaleoverheid.nl/overzicht-van-alle-onderwerpen/algoritmes/algoritmes-publiceren/">
+                    Lees hier meer over het Algoritmeregisiter
+                </c-link>
+            </c-p>
+        </c-layout-flow>
+    </c-alert>
+    <c-button @click="window.location='./publish/start'" kind="primary">Start met publiceren</c-button>
 </c-layout-flow>
-</c-alert>
-<c-button @click="window.location='./publish/start'" kind="primary">Start met publiceren</c-button>
-</c-layout-flow>
-</c-card>

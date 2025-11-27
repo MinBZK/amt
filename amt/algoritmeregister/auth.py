@@ -1,13 +1,16 @@
 from typing import Any
 
 import httpx
+from fastapi import status
 
 from amt.core.config import get_settings
-from amt.core.exceptions import AMTError
+from amt.core.exceptions import AMTHTTPException
 
 
-class AlgoritmeregisterAuthError(AMTError):
-    pass
+class AlgoritmeregisterAuthError(AMTHTTPException):
+    def __init__(self, detail: str = "Authentication with Algoritmeregister failed") -> None:
+        self.detail: str = detail
+        super().__init__(status.HTTP_401_UNAUTHORIZED, self.detail)
 
 
 async def get_access_token(username: str, password: str) -> str:

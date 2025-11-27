@@ -1,4 +1,3 @@
-import datetime
 import logging
 from http.client import HTTPException
 from typing import Annotated
@@ -14,13 +13,13 @@ from amt.algoritmeregister.auth import get_access_token
 from amt.algoritmeregister.mapper import AlgorithmMapper
 from amt.algoritmeregister.openapi.v1_0.client.openapi_client import AlgorithmSummary
 from amt.algoritmeregister.publisher import (
+    PreviewResult,
+    PublicationException,
     PublicationResult,
-    ReleaseResult,
     get_algorithms_status,
+    preview_algorithm,
     publish_algorithm,
     release_algorithm,
-    preview_algorithm,
-    PreviewResult,
 )
 from amt.api.decorators import permission
 from amt.api.deps import templates
@@ -35,15 +34,15 @@ from amt.core.authorization import (
     AuthorizationResource,
     AuthorizationVerb,
 )
+from amt.core.exceptions import AMTAuthorizationError, AMTNotFound
 from amt.core.session_utils import (
-    get_algoritmeregister_credentials,
     AlgoritmeregisterCredentials,
+    get_algoritmeregister_credentials,
     store_algoritmeregister_credentials,
 )
 from amt.enums.tasks import (
     Status,
 )
-from amt.models import Publication
 from amt.schema.algoritmeregister import AlgoritmeregisterCredentials
 from amt.services.algorithms import AlgorithmsService
 from amt.services.publications import PublicationsService
@@ -52,9 +51,6 @@ from amt.services.services_provider import ServicesProvider, get_service_provide
 router = APIRouter()
 logger = logging.getLogger(__name__)
 
-# TODO: decide where credentials come from
-username = "rig"
-password = "rig"
 organisation_id = "RIG"
 
 
@@ -74,17 +70,21 @@ async def ar_login(
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
     publication = await publication_service.get_by_algorithm_id(algorithm_id)
 
-    publication_status = None
+    publication_status = PublicationStatuses.NONE
     if publication is not None:
-        algorithm_summary: list[AlgorithmSummary] = await get_algorithms_status(
-            username, password, publication.organization_code, publication.lars
-        )
-        if algorithm_summary[0].published:
-            publication_status = PublicationStatuses.PUBLISHED
-        elif algorithm_summary[0].current_version_released:
-            publication_status = PublicationStatuses.STATE_2
-        else:
-            publication_status = PublicationStatuses.STATE_1
+        try:
+            algorithm_summary: list[AlgorithmSummary] = await get_algorithms_status(
+                credentials.username, credentials.password, publication.organization_code, publication.lars
+            )
+            if algorithm_summary[0].published:
+                publication_status = PublicationStatuses.PUBLISHED
+            elif algorithm_summary[0].current_version_released:
+                publication_status = PublicationStatuses.STATE_2
+            else:
+                publication_status = PublicationStatuses.STATE_1
+        except PublicationException as e:
+            logger.warning(f"Failed to get algorithm status: {e!s}")
+
 
     context = {
         "permission_path": AuthorizationResource.ALGORITHM_SYSTEMCARD.format_map({"algorithm_id": algorithm.id}),
@@ -114,17 +114,17 @@ async def pre_publish(
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
     publication = await publication_service.get_by_algorithm_id(algorithm_id)
 
-    publication_status = None
-    if publication is not None:
-        algorithm_summary: list[AlgorithmSummary] = await get_algorithms_status(
-            username, password, publication.organization_code, publication.lars
-        )
-        if algorithm_summary[0].published:
-            publication_status = PublicationStatuses.PUBLISHED
-        elif algorithm_summary[0].current_version_released:
-            publication_status = PublicationStatuses.STATE_2
-        else:
-            publication_status = PublicationStatuses.STATE_1
+    publication_status = PublicationStatuses.NONE
+    # if publication is not None:
+    #     algorithm_summary: list[AlgorithmSummary] = await get_algorithms_status(
+    #         username, password, publication.organization_code, publication.lars
+    #     )
+    #     if algorithm_summary[0].published:
+    #         publication_status = PublicationStatuses.PUBLISHED
+    #     elif algorithm_summary[0].current_version_released:
+    #         publication_status = PublicationStatuses.STATE_2
+    #     else:
+    #         publication_status = PublicationStatuses.STATE_1
 
     tab_items = get_algorithm_details_tabs(request)
 
@@ -198,12 +198,12 @@ async def publish_start(
     error_message = None
 
     # Step 1: Create algorithm (STATE_1)
-    create_result: PublicationResult = await publish_algorithm(
-        algorithm=algorithm,
-        username=username,
-        password=password,
-        organisation_id=organisation_id,
-    )
+    # create_result: PublicationResult = await publish_algorithm(
+    #     algorithm=algorithm,
+    #     username=username,
+    #     password=password,
+    #     organisation_id=organisation_id,
+    # )
 
     steps = [
         {"state": "start", "line": "straight", "size": "md", "label": "Start", "link": "#"},
@@ -298,12 +298,16 @@ async def publish_release(
 ) -> HTMLResponse:
     publication_service = await services_provider.get(PublicationsService)
 
+    credentials: AlgoritmeregisterCredentials | None = get_algoritmeregister_credentials(request)
+    if not credentials:
+        raise AMTAuthorizationError()
+
     publication = await publication_service.get_by_algorithm_id(algorithm_id)
 
-    if publication is None:
-        raise HTTPException(status_code=404, detail="Publication not found")
+    if not publication:
+        raise AMTNotFound()
 
-    await release_algorithm(username=username, password=password, organisation_id=organisation_id, lars_code=lars)
+    await release_algorithm(username=credentials.username, password=credentials.password, organisation_id=organisation_id, lars_code=lars)
 
     publication.publication_status = PublicationStatuses.STATE_2
     await publication_service.update(publication)
@@ -324,13 +328,17 @@ async def preview(
 ) -> RedirectResponse:
     publication_service = await services_provider.get(PublicationsService)
 
+    credentials: AlgoritmeregisterCredentials = get_algoritmeregister_credentials(request)
+    if not credentials:
+        raise AMTAuthorizationError()
+
     publication = await publication_service.get_by_algorithm_id(algorithm_id)
 
     if publication is None:
-        raise HTTPException(status_code=404, detail="Publication not found")
+        raise AMTNotFound()
 
     preview_result: PreviewResult = await preview_algorithm(
-        username=username, password=password, organisation_id=organisation_id, lars_code=lars
+        username=credentials.username, password=credentials.password, organisation_id=organisation_id, lars_code=lars
     )
 
     publication.publication_status = PublicationStatuses.STATE_2
