@@ -16,7 +16,7 @@ RequestResponseEndpoint = typing.Callable[[Request], typing.Awaitable[Response]]
 
 class AuthorizationMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next: RequestResponseEndpoint) -> Response:
-        if request.url.path in ["/auth/login", "/auth/logout", "/auth/callback", "/health/live", "/health/ready", "/"]:
+        if request.url.path in ["/auth/login", "/auth/logout", "/auth/callback", "/health/live", "/health/ready", "/", "/debug-headers"]:
             return await call_next(request)
 
         if request.url.path.startswith("/static/"):

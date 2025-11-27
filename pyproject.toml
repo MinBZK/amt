@@ -44,7 +44,10 @@ jinja2-base64-filters = "^0.1.4"
 python-multipart = "^0.0.20"
 minio = "^7.2.16"
 poetry = "^2.2.1"
-
+jinja-roos-components = {git = "https://github.com/RijksICTGilde/jinja-roos-components.git", branch = "table-and-more-conversion"}
+#jinja-roos-components = {path = "../jinja-roos-components", develop = true}
+aenum = "^3.1.16"
+python-dateutil = "^2.9.0.post0"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.4.2"
@@ -83,7 +86,7 @@ build-backend = "poetry.core.masonry.api"
 line-length = 120
 target-version = "py312"
 src = ["amt","tests"]
-exclude = ["amt/migrations"]
+exclude = ["amt/migrations", "amt/algoritmeregister/openapi/**/client"]
 
 [tool.ruff.format]
 line-ending = "lf"
@@ -109,7 +112,8 @@ reportUnnecessaryIsInstance = false
 exclude = [
     "amt/migrations",
     ".venv",
-    "node_modules"
+    "node_modules",
+    "amt/algoritmeregister/openapi/**/client"
 ]
 
 [tool.coverage.run]
@@ -117,7 +121,8 @@ branch = true
 command_line = "-m pytest"
 relative_files = true # needed for sonarcloud code coverage
 omit = [
-    "tests/*"
+    "tests/*",
+    "amt/algoritmeregister/openapi/**/client/*"
 ]
 concurrency = ["greenlet", "thread"]
 

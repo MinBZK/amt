@@ -26,6 +26,7 @@ class DisplayText(Enum):
     OVERVIEW = "overview"
     TASKS = "tasks"
     NEW = "new"
+    PUBLISH = "publish"
     SYSTEMCARD = "systemcard"
     ASSESSMENTCARD = "assessmentcard"
     MODELCARD = "modelcard"
@@ -50,6 +51,7 @@ def get_translation(key: DisplayText, translations: NullTranslations) -> str:
         DisplayText.OVERVIEW: _("Overview"),
         DisplayText.TASKS: _("Tasks"),
         DisplayText.NEW: _("New"),
+        DisplayText.PUBLISH: _("Publish"),
         DisplayText.SYSTEMCARD: _("System card"),
         DisplayText.ASSESSMENTCARD: _("Assessment card"),
         DisplayText.MODELCARD: _("Model card"),
@@ -108,6 +110,7 @@ class Navigation:
         display_text=DisplayText.ALGORITHM_DETAILS, url="/algorithm/{algorithm_id}/details"
     )
     ALGORITHM_NEW = BaseNavigationItem(display_text=DisplayText.NEW, url="/algorithms/new")
+    ALGORITHM_PUBLISH = BaseNavigationItem(display_text=DisplayText.PUBLISH, url="/algorithm/{algorithm_id}/publish")
     ALGORITHM_INFO = BaseNavigationItem(display_text=DisplayText.INFO, url="/algorithm/{algorithm_id}/info")
 
     ALGORITHM_MODEL_CARD = BaseNavigationItem(
