@@ -68,8 +68,8 @@ class Settings(BaseSettings):
 
     # ALGORITMEREGISTER_API_URL: str = "http://localhost:8000/aanleverapi/v1_0"
     ALGORITMEREGISTER_API_URL: str = "http://deployment-1-algor-dev.kind/aanleverapi/v1_0"
-    # ALGORITMEREGISTER_TOKEN_URL: str = "http://keycloak.kind/realms/algor-dev-local/protocol/openid-connect/token"
-    ALGORITMEREGISTER_TOKEN_URL: str = "https://keycloak.rig.prd1.gn2.quattro.rijksapps.nl/realms/algor-odc-odcn-production/protocol/openid-connect/token"
+    ALGORITMEREGISTER_TOKEN_URL: str = "http://keycloak.kind/realms/algor-dev-local/protocol/openid-connect/token"
+    # ALGORITMEREGISTER_TOKEN_URL: str = "https://keycloak.rig.prd1.gn2.quattro.rijksapps.nl/realms/algor-odc-odcn-production/protocol/openid-connect/token"
     ALGORITMEREGISTER_CLIENT_ID: str = "authentication-client"
 
     OBJECT_STORE_URL: str = "localhost:9000"
