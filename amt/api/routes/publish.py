@@ -1,6 +1,5 @@
 import datetime
 import logging
-from http.client import HTTPException
 from typing import Annotated
 
 from fastapi import (
@@ -494,7 +493,9 @@ async def publish_confirm(
 
     if publication is None and create_result.lars_code:
         publication = Publication(
-            last_updated=datetime.datetime.now(tz=datetime.UTC),
+            # Using naive datetime because the database column is TIMESTAMP WITHOUT TIME ZONE
+            # TODO: migrate database to TIMESTAMP WITH TIME ZONE for proper timezone handling
+            last_updated=datetime.datetime.now(tz=None),  # noqa: DTZ005
             algorithm=algorithm,
             lars=create_result.lars_code,
             organization_code=organisation_id,

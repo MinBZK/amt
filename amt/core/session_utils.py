@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 def get_algoritmeregister_credentials(request: Request) -> AlgoritmeregisterCredentials | None:
     # TODO: temporary hardcoded credentials for testing, remove after fixing session issue
-    return AlgoritmeregisterCredentials(username="ictu_user1", password="demo123")  # noqa: S106
+    return AlgoritmeregisterCredentials(username="minbzk_user1", password="demo123")  # noqa: S106
 
 
 def store_algoritmeregister_credentials(request: Request, credentials: AlgoritmeregisterCredentials) -> None:
