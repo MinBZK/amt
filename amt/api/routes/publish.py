@@ -145,9 +145,6 @@ async def pre_publish(
         request,
     )
 
-    test = get_algoritmeregister_credentials(request)
-    print(test)
-
     context = {
         "permission_path": AuthorizationResource.ALGORITHM_SYSTEMCARD.format_map({"algorithm_id": algorithm.id}),
         "statuses": Status,

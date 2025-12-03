@@ -13,6 +13,7 @@ async def test_store_and_get_algoritmeregister_credentials(mocker: MockerFixture
     # given
     mock_request = mocker.Mock()
     mock_request.session = {}  # type: ignore
+    mock_request.cookies = {}  # type: ignore
     credentials = AlgoritmeregisterCredentials(username="test_user", password="test_pass", token="test_token")  # noqa: S106
 
     # when
@@ -33,6 +34,7 @@ async def test_get_algoritmeregister_credentials_returns_none_when_not_set(mocke
     # given
     mock_request = mocker.Mock()
     mock_request.session = {}  # type: ignore
+    mock_request.cookies = {}  # type: ignore
 
     # when
     result = get_algoritmeregister_credentials(mock_request)
@@ -46,6 +48,7 @@ async def test_clear_algoritmeregister_credentials(mocker: MockerFixture) -> Non
     # given
     mock_request = mocker.Mock()
     mock_request.session = {}  # type: ignore
+    mock_request.cookies = {}  # type: ignore
     credentials = AlgoritmeregisterCredentials(username="test_user", password="test_pass", token="test_token")  # noqa: S106
     store_algoritmeregister_credentials(mock_request, credentials)
 
@@ -63,6 +66,7 @@ async def test_clear_algoritmeregister_credentials_when_not_set(mocker: MockerFi
     # given
     mock_request = mocker.Mock()
     mock_request.session = {}  # type: ignore
+    mock_request.cookies = {}  # type: ignore
 
     # when
     clear_algoritmeregister_credentials(mock_request)

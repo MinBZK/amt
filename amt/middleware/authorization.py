@@ -1,3 +1,4 @@
+import logging
 import os
 import typing
 from uuid import UUID
@@ -11,12 +12,14 @@ from amt.models import User
 from amt.services.authorization import AuthorizationsService
 from amt.services.services_provider import ServicesProvider
 
+logger = logging.getLogger(__name__)
+
 RequestResponseEndpoint = typing.Callable[[Request], typing.Awaitable[Response]]
 
 
 class AuthorizationMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next: RequestResponseEndpoint) -> Response:
-        if request.url.path in ["/auth/login", "/auth/logout", "/auth/callback", "/health/live", "/health/ready", "/", "/debug-headers"]:
+        if request.url.path in ["/auth/login", "/auth/logout", "/auth/callback", "/health/live", "/health/ready", "/"]:
             return await call_next(request)
 
         if request.url.path.startswith("/static/"):

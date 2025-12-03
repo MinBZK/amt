@@ -78,6 +78,11 @@ class Settings(BaseSettings):
     OBJECT_STORE_BUCKET_NAME: str = "amt"
     OBJECT_STORE_REGION: str = "us-east-1"
 
+    SESSION_COOKIE_NAME: str = "session_id"
+    SESSION_TTL_SECONDS: int = 60 * 60  # 1 hour
+    SESSION_CLEANUP_INTERVAL_SECONDS: int = 60
+    SESSION_COOKIE_SECURE: bool = False
+
     @computed_field
     def SQLALCHEMY_ECHO(self) -> bool:
         return self.DEBUG
