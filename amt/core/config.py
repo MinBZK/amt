@@ -66,11 +66,22 @@ class Settings(BaseSettings):
 
     TASK_REGISTRY_URL: str = "https://task-registry.apps.digilab.network"
 
+    # ALGORITMEREGISTER_API_URL: str = "http://localhost:8000/aanleverapi/v1_0"
+    ALGORITMEREGISTER_API_URL: str = "http://deployment-1-algor-dev.kind/aanleverapi/v1_0"
+    ALGORITMEREGISTER_TOKEN_URL: str = "http://keycloak.kind/realms/algor-dev-local/protocol/openid-connect/token"
+    # ALGORITMEREGISTER_TOKEN_URL: str = "https://keycloak.rig.prd1.gn2.quattro.rijksapps.nl/realms/algor-odc-odcn-production/protocol/openid-connect/token"
+    ALGORITMEREGISTER_CLIENT_ID: str = "authentication-client"
+
     OBJECT_STORE_URL: str = "localhost:9000"
     OBJECT_STORE_USER: str = "amt"
     OBJECT_STORE_PASSWORD: str = "changeme"  # noqa: S105
     OBJECT_STORE_BUCKET_NAME: str = "amt"
     OBJECT_STORE_REGION: str = "us-east-1"
+
+    SESSION_COOKIE_NAME: str = "session_id"
+    SESSION_TTL_SECONDS: int = 60 * 60  # 1 hour
+    SESSION_CLEANUP_INTERVAL_SECONDS: int = 60
+    SESSION_COOKIE_SECURE: bool = False
 
     @computed_field
     def SQLALCHEMY_ECHO(self) -> bool:

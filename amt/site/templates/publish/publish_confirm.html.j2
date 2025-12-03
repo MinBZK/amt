@@ -1,0 +1,17 @@
+{% extends 'layouts/base.html.j2' %}
+{% from "macros/editable_macros.html.j2" import editable with context %}
+{% import "macros/tabs.html.j2" as tabs with context %}
+{% block title %}{{ algorithm.name }} | AMT{% endblock %}
+{% block content %}
+    <c-max-width-layout size="lg">
+        <c-grid columns="two" division="1fr 3fr">
+            <c-progress-tracker :steps="steps"/>
+            <div>
+                <c-heading type="h1" class="rvo-layout-margin-vertical--xl">Publicatie geslaagd</c-heading>
+                <c-card outline="true">
+                    <c-p>De publicatie is beschikbaar in het algoritmeregister.</c-p>
+                </c-card>
+            </div>
+        </c-grid>
+    </c-max-width-layout>
+{% endblock %}

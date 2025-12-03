@@ -1,0 +1,19 @@
+<c-card outline="true" padding="sm">
+    <c-layout-flow gap="md">
+        <c-alert class="rvo-layout-justify-content-start" maxWidth="sm" kind="info"
+                 heading="Inloggen bij het Algoritmeregister">
+            {% trans %}U moet inloggen bij het Algoritmeregister om te kunnen publiceren of de status in te
+                zien.{% endtrans %}
+            {% trans %}Deze gegevens worden niet vastgelegd in AMT en alleen in deze sessie gebruikt. {% endtrans %}
+        </c-alert>
+        <form id="ar-login-container" hx-ext="json-enc" hx-post="./ar-login" hx-target="#publish-content-container"
+              hx-swap="innerHTML">
+            <c-text-input-field id="username" name="username" label="{% trans %}Name{% endtrans %}" required="true"/>
+            <c-text-input-field type="password" id="password" name="password" label="{% trans %}Password{% endtrans %}"
+                                required="true"/>
+            <c-button type="submit">
+                Aanmelden
+            </c-button>
+        </form>
+    </c-layout-flow>
+</c-card>
