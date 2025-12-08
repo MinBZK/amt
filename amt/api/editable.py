@@ -628,7 +628,14 @@ async def save_editable(  # noqa: C901
                 services_provider,
             )
     else:
-        new_value = editable_context.get("new_values", {}).get(editable.last_path_item())
+        field_name, index = extract_number_and_string(editable.last_path_item())
+        new_values_dict = editable_context.get("new_values", {})
+
+        if index is not None:
+            index = 0  # TODO: the form post is always for one list item, so the index does not change
+            new_value = new_values_dict.get(field_name, [])[index] if field_name in new_values_dict else None
+        else:
+            new_value = new_values_dict.get(editable.last_path_item())
 
         # we validate on 'raw' form fields, so validation is done before the converter
         if editable.validator and editable.relative_resource_path is not None:

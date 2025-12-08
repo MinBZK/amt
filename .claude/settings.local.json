@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./script/format tests/repositories/test_deps.py)",
+      "Bash(./script/format)",
+      "Bash(./script/format:*)",
+      "Bash(./script/lint:*)",
+      "Bash(./script/test:*)",
+      "Bash(coverage run && coverage report)",
+      "Bash(grep:*)",
+      "Bash(ls:*)",
+      "Bash(poetry run coverage:*)",
+      "Bash(poetry run pytest:*)",
+      "Bash(pyright:*)",
+      "Bash(pytest:*)",
+      "Bash(ruff check:*)",
+      "Bash(python -m pytest tests/api/routes/test_organizations.py::test_get_new_organizations tests/api/routes/test_organizations.py::test_get_users tests/api/test_editable_converters.py::test_editable_converter_for_authorization_role -v)",
+      "Bash(python -m pytest tests/api/routes/test_organizations.py tests/api/test_editable_converters.py)",
+      "Bash(python -m pytest tests/core/test_dynamic_translations.py -v)",
+      "Bash(python -m pytest tests/api/routes/test_icons.py -v)",
+      "Bash(python -m pytest tests/api/routes/test_organizations.py::test_get_new_organizations tests/api/routes/test_organizations.py::test_get_users tests/api/test_editable_converters.py::test_editable_converter_for_authorization_role tests/core/test_dynamic_translations.py tests/api/routes/test_icons.py -v)",
+      "Bash(npm run typecheck:*)",
+      "Bash(python -m pytest -xvs tests/repositories/test_authorizations.py)",
+      "Bash(python -m pytest -xvs tests/api/routes/test_organizations.py)",
+      "Bash(python -m pytest -xvs tests/api/routes/test_organizations.py::test_delete_member)",
+      "Bash(python -m pytest -xvs tests/services/test_authorization_service.py)",
+      "Bash(python -m pytest -xvs tests/models/test_model_*)",
+      "Bash(python -m pytest -xvs tests/repositories/test_authorizations.py::test_find_all)",
+      "Bash(python -m pytest -xvs tests/repositories/test_authorizations.py::test_find_all --no-header -v)",
+      "Bash(python3:*)",
+      "Bash(pip show:*)",
+      "Bash(find:*)",
+      "Bash(python:*)"
+    ],
+    "deny": []
+  },
+  "enableAllProjectMcpServers": false
+}

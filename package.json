@@ -48,8 +48,9 @@
   },
   "dependencies": {
     "@nl-rvo/assets": "1.0.0-alpha.360",
-    "@nl-rvo/component-library-css": "4.7.0",
-    "@nl-rvo/design-tokens": "1.8.0",
+    "@nl-rvo/component-library-css": "4.12.1",
+    "@nl-rvo/design-tokens": "1.12.0",
+    "@nl-rvo/css-alert": "1.3.3",
     "htmx.org": "^2.0.6",
     "hyperscript.org": "^0.9.14",
     "reset-css": "^5.0.2",

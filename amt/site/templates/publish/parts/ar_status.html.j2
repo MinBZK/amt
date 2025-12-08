@@ -1,0 +1,51 @@
+<c-card outline="true" padding="sm">
+    <c-layout-flow gap="md">
+        <c-grid columns="two">
+            <div>
+                <c-heading type="h3">Status</c-heading>
+                <c-tag type="warning"
+                       content="{{ get_localized_value('publication-status', publication_status, request).display_value | safe }}"></c-tag>
+                {% if PublicationStatuses.STATE_1 == publication_status %}
+                    <c-p class="rvo-layout-margin-vertical--md" text-style="subtle">
+                        Het algoritme is aangeleverd bij het Algoritmeregister, maar nog niet vrijgegeven voor
+                        publicatie.
+                    </c-p>
+                    <c-button type="button" hx-get="/algorithm/{{ algorithm_id }}/release/{{ publication.lars }}">
+                        Publicatie vrijgeven
+                    </c-button>
+                {% endif %}
+            </div>
+            <div>
+                <c-heading type="h3">Publicatie</c-heading>
+                {% if not publication %}
+                    Er is nog geen publicatie informatie beschikbaar.
+                {% elif publication.publication_link %}
+                    <c-link href="#">Link naar je publicatie</c-link>
+                {% else %}
+                    <c-p text-style="subtle">{% trans %}Het algoritme is pas beschikbaar als het vrijgegeven en
+                        gepubliceerd is. Dit is nu niet het geval.{% endtrans %}</c-p>
+                    <c-button type="button"
+                              @click="window.open('/algorithm/{{ algorithm_id }}/preview/{{ publication.lars }}')">
+                        Bekijk de preview op het Algoritmeregister
+                    </c-button>
+                {% endif %}
+            </div>
+        </c-grid>
+        <c-hr/>
+        {% if not publication %}
+            {% include "publish/parts/ar_explanation.html.j2" %}
+        {% else %}
+        <c-alert class="rvo-layout-justify-content-start" maxWidth="sm" kind="info"
+                 heading="Status publicatie in het Algoritmeregister">
+            {% if PublicationStatuses.NONE == publication_status %}
+                {% trans %}De publicatie is nog niet bekend in het Algoritmeregister.{% endtrans %}
+            {% elif PublicationStatuses.STATE_1 == publication_status %}
+                {% trans %}De publicatie is aangeboden maar moet nog worden vrijgegeven.{% endtrans %}
+            {% elif PublicationStatuses.STATE_2 == publication_status %}
+                {% trans %}De publicatie is vrijgegeven en moet door het team van het Algoritmeregister goedgekeurd
+                    worden.{% endtrans %}
+            {% endif %}
+        </c-alert>
+        {% endif %}
+    </c-layout-flow>
+</c-card>
