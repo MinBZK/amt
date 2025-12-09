@@ -10,17 +10,17 @@ from starlette.responses import Response
 
 
 def test_url_for_cache_not_static():
-    with pytest.raises(AMTOnlyStatic, match="Only static files are supported."):
+    with pytest.raises(AMTOnlyStatic, match=r"Only static files are supported."):
         http_browser_caching.url_for_cache("not-static")
 
 
 def test_url_for_cache_not_local():
-    with pytest.raises(AMTOnlyStatic, match="Only static files are supported."):
+    with pytest.raises(AMTOnlyStatic, match=r"Only static files are supported."):
         http_browser_caching.url_for_cache("static", path="http://this.is.not.local")
 
 
 def test_url_for_cache_file_not_found():
-    with pytest.raises(AMTNotFound, match="The requested page or resource could not be found."):
+    with pytest.raises(AMTNotFound, match=r"The requested page or resource could not be found."):
         http_browser_caching.url_for_cache("static", path="this/does/not/exist")
 
 

@@ -30,7 +30,7 @@ async def test_cookie_only_csrf_protect_validate_csrf_missing_token(mocker: Mock
     request = Request(scope)
 
     # when/then
-    with pytest.raises(MissingTokenError, match="Missing Cookie: `csrf_token`."):
+    with pytest.raises(MissingTokenError, match=r"Missing Cookie: `csrf_token`."):
         await csrf_protect.validate_csrf(request)
 
 
@@ -54,7 +54,7 @@ async def test_cookie_only_csrf_protect_validate_csrf_expired_token(mocker: Mock
     mocker.patch("amt.middleware.csrf.URLSafeTimedSerializer", return_value=mock_serializer)
 
     # when/then
-    with pytest.raises(TokenValidationError, match="The CSRF token has expired."):
+    with pytest.raises(TokenValidationError, match=r"The CSRF token has expired."):
         await csrf_protect.validate_csrf(request)
 
 
@@ -78,7 +78,7 @@ async def test_cookie_only_csrf_protect_validate_csrf_invalid_token(mocker: Mock
     mocker.patch("amt.middleware.csrf.URLSafeTimedSerializer", return_value=mock_serializer)
 
     # when/then
-    with pytest.raises(TokenValidationError, match="The CSRF token is invalid."):
+    with pytest.raises(TokenValidationError, match=r"The CSRF token is invalid."):
         await csrf_protect.validate_csrf(request)
 
 
