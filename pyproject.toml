@@ -44,6 +44,8 @@ jinja2-base64-filters = "^0.1.4"
 python-multipart = "^0.0.20"
 minio = "^7.2.16"
 poetry = "^2.2.1"
+vcrpy = "^8.1.0"
+urllib3 = "^2.6.0"
 
 
 [tool.poetry.group.test.dependencies]
@@ -56,7 +58,7 @@ playwright = "^1.55.0"
 pytest-playwright = "^0.7.1"
 pytest-httpx = "^0.35.0"
 freezegun = "^1.5.5"
-vcrpy = "^7.0.0"
+vcrpy = "^8.1.0"
 pytest-minio-mock = "^0.4.19"
 
 
