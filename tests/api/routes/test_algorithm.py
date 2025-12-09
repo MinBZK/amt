@@ -24,6 +24,7 @@ from amt.services.users import UsersService
 from fastapi import UploadFile
 from httpx import AsyncClient
 from minio import Minio  # pyright: ignore[reportMissingTypeStubs]
+from minio.versioningconfig import SUSPENDED, VersioningConfig  # pyright: ignore[reportMissingTypeStubs]
 from pytest_minio_mock.plugin import MockMinioClient  # pyright: ignore [reportMissingTypeStubs]
 from pytest_mock import MockFixture
 
@@ -987,6 +988,8 @@ async def test_delete_file(
         secure=False,
     )
     storage_client.make_bucket(get_settings().OBJECT_STORE_BUCKET_NAME)
+    # pytest-minio-mock requires explicit versioning config for remove_object to work
+    storage_client.set_bucket_versioning(get_settings().OBJECT_STORE_BUCKET_NAME, VersioningConfig(SUSPENDED))
 
     # Mock UploadFile and upload it to Minio and retrieve the ULID.
     file_content = b"test file content"

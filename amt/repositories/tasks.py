@@ -132,7 +132,7 @@ class TasksRepository(BaseRepository):
             # reminder: session.execute does NOT commit changes
             # this repository uses the get_session which commits for us
             delete_result = await self.session.execute(statement)
-            logger.info(f"Removed {delete_result.rowcount} tasks for algorithm_id = {algorithm_id}")
+            logger.info(f"Removed {delete_result.rowcount} tasks for algorithm_id = {algorithm_id}")  # pyright: ignore[reportUnknownMemberType, reportAttributeAccessIssue]
             self.session.should_commit = True
 
     async def find_by_algorithm_id_and_type(self, algorithm_id: int, task_type: TaskType | None) -> Sequence[Task]:
