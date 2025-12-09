@@ -163,9 +163,14 @@ authorized_licenses = [
     "GNU General Public License (GPL)",
     "GNU Library or Lesser General Public License (LGPL)",
     "MIT",
+    "MIT AND Python-2.0",
     "The Unlicense (Unlicense)",
     "ISC License (ISCL)",
     "Mozilla Public License 2.0 (MPL 2.0)",
     "Python Software Foundation",
+    "PSF-2.0",
     "Public Domain"
 ]
+# wrapt is BSD licensed but reports copyright text instead of a license identifier
+[tool.liccheck.authorized_packages]
+wrapt = "*"
