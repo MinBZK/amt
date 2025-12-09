@@ -25,17 +25,16 @@ class APIClient:
 
     def __init__(self, base_url: str, max_retries: int = 3, timeout: int = 5) -> None:
         self.base_url = base_url
-        transport = httpx.AsyncHTTPTransport(retries=max_retries)
-        self.client = httpx.AsyncClient(timeout=timeout, transport=transport)
+        self.max_retries = max_retries
+        self.timeout = timeout
 
     async def _make_request(self, endpoint: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
-        # we use 'Connection: close' for this reason https://github.com/encode/httpx/discussions/2959
-        response = await self.client.get(
-            f"{self.base_url}/{endpoint}", params=params, headers=[("Connection", "close")]
-        )
-        if response.status_code != 200:
-            raise AMTNotFound()
-        return response.json()
+        transport = httpx.AsyncHTTPTransport(retries=self.max_retries)
+        async with httpx.AsyncClient(timeout=self.timeout, transport=transport) as client:
+            response = await client.get(f"{self.base_url}/{endpoint}", params=params)
+            if response.status_code != 200:
+                raise AMTNotFound()
+            return response.json()
 
 
 class TaskRegistryAPIClient(APIClient):

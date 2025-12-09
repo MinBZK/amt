@@ -45,7 +45,7 @@ class DatabaseTestUtils:
         except SQLAlchemyError:
             await self.session.rollback()
         await self.session.close()
-        thread = (await self.session.connection()).sync_connection.connection.connection  # pyright: ignore[reportUnknownVariableType, reportUnknownMemberType, reportOptionalMemberAccess, reportAttributeAccessIssue]
+        thread = (await self.session.connection()).sync_connection.connection.driver_connection  # pyright: ignore[reportUnknownVariableType, reportUnknownMemberType, reportOptionalMemberAccess, reportAttributeAccessIssue]
         logger.info(
             f"Closing session {thread} / {self.session.info.get('id', 'unknown')} /"
             f"{self.session} and database file {self.database_file}"

@@ -59,15 +59,13 @@ class ServicesProvider:
         if self._session is None:
             self._session = await get_session_non_generator()
             self._should_close_session = True
-            thread = (await self._session.connection()).sync_connection.connection.connection  # pyright: ignore[reportUnknownVariableType, reportUnknownMemberType, reportOptionalMemberAccess, reportAttributeAccessIssue]
+            conn = (await self._session.connection()).sync_connection.connection.driver_connection  # pyright: ignore[reportUnknownVariableType, reportUnknownMemberType, reportOptionalMemberAccess, reportAttributeAccessIssue]
             logger.debug(
-                f"ServiceProvider {id(self)} created a new session {thread} / {self._session.info.get('id', 'unknown')}"
+                f"ServiceProvider {id(self)} created a new session {conn} / {self._session.info.get('id', 'unknown')}"
             )
         else:
-            thread = (await self._session.connection()).sync_connection.connection.connection  # pyright: ignore[reportUnknownVariableType, reportUnknownMemberType, reportOptionalMemberAccess, reportAttributeAccessIssue]
-            logger.debug(
-                f"ServiceProvider {id(self)} using session {thread} / {self._session.info.get('id', 'unknown')}"
-            )
+            conn = (await self._session.connection()).sync_connection.connection.driver_connection  # pyright: ignore[reportUnknownVariableType, reportUnknownMemberType, reportOptionalMemberAccess, reportAttributeAccessIssue]
+            logger.debug(f"ServiceProvider {id(self)} using session {conn} / {self._session.info.get('id', 'unknown')}")
 
         return self._session
 

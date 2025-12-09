@@ -1,8 +1,8 @@
-from collections.abc import Sequence
+from collections.abc import Callable, Sequence
 from os import PathLike
-from typing import Any, AnyStr
+from typing import Any
 
-from jinja2 import Environment
+from jinja2 import Environment, FileSystemLoader
 from starlette.background import BackgroundTask
 from starlette.requests import Request
 from starlette.responses import HTMLResponse
@@ -18,14 +18,15 @@ from amt.core.internationalization import (
 
 # we use a custom override so we can add the translation per request, which is parsed in the Request object in kwargs
 class LocaleJinja2Templates(Jinja2Templates):
-    def _create_env(
+    def __init__(
         self,
-        directory: str | PathLike[AnyStr] | Sequence[str | PathLike[AnyStr]],
+        directory: str | PathLike[str] | Sequence[str | PathLike[str]],
+        context_processors: list[Callable[[Request], dict[str, Any]]] | None = None,
         **env_options: Any,  # noqa: ANN401
-    ) -> Environment:
-        env: Environment = super()._create_env(directory, **env_options)  # pyright: ignore [reportUnknownMemberType, reportUnknownVariableType, reportArgumentType]
-        env.add_extension("jinja2.ext.i18n")  # pyright: ignore [reportUnknownMemberType]
-        return env  # pyright: ignore [reportUnknownVariableType]
+    ) -> None:
+        env = Environment(loader=FileSystemLoader(directory), autoescape=True, **env_options)
+        env.add_extension("jinja2.ext.i18n")
+        super().__init__(env=env, context_processors=context_processors)  # pyright: ignore[reportUnknownMemberType]
 
     def TemplateResponse(  # pyright: ignore [reportIncompatibleMethodOverride]
         self,

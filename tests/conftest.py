@@ -32,10 +32,15 @@ logger = logging.getLogger(__name__)
 # Dubious choice here: allow nested event loops.
 nest_asyncio.apply()  # type: ignore [(reportUnknownMemberType)]
 
+# VCR intercepts HTTP requests at the httpcore level, but httpx still logs as if requests were made.
+# We suppress httpx/httpcore/vcr logging to avoid confusion - the requests are served from VCR cassettes.
 logging.getLogger("vcr").setLevel(logging.WARNING)
+logging.getLogger("httpx").setLevel(logging.WARNING)
+logging.getLogger("httpcore").setLevel(logging.WARNING)
 
 # we use a custom VCR as I could not find out how to use global settings
-amt_vcr = vcr.VCR(ignore_hosts=["127.0.0.1", "localhost", "testserver"], record_mode=RecordMode.NEW_EPISODES)
+# ONCE mode plays back existing cassettes but blocks new unrecorded requests (safer for CI)
+amt_vcr = vcr.VCR(ignore_hosts=["127.0.0.1", "localhost", "testserver"], record_mode=RecordMode.ONCE)
 
 global_e2e_engine: AsyncEngine | None = None
 
@@ -264,7 +269,7 @@ async def db(
 
     async_session = async_sessionmaker(engine, expire_on_commit=False, class_=AsyncSessionWithCommitFlag)
     async with async_session() as session:
-        thread = (await session.connection()).sync_connection.connection.connection  # pyright: ignore[reportUnknownVariableType, reportUnknownMemberType, reportOptionalMemberAccess, reportAttributeAccessIssue]
+        thread = (await session.connection()).sync_connection.connection.driver_connection  # pyright: ignore[reportUnknownVariableType, reportUnknownMemberType, reportOptionalMemberAccess, reportAttributeAccessIssue]
         logger.debug(f"Creating session on thread {thread}")
         session.info["id"] = str(id(session)) + " (pytest)"
         db = DatabaseTestUtils(session, database_file)
