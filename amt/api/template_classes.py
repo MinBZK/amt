@@ -2,6 +2,7 @@ from collections.abc import Callable, Sequence
 from os import PathLike
 from typing import Any
 
+import jinja_roos_components
 from jinja2 import Environment, FileSystemLoader
 from starlette.background import BackgroundTask
 from starlette.requests import Request
@@ -26,6 +27,7 @@ class LocaleJinja2Templates(Jinja2Templates):
     ) -> None:
         env = Environment(loader=FileSystemLoader(directory), autoescape=True, **env_options)
         env.add_extension("jinja2.ext.i18n")
+        jinja_roos_components.setup_components(env, strict_validation=True)  # pyright: ignore [reportUnknownArgumentType]
         super().__init__(env=env, context_processors=context_processors)  # pyright: ignore[reportUnknownMemberType]
 
     def TemplateResponse(  # pyright: ignore [reportIncompatibleMethodOverride]

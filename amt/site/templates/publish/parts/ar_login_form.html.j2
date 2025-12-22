@@ -1,0 +1,39 @@
+{% if login_error is defined and login_error %}
+    <c-alert kind="error" class="rvo-layout-margin-vertical--xl">
+    <c-p class="rvo-layout-margin-vertical--sm">Er kon geen verbinding worden gemaakt met het Algoritmeregister.
+    </c-p>
+    <c-p>Controleer de ingevulde gegevens en probeer het opnieuw.</c-p>
+    </c-alert>
+{% endif %}
+<c-form-fieldset>
+<c-p>
+Om het algoritme te kunnen publiceren of de status te controleren, maken we eerst een veilige verbinding met het
+Algoritmeregister.
+</c-p>
+<c-p>
+Gebruik de login gegevens van het Algoritmeregister om in te loggen.
+</c-p>
+<c-p>
+Login gegevens worden niet vastgelegd in AMT.
+</c-p>
+<form id="ar-login-container"
+      hx-ext="json-enc"
+      hx-post="./login"
+      hx-target="#publish-content-container"
+      hx-swap="innerHTML">
+    <c-text-input-field id="username" name="username" label="{% trans %}Name{% endtrans %}" required="true"
+    {% if values is defined and values.get('username') %}value="{{ values.get('username') }}"{% endif %}
+    {% if errors is defined and errors.get('username') %}errorText="{{ errors.get('username') }}"{% endif %}
+    />
+    <c-text-input-field type="password" id="password" name="password" label="{% trans %}Password{% endtrans %}" required="true"
+    {% if errors is defined and errors.get('password') %}errorText="{{ errors.get('password') }}"{% endif %}
+    />
+    <c-text-input-field id="organization_id" name="organization_id" label="{% trans %}Organisatie Identifier{% endtrans %}" required="true" helperText="Dit is uw organisatie-id in het Algoritmeregister."
+    {% if values is defined and values.get('organization_id') %}value="{{ values.get('organization_id') }}"{% endif %}
+    {% if errors is defined and errors.get('organization_id') %}errorText="{{ errors.get('organization_id') }}"{% endif %}
+    />
+    <c-button type="submit">
+    Aanmelden
+    </c-button>
+</form>
+</c-form-fieldset>
