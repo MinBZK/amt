@@ -159,9 +159,7 @@ async def ar_login(
 
     try:
         user = user_api.get_me()
-        credentials.organisations = [
-            OrganisationOption(value=org.org_id, label=org.name) for org in user.organisations
-        ]
+        credentials.organisations = [OrganisationOption(value=org.org_id, label=org.name) for org in user.organisations]
     except Exception:
         logger.exception("Failed to fetch user info from Algoritmeregister")
 
@@ -229,9 +227,7 @@ async def ar_set_organization(
     credentials = get_algoritmeregister_credentials(request)
 
     if not organization_id:
-        context = get_organization_selector_context(
-            credentials, errors={"organization_id": "Dit veld is verplicht."}
-        )
+        context = get_organization_selector_context(credentials, errors={"organization_id": "Dit veld is verplicht."})
         return templates.TemplateResponse(request, "publish/parts/ar_organization_selector.html.j2", context)
 
     if credentials is None:

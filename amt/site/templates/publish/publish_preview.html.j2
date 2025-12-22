@@ -6,9 +6,8 @@
     <c-progress-tracker :steps="steps" />
     <div>
         <c-heading type="h2" class="rvo-layout-margin-vertical--xl">Preview & controleren</c-heading>
-
         {% include "publish/parts/ar_organization_selector.html.j2" %}
-        <br/>
+        <br />
         <c-form-fieldset>
         <c-p>
         Hieronder ziet u de volledige preview van de publicatie.
@@ -260,9 +259,9 @@
 <c-button style="margin-right: auto" @click="window.location='./prepare'" kind="tertiary" showIcon="before" icon="terug">Vorige stap
 </c-button>
 {% if selected_org_id %}
-<c-button @click="window.location='./confirm'" kind="primary">Volgende stap</c-button>
+    <c-button @click="window.location='./confirm'" kind="primary">Volgende stap</c-button>
 {% else %}
-<c-button kind="primary" disabled="true">Volgende stap</c-button>
+    <c-button kind="primary" disabled="true">Volgende stap</c-button>
 {% endif %}
 </c-layout-flow>
 </div>

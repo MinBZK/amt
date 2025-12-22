@@ -1,53 +1,40 @@
 <div id="ar-organization-selector">
-{% if selected_org_id %}
-    <c-alert class="rvo-layout-margin-bottom--xl" kind="info" heading="{% trans %}Organisatie geselecteerd{% endtrans %}">
+    {% if selected_org_id %}
+        <c-alert class="rvo-layout-margin-bottom--xl" kind="info" heading="{% trans %}Organisatie geselecteerd{% endtrans %}">
         <c-p>{% trans %}U publiceert naar organisatie:{% endtrans %} <strong>{{ selected_org_name or selected_org_id }}</strong>
-        <br/>
-        <c-link hx-get="./organization-selector?select=true"
-                hx-target="#ar-organization-selector"
-                hx-swap="outerHTML">{% trans %}Wijzig organisatie{% endtrans %}</c-link>
+        <br />
+        <c-link hx-get="./organization-selector?select=true" hx-target="#ar-organization-selector" hx-swap="outerHTML">{% trans %}Wijzig organisatie{% endtrans %}</c-link>
         </c-p>
-    </c-alert>
-{% else %}
-    <c-card outline="true" class="rvo-layout-margin-bottom--xl">
+        </c-alert>
+    {% else %}
+        <c-card outline="true" class="rvo-layout-margin-bottom--xl">
         <c-heading type="h5">{% trans %}Selecteer een organisatie{% endtrans %}</c-heading>
         {% if organisations | length > 1 %}
-        <c-p>{% trans %}Onder welke organisatie moet dit algoritme gepubliceerd worden?{% endtrans %}</c-p>
-        <form hx-ext="json-enc"
-              hx-post="./set-organization"
-              hx-target="#ar-organization-selector"
-              hx-swap="outerHTML">
-            <c-select-field
-                id="organization_id"
-                name="organization_id"
-                label="{% trans %}Kies uw organisatie{% endtrans %}"
-                required="true"
-                :options="organisations"
-            >
+            <c-p>{% trans %}Onder welke organisatie moet dit algoritme gepubliceerd worden?{% endtrans %}</c-p>
+            <form hx-ext="json-enc"
+                  hx-post="./set-organization"
+                  hx-target="#ar-organization-selector"
+                  hx-swap="outerHTML">
+                <c-select-field id="organization_id" name="organization_id" label="{% trans %}Kies uw organisatie{% endtrans %}" required="true" :options="organisations">
                 <option value="">{% trans %}Selecteer een organisatie{% endtrans %}</option>
-            </c-select-field>
-            {% if errors is defined and errors.get('organization_id') %}
-            <div class="rvo-form-field__error-message" role="alert">{{ errors.get('organization_id') }}</div>
-            {% endif %}
-            <c-button type="submit" kind="primary">{% trans %}Bevestig{% endtrans %}</c-button>
-        </form>
+                </c-select-field>
+                {% if errors is defined and errors.get('organization_id') %}
+                    <div class="rvo-form-field__error-message" role="alert">{{ errors.get("organization_id") }}</div>
+                {% endif %}
+                <c-button type="submit" kind="primary">{% trans %}Bevestig{% endtrans %}</c-button>
+            </form>
         {% else %}
-        <c-p>{% trans %}Voer de organisatie identifier in waarmee u wilt publiceren.{% endtrans %}</c-p>
-        <form hx-ext="json-enc"
-              hx-post="./set-organization"
-              hx-target="#ar-organization-selector"
-              hx-swap="outerHTML">
-            <c-text-input-field
-                id="organization_id"
-                name="organization_id"
-                label="{% trans %}Organisatie Identifier{% endtrans %}"
-                required="true"
-                helperText="{% trans %}Dit is uw organisatie-id in het Algoritmeregister.{% endtrans %}"
+            <c-p>{% trans %}Voer de organisatie identifier in waarmee u wilt publiceren.{% endtrans %}</c-p>
+            <form hx-ext="json-enc"
+                  hx-post="./set-organization"
+                  hx-target="#ar-organization-selector"
+                  hx-swap="outerHTML">
+                <c-text-input-field id="organization_id" name="organization_id" label="{% trans %}Organisatie Identifier{% endtrans %}" required="true" helperText="{% trans %}Dit is uw organisatie-id in het Algoritmeregister.{% endtrans %}"
                 {% if errors is defined and errors.get('organization_id') %}errorText="{{ errors.get('organization_id') }}"{% endif %}
-            />
-            <c-button type="submit" kind="primary">{% trans %}Bevestig{% endtrans %}</c-button>
-        </form>
+                />
+                <c-button type="submit" kind="primary">{% trans %}Bevestig{% endtrans %}</c-button>
+            </form>
         {% endif %}
-    </c-card>
-{% endif %}
+        </c-card>
+    {% endif %}
 </div>
