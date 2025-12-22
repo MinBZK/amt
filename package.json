@@ -34,7 +34,7 @@
     "mini-css-extract-plugin": "^2.9.4",
     "prettier": "3.7.4",
     "replace-in-file-webpack-plugin": "^1.0.6",
-    "sass": "^1.96.0",
+    "sass": "^1.97.1",
     "sass-loader": "^16.0.6",
     "style-loader": "^4.0.0",
     "stylelint": "^16.26.1",
@@ -42,8 +42,8 @@
     "ts-loader": "^9.5.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.49.0",
-    "webpack": "^5.103.0",
+    "typescript-eslint": "^8.50.0",
+    "webpack": "^5.104.1",
     "webpack-cli": "^6.0.1"
   },
   "dependencies": {
