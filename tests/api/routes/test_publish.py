@@ -179,7 +179,7 @@ async def test_ar_login_auth_error_returns_form_with_login_error(
     # when
     response = await client.post(
         "/algorithm/1/publish/login",
-        json={"username": "test@example.com", "password": "wrongpassword", "organization_id": "org123"},
+        json={"username": "test@example.com", "password": "wrongpassword"},
         headers={"X-CSRF-Token": "1"},
     )
 
@@ -197,12 +197,37 @@ async def test_ar_login_success_stores_credentials(
     await db.init_authorizations_and_roles()
     mocker.patch("amt.middleware.csrf.CookieOnlyCsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
     mocker.patch("amt.api.routes.publish.get_access_token", return_value="test_access_token")
+
+    from amt.algoritmeregister.openapi.base.models import Flow, OrganisationConfig, OrgType, User
+
+    mock_user = User(
+        id="user-1",
+        username="test@example.com",
+        first_name="Test",
+        last_name="User",
+        roles=[],
+        organisations=[
+            OrganisationConfig(
+                id=1,
+                name="Test Org",
+                code="org123",
+                org_id="1",
+                type=OrgType.GEMEENTE,
+                flow=Flow.ICTU_LAST,
+                show_page=True,
+            )
+        ],
+    )
+    mock_user_api = mocker.Mock()
+    mock_user_api.get_me.return_value = mock_user
+    mocker.patch("amt.api.routes.publish.UserApi", return_value=mock_user_api)
+
     client.cookies["fastapi-csrf-token"] = "1"
 
     # when
     response = await client.post(
         "/algorithm/1/publish/login",
-        json={"username": "test@example.com", "password": "testpassword", "organization_id": "org123"},
+        json={"username": "test@example.com", "password": "testpassword"},
         headers={"X-CSRF-Token": "1"},
     )
 

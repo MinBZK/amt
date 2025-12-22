@@ -73,8 +73,13 @@ class Settings(BaseSettings):
 
     @computed_field
     @property
+    def ALGORITMEREGISTER_BASE_API_URL(self) -> str:
+        return f"{self.ALGORITMEREGISTER_URL}/aanleverapi"
+
+    @computed_field
+    @property
     def ALGORITMEREGISTER_API_URL(self) -> str:
-        return f"{self.ALGORITMEREGISTER_URL}/aanleverapi/v1_0"
+        return f"{self.ALGORITMEREGISTER_BASE_API_URL}/v1_0"
 
     OBJECT_STORE_URL: str = "localhost:9000"
     OBJECT_STORE_USER: str = "amt"

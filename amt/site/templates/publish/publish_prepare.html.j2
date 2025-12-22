@@ -43,7 +43,11 @@
         </c-ul>
         </c-form-fieldset>
         <c-layout-flow justifyContent="end" row="true" class="rvo-layout-margin-vertical--xl">
+        {% if has_publication %}
+        <c-button style="margin-right: auto" @click="window.location='./status'" kind="tertiary" showIcon="before" icon="terug">Toon status</c-button>
+        {% else %}
         <c-button style="margin-right: auto" @click="window.location='./connection'" kind="tertiary" showIcon="before" icon="terug">Vorige stap</c-button>
+        {% endif %}
         <c-button @click="window.location='./preview'" kind="primary">Volgende stap</c-button>
         </c-layout-flow>
     </div>

@@ -13,7 +13,8 @@ from pydantic import ValidationError
 
 from amt.algoritmeregister.auth import AlgoritmeregisterAuthError, get_access_token
 from amt.algoritmeregister.mapper import AlgorithmMapper
-from amt.algoritmeregister.openapi.v1_0.client.openapi_client import AlgorithmSummary
+from amt.algoritmeregister.openapi.base import UserApi
+from amt.algoritmeregister.openapi.v1_0.client.openapi_client import AlgorithmSummary, ApiClient, Configuration
 from amt.algoritmeregister.publisher import (
     PreviewResult,
     PublicationResult,
@@ -49,15 +50,13 @@ from amt.core.session_utils import (
     store_algoritmeregister_credentials,
 )
 from amt.models import Publication
-from amt.schema.algoritmeregister import AlgoritmeregisterCredentials
+from amt.schema.algoritmeregister import AlgoritmeregisterCredentials, OrganisationOption
 from amt.services.algorithms import AlgorithmsService
 from amt.services.publications import PublicationsService
 from amt.services.services_provider import ServicesProvider, get_service_provider
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
-
-organisation_id = "RIG"
 
 
 def get_global_steps() -> list[dict[str, str]]:
@@ -152,6 +151,20 @@ async def ar_login(
         )
 
     credentials.token = access_token
+
+    settings = get_settings()
+    configuration = Configuration(host=settings.ALGORITMEREGISTER_BASE_API_URL, access_token=access_token)
+    api_client = ApiClient(configuration)
+    user_api = UserApi(api_client)
+
+    try:
+        user = user_api.get_me()
+        credentials.organisations = [
+            OrganisationOption(value=org.org_id, label=org.name) for org in user.organisations
+        ]
+    except Exception:
+        logger.exception("Failed to fetch user info from Algoritmeregister")
+
     store_algoritmeregister_credentials(request, credentials)
 
     publication_service = await services_provider.get(PublicationsService)
@@ -160,7 +173,75 @@ async def ar_login(
     if not publication:
         set_publish_step(request, algorithm_id, PublishStep.PREPARE)
 
-    return templates.TemplateResponse(request, "publish/parts/ar_login_success.html.j2", {})
+    return templates.TemplateResponse(
+        request,
+        "publish/parts/ar_login_success.html.j2",
+        {
+            "algorithm_id": algorithm_id,
+        },
+    )
+
+
+def get_organization_selector_context(
+    credentials: AlgoritmeregisterCredentials | None,
+    errors: dict[str, str] | None = None,
+    force_select: bool = False,
+) -> dict[str, object]:
+    """Build context for the organization selector partial."""
+    if credentials is None:
+        return {"organisations": [], "selected_org_id": None, "selected_org_name": None, "errors": errors or {}}
+
+    selected_org_name = None
+    selected_org_id = None if force_select else credentials.organization_id
+    if selected_org_id:
+        for org in credentials.organisations:
+            if org.value == selected_org_id:
+                selected_org_name = org.label
+                break
+
+    return {
+        "organisations": [{"value": org.value, "label": org.label} for org in credentials.organisations],
+        "selected_org_id": selected_org_id,
+        "selected_org_name": selected_org_name,
+        "errors": errors or {},
+    }
+
+
+@router.get("/{algorithm_id}/publish/organization-selector")
+async def get_organization_selector(
+    request: Request,
+    algorithm_id: int,
+    select: bool = False,
+) -> HTMLResponse:
+    credentials = get_algoritmeregister_credentials(request)
+    context = get_organization_selector_context(credentials, force_select=select)
+    return templates.TemplateResponse(request, "publish/parts/ar_organization_selector.html.j2", context)
+
+
+@router.post("/{algorithm_id}/publish/set-organization")
+async def ar_set_organization(
+    request: Request,
+    algorithm_id: int,
+) -> HTMLResponse:
+    body = await request.json()
+    organization_id = body.get("organization_id", "").strip()
+
+    credentials = get_algoritmeregister_credentials(request)
+
+    if not organization_id:
+        context = get_organization_selector_context(
+            credentials, errors={"organization_id": "Dit veld is verplicht."}
+        )
+        return templates.TemplateResponse(request, "publish/parts/ar_organization_selector.html.j2", context)
+
+    if credentials is None:
+        return templates.Redirect(request, f"/algorithm/{algorithm_id}/publish/connection")
+
+    credentials.organization_id = organization_id
+    store_algoritmeregister_credentials(request, credentials)
+
+    context = get_organization_selector_context(credentials)
+    return templates.TemplateResponse(request, "publish/parts/ar_organization_selector.html.j2", context)
 
 
 @router.get("/{algorithm_id}/publish", response_model=None)
@@ -317,11 +398,20 @@ async def publish_connection(
         request,
     )
 
+    credentials = get_algoritmeregister_credentials(request)
+    is_ar_logged_in = credentials is not None
+
+    selected_org_name = None
+    if credentials and credentials.organization_id:
+        selected_org_name = credentials.organization_id
+
     context = {
         "algorithm": algorithm,
         "breadcrumbs": breadcrumbs,
         "tab_items": tab_items,
-        "is_ar_logged_in": get_algoritmeregister_credentials(request) is not None,
+        "is_ar_logged_in": is_ar_logged_in,
+        "organisations": [],
+        "selected_org_name": selected_org_name,
     }
 
     return templates.TemplateResponse(request, "publish/publish_connection.html.j2", context)
@@ -339,7 +429,9 @@ async def publish_prepare(
     set_publish_step(request, algorithm_id, PublishStep.PREPARE)
 
     algorithms_service = await services_provider.get(AlgorithmsService)
+    publication_service = await services_provider.get(PublicationsService)
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
+    publication = await publication_service.get_by_algorithm_id(algorithm_id)
 
     tab_items = get_algorithm_details_tabs(request, False)
 
@@ -363,6 +455,7 @@ async def publish_prepare(
         "breadcrumbs": breadcrumbs,
         "tab_items": tab_items,
         "steps": steps,
+        "has_publication": publication is not None,
     }
 
     return templates.TemplateResponse(request, "publish/publish_prepare.html.j2", context)
@@ -374,6 +467,7 @@ async def publish_preview(
     request: Request,
     algorithm_id: int,
     services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
+    select: bool = False,
 ) -> HTMLResponse:
     get_algoritmeregister_credentials_or_trigger_redirect(request, algorithm_id)
 
@@ -401,13 +495,17 @@ async def publish_preview(
     steps = get_global_steps()
     set_steps_completed_until(steps, "./preview")
 
-    context = {
+    credentials = get_algoritmeregister_credentials(request)
+    org_selector_context = get_organization_selector_context(credentials, force_select=select)
+
+    context: dict[str, object] = {
         "algorithm": algorithm,
         "breadcrumbs": breadcrumbs,
         "tab_items": tab_items,
         "publication_model": publication_model,
         "steps": steps,
     }
+    context.update(org_selector_context)
 
     return templates.TemplateResponse(request, "publish/publish_preview.html.j2", context)
 
@@ -418,8 +516,11 @@ async def publish_confirm(
     request: Request,
     algorithm_id: int,
     services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
-) -> HTMLResponse:
-    get_algoritmeregister_credentials_or_trigger_redirect(request, algorithm_id)
+) -> HTMLResponse | RedirectResponse:
+    credentials = get_algoritmeregister_credentials_or_trigger_redirect(request, algorithm_id)
+
+    if not credentials.organization_id:
+        return RedirectResponse(url=f"/algorithm/{algorithm_id}/publish/preview?select=true", status_code=302)
 
     set_publish_step(request, algorithm_id, PublishStep.CONFIRM)
 
@@ -459,6 +560,7 @@ async def publish_send(
     request: Request,
     algorithm_id: int,
     services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
+    release: bool = False,
 ) -> HTMLResponse:
     credentials = get_algoritmeregister_credentials_or_trigger_redirect(request, algorithm_id)
 
@@ -468,19 +570,22 @@ async def publish_send(
 
     publication = await publication_service.get_by_algorithm_id(algorithm_id)
 
+    if credentials.organization_id is None:
+        raise AMTNotFound()
+
     if not publication or not publication.lars:
         create_result: PublicationResult = await publish_algorithm(
             algorithm=algorithm,
             username=credentials.username,
             password=credentials.password,
-            organisation_id=organisation_id,
+            organisation_id=credentials.organization_id,
         )
     else:
         create_result: PublicationResult = await update_algorithm(
             algorithm=algorithm,
             username=credentials.username,
             password=credentials.password,
-            organisation_id=organisation_id,
+            organisation_id=credentials.organization_id,
             algorithm_id=publication.lars if publication else "",
         )
 
@@ -492,12 +597,22 @@ async def publish_send(
                 last_updated=datetime.datetime.now(tz=None),  # noqa: DTZ005
                 algorithm=algorithm,
                 lars=create_result.lars_code,
-                organization_code=organisation_id,
+                organization_code=credentials.organization_id,
             )
         else:
             publication.last_updated = datetime.datetime.now(tz=None)  # noqa: DTZ005
         await publication_service.update(publication)
-        # TODO: update if exists
+
+        if release:
+            await release_algorithm(
+                username=credentials.username,
+                password=credentials.password,
+                organisation_id=credentials.organization_id,
+                lars_code=create_result.lars_code,
+            )
+            publication.publication_status = PublicationStatuses.STATE_2
+            await publication_service.update(publication)
+
     set_publish_step(request, algorithm_id, PublishStep.STATUS)
 
     return templates.Redirect(
@@ -518,11 +633,14 @@ async def publish_release(
     publication_service = await services_provider.get(PublicationsService)
     publication = await publication_service.get_by_algorithm_id(algorithm_id)
 
-    if not publication:
+    if not publication or credentials.organization_id is None:
         raise AMTNotFound()
 
     await release_algorithm(
-        username=credentials.username, password=credentials.password, organisation_id=organisation_id, lars_code=lars
+        username=credentials.username,
+        password=credentials.password,
+        organisation_id=credentials.organization_id,
+        lars_code=lars,
     )
 
     publication.publication_status = PublicationStatuses.STATE_2
@@ -547,11 +665,14 @@ async def preview(
     publication_service = await services_provider.get(PublicationsService)
     publication = await publication_service.get_by_algorithm_id(algorithm_id)
 
-    if publication is None:
+    if publication is None or credentials.organization_id is None:
         raise AMTNotFound()
 
     preview_result: PreviewResult = await preview_algorithm(
-        username=credentials.username, password=credentials.password, organisation_id=organisation_id, lars_code=lars
+        username=credentials.username,
+        password=credentials.password,
+        organisation_id=credentials.organization_id,
+        lars_code=lars,
     )
 
     publication.publication_status = PublicationStatuses.STATE_2

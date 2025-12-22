@@ -1,0 +1,145 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Algoritmeregister Base API",
+    "description": "Base API endpoints for the Algoritmeregister (not versioned). This is a partial spec containing only the endpoints used by this application.",
+    "version": "1.0.0"
+  },
+  "servers": [{ "url": "/aanleverapi" }],
+  "paths": {
+    "/user/me": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get Me",
+        "description": "Retrieve the current authenticated user's information including their organisations and roles.",
+        "operationId": "get_me",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/User" }
+              }
+            }
+          }
+        },
+        "security": [{ "OAuth2AuthorizationCodeBearer": [] }]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "title": "User",
+        "required": [
+          "username",
+          "first_name",
+          "last_name",
+          "roles",
+          "organisations",
+          "id"
+        ],
+        "properties": {
+          "id": { "type": "string", "title": "Id" },
+          "username": { "type": "string", "title": "Username" },
+          "first_name": { "type": "string", "title": "First Name" },
+          "last_name": { "type": "string", "title": "Last Name" },
+          "roles": {
+            "type": "array",
+            "title": "Roles",
+            "items": { "$ref": "#/components/schemas/Role" }
+          },
+          "organisations": {
+            "type": "array",
+            "title": "Organisations",
+            "items": { "$ref": "#/components/schemas/OrganisationConfig" }
+          }
+        }
+      },
+      "OrganisationConfig": {
+        "type": "object",
+        "title": "OrganisationConfig",
+        "required": [
+          "name",
+          "code",
+          "org_id",
+          "type",
+          "flow",
+          "show_page",
+          "id"
+        ],
+        "properties": {
+          "id": { "type": "integer", "title": "Id" },
+          "name": { "type": "string", "title": "Name" },
+          "code": { "type": "string", "title": "Code" },
+          "org_id": { "type": "string", "title": "Org Id" },
+          "type": { "$ref": "#/components/schemas/OrgType" },
+          "flow": { "$ref": "#/components/schemas/Flow" },
+          "show_page": { "type": "boolean", "title": "Show Page" }
+        }
+      },
+      "Role": {
+        "type": "string",
+        "title": "Role",
+        "enum": [
+          "disabled",
+          "all_groups",
+          "admin",
+          "orgdetail",
+          "ictu",
+          "role_1",
+          "role_2"
+        ]
+      },
+      "OrgType": {
+        "type": "string",
+        "title": "OrgType",
+        "enum": [
+          "adviescollege",
+          "agentschap",
+          "brandweer",
+          "caribisch_openbaar_lichaam",
+          "gemeente",
+          "grensoverschrijdend_regionaal_samenwerkingsorgaan",
+          "hoog_college_van_staat",
+          "interdepartementale_commissie",
+          "kabinet_van_de_koning",
+          "koepelorganisatie",
+          "ministerie",
+          "omgevingsdienst",
+          "openbaar_lichaam_voor_beroep_en_bedrijf",
+          "organisatie_met_overheidsbemoeienis",
+          "organisatieonderdeel",
+          "politie",
+          "provincie",
+          "regionaal_samenwerkingsverband",
+          "rechtspraak",
+          "regionaal_samenwerkingsorgaan",
+          "waterschap",
+          "zelfstandig_bestuursorgaan",
+          "overig",
+          "veiligheidsregio",
+          "inspectie"
+        ]
+      },
+      "Flow": {
+        "type": "string",
+        "title": "Flow",
+        "enum": ["ictu_last", "self_publish_two"]
+      }
+    },
+    "securitySchemes": {
+      "OAuth2AuthorizationCodeBearer": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "scopes": {},
+            "authorizationUrl": "<KEYCLOAK_URI>/realms/algreg/protocol/openid-connect/auth",
+            "tokenUrl": "<KEYCLOAK_URI>/realms/algreg/protocol/openid-connect/token"
+          }
+        }
+      }
+    }
+  }
+}

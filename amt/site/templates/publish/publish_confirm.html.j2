@@ -29,11 +29,17 @@
             De verantwoordelijkheid voor de juistheid van de gegevens blijft altijd bij uw organisatie
             liggen.
             </c-p>
-            <c-button kind="primary" hx-get="./send" hx-target="#publication-container" hx-swap="innerHTML">Algoritme publiceren
-            </c-button>
+            <c-layout-row gap="md">
+                <c-button kind="secondary" hx-get="./send" hx-target="#publication-container" hx-swap="innerHTML">Publiceren</c-button>
+                <c-button kind="primary" hx-get="./send?release=true" hx-target="#publication-container" hx-swap="innerHTML">Publiceren en vrijgeven</c-button>
+            </c-layout-row>
             </c-form-fieldset>
         </div>
+        <c-button style="margin-right: auto" @click="window.location='./preview'" kind="tertiary" showIcon="before" icon="terug">Vorige stap</c-button>
+
     </div>
+
     </c-grid>
     </c-max-width-layout>
+
 {% endblock %}

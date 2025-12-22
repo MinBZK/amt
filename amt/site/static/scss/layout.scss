@@ -578,5 +578,17 @@ main {
         align-items: baseline;
     }
 
+    & .inline-blocks-row {
+        /* stylelint-disable-next-line no-descending-specificity */
+        > * {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        > *:not(:first-child) {
+            margin-left: 0.5rem;
+        }
+    }
+
     /* stylelint-enable */
 }

@@ -1436,7 +1436,7 @@ optional = false
 python-versions = ">=3.12"
 groups = ["main"]
 files = []
-develop = false
+develop = true
 
 [package.dependencies]
 beautifulsoup4 = ">=4.9.0"
@@ -1450,10 +1450,8 @@ fastapi = ["fastapi (>=0.100.0)", "python-multipart (>=0.0.6)", "uvicorn (>=0.20
 flask = ["flask (>=2.3.0)"]
 
 [package.source]
-type = "git"
-url = "https://github.com/RijksICTGilde/jinja-roos-components.git"
-reference = "table-and-more-conversion"
-resolved_reference = "ba206b68a6f12e6fe49eb5e9731768b5a964a5bf"
+type = "directory"
+url = "../jinja-roos-components"
 
 [[package]]
 name = "jinja2"
@@ -3962,4 +3960,4 @@ cffi = ["cffi (>=1.11)"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "3c0a53720eeef751b5162d769501b598ebbbe78d084e8b38294d7092cf9c30e6"
+content-hash = "e93e781c93b33d138338262335bf3e217bebd26283b753a17a99fd657a2d7846"
