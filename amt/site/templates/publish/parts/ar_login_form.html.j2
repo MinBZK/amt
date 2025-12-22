@@ -21,7 +21,8 @@ over het aanmelden
       hx-ext="json-enc"
       hx-post="./login"
       hx-target="#publish-content-container"
-      hx-swap="innerHTML">
+      hx-swap="innerHTML"
+      autocomplete="off">
     <div style="text-align: right;">
         <img src="/static/images/logo_register.png"
              style="mix-blend-mode: multiply" />
@@ -33,7 +34,7 @@ over het aanmelden
     <c-text-input-field type="password" id="password" name="password" label="{% trans %}Wachtwoord{% endtrans %}" required="true"
     {% if errors is defined and errors.get('password') %}errorText="{{ errors.get('password') }}"{% endif %}
     />
-    <c-button type="submit">
+    <c-button type="submit" hx-disabled-elt="this">
     Verbinding maken
     </c-button>
 </form>

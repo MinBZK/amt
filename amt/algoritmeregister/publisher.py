@@ -49,7 +49,7 @@ class PreviewResult:
 
 
 async def publish_algorithm(
-    algorithm: Algorithm, username: str, password: str, organisation_id: str
+    algorithm: Algorithm, username: str, password: str, organisation_id: str, organisation_name: str
 ) -> PublicationResult:
     """
     Publish an algorithm to the Algoritmeregister.
@@ -59,6 +59,7 @@ async def publish_algorithm(
         username: Algoritmeregister username (email address)
         password: Algoritmeregister password
         organisation_id: Organization ID in the Algoritmeregister
+        organisation_name: Organization name in the Algoritmeregister
 
     Returns:
         PublicationResult containing lars_code, message, and response
@@ -66,7 +67,7 @@ async def publish_algorithm(
     Raises:
         PublicationException: If publication fails
     """
-    publication_data = AlgorithmMapper.to_publication_model(algorithm)
+    publication_data = AlgorithmMapper.to_publication_model(algorithm, organisation_name)
 
     settings = get_settings()
     access_token = await get_access_token(username, password)
@@ -93,6 +94,7 @@ async def update_algorithm(
     username: str,
     password: str,
     organisation_id: str,
+    organisation_name: str,
     algorithm_id: str,
 ) -> PublicationResult:
     """
@@ -103,6 +105,7 @@ async def update_algorithm(
         username: Algoritmeregister username (email address)
         password: Algoritmeregister password
         organisation_id: Organization ID in the Algoritmeregister
+        organisation_name: Organization name in the Algoritmeregister
         algorithm_id: The ID of the algorithm to update
 
     Returns:
@@ -111,7 +114,7 @@ async def update_algorithm(
     Raises:
         PublicationException: If update fails
     """
-    publication_data = AlgorithmMapper.to_publication_model(algorithm)
+    publication_data = AlgorithmMapper.to_publication_model(algorithm, organisation_name)
 
     settings = get_settings()
     access_token = await get_access_token(username, password)

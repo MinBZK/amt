@@ -50,7 +50,7 @@ from amt.core.session_utils import (
     store_algoritmeregister_credentials,
 )
 from amt.models import Publication
-from amt.schema.algoritmeregister import AlgoritmeregisterCredentials, OrganisationOption
+from amt.schema.algoritmeregister import AlgoritmeregisterCredentials, OrganisationOption, OrganizationSelection
 from amt.services.algorithms import AlgorithmsService
 from amt.services.publications import PublicationsService
 from amt.services.services_provider import ServicesProvider, get_service_provider
@@ -171,13 +171,26 @@ async def ar_login(
     if not publication:
         set_publish_step(request, algorithm_id, PublishStep.PREPARE)
 
+    org_context = get_organization_selector_context(credentials)
+
     return templates.TemplateResponse(
         request,
         "publish/parts/ar_login_success.html.j2",
         {
             "algorithm_id": algorithm_id,
+            **org_context,
         },
     )
+
+
+def get_organization_name(credentials: AlgoritmeregisterCredentials) -> str | None:
+    """Get the organization name from credentials based on the selected organization_id."""
+    if not credentials.organization_id:
+        return None
+    for org in credentials.organisations:
+        if org.value == credentials.organization_id:
+            return org.label
+    return credentials.organization_id
 
 
 def get_organization_selector_context(
@@ -189,8 +202,8 @@ def get_organization_selector_context(
     if credentials is None:
         return {"organisations": [], "selected_org_id": None, "selected_org_name": None, "errors": errors or {}}
 
-    selected_org_name = None
     selected_org_id = None if force_select else credentials.organization_id
+    selected_org_name = None
     if selected_org_id:
         for org in credentials.organisations:
             if org.value == selected_org_id:
@@ -216,28 +229,40 @@ async def get_organization_selector(
     return templates.TemplateResponse(request, "publish/parts/ar_organization_selector.html.j2", context)
 
 
-@router.post("/{algorithm_id}/publish/set-organization")
+@router.post("/{algorithm_id}/publish/set-organization", response_model=None)
 async def ar_set_organization(
     request: Request,
     algorithm_id: int,
-) -> HTMLResponse:
+) -> HTMLResponse | RedirectResponse:
     body = await request.json()
-    organization_id = body.get("organization_id", "").strip()
 
     credentials = get_algoritmeregister_credentials(request)
 
-    if not organization_id:
-        context = get_organization_selector_context(credentials, errors={"organization_id": "Dit veld is verplicht."})
+    try:
+        selection = OrganizationSelection.model_validate(body)
+    except ValidationError as e:
+        translations = get_current_translation(request)
+        errors: dict[str, str] = {}
+        for error in e.errors():
+            field_name = str(error["loc"][0])
+            errors[field_name] = translate_pydantic_exception(dict(error), translations)
+
+        context = get_organization_selector_context(credentials, errors=errors)
         return templates.TemplateResponse(request, "publish/parts/ar_organization_selector.html.j2", context)
 
     if credentials is None:
         return templates.Redirect(request, f"/algorithm/{algorithm_id}/publish/connection")
 
-    credentials.organization_id = organization_id
+    credentials.organization_id = selection.organization_id
+
+    if selection.organization_name:
+        credentials.organisations = [
+            OrganisationOption(value=selection.organization_id, label=selection.organization_name)
+        ]
+
     store_algoritmeregister_credentials(request, credentials)
 
-    context = get_organization_selector_context(credentials)
-    return templates.TemplateResponse(request, "publish/parts/ar_organization_selector.html.j2", context)
+    return templates.Redirect(request, f"/algorithm/{algorithm_id}/publish/connection")
 
 
 @router.get("/{algorithm_id}/publish", response_model=None)
@@ -397,17 +422,14 @@ async def publish_connection(
     credentials = get_algoritmeregister_credentials(request)
     is_ar_logged_in = credentials is not None
 
-    selected_org_name = None
-    if credentials and credentials.organization_id:
-        selected_org_name = credentials.organization_id
+    org_context = get_organization_selector_context(credentials)
 
     context = {
         "algorithm": algorithm,
         "breadcrumbs": breadcrumbs,
         "tab_items": tab_items,
         "is_ar_logged_in": is_ar_logged_in,
-        "organisations": [],
-        "selected_org_name": selected_org_name,
+        **org_context,
     }
 
     return templates.TemplateResponse(request, "publish/publish_connection.html.j2", context)
@@ -465,7 +487,7 @@ async def publish_preview(
     services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
     select: bool = False,
 ) -> HTMLResponse:
-    get_algoritmeregister_credentials_or_trigger_redirect(request, algorithm_id)
+    credentials = get_algoritmeregister_credentials_or_trigger_redirect(request, algorithm_id)
 
     set_publish_step(request, algorithm_id, PublishStep.PREVIEW)
 
@@ -486,12 +508,15 @@ async def publish_preview(
         request,
     )
 
-    publication_model = AlgorithmMapper.to_publication_model(algorithm)
+    organization_name = get_organization_name(credentials)
+    if organization_name is None:
+        raise AMTNotFound()
+
+    publication_model = AlgorithmMapper.to_publication_model(algorithm, organization_name)
 
     steps = get_global_steps()
     set_steps_completed_until(steps, "./preview")
 
-    credentials = get_algoritmeregister_credentials(request)
     org_selector_context = get_organization_selector_context(credentials, force_select=select)
 
     context: dict[str, object] = {
@@ -566,7 +591,8 @@ async def publish_send(
 
     publication = await publication_service.get_by_algorithm_id(algorithm_id)
 
-    if credentials.organization_id is None:
+    organization_name = get_organization_name(credentials)
+    if credentials.organization_id is None or organization_name is None:
         raise AMTNotFound()
 
     if not publication or not publication.lars:
@@ -575,6 +601,7 @@ async def publish_send(
             username=credentials.username,
             password=credentials.password,
             organisation_id=credentials.organization_id,
+            organisation_name=organization_name,
         )
     else:
         create_result: PublicationResult = await update_algorithm(
@@ -582,6 +609,7 @@ async def publish_send(
             username=credentials.username,
             password=credentials.password,
             organisation_id=credentials.organization_id,
+            organisation_name=organization_name,
             algorithm_id=publication.lars if publication else "",
         )
 

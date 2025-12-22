@@ -1,9 +1,15 @@
 import datetime
 
 import pytest
-from amt.api.routes.publish import get_global_steps, get_publication_url, set_step_state, set_steps_completed_until
+from amt.api.routes.publish import (
+    get_global_steps,
+    get_organization_name,
+    get_publication_url,
+    set_step_state,
+    set_steps_completed_until,
+)
 from amt.models import Publication
-from amt.schema.algoritmeregister import AlgoritmeregisterCredentials
+from amt.schema.algoritmeregister import AlgoritmeregisterCredentials, OrganisationOption
 from httpx import AsyncClient
 from pytest_mock import MockerFixture
 
@@ -13,6 +19,19 @@ from tests.constants import (
     default_user,
 )
 from tests.database_test_utils import DatabaseTestUtils
+
+
+def mock_credentials_with_organisations() -> AlgoritmeregisterCredentials:
+    return AlgoritmeregisterCredentials(
+        username="test@example.com",
+        password="testpassword",  # noqa: S106
+        organization_id="org123",
+        token="test_token",  # noqa: S106
+        organisations=[
+            OrganisationOption(value="org123", label="Test Organisation"),
+            OrganisationOption(value="org456", label="Another Organisation"),
+        ],
+    )
 
 
 def mock_credentials() -> AlgoritmeregisterCredentials:
@@ -667,3 +686,139 @@ async def test_publish_router_redirects_to_status_when_publication_exists(
     # then
     assert response.status_code == 302
     assert response.headers["location"] == "/algorithm/1/publish/status"
+
+
+def test_get_organization_name_returns_label_from_organisations_list() -> None:
+    # given
+    credentials = mock_credentials_with_organisations()
+
+    # when
+    result = get_organization_name(credentials)
+
+    # then
+    assert result == "Test Organisation"
+
+
+def test_get_organization_name_returns_organization_id_as_fallback() -> None:
+    # given
+    credentials = AlgoritmeregisterCredentials(
+        username="test@example.com",
+        password="testpassword",  # noqa: S106
+        organization_id="unknown_org",
+        token="test_token",  # noqa: S106
+        organisations=[],
+    )
+
+    # when
+    result = get_organization_name(credentials)
+
+    # then
+    assert result == "unknown_org"
+
+
+def test_get_organization_name_returns_none_when_no_organization_id() -> None:
+    # given
+    credentials = AlgoritmeregisterCredentials(
+        username="test@example.com",
+        password="testpassword",  # noqa: S106
+        organization_id=None,
+        token="test_token",  # noqa: S106
+    )
+
+    # when
+    result = get_organization_name(credentials)
+
+    # then
+    assert result is None
+
+
+@pytest.mark.asyncio
+async def test_set_organization_with_select_preserves_organisations_list(
+    client: AsyncClient, db: DatabaseTestUtils, mocker: MockerFixture
+) -> None:
+    # given
+    await db.given([default_user(), default_organization(), default_algorithm("testalgorithm1")])
+    await db.init_authorizations_and_roles()
+    mocker.patch("amt.middleware.csrf.CookieOnlyCsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+    credentials = mock_credentials_with_organisations()
+    credentials.organization_id = None
+    mocker.patch("amt.api.routes.publish.get_algoritmeregister_credentials", return_value=credentials)
+    store_mock = mocker.patch("amt.api.routes.publish.store_algoritmeregister_credentials")
+    client.cookies["fastapi-csrf-token"] = "1"
+
+    # when
+    response = await client.post(
+        "/algorithm/1/publish/set-organization",
+        json={"organization_id": "org456"},
+        headers={"X-CSRF-Token": "1"},
+        follow_redirects=False,
+    )
+
+    # then
+    assert response.status_code == 200
+    store_mock.assert_called_once()
+    stored_credentials = store_mock.call_args[0][1]
+    assert stored_credentials.organization_id == "org456"
+    assert len(stored_credentials.organisations) == 2
+    assert stored_credentials.organisations[0].value == "org123"
+    assert stored_credentials.organisations[1].value == "org456"
+
+
+@pytest.mark.asyncio
+async def test_set_organization_with_manual_entry_stores_organization_name(
+    client: AsyncClient, db: DatabaseTestUtils, mocker: MockerFixture
+) -> None:
+    # given
+    await db.given([default_user(), default_organization(), default_algorithm("testalgorithm1")])
+    await db.init_authorizations_and_roles()
+    mocker.patch("amt.middleware.csrf.CookieOnlyCsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+    credentials = AlgoritmeregisterCredentials(
+        username="test@example.com",
+        password="testpassword",  # noqa: S106
+        organization_id=None,
+        token="test_token",  # noqa: S106
+        organisations=[],
+    )
+    mocker.patch("amt.api.routes.publish.get_algoritmeregister_credentials", return_value=credentials)
+    store_mock = mocker.patch("amt.api.routes.publish.store_algoritmeregister_credentials")
+    client.cookies["fastapi-csrf-token"] = "1"
+
+    # when
+    response = await client.post(
+        "/algorithm/1/publish/set-organization",
+        json={"organization_id": "manual_org", "organization_name": "Manual Organisation Name"},
+        headers={"X-CSRF-Token": "1"},
+        follow_redirects=False,
+    )
+
+    # then
+    assert response.status_code == 200
+    store_mock.assert_called_once()
+    stored_credentials = store_mock.call_args[0][1]
+    assert stored_credentials.organization_id == "manual_org"
+    assert len(stored_credentials.organisations) == 1
+    assert stored_credentials.organisations[0].value == "manual_org"
+    assert stored_credentials.organisations[0].label == "Manual Organisation Name"
+
+
+@pytest.mark.asyncio
+async def test_set_organization_validation_error_for_empty_organization_id(
+    client: AsyncClient, db: DatabaseTestUtils, mocker: MockerFixture
+) -> None:
+    # given
+    await db.given([default_user(), default_organization(), default_algorithm("testalgorithm1")])
+    await db.init_authorizations_and_roles()
+    mocker.patch("amt.middleware.csrf.CookieOnlyCsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+    mocker.patch("amt.api.routes.publish.get_algoritmeregister_credentials", return_value=mock_credentials())
+    client.cookies["fastapi-csrf-token"] = "1"
+
+    # when
+    response = await client.post(
+        "/algorithm/1/publish/set-organization",
+        json={"organization_id": ""},
+        headers={"X-CSRF-Token": "1"},
+    )
+
+    # then
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"

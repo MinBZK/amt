@@ -12,3 +12,8 @@ class AlgoritmeregisterCredentials(BaseModel):
     organization_id: str | None = Field(default=None)
     token: str | None = Field(default=None)
     organisations: list[OrganisationOption] = Field(default_factory=list)
+
+
+class OrganizationSelection(BaseModel):
+    organization_id: str = Field(min_length=1)
+    organization_name: str | None = Field(default=None, min_length=1)

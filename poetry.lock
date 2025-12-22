@@ -1453,7 +1453,7 @@ flask = ["flask (>=2.3.0)"]
 type = "git"
 url = "https://github.com/RijksICTGilde/jinja-roos-components.git"
 reference = "table-and-more-conversion"
-resolved_reference = "ba206b68a6f12e6fe49eb5e9731768b5a964a5bf"
+resolved_reference = "016d9804962f886a6e5f21affe6ca13994a5463b"
 
 [[package]]
 name = "jinja2"

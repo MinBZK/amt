@@ -30,8 +30,8 @@
             liggen.
             </c-p>
             <c-layout-row gap="md">
-            <c-button kind="secondary" hx-get="./send" hx-target="#publication-container" hx-swap="innerHTML">Publiceren</c-button>
-            <c-button kind="primary" hx-get="./send?release=true" hx-target="#publication-container" hx-swap="innerHTML">Publiceren en vrijgeven</c-button>
+            <c-button kind="secondary" hx-get="./send" hx-target="#publication-container" hx-swap="innerHTML" hx-disabled-elt="this">Publiceren</c-button>
+            <c-button kind="primary" hx-get="./send?release=true" hx-target="#publication-container" hx-swap="innerHTML" hx-disabled-elt="this">Publiceren en vrijgeven</c-button>
             </c-layout-row>
             </c-form-fieldset>
         </div>

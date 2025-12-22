@@ -39,14 +39,18 @@ class AlgorithmMapper:
         return value
 
     @staticmethod
-    def to_publication_model(algorithm: Algorithm, lang: V10EnumLang = V10EnumLang.NLD) -> AlgorithmIn:
+    def to_publication_model(
+        algorithm: Algorithm,
+        organization_name: str,
+        lang: V10EnumLang = V10EnumLang.NLD,
+    ) -> AlgorithmIn:
         system_card = algorithm.system_card
         organization: Organization = cast(Organization, algorithm.organization)  # pyright: ignore [reportUnknownMemberType]
 
         return AlgorithmIn(
             name=AlgorithmMapper._get_name(algorithm),
             description_short=AlgorithmMapper._get_description_short(system_card),
-            organization=AlgorithmMapper._get_organization(organization),
+            organization=organization_name,
             category=AlgorithmMapper._get_category(system_card),
             status=AlgorithmMapper._map_status(system_card.status, algorithm.lifecycle),
             begin_date=AlgorithmMapper._format_date(system_card.begin_date),
