@@ -69,9 +69,10 @@ jobs:
           platforms: linux/amd64,linux/arm64,darwin/amd64
 
       - name: Call API to upsert deployment
+        id: upsert_deployment
         if: github.event_name == 'pull_request'
         run: |
-          curl -f --show-error -X POST "https://operations-manager.rig.prd1.gn2.quattro.rijksapps.nl/api/projects/amt-odc/:upsert-deployment" \
+          response=$(curl -f --show-error --max-time 120 -X POST "https://operations-manager.rig.prd1.gn2.quattro.rijksapps.nl/api/projects/amt-odc/:upsert-deployment" \
             -H "Content-Type: application/json" \
             -H "X-API-Key: ${{ secrets.OPERATIONS_MANAGER_API_KEY }}" \
             -d '{
@@ -79,7 +80,24 @@ jobs:
               "components": [
                 {"reference": "component-1", "image": "${{ fromJSON(steps.meta.outputs.json).tags[0] }}"}
               ]
-            }'
+            }')
+          echo "response=$response"
+          preview_url=$(echo "$response" | jq -r '.urls["pr-${{ github.event.pull_request.number }}"].urls["component-1"] // empty')
+          echo "preview_url=$preview_url" >> "$GITHUB_OUTPUT"
+
+      - name: Notify Mattermost of preview deployment
+        if: github.event_name == 'pull_request' && steps.upsert_deployment.outputs.preview_url != ''
+        uses: mattermost/action-mattermost-notify@master
+        with:
+          MATTERMOST_WEBHOOK_URL: ${{ secrets.MM_WEBHOOK_URL }}
+          MATTERMOST_CHANNEL: dev
+          TEXT: |
+            :rocket: Preview deployment ready for PR #${{ github.event.pull_request.number }} by ${{ github.actor }}
+
+            **${{ github.event.pull_request.title }}**
+            Preview: ${{ steps.upsert_deployment.outputs.preview_url }}
+            [View PR](${{ github.event.pull_request.html_url }})
+          MATTERMOST_USERNAME: ${{ github.triggering_actor }}
 
       - name: Run Trivy vulnerability scanner sarif
         uses: aquasecurity/trivy-action@master
