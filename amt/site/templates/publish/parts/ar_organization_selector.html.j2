@@ -2,8 +2,10 @@
     {% if selected_org_id %}
         <c-alert class="rvo-layout-margin-bottom--xl" kind="info" heading="{% trans %}Organisatie geselecteerd{% endtrans %}">
         <c-p>{% trans %}U publiceert naar organisatie:{% endtrans %} <strong>{{ selected_org_name or selected_org_id }}</strong>
+        {% if organisations | length != 1 %}
         <br />
         <c-link hx-get="./organization-selector?select=true" hx-target="#ar-organization-selector" hx-swap="outerHTML">{% trans %}Wijzig organisatie{% endtrans %}</c-link>
+        {% endif %}
         </c-p>
         </c-alert>
     {% else %}
