@@ -79,9 +79,23 @@ main {
     }
 }
 
+/* add default spacing for paragraphs */
+* + .rvo-paragraph {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+}
+
 /* we override the default ROOS style because we want to display as column, not rows */
 /* stylelint-disable selector-class-pattern */
 .amt-theme {
+    /* adding missing design token */
+    --utrecht-space-around: 1;
+    --utrecht-heading-1-margin-block-start: var(--rvo-space-md);
+
+    & .utrecht-heading-1:first-child {
+        --utrecht-heading-1-margin-block-start: 0;
+    }
+
     & .utrecht-form-fieldset .rvo-table-header {
         background-color: transparent;
     }
@@ -322,6 +336,10 @@ main {
         display: none !important;
     }
 
+    & .display-block {
+        display: block !important;
+    }
+
     & .amt-widget-title {
         color: var(--rvo-color-hemelblauw);
         font-weight: bold;
@@ -549,6 +567,27 @@ main {
 
     & #general-error-container > p {
         padding: 1em;
+    }
+
+    /* redefining RVO utility classes, as we use 'harder matching rules', they override naturally */
+    & .rvo-layout-justify-content-start {
+        justify-content: flex-start;
+    }
+
+    & .rvo-ul--icon li {
+        align-items: baseline;
+    }
+
+    & .inline-blocks-row {
+        /* stylelint-disable-next-line no-descending-specificity */
+        > * {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        > *:not(:first-child) {
+            margin-left: 0.5rem;
+        }
     }
 
     /* stylelint-enable */

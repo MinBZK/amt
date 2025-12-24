@@ -37,6 +37,7 @@ class Settings(BaseSettings):
 
     DEBUG: bool = False
     AUTO_CREATE_SCHEMA: bool = False
+    VERIFY_SSL: bool = True
 
     OIDC_CLIENT_ID: str | None = None
     OIDC_CLIENT_SECRET: str | None = None
@@ -56,7 +57,7 @@ class Settings(BaseSettings):
 
     APP_DATABASE_FILE: str = "/database.sqlite3"
 
-    model_config = SettingsConfigDict(extra="ignore")
+    model_config = SettingsConfigDict(extra="ignore", env_file=".env")
 
     # FastAPI CSRF Protect Settings
     CSRF_PROTECT_SECRET_KEY: str = secrets.token_urlsafe(32)
@@ -66,11 +67,30 @@ class Settings(BaseSettings):
 
     TASK_REGISTRY_URL: str = "https://task-registry.apps.digilab.network"
 
+    ALGORITMEREGISTER_URL: str = "https://deployment-1-algor-dev.kind"
+    ALGORITMEREGISTER_TOKEN_URL: str = "https://keycloak.kind/realms/algor-dev-local/protocol/openid-connect/token"  # noqa: S105
+    ALGORITMEREGISTER_CLIENT_ID: str = "authentication-client"
+
+    @computed_field
+    @property
+    def ALGORITMEREGISTER_BASE_API_URL(self) -> str:
+        return f"{self.ALGORITMEREGISTER_URL}/aanleverapi"
+
+    @computed_field
+    @property
+    def ALGORITMEREGISTER_API_URL(self) -> str:
+        return f"{self.ALGORITMEREGISTER_BASE_API_URL}/v1_0"
+
     OBJECT_STORE_URL: str = "localhost:9000"
     OBJECT_STORE_USER: str = "amt"
     OBJECT_STORE_PASSWORD: str = "changeme"  # noqa: S105
     OBJECT_STORE_BUCKET_NAME: str = "amt"
     OBJECT_STORE_REGION: str = "us-east-1"
+
+    SESSION_COOKIE_NAME: str = "session_id"
+    SESSION_TTL_SECONDS: int = 60 * 60  # 1 hour
+    SESSION_CLEANUP_INTERVAL_SECONDS: int = 60
+    SESSION_COOKIE_SECURE: bool = False
 
     @computed_field
     def SQLALCHEMY_ECHO(self) -> bool:
