@@ -13,7 +13,7 @@ from pydantic import ValidationError
 
 from amt.algoritmeregister.auth import AlgoritmeregisterAuthError, get_access_token
 from amt.algoritmeregister.mapper import AlgorithmMapper
-from amt.algoritmeregister.openapi.base import UserApi
+from amt.algoritmeregister.openapi.base import OrganisationApi
 from amt.algoritmeregister.openapi.v1_0.client.openapi_client import AlgorithmSummary, ApiClient, Configuration
 from amt.algoritmeregister.publisher import (
     PreviewResult,
@@ -154,14 +154,19 @@ async def ar_login(
 
     settings = get_settings()
     configuration = Configuration(host=settings.ALGORITMEREGISTER_BASE_API_URL, access_token=access_token)
+    configuration.verify_ssl = settings.VERIFY_SSL
     api_client = ApiClient(configuration)
-    user_api = UserApi(api_client)
+    org_api = OrganisationApi(api_client)
 
     try:
-        user = user_api.get_me()
-        credentials.organisations = [OrganisationOption(value=org.org_id, label=org.name) for org in user.organisations]
+        org_response = org_api.get_all()
+        credentials.organisations = [
+            OrganisationOption(value=org.org_id, label=org.name) for org in org_response.organisations
+        ]
+        if len(credentials.organisations) == 1:
+            credentials.organization_id = credentials.organisations[0].value
     except Exception:
-        logger.exception("Failed to fetch user info from Algoritmeregister")
+        logger.exception("Failed to fetch organisations from Algoritmeregister")
 
     store_algoritmeregister_credentials(request, credentials)
 

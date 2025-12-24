@@ -2,8 +2,8 @@ import json
 from unittest.mock import MagicMock
 
 import pytest
-from amt.algoritmeregister.openapi.base.client import UserApi
-from amt.algoritmeregister.openapi.base.models import Flow, OrgType, User
+from amt.algoritmeregister.openapi.base.client import OrganisationApi, UserApi
+from amt.algoritmeregister.openapi.base.models import Flow, GetOrganisationsResponse, OrgType, User
 from pytest_mock import MockerFixture
 
 
@@ -31,6 +31,7 @@ async def test_get_me_success(mocker: MockerFixture) -> None:
 
     mock_response = MagicMock()
     mock_response.data = json.dumps(user_data).encode()
+    mock_response.status = 200
 
     mock_api_client = MagicMock()
     mock_api_client.call_api.return_value = mock_response
@@ -88,6 +89,7 @@ async def test_get_me_multiple_organisations(mocker: MockerFixture) -> None:
 
     mock_response = MagicMock()
     mock_response.data = json.dumps(user_data).encode()
+    mock_response.status = 200
 
     mock_api_client = MagicMock()
     mock_api_client.call_api.return_value = mock_response
@@ -111,6 +113,7 @@ async def test_get_me_no_data_raises_error(mocker: MockerFixture) -> None:
     # given
     mock_response = MagicMock()
     mock_response.data = None
+    mock_response.status = 200
 
     mock_api_client = MagicMock()
     mock_api_client.call_api.return_value = mock_response
@@ -122,3 +125,96 @@ async def test_get_me_no_data_raises_error(mocker: MockerFixture) -> None:
     # when / then
     with pytest.raises(ValueError, match="No data returned from API"):
         user_api.get_me()
+
+
+@pytest.mark.asyncio
+async def test_get_all_organisations_success(mocker: MockerFixture) -> None:
+    # given
+    response_data = {
+        "organisations": [
+            {
+                "id": 1,
+                "name": "Test Organisation",
+                "code": "gm0001",
+                "org_id": "org-1",
+                "type": "gemeente",
+                "flow": "ictu_last",
+                "show_page": True,
+            },
+            {
+                "id": 2,
+                "name": "Another Organisation",
+                "code": "pv0001",
+                "org_id": "org-2",
+                "type": "provincie",
+                "flow": "self_publish_two",
+                "show_page": False,
+            },
+        ],
+        "count": 2,
+    }
+
+    mock_response = MagicMock()
+    mock_response.data = json.dumps(response_data).encode()
+    mock_response.status = 200
+
+    mock_api_client = MagicMock()
+    mock_api_client.call_api.return_value = mock_response
+    mock_api_client.param_serialize.return_value = ("GET", "/aanleverapi/organisation", {}, None, [])
+
+    organisation_api = OrganisationApi(mock_api_client)
+
+    # when
+    result = organisation_api.get_all()
+
+    # then
+    assert isinstance(result, GetOrganisationsResponse)
+    assert result.count == 2
+    assert len(result.organisations) == 2
+    assert result.organisations[0].name == "Test Organisation"
+    assert result.organisations[0].type == OrgType.GEMEENTE
+    assert result.organisations[1].type == OrgType.PROVINCIE
+    assert result.organisations[1].flow == Flow.SELF_PUBLISH_TWO
+
+
+@pytest.mark.asyncio
+async def test_get_all_organisations_with_query_params(mocker: MockerFixture) -> None:
+    # given
+    response_data: dict[str, list[dict[str, object]] | int] = {"organisations": [], "count": 0}
+
+    mock_response = MagicMock()
+    mock_response.data = json.dumps(response_data).encode()
+    mock_response.status = 200
+
+    mock_api_client = MagicMock()
+    mock_api_client.call_api.return_value = mock_response
+    mock_api_client.param_serialize.return_value = ("GET", "/aanleverapi/organisation", {}, None, [])
+
+    organisation_api = OrganisationApi(mock_api_client)
+
+    # when
+    result = organisation_api.get_all(limit=100, skip=10, q="test")
+
+    # then
+    mock_api_client.param_serialize.assert_called_once()
+    call_kwargs = mock_api_client.param_serialize.call_args
+    assert call_kwargs.kwargs["query_params"] == [("limit", "100"), ("skip", "10"), ("q", "test")]
+    assert result.count == 0
+
+
+@pytest.mark.asyncio
+async def test_get_all_organisations_api_error(mocker: MockerFixture) -> None:
+    # given
+    mock_response = MagicMock()
+    mock_response.data = b"Unauthorized"
+    mock_response.status = 401
+
+    mock_api_client = MagicMock()
+    mock_api_client.call_api.return_value = mock_response
+    mock_api_client.param_serialize.return_value = ("GET", "/aanleverapi/organisation", {}, None, [])
+
+    organisation_api = OrganisationApi(mock_api_client)
+
+    # when / then
+    with pytest.raises(ValueError, match="API request failed with status 401"):
+        organisation_api.get_all()

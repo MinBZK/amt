@@ -74,3 +74,10 @@ class User(BaseModel):
     last_name: str
     roles: list[Role]
     organisations: list[OrganisationConfig]
+
+
+class GetOrganisationsResponse(BaseModel):
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
+
+    organisations: list[OrganisationConfig]
+    count: int

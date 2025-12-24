@@ -217,14 +217,9 @@ async def test_ar_login_success_stores_credentials(
     mocker.patch("amt.middleware.csrf.CookieOnlyCsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
     mocker.patch("amt.api.routes.publish.get_access_token", return_value="test_access_token")
 
-    from amt.algoritmeregister.openapi.base.models import Flow, OrganisationConfig, OrgType, User
+    from amt.algoritmeregister.openapi.base.models import Flow, GetOrganisationsResponse, OrganisationConfig, OrgType
 
-    mock_user = User(
-        id="user-1",
-        username="test@example.com",
-        first_name="Test",
-        last_name="User",
-        roles=[],
+    mock_org_response = GetOrganisationsResponse(
         organisations=[
             OrganisationConfig(
                 id=1,
@@ -236,10 +231,11 @@ async def test_ar_login_success_stores_credentials(
                 show_page=True,
             )
         ],
+        count=1,
     )
-    mock_user_api = mocker.Mock()
-    mock_user_api.get_me.return_value = mock_user
-    mocker.patch("amt.api.routes.publish.UserApi", return_value=mock_user_api)
+    mock_org_api = mocker.Mock()
+    mock_org_api.get_all.return_value = mock_org_response
+    mocker.patch("amt.api.routes.publish.OrganisationApi", return_value=mock_org_api)
 
     client.cookies["fastapi-csrf-token"] = "1"
 
