@@ -1,0 +1,21 @@
+# Ignore all tests
+test/**
+**/test/**
+
+# Ignore all docs
+docs/**
+*.md
+!README.md
+
+# Ignore other unwanted files
+.travis.yml
+.gitlab-ci.yml
+git_push.sh
+tox.ini
+requirements.txt
+test-requirements.txt
+setup.py
+setup.cfg
+.flake8
+.travis.yml
+docker-compose.yaml

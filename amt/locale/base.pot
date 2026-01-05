@@ -94,79 +94,83 @@ msgstr ""
 msgid "Phasing Out"
 msgstr ""
 
-#: amt/api/navigation.py:48
+#: amt/api/navigation.py:49
 msgid "Home"
 msgstr ""
 
-#: amt/api/navigation.py:49 amt/site/templates/auth/profile.html.j2:90
+#: amt/api/navigation.py:50 amt/site/templates/auth/profile.html.j2:90
 #: amt/site/templates/parts/algorithm_search.html.j2:9
 msgid "Algorithms"
 msgstr ""
 
-#: amt/api/navigation.py:50 amt/site/templates/auth/profile.html.j2:10
+#: amt/api/navigation.py:51 amt/site/templates/auth/profile.html.j2:10
 msgid "Overview"
 msgstr ""
 
-#: amt/api/navigation.py:51
+#: amt/api/navigation.py:52
 msgid "Tasks"
 msgstr ""
 
-#: amt/api/navigation.py:52
+#: amt/api/navigation.py:53
 msgid "New"
 msgstr ""
 
-#: amt/api/navigation.py:53
-msgid "System card"
-msgstr ""
-
 #: amt/api/navigation.py:54
-msgid "Assessment card"
+msgid "Publish"
 msgstr ""
 
 #: amt/api/navigation.py:55
-msgid "Model card"
+msgid "System card"
 msgstr ""
 
 #: amt/api/navigation.py:56
-msgid "Details"
+msgid "Assessment card"
 msgstr ""
 
-#: amt/api/navigation.py:57 amt/site/templates/organizations/home.html.j2:8
-msgid "Info"
+#: amt/api/navigation.py:57
+msgid "Model card"
 msgstr ""
 
 #: amt/api/navigation.py:58
-msgid "Algorithm details"
+msgid "Details"
 msgstr ""
 
-#: amt/api/navigation.py:59
-msgid "Requirements"
+#: amt/api/navigation.py:59 amt/site/templates/organizations/home.html.j2:8
+msgid "Info"
 msgstr ""
 
 #: amt/api/navigation.py:60
-msgid "Data"
+msgid "Algorithm details"
 msgstr ""
 
 #: amt/api/navigation.py:61
-msgid "Model"
+msgid "Requirements"
 msgstr ""
 
 #: amt/api/navigation.py:62
+msgid "Data"
+msgstr ""
+
+#: amt/api/navigation.py:63
+msgid "Model"
+msgstr ""
+
+#: amt/api/navigation.py:64
 msgid "Instruments"
 msgstr ""
 
-#: amt/api/navigation.py:63 amt/site/templates/auth/profile.html.j2:63
+#: amt/api/navigation.py:65 amt/site/templates/auth/profile.html.j2:63
 #: amt/site/templates/organizations/parts/overview_results.html.j2:6
 msgid "Organizations"
 msgstr ""
 
-#: amt/api/navigation.py:64 amt/site/templates/organizations/home.html.j2:38
+#: amt/api/navigation.py:66 amt/site/templates/organizations/home.html.j2:38
 #: amt/site/templates/organizations/parts/members_results.html.j2:6
 #: amt/site/templates/organizations/parts/overview_results.html.j2:131
 msgid "Members"
 msgstr ""
 
-#: amt/api/navigation.py:65
+#: amt/api/navigation.py:67
 msgid "Compliance"
 msgstr ""
 
@@ -176,6 +180,22 @@ msgstr ""
 
 #: amt/api/organization_filter_options.py:17
 msgid "My organizations"
+msgstr ""
+
+#: amt/api/publication_statuses.py:20
+msgid "Not supplied"
+msgstr ""
+
+#: amt/api/publication_statuses.py:21
+msgid "Supplied"
+msgstr ""
+
+#: amt/api/publication_statuses.py:22
+msgid "Approved"
+msgstr ""
+
+#: amt/api/publication_statuses.py:23
+msgid "Published"
 msgstr ""
 
 #: amt/api/risk_group.py:19
@@ -202,24 +222,24 @@ msgstr ""
 msgid "Select organization"
 msgstr ""
 
-#: amt/api/forms/algorithm.py:65
+#: amt/api/forms/algorithm.py:73
 #: amt/site/templates/algorithms/details_info.html.j2:82
 msgid "Organization"
 msgstr ""
 
-#: amt/api/forms/algorithm.py:67
+#: amt/api/forms/algorithm.py:74
 msgid ""
 "You do not have sufficient permissions to create an algorithm on any "
 "organization you are member of"
 msgstr ""
 
-#: amt/api/forms/algorithm.py:98 amt/api/forms/organization.py:67
+#: amt/api/forms/algorithm.py:106 amt/api/forms/organization.py:67
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:4
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:23
 msgid "Add members"
 msgstr ""
 
-#: amt/api/forms/algorithm.py:99
+#: amt/api/forms/algorithm.py:107
 msgid "Search for a person..."
 msgstr ""
 
@@ -270,7 +290,7 @@ msgstr ""
 msgid "Information on how this measure is implemented"
 msgstr ""
 
-#: amt/api/forms/measure.py:81
+#: amt/api/forms/measure.py:80
 msgid ""
 "Select one or more to upload. The files will be saved once you confirm "
 "changes by pressing the save button."
@@ -300,6 +320,7 @@ msgstr ""
 #: amt/site/templates/macros/form_macros.html.j2:440
 #: amt/site/templates/organizations/home.html.j2:14
 #: amt/site/templates/organizations/parts/members_results.html.j2:130
+#: amt/site/templates/publish/parts/ar_login_form.html.j2:24
 msgid "Name"
 msgstr ""
 
@@ -349,7 +370,6 @@ msgid "algorithm"
 msgstr ""
 
 #: amt/core/exception_handlers.py:21
-#, python-brace-format
 msgid "String should have at least {min_length} characters"
 msgstr ""
 
@@ -358,7 +378,6 @@ msgid "Field required"
 msgstr ""
 
 #: amt/core/exception_handlers.py:24
-#, python-brace-format
 msgid "String should match pattern '{pattern}'"
 msgstr ""
 
@@ -366,8 +385,7 @@ msgstr ""
 msgid "Input should be a valid integer."
 msgstr ""
 
-#: amt/core/exception_handlers.py:27
-#, python-brace-format
+#: amt/core/exception_handlers.py:26
 msgid "For {type} {type_name}, at least one member must have the maintainer role."
 msgstr ""
 
@@ -375,8 +393,7 @@ msgstr ""
 msgid "At least one member must have the maintainer role."
 msgstr ""
 
-#: amt/core/exceptions.py:21
-#, python-brace-format
+#: amt/core/exceptions.py:20
 msgid ""
 "An error occurred while configuring the options for '{field}'. Please "
 "check the settings and try again."
@@ -390,7 +407,7 @@ msgstr ""
 msgid "An error occurred while processing the instrument. Please try again later."
 msgstr ""
 
-#: amt/core/exceptions.py:41 amt/core/exceptions.py:87
+#: amt/core/exceptions.py:40 amt/core/exceptions.py:86
 msgid ""
 "The requested page or resource could not be found, or you do not have the"
 " correct permissions to access it. Please check the URL or query and try "
@@ -406,12 +423,10 @@ msgid "Only static files are supported."
 msgstr ""
 
 #: amt/core/exceptions.py:62
-#, python-brace-format
 msgid "Key not correct: {field}"
 msgstr ""
 
 #: amt/core/exceptions.py:68
-#, python-brace-format
 msgid "Value not correct: {field}"
 msgstr ""
 
@@ -540,12 +555,12 @@ msgid "Read more on the algoritmekader"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:62
-#: amt/site/templates/macros/editable_macros.html.j2:249
+#: amt/site/templates/macros/editable_macros.html.j2:250
 msgid "Save"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:66
-#: amt/site/templates/macros/editable_macros.html.j2:254
+#: amt/site/templates/macros/editable_macros.html.j2:255
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:26
 msgid "Cancel"
 msgstr ""
@@ -619,8 +634,8 @@ msgid "Email"
 msgstr ""
 
 #: amt/site/templates/auth/profile.html.j2:49
-#: amt/site/templates/parts/header.html.j2:75
-#: amt/site/templates/parts/header.html.j2:138
+#: amt/site/templates/parts/header.html.j2:68
+#: amt/site/templates/parts/header.html.j2:131
 msgid "Language"
 msgstr ""
 
@@ -644,8 +659,8 @@ msgstr ""
 
 #: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:11
 #: amt/site/templates/pages/landingpage.html.j2:16
-#: amt/site/templates/parts/header.html.j2:86
-#: amt/site/templates/parts/header.html.j2:152
+#: amt/site/templates/parts/header.html.j2:79
+#: amt/site/templates/parts/header.html.j2:145
 msgid "Login"
 msgstr ""
 
@@ -852,7 +867,7 @@ msgid "AMT Placeholder information pages"
 msgstr ""
 
 #: amt/site/templates/pages/landingpage.html.j2:11
-#: amt/site/templates/parts/header.html.j2:18
+#: amt/site/templates/parts/header.html.j2:11
 msgid "Algorithm Management Toolkit"
 msgstr ""
 
@@ -1003,11 +1018,11 @@ msgstr ""
 msgid "Does not exist"
 msgstr ""
 
-#: amt/site/templates/parts/header.html.j2:7
+#: amt/site/templates/parts/header.html.j2:2
 msgid "Beta Version"
 msgstr ""
 
-#: amt/site/templates/parts/header.html.j2:7
+#: amt/site/templates/parts/header.html.j2:2
 msgid ""
 "  |  This website is under development  |  All versions are created in an"
 " open manner."
@@ -1019,5 +1034,48 @@ msgstr ""
 
 #: amt/site/templates/parts/tasks_search.html.j2:52
 msgid "Assignee"
+msgstr ""
+
+#: amt/site/templates/publish/publish_explanation.html.j2:6
+msgid ""
+"In het centrale algoritmeregister van de Nederlandse overheid publiceren\n"
+"    overheden\n"
+"    informatie over hun algoritmes op één plek, zodat het doorzoekbaar is"
+" voor\n"
+"    iedereen."
+msgstr ""
+
+#: amt/site/templates/publish/publish_explanation.html.j2:10
+msgid ""
+"Via AMT kan een algoritme aangeboden worden aan het\n"
+"    algoritmeregister."
+msgstr ""
+
+#: amt/site/templates/publish/publish_explanation.html.j2:12
+msgid ""
+"Het algoritmeregister is geen onderdeel van AMT en om een algoritme te "
+"kunnen\n"
+"    aanleveren is aanmelden bij het register noodzakelijk."
+msgstr ""
+
+#: amt/site/templates/publish/publish_explanation.html.j2:14
+msgid ""
+"Het aanleveren van een algoritme is enkel mogelijk indien u al over\n"
+"    aanmeldgegevens\n"
+"    voor het register beschikt."
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:50
+msgid ""
+"Het algoritme is pas beschikbaar als het\n"
+"                vrijgegeven en gepubliceerd is."
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_login_form.html.j2:28
+msgid "Password"
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_login_form.html.j2:31
+msgid "Organisatie Identifier"
 msgstr ""
 

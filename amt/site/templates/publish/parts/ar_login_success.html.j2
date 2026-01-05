@@ -1,0 +1,11 @@
+<c-alert class="rvo-layout-justify-content-start" maxWidth="sm" kind="success" heading="Verbinding geslaagd">
+<c-p>De verbinding met het Algoritmeregister is geslaagd.</c-p>
+</c-alert>
+<br />
+{% include "publish/parts/ar_organization_selector.html.j2" %}
+<br />
+{% if selected_org_id %}
+    <c-button @click="window.location='./'" kind="primary">Ga verder</c-button>
+{% else %}
+    <c-button kind="primary" disabled="true">Ga verder</c-button>
+{% endif %}
