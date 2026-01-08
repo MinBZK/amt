@@ -45,7 +45,7 @@ python-multipart = "^0.0.20"
 minio = "^7.2.20"
 poetry = "^2.2.1"
 vcrpy = "^8.1.0"
-urllib3 = "^2.6.0"
+urllib3 = "^2.6.3"
 
 
 [tool.poetry.group.test.dependencies]
