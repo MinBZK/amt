@@ -36,6 +36,7 @@ async def test_store_and_get_algoritmeregister_credentials(mocker: MockerFixture
         "password": "test_pass",
         "organization_id": "org123",
         "token": "test_token",
+        "organisations": [],
     }
 
 

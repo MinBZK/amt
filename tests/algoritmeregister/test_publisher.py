@@ -54,6 +54,7 @@ async def test_publish_algorithm_success(mocker: MockerFixture) -> None:
         username="test@example.com",
         password=TEST_PASSWORD,
         organisation_id="ORG1",
+        organisation_name="Test Organisation",
     )
 
     # then
@@ -86,6 +87,7 @@ async def test_publish_algorithm_failure(mocker: MockerFixture) -> None:
             username="test@example.com",
             password=TEST_PASSWORD,
             organisation_id="ORG1",
+            organisation_name="Test Organisation",
         )
     assert "Failed to publish algorithm" in str(exc_info.value)
 
@@ -115,6 +117,7 @@ async def test_update_algorithm_success(mocker: MockerFixture) -> None:
         username="test@example.com",
         password=TEST_PASSWORD,
         organisation_id="ORG1",
+        organisation_name="Test Organisation",
         algorithm_id="LARS123",
     )
 
@@ -148,6 +151,7 @@ async def test_update_algorithm_failure(mocker: MockerFixture) -> None:
             username="test@example.com",
             password=TEST_PASSWORD,
             organisation_id="ORG1",
+            organisation_name="Test Organisation",
             algorithm_id="LARS123",
         )
     assert "Failed to update algorithm" in str(exc_info.value)

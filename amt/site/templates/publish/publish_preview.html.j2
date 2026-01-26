@@ -5,33 +5,30 @@
     <c-grid columns="two" division="1fr 4fr">
     <c-progress-tracker :steps="steps" />
     <div>
-        <c-heading type="h2" class="rvo-layout-margin-vertical--xl">Preview & controleren</c-heading>
+        <c-heading type="h2" class="rvo-layout-margin-vertical--xl">{% trans %}Preview & verify{% endtrans %}</c-heading>
         <c-form-fieldset>
         <c-p>
-        Hieronder ziet u de volledige preview van de publicatie.
+        {% trans %}Below you can see the complete preview of the publication.{% endtrans %}
         </c-p>
         <c-p>
-        Let op de volgende punten:
+        {% trans %}Pay attention to the following points:{% endtrans %}
         </c-p>
         <c-ul>
         <c-li class="rvo-layout-margin-vertical--sm">
         <c-div class="display-block">
-        <c-strong>Volledigheid</c-strong>
-        : Vul zo veel mogelijk velden in. Lege velden worden over het algemeen niet getoond op
-        de
-        website.
+        <c-strong>{% trans %}Completeness{% endtrans %}</c-strong>
+        {% trans %}: Fill in as many fields as possible. Empty fields are generally not shown on the website.{% endtrans %}
         </c-div>
         </c-li>
         <c-li class="rvo-layout-margin-vertical--sm">
         <c-div class="display-block">
-        <c-strong>Toegankelijke taal</c-strong>
-        : Gebruik waar mogelijk begrijpelijke taal (streven is B1-niveau), zeker in de algemene
-        omschrijvingen.
+        <c-strong>{% trans %}Accessible language{% endtrans %}</c-strong>
+        {% trans %}: Use understandable language where possible (aim is B1 level), especially in the general descriptions.{% endtrans %}
         </c-div>
         </c-li>
         </c-ul>
         <c-p>
-        Indien u gegevens wilt wijzigen, kunt u gebruik maken van de details pagina.
+        {% trans %}If you want to change data, you can use the details page.{% endtrans %}
         </c-p>
         </c-form-fieldset>
         <c-card outline="true" class="rvo-layout-margin-vertical--xl">
@@ -46,19 +43,19 @@
             </c-p>
         </div>
         <div>
-            <c-p text-style="bold,no-margins">Publicatiecategorie</c-p>
+            <c-p text-style="bold,no-margins">{% trans %}Publication category{% endtrans %}</c-p>
             <c-p>{{ publication_model.publication_category.value }}</c-p>
-            <c-p text-style="bold,no-margins">Impacttoetsen</c-p>
+            <c-p text-style="bold,no-margins">{% trans %}Impact assessments{% endtrans %}</c-p>
             <c-p>{{ publication_model.impacttoetsen_grouping | map(attribute='title') | join(', ') }}</c-p>
-            <c-p text-style="bold,no-margins">Status</c-p>
+            <c-p text-style="bold,no-margins">{% trans %}Status{% endtrans %}</c-p>
             <c-p>{{ publication_model.status.value }}</c-p>
         </div>
         </c-grid>
         </c-card>
         <c-tabs>
-        <c-tab-item @click="applyRules('#tab-content-container > *: +display-none; #{id}-content: -display-none; siblings > a: -rvo-link--active -rvo-tabs__item-link--active; self > a: +rvo-link--active +rvo-tabs__item-link--active', event, { preventDefault: true, stopPropagation: true })" id="tab1" href="#" label="Algemene informatie" :selected="true" />
-        <c-tab-item @click="applyRules('#tab-content-container > *: +display-none; #{id}-content: -display-none; siblings > a: -rvo-link--active -rvo-tabs__item-link--active; self > a: +rvo-link--active +rvo-tabs__item-link--active', event, { preventDefault: true, stopPropagation: true })" id="tab2" href="#" label="Verantwoord gebruik" />
-        <c-tab-item @click="applyRules('#tab-content-container > *: +display-none; #{id}-content: -display-none; siblings > a: -rvo-link--active -rvo-tabs__item-link--active; self > a: +rvo-link--active +rvo-tabs__item-link--active', event, { preventDefault: true, stopPropagation: true })" id="tab3" href="#" label="Werking" />
+        <c-tab-item @click="applyRules('#tab-content-container > *: +display-none; #{id}-content: -display-none; siblings > a: -rvo-link--active -rvo-tabs__item-link--active; self > a: +rvo-link--active +rvo-tabs__item-link--active', event, { preventDefault: true, stopPropagation: true })" id="tab1" href="#" label="{% trans %}General information{% endtrans %}" :selected="true" />
+        <c-tab-item @click="applyRules('#tab-content-container > *: +display-none; #{id}-content: -display-none; siblings > a: -rvo-link--active -rvo-tabs__item-link--active; self > a: +rvo-link--active +rvo-tabs__item-link--active', event, { preventDefault: true, stopPropagation: true })" id="tab2" href="#" label="{% trans %}Responsible use{% endtrans %}" />
+        <c-tab-item @click="applyRules('#tab-content-container > *: +display-none; #{id}-content: -display-none; siblings > a: -rvo-link--active -rvo-tabs__item-link--active; self > a: +rvo-link--active +rvo-tabs__item-link--active', event, { preventDefault: true, stopPropagation: true })" id="tab3" href="#" label="{% trans %}Operation{% endtrans %}" />
         </c-tabs>
         <div id="tab-content-container">
             <div id="tab1-content">
@@ -69,24 +66,24 @@
                 </colgroup>
                 <c-tr>
                 <c-td>
-                <c-strong>Thema</c-strong>
+                <c-strong>{% trans %}Theme{% endtrans %}</c-strong>
                 </c-td>
                 <c-td>{{ publication_model.category if publication_model.category else '-' }}</c-td>
                 </c-tr>
                 <c-tr>
-                <c-td>Begindatum</c-td>
+                <c-td>{% trans %}Start date{% endtrans %}</c-td>
                 <c-td>{{ publication_model.begin_date or '-' }}</c-td>
                 </c-tr>
                 <c-tr>
-                <c-td>Einddatum</c-td>
+                <c-td>{% trans %}End date{% endtrans %}</c-td>
                 <c-td>{{ publication_model.end_date or '-' }}</c-td>
                 </c-tr>
                 <c-tr>
-                <c-td>Contactgegevens</c-td>
+                <c-td>{% trans %}Contact details{% endtrans %}</c-td>
                 <c-td>{{ publication_model.contact_email or '-' }}</c-td>
                 </c-tr>
                 <c-tr>
-                <c-td>Website</c-td>
+                <c-td>{% trans %}Website{% endtrans %}</c-td>
                 <c-td>
                 {% if publication_model.website %}
                     <c-link href="{{ publication_model.website }}">{{ publication_model.website }}</c-link>
@@ -96,7 +93,7 @@
                 </c-td>
                 </c-tr>
                 <c-tr>
-                <c-td>URL</c-td>
+                <c-td>{% trans %}URL{% endtrans %}</c-td>
                 <c-td>
                 {% if publication_model.url %}
                     <c-link href="{{ publication_model.url }}">{{ publication_model.url }}</c-link>
@@ -115,37 +112,37 @@
                 </colgroup>
                 <c-tr>
                 <c-td>
-                <c-strong>Doel en impact</c-strong>
+                <c-strong>{% trans %}Purpose and impact{% endtrans %}</c-strong>
                 </c-td>
                 <c-td>{{ publication_model.goal or '-' }}</c-td>
                 </c-tr>
                 <c-tr>
                 <c-td>
-                <c-strong>Afwegingen</c-strong>
+                <c-strong>{% trans %}Considerations{% endtrans %}</c-strong>
                 </c-td>
                 <c-td>{{ publication_model.proportionality or '-' }}</c-td>
                 </c-tr>
                 <c-tr>
                 <c-td>
-                <c-strong>Menselijke tussenkomst</c-strong>
+                <c-strong>{% trans %}Human intervention{% endtrans %}</c-strong>
                 </c-td>
                 <c-td>{{ publication_model.human_intervention or '-' }}</c-td>
                 </c-tr>
                 <c-tr>
                 <c-td>
-                <c-strong>Risicobeheer</c-strong>
+                <c-strong>{% trans %}Risk management{% endtrans %}</c-strong>
                 </c-td>
                 <c-td>{{ publication_model.risks or '-' }}</c-td>
                 </c-tr>
                 <c-tr>
                 <c-td>
-                <c-strong>Wettelijke basis</c-strong>
+                <c-strong>{% trans %}Legal basis{% endtrans %}</c-strong>
                 </c-td>
                 <c-td>{{ publication_model.lawful_basis or '-' }}</c-td>
                 </c-tr>
                 <c-tr>
                 <c-td>
-                <c-strong>Wettelijke basis (links)</c-strong>
+                <c-strong>{% trans %}Legal basis (links){% endtrans %}</c-strong>
                 </c-td>
                 <c-td>
                 {% if publication_model.lawful_basis_grouping %}
@@ -161,7 +158,7 @@
             </c-tr>
             <c-tr>
             <c-td>
-            <c-strong>Link naar verwerkingsregister</c-strong>
+            <c-strong>{% trans %}Link to processing register{% endtrans %}</c-strong>
             </c-td>
             <c-td>
             {% if publication_model.process_index_url %}
@@ -173,13 +170,13 @@
             </c-tr>
             <c-tr>
             <c-td>
-            <c-strong>Impacttoetsen</c-strong>
+            <c-strong>{% trans %}Impact assessments{% endtrans %}</c-strong>
             </c-td>
             <c-td>{{ publication_model.impacttoetsen or '-' }}</c-td>
             </c-tr>
             <c-tr>
             <c-td>
-            <c-strong>Impacttoetsen (links)</c-strong>
+            <c-strong>{% trans %}Impact assessments (links){% endtrans %}</c-strong>
             </c-td>
             <c-td>
             {% if publication_model.impacttoetsen_grouping %}
@@ -206,13 +203,13 @@
         </colgroup>
         <c-tr>
         <c-td>
-        <c-strong>Brondata</c-strong>
+        <c-strong>{% trans %}Source data{% endtrans %}</c-strong>
         </c-td>
         <c-td>{{ publication_model.source_data or '-' }}</c-td>
         </c-tr>
         <c-tr>
         <c-td>
-        <c-strong>Brondata (links)</c-strong>
+        <c-strong>{% trans %}Source data (links){% endtrans %}</c-strong>
         </c-td>
         <c-td>
         {% if publication_model.source_data_grouping %}
@@ -228,19 +225,19 @@
     </c-tr>
     <c-tr>
     <c-td>
-    <c-strong>Methoden en modellen</c-strong>
+    <c-strong>{% trans %}Methods and models{% endtrans %}</c-strong>
     </c-td>
     <c-td>{{ publication_model.methods_and_models or '-' }}</c-td>
     </c-tr>
     <c-tr>
     <c-td>
-    <c-strong>Leverancier</c-strong>
+    <c-strong>{% trans %}Supplier{% endtrans %}</c-strong>
     </c-td>
     <c-td>{{ publication_model.provider or '-' }}</c-td>
     </c-tr>
     <c-tr>
     <c-td>
-    <c-strong>Publiccode</c-strong>
+    <c-strong>{% trans %}Publiccode{% endtrans %}</c-strong>
     </c-td>
     <c-td>
     {% if publication_model.publiccode %}
@@ -254,9 +251,9 @@
 </div>
 </div>
 <c-layout-flow justifyContent="end" row="true" class="rvo-layout-margin-vertical--xl">
-<c-button style="margin-right: auto" @click="window.location='./prepare'" kind="tertiary" showIcon="before" icon="terug">Vorige stap
+<c-button style="margin-right: auto" @click="window.location='./prepare'" kind="tertiary" showIcon="before" icon="terug">{% trans %}Previous step{% endtrans %}
 </c-button>
-<c-button @click="window.location='./confirm'" kind="primary">Volgende stap</c-button>
+<c-button @click="window.location='./confirm'" kind="primary">{% trans %}Next step{% endtrans %}</c-button>
 </c-layout-flow>
 </div>
 </c-grid>

@@ -116,7 +116,9 @@ msgstr "Tasks"
 msgid "New"
 msgstr "New"
 
-#: amt/api/navigation.py:54
+#: amt/api/navigation.py:54 amt/api/routes/publish.py:82
+#: amt/site/templates/publish/publish_confirm.html.j2:8
+#: amt/site/templates/publish/publish_confirm.html.j2:30
 msgid "Publish"
 msgstr ""
 
@@ -257,6 +259,7 @@ msgid "Accountable"
 msgstr "Accountable"
 
 #: amt/api/forms/measure.py:58
+#: amt/site/templates/publish/publish_preview.html.j2:50
 msgid "Status"
 msgstr "Status"
 
@@ -323,7 +326,7 @@ msgstr "Add links to documents"
 #: amt/site/templates/macros/form_macros.html.j2:440
 #: amt/site/templates/organizations/home.html.j2:14
 #: amt/site/templates/organizations/parts/members_results.html.j2:130
-#: amt/site/templates/publish/parts/ar_login_form.html.j2:30
+#: amt/site/templates/publish/parts/ar_login_form.html.j2:26
 msgid "Name"
 msgstr "Name"
 
@@ -338,6 +341,21 @@ msgstr ""
 
 #: amt/api/forms/organization.py:75
 msgid "Add organization"
+msgstr ""
+
+#: amt/api/routes/publish.py:72
+#: amt/site/templates/publish/publish_prepare.html.j2:8
+msgid "Prepare publication"
+msgstr ""
+
+#: amt/api/routes/publish.py:79
+#: amt/site/templates/publish/publish_preview.html.j2:8
+#, fuzzy
+msgid "Preview & verify"
+msgstr "Reviewer"
+
+#: amt/api/routes/publish.py:83
+msgid "End"
 msgstr ""
 
 #: amt/core/dynamic_translations.py:13
@@ -894,6 +912,7 @@ msgid "Get a grip on algorithms with the Algorithm Management Toolkit"
 msgstr "Get a grip on algorithms with the Algorithm Management Toolkit"
 
 #: amt/site/templates/pages/landingpage.html.j2:37
+#: amt/site/templates/publish/publish_preview.html.j2:133
 msgid "Risk management"
 msgstr "Monitoring and Management"
 
@@ -1068,106 +1087,441 @@ msgstr "Results for"
 msgid "Assignee"
 msgstr "Assignee"
 
-#: amt/site/templates/publish/publish_explanation.html.j2:6
-msgid ""
-"In het centrale algoritmeregister van de Nederlandse overheid publiceren\n"
-"    overheden\n"
-"    informatie over hun algoritmes op één plek, zodat het doorzoekbaar is"
-" voor\n"
-"    iedereen."
+#: amt/site/templates/publish/publish_confirm.html.j2:12
+msgid "You are about to permanently publish the algorithm"
 msgstr ""
 
-#: amt/site/templates/publish/publish_explanation.html.j2:10
+#: amt/site/templates/publish/publish_confirm.html.j2:14
+#, fuzzy
+msgid "in the Algorithm Register."
+msgstr "Name of the algorithm"
+
+#: amt/site/templates/publish/publish_confirm.html.j2:17
+#, fuzzy
+msgid "What happens now?"
+msgstr "What now?"
+
+#: amt/site/templates/publish/publish_confirm.html.j2:21
+msgid "After your confirmation, the publication will be released."
+msgstr ""
+
+#: amt/site/templates/publish/publish_confirm.html.j2:22
+msgid "The submission will be manually reviewed."
+msgstr ""
+
+#: amt/site/templates/publish/publish_confirm.html.j2:23
 msgid ""
-"Via AMT kan een algoritme aangeboden worden aan het\n"
-"    algoritmeregister."
+"The publication will be visible in the Algorithm Register within a "
+"maximum of 1 business day."
+msgstr ""
+
+#: amt/site/templates/publish/publish_confirm.html.j2:27
+msgid ""
+"The responsibility for the accuracy of the data always remains with your "
+"organization."
+msgstr ""
+
+#: amt/site/templates/publish/publish_confirm.html.j2:31
+msgid "Publish and release"
+msgstr ""
+
+#: amt/site/templates/publish/publish_confirm.html.j2:35
+#: amt/site/templates/publish/publish_prepare.html.j2:38
+#: amt/site/templates/publish/publish_preview.html.j2:254
+msgid "Previous step"
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_login_form.html.j2:9
+#: amt/site/templates/publish/publish_connection.html.j2:4
+msgid "Algorithm register connection"
+msgstr ""
+
+#: amt/site/templates/publish/publish_explanation.html.j2:5
+msgid "Publish to the Algorithm Register"
+msgstr ""
+
+#: amt/site/templates/publish/publish_explanation.html.j2:6
+msgid ""
+"In the central algorithm register of the Dutch government, government "
+"agencies publish information about their algorithms in one place, making "
+"it searchable for everyone."
+msgstr ""
+
+#: amt/site/templates/publish/publish_explanation.html.j2:7
+msgid "Via AMT an algorithm can be submitted to the algorithm register."
+msgstr ""
+
+#: amt/site/templates/publish/publish_explanation.html.j2:8
+msgid ""
+"The algorithm register is not part of AMT and to submit an algorithm, "
+"registration with the register is required."
+msgstr ""
+
+#: amt/site/templates/publish/publish_explanation.html.j2:9
+msgid ""
+"Submitting an algorithm is only possible if you already have registration"
+" credentials for the register."
 msgstr ""
 
 #: amt/site/templates/publish/publish_explanation.html.j2:12
-msgid ""
-"Het algoritmeregister is geen onderdeel van AMT en om een algoritme te "
-"kunnen\n"
-"    aanleveren is aanmelden bij het register noodzakelijk."
+msgid "Read more about the Algorithm Register here"
 msgstr ""
 
-#: amt/site/templates/publish/publish_explanation.html.j2:14
+#: amt/site/templates/publish/publish_explanation.html.j2:17
+msgid "Check connection"
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_login_success.html.j2:8
+#: amt/site/templates/publish/parts/ar_login_success.html.j2:10
+#: amt/site/templates/publish/publish_explanation.html.j2:19
+msgid "Continue"
+msgstr ""
+
+#: amt/site/templates/publish/publish_prepare.html.j2:11
+msgid "What is important when publishing?"
+msgstr ""
+
+#: amt/site/templates/publish/publish_prepare.html.j2:14
 msgid ""
-"Het aanleveren van een algoritme is enkel mogelijk indien u al over\n"
-"    aanmeldgegevens\n"
-"    voor het register beschikt."
+"Before you continue with publishing your algorithm, it is important to "
+"know what criteria your algorithm must meet. Publication in the Algorithm"
+" Register contributes to transparency and accountability regarding the "
+"use of algorithms within the government."
+msgstr ""
+
+#: amt/site/templates/publish/publish_prepare.html.j2:17
+#: amt/site/templates/publish/publish_preview.html.j2:14
+msgid "Pay attention to the following points:"
+msgstr ""
+
+#: amt/site/templates/publish/publish_prepare.html.j2:22
+msgid "Completeness of data:"
+msgstr ""
+
+#: amt/site/templates/publish/publish_prepare.html.j2:23
+msgid ""
+"Ensure that all relevant metadata, such as purpose, operation, data used "
+"and impact assessments, are fully and accurately filled in your algorithm"
+" description. Incomplete information can lead to delay or rejection of "
+"publication."
+msgstr ""
+
+#: amt/site/templates/publish/publish_prepare.html.j2:28
+msgid "Necessity of publication:"
+msgstr ""
+
+#: amt/site/templates/publish/publish_prepare.html.j2:29
+msgid ""
+"Determine whether your algorithm falls under the publication obligation, "
+"for example because it is a high-risk algorithm according to the European"
+" AI regulation, or has a direct impact on citizens. Make sure you have "
+"all this information at hand or have already filled it in on the previous"
+" tabs."
+msgstr ""
+
+#: amt/site/templates/publish/publish_prepare.html.j2:36
+#, fuzzy
+msgid "Show status"
+msgstr "Status"
+
+#: amt/site/templates/publish/publish_prepare.html.j2:40
+#: amt/site/templates/publish/publish_preview.html.j2:256
+msgid "Next step"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:11
+msgid "Below you can see the complete preview of the publication."
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:19
+#, fuzzy
+msgid "Completeness"
+msgstr "Compliance"
+
+#: amt/site/templates/publish/publish_preview.html.j2:20
+msgid ""
+": Fill in as many fields as possible. Empty fields are generally not "
+"shown on the website."
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:25
+#, fuzzy
+msgid "Accessible language"
+msgstr "Select language"
+
+#: amt/site/templates/publish/publish_preview.html.j2:26
+msgid ""
+": Use understandable language where possible (aim is B1 level), "
+"especially in the general descriptions."
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:31
+msgid "If you want to change data, you can use the details page."
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:46
+msgid "Publication category"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:48
+#: amt/site/templates/publish/publish_preview.html.j2:173
+#, fuzzy
+msgid "Impact assessments"
+msgstr "Assessment cards"
+
+#: amt/site/templates/publish/publish_preview.html.j2:56
+msgid "General information"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:57
+#, fuzzy
+msgid "Responsible use"
+msgstr "Responsible"
+
+#: amt/site/templates/publish/publish_preview.html.j2:58
+#, fuzzy
+msgid "Operation"
+msgstr "Organization"
+
+#: amt/site/templates/publish/publish_preview.html.j2:69
+#, fuzzy
+msgid "Theme"
+msgstr "Home"
+
+#: amt/site/templates/publish/publish_preview.html.j2:74
+msgid "Start date"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:78
+msgid "End date"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:82
+#, fuzzy
+msgid "Contact details"
+msgstr "Details"
+
+#: amt/site/templates/publish/publish_preview.html.j2:86
+msgid "Website"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:96
+msgid "URL"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:115
+msgid "Purpose and impact"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:121
+msgid "Considerations"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:127
+msgid "Human intervention"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:139
+msgid "Legal basis"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:145
+msgid "Legal basis (links)"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:161
+msgid "Link to processing register"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:179
+msgid "Impact assessments (links)"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:206
+msgid "Source data"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:212
+msgid "Source data (links)"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:228
+msgid "Methods and models"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:234
+msgid "Supplier"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:240
+msgid "Publiccode"
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:9
+#: amt/site/templates/publish/publish_status.html.j2:18
+msgid "Publication status"
 msgstr ""
 
 #: amt/site/templates/publish/publish_status.html.j2:12
 msgid ""
-"Het algoritme kan niet in het register gevonden worden maar is voorheen "
-"wel via AMT\n"
-"        gepubliceerd. Wellicht is het uit het register verwijderd."
+"The algorithm cannot be found in the register but was previously "
+"published via AMT. It may have been removed from the register."
 msgstr ""
 
+#: amt/site/templates/publish/publish_status.html.j2:13
+#, fuzzy
+msgid "The publication has now also been removed from AMT."
+msgstr "The page has moved or been removed"
+
 #: amt/site/templates/publish/publish_status.html.j2:14
-msgid "De publicatie is nu ook uit AMT verwijderd."
+msgid "Publish again"
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:24
+msgid "Last published on"
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:29
+msgid "No publication information is available yet."
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:31
+msgid "Link to your publication"
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:35
+#: amt/site/templates/publish/publish_status.html.j2:40
+msgid "View publication preview"
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:52
+msgid ""
+"A newer version of the algorithm has been successfully submitted, but not"
+" yet released. Only after release will the approval process start and "
+"publication can take place."
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:56
+msgid ""
+"The algorithm has been successfully submitted, but not yet released. Only"
+" after release will the approval process start and publication can take "
+"place."
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:60
+msgid "Release publication"
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:66
+msgid ""
+"The algorithm has been submitted to the Algorithm Register and released. "
+"It still needs to be definitively published by the Algorithm Register."
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:70
+msgid ""
+"A new version of the algorithm has been submitted to the Algorithm "
+"Register and released. It still needs to be definitively published by the"
+" Algorithm Register."
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:73
+msgid "Start publishing"
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:77
+msgid "Modify publication"
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_login_form.html.j2:3
+msgid "A connection could not be established with the Algorithm Register."
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_login_form.html.j2:5
+msgid "Check the entered data and try again."
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_login_form.html.j2:10
+msgid ""
+"The Algorithm Register is not part of AMT and to submit an algorithm or "
+"check the status, logging in to the register is required."
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_login_form.html.j2:11
+msgid "Read more about registration here"
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_login_form.html.j2:30
+msgid "Password"
 msgstr ""
 
 #: amt/site/templates/publish/parts/ar_login_form.html.j2:34
-msgid "Wachtwoord"
+msgid "Connect"
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_login_success.html.j2:1
+msgid "Connection successful"
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_login_success.html.j2:2
+msgid "The connection to the Algorithm Register was successful."
 msgstr ""
 
 #: amt/site/templates/publish/parts/ar_organization_selector.html.j2:3
 #, fuzzy
-msgid "Organisatie geselecteerd"
+msgid "Organization selected"
 msgstr "Organization Type"
 
 #: amt/site/templates/publish/parts/ar_organization_selector.html.j2:4
-msgid "U publiceert naar organisatie:"
+msgid "You are publishing to organization:"
 msgstr ""
 
 #: amt/site/templates/publish/parts/ar_organization_selector.html.j2:7
 #, fuzzy
-msgid "Wijzig organisatie"
+msgid "Change organization"
 msgstr "New organization"
 
 #: amt/site/templates/publish/parts/ar_organization_selector.html.j2:13
 #: amt/site/templates/publish/parts/ar_organization_selector.html.j2:21
 #, fuzzy
-msgid "Selecteer een organisatie"
+msgid "Select an organization"
 msgstr "Select Organization"
 
 #: amt/site/templates/publish/parts/ar_organization_selector.html.j2:15
-msgid "Onder welke organisatie moet dit algoritme gepubliceerd worden?"
+msgid "Under which organization should this algorithm be published?"
 msgstr ""
 
 #: amt/site/templates/publish/parts/ar_organization_selector.html.j2:20
 #, fuzzy
-msgid "Kies uw organisatie"
+msgid "Choose your organization"
 msgstr "New organization"
 
 #: amt/site/templates/publish/parts/ar_organization_selector.html.j2:26
 #: amt/site/templates/publish/parts/ar_organization_selector.html.j2:42
-#, fuzzy
-msgid "Bevestig"
-msgstr "Beta Version"
+msgid "Confirm"
+msgstr ""
 
 #: amt/site/templates/publish/parts/ar_organization_selector.html.j2:29
-msgid "Voer de organisatiegegevens in waarmee u wilt publiceren."
+msgid "Enter the organization details you want to publish with."
 msgstr ""
 
 #: amt/site/templates/publish/parts/ar_organization_selector.html.j2:34
 #, fuzzy
-msgid "Organisatie Identifier"
+msgid "Organization Identifier"
 msgstr "Organization Type"
 
 #: amt/site/templates/publish/parts/ar_organization_selector.html.j2:34
-msgid "Dit is uw organisatie-id in het Algoritmeregister."
+msgid "This is your organization ID in the Algorithm Register."
 msgstr ""
 
 #: amt/site/templates/publish/parts/ar_organization_selector.html.j2:37
 #, fuzzy
-msgid "Organisatie Naam"
+msgid "Organization Name"
 msgstr "Organization name"
 
 #: amt/site/templates/publish/parts/ar_organization_selector.html.j2:37
 msgid ""
-"Dit is de naam van uw organisatie zoals deze in het Algoritmeregister "
-"wordt weergegeven."
+"This is the name of your organization as it will be displayed in the "
+"Algorithm Register."
 msgstr ""
 

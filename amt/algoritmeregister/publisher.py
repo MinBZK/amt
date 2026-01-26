@@ -1,3 +1,5 @@
+from collections.abc import Generator
+from contextlib import contextmanager
 from dataclasses import dataclass
 from typing import Any
 
@@ -48,6 +50,16 @@ class PreviewResult:
     response: PreviewUrl
 
 
+@contextmanager
+def _create_api_client(access_token: str) -> Generator[ApiClient, None, None]:
+    """Create a configured API client for the Algoritmeregister."""
+    settings = get_settings()
+    configuration = Configuration(host=settings.ALGORITMEREGISTER_API_URL, access_token=access_token)
+    configuration.verify_ssl = settings.VERIFY_SSL
+    with ApiClient(configuration) as api_client:
+        yield api_client
+
+
 async def publish_algorithm(
     algorithm: Algorithm, username: str, password: str, organisation_id: str, organisation_name: str
 ) -> PublicationResult:
@@ -68,13 +80,9 @@ async def publish_algorithm(
         PublicationException: If publication fails
     """
     publication_data = AlgorithmMapper.to_publication_model(algorithm, organisation_name)
-
-    settings = get_settings()
     access_token = await get_access_token(username, password)
-    configuration = Configuration(host=settings.ALGORITMEREGISTER_API_URL, access_token=access_token)
-    configuration.verify_ssl = settings.VERIFY_SSL
 
-    with ApiClient(configuration) as api_client:
+    with _create_api_client(access_token) as api_client:
         api_instance = AlgoritmesInOntwikkelingApi(api_client)
 
         try:
@@ -115,13 +123,9 @@ async def update_algorithm(
         PublicationException: If update fails
     """
     publication_data = AlgorithmMapper.to_publication_model(algorithm, organisation_name)
-
-    settings = get_settings()
     access_token = await get_access_token(username, password)
-    configuration = Configuration(host=settings.ALGORITMEREGISTER_API_URL, access_token=access_token)
-    configuration.verify_ssl = settings.VERIFY_SSL
 
-    with ApiClient(configuration) as api_client:
+    with _create_api_client(access_token) as api_client:
         api_instance = AlgoritmesInOntwikkelingApi(api_client)
 
         try:
@@ -158,23 +162,19 @@ async def get_algorithms_status(
     Raises:
         PublicationException: If retrieval fails
     """
-    settings = get_settings()
     access_token = await get_access_token(username, password)
-    configuration = Configuration(host=settings.ALGORITMEREGISTER_API_URL, access_token=access_token)
-    configuration.verify_ssl = settings.VERIFY_SSL
 
-    with ApiClient(configuration) as api_client:
+    with _create_api_client(access_token) as api_client:
         api_instance = AlgoritmesInOntwikkelingApi(api_client)
 
         try:
             response = api_instance.get_all_algorithms(organisation_id=organisation_id)
-
-            if lars_code:
-                return [algorithm for algorithm in response if algorithm.lars == lars_code]
-            else:
-                return response
         except Exception as e:
             raise PublicationException(f"Failed to get algorithms status: {e!s}") from e
+        else:
+            if lars_code:
+                return [alg for alg in response if alg.lars == lars_code]
+            return response
 
 
 async def preview_algorithm(username: str, password: str, organisation_id: str, lars_code: str) -> PreviewResult:
@@ -195,12 +195,9 @@ async def preview_algorithm(username: str, password: str, organisation_id: str, 
     Raises:
         PublicationException: If preview fails
     """
-    settings = get_settings()
     access_token = await get_access_token(username, password)
-    configuration = Configuration(host=settings.ALGORITMEREGISTER_API_URL, access_token=access_token)
-    configuration.verify_ssl = settings.VERIFY_SSL
 
-    with ApiClient(configuration) as api_client:
+    with _create_api_client(access_token) as api_client:
         api_instance = ActiesApi(api_client)
 
         try:
@@ -234,12 +231,9 @@ async def release_algorithm(username: str, password: str, organisation_id: str, 
     Raises:
         PublicationException: If release fails
     """
-    settings = get_settings()
     access_token = await get_access_token(username, password)
-    configuration = Configuration(host=settings.ALGORITMEREGISTER_API_URL, access_token=access_token)
-    configuration.verify_ssl = settings.VERIFY_SSL
 
-    with ApiClient(configuration) as api_client:
+    with _create_api_client(access_token) as api_client:
         api_instance = ActiesApi(api_client)
 
         try:
@@ -274,12 +268,9 @@ async def publish_algorithm_final(username: str, password: str, organisation_id:
     Raises:
         PublicationException: If publication fails
     """
-    settings = get_settings()
     access_token = await get_access_token(username, password)
-    configuration = Configuration(host=settings.ALGORITMEREGISTER_API_URL, access_token=access_token)
-    configuration.verify_ssl = settings.VERIFY_SSL
 
-    with ApiClient(configuration) as api_client:
+    with _create_api_client(access_token) as api_client:
         api_extensions = ActiesApiExtensions(api_client)
 
         try:

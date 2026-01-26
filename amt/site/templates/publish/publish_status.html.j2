@@ -6,39 +6,38 @@
             PublicationStatuses.STATE_2: 'info',
             PublicationStatuses.STATE_1: 'warning'
         } %}
-    <c-heading type="h2">Publicatie status</c-heading>
+    <c-heading type="h2">{% trans %}Publication status{% endtrans %}</c-heading>
     {% if publication_missing_in_register %}
         <c-alert kind="warning" class="rvo-layout-margin-vertical--sm">
-        <c-p>{% trans %}Het algoritme kan niet in het register gevonden worden maar is voorheen wel via AMT
-        gepubliceerd. Wellicht is het uit het register verwijderd.{% endtrans %}</c-p>
-        <c-p>{% trans %}De publicatie is nu ook uit AMT verwijderd.{% endtrans %}</c-p>
-        <c-button @click="window.location='./explanation'" kind="primary">Opnieuw publiceren</c-button>
+        <c-p>{% trans %}The algorithm cannot be found in the register but was previously published via AMT. It may have been removed from the register.{% endtrans %}</c-p>
+        <c-p>{% trans %}The publication has now also been removed from AMT.{% endtrans %}</c-p>
+        <c-button @click="window.location='./explanation'" kind="primary">{% trans %}Publish again{% endtrans %}</c-button>
         </c-alert>
     {% endif %}
     <c-card outline="true" padding="sm">
-    <c-heading type="h3">Status publicatie</c-heading>
+    <c-heading type="h3">{% trans %}Publication status{% endtrans %}</c-heading>
     <c-layout-flow gap="md">
     <c-grid columns="two">
     <div class="inline-blocks-row">
         <c-tag type="{{ status_types.get(publication_status, 'error') }}" content="{{ get_localized_value('publication-status', publication_status, request).display_value | safe }}"></c-tag>
         {% if publication and publication.last_updated %}
-            <span>Laatst gepubliceerd op {{ publication.last_updated|format_datetime(language, 'long') }}</span>
+            <span>{% trans %}Last published on{% endtrans %} {{ publication.last_updated|format_datetime(language, 'long') }}</span>
         {% endif %}
     </div>
     <div>
         {% if not publication %}
-            Er is nog geen publicatie informatie beschikbaar.
+            {% trans %}No publication information is available yet.{% endtrans %}
         {% elif publication_url is defined and publication_url %}
-            <c-link showIcon="before" icon="externe-link" href="{{ publication_url }}" target="_blank">Link naar je publicatie</c-link>
+            <c-link showIcon="before" icon="externe-link" href="{{ publication_url }}" target="_blank">{% trans %}Link to your publication{% endtrans %}</c-link>
             <br />
         {% else %}
             <c-link href="#" showIcon="before" icon="externe-link" @click="window.open('/algorithm/{{ algorithm_id }}/preview/{{ publication.lars }}')">
-            Bekijk publicatie preview
+            {% trans %}View publication preview{% endtrans %}
             </c-link>
         {% endif %}
         {% if algorithm_summary and algorithm_summary.published and ((algorithm_summary.current_version_released and not algorithm_summary.current_version_published) or (not algorithm_summary.current_version_released and not algorithm_summary.current_version_published)) %}
             <c-link href="#" showIcon="before" icon="externe-link" @click="window.open('/algorithm/{{ algorithm_id }}/preview/{{ publication.lars }}')">
-            Bekijk publicatie preview
+            {% trans %}View publication preview{% endtrans %}
             </c-link>
         {% endif %}
     </div>
@@ -50,36 +49,32 @@
         <c-layout-flow gap="md">
         {% if (algorithm_summary and algorithm_summary.published and not algorithm_summary.current_version_released) %}
             <c-p>
-            Een nieuwere versie van het algoritme is succesvol aangeleverd, maar nog niet vrijgegeven. Pas na vrijgave
-            start het goedkeuringsproces en kan publicatie plaatsvinden.
+            {% trans %}A newer version of the algorithm has been successfully submitted, but not yet released. Only after release will the approval process start and publication can take place.{% endtrans %}
             </c-p>
         {% else %}
             <c-p>
-            Het algoritme is succesvol aangeleverd, maar nog niet vrijgegeven. Pas na vrijgave
-            start het goedkeuringsproces en kan publicatie plaatsvinden.
+            {% trans %}The algorithm has been successfully submitted, but not yet released. Only after release will the approval process start and publication can take place.{% endtrans %}
             </c-p>
         {% endif %}
         <c-button type="button" hx-get="/algorithm/{{ algorithm_id }}/release/{{ publication.lars }}" hx-disabled-elt="this">
-        Publicatie vrijgeven
+        {% trans %}Release publication{% endtrans %}
         </c-button>
         </c-layout-flow>
         </c-alert>
     {% elif PublicationStatuses.STATE_2 == publication_status %}
         <c-alert kind="warning">
-        Het algoritme is aangeleverd bij het Algoritmeregister en vrijgegeven.
-        Het moet nog definitief gepubliceerd worden door het Algoritmeregister.
+        {% trans %}The algorithm has been submitted to the Algorithm Register and released. It still needs to be definitively published by the Algorithm Register.{% endtrans %}
         </c-alert>
     {% elif (algorithm_summary and not algorithm_summary.current_version_published) %}
         <c-alert kind="warning">
-        Een nieuwe versie van het algoritme is aangeleverd bij het Algoritmeregister en vrijgegeven.
-        Het moet nog definitief gepubliceerd worden door het Algoritmeregister.
+        {% trans %}A new version of the algorithm has been submitted to the Algorithm Register and released. It still needs to be definitively published by the Algorithm Register.{% endtrans %}
         </c-alert>
     {% elif not publication %}
-        <c-button @click="window.location='./explanation'" kind="primary">Start met publiceren</c-button>
+        <c-button @click="window.location='./explanation'" kind="primary">{% trans %}Start publishing{% endtrans %}</c-button>
     {% endif %}
     {% if publication %}
         <div>
-            <c-button @click="window.location='./prepare'" kind="secondary">Publicatie wijzigen</c-button>
+            <c-button @click="window.location='./prepare'" kind="secondary">{% trans %}Modify publication{% endtrans %}</c-button>
         </div>
     {% endif %}
     </c-layout-flow>
