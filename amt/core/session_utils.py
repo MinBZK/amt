@@ -1,5 +1,5 @@
 from enum import StrEnum
-from typing import cast
+from typing import Any, cast
 
 from fastapi import Request
 
@@ -17,7 +17,7 @@ class PublishStep(StrEnum):
 
 
 def get_algoritmeregister_credentials(request: Request) -> AlgoritmeregisterCredentials | None:
-    credentials_data = cast(dict[str, str] | None, request.session.get("algoritmeregister_credentials"))
+    credentials_data = cast(dict[str, Any] | None, request.session.get("algoritmeregister_credentials"))
     return AlgoritmeregisterCredentials(**credentials_data) if credentials_data else None
 
 

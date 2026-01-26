@@ -1,6 +1,7 @@
 import datetime
 import logging
 import re
+from gettext import NullTranslations
 from typing import Annotated
 
 from fastapi import (
@@ -29,6 +30,7 @@ from amt.api.deps import templates
 from amt.api.navigation import (
     BaseNavigationItem,
     Navigation,
+    NavigationItem,
     resolve_base_navigation_items,
 )
 from amt.api.publication_statuses import PublicationStatuses
@@ -59,25 +61,26 @@ router = APIRouter()
 logger = logging.getLogger(__name__)
 
 
-def get_global_steps() -> list[dict[str, str]]:
+def get_global_steps(translations: NullTranslations) -> list[dict[str, str]]:
+    _ = translations.gettext
     steps_global = [
         {"state": "start", "line": "straight", "size": "md", "label": "Start", "link": "#"},
         {
             "state": "incomplete",
             "line": "straight",
             "size": "md",
-            "label": "Publicatie voorbereiden",
+            "label": _("Prepare publication"),
             "link": "./prepare",
         },
         {
             "state": "incomplete",
             "line": "straight",
             "size": "md",
-            "label": "Preview & controleren",
+            "label": _("Preview & verify"),
             "link": "./preview",
         },
-        {"state": "incomplete", "line": "straight", "size": "md", "label": "Publiceren", "link": "./confirm"},
-        {"state": "end", "line": "none", "size": "md", "label": "Einde", "link": "#"},
+        {"state": "incomplete", "line": "straight", "size": "md", "label": _("Publish"), "link": "./confirm"},
+        {"state": "end", "line": "none", "size": "md", "label": _("End"), "link": "#"},
     ]
     return steps_global
 
@@ -110,6 +113,21 @@ def get_publication_url(organization_code: str, lars: str, name: str) -> str:
     slug = re.sub(r"[^a-z0-9\-]", "", name.lower().replace(" ", "-"))
     settings = get_settings()
     return f"{settings.ALGORITMEREGISTER_URL}/nl/algoritme/{organization_code}/{lars}/{slug}"
+
+
+def get_publish_breadcrumbs(algorithm_name: str, request: Request) -> list[NavigationItem]:
+    """Build breadcrumbs for the publish workflow pages."""
+    return resolve_base_navigation_items(
+        [
+            Navigation.ALGORITHMS_ROOT,
+            BaseNavigationItem(
+                custom_display_text=algorithm_name,
+                url="/algorithm/{algorithm_id}/details",
+            ),
+            Navigation.ALGORITHM_PUBLISH,
+        ],
+        request,
+    )
 
 
 @router.post("/{algorithm_id}/publish/login")
@@ -303,24 +321,10 @@ async def publication_explanation(
     algorithms_service = await services_provider.get(AlgorithmsService)
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
 
-    tab_items = get_algorithm_details_tabs(request, False)
-
-    breadcrumbs = resolve_base_navigation_items(
-        [
-            Navigation.ALGORITHMS_ROOT,
-            BaseNavigationItem(
-                custom_display_text=algorithm.name,
-                url="/algorithm/{algorithm_id}/details",
-            ),
-            Navigation.ALGORITHM_PUBLISH,
-        ],
-        request,
-    )
-
     context = {
         "algorithm": algorithm,
-        "breadcrumbs": breadcrumbs,
-        "tab_items": tab_items,
+        "breadcrumbs": get_publish_breadcrumbs(algorithm.name, request),
+        "tab_items": get_algorithm_details_tabs(request, False),
         "is_ar_logged_in": get_algoritmeregister_credentials(request) is not None,
     }
 
@@ -362,20 +366,6 @@ async def publication_status(
             else:
                 current_publication_status = PublicationStatuses.STATE_1
 
-    tab_items = get_algorithm_details_tabs(request, False)
-
-    breadcrumbs = resolve_base_navigation_items(
-        [
-            Navigation.ALGORITHMS_ROOT,
-            BaseNavigationItem(
-                custom_display_text=algorithm.name,
-                url="/algorithm/{algorithm_id}/details",
-            ),
-            Navigation.ALGORITHM_PUBLISH,
-        ],
-        request,
-    )
-
     publication_url = None
     if (
         current_publication_status == PublicationStatuses.PUBLISHED
@@ -393,8 +383,8 @@ async def publication_status(
         "algorithm_summary": algorithm_summary[0] if algorithm_summary else None,
         "publication_missing_in_register": publication_missing_in_register,
         "algorithm_id": algorithm.id,
-        "breadcrumbs": breadcrumbs,
-        "tab_items": tab_items,
+        "breadcrumbs": get_publish_breadcrumbs(algorithm.name, request),
+        "tab_items": get_algorithm_details_tabs(request, False),
     }
 
     return templates.TemplateResponse(request, "publish/publish_status.html.j2", context)
@@ -410,30 +400,14 @@ async def publish_connection(
     algorithms_service = await services_provider.get(AlgorithmsService)
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
 
-    tab_items = get_algorithm_details_tabs(request, False)
-
-    breadcrumbs = resolve_base_navigation_items(
-        [
-            Navigation.ALGORITHMS_ROOT,
-            BaseNavigationItem(
-                custom_display_text=algorithm.name,
-                url="/algorithm/{algorithm_id}/details",
-            ),
-            Navigation.ALGORITHM_PUBLISH,
-        ],
-        request,
-    )
-
     credentials = get_algoritmeregister_credentials(request)
-    is_ar_logged_in = credentials is not None
-
     org_context = get_organization_selector_context(credentials)
 
     context = {
         "algorithm": algorithm,
-        "breadcrumbs": breadcrumbs,
-        "tab_items": tab_items,
-        "is_ar_logged_in": is_ar_logged_in,
+        "breadcrumbs": get_publish_breadcrumbs(algorithm.name, request),
+        "tab_items": get_algorithm_details_tabs(request, False),
+        "is_ar_logged_in": credentials is not None,
         **org_context,
     }
 
@@ -456,27 +430,13 @@ async def publish_prepare(
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
     publication = await publication_service.get_by_algorithm_id(algorithm_id)
 
-    tab_items = get_algorithm_details_tabs(request, False)
-
-    breadcrumbs = resolve_base_navigation_items(
-        [
-            Navigation.ALGORITHMS_ROOT,
-            BaseNavigationItem(
-                custom_display_text=algorithm.name,
-                url="/algorithm/{algorithm_id}/details",
-            ),
-            Navigation.ALGORITHM_PUBLISH,
-        ],
-        request,
-    )
-
-    steps = get_global_steps()
+    steps = get_global_steps(get_current_translation(request))
     set_steps_completed_until(steps, "./prepare")
 
     context = {
         "algorithm": algorithm,
-        "breadcrumbs": breadcrumbs,
-        "tab_items": tab_items,
+        "breadcrumbs": get_publish_breadcrumbs(algorithm.name, request),
+        "tab_items": get_algorithm_details_tabs(request, False),
         "steps": steps,
         "has_publication": publication is not None,
     }
@@ -499,35 +459,21 @@ async def publish_preview(
     algorithms_service = await services_provider.get(AlgorithmsService)
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
 
-    tab_items = get_algorithm_details_tabs(request, False)
-
-    breadcrumbs = resolve_base_navigation_items(
-        [
-            Navigation.ALGORITHMS_ROOT,
-            BaseNavigationItem(
-                custom_display_text=algorithm.name,
-                url="/algorithm/{algorithm_id}/details",
-            ),
-            Navigation.ALGORITHM_PUBLISH,
-        ],
-        request,
-    )
-
     organization_name = get_organization_name(credentials)
     if organization_name is None:
         raise AMTNotFound()
 
     publication_model = AlgorithmMapper.to_publication_model(algorithm, organization_name)
 
-    steps = get_global_steps()
+    steps = get_global_steps(get_current_translation(request))
     set_steps_completed_until(steps, "./preview")
 
     org_selector_context = get_organization_selector_context(credentials, force_select=select)
 
     context: dict[str, object] = {
         "algorithm": algorithm,
-        "breadcrumbs": breadcrumbs,
-        "tab_items": tab_items,
+        "breadcrumbs": get_publish_breadcrumbs(algorithm.name, request),
+        "tab_items": get_algorithm_details_tabs(request, False),
         "publication_model": publication_model,
         "steps": steps,
     }
@@ -553,27 +499,13 @@ async def publish_confirm(
     algorithms_service = await services_provider.get(AlgorithmsService)
     algorithm = await get_algorithm_or_error(algorithm_id, algorithms_service, request)
 
-    breadcrumbs = resolve_base_navigation_items(
-        [
-            Navigation.ALGORITHMS_ROOT,
-            BaseNavigationItem(
-                custom_display_text=algorithm.name,
-                url="/algorithm/{algorithm_id}/details",
-            ),
-            Navigation.ALGORITHM_PUBLISH,
-        ],
-        request,
-    )
-
-    tab_items = get_algorithm_details_tabs(request, False)
-
-    steps = get_global_steps()
-    set_steps_completed_until(steps, "/confirm")
+    steps = get_global_steps(get_current_translation(request))
+    set_steps_completed_until(steps, "./confirm")
 
     context = {
         "algorithm": algorithm,
-        "breadcrumbs": breadcrumbs,
-        "tab_items": tab_items,
+        "breadcrumbs": get_publish_breadcrumbs(algorithm.name, request),
+        "tab_items": get_algorithm_details_tabs(request, False),
         "steps": steps,
     }
 
@@ -703,8 +635,5 @@ async def preview(
         organisation_id=credentials.organization_id,
         lars_code=lars,
     )
-
-    publication.publication_status = PublicationStatuses.STATE_2
-    await publication_service.update(publication)
 
     return RedirectResponse(url=preview_result.preview_url)

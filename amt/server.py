@@ -11,6 +11,7 @@ from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import HTMLResponse, RedirectResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
+from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
 
 from amt.api.main import api_router
 from amt.core.config import PROJECT_DESCRIPTION, PROJECT_NAME, VERSION, get_settings
@@ -109,6 +110,8 @@ def create_app() -> FastAPI:
     app.add_middleware(CSRFMiddlewareExceptionHandler)
     app.add_middleware(HTMXMiddleware)
     app.add_middleware(SecurityMiddleware)
+    # ProxyHeadersMiddleware must be last (runs first) to set correct scheme from X-Forwarded-Proto
+    app.add_middleware(ProxyHeadersMiddleware, trusted_hosts=["*"])  # type: ignore[arg-type]
 
     oauth = OAuth()
     app.state.oauth = oauth

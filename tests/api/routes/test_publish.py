@@ -8,6 +8,7 @@ from amt.api.routes.publish import (
     set_step_state,
     set_steps_completed_until,
 )
+from amt.core.internationalization import get_translation
 from amt.models import Publication
 from amt.schema.algoritmeregister import AlgoritmeregisterCredentials, OrganisationOption
 from httpx import AsyncClient
@@ -264,8 +265,11 @@ async def test_publish_without_permission_returns_404(client: AsyncClient, db: D
 
 
 def test_get_global_steps() -> None:
+    # given
+    translations = get_translation("en")
+
     # when
-    steps = get_global_steps()
+    steps = get_global_steps(translations)
 
     # then
     assert len(steps) == 5
@@ -276,7 +280,8 @@ def test_get_global_steps() -> None:
 
 def test_set_step_state() -> None:
     # given
-    steps = get_global_steps()
+    translations = get_translation("en")
+    steps = get_global_steps(translations)
 
     # when
     set_step_state(steps, "./prepare", "doing")
@@ -287,7 +292,8 @@ def test_set_step_state() -> None:
 
 def test_set_step_state_not_found() -> None:
     # given
-    steps = get_global_steps()
+    translations = get_translation("en")
+    steps = get_global_steps(translations)
 
     # when
     set_step_state(steps, "./nonexistent", "doing")
@@ -298,7 +304,8 @@ def test_set_step_state_not_found() -> None:
 
 def test_set_steps_completed_until() -> None:
     # given
-    steps = get_global_steps()
+    translations = get_translation("en")
+    steps = get_global_steps(translations)
 
     # when
     set_steps_completed_until(steps, "./preview")

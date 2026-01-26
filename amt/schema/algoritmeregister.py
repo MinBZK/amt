@@ -11,7 +11,7 @@ class AlgoritmeregisterCredentials(BaseModel):
     password: str = Field(min_length=1)
     organization_id: str | None = Field(default=None)
     token: str | None = Field(default=None)
-    organisations: list[OrganisationOption] = Field(default_factory=list)
+    organisations: list[OrganisationOption] = Field(default_factory=list)  # pyright: ignore[reportUnknownVariableType]
 
 
 class OrganizationSelection(BaseModel):
