@@ -177,6 +177,5 @@ authorized_licenses = [
     "Python Software Foundation",
     "Public Domain"
 ]
-authorized_packages = [
-    "wrapt"
-]
+[tool.liccheck.authorized_packages]
+wrapt = "*"
