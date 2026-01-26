@@ -1,0 +1,45 @@
+{% extends 'algorithms/details_base.html.j2' %}
+{% from "macros/editable_macros.html.j2" import editable with context %}
+{% block detail_content %}
+    <c-max-width-layout size="lg">
+    <c-grid columns="two" division="1fr 4fr">
+    <c-progress-tracker :steps="steps" />
+    <div>
+        <c-heading type="h2" class="rvo-layout-margin-vertical--xl">{% trans %}Prepare publication{% endtrans %}</c-heading>
+        <c-form-fieldset>
+        <c-heading type="h5">
+        {% trans %}What is important when publishing?{% endtrans %}
+        </c-heading>
+        <c-p>
+        {% trans %}Before you continue with publishing your algorithm, it is important to know what criteria your algorithm must meet. Publication in the Algorithm Register contributes to transparency and accountability regarding the use of algorithms within the government.{% endtrans %}
+        </c-p>
+        <c-p text-style="bold" class="rvo-layout-margin-vertical--sm">
+        {% trans %}Pay attention to the following points:{% endtrans %}
+        </c-p>
+        <c-ul>
+        <c-li class="rvo-layout-margin-vertical--sm">
+        <c-div class="display-block">
+        <c-strong>{% trans %}Completeness of data:{% endtrans %}</c-strong>
+        {% trans %}Ensure that all relevant metadata, such as purpose, operation, data used and impact assessments, are fully and accurately filled in your algorithm description. Incomplete information can lead to delay or rejection of publication.{% endtrans %}
+        </c-div>
+        </c-li>
+        <c-li>
+        <c-div class="display-block">
+        <c-strong>{% trans %}Necessity of publication:{% endtrans %}</c-strong>
+        {% trans %}Determine whether your algorithm falls under the publication obligation, for example because it is a high-risk algorithm according to the European AI regulation, or has a direct impact on citizens. Make sure you have all this information at hand or have already filled it in on the previous tabs.{% endtrans %}
+        </c-div>
+        </c-li>
+        </c-ul>
+        </c-form-fieldset>
+        <c-layout-flow justifyContent="end" row="true" class="rvo-layout-margin-vertical--xl">
+        {% if has_publication %}
+            <c-button style="margin-right: auto" @click="window.location='./status'" kind="tertiary" showIcon="before" icon="terug">{% trans %}Show status{% endtrans %}</c-button>
+        {% else %}
+            <c-button style="margin-right: auto" @click="window.location='./connection'" kind="tertiary" showIcon="before" icon="terug">{% trans %}Previous step{% endtrans %}</c-button>
+        {% endif %}
+        <c-button @click="window.location='./preview'" kind="primary">{% trans %}Next step{% endtrans %}</c-button>
+        </c-layout-flow>
+    </div>
+    </c-grid>
+    </c-max-width-layout>
+{% endblock %}

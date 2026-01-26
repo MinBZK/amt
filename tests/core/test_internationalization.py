@@ -62,8 +62,10 @@ def test_format_datetime():
     date = datetime(2020, 1, 2, 12, 13, 14, 0, tzinfo=UTC)
     assert format_datetime(date, "en", "full") == "Thursday, 2 January 2020 12:13"
     assert format_datetime(date, "en", "medium") == "Thu 02/01/2020 12:13"
+    assert format_datetime(date, "en", "long") == "2 January 2020 om 12:13"
     assert format_datetime(date, "nl", "full") == "donderdag, 2 januari 2020 12:13"
     assert format_datetime(date, "nl", "medium") == "do 02/01/2020 12:13"
+    assert format_datetime(date, "nl", "long") == "2 januari 2020 om 12:13"
     assert format_datetime(date, "en", "other") == "02/01/2020 12:13"
     assert format_datetime(date, "nl", "other") == "02/01/2020 12:13"
 

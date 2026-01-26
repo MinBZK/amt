@@ -22,3 +22,4 @@ INSERT INTO rule (id, resource, verbs, role_id) VALUES (15, 'algorithm/{algorith
 INSERT INTO rule (id, resource, verbs, role_id) VALUES (16, 'algorithm/{algorithm_id}', '["Read"]', 6);
 INSERT INTO rule (id, resource, verbs, role_id) VALUES (17, 'algorithm/{algorithm_id}/systemcard', '["Read"]', 6);
 INSERT INTO rule (id, resource, verbs, role_id) VALUES (18, 'algorithm/{algorithm_id}/user', '["Read"]', 6);
+INSERT INTO rule (id, resource, verbs, role_id) VALUES (19, 'algorithm/{algorithm_id}/publish', '["Create"]', 4);

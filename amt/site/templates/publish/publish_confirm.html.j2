@@ -1,0 +1,39 @@
+{% extends 'algorithms/details_base.html.j2' %}
+{% from "macros/editable_macros.html.j2" import editable with context %}
+{% block detail_content %}
+    <c-max-width-layout size="lg">
+    <c-grid columns="two" division="1fr 4fr">
+    <c-progress-tracker :steps="steps" />
+    <div>
+        <c-heading type="h2" class="rvo-layout-margin-vertical--xl">{% trans %}Publish{% endtrans %}</c-heading>
+        <div id="publication-container">
+            <c-form-fieldset>
+            <c-p>
+            {% trans %}You are about to permanently publish the algorithm{% endtrans %}
+            <c-strong>{{ algorithm.name }}</c-strong>
+            {% trans %}in the Algorithm Register.{% endtrans %}
+            </c-p>
+            <c-p>
+            {% trans %}What happens now?{% endtrans %}
+            </c-p>
+            <c-ul>
+            <c-li>
+            <c-li>{% trans %}After your confirmation, the publication will be released.{% endtrans %}</c-li>
+            <c-li>{% trans %}The submission will be manually reviewed.{% endtrans %}</c-li>
+            <c-li>{% trans %}The publication will be visible in the Algorithm Register within a maximum of 1 business day.{% endtrans %}
+            </c-li>
+            </c-ul>
+            <c-p>
+            {% trans %}The responsibility for the accuracy of the data always remains with your organization.{% endtrans %}
+            </c-p>
+            <c-layout-row gap="md">
+            <c-button kind="secondary" hx-get="./send" hx-target="#publication-container" hx-swap="innerHTML" hx-disabled-elt="this">{% trans %}Publish{% endtrans %}</c-button>
+            <c-button kind="primary" hx-get="./send?release=true" hx-target="#publication-container" hx-swap="innerHTML" hx-disabled-elt="this">{% trans %}Publish and release{% endtrans %}</c-button>
+            </c-layout-row>
+            </c-form-fieldset>
+        </div>
+        <c-button style="margin-right: auto" @click="window.location='./preview'" kind="tertiary" showIcon="before" icon="terug">{% trans %}Previous step{% endtrans %}</c-button>
+    </div>
+    </c-grid>
+    </c-max-width-layout>
+{% endblock %}

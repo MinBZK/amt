@@ -1,0 +1,83 @@
+{% extends 'algorithms/details_base.html.j2' %}
+{% from "macros/editable_macros.html.j2" import editable with context %}
+{% block detail_content %}
+    {% set status_types = {
+            PublicationStatuses.PUBLISHED: 'success',
+            PublicationStatuses.STATE_2: 'info',
+            PublicationStatuses.STATE_1: 'warning'
+        } %}
+    <c-heading type="h2">{% trans %}Publication status{% endtrans %}</c-heading>
+    {% if publication_missing_in_register %}
+        <c-alert kind="warning" class="rvo-layout-margin-vertical--sm">
+        <c-p>{% trans %}The algorithm cannot be found in the register but was previously published via AMT. It may have been removed from the register.{% endtrans %}</c-p>
+        <c-p>{% trans %}The publication has now also been removed from AMT.{% endtrans %}</c-p>
+        <c-button @click="window.location='./explanation'" kind="primary">{% trans %}Publish again{% endtrans %}</c-button>
+        </c-alert>
+    {% endif %}
+    <c-card outline="true" padding="sm">
+    <c-heading type="h3">{% trans %}Publication status{% endtrans %}</c-heading>
+    <c-layout-flow gap="md">
+    <c-grid columns="two">
+    <div class="inline-blocks-row">
+        <c-tag type="{{ status_types.get(publication_status, 'error') }}" content="{{ get_localized_value('publication-status', publication_status, request).display_value | safe }}"></c-tag>
+        {% if publication and publication.last_updated %}
+            <span>{% trans %}Last published on{% endtrans %} {{ publication.last_updated|format_datetime(language, 'long') }}</span>
+        {% endif %}
+    </div>
+    <div>
+        {% if not publication %}
+            {% trans %}No publication information is available yet.{% endtrans %}
+        {% elif publication_url is defined and publication_url %}
+            <c-link showIcon="before" icon="externe-link" href="{{ publication_url }}" target="_blank">{% trans %}Link to your publication{% endtrans %}</c-link>
+            <br />
+        {% else %}
+            <c-link href="#" showIcon="before" icon="externe-link" @click="window.open('/algorithm/{{ algorithm_id }}/preview/{{ publication.lars }}')">
+            {% trans %}View publication preview{% endtrans %}
+            </c-link>
+        {% endif %}
+        {% if algorithm_summary and algorithm_summary.published and ((algorithm_summary.current_version_released and not algorithm_summary.current_version_published) or (not algorithm_summary.current_version_released and not algorithm_summary.current_version_published)) %}
+            <c-link href="#" showIcon="before" icon="externe-link" @click="window.open('/algorithm/{{ algorithm_id }}/preview/{{ publication.lars }}')">
+            {% trans %}View publication preview{% endtrans %}
+            </c-link>
+        {% endif %}
+    </div>
+    </c-grid>
+    <c-hr />
+    <c-layout-flow gap="md">
+    {% if PublicationStatuses.STATE_1 == publication_status or (algorithm_summary and not algorithm_summary.current_version_released and not algorithm_summary.current_version_published) %}
+        <c-alert kind="warning">
+        <c-layout-flow gap="md">
+        {% if (algorithm_summary and algorithm_summary.published and not algorithm_summary.current_version_released) %}
+            <c-p>
+            {% trans %}A newer version of the algorithm has been successfully submitted, but not yet released. Only after release will the approval process start and publication can take place.{% endtrans %}
+            </c-p>
+        {% else %}
+            <c-p>
+            {% trans %}The algorithm has been successfully submitted, but not yet released. Only after release will the approval process start and publication can take place.{% endtrans %}
+            </c-p>
+        {% endif %}
+        <c-button type="button" hx-get="/algorithm/{{ algorithm_id }}/release/{{ publication.lars }}" hx-disabled-elt="this">
+        {% trans %}Release publication{% endtrans %}
+        </c-button>
+        </c-layout-flow>
+        </c-alert>
+    {% elif PublicationStatuses.STATE_2 == publication_status %}
+        <c-alert kind="warning">
+        {% trans %}The algorithm has been submitted to the Algorithm Register and released. It still needs to be definitively published by the Algorithm Register.{% endtrans %}
+        </c-alert>
+    {% elif (algorithm_summary and not algorithm_summary.current_version_published) %}
+        <c-alert kind="warning">
+        {% trans %}A new version of the algorithm has been submitted to the Algorithm Register and released. It still needs to be definitively published by the Algorithm Register.{% endtrans %}
+        </c-alert>
+    {% elif not publication %}
+        <c-button @click="window.location='./explanation'" kind="primary">{% trans %}Start publishing{% endtrans %}</c-button>
+    {% endif %}
+    {% if publication %}
+        <div>
+            <c-button @click="window.location='./prepare'" kind="secondary">{% trans %}Modify publication{% endtrans %}</c-button>
+        </div>
+    {% endif %}
+    </c-layout-flow>
+    </c-layout-flow>
+    </c-card>
+{% endblock %}

@@ -1,0 +1,47 @@
+<div id="ar-organization-selector">
+    {% if selected_org_id %}
+        <c-alert class="rvo-layout-margin-bottom--xl" kind="info" heading="{% trans %}Organization selected{% endtrans %}">
+        <c-p>{% trans %}You are publishing to organization:{% endtrans %} <strong>{{ selected_org_name or selected_org_id }}</strong>
+        {% if organisations | length != 1 %}
+            <br />
+            <c-link hx-get="./organization-selector?select=true" hx-target="#ar-organization-selector" hx-swap="outerHTML">{% trans %}Change organization{% endtrans %}</c-link>
+        {% endif %}
+        </c-p>
+        </c-alert>
+    {% else %}
+        <c-card outline="true" class="rvo-layout-margin-bottom--xl">
+        <c-heading type="h5">{% trans %}Select an organization{% endtrans %}</c-heading>
+        {% if organisations | length > 1 %}
+            <c-p>{% trans %}Under which organization should this algorithm be published?{% endtrans %}</c-p>
+            <form hx-ext="json-enc"
+                  hx-post="./set-organization"
+                  hx-target="#ar-organization-selector"
+                  hx-swap="outerHTML">
+                <c-select-field id="organization_id" name="organization_id" label="{% trans %}Choose your organization{% endtrans %}" required="true" :options="organisations">
+                <option value="">{% trans %}Select an organization{% endtrans %}</option>
+                </c-select-field>
+                {% if errors is defined and errors.get('organization_id') %}
+                    <div class="rvo-form-field__error-message" role="alert">{{ errors.get("organization_id") }}</div>
+                {% endif %}
+                <c-button type="submit" kind="primary" hx-disabled-elt="this">{% trans %}Confirm{% endtrans %}</c-button>
+            </form>
+        {% else %}
+            <c-p>{% trans %}Enter the organization details you want to publish with.{% endtrans %}</c-p>
+            <form hx-ext="json-enc"
+                  hx-post="./set-organization"
+                  hx-target="#ar-organization-selector"
+                  hx-swap="outerHTML">
+                <c-text-input-field id="organization_id" name="organization_id" label="{% trans %}Organization Identifier{% endtrans %}" required="true" helperText="{% trans %}This is your organization ID in the Algorithm Register.{% endtrans %}"
+                {% if errors is defined and errors.get('organization_id') %}errorText="{{ errors.get('organization_id') }}"{% endif %}
+                />
+                <c-text-input-field id="organization_name" name="organization_name" label="{% trans %}Organization Name{% endtrans %}" required="true" helperText="{% trans %}This is the name of your organization as it will be displayed in the Algorithm Register.{% endtrans %}"
+                {% if errors is defined and errors.get('organization_name') %}
+                    errorText="{{ errors.get('organization_name') }}"
+                {% endif %}
+                />
+                <c-button type="submit" kind="primary" hx-disabled-elt="this">{% trans %}Confirm{% endtrans %}</c-button>
+            </form>
+        {% endif %}
+        </c-card>
+    {% endif %}
+</div>
