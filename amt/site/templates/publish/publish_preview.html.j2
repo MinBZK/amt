@@ -1,0 +1,264 @@
+{% extends 'algorithms/details_base.html.j2' %}
+{% from "macros/editable_macros.html.j2" import editable with context %}
+{% block detail_content %}
+    <c-max-width-layout size="lg">
+    <c-grid columns="two" division="1fr 4fr">
+    <c-progress-tracker :steps="steps" />
+    <div>
+        <c-heading type="h2" class="rvo-layout-margin-vertical--xl">Preview & controleren</c-heading>
+        <c-form-fieldset>
+        <c-p>
+        Hieronder ziet u de volledige preview van de publicatie.
+        </c-p>
+        <c-p>
+        Let op de volgende punten:
+        </c-p>
+        <c-ul>
+        <c-li class="rvo-layout-margin-vertical--sm">
+        <c-div class="display-block">
+        <c-strong>Volledigheid</c-strong>
+        : Vul zo veel mogelijk velden in. Lege velden worden over het algemeen niet getoond op
+        de
+        website.
+        </c-div>
+        </c-li>
+        <c-li class="rvo-layout-margin-vertical--sm">
+        <c-div class="display-block">
+        <c-strong>Toegankelijke taal</c-strong>
+        : Gebruik waar mogelijk begrijpelijke taal (streven is B1-niveau), zeker in de algemene
+        omschrijvingen.
+        </c-div>
+        </c-li>
+        </c-ul>
+        <c-p>
+        Indien u gegevens wilt wijzigen, kunt u gebruik maken van de details pagina.
+        </c-p>
+        </c-form-fieldset>
+        <c-card outline="true" class="rvo-layout-margin-vertical--xl">
+        <c-heading type="h2">
+        {{ publication_model.name }}
+        </c-heading>
+        <c-grid columns="two">
+        <div>
+            <c-link href="#">{{ publication_model.organization }}</c-link>
+            <c-p>
+            {{ publication_model.description_short }}
+            </c-p>
+        </div>
+        <div>
+            <c-p text-style="bold,no-margins">Publicatiecategorie</c-p>
+            <c-p>{{ publication_model.publication_category.value }}</c-p>
+            <c-p text-style="bold,no-margins">Impacttoetsen</c-p>
+            <c-p>{{ publication_model.impacttoetsen_grouping | map(attribute='title') | join(', ') }}</c-p>
+            <c-p text-style="bold,no-margins">Status</c-p>
+            <c-p>{{ publication_model.status.value }}</c-p>
+        </div>
+        </c-grid>
+        </c-card>
+        <c-tabs>
+        <c-tab-item @click="applyRules('#tab-content-container > *: +display-none; #{id}-content: -display-none; siblings > a: -rvo-link--active -rvo-tabs__item-link--active; self > a: +rvo-link--active +rvo-tabs__item-link--active', event, { preventDefault: true, stopPropagation: true })" id="tab1" href="#" label="Algemene informatie" :selected="true" />
+        <c-tab-item @click="applyRules('#tab-content-container > *: +display-none; #{id}-content: -display-none; siblings > a: -rvo-link--active -rvo-tabs__item-link--active; self > a: +rvo-link--active +rvo-tabs__item-link--active', event, { preventDefault: true, stopPropagation: true })" id="tab2" href="#" label="Verantwoord gebruik" />
+        <c-tab-item @click="applyRules('#tab-content-container > *: +display-none; #{id}-content: -display-none; siblings > a: -rvo-link--active -rvo-tabs__item-link--active; self > a: +rvo-link--active +rvo-tabs__item-link--active', event, { preventDefault: true, stopPropagation: true })" id="tab3" href="#" label="Werking" />
+        </c-tabs>
+        <div id="tab-content-container">
+            <div id="tab1-content">
+                <c-table>
+                <colgroup>
+                    <col style="width: 20%">
+                    <col style="width: 80%">
+                </colgroup>
+                <c-tr>
+                <c-td>
+                <c-strong>Thema</c-strong>
+                </c-td>
+                <c-td>{{ publication_model.category if publication_model.category else '-' }}</c-td>
+                </c-tr>
+                <c-tr>
+                <c-td>Begindatum</c-td>
+                <c-td>{{ publication_model.begin_date or '-' }}</c-td>
+                </c-tr>
+                <c-tr>
+                <c-td>Einddatum</c-td>
+                <c-td>{{ publication_model.end_date or '-' }}</c-td>
+                </c-tr>
+                <c-tr>
+                <c-td>Contactgegevens</c-td>
+                <c-td>{{ publication_model.contact_email or '-' }}</c-td>
+                </c-tr>
+                <c-tr>
+                <c-td>Website</c-td>
+                <c-td>
+                {% if publication_model.website %}
+                    <c-link href="{{ publication_model.website }}">{{ publication_model.website }}</c-link>
+                {% else %}
+                    -
+                {% endif %}
+                </c-td>
+                </c-tr>
+                <c-tr>
+                <c-td>URL</c-td>
+                <c-td>
+                {% if publication_model.url %}
+                    <c-link href="{{ publication_model.url }}">{{ publication_model.url }}</c-link>
+                {% else %}
+                    -
+                {% endif %}
+                </c-td>
+                </c-tr>
+                </c-table>
+            </div>
+            <div id="tab2-content" class="display-none">
+                <c-table>
+                <colgroup>
+                    <col style="width: 20%">
+                    <col style="width: 80%">
+                </colgroup>
+                <c-tr>
+                <c-td>
+                <c-strong>Doel en impact</c-strong>
+                </c-td>
+                <c-td>{{ publication_model.goal or '-' }}</c-td>
+                </c-tr>
+                <c-tr>
+                <c-td>
+                <c-strong>Afwegingen</c-strong>
+                </c-td>
+                <c-td>{{ publication_model.proportionality or '-' }}</c-td>
+                </c-tr>
+                <c-tr>
+                <c-td>
+                <c-strong>Menselijke tussenkomst</c-strong>
+                </c-td>
+                <c-td>{{ publication_model.human_intervention or '-' }}</c-td>
+                </c-tr>
+                <c-tr>
+                <c-td>
+                <c-strong>Risicobeheer</c-strong>
+                </c-td>
+                <c-td>{{ publication_model.risks or '-' }}</c-td>
+                </c-tr>
+                <c-tr>
+                <c-td>
+                <c-strong>Wettelijke basis</c-strong>
+                </c-td>
+                <c-td>{{ publication_model.lawful_basis or '-' }}</c-td>
+                </c-tr>
+                <c-tr>
+                <c-td>
+                <c-strong>Wettelijke basis (links)</c-strong>
+                </c-td>
+                <c-td>
+                {% if publication_model.lawful_basis_grouping %}
+                    {% for lawful_basis in publication_model.lawful_basis_grouping %}
+                        {{ lawful_basis.title }}:
+                        <c-link href="{{ lawful_basis.link }}">{{ lawful_basis.link }}</c-link>
+                    </br>
+                {% endfor %}
+            {% else %}
+                -
+            {% endif %}
+            </c-td>
+            </c-tr>
+            <c-tr>
+            <c-td>
+            <c-strong>Link naar verwerkingsregister</c-strong>
+            </c-td>
+            <c-td>
+            {% if publication_model.process_index_url %}
+                <c-link href="{{ publication_model.process_index_url }}">{{ publication_model.process_index_url }}</c-link>
+            {% else %}
+                -
+            {% endif %}
+            </c-td>
+            </c-tr>
+            <c-tr>
+            <c-td>
+            <c-strong>Impacttoetsen</c-strong>
+            </c-td>
+            <c-td>{{ publication_model.impacttoetsen or '-' }}</c-td>
+            </c-tr>
+            <c-tr>
+            <c-td>
+            <c-strong>Impacttoetsen (links)</c-strong>
+            </c-td>
+            <c-td>
+            {% if publication_model.impacttoetsen_grouping %}
+                {% for impacttoets in publication_model.impacttoetsen_grouping %}
+                    {{ impacttoets.title }}
+                    {% if impacttoets.link %}
+                        :
+                        <c-link href="{{ impacttoets.link }}">{{ impacttoets.link }}</c-link>
+                    {% endif %}
+                </br>
+            {% endfor %}
+        {% else %}
+            -
+        {% endif %}
+        </c-td>
+        </c-tr>
+        </c-table>
+    </div>
+    <div id="tab3-content" class="display-none">
+        <c-table>
+        <colgroup>
+            <col style="width: 20%">
+            <col style="width: 80%">
+        </colgroup>
+        <c-tr>
+        <c-td>
+        <c-strong>Brondata</c-strong>
+        </c-td>
+        <c-td>{{ publication_model.source_data or '-' }}</c-td>
+        </c-tr>
+        <c-tr>
+        <c-td>
+        <c-strong>Brondata (links)</c-strong>
+        </c-td>
+        <c-td>
+        {% if publication_model.source_data_grouping %}
+            {% for source in publication_model.source_data_grouping %}
+                {{ source.title }}:
+                <c-link href="{{ source.link }}">{{ source.link }}</c-link>
+            </br>
+        {% endfor %}
+    {% else %}
+        -
+    {% endif %}
+    </c-td>
+    </c-tr>
+    <c-tr>
+    <c-td>
+    <c-strong>Methoden en modellen</c-strong>
+    </c-td>
+    <c-td>{{ publication_model.methods_and_models or '-' }}</c-td>
+    </c-tr>
+    <c-tr>
+    <c-td>
+    <c-strong>Leverancier</c-strong>
+    </c-td>
+    <c-td>{{ publication_model.provider or '-' }}</c-td>
+    </c-tr>
+    <c-tr>
+    <c-td>
+    <c-strong>Publiccode</c-strong>
+    </c-td>
+    <c-td>
+    {% if publication_model.publiccode %}
+        <c-link href="{{ publication_model.publiccode }}">{{ publication_model.publiccode }}</c-link>
+    {% else %}
+        -
+    {% endif %}
+    </c-td>
+    </c-tr>
+    </c-table>
+</div>
+</div>
+<c-layout-flow justifyContent="end" row="true" class="rvo-layout-margin-vertical--xl">
+<c-button style="margin-right: auto" @click="window.location='./prepare'" kind="tertiary" showIcon="before" icon="terug">Vorige stap
+</c-button>
+<c-button @click="window.location='./confirm'" kind="primary">Volgende stap</c-button>
+</c-layout-flow>
+</div>
+</c-grid>
+</c-max-width-layout>
+{% endblock %}

@@ -59,6 +59,14 @@ async def get_organization_select_field(
             my_organizations.append(organization)
 
     select_organization: WebFormOption = WebFormOption(value="", display_value=_("Select organization"))
+
+    if organization_id:
+        default_value = str(organization_id)
+    elif len(my_organizations) == 1:
+        default_value = str(my_organizations[0].id)
+    else:
+        default_value = ""
+
     organization_select_field = WebFormField(
         type=WebFormFieldType.SELECT,
         name="organization_id",
@@ -71,7 +79,7 @@ async def get_organization_select_field(
             WebFormOption(value=str(organization.id), display_value=organization.name)
             for organization in my_organizations
         ],
-        default_value=str(organization_id) if organization_id else "",
+        default_value=default_value,
         group="1",
     )
     return organization_select_field
