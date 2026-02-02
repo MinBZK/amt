@@ -160,6 +160,7 @@ dependencies = true
 authorized_licenses = [
     "Apache Software",
     "Apache-2.0",
+    "Apache-2.0 OR BSD-2-Clause",
     "Artistic",
     "BSD",
     "BSD-3-Clause",
