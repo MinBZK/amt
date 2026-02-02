@@ -1205,8 +1205,8 @@ msgid "Read more about the Algorithm Register here"
 msgstr "Lees hier meer over het Algoritmeregister"
 
 #: amt/site/templates/publish/publish_explanation.html.j2:17
-msgid "Check connection"
-msgstr "Verbinding controleren"
+msgid "Login to Algorithm Register"
+msgstr "Inloggen bij Algoritmeregister"
 
 #: amt/site/templates/publish/parts/ar_login_success.html.j2:8
 #: amt/site/templates/publish/parts/ar_login_success.html.j2:10

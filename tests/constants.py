@@ -235,9 +235,9 @@ entries": [
       "name": "3-dat-03-persoonsgegevens-beschrijven.yaml",
       "path": "measures/3-dat-03-persoonsgegevens-beschrijven.yaml",
       "urn": "urn:nl:ak:mtr:dat-03",
-      "download_url": "https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-03",
+      "download_url": "https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-03",
       "links": {
-        "self": "https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-03"
+        "self": "https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-03"
       }
     }
 ]
@@ -253,9 +253,9 @@ TASK_REGISTRY_REQUIREMENTS_LIST_PAYLOAD = """
       "name": "aia-08-transparantie-aan-gebruiksverantwoordelijken.yaml",
       "path": "requirements/aia-08-transparantie-aan-gebruiksverantwoordelijken.yaml",
       "urn": "urn:nl:ak:ver:aia-08",
-      "download_url": "https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-08",
+      "download_url": "https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-08",
       "links": {
-        "self": "https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-08"
+        "self": "https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-08"
       }
     }
 ]

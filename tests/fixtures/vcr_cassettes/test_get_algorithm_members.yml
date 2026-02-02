@@ -13,7 +13,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest
+      uri: https://task-registry.rijksapp.nl/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest
     response:
       body:
         string:
@@ -446,7 +446,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest
+      uri: https://task-registry.rijksapp.nl/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest
     response:
       body:
         string:
@@ -735,7 +735,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-05?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-05?version=latest
     response:
       body:
         string:
@@ -796,7 +796,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-25?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-25?version=latest
     response:
       body:
         string:
@@ -852,7 +852,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-13?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-13?version=latest
     response:
       body:
         string:
@@ -896,7 +896,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aut-01?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aut-01?version=latest
     response:
       body:
         string:
@@ -936,7 +936,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-07?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-07?version=latest
     response:
       body:
         string:
@@ -993,7 +993,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-29?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-29?version=latest
     response:
       body:
         string:
@@ -1050,7 +1050,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-28?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-28?version=latest
     response:
       body:
         string:
@@ -1102,7 +1102,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-03?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-03?version=latest
     response:
       body:
         string:
@@ -1165,7 +1165,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-22?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-22?version=latest
     response:
       body:
         string:
@@ -1227,7 +1227,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-07?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-07?version=latest
     response:
       body:
         string:
@@ -1272,7 +1272,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:arc-01?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:arc-01?version=latest
     response:
       body:
         string:
@@ -1315,7 +1315,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:awb-01?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:awb-01?version=latest
     response:
       body:
         string:
@@ -1362,7 +1362,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-04?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-04?version=latest
     response:
       body:
         string:
@@ -1412,7 +1412,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-01?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-01?version=latest
     response:
       body:
         string:
@@ -1465,7 +1465,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-08?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-08?version=latest
     response:
       body:
         string:
@@ -1516,7 +1516,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-13?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-13?version=latest
     response:
       body:
         string:
@@ -1582,7 +1582,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-06?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-06?version=latest
     response:
       body:
         string:
@@ -1630,7 +1630,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:awb-01?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:awb-01?version=latest
     response:
       body:
         string:
@@ -1677,7 +1677,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-10?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-10?version=latest
     response:
       body:
         string:
@@ -1814,7 +1814,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-27?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-27?version=latest
     response:
       body:
         string:
@@ -1870,7 +1870,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-10?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-10?version=latest
     response:
       body:
         string:
@@ -1936,7 +1936,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-24?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-24?version=latest
     response:
       body:
         string:
@@ -1986,7 +1986,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-35?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-35?version=latest
     response:
       body:
         string:
@@ -2039,7 +2039,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-03?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-03?version=latest
     response:
       body:
         string:
@@ -2086,7 +2086,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-09?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-09?version=latest
     response:
       body:
         string:
@@ -2133,7 +2133,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-11?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-11?version=latest
     response:
       body:
         string:
@@ -2181,7 +2181,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:grw-01?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:grw-01?version=latest
     response:
       body:
         string:
@@ -2231,7 +2231,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-23?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-23?version=latest
     response:
       body:
         string:
@@ -2284,7 +2284,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-05?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-05?version=latest
     response:
       body:
         string:
@@ -2327,7 +2327,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:awb-02?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:awb-02?version=latest
     response:
       body:
         string:
@@ -2382,7 +2382,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-12?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-12?version=latest
     response:
       body:
         string:
@@ -2428,7 +2428,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-26?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-26?version=latest
     response:
       body:
         string:
@@ -2489,7 +2489,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:woo-01?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:woo-01?version=latest
     response:
       body:
         string:
@@ -2546,7 +2546,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:bio-01?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:bio-01?version=latest
     response:
       body:
         string:
@@ -2593,7 +2593,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:bzk-01?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:bzk-01?version=latest
     response:
       body:
         string:
@@ -2635,7 +2635,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:dat-01?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:dat-01?version=latest
     response:
       body:
         string:
@@ -2687,7 +2687,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:grw-02?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:grw-02?version=latest
     response:
       body:
         string:

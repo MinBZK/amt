@@ -13,7 +13,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest
+      uri: https://task-registry.rijksapp.nl/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest
     response:
       body:
         string:
@@ -302,7 +302,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest
+      uri: https://task-registry.rijksapp.nl/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest
     response:
       body:
         string:
@@ -735,7 +735,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-29?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-29?version=latest
     response:
       body:
         string:
@@ -792,7 +792,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-22?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-22?version=latest
     response:
       body:
         string:
@@ -854,7 +854,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:awb-01?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:awb-01?version=latest
     response:
       body:
         string:
@@ -901,7 +901,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-03?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-03?version=latest
     response:
       body:
         string:
@@ -964,7 +964,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-24?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-24?version=latest
     response:
       body:
         string:
@@ -1014,7 +1014,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-05?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-05?version=latest
     response:
       body:
         string:
@@ -1057,7 +1057,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:woo-01?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:woo-01?version=latest
     response:
       body:
         string:
@@ -1114,7 +1114,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:awb-01?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:awb-01?version=latest
     response:
       body:
         string:
@@ -1161,7 +1161,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-05?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-05?version=latest
     response:
       body:
         string:
@@ -1222,7 +1222,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:dat-01?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:dat-01?version=latest
     response:
       body:
         string:
@@ -1274,7 +1274,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:arc-01?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:arc-01?version=latest
     response:
       body:
         string:
@@ -1317,7 +1317,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-08?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-08?version=latest
     response:
       body:
         string:
@@ -1368,7 +1368,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-04?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-04?version=latest
     response:
       body:
         string:
@@ -1418,7 +1418,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:grw-02?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:grw-02?version=latest
     response:
       body:
         string:
@@ -1464,7 +1464,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-03?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-03?version=latest
     response:
       body:
         string:
@@ -1511,7 +1511,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-23?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-23?version=latest
     response:
       body:
         string:
@@ -1564,7 +1564,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-25?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-25?version=latest
     response:
       body:
         string:
@@ -1620,7 +1620,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-11?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-11?version=latest
     response:
       body:
         string:
@@ -1668,7 +1668,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-06?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-06?version=latest
     response:
       body:
         string:
@@ -1716,7 +1716,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-13?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-13?version=latest
     response:
       body:
         string:
@@ -1782,7 +1782,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-28?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-28?version=latest
     response:
       body:
         string:
@@ -1834,7 +1834,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-35?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-35?version=latest
     response:
       body:
         string:
@@ -1887,7 +1887,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aut-01?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aut-01?version=latest
     response:
       body:
         string:
@@ -1927,7 +1927,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-01?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-01?version=latest
     response:
       body:
         string:
@@ -1980,7 +1980,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:grw-01?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:grw-01?version=latest
     response:
       body:
         string:
@@ -2030,7 +2030,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-27?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-27?version=latest
     response:
       body:
         string:
@@ -2086,7 +2086,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-12?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-12?version=latest
     response:
       body:
         string:
@@ -2132,7 +2132,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-10?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-10?version=latest
     response:
       body:
         string:
@@ -2269,7 +2269,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:bio-01?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:bio-01?version=latest
     response:
       body:
         string:
@@ -2316,7 +2316,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-26?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-26?version=latest
     response:
       body:
         string:
@@ -2377,7 +2377,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-07?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-07?version=latest
     response:
       body:
         string:
@@ -2422,7 +2422,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:bzk-01?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:bzk-01?version=latest
     response:
       body:
         string:
@@ -2464,7 +2464,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:awb-02?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:awb-02?version=latest
     response:
       body:
         string:
@@ -2519,7 +2519,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-10?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-10?version=latest
     response:
       body:
         string:
@@ -2585,7 +2585,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-07?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-07?version=latest
     response:
       body:
         string:
@@ -2642,7 +2642,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-13?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-13?version=latest
     response:
       body:
         string:
@@ -2686,7 +2686,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-09?version=latest
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-09?version=latest
     response:
       body:
         string:
@@ -2716,6 +2716,3262 @@ interactions:
           - Wed, 15 Jan 2025 09:18:46 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:aia-03?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:aia-05?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:awb-01?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:aia-25?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:aia-24?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:aut-01?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:aia-23?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:aia-35?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:aia-26?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:aia-13?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:aia-10?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:aia-07?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:arc-01?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:aia-22?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:avg-01?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:aia-29?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:avg-04?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:aia-28?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:avg-08?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:avg-12?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:aia-27?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:woo-01?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:avg-11?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:avg-07?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:avg-05?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:avg-09?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:dat-01?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:bio-01?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:grw-02?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:avg-06?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:grw-01?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:awb-02?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:avg-10?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:awb-01?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:avg-13?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:bzk-01?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//requirements/urn/urn:nl:ak:ver:avg-03?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:05 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:awb-01?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Organisaties
+          die algoritmes gebruiken voor publieke taken nemen besluiten zorgvuldig.","description":"Organisaties
+          die algoritmes gebruiken voor publieke taken nemen besluiten zorgvuldig.\n","explanation":"Het
+          zorgvuldigheidsvereiste eist dat een besluit met de nodige zorgvuldigheid
+          wordt voorbereid en juist wordt genomen.\nDit vraagt onder meer om een zorgvuldig
+          onderzoek naar informatie, feiten, een zorgvuldige beslissingsprocedure en
+          een deugdelijke besluitvorming. \n\nDit betekent dat bij de ontwikkeling en
+          gebruik van algoritmes informatie moet worden vastgelegd  over het algoritme.
+          Hierbij kan worden gedacht aan:\n- Dat het [doel en eventuele subdoelen](https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/1-pba-01-formuleren-probleemdefinitie/index.html)
+          van het algoritme of AI-systeem helder zijn gedefinieerd, ook in relatie tot
+          het maatschappelijke resultaat (outcome).\n- Een bewuste afweging afmaken
+          en vaststellen of het algoritme het [juiste middel is om het probleem](https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/1-pba-01-formuleren-probleemdefinitie/index.html)
+          op doelmatige en doeltreffende wijze op te lossen.\n- Dat de werking van het
+          algoritme is onderzocht en is vastgesteld dat dit [passend is](https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/5-ver-01-functioneren-in-lijn-met-doeleinden/index.html)
+          om te gebruiken in een besluitvormingsproces.\n","urn":"urn:nl:ak:ver:awb-01","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/awb-01-zorgvuldigheidsbeginsel/index.html","subject":["fundamentele-rechten"],"lifecycle":["ontwerp","ontwikkelen","verificatie-en-validatie"],"links":["urn:nl:ak:mtr:org-01","urn:nl:ak:mtr:org-02","urn:nl:ak:mtr:org-03","urn:nl:ak:mtr:pba-01","urn:nl:ak:mtr:pba-02","urn:nl:ak:mtr:pba-03","urn:nl:ak:mtr:pba-04","urn:nl:ak:mtr:pba-05","urn:nl:ak:mtr:pba-06","urn:nl:ak:mtr:owp-01","urn:nl:ak:mtr:owp-03","urn:nl:ak:mtr:owp-04","urn:nl:ak:mtr:owp-10","urn:nl:ak:mtr:owp-12","urn:nl:ak:mtr:owp-15","urn:nl:ak:mtr:owp-16","urn:nl:ak:mtr:owp-21","urn:nl:ak:mtr:owp-22","urn:nl:ak:mtr:owp-23","urn:nl:ak:mtr:owp-24","urn:nl:ak:mtr:owp-25","urn:nl:ak:mtr:owp-28","urn:nl:ak:mtr:owp-31","urn:nl:ak:mtr:owp-32","urn:nl:ak:mtr:owp-35","urn:nl:ak:mtr:owp-37","urn:nl:ak:mtr:owk-02","urn:nl:ak:mtr:ver-01","urn:nl:ak:mtr:ver-02","urn:nl:ak:mtr:ver-05","urn:nl:ak:mtr:imp-01","urn:nl:ak:mtr:imp-03","urn:nl:ak:mtr:imp-04","urn:nl:ak:mtr:imp-09"],"ai_act_profile":[{"type":[],"open_source":[],"risk_group":[],"systemic_risk":[],"transparency_obligations":[],"role":[],"conformity_assessment_body":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        content-length:
+          - "3078"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-03?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Hoog-risico-AI-systemen
+          zijn voorzien van een risicobeheersysteem\",\"description\":\"\\nVoor AI-systemen
+          met een hoog risico wordt een systeem voor risicobeheer vastgesteld, uitgevoerd,
+          gedocumenteerd en in stand gehouden.\\n\",\"explanation\":\"Het systeem voor
+          risicobeheer moet bestaan uit een gepland iteratief proces, dat tijdens de
+          [gehele levensduur](https://minbzk.github.io/Algoritmekader/levenscyclus/over-de-levenscyclus/)
+          van een hoog-risico AI-systeem wordt doorlopen. Een organisatie moet ervoor
+          zorgen dat een risicobeheersysteem wordt ingericht in de organisatie. \\n\\nHet
+          risicobeheersysteem moet gericht zijn op het vaststellen en beperken van de
+          relevante risico\u2019s van AI-systemen voor de gezondheid, veiligheid en
+          grondrechten met passende maatregelen. \\n\\nHet systeem voor risicobeheer
+          moet periodiek worden ge\xEBvalueerd en geactualiseerd om de blijvende doeltreffendheid
+          ervan te waarborgen, alsook de motivering en de documentatie van eventuele
+          significante besluiten en maatregelen die op grond van de AI-verordening zijn
+          genomen.\\n\\nDit proces moet ervoor zorgen dat de aanbieder de risico\u2019s
+          of negatieve effecten vaststelt en risicobeperkende maatregelen uitvoert voor
+          de bekende en de redelijkerwijs te voorziene risico\u2019s van AI-systemen
+          voor de gezondheid, veiligheid en grondrechten.\\n\\nHierin moeten ook maatregelen
+          zitten voor redelijkerwijs te voorzien misbruik, met inbegrip van de mogelijke
+          risico\u2019s die voortvloeien uit de wisselwerking tussen het AI-systeem
+          en de omgeving waarin het werkt. De aanbieder moet aandacht hebben voor het
+          gebruik van AI-systemen waarvan, hoewel zij niet rechtstreeks onder het beoogde
+          doel vallen en niet in de gebruiksinstructies worden vermeld, mag worden verwacht
+          dat zij kunnen voortvloeien uit gemakkelijk voorspelbaar menselijk gedrag.\\n\\nBij
+          het vaststellen van passende risicobeheersmaatregelen moet de aanbieder de
+          gemaakte keuzes hebben gedocumenteerd en voorzien van een toelichting en,
+          in voorkomend geval, deskundigen en externe belanghebbenden hierbij betrekken.\\n\\n\\nHet
+          ontbreken van risicobeheer kan leiden tot schade aan gebruikers of derden
+          en wettelijke aansprakelijkheid voor de aanbieder.\\n\\n\",\"urn\":\"urn:nl:ak:ver:aia-03\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/aia-03-risicobeheersysteem/index.html\",\"subject\":[\"governance\"],\"lifecycle\":[\"organisatieverantwoordelijkheden\"],\"links\":[\"urn:nl:ak:mtr:org-03\",\"urn:nl:ak:mtr:owp-15\",\"urn:nl:ak:mtr:owp-16\",\"urn:nl:ak:mtr:owp-21\",\"urn:nl:ak:mtr:owp-22\",\"urn:nl:ak:mtr:owp-24\",\"urn:nl:ak:mtr:owp-28\",\"urn:nl:ak:mtr:owp-29\",\"urn:nl:ak:mtr:owp-32\",\"urn:nl:ak:mtr:owp-35\",\"urn:nl:ak:mtr:ver-04\",\"urn:nl:ak:mtr:mon-05\",\"urn:nl:ak:mtr:mon-07\"],\"ai_act_profile\":[{\"type\":[\"AI-systeem\",\"AI-systeem
+          voor algemene doeleinden\"],\"open_source\":[],\"risk_group\":[\"hoog-risico
+          AI\"],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[\"aanbieder\"],\"conformity_assessment_body\":[]}],\"always_applicable\":0,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        content-length:
+          - "3342"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-22?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"De
+          werking van hoog-risico-AI-systemen wordt gemonitord.\",\"description\":\"\\nDe
+          werking van hoog-risico-AI-systemen wordt gemonitord.\\n\",\"explanation\":\"Gebruiksverantwoordelijken
+          monitoren de werking van het AI-systeem met een hoog risico op basis van de
+          gebruiksaanwijzingen en stellen in voorkomend geval de aanbieders in kennis
+          overeenkomstig artikel 72 AI Verordening.\\n\\nDit is van belang om passende
+          maatregelen te kunnen treffen als het systeem onbedoeld anders gaat functioneren.\\n
+          \\nAls gebruiksverantwoordelijken redenen hebben om aan te nemen dat het gebruik
+          overeenkomstig de gebruiksaanwijzingen ertoe kan leiden dat dat AI-systeem
+          een risico vormt in de zin van artikel 79, lid 1, stellen zij de aanbieder
+          of distributeur en de betreffende markttoezichtautoriteit hiervan zonder onnodige
+          vertraging in kennis en onderbreken zij het gebruik van dat systeem. \\n\\nWanneer
+          gebruiksverantwoordelijke een ernstig incident vaststellen, stellen zij ook
+          onmiddellijk eerst de aanbieder hiervan in kennis, en vervolgens de importeur
+          of distributeur en de betreffende markttoezichtautoriteiten van dat incident.\\n\\nAls
+          de gebruiksverantwoordelijke de aanbieder niet kan bereiken, is artikel 73
+          mutatis mutandis van toepassing. Deze verplichting geldt niet voor gevoelige
+          operationele gegevens van gebruiksverantwoordelijke van AI-systemen die de
+          hoedanigheid van rechtshandhavingsinstanties hebben.\\n\\nVoor gebruiksverantwoordelijke
+          die in de hoedanigheid van financi\xEBle instellingen onderworpen zijn aan
+          eisen met betrekking tot hun interne governance, regelingen of processen uit
+          hoofde van het Unierecht inzake financi\xEBle diensten, wordt de monitoringsverplichting
+          overeenkomstig de eerste alinea geacht te zijn vervuld door te voldoen aan
+          de regels inzake interne governance, regelingen of processen en -mechanismen
+          uit hoofde van het desbetreffende recht inzake financi\xEBle diensten.\\n\\n\\nZonder
+          monitoring door gebruiksverantwoordelijken en (waar nodig) het informeren
+          van aanbieder, distributeur of markttoezichtautoriteit, kan de foutieve werking
+          van een hoog risico AI-systeem niet worden gesignaleerd en hersteld.\\n\\n\",\"urn\":\"urn:nl:ak:ver:aia-22\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/aia-22-gebruiksverantwoordelijken-monitoren-werking/index.html\",\"subject\":[\"menselijke-controle\"],\"lifecycle\":[\"monitoring-en-beheer\"],\"links\":[\"urn:nl:ak:mtr:owp-15\",\"urn:nl:ak:mtr:owp-16\",\"urn:nl:ak:mtr:owp-21\",\"urn:nl:ak:mtr:owp-22\",\"urn:nl:ak:mtr:owp-24\",\"urn:nl:ak:mtr:owp-28\",\"urn:nl:ak:mtr:owp-36\",\"urn:nl:ak:mtr:dat-11\",\"urn:nl:ak:mtr:dat-12\",\"urn:nl:ak:mtr:owk-02\",\"urn:nl:ak:mtr:owk-09\",\"urn:nl:ak:mtr:imp-03\",\"urn:nl:ak:mtr:imp-09\",\"urn:nl:ak:mtr:mon-05\",\"urn:nl:ak:mtr:mon-07\",\"urn:nl:ak:mtr:mon-08\"],\"ai_act_profile\":[{\"type\":[\"AI-systeem\",\"AI-systeem
+          voor algemene doeleinden\"],\"open_source\":[],\"risk_group\":[\"hoog-risico
+          AI\"],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[\"gebruiksverantwoordelijke\"],\"conformity_assessment_body\":[]}],\"always_applicable\":0,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        content-length:
+          - "3402"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-27?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Hoog-risico-AI-systemen
+          voor publieke taken worden beoordeeld op gevolgen voor grondrechten\",\"description\":\"\\nHoog-risico-AI-systemen
+          voor publieke taken worden beoordeeld op gevolgen voor grondrechten.\\n\",\"explanation\":\"Voordat
+          een AI-systeem met een hoog risico als bedoeld in artikel 6, lid 2 AI-verordening,
+          in gebruik wordt genomen, met uitzondering van AI-systemen met een hoog risico
+          die bedoeld zijn om te worden gebruikt op het in punt 2 van bijlage III vermelde
+          gebied, voeren operatoren die publiekrechtelijke instellingen zijn of particuliere
+          entiteiten zijn die openbare diensten verlenen, en operatoren van AI-systemen
+          met een hoog risico als bedoeld in bijlage III, punt 5, onder b) en c), een
+          beoordeling uit van de gevolgen voor de grondrechten die het gebruik van een
+          dergelijk systeem kan opleveren.\\n\\nPublieke instellingen of particuliere
+          entiteiten die openbare diensten leveren, en operators van bepaalde AI-systemen,
+          moeten dus een beoordeling uitvoeren van de impact op de grondrechten die
+          het gebruik ervan kan hebben.\\n\\nDeze evaluatie is bedoeld om potenti\xEBle
+          risico's te identificeren die kunnen voortvloeien uit het gebruik van dergelijke
+          systemen en om passende maatregelen te nemen om deze risico's te beheersen.\\n\\nHet
+          doel is om de bescherming van grondrechten te waarborgen bij het gebruik van
+          AI-systemen met een hoog risico, met name in sectoren waar deze systemen cruciale
+          diensten leveren aan het publiek.\\n\\n\\nHet niet uitvoeren van deze beoordeling
+          kan leiden tot schendingen van de grondrechten, juridische complicaties en
+          verlies van vertrouwen van het publiek in het gebruik van AI-systemen door
+          overheids- en openbare dienstverlenende entiteiten.\\n\\n\",\"urn\":\"urn:nl:ak:ver:aia-27\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/aia-27-beoordelen-gevolgen-grondrechten/index.html\",\"subject\":[\"fundamentele-rechten\"],\"lifecycle\":[\"ontwerp\",\"verificatie-en-validatie\"],\"links\":[\"urn:nl:ak:mtr:org-12\",\"urn:nl:ak:mtr:owp-07\",\"urn:nl:ak:mtr:owp-15\",\"urn:nl:ak:mtr:owp-16\",\"urn:nl:ak:mtr:owp-21\",\"urn:nl:ak:mtr:owp-22\",\"urn:nl:ak:mtr:owp-24\",\"urn:nl:ak:mtr:owp-28\",\"urn:nl:ak:mtr:owk-02\",\"urn:nl:ak:mtr:ver-03\",\"urn:nl:ak:mtr:imp-02\"],\"ai_act_profile\":[{\"type\":[\"AI-systeem\",\"AI-systeem
+          voor algemene doeleinden\"],\"open_source\":[],\"risk_group\":[\"hoog-risico
+          AI\"],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[\"gebruiksverantwoordelijke\"],\"conformity_assessment_body\":[]}],\"always_applicable\":0,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        content-length:
+          - "2856"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-24?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Werknemers
+          weten dat hun organisatie een hoog-risico AI-systeem gebruikt.\",\"description\":\"\\nWerknemers
+          weten dat hun organisatie een hoog-risico AI-systeem gebruikt.\\n\",\"explanation\":\"Voordat
+          een AI-systeem met een hoog risico op de werkplek in gebruik wordt gesteld
+          of wordt gebruikt, delen gebruiksverantwoordelijken die werkgever zijn werknemersvertegenwoordigers
+          en de betrokken werknemers mee dat zij zullen worden onderworpen aan het gebruik
+          van het AI-systeem met een hoog risico.\\n\\nDeze informatie wordt, indien
+          van toepassing, verstrekt in overeenstemming met de in het Unie- en nationaal
+          recht vastgelegde regels en procedures en de praktijk inzake informatie van
+          werknemers en hun vertegenwoordigers.\\n\\nDit vereiste benadrukt het belang
+          van het informeren van werknemersvertegenwoordigers en betrokken werknemers
+          over de inzet van een hoog risico AI-systeem op de werkplaats.\\n\\nDe gebruiksverantwoordelijke
+          als werknemer dient hier zorg voor te dragen.\\n\\n\\nAls werknemersvertegenwoordigers
+          en werknemers niet worden ge\xEFnformeerd over de inzet van een hoog risico
+          AI-systeem, kunnen zij zich niet weren tegen mogelijk ongewenste en negatieve
+          effecten van de inzet van het hoog risico AI-systeem.\\n\\n\",\"urn\":\"urn:nl:ak:ver:aia-24\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/aia-24-informeren-werknemers/index.html\",\"subject\":[\"transparantie\"],\"lifecycle\":[\"implementatie\"],\"links\":[\"urn:nl:ak:mtr:owp-15\",\"urn:nl:ak:mtr:owp-16\",\"urn:nl:ak:mtr:owp-21\",\"urn:nl:ak:mtr:owp-22\",\"urn:nl:ak:mtr:owp-24\",\"urn:nl:ak:mtr:owp-26\",\"urn:nl:ak:mtr:owp-28\"],\"ai_act_profile\":[{\"type\":[\"AI-systeem\",\"AI-systeem
+          voor algemene doeleinden\"],\"open_source\":[],\"risk_group\":[\"hoog-risico
+          AI\"],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[\"gebruiksverantwoordelijke\"],\"conformity_assessment_body\":[]}],\"always_applicable\":0,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        content-length:
+          - "2243"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-23?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Logs
+          voor hoog-risico-AI-systemen worden bewaard door de gebruiksverantwoordelijke.","description":"\nLogs
+          voor hoog-risico-AI-systemen worden bewaard door de gebruiksverantwoordelijke.\n","explanation":"Gebruiksverantwoordelijken
+          van AI-systemen met een hoog risico bewaren de logs die automatisch worden
+          gegenereerd door dat AI-systeem met een hoog risico voor zover dergelijke
+          logs onder hun controle vallen gedurende een periode die passend is voor het
+          beoogde doel van het AI-systeem met een hoog risico, of ten minste zes maanden,
+          tenzij anders is bepaald in het toepasselijke Unie- of nationaal recht, meer
+          in het bijzonder het Unierecht over de bescherming van persoonsgegevens\n\nAnders
+          dan in artikel 16(e) AI-verordening, waar een vergelijkbare vereiste geldt
+          voor aanbieders, gaat het hier om een vereiste specifiek voor de gebruiksverantwoordelijken.\n\nHet
+          is van belang dat de gebruiksverantwoordelijken een zelfstandige beoordeling
+          maakt wat moet worden gelogd en voor welke periode gezien de doelstelling
+          van de inzet van het AI-systeem.\n\nDaarbij is het van belang om te beoordelen
+          in hoeverre een gebruiksverantwoordelijke hier ''controle'' over heeft.\n\nDe
+          gebruiksverantwoordelijke zal, al dan niet samen met de aanbieder, (technische)
+          maatregelen moeten treffen om dit te realiseren.\n\n\nHet niet of onvoldoende
+          bewaren van logs kan het vermogen belemmeren om incidenten te analyseren,
+          naleving te controleren en verantwoordelijkheid vast te stellen bij mogelijke
+          problemen met het AI-systeem.\n","urn":"urn:nl:ak:ver:aia-23","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/aia-23-gebruiksverantwoordelijken-bewaren-logs/index.html","subject":["technische-robuustheid-en-veiligheid"],"lifecycle":["ontwikkelen","monitoring-en-beheer"],"links":["urn:nl:ak:mtr:owp-15","urn:nl:ak:mtr:owp-16","urn:nl:ak:mtr:owp-22","urn:nl:ak:mtr:owp-24","urn:nl:ak:mtr:owp-28"],"ai_act_profile":[{"type":["AI-systeem","AI-systeem
+          voor algemene doeleinden"],"open_source":[],"risk_group":["hoog-risico AI"],"systemic_risk":[],"transparency_obligations":[],"role":["gebruiksverantwoordelijke"],"conformity_assessment_body":[]}],"always_applicable":0,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        content-length:
+          - "2563"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-13?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Logs
+          van hoog-risico-AI-systemen worden zes maanden bewaard door de aanbieder.","description":"\nLogs
+          van hoog-risico-AI-systemen worden zes maanden bewaard door de aanbieder.\n","explanation":"Aanbieders
+          van AI-systemen met een hoog risico moeten de automatisch gegenereerde logs
+          bewaren volgens de voorschriften van artikel 12, lid 1, zolang deze logs onder
+          hun controle vallen.\n\nDeze logs moeten ten minste zes maanden worden bewaard,
+          tenzij anders bepaald door Unie- of nationale wetgeving met betrekking tot
+          gegevensbescherming, om te voldoen aan de relevante voorschriften en verantwoordingsplicht.\n\n\nHet
+          niet of onvoldoende bewaren van logs kan het vermogen belemmeren om incidenten
+          te analyseren, naleving te controleren en verantwoordelijkheid vast te stellen
+          bij mogelijke problemen met het AI-systeem.\n","urn":"urn:nl:ak:ver:aia-13","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/aia-13-bewaartermijn-voor-gegenereerde-logs/index.html","subject":["technische-robuustheid-en-veiligheid"],"lifecycle":["ontwerp","monitoring-en-beheer","uitfaseren"],"links":["urn:nl:ak:mtr:owp-15","urn:nl:ak:mtr:owp-16","urn:nl:ak:mtr:owp-22","urn:nl:ak:mtr:owp-24","urn:nl:ak:mtr:owp-28","urn:nl:ak:mtr:owk-04"],"ai_act_profile":[{"type":["AI-systeem","AI-systeem
+          voor algemene doeleinden"],"open_source":[],"risk_group":["hoog-risico AI"],"systemic_risk":[],"transparency_obligations":[],"role":["aanbieder"],"conformity_assessment_body":[]}],"always_applicable":0,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        content-length:
+          - "1877"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-05?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Datasets
+          voor hoog-risico-AI-systemen voldoen aan kwaliteitscriteria","description":"\nAI-systemen
+          met een hoog risico die technieken gebruiken die het trainen van AI-modellen
+          met data omvatten, worden ontwikkeld op basis van datasets voor training,
+          validatie en tests die voldoen aan de kwaliteitscriteria telkens wanneer dergelijke
+          datasets worden gebruikt.\n","explanation":"AI-systemen met een hoog risico
+          die data gebruiken voor het trainen van AI-modellen, moeten gebaseerd zijn
+          op datasets die voldoen aan specifieke [kwaliteitscriteria](https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/3-dat-01-datakwaliteit/index.html).
+          \n\nDeze criteria zorgen ervoor dat de data geschikt zijn voor [training,
+          validatie en tests](https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/3-dat-07-training-validatie-en-testdata/index.html),
+          wat de betrouwbaarheid en nauwkeurigheid van het AI-systeem waarborgt. De
+          kwaliteitscriteria zijn te vinden in leden 2 t/m 5 van artikel 10 van de AI-verordening.
+          Bijvoorbeeld datasets moeten aan praktijken voor databeheer voldoen en moeten
+          relevant, representatief, accuraat en volledig zijn.\n\nDeze vereiste houdt
+          in dat de gebruikte datasets onder meer moeten voldoen aan:\n\n- datasets
+          voor training, validatie en tests worden onderworpen aan praktijken op het
+          gebied van databeheer die stroken met het beoogde doel van het AI-systeem
+          met een hoog risico. Dit heeft in het bijzonder betrekking op relevante ontwerpkeuzes,
+          processen voor dataverzameling, verwerkingsactiviteiten voor datavoorbereiding,
+          het opstellen van aannames met name betrekking tot de informatie die de data
+          moeten meten en vertegenwoordigen, beschikbaarheid, kwantiteit en geschiktheid
+          van de datasets en een beoordeling op mogelijke vooringenomenheid en passende
+          maatregelen om deze vooringenomenheid op te sporen, te voorkomen en te beperken.
+          \n- datasets voor training, validatie en tests zijn relevant, voldoende representatief
+          en zoveel mogelijk foutenvrij en volledig met het oog op het beoogde doel.\n-
+          Er wordt rekening gehouden met de eigenschappen of elementen die specifiek
+          zijn voor een bepaalde geografische, contextuele, functionele of gedragsomgeving
+          waarin het AI-systeem wordt gebruikt.\n","urn":"urn:nl:ak:ver:aia-05","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/aia-05-data-kwaliteitscriteria/index.html","subject":["data"],"lifecycle":["dataverkenning-en-datapreparatie","verificatie-en-validatie"],"links":["urn:nl:ak:mtr:owp-11","urn:nl:ak:mtr:owp-15","urn:nl:ak:mtr:owp-16","urn:nl:ak:mtr:owp-21","urn:nl:ak:mtr:owp-22","urn:nl:ak:mtr:owp-24","urn:nl:ak:mtr:owp-28","urn:nl:ak:mtr:owp-29","urn:nl:ak:mtr:owp-30","urn:nl:ak:mtr:owp-32","urn:nl:ak:mtr:owp-35","urn:nl:ak:mtr:dat-01","urn:nl:ak:mtr:dat-08","urn:nl:ak:mtr:ver-05","urn:nl:ak:mtr:mon-05"],"ai_act_profile":[{"type":["AI-systeem","AI-systeem
+          voor algemene doeleinden"],"open_source":[],"risk_group":["hoog-risico AI"],"systemic_risk":[],"transparency_obligations":[],"role":["aanbieder"],"conformity_assessment_body":[]}],"always_applicable":0,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        content-length:
+          - "3508"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-03?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Persoonsgegevens
+          worden zo min mogelijk verwerkt.\",\"description\":\"\\nPersoonsgegevens worden
+          zo min mogelijk verwerkt.\\n\",\"explanation\":\"De verwerking van persoonsgegevens
+          moet minimaal worden gehouden, dat wil zeggen dat die verwerking toereikend
+          moet zijn, ter zake dienend en beperkt tot wat noodzakelijk is voor de doeleinden
+          waarvoor zij worden verwerkt.\\n\\nHet is van belang dat \xE9nkel persoonsgegevens
+          worden verwerkt die noodzakelijk zijn gezien de doeleinden van die vewerking.\\n\\nEr
+          moet een beoordeling worden gemaakt welke persoonsgegevens dit wel en eventueel
+          niet zijn.\\n\\nVoor het ontwikkelen en gebruiken van algoritmes is het van
+          belang om te beoordelen welke persoonsgegevens noodzakelijk zijn om het beoogde
+          doel te bereiken. \\n\\nAfhankelijk van de toepassing vraagt dit om een intensieve
+          toets. Er moet voor worden gezorgd dat persoonsgegevens die niet als noodzakelijk
+          worden beschouwd, buiten de verwerking blijven. \\n\\n\\nHet onnodig verwerken
+          van persoonsgegevens kan een inbreuk maken op rechten van betrokkenen, en
+          zou kunnen leiden tot een datalek.\\n\",\"urn\":\"urn:nl:ak:ver:avg-03\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/avg-03-minimale-verwerking-van-persoonsgegevens/index.html\",\"subject\":[\"privacy-en-gegevensbescherming\"],\"lifecycle\":[\"ontwerp\",\"dataverkenning-en-datapreparatie\",\"ontwikkelen\"],\"links\":[\"urn:nl:ak:mtr:owp-15\",\"urn:nl:ak:mtr:owp-16\",\"urn:nl:ak:mtr:owp-21\",\"urn:nl:ak:mtr:owp-22\",\"urn:nl:ak:mtr:owp-24\",\"urn:nl:ak:mtr:owp-28\",\"urn:nl:ak:mtr:dat-04\"],\"ai_act_profile\":[{\"type\":[],\"open_source\":[],\"risk_group\":[],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[],\"conformity_assessment_body\":[]}],\"always_applicable\":1,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        content-length:
+          - "2090"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-05?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Persoonsgegevens
+          zijn juist en actueel.","description":"\nPersoonsgegevens zijn juist en actueel.\n","explanation":"De
+          te verwerken persoonsgegevens moeten nauwkeurig, juist en zo nodig actueel
+          zijn.\nDit betekent dat alle maatregelen moeten worden genomen om ervoor te
+          zorgen dat onjuiste persoonsgegevens worden gerectificeerd of gewist.\n\nDat
+          kan betekenen dat persoonsgegevens moeten worden geactualiseerd of verbeterd.
+          In de context van algoritmes is het van belang dat ook daar wordt onderzocht
+          welke maatregelen nodig zijn om die [juistheid](https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/2-owp-11-gebruikte-data/index.html)
+          toe te passen.\n\n\nAls er geen rekening wordt gehouden met de juistheid,
+          nauwkeurigheid en volledigheid van persoonsgegevens, kunnen kwaliteit en integriteit
+          van data niet voldoende worden gewaarborgd.\n","urn":"urn:nl:ak:ver:avg-05","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/avg-05-juistheid-en-actualiteit-van-persoonsgegevens/index.html","subject":["privacy-en-gegevensbescherming"],"lifecycle":["dataverkenning-en-datapreparatie"],"links":["urn:nl:ak:mtr:owp-15","urn:nl:ak:mtr:owp-16","urn:nl:ak:mtr:owp-22","urn:nl:ak:mtr:owp-24","urn:nl:ak:mtr:owp-28","urn:nl:ak:mtr:dat-01","urn:nl:ak:mtr:mon-05"],"ai_act_profile":[{"type":[],"open_source":[],"risk_group":[],"systemic_risk":[],"transparency_obligations":[],"role":[],"conformity_assessment_body":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        content-length:
+          - "1867"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-04?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Persoonsgegevens
+          en andere data verwerken gebeurt proportioneel en subsidiair.","description":"Persoonsgegevens
+          en andere data verwerken gebeurt proportioneel en subsidiair.\n\n\n","explanation":"Gegevensverwerking
+          moet in verhouding staan tot het beoogde doel en persoonsgegevens mogen alleen
+          verwerkt worden als er geen minder ingrijpende manier is om het doel te bereiken.
+          Voor zover het gaat om de verwerking van persoonsgegevens moet dit vereiste
+          aantoonbaar zijn. \n\nProportionaliteit vereist dat de impact van gegevensverwerking
+          op de persoonlijke levenssfeer voor de toepassing van een algoritme en voor
+          het genereren van de benodigde output in balans is met het beoogde doel.\n\nSubsidiariteit
+          vereist dat persoonsgegevens alleen moeten worden verwerkt als dit de minst
+          inbreukmakende manier is om het doel te bereiken.\n\nDeze principes waarborgen
+          dat de privacy van individuen wordt gerespecteerd en dat gegevensverwerking
+          niet verder gaat dan noodzakelijk is voor legitieme doeleinden.\n\nHet is
+          van belang om deze principes te hanteren om te bepalen of en in [welke vorm
+          een algoritmes](https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/1-pba-03-onderbouwen-gebruik-algoritme/index.html)
+          moet worden toegepast en om tot een passende mate van gegevensverwerking te
+          komen om het [doel](https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/1-pba-02-formuleren-doelstelling/index.html)
+          te bereiken.\n","urn":"urn:nl:ak:ver:avg-04","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/avg-04-proportionaliteit-en-subsidiariteit/index.html","subject":["fundamentele-rechten","privacy-en-gegevensbescherming"],"lifecycle":["ontwerp","dataverkenning-en-datapreparatie"],"links":["urn:nl:ak:mtr:owp-05","urn:nl:ak:mtr:owp-15","urn:nl:ak:mtr:owp-16","urn:nl:ak:mtr:owp-21","urn:nl:ak:mtr:owp-22","urn:nl:ak:mtr:owp-24","urn:nl:ak:mtr:owp-28","urn:nl:ak:mtr:owk-02"],"ai_act_profile":[{"type":[],"open_source":[],"risk_group":[],"systemic_risk":[],"transparency_obligations":[],"role":[],"conformity_assessment_body":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        content-length:
+          - "2511"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-35?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Ernstige
+          incidenten door hoog-risico-AI-systemen worden gemeld aan de toezichthouder.\",\"description\":\"\\nErnstige
+          incidenten door hoog-risico-AI-systemen worden gemeld aan de toezichthouder.\\n\",\"explanation\":\"Aanbieders
+          van AI-systemen met een hoog risico die binnen de EU worden verhandeld, moeten
+          ernstige incidenten melden bij de markttoezichtautoriteiten van de lidstaten
+          waar het incident heeft plaatsgevonden. Het doel is om de veiligheid en betrouwbaarheid
+          van AI-systemen te waarborgen en mogelijke risico's voor gebruikers te minimaliseren.\\n\\nDit
+          meldingsproces is bedoeld om snel en adequaat te reageren op ernstige incidenten
+          die zich voordoen bij het gebruik van deze AI-systemen, en om passende maatregelen
+          te nemen ter bescherming van de consumenten en het publiek. Een 'ernstig incident'
+          wordt in artikel 3 van de AI-verordening gedefinieerd als: een incident of
+          gebrekkig functioneren van een AI-systeem dat direct of indirect leidt tot:
+          \\n\\n1. het overlijden van een persoon of ernstige schade voor de gezondheid
+          van een persoon;\\n2. een ernstige en onomkeerbare verstoring van het beheer
+          of de exploitatie van kritieke infrastructuur;\\n3. een schending van de uit
+          het recht van de Unie voortvloeiende verplichtingen ter bescherming van de
+          grondrechten;\\n4. ernstige schade aan eigendommen of het milieu.\\n\\nHet
+          niet melden van ernstige incidenten kan leiden tot vertraagde reactie op potenti\xEBle
+          gevaren voor gebruikers en kan het vertrouwen in AI-systemen ondermijnen.\\n\",\"urn\":\"urn:nl:ak:ver:aia-35\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/aia-35-melding-ernstige-incidenten/index.html\",\"subject\":[\"governance\"],\"lifecycle\":[\"organisatieverantwoordelijkheden\",\"monitoring-en-beheer\"],\"links\":[\"urn:nl:ak:mtr:owp-15\",\"urn:nl:ak:mtr:owp-16\",\"urn:nl:ak:mtr:owp-22\",\"urn:nl:ak:mtr:owp-24\",\"urn:nl:ak:mtr:owp-28\",\"urn:nl:ak:mtr:owp-29\"],\"ai_act_profile\":[{\"type\":[\"AI-systeem\",\"AI-systeem
+          voor algemene doeleinden\"],\"open_source\":[],\"risk_group\":[\"hoog-risico
+          AI\"],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[\"aanbieder\"],\"conformity_assessment_body\":[]}],\"always_applicable\":0,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        content-length:
+          - "2524"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-10?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Hoog-risico-AI-systemen
+          zijn voldoende nauwkeurig, robuust en cyberveilig.\",\"description\":\"\\nHoog-risico-AI-systemen
+          zijn voldoende nauwkeurig, robuust en cyberveilig.\\n\",\"explanation\":\"AI-systemen
+          met een hoog risico worden zorgvuldig ontworpen en ontwikkeld om een hoog
+          niveau van nauwkeurigheid, robuustheid en cyberbeveiliging te bieden.\\n\\nDit
+          garandeert consistente prestaties gedurende hun levensduur en minimaliseert
+          risico's met betrekking tot deze aspecten, waardoor de betrouwbaarheid en
+          veiligheid van het systeem worden gewaarborgd.\\n\\nTechnische robuustheid
+          is een essenti\xEBle eis voor AI-systemen met een hoog risico.\\nDeze systemen
+          moeten bestand zijn tegen schadelijk of anderszins ongewenst gedrag dat kan
+          voortvloeien uit de beperkingen binnen de systemen of de omgeving waarin de
+          systemen opereren (bijvoorbeeld fouten, onregelmatigheden, onverwachte situaties).\\n\\nEr
+          moeten technische en organisatorische maatregelen worden getroffen om de robuustheid
+          van AI-systemen met een hoog risico te waarborgen. Een technische oplossing
+          kan bijvoorbeeld bestaan uit mechanismen die het systeem in staat stellen
+          zijn werking veilig te onderbreken (storingsbeveiligingsplannen) wanneer zich
+          bepaalde anomalie\xEBn voordoen of wanneer de werking buiten bepaalde vooraf
+          bepaalde grenzen plaatsvindt.\\n\\nCyberbeveiliging is cruciaal om te waarborgen
+          dat AI-systemen bestand zijn tegen pogingen van kwaadwillige derden die gebruikmaken
+          van de kwetsbaarheden van het systeem om het gebruik, het gedrag of de prestaties
+          ervan te wijzigen of de veiligheidskenmerken ervan in gevaar te brengen.\\n\\nBij
+          cyberaanvallen tegen AI-systemen kunnen AI-specifieke activa worden gebruikt,
+          zoals trainingsdatasets (bv. datavervuiling) of getrainde modellen (bv. vijandige
+          aanvallen of membership inference), of kwetsbaarheden in de digitale activa
+          van het AI-systeem of de onderliggende ICT-infrastructuur worden benut.\\n\\nOm
+          te zorgen voor een niveau van cyberbeveiliging dat aansluit op de risico\u2019s,
+          moeten aanbieders van AI-systemen met een hoog risico passende maatregelen
+          zoals veiligheidscontroles nemen, waarbij ook rekening wordt gehouden met
+          de onderliggende ICT infrastructuur.\\n\\n\\nGebrek aan nauwkeurigheid, robuustheid
+          of cyberbeveiliging kan leiden tot onbetrouwbare prestaties, kwetsbaarheid
+          voor storingen en blootstelling aan beveiligingsrisico's, wat de effectiviteit
+          en veiligheid van het AI-systeem in gevaar kan brengen.\\n\",\"urn\":\"urn:nl:ak:ver:aia-10\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/aia-10-nauwkeurigheid-robuustheid-cyberbeveiliging/index.html\",\"subject\":[\"technische-robuustheid-en-veiligheid\"],\"lifecycle\":[\"ontwerp\",\"ontwikkelen\",\"monitoring-en-beheer\"],\"links\":[\"urn:nl:ak:mtr:owp-04\",\"urn:nl:ak:mtr:owp-10\",\"urn:nl:ak:mtr:owp-15\",\"urn:nl:ak:mtr:owp-16\",\"urn:nl:ak:mtr:owp-22\",\"urn:nl:ak:mtr:owp-24\",\"urn:nl:ak:mtr:owp-27\",\"urn:nl:ak:mtr:owp-28\",\"urn:nl:ak:mtr:owp-32\",\"urn:nl:ak:mtr:owp-36\",\"urn:nl:ak:mtr:dat-07\",\"urn:nl:ak:mtr:dat-11\",\"urn:nl:ak:mtr:dat-12\",\"urn:nl:ak:mtr:owk-09\",\"urn:nl:ak:mtr:ver-01\",\"urn:nl:ak:mtr:ver-02\",\"urn:nl:ak:mtr:ver-06\",\"urn:nl:ak:mtr:imp-02\",\"urn:nl:ak:mtr:imp-10\",\"urn:nl:ak:mtr:mon-02\",\"urn:nl:ak:mtr:mon-03\",\"urn:nl:ak:mtr:mon-05\",\"urn:nl:ak:mtr:mon-08\"],\"ai_act_profile\":[{\"type\":[\"AI-systeem\",\"AI-systeem
+          voor algemene doeleinden\"],\"open_source\":[],\"risk_group\":[\"hoog-risico
+          AI\"],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[\"aanbieder\"],\"conformity_assessment_body\":[]}],\"always_applicable\":0,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        content-length:
+          - "3893"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-01?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Persoonsgegevens
+          worden op een rechtmatige manier verwerkt.\",\"description\":\"\\nPersoonsgegevens
+          worden op een rechtmatige manier verwerkt.\\n\",\"explanation\":\"De verwerking
+          van persoonsgegevens moet rechtmatig plaatsvinden, wat betekent dat de verwerking
+          gebaseerd moet zijn op \xE9\xE9n van de wettelijke grondslagen die zijn geformuleerd
+          in artikel 6 Algemene Verordening Gegevensbescherming.\\n\\nPersoonsgegevens
+          mogen alleen worden verzameld en verwerkt voor specifieke, duidelijk omschreven
+          en gerechtvaardigde doeleinden.\\nHet is niet toegestaan om deze gegevens
+          verder te verwerken op een manier die niet verenigbaar is met deze oorspronkelijke
+          doeleinden.\\n\\nBij het verwerken van persoonsgegevens ten behoeve van de
+          ontwikkeling en gebruik van algoritmes moet worden onderzocht of dit kan worden
+          gebaseerd op \xE9\xE9n van de verwerkingsgrondslagen. Het is van belang dat
+          wordt uitgewerkt welke persoonsgegevens waarvoor worden verwerkt en op basis
+          van welke grondslag.\\n\\nHierbij kan worden gedacht aan persoonsgegevens
+          ten behoeve van trainingsdata, voor het genereren van output of, indien (juridisch)
+          mogelijk, voor het uitvoeren van een onderzoek naar onbewuste vooringenomenheid.\\n\\n\\nHet
+          risico wanneer persoonsgegevens niet op een rechtmatige manier worden verwerkt
+          (verzamelen van gegevens valt hier ook onder), is dat er niet aan de AVG wordt
+          voldaan. Er worden dan onrechtmatig persoonsgegevens verwerkt, waarmee privacy
+          van personen in het geding komt. Ook kan het leiden tot hoge boetes voor organisaties,
+          en kan een datalek plaatsvinden.\\n\",\"urn\":\"urn:nl:ak:ver:avg-01\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/avg-01-persoonsgegevens-worden-rechtmatig-verwerkt/index.html\",\"subject\":[\"privacy-en-gegevensbescherming\"],\"lifecycle\":[\"ontwerp\",\"dataverkenning-en-datapreparatie\"],\"links\":[\"urn:nl:ak:mtr:pba-05\",\"urn:nl:ak:mtr:owp-03\",\"urn:nl:ak:mtr:owp-15\",\"urn:nl:ak:mtr:owp-16\",\"urn:nl:ak:mtr:owp-22\",\"urn:nl:ak:mtr:owp-24\",\"urn:nl:ak:mtr:owp-28\",\"urn:nl:ak:mtr:owp-30\"],\"ai_act_profile\":[{\"type\":[],\"open_source\":[],\"risk_group\":[],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[],\"conformity_assessment_body\":[]}],\"always_applicable\":1,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        content-length:
+          - "2577"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-10?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Besluiten
+          die levens kunnen be\xEFnvloeden, zijn niet volledig geautomatiseerd.\",\"description\":\"\\nBetrokkenen
+          hebben het recht om niet onderworpen te worden aan een enkel op geautomatiseerde
+          verwerking, waaronder proflering, gebaseerd besluit, wanneer dit rechtsgevolgen
+          heeft voor hen of het hen anderszins in aanzienlijke mate treft. Dit verbod
+          geldt niet indien de geautomatiseerde individuele besluitvorming, anders dan
+          op basis van profilering, noodzakelijk is om te voldoen aan een wettelijke
+          verplichting die op de verwerkingsverantwoordelijke rust of noodzakelijk is
+          voor de vervulling van een taak van algemeen belang.\\n\",\"explanation\":\"Overheidsorganisaties
+          zijn vaak belast met de uitvoering van wettelijke taken waarbij zij 'besluiten'
+          moeten nemen, bijvoorbeeld als een burger vraagt om een uitkering, toeslag
+          of een subsidie.\\n\\nHiervoor moeten gegevens worden verwerkt om te kunnen
+          bepalen of een burger hier ook recht op heeft. Om deze gegevens snel en accuraat
+          te verwerken, zetten overheidsorganisaties vaak algoritmes in. Deze gegevens
+          worden dan vaak 'geautomatiseerd' door deze algoritmes verwerkt, zonder dat
+          een ambtenaar dit werk controleert.\\n\\nSoms wordt het proces voor het nemen
+          van een **besluit** volledig geautomatiseerd ingericht. Denk hierbij aan het
+          opleggen van een boete voor een snelheidsovertreding. Hierdoor kan in korte
+          tijd en op een effici\xEBnte wijze, een grote hoeveelheid besluiten worden
+          genomen. \\n\\nHet geautomatiseerd verwerken van gegevens voor de totstandkoming
+          van een besluit brengt risico's met zich mee. Zeker als hierbij persoonsgegevens
+          van individuen worden verwerkt en er sprake is van profilering. Hierdoor ontstaat
+          bijvoorbeeld het risico op discriminatie. Daarom is in art. 22 AVG het recht
+          voor betrokkenen gecre\xEBerd om niet te worden onderworpen aan een uitsluitend
+          op geautomatiseerde verwerking, waaronder profilering, gebaseerd besluit.
+          \\n\\nDit verbod geldt voor besluiten die **'rechtsgevolgen'** hebben voor
+          een betrokkene, bijvoorbeeld een burger die een boete ontvangt voor de snelheidsovertreding,
+          of hem anderzijds in **aanmerkelijke mate treft**. Het besluit mag in die
+          gevallen niet geautomatiseerd worden genomen. Een individu moet namelijk kunnen
+          rekenen op voldoende 'menselijke tussenkomst' bij de beoordeling van belangrijke
+          beslissingen die deze persoon treffen.\\n\\nBij het geautomatiseerd uitvoeren
+          van processen dient altijd te worden voldaan aan de voorwaarden uit wetgeving,
+          waaronder in het bijzonder de Algemene Verordening Gegevensbescherming (AVG)
+          en de Algemene wet bestuursrecht(Awb). Bestuursorganen dienen dan ook te handelen
+          conform de algemene beginselen van behoorlijk bestuur. Dit samenstel van regels
+          moet de rechten van betrokkenen borgen. \\n\\n### Algemene eisen aan geautomatiseerde
+          besluitvorming door overheden\\n\\nDe Nederlandse wetgever heeft in artikel
+          40 lid 1 UAVG gebruik gemaakt van de mogelijkheid een uitzondering te maken
+          op het verbod van art. 22 lid 1 AVG. In Nederland is geautomatiseerde besluitvorming
+          toegestaan, als het gaat om besluitvorming waarbij menselijke tussenkomst
+          geen toegevoegde waarde heeft.\\n\\nDit is het geval als er sprake is van
+          een gebonden karakter waarbij weinig of geen beoordelingsruimte is waarin
+          tot een andere conclusie kan worden gekomen. Hierbij kan worden gedacht aan
+          het toekennen van kinderbijslag of de hoogte van het recht op studiefinanciering.
+          Deze uitzondering geldt niet voor 'profilering', tenzij er specifieke (sectorale)
+          wetgeving het verbod opheft.\\n\\nOm deze uitzondering toe te kunnen passen,
+          moet er op grond van artikel 22 AVG een 'passende maatregel' in de vorm van
+          wetgeving zijn die personen voldoende bescherming biedt. In Nederland moet
+          de Algemene wet bestuursrecht deze bescherming aan burgers bieden als bestuursorganen
+          besluiten nemen. De Awb bevat vereisten en algemene beginselen waaraan besluitvorming
+          moet voldoen. \\n\\nBij het toepassen van geautomatiseerde besluitvorming,
+          moet aan de hand van een DPIA wordt vastgesteld of er bij toepassing van de
+          Awb daadwerkelijk voldoende bescherming wordt geboden. Een verwerkersverantwoordelijke
+          zal dus, naast het toepassen van vereisten uit de AVG en specifieke (sectorale)
+          wetgeving, beginselen uit de Awb moeten vertalen naar concrete maatregelen
+          om geautomatiseerde besluitvorming op een rechtmatige wijze toe te passen.
+          Hierbij kan worden gedacht aan het toepassen van [motiveringsbeginsel](awb-02-motiveringsbeginsel.md)
+          of het [zorgvuldigheidsbeginsel](awb-01-zorgvuldigheidsbeginsel.md).\\n\\n###
+          Begrippen\\n\\n#### Profilering\\n\\nProfilering is bijzonder gevoelig. Bij
+          profilering gaat het om elke vorm van een geautomatiseerde verwerking van
+          persoonsgegevens, waarbij aan de hand van persoonsgegevens bepaalde persoonlijke
+          aspecten van een natuurlijke persoon worden ge\xEBvalueerd. Daarbij gaat het
+          voornamelijk om het analyseren of verspellen van zaken als beroepsprestaties,
+          economische situatie, gezondheid, persoonlijke voorkeuren, interesses, betrouwbaarheid,
+          gedrag, locatie of een verplaatsingen. \\n\\nVolgens deze definitie gaat het
+          om een verwerking door een computersysteem waarbij het systeem algemene aanname(s)
+          toegepast in een concreet geval. Dit doet het door een individu, met gebruikmaking
+          van diens persoonsgegevens, in te delen in een categorie(profiel). Een dergelijk
+          categorie(profiel) wordt vaak in verband gebracht met bepaalde risico's, bijvoorbeeld
+          het risico op het misbruiken van bepaalde publieke voorzieningen. \\n\\nDe
+          gevoeligheid is dat nog niet is vastgesteld dat, in dit voorbeeld, de betreffende
+          natuurlijke persoon ook daadwerkelijk misbruik heeft gemaakt van bepaalde
+          voorzieningen. Als daar wel automatisch gevolgen aan worden verbonden, ontstaat
+          het risico op een onrechtmatige behandeling van een natuurlijk persoon. \\n\\n####
+          Besluit\\n\\nIn deze context moet het begrip 'besluit' worden gehanteerd zoals
+          dit is bedoeld in artikel 22 AVG. Het begrip 'besluit' krijgt in de AVG een
+          ruimere betekenis dan het geval is in artikel 1:3 Algemene wet bestuursrecht
+          (Awb). In de Algemene wet bestuursrecht moet er sprake zijn van een 'rechtsgevolg',
+          maar onder het besluitbegrip van de AVG kunnen ook situaties vallen waarin
+          een individu \u2018slechts\u2019 feitelijke gevolgen ervaart als een besluit
+          wordt genomen. Daarmee biedt de AVG dus bescherming voor meerdere situaties.
+          \\n\\n#### Rechtsgevolgen\\n\\nHet begrip 'rechtsgevolg' duidt op wijziging
+          in de rechtspositie van betrokkene. Het betekent, juridisch uitgedrukt, een
+          verandering in het geheel van de rechten, aanspraken, bevoegdheden en verplichtingen
+          van \xE9\xE9n of meer natuurlijke personen of rechtspersonen. In deze context
+          wijzigt de rechtspositie van een individu door een keuze van het systeem,
+          bijvoorbeeld doordat deze een boete ontvangt. Rechtsgevolgen kwalificeren
+          altijd als relevant. \\n\\n#### Aanmerkelijke mate treffen\\n\\nDe Europese
+          wetgever heeft weinig richting gegeven aan hoe dit begrip moet worden ge\xEFnterpreteerd.
+          Er zijn wel aanknopingspunten om te duiden wanneer hier sprake van is. De
+          EDPB spreekt van ernstige, aanzienlijke effecten, groot of belangrijk genoeg
+          zijn om aandacht te verdienen. Dat is in ieder geval zo als het besluit het
+          potentieel heeft om de omstandigheden, het gedrag of de keuze van de betrokken
+          personen in aanmerkelijke mate te treffen; een langdurig of blijvend effect
+          op de betrokkene te hebben; of in het uiterste geval, tot uitsluiting of discriminatie
+          te leiden. \\n\\nDit vraagt per geval om een analyse welke 'keuzes' van het
+          systeem welke gevolgen hebben voor een individu en of die gevolgen rechtsgevolgen
+          zijn of alleen een feitelijk gevolg. Zie voor een nadere toelichting hiervoor
+          het advies van de Autoriteit Persoonsgegevens inzake geautomatiseerde selectietechnieken.\\n\\n####
+          Toepassing\\n\\nVolledig geautomatiseerde vaststelling van een publiekrechtelijk
+          besluit zoals een aanslag, een boete of een vergunning heeft rechtsgevolgen.
+          Een beslissing dat een bepaalde aanvraag in aanmerking komt voor handmatige
+          controle heeft op zichzelf geen rechtsgevolg - de rechtspositie van de betrokkene
+          wijzigt (nog) niet. Wel moet beoordeeld worden of de betrokkene door dat besluit
+          anderszins (dus feitelijk) in aanmerkelijke mate wordt getroffen. \\n\",\"urn\":\"urn:nl:ak:ver:avg-10\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/avg-10-recht-op-niet-geautomatiseerde-besluitvorming/index.html\",\"subject\":[\"privacy-en-gegevensbescherming\"],\"lifecycle\":[\"ontwerp\",\"implementatie\"],\"links\":[\"urn:nl:ak:mtr:owp-15\",\"urn:nl:ak:mtr:owp-16\",\"urn:nl:ak:mtr:owp-21\",\"urn:nl:ak:mtr:owp-22\",\"urn:nl:ak:mtr:owp-24\",\"urn:nl:ak:mtr:owp-25\",\"urn:nl:ak:mtr:owp-28\",\"urn:nl:ak:mtr:imp-03\"],\"ai_act_profile\":[{\"type\":[],\"open_source\":[],\"risk_group\":[],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[],\"conformity_assessment_body\":[]}],\"always_applicable\":1,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        content-length:
+          - "9210"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-09?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Betrokkenen
+          kunnen een beroep doen op hun privacyrechten.","description":"\nBetrokkenen
+          kunnen een beroep doen op hun privacyrechten.\n","explanation":"Mensen hebben
+          het recht om hun privacyrechten uit te oefenen door een beroep te doen op
+          verschillende wettelijke bepalingen, zoals het recht op inzage, correctie,
+          verwijdering en bezwaar tegen de verwerking van hun persoonsgegevens.\n\nDit
+          betekent dat individuen controle hebben over hoe hun gegevens worden gebruikt
+          en kunnen verzoeken om toegang te krijgen tot hun gegevens of om wijzigingen
+          aan te brengen indien nodig.\n\nHet kunnen uitoefenen van privacyrechten is
+          essentieel voor het beschermen van de privacy van individuen, het waarborgen
+          van transparantie en controle uitvoeren over persoonsgegevens.\n\nAls persoonsgegevens
+          worden verwerkt voor het ontwikkelen en gebruiken van algoritmes, is het van
+          belang dat maatregelen worden getroffen om deze rechten te eerbiedigen.\n\n\nBetrokkenen
+          hebben geen controle over hun persoonsgegevens wanneer ze geen beroep kunnen
+          doen op hun privacyrechten.\n","urn":"urn:nl:ak:ver:avg-09","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/avg-09-inroepen-privacyrecht-bij-verwerking-persoonsgegevens/index.html","subject":["privacy-en-gegevensbescherming","data"],"lifecycle":["organisatieverantwoordelijkheden","ontwikkelen"],"links":["urn:nl:ak:mtr:owp-15","urn:nl:ak:mtr:owp-16","urn:nl:ak:mtr:owp-21","urn:nl:ak:mtr:owp-22","urn:nl:ak:mtr:owp-24","urn:nl:ak:mtr:owp-28","urn:nl:ak:mtr:owp-32","urn:nl:ak:mtr:imp-07","urn:nl:ak:mtr:imp-11"],"ai_act_profile":[{"type":[],"open_source":[],"risk_group":[],"systemic_risk":[],"transparency_obligations":[],"role":[],"conformity_assessment_body":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        content-length:
+          - "2130"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-28?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"AI-systemen
+          worden zo ontworpen en gebruikt, dat mensen begrijpen wanneer zij met een
+          AI-systeem communiceren en welke content gemaakt is door een AI-systeem.\",\"description\":\"AI-systemen
+          worden zo ontworpen en gebruikt, dat mensen begrijpen wanneer zij met een
+          AI-systeem communiceren en welke content gemaakt is door een AI-systeem.\\n\",\"explanation\":\"Aanbieders
+          van AI-systemen zorgen dat AI-sytemen zodanig worden ontworpen en ontwikkeld
+          dat de betrokken natuurlijke personen worden ge\xEFnformeerd dat zij interacteren
+          met een AI-systeem. \\n\\nGebruiksverantwoordelijken moeten betrokkenen informeren
+          over de werking van het systeem en in het geval van een AI-systeem dat content
+          gegenereert duidelijk kenbaar maken dat de content kunstmatig is gegenereerd
+          of gemanipuleerd.\\n\\nDit geldt voor AI-systemen die:\\n\\n- gebruikt worden
+          voor directe interactie met natuurlijke personen (zoals chatbots). \\n- synthetische
+          afbeeldingen, audio, video of tekst genereert en/of manipuleert (bijvoorbeeld
+          deepfake).\\n- doen aan emotieherkenning of biometrische categorisatie.\\n\\nBepaalde
+          AI-systemen die bedoeld zijn om met natuurlijke personen te interageren of
+          om content te genereren, kunnen specifieke risico\u2019s op imitatie of misleiding
+          met zich meebrengen, ongeacht of zij als systeem met een hoog risico gelden.
+          \\n\",\"urn\":\"urn:nl:ak:ver:aia-28\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/aia-28-transparantieverplichtingen/index.html\",\"subject\":[\"transparantie\"],\"lifecycle\":[\"ontwikkelen\",\"implementatie\"],\"links\":[\"urn:nl:ak:mtr:owp-15\",\"urn:nl:ak:mtr:owp-16\",\"urn:nl:ak:mtr:owp-21\",\"urn:nl:ak:mtr:owp-22\",\"urn:nl:ak:mtr:owp-23\",\"urn:nl:ak:mtr:owp-24\",\"urn:nl:ak:mtr:owp-28\",\"urn:nl:ak:mtr:owp-29\",\"urn:nl:ak:mtr:owp-31\",\"urn:nl:ak:mtr:owp-37\",\"urn:nl:ak:mtr:imp-01\"],\"ai_act_profile\":[{\"type\":[\"AI-systeem\",\"AI-systeem
+          voor algemene doeleinden\"],\"open_source\":[],\"risk_group\":[\"hoog-risico
+          AI\",\"geen hoog-risico AI\"],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[\"aanbieder\"],\"conformity_assessment_body\":[]}],\"always_applicable\":0,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        content-length:
+          - "2457"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-08?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Gevoelige
+          persoonsgegevens worden alleen gebruikt als hiervoor een wettelijke uitzondering
+          geldt.\",\"description\":\"\\nBijzondere categorie\xEBn van persoonsgegevens
+          mogen alleen worden verwerkt op basis van een wettelijke uitzondering.\\n\",\"explanation\":\"Persoonsgegevens
+          die door hun aard bijzonder gevoelig zijn wat betreft de grondrechten en fundamentele
+          vrijheden, verdienen specifieke bescherming.\\n\\nDit komt doordat de context
+          van de verwerking ervan significante risico's kan meebrengen voor de grondrechten
+          en de fundamentele vrijheden.\\n\\nDenk hierbij aan persoonsgegevens als ras,
+          ethnische afkomst, politieke opvattingen of religieuze of levenschouwelijke
+          overtuigingen.\\n\\nBijzondere categorie\xEBn persoonsgegevens mogen alleen
+          worden verwerkt als er hier een wettelijke uitzondering voor is ([artikel\\n9
+          AVG](https://eur-lex.europa.eu/legal-content/NL/TXT/HTML/?uri=CELEX:32016R0679#d1e2043-1-1)
+          en [artikel 30 UAVG](https://wetten.overheid.nl/jci1.3:c:BWBR0040940&hoofdstuk=3&paragraaf=3.1&artikel=30&z=2021-07-01&g=2021-07-01)).\\n\\nDeze
+          vereiste is ook van toepassing bij het ontwikkelen en gebruiken van algoritmes
+          en stelt daarmee beperkingen aan het mogen verwerken van deze categorie\xEBn
+          persoonsgegevens, bv. ten behoeve van trainingsdata of het genereren van de
+          beoogde output.\\n\\n\\nHet (onrechtmatige) verwerken van bijzondere categorie\xEBn
+          persoonsgegevens brengt risico's met zich mee op het gebied van respecteren
+          van de persoonlijke levenssfeer en discriminatie.\\n\\n\",\"urn\":\"urn:nl:ak:ver:avg-08\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/avg-08-wettelijke-verwerking-van-gevoelige-gegevens/index.html\",\"subject\":[\"privacy-en-gegevensbescherming\",\"bias-en-non-discriminatie\"],\"lifecycle\":[\"ontwerp\",\"dataverkenning-en-datapreparatie\"],\"links\":[\"urn:nl:ak:mtr:owp-15\",\"urn:nl:ak:mtr:owp-16\",\"urn:nl:ak:mtr:owp-22\",\"urn:nl:ak:mtr:owp-24\",\"urn:nl:ak:mtr:owp-28\"],\"ai_act_profile\":[{\"type\":[],\"open_source\":[],\"risk_group\":[],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[],\"conformity_assessment_body\":[]}],\"always_applicable\":1,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        content-length:
+          - "2472"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-25?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Gebruiksverantwoordelijken
+          controleren de registratie van het hoog-risico AI-systeem in de EU-databank.\",\"description\":\"\\nGebruiksverantwoordelijken
+          controleren de registratie van het hoog-risico AI-systeem in de EU-databank.\\n\",\"explanation\":\"Het
+          is van belang dat gebruiksverantwoordelijken nagaan of het betreffende hoog
+          risico AI-systeem door aanbieder is geregistreerd in de EU-databank (zoals
+          omschreven in artikel 71 AI-verordening).\\n\\nVoordat het betreffende AI-systeem
+          (bijlage III vermeld AI-systeem met een hoog risico) in gebruik te stellen
+          of te gebruiken (met uitzondering van de in punt 2 van bijlage III vermelde
+          AI-systemen met een hoog risico) registreren gebruiksverantwoordelijken die
+          overheidsinstanties, instellingen, organen of instanties van de Unie, of personen
+          die namens hen optreden, zichzelf en selecteren zij het systeem en registreren
+          zij het gebruik ervan in de in [artikel 71](https://eur-lex.europa.eu/legal-content/NL/TXT/HTML/?uri=OJ:L_202401689#d1e7019-1-1)
+          bedoelde EU-databank.\\n\\nHeeft de aanbieder het betreffende hoog risico
+          AI-systeem niet geregistreerd in de EU-Databank, dan mag het hoog risico AI-systeem
+          niet worden gebruikt.\\nDe aanbieder of distributeur wordt door de gebruiksverantwoordelijke
+          ge\xEFnformeerd dat het systeem niet is geregistreerd in de EU-databank.\\n\\nAI-systemen
+          met een hoog risico als bedoeld in punt 2 van bijlage III (kritieke infrastructuur)
+          worden op nationaal niveau geregistreerd.\\n\\n\\nZonder registratie van het
+          hoog risico AI-systeem en het registreren welke organisaties of personen hier
+          gebruik van maken, is het negatieve negatieve van het mogelijk onjuist of
+          ongewenst functioneren van het AI-systeem niet te overzien en onduidelijk
+          welke betrokken dit raakt.\\n \",\"urn\":\"urn:nl:ak:ver:aia-25\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/aia-25-gebruiksverantwoordelijken-registratieverplichtingen/index.html\",\"subject\":[\"transparantie\",\"governance\"],\"lifecycle\":[\"organisatieverantwoordelijkheden\",\"implementatie\",\"monitoring-en-beheer\"],\"links\":[\"urn:nl:ak:mtr:owp-15\",\"urn:nl:ak:mtr:owp-16\",\"urn:nl:ak:mtr:owp-22\",\"urn:nl:ak:mtr:owp-24\",\"urn:nl:ak:mtr:owp-28\"],\"ai_act_profile\":[{\"type\":[\"AI-systeem\",\"AI-systeem
+          voor algemene doeleinden\"],\"open_source\":[],\"risk_group\":[\"hoog-risico
+          AI\"],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[\"gebruiksverantwoordelijke\"],\"conformity_assessment_body\":[]}],\"always_applicable\":0,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        content-length:
+          - "2828"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:awb-02?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Organisaties
+          kunnen duidelijk uitleggen waarom en hoe algoritmes leiden tot een besluit","description":"Een
+          besluit berust op een deugdelijke en kenbare motivering.\n","explanation":"De
+          Awb eist dat een besluit een deugdelijke en kenbare motivering heeft. Dit
+          geldt ook als algoritmes worden ingezet. Een betrokkene moet in staat zijn
+          om te controleren of de overheid een besluit correct heeft genomen. Het motiveringsbeginsel
+          draagt bij aan doelen als verantwoording kunnen afleggen en het bieden van
+          rechtsbescherming. Het kan in samenhang worden gezien met [transparantieverplichtingen](avg-07-transparantie-bij-verwerken-persoonsgegevens.md)
+          die voortkomen uit de AVG. \n\nHet is van belang dat inzichtelijk wordt gemaakt
+          in het besluit welke gegevens zijn verwerkt en welke ''aannames'' een algoritme
+          bevat. Dit speelt in het bijzonder als gebruik wordt gemaakt van geautomatiseerde
+          besluitvormingsprocessen. Hierbij kan worden gedacht aan:\n\n- Dat een besluit
+          tot stand is gekomen met behulp van een algoritme.\n  \n- Van welke feiten
+          het bestuursorgaan is uitgegaan.\n  \n- Welke gegevens zijn verwerkt.\n  \n-
+          Welke relevante belangen tegen elkaar zijn afgewogen en hoe die afweging is
+          verlopen.\n  \n- Welke regels zijn gebruikt.\n  \n- Wat de hierachter is (kenbaarheid).\n  \n-
+          Welke analytische technieken zijn gebruikt.\n  \n- Waarom deze regels en logica
+          relevant zijn (uitleg)?\n  \n- Op welke wijze de regels en logica tot stand
+          zijn gekomen en hoe deze regels worden gevalideerd.\n  \nEen besluit moet
+          informatie hierover bevatten om als om als voldoende draagkrachtig gemotiveerd
+          te gelden.\nHet motiveringsbeginsel op grond van de Awb is beperkt tot besluiten
+          in de zin van de Awb. \n\nHet is onduidelijk op wat voor manier het algoritmes
+          heeft bijgedragen aan de totstandkoming van een besluit. \n","urn":"urn:nl:ak:ver:awb-02","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/awb-02-motiveringsbeginsel/index.html","subject":["transparantie"],"lifecycle":["ontwerp","implementatie","monitoring-en-beheer"],"links":["urn:nl:ak:mtr:owp-15","urn:nl:ak:mtr:owp-16","urn:nl:ak:mtr:owp-21","urn:nl:ak:mtr:owp-22","urn:nl:ak:mtr:owp-23","urn:nl:ak:mtr:owp-24","urn:nl:ak:mtr:owp-25","urn:nl:ak:mtr:owp-28","urn:nl:ak:mtr:owp-33","urn:nl:ak:mtr:owp-37","urn:nl:ak:mtr:ver-05","urn:nl:ak:mtr:imp-09"],"ai_act_profile":[{"type":[],"open_source":[],"risk_group":[],"systemic_risk":[],"transparency_obligations":[],"role":[],"conformity_assessment_body":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        content-length:
+          - "2898"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-07?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Organisaties
+          zijn transparant over het verwerken van persoonsgegevens","description":"\nDe
+          verwerking van persoonsgegevens moet transparant zijn.\n","explanation":"Een
+          betrokkene moet op de hoogte worden gesteld van het feit dat er verwerking
+          plaatsvindt van diens persoonsgegevens en van de doeleinden daarvan (zoals
+          ook is verwoord in het beginsel van transparante verwerking, artikel 5 AVG).\n\nHierbij
+          moeten de specifieke omstandigheden en de context waarin de persoonsgegevens
+          worden verwerkt, worden meegenomen.\nIn artikel 13 en 14 AVG wordt toegelicht
+          welke informatie in welke gevallen moet worden verstrekt door de verwerkersverantwoordelijke.\n\nAls
+          persoonsgegevens worden verwerkt ten behoeve van het ontwikkelen of gebruiken
+          van algoritmes, zal deze informatie moeten worden verstrekt.\n\n\nRechten
+          van betrokken worden geschonden als er geen sprake is van transparantie over
+          de verwerkingen van de persoonsgegevens.\n ","urn":"urn:nl:ak:ver:avg-07","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/avg-07-transparantie-bij-verwerken-persoonsgegevens/index.html","subject":["privacy-en-gegevensbescherming","transparantie"],"lifecycle":["implementatie","monitoring-en-beheer"],"links":["urn:nl:ak:mtr:owp-15","urn:nl:ak:mtr:owp-16","urn:nl:ak:mtr:owp-21","urn:nl:ak:mtr:owp-22","urn:nl:ak:mtr:owp-23","urn:nl:ak:mtr:owp-24","urn:nl:ak:mtr:owp-28","urn:nl:ak:mtr:owp-29","urn:nl:ak:mtr:imp-04","urn:nl:ak:mtr:imp-06","urn:nl:ak:mtr:imp-08"],"ai_act_profile":[{"type":[],"open_source":[],"risk_group":[],"systemic_risk":[],"transparency_obligations":[],"role":[],"conformity_assessment_body":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        content-length:
+          - "2041"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-07?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Hoog-risico-AI-systemen
+          loggen automatisch bepaalde gegevens.","description":"\nHoog-risico-AI-systemen
+          loggen automatisch bepaalde gegevens.\n\n","explanation":"AI-systemen met
+          een hoog risico zijn ontworpen met functionaliteiten die gebeurtenissen gedurende
+          hun levenscyclus automatisch registreren. Dit wordt vaak aangeduid als \"logs\".\n\nDeze
+          logs bieden een traceerbaarheidsmechanisme waarmee gebruiksverantwoordelijken
+          en autoriteiten incidenten en fouten kunnen analyseren, naleving kunnen controleren
+          en mogelijke risico''s kunnen identificeren en aanpakken.\n\nHet doel van
+          deze registratie is om de transparantie en verantwoordingsplicht van AI-systemen
+          te vergroten, waardoor het beheer van risico''s en incidenten verbetert. Voor
+          AI-systemen met een hoog-risico voorziet de loggingcapaciteit ten minste in:
+          \n\n1. de registratie van de duur van elk gebruik van het systeem; \n2. de
+          referentiedatabank aan de hand waarvan de inputdata zijn gecontroleerd door
+          het systeem; \n3. de inputdata ten aanzien waarvan de zoekopdracht een match
+          heeft opgeleverd; \n4. de identificatie van natuurlijke personen die betrokken
+          zijn bij de verificatie van de resultaten. Specifiek voor gebruiksverantwoordelijken\n\nVoor
+          AI-systemen die door bestuursorganen worden gebruikt of AI-systmen die persoonsgegevens
+          verwerken leveren de BIO en AVG vergelijkbare verplichingen op die ook van
+          toepassing zijn op AI-systemen die niet gezien worden als een AI-systeem met
+          hoog risico. Daarbij komen nog verplichtingen om de logs doorlopend of periodiek
+          te monitoren op incidenten.\n\n\nOntbreken van automatische logregistratie
+          kan leiden tot een gebrek aan transparantie en traceerbaarheid van het AI-systeem,
+          wat het vermogen om verantwoordelijkheid te nemen en eventuele problemen aan
+          te pakken belemmert.\n","urn":"urn:nl:ak:ver:aia-07","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/aia-07-automatische-logregistratie/index.html","subject":["technische-robuustheid-en-veiligheid"],"lifecycle":["ontwikkelen","monitoring-en-beheer"],"links":["urn:nl:ak:mtr:owp-15","urn:nl:ak:mtr:owp-16","urn:nl:ak:mtr:owp-22","urn:nl:ak:mtr:owp-24","urn:nl:ak:mtr:owp-28","urn:nl:ak:mtr:owp-29","urn:nl:ak:mtr:owk-01","urn:nl:ak:mtr:owk-04"],"ai_act_profile":[{"type":["AI-systeem","AI-systeem
+          voor algemene doeleinden"],"open_source":[],"risk_group":["hoog-risico AI"],"systemic_risk":[],"transparency_obligations":[],"role":["aanbieder"],"conformity_assessment_body":[]}],"always_applicable":0,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        content-length:
+          - "2883"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-26?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Mensen
+          over wie besluiten worden genomen door een hoog-risico-AI-systemen, krijgen
+          op verzoek informatie over deze besluiten","description":"Mensen over wie
+          besluiten worden genomen door een hoog-risico-AI-systemen, krijgen op verzoek
+          informatie over deze besluiten.\n","explanation":"Elke getroffen persoon op
+          wie een besluit van toepassing is dat door de gebruiksverantwoordelijke wordt
+          genomen op basis van de output van een in bijlage III vermeld AI-systeem met
+          een hoog risico, met uitzondering van systemen die in punt 2 van die bijlage
+          zijn vermeld, en dat rechtsgevolgen heeft voor die persoon, of op deze op
+          vergelijkbare wijze aanzienlijke invloed heeft die hij of zij als nadelige
+          gevolgen voor zijn of haar gezondheid, veiligheid of grondrechten beschouwt,
+          heeft het recht om van de gebruiksverantwoordelijke duidelijke, inhoudelijke
+          toelichting te verkrijgen bij de rol van het AI-systeem in de besluitvormingsprocedure
+          en de voornaamste elementen van het genomen besluit.\n\nDie uitleg moet duidelijk
+          en zinvol zijn en moet de grondslag zijn waarop de getroffen personen zich
+          kunnen baseren om hun rechten uit te oefenen.\n\nHet recht om uitleg te krijgen
+          mag niet van toepassing zijn op het gebruik van AI-systemen waarvoor uitzonderingen
+          of beperkingen voortvloeien uit het Unierecht of het nationale recht en moet
+          alleen van toepassing zijn voor zover het Unierecht niet reeds in dit recht
+          voorziet.\n\nDit vereiste geldt bijvoorbeeld niet als het gaat om AI-systemen
+          die bedoeld zijn om te worden gebruikt als veiligheidscomponent bij het beheer
+          of de exploitatie van kritieke digitale infrastructuur, wegverkeer of bij
+          de levering van water, gas, verwerking en electriciteit (punt 2 bij Bijlage
+          III van AI-verordening).\n\n\nAls gebruiksverantwoordelijke geen duidelijke,
+          inhoudelijke toelichting geeft over de rol van het AI-systeem in de besluitvormingsprocedure
+          en de voornaamste elementen bij het genomen besluit, is het voor getroffen
+          personen niet mogelijk zich te verdedigen tegen de rechtsgevolgen die hieruit
+          voortkomen of de nadelige gevolgen voor gezondheid, veiligheid of diens grondrechten.\n\n","urn":"urn:nl:ak:ver:aia-26","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/aia-26-recht-op-uitleg-ai-besluiten/index.html","subject":["governance","fundamentele-rechten","transparantie"],"lifecycle":["organisatieverantwoordelijkheden","ontwerp","monitoring-en-beheer"],"links":["urn:nl:ak:mtr:owp-15","urn:nl:ak:mtr:owp-16","urn:nl:ak:mtr:owp-21","urn:nl:ak:mtr:owp-22","urn:nl:ak:mtr:owp-24","urn:nl:ak:mtr:owp-28","urn:nl:ak:mtr:owp-33"],"ai_act_profile":[{"type":["AI-systeem","AI-systeem
+          voor algemene doeleinden"],"open_source":[],"risk_group":["hoog-risico AI"],"systemic_risk":[],"transparency_obligations":[],"role":["gebruiksverantwoordelijke"],"conformity_assessment_body":[]}],"always_applicable":0,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        content-length:
+          - "3250"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-06?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Organisaties
+          kunnen bewijzen dat zij persoonsgegevens op de juiste manier verwerken.","description":"Organisaties
+          kunnen bewijzen dat zij persoonsgegevens op de juiste manier verwerken.\n","explanation":"De
+          verantwoordelijken moeten bij de verwerking van persoonsgegevens door algoritmes
+          kunnen aantonen dat de verwerkingen rechtmatig plaatsvinden.\nDit betekent
+          concreet dat de volgende punten aangetoond kunnen worden:\n\n - Rechtmatigheid,
+          behoorlijkheid en transparantie\n - Doelbinding\n - Minimale gegevensverwerking\n
+          - Juistheid\n - Opslagbeperking\n - Integriteit en vertrouwelijkheid\n\nEen
+          aandachtpunt daarbij is dat de rechtmatigheid van de verwerking ten opzichte
+          van andere gerelateerde wetgeving zoals de AI Act en de Algemene wet gelijke
+          behandeling ook moeten kunnen worden aangetoond voor zover de rechtmatigheid
+          van de verwerking onder de AVG daarvan afhankelijk is.\n\nBij het verwerken
+          van persoonsgegevens voor algoritmes moeten de verantwoordelijkheden duidelijk
+          beschreven en toegewezen zijn.\n\nDe verwerkingsverantwoordelijke is degene
+          die ervoor zorgt dat deze verantwoordelijkheden worden nageleefd en kan dit
+          aantonen, wat bekend staat als de verantwoordingsplicht.\n","urn":"urn:nl:ak:ver:avg-06","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/avg-06-verantwoordingsplicht-rechtmatigheid/index.html","subject":["governance","privacy-en-gegevensbescherming"],"lifecycle":["ontwerp","dataverkenning-en-datapreparatie"],"links":["urn:nl:ak:mtr:owp-01","urn:nl:ak:mtr:owp-15","urn:nl:ak:mtr:owp-16","urn:nl:ak:mtr:owp-22","urn:nl:ak:mtr:owp-24","urn:nl:ak:mtr:owp-28"],"ai_act_profile":[{"type":[],"open_source":[],"risk_group":[],"systemic_risk":[],"transparency_obligations":[],"role":[],"conformity_assessment_body":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        content-length:
+          - "2184"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-29?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"AI-modellen
+          voor algemene doeleinden zijn voorzien van voldoende technische documentatie
+          en informatie.","description":"AI-modellen voor algemene doeleinden zijn voorzien
+          van voldoende technische documentatie en informatie.\n","explanation":"Aanbieders
+          van AI-modellen voor algemene doeleinden hebben een bijzondere rol en verantwoordelijkheid.\n\nZij
+          leveren modellen die de basis kunnen vormen voor weer andere systemen en algoritmen,
+          die vaak weer door andere partijen worden aangeboden dan de ontwikkelaar van
+          het algemene systeem. Dit vraagt om een goed inzicht in de modellen en hun
+          capaciteiten, zowel qua integratie van de modellen in producten als qua naleving
+          van verplichtingen.\n\nEr zijn daarom evenredige transparantiemaatregelen
+          nodig, zoals het opstellen en bijwerken van documentatie en verstrekken van
+          informatie over het AI-model voor algemeen gebruik door de aanbieders van
+          systemen die de algemene modellen gebruiken in hun product. De minimaal in
+          de documentatie op te nemen elementen moeten worden vastgelegd volgens bijlage
+          XII van de AI-Verordening.\n\nDe aanbieder van het AI-model voor algemene
+          doeleinden dient technische documentatie op te stellen en bij te werken om
+          deze op verzoek te kunnen overleggen aan het AI-bureau en de nationale bevoegde
+          autoriteiten.\n\nHierbij is het ook van belang dat de aanbieder van AI-modellen
+          voor algemene doelstelling beleid opstellen voor naleving van auteursrechten
+          en naburige rechten (artikel 4, lid 3 Richtlijn (EU) 2019/790).\n\nIn art.
+          53 lid 2 wordt een uitzondering gemaakt op deze vereisten.\n\nHet niet voldoen
+          aan deze verplichtingen kan leiden tot juridische en ethische complicaties,
+          inclusief schendingen van auteursrechten en gebrek aan transparantie in het
+          gebruik van AI-modellen.\n","urn":"urn:nl:ak:ver:aia-29","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/aia-29-ai-modellen-algemene-doeleinden/index.html","subject":["transparantie"],"lifecycle":["ontwerp","ontwikkelen","monitoring-en-beheer"],"links":["urn:nl:ak:mtr:owp-15","urn:nl:ak:mtr:owp-16","urn:nl:ak:mtr:owp-22","urn:nl:ak:mtr:owp-24","urn:nl:ak:mtr:owp-28"],"ai_act_profile":[{"type":["AI-model
+          voor algemene doeleinden"],"open_source":[],"risk_group":[],"systemic_risk":[],"transparency_obligations":[],"role":["aanbieder"],"conformity_assessment_body":[]}],"always_applicable":0,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        content-length:
+          - "2743"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aut-01?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Auteursrechten
+          zijn beschermd.","description":"\nAuteursrechten en naburige rechten mogen
+          niet geschonden worden bij het ontwikkelen, testen en gebruiken van algoritmes.\n","explanation":"Bepaalde
+          type algoritmes worden ontwikkeld op basis van grote hoeveelheden data.\nDeze
+          data wordt gebruikt voor het trainen en testen van algoritmes.\nHet gebruiken
+          van deze data mag geen inbreuk maken op auteursrechten van diegene die deze
+          rechten heeft.\nOok de gegenereerde output van algoritmes mag geen inbreuk
+          maken op deze rechten.\n","urn":"urn:nl:ak:ver:aut-01","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/aut-01-auteursrechten/index.html","subject":["data"],"lifecycle":["ontwerp","dataverkenning-en-datapreparatie"],"links":["urn:nl:ak:mtr:owp-15","urn:nl:ak:mtr:owp-16","urn:nl:ak:mtr:owp-19","urn:nl:ak:mtr:owp-20","urn:nl:ak:mtr:owp-21","urn:nl:ak:mtr:owp-22","urn:nl:ak:mtr:owp-24","urn:nl:ak:mtr:owp-28","urn:nl:ak:mtr:owp-30","urn:nl:ak:mtr:owp-37","urn:nl:ak:mtr:dat-05","urn:nl:ak:mtr:dat-08"],"ai_act_profile":[{"type":[],"open_source":[],"risk_group":[],"systemic_risk":[],"transparency_obligations":[],"role":[],"conformity_assessment_body":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        content-length:
+          - "1592"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:awb-01?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Organisaties
+          die algoritmes gebruiken voor publieke taken nemen besluiten zorgvuldig.","description":"Organisaties
+          die algoritmes gebruiken voor publieke taken nemen besluiten zorgvuldig.\n","explanation":"Het
+          zorgvuldigheidsvereiste eist dat een besluit met de nodige zorgvuldigheid
+          wordt voorbereid en juist wordt genomen.\nDit vraagt onder meer om een zorgvuldig
+          onderzoek naar informatie, feiten, een zorgvuldige beslissingsprocedure en
+          een deugdelijke besluitvorming. \n\nDit betekent dat bij de ontwikkeling en
+          gebruik van algoritmes informatie moet worden vastgelegd  over het algoritme.
+          Hierbij kan worden gedacht aan:\n- Dat het [doel en eventuele subdoelen](https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/1-pba-01-formuleren-probleemdefinitie/index.html)
+          van het algoritme of AI-systeem helder zijn gedefinieerd, ook in relatie tot
+          het maatschappelijke resultaat (outcome).\n- Een bewuste afweging afmaken
+          en vaststellen of het algoritme het [juiste middel is om het probleem](https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/1-pba-01-formuleren-probleemdefinitie/index.html)
+          op doelmatige en doeltreffende wijze op te lossen.\n- Dat de werking van het
+          algoritme is onderzocht en is vastgesteld dat dit [passend is](https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/5-ver-01-functioneren-in-lijn-met-doeleinden/index.html)
+          om te gebruiken in een besluitvormingsproces.\n","urn":"urn:nl:ak:ver:awb-01","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/awb-01-zorgvuldigheidsbeginsel/index.html","subject":["fundamentele-rechten"],"lifecycle":["ontwerp","ontwikkelen","verificatie-en-validatie"],"links":["urn:nl:ak:mtr:org-01","urn:nl:ak:mtr:org-02","urn:nl:ak:mtr:org-03","urn:nl:ak:mtr:pba-01","urn:nl:ak:mtr:pba-02","urn:nl:ak:mtr:pba-03","urn:nl:ak:mtr:pba-04","urn:nl:ak:mtr:pba-05","urn:nl:ak:mtr:pba-06","urn:nl:ak:mtr:owp-01","urn:nl:ak:mtr:owp-03","urn:nl:ak:mtr:owp-04","urn:nl:ak:mtr:owp-10","urn:nl:ak:mtr:owp-12","urn:nl:ak:mtr:owp-15","urn:nl:ak:mtr:owp-16","urn:nl:ak:mtr:owp-21","urn:nl:ak:mtr:owp-22","urn:nl:ak:mtr:owp-23","urn:nl:ak:mtr:owp-24","urn:nl:ak:mtr:owp-25","urn:nl:ak:mtr:owp-28","urn:nl:ak:mtr:owp-31","urn:nl:ak:mtr:owp-32","urn:nl:ak:mtr:owp-35","urn:nl:ak:mtr:owp-37","urn:nl:ak:mtr:owk-02","urn:nl:ak:mtr:ver-01","urn:nl:ak:mtr:ver-02","urn:nl:ak:mtr:ver-05","urn:nl:ak:mtr:imp-01","urn:nl:ak:mtr:imp-03","urn:nl:ak:mtr:imp-04","urn:nl:ak:mtr:imp-09"],"ai_act_profile":[{"type":[],"open_source":[],"risk_group":[],"systemic_risk":[],"transparency_obligations":[],"role":[],"conformity_assessment_body":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        content-length:
+          - "3078"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:arc-01?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Informatie
+          over algoritmes wordt in goede, geordende en toegankelijke staat gebracht,
+          bewaard en vernietigd wanneer nodig.","description":"\nInformatie over algoritmes
+          wordt in goede, geordende en toegankelijke staat gebracht, bewaard en vernietigd
+          wanneer nodig. \n","explanation":"Overheden moeten informatie over algoritmes
+          in goede, geordende en toegankelijke staat brengen en bewaren. Ook moeten
+          ze zorgen voor de vernietiging van archiefbescheiden die daarvoor in aanmerking
+          komen. \n\nOp basis van deze informatie moet bijvoorbeeld gereconstrueerd
+          kunnen worden hoe besluiten, ook in de context van algoritmes, tot stand zijn
+          gekomen. Informatie over algoritmes moet daarom op basis van de selectielijst
+          bewaard en vernietigd worden.\n","urn":"urn:nl:ak:ver:arc-01","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/arc-01-archiefwet/index.html","subject":["transparantie","data"],"lifecycle":["uitfaseren","monitoring-en-beheer","ontwikkelen"],"links":["urn:nl:ak:mtr:owp-09","urn:nl:ak:mtr:owp-15","urn:nl:ak:mtr:owp-16","urn:nl:ak:mtr:owp-21","urn:nl:ak:mtr:owp-22","urn:nl:ak:mtr:owp-24","urn:nl:ak:mtr:owp-28","urn:nl:ak:mtr:dat-03","urn:nl:ak:mtr:uit-01"],"ai_act_profile":[{"type":[],"open_source":[],"risk_group":[],"systemic_risk":[],"transparency_obligations":[],"role":[],"conformity_assessment_body":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        content-length:
+          - "1754"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:grw-01?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Algoritmes
+          schenden geen grondrechten of mensenrechten.\",\"description\":\"Fundamentele
+          vrijheden, mensenrechten en grondrechten worden beschermd bij de inzet van
+          algoritmes.\\n\",\"explanation\":\"De mensenrechten in Nederland zijn beschermd
+          door nationale wetten en internationale verdragen.\\nIn Nederland staan veel
+          mensenrechten in hoofdstuk 1 van de Grondwet.\\nDeze rechten worden ook wel
+          \u2019grondrechten\u2019 genoemd.\\nEen bekend voorbeeld is artikel 1 van
+          de Grondwet.\\nOm mensenrechten te beschermen zijn ze op Europees en internationaal
+          niveau in verschillende verklaringen en verdragen vastgelegd.\\n\\nMensenrechten
+          kunnen bij overheidshandelen en de inzet van algoritmes soms onder druk komen
+          te staan.\\nDe inzet van algoritmes kan bijvoorbeeld een bedreiging vormen
+          voor de privacy van burgers, voor het recht op gelijke behandeling en voor
+          het recht op behoorlijk bestuur.\\nHet is daarom belangrijk om [tijdig te
+          onderzoeken of er sprake is of kan zijn van een eventuele inbreuk op fundamentele
+          rechten](../hulpmiddelen/IAMA.md) en vrijheden van burgers. Het is van belang
+          dat maatregelen worden getroffen om een eventuele inbreuk te voorkomen.\\n\\nGrondrechten
+          kunnen worden geraakt door de inzet van algoritmes met eventuele schadelijke
+          gevolgen voor betrokkenen. \\n\",\"urn\":\"urn:nl:ak:ver:grw-01\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/grw-01-fundamentele-rechten/index.html\",\"subject\":[\"fundamentele-rechten\"],\"lifecycle\":[\"probleemanalyse\",\"ontwerp\",\"verificatie-en-validatie\",\"monitoring-en-beheer\"],\"links\":[\"urn:nl:ak:mtr:owp-06\",\"urn:nl:ak:mtr:owp-07\",\"urn:nl:ak:mtr:owp-08\",\"urn:nl:ak:mtr:owp-15\",\"urn:nl:ak:mtr:owp-16\",\"urn:nl:ak:mtr:owp-21\",\"urn:nl:ak:mtr:owp-22\",\"urn:nl:ak:mtr:owp-24\",\"urn:nl:ak:mtr:owp-28\",\"urn:nl:ak:mtr:owp-32\",\"urn:nl:ak:mtr:owk-02\",\"urn:nl:ak:mtr:ver-03\",\"urn:nl:ak:mtr:imp-03\"],\"ai_act_profile\":[{\"type\":[],\"open_source\":[],\"risk_group\":[],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[],\"conformity_assessment_body\":[]}],\"always_applicable\":1,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        content-length:
+          - "2411"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-13?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Een
+          gegevensbeschermingseffectbeoordeling (DPIA) is verplicht, indien een verwerking
+          van persoonsgegevens waarschijnlijk een hoog risico inhoudt voor de rechten
+          en vrijheden van natuurlijke personen.\",\"description\":\"Een [gegevensbeschermingseffectbeoordeling
+          (DPIA)](../hulpmiddelen/DPIA.md) is verplicht, indien een verwerking van persoonsgegevens
+          waarschijnlijk een hoog risico inhoudt voor de rechten en vrijheden van natuurlijke
+          personen.\\n\",\"explanation\":\"Een Gegevensbeschermingseffectbeoordeling
+          (GEB) of [Data Protection Impact Assessment (DPIA)](../hulpmiddelen/DPIA.md)
+          is verplicht wanneer de verwerking van persoonsgegevens waarschijnlijk een
+          hoog risico met zich meebrengt voor de rechten en vrijheden van natuurlijke
+          personen. \\n\\nDeze beoordeling identificeert en beperkt potenti\xEBle risico's
+          en zorgt ervoor dat passende maatregelen worden genomen om de privacy van
+          individuen te beschermen. \\n\\nDeze verplichting draagt bij aan een zorgvuldige
+          en verantwoorde omgang met persoonsgegevens in algoritmes, waardoor de privacy
+          van individuen wordt gewaarborgd.\\n\\nLet op: de DPIA verplichting is niet
+          gebaseerd op de hoog-risico criteria uit de AI-act. Volgens [Besluit lijst
+          verwerkingen persoonsgegevens waarvoor een gegevensbeschermingseffectbeoordeling
+          (DPIA) verplicht is, Autoriteit Persoonsgegevens](https://wetten.overheid.nl/BWBR0042812/2019-11-27)
+          moet voor het uitvoeren van een DPIA in ieder geval uitgegaan worden van een
+          hoog risico als er sprake is van \xE9\xE9n van de volgende voorwaarden:\\n\\n
+          1. Evaluatie of scoretoekenning\\n 2. Geautomatiseerde besluitvorming met
+          rechtsgevolg of vergelijkbaar wezenlijk gevolg\\n 3. Stelselmatige monitoring\\n
+          4. Gevoelige gegevens of gegevens van zeer persoonlijke aard\\n 5. Op grote
+          schaal verwerkte gegevens\\n 6. Matching of samenvoeging van datasets\\n 7.
+          Gegevens met betrekking tot kwetsbare betrokkenen\\n 8. Innovatief gebruik
+          of innovatieve toepassing van nieuwe technologische of organisatorische oplossingen\\n
+          9. de situatie waarin als gevolg van de verwerking zelf \\\"betrokkenen [...]
+          een recht niet kunnen uitoefenen of geen beroep kunnen doen op een dienst
+          of een overeenkomst\\\";\\n\\nHet is mogelijk dat algoritmes die niet aan
+          \xE9\xE9n of meer van deze eigenschappen voldoen toch voor een potentieel
+          hoog risico zorgen. \\n\\nGebruiksverantwoordelijken van AI-systemen met een
+          hoog risico gebruiken die informatie op grond van artikel 13 AI Verordening
+          om hun verplichting na te komen om een gegevensbeschermingseffectbeoordeling
+          uit te voeren. \\n\",\"urn\":\"urn:nl:ak:ver:avg-13\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/avg-13-dpia-verplicht/index.html\",\"subject\":[\"privacy-en-gegevensbescherming\"],\"lifecycle\":[\"ontwerp\",\"dataverkenning-en-datapreparatie\",\"verificatie-en-validatie\"],\"links\":[\"urn:nl:ak:mtr:owp-14\",\"urn:nl:ak:mtr:owp-15\",\"urn:nl:ak:mtr:owp-16\",\"urn:nl:ak:mtr:owp-17\",\"urn:nl:ak:mtr:owp-22\",\"urn:nl:ak:mtr:owp-24\",\"urn:nl:ak:mtr:owp-28\",\"urn:nl:ak:mtr:owk-03\"],\"ai_act_profile\":[{\"type\":[],\"open_source\":[],\"risk_group\":[],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[],\"conformity_assessment_body\":[]}],\"always_applicable\":1,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        content-length:
+          - "3541"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-11?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Ontwerp
+          en standaardinstellingen (defaults) zijn zo gunstig mogelijk voor de privacy
+          van betrokkenen.\",\"description\":\"Privacy en gegevensbescherming door goed
+          ontwerp en door standaardinstellingen.\\n\",\"explanation\":\"Gegevensbescherming
+          door ontwerp en standaardinstellingen houdt in dat privacy- en gegevensbescherming
+          vanaf het begin worden ge\xEFntegreerd in de ontwikkeling van systemen en
+          processen (ook wel privacy-by-design genoemd).\\n\\nDoor al bij het ontwerp
+          rekening te houden met privacyaspecten en door standaardinstellingen die privacy
+          bevorderen, wordt de bescherming van persoonsgegevens versterkt. Hierbij kan
+          worden gedacht een het pseudonimiseren van persoonsgegevens of dataminimalisatie.\\n\\nDeze
+          aanpak zorgt ervoor dat privacy-overwegingen een integraal onderdeel zijn
+          van alle aspecten van gegevensverwerking en draagt bij aan het vertrouwen
+          van individuen in de veilige omgang met hun gegevens.\\nDit is eveneens van
+          toepassing als persoonsgegevens worden verwerkt bij het ontwikkelen en gebruiken
+          van algoritmes.\\n\\nDoor privacy en gegevensbescherming door ontwerp en standaardinstellingen
+          niet toe te passen, kan een inbreuk op rechten van betrokkenen ontstaan.\\n\",\"urn\":\"urn:nl:ak:ver:avg-11\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/avg-11-privacy-bij-ontwerp-bij-verwerking-van-persoonsgegevens/index.html\",\"subject\":[\"privacy-en-gegevensbescherming\"],\"lifecycle\":[\"ontwerp\",\"dataverkenning-en-datapreparatie\"],\"links\":[\"urn:nl:ak:mtr:owp-06\",\"urn:nl:ak:mtr:owp-10\",\"urn:nl:ak:mtr:owp-15\",\"urn:nl:ak:mtr:owp-16\",\"urn:nl:ak:mtr:owp-21\",\"urn:nl:ak:mtr:owp-22\",\"urn:nl:ak:mtr:owp-24\",\"urn:nl:ak:mtr:owp-28\",\"urn:nl:ak:mtr:owp-32\"],\"ai_act_profile\":[{\"type\":[],\"open_source\":[],\"risk_group\":[],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[],\"conformity_assessment_body\":[]}],\"always_applicable\":1,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        content-length:
+          - "2246"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-12?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Data
+          zoals persoonsgegevens zijn voldoende beveiligd tegen ongelukken en cyberaanvallen.","description":"Rekening
+          houdend met de stand van de techniek, de uitvoeringskosten, alsook met de
+          aard, de omvang, de context en de verwerkingsdoeleinden en de qua waarschijnlijkheid
+          en ernst uiteenlopende risico''s voor de rechten en vrijheden van personen,
+          treffen de verwerkingsverantwoordelijke en de verwerker passende technische
+          en organisatorische maatregelen om een op het risico afgestemd beveiligingsniveau
+          te waarborgen.\n","explanation":"Voor de ontwikkeling en gebruik van algoritmes
+          is data nodig.\nDeze data kan persoonsgegevens bevatten die moeten worden
+          beschermd.\nDe organisatie zal technische en organisatorische maatregelen
+          moeten treffen om de data en het algoritme voldoende te beschermen.\nHierbij
+          kan worden gedacht aan dataminimalisatie, het pseudonimiseren of aggregeren
+          van persoonsgegevens.\nPer toepassing moet worden onderzocht welke maatregelen
+          hiervoor geschikt zijn.\n","urn":"urn:nl:ak:ver:avg-12","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/avg-12-beveiliging-van-verwerking/index.html","subject":["privacy-en-gegevensbescherming","technische-robuustheid-en-veiligheid"],"lifecycle":["organisatieverantwoordelijkheden"],"links":["urn:nl:ak:mtr:owp-15","urn:nl:ak:mtr:owp-16","urn:nl:ak:mtr:owp-22","urn:nl:ak:mtr:owp-24","urn:nl:ak:mtr:owp-28","urn:nl:ak:mtr:owp-29","urn:nl:ak:mtr:owp-36","urn:nl:ak:mtr:dat-04","urn:nl:ak:mtr:dat-11","urn:nl:ak:mtr:dat-12","urn:nl:ak:mtr:owk-01","urn:nl:ak:mtr:owk-09","urn:nl:ak:mtr:mon-02","urn:nl:ak:mtr:mon-03","urn:nl:ak:mtr:mon-08"],"ai_act_profile":[{"type":[],"open_source":[],"risk_group":[],"systemic_risk":[],"transparency_obligations":[],"role":[],"conformity_assessment_body":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        content-length:
+          - "2191"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:bio-01?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Computersystemen
+          zijn voldoende beveiligd tegen ongelukken en cyberaanvallen","description":"Informatie
+          en informatiesystemen moeten op de juiste manier worden beveiligd.\n","explanation":"Informatiebeveiliging
+          is het proces van vaststellen van de vereiste beveiliging van informatiesystemen
+          in termen van vertrouwelijkheid, beschikbaarheid en integriteit alsmede het
+          treffen, onderhouden en controleren van een samenhangend pakket van bijbehorende
+          maatregelen.\n\nIn Nederland is besloten dat overheidsinstellingen de Baseline
+          Informatiebeveiliging Overheid (BIO) dienen toe te passen over hun informatie
+          en informatiesystemen.\nDe BIO beoogt de beveiliging van informatie(systemen)
+          bij alle bestuurslagen en bestuursorganen van de overheid te bevorderen, zodat
+          alle onderdelen erop kunnen vertrouwen dat onderling uitgewisselde gegevens,
+          in lijn met wet- en regelgeving, passend beveiligd zijn.\n\nAlgoritmes en
+          hun output kunnen onderdeel worden van de informatie en informatiesystemen
+          waar de BIO op van toepassing is. Het is van belang om algoritmische toepassingen
+          en AI-systemen op de juiste manier te beveiligen.\n","urn":"urn:nl:ak:ver:bio-01","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/bio-01-beveiliging-informatie-en-informatiesystemen/index.html","subject":["technische-robuustheid-en-veiligheid"],"lifecycle":["organisatieverantwoordelijkheden"],"links":["urn:nl:ak:mtr:org-11","urn:nl:ak:mtr:org-13","urn:nl:ak:mtr:org-14","urn:nl:ak:mtr:owp-15","urn:nl:ak:mtr:owp-16","urn:nl:ak:mtr:owp-22","urn:nl:ak:mtr:owp-24","urn:nl:ak:mtr:owp-27","urn:nl:ak:mtr:owp-28","urn:nl:ak:mtr:owp-29","urn:nl:ak:mtr:owp-32","urn:nl:ak:mtr:owp-35","urn:nl:ak:mtr:owp-36","urn:nl:ak:mtr:dat-11","urn:nl:ak:mtr:dat-12","urn:nl:ak:mtr:owk-01","urn:nl:ak:mtr:owk-04","urn:nl:ak:mtr:owk-09","urn:nl:ak:mtr:mon-01","urn:nl:ak:mtr:mon-02","urn:nl:ak:mtr:mon-03","urn:nl:ak:mtr:mon-08"],"ai_act_profile":[{"type":[],"open_source":[],"risk_group":[],"systemic_risk":[],"transparency_obligations":[],"role":[],"conformity_assessment_body":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        content-length:
+          - "2468"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:bzk-01?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Impactvolle
+          algoritmes en hoog-risico-AI-systemen staan in het Nederlandse Algoritmeregister","description":"Bestuursorganen
+          publiceren algoritmes met impact en hoog-risico-AI-systemen in het [Nederlandse
+          Algoritmeregister](../hulpmiddelen/algoritmeregister.md).\n","explanation":"Het
+          publiceren van algoritmes draagt bij aan transparantie voor belanghebbenden
+          en derden over welke algoritmes worden gebruikt door de overheid.\nHet is
+          vastgesteld beleid dat overheidsinstellingen, tenzij er uitsluitingsgronden
+          zijn, de door hen gebruikte impactvolle algoritmes en hoogrisico AI-systemen
+          publiceren in het algoritmeregister.\n\nEr wordt gewerkt aan wetgeving om
+          dit bij wet verplicht te stellen.\n","urn":"urn:nl:ak:ver:bzk-01","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/bzk-01-algoritmeregister/index.html","subject":["transparantie"],"lifecycle":["implementatie","monitoring-en-beheer"],"links":["urn:nl:ak:mtr:owp-15","urn:nl:ak:mtr:owp-16","urn:nl:ak:mtr:owp-22","urn:nl:ak:mtr:owp-24","urn:nl:ak:mtr:owp-28","urn:nl:ak:mtr:imp-04"],"ai_act_profile":[{"type":[],"open_source":[],"risk_group":[],"systemic_risk":[],"transparency_obligations":[],"role":[],"conformity_assessment_body":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        content-length:
+          - "1629"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:grw-02?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Algoritmes
+          discrimineren niet.","description":"Allen die zich in Nederland bevinden,
+          worden in gelijke gevallen gelijk behandeld.\nDirecte en indirecte discriminatie
+          wegens godsdienst, levensovertuiging, politieke gezindheid, ras, geslacht,
+          handicap, seksuele gerichtheid of op welke grond dan ook, is niet toegestaan.\n","explanation":"Overheidsinstanties
+          moeten zich bij het uitvoeren van hun taken onthouden van discriminatie, ook
+          wanneer er gebruik wordt gemaakt van algoritmes.\nWanneer er algoritmes worden
+          gebruikt om selecties te maken van burgers, dienen we te streven naar een
+          gelijke behandeling van personen of groepen ten opzichte van andere personen
+          in een vergelijkbare situatie.\n\nHierbij is het belangrijk te beseffen dat
+          discriminatie ook op indirecte wijze kan ontstaan.\nHiervan is sprake wanneer
+          een ogenschijnlijk neutrale bepaling, maatstaf of handelwijze personen met
+          een beschermd persoonskenmerk in vergelijking met andere personen in het bijzonder
+          benadeelt, tenzij hiervoor een objectieve rechtvaardiging bestaat.\n","urn":"urn:nl:ak:ver:grw-02","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/grw-02-non-discriminatie/index.html","subject":["bias-en-non-discriminatie"],"lifecycle":["ontwerp","ontwikkelen","verificatie-en-validatie","monitoring-en-beheer"],"links":["urn:nl:ak:mtr:org-15","urn:nl:ak:mtr:owp-15","urn:nl:ak:mtr:owp-16","urn:nl:ak:mtr:owp-21","urn:nl:ak:mtr:owp-22","urn:nl:ak:mtr:owp-24","urn:nl:ak:mtr:owp-28","urn:nl:ak:mtr:owp-32","urn:nl:ak:mtr:owk-02","urn:nl:ak:mtr:ver-03","urn:nl:ak:mtr:imp-02","urn:nl:ak:mtr:imp-05"],"ai_act_profile":[{"type":[],"open_source":[],"risk_group":[],"systemic_risk":[],"transparency_obligations":[],"role":[],"conformity_assessment_body":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        content-length:
+          - "2161"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:woo-01?version=latest
+    response:
+      body:
+        string:
+          '{"systemcard_path":".systemcard.requirements[]","schema_version":"1.1.0","name":"Iedereen
+          kan openbare informatie over algoritmes vinden of aanvragen","description":"\nEen
+          bestuursorgaan draagt er zorg voor dat de documenten die het ontvangt, vervaardigt
+          of anderszins onder zich heeft, zich in goede, geordende en toegankelijke
+          staat bevinden.\nEen bestuursorgaan draagt er zoveel mogelijk zorg voor dat
+          de informatie die het overeenkomstig deze wet verstrekt, actueel, nauwkeurig
+          en vergelijkbaar is.\n","explanation":"Bij het ontwikkelen en gebruiken van
+          algoritmes kunnen documenten en publieke informatie ontstaan die (op verzoek)
+          in aanmerking komen voor openbaarmaking.\nHet kunnen openbaren van publieke
+          informatie is in het belang van een democratische rechtstaat.\nDe Wet open
+          overheid gaat uit van een recht op openbaarheid van publieke informatie.\nIedereenkan
+          een verzoek tot openbaarmaking van publieke informatie doen bij een bestuursorgaan
+          zonder daarbij een belang te stellen (artikel 4.1 Woo).\nDe aan een verzoeker
+          verstrekte informatie wordt openbaar voor iedereen.\nDe Woo is niet van toepassing
+          op informatie die al openbaar is (uitspraken van de Afdeling bestuursrechtspraak
+          van de Raad van State van 1 december 2010 (ECLI:NL:RVS:2010:BNS6990) en 20
+          oktober 2010 (ECLI:NL:RVS:2010:BO1165)).\nEr kunnen uitsluitingsgronden bestaan
+          voor het openbaarmaken van documenten (artikel 5.1 Woo).\n\nIn de context
+          van het ontwikkelen en gebruiken van algoritmes is het van belang dat tijdig
+          wordt vastgesteld welke documenten in aanmerking komen voor openbaarmaking.\nDit
+          moet worden bekeken in het licht van wat ''actief'' moet worden geopenbaard,
+          dus proactief vanuit overheidsinstanties zelf, of wat op ''verzoek'' van iemand
+          moet worden geopenbaard.\n\n\nZonder het openbaren van overheidsinformatie
+          kan de overheid niet effectief worden gecontroleerd bij het uitvoeren van
+          wettelijke taken.\n\n","urn":"urn:nl:ak:ver:woo-01","language":"nl","owners":[{"organization":"Algoritmekader","name":"","email":"","role":""}],"date":"","url":"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/woo-01-recht-op-toegang-tot-publieke-informatie/index.html","subject":["transparantie"],"lifecycle":["organisatieverantwoordelijkheden"],"links":["urn:nl:ak:mtr:owp-29"],"ai_act_profile":[{"type":[],"open_source":[],"risk_group":[],"systemic_risk":[],"transparency_obligations":[],"role":[],"conformity_assessment_body":[]}],"always_applicable":1,"template":{"requirement":"$REQUIREMENT","remarks":"$REMARKS","status":"$STATUS","timestamp":"$TIMESTAMP","authors":[{"name":"$AUTHOR.NAME","email":"$AUTHOR.EMAIL","role":"$AUTHOR.ROLE"}]}}'
+      headers:
+        content-length:
+          - "2663"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:dat-01?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Databanken
+          worden alleen gebruikt met toestemming van de databank-producent.\",\"description\":\"Het
+          is verboden om zonder goedkeuring van de producent een databank op te vragen
+          en/of te hergebruiken.\\n\",\"explanation\":\"De Databankrichtlijn en Databankenwet
+          beschermt de producten/fabrikanten van databanken tegen onrechtmatige toe-eigening
+          van een databank.\\nDegene die een substanti\xEBle financi\xEBle en professionele
+          investering heeft verricht om de inhoud van de databank te verkijgen en te
+          verzamelen, krijgt een verbodsrecht en kan zo anderen verbieden de databank
+          te gebruiken.\\n\\nBij verkrijgen gaat het om \\\"het verzamelen van de werken,
+          gegevens of andere zelfstandige elementen die tezamen de inhoud van de databank
+          vormen\\\".\\nDit recht bestaat naast het recht op bescherming van de originele
+          keuze of rangschikking van de inhoud van databanken (auteurswet).\\n \\nVoor
+          het ontwikkelen van algoritme is data nodig. De data die hiervoor wordt gebruikt
+          mag niet ongeoorloofd zijn verkregen uit een databank.\\n\\nAls een ontwikkelaar
+          onbevoegd gebruik heeft gemaakt van data uit een databank bij de ontwikkeling
+          van algoritmes, wordt het databankenrecht geschonden van de eigenaar.\\nDe
+          eigenaar van de databank kan bijvoorbeeld ontrekking van de data uit het handelsverkeer,
+          vernietiging en onbruikbaarmaking  eisen, wat vergaande gevolgen kan hebben
+          voor het gebruik kunnen maken van de algoritmische toepassing of AI-systeem.\\n
+          \",\"urn\":\"urn:nl:ak:ver:dat-01\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/vereisten/dat-01-databankenwet/index.html\",\"subject\":[\"data\"],\"lifecycle\":[\"dataverkenning-en-datapreparatie\"],\"links\":[\"urn:nl:ak:mtr:owp-15\",\"urn:nl:ak:mtr:owp-16\",\"urn:nl:ak:mtr:owp-21\",\"urn:nl:ak:mtr:owp-22\",\"urn:nl:ak:mtr:owp-24\",\"urn:nl:ak:mtr:owp-28\",\"urn:nl:ak:mtr:owp-30\",\"urn:nl:ak:mtr:owp-37\",\"urn:nl:ak:mtr:dat-08\"],\"ai_act_profile\":[{\"type\":[],\"open_source\":[],\"risk_group\":[],\"systemic_risk\":[],\"transparency_obligations\":[],\"role\":[],\"conformity_assessment_body\":[]}],\"always_applicable\":1,\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        content-length:
+          - "2412"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:44:48 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
       status:
         code: 200
         message: OK

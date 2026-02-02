@@ -14,7 +14,7 @@
     </c-p>
     </c-alert>
     {% if not is_ar_logged_in %}
-        <c-button @click="window.location='./connection'" kind="primary">{% trans %}Check connection{% endtrans %}</c-button>
+        <c-button @click="window.location='./connection'" kind="primary">{% trans %}Login to Algorithm Register{% endtrans %}</c-button>
     {% else %}
         <c-button @click="window.location='./prepare'" kind="primary">{% trans %}Continue{% endtrans %}</c-button>
     {% endif %}

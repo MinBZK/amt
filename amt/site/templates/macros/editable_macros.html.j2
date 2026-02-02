@@ -72,7 +72,7 @@
                 <a class="rvo-link rvo-link--normal" href="mailto:{{ value }}">{{ value }}</a>
             {% elif key == "urn" %}
                 <a class="rvo-link rvo-link--normal"
-                   href="https://task-registry.apps.digilab.network/urns/?version=latest&urn={{ value }}">{{ value }}</a>
+                   href="https://task-registry.rijksapp.nl/urns/?version=latest&urn={{ value }}">{{ value }}</a>
             {% elif value is string and value.startswith('http') %}
                 <a href="{{ value }}" target="_blank" rel="noopener noreferrer">{{ value }}</a>
             {% elif value is iterable and value is not string %}

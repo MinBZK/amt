@@ -185,6 +185,14 @@ async def ar_login(
             credentials.organization_id = credentials.organisations[0].value
     except Exception:
         logger.exception("Failed to fetch organisations from Algoritmeregister")
+        return templates.TemplateResponse(
+            request,
+            "publish/parts/ar_login_form.html.j2",
+            {
+                "values": body,
+                "login_error": True,
+            },
+        )
 
     store_algoritmeregister_credentials(request, credentials)
 

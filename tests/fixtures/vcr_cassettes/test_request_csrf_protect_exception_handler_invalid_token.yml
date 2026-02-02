@@ -13,10 +13,10 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/instruments/
+      uri: https://task-registry.rijksapp.nl/instruments/
     response:
       body:
-        string: '{"type":"dir","size":0,"name":"instruments","path":"instruments","download_url":"https://task-registry.apps.digilab.network/instruments","links":{"self":"https://task-registry.apps.digilab.network/instruments"},"entries":[{"type":"file","size":32897,"name":"iama.yaml","path":"instruments/iama.yaml","urn":"urn:nl:aivt:tr:iama:1.0","download_url":"https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0","links":{"self":"https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0"}},{"type":"file","size":60271,"name":"aiia.yaml","path":"instruments/aiia.yaml","urn":"urn:nl:aivt:tr:aiia:1.0","download_url":"https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0","links":{"self":"https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0"}},{"type":"file","size":5187,"name":"conformity_assessment_eu_ai_act.yaml","path":"instruments/conformity_assessment_eu_ai_act.yaml","urn":"urn:nl:aivt:tr:ca:1.0","download_url":"https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:ca:1.0","links":{"self":"https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:ca:1.0"}},{"type":"file","size":14009,"name":"technical_docs_for_high_risk_ai.yaml","path":"instruments/technical_docs_for_high_risk_ai.yaml","urn":"urn:nl:aivt:tr:td:1.0","download_url":"https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:td:1.0","links":{"self":"https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:td:1.0"}}]}'
+        string: '{"type":"dir","size":0,"name":"instruments","path":"instruments","download_url":"https://task-registry.rijksapp.nl/instruments","links":{"self":"https://task-registry.rijksapp.nl/instruments"},"entries":[{"type":"file","size":32897,"name":"iama.yaml","path":"instruments/iama.yaml","urn":"urn:nl:aivt:tr:iama:1.0","download_url":"https://task-registry.rijksapp.nl/instruments/urn/urn:nl:aivt:tr:iama:1.0","links":{"self":"https://task-registry.rijksapp.nl/instruments/urn/urn:nl:aivt:tr:iama:1.0"}},{"type":"file","size":60271,"name":"aiia.yaml","path":"instruments/aiia.yaml","urn":"urn:nl:aivt:tr:aiia:1.0","download_url":"https://task-registry.rijksapp.nl/instruments/urn/urn:nl:aivt:tr:aiia:1.0","links":{"self":"https://task-registry.rijksapp.nl/instruments/urn/urn:nl:aivt:tr:aiia:1.0"}},{"type":"file","size":5187,"name":"conformity_assessment_eu_ai_act.yaml","path":"instruments/conformity_assessment_eu_ai_act.yaml","urn":"urn:nl:aivt:tr:ca:1.0","download_url":"https://task-registry.rijksapp.nl/instruments/urn/urn:nl:aivt:tr:ca:1.0","links":{"self":"https://task-registry.rijksapp.nl/instruments/urn/urn:nl:aivt:tr:ca:1.0"}},{"type":"file","size":14009,"name":"technical_docs_for_high_risk_ai.yaml","path":"instruments/technical_docs_for_high_risk_ai.yaml","urn":"urn:nl:aivt:tr:td:1.0","download_url":"https://task-registry.rijksapp.nl/instruments/urn/urn:nl:aivt:tr:td:1.0","links":{"self":"https://task-registry.rijksapp.nl/instruments/urn/urn:nl:aivt:tr:td:1.0"}}]}'
       headers:
         Connection:
           - keep-alive
@@ -45,7 +45,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest
+      uri: https://task-registry.rijksapp.nl/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest
     response:
       body:
         string:
@@ -334,7 +334,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:ca:1.0?version=latest
+      uri: https://task-registry.rijksapp.nl/instruments/urn/urn:nl:aivt:tr:ca:1.0?version=latest
     response:
       body:
         string:
@@ -396,7 +396,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:td:1.0?version=latest
+      uri: https://task-registry.rijksapp.nl/instruments/urn/urn:nl:aivt:tr:td:1.0?version=latest
     response:
       body:
         string:
@@ -516,7 +516,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest
+      uri: https://task-registry.rijksapp.nl/instruments/urn/urn:nl:aivt:tr:aiia:1.0?version=latest
     response:
       body:
         string:

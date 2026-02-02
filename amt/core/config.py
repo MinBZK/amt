@@ -65,7 +65,7 @@ class Settings(BaseSettings):
     CSRF_TOKEN_KEY: str = "csrf-token"  # noqa: S105
     CSRF_COOKIE_SAMESITE: str = "strict"
 
-    TASK_REGISTRY_URL: str = "https://task-registry.apps.digilab.network"
+    TASK_REGISTRY_URL: str = "https://task-registry.rijksapp.nl"
 
     ALGORITMEREGISTER_URL: str = "https://deployment-1-algor-dev.kind"
     ALGORITMEREGISTER_TOKEN_URL: str = "https://keycloak.kind/realms/algor-dev-local/protocol/openid-connect/token"  # noqa: S105

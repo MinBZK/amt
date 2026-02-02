@@ -13,7 +13,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-01?version=latest
+      uri: https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-01?version=latest
     response:
       body:
         string:
@@ -58,6 +58,102 @@ interactions:
           - Wed, 15 Jan 2025 09:18:49 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//measures/urn/urn:nl:ak:mtr:dat-01?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:11 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-01?version=latest
+    response:
+      body:
+        string:
+          "{\"systemcard_path\":\".systemcard.requirements[]\",\"schema_version\":\"1.1.0\",\"name\":\"Controleer
+          de datakwaliteit\",\"description\":\"Stel vast of de gebruikte data van voldoende
+          kwaliteit is voor de beoogde toepassing.\\n\",\"explanation\":\"- Stel functionele
+          eisen voor de datakwaliteit vast en [analyseer structureel of er aan deze
+          eisen wordt voldaan](https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/7-mon-05-evalueer-bij-veranderingen-in-data/index.html).
+          \\n\\n- De kwaliteit van de data die als input voor het algoritme wordt gebruikt
+          is bepalend voor de uitkomsten van het algoritme. Hier wordt soms ook naar
+          gerefereerd als *garbage in = garbage out*. \\n- Een vraag die gesteld dient
+          te worden: beschrijft de data het fenomeen dat onderzocht dient te worden?
+          \\n- Het [Raamwerk gegevenskwaliteit](https://www.noraonline.nl/wiki/Raamwerk_gegevenskwaliteit)
+          bevat een breed toepasbare set van kwaliteitsdimensies:\\n\\n    - juistheid\\n
+          \   - compleetheid\\n    - validiteit\\n    - consistentie\\n    - actualiteit\\n
+          \   - precisie\\n    - plausibiliteit\\n    - traceerbaarheid\\n    - begrijpelijkheid\\n\\n
+          \   Deze dimensies zijn aangevuld met [kwaliteitsattributen](https://www.noraonline.nl/wiki/Raamwerk_gegevenskwaliteit/Kwaliteitsattributen)
+          welke gebruikt kunnen worden om de verschillende dimensies meetbaar te maken.
+          \\n\\n- De vraag of de data kwaliteit voldoende is, hangt sterk samen met
+          de vraag of er bias in de onderliggende data zit. Analyseer daarom ook welke
+          bias en aannames er besloten zijn in de onderliggende data. Denk hierbij onder
+          andere aan de volgende vormen van bias:\\n\\n    - [historische bias](../../onderwerpen/bias-en-non-discriminatie.md#herken-bias)\\n
+          \   - [meetbias](../../onderwerpen/bias-en-non-discriminatie.md#herken-bias)\\n
+          \   - [representatie bias](../../onderwerpen/bias-en-non-discriminatie.md#herken-bias)\\n\\n-
+          Zorg dat je data [vindbaar, toegankelijk, interoperabel en herbruikbaar (FAIR)](https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/3-dat-02-fair-data/index.html)
+          is.\\n\\n\\n!!! note \\\"Let op!\\\"\\n\\n    Wanneer je een algoritme inkoopt
+          en de ontwikkeling van het algoritme uitbesteedt aan een derde partij, houdt
+          er dan dan rekening mee dat data traceerbaar en reproduceerbaar moet zijn.
+          Maak hier heldere afspraken over met de aanbieder. \\n\\n- Door onjuiste beslissingen
+          van gegevens kunnen verkeerde beslissingen genomen worden. \\n- Het model
+          cre\xEBert onwenselijke systematische afwijking voor specifieke personen,
+          groepen of andere eenheden. Dit kan leiden tot ongelijke behandeling en discriminerende
+          effecten met eventuele schade voor betrokkenen. \\n\",\"urn\":\"urn:nl:ak:mtr:dat-01\",\"language\":\"nl\",\"owners\":[{\"organization\":\"Algoritmekader\",\"name\":\"\",\"email\":\"\",\"role\":\"\"}],\"date\":\"\",\"url\":\"https://minbzk.github.io/Algoritmekader/voldoen-aan-wetten-en-regels/maatregelen/3-dat-01-datakwaliteit/index.html\",\"subject\":[\"data\"],\"suggested_roles\":[\"ontwikkelaar\"],\"lifecycle\":[\"dataverkenning-en-datapreparatie\"],\"links\":[\"urn:nl:ak:ver:avg-05\",\"urn:nl:ak:ver:aia-05\"],\"template\":{\"requirement\":\"$REQUIREMENT\",\"remarks\":\"$REMARKS\",\"status\":\"$STATUS\",\"timestamp\":\"$TIMESTAMP\",\"authors\":[{\"name\":\"$AUTHOR.NAME\",\"email\":\"$AUTHOR.EMAIL\",\"role\":\"$AUTHOR.ROLE\"}]}}"
+      headers:
+        content-length:
+          - "3253"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:45:01 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
       status:
         code: 200
         message: OK

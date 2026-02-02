@@ -11,7 +11,7 @@ from tests.constants import TASK_REGISTRY_CONTENT_PAYLOAD, TASK_REGISTRY_LIST_PA
 @pytest.mark.asyncio
 async def test_task_registry_api_client_get_instrument_list(httpx_mock: HTTPXMock):
     httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
+        url="https://task-registry.rijksapp.nl/instruments/", content=TASK_REGISTRY_LIST_PAYLOAD.encode()
     )
 
     result = await TaskRegistryAPIClient().get_list_of_task(task=TaskType.INSTRUMENTS)
@@ -21,7 +21,7 @@ async def test_task_registry_api_client_get_instrument_list(httpx_mock: HTTPXMoc
 
 @pytest.mark.asyncio
 async def test_task_registry_api_client_get_instrument_list_not_succesfull(httpx_mock: HTTPXMock):
-    httpx_mock.add_response(status_code=408, url="https://task-registry.apps.digilab.network/instruments/")
+    httpx_mock.add_response(status_code=408, url="https://task-registry.rijksapp.nl/instruments/")
 
     # then
     with pytest.raises(AMTNotFound):
@@ -32,7 +32,7 @@ async def test_task_registry_api_client_get_instrument_list_not_succesfull(httpx
 async def test_task_registry_api_client_get_instrument(httpx_mock: HTTPXMock):
     # given
     httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
+        url="https://task-registry.rijksapp.nl/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
         content=TASK_REGISTRY_CONTENT_PAYLOAD.encode(),
     )
 
@@ -48,7 +48,7 @@ async def test_task_registry_api_client_get_instrument(httpx_mock: HTTPXMock):
 async def test_task_registry_api_client_get_instrument_not_succesfull(httpx_mock: HTTPXMock):
     httpx_mock.add_response(
         status_code=408,
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
+        url="https://task-registry.rijksapp.nl/instruments/urn/urn:nl:aivt:tr:iama:1.0?version=latest",
     )
 
     urn = "urn:nl:aivt:tr:iama:1.0"
