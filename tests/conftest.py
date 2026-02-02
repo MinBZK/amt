@@ -56,7 +56,7 @@ def run_server_uvicorn(database_file: Path, host: str = "127.0.0.1", port: int =
     )
     logger.info(os.environ["APP_DATABASE_FILE"])
     app = create_app()
-    uvicorn.run(app, host=host, port=port)
+    uvicorn.run(app, host=host, port=port, loop="asyncio")
 
 
 @pytest.fixture(scope="session")
