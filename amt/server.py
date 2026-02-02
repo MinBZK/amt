@@ -1,19 +1,25 @@
+import asyncio
+import contextlib
 import logging
 from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
+from pathlib import Path
 
+import jinja_roos_components
 from authlib.integrations.starlette_client import OAuth  # type: ignore
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
-from starlette.middleware.sessions import SessionMiddleware
 
 from amt.api.main import api_router
 from amt.core.config import PROJECT_DESCRIPTION, PROJECT_NAME, VERSION, get_settings
 from amt.core.db import check_db, init_db
 from amt.core.exception_handlers import general_exception_handler as amt_general_exception_handler
+from amt.core.exception_handlers import redirect_exception_handler
+from amt.core.exceptions import AMTRedirectError
 from amt.core.log import configure_logging
+from amt.core.session_store import InMemorySessionStore, SessionStore
 from amt.utils.mask import Mask
 
 from .api.http_browser_caching import static_files
@@ -22,6 +28,7 @@ from .middleware.csrf import CSRFMiddleware, CSRFMiddlewareExceptionHandler
 from .middleware.htmx import HTMXMiddleware
 from .middleware.route_logging import RequestLoggingMiddleware
 from .middleware.security import SecurityMiddleware
+from .middleware.session import ServerSideSessionMiddleware
 
 configure_logging(
     get_settings().LOGGING_LEVEL,
@@ -32,6 +39,22 @@ configure_logging(
 
 logger = logging.getLogger(__name__)
 
+STATIC_DIR_ROOS = Path(jinja_roos_components.__file__).parent / "static" / "roos" / "dist"
+
+
+async def cleanup_sessions_task(session_store: SessionStore, interval: int) -> None:
+    """Background task to periodically cleanup expired sessions."""
+    while True:
+        try:
+            await asyncio.sleep(interval)
+            expired_count = await session_store.cleanup_expired()
+            active_count = await session_store.count()
+            logger.info(f"Session stats: {active_count} active, {expired_count} expired and removed")
+        except asyncio.CancelledError:
+            break
+        except Exception:
+            logger.exception("Error during session cleanup")
+
 
 # todo(berry): move lifespan to own file
 @asynccontextmanager
@@ -41,7 +64,17 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     await init_db()
     logger.info(f"Starting {PROJECT_NAME} version {VERSION}")
     logger.info(f"Settings: {mask.secrets(get_settings().model_dump())}")
+
+    cleanup_task = asyncio.create_task(
+        cleanup_sessions_task(app.state.session_store, get_settings().SESSION_CLEANUP_INTERVAL_SECONDS)
+    )
+
     yield
+
+    cleanup_task.cancel()
+    with contextlib.suppress(asyncio.CancelledError):
+        await cleanup_task
+    await app.state.session_store.close()
 
     logger.info(f"Stopping application {PROJECT_NAME} version {VERSION}")
     logging.shutdown()
@@ -58,8 +91,19 @@ def create_app() -> FastAPI:
         debug=get_settings().DEBUG,
     )
 
+    session_store = InMemorySessionStore(default_ttl_seconds=get_settings().SESSION_TTL_SECONDS)
+    app.state.session_store = session_store
+
     app.add_middleware(AuthorizationMiddleware)
-    app.add_middleware(SessionMiddleware, secret_key=get_settings().SECRET_KEY)
+    app.add_middleware(
+        ServerSideSessionMiddleware,
+        session_store=session_store,
+        secret_key=get_settings().SECRET_KEY,
+        session_cookie=get_settings().SESSION_COOKIE_NAME,
+        max_age=get_settings().SESSION_TTL_SECONDS,
+        https_only=get_settings().SESSION_COOKIE_SECURE,
+        exclude_paths=["/health"],
+    )
     app.add_middleware(RequestLoggingMiddleware)
     app.add_middleware(CSRFMiddleware)
     app.add_middleware(CSRFMiddlewareExceptionHandler)
@@ -78,6 +122,10 @@ def create_app() -> FastAPI:
     )
 
     app.mount("/static", static_files, name="static")
+
+    @app.exception_handler(AMTRedirectError)
+    async def amt_redirect_exception_handler(request: Request, exc: AMTRedirectError) -> RedirectResponse:  # type: ignore[reportUnusedFunction]
+        return await redirect_exception_handler(request, exc)
 
     @app.exception_handler(StarletteHTTPException)
     async def HTTPException_exception_handler(request: Request, exc: Exception) -> HTMLResponse:  # type: ignore

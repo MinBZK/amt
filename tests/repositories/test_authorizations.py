@@ -39,7 +39,7 @@ async def test_authorization_basic(db: DatabaseTestUtils):
     results = await authorization_repository.find_by_user(UUID(default_auth_user()["sub"]))
 
     # then
-    assert len(results) == 6
+    assert len(results) == 7
 
 
 @pytest.mark.asyncio

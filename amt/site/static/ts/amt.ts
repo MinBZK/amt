@@ -4,6 +4,13 @@ import _hyperscript from "hyperscript.org";
 
 import "../scss/tabs.scss";
 import "../scss/layout.scss";
+
+import {
+  RuleApplier,
+  applyRules,
+  type ApplyRulesOptions,
+} from "../js/ruleapplier.js";
+
 /* eslint-disable  @typescript-eslint/no-non-null-assertion */
 
 _hyperscript.browserInit();
@@ -144,6 +151,13 @@ declare global {
     ) => void;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     htmx: any;
+    applyRules: (
+      rulesString: string,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      event: any,
+      options?: ApplyRulesOptions,
+    ) => void;
+    RuleApplier: typeof RuleApplier;
   }
 }
 
@@ -163,6 +177,8 @@ export function hideMobileMenu() {
 
 window.setCookie = setCookie;
 window.htmx = htmx;
+window.applyRules = applyRules;
+window.RuleApplier = RuleApplier;
 
 export function openModal(id: string) {
   const el: Element | null = document.getElementById(id);

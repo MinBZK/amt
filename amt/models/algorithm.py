@@ -64,6 +64,7 @@ class Algorithm(Base):
     deleted_at: Mapped[datetime | None] = mapped_column(server_default=None, nullable=True)
     organization_id: Mapped[int] = mapped_column(ForeignKey("organization.id"))
     organization: Mapped["Organization"] = relationship(back_populates="algorithms", lazy="selectin")  # pyright: ignore [reportUndefinedVariable, reportUnknownVariableType] #noqa
+    publication: Mapped["Publication | None"] = relationship(back_populates="algorithm", lazy="selectin", uselist=False)  # pyright: ignore [reportUndefinedVariable, reportUnknownVariableType] #noqa
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:  # noqa: ANN401
         system_card: SystemCard | None = kwargs.pop("system_card", None)

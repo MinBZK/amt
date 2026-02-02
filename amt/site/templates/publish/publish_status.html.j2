@@ -1,0 +1,88 @@
+{% extends 'algorithms/details_base.html.j2' %}
+{% from "macros/editable_macros.html.j2" import editable with context %}
+{% block detail_content %}
+    {% set status_types = {
+            PublicationStatuses.PUBLISHED: 'success',
+            PublicationStatuses.STATE_2: 'info',
+            PublicationStatuses.STATE_1: 'warning'
+        } %}
+    <c-heading type="h2">Publicatie status</c-heading>
+    {% if publication_missing_in_register %}
+        <c-alert kind="warning" class="rvo-layout-margin-vertical--sm">
+        <c-p>{% trans %}Het algoritme kan niet in het register gevonden worden maar is voorheen wel via AMT
+        gepubliceerd. Wellicht is het uit het register verwijderd.{% endtrans %}</c-p>
+        <c-p>{% trans %}De publicatie is nu ook uit AMT verwijderd.{% endtrans %}</c-p>
+        <c-button @click="window.location='./explanation'" kind="primary">Opnieuw publiceren</c-button>
+        </c-alert>
+    {% endif %}
+    <c-card outline="true" padding="sm">
+    <c-heading type="h3">Status publicatie</c-heading>
+    <c-layout-flow gap="md">
+    <c-grid columns="two">
+    <div class="inline-blocks-row">
+        <c-tag type="{{ status_types.get(publication_status, 'error') }}" content="{{ get_localized_value('publication-status', publication_status, request).display_value | safe }}"></c-tag>
+        {% if publication and publication.last_updated %}
+            <span>Laatst gepubliceerd op {{ publication.last_updated|format_datetime(language, 'long') }}</span>
+        {% endif %}
+    </div>
+    <div>
+        {% if not publication %}
+            Er is nog geen publicatie informatie beschikbaar.
+        {% elif publication_url is defined and publication_url %}
+            <c-link showIcon="before" icon="externe-link" href="{{ publication_url }}" target="_blank">Link naar je publicatie</c-link>
+            <br />
+        {% else %}
+            <c-link href="#" showIcon="before" icon="externe-link" @click="window.open('/algorithm/{{ algorithm_id }}/preview/{{ publication.lars }}')">
+            Bekijk publicatie preview
+            </c-link>
+        {% endif %}
+        {% if algorithm_summary and algorithm_summary.published and ((algorithm_summary.current_version_released and not algorithm_summary.current_version_published) or (not algorithm_summary.current_version_released and not algorithm_summary.current_version_published)) %}
+            <c-link href="#" showIcon="before" icon="externe-link" @click="window.open('/algorithm/{{ algorithm_id }}/preview/{{ publication.lars }}')">
+            Bekijk publicatie preview
+            </c-link>
+        {% endif %}
+    </div>
+    </c-grid>
+    <c-hr />
+    <c-layout-flow gap="md">
+    {% if PublicationStatuses.STATE_1 == publication_status or (algorithm_summary and not algorithm_summary.current_version_released and not algorithm_summary.current_version_published) %}
+        <c-alert kind="warning">
+        <c-layout-flow gap="md">
+        {% if (algorithm_summary and algorithm_summary.published and not algorithm_summary.current_version_released) %}
+            <c-p>
+            Een nieuwere versie van het algoritme is succesvol aangeleverd, maar nog niet vrijgegeven. Pas na vrijgave
+            start het goedkeuringsproces en kan publicatie plaatsvinden.
+            </c-p>
+        {% else %}
+            <c-p>
+            Het algoritme is succesvol aangeleverd, maar nog niet vrijgegeven. Pas na vrijgave
+            start het goedkeuringsproces en kan publicatie plaatsvinden.
+            </c-p>
+        {% endif %}
+        <c-button type="button" hx-get="/algorithm/{{ algorithm_id }}/release/{{ publication.lars }}" hx-disabled-elt="this">
+        Publicatie vrijgeven
+        </c-button>
+        </c-layout-flow>
+        </c-alert>
+    {% elif PublicationStatuses.STATE_2 == publication_status %}
+        <c-alert kind="warning">
+        Het algoritme is aangeleverd bij het Algoritmeregister en vrijgegeven.
+        Het moet nog definitief gepubliceerd worden door het Algoritmeregister.
+        </c-alert>
+    {% elif (algorithm_summary and not algorithm_summary.current_version_published) %}
+        <c-alert kind="warning">
+        Een nieuwe versie van het algoritme is aangeleverd bij het Algoritmeregister en vrijgegeven.
+        Het moet nog definitief gepubliceerd worden door het Algoritmeregister.
+        </c-alert>
+    {% elif not publication %}
+        <c-button @click="window.location='./explanation'" kind="primary">Start met publiceren</c-button>
+    {% endif %}
+    {% if publication %}
+        <div>
+            <c-button @click="window.location='./prepare'" kind="secondary">Publicatie wijzigen</c-button>
+        </div>
+    {% endif %}
+    </c-layout-flow>
+    </c-layout-flow>
+    </c-card>
+{% endblock %}

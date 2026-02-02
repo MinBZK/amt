@@ -1,4 +1,5 @@
 import asyncio
+import hashlib
 import logging
 import os
 import re
@@ -245,7 +246,8 @@ def generate_db_name(request: pytest.FixtureRequest) -> str:
 
     # postgres has a limit of 63 bytes for database names
     if len(sanitized_name) > 63:
-        sanitized_name = sanitized_name[:63]
+        hash_suffix = hashlib.md5(sanitized_name.encode()).hexdigest()[:8]  # noqa: S324
+        sanitized_name = sanitized_name[:54] + "_" + hash_suffix
 
     return sanitized_name
 

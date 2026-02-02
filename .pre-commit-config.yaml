@@ -5,8 +5,9 @@ repos:
     rev: v6.0.0
     hooks:
       - id: end-of-file-fixer
-        exclude: "^amt/static/vendor/.*|amt/locale/.*"
+        exclude: "^amt/static/vendor/.*|amt/locale/.*|amt/algoritmeregister/openapi/.*/client/.*"
       - id: trailing-whitespace
+        exclude: "amt/algoritmeregister/openapi/.*/client/.*"
       - id: check-yaml
         exclude: "^(example|example_system_card|example_registry)/"
       - id: check-json

@@ -84,8 +84,9 @@ def _parse_attribute_values(attr: str, ai_act_profile: AiActProfile) -> set[str]
     """
     Helper function needed in `is_requirement_applicable`, handling special case for 'publication_category'.
     """
-    value = getattr(ai_act_profile, attr, "")
+    value = getattr(ai_act_profile, attr, None)
+    if value is None:
+        return set()
     if isinstance(value, str):
         return {value}
-    else:
-        return set(value)
+    return set(value)

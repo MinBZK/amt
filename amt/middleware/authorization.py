@@ -1,3 +1,4 @@
+import logging
 import os
 import typing
 from uuid import UUID
@@ -10,6 +11,8 @@ from amt.core.authorization import get_user
 from amt.models import User
 from amt.services.authorization import AuthorizationsService
 from amt.services.services_provider import ServicesProvider
+
+logger = logging.getLogger(__name__)
 
 RequestResponseEndpoint = typing.Callable[[Request], typing.Awaitable[Response]]
 

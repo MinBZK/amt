@@ -170,7 +170,8 @@
                               name="{{ field_name }}"
                               placeholder=""
                               class="utrecht-textbox utrecht-textarea utrecht-textarea--html-textarea"
-                              dir="auto">{{ editable_object.value }}</textarea>
+{#                              TODO: find out if and when value is not of type 'weboption' and value.value would break #}
+                              dir="auto">{{ editable_object.value.display_value }}</textarea>
                 {% elif editable_object.implementation_type.type == WebFormFieldType.SELECT %}
                     <div class="rvo-select-wrapper"
                          style="max-inline-size: clamp(20rem, 40%, 50rem)">

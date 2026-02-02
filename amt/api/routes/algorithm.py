@@ -105,7 +105,7 @@ def get_measure_task_or_error(system_card: SystemCard, measure_urn: str) -> Meas
     return measure_task
 
 
-def get_algorithm_details_tabs(request: Request) -> list[NavigationItem]:
+def get_algorithm_details_tabs(request: Request, exact_match: bool = True) -> list[NavigationItem]:
     return resolve_navigation_items(
         [
             Navigation.ALGORITHM_INFO,
@@ -113,8 +113,10 @@ def get_algorithm_details_tabs(request: Request) -> list[NavigationItem]:
             Navigation.ALGORITHM_COMPLIANCE,
             Navigation.ALGORITHM_TASKS,
             Navigation.ALGORITHM_MEMBERS,
+            Navigation.ALGORITHM_PUBLISH,
         ],
         request,
+        exact_match,
     )
 
 
@@ -122,8 +124,8 @@ def get_algorithms_submenu_items() -> list[BaseNavigationItem]:
     return [Navigation.ALGORITHMS_OVERVIEW, Navigation.ALGORITHM_TASKS]
 
 
-@permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
 @router.get("/{algorithm_id}/tasks")
+@permission({AuthorizationResource.ALGORITHM: [AuthorizationVerb.READ]})
 async def get_tasks(
     request: Request,
     algorithm_id: int,

@@ -1,0 +1,10 @@
+{
+  "generatorName": "python",
+  "inputSpec": "amt/algoritmeregister/openapi/v1_0/specs/openapi.json",
+  "outputDir": ".",
+  "packageName": "amt.algoritmeregister.openapi.v1_0.client.openapi_client",
+  "enablePostProcessFile": true,
+  "additionalProperties": {
+    "generateSourceCodeOnly": "true"
+  }
+}

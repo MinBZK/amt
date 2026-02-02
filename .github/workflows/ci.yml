@@ -190,119 +190,29 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-  build:
-    needs: [test-local-frontend, test-local-backend, test-compose]
-    if: ${{ !github.event.act }}
-    runs-on: ubuntu-latest
+  build-pr:
+    if: github.event_name == 'pull_request' && !github.event.act
+    uses: ./.github/workflows/build-reusable.yml
     permissions:
       packages: write
       contents: read
       security-events: write
       actions: read
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
+    secrets: inherit
 
-      - name: get commit hash
-        id: get_commit_hash
-        run: |
-          echo "commit_hash=$(git describe --tags)" >> "$GITHUB_OUTPUT"
-
-      - name: Make changes to project to inject commit hash
-        run: |
-          sed -i 's/VERSION: str = .*$/VERSION: str = "${{ steps.get_commit_hash.outputs.commit_hash }}"/g' amt/core/config.py
-
-      - name: Log in to the Container registry
-        uses: docker/login-action@v3
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Extract metadata for Docker
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} #TODO(berry): fix on git labels multiple tags
-        env:
-          DOCKER_METADATA_ANNOTATIONS_LEVELS: manifest,index
-
-      - name: print metadata
-        run: |
-          echo "tags: ${{ steps.meta.outputs.tags }}"
-          echo "labels: ${{ steps.meta.outputs.labels }}"
-          echo "annotations: ${{ steps.meta.outputs.annotations }}"
-          echo "hash: ${{ steps.get_commit_hash.outputs.commit_hash }}"
-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          annotations: ${{ steps.meta.outputs.annotations }}
-          platforms: linux/amd64,linux/arm64,darwin/amd64
-
-      - name: Run Trivy vulnerability scanner sarif
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
-          scan-type: image
-          exit-code: 0
-          format: "sarif"
-          output: "trivy-results.sarif"
-        env:
-          TRIVY_USERNAME: ${{ github.actor }}
-          TRIVY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v4
-        with:
-          sarif_file: "trivy-results.sarif"
-
-      - name: Run Trivy SBOM
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
-          scan-type: image
-          exit-code: 0
-          format: "cyclonedx"
-          output: "trivy-sbom.json"
-          list-all-pkgs: "true"
-        env:
-          TRIVY_USERNAME: ${{ github.actor }}
-          TRIVY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Run Trivy license scanner
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
-          scan-type: image
-          scanners: "license"
-          exit-code: 0
-          output: "trivy-license.json"
-        env:
-          TRIVY_USERNAME: ${{ github.actor }}
-          TRIVY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload SBOM & License
-        uses: actions/upload-artifact@v4.6.2
-        with:
-          name: sbom-licence-${{ github.sha }}.json
-          path: |
-            trivy-sbom.json
-            trivy-license.json
-          if-no-files-found: error
-          overwrite: true
+  build:
+    needs: [test-local-frontend, test-local-backend, test-compose]
+    if: >-
+      github.event_name != 'pull_request' &&
+      !github.event.act &&
+      !contains(needs.*.result, 'failure')
+    uses: ./.github/workflows/build-reusable.yml
+    permissions:
+      packages: write
+      contents: read
+      security-events: write
+      actions: read
+    secrets: inherit
 
   deploy:
     runs-on: ubuntu-latest
@@ -346,6 +256,7 @@ jobs:
         test-local-frontend,
         test-compose,
         build,
+        build-pr,
       ]
     if: ${{ always() && contains(needs.*.result, 'failure') }}
     steps:
