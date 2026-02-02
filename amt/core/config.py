@@ -41,7 +41,7 @@ class Settings(BaseSettings):
 
     OIDC_CLIENT_ID: str | None = None
     OIDC_CLIENT_SECRET: str | None = None
-    OIDC_DISCOVERY_URL: str = "https://keycloak.apps.digilab.network/realms/algoritmes/.well-known/openid-configuration"
+    OIDC_DISCOVERY_URL: str = "https://keycloak.rig.prd1.gn2.quattro.rijksapps.nl/realms/amt-odc-odcn-production/.well-known/openid-configuration"
 
     CARD_DIR: Path = Path("/tmp/")  # TODO(berry): create better location for model cards  # noqa: S108
 

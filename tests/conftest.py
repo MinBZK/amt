@@ -52,7 +52,7 @@ def run_server_uvicorn(database_file: Path, host: str = "127.0.0.1", port: int =
     os.environ["DISABLE_AUTH"] = "true"
     os.environ["OIDC_CLIENT_ID"] = "AMT"
     os.environ["OIDC_DISCOVERY_URL"] = (
-        "https://keycloak.apps.digilab.network/realms/algoritmes-test/.well-known/openid-configuration"
+        "https://keycloak.rig.prd1.gn2.quattro.rijksapps.nl/realms/amt-test/.well-known/openid-configuration"
     )
     logger.info(os.environ["APP_DATABASE_FILE"])
     app = create_app()
