@@ -1,0 +1,261 @@
+{% extends 'algorithms/details_base.html.j2' %}
+{% from "macros/editable_macros.html.j2" import editable with context %}
+{% block detail_content %}
+    <c-max-width-layout size="lg">
+    <c-grid columns="two" division="1fr 4fr">
+    <c-progress-tracker :steps="steps" />
+    <div>
+        <c-heading type="h2" class="rvo-layout-margin-vertical--xl">{% trans %}Preview & verify{% endtrans %}</c-heading>
+        <c-form-fieldset>
+        <c-p>
+        {% trans %}Below you can see the complete preview of the publication.{% endtrans %}
+        </c-p>
+        <c-p>
+        {% trans %}Pay attention to the following points:{% endtrans %}
+        </c-p>
+        <c-ul>
+        <c-li class="rvo-layout-margin-vertical--sm">
+        <c-div class="display-block">
+        <c-strong>{% trans %}Completeness{% endtrans %}</c-strong>
+        {% trans %}: Fill in as many fields as possible. Empty fields are generally not shown on the website.{% endtrans %}
+        </c-div>
+        </c-li>
+        <c-li class="rvo-layout-margin-vertical--sm">
+        <c-div class="display-block">
+        <c-strong>{% trans %}Accessible language{% endtrans %}</c-strong>
+        {% trans %}: Use understandable language where possible (aim is B1 level), especially in the general descriptions.{% endtrans %}
+        </c-div>
+        </c-li>
+        </c-ul>
+        <c-p>
+        {% trans %}If you want to change data, you can use the details page.{% endtrans %}
+        </c-p>
+        </c-form-fieldset>
+        <c-card outline="true" class="rvo-layout-margin-vertical--xl">
+        <c-heading type="h2">
+        {{ publication_model.name }}
+        </c-heading>
+        <c-grid columns="two">
+        <div>
+            <c-link href="#">{{ publication_model.organization }}</c-link>
+            <c-p>
+            {{ publication_model.description_short }}
+            </c-p>
+        </div>
+        <div>
+            <c-p text-style="bold,no-margins">{% trans %}Publication category{% endtrans %}</c-p>
+            <c-p>{{ publication_model.publication_category.value }}</c-p>
+            <c-p text-style="bold,no-margins">{% trans %}Impact assessments{% endtrans %}</c-p>
+            <c-p>{{ publication_model.impacttoetsen_grouping | map(attribute='title') | join(', ') }}</c-p>
+            <c-p text-style="bold,no-margins">{% trans %}Status{% endtrans %}</c-p>
+            <c-p>{{ publication_model.status.value }}</c-p>
+        </div>
+        </c-grid>
+        </c-card>
+        <c-tabs>
+        <c-tab-item @click="applyRules('#tab-content-container > *: +display-none; #{id}-content: -display-none; siblings > a: -rvo-link--active -rvo-tabs__item-link--active; self > a: +rvo-link--active +rvo-tabs__item-link--active', event, { preventDefault: true, stopPropagation: true })" id="tab1" href="#" label="{% trans %}General information{% endtrans %}" :selected="true" />
+        <c-tab-item @click="applyRules('#tab-content-container > *: +display-none; #{id}-content: -display-none; siblings > a: -rvo-link--active -rvo-tabs__item-link--active; self > a: +rvo-link--active +rvo-tabs__item-link--active', event, { preventDefault: true, stopPropagation: true })" id="tab2" href="#" label="{% trans %}Responsible use{% endtrans %}" />
+        <c-tab-item @click="applyRules('#tab-content-container > *: +display-none; #{id}-content: -display-none; siblings > a: -rvo-link--active -rvo-tabs__item-link--active; self > a: +rvo-link--active +rvo-tabs__item-link--active', event, { preventDefault: true, stopPropagation: true })" id="tab3" href="#" label="{% trans %}Operation{% endtrans %}" />
+        </c-tabs>
+        <div id="tab-content-container">
+            <div id="tab1-content">
+                <c-table>
+                <colgroup>
+                    <col style="width: 20%">
+                    <col style="width: 80%">
+                </colgroup>
+                <c-tr>
+                <c-td>
+                <c-strong>{% trans %}Theme{% endtrans %}</c-strong>
+                </c-td>
+                <c-td>{{ publication_model.category if publication_model.category else '-' }}</c-td>
+                </c-tr>
+                <c-tr>
+                <c-td>{% trans %}Start date{% endtrans %}</c-td>
+                <c-td>{{ publication_model.begin_date or '-' }}</c-td>
+                </c-tr>
+                <c-tr>
+                <c-td>{% trans %}End date{% endtrans %}</c-td>
+                <c-td>{{ publication_model.end_date or '-' }}</c-td>
+                </c-tr>
+                <c-tr>
+                <c-td>{% trans %}Contact details{% endtrans %}</c-td>
+                <c-td>{{ publication_model.contact_email or '-' }}</c-td>
+                </c-tr>
+                <c-tr>
+                <c-td>{% trans %}Website{% endtrans %}</c-td>
+                <c-td>
+                {% if publication_model.website %}
+                    <c-link href="{{ publication_model.website }}">{{ publication_model.website }}</c-link>
+                {% else %}
+                    -
+                {% endif %}
+                </c-td>
+                </c-tr>
+                <c-tr>
+                <c-td>{% trans %}URL{% endtrans %}</c-td>
+                <c-td>
+                {% if publication_model.url %}
+                    <c-link href="{{ publication_model.url }}">{{ publication_model.url }}</c-link>
+                {% else %}
+                    -
+                {% endif %}
+                </c-td>
+                </c-tr>
+                </c-table>
+            </div>
+            <div id="tab2-content" class="display-none">
+                <c-table>
+                <colgroup>
+                    <col style="width: 20%">
+                    <col style="width: 80%">
+                </colgroup>
+                <c-tr>
+                <c-td>
+                <c-strong>{% trans %}Purpose and impact{% endtrans %}</c-strong>
+                </c-td>
+                <c-td>{{ publication_model.goal or '-' }}</c-td>
+                </c-tr>
+                <c-tr>
+                <c-td>
+                <c-strong>{% trans %}Considerations{% endtrans %}</c-strong>
+                </c-td>
+                <c-td>{{ publication_model.proportionality or '-' }}</c-td>
+                </c-tr>
+                <c-tr>
+                <c-td>
+                <c-strong>{% trans %}Human intervention{% endtrans %}</c-strong>
+                </c-td>
+                <c-td>{{ publication_model.human_intervention or '-' }}</c-td>
+                </c-tr>
+                <c-tr>
+                <c-td>
+                <c-strong>{% trans %}Risk management{% endtrans %}</c-strong>
+                </c-td>
+                <c-td>{{ publication_model.risks or '-' }}</c-td>
+                </c-tr>
+                <c-tr>
+                <c-td>
+                <c-strong>{% trans %}Legal basis{% endtrans %}</c-strong>
+                </c-td>
+                <c-td>{{ publication_model.lawful_basis or '-' }}</c-td>
+                </c-tr>
+                <c-tr>
+                <c-td>
+                <c-strong>{% trans %}Legal basis (links){% endtrans %}</c-strong>
+                </c-td>
+                <c-td>
+                {% if publication_model.lawful_basis_grouping %}
+                    {% for lawful_basis in publication_model.lawful_basis_grouping %}
+                        {{ lawful_basis.title }}:
+                        <c-link href="{{ lawful_basis.link }}">{{ lawful_basis.link }}</c-link>
+                    </br>
+                {% endfor %}
+            {% else %}
+                -
+            {% endif %}
+            </c-td>
+            </c-tr>
+            <c-tr>
+            <c-td>
+            <c-strong>{% trans %}Link to processing register{% endtrans %}</c-strong>
+            </c-td>
+            <c-td>
+            {% if publication_model.process_index_url %}
+                <c-link href="{{ publication_model.process_index_url }}">{{ publication_model.process_index_url }}</c-link>
+            {% else %}
+                -
+            {% endif %}
+            </c-td>
+            </c-tr>
+            <c-tr>
+            <c-td>
+            <c-strong>{% trans %}Impact assessments{% endtrans %}</c-strong>
+            </c-td>
+            <c-td>{{ publication_model.impacttoetsen or '-' }}</c-td>
+            </c-tr>
+            <c-tr>
+            <c-td>
+            <c-strong>{% trans %}Impact assessments (links){% endtrans %}</c-strong>
+            </c-td>
+            <c-td>
+            {% if publication_model.impacttoetsen_grouping %}
+                {% for impacttoets in publication_model.impacttoetsen_grouping %}
+                    {{ impacttoets.title }}
+                    {% if impacttoets.link %}
+                        :
+                        <c-link href="{{ impacttoets.link }}">{{ impacttoets.link }}</c-link>
+                    {% endif %}
+                </br>
+            {% endfor %}
+        {% else %}
+            -
+        {% endif %}
+        </c-td>
+        </c-tr>
+        </c-table>
+    </div>
+    <div id="tab3-content" class="display-none">
+        <c-table>
+        <colgroup>
+            <col style="width: 20%">
+            <col style="width: 80%">
+        </colgroup>
+        <c-tr>
+        <c-td>
+        <c-strong>{% trans %}Source data{% endtrans %}</c-strong>
+        </c-td>
+        <c-td>{{ publication_model.source_data or '-' }}</c-td>
+        </c-tr>
+        <c-tr>
+        <c-td>
+        <c-strong>{% trans %}Source data (links){% endtrans %}</c-strong>
+        </c-td>
+        <c-td>
+        {% if publication_model.source_data_grouping %}
+            {% for source in publication_model.source_data_grouping %}
+                {{ source.title }}:
+                <c-link href="{{ source.link }}">{{ source.link }}</c-link>
+            </br>
+        {% endfor %}
+    {% else %}
+        -
+    {% endif %}
+    </c-td>
+    </c-tr>
+    <c-tr>
+    <c-td>
+    <c-strong>{% trans %}Methods and models{% endtrans %}</c-strong>
+    </c-td>
+    <c-td>{{ publication_model.methods_and_models or '-' }}</c-td>
+    </c-tr>
+    <c-tr>
+    <c-td>
+    <c-strong>{% trans %}Supplier{% endtrans %}</c-strong>
+    </c-td>
+    <c-td>{{ publication_model.provider or '-' }}</c-td>
+    </c-tr>
+    <c-tr>
+    <c-td>
+    <c-strong>{% trans %}Publiccode{% endtrans %}</c-strong>
+    </c-td>
+    <c-td>
+    {% if publication_model.publiccode %}
+        <c-link href="{{ publication_model.publiccode }}">{{ publication_model.publiccode }}</c-link>
+    {% else %}
+        -
+    {% endif %}
+    </c-td>
+    </c-tr>
+    </c-table>
+</div>
+</div>
+<c-layout-flow justifyContent="end" row="true" class="rvo-layout-margin-vertical--xl">
+<c-button style="margin-right: auto" @click="window.location='./prepare'" kind="tertiary" showIcon="before" icon="terug">{% trans %}Previous step{% endtrans %}
+</c-button>
+<c-button @click="window.location='./confirm'" kind="primary">{% trans %}Next step{% endtrans %}</c-button>
+</c-layout-flow>
+</div>
+</c-grid>
+</c-max-width-layout>
+{% endblock %}

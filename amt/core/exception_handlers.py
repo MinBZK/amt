@@ -6,11 +6,11 @@ from typing import Any
 from babel.support import NullTranslations
 from fastapi import Request, status
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from amt.api.deps import templates
-from amt.core.exceptions import AMTCSRFProtectError, AMTHTTPException, AMTNotFound, AMTRepositoryError
+from amt.core.exceptions import AMTCSRFProtectError, AMTHTTPException, AMTNotFound, AMTRedirectError, AMTRepositoryError
 from amt.core.internationalization import (
     get_current_translation,
 )
@@ -104,3 +104,7 @@ async def general_exception_handler(request: Request, exc: Exception) -> HTMLRes
         )
 
     return response
+
+
+async def redirect_exception_handler(request: Request, exc: AMTRedirectError) -> RedirectResponse:
+    return RedirectResponse(url=exc.redirect_url, status_code=status.HTTP_302_FOUND)

@@ -1,0 +1,22 @@
+{% extends 'algorithms/details_base.html.j2' %}
+{% from "macros/editable_macros.html.j2" import editable with context %}
+{% block detail_content %}
+    <c-layout-flow gap="md">
+    <c-alert class="rvo-layout-justify-content-start" maxWidth="sm" kind="info" heading="{% trans %}Publish to the Algorithm Register{% endtrans %}">
+    <c-p>{% trans %}In the central algorithm register of the Dutch government, government agencies publish information about their algorithms in one place, making it searchable for everyone.{% endtrans %}</c-p>
+    <c-p>{% trans %}Via AMT an algorithm can be submitted to the algorithm register.{% endtrans %}</c-p>
+    <c-p>{% trans %}The algorithm register is not part of AMT and to submit an algorithm, registration with the register is required.{% endtrans %}</c-p>
+    <c-p>{% trans %}Submitting an algorithm is only possible if you already have registration credentials for the register.{% endtrans %}</c-p>
+    <c-p>
+    <c-link target="_blank" href="https://www.digitaleoverheid.nl/overzicht-van-alle-onderwerpen/algoritmes/algoritmes-publiceren/">
+    {% trans %}Read more about the Algorithm Register here{% endtrans %}
+    </c-link>
+    </c-p>
+    </c-alert>
+    {% if not is_ar_logged_in %}
+        <c-button @click="window.location='./connection'" kind="primary">{% trans %}Login to Algorithm Register{% endtrans %}</c-button>
+    {% else %}
+        <c-button @click="window.location='./prepare'" kind="primary">{% trans %}Continue{% endtrans %}</c-button>
+    {% endif %}
+    </c-layout-flow>
+{% endblock %}

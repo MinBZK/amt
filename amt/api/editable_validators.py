@@ -66,3 +66,18 @@ class EditableValidatorSlug(EditableValidator):
             errors = e.errors()
             errors[0]["loc"] = (editable.safe_html_path(),)  # pyright: ignore[reportUnknownMemberType]
             raise RequestValidationError(errors) from e
+
+
+class EditableValidatorRequiredField(EditableValidator):
+    async def validate(
+        self,
+        request: Request,
+        editable: ResolvedEditable,
+        editable_context: dict[str, str | dict[str, str]],
+        edit_mode: EditModes,
+        services_provider: ServicesProvider,
+    ) -> None:
+        in_value = self.get_new_value(editable, editable_context)
+        if in_value is None or in_value == "":
+            errors = [{"loc": [editable.safe_html_path()], "type": "missing"}]
+            raise RequestValidationError(errors)

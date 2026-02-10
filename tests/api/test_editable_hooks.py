@@ -53,7 +53,7 @@ async def test_save_authorization_hook_algorithm(mocker: MockerFixture):
     service_provider = mocker.MagicMock(spec=ServicesProvider)
     auth_service = mocker.MagicMock(spec=AuthorizationsService)
 
-    user_id = "92714be3-f798-4461-ba83-55d6cfd889a6"
+    user_id = "8eacad1c-594f-4507-bbd1-b162340d5984"
     mocker.patch.object(request, "json", return_value={"authorization": [{"user_id": user_id, "role_id": 1}]})
 
     service_provider.get.return_value = auth_service
@@ -80,7 +80,7 @@ async def test_save_authorization_hook_organization(mocker: MockerFixture):
     service_provider = mocker.MagicMock(spec=ServicesProvider)
     auth_service = mocker.MagicMock(spec=AuthorizationsService)
 
-    user_id = "92714be3-f798-4461-ba83-55d6cfd889a6"
+    user_id = "8eacad1c-594f-4507-bbd1-b162340d5984"
     mocker.patch.object(request, "json", return_value={"authorization": [{"user_id": user_id, "role_id": 1}]})
 
     service_provider.get.return_value = auth_service
@@ -110,7 +110,7 @@ async def test_save_authorization_hook_no_auth_type(mocker: MockerFixture):
     mocker.patch.object(
         request,
         "json",
-        return_value={"authorization": [{"user_id": "92714be3-f798-4461-ba83-55d6cfd889a6", "role_id": 1}]},
+        return_value={"authorization": [{"user_id": "8eacad1c-594f-4507-bbd1-b162340d5984", "role_id": 1}]},
     )
 
     service_provider.get.return_value = auth_service

@@ -1,0 +1,152 @@
+name: build-reusable
+
+on:
+  workflow_call:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+      security-events: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: get commit hash
+        id: get_commit_hash
+        run: |
+          echo "commit_hash=$(git describe --tags)" >> "$GITHUB_OUTPUT"
+
+      - name: Make changes to project to inject commit hash
+        run: |
+          sed -i 's/VERSION: str = .*$/VERSION: str = "${{ steps.get_commit_hash.outputs.commit_hash }}"/g' amt/core/config.py
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Extract metadata for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} #TODO(berry): fix on git labels multiple tags
+        env:
+          DOCKER_METADATA_ANNOTATIONS_LEVELS: manifest,index
+
+      - name: print metadata
+        run: |
+          echo "tags: ${{ steps.meta.outputs.tags }}"
+          echo "labels: ${{ steps.meta.outputs.labels }}"
+          echo "annotations: ${{ steps.meta.outputs.annotations }}"
+          echo "hash: ${{ steps.get_commit_hash.outputs.commit_hash }}"
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          annotations: ${{ steps.meta.outputs.annotations }}
+          platforms: linux/amd64,linux/arm64,darwin/amd64
+
+      - name: Call API to upsert deployment
+        id: upsert_deployment
+        if: github.event_name == 'pull_request'
+        run: |
+          response=$(curl -f --show-error --max-time 120 -X POST "https://operations-manager.rig.prd1.gn2.quattro.rijksapps.nl/api/projects/amt-odc/:upsert-deployment" \
+            -H "Content-Type: application/json" \
+            -H "X-API-Key: ${{ secrets.OPERATIONS_MANAGER_API_KEY }}" \
+            -d '{
+              "deploymentName": "pr-${{ github.event.pull_request.number }}",
+              "components": [
+                {"reference": "component-1", "image": "${{ fromJSON(steps.meta.outputs.json).tags[0] }}"}
+              ]
+            }')
+          echo "response=$response"
+          preview_url=$(echo "$response" | jq -r '.urls["pr-${{ github.event.pull_request.number }}"].urls["component-1"] // empty')
+          echo "preview_url=$preview_url" >> "$GITHUB_OUTPUT"
+
+      - name: Notify Mattermost of preview deployment
+        if: github.event_name == 'pull_request' && steps.upsert_deployment.outputs.preview_url != ''
+        uses: mattermost/action-mattermost-notify@master
+        with:
+          MATTERMOST_WEBHOOK_URL: ${{ secrets.MM_WEBHOOK_URL }}
+          MATTERMOST_CHANNEL: dev
+          TEXT: |
+            :rocket: Preview deployment ready for PR #${{ github.event.pull_request.number }} by ${{ github.actor }}
+
+            **${{ github.event.pull_request.title }}**
+            Preview: ${{ steps.upsert_deployment.outputs.preview_url }}
+            [View PR](${{ github.event.pull_request.html_url }})
+          MATTERMOST_USERNAME: ${{ github.triggering_actor }}
+
+      - name: Run Trivy vulnerability scanner sarif
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
+          scan-type: image
+          exit-code: 0
+          format: "sarif"
+          output: "trivy-results.sarif"
+        env:
+          TRIVY_USERNAME: ${{ github.actor }}
+          TRIVY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: "trivy-results.sarif"
+
+      - name: Run Trivy SBOM
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
+          scan-type: image
+          exit-code: 0
+          format: "cyclonedx"
+          output: "trivy-sbom.json"
+          list-all-pkgs: "true"
+        env:
+          TRIVY_USERNAME: ${{ github.actor }}
+          TRIVY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run Trivy license scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
+          scan-type: image
+          scanners: "license"
+          exit-code: 0
+          output: "trivy-license.json"
+        env:
+          TRIVY_USERNAME: ${{ github.actor }}
+          TRIVY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload SBOM & License
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: sbom-licence-${{ github.sha }}.json
+          path: |
+            trivy-sbom.json
+            trivy-license.json
+          if-no-files-found: error
+          overwrite: true

@@ -21,9 +21,9 @@ def default_auth_user() -> dict[str, Any]:
         "iat": 1732620776,
         "auth_time": 1732620601,
         "jti": "ad011860-aecb-4378-ba46-98284a7818f3",
-        "iss": "https://keycloak.apps.digilab.network/realms/algoritmes-test",
+        "iss": "https://keycloak.rig.prd1.gn2.quattro.rijksapps.nl/realms/amt-test",
         "aud": "AMT",
-        "sub": "92714be3-f798-4461-ba83-55d6cfd889a6",
+        "sub": "8eacad1c-594f-4507-bbd1-b162340d5984",
         "typ": "ID",
         "azp": "AMT",
         "nonce": "qZ9KGvZs6acg4nYENou5",
@@ -235,9 +235,9 @@ entries": [
       "name": "3-dat-03-persoonsgegevens-beschrijven.yaml",
       "path": "measures/3-dat-03-persoonsgegevens-beschrijven.yaml",
       "urn": "urn:nl:ak:mtr:dat-03",
-      "download_url": "https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-03",
+      "download_url": "https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-03",
       "links": {
-        "self": "https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-03"
+        "self": "https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-03"
       }
     }
 ]
@@ -253,9 +253,9 @@ TASK_REGISTRY_REQUIREMENTS_LIST_PAYLOAD = """
       "name": "aia-08-transparantie-aan-gebruiksverantwoordelijken.yaml",
       "path": "requirements/aia-08-transparantie-aan-gebruiksverantwoordelijken.yaml",
       "urn": "urn:nl:ak:ver:aia-08",
-      "download_url": "https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-08",
+      "download_url": "https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-08",
       "links": {
-        "self": "https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-08"
+        "self": "https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-08"
       }
     }
 ]

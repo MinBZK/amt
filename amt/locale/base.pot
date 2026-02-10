@@ -1,7 +1,7 @@
 # Translations template for PROJECT.
-# Copyright (C) 2025 ORGANIZATION
+# Copyright (C) 2026 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
 #
 #, fuzzy
 msgid ""
@@ -50,7 +50,7 @@ msgstr ""
 
 #: amt/api/group_by_category.py:15
 #: amt/site/templates/algorithms/details_info.html.j2:100
-#: amt/site/templates/algorithms/new.html.j2:42
+#: amt/site/templates/algorithms/new.html.j2:43
 #: amt/site/templates/macros/tasks.html.j2:85
 #: amt/site/templates/parts/algorithm_search.html.j2:50
 #: amt/site/templates/parts/filter_list.html.j2:71
@@ -94,79 +94,85 @@ msgstr ""
 msgid "Phasing Out"
 msgstr ""
 
-#: amt/api/navigation.py:48
+#: amt/api/navigation.py:49
 msgid "Home"
 msgstr ""
 
-#: amt/api/navigation.py:49 amt/site/templates/auth/profile.html.j2:90
+#: amt/api/navigation.py:50 amt/site/templates/auth/profile.html.j2:90
 #: amt/site/templates/parts/algorithm_search.html.j2:9
 msgid "Algorithms"
 msgstr ""
 
-#: amt/api/navigation.py:50 amt/site/templates/auth/profile.html.j2:10
+#: amt/api/navigation.py:51 amt/site/templates/auth/profile.html.j2:10
 msgid "Overview"
 msgstr ""
 
-#: amt/api/navigation.py:51
+#: amt/api/navigation.py:52
 msgid "Tasks"
 msgstr ""
 
-#: amt/api/navigation.py:52
+#: amt/api/navigation.py:53
 msgid "New"
 msgstr ""
 
-#: amt/api/navigation.py:53
-msgid "System card"
-msgstr ""
-
-#: amt/api/navigation.py:54
-msgid "Assessment card"
+#: amt/api/navigation.py:54 amt/api/routes/publish.py:82
+#: amt/site/templates/publish/publish_confirm.html.j2:8
+#: amt/site/templates/publish/publish_confirm.html.j2:30
+msgid "Publish"
 msgstr ""
 
 #: amt/api/navigation.py:55
-msgid "Model card"
+msgid "System card"
 msgstr ""
 
 #: amt/api/navigation.py:56
-msgid "Details"
+msgid "Assessment card"
 msgstr ""
 
-#: amt/api/navigation.py:57 amt/site/templates/organizations/home.html.j2:8
-msgid "Info"
+#: amt/api/navigation.py:57
+msgid "Model card"
 msgstr ""
 
 #: amt/api/navigation.py:58
-msgid "Algorithm details"
+msgid "Details"
 msgstr ""
 
-#: amt/api/navigation.py:59
-msgid "Requirements"
+#: amt/api/navigation.py:59 amt/site/templates/organizations/home.html.j2:8
+msgid "Info"
 msgstr ""
 
 #: amt/api/navigation.py:60
-msgid "Data"
+msgid "Algorithm details"
 msgstr ""
 
 #: amt/api/navigation.py:61
-msgid "Model"
+msgid "Requirements"
 msgstr ""
 
 #: amt/api/navigation.py:62
+msgid "Data"
+msgstr ""
+
+#: amt/api/navigation.py:63
+msgid "Model"
+msgstr ""
+
+#: amt/api/navigation.py:64
 msgid "Instruments"
 msgstr ""
 
-#: amt/api/navigation.py:63 amt/site/templates/auth/profile.html.j2:63
+#: amt/api/navigation.py:65 amt/site/templates/auth/profile.html.j2:63
 #: amt/site/templates/organizations/parts/overview_results.html.j2:6
 msgid "Organizations"
 msgstr ""
 
-#: amt/api/navigation.py:64 amt/site/templates/organizations/home.html.j2:38
+#: amt/api/navigation.py:66 amt/site/templates/organizations/home.html.j2:38
 #: amt/site/templates/organizations/parts/members_results.html.j2:6
 #: amt/site/templates/organizations/parts/overview_results.html.j2:131
 msgid "Members"
 msgstr ""
 
-#: amt/api/navigation.py:65
+#: amt/api/navigation.py:67
 msgid "Compliance"
 msgstr ""
 
@@ -176,6 +182,22 @@ msgstr ""
 
 #: amt/api/organization_filter_options.py:17
 msgid "My organizations"
+msgstr ""
+
+#: amt/api/publication_statuses.py:20
+msgid "Not supplied"
+msgstr ""
+
+#: amt/api/publication_statuses.py:21
+msgid "Supplied"
+msgstr ""
+
+#: amt/api/publication_statuses.py:22
+msgid "Approved"
+msgstr ""
+
+#: amt/api/publication_statuses.py:23
+msgid "Published"
 msgstr ""
 
 #: amt/api/risk_group.py:19
@@ -202,24 +224,24 @@ msgstr ""
 msgid "Select organization"
 msgstr ""
 
-#: amt/api/forms/algorithm.py:65
+#: amt/api/forms/algorithm.py:73
 #: amt/site/templates/algorithms/details_info.html.j2:82
 msgid "Organization"
 msgstr ""
 
-#: amt/api/forms/algorithm.py:67
+#: amt/api/forms/algorithm.py:75
 msgid ""
 "You do not have sufficient permissions to create an algorithm on any "
 "organization you are member of"
 msgstr ""
 
-#: amt/api/forms/algorithm.py:98 amt/api/forms/organization.py:67
+#: amt/api/forms/algorithm.py:106 amt/api/forms/organization.py:67
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:4
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:23
 msgid "Add members"
 msgstr ""
 
-#: amt/api/forms/algorithm.py:99
+#: amt/api/forms/algorithm.py:107
 msgid "Search for a person..."
 msgstr ""
 
@@ -236,6 +258,7 @@ msgid "Accountable"
 msgstr ""
 
 #: amt/api/forms/measure.py:58
+#: amt/site/templates/publish/publish_preview.html.j2:50
 msgid "Status"
 msgstr ""
 
@@ -300,6 +323,7 @@ msgstr ""
 #: amt/site/templates/macros/form_macros.html.j2:440
 #: amt/site/templates/organizations/home.html.j2:14
 #: amt/site/templates/organizations/parts/members_results.html.j2:130
+#: amt/site/templates/publish/parts/ar_login_form.html.j2:26
 msgid "Name"
 msgstr ""
 
@@ -314,6 +338,20 @@ msgstr ""
 
 #: amt/api/forms/organization.py:75
 msgid "Add organization"
+msgstr ""
+
+#: amt/api/routes/publish.py:72
+#: amt/site/templates/publish/publish_prepare.html.j2:8
+msgid "Prepare publication"
+msgstr ""
+
+#: amt/api/routes/publish.py:79
+#: amt/site/templates/publish/publish_preview.html.j2:8
+msgid "Preview & verify"
+msgstr ""
+
+#: amt/api/routes/publish.py:83
+msgid "End"
 msgstr ""
 
 #: amt/core/dynamic_translations.py:13
@@ -472,14 +510,14 @@ msgid "Data will be stored for at least 45 days before permanent deletion."
 msgstr ""
 
 #: amt/site/templates/algorithms/details_base.html.j2:27
-#: amt/site/templates/algorithms/new.html.j2:154
+#: amt/site/templates/algorithms/new.html.j2:155
 #: amt/site/templates/macros/form_macros.html.j2:223
 #: amt/site/templates/organizations/members.html.j2:35
 msgid "Yes"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_base.html.j2:30
-#: amt/site/templates/algorithms/new.html.j2:164
+#: amt/site/templates/algorithms/new.html.j2:165
 #: amt/site/templates/macros/form_macros.html.j2:228
 #: amt/site/templates/organizations/members.html.j2:38
 msgid "No"
@@ -540,12 +578,12 @@ msgid "Read more on the algoritmekader"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:62
-#: amt/site/templates/macros/editable_macros.html.j2:249
+#: amt/site/templates/macros/editable_macros.html.j2:250
 msgid "Save"
 msgstr ""
 
 #: amt/site/templates/algorithms/details_measure_modal.html.j2:66
-#: amt/site/templates/macros/editable_macros.html.j2:254
+#: amt/site/templates/macros/editable_macros.html.j2:255
 #: amt/site/templates/organizations/parts/add_members_modal.html.j2:26
 msgid "Cancel"
 msgstr ""
@@ -554,33 +592,33 @@ msgstr ""
 msgid "Add an algorithm"
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:27
+#: amt/site/templates/algorithms/new.html.j2:28
 #: amt/site/templates/parts/filter_list.html.j2:67
 #: amt/site/templates/parts/filter_list.html.j2:93
 msgid "Algorithm name"
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:31
+#: amt/site/templates/algorithms/new.html.j2:32
 msgid "Name of the algorithm"
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:45
+#: amt/site/templates/algorithms/new.html.j2:46
 msgid "Select the lifecycle your algorithm is currently in."
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:46
+#: amt/site/templates/algorithms/new.html.j2:47
 msgid "For more information on lifecycle, read the"
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:49
+#: amt/site/templates/algorithms/new.html.j2:50
 msgid "Algorithm Framework"
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:68
+#: amt/site/templates/algorithms/new.html.j2:69
 msgid "AI Act Profile"
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:70
+#: amt/site/templates/algorithms/new.html.j2:71
 msgid ""
 "The AI Act profile provides insight into, among other things, the type of"
 " AI system and the associated obligations from the European AI Act. If "
@@ -588,16 +626,16 @@ msgid ""
 "Otherwise, you can find your AI Act Profile with the AI Act Support Tool."
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:77
+#: amt/site/templates/algorithms/new.html.j2:78
 #: amt/site/templates/macros/editable_macros.html.j2:9
 msgid "Find your AI Act profile"
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:113
+#: amt/site/templates/algorithms/new.html.j2:114
 msgid "Select Option"
 msgstr ""
 
-#: amt/site/templates/algorithms/new.html.j2:177
+#: amt/site/templates/algorithms/new.html.j2:178
 #: amt/site/templates/parts/algorithm_search.html.j2:16
 msgid "Add algorithm"
 msgstr ""
@@ -619,8 +657,8 @@ msgid "Email"
 msgstr ""
 
 #: amt/site/templates/auth/profile.html.j2:49
-#: amt/site/templates/parts/header.html.j2:75
-#: amt/site/templates/parts/header.html.j2:138
+#: amt/site/templates/parts/header.html.j2:68
+#: amt/site/templates/parts/header.html.j2:131
 msgid "Language"
 msgstr ""
 
@@ -644,8 +682,8 @@ msgstr ""
 
 #: amt/site/templates/errors/AMTAuthorizationError_401.html.j2:11
 #: amt/site/templates/pages/landingpage.html.j2:16
-#: amt/site/templates/parts/header.html.j2:86
-#: amt/site/templates/parts/header.html.j2:152
+#: amt/site/templates/parts/header.html.j2:79
+#: amt/site/templates/parts/header.html.j2:145
 msgid "Login"
 msgstr ""
 
@@ -852,7 +890,7 @@ msgid "AMT Placeholder information pages"
 msgstr ""
 
 #: amt/site/templates/pages/landingpage.html.j2:11
-#: amt/site/templates/parts/header.html.j2:18
+#: amt/site/templates/parts/header.html.j2:11
 msgid "Algorithm Management Toolkit"
 msgstr ""
 
@@ -865,6 +903,7 @@ msgid "Get a grip on algorithms with the Algorithm Management Toolkit"
 msgstr ""
 
 #: amt/site/templates/pages/landingpage.html.j2:37
+#: amt/site/templates/publish/publish_preview.html.j2:133
 msgid "Risk management"
 msgstr ""
 
@@ -1003,11 +1042,11 @@ msgstr ""
 msgid "Does not exist"
 msgstr ""
 
-#: amt/site/templates/parts/header.html.j2:7
+#: amt/site/templates/parts/header.html.j2:2
 msgid "Beta Version"
 msgstr ""
 
-#: amt/site/templates/parts/header.html.j2:7
+#: amt/site/templates/parts/header.html.j2:2
 msgid ""
 "  |  This website is under development  |  All versions are created in an"
 " open manner."
@@ -1019,5 +1058,426 @@ msgstr ""
 
 #: amt/site/templates/parts/tasks_search.html.j2:52
 msgid "Assignee"
+msgstr ""
+
+#: amt/site/templates/publish/publish_confirm.html.j2:12
+msgid "You are about to permanently publish the algorithm"
+msgstr ""
+
+#: amt/site/templates/publish/publish_confirm.html.j2:14
+msgid "in the Algorithm Register."
+msgstr ""
+
+#: amt/site/templates/publish/publish_confirm.html.j2:17
+msgid "What happens now?"
+msgstr ""
+
+#: amt/site/templates/publish/publish_confirm.html.j2:21
+msgid "After your confirmation, the publication will be released."
+msgstr ""
+
+#: amt/site/templates/publish/publish_confirm.html.j2:22
+msgid "The submission will be manually reviewed."
+msgstr ""
+
+#: amt/site/templates/publish/publish_confirm.html.j2:23
+msgid ""
+"The publication will be visible in the Algorithm Register within a "
+"maximum of 1 business day."
+msgstr ""
+
+#: amt/site/templates/publish/publish_confirm.html.j2:27
+msgid ""
+"The responsibility for the accuracy of the data always remains with your "
+"organization."
+msgstr ""
+
+#: amt/site/templates/publish/publish_confirm.html.j2:31
+msgid "Publish and release"
+msgstr ""
+
+#: amt/site/templates/publish/publish_confirm.html.j2:35
+#: amt/site/templates/publish/publish_prepare.html.j2:38
+#: amt/site/templates/publish/publish_preview.html.j2:254
+msgid "Previous step"
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_login_form.html.j2:9
+#: amt/site/templates/publish/publish_connection.html.j2:4
+msgid "Algorithm register connection"
+msgstr ""
+
+#: amt/site/templates/publish/publish_explanation.html.j2:5
+msgid "Publish to the Algorithm Register"
+msgstr ""
+
+#: amt/site/templates/publish/publish_explanation.html.j2:6
+msgid ""
+"In the central algorithm register of the Dutch government, government "
+"agencies publish information about their algorithms in one place, making "
+"it searchable for everyone."
+msgstr ""
+
+#: amt/site/templates/publish/publish_explanation.html.j2:7
+msgid "Via AMT an algorithm can be submitted to the algorithm register."
+msgstr ""
+
+#: amt/site/templates/publish/publish_explanation.html.j2:8
+msgid ""
+"The algorithm register is not part of AMT and to submit an algorithm, "
+"registration with the register is required."
+msgstr ""
+
+#: amt/site/templates/publish/publish_explanation.html.j2:9
+msgid ""
+"Submitting an algorithm is only possible if you already have registration"
+" credentials for the register."
+msgstr ""
+
+#: amt/site/templates/publish/publish_explanation.html.j2:12
+msgid "Read more about the Algorithm Register here"
+msgstr ""
+
+#: amt/site/templates/publish/publish_explanation.html.j2:17
+msgid "Login to Algorithm Register"
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_login_success.html.j2:8
+#: amt/site/templates/publish/parts/ar_login_success.html.j2:10
+#: amt/site/templates/publish/publish_explanation.html.j2:19
+msgid "Continue"
+msgstr ""
+
+#: amt/site/templates/publish/publish_prepare.html.j2:11
+msgid "What is important when publishing?"
+msgstr ""
+
+#: amt/site/templates/publish/publish_prepare.html.j2:14
+msgid ""
+"Before you continue with publishing your algorithm, it is important to "
+"know what criteria your algorithm must meet. Publication in the Algorithm"
+" Register contributes to transparency and accountability regarding the "
+"use of algorithms within the government."
+msgstr ""
+
+#: amt/site/templates/publish/publish_prepare.html.j2:17
+#: amt/site/templates/publish/publish_preview.html.j2:14
+msgid "Pay attention to the following points:"
+msgstr ""
+
+#: amt/site/templates/publish/publish_prepare.html.j2:22
+msgid "Completeness of data:"
+msgstr ""
+
+#: amt/site/templates/publish/publish_prepare.html.j2:23
+msgid ""
+"Ensure that all relevant metadata, such as purpose, operation, data used "
+"and impact assessments, are fully and accurately filled in your algorithm"
+" description. Incomplete information can lead to delay or rejection of "
+"publication."
+msgstr ""
+
+#: amt/site/templates/publish/publish_prepare.html.j2:28
+msgid "Necessity of publication:"
+msgstr ""
+
+#: amt/site/templates/publish/publish_prepare.html.j2:29
+msgid ""
+"Determine whether your algorithm falls under the publication obligation, "
+"for example because it is a high-risk algorithm according to the European"
+" AI regulation, or has a direct impact on citizens. Make sure you have "
+"all this information at hand or have already filled it in on the previous"
+" tabs."
+msgstr ""
+
+#: amt/site/templates/publish/publish_prepare.html.j2:36
+msgid "Show status"
+msgstr ""
+
+#: amt/site/templates/publish/publish_prepare.html.j2:40
+#: amt/site/templates/publish/publish_preview.html.j2:256
+msgid "Next step"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:11
+msgid "Below you can see the complete preview of the publication."
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:19
+msgid "Completeness"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:20
+msgid ""
+": Fill in as many fields as possible. Empty fields are generally not "
+"shown on the website."
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:25
+msgid "Accessible language"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:26
+msgid ""
+": Use understandable language where possible (aim is B1 level), "
+"especially in the general descriptions."
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:31
+msgid "If you want to change data, you can use the details page."
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:46
+msgid "Publication category"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:48
+#: amt/site/templates/publish/publish_preview.html.j2:173
+msgid "Impact assessments"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:56
+msgid "General information"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:57
+msgid "Responsible use"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:58
+msgid "Operation"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:69
+msgid "Theme"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:74
+msgid "Start date"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:78
+msgid "End date"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:82
+msgid "Contact details"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:86
+msgid "Website"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:96
+msgid "URL"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:115
+msgid "Purpose and impact"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:121
+msgid "Considerations"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:127
+msgid "Human intervention"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:139
+msgid "Legal basis"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:145
+msgid "Legal basis (links)"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:161
+msgid "Link to processing register"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:179
+msgid "Impact assessments (links)"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:206
+msgid "Source data"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:212
+msgid "Source data (links)"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:228
+msgid "Methods and models"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:234
+msgid "Supplier"
+msgstr ""
+
+#: amt/site/templates/publish/publish_preview.html.j2:240
+msgid "Publiccode"
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:9
+#: amt/site/templates/publish/publish_status.html.j2:18
+msgid "Publication status"
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:12
+msgid ""
+"The algorithm cannot be found in the register but was previously "
+"published via AMT. It may have been removed from the register."
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:13
+msgid "The publication has now also been removed from AMT."
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:14
+msgid "Publish again"
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:24
+msgid "Last published on"
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:29
+msgid "No publication information is available yet."
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:31
+msgid "Link to your publication"
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:35
+#: amt/site/templates/publish/publish_status.html.j2:40
+msgid "View publication preview"
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:52
+msgid ""
+"A newer version of the algorithm has been successfully submitted, but not"
+" yet released. Only after release will the approval process start and "
+"publication can take place."
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:56
+msgid ""
+"The algorithm has been successfully submitted, but not yet released. Only"
+" after release will the approval process start and publication can take "
+"place."
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:60
+msgid "Release publication"
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:66
+msgid ""
+"The algorithm has been submitted to the Algorithm Register and released. "
+"It still needs to be definitively published by the Algorithm Register."
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:70
+msgid ""
+"A new version of the algorithm has been submitted to the Algorithm "
+"Register and released. It still needs to be definitively published by the"
+" Algorithm Register."
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:73
+msgid "Start publishing"
+msgstr ""
+
+#: amt/site/templates/publish/publish_status.html.j2:77
+msgid "Modify publication"
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_login_form.html.j2:3
+msgid "A connection could not be established with the Algorithm Register."
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_login_form.html.j2:5
+msgid "Check the entered data and try again."
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_login_form.html.j2:10
+msgid ""
+"The Algorithm Register is not part of AMT and to submit an algorithm or "
+"check the status, logging in to the register is required."
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_login_form.html.j2:11
+msgid "Read more about registration here"
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_login_form.html.j2:30
+msgid "Password"
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_login_form.html.j2:34
+msgid "Connect"
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_login_success.html.j2:1
+msgid "Connection successful"
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_login_success.html.j2:2
+msgid "The connection to the Algorithm Register was successful."
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_organization_selector.html.j2:3
+msgid "Organization selected"
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_organization_selector.html.j2:4
+msgid "You are publishing to organization:"
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_organization_selector.html.j2:7
+msgid "Change organization"
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_organization_selector.html.j2:13
+#: amt/site/templates/publish/parts/ar_organization_selector.html.j2:21
+msgid "Select an organization"
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_organization_selector.html.j2:15
+msgid "Under which organization should this algorithm be published?"
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_organization_selector.html.j2:20
+msgid "Choose your organization"
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_organization_selector.html.j2:26
+#: amt/site/templates/publish/parts/ar_organization_selector.html.j2:42
+msgid "Confirm"
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_organization_selector.html.j2:29
+msgid "Enter the organization details you want to publish with."
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_organization_selector.html.j2:34
+msgid "Organization Identifier"
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_organization_selector.html.j2:34
+msgid "This is your organization ID in the Algorithm Register."
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_organization_selector.html.j2:37
+msgid "Organization Name"
+msgstr ""
+
+#: amt/site/templates/publish/parts/ar_organization_selector.html.j2:37
+msgid ""
+"This is the name of your organization as it will be displayed in the "
+"Algorithm Register."
 msgstr ""
 

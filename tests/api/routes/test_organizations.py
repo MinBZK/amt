@@ -208,7 +208,7 @@ async def test_get_users(client: AsyncClient, mocker: MockFixture, db: DatabaseT
     # then
     assert response.status_code == 200
     assert response.headers["content-type"] == "application/json"
-    assert b'{"value":"92714be3-f798-4461-ba83-55d6cfd889a6","display_value":"Default User"}' in response.content
+    assert b'{"value":"8eacad1c-594f-4507-bbd1-b162340d5984","display_value":"Default User"}' in response.content
 
     # when
     response = await client.get("/organizations/users?query=Default&returnType=search_select_field")
@@ -240,14 +240,14 @@ async def test_get_members(client: AsyncClient, mocker: MockFixture, db: Databas
     # then
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"/organizations/default-organization/members/92714be3-f798-4461-ba83-55d6cfd889a6" in response.content
+    assert b"/organizations/default-organization/members/8eacad1c-594f-4507-bbd1-b162340d5984" in response.content
 
     # when
     response = await client.get("/organizations/default-organization/members", headers={"HX-Request": "true"})
     # then
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert b"/organizations/default-organization/members/92714be3-f798-4461-ba83-55d6cfd889a6" in response.content
+    assert b"/organizations/default-organization/members/8eacad1c-594f-4507-bbd1-b162340d5984" in response.content
 
 
 @pytest.mark.asyncio

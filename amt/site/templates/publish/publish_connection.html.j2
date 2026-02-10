@@ -1,0 +1,12 @@
+{% extends 'algorithms/details_base.html.j2' %}
+{% from "macros/editable_macros.html.j2" import editable with context %}
+{% block detail_content %}
+    <c-heading type="h2" class="rvo-layout-margin-vertical--xl">{% trans %}Algorithm register connection{% endtrans %}</c-heading>
+    <div id="publish-content-container">
+        {% if is_ar_logged_in %}
+            {% include "publish/parts/ar_login_success.html.j2" %}
+        {% else %}
+            {% include "publish/parts/ar_login_form.html.j2" %}
+        {% endif %}
+    </div>
+{% endblock %}

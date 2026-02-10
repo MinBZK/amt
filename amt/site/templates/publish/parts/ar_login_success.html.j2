@@ -1,0 +1,11 @@
+<c-alert class="rvo-layout-justify-content-start" maxWidth="sm" kind="success" heading="{% trans %}Connection successful{% endtrans %}">
+<c-p>{% trans %}The connection to the Algorithm Register was successful.{% endtrans %}</c-p>
+</c-alert>
+<br />
+{% include "publish/parts/ar_organization_selector.html.j2" %}
+<br />
+{% if selected_org_id %}
+    <c-button @click="window.location='./'" kind="primary">{% trans %}Continue{% endtrans %}</c-button>
+{% else %}
+    <c-button kind="primary" disabled="true">{% trans %}Continue{% endtrans %}</c-button>
+{% endif %}

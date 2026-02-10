@@ -1,13 +1,6 @@
-<div class="rvo-alert rvo-alert--warning rvo-alert--padding-sm">
-    <span class="utrecht-icon rvo-icon rvo-icon-waarschuwing rvo-icon--xl rvo-status-icon-waarschuwing"
-          role="img"
-          aria-label="Waarschuwing"></span>
-    <div class="rvo-alert-text">
-        <div>
-            <b>{% trans %}Beta Version{% endtrans %} <a class="rvo-link" href="https://github.com/MinBZK/amt">{{ version }}</a></b> {% trans %}  |  This website is under development  |  All versions are created in an open manner.{% endtrans %}
-        </div>
-    </div>
-</div>
+<c-alert kind="warning" padding="xs">
+<b>{% trans %}Beta Version{% endtrans %} <a class="rvo-link" href="https://github.com/MinBZK/amt">{{ version }}</a></b> {% trans %}  |  This website is under development  |  All versions are created in an open manner.{% endtrans %}
+</c-alert>
 <header class="header">
     <div class="rvo-header__logo-wrapper">
         <div class="rvo-logo rvo-header__logo-img">

@@ -106,7 +106,7 @@ async def test_fetch_tasks_invalid_response(httpx_mock: HTTPXMock):
     urn = "urn:nl:aivt:tr:td:1.0"
 
     httpx_mock.add_response(
-        url="https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:td:1.0?version=latest",
+        url="https://task-registry.rijksapp.nl/instruments/urn/urn:nl:aivt:tr:td:1.0?version=latest",
         content=b'{"test": 1}',
         is_optional=True,
     )

@@ -62,7 +62,9 @@
     {% endif %}
 {% endif %}
 {% if start > 0 %}
-    {% for user, role in members %}{{ macros.overview_table_row_member(loop, user, role) }}{% endfor %}
+    {% for user, authorization, role, _ in members %}
+        {{ macros.overview_table_row_member(loop, user, authorization, role, permission_path) }}
+    {% endfor %}
 {% else %}
     <div id="members-search-results">
         <div class="margin-top-large rvo-layout-row rvo-layout-justify-content-space-between">

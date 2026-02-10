@@ -13,7 +13,7 @@ interactions:
         user-agent:
           - python-httpx/0.28.1
       method: GET
-      uri: https://task-registry.apps.digilab.network/instruments/urn/invalid?version=latest
+      uri: https://task-registry.rijksapp.nl/instruments/urn/invalid?version=latest
     response:
       body:
         string: '{"detail":"invalid urn: invalid"}'
@@ -28,6 +28,72 @@ interactions:
           - Wed, 15 Jan 2025 09:18:57 GMT
         Strict-Transport-Security:
           - max-age=31536000; includeSubDomains
+      status:
+        code: 400
+        message: Bad Request
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl//instruments/urn/invalid?version=latest
+    response:
+      body:
+        string: '{"detail":"Not Found"}'
+      headers:
+        content-length:
+          - "22"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:42:35 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: ""
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate, zstd
+        Connection:
+          - keep-alive
+        Host:
+          - task-registry.rijksapp.nl
+        User-Agent:
+          - python-httpx/0.28.1
+      method: GET
+      uri: https://task-registry.rijksapp.nl/instruments/urn/invalid?version=latest
+    response:
+      body:
+        string: '{"detail":"invalid urn: invalid"}'
+      headers:
+        content-length:
+          - "33"
+        content-type:
+          - application/json
+        date:
+          - Mon, 02 Feb 2026 08:45:44 GMT
+        server:
+          - uvicorn
+        set-cookie:
+          - 70f911933f5f364bb648c3bc66895b1b=6e202bd8f3385da298253ccd0d2d1991; path=/;
+            HttpOnly; Secure; SameSite=None
       status:
         code: 400
         message: Bad Request

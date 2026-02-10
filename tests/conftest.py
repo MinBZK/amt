@@ -1,4 +1,5 @@
 import asyncio
+import hashlib
 import logging
 import os
 import re
@@ -51,11 +52,11 @@ def run_server_uvicorn(database_file: Path, host: str = "127.0.0.1", port: int =
     os.environ["DISABLE_AUTH"] = "true"
     os.environ["OIDC_CLIENT_ID"] = "AMT"
     os.environ["OIDC_DISCOVERY_URL"] = (
-        "https://keycloak.apps.digilab.network/realms/algoritmes-test/.well-known/openid-configuration"
+        "https://keycloak.rig.prd1.gn2.quattro.rijksapps.nl/realms/amt-test/.well-known/openid-configuration"
     )
     logger.info(os.environ["APP_DATABASE_FILE"])
     app = create_app()
-    uvicorn.run(app, host=host, port=port)
+    uvicorn.run(app, host=host, port=port, loop="asyncio")
 
 
 @pytest.fixture(scope="session")
@@ -245,7 +246,8 @@ def generate_db_name(request: pytest.FixtureRequest) -> str:
 
     # postgres has a limit of 63 bytes for database names
     if len(sanitized_name) > 63:
-        sanitized_name = sanitized_name[:63]
+        hash_suffix = hashlib.md5(sanitized_name.encode()).hexdigest()[:8]  # noqa: S324
+        sanitized_name = sanitized_name[:54] + "_" + hash_suffix
 
     return sanitized_name
 
