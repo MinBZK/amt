@@ -182,3 +182,7 @@ authorized_licenses = [
 # packaging uses "Apache-2.0 OR BSD-2-Clause" which liccheck doesn't parse correctly
 packaging = "*"
 wrapt = "*"
+# prometheus-client uses "Apache-2.0 AND BSD-2-Clause" which liccheck doesn't parse correctly
+prometheus-client = "*"
+# prometheus-fastapi-instrumentator reports "ISC" which doesn't match "ISC License (ISCL)"
+prometheus-fastapi-instrumentator = "*"
