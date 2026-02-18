@@ -246,6 +246,38 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  deploy-pr:
+    runs-on: ubuntu-latest
+    needs: [build]
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Extract metadata for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ""
+          flavor: |
+            latest=false
+
+      - name: Get GHCR package hash
+        id: get_package_hash
+        run: |
+          container_id=$(gh api --paginate -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /orgs/MinBZK/packages/container/amt/versions | jq -r '.[] | select(.metadata.container.tags | contains(["${{ fromJSON(steps.meta.outputs.json).tags[0] }}"])) | .name')
+          echo "container_id=$container_id" >> "$GITHUB_OUTPUT"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy to ZAD
+        uses: RijksICTGilde/zad-actions/deploy@v2
+        with:
+          api-key: ${{ secrets.ZAD_API_KEY_DEV }}
+          project-id: amt-odc
+          deployment-name: amt-odc
+          component: component-1
+          image: ghcr.io/minbzk/amt:${{ fromJSON(steps.meta.outputs.json).tags[0] }}@${{ steps.get_package_hash.outputs.container_id }}
+          comment-on-pr: "true"
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
   notifyMattermost:
     runs-on: ubuntu-latest
     needs:

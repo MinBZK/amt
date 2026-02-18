@@ -14,6 +14,7 @@ on:
         type: choice
         options:
           - sandbox
+          - production
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -43,8 +44,13 @@ jobs:
         run: |
           case "${{ inputs.environment }}" in
             sandbox)
-              echo "project_id=amt-dev" >> "$GITHUB_OUTPUT"
+              echo "project_id=amt-odc" >> "$GITHUB_OUTPUT"
               echo "deployment_name=deployment-1" >> "$GITHUB_OUTPUT"
+              echo "component=component-1" >> "$GITHUB_OUTPUT"
+              ;;
+            production)
+              echo "project_id=amt-odc-prd" >> "$GITHUB_OUTPUT"
+              echo "deployment_name=productie" >> "$GITHUB_OUTPUT"
               echo "component=component-1" >> "$GITHUB_OUTPUT"
               ;;
             *)
@@ -54,9 +60,9 @@ jobs:
           esac
 
       - name: Deploy to ZAD
-        uses: RijksICTGilde/zad-actions/deploy@v1
+        uses: RijksICTGilde/zad-actions/deploy@v2
         with:
-          api-key: ${{ secrets.ZAD_API_KEY }}
+          api-key: ${{ inputs.environment == 'production' && secrets.ZAD_API_KEY_PRD || secrets.ZAD_API_KEY_DEV }}
           project-id: ${{ steps.zad_config.outputs.project_id }}
           deployment-name: ${{ steps.zad_config.outputs.deployment_name }}
           component: ${{ steps.zad_config.outputs.component }}
