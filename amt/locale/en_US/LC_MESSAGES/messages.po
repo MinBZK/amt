@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 0001-01-01 00:00+0000\n"
+"POT-Creation-Date: 2026-02-03 14:43+0100\n"
 "PO-Revision-Date: 0001-01-01 00:00+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.15.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: amt/api/ai_act_profile.py:24
 msgid "Type"
@@ -45,7 +45,7 @@ msgstr "Are there transparency obligations?"
 #: amt/api/ai_act_profile.py:36 amt/site/templates/auth/profile.html.j2:72
 #: amt/site/templates/auth/profile.html.j2:99
 #: amt/site/templates/macros/form_macros.html.j2:441
-#: amt/site/templates/organizations/parts/members_results.html.j2:133
+#: amt/site/templates/organizations/parts/members_results.html.j2:135
 msgid "Role"
 msgstr "Role"
 
@@ -325,7 +325,7 @@ msgstr "Add links to documents"
 #: amt/site/templates/auth/profile.html.j2:96
 #: amt/site/templates/macros/form_macros.html.j2:440
 #: amt/site/templates/organizations/home.html.j2:14
-#: amt/site/templates/organizations/parts/members_results.html.j2:130
+#: amt/site/templates/organizations/parts/members_results.html.j2:132
 #: amt/site/templates/publish/parts/ar_login_form.html.j2:26
 msgid "Name"
 msgstr "Name"
@@ -821,7 +821,7 @@ msgstr "Add member"
 msgid "Search"
 msgstr "Search"
 
-#: amt/site/templates/organizations/parts/members_results.html.j2:71
+#: amt/site/templates/organizations/parts/members_results.html.j2:73
 #, python-format
 msgid ""
 "%(members_length)s result\n"
@@ -832,7 +832,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: amt/site/templates/organizations/parts/members_results.html.j2:76
+#: amt/site/templates/organizations/parts/members_results.html.j2:78
 #: amt/site/templates/organizations/parts/overview_results.html.j2:85
 #: amt/site/templates/parts/filter_list.html.j2:16
 msgid "for"
@@ -1132,9 +1132,12 @@ msgid "Previous step"
 msgstr ""
 
 #: amt/site/templates/publish/parts/ar_login_form.html.j2:9
+#: amt/site/templates/publish/parts/ar_login_form.html.j2:34
 #: amt/site/templates/publish/publish_connection.html.j2:4
-msgid "Algorithm register connection"
-msgstr ""
+#: amt/site/templates/publish/publish_explanation.html.j2:17
+#, fuzzy
+msgid "Login to Algorithm Register"
+msgstr "Name of the algorithm"
 
 #: amt/site/templates/publish/publish_explanation.html.j2:5
 msgid "Publish to the Algorithm Register"
@@ -1166,11 +1169,6 @@ msgstr ""
 #: amt/site/templates/publish/publish_explanation.html.j2:12
 msgid "Read more about the Algorithm Register here"
 msgstr ""
-
-#: amt/site/templates/publish/publish_explanation.html.j2:17
-#, fuzzy
-msgid "Login to Algorithm Register"
-msgstr "Name of the algorithm"
 
 #: amt/site/templates/publish/parts/ar_login_success.html.j2:8
 #: amt/site/templates/publish/parts/ar_login_success.html.j2:10
@@ -1456,10 +1454,6 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: amt/site/templates/publish/parts/ar_login_form.html.j2:34
-msgid "Connect"
-msgstr ""
-
 #: amt/site/templates/publish/parts/ar_login_success.html.j2:1
 msgid "Connection successful"
 msgstr ""
@@ -1525,4 +1519,10 @@ msgid ""
 "This is the name of your organization as it will be displayed in the "
 "Algorithm Register."
 msgstr ""
+
+#~ msgid "Algorithm register connection"
+#~ msgstr ""
+
+#~ msgid "Connect"
+#~ msgstr ""
 

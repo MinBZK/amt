@@ -6,7 +6,7 @@
     </c-alert>
 {% endif %}
 <c-card outline="true">
-<c-alert style="margin-top: 0;" kind="warning" heading="{% trans %}Algorithm register connection{% endtrans %}" class="rvo-layout-margin-vertical--xl">
+<c-alert style="margin-top: 0;" kind="warning" heading="{% trans %}Login to Algorithm Register{% endtrans %}" class="rvo-layout-margin-vertical--xl">
 <c-p>{% trans %}The Algorithm Register is not part of AMT and to submit an algorithm or check the status, logging in to the register is required.{% endtrans %}
 <c-link target="_blank" href="https://algoritmes.overheid.nl/nl/footer/registreer-je-algoritme">{% trans %}Read more about registration here{% endtrans %}
 </c-link>
@@ -31,7 +31,7 @@
     {% if errors is defined and errors.get('password') %}errorText="{{ errors.get('password') }}"{% endif %}
     />
     <c-button type="submit" hx-disabled-elt="this">
-    {% trans %}Connect{% endtrans %}
+    {% trans %}Login to Algorithm Register{% endtrans %}
     </c-button>
 </form>
 </c-form-fieldset>
