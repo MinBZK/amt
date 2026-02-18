@@ -44,7 +44,7 @@ msgstr ""
 #: amt/api/ai_act_profile.py:36 amt/site/templates/auth/profile.html.j2:72
 #: amt/site/templates/auth/profile.html.j2:99
 #: amt/site/templates/macros/form_macros.html.j2:441
-#: amt/site/templates/organizations/parts/members_results.html.j2:133
+#: amt/site/templates/organizations/parts/members_results.html.j2:135
 msgid "Role"
 msgstr ""
 
@@ -322,7 +322,7 @@ msgstr ""
 #: amt/site/templates/auth/profile.html.j2:96
 #: amt/site/templates/macros/form_macros.html.j2:440
 #: amt/site/templates/organizations/home.html.j2:14
-#: amt/site/templates/organizations/parts/members_results.html.j2:130
+#: amt/site/templates/organizations/parts/members_results.html.j2:132
 #: amt/site/templates/publish/parts/ar_login_form.html.j2:26
 msgid "Name"
 msgstr ""
@@ -812,7 +812,7 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: amt/site/templates/organizations/parts/members_results.html.j2:71
+#: amt/site/templates/organizations/parts/members_results.html.j2:73
 #, python-format
 msgid ""
 "%(members_length)s result\n"
@@ -823,7 +823,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: amt/site/templates/organizations/parts/members_results.html.j2:76
+#: amt/site/templates/organizations/parts/members_results.html.j2:78
 #: amt/site/templates/organizations/parts/overview_results.html.j2:85
 #: amt/site/templates/parts/filter_list.html.j2:16
 msgid "for"
@@ -1103,8 +1103,10 @@ msgid "Previous step"
 msgstr ""
 
 #: amt/site/templates/publish/parts/ar_login_form.html.j2:9
+#: amt/site/templates/publish/parts/ar_login_form.html.j2:34
 #: amt/site/templates/publish/publish_connection.html.j2:4
-msgid "Algorithm register connection"
+#: amt/site/templates/publish/publish_explanation.html.j2:17
+msgid "Login to Algorithm Register"
 msgstr ""
 
 #: amt/site/templates/publish/publish_explanation.html.j2:5
@@ -1136,10 +1138,6 @@ msgstr ""
 
 #: amt/site/templates/publish/publish_explanation.html.j2:12
 msgid "Read more about the Algorithm Register here"
-msgstr ""
-
-#: amt/site/templates/publish/publish_explanation.html.j2:17
-msgid "Login to Algorithm Register"
 msgstr ""
 
 #: amt/site/templates/publish/parts/ar_login_success.html.j2:8
@@ -1415,10 +1413,6 @@ msgstr ""
 
 #: amt/site/templates/publish/parts/ar_login_form.html.j2:30
 msgid "Password"
-msgstr ""
-
-#: amt/site/templates/publish/parts/ar_login_form.html.j2:34
-msgid "Connect"
 msgstr ""
 
 #: amt/site/templates/publish/parts/ar_login_success.html.j2:1

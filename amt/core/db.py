@@ -8,16 +8,29 @@ from amt.models.base import Base
 
 logger = logging.getLogger(__name__)
 
+_engine: AsyncEngine | None = None
+
 
 def get_engine() -> AsyncEngine:
-    settings = get_settings()
-    connect_args = {"check_same_thread": False} if settings.APP_DATABASE_SCHEME == "sqlite" else {}
+    global _engine
+    if _engine is None:
+        settings = get_settings()
+        connect_args = {"check_same_thread": False} if settings.APP_DATABASE_SCHEME == "sqlite" else {}
 
-    return create_async_engine(
-        settings.SQLALCHEMY_DATABASE_URI,  # pyright: ignore [reportArgumentType]
-        connect_args=connect_args,
-        echo=settings.SQLALCHEMY_ECHO,
-    )
+        pool_kwargs = {} if settings.APP_DATABASE_SCHEME == "sqlite" else {"pool_size": 2, "max_overflow": 2}
+
+        _engine = create_async_engine(
+            settings.SQLALCHEMY_DATABASE_URI,  # pyright: ignore [reportArgumentType]
+            connect_args=connect_args,
+            echo=settings.SQLALCHEMY_ECHO,
+            **pool_kwargs,
+        )
+    return _engine
+
+
+def reset_engine() -> None:
+    global _engine
+    _engine = None
 
 
 async def check_db() -> None:

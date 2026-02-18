@@ -47,7 +47,7 @@ msgstr "Zijn er transparantieverplichtingen?"
 #: amt/api/ai_act_profile.py:36 amt/site/templates/auth/profile.html.j2:72
 #: amt/site/templates/auth/profile.html.j2:99
 #: amt/site/templates/macros/form_macros.html.j2:441
-#: amt/site/templates/organizations/parts/members_results.html.j2:133
+#: amt/site/templates/organizations/parts/members_results.html.j2:135
 msgid "Role"
 msgstr "Rol"
 
@@ -329,7 +329,7 @@ msgstr "Voeg link naar bestanden toe"
 #: amt/site/templates/auth/profile.html.j2:96
 #: amt/site/templates/macros/form_macros.html.j2:440
 #: amt/site/templates/organizations/home.html.j2:14
-#: amt/site/templates/organizations/parts/members_results.html.j2:130
+#: amt/site/templates/organizations/parts/members_results.html.j2:132
 #: amt/site/templates/publish/parts/ar_login_form.html.j2:26
 msgid "Name"
 msgstr "Naam"
@@ -839,7 +839,7 @@ msgstr "Voeg personen toe"
 msgid "Search"
 msgstr "Zoek"
 
-#: amt/site/templates/organizations/parts/members_results.html.j2:71
+#: amt/site/templates/organizations/parts/members_results.html.j2:73
 #, python-format
 msgid ""
 "%(members_length)s result\n"
@@ -854,7 +854,7 @@ msgstr[1] ""
 "\n"
 "                    %(members_length)s resultaten"
 
-#: amt/site/templates/organizations/parts/members_results.html.j2:76
+#: amt/site/templates/organizations/parts/members_results.html.j2:78
 #: amt/site/templates/organizations/parts/overview_results.html.j2:85
 #: amt/site/templates/parts/filter_list.html.j2:16
 msgid "for"
@@ -1162,9 +1162,11 @@ msgid "Previous step"
 msgstr "Vorige stap"
 
 #: amt/site/templates/publish/parts/ar_login_form.html.j2:9
+#: amt/site/templates/publish/parts/ar_login_form.html.j2:34
 #: amt/site/templates/publish/publish_connection.html.j2:4
-msgid "Algorithm register connection"
-msgstr "Verbinding algoritmeregister"
+#: amt/site/templates/publish/publish_explanation.html.j2:17
+msgid "Login to Algorithm Register"
+msgstr "Inloggen bij Algoritmeregister"
 
 #: amt/site/templates/publish/publish_explanation.html.j2:5
 msgid "Publish to the Algorithm Register"
@@ -1203,10 +1205,6 @@ msgstr ""
 #: amt/site/templates/publish/publish_explanation.html.j2:12
 msgid "Read more about the Algorithm Register here"
 msgstr "Lees hier meer over het Algoritmeregister"
-
-#: amt/site/templates/publish/publish_explanation.html.j2:17
-msgid "Login to Algorithm Register"
-msgstr "Inloggen bij Algoritmeregister"
 
 #: amt/site/templates/publish/parts/ar_login_success.html.j2:8
 #: amt/site/templates/publish/parts/ar_login_success.html.j2:10
@@ -1513,10 +1511,6 @@ msgstr "Lees hier meer over registratie"
 #: amt/site/templates/publish/parts/ar_login_form.html.j2:30
 msgid "Password"
 msgstr "Wachtwoord"
-
-#: amt/site/templates/publish/parts/ar_login_form.html.j2:34
-msgid "Connect"
-msgstr "Verbinding maken"
 
 #: amt/site/templates/publish/parts/ar_login_success.html.j2:1
 msgid "Connection successful"

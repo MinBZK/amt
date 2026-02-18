@@ -1,4 +1,5 @@
-from collections.abc import Callable, Sequence
+import asyncio
+from collections.abc import Callable, Mapping, Sequence
 from os import PathLike
 from typing import Any
 
@@ -7,7 +8,8 @@ from jinja2 import Environment, FileSystemLoader
 from starlette.background import BackgroundTask
 from starlette.requests import Request
 from starlette.responses import HTMLResponse
-from starlette.templating import Jinja2Templates, _TemplateResponse  # pyright: ignore[reportPrivateUsage]
+from starlette.templating import Jinja2Templates
+from starlette.types import Receive, Scope, Send
 
 from amt.core.internationalization import (
     get_requested_language,
@@ -15,6 +17,57 @@ from amt.core.internationalization import (
     get_translation,
     supported_translations,
 )
+
+
+class _AsyncTemplateResponse(HTMLResponse):
+    """A TemplateResponse that renders Jinja2 async templates.
+
+    Unlike Starlette's default _TemplateResponse which renders synchronously in __init__,
+    this defers rendering to __call__ (which is async) so that async template globals
+    (like resolve_editable_from_path) can be awaited on the main event loop.
+    """
+
+    def __init__(
+        self,
+        template: Any,  # noqa: ANN401
+        context: dict[str, Any],
+        status_code: int = 200,
+        headers: Mapping[str, str] | None = None,
+        media_type: str | None = None,
+        background: BackgroundTask | None = None,
+    ) -> None:
+        self.template = template
+        self.context = context
+        self._async_rendered = False
+        try:
+            asyncio.get_running_loop()
+            # We're inside an async handler; defer rendering to __call__
+            # where we can use render_async on the main event loop.
+            content = ""
+        except RuntimeError:
+            # No running event loop (e.g. in tests); render synchronously.
+            content = template.render(context)
+            self._async_rendered = True
+        super().__init__(content, status_code, headers, media_type, background)
+
+    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+        if not self._async_rendered:
+            # Render the template asynchronously on the main event loop.
+            content = await self.template.render_async(self.context)
+            self.body = content.encode("utf-8")
+            self.headers["content-length"] = str(len(self.body))
+            self._async_rendered = True
+
+        request = self.context.get("request", {})
+        extensions = request.get("extensions", {})
+        if "http.response.debug" in extensions:
+            await send(
+                {
+                    "type": "http.response.debug",
+                    "info": {"template": self.template, "context": self.context},
+                }
+            )
+        await super().__call__(scope, receive, send)
 
 
 # we use a custom override so we can add the translation per request, which is parsed in the Request object in kwargs
@@ -25,7 +78,7 @@ class LocaleJinja2Templates(Jinja2Templates):
         context_processors: list[Callable[[Request], dict[str, Any]]] | None = None,
         **env_options: Any,  # noqa: ANN401
     ) -> None:
-        env = Environment(loader=FileSystemLoader(directory), autoescape=True, **env_options)
+        env = Environment(loader=FileSystemLoader(directory), autoescape=True, enable_async=True, **env_options)
         env.add_extension("jinja2.ext.i18n")
         jinja_roos_components.setup_components(env, strict_validation=True)  # pyright: ignore [reportUnknownArgumentType]
         super().__init__(env=env, context_processors=context_processors)  # pyright: ignore[reportUnknownMemberType]
@@ -39,7 +92,7 @@ class LocaleJinja2Templates(Jinja2Templates):
         headers: dict[str, str] | None = None,
         media_type: str | None = None,
         background: BackgroundTask | None = None,
-    ) -> _TemplateResponse:
+    ) -> _AsyncTemplateResponse:
         content_language = get_supported_translation(get_requested_language(request))
         translations = get_translation(content_language)
         if headers is None:
@@ -57,7 +110,19 @@ class LocaleJinja2Templates(Jinja2Templates):
         else:
             context["csrftoken"] = ""
 
-        return super().TemplateResponse(request, name, context, status_code, headers, media_type, background)
+        context.setdefault("request", request)
+        for context_processor in self.context_processors:
+            context.update(context_processor(request))
+
+        template = self.get_template(name)  # pyright: ignore[reportUnknownVariableType, reportUnknownMemberType]
+        return _AsyncTemplateResponse(
+            template,
+            context,
+            status_code=status_code,
+            headers=headers,
+            media_type=media_type,
+            background=background,
+        )
 
     def Redirect(self, request: Request, url: str) -> HTMLResponse:
         headers = {"HX-Redirect": url}

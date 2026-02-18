@@ -77,5 +77,5 @@ jobs:
           TEXT: |
             :sparkles: A new version of AMT has been released on production by ${{ github.triggering_actor }} :sparkles:.
 
-            It will be available within a few minutes on https://amt.prd.apps.digilab.network/.
+            It will be available within a few minutes on https://amt.rijksapp.nl/.
           MATTERMOST_USERNAME: ${{ github.triggering_actor }}

@@ -10,7 +10,7 @@
 AMT is a modern tool for bookkeeping of algorithmic systems (AI or not) and to apply technical and non-technical tests
 for algorithms.
 
-A demo of the tool is deployed here: https://amt.prd.apps.digilab.network.
+A demo of the tool is deployed here: https://amt.rijksapp.nl/.
 
 The tool is built by the [AI Validation Team](https://minbzk.github.io/ai-validation/).
 
