@@ -14,4 +14,4 @@ jobs:
         with:
           api-key: ${{ secrets.ZAD_API_KEY_DEV }}
           project-id: amt-odc
-          deployment-name: amt-odc
+          deployment-name: pr-${{ github.event.pull_request.number }}
