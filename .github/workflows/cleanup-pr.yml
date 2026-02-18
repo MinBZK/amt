@@ -1,0 +1,16 @@
+name: cleanup-pr
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cleanup ZAD deployment
+        uses: RijksICTGilde/zad-actions/cleanup@v2
+        with:
+          api-key: ${{ secrets.ZAD_API_KEY_DEV }}
+          project-id: amt-odc
+          deployment-name: amt-odc
