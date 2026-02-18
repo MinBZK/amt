@@ -8,14 +8,12 @@ on:
         required: true
         default: "main"
       environment:
-        description: "Environment to deploy too"
+        description: "Environment to deploy to"
         required: true
         default: "sandbox"
         type: choice
         options:
           - sandbox
-          - production
-          - bzk
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -33,49 +31,33 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: check correct name
+      - name: Check container exists
         run: |
-          if [ -z "${{steps.get_package_hash.outputs.container_id}}" ]; then
-            echo "Variable is empty. Failing the workflow."
+          if [ -z "${{ steps.get_package_hash.outputs.container_id }}" ]; then
+            echo "Container tag '${{ inputs.image_tag }}' not found. Failing the workflow."
             exit 1
           fi
 
-      - uses: actions/checkout@v6
+      - name: Map environment to ZAD project
+        id: zad_config
+        run: |
+          case "${{ inputs.environment }}" in
+            sandbox)
+              echo "project_id=amt-dev" >> "$GITHUB_OUTPUT"
+              echo "deployment_name=deployment-1" >> "$GITHUB_OUTPUT"
+              echo "component=component-1" >> "$GITHUB_OUTPUT"
+              ;;
+            *)
+              echo "Unknown environment: ${{ inputs.environment }}"
+              exit 1
+              ;;
+          esac
+
+      - name: Deploy to ZAD
+        uses: RijksICTGilde/zad-actions/deploy@v1
         with:
-          repository: "minbzk/ai-validation-infra"
-          ref: main
-          token: ${{ secrets.GH_PAT }}
-
-      - name: Configure Git
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-      - name: Make changes to the file
-        run: |
-          sed -i 's/newTag: .*$/newTag: ${{inputs.image_tag  }}@${{ steps.get_package_hash.outputs.container_id }}/g' apps/amt/overlays/${{ inputs.environment }}/kustomization.yaml
-          sed -i 's|minbzk.github.io/version: .*$|minbzk.github.io/version: ${{ inputs.image_tag }}|g' apps/amt/overlays/${{ inputs.environment }}/kustomization.yaml
-          git add apps/amt/overlays/${{ inputs.environment }}/kustomization.yaml
-
-      - name: show changes
-        run: git diff --staged
-
-      - name: push changes
-        run: |
-          git commit -m "Update amt overlay ${{ inputs.environment }} tag ${{ steps.get_package_hash.outputs.container_id }}"
-          git push --force-with-lease
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
-
-  notifyMattermost:
-    runs-on: ubuntu-latest
-    if: ${{ success() && inputs.environment == 'production' }}
-    steps:
-      - uses: mattermost/action-mattermost-notify@master
-        with:
-          MATTERMOST_WEBHOOK_URL: ${{ secrets.MM_WEBHOOK_RELEASES }}
-          TEXT: |
-            :sparkles: A new version of AMT has been released on production by ${{ github.triggering_actor }} :sparkles:.
-
-            It will be available within a few minutes on https://amt.rijksapp.nl/.
-          MATTERMOST_USERNAME: ${{ github.triggering_actor }}
+          api-key: ${{ secrets.ZAD_API_KEY }}
+          project-id: ${{ steps.zad_config.outputs.project_id }}
+          deployment-name: ${{ steps.zad_config.outputs.deployment_name }}
+          component: ${{ steps.zad_config.outputs.component }}
+          image: ghcr.io/minbzk/amt:${{ inputs.image_tag }}@${{ steps.get_package_hash.outputs.container_id }}
