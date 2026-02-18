@@ -248,8 +248,8 @@ jobs:
 
   deploy-pr:
     runs-on: ubuntu-latest
-    needs: [build]
-    if: github.event_name == 'pull_request'
+    needs: [build-pr]
+    if: github.event_name == 'pull_request' && github.event.pull_request.user.type != 'Bot'
     steps:
       - name: Extract metadata for Docker
         id: meta
