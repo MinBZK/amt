@@ -55,6 +55,10 @@ def run_server_uvicorn(database_file: Path, host: str = "127.0.0.1", port: int =
         "https://keycloak.rig.prd1.gn2.quattro.rijksapps.nl/realms/amt-test/.well-known/openid-configuration"
     )
     logger.info(os.environ["APP_DATABASE_FILE"])
+
+    from amt.core.db import reset_engine
+
+    reset_engine()
     app = create_app()
     uvicorn.run(app, host=host, port=port, loop="asyncio")
 
