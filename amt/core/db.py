@@ -12,7 +12,7 @@ _engine: AsyncEngine | None = None
 
 
 def get_engine() -> AsyncEngine:
-    global _engine  # noqa: PLW0603
+    global _engine
     if _engine is None:
         settings = get_settings()
         connect_args = {"check_same_thread": False} if settings.APP_DATABASE_SCHEME == "sqlite" else {}
@@ -29,7 +29,7 @@ def get_engine() -> AsyncEngine:
 
 
 def reset_engine() -> None:
-    global _engine  # noqa: PLW0603
+    global _engine
     _engine = None
 
 

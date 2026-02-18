@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-02-03 14:43+0100\n"
+"POT-Creation-Date: 0001-01-01 00:00+0000\n"
 "PO-Revision-Date: 0001-01-01 00:00+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.18.0\n"
+"Generated-By: Babel 2.15.0\n"
 
 #: amt/api/ai_act_profile.py:24
 msgid "Type"
@@ -1519,10 +1519,4 @@ msgid ""
 "This is the name of your organization as it will be displayed in the "
 "Algorithm Register."
 msgstr ""
-
-#~ msgid "Algorithm register connection"
-#~ msgstr ""
-
-#~ msgid "Connect"
-#~ msgstr ""
 
