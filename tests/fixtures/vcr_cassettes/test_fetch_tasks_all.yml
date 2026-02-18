@@ -9,7 +9,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -41,7 +41,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -330,7 +330,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -392,7 +392,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -512,7 +512,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -945,7 +945,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -977,7 +977,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -1041,7 +1041,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -1178,7 +1178,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -1227,7 +1227,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -1293,7 +1293,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -1344,7 +1344,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -1395,7 +1395,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -1446,7 +1446,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -1499,7 +1499,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -1549,7 +1549,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -1592,7 +1592,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -1659,7 +1659,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -1703,7 +1703,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -1749,7 +1749,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -1797,7 +1797,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -1850,7 +1850,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -1901,7 +1901,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -1990,7 +1990,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -2047,7 +2047,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -2102,7 +2102,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -2154,7 +2154,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -2204,7 +2204,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -2250,7 +2250,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -2298,7 +2298,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -2360,7 +2360,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -2407,7 +2407,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -2454,7 +2454,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -2505,7 +2505,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -2550,7 +2550,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -2593,7 +2593,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -2641,7 +2641,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -2707,7 +2707,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -2759,7 +2759,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -2840,7 +2840,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -2906,7 +2906,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -2980,7 +2980,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -3038,7 +3038,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -3099,7 +3099,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -3164,7 +3164,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -3227,7 +3227,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -3273,7 +3273,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -3334,7 +3334,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -3384,7 +3384,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -3432,7 +3432,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -3476,7 +3476,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -3534,7 +3534,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -3584,7 +3584,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -3641,7 +3641,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -3688,7 +3688,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -3740,7 +3740,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -3795,7 +3795,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -3851,7 +3851,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -3904,7 +3904,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -3961,7 +3961,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -4014,7 +4014,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -4054,7 +4054,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -4101,7 +4101,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -4227,7 +4227,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -4274,7 +4274,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -4317,7 +4317,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -4369,7 +4369,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -4425,7 +4425,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -4467,7 +4467,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -4516,7 +4516,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -4548,7 +4548,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -4606,7 +4606,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -4650,7 +4650,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -4704,7 +4704,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -4750,7 +4750,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -4804,7 +4804,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -4859,7 +4859,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -4935,7 +4935,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -4998,7 +4998,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -5068,7 +5068,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -5142,7 +5142,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -5196,7 +5196,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -5246,7 +5246,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -5296,7 +5296,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -5344,7 +5344,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -5404,7 +5404,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -5464,7 +5464,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -5539,7 +5539,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -5583,7 +5583,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -5647,7 +5647,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -5708,7 +5708,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -5784,7 +5784,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -5830,7 +5830,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -5874,7 +5874,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -5953,7 +5953,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -5998,7 +5998,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -6052,7 +6052,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -6093,7 +6093,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -6177,7 +6177,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -6226,7 +6226,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -6269,7 +6269,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -6315,7 +6315,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -6378,7 +6378,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -6463,7 +6463,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -6542,7 +6542,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -6596,7 +6596,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -6646,7 +6646,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -6691,7 +6691,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -6812,7 +6812,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -6861,7 +6861,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -6908,7 +6908,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -6951,7 +6951,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -6998,7 +6998,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -7058,7 +7058,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -7096,7 +7096,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -7188,7 +7188,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -7241,7 +7241,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -7289,7 +7289,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -7339,7 +7339,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -7395,7 +7395,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -7447,7 +7447,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -7498,7 +7498,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -7585,7 +7585,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -7634,7 +7634,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -7711,7 +7711,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -7784,7 +7784,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -7871,7 +7871,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -7933,7 +7933,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -7979,7 +7979,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -8049,7 +8049,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -8125,7 +8125,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -8188,7 +8188,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -8229,7 +8229,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -8287,7 +8287,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -8342,7 +8342,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -8414,7 +8414,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -8453,7 +8453,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -8493,7 +8493,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -8538,7 +8538,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -8590,7 +8590,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -8650,7 +8650,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -8719,7 +8719,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -8764,7 +8764,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -8828,7 +8828,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -8893,7 +8893,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -8948,7 +8948,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -9030,7 +9030,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -9080,7 +9080,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -9126,7 +9126,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -9178,7 +9178,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -9233,7 +9233,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -9292,7 +9292,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -9348,7 +9348,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -9401,7 +9401,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -9445,7 +9445,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -9551,7 +9551,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -9593,7 +9593,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -9665,7 +9665,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -9729,7 +9729,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -9790,7 +9790,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -9849,7 +9849,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -10056,7 +10056,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -10112,7 +10112,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -10176,7 +10176,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -10276,7 +10276,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -10325,7 +10325,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -10394,7 +10394,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -10446,7 +10446,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -10513,7 +10513,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -10558,7 +10558,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -10600,7 +10600,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -10648,7 +10648,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -10723,7 +10723,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -10774,7 +10774,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -10814,7 +10814,7 @@ interactions:
         connection:
           - keep-alive
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -10829,7 +10829,7 @@ interactions:
           verschilt per type algoritme welke vereisten hierop van toepassing is en waar
           een aanbieder of gebruiksverantwoordelijke aan moet voldoen. \\n\\nDit is
           mede afhankelijk van de bijbehorende risicoclassificatie. \\n\\nHiervoor kan
-          de [beslishulp](https://ai-verordening-beslishulp.apps.digilab.network/) in
+          de [beslishulp](https://algoritmes.rijksapp.nl/beslishulp-ai-verordening) in
           het Algoritmekader voor worden gebruikt'. \\n\\nLet op dat niet enkel naar
           de AI-verordening wordt gekeken. Ook op impactvolle algoritmes die niet vallen
           onder het bereik van de AI-Verordening zijn vereisten van toepassing. Zie
@@ -10901,7 +10901,7 @@ interactions:
       uri: https://task-registry.rijksapp.nl/instruments/
     response:
       body:
-        string: '{"type":"dir","size":0,"name":"instruments","path":"instruments","download_url":"https://task-registry.apps.digilab.network/instruments","links":{"self":"https://task-registry.apps.digilab.network/instruments"},"entries":[{"type":"file","size":60271,"name":"aiia.yaml","path":"instruments/aiia.yaml","urn":"urn:nl:aivt:tr:aiia:1.0","download_url":"https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0","links":{"self":"https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:aiia:1.0"}},{"type":"file","size":5187,"name":"conformity_assessment_eu_ai_act.yaml","path":"instruments/conformity_assessment_eu_ai_act.yaml","urn":"urn:nl:aivt:tr:ca:1.0","download_url":"https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:ca:1.0","links":{"self":"https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:ca:1.0"}},{"type":"file","size":32897,"name":"iama.yaml","path":"instruments/iama.yaml","urn":"urn:nl:aivt:tr:iama:1.0","download_url":"https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0","links":{"self":"https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:iama:1.0"}},{"type":"file","size":14009,"name":"technical_docs_for_high_risk_ai.yaml","path":"instruments/technical_docs_for_high_risk_ai.yaml","urn":"urn:nl:aivt:tr:td:1.0","download_url":"https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:td:1.0","links":{"self":"https://task-registry.apps.digilab.network/instruments/urn/urn:nl:aivt:tr:td:1.0"}}]}'
+        string: '{"type":"dir","size":0,"name":"instruments","path":"instruments","download_url":"https://task-registry.rijksapp.nl/instruments","links":{"self":"https://task-registry.rijksapp.nl/instruments"},"entries":[{"type":"file","size":60271,"name":"aiia.yaml","path":"instruments/aiia.yaml","urn":"urn:nl:aivt:tr:aiia:1.0","download_url":"https://task-registry.rijksapp.nl/instruments/urn/urn:nl:aivt:tr:aiia:1.0","links":{"self":"https://task-registry.rijksapp.nl/instruments/urn/urn:nl:aivt:tr:aiia:1.0"}},{"type":"file","size":5187,"name":"conformity_assessment_eu_ai_act.yaml","path":"instruments/conformity_assessment_eu_ai_act.yaml","urn":"urn:nl:aivt:tr:ca:1.0","download_url":"https://task-registry.rijksapp.nl/instruments/urn/urn:nl:aivt:tr:ca:1.0","links":{"self":"https://task-registry.rijksapp.nl/instruments/urn/urn:nl:aivt:tr:ca:1.0"}},{"type":"file","size":32897,"name":"iama.yaml","path":"instruments/iama.yaml","urn":"urn:nl:aivt:tr:iama:1.0","download_url":"https://task-registry.rijksapp.nl/instruments/urn/urn:nl:aivt:tr:iama:1.0","links":{"self":"https://task-registry.rijksapp.nl/instruments/urn/urn:nl:aivt:tr:iama:1.0"}},{"type":"file","size":14009,"name":"technical_docs_for_high_risk_ai.yaml","path":"instruments/technical_docs_for_high_risk_ai.yaml","urn":"urn:nl:aivt:tr:td:1.0","download_url":"https://task-registry.rijksapp.nl/instruments/urn/urn:nl:aivt:tr:td:1.0","links":{"self":"https://task-registry.rijksapp.nl/instruments/urn/urn:nl:aivt:tr:td:1.0"}}]}'
       headers:
         content-length:
           - "1570"
@@ -11842,7 +11842,7 @@ interactions:
       uri: https://task-registry.rijksapp.nl/requirements/
     response:
       body:
-        string: '{"type":"dir","size":0,"name":"requirements","path":"requirements","download_url":"https://task-registry.apps.digilab.network/requirements","links":{"self":"https://task-registry.apps.digilab.network/requirements"},"entries":[{"type":"file","size":5472,"name":"aia-00-verboden-AI-praktijken.yaml","path":"requirements/aia-00-verboden-AI-praktijken.yaml","urn":"urn:nl:ak:ver:aia-00","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-00","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-00"}},{"type":"file","size":2549,"name":"aia-01-ai-geletterdheid.yaml","path":"requirements/aia-01-ai-geletterdheid.yaml","urn":"urn:nl:ak:ver:aia-01","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-01","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-01"}},{"type":"file","size":2087,"name":"aia-02-documentatie-beoordeling-niet-hoog-risico-ai.yaml","path":"requirements/aia-02-documentatie-beoordeling-niet-hoog-risico-ai.yaml","urn":"urn:nl:ak:ver:aia-02","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-02","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-02"}},{"type":"file","size":3438,"name":"aia-03-risicobeheersysteem.yaml","path":"requirements/aia-03-risicobeheersysteem.yaml","urn":"urn:nl:ak:ver:aia-03","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-03","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-03"}},{"type":"file","size":2090,"name":"aia-04-risicobeoordeling-voor-jongeren-en-kwetsbaren.yaml","path":"requirements/aia-04-risicobeoordeling-voor-jongeren-en-kwetsbaren.yaml","urn":"urn:nl:ak:ver:aia-04","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-04","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-04"}},{"type":"file","size":3585,"name":"aia-05-data-kwaliteitscriteria.yaml","path":"requirements/aia-05-data-kwaliteitscriteria.yaml","urn":"urn:nl:ak:ver:aia-05","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-05","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-05"}},{"type":"file","size":2897,"name":"aia-06-technische-documentatie.yaml","path":"requirements/aia-06-technische-documentatie.yaml","urn":"urn:nl:ak:ver:aia-06","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-06","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-06"}},{"type":"file","size":2942,"name":"aia-07-automatische-logregistratie.yaml","path":"requirements/aia-07-automatische-logregistratie.yaml","urn":"urn:nl:ak:ver:aia-07","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-07","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-07"}},{"type":"file","size":1974,"name":"aia-08-transparantie-aan-gebruiksverantwoordelijken.yaml","path":"requirements/aia-08-transparantie-aan-gebruiksverantwoordelijken.yaml","urn":"urn:nl:ak:ver:aia-08","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-08","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-08"}},{"type":"file","size":4920,"name":"aia-09-menselijk-toezicht.yaml","path":"requirements/aia-09-menselijk-toezicht.yaml","urn":"urn:nl:ak:ver:aia-09","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-09","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-09"}},{"type":"file","size":3993,"name":"aia-10-nauwkeurigheid-robuustheid-cyberbeveiliging.yaml","path":"requirements/aia-10-nauwkeurigheid-robuustheid-cyberbeveiliging.yaml","urn":"urn:nl:ak:ver:aia-10","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-10","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-10"}},{"type":"file","size":4339,"name":"aia-11-systeem-voor-kwaliteitsbeheer.yaml","path":"requirements/aia-11-systeem-voor-kwaliteitsbeheer.yaml","urn":"urn:nl:ak:ver:aia-11","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-11","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-11"}},{"type":"file","size":2519,"name":"aia-12-bewaartermijn-voor-documentatie.yaml","path":"requirements/aia-12-bewaartermijn-voor-documentatie.yaml","urn":"urn:nl:ak:ver:aia-12","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-12","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-12"}},{"type":"file","size":1858,"name":"aia-13-bewaartermijn-voor-gegenereerde-logs.yaml","path":"requirements/aia-13-bewaartermijn-voor-gegenereerde-logs.yaml","urn":"urn:nl:ak:ver:aia-13","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-13","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-13"}},{"type":"file","size":3755,"name":"aia-14-conformiteitsbeoordeling.yaml","path":"requirements/aia-14-conformiteitsbeoordeling.yaml","urn":"urn:nl:ak:ver:aia-14","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-14","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-14"}},{"type":"file","size":2422,"name":"aia-15-eu-conformiteitsverklaring.yaml","path":"requirements/aia-15-eu-conformiteitsverklaring.yaml","urn":"urn:nl:ak:ver:aia-15","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-15","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-15"}},{"type":"file","size":2173,"name":"aia-16-ce-markering.yaml","path":"requirements/aia-16-ce-markering.yaml","urn":"urn:nl:ak:ver:aia-16","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-16","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-16"}},{"type":"file","size":2217,"name":"aia-17-registratieverplichtingen.yaml","path":"requirements/aia-17-registratieverplichtingen.yaml","urn":"urn:nl:ak:ver:aia-17","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-17","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-17"}},{"type":"file","size":2620,"name":"aia-18-corrigerende-maatregelen-voor-non-conforme-ai.yaml","path":"requirements/aia-18-corrigerende-maatregelen-voor-non-conforme-ai.yaml","urn":"urn:nl:ak:ver:aia-18","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-18","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-18"}},{"type":"file","size":3418,"name":"aia-19-toegankelijkheidseisen.yaml","path":"requirements/aia-19-toegankelijkheidseisen.yaml","urn":"urn:nl:ak:ver:aia-19","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-19","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-19"}},{"type":"file","size":2200,"name":"aia-20-gebruiksverantwoordelijken-maatregelen.yaml","path":"requirements/aia-20-gebruiksverantwoordelijken-maatregelen.yaml","urn":"urn:nl:ak:ver:aia-20","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-20","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-20"}},{"type":"file","size":2996,"name":"aia-21-gebruiksverantwoordelijken-menselijk-toezicht.yaml","path":"requirements/aia-21-gebruiksverantwoordelijken-menselijk-toezicht.yaml","urn":"urn:nl:ak:ver:aia-21","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-21","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-21"}},{"type":"file","size":3493,"name":"aia-22-gebruiksverantwoordelijken-monitoren-werking.yaml","path":"requirements/aia-22-gebruiksverantwoordelijken-monitoren-werking.yaml","urn":"urn:nl:ak:ver:aia-22","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-22","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-22"}},{"type":"file","size":2561,"name":"aia-23-gebruiksverantwoordelijken-bewaren-logs.yaml","path":"requirements/aia-23-gebruiksverantwoordelijken-bewaren-logs.yaml","urn":"urn:nl:ak:ver:aia-23","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-23","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-23"}},{"type":"file","size":2270,"name":"aia-24-informeren-werknemers.yaml","path":"requirements/aia-24-informeren-werknemers.yaml","urn":"urn:nl:ak:ver:aia-24","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-24","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-24"}},{"type":"file","size":2890,"name":"aia-25-gebruiksverantwoordelijken-registratieverplichtingen.yaml","path":"requirements/aia-25-gebruiksverantwoordelijken-registratieverplichtingen.yaml","urn":"urn:nl:ak:ver:aia-25","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-25","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-25"}},{"type":"file","size":3260,"name":"aia-26-recht-op-uitleg-ai-besluiten.yaml","path":"requirements/aia-26-recht-op-uitleg-ai-besluiten.yaml","urn":"urn:nl:ak:ver:aia-26","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-26","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-26"}},{"type":"file","size":2916,"name":"aia-27-beoordelen-gevolgen-grondrechten.yaml","path":"requirements/aia-27-beoordelen-gevolgen-grondrechten.yaml","urn":"urn:nl:ak:ver:aia-27","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-27","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-27"}},{"type":"file","size":2487,"name":"aia-28-transparantieverplichtingen.yaml","path":"requirements/aia-28-transparantieverplichtingen.yaml","urn":"urn:nl:ak:ver:aia-28","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-28","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-28"}},{"type":"file","size":2745,"name":"aia-29-ai-modellen-algemene-doeleinden.yaml","path":"requirements/aia-29-ai-modellen-algemene-doeleinden.yaml","urn":"urn:nl:ak:ver:aia-29","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-29","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-29"}},{"type":"file","size":3528,"name":"aia-30-ai-modellen-algemene-doeleinden-systeemrisico.yaml","path":"requirements/aia-30-ai-modellen-algemene-doeleinden-systeemrisico.yaml","urn":"urn:nl:ak:ver:aia-30","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-30","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-30"}},{"type":"file","size":1924,"name":"aia-31-ai-modellen-algemene-doeleinden-systeemrisico-ernstige-incidenten.yaml","path":"requirements/aia-31-ai-modellen-algemene-doeleinden-systeemrisico-ernstige-incidenten.yaml","urn":"urn:nl:ak:ver:aia-31","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-31","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-31"}},{"type":"file","size":2236,"name":"aia-32-ai-modellen-algemene-doeleinden-systeemrisico-cyberbeveiliging.yaml","path":"requirements/aia-32-ai-modellen-algemene-doeleinden-systeemrisico-cyberbeveiliging.yaml","urn":"urn:nl:ak:ver:aia-32","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-32","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-32"}},{"type":"file","size":2496,"name":"aia-33-verwerking-in-testomgeving.yaml","path":"requirements/aia-33-verwerking-in-testomgeving.yaml","urn":"urn:nl:ak:ver:aia-33","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-33","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-33"}},{"type":"file","size":2970,"name":"aia-34-monitoring-na-het-in-de-handel-brengen.yaml","path":"requirements/aia-34-monitoring-na-het-in-de-handel-brengen.yaml","urn":"urn:nl:ak:ver:aia-34","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-34","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-34"}},{"type":"file","size":2566,"name":"aia-35-melding-ernstige-incidenten.yaml","path":"requirements/aia-35-melding-ernstige-incidenten.yaml","urn":"urn:nl:ak:ver:aia-35","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-35","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-35"}},{"type":"file","size":2335,"name":"aia-36-melding-inbreuk-op-ai-verordening.yaml","path":"requirements/aia-36-melding-inbreuk-op-ai-verordening.yaml","urn":"urn:nl:ak:ver:aia-36","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-36","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-36"}},{"type":"file","size":1810,"name":"aia-37-recht-klacht-indienen-bij-ai-bureau.yaml","path":"requirements/aia-37-recht-klacht-indienen-bij-ai-bureau.yaml","urn":"urn:nl:ak:ver:aia-37","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-37","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-37"}},{"type":"file","size":8417,"name":"aia-38-testen.yaml","path":"requirements/aia-38-testen.yaml","urn":"urn:nl:ak:ver:aia-38","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-38","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-38"}},{"type":"file","size":3437,"name":"aia-39-beleid-naleven-auteurs-en-naburige-rechten.yaml","path":"requirements/aia-39-beleid-naleven-auteurs-en-naburige-rechten.yaml","urn":"urn:nl:ak:ver:aia-39","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-39","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aia-39"}},{"type":"file","size":1746,"name":"arc-01-archiefwet.yaml","path":"requirements/arc-01-archiefwet.yaml","urn":"urn:nl:ak:ver:arc-01","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:arc-01","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:arc-01"}},{"type":"file","size":1570,"name":"aut-01-auteursrechten.yaml","path":"requirements/aut-01-auteursrechten.yaml","urn":"urn:nl:ak:ver:aut-01","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aut-01","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:aut-01"}},{"type":"file","size":2627,"name":"avg-01-persoonsgegevens-worden-rechtmatig-verwerkt.yaml","path":"requirements/avg-01-persoonsgegevens-worden-rechtmatig-verwerkt.yaml","urn":"urn:nl:ak:ver:avg-01","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-01","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-01"}},{"type":"file","size":2420,"name":"avg-02-beperkte-bewaartermijn-van-persoonsgegevens.yaml","path":"requirements/avg-02-beperkte-bewaartermijn-van-persoonsgegevens.yaml","urn":"urn:nl:ak:ver:avg-02","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-02","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-02"}},{"type":"file","size":2110,"name":"avg-03-minimale-verwerking-van-persoonsgegevens.yaml","path":"requirements/avg-03-minimale-verwerking-van-persoonsgegevens.yaml","urn":"urn:nl:ak:ver:avg-03","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-03","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-03"}},{"type":"file","size":2536,"name":"avg-04-proportionaliteit-en-subsidiariteit.yaml","path":"requirements/avg-04-proportionaliteit-en-subsidiariteit.yaml","urn":"urn:nl:ak:ver:avg-04","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-04","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-04"}},{"type":"file","size":1850,"name":"avg-05-juistheid-en-actualiteit-van-persoonsgegevens.yaml","path":"requirements/avg-05-juistheid-en-actualiteit-van-persoonsgegevens.yaml","urn":"urn:nl:ak:ver:avg-05","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-05","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-05"}},{"type":"file","size":2202,"name":"avg-06-verantwoordingsplicht-rechtmatigheid.yaml","path":"requirements/avg-06-verantwoordingsplicht-rechtmatigheid.yaml","urn":"urn:nl:ak:ver:avg-06","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-06","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-06"}},{"type":"file","size":2049,"name":"avg-07-transparantie-bij-verwerken-persoonsgegevens.yaml","path":"requirements/avg-07-transparantie-bij-verwerken-persoonsgegevens.yaml","urn":"urn:nl:ak:ver:avg-07","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-07","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-07"}},{"type":"file","size":2513,"name":"avg-08-wettelijke-verwerking-van-gevoelige-gegevens.yaml","path":"requirements/avg-08-wettelijke-verwerking-van-gevoelige-gegevens.yaml","urn":"urn:nl:ak:ver:avg-08","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-08","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-08"}},{"type":"file","size":2115,"name":"avg-09-inroepen-privacyrecht-bij-verwerking-persoonsgegevens.yaml","path":"requirements/avg-09-inroepen-privacyrecht-bij-verwerking-persoonsgegevens.yaml","urn":"urn:nl:ak:ver:avg-09","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-09","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-09"}},{"type":"file","size":9664,"name":"avg-10-recht-op-niet-geautomatiseerde-besluitvorming.yaml","path":"requirements/avg-10-recht-op-niet-geautomatiseerde-besluitvorming.yaml","urn":"urn:nl:ak:ver:avg-10","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-10","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-10"}},{"type":"file","size":2265,"name":"avg-11-privacy-bij-ontwerp-bij-verwerking-van-persoonsgegevens.yaml","path":"requirements/avg-11-privacy-bij-ontwerp-bij-verwerking-van-persoonsgegevens.yaml","urn":"urn:nl:ak:ver:avg-11","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-11","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-11"}},{"type":"file","size":2178,"name":"avg-12-beveiliging-van-verwerking.yaml","path":"requirements/avg-12-beveiliging-van-verwerking.yaml","urn":"urn:nl:ak:ver:avg-12","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-12","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-12"}},{"type":"file","size":3640,"name":"avg-13-dpia-verplicht.yaml","path":"requirements/avg-13-dpia-verplicht.yaml","urn":"urn:nl:ak:ver:avg-13","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-13","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:avg-13"}},{"type":"file","size":3097,"name":"awb-01-zorgvuldigheidsbeginsel.yaml","path":"requirements/awb-01-zorgvuldigheidsbeginsel.yaml","urn":"urn:nl:ak:ver:awb-01","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:awb-01","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:awb-01"}},{"type":"file","size":2956,"name":"awb-02-motiveringsbeginsel.yaml","path":"requirements/awb-02-motiveringsbeginsel.yaml","urn":"urn:nl:ak:ver:awb-02","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:awb-02","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:awb-02"}},{"type":"file","size":2454,"name":"bio-01-beveiliging-informatie-en-informatiesystemen.yaml","path":"requirements/bio-01-beveiliging-informatie-en-informatiesystemen.yaml","urn":"urn:nl:ak:ver:bio-01","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:bio-01","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:bio-01"}},{"type":"file","size":1604,"name":"bzk-01-algoritmeregister.yaml","path":"requirements/bzk-01-algoritmeregister.yaml","urn":"urn:nl:ak:ver:bzk-01","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:bzk-01","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:bzk-01"}},{"type":"file","size":2454,"name":"dat-01-databankenwet.yaml","path":"requirements/dat-01-databankenwet.yaml","urn":"urn:nl:ak:ver:dat-01","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:dat-01","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:dat-01"}},{"type":"file","size":2445,"name":"grw-01-fundamentele-rechten.yaml","path":"requirements/grw-01-fundamentele-rechten.yaml","urn":"urn:nl:ak:ver:grw-01","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:grw-01","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:grw-01"}},{"type":"file","size":2150,"name":"grw-02-non-discriminatie.yaml","path":"requirements/grw-02-non-discriminatie.yaml","urn":"urn:nl:ak:ver:grw-02","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:grw-02","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:grw-02"}},{"type":"file","size":2675,"name":"woo-01-recht-op-toegang-tot-publieke-informatie.yaml","path":"requirements/woo-01-recht-op-toegang-tot-publieke-informatie.yaml","urn":"urn:nl:ak:ver:woo-01","download_url":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:woo-01","links":{"self":"https://task-registry.apps.digilab.network/requirements/urn/urn:nl:ak:ver:woo-01"}}]}'
+        string: '{"type":"dir","size":0,"name":"requirements","path":"requirements","download_url":"https://task-registry.rijksapp.nl/requirements","links":{"self":"https://task-registry.rijksapp.nl/requirements"},"entries":[{"type":"file","size":5472,"name":"aia-00-verboden-AI-praktijken.yaml","path":"requirements/aia-00-verboden-AI-praktijken.yaml","urn":"urn:nl:ak:ver:aia-00","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-00","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-00"}},{"type":"file","size":2549,"name":"aia-01-ai-geletterdheid.yaml","path":"requirements/aia-01-ai-geletterdheid.yaml","urn":"urn:nl:ak:ver:aia-01","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-01","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-01"}},{"type":"file","size":2087,"name":"aia-02-documentatie-beoordeling-niet-hoog-risico-ai.yaml","path":"requirements/aia-02-documentatie-beoordeling-niet-hoog-risico-ai.yaml","urn":"urn:nl:ak:ver:aia-02","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-02","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-02"}},{"type":"file","size":3438,"name":"aia-03-risicobeheersysteem.yaml","path":"requirements/aia-03-risicobeheersysteem.yaml","urn":"urn:nl:ak:ver:aia-03","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-03","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-03"}},{"type":"file","size":2090,"name":"aia-04-risicobeoordeling-voor-jongeren-en-kwetsbaren.yaml","path":"requirements/aia-04-risicobeoordeling-voor-jongeren-en-kwetsbaren.yaml","urn":"urn:nl:ak:ver:aia-04","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-04","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-04"}},{"type":"file","size":3585,"name":"aia-05-data-kwaliteitscriteria.yaml","path":"requirements/aia-05-data-kwaliteitscriteria.yaml","urn":"urn:nl:ak:ver:aia-05","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-05","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-05"}},{"type":"file","size":2897,"name":"aia-06-technische-documentatie.yaml","path":"requirements/aia-06-technische-documentatie.yaml","urn":"urn:nl:ak:ver:aia-06","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-06","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-06"}},{"type":"file","size":2942,"name":"aia-07-automatische-logregistratie.yaml","path":"requirements/aia-07-automatische-logregistratie.yaml","urn":"urn:nl:ak:ver:aia-07","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-07","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-07"}},{"type":"file","size":1974,"name":"aia-08-transparantie-aan-gebruiksverantwoordelijken.yaml","path":"requirements/aia-08-transparantie-aan-gebruiksverantwoordelijken.yaml","urn":"urn:nl:ak:ver:aia-08","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-08","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-08"}},{"type":"file","size":4920,"name":"aia-09-menselijk-toezicht.yaml","path":"requirements/aia-09-menselijk-toezicht.yaml","urn":"urn:nl:ak:ver:aia-09","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-09","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-09"}},{"type":"file","size":3993,"name":"aia-10-nauwkeurigheid-robuustheid-cyberbeveiliging.yaml","path":"requirements/aia-10-nauwkeurigheid-robuustheid-cyberbeveiliging.yaml","urn":"urn:nl:ak:ver:aia-10","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-10","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-10"}},{"type":"file","size":4339,"name":"aia-11-systeem-voor-kwaliteitsbeheer.yaml","path":"requirements/aia-11-systeem-voor-kwaliteitsbeheer.yaml","urn":"urn:nl:ak:ver:aia-11","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-11","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-11"}},{"type":"file","size":2519,"name":"aia-12-bewaartermijn-voor-documentatie.yaml","path":"requirements/aia-12-bewaartermijn-voor-documentatie.yaml","urn":"urn:nl:ak:ver:aia-12","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-12","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-12"}},{"type":"file","size":1858,"name":"aia-13-bewaartermijn-voor-gegenereerde-logs.yaml","path":"requirements/aia-13-bewaartermijn-voor-gegenereerde-logs.yaml","urn":"urn:nl:ak:ver:aia-13","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-13","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-13"}},{"type":"file","size":3755,"name":"aia-14-conformiteitsbeoordeling.yaml","path":"requirements/aia-14-conformiteitsbeoordeling.yaml","urn":"urn:nl:ak:ver:aia-14","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-14","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-14"}},{"type":"file","size":2422,"name":"aia-15-eu-conformiteitsverklaring.yaml","path":"requirements/aia-15-eu-conformiteitsverklaring.yaml","urn":"urn:nl:ak:ver:aia-15","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-15","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-15"}},{"type":"file","size":2173,"name":"aia-16-ce-markering.yaml","path":"requirements/aia-16-ce-markering.yaml","urn":"urn:nl:ak:ver:aia-16","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-16","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-16"}},{"type":"file","size":2217,"name":"aia-17-registratieverplichtingen.yaml","path":"requirements/aia-17-registratieverplichtingen.yaml","urn":"urn:nl:ak:ver:aia-17","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-17","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-17"}},{"type":"file","size":2620,"name":"aia-18-corrigerende-maatregelen-voor-non-conforme-ai.yaml","path":"requirements/aia-18-corrigerende-maatregelen-voor-non-conforme-ai.yaml","urn":"urn:nl:ak:ver:aia-18","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-18","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-18"}},{"type":"file","size":3418,"name":"aia-19-toegankelijkheidseisen.yaml","path":"requirements/aia-19-toegankelijkheidseisen.yaml","urn":"urn:nl:ak:ver:aia-19","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-19","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-19"}},{"type":"file","size":2200,"name":"aia-20-gebruiksverantwoordelijken-maatregelen.yaml","path":"requirements/aia-20-gebruiksverantwoordelijken-maatregelen.yaml","urn":"urn:nl:ak:ver:aia-20","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-20","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-20"}},{"type":"file","size":2996,"name":"aia-21-gebruiksverantwoordelijken-menselijk-toezicht.yaml","path":"requirements/aia-21-gebruiksverantwoordelijken-menselijk-toezicht.yaml","urn":"urn:nl:ak:ver:aia-21","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-21","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-21"}},{"type":"file","size":3493,"name":"aia-22-gebruiksverantwoordelijken-monitoren-werking.yaml","path":"requirements/aia-22-gebruiksverantwoordelijken-monitoren-werking.yaml","urn":"urn:nl:ak:ver:aia-22","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-22","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-22"}},{"type":"file","size":2561,"name":"aia-23-gebruiksverantwoordelijken-bewaren-logs.yaml","path":"requirements/aia-23-gebruiksverantwoordelijken-bewaren-logs.yaml","urn":"urn:nl:ak:ver:aia-23","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-23","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-23"}},{"type":"file","size":2270,"name":"aia-24-informeren-werknemers.yaml","path":"requirements/aia-24-informeren-werknemers.yaml","urn":"urn:nl:ak:ver:aia-24","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-24","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-24"}},{"type":"file","size":2890,"name":"aia-25-gebruiksverantwoordelijken-registratieverplichtingen.yaml","path":"requirements/aia-25-gebruiksverantwoordelijken-registratieverplichtingen.yaml","urn":"urn:nl:ak:ver:aia-25","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-25","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-25"}},{"type":"file","size":3260,"name":"aia-26-recht-op-uitleg-ai-besluiten.yaml","path":"requirements/aia-26-recht-op-uitleg-ai-besluiten.yaml","urn":"urn:nl:ak:ver:aia-26","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-26","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-26"}},{"type":"file","size":2916,"name":"aia-27-beoordelen-gevolgen-grondrechten.yaml","path":"requirements/aia-27-beoordelen-gevolgen-grondrechten.yaml","urn":"urn:nl:ak:ver:aia-27","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-27","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-27"}},{"type":"file","size":2487,"name":"aia-28-transparantieverplichtingen.yaml","path":"requirements/aia-28-transparantieverplichtingen.yaml","urn":"urn:nl:ak:ver:aia-28","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-28","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-28"}},{"type":"file","size":2745,"name":"aia-29-ai-modellen-algemene-doeleinden.yaml","path":"requirements/aia-29-ai-modellen-algemene-doeleinden.yaml","urn":"urn:nl:ak:ver:aia-29","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-29","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-29"}},{"type":"file","size":3528,"name":"aia-30-ai-modellen-algemene-doeleinden-systeemrisico.yaml","path":"requirements/aia-30-ai-modellen-algemene-doeleinden-systeemrisico.yaml","urn":"urn:nl:ak:ver:aia-30","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-30","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-30"}},{"type":"file","size":1924,"name":"aia-31-ai-modellen-algemene-doeleinden-systeemrisico-ernstige-incidenten.yaml","path":"requirements/aia-31-ai-modellen-algemene-doeleinden-systeemrisico-ernstige-incidenten.yaml","urn":"urn:nl:ak:ver:aia-31","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-31","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-31"}},{"type":"file","size":2236,"name":"aia-32-ai-modellen-algemene-doeleinden-systeemrisico-cyberbeveiliging.yaml","path":"requirements/aia-32-ai-modellen-algemene-doeleinden-systeemrisico-cyberbeveiliging.yaml","urn":"urn:nl:ak:ver:aia-32","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-32","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-32"}},{"type":"file","size":2496,"name":"aia-33-verwerking-in-testomgeving.yaml","path":"requirements/aia-33-verwerking-in-testomgeving.yaml","urn":"urn:nl:ak:ver:aia-33","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-33","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-33"}},{"type":"file","size":2970,"name":"aia-34-monitoring-na-het-in-de-handel-brengen.yaml","path":"requirements/aia-34-monitoring-na-het-in-de-handel-brengen.yaml","urn":"urn:nl:ak:ver:aia-34","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-34","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-34"}},{"type":"file","size":2566,"name":"aia-35-melding-ernstige-incidenten.yaml","path":"requirements/aia-35-melding-ernstige-incidenten.yaml","urn":"urn:nl:ak:ver:aia-35","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-35","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-35"}},{"type":"file","size":2335,"name":"aia-36-melding-inbreuk-op-ai-verordening.yaml","path":"requirements/aia-36-melding-inbreuk-op-ai-verordening.yaml","urn":"urn:nl:ak:ver:aia-36","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-36","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-36"}},{"type":"file","size":1810,"name":"aia-37-recht-klacht-indienen-bij-ai-bureau.yaml","path":"requirements/aia-37-recht-klacht-indienen-bij-ai-bureau.yaml","urn":"urn:nl:ak:ver:aia-37","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-37","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-37"}},{"type":"file","size":8417,"name":"aia-38-testen.yaml","path":"requirements/aia-38-testen.yaml","urn":"urn:nl:ak:ver:aia-38","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-38","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-38"}},{"type":"file","size":3437,"name":"aia-39-beleid-naleven-auteurs-en-naburige-rechten.yaml","path":"requirements/aia-39-beleid-naleven-auteurs-en-naburige-rechten.yaml","urn":"urn:nl:ak:ver:aia-39","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-39","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aia-39"}},{"type":"file","size":1746,"name":"arc-01-archiefwet.yaml","path":"requirements/arc-01-archiefwet.yaml","urn":"urn:nl:ak:ver:arc-01","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:arc-01","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:arc-01"}},{"type":"file","size":1570,"name":"aut-01-auteursrechten.yaml","path":"requirements/aut-01-auteursrechten.yaml","urn":"urn:nl:ak:ver:aut-01","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aut-01","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:aut-01"}},{"type":"file","size":2627,"name":"avg-01-persoonsgegevens-worden-rechtmatig-verwerkt.yaml","path":"requirements/avg-01-persoonsgegevens-worden-rechtmatig-verwerkt.yaml","urn":"urn:nl:ak:ver:avg-01","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-01","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-01"}},{"type":"file","size":2420,"name":"avg-02-beperkte-bewaartermijn-van-persoonsgegevens.yaml","path":"requirements/avg-02-beperkte-bewaartermijn-van-persoonsgegevens.yaml","urn":"urn:nl:ak:ver:avg-02","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-02","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-02"}},{"type":"file","size":2110,"name":"avg-03-minimale-verwerking-van-persoonsgegevens.yaml","path":"requirements/avg-03-minimale-verwerking-van-persoonsgegevens.yaml","urn":"urn:nl:ak:ver:avg-03","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-03","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-03"}},{"type":"file","size":2536,"name":"avg-04-proportionaliteit-en-subsidiariteit.yaml","path":"requirements/avg-04-proportionaliteit-en-subsidiariteit.yaml","urn":"urn:nl:ak:ver:avg-04","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-04","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-04"}},{"type":"file","size":1850,"name":"avg-05-juistheid-en-actualiteit-van-persoonsgegevens.yaml","path":"requirements/avg-05-juistheid-en-actualiteit-van-persoonsgegevens.yaml","urn":"urn:nl:ak:ver:avg-05","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-05","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-05"}},{"type":"file","size":2202,"name":"avg-06-verantwoordingsplicht-rechtmatigheid.yaml","path":"requirements/avg-06-verantwoordingsplicht-rechtmatigheid.yaml","urn":"urn:nl:ak:ver:avg-06","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-06","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-06"}},{"type":"file","size":2049,"name":"avg-07-transparantie-bij-verwerken-persoonsgegevens.yaml","path":"requirements/avg-07-transparantie-bij-verwerken-persoonsgegevens.yaml","urn":"urn:nl:ak:ver:avg-07","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-07","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-07"}},{"type":"file","size":2513,"name":"avg-08-wettelijke-verwerking-van-gevoelige-gegevens.yaml","path":"requirements/avg-08-wettelijke-verwerking-van-gevoelige-gegevens.yaml","urn":"urn:nl:ak:ver:avg-08","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-08","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-08"}},{"type":"file","size":2115,"name":"avg-09-inroepen-privacyrecht-bij-verwerking-persoonsgegevens.yaml","path":"requirements/avg-09-inroepen-privacyrecht-bij-verwerking-persoonsgegevens.yaml","urn":"urn:nl:ak:ver:avg-09","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-09","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-09"}},{"type":"file","size":9664,"name":"avg-10-recht-op-niet-geautomatiseerde-besluitvorming.yaml","path":"requirements/avg-10-recht-op-niet-geautomatiseerde-besluitvorming.yaml","urn":"urn:nl:ak:ver:avg-10","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-10","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-10"}},{"type":"file","size":2265,"name":"avg-11-privacy-bij-ontwerp-bij-verwerking-van-persoonsgegevens.yaml","path":"requirements/avg-11-privacy-bij-ontwerp-bij-verwerking-van-persoonsgegevens.yaml","urn":"urn:nl:ak:ver:avg-11","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-11","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-11"}},{"type":"file","size":2178,"name":"avg-12-beveiliging-van-verwerking.yaml","path":"requirements/avg-12-beveiliging-van-verwerking.yaml","urn":"urn:nl:ak:ver:avg-12","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-12","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-12"}},{"type":"file","size":3640,"name":"avg-13-dpia-verplicht.yaml","path":"requirements/avg-13-dpia-verplicht.yaml","urn":"urn:nl:ak:ver:avg-13","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-13","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:avg-13"}},{"type":"file","size":3097,"name":"awb-01-zorgvuldigheidsbeginsel.yaml","path":"requirements/awb-01-zorgvuldigheidsbeginsel.yaml","urn":"urn:nl:ak:ver:awb-01","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:awb-01","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:awb-01"}},{"type":"file","size":2956,"name":"awb-02-motiveringsbeginsel.yaml","path":"requirements/awb-02-motiveringsbeginsel.yaml","urn":"urn:nl:ak:ver:awb-02","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:awb-02","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:awb-02"}},{"type":"file","size":2454,"name":"bio-01-beveiliging-informatie-en-informatiesystemen.yaml","path":"requirements/bio-01-beveiliging-informatie-en-informatiesystemen.yaml","urn":"urn:nl:ak:ver:bio-01","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:bio-01","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:bio-01"}},{"type":"file","size":1604,"name":"bzk-01-algoritmeregister.yaml","path":"requirements/bzk-01-algoritmeregister.yaml","urn":"urn:nl:ak:ver:bzk-01","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:bzk-01","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:bzk-01"}},{"type":"file","size":2454,"name":"dat-01-databankenwet.yaml","path":"requirements/dat-01-databankenwet.yaml","urn":"urn:nl:ak:ver:dat-01","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:dat-01","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:dat-01"}},{"type":"file","size":2445,"name":"grw-01-fundamentele-rechten.yaml","path":"requirements/grw-01-fundamentele-rechten.yaml","urn":"urn:nl:ak:ver:grw-01","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:grw-01","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:grw-01"}},{"type":"file","size":2150,"name":"grw-02-non-discriminatie.yaml","path":"requirements/grw-02-non-discriminatie.yaml","urn":"urn:nl:ak:ver:grw-02","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:grw-02","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:grw-02"}},{"type":"file","size":2675,"name":"woo-01-recht-op-toegang-tot-publieke-informatie.yaml","path":"requirements/woo-01-recht-op-toegang-tot-publieke-informatie.yaml","urn":"urn:nl:ak:ver:woo-01","download_url":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:woo-01","links":{"self":"https://task-registry.rijksapp.nl/requirements/urn/urn:nl:ak:ver:woo-01"}}]}'
       headers:
         content-length:
           - "23983"
@@ -15477,7 +15477,7 @@ interactions:
       uri: https://task-registry.rijksapp.nl/measures/
     response:
       body:
-        string: '{"type":"dir","size":0,"name":"measures","path":"measures","download_url":"https://task-registry.apps.digilab.network/measures","links":{"self":"https://task-registry.apps.digilab.network/measures"},"entries":[{"type":"file","size":2349,"name":"0-org-01-benodigde-expertise-en-capaciteit.yaml","path":"measures/0-org-01-benodigde-expertise-en-capaciteit.yaml","urn":"urn:nl:ak:mtr:org-01","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-01","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-01"}},{"type":"file","size":3443,"name":"0-org-02-beleid-opstellen-inzet-algoritmes.yaml","path":"measures/0-org-02-beleid-opstellen-inzet-algoritmes.yaml","urn":"urn:nl:ak:mtr:org-02","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-02","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-02"}},{"type":"file","size":2419,"name":"0-org-03-toepassen-risicobeheer.yaml","path":"measures/0-org-03-toepassen-risicobeheer.yaml","urn":"urn:nl:ak:mtr:org-03","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-03","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-03"}},{"type":"file","size":2638,"name":"0-org-04-politiek-bestuurlijke-verantwoordelijkheid.yaml","path":"measures/0-org-04-politiek-bestuurlijke-verantwoordelijkheid.yaml","urn":"urn:nl:ak:mtr:org-04","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-04","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-04"}},{"type":"file","size":3053,"name":"0-org-05-bestaande-governance.yaml","path":"measures/0-org-05-bestaande-governance.yaml","urn":"urn:nl:ak:mtr:org-05","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-05","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-05"}},{"type":"file","size":1821,"name":"0-org-06-volwassenheidsmodel.yaml","path":"measures/0-org-06-volwassenheidsmodel.yaml","urn":"urn:nl:ak:mtr:org-06","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-06","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-06"}},{"type":"file","size":1568,"name":"0-org-07-intern-toezicht.yaml","path":"measures/0-org-07-intern-toezicht.yaml","urn":"urn:nl:ak:mtr:org-07","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-07","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-07"}},{"type":"file","size":1615,"name":"0-org-08-beslismoment-levenscyclus.yaml","path":"measures/0-org-08-beslismoment-levenscyclus.yaml","urn":"urn:nl:ak:mtr:org-08","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-08","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-08"}},{"type":"file","size":2084,"name":"0-org-09-governance-per-risicocategorie.yaml","path":"measures/0-org-09-governance-per-risicocategorie.yaml","urn":"urn:nl:ak:mtr:org-09","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-09","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-09"}},{"type":"file","size":1845,"name":"0-org-10-inrichten-taken-en-verantwoordelijkheden-algoritmegovernance.yaml","path":"measures/0-org-10-inrichten-taken-en-verantwoordelijkheden-algoritmegovernance.yaml","urn":"urn:nl:ak:mtr:org-10","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-10","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-10"}},{"type":"file","size":4229,"name":"0-org-11-gebruikersbeheer.yaml","path":"measures/0-org-11-gebruikersbeheer.yaml","urn":"urn:nl:ak:mtr:org-11","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-11","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-11"}},{"type":"file","size":2440,"name":"0-org-12-periodieke-evaluatie-kwaliteit.yaml","path":"measures/0-org-12-periodieke-evaluatie-kwaliteit.yaml","urn":"urn:nl:ak:mtr:org-12","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-12","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-12"}},{"type":"file","size":2537,"name":"0-org-13-wachtwoordbeheer.yaml","path":"measures/0-org-13-wachtwoordbeheer.yaml","urn":"urn:nl:ak:mtr:org-13","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-13","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-13"}},{"type":"file","size":1980,"name":"0-org-14-wijzigingenproces.yaml","path":"measures/0-org-14-wijzigingenproces.yaml","urn":"urn:nl:ak:mtr:org-14","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-14","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-14"}},{"type":"file","size":6531,"name":"0-org-15-discriminatieprotocol.yaml","path":"measures/0-org-15-discriminatieprotocol.yaml","urn":"urn:nl:ak:mtr:org-15","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-15","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:org-15"}},{"type":"file","size":1265,"name":"1-pba-01-formuleren-probleemdefinitie.yaml","path":"measures/1-pba-01-formuleren-probleemdefinitie.yaml","urn":"urn:nl:ak:mtr:pba-01","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:pba-01","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:pba-01"}},{"type":"file","size":2341,"name":"1-pba-02-formuleren-doelstelling.yaml","path":"measures/1-pba-02-formuleren-doelstelling.yaml","urn":"urn:nl:ak:mtr:pba-02","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:pba-02","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:pba-02"}},{"type":"file","size":1846,"name":"1-pba-03-onderbouwen-gebruik-algoritme.yaml","path":"measures/1-pba-03-onderbouwen-gebruik-algoritme.yaml","urn":"urn:nl:ak:mtr:pba-03","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:pba-03","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:pba-03"}},{"type":"file","size":2389,"name":"1-pba-04-betrek-belanghebbenden.yaml","path":"measures/1-pba-04-betrek-belanghebbenden.yaml","urn":"urn:nl:ak:mtr:pba-04","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:pba-04","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:pba-04"}},{"type":"file","size":1419,"name":"1-pba-05-wettelijke-grondslag.yaml","path":"measures/1-pba-05-wettelijke-grondslag.yaml","urn":"urn:nl:ak:mtr:pba-05","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:pba-05","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:pba-05"}},{"type":"file","size":2514,"name":"1-pba-06-multidisciplinair-inkoopteam.yaml","path":"measures/1-pba-06-multidisciplinair-inkoopteam.yaml","urn":"urn:nl:ak:mtr:pba-06","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:pba-06","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:pba-06"}},{"type":"file","size":5027,"name":"2-owp-01-rollen-en-verantwoordelijkheden.yaml","path":"measures/2-owp-01-rollen-en-verantwoordelijkheden.yaml","urn":"urn:nl:ak:mtr:owp-01","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-01","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-01"}},{"type":"file","size":1974,"name":"2-owp-02-data-beschikbaarheid.yaml","path":"measures/2-owp-02-data-beschikbaarheid.yaml","urn":"urn:nl:ak:mtr:owp-11","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-11","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-11"}},{"type":"file","size":2820,"name":"2-owp-03-doel-verwerken-persoonsgegevens.yaml","path":"measures/2-owp-03-doel-verwerken-persoonsgegevens.yaml","urn":"urn:nl:ak:mtr:owp-03","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-03","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-03"}},{"type":"file","size":2626,"name":"2-owp-04-gebruikte-techniek.yaml","path":"measures/2-owp-04-gebruikte-techniek.yaml","urn":"urn:nl:ak:mtr:owp-04","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-04","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-04"}},{"type":"file","size":1848,"name":"2-owp-05-soort-algoritme.yaml","path":"measures/2-owp-05-soort-algoritme.yaml","urn":"urn:nl:ak:mtr:owp-05","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-05","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-05"}},{"type":"file","size":4743,"name":"2-owp-06-impactanalyse.yaml","path":"measures/2-owp-06-impactanalyse.yaml","urn":"urn:nl:ak:mtr:owp-06","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-06","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-06"}},{"type":"file","size":4466,"name":"2-owp-07-afwegen-grondrechten.yaml","path":"measures/2-owp-07-afwegen-grondrechten.yaml","urn":"urn:nl:ak:mtr:owp-07","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-07","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-07"}},{"type":"file","size":4012,"name":"2-owp-08-kwetsbare-groepen.yaml","path":"measures/2-owp-08-kwetsbare-groepen.yaml","urn":"urn:nl:ak:mtr:owp-08","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-08","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-08"}},{"type":"file","size":2802,"name":"2-owp-09-archiveren-documenten.yaml","path":"measures/2-owp-09-archiveren-documenten.yaml","urn":"urn:nl:ak:mtr:owp-09","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-09","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-09"}},{"type":"file","size":2274,"name":"2-owp-10-projectstartarchitectuur.yaml","path":"measures/2-owp-10-projectstartarchitectuur.yaml","urn":"urn:nl:ak:mtr:owp-10","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-10","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-10"}},{"type":"file","size":1807,"name":"2-owp-11-gebruikte-data.yaml","path":"measures/2-owp-11-gebruikte-data.yaml","urn":"urn:nl:ak:mtr:owp-11","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-11","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-11"}},{"type":"file","size":3073,"name":"2-owp-12-duurzaam-inkopen.yaml","path":"measures/2-owp-12-duurzaam-inkopen.yaml","urn":"urn:nl:ak:mtr:owp-12","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-12","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-12"}},{"type":"file","size":3094,"name":"2-owp-13-eenvoudigere-algoritmes.yaml","path":"measures/2-owp-13-eenvoudigere-algoritmes.yaml","urn":"urn:nl:ak:mtr:owp-13","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-13","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-13"}},{"type":"file","size":1660,"name":"2-owp-14-model-verwerkersovereenkomst-onderdeel-aanbesteding.yaml","path":"measures/2-owp-14-model-verwerkersovereenkomst-onderdeel-aanbesteding.yaml","urn":"urn:nl:ak:mtr:owp-14","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-14","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-14"}},{"type":"file","size":3304,"name":"2-owp-15-bespreek-vereisten-met-aanbieders.yaml","path":"measures/2-owp-15-bespreek-vereisten-met-aanbieders.yaml","urn":"urn:nl:ak:mtr:owp-15","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-15","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-15"}},{"type":"file","size":2754,"name":"2-owp-16-vereisten-onderdeel-algemene-inkoopvoorwaarden-en-contractovereenkomst.yaml","path":"measures/2-owp-16-vereisten-onderdeel-algemene-inkoopvoorwaarden-en-contractovereenkomst.yaml","urn":"urn:nl:ak:mtr:owp-16","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-16","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-16"}},{"type":"file","size":3861,"name":"2-owp-17-verwerkersovereenkomst-onderdeel-aanbesteding.yaml","path":"measures/2-owp-17-verwerkersovereenkomst-onderdeel-aanbesteding.yaml","urn":"urn:nl:ak:mtr:owp-17","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-17","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-17"}},{"type":"file","size":1775,"name":"2-owp-18-leveren-bewijs-voldoen-aan-vereisten-algoritme-aanbieder.yaml","path":"measures/2-owp-18-leveren-bewijs-voldoen-aan-vereisten-algoritme-aanbieder.yaml","urn":"urn:nl:ak:mtr:owp-18","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-18","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-18"}},{"type":"file","size":3726,"name":"2-owp-19-leveren-bewijs-door-aanbieder-niet-schenden-auteursrechten.yaml","path":"measures/2-owp-19-leveren-bewijs-door-aanbieder-niet-schenden-auteursrechten.yaml","urn":"urn:nl:ak:mtr:owp-19","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-19","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-19"}},{"type":"file","size":2455,"name":"2-owp-20-beoordeel-aansprakelijkheidsvoorwaarden-van-aanbieder.yaml","path":"measures/2-owp-20-beoordeel-aansprakelijkheidsvoorwaarden-van-aanbieder.yaml","urn":"urn:nl:ak:mtr:owp-20","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-20","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-20"}},{"type":"file","size":2136,"name":"2-owp-21-maak-vereisten-onderdeel-van-subgunningscriteria.yaml","path":"measures/2-owp-21-maak-vereisten-onderdeel-van-subgunningscriteria.yaml","urn":"urn:nl:ak:mtr:owp-21","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-21","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-21"}},{"type":"file","size":3645,"name":"2-owp-22-ruimte-voor-samenwerking-met-aanbieder.yaml","path":"measures/2-owp-22-ruimte-voor-samenwerking-met-aanbieder.yaml","urn":"urn:nl:ak:mtr:owp-22","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-22","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-22"}},{"type":"file","size":2308,"name":"2-owp-23-vaststellen-aanleveren-informatie-technische-documentatie.yaml","path":"measures/2-owp-23-vaststellen-aanleveren-informatie-technische-documentatie.yaml","urn":"urn:nl:ak:mtr:owp-23","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-23","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-23"}},{"type":"file","size":2422,"name":"2-owp-24-uitvoeren-audit-voor-naleving-vereisten.yaml","path":"measures/2-owp-24-uitvoeren-audit-voor-naleving-vereisten.yaml","urn":"urn:nl:ak:mtr:owp-24","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-24","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-24"}},{"type":"file","size":2046,"name":"2-owp-25-invloed-besluitvorming-algoritmes-aanbieders.yaml","path":"measures/2-owp-25-invloed-besluitvorming-algoritmes-aanbieders.yaml","urn":"urn:nl:ak:mtr:owp-25","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-25","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-25"}},{"type":"file","size":1591,"name":"2-owp-26-kennisoverdracht-en-ondersteuning-aanbieder.yaml","path":"measures/2-owp-26-kennisoverdracht-en-ondersteuning-aanbieder.yaml","urn":"urn:nl:ak:mtr:owp-26","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-26","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-26"}},{"type":"file","size":1442,"name":"2-owp-27-risico-analyse-informatiebeveiliging-leverancier.yaml","path":"measures/2-owp-27-risico-analyse-informatiebeveiliging-leverancier.yaml","urn":"urn:nl:ak:mtr:owp-27","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-27","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-27"}},{"type":"file","size":2772,"name":"2-owp-28-maak-vereisten-onderdeel-van-programma-van-eisen.yaml","path":"measures/2-owp-28-maak-vereisten-onderdeel-van-programma-van-eisen.yaml","urn":"urn:nl:ak:mtr:owp-28","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-28","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-28"}},{"type":"file","size":1969,"name":"2-owp-29-maak-vereisten-onderdeel-van-service-level-agreement.yaml","path":"measures/2-owp-29-maak-vereisten-onderdeel-van-service-level-agreement.yaml","urn":"urn:nl:ak:mtr:owp-29","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-29","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-29"}},{"type":"file","size":1103,"name":"2-owp-30-contractuele-afspraken-data-en-artefacten.yaml","path":"measures/2-owp-30-contractuele-afspraken-data-en-artefacten.yaml","urn":"urn:nl:ak:mtr:owp-30","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-30","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-30"}},{"type":"file","size":4292,"name":"2-owp-31-informeer-betrokkenen.yaml","path":"measures/2-owp-31-informeer-betrokkenen.yaml","urn":"urn:nl:ak:mtr:owp-31","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-31","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-31"}},{"type":"file","size":2463,"name":"2-owp-32-pas-vastgestelde-beleidskaders-zijn-nageleefd.yaml","path":"measures/2-owp-32-pas-vastgestelde-beleidskaders-zijn-nageleefd.yaml","urn":"urn:nl:ak:mtr:owp-32","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-32","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-32"}},{"type":"file","size":3559,"name":"2-owp-33-toepassen-uitlegbaarheidstechnieken.yaml","path":"measures/2-owp-33-toepassen-uitlegbaarheidstechnieken.yaml","urn":"urn:nl:ak:mtr:owp-33","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-33","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-33"}},{"type":"file","size":3599,"name":"2-owp-34-technische-interventies-robuustheid.yaml","path":"measures/2-owp-34-technische-interventies-robuustheid.yaml","urn":"urn:nl:ak:mtr:owp-34","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-34","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-34"}},{"type":"file","size":2247,"name":"2-owp-35-toepassen-vastgestelde-beleidskaders.yaml","path":"measures/2-owp-35-toepassen-vastgestelde-beleidskaders.yaml","urn":"urn:nl:ak:mtr:owp-35","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-35","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-35"}},{"type":"file","size":2943,"name":"2-owp-36-voorkom-kwetsbaarheden-supplychain.yaml","path":"measures/2-owp-36-voorkom-kwetsbaarheden-supplychain.yaml","urn":"urn:nl:ak:mtr:owp-36","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-36","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-36"}},{"type":"file","size":2421,"name":"2-owp-37-genereren-bronvermelding.yaml","path":"measures/2-owp-37-genereren-bronvermelding.yaml","urn":"urn:nl:ak:mtr:owp-37","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-37","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owp-37"}},{"type":"file","size":3336,"name":"3-dat-01-datakwaliteit.yaml","path":"measures/3-dat-01-datakwaliteit.yaml","urn":"urn:nl:ak:mtr:dat-01","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-01","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-01"}},{"type":"file","size":5883,"name":"3-dat-02-fair-data.yaml","path":"measures/3-dat-02-fair-data.yaml","urn":"urn:nl:ak:mtr:dat-02","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-02","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-02"}},{"type":"file","size":1777,"name":"3-dat-03-bewaartermijnen-persoonsgegevens.yaml","path":"measures/3-dat-03-bewaartermijnen-persoonsgegevens.yaml","urn":"urn:nl:ak:mtr:dat-03","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-03","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-03"}},{"type":"file","size":1614,"name":"3-dat-04-pseudonimiseren-anonimiseren.yaml","path":"measures/3-dat-04-pseudonimiseren-anonimiseren.yaml","urn":"urn:nl:ak:mtr:dat-04","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-04","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-04"}},{"type":"file","size":1235,"name":"3-dat-05-schending-auteursrechten.yaml","path":"measures/3-dat-05-schending-auteursrechten.yaml","urn":"urn:nl:ak:mtr:dat-05","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-05","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-05"}},{"type":"file","size":3139,"name":"3-dat-06-duurzame-datacenters.yaml","path":"measures/3-dat-06-duurzame-datacenters.yaml","urn":"urn:nl:ak:mtr:dat-06","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-06","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-06"}},{"type":"file","size":5222,"name":"3-dat-07-training-validatie-en-testdata.yaml","path":"measures/3-dat-07-training-validatie-en-testdata.yaml","urn":"urn:nl:ak:mtr:dat-07","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-07","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-07"}},{"type":"file","size":1994,"name":"3-dat-08-eigenaarschap-data.yaml","path":"measures/3-dat-08-eigenaarschap-data.yaml","urn":"urn:nl:ak:mtr:dat-08","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-08","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-08"}},{"type":"file","size":2507,"name":"3-dat-09-dataminimalisatie.yaml","path":"measures/3-dat-09-dataminimalisatie.yaml","urn":"urn:nl:ak:mtr:dat-09","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-09","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-09"}},{"type":"file","size":3877,"name":"3-dat-11-datamanipulatie.yaml","path":"measures/3-dat-11-datamanipulatie.yaml","urn":"urn:nl:ak:mtr:dat-11","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-11","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-11"}},{"type":"file","size":3106,"name":"3-dat-12-controleren-inputdata.yaml","path":"measures/3-dat-12-controleren-inputdata.yaml","urn":"urn:nl:ak:mtr:dat-12","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-12","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:dat-12"}},{"type":"file","size":2340,"name":"4-owk-01-security-by-design.yaml","path":"measures/4-owk-01-security-by-design.yaml","urn":"urn:nl:ak:mtr:owk-01","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owk-01","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owk-01"}},{"type":"file","size":5629,"name":"4-owk-02-stopzetten-gebruik.yaml","path":"measures/4-owk-02-stopzetten-gebruik.yaml","urn":"urn:nl:ak:mtr:owk-02","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owk-02","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owk-02"}},{"type":"file","size":2895,"name":"4-owk-03-privacyrisico.yaml","path":"measures/4-owk-03-privacyrisico.yaml","urn":"urn:nl:ak:mtr:owk-03","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owk-03","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owk-03"}},{"type":"file","size":2766,"name":"4-owk-04-logging.yaml","path":"measures/4-owk-04-logging.yaml","urn":"urn:nl:ak:mtr:owk-04","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owk-04","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owk-04"}},{"type":"file","size":2922,"name":"4-owk-05-energiezuinige-programmeermethoden.yaml","path":"measures/4-owk-05-energiezuinige-programmeermethoden.yaml","urn":"urn:nl:ak:mtr:owk-05","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owk-05","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owk-05"}},{"type":"file","size":2780,"name":"4-owk-06-optimaliseer-AI-training.yaml","path":"measures/4-owk-06-optimaliseer-AI-training.yaml","urn":"urn:nl:ak:mtr:owk-06","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owk-06","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owk-06"}},{"type":"file","size":5121,"name":"4-owk-07-reproduceerbaarheid.yaml","path":"measures/4-owk-07-reproduceerbaarheid.yaml","urn":"urn:nl:ak:mtr:owk-07","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owk-07","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owk-07"}},{"type":"file","size":5118,"name":"4-owk-08-feedbackloops.yaml","path":"measures/4-owk-08-feedbackloops.yaml","urn":"urn:nl:ak:mtr:owk-08","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owk-08","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owk-08"}},{"type":"file","size":4260,"name":"4-owk-09-adversarial-aanvallen.yaml","path":"measures/4-owk-09-adversarial-aanvallen.yaml","urn":"urn:nl:ak:mtr:owk-09","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owk-09","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owk-09"}},{"type":"file","size":4292,"name":"4-owk-10-voorkom-lekken-op-basis-van-output.yaml","path":"measures/4-owk-10-voorkom-lekken-op-basis-van-output.yaml","urn":"urn:nl:ak:mtr:owk-09","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owk-09","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:owk-09"}},{"type":"file","size":2295,"name":"5-ver-01-functioneren-in-lijn-met-doeleinden.yaml","path":"measures/5-ver-01-functioneren-in-lijn-met-doeleinden.yaml","urn":"urn:nl:ak:mtr:ver-01","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:ver-01","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:ver-01"}},{"type":"file","size":4427,"name":"5-ver-02-evalueer-nauwkeurigheid.yaml","path":"measures/5-ver-02-evalueer-nauwkeurigheid.yaml","urn":"urn:nl:ak:mtr:ver-02","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:ver-02","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:ver-02"}},{"type":"file","size":16482,"name":"5-ver-03-biasanalyse.yaml","path":"measures/5-ver-03-biasanalyse.yaml","urn":"urn:nl:ak:mtr:ver-03","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:ver-03","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:ver-03"}},{"type":"file","size":3096,"name":"5-ver-04-representatieve-testomgeving.yaml","path":"measures/5-ver-04-representatieve-testomgeving.yaml","urn":"urn:nl:ak:mtr:ver-04","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:ver-04","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:ver-04"}},{"type":"file","size":3693,"name":"5-ver-05-vertaling-wetgeving-naar-systeem.yaml","path":"measures/5-ver-05-vertaling-wetgeving-naar-systeem.yaml","urn":"urn:nl:ak:mtr:ver-05","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:ver-05","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:ver-05"}},{"type":"file","size":9070,"name":"5-ver-06-evalueer-betrouwbaarheid.yaml","path":"measures/5-ver-06-evalueer-betrouwbaarheid.yaml","urn":"urn:nl:ak:mtr:ver-06","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:ver-06","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:ver-06"}},{"type":"file","size":3357,"name":"6-imp-01-werkinstructies-gebruikers.yaml","path":"measures/6-imp-01-werkinstructies-gebruikers.yaml","urn":"urn:nl:ak:mtr:imp-01","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-01","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-01"}},{"type":"file","size":4251,"name":"6-imp-02-aselecte-steekproeven.yaml","path":"measures/6-imp-02-aselecte-steekproeven.yaml","urn":"urn:nl:ak:mtr:imp-02","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-02","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-02"}},{"type":"file","size":6970,"name":"6-imp-03-menselijke-tussenkomst.yaml","path":"measures/6-imp-03-menselijke-tussenkomst.yaml","urn":"urn:nl:ak:mtr:imp-03","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-03","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-03"}},{"type":"file","size":2864,"name":"6-imp-04-publiceren-algoritmeregister.yaml","path":"measures/6-imp-04-publiceren-algoritmeregister.yaml","urn":"urn:nl:ak:mtr:imp-04","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-04","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-04"}},{"type":"file","size":2239,"name":"6-imp-05-werkinstructies-medewerkers.yaml","path":"measures/6-imp-05-werkinstructies-medewerkers.yaml","urn":"urn:nl:ak:mtr:imp-05","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-05","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-05"}},{"type":"file","size":3417,"name":"6-imp-06-vermelding-in-privacyverklaring.yaml","path":"measures/6-imp-06-vermelding-in-privacyverklaring.yaml","urn":"urn:nl:ak:mtr:imp-06","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-06","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-06"}},{"type":"file","size":1726,"name":"6-imp-07-klacht-bezwaar-beroep.yaml","path":"measures/6-imp-07-klacht-bezwaar-beroep.yaml","urn":"urn:nl:ak:mtr:imp-07","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-07","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-07"}},{"type":"file","size":1920,"name":"6-imp-08-vermelding-in-verwerkingsregister.yaml","path":"measures/6-imp-08-vermelding-in-verwerkingsregister.yaml","urn":"urn:nl:ak:mtr:imp-08","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-08","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-08"}},{"type":"file","size":2135,"name":"6-imp-09-politiek-bestuurlijk-besluit.yaml","path":"measures/6-imp-09-politiek-bestuurlijk-besluit.yaml","urn":"urn:nl:ak:mtr:imp-09","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-09","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-09"}},{"type":"file","size":2009,"name":"6-imp-10-interventies-ux.yaml","path":"measures/6-imp-10-interventies-ux.yaml","urn":"urn:nl:ak:mtr:imp-10","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-10","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-10"}},{"type":"file","size":1834,"name":"6-imp-11-proces-privacyrechten.yaml","path":"measures/6-imp-11-proces-privacyrechten.yaml","urn":"urn:nl:ak:mtr:imp-11","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-11","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:imp-11"}},{"type":"file","size":1483,"name":"7-mon-01-backups-maken.yaml","path":"measures/7-mon-01-backups-maken.yaml","urn":"urn:nl:ak:mtr:mon-01","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:mon-01","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:mon-01"}},{"type":"file","size":3351,"name":"7-mon-02-beveiliging-algoritme.yaml","path":"measures/7-mon-02-beveiliging-algoritme.yaml","urn":"urn:nl:ak:mtr:mon-02","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:mon-02","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:mon-02"}},{"type":"file","size":1332,"name":"7-mon-03-informatiebeveiligingsincidenten.yaml","path":"measures/7-mon-03-informatiebeveiligingsincidenten.yaml","urn":"urn:nl:ak:mtr:mon-03","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:mon-03","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:mon-03"}},{"type":"file","size":4970,"name":"7-mon-04-evaluatieplan.yaml","path":"measures/7-mon-04-evaluatieplan.yaml","urn":"urn:nl:ak:mtr:mon-05","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:mon-05","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:mon-05"}},{"type":"file","size":2325,"name":"7-mon-05-evalueer-bij-veranderingen-in-data.yaml","path":"measures/7-mon-05-evalueer-bij-veranderingen-in-data.yaml","urn":"urn:nl:ak:mtr:mon-05","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:mon-05","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:mon-05"}},{"type":"file","size":3365,"name":"7-mon-06-meten-milieu-impact.yaml","path":"measures/7-mon-06-meten-milieu-impact.yaml","urn":"urn:nl:ak:mtr:mon-06","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:mon-06","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:mon-06"}},{"type":"file","size":4744,"name":"7-mon-07-plan-continue-monitoring.yaml","path":"measures/7-mon-07-plan-continue-monitoring.yaml","urn":"urn:nl:ak:mtr:mon-07","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:mon-07","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:mon-07"}},{"type":"file","size":2479,"name":"7-mon-08-test-weerbaarheid-tegen-aanvallen.yaml","path":"measures/7-mon-08-test-weerbaarheid-tegen-aanvallen.yaml","urn":"urn:nl:ak:mtr:mon-08","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:mon-08","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:mon-08"}},{"type":"file","size":2655,"name":"8-uit-01-archiveren.yaml","path":"measures/8-uit-01-archiveren.yaml","urn":"urn:nl:ak:mtr:uit-01","download_url":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:uit-01","links":{"self":"https://task-registry.apps.digilab.network/measures/urn/urn:nl:ak:mtr:uit-01"}}]}'
+        string: '{"type":"dir","size":0,"name":"measures","path":"measures","download_url":"https://task-registry.rijksapp.nl/measures","links":{"self":"https://task-registry.rijksapp.nl/measures"},"entries":[{"type":"file","size":2349,"name":"0-org-01-benodigde-expertise-en-capaciteit.yaml","path":"measures/0-org-01-benodigde-expertise-en-capaciteit.yaml","urn":"urn:nl:ak:mtr:org-01","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-01","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-01"}},{"type":"file","size":3443,"name":"0-org-02-beleid-opstellen-inzet-algoritmes.yaml","path":"measures/0-org-02-beleid-opstellen-inzet-algoritmes.yaml","urn":"urn:nl:ak:mtr:org-02","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-02","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-02"}},{"type":"file","size":2419,"name":"0-org-03-toepassen-risicobeheer.yaml","path":"measures/0-org-03-toepassen-risicobeheer.yaml","urn":"urn:nl:ak:mtr:org-03","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-03","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-03"}},{"type":"file","size":2638,"name":"0-org-04-politiek-bestuurlijke-verantwoordelijkheid.yaml","path":"measures/0-org-04-politiek-bestuurlijke-verantwoordelijkheid.yaml","urn":"urn:nl:ak:mtr:org-04","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-04","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-04"}},{"type":"file","size":3053,"name":"0-org-05-bestaande-governance.yaml","path":"measures/0-org-05-bestaande-governance.yaml","urn":"urn:nl:ak:mtr:org-05","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-05","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-05"}},{"type":"file","size":1821,"name":"0-org-06-volwassenheidsmodel.yaml","path":"measures/0-org-06-volwassenheidsmodel.yaml","urn":"urn:nl:ak:mtr:org-06","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-06","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-06"}},{"type":"file","size":1568,"name":"0-org-07-intern-toezicht.yaml","path":"measures/0-org-07-intern-toezicht.yaml","urn":"urn:nl:ak:mtr:org-07","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-07","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-07"}},{"type":"file","size":1615,"name":"0-org-08-beslismoment-levenscyclus.yaml","path":"measures/0-org-08-beslismoment-levenscyclus.yaml","urn":"urn:nl:ak:mtr:org-08","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-08","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-08"}},{"type":"file","size":2084,"name":"0-org-09-governance-per-risicocategorie.yaml","path":"measures/0-org-09-governance-per-risicocategorie.yaml","urn":"urn:nl:ak:mtr:org-09","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-09","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-09"}},{"type":"file","size":1845,"name":"0-org-10-inrichten-taken-en-verantwoordelijkheden-algoritmegovernance.yaml","path":"measures/0-org-10-inrichten-taken-en-verantwoordelijkheden-algoritmegovernance.yaml","urn":"urn:nl:ak:mtr:org-10","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-10","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-10"}},{"type":"file","size":4229,"name":"0-org-11-gebruikersbeheer.yaml","path":"measures/0-org-11-gebruikersbeheer.yaml","urn":"urn:nl:ak:mtr:org-11","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-11","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-11"}},{"type":"file","size":2440,"name":"0-org-12-periodieke-evaluatie-kwaliteit.yaml","path":"measures/0-org-12-periodieke-evaluatie-kwaliteit.yaml","urn":"urn:nl:ak:mtr:org-12","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-12","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-12"}},{"type":"file","size":2537,"name":"0-org-13-wachtwoordbeheer.yaml","path":"measures/0-org-13-wachtwoordbeheer.yaml","urn":"urn:nl:ak:mtr:org-13","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-13","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-13"}},{"type":"file","size":1980,"name":"0-org-14-wijzigingenproces.yaml","path":"measures/0-org-14-wijzigingenproces.yaml","urn":"urn:nl:ak:mtr:org-14","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-14","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-14"}},{"type":"file","size":6531,"name":"0-org-15-discriminatieprotocol.yaml","path":"measures/0-org-15-discriminatieprotocol.yaml","urn":"urn:nl:ak:mtr:org-15","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-15","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:org-15"}},{"type":"file","size":1265,"name":"1-pba-01-formuleren-probleemdefinitie.yaml","path":"measures/1-pba-01-formuleren-probleemdefinitie.yaml","urn":"urn:nl:ak:mtr:pba-01","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:pba-01","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:pba-01"}},{"type":"file","size":2341,"name":"1-pba-02-formuleren-doelstelling.yaml","path":"measures/1-pba-02-formuleren-doelstelling.yaml","urn":"urn:nl:ak:mtr:pba-02","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:pba-02","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:pba-02"}},{"type":"file","size":1846,"name":"1-pba-03-onderbouwen-gebruik-algoritme.yaml","path":"measures/1-pba-03-onderbouwen-gebruik-algoritme.yaml","urn":"urn:nl:ak:mtr:pba-03","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:pba-03","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:pba-03"}},{"type":"file","size":2389,"name":"1-pba-04-betrek-belanghebbenden.yaml","path":"measures/1-pba-04-betrek-belanghebbenden.yaml","urn":"urn:nl:ak:mtr:pba-04","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:pba-04","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:pba-04"}},{"type":"file","size":1419,"name":"1-pba-05-wettelijke-grondslag.yaml","path":"measures/1-pba-05-wettelijke-grondslag.yaml","urn":"urn:nl:ak:mtr:pba-05","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:pba-05","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:pba-05"}},{"type":"file","size":2514,"name":"1-pba-06-multidisciplinair-inkoopteam.yaml","path":"measures/1-pba-06-multidisciplinair-inkoopteam.yaml","urn":"urn:nl:ak:mtr:pba-06","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:pba-06","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:pba-06"}},{"type":"file","size":5027,"name":"2-owp-01-rollen-en-verantwoordelijkheden.yaml","path":"measures/2-owp-01-rollen-en-verantwoordelijkheden.yaml","urn":"urn:nl:ak:mtr:owp-01","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-01","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-01"}},{"type":"file","size":1974,"name":"2-owp-02-data-beschikbaarheid.yaml","path":"measures/2-owp-02-data-beschikbaarheid.yaml","urn":"urn:nl:ak:mtr:owp-11","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-11","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-11"}},{"type":"file","size":2820,"name":"2-owp-03-doel-verwerken-persoonsgegevens.yaml","path":"measures/2-owp-03-doel-verwerken-persoonsgegevens.yaml","urn":"urn:nl:ak:mtr:owp-03","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-03","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-03"}},{"type":"file","size":2626,"name":"2-owp-04-gebruikte-techniek.yaml","path":"measures/2-owp-04-gebruikte-techniek.yaml","urn":"urn:nl:ak:mtr:owp-04","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-04","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-04"}},{"type":"file","size":1848,"name":"2-owp-05-soort-algoritme.yaml","path":"measures/2-owp-05-soort-algoritme.yaml","urn":"urn:nl:ak:mtr:owp-05","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-05","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-05"}},{"type":"file","size":4743,"name":"2-owp-06-impactanalyse.yaml","path":"measures/2-owp-06-impactanalyse.yaml","urn":"urn:nl:ak:mtr:owp-06","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-06","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-06"}},{"type":"file","size":4466,"name":"2-owp-07-afwegen-grondrechten.yaml","path":"measures/2-owp-07-afwegen-grondrechten.yaml","urn":"urn:nl:ak:mtr:owp-07","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-07","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-07"}},{"type":"file","size":4012,"name":"2-owp-08-kwetsbare-groepen.yaml","path":"measures/2-owp-08-kwetsbare-groepen.yaml","urn":"urn:nl:ak:mtr:owp-08","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-08","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-08"}},{"type":"file","size":2802,"name":"2-owp-09-archiveren-documenten.yaml","path":"measures/2-owp-09-archiveren-documenten.yaml","urn":"urn:nl:ak:mtr:owp-09","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-09","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-09"}},{"type":"file","size":2274,"name":"2-owp-10-projectstartarchitectuur.yaml","path":"measures/2-owp-10-projectstartarchitectuur.yaml","urn":"urn:nl:ak:mtr:owp-10","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-10","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-10"}},{"type":"file","size":1807,"name":"2-owp-11-gebruikte-data.yaml","path":"measures/2-owp-11-gebruikte-data.yaml","urn":"urn:nl:ak:mtr:owp-11","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-11","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-11"}},{"type":"file","size":3073,"name":"2-owp-12-duurzaam-inkopen.yaml","path":"measures/2-owp-12-duurzaam-inkopen.yaml","urn":"urn:nl:ak:mtr:owp-12","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-12","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-12"}},{"type":"file","size":3094,"name":"2-owp-13-eenvoudigere-algoritmes.yaml","path":"measures/2-owp-13-eenvoudigere-algoritmes.yaml","urn":"urn:nl:ak:mtr:owp-13","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-13","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-13"}},{"type":"file","size":1660,"name":"2-owp-14-model-verwerkersovereenkomst-onderdeel-aanbesteding.yaml","path":"measures/2-owp-14-model-verwerkersovereenkomst-onderdeel-aanbesteding.yaml","urn":"urn:nl:ak:mtr:owp-14","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-14","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-14"}},{"type":"file","size":3304,"name":"2-owp-15-bespreek-vereisten-met-aanbieders.yaml","path":"measures/2-owp-15-bespreek-vereisten-met-aanbieders.yaml","urn":"urn:nl:ak:mtr:owp-15","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-15","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-15"}},{"type":"file","size":2754,"name":"2-owp-16-vereisten-onderdeel-algemene-inkoopvoorwaarden-en-contractovereenkomst.yaml","path":"measures/2-owp-16-vereisten-onderdeel-algemene-inkoopvoorwaarden-en-contractovereenkomst.yaml","urn":"urn:nl:ak:mtr:owp-16","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-16","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-16"}},{"type":"file","size":3861,"name":"2-owp-17-verwerkersovereenkomst-onderdeel-aanbesteding.yaml","path":"measures/2-owp-17-verwerkersovereenkomst-onderdeel-aanbesteding.yaml","urn":"urn:nl:ak:mtr:owp-17","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-17","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-17"}},{"type":"file","size":1775,"name":"2-owp-18-leveren-bewijs-voldoen-aan-vereisten-algoritme-aanbieder.yaml","path":"measures/2-owp-18-leveren-bewijs-voldoen-aan-vereisten-algoritme-aanbieder.yaml","urn":"urn:nl:ak:mtr:owp-18","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-18","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-18"}},{"type":"file","size":3726,"name":"2-owp-19-leveren-bewijs-door-aanbieder-niet-schenden-auteursrechten.yaml","path":"measures/2-owp-19-leveren-bewijs-door-aanbieder-niet-schenden-auteursrechten.yaml","urn":"urn:nl:ak:mtr:owp-19","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-19","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-19"}},{"type":"file","size":2455,"name":"2-owp-20-beoordeel-aansprakelijkheidsvoorwaarden-van-aanbieder.yaml","path":"measures/2-owp-20-beoordeel-aansprakelijkheidsvoorwaarden-van-aanbieder.yaml","urn":"urn:nl:ak:mtr:owp-20","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-20","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-20"}},{"type":"file","size":2136,"name":"2-owp-21-maak-vereisten-onderdeel-van-subgunningscriteria.yaml","path":"measures/2-owp-21-maak-vereisten-onderdeel-van-subgunningscriteria.yaml","urn":"urn:nl:ak:mtr:owp-21","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-21","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-21"}},{"type":"file","size":3645,"name":"2-owp-22-ruimte-voor-samenwerking-met-aanbieder.yaml","path":"measures/2-owp-22-ruimte-voor-samenwerking-met-aanbieder.yaml","urn":"urn:nl:ak:mtr:owp-22","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-22","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-22"}},{"type":"file","size":2308,"name":"2-owp-23-vaststellen-aanleveren-informatie-technische-documentatie.yaml","path":"measures/2-owp-23-vaststellen-aanleveren-informatie-technische-documentatie.yaml","urn":"urn:nl:ak:mtr:owp-23","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-23","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-23"}},{"type":"file","size":2422,"name":"2-owp-24-uitvoeren-audit-voor-naleving-vereisten.yaml","path":"measures/2-owp-24-uitvoeren-audit-voor-naleving-vereisten.yaml","urn":"urn:nl:ak:mtr:owp-24","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-24","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-24"}},{"type":"file","size":2046,"name":"2-owp-25-invloed-besluitvorming-algoritmes-aanbieders.yaml","path":"measures/2-owp-25-invloed-besluitvorming-algoritmes-aanbieders.yaml","urn":"urn:nl:ak:mtr:owp-25","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-25","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-25"}},{"type":"file","size":1591,"name":"2-owp-26-kennisoverdracht-en-ondersteuning-aanbieder.yaml","path":"measures/2-owp-26-kennisoverdracht-en-ondersteuning-aanbieder.yaml","urn":"urn:nl:ak:mtr:owp-26","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-26","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-26"}},{"type":"file","size":1442,"name":"2-owp-27-risico-analyse-informatiebeveiliging-leverancier.yaml","path":"measures/2-owp-27-risico-analyse-informatiebeveiliging-leverancier.yaml","urn":"urn:nl:ak:mtr:owp-27","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-27","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-27"}},{"type":"file","size":2772,"name":"2-owp-28-maak-vereisten-onderdeel-van-programma-van-eisen.yaml","path":"measures/2-owp-28-maak-vereisten-onderdeel-van-programma-van-eisen.yaml","urn":"urn:nl:ak:mtr:owp-28","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-28","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-28"}},{"type":"file","size":1969,"name":"2-owp-29-maak-vereisten-onderdeel-van-service-level-agreement.yaml","path":"measures/2-owp-29-maak-vereisten-onderdeel-van-service-level-agreement.yaml","urn":"urn:nl:ak:mtr:owp-29","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-29","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-29"}},{"type":"file","size":1103,"name":"2-owp-30-contractuele-afspraken-data-en-artefacten.yaml","path":"measures/2-owp-30-contractuele-afspraken-data-en-artefacten.yaml","urn":"urn:nl:ak:mtr:owp-30","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-30","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-30"}},{"type":"file","size":4292,"name":"2-owp-31-informeer-betrokkenen.yaml","path":"measures/2-owp-31-informeer-betrokkenen.yaml","urn":"urn:nl:ak:mtr:owp-31","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-31","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-31"}},{"type":"file","size":2463,"name":"2-owp-32-pas-vastgestelde-beleidskaders-zijn-nageleefd.yaml","path":"measures/2-owp-32-pas-vastgestelde-beleidskaders-zijn-nageleefd.yaml","urn":"urn:nl:ak:mtr:owp-32","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-32","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-32"}},{"type":"file","size":3559,"name":"2-owp-33-toepassen-uitlegbaarheidstechnieken.yaml","path":"measures/2-owp-33-toepassen-uitlegbaarheidstechnieken.yaml","urn":"urn:nl:ak:mtr:owp-33","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-33","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-33"}},{"type":"file","size":3599,"name":"2-owp-34-technische-interventies-robuustheid.yaml","path":"measures/2-owp-34-technische-interventies-robuustheid.yaml","urn":"urn:nl:ak:mtr:owp-34","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-34","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-34"}},{"type":"file","size":2247,"name":"2-owp-35-toepassen-vastgestelde-beleidskaders.yaml","path":"measures/2-owp-35-toepassen-vastgestelde-beleidskaders.yaml","urn":"urn:nl:ak:mtr:owp-35","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-35","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-35"}},{"type":"file","size":2943,"name":"2-owp-36-voorkom-kwetsbaarheden-supplychain.yaml","path":"measures/2-owp-36-voorkom-kwetsbaarheden-supplychain.yaml","urn":"urn:nl:ak:mtr:owp-36","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-36","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-36"}},{"type":"file","size":2421,"name":"2-owp-37-genereren-bronvermelding.yaml","path":"measures/2-owp-37-genereren-bronvermelding.yaml","urn":"urn:nl:ak:mtr:owp-37","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-37","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owp-37"}},{"type":"file","size":3336,"name":"3-dat-01-datakwaliteit.yaml","path":"measures/3-dat-01-datakwaliteit.yaml","urn":"urn:nl:ak:mtr:dat-01","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-01","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-01"}},{"type":"file","size":5883,"name":"3-dat-02-fair-data.yaml","path":"measures/3-dat-02-fair-data.yaml","urn":"urn:nl:ak:mtr:dat-02","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-02","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-02"}},{"type":"file","size":1777,"name":"3-dat-03-bewaartermijnen-persoonsgegevens.yaml","path":"measures/3-dat-03-bewaartermijnen-persoonsgegevens.yaml","urn":"urn:nl:ak:mtr:dat-03","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-03","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-03"}},{"type":"file","size":1614,"name":"3-dat-04-pseudonimiseren-anonimiseren.yaml","path":"measures/3-dat-04-pseudonimiseren-anonimiseren.yaml","urn":"urn:nl:ak:mtr:dat-04","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-04","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-04"}},{"type":"file","size":1235,"name":"3-dat-05-schending-auteursrechten.yaml","path":"measures/3-dat-05-schending-auteursrechten.yaml","urn":"urn:nl:ak:mtr:dat-05","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-05","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-05"}},{"type":"file","size":3139,"name":"3-dat-06-duurzame-datacenters.yaml","path":"measures/3-dat-06-duurzame-datacenters.yaml","urn":"urn:nl:ak:mtr:dat-06","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-06","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-06"}},{"type":"file","size":5222,"name":"3-dat-07-training-validatie-en-testdata.yaml","path":"measures/3-dat-07-training-validatie-en-testdata.yaml","urn":"urn:nl:ak:mtr:dat-07","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-07","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-07"}},{"type":"file","size":1994,"name":"3-dat-08-eigenaarschap-data.yaml","path":"measures/3-dat-08-eigenaarschap-data.yaml","urn":"urn:nl:ak:mtr:dat-08","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-08","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-08"}},{"type":"file","size":2507,"name":"3-dat-09-dataminimalisatie.yaml","path":"measures/3-dat-09-dataminimalisatie.yaml","urn":"urn:nl:ak:mtr:dat-09","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-09","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-09"}},{"type":"file","size":3877,"name":"3-dat-11-datamanipulatie.yaml","path":"measures/3-dat-11-datamanipulatie.yaml","urn":"urn:nl:ak:mtr:dat-11","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-11","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-11"}},{"type":"file","size":3106,"name":"3-dat-12-controleren-inputdata.yaml","path":"measures/3-dat-12-controleren-inputdata.yaml","urn":"urn:nl:ak:mtr:dat-12","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-12","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:dat-12"}},{"type":"file","size":2340,"name":"4-owk-01-security-by-design.yaml","path":"measures/4-owk-01-security-by-design.yaml","urn":"urn:nl:ak:mtr:owk-01","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owk-01","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owk-01"}},{"type":"file","size":5629,"name":"4-owk-02-stopzetten-gebruik.yaml","path":"measures/4-owk-02-stopzetten-gebruik.yaml","urn":"urn:nl:ak:mtr:owk-02","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owk-02","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owk-02"}},{"type":"file","size":2895,"name":"4-owk-03-privacyrisico.yaml","path":"measures/4-owk-03-privacyrisico.yaml","urn":"urn:nl:ak:mtr:owk-03","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owk-03","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owk-03"}},{"type":"file","size":2766,"name":"4-owk-04-logging.yaml","path":"measures/4-owk-04-logging.yaml","urn":"urn:nl:ak:mtr:owk-04","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owk-04","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owk-04"}},{"type":"file","size":2922,"name":"4-owk-05-energiezuinige-programmeermethoden.yaml","path":"measures/4-owk-05-energiezuinige-programmeermethoden.yaml","urn":"urn:nl:ak:mtr:owk-05","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owk-05","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owk-05"}},{"type":"file","size":2780,"name":"4-owk-06-optimaliseer-AI-training.yaml","path":"measures/4-owk-06-optimaliseer-AI-training.yaml","urn":"urn:nl:ak:mtr:owk-06","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owk-06","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owk-06"}},{"type":"file","size":5121,"name":"4-owk-07-reproduceerbaarheid.yaml","path":"measures/4-owk-07-reproduceerbaarheid.yaml","urn":"urn:nl:ak:mtr:owk-07","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owk-07","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owk-07"}},{"type":"file","size":5118,"name":"4-owk-08-feedbackloops.yaml","path":"measures/4-owk-08-feedbackloops.yaml","urn":"urn:nl:ak:mtr:owk-08","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owk-08","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owk-08"}},{"type":"file","size":4260,"name":"4-owk-09-adversarial-aanvallen.yaml","path":"measures/4-owk-09-adversarial-aanvallen.yaml","urn":"urn:nl:ak:mtr:owk-09","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owk-09","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owk-09"}},{"type":"file","size":4292,"name":"4-owk-10-voorkom-lekken-op-basis-van-output.yaml","path":"measures/4-owk-10-voorkom-lekken-op-basis-van-output.yaml","urn":"urn:nl:ak:mtr:owk-09","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owk-09","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:owk-09"}},{"type":"file","size":2295,"name":"5-ver-01-functioneren-in-lijn-met-doeleinden.yaml","path":"measures/5-ver-01-functioneren-in-lijn-met-doeleinden.yaml","urn":"urn:nl:ak:mtr:ver-01","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:ver-01","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:ver-01"}},{"type":"file","size":4427,"name":"5-ver-02-evalueer-nauwkeurigheid.yaml","path":"measures/5-ver-02-evalueer-nauwkeurigheid.yaml","urn":"urn:nl:ak:mtr:ver-02","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:ver-02","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:ver-02"}},{"type":"file","size":16482,"name":"5-ver-03-biasanalyse.yaml","path":"measures/5-ver-03-biasanalyse.yaml","urn":"urn:nl:ak:mtr:ver-03","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:ver-03","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:ver-03"}},{"type":"file","size":3096,"name":"5-ver-04-representatieve-testomgeving.yaml","path":"measures/5-ver-04-representatieve-testomgeving.yaml","urn":"urn:nl:ak:mtr:ver-04","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:ver-04","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:ver-04"}},{"type":"file","size":3693,"name":"5-ver-05-vertaling-wetgeving-naar-systeem.yaml","path":"measures/5-ver-05-vertaling-wetgeving-naar-systeem.yaml","urn":"urn:nl:ak:mtr:ver-05","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:ver-05","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:ver-05"}},{"type":"file","size":9070,"name":"5-ver-06-evalueer-betrouwbaarheid.yaml","path":"measures/5-ver-06-evalueer-betrouwbaarheid.yaml","urn":"urn:nl:ak:mtr:ver-06","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:ver-06","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:ver-06"}},{"type":"file","size":3357,"name":"6-imp-01-werkinstructies-gebruikers.yaml","path":"measures/6-imp-01-werkinstructies-gebruikers.yaml","urn":"urn:nl:ak:mtr:imp-01","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:imp-01","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:imp-01"}},{"type":"file","size":4251,"name":"6-imp-02-aselecte-steekproeven.yaml","path":"measures/6-imp-02-aselecte-steekproeven.yaml","urn":"urn:nl:ak:mtr:imp-02","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:imp-02","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:imp-02"}},{"type":"file","size":6970,"name":"6-imp-03-menselijke-tussenkomst.yaml","path":"measures/6-imp-03-menselijke-tussenkomst.yaml","urn":"urn:nl:ak:mtr:imp-03","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:imp-03","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:imp-03"}},{"type":"file","size":2864,"name":"6-imp-04-publiceren-algoritmeregister.yaml","path":"measures/6-imp-04-publiceren-algoritmeregister.yaml","urn":"urn:nl:ak:mtr:imp-04","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:imp-04","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:imp-04"}},{"type":"file","size":2239,"name":"6-imp-05-werkinstructies-medewerkers.yaml","path":"measures/6-imp-05-werkinstructies-medewerkers.yaml","urn":"urn:nl:ak:mtr:imp-05","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:imp-05","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:imp-05"}},{"type":"file","size":3417,"name":"6-imp-06-vermelding-in-privacyverklaring.yaml","path":"measures/6-imp-06-vermelding-in-privacyverklaring.yaml","urn":"urn:nl:ak:mtr:imp-06","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:imp-06","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:imp-06"}},{"type":"file","size":1726,"name":"6-imp-07-klacht-bezwaar-beroep.yaml","path":"measures/6-imp-07-klacht-bezwaar-beroep.yaml","urn":"urn:nl:ak:mtr:imp-07","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:imp-07","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:imp-07"}},{"type":"file","size":1920,"name":"6-imp-08-vermelding-in-verwerkingsregister.yaml","path":"measures/6-imp-08-vermelding-in-verwerkingsregister.yaml","urn":"urn:nl:ak:mtr:imp-08","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:imp-08","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:imp-08"}},{"type":"file","size":2135,"name":"6-imp-09-politiek-bestuurlijk-besluit.yaml","path":"measures/6-imp-09-politiek-bestuurlijk-besluit.yaml","urn":"urn:nl:ak:mtr:imp-09","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:imp-09","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:imp-09"}},{"type":"file","size":2009,"name":"6-imp-10-interventies-ux.yaml","path":"measures/6-imp-10-interventies-ux.yaml","urn":"urn:nl:ak:mtr:imp-10","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:imp-10","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:imp-10"}},{"type":"file","size":1834,"name":"6-imp-11-proces-privacyrechten.yaml","path":"measures/6-imp-11-proces-privacyrechten.yaml","urn":"urn:nl:ak:mtr:imp-11","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:imp-11","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:imp-11"}},{"type":"file","size":1483,"name":"7-mon-01-backups-maken.yaml","path":"measures/7-mon-01-backups-maken.yaml","urn":"urn:nl:ak:mtr:mon-01","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:mon-01","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:mon-01"}},{"type":"file","size":3351,"name":"7-mon-02-beveiliging-algoritme.yaml","path":"measures/7-mon-02-beveiliging-algoritme.yaml","urn":"urn:nl:ak:mtr:mon-02","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:mon-02","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:mon-02"}},{"type":"file","size":1332,"name":"7-mon-03-informatiebeveiligingsincidenten.yaml","path":"measures/7-mon-03-informatiebeveiligingsincidenten.yaml","urn":"urn:nl:ak:mtr:mon-03","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:mon-03","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:mon-03"}},{"type":"file","size":4970,"name":"7-mon-04-evaluatieplan.yaml","path":"measures/7-mon-04-evaluatieplan.yaml","urn":"urn:nl:ak:mtr:mon-05","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:mon-05","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:mon-05"}},{"type":"file","size":2325,"name":"7-mon-05-evalueer-bij-veranderingen-in-data.yaml","path":"measures/7-mon-05-evalueer-bij-veranderingen-in-data.yaml","urn":"urn:nl:ak:mtr:mon-05","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:mon-05","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:mon-05"}},{"type":"file","size":3365,"name":"7-mon-06-meten-milieu-impact.yaml","path":"measures/7-mon-06-meten-milieu-impact.yaml","urn":"urn:nl:ak:mtr:mon-06","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:mon-06","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:mon-06"}},{"type":"file","size":4744,"name":"7-mon-07-plan-continue-monitoring.yaml","path":"measures/7-mon-07-plan-continue-monitoring.yaml","urn":"urn:nl:ak:mtr:mon-07","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:mon-07","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:mon-07"}},{"type":"file","size":2479,"name":"7-mon-08-test-weerbaarheid-tegen-aanvallen.yaml","path":"measures/7-mon-08-test-weerbaarheid-tegen-aanvallen.yaml","urn":"urn:nl:ak:mtr:mon-08","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:mon-08","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:mon-08"}},{"type":"file","size":2655,"name":"8-uit-01-archiveren.yaml","path":"measures/8-uit-01-archiveren.yaml","urn":"urn:nl:ak:mtr:uit-01","download_url":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:uit-01","links":{"self":"https://task-registry.rijksapp.nl/measures/urn/urn:nl:ak:mtr:uit-01"}}]}'
       headers:
         content-length:
           - "37970"
@@ -16478,7 +16478,7 @@ interactions:
           verschilt per type algoritme welke vereisten hierop van toepassing is en waar
           een aanbieder of gebruiksverantwoordelijke aan moet voldoen. \\n\\nDit is
           mede afhankelijk van de bijbehorende risicoclassificatie. \\n\\nHiervoor kan
-          de [beslishulp](https://ai-verordening-beslishulp.apps.digilab.network/) in
+          de [beslishulp](https://algoritmes.rijksapp.nl/beslishulp-ai-verordening) in
           het Algoritmekader voor worden gebruikt'. \\n\\nLet op dat niet enkel naar
           de AI-verordening wordt gekeken. Ook op impactvolle algoritmes die niet vallen
           onder het bereik van de AI-Verordening zijn vereisten van toepassing. Zie

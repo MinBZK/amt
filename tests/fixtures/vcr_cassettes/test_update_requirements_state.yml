@@ -9,7 +9,7 @@ interactions:
         connection:
           - close
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -71,7 +71,7 @@ interactions:
         connection:
           - close
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -114,7 +114,7 @@ interactions:
         connection:
           - close
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -175,7 +175,7 @@ interactions:
         connection:
           - close
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -236,7 +236,7 @@ interactions:
         connection:
           - close
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET
@@ -279,7 +279,7 @@ interactions:
         connection:
           - close
         host:
-          - task-registry.apps.digilab.network
+          - task-registry.rijksapp.nl
         user-agent:
           - python-httpx/0.28.1
       method: GET

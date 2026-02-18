@@ -133,8 +133,10 @@ async def client(db: DatabaseTestUtils, monkeypatch: pytest.MonkeyPatch) -> Asyn
     # overwrite db url
     monkeypatch.setenv("APP_DATABASE_FILE", "/" + str(db.get_database_file()))
 
+    from amt.core.db import reset_engine
     from amt.repositories.deps import get_session
 
+    reset_engine()
     app = create_app()
 
     async with AsyncClient(
