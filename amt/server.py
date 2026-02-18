@@ -3,6 +3,7 @@ import contextlib
 import logging
 from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
+from typing import Any
 from pathlib import Path
 
 import jinja_roos_components
@@ -13,9 +14,12 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
 
+from prometheus_client import Gauge  # pyright: ignore[reportMissingImports]
+from prometheus_fastapi_instrumentator import Instrumentator  # pyright: ignore[reportMissingImports]
+
 from amt.api.main import api_router
 from amt.core.config import PROJECT_DESCRIPTION, PROJECT_NAME, VERSION, get_settings
-from amt.core.db import check_db, init_db
+from amt.core.db import check_db, get_engine, init_db
 from amt.core.exception_handlers import general_exception_handler as amt_general_exception_handler
 from amt.core.exception_handlers import redirect_exception_handler
 from amt.core.exceptions import AMTRedirectError
@@ -39,6 +43,10 @@ configure_logging(
 )
 
 logger = logging.getLogger(__name__)
+
+_db_pool_checked_in = Gauge("db_pool_checked_in", "DB connections available in pool")  # pyright: ignore[reportUnknownVariableType]
+_db_pool_checked_out = Gauge("db_pool_checked_out", "DB connections currently in use")  # pyright: ignore[reportUnknownVariableType]
+_db_pool_overflow = Gauge("db_pool_overflow", "DB connections beyond pool_size")  # pyright: ignore[reportUnknownVariableType]
 
 STATIC_DIR_ROOS = Path(jinja_roos_components.__file__).parent / "static" / "roos" / "dist"
 
@@ -143,6 +151,16 @@ def create_app() -> FastAPI:
         return await amt_general_exception_handler(request, exc)
 
     app.include_router(api_router)
+
+    def db_pool_metrics(info: Any) -> None:  # noqa: ANN401  # pyright: ignore[reportUnknownParameterType]
+        pool = get_engine().pool  # pyright: ignore[reportUnknownMemberType]
+        _db_pool_checked_in.set(pool.checkedin())  # pyright: ignore[reportUnknownMemberType, reportUnknownArgumentType, reportAttributeAccessIssue]
+        _db_pool_checked_out.set(pool.checkedout())  # pyright: ignore[reportUnknownMemberType, reportUnknownArgumentType, reportAttributeAccessIssue]
+        _db_pool_overflow.set(pool.overflow())  # pyright: ignore[reportUnknownMemberType, reportUnknownArgumentType, reportAttributeAccessIssue]
+
+    instrumentator = Instrumentator(excluded_handlers=["/health", "/metrics"])  # pyright: ignore[reportUnknownVariableType]
+    instrumentator.add(db_pool_metrics)  # pyright: ignore[reportUnknownMemberType]
+    instrumentator.instrument(app).expose(app, endpoint="/metrics", include_in_schema=False)  # pyright: ignore[reportUnknownMemberType]
 
     return app
 

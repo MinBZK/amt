@@ -43,7 +43,10 @@ def translate_pydantic_exception(err: dict[str, Any], translations: NullTranslat
 async def general_exception_handler(request: Request, exc: Exception) -> HTMLResponse:  # noqa
     exception_name = exc.__class__.__name__
 
-    logger.exception(f"general_exception_handler {exception_name}: {exc}")
+    if isinstance(exc, StarletteHTTPException) and exc.status_code == status.HTTP_404_NOT_FOUND:
+        logger.warning("general_exception_handler %s: %s %s", exception_name, exc, request.url.path)
+    else:
+        logger.exception("general_exception_handler %s: %s %s", exception_name, exc, request.url.path)
 
     translations = get_current_translation(request)
 

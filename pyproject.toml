@@ -49,6 +49,7 @@ urllib3 = "^2.6.3"
 jinja-roos-components = {git = "https://github.com/RijksICTGilde/jinja-roos-components.git", branch = "table-and-more-conversion"}
 aenum = "^3.1.16"
 python-dateutil = "^2.9.0.post0"
+prometheus-fastapi-instrumentator = "^7.1.0"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.4.2"
