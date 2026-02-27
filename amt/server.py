@@ -111,7 +111,7 @@ def create_app() -> FastAPI:
         session_cookie=get_settings().SESSION_COOKIE_NAME,
         max_age=get_settings().SESSION_TTL_SECONDS,
         https_only=get_settings().SESSION_COOKIE_SECURE,
-        exclude_paths=["/health"],
+        exclude_paths=["/health", "/metrics"],
     )
     app.add_middleware(RequestLoggingMiddleware)
     app.add_middleware(CSRFMiddleware)
