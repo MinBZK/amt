@@ -222,7 +222,7 @@ jobs:
     steps:
       - name: Extract metadata for Docker
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6
         with:
           images: "" # make empty to get the correct tag
           flavor: |
@@ -253,7 +253,7 @@ jobs:
     steps:
       - name: Extract metadata for Docker
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6
         with:
           images: ""
           flavor: |
