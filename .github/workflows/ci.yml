@@ -292,7 +292,7 @@ jobs:
       ]
     if: ${{ always() && contains(needs.*.result, 'failure') }}
     steps:
-      - uses: mattermost/action-mattermost-notify@master
+      - uses: mattermost/action-mattermost-notify@d317daebed2a792679f68fd0248557a8d21d82b6
         if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
         with:
           MATTERMOST_WEBHOOK_URL: ${{ secrets.MM_WEBHOOK_URL }}
