@@ -3,19 +3,18 @@ import contextlib
 import logging
 from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
-from typing import Any
 from pathlib import Path
+from typing import Any
 
 import jinja_roos_components
 from authlib.integrations.starlette_client import OAuth  # type: ignore
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import HTMLResponse, RedirectResponse
-from starlette.exceptions import HTTPException as StarletteHTTPException
-from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
-
 from prometheus_client import Gauge  # pyright: ignore[reportMissingImports]
 from prometheus_fastapi_instrumentator import Instrumentator  # pyright: ignore[reportMissingImports]
+from starlette.exceptions import HTTPException as StarletteHTTPException
+from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
 
 from amt.api.main import api_router
 from amt.core.config import PROJECT_DESCRIPTION, PROJECT_NAME, VERSION, get_settings
