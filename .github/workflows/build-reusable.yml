@@ -70,7 +70,7 @@ jobs:
 
       - name: Call API to upsert deployment
         id: upsert_deployment
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && github.event.pull_request.user.type != 'Bot'
         run: |
           response=$(curl -f --show-error --max-time 120 -X POST "https://operations-manager.rig.prd1.gn2.quattro.rijksapps.nl/api/projects/amt-odc/:upsert-deployment" \
             -H "Content-Type: application/json" \
@@ -86,7 +86,7 @@ jobs:
           echo "preview_url=$preview_url" >> "$GITHUB_OUTPUT"
 
       - name: Notify Mattermost of preview deployment
-        if: github.event_name == 'pull_request' && steps.upsert_deployment.outputs.preview_url != ''
+        if: github.event_name == 'pull_request' && github.event.pull_request.user.type != 'Bot' && steps.upsert_deployment.outputs.preview_url != ''
         uses: mattermost/action-mattermost-notify@master
         with:
           MATTERMOST_WEBHOOK_URL: ${{ secrets.MM_WEBHOOK_URL }}
