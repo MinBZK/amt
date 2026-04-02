@@ -43,7 +43,7 @@ async-lru = "^2.0.5"
 jinja2-base64-filters = "^0.1.4"
 python-multipart = "^0.0.22"
 minio = "^7.2.20"
-poetry = "^2.2.1"
+poetry = "^2.3.3"
 vcrpy = "^8.1.0"
 urllib3 = "^2.6.3"
 jinja-roos-components = {git = "https://github.com/RijksICTGilde/jinja-roos-components.git", branch = "table-and-more-conversion"}
