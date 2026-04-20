@@ -222,7 +222,7 @@ jobs:
     steps:
       - name: Extract metadata for Docker
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6
         with:
           images: "" # make empty to get the correct tag
           flavor: |
@@ -253,7 +253,7 @@ jobs:
     steps:
       - name: Extract metadata for Docker
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6
         with:
           images: ""
           flavor: |
@@ -268,7 +268,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy to ZAD
-        uses: RijksICTGilde/zad-actions/deploy@v2
+        uses: RijksICTGilde/zad-actions/deploy@v4
         with:
           api-key: ${{ secrets.ZAD_API_KEY_DEV }}
           project-id: amt-odc
