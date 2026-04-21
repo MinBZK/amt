@@ -268,7 +268,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy to ZAD
-        uses: RijksICTGilde/zad-actions/deploy@v2
+        uses: RijksICTGilde/zad-actions/deploy@v3
         with:
           api-key: ${{ secrets.ZAD_API_KEY_DEV }}
           project-id: amt-odc
