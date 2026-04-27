@@ -60,7 +60,7 @@ jobs:
           esac
 
       - name: Deploy to ZAD
-        uses: RijksICTGilde/zad-actions/deploy@v2
+        uses: RijksICTGilde/zad-actions/deploy@v4
         with:
           api-key: ${{ inputs.environment == 'production' && secrets.ZAD_API_KEY_PRD || secrets.ZAD_API_KEY_DEV }}
           project-id: ${{ steps.zad_config.outputs.project_id }}
