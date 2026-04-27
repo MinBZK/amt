@@ -10,7 +10,7 @@ jobs:
     if: github.event.pull_request.user.type != 'Bot'
     steps:
       - name: Cleanup ZAD deployment
-        uses: RijksICTGilde/zad-actions/cleanup@v2
+        uses: RijksICTGilde/zad-actions/cleanup@v4
         with:
           api-key: ${{ secrets.ZAD_API_KEY_DEV }}
           project-id: amt-odc
