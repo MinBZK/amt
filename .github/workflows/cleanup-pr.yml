@@ -8,6 +8,9 @@ jobs:
   cleanup:
     runs-on: ubuntu-latest
     if: github.event.pull_request.user.type != 'Bot'
+    permissions:
+      contents: read
+      pull-requests: write
     steps:
       - name: Cleanup ZAD deployment
         uses: RijksICTGilde/zad-actions/cleanup@v2
