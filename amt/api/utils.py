@@ -1,5 +1,4 @@
 from collections.abc import Iterable
-from typing import TypeVar
 
 
 class SafeDict(dict[str, str | int]):
@@ -12,10 +11,7 @@ class SafeDict(dict[str, str | int]):
         return "{" + key + "}"
 
 
-T = TypeVar("T")
-
-
-def compare_lists(
+def compare_lists[T](
     current_list: Iterable[T],
     new_list: Iterable[T],
     current_attr_name: str,
