@@ -31,7 +31,7 @@ CUSTOM_MESSAGES = {
 
 
 def translate_pydantic_exception(err: dict[str, Any], translations: NullTranslations) -> str:
-    message: str | None = CUSTOM_MESSAGES.get(err["type"], None)
+    message: str | None = CUSTOM_MESSAGES.get(err["type"])
 
     if message:
         custom_message = translations.gettext(message)
