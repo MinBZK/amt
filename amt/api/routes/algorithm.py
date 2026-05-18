@@ -1121,6 +1121,7 @@ async def get_members_form(
 
 
 @router.get("/{algorithm_id}/users")
+@permission({AuthorizationResource.ALGORITHM_MEMBER: [AuthorizationVerb.READ]})
 async def get_users(
     request: Request,
     algorithm_id: int,

@@ -131,6 +131,7 @@ def get_publish_breadcrumbs(algorithm_name: str, request: Request) -> list[Navig
 
 
 @router.post("/{algorithm_id}/publish/login")
+@permission({AuthorizationResource.ALGORITHM_PUBLISH: [AuthorizationVerb.CREATE]})
 async def ar_login(
     request: Request,
     algorithm_id: int,
