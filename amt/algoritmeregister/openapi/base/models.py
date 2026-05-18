@@ -5,12 +5,12 @@ These models are manually created for endpoints not included in the versioned AP
 See openapi/base/specs/openapi.json for the reference specification.
 """
 
-from enum import Enum
+from enum import StrEnum
 
 from pydantic import BaseModel, ConfigDict
 
 
-class Role(str, Enum):
+class Role(StrEnum):
     DISABLED = "disabled"
     ALL_GROUPS = "all_groups"
     ADMIN = "admin"
@@ -20,7 +20,7 @@ class Role(str, Enum):
     ROLE_2 = "role_2"
 
 
-class OrgType(str, Enum):
+class OrgType(StrEnum):
     ADVIESCOLLEGE = "adviescollege"
     AGENTSCHAP = "agentschap"
     BRANDWEER = "brandweer"
@@ -48,7 +48,7 @@ class OrgType(str, Enum):
     INSPECTIE = "inspectie"
 
 
-class Flow(str, Enum):
+class Flow(StrEnum):
     ICTU_LAST = "ictu_last"
     SELF_PUBLISH_TWO = "self_publish_two"
 
