@@ -30,7 +30,7 @@ def resolve_resource_list_path(full_resource_path_resolved: str, relative_resour
 
 
 def is_editable_resource(full_resource_path: str, editables: dict[str, ResolvedEditable]) -> bool:
-    return editables.get(replace_digits_in_brackets(full_resource_path), None) is not None
+    return editables.get(replace_digits_in_brackets(full_resource_path)) is not None
 
 
 def is_parent_editable(editables: dict[str, ResolvedEditable] | None, full_resource_path: str) -> bool:
