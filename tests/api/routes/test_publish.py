@@ -264,6 +264,26 @@ async def test_publish_without_permission_returns_404(client: AsyncClient, db: D
     assert response.status_code == 404
 
 
+@pytest.mark.asyncio
+async def test_ar_login_without_permission_is_denied(
+    client: AsyncClient, db: DatabaseTestUtils, mocker: MockerFixture
+) -> None:
+    # given a user without any authorizations on the algorithm (no init_authorizations_and_roles)
+    await db.given([default_user(), default_organization(), default_algorithm("testalgorithm1")])
+    mocker.patch("amt.middleware.csrf.CookieOnlyCsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+    client.cookies["fastapi-csrf-token"] = "1"
+
+    # when posting to the Algoritmeregister login route for an algorithm the user has no access to
+    response = await client.post(
+        "/algorithm/1/publish/login",
+        json={"username": "test@example.com", "password": "testpassword"},
+        headers={"X-CSRF-Token": "1"},
+    )
+
+    # then the permission check denies it (consistent with the other /publish/* routes)
+    assert response.status_code == 404
+
+
 def test_get_global_steps() -> None:
     # given
     translations = get_translation("en")
