@@ -12,3 +12,9 @@ __pycache__/
 *$py.class
 
 .venv
+
+# Build artifacts that must come from the image build, never from a
+# developer's working tree. Without this a stale local dist/ or
+# node_modules/ would enter the build context and the image.
+node_modules/
+amt/site/static/dist/

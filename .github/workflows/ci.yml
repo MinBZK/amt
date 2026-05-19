@@ -94,6 +94,51 @@ jobs:
         run: docker compose exec -T amt alembic upgrade head
       - run: docker compose down -v --remove-orphans
 
+  # Smoke test the production image. test-compose runs against the `test`
+  # stage; nothing else starts the production stage, so a broken multi-stage
+  # build or a missing runtime dependency would otherwise only surface after
+  # deploy. This builds the default (production) target, boots it against
+  # postgres and asserts the app serves a real page with its webpack assets.
+  smoke-production:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build and start the production image
+        run: docker compose up -d --build
+      - name: Wait until the amt container is healthy
+        run: |
+          for i in $(seq 1 60); do
+            status=$(docker inspect --format '{{.State.Health.Status}}' amt-amt-1 2>/dev/null || echo missing)
+            echo "attempt $i: health=$status"
+            if [ "$status" = "healthy" ]; then exit 0; fi
+            if [ "$status" = "unhealthy" ]; then
+              docker compose logs amt
+              exit 1
+            fi
+            sleep 5
+          done
+          echo "container did not become healthy in time"
+          docker compose logs amt
+          exit 1
+      - name: Assert migrations ran in the entrypoint
+        run: docker compose logs amt | grep -q "alembic.runtime.migration"
+      - name: Assert the landing page renders with webpack assets
+        run: |
+          body=$(curl -fsS http://localhost:8070/)
+          echo "$body" | grep -qE '/static/dist/amt\.[a-z0-9]+\.js' \
+            || { echo "no hashed webpack bundle in the landing page"; echo "$body" | head -40; exit 1; }
+          echo "$body" | grep -qE '/static/dist/main\.[a-z0-9]+\.css' \
+            || { echo "no hashed css bundle in the landing page"; exit 1; }
+      - name: Assert the production image carries no node toolchain
+        run: |
+          if docker compose exec -T amt sh -c 'command -v node || command -v npm'; then
+            echo "node/npm leaked into the production image"
+            exit 1
+          fi
+          echo "no node/npm in the production image"
+      - if: always()
+        run: docker compose down -v --remove-orphans
+
   test-local-frontend:
     runs-on: ubuntu-latest
     steps:
@@ -201,7 +246,7 @@ jobs:
     secrets: inherit
 
   build:
-    needs: [test-local-frontend, test-local-backend, test-compose]
+    needs: [test-local-frontend, test-local-backend, test-compose, smoke-production]
     if: >-
       github.event_name != 'pull_request' &&
       !github.event.act &&
