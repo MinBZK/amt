@@ -5,8 +5,6 @@ services:
       dockerfile: Dockerfile
     image: ghcr.io/minbzk/amt:latest
     restart: unless-stopped
-    volumes:
-      - ./amt:/app/amt/:cached
     depends_on:
       db:
         condition: service_healthy
@@ -18,7 +16,15 @@ services:
     ports:
       - 8070:8000
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8000/health/live || exit 1"]
+      # Python instead of curl: the production image is a clean python:slim
+      # without curl, so the check uses the interpreter that is always present.
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://localhost:8000/health/live').status==200 else 1)",
+        ]
 
   db:
     image: postgres:16
