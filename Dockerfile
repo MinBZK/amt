@@ -1,6 +1,12 @@
 ARG PYTHON_VERSION=3.12-slim
 ARG NVM_VERSION=0.40.0
 
+# Build-platform side: full toolchain pinned to $BUILDPLATFORM so lint, test,
+# and webpack run natively on the CI runner instead of emulated under QEMU.
+# Anything produced here is either consumed in the same stage (lint/test) or
+# arch-independent (webpack JS/CSS/templates). The .venv built here targets
+# BUILDPLATFORM wheels and must never reach the runtime image — production
+# pulls its .venv from the separate python-deps stage below.
 FROM  --platform=$BUILDPLATFORM python:${PYTHON_VERSION} AS project-base
 ARG NVM_VERSION
 
@@ -69,10 +75,41 @@ COPY ./resources/ ./resources/
 RUN npm run build
 
 # Builder stage: produces the webpack assets that the production image needs.
-# Node, npm and nvm live here only and never reach the runtime image.
+# Node, npm and nvm live here only and never reach the runtime image. Stays on
+# BUILDPLATFORM via project-base; webpack output is arch-independent.
 FROM project-base AS asset-builder
 COPY amt/ ./amt/
 RUN npm run build
+
+# Python deps for the runtime image, deliberately built on $TARGETPLATFORM
+# (no --platform). asyncpg, psycopg2-binary, and cryptography all ship
+# arch-specific manylinux wheels; the previous setup copied the project-base
+# .venv into production, which on a linux/arm64 target produced an arm64
+# manifest with amd64 .so files that crashed at import. Splitting this stage
+# off makes the .venv match the runtime arch. Wheels are precompiled, so this
+# stage is just downloads even when QEMU emulation is in play, no compiler
+# toolchain needed.
+FROM python:${PYTHON_VERSION} AS python-deps
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=off \
+    PIP_DISABLE_PIP_VERSION_CHECK=on \
+    PIP_DEFAULT_TIMEOUT=100 \
+    POETRY_VIRTUALENVS_IN_PROJECT=true \
+    POETRY_NO_INTERACTION=1 \
+    POETRY_HOME='/usr/local'
+
+RUN apt-get update \
+    && apt-get upgrade -y \
+    && apt-get install -y --no-install-recommends curl \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN curl -sSL https://install.python-poetry.org | python3 -
+
+WORKDIR /app/
+COPY ./poetry.lock ./pyproject.toml ./
+RUN poetry install --without dev,test --no-root
 
 FROM python:${PYTHON_VERSION} AS production
 
@@ -100,8 +137,9 @@ RUN groupadd amt && \
 # current problem is that i could not get the logger to accept a path in the filerotate handler
 RUN mkdir -p /app/ && chown amt:amt /app/
 
-# Python environment built by poetry in project-base, no node/npm/nvm.
-COPY --from=project-base --chown=amt:amt /app/.venv /app/.venv
+# Python environment built by poetry in python-deps, on $TARGETPLATFORM so
+# the C extensions match the runtime arch. No node/npm/nvm.
+COPY --from=python-deps --chown=amt:amt /app/.venv /app/.venv
 ENV PATH="/app/.venv/bin:$PATH"
 
 WORKDIR /app/
