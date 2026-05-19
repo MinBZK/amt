@@ -4,6 +4,7 @@ from functools import wraps
 from typing import Any
 
 from fastapi import HTTPException, Request
+from starlette.datastructures import State
 
 from amt.api.utils import SafeDict
 from amt.core.exceptions import AMTPermissionDenied
@@ -15,9 +16,9 @@ def permission(permissions: dict[str, list[str]]) -> Callable[[Callable[..., Any
     def decorator(func: Callable[..., Any]) -> Callable[..., Any]:  # noqa C901
         @wraps(func)
         async def wrapper(*args: Any, **kwargs: Any) -> Any:  # noqa: ANN401 C901
-            request = kwargs.get("request")
-            if not isinstance(request, Request):  # todo:  change exception to custom exception
+            if not isinstance(kwargs.get("request"), Request):  # todo:  change exception to custom exception
                 raise HTTPException(status_code=400, detail="Request object is missing")
+            request: Request[State] = kwargs["request"]
 
             organization_slug_resolved = False
             extra_arguments: dict[str, Any] = {}
@@ -37,13 +38,11 @@ def permission(permissions: dict[str, list[str]]) -> Callable[[Callable[..., Any
                         permission = permission.replace("organization_slug", "organization_id")
 
                 permission = permission.format_map(SafeDict(ChainMap(kwargs, extra_arguments)))
-                request_permissions: dict[str, list[str]] = (
-                    request.state.permissions if hasattr(request.state, "permissions") else {}
-                )
+                request_permissions: dict[str, list[str]] = getattr(request.state, "permissions", {})
                 if permission not in request_permissions:
                     raise AMTPermissionDenied()
                 for verb in verbs:
-                    if verb not in request.state.permissions[permission]:
+                    if verb not in request_permissions[permission]:
                         raise AMTPermissionDenied()
 
             return await func(*args, **kwargs)
