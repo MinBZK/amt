@@ -187,3 +187,5 @@ wrapt = "*"
 prometheus-client = "*"
 # prometheus-fastapi-instrumentator reports "ISC" which doesn't match "ISC License (ISCL)"
 prometheus-fastapi-instrumentator = "*"
+# greenlet >=3.5 reports "MIT AND PSF-2.0" which liccheck doesn't parse correctly
+greenlet = "*"
