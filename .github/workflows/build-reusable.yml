@@ -66,9 +66,6 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           annotations: ${{ steps.meta.outputs.annotations }}
-          # darwin has no container image (Docker does not run on the macOS
-          # kernel) and no python:slim tag ships a darwin manifest, so this
-          # only ever resolved by accident. Build the platforms we deploy.
           platforms: linux/amd64,linux/arm64
 
       - name: Call API to upsert deployment
