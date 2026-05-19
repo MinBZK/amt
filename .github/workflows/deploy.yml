@@ -73,7 +73,7 @@ jobs:
     needs: [deploy]
     if: ${{ success() && inputs.environment == 'production' }}
     steps:
-      - uses: mattermost/action-mattermost-notify@master
+      - uses: mattermost/action-mattermost-notify@v2.1.0
         with:
           MATTERMOST_WEBHOOK_URL: ${{ secrets.MM_WEBHOOK_RELEASES }}
           TEXT: |
