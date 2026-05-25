@@ -19,21 +19,21 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.12"
-fastapi = "^0.136.1"
+fastapi = "^0.136.3"
 alembic = "^1.18.4"
 pydantic = "2.13.4"
 jinja2 = "^3.1.6"
 pydantic-settings = "^2.14.1"
 psycopg2-binary = "^2.9.12"
-uvicorn = {extras = ["standard"], version = "0.47.0"}
+uvicorn = {extras = ["standard"], version = "0.48.0"}
 pyyaml = "^6.0.1"
 babel = "^2.17.0"
 httpx = "^0.28.1"
 pyyaml-include = "^2.2"
-click = "^8.4.0"
+click = "^8.4.1"
 python-ulid = {extras = ["pydantic"], version = "^3.1.0"}
 fastapi-csrf-protect = "^1.0.7"
-sqlalchemy = {extras = ["asyncio"], version = "^2.0.49"}
+sqlalchemy = {extras = ["asyncio"], version = "^2.0.50"}
 sqlalchemy-utils = "^0.42.0"
 liccheck = "^0.9.2"
 authlib = "^1.7.2"
@@ -66,13 +66,13 @@ pytest-minio-mock = "^0.4.19"
 
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.15.13"
+ruff = "^0.15.14"
 pre-commit = "^4.6.0"
 polib = "^1.2.0"
 pyright = "^1.1.409"
 liccheck = "^0.9.2"
 # liccheck 0.9.2 imports pkg_resources, which setuptools >=81 deprecates and >=82 removes; pin below 81
-setuptools = ">=80,<81"
+setuptools = ">=82.0.1,<83"
 types-pyyaml = "^6.0.12.20260518"
 djlint = "^1.36.1"
 jurigged = "^0.6.1"
