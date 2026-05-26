@@ -352,3 +352,33 @@ async def test_get_algorithms(client: AsyncClient, mocker: MockFixture, db: Data
     assert response.headers["content-type"] == "text/html; charset=utf-8"
     assert b"Algorithm1" not in response.content
     assert b"Algorithm2" not in response.content
+
+
+@pytest.mark.asyncio
+async def test_show_algorithms_without_permission_is_denied(
+    client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils
+) -> None:
+    # given a user without any organization authorizations (no init_authorizations_and_roles)
+    await db.given([default_user(), default_organization()])
+    mocker.patch("amt.api.routes.organizations.get_user", return_value=default_auth_user())
+
+    # when listing algorithms of an organization the user has no membership in
+    response = await client.get("/organizations/default-organization/algorithms")
+
+    # then the permission check denies it
+    assert response.status_code == 404
+
+
+@pytest.mark.asyncio
+async def test_get_users_without_permission_is_denied(
+    client: AsyncClient, mocker: MockFixture, db: DatabaseTestUtils
+) -> None:
+    # given a user without any authorizations
+    await db.given([default_user()])
+    mocker.patch("amt.api.routes.organizations.get_user", return_value=default_auth_user())
+
+    # when searching users
+    response = await client.get("/organizations/users?query=Default")
+
+    # then the permission check denies it
+    assert response.status_code == 404
