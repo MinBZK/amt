@@ -67,6 +67,11 @@ def get_organization_tabs(request: Request, organization_slug: str) -> list[Navi
 
 
 @router.get("/users")
+# Note: ORGANIZATIONS:[LIST, CREATE] is granted to every authenticated user via
+# AuthorizationRepository.get_default_permissions(), so this gate only blocks
+# anonymous access, not logged-in-but-unprivileged users. That is intentional:
+# this endpoint backs the member-add autocomplete, available to any logged-in user.
+@permission({AuthorizationResource.ORGANIZATIONS: [AuthorizationVerb.LIST]})
 async def get_users(
     request: Request,
     services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
@@ -107,6 +112,9 @@ async def get_users(
 
 
 @router.get("/new")
+# Note: ORGANIZATIONS:CREATE is a default permission (see get_users above), so this
+# gate only blocks anonymous access. Any logged-in user may open the create-org form.
+@permission({AuthorizationResource.ORGANIZATIONS: [AuthorizationVerb.CREATE]})
 async def get_new(
     request: Request,
     services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],
@@ -355,8 +363,8 @@ async def get_organization_update(
     )
 
 
-@permission({AuthorizationResource.ORGANIZATION_ALGORITHM_SLUG: [AuthorizationVerb.LIST]})
 @router.get("/{organization_slug}/algorithms")
+@permission({AuthorizationResource.ORGANIZATION_ALGORITHM_SLUG: [AuthorizationVerb.LIST]})
 async def show_algorithms(
     request: Request,
     services_provider: Annotated[ServicesProvider, Depends(get_service_provider)],

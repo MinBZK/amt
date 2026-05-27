@@ -854,7 +854,7 @@ async def redirect_to(request: Request, algorithm_id: str, to: str) -> RedirectR
     not work when redirecting to the same URL, even if query params are changed.
     """
 
-    if not to.startswith("/"):
+    if not to.startswith("/") or to.startswith(("//", "/\\")):
         raise AMTPermissionDenied
 
     return RedirectResponse(  # NOSONAR

@@ -66,6 +66,13 @@ jobs:
       - name: Install dependencies
         run: poetry install
 
+      # liccheck 0.9.2 imports pkg_resources, which setuptools >=82 removed. The app
+      # itself does not need pkg_resources at runtime, so we keep setuptools current in
+      # the lock and only downgrade it here, in the license-check job, to provide
+      # pkg_resources for liccheck. Drop this once liccheck no longer needs pkg_resources.
+      - name: Provide pkg_resources for liccheck
+        run: poetry run pip install "setuptools<81"
+
       - name: check licenses used by project in pyproject.toml
         run: poetry run liccheck -s pyproject.toml
 
@@ -246,7 +253,8 @@ jobs:
     secrets: inherit
 
   build:
-    needs: [test-local-frontend, test-local-backend, test-compose, smoke-production]
+    needs:
+      [test-local-frontend, test-local-backend, test-compose, smoke-production]
     if: >-
       github.event_name != 'pull_request' &&
       !github.event.act &&

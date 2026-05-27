@@ -1175,6 +1175,15 @@ async def test_redirect_to_with_invalid_path(client: AsyncClient, db: DatabaseTe
     response = await client.get("/algorithm/1/redirect?to=test/path")
     assert response.status_code == 404  # The app returns 404 for permission denied
 
+    # Protocol-relative URLs (//evil.com/path) must also be rejected: a browser
+    # treats them as scheme-relative and navigates to the external domain.
+    response = await client.get("/algorithm/1/redirect?to=//evil.com/path")
+    assert response.status_code == 404
+
+    # Backslash variant that some browsers normalize to a scheme-relative URL.
+    response = await client.get("/algorithm/1/redirect?to=/\\evil.com/path")
+    assert response.status_code == 404
+
 
 @pytest.mark.asyncio
 async def test_resolve_and_enrich_measures(mocker: MockFixture) -> None:
