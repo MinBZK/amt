@@ -1,6 +1,9 @@
 import Sortable from "sortablejs";
 import htmx from "htmx.org";
-import _hyperscript from "hyperscript.org";
+// Side-effect import: hyperscript.org (>=0.9.x) self-initialises on load
+// (processes the DOM on DOMContentLoaded) and attaches itself to window._hyperscript.
+// It no longer exposes a default export or a browserInit() method.
+import "hyperscript.org";
 
 import "../scss/tabs.scss";
 import "../scss/layout.scss";
@@ -12,8 +15,6 @@ import {
 } from "../js/ruleapplier.js";
 
 /* eslint-disable  @typescript-eslint/no-non-null-assertion */
-
-_hyperscript.browserInit();
 
 const currentSortables: Sortable[] = [];
 
