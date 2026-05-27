@@ -669,6 +669,54 @@ async def test_preview_no_publication_raises_not_found(
 
 
 @pytest.mark.asyncio
+async def test_preview_without_permission_is_denied(
+    client: AsyncClient, db: DatabaseTestUtils, mocker: MockerFixture
+) -> None:
+    # given a user without any authorizations on the algorithm (no init_authorizations_and_roles)
+    await db.given([default_user(), default_organization(), default_algorithm("testalgorithm1")])
+
+    # when calling the preview route directly
+    response = await client.get("/algorithm/1/preview/LARS123", follow_redirects=False)
+
+    # then the permission check denies it
+    assert response.status_code == 404
+
+
+@pytest.mark.asyncio
+async def test_get_organization_selector_without_permission_is_denied(
+    client: AsyncClient, db: DatabaseTestUtils
+) -> None:
+    # given a user without any authorizations on the algorithm
+    await db.given([default_user(), default_organization(), default_algorithm("testalgorithm1")])
+
+    # when fetching the publish/organization-selector fragment
+    response = await client.get("/algorithm/1/publish/organization-selector")
+
+    # then the permission check denies it
+    assert response.status_code == 404
+
+
+@pytest.mark.asyncio
+async def test_ar_set_organization_without_permission_is_denied(
+    client: AsyncClient, db: DatabaseTestUtils, mocker: MockerFixture
+) -> None:
+    # given a user without any authorizations on the algorithm
+    await db.given([default_user(), default_organization(), default_algorithm("testalgorithm1")])
+    mocker.patch("amt.middleware.csrf.CookieOnlyCsrfProtect.validate_csrf", new_callable=mocker.AsyncMock)
+    client.cookies["fastapi-csrf-token"] = "1"
+
+    # when posting to set-organization
+    response = await client.post(
+        "/algorithm/1/publish/set-organization",
+        json={"organization_id": "1"},
+        headers={"X-CSRF-Token": "1"},
+    )
+
+    # then the permission check denies it
+    assert response.status_code == 404
+
+
+@pytest.mark.asyncio
 async def test_publish_router_redirects_to_step_when_in_progress(
     client: AsyncClient, db: DatabaseTestUtils, mocker: MockerFixture
 ) -> None:

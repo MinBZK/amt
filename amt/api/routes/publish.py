@@ -251,6 +251,7 @@ def get_organization_selector_context(
 
 
 @router.get("/{algorithm_id}/publish/organization-selector")
+@permission({AuthorizationResource.ALGORITHM_PUBLISH: [AuthorizationVerb.CREATE]})
 async def get_organization_selector(
     request: Request,
     algorithm_id: int,
@@ -262,6 +263,7 @@ async def get_organization_selector(
 
 
 @router.post("/{algorithm_id}/publish/set-organization", response_model=None)
+@permission({AuthorizationResource.ALGORITHM_PUBLISH: [AuthorizationVerb.CREATE]})
 async def ar_set_organization(
     request: Request,
     algorithm_id: int,
@@ -622,8 +624,8 @@ async def publish_release(
     )
 
 
-@permission({AuthorizationResource.ALGORITHM_PUBLISH: [AuthorizationVerb.CREATE]})
 @router.get("/{algorithm_id}/preview/{lars}")
+@permission({AuthorizationResource.ALGORITHM_PUBLISH: [AuthorizationVerb.CREATE]})
 async def preview(
     request: Request,  # needed for authorization
     algorithm_id: int,
