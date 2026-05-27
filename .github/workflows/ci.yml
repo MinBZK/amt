@@ -246,7 +246,8 @@ jobs:
     secrets: inherit
 
   build:
-    needs: [test-local-frontend, test-local-backend, test-compose, smoke-production]
+    needs:
+      [test-local-frontend, test-local-backend, test-compose, smoke-production]
     if: >-
       github.event_name != 'pull_request' &&
       !github.event.act &&
