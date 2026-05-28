@@ -5,10 +5,19 @@ on:
   pull_request:
     types:
       - closed
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
+# Retention policy for the ghcr.io/minbzk/amt container package:
+#   - main, latest and release tags (v*) are kept indefinitely.
+#   - PR images (pr-*) are removed immediately when their PR closes, and any
+#     that linger are swept once they are older than 14 days.
+#   - Untagged versions left behind by tag moves (and the per-arch children
+#     freed by the PR sweep) are removed.
+#
+# Safety: the scheduled/manual sweep runs in dry-run mode by default so the
+# deletions can be reviewed in the Actions log first. To enable live deletion,
+# set the repository variable GHCR_CLEANUP_DRY_RUN to "false"
+# (Settings -> Secrets and variables -> Actions -> Variables).
 jobs:
   delete_old_images:
     runs-on: ubuntu-latest
@@ -16,15 +25,28 @@ jobs:
       contents: read
       packages: write
     steps:
-      - name: "Delete untagged images"
-        if: github.event_name == 'schedule'
+      - name: "Delete PR images older than 14 days"
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         uses: dataaxiom/ghcr-cleanup-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          tags: "pr-*"
+          older-than: "14 days"
+          exclude-tags: "main,latest,v*"
+          dry-run: ${{ vars.GHCR_CLEANUP_DRY_RUN != 'false' }}
 
-      - name: "Clean up development images"
+      - name: "Delete untagged images"
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        uses: dataaxiom/ghcr-cleanup-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          delete-untagged: true
+          exclude-tags: "main,latest,v*"
+          dry-run: ${{ vars.GHCR_CLEANUP_DRY_RUN != 'false' }}
+
+      - name: "Clean up images for the closed PR"
         if: github.event_name == 'pull_request' && (github.event.action == 'closed' || github.event.pull_request.merged == true)
         uses: dataaxiom/ghcr-cleanup-action@v1
         with:
-          tags: "pr-${{github.event.pull_request.number}}"
           token: ${{ secrets.GITHUB_TOKEN }}
+          tags: "pr-${{ github.event.pull_request.number }}"
