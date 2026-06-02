@@ -143,14 +143,14 @@ def sanitize_html_id(input_string: str) -> str:
 templates = LocaleJinja2Templates(
     directory="amt/site/templates/", context_processors=[custom_context_processor], undefined=get_undefined_behaviour()
 )
-templates.env.filters.update(  # pyright: ignore [reportUnknownMemberType]
+templates.env.filters.update(  # pyright: ignore [reportUnknownMemberType, reportCallIssue, reportArgumentType]
     {
         "format_datetime": format_datetime,
         "format_timedelta": format_timedelta,
         "time_ago": time_ago,
     }
 )
-templates.env.globals.update(  # pyright: ignore [reportUnknownMemberType]
+templates.env.globals.update(  # pyright: ignore [reportUnknownMemberType, reportCallIssue, reportArgumentType]
     {
         "url_for_cache": url_for_cache,
         "nested_value": nested_value,
@@ -173,7 +173,7 @@ templates.env.globals.update(  # pyright: ignore [reportUnknownMemberType]
     }
 )
 # env tests allows for usage in templates like: if value is test_name(other_value)
-templates.env.tests.update(  # pyright: ignore [reportUnknownMemberType]
+templates.env.tests.update(  # pyright: ignore [reportUnknownMemberType, reportCallIssue, reportArgumentType]
     {"permission": permission, "equal_or_includes": equal_or_includes}
 )
 
