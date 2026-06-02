@@ -9,8 +9,8 @@ def test_template_permission_unauthorized():
     templates = LocaleJinja2Templates(
         directory="tests/site/static/templates", context_processors=[custom_context_processor]
     )
-    templates.env.globals.update(permission=permission)  # pyright: ignore [reportUnknownMemberType]
-    templates.env.tests["permission"] = permission  # pyright: ignore [reportUnknownMemberType]
+    templates.env.globals.update(permission=permission)  # pyright: ignore [reportUnknownMemberType, reportArgumentType]
+    templates.env.tests["permission"] = permission  # pyright: ignore [reportUnknownMemberType, reportArgumentType]
 
     # when
     response = templates.TemplateResponse(request, "permission_example.html.j2")
@@ -28,8 +28,8 @@ def test_template_permission_authorized():
     templates = LocaleJinja2Templates(
         directory="tests/site/static/templates", context_processors=[custom_context_processor]
     )
-    templates.env.globals.update(permission=permission)  # pyright: ignore [reportUnknownMemberType]
-    templates.env.tests["permission"] = permission  # pyright: ignore [reportUnknownMemberType]
+    templates.env.globals.update(permission=permission)  # pyright: ignore [reportUnknownMemberType, reportArgumentType]
+    templates.env.tests["permission"] = permission  # pyright: ignore [reportUnknownMemberType, reportArgumentType]
 
     # when
     response = templates.TemplateResponse(request, "permission_example.html.j2")
