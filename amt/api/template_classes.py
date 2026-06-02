@@ -100,7 +100,7 @@ class LocaleJinja2Templates(Jinja2Templates):
         headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
         if "Content-Language" not in headers:
             headers["Content-Language"] = ",".join(supported_translations)
-        self.env.install_gettext_translations(translations, newstyle=True)  # pyright: ignore [reportUnknownMemberType]
+        self.env.install_gettext_translations(translations, newstyle=True)  # pyright: ignore [reportUnknownMemberType, reportAttributeAccessIssue]
 
         if context is None:
             context = {}

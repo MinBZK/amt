@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any
 
 import httpx
-import nest_asyncio  # pyright: ignore [(reportMissingTypeStubs)]
+import nest_asyncio  # pyright: ignore [reportMissingTypeStubs]
 import pytest
 import pytest_asyncio
 import uvicorn
@@ -31,7 +31,7 @@ from tests.database_test_utils import DatabaseTestUtils
 logger = logging.getLogger(__name__)
 
 # Dubious choice here: allow nested event loops.
-nest_asyncio.apply()  # type: ignore [(reportUnknownMemberType)]
+nest_asyncio.apply()  # pyright: ignore [reportUnknownMemberType]
 
 # VCR intercepts HTTP requests at the httpcore level, but httpx still logs as if requests were made.
 # We suppress httpx/httpcore/vcr logging to avoid confusion - the requests are served from VCR cassettes.
@@ -91,7 +91,7 @@ async def setup_db_and_server(
 
 @pytest.fixture(autouse=True)
 def disable_auth(request: pytest.FixtureRequest, monkeypatch: pytest.MonkeyPatch) -> None:
-    marker = request.node.get_closest_marker("enable_auth")  # type: ignore [(reportUnknownMemberType)]
+    marker = request.node.get_closest_marker("enable_auth")  # pyright: ignore [reportUnknownMemberType, reportUnknownVariableType]
 
     if marker:
         monkeypatch.setenv("DISABLE_AUTH", "false")

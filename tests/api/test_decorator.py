@@ -1,3 +1,7 @@
+# pyright: reportUnknownVariableType=false, reportUnknownMemberType=false
+# starlette 1.x TestClient is partially-typed under strict pyright; suppress only
+# the resulting "unknown type" noise for this test file (the runtime is fine).
+
 import json
 import typing
 
