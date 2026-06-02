@@ -68,12 +68,12 @@ jobs:
           component: ${{ steps.zad_config.outputs.component }}
           image: ghcr.io/minbzk/amt:${{ inputs.image_tag }}@${{ steps.get_package_hash.outputs.container_id }}
 
-      - name: Deploy to ZAD (amt-bzk-prd)
+      - name: Deploy to ZAD (amtbz-2m9)
         if: ${{ inputs.environment == 'production' }}
         uses: RijksICTGilde/zad-actions/deploy@v4
         with:
           api-key: ${{ secrets.ZAD_API_KEY_BZK_PRD }}
-          project-id: amt-bzk-prd
+          project-id: amtbz-2m9
           deployment-name: productie
           component: component-1
           image: ghcr.io/minbzk/amt:${{ inputs.image_tag }}@${{ steps.get_package_hash.outputs.container_id }}
