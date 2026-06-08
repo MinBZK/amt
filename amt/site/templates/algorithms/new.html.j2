@@ -112,7 +112,9 @@
                                                 name="{{ item.target_name }}"
                                                 class="utrecht-select utrecht-select--html-select">
                                             <option value="" hidden>{% trans %}Select Option{% endtrans %}</option>
-                                            {% for option in item.options %}<option value="{{ option }}">{{ option }}</option>{% endfor %}
+                                            {% for option in item.options %}
+                                                <option value="{{ option }}">{{ option }}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                 </div>
