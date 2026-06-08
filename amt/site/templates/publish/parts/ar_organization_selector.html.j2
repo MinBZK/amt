@@ -21,7 +21,7 @@
                 <option value="">{% trans %}Select an organization{% endtrans %}</option>
                 </c-select-field>
                 {% if errors is defined and errors.get('organization_id') %}
-                    <div class="rvo-form-field__error-message" role="alert">{{ errors.get("organization_id") }}</div>
+                    <div class="rvo-form-field__error-message" role="alert">{{ errors.get('organization_id') }}</div>
                 {% endif %}
                 <c-button type="submit" kind="primary" hx-disabled-elt="this">{% trans %}Confirm{% endtrans %}</c-button>
             </form>
@@ -35,9 +35,7 @@
                 {% if errors is defined and errors.get('organization_id') %}errorText="{{ errors.get('organization_id') }}"{% endif %}
                 />
                 <c-text-input-field id="organization_name" name="organization_name" label="{% trans %}Organization Name{% endtrans %}" required="true" helperText="{% trans %}This is the name of your organization as it will be displayed in the Algorithm Register.{% endtrans %}"
-                {% if errors is defined and errors.get('organization_name') %}
-                    errorText="{{ errors.get('organization_name') }}"
-                {% endif %}
+                {% if errors is defined and errors.get('organization_name') %} errorText="{{ errors.get('organization_name') }}" {% endif %}
                 />
                 <c-button type="submit" kind="primary" hx-disabled-elt="this">{% trans %}Confirm{% endtrans %}</c-button>
             </form>

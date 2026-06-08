@@ -163,7 +163,9 @@
             {% else %}
                 {% set field_name = editable_object.last_path_item() %}
             {% endif %}
-            {% if editable_object.implementation_type.type != WebFormFieldType.HIDDEN %}<div style="flex: 1">{% endif %}
+            {% if editable_object.implementation_type.type != WebFormFieldType.HIDDEN %}
+                <div style="flex: 1">
+                {% endif %}
                 {% if editable_object.implementation_type.type == WebFormFieldType.TEXTAREA %}
                     <!-- TODO: classes utrecht-textarea seem to be missing? wrong NL design version? -->
                     <textarea id="field-{{ sanitize_html_id(field_name) }}"
