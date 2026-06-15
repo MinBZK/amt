@@ -21,7 +21,7 @@
                 <option value="">{% trans %}Select an organization{% endtrans %}</option>
                 </c-select-field>
                 {% if errors is defined and errors.get('organization_id') %}
-                    <div class="rvo-form-field__error-message" role="alert">{{ errors.get('organization_id') }}</div>
+                    <div class="rvo-form-field__error-message" role="alert">{{ errors.get("organization_id") }}</div>
                 {% endif %}
                 <c-button type="submit" kind="primary" hx-disabled-elt="this">{% trans %}Confirm{% endtrans %}</c-button>
             </form>
