@@ -25,7 +25,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Install poetry
         run: pipx install poetry
@@ -52,7 +52,7 @@ jobs:
   security:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Install poetry
         run: pipx install poetry
@@ -86,7 +86,7 @@ jobs:
   test-compose:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - run: mv compose.test.yml compose.override.yml
       - run: docker compose build
       - run: docker compose down -v --remove-orphans
@@ -109,7 +109,7 @@ jobs:
   smoke-production:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Build and start the production image
         run: docker compose up -d --build
       - name: Wait until the amt container is healthy
@@ -149,7 +149,7 @@ jobs:
   test-local-frontend:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - uses: actions/setup-node@v6
         with:
@@ -169,7 +169,7 @@ jobs:
         python-version: ["3.12"] # When using ACT only use ["3.12"]
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
@@ -285,7 +285,7 @@ jobs:
         run: |
           echo "tags: ${{ steps.meta.outputs.tags }}"
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Trigger deployment
         run: |
