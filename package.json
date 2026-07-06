@@ -32,7 +32,7 @@
     "jest": "^30.4.2",
     "lint-staged": "^17.0.8",
     "mini-css-extract-plugin": "^2.10.2",
-    "prettier": "3.9.1",
+    "prettier": "3.9.4",
     "replace-in-file-webpack-plugin": "^1.0.6",
     "sass": "^1.101.0",
     "sass-loader": "^17.0.0",
@@ -42,15 +42,15 @@
     "ts-loader": "^9.6.2",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.62.0",
-    "webpack": "^5.108.1",
-    "webpack-cli": "^7.1.0"
+    "typescript-eslint": "^8.62.1",
+    "webpack": "^5.108.4",
+    "webpack-cli": "^7.2.1"
   },
   "dependencies": {
     "@nl-rvo/assets": "1.0.0-alpha.360",
     "@nl-rvo/component-library-css": "4.12.1",
     "@nl-rvo/design-tokens": "1.12.0",
-    "@nl-rvo/css-alert": "1.6.1",
+    "@nl-rvo/css-alert": "1.6.2",
     "htmx.org": "^2.0.10",
     "hyperscript.org": "^0.9.93",
     "reset-css": "^5.0.2",
