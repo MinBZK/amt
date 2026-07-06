@@ -79,18 +79,18 @@
                       onclick="amt.openConfirmModal('{% trans %}Remove member{% endtrans %} {{ user.name }}','{% trans %}Are you sure you want to remove {% endtrans %} {{ user.name }}{% trans %}?{% endtrans %}', 'hx-delete','{{ base_href }}/members/{{ user.id }}')"
                       style="cursor: pointer;
                              vertical-align: top">
-                    <span class="utrecht-icon rvo-icon rvo-icon-verwijderen rvo-icon--md rvo-icon--hemelblauw"
-                          role="img"
-                          aria-label="{% trans %}Delete{% endtrans %}"></span>
-                    <a class="rvo-link"
-                       href="#"
-                       onclick="event.preventDefault()"
-                       style="font-size: 14px !important;
-                              color: rgb(0, 123, 199) !important">{% trans %}Delete{% endtrans %}</a>
-                </span>
-            </td>
-        {% endif %}
-    </tr>
+        <span class="utrecht-icon rvo-icon rvo-icon-verwijderen rvo-icon--md rvo-icon--hemelblauw"
+              role="img"
+              aria-label="{% trans %}Delete{% endtrans %}"></span>
+    <a class="rvo-link"
+       href="#"
+       onclick="event.preventDefault()"
+       style="font-size: 14px !important;
+              color: rgb(0, 123, 199) !important">{% trans %}Delete{% endtrans %}</a>
+</span>
+</td>
+{% endif %}
+</tr>
 {% endmacro %}
 {% macro render_form_field_search_result(editable_object) -%}
     {% set list_result = render_form_field_list_result(editable_object) %}
@@ -123,14 +123,14 @@
                 <span class="utrecht-icon rvo-icon rvo-icon-verwijderen rvo-icon--md rvo-icon--hemelblauw"
                       role="img"
                       aria-label="{% trans %}Delete{% endtrans %}"></span>
-                <a class="rvo-link"
-                   href="#"
-                   onclick="event.preventDefault()"
-                   style="font-size: 14px !important;
-                          color: rgb(0, 123, 199) !important">{% trans %}Delete{% endtrans %}</a>
-            </span>
-        </td>
-    </tr>
+            <a class="rvo-link"
+               href="#"
+               onclick="event.preventDefault()"
+               style="font-size: 14px !important;
+                      color: rgb(0, 123, 199) !important">{% trans %}Delete{% endtrans %}</a>
+    </span>
+</td>
+</tr>
 {% endmacro %}
 {% macro form_field_select(prefix, field) %}
     <div role="group"
@@ -169,8 +169,8 @@
         <span class="utrecht-icon rvo-icon rvo-icon-foutmelding rvo-icon--md rvo-status-icon-foutmelding rvo-status-icon-foutmelding"
               role="img"
               aria-label="{% trans %}Error{% endtrans %}"></span>
-        <span class="amt-error-message">{{ msg }}</span>
-    </div>
+    <span class="amt-error-message">{{ msg }}</span>
+</div>
 {% endmacro %}
 {% macro form_field_file(prefix, field) %}
     <div role="group"
@@ -206,55 +206,55 @@
                                                 width: auto">
                                         <div class="amt-flex-container">
                                             <h3 class="utrecht-heading-3 rvo-heading--no-margins">{% trans %}Delete file{% endtrans %}</h3>
-                                        </div>
-                                        <hr class="rvo-hr" />
-                                        <p style="min-height: 54%; padding-block: 0.5em 0.4em;">
-                                            {% trans %}Are you sure you want to delete{% endtrans %}
-                                            <strong>{{ file }}?</strong>
-                                        </p>
-                                        <div class="utrecht-button-group">
-                                            <button hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
-                                                    hx-delete="/algorithm/{{ algorithm_id }}/file/{{ ulid }}"
-                                                    hx-target="#file-{{ ulid }}"
-                                                    hx-swap="delete"
-                                                    hx-on::after-request="amt.closeModal('delete-file-modal-{{ ulid }}')"
-                                                    class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
-                                                    type="button">
-                                                {% trans %}Yes{%
-                                                endtrans %}
-                                            </button>
-                                            <button class="utrecht-button utrecht-button--secondary-action utrecht-button--rvo-md"
-                                                    onclick="amt.closeModal('delete-file-modal-{{ ulid }}')"
-                                                    type="button">{% trans %}No{% endtrans %}</button>
-                                        </div>
                                     </div>
-                                </div>
+                                    <hr class="rvo-hr" />
+                                    <p style="min-height: 54%; padding-block: 0.5em 0.4em;">
+                                        {% trans %}Are you sure you want to delete{% endtrans %}
+                                    <strong>{{ file }}?</strong>
+                                </p>
+                                <div class="utrecht-button-group">
+                                    <button hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
+                                            hx-delete="/algorithm/{{ algorithm_id }}/file/{{ ulid }}"
+                                            hx-target="#file-{{ ulid }}"
+                                            hx-swap="delete"
+                                            hx-on::after-request="amt.closeModal('delete-file-modal-{{ ulid }}')"
+                                            class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
+                                            type="button">
+                                        {% trans %}Yes{%
+                                        endtrans %}
+                                    </button>
+                                    <button class="utrecht-button utrecht-button--secondary-action utrecht-button--rvo-md"
+                                            onclick="amt.closeModal('delete-file-modal-{{ ulid }}')"
+                                            type="button">{% trans %}No{% endtrans %}</button>
                             </div>
-                            <li id="file-{{ ulid }}" class="rvo-item-list__item">
-                                <div class="rvo-layout-row rvo-layout-justify-content-space-between rvo-layout-gap--md">
-                                    <div class="rvo-layout-row rvo-layout-gap--sm">
-                                        <span class="utrecht-icon rvo-icon rvo-icon-document-met-lijnen rvo-icon--md rvo-icon--hemelblauw"
-                                              role="img"
-                                              aria-label="File"></span>
-                                        <a id="link-to-file"
-                                           href="{{ url_for('get_file', algorithm_id=algorithm_id, ulid=ulid) }}"
-                                           class="rvo-link rvo-link--normal">{{ file }}</a>
-                                    </div>
-                                    <a id="saved-file-delete"
-                                       class="rvo-link rvo-link--normal rvo-link--no-underline rvo-link--with-icon"
-                                       onclick="amt.openModal('delete-file-modal-{{ ulid }}')">
-                                        <span class="utrecht-icon rvo-icon rvo-icon-verwijderen rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
-                                              role="img"
-                                              aria-label="Delete"></span>
-                                    </a>
-                                </div>
-                            </li>
-                        {% endfor %}
-                    </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        {% endif %}
+                <li id="file-{{ ulid }}" class="rvo-item-list__item">
+                    <div class="rvo-layout-row rvo-layout-justify-content-space-between rvo-layout-gap--md">
+                        <div class="rvo-layout-row rvo-layout-gap--sm">
+                            <span class="utrecht-icon rvo-icon rvo-icon-document-met-lijnen rvo-icon--md rvo-icon--hemelblauw"
+                                  role="img"
+                                  aria-label="File"></span>
+                            <a id="link-to-file"
+                               href="{{ url_for('get_file', algorithm_id=algorithm_id, ulid=ulid) }}"
+                               class="rvo-link rvo-link--normal">{{ file }}</a>
+                        </div>
+                        <a id="saved-file-delete"
+                           class="rvo-link rvo-link--normal rvo-link--no-underline rvo-link--with-icon"
+                           onclick="amt.openModal('delete-file-modal-{{ ulid }}')">
+                            <span class="utrecht-icon rvo-icon rvo-icon-verwijderen rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
+                                  role="img"
+                                  aria-label="Delete"></span>
+                        </a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
     </div>
+</div>
+{% endif %}
+</div>
 {% endmacro %}
 {% macro form_field_text(prefix, field) %}
     <div role="group"
@@ -398,8 +398,8 @@
                       {% endif %}>{{ field.default_value }}</textarea>
             {# TODO: Fix when we upgrade to higher @nl-rvo npm package #}
             {# <span class="utrecht-textbox-remaining-chars">{% trans %}Still{% endtrans %} <strong>300</strong> {% trans %}Characters remaining{% endtrans %}</span>#}
-        </div>
-    </div>
+</div>
+</div>
 {% endmacro %}
 {% macro form_field_search(prefix, field) %}
     <div role="group"
@@ -438,15 +438,15 @@
             <thead>
                 <tr class="rvo-table-row">
                     <th scope="col" class="rvo-table-header">{% trans %}Name{% endtrans %}</th>
-                    <th scope="col" class="rvo-table-header">{% trans %}Role{% endtrans %}</th>
-                    <th scope="col" class="rvo-table-header">{% trans %}Options{% endtrans %}</th>
-                </tr>
-            </thead>
-            <tbody id="{{ prefix }}{{ field.name }}-results-list">
-                {% if field.default_value %}{{ render_form_field_list_result(field.default_value) }}{% endif %}
-            </tbody>
-        </table>
-    </div>
+                <th scope="col" class="rvo-table-header">{% trans %}Role{% endtrans %}</th>
+            <th scope="col" class="rvo-table-header">{% trans %}Options{% endtrans %}</th>
+    </tr>
+</thead>
+<tbody id="{{ prefix }}{{ field.name }}-results-list">
+    {% if field.default_value %}{{ render_form_field_list_result(field.default_value) }}{% endif %}
+</tbody>
+</table>
+</div>
 {% endmacro %}
 {% macro form_field_submit(form, field) %}
     <div id="errorContainer" class="margin-bottom-small"></div>

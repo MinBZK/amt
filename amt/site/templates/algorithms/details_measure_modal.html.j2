@@ -23,57 +23,57 @@
                                  class="utrecht-form-field utrecht-form-field--text rvo-form-field rvo-layout-gap--0">
                                 <div class="rvo-form-field__label rvo-layout-gap--0">
                                     <label class="rvo-label" id="fieldId-label" for="fieldId">{% trans %}Description{% endtrans %}</label>
-                                    <div class="utrecht-form-field-description">{{ measure.description }}</div>
-                                </div>
-                                <div class="rvo-layout-row">
-                                    <span class="utrecht-icon rvo-icon rvo-icon-info rvo-icon--xl rvo-status-icon-info"
-                                          role="img"
-                                          aria-label="Info"></span>
-                                    <a href="{{ measure.url }}"
-                                       target="_blank"
-                                       class="rvo-link utrecht-link">
-                                        {% trans %}Read more on the algoritmekader{% endtrans %}
-                                    </a>
-                                </div>
+                                <div class="utrecht-form-field-description">{{ measure.description }}</div>
                             </div>
-                            {% for form_field   in form.fields %}
-                                {# Place the measure_state on the side in the modal #}
-                                {% if form_field.name != "measure_state" %}
-                                    {# The functions have a specific ordering in horizontal fashion #}
-                                    {% if form_field.name == "measure_responsible" %}
-                                        <div class="rvo-layout-row rvo-layout-gap--md"
-                                             style="justify-content: space-between;
-                                                    align-items: start">
-                                            {{ macros.form_field(form.id, form_field) }}
-                                        {% elif form_field.name == "measure_accountable" %}
-                                            {{ macros.form_field(form.id, form_field) }}
-                                        </div>
-                                    {% else %}
-                                        {{ macros.form_field(form.id, form_field) }}
-                                    {% endif %}
-                                {% endif %}
-                            {% endfor %}
-                        </fieldset>
+                            <div class="rvo-layout-row">
+                                <span class="utrecht-icon rvo-icon rvo-icon-info rvo-icon--xl rvo-status-icon-info"
+                                      role="img"
+                                      aria-label="Info"></span>
+                                <a href="{{ measure.url }}"
+                                   target="_blank"
+                                   class="rvo-link utrecht-link">
+                                    {% trans %}Read more on the algoritmekader{% endtrans %}
+                            </a>
+                        </div>
                     </div>
-                    <p class="utrecht-button-group">
-                        <button id="save-measure-edit"
-                                type="submit"
-                                class="flex utrecht-button utrecht-button--primary-action rvo-layout-row rvo-layout-gap--md utrecht-button--rvo-md rvo-link--no-underline utrecht-button-group__align-left"
-                                onclick="amt.closeModal('modal')">{% trans %}Save{% endtrans %}</button>
-                        <button id="close-measure-edit"
-                                type="button"
-                                class="flex utrecht-button utrecht-button--secondary-action rvo-layout-row rvo-layout-gap--md utrecht-button--rvo-md rvo-link--no-underline utrecht-button-group__align-left"
-                                onclick="amt.closeModal('modal')">{% trans %}Cancel{% endtrans %}</button>
-                    </p>
-                </div>
+                    {% for form_field   in form.fields %}
+                        {# Place the measure_state on the side in the modal #}
+                        {% if form_field.name != "measure_state" %}
+                            {# The functions have a specific ordering in horizontal fashion #}
+                            {% if form_field.name == "measure_responsible" %}
+                                <div class="rvo-layout-row rvo-layout-gap--md"
+                                     style="justify-content: space-between;
+                                            align-items: start">
+                                    {{ macros.form_field(form.id, form_field) }}
+                                {% elif form_field.name == "measure_accountable" %}
+                                    {{ macros.form_field(form.id, form_field) }}
+                                </div>
+                            {% else %}
+                                {{ macros.form_field(form.id, form_field) }}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </fieldset>
             </div>
-            <div class="utrecht-form-field utrecht-form-field--text rvo-form-field"
-                 style="margin-top: var(--rvo-card-image-margin-block-end);
-                        margin-left: var(--rvo-card-image-margin-block-end)">
-                {% for form_field in form.fields %}
-                    {% if form_field.name == "measure_state" %}{{ macros.form_field(form.id, form_field) }}{% endif %}
-                {% endfor %}
-            </div>
-        </div>
-    </form>
+            <p class="utrecht-button-group">
+                <button id="save-measure-edit"
+                        type="submit"
+                        class="flex utrecht-button utrecht-button--primary-action rvo-layout-row rvo-layout-gap--md utrecht-button--rvo-md rvo-link--no-underline utrecht-button-group__align-left"
+                        onclick="amt.closeModal('modal')">{% trans %}Save{% endtrans %}</button>
+            <button id="close-measure-edit"
+                    type="button"
+                    class="flex utrecht-button utrecht-button--secondary-action rvo-layout-row rvo-layout-gap--md utrecht-button--rvo-md rvo-link--no-underline utrecht-button-group__align-left"
+                    onclick="amt.closeModal('modal')">{% trans %}Cancel{% endtrans %}</button>
+    </p>
+</div>
+</div>
+<div class="utrecht-form-field utrecht-form-field--text rvo-form-field"
+     style="margin-top: var(--rvo-card-image-margin-block-end);
+            margin-left: var(--rvo-card-image-margin-block-end)">
+    {% for form_field in form.fields %}
+        {% if form_field.name == "measure_state" %}{{ macros.form_field(form.id, form_field) }}{% endif %}
+    {% endfor %}
+</div>
+</div>
+</form>
 </div>

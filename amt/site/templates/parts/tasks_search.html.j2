@@ -11,62 +11,60 @@
                     <div class="rvo-layout-grid rvo-layout-gap--sm rvo-layout-grid-columns--three rvo-layout-grid-layout--1fr">
                         <div class="rvo-layout-column rvo-text--bold rvo-layout-gap--sm">
                             <div>{% trans %}Search{% endtrans %}</div>
-                            <div class="form-input-container">
-                                <input id="tasks-search-input"
-                                       onkeyup="amt.searchInputChanged()"
-                                       type="text"
-                                       class="utrecht-textbox utrecht-textbox--html-input form-input-search"
-                                       dir="auto"
-                                       value="{{ search }}"
-                                       name="search"
-                                       hx-get="{{ base_href }}?skip=0"
-                                       hx-trigger="input changed delay:500ms, search"
-                                       autocomplete="off"
-                                       onfocus="this.value=''" />
-                                <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--lg form-input-clear display-none"
-                                      role="img"
-                                      aria-label="Kruis"
-                                      hx-trigger="click"
-                                      hx-get="{{ base_href }}?skip=0"
-                                      hx-swap="innerHTML"
-                                      onclick="amt.resetSearchInput()"></span>
-                            </div>
-                        </div>
-                        <div class="rvo-layout-column rvo-text--bold rvo-layout-gap--sm">
-                            <div>{% trans %}Lifecycle{% endtrans %}</div>
-                            <div class="rvo-select-wrapper">
-                                <select id="add-lifecycle"
-                                        name="add-filter-lifecycle"
-                                        class="utrecht-select utrecht-select--html-select">
-                                    <option value=""></option>
-                                    {% for lifecycle in lifecycles %}
-                                        <option {% if "lifecycle" in filters and lifecycle.value == filters["lifecycle"].value %}selected="selected"{% endif %}
-                                                value="{{ lifecycle.value }}">
-                                            {{ lifecycle.display_value | safe }}
-                                        </option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        </div>
-                        <div class="rvo-layout-column rvo-text--bold rvo-layout-gap--sm">
-                            <div>{% trans %}Assignee{% endtrans %}</div>
-                            <div class="rvo-select-wrapper">
-                                <select id="add-assignee"
-                                        name="add-filter-assignee"
-                                        class="utrecht-select utrecht-select--html-select">
-                                    <option value=""></option>
-                                    {% for assignee in assignees %}
-                                        <option {% if "assignee" in filters and assignee.value==filters["assignee"].value %}selected="selected" {% endif
-                                            %} value="{{ assignee.value }}">{{ assignee.display_value }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
+                        <div class="form-input-container">
+                            <input id="tasks-search-input"
+                                   onkeyup="amt.searchInputChanged()"
+                                   type="text"
+                                   class="utrecht-textbox utrecht-textbox--html-input form-input-search"
+                                   dir="auto"
+                                   value="{{ search }}"
+                                   name="search"
+                                   hx-get="{{ base_href }}?skip=0"
+                                   hx-trigger="input changed delay:500ms, search"
+                                   autocomplete="off"
+                                   onfocus="this.value=''" />
+                            <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--lg form-input-clear display-none"
+                                  role="img"
+                                  aria-label="Kruis"
+                                  hx-trigger="click"
+                                  hx-get="{{ base_href }}?skip=0"
+                                  hx-swap="innerHTML"
+                                  onclick="amt.resetSearchInput()"></span>
                         </div>
                     </div>
+                    <div class="rvo-layout-column rvo-text--bold rvo-layout-gap--sm">
+                        <div>{% trans %}Lifecycle{% endtrans %}</div>
+                    <div class="rvo-select-wrapper">
+                        <select id="add-lifecycle"
+                                name="add-filter-lifecycle"
+                                class="utrecht-select utrecht-select--html-select">
+                            <option value=""></option>
+                            {% for lifecycle in lifecycles %}
+                                <option {% if "lifecycle" in filters and lifecycle.value == filters["lifecycle"].value %}selected="selected"{% endif %}
+                                        value="{{ lifecycle.value }}">{{ lifecycle.display_value | safe }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="rvo-layout-column rvo-text--bold rvo-layout-gap--sm">
+                    <div>{% trans %}Assignee{% endtrans %}</div>
+                <div class="rvo-select-wrapper">
+                    <select id="add-assignee"
+                            name="add-filter-assignee"
+                            class="utrecht-select utrecht-select--html-select">
+                        <option value=""></option>
+                        {% for assignee in assignees %}
+                            <option {% if "assignee" in filters and assignee.value==filters["assignee"].value %}selected="selected" {% endif
+                                %} value="{{ assignee.value }}">{{ assignee.display_value }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
             </div>
-        </fieldset>
+        </div>
     </div>
+</div>
+</fieldset>
+</div>
 </form>
 <div id="tasks-search-results">{% include 'parts/tasks_board.html.j2' %}</div>
 <div id="errorContainer"></div>

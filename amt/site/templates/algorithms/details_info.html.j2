@@ -15,116 +15,116 @@
                         <span class="utrecht-icon rvo-icon rvo-icon-vinkje rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
                               role="img"
                               aria-label=""></span>{% trans %}Does the algorithm meet the requirements?{% endtrans %}
-                    </h5>
-                    <a class="rvo-text--subtle rvo-text--bold">{{ requirements_state.count_0 }}/{{ requirements_state.count_1 }}
-                    {% trans %}Done{% endtrans %}</a>
-                </div>
-                <ul class="rvo-item-list">
-                    {% for requirement in requirements_state.states %}
-                        {# Only show the first 3 elements of the instruments_state#}
-                        {% if loop.index <= 3 %}
-                            <li class="rvo-item-list__item">
-                                <div class="rvo-layout-row rvo-layout-gap--sm"
-                                     style="display: flex;
-                                            justify-content: space-between">
-                                    <div class="rvo-layout-row rvo-layout-gap--sm rvo-layout-align-items-start">
-                                        {% if requirement.state == "to do" or requirement.state == "" %}
-                                            <div class="rvo-status-indicator rvo-status-indicator--hemelblauw"></div>
-                                        {% elif requirement.state == "in progress" %}
-                                            <div class="rvo-status-indicator rvo-status-indicator--oranje"></div>
-                                        {% else %}
-                                            <div class="rvo-status-indicator rvo-status-indicator--groen"></div>
-                                        {% endif %}
-                                        <a class="rvo-link rvo-link--no-underline rvo-link--zwart"
-                                           href="compliance#{{ requirement.urn | replace(':', '_') }}">{{ requirement.name }}</a>
-                                    </div>
-                                    <div style="white-space: nowrap">
-                                        <span class="rvo-text--subtle">
-                                            {% if requirement.state == "to do" or requirement.state == "" %}
-                                                {% trans %}To do{% endtrans %}
-                                            {% elif requirement.state == "in progress" %}
-                                                {% trans %}In progress{% endtrans %}
-                                            {% elif requirement.state == "done" %}
-                                                {% trans %}Done{% endtrans %}
-                                            {% else %}
-                                                {{ requirement.state }}
-                                            {% endif %}
-                                        </span>
-                                    </div>
-                                </div>
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-                <a class="rvo-link rvo-link--normal rvo-link--with-icon"
-                   href="/algorithm/{{ algorithm_id }}/compliance"
-                   style="margin-top: 1em">
-                    <span class="utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
-                          role="img"
-                          aria-label="Home"></span>
-                    {% trans %}Go to all requirements{% endtrans %}
-                </a>
-            </div>
+                </h5>
+                <a class="rvo-text--subtle rvo-text--bold">{{ requirements_state.count_0 }}/{{ requirements_state.count_1 }}
+                {% trans %}Done{% endtrans %}</a>
         </div>
+        <ul class="rvo-item-list">
+            {% for requirement in requirements_state.states %}
+                {# Only show the first 3 elements of the instruments_state#}
+                {% if loop.index <= 3 %}
+                    <li class="rvo-item-list__item">
+                        <div class="rvo-layout-row rvo-layout-gap--sm"
+                             style="display: flex;
+                                    justify-content: space-between">
+                            <div class="rvo-layout-row rvo-layout-gap--sm rvo-layout-align-items-start">
+                                {% if requirement.state == "to do" or requirement.state == "" %}
+                                    <div class="rvo-status-indicator rvo-status-indicator--hemelblauw"></div>
+                                {% elif requirement.state == "in progress" %}
+                                    <div class="rvo-status-indicator rvo-status-indicator--oranje"></div>
+                                {% else %}
+                                    <div class="rvo-status-indicator rvo-status-indicator--groen"></div>
+                                {% endif %}
+                                <a class="rvo-link rvo-link--no-underline rvo-link--zwart"
+                                   href="compliance#{{ requirement.urn | replace(':', '_') }}">{{ requirement.name }}</a>
+                            </div>
+                            <div style="white-space: nowrap">
+                                <span class="rvo-text--subtle">
+                                    {% if requirement.state == "to do" or requirement.state == "" %}
+                                        {% trans %}To do{% endtrans %}
+                                {% elif requirement.state == "in progress" %}
+                                    {% trans %}In progress{% endtrans %}
+                            {% elif requirement.state == "done" %}
+                                {% trans %}Done{% endtrans %}
+                        {% else %}
+                            {{ requirement.state }}
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </li>
+    {% endif %}
+{% endfor %}
+</ul>
+<a class="rvo-link rvo-link--normal rvo-link--with-icon"
+   href="/algorithm/{{ algorithm_id }}/compliance"
+   style="margin-top: 1em">
+    <span class="utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--md rvo-icon--hemelblauw rvo-link__icon--before"
+          role="img"
+          aria-label="Home"></span>
+    {% trans %}Go to all requirements{% endtrans %}
+</a>
+</div>
+</div>
+</div>
+<!-- Table with Information on the Algorithm -->
+<div class="rvo-table--responsive rvo-alert--padding-md">
+    {% set has_permission = permission("algorithm/" ~ algorithm_id ~ "/systemcard", 'Update', permissions) %}
+    <table class="rvo-table">
+        <tbody class="rvo-table-body">
+            <tr class="rvo-table-row">
+                <td class="rvo-table-cell">{% trans %}Name{% endtrans %}</td>
+            <td class="rvo-table-cell">
+                {{ editable(algorithm, "name", "algorithm/" + algorithm_id|string  + "/name", None, has_permission) }}
+            </td>
+        </tr>
+        <tr class="rvo-table-row">
+            <td class="rvo-table-cell">{% trans %}Organization{% endtrans %}</td>
+        <td class="rvo-table-cell">
+            {{ editable(algorithm, "organization.name", "algorithm/" + algorithm_id|string  + "/organization", None, has_permission) }}
+        </td>
+    </tr>
+    <tr class="rvo-table-row">
+        <td class="rvo-table-cell">{% trans %}Description{% endtrans %}</td>
+    <td class="rvo-table-cell">
+        {{ editable(algorithm, "system_card.description", "algorithm/" + algorithm_id|string + "/system_card/description", None, has_permission) }}
+    </td>
+</tr>
+<tr class="rvo-table-row">
+    <td class="rvo-table-cell">{% trans %}Repository{% endtrans %}</td>
+<td class="rvo-table-cell">
+    {{ editable(algorithm, "system_card.provenance.uri", "algorithm/" + algorithm_id|string + "/systemcard/provenance/uri", None, has_permission) }}
+</td>
+</tr>
+<tr class="rvo-table-row">
+    <td class="rvo-table-cell">{% trans %}Lifecycle{% endtrans %}</td>
+<td class="rvo-table-cell">
+    {{ editable(algorithm, "lifecycle", "algorithm/" + algorithm_id|string + "/lifecycle", None, has_permission) }}
+</td>
+</tr>
+<tr class="rvo-table-row">
+    <td class="rvo-table-cell">{% trans %}Last updated{% endtrans %}</td>
+<td class="rvo-table-cell">{{ last_edited|format_datetime(language) }}</td>
+</tr>
+<tr class="rvo-table-row">
+    <td class="rvo-table-cell">{% trans %}Labels{% endtrans %}</td>
+<td class="rvo-table-cell">
+    {% for label in system_card.labels %}
+        <a class="rvo-tag rvo-tag--active rvo-tag--default rvo-tag--info">{{ label.name }}</a>
+    {% endfor %}
+</td>
+</tr>
+<tr class="rvo-table-row">
+    <td class="rvo-table-cell">{% trans %}References{% endtrans %}</td>
+<td class="rvo-table-cell">
+    <div class="amt-blocks-with-vertical-spacing">
+        {% for reference in system_card.references %}
+            {{ editable(algorithm, "system_card.references[" + (loop.index-1) |string + "]", "algorithm/" + algorithm_id|string + "/system_card/references[" + (loop.index-1)|string + "]", None, has_permission) }}
+        {% endfor %}
     </div>
-    <!-- Table with Information on the Algorithm -->
-    <div class="rvo-table--responsive rvo-alert--padding-md">
-        {% set has_permission = permission("algorithm/" ~ algorithm_id ~ "/systemcard", 'Update', permissions) %}
-        <table class="rvo-table">
-            <tbody class="rvo-table-body">
-                <tr class="rvo-table-row">
-                    <td class="rvo-table-cell">{% trans %}Name{% endtrans %}</td>
-                    <td class="rvo-table-cell">
-                        {{ editable(algorithm, "name", "algorithm/" + algorithm_id|string  + "/name", None, has_permission) }}
-                    </td>
-                </tr>
-                <tr class="rvo-table-row">
-                    <td class="rvo-table-cell">{% trans %}Organization{% endtrans %}</td>
-                    <td class="rvo-table-cell">
-                        {{ editable(algorithm, "organization.name", "algorithm/" + algorithm_id|string  + "/organization", None, has_permission) }}
-                    </td>
-                </tr>
-                <tr class="rvo-table-row">
-                    <td class="rvo-table-cell">{% trans %}Description{% endtrans %}</td>
-                    <td class="rvo-table-cell">
-                        {{ editable(algorithm, "system_card.description", "algorithm/" + algorithm_id|string + "/system_card/description", None, has_permission) }}
-                    </td>
-                </tr>
-                <tr class="rvo-table-row">
-                    <td class="rvo-table-cell">{% trans %}Repository{% endtrans %}</td>
-                    <td class="rvo-table-cell">
-                        {{ editable(algorithm, "system_card.provenance.uri", "algorithm/" + algorithm_id|string + "/systemcard/provenance/uri", None, has_permission) }}
-                    </td>
-                </tr>
-                <tr class="rvo-table-row">
-                    <td class="rvo-table-cell">{% trans %}Lifecycle{% endtrans %}</td>
-                    <td class="rvo-table-cell">
-                        {{ editable(algorithm, "lifecycle", "algorithm/" + algorithm_id|string + "/lifecycle", None, has_permission) }}
-                    </td>
-                </tr>
-                <tr class="rvo-table-row">
-                    <td class="rvo-table-cell">{% trans %}Last updated{% endtrans %}</td>
-                    <td class="rvo-table-cell">{{ last_edited|format_datetime(language) }}</td>
-                </tr>
-                <tr class="rvo-table-row">
-                    <td class="rvo-table-cell">{% trans %}Labels{% endtrans %}</td>
-                    <td class="rvo-table-cell">
-                        {% for label in system_card.labels %}
-                            <a class="rvo-tag rvo-tag--active rvo-tag--default rvo-tag--info">{{ label.name }}</a>
-                        {% endfor %}
-                    </td>
-                </tr>
-                <tr class="rvo-table-row">
-                    <td class="rvo-table-cell">{% trans %}References{% endtrans %}</td>
-                    <td class="rvo-table-cell">
-                        <div class="amt-blocks-with-vertical-spacing">
-                            {% for reference in system_card.references %}
-                                {{ editable(algorithm, "system_card.references[" + (loop.index-1) |string + "]", "algorithm/" + algorithm_id|string + "/system_card/references[" + (loop.index-1)|string + "]", None, has_permission) }}
-                            {% endfor %}
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 {% endblock %}

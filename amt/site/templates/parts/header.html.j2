@@ -9,9 +9,9 @@
             </div>
             <div class="rvo-logo__wordmark">
                 <p class="rvo-logo__title">{% trans %}Algorithm Management Toolkit{% endtrans %}</p>
-            </div>
         </div>
     </div>
+</div>
 </header>
 {% set language_mappings = {"nl": "Nederlands", "en": "English"} %}
 <div id="amt-main-menu-mobile"
@@ -66,34 +66,34 @@
                                     <span class="utrecht-icon rvo-icon rvo-icon-wereldbol rvo-icon--sm rvo-link__icon--before"
                                           role="img"
                                           aria-label="{% trans %}Language{% endtrans %} {{ available_translation }}"></span>
-                                    {{ language_mappings.get(available_translation) }}
-                                </a>
-                            {% endif %}
-                        {% endfor %}
-                    </li>
-                    <li class="rvo-topnav__item">
-                        <a class="rvo-link rvo-topnav__link rvo-link--logoblauw"
-                           href="/auth/login">
-                            <span class="utrecht-icon rvo-icon rvo-icon-user rvo-icon--sm rvo-link__icon--before"
-                                  role="img"
-                                  aria-label="User"></span> {% trans %}Login{% endtrans %}
-                        </a>
-                    </li>
-                {% else %}
-                    <li class="rvo-topnav__item">
-                        <a class="rvo-link rvo-topnav__link rvo-link--logoblauw"
-                           href="/auth/profile">
-                            <img width="12"
-                                 height="12"
-                                 src="https://gravatar.com/avatar/{{ user['email_hash'] }}?r=g&s=48&d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/{{ user['name_encoded'] }}/48"
-                                 alt="User icon">
-                            {{ user['name'] }}
-                        </a>
-                    </li>
-                {% endif %}
-            </ul>
-        </nav>
-    </div>
+                                {{ language_mappings.get(available_translation) }}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </li>
+                <li class="rvo-topnav__item">
+                    <a class="rvo-link rvo-topnav__link rvo-link--logoblauw"
+                       href="/auth/login">
+                        <span class="utrecht-icon rvo-icon rvo-icon-user rvo-icon--sm rvo-link__icon--before"
+                              role="img"
+                              aria-label="User"></span> {% trans %}Login{% endtrans %}
+                </a>
+            </li>
+        {% else %}
+            <li class="rvo-topnav__item">
+                <a class="rvo-link rvo-topnav__link rvo-link--logoblauw"
+                   href="/auth/profile">
+                    <img width="12"
+                         height="12"
+                         src="https://gravatar.com/avatar/{{ user['email_hash'] }}?r=g&s=48&d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/{{ user['name_encoded'] }}/48"
+                         alt="User icon">
+                    {{ user['name'] }}
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
+</div>
 </div>
 <div id="amt-main-menu-desktop">
     <div class="rvo-menubar__background rvo-menubar__background--horizontal-rule">
@@ -129,38 +129,38 @@
                                             <span class="utrecht-icon rvo-icon rvo-icon-wereldbol rvo-icon--sm rvo-icon--wit rvo-link__icon--before"
                                                   role="img"
                                                   aria-label="{% trans %}Language{% endtrans %} {{ available_translation }}"></span>
-                                            {{ language_mappings.get(available_translation) }}
-                                        </a>
-                                    </li>
-                                {% endif %}
-                            {% endfor %}
-                            <li class="rvo-menubar__item">
-                                {% if not user %}
-                                    <a id="header-link-login"
-                                       class="rvo-link rvo-menubar__link rvo-link--logoblauw"
-                                       href="/auth/login">
-                                        <span class="utrecht-icon rvo-icon rvo-icon-user rvo-icon--md rvo-icon--wit"
-                                              role="img"
-                                              aria-label="User"></span>
-                                        {% trans %}Login{% endtrans %}
+                                        {{ language_mappings.get(available_translation) }}
                                     </a>
-                                {% else %}
-                                    <a class="rvo-link rvo-menubar__link rvo-link--logoblauw"
-                                       href="/auth/profile">
-                                        <img width="24"
-                                             height="24"
-                                             src="https://gravatar.com/avatar/{{ user['email_hash'] }}?r=g&s=48&d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/{{ user['name_encoded'] }}/48"
-                                             alt="User icon">
-                                        {{ user['name'] }}
-                                    </a>
-                                {% endif %}
-                            </li>
-                        </ul>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        <li class="rvo-menubar__item">
+                            {% if not user %}
+                                <a id="header-link-login"
+                                   class="rvo-link rvo-menubar__link rvo-link--logoblauw"
+                                   href="/auth/login">
+                                    <span class="utrecht-icon rvo-icon rvo-icon-user rvo-icon--md rvo-icon--wit"
+                                          role="img"
+                                          aria-label="User"></span>
+                                    {% trans %}Login{% endtrans %}
+                            </a>
+                        {% else %}
+                            <a class="rvo-link rvo-menubar__link rvo-link--logoblauw"
+                               href="/auth/profile">
+                                <img width="24"
+                                     height="24"
+                                     src="https://gravatar.com/avatar/{{ user['email_hash'] }}?r=g&s=48&d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/{{ user['name_encoded'] }}/48"
+                                     alt="User icon">
+                                {{ user['name'] }}
+                            </a>
+                        {% endif %}
                     </li>
                 </ul>
-            </nav>
-        </div>
-    </div>
+            </li>
+        </ul>
+    </nav>
+</div>
+</div>
 </div>
 {% if sub_menu_items is defined and sub_menu_items|length > 0 %}
     <div id="amt-sub-menu-desktop"

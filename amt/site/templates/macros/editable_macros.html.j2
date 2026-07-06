@@ -90,170 +90,170 @@
                 <span class="utrecht-icon rvo-icon rvo-icon-bewerken rvo-icon--md rvo-icon--hemelblauw"
                       role="img"
                       aria-label="{% trans %}Edit{% endtrans %}"></span>
-                <a class="rvo-link"
-                   href="#"
-                   onclick="event.preventDefault()"
-                   style="font-size: 14px !important;
-                          color: rgb(0, 123, 199) !important">{% trans %}Edit{% endtrans %}</a>
-            </span>
-        {% endmacro %}
-        {% macro edit(editable_object) %}
-            <span hx-target="this">
-                <form hx-put="{{ base_href }}/update?full_resource_path={{ editable_object.full_resource_path }}"
-                      hx-ext="json-enc"
-                      hx-target-error="#errorContainer-{{ editable_object.safe_html_path() }}"
-                      method="post"
-                      hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
-                      hx-swap="outerHTML"
-                      id="form-for-{{ editable_object.safe_html_path() }}"
-                      autocomplete="off">
-                    <input type="hidden"
-                           name="form-id"
-                           value="form-for-{{ editable_object.safe_html_path() }}">
-                    <div class="rvo-layout-grid-container">
-                        {% if editable_object.implementation_type.type is none %}
-                            {# TODO: hardcoded check could be made more elegant #}
-                            {% if editable_object.last_path_item() == "ai_act_profile" %}{{ show_ai_act_button() }}{% endif %}
-                            <div class="amt-blocks-with-vertical-spacing">
-                                {% for child_editable in editable_object.children %}
-                                    <div>
-                                        <div id="error-{{ child_editable.safe_html_path() }}"
-                                             class="htmx-error-oob margin-top-middle"></div>
-                                        <strong>{{ render_attribute(child_editable.last_path_item() ) }}</strong>:
-                                        <br />
-                                        {{ inline_editor_form_field(child_editable) }}
-                                    </div>
-                                {% endfor %}
+            <a class="rvo-link"
+               href="#"
+               onclick="event.preventDefault()"
+               style="font-size: 14px !important;
+                      color: rgb(0, 123, 199) !important">{% trans %}Edit{% endtrans %}</a>
+    </span>
+{% endmacro %}
+{% macro edit(editable_object) %}
+    <span hx-target="this">
+        <form hx-put="{{ base_href }}/update?full_resource_path={{ editable_object.full_resource_path }}"
+              hx-ext="json-enc"
+              hx-target-error="#errorContainer-{{ editable_object.safe_html_path() }}"
+              method="post"
+              hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
+              hx-swap="outerHTML"
+              id="form-for-{{ editable_object.safe_html_path() }}"
+              autocomplete="off">
+            <input type="hidden"
+                   name="form-id"
+                   value="form-for-{{ editable_object.safe_html_path() }}">
+            <div class="rvo-layout-grid-container">
+                {% if editable_object.implementation_type.type is none %}
+                    {# TODO: hardcoded check could be made more elegant #}
+                    {% if editable_object.last_path_item() == "ai_act_profile" %}{{ show_ai_act_button() }}{% endif %}
+                    <div class="amt-blocks-with-vertical-spacing">
+                        {% for child_editable in editable_object.children %}
+                            <div>
+                                <div id="error-{{ child_editable.safe_html_path() }}"
+                                     class="htmx-error-oob margin-top-middle"></div>
+                                <strong>{{ render_attribute(child_editable.last_path_item() ) }}</strong>:
+                                <br />
+                                {{ inline_editor_form_field(child_editable) }}
                             </div>
-                            <div style="text-align: right" class="margin-top-middle">
-                                {{ inline_editor_form_buttons(editable_object.full_resource_path) }}
-                            </div>
-                        {% elif editable_object.implementation_type.type == WebFormFieldType.TEXTAREA %}
-                            <div id="error-{{ editable_object.safe_html_path() }}"
-                                 class="htmx-error-oob margin-top-middle"></div>
-                            {{ inline_editor_form_field(editable_object) }}
-                            <div style="text-align: right" class="margin-top-middle">
-                                {{ inline_editor_form_buttons(editable_object.full_resource_path) }}
-                            </div>
-                        {% else %}
-                            <div id="error-{{ editable_object.safe_html_path() }}"
-                                 class="htmx-error-oob margin-top-middle"></div>
-                            {#                        #TODO: figure out how to display fields inline or block-wise #}
-                            {% if editable_object.relative_resource_path == "role_id" %}
-                                <div>{{ inline_editor_form_field(editable_object) }}</div>
-                                <div class="margin-top-middle">{{ inline_editor_form_buttons(editable_object.full_resource_path) }}</div>
-                            {% else %}
-                                <div class="rvo-layout-grid rvo-layout-gap--md rvo-layout-grid--division"
-                                     style="grid-template-columns: 2fr 1fr">
-                                    {{ inline_editor_form_field(editable_object) }}
-                                    <div style="text-align: right">{{ inline_editor_form_buttons(editable_object.full_resource_path) }}</div>
-                                </div>
-                            {% endif %}
-                        {% endif %}
+                        {% endfor %}
                     </div>
-                </form>
-                {# we need the errorContainer to keep htmx happy, but we hide the contents #}
-                <div id="errorContainer-{{ editable_object.safe_html_path() }}"
-                     class="display-none"></div>
-            </span>
-        {% endmacro %}
-        {% macro inline_editor_form_field(editable_object, field_prefix = None) %}
-            {% if field_prefix is not none %}
-                {% set field_name = field_prefix + "[" + editable_object.last_path_item() + "]" %}
-            {% else %}
-                {% set field_name = editable_object.last_path_item() %}
-            {% endif %}
-            {% if editable_object.implementation_type.type != WebFormFieldType.HIDDEN %}
-                <div style="flex: 1">
+                    <div style="text-align: right" class="margin-top-middle">
+                        {{ inline_editor_form_buttons(editable_object.full_resource_path) }}
+                    </div>
+                {% elif editable_object.implementation_type.type == WebFormFieldType.TEXTAREA %}
+                    <div id="error-{{ editable_object.safe_html_path() }}"
+                         class="htmx-error-oob margin-top-middle"></div>
+                    {{ inline_editor_form_field(editable_object) }}
+                    <div style="text-align: right" class="margin-top-middle">
+                        {{ inline_editor_form_buttons(editable_object.full_resource_path) }}
+                    </div>
+                {% else %}
+                    <div id="error-{{ editable_object.safe_html_path() }}"
+                         class="htmx-error-oob margin-top-middle"></div>
+                    {#                        #TODO: figure out how to display fields inline or block-wise #}
+                    {% if editable_object.relative_resource_path == "role_id" %}
+                        <div>{{ inline_editor_form_field(editable_object) }}</div>
+                        <div class="margin-top-middle">{{ inline_editor_form_buttons(editable_object.full_resource_path) }}</div>
+                    {% else %}
+                        <div class="rvo-layout-grid rvo-layout-gap--md rvo-layout-grid--division"
+                             style="grid-template-columns: 2fr 1fr">
+                            {{ inline_editor_form_field(editable_object) }}
+                            <div style="text-align: right">{{ inline_editor_form_buttons(editable_object.full_resource_path) }}</div>
+                        </div>
+                    {% endif %}
                 {% endif %}
-                {% if editable_object.implementation_type.type == WebFormFieldType.TEXTAREA %}
-                    <!-- TODO: classes utrecht-textarea seem to be missing? wrong NL design version? -->
-                    <textarea id="field-{{ sanitize_html_id(field_name) }}"
+            </div>
+        </form>
+        {# we need the errorContainer to keep htmx happy, but we hide the contents #}
+        <div id="errorContainer-{{ editable_object.safe_html_path() }}"
+             class="display-none"></div>
+    </span>
+{% endmacro %}
+{% macro inline_editor_form_field(editable_object, field_prefix = None) %}
+    {% if field_prefix is not none %}
+        {% set field_name = field_prefix + "[" + editable_object.last_path_item() + "]" %}
+    {% else %}
+        {% set field_name = editable_object.last_path_item() %}
+    {% endif %}
+    {% if editable_object.implementation_type.type != WebFormFieldType.HIDDEN %}
+        <div style="flex: 1">
+        {% endif %}
+        {% if editable_object.implementation_type.type == WebFormFieldType.TEXTAREA %}
+            <!-- TODO: classes utrecht-textarea seem to be missing? wrong NL design version? -->
+            <textarea id="field-{{ sanitize_html_id(field_name) }}"
                               name="{{ field_name }}"
                               placeholder=""
                               class="utrecht-textbox utrecht-textarea utrecht-textarea--html-textarea"
 {#                              TODO: find out if and when value is not of type 'weboption' and value.value would break #}
                               dir="auto">{{ editable_object.value.display_value }}</textarea>
-                {% elif editable_object.implementation_type.type == WebFormFieldType.SELECT %}
-                    <div class="rvo-select-wrapper"
-                         style="max-inline-size: clamp(20rem, 40%, 50rem)">
-                        <select id="field-{{ sanitize_html_id(field_name) }}"
-                                name="{{ field_name }}"
-                                class="utrecht-select utrecht-select--html-select">
-                            {% for e in editable_object.form_options %}
-                                <option value="{{ e.value }}"
-                                        {% if e.value == editable_object.value.value|string %}selected="selected"{% endif %}>
-                                    {{ e.display_value | safe }}
-                                </option>
-                            {% endfor %}
-                        </select>
+        {% elif editable_object.implementation_type.type == WebFormFieldType.SELECT %}
+            <div class="rvo-select-wrapper"
+                 style="max-inline-size: clamp(20rem, 40%, 50rem)">
+                <select id="field-{{ sanitize_html_id(field_name) }}"
+                        name="{{ field_name }}"
+                        class="utrecht-select utrecht-select--html-select">
+                    {% for e in editable_object.form_options %}
+                        <option value="{{ e.value }}"
+                                {% if e.value == editable_object.value.value|string %}selected="selected"{% endif %}>
+                            {{ e.display_value | safe }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+        {% elif is_nested_enum(editable_object.resource_object, editable_object.relative_resource_path) %}
+            {% set value = nested_value(editable_object.resource_object, editable_object.relative_resource_path) %}
+            <div class="rvo-select-wrapper">
+                <select id="field-{{ sanitize_html_id(field_name) }}"
+                        name="{{ field_name }}"
+                        class="utrecht-select utrecht-select--html-select">
+                    {% for option in nested_enum(editable_object.resource_object, editable_object.relative_resource_path, language) %}
+                        <option value="{{ option.value }}"
+                                {% if option.value == value %}selected="selected"{% endif %}>
+                            {{ option.display_value | safe }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+        {% elif editable_object.implementation_type.type == WebFormFieldType.DATE %}
+            <input type="date"
+                   name="{{ field_name }}"
+                   value="{{ nested_value(editable_object.resource_object, editable_object.relative_resource_path) }}"
+                   class="utrecht-textbox utrecht-textbox--html-input utrecht-textbox--md"
+                   dir="auto">
+        {% elif editable_object.implementation_type.type == WebFormFieldType.CHECKBOX_MULTIPLE %}
+            <div class="utrecht-form-field utrecht-form-field--text rvo-form-field">
+                {% set value = nested_value(editable_object.resource_object, editable_object.relative_resource_path) %}
+                {% for option in editable_object.form_options %}
+                    <div class="rvo-checkbox__group">
+                        <label class="rvo-checkbox rvo-checkbox--not-checked" for="{{ option }}">
+                            <input id="{{ sanitize_html_id(field_name) }}-{{ loop.index }}"
+                                   name="{{ field_name }}"
+                                   class="rvo-checkbox__input"
+                                   type="checkbox"
+                                   {% if option.value is equal_or_includes(value) %}checked="checked"{% endif %}
+                                   value="{{ option.value }}" />
+                            {{ option.display_value | safe }}
+                        </label>
                     </div>
-                {% elif is_nested_enum(editable_object.resource_object, editable_object.relative_resource_path) %}
-                    {% set value = nested_value(editable_object.resource_object, editable_object.relative_resource_path) %}
-                    <div class="rvo-select-wrapper">
-                        <select id="field-{{ sanitize_html_id(field_name) }}"
-                                name="{{ field_name }}"
-                                class="utrecht-select utrecht-select--html-select">
-                            {% for option in nested_enum(editable_object.resource_object, editable_object.relative_resource_path, language) %}
-                                <option value="{{ option.value }}"
-                                        {% if option.value == value %}selected="selected"{% endif %}>
-                                    {{ option.display_value | safe }}
-                                </option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                {% elif editable_object.implementation_type.type == WebFormFieldType.DATE %}
-                    <input type="date"
-                           name="{{ field_name }}"
-                           value="{{ nested_value(editable_object.resource_object, editable_object.relative_resource_path) }}"
-                           class="utrecht-textbox utrecht-textbox--html-input utrecht-textbox--md"
-                           dir="auto">
-                {% elif editable_object.implementation_type.type == WebFormFieldType.CHECKBOX_MULTIPLE %}
-                    <div class="utrecht-form-field utrecht-form-field--text rvo-form-field">
-                        {% set value = nested_value(editable_object.resource_object, editable_object.relative_resource_path) %}
-                        {% for option in editable_object.form_options %}
-                            <div class="rvo-checkbox__group">
-                                <label class="rvo-checkbox rvo-checkbox--not-checked" for="{{ option }}">
-                                    <input id="{{ sanitize_html_id(field_name) }}-{{ loop.index }}"
-                                           name="{{ field_name }}"
-                                           class="rvo-checkbox__input"
-                                           type="checkbox"
-                                           {% if option.value is equal_or_includes(value) %}checked="checked"{% endif %}
-                                           value="{{ option.value }}" />
-                                    {{ option.display_value | safe }}
-                                </label>
-                            </div>
-                        {% endfor %}
-                    </div>
-                {% elif editable_object.implementation_type.type == WebFormFieldType.PRE_CHOSEN %}
-                    <div>
-                        <span>{{ editable_object.value.display_value }}</span>
-                        <input type="hidden"
-                               name="{{ field_name }}"
-                               value="{{ editable_object.value.value }}"
-                               class="utrecht-textbox utrecht-textbox--html-input" />
-                    </div>
-                {% elif editable_object.implementation_type.type == WebFormFieldType.HIDDEN %}
-                    <input type="hidden"
-                           name="{{ field_name }}"
-                           value="{{ editable_object.value.value }}"
-                           class="utrecht-textbox utrecht-textbox--html-input" />
-                {% else %}
-                    <input type="text"
-                           name="{{ field_name }}"
-                           value="{{ editable_object.value.value }}"
-                           class="utrecht-textbox utrecht-textbox--html-input" />
-                {% endif %}
-                {% if editable_object.implementation_type.type != WebFormFieldType.HIDDEN %}</div>{% endif %}
-        {% endmacro %}
-        {% macro inline_editor_form_buttons(full_resource_path) %}
-            <button type="submit"
-                    class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md">
-                {% trans %}Save{% endtrans %}
-            </button>
-            <button hx-get="{{ base_href }}/cancel?full_resource_path={{ full_resource_path }}"
-                    hx-swap="outerHTML"
-                    class="utrecht-button utrecht-button--secondary-action utrecht-button-group__align-right utrecht-button--rvo-md">
-                {% trans %}Cancel{% endtrans %}
-            </button>
-        {% endmacro %}
+                {% endfor %}
+            </div>
+        {% elif editable_object.implementation_type.type == WebFormFieldType.PRE_CHOSEN %}
+            <div>
+                <span>{{ editable_object.value.display_value }}</span>
+                <input type="hidden"
+                       name="{{ field_name }}"
+                       value="{{ editable_object.value.value }}"
+                       class="utrecht-textbox utrecht-textbox--html-input" />
+            </div>
+        {% elif editable_object.implementation_type.type == WebFormFieldType.HIDDEN %}
+            <input type="hidden"
+                   name="{{ field_name }}"
+                   value="{{ editable_object.value.value }}"
+                   class="utrecht-textbox utrecht-textbox--html-input" />
+        {% else %}
+            <input type="text"
+                   name="{{ field_name }}"
+                   value="{{ editable_object.value.value }}"
+                   class="utrecht-textbox utrecht-textbox--html-input" />
+        {% endif %}
+        {% if editable_object.implementation_type.type != WebFormFieldType.HIDDEN %}</div>{% endif %}
+{% endmacro %}
+{% macro inline_editor_form_buttons(full_resource_path) %}
+    <button type="submit"
+            class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md">
+        {% trans %}Save{% endtrans %}
+</button>
+<button hx-get="{{ base_href }}/cancel?full_resource_path={{ full_resource_path }}"
+        hx-swap="outerHTML"
+        class="utrecht-button utrecht-button--secondary-action utrecht-button-group__align-right utrecht-button--rvo-md">
+    {% trans %}Cancel{% endtrans %}
+</button>
+{% endmacro %}

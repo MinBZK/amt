@@ -10,54 +10,54 @@
                           role="img"
                           aria-label="todo-icon"></span>
                     <a class="rvo-max-width-layout-inline-padding--sm">{% trans %}To do{% endtrans %}</a>
-                </div>
-            {% elif status == 2 %}
-                <div class="rvo-layout-row rvo-max-width-layout-inline-padding--sm">
-                    <span class="utrecht-icon rvo-icon rvo-icon-refresh rvo-icon--lg"
-                          role="img"
-                          aria-label="doing-icon"></span>
-                    <a class="rvo-max-width-layout-inline-padding--sm">{% trans %}In progress{% endtrans %}</a>
-                </div>
-            {% elif status == 3 %}
-                <div class="rvo-layout-row rvo-max-width-layout-inline-padding--sm">
-                    <span class="utrecht-icon rvo-icon rvo-icon-let-op-met-loep rvo-icon--lg"
-                          role="img"
-                          aria-label="reviewing-icon"></span>
-                    <a class="rvo-max-width-layout-inline-padding--sm">{% trans %}In review{% endtrans %}</a>
-                </div>
-            {% elif status == 4 %}
-                <div class="rvo-layout-row rvo-max-width-layout-inline-padding--sm">
-                    <span class="utrecht-icon rvo-icon rvo-icon-vinkje rvo-icon--lg"
-                          role="img"
-                          aria-label="reviewing-icon"></span>
-                    <a class="rvo-max-width-layout-inline-padding--sm">{% trans %}Done{% endtrans %}</a>
-                </div>
-            {% elif status == 5 %}
-                <div class="rvo-layout-row rvo-max-width-layout-inline-padding--sm">
-                    <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--lg"
-                          role="img"
-                          aria-label="reviewing-icon"></span>
-                    <a class="rvo-max-width-layout-inline-padding--sm">{% trans %}Not implemented{% endtrans %}</a>
-                </div>
-            {% else %}
-                {% trans %}Unknown{% endtrans %}
-            {% endif %}
-        </h5>
-        {% if permission(permission_path, 'Update', permissions) == True %}
-            {% set column_class = "progress-cards-container sortable" %}
-        {% else %}
-            {% set column_class = "progress-cards-container" %}
-        {% endif %}
-        <div class="{{ column_class }}"
-             data-id="{{ status.value }}"
-             id="column-{{ status.value }}">
-            {% if algorithm is defined %}
-                {% for task in tasks_by_status[status] %}{{ render_task_card_full(task) }}{% endfor %}
-            {% else %}
-                {% for task in tasks_by_status[status] %}{{ render_task_card_full(task) }}{% endfor %}
-            {% endif %}
+            </div>
+        {% elif status == 2 %}
+            <div class="rvo-layout-row rvo-max-width-layout-inline-padding--sm">
+                <span class="utrecht-icon rvo-icon rvo-icon-refresh rvo-icon--lg"
+                      role="img"
+                      aria-label="doing-icon"></span>
+                <a class="rvo-max-width-layout-inline-padding--sm">{% trans %}In progress{% endtrans %}</a>
         </div>
+    {% elif status == 3 %}
+        <div class="rvo-layout-row rvo-max-width-layout-inline-padding--sm">
+            <span class="utrecht-icon rvo-icon rvo-icon-let-op-met-loep rvo-icon--lg"
+                  role="img"
+                  aria-label="reviewing-icon"></span>
+            <a class="rvo-max-width-layout-inline-padding--sm">{% trans %}In review{% endtrans %}</a>
     </div>
+{% elif status == 4 %}
+    <div class="rvo-layout-row rvo-max-width-layout-inline-padding--sm">
+        <span class="utrecht-icon rvo-icon rvo-icon-vinkje rvo-icon--lg"
+              role="img"
+              aria-label="reviewing-icon"></span>
+        <a class="rvo-max-width-layout-inline-padding--sm">{% trans %}Done{% endtrans %}</a>
+</div>
+{% elif status == 5 %}
+<div class="rvo-layout-row rvo-max-width-layout-inline-padding--sm">
+    <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--lg"
+          role="img"
+          aria-label="reviewing-icon"></span>
+    <a class="rvo-max-width-layout-inline-padding--sm">{% trans %}Not implemented{% endtrans %}</a>
+</div>
+{% else %}
+{% trans %}Unknown{% endtrans %}
+{% endif %}
+</h5>
+{% if permission(permission_path, 'Update', permissions) == True %}
+    {% set column_class = "progress-cards-container sortable" %}
+{% else %}
+    {% set column_class = "progress-cards-container" %}
+{% endif %}
+<div class="{{ column_class }}"
+     data-id="{{ status.value }}"
+     id="column-{{ status.value }}">
+    {% if algorithm is defined %}
+        {% for task in tasks_by_status[status] %}{{ render_task_card_full(task) }}{% endfor %}
+    {% else %}
+        {% for task in tasks_by_status[status] %}{{ render_task_card_full(task) }}{% endfor %}
+    {% endif %}
+</div>
+</div>
 {% endmacro -%}
 {% macro render_task_card_full(task) -%}
     <div {% if permission(permission_path, 'Update', permissions) == True %}draggable="true"{% endif %}
@@ -83,31 +83,31 @@
                                 <span class="utrecht-icon rvo-icon rvo-icon-refresh rvo-icon--md rvo-link__icon--before"
                                       role="img"
                                       aria-label="{% trans %}Lifecycle{% endtrans %}"></span>
-                                {{ get_localized_value("lifecycle", lifecycle, request).display_value | safe }}
-                            </span>
-                        {% endfor %}
-                    </div>
-                    <div class="margin-top-middle amt-clear-float">
-                        {% if hasattr(task, "type_object.users") and task.type_object.users | length > 0 %}
-                            {{ macros.user_avatars(task.type_object.users) }}
-                        {% endif %}
-                        {% if permission(permission_path, 'Update', permissions) == True %}
-                            <div style="float: right; margin-top: 0.4em;">
-                                <a class="rvo-link rvo-link--normal rvo-link--with-icon"
-                                   hx-trigger="click"
-                                   hx-target="#dynamic-modal-content"
-                                   hx-get="/algorithm/{{ algorithm_id }}/measure/{{ task.type_object.urn }}"
-                                   hx-swap="innerHTML"
-                                   onclick="amt.openModal('modal')">
-                                    <span class="utrecht-icon rvo-icon rvo-icon-bewerken rvo-icon--lg rvo-icon--hemelblauw rvo-link__icon--before"
-                                          role="img"
-                                          aria-label="{% trans %}Edit{% endtrans %}"></span>
-                                </a>
-                            </div>
-                        {% endif %}
-                    </div>
+                            {{ get_localized_value("lifecycle", lifecycle, request).display_value | safe }}
+                        </span>
+                    {% endfor %}
                 </div>
-            {% endif %}
+                <div class="margin-top-middle amt-clear-float">
+                    {% if hasattr(task, "type_object.users") and task.type_object.users | length > 0 %}
+                        {{ macros.user_avatars(task.type_object.users) }}
+                    {% endif %}
+                    {% if permission(permission_path, 'Update', permissions) == True %}
+                        <div style="float: right; margin-top: 0.4em;">
+                            <a class="rvo-link rvo-link--normal rvo-link--with-icon"
+                               hx-trigger="click"
+                               hx-target="#dynamic-modal-content"
+                               hx-get="/algorithm/{{ algorithm_id }}/measure/{{ task.type_object.urn }}"
+                               hx-swap="innerHTML"
+                               onclick="amt.openModal('modal')">
+                                <span class="utrecht-icon rvo-icon rvo-icon-bewerken rvo-icon--lg rvo-icon--hemelblauw rvo-link__icon--before"
+                                      role="img"
+                                      aria-label="{% trans %}Edit{% endtrans %}"></span>
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
         </div>
-    </div>
+    {% endif %}
+</div>
+</div>
 {% endmacro %}

@@ -33,12 +33,12 @@
                                 hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
                                 class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
                                 type="button">{% trans %}Yes{% endtrans %}</button>
-                        <button class="utrecht-button utrecht-button--secondary-action utrecht-button--rvo-md"
-                                onclick="this.closest('.minbzk-modal').remove()"
-                                type="button">{% trans %}No{% endtrans %}</button>
-                    </p>
-                </div>
-            </div>
+                    <button class="utrecht-button utrecht-button--secondary-action utrecht-button--rvo-md"
+                            onclick="this.closest('.minbzk-modal').remove()"
+                            type="button">{% trans %}No{% endtrans %}</button>
+            </p>
         </div>
-    </template>
+    </div>
+</div>
+</template>
 {% endblock content %}

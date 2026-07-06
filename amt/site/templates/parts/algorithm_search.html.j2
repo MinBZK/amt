@@ -7,96 +7,94 @@
     <div class="amt-layout-grid rvo-layout-gap--md amt-layout-grid-columns--two">
         <div>
             <h1 class="utrecht-heading-1">{% trans %}Algorithms{% endtrans %}</h1>
-        </div>
-        {% if permission(permission_path, 'Create', permissions) == True %}
-            <div style="margin-left: auto">
-                <a data-navigation="button:/algorithms/new"
-                   href="/algorithms/new{% if organization_id is defined %}?organization_id={{ organization_id }}{% endif %}">
-                    <button class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
-                            type="button">{% trans %}Add algorithm{% endtrans %}</button>
-                </a>
-            </div>
-        {% endif %}
     </div>
-    <div class="utrecht-form-fieldset rvo-form-fieldset rvo-margin-block-start--lg">
-        <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
-            <div class="rvo-inline-form">
-                <div class="rvo-layout-grid-container margin-bottom-none">
-                    <div class="rvo-layout-grid rvo-layout-gap--sm rvo-layout-grid-columns--three rvo-layout-grid-layout--1fr">
-                        <div class="rvo-layout-column rvo-text--bold rvo-layout-gap--sm">
-                            <div>{% trans %}Search{% endtrans %}</div>
-                            <div class="form-input-container">
-                                <input id="algorithm-search-input"
-                                       onkeyup="amt.searchInputChanged()"
-                                       type="text"
-                                       class="utrecht-textbox utrecht-textbox--html-input form-input-search"
-                                       dir="auto"
-                                       value="{{ search }}"
-                                       name="search"
-                                       hx-get="{{ base_href }}?skip=0"
-                                       hx-trigger="input changed delay:500ms, search"
-                                       autocomplete="off"
-                                       onfocus="this.value=''" />
-                                <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--lg form-input-clear {% if search == "" %}display-none{% endif %}"
-                                      role="img"
-                                      aria-label="Kruis"
-                                      hx-trigger="click"
-                                      hx-get="{{ base_href }}?skip=0"
-                                      hx-swap="innerHTML"
-                                      onclick="amt.resetSearchInput()"></span>
-                            </div>
-                        </div>
-                        <div class="rvo-layout-column rvo-text--bold rvo-layout-gap--sm">
-                            <div>{% trans %}Lifecycle{% endtrans %}</div>
-                            <div class="rvo-select-wrapper">
-                                <select id="add-lifecycle"
-                                        name="add-filter-lifecycle"
-                                        class="utrecht-select utrecht-select--html-select">
-                                    <option value=""></option>
-                                    {% for lifecycle in lifecycles %}
-                                        <option {% if "lifecycle" in filters and lifecycle.value == filters["lifecycle"].value %}selected="selected"{% endif %}
-                                                value="{{ lifecycle.value }}">
-                                            {{ lifecycle.display_value | safe }}
-                                        </option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        </div>
-                        <div class="rvo-layout-column rvo-text--bold rvo-layout-gap--sm">
-                            <div>{% trans %}Category{% endtrans %}</div>
-                            <div class="rvo-select-wrapper">
-                                <select id="add-risk-group"
-                                        name="add-filter-risk-group"
-                                        class="utrecht-select utrecht-select--html-select">
-                                    <option value=""></option>
-                                    {% for risk_group in risk_groups %}
-                                        <option {% if "risk-group" in filters and risk_group.value==filters["risk-group"].value %}selected="selected" {% endif
-                                            %} value="{{ risk_group.value }}">{{ risk_group.display_value }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        </div>
+    {% if permission(permission_path, 'Create', permissions) == True %}
+        <div style="margin-left: auto">
+            <a data-navigation="button:/algorithms/new"
+               href="/algorithms/new{% if organization_id is defined %}?organization_id={{ organization_id }}{% endif %}">
+                <button class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
+                        type="button">{% trans %}Add algorithm{% endtrans %}</button>
+        </a>
+    </div>
+{% endif %}
+</div>
+<div class="utrecht-form-fieldset rvo-form-fieldset rvo-margin-block-start--lg">
+    <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
+        <div class="rvo-inline-form">
+            <div class="rvo-layout-grid-container margin-bottom-none">
+                <div class="rvo-layout-grid rvo-layout-gap--sm rvo-layout-grid-columns--three rvo-layout-grid-layout--1fr">
+                    <div class="rvo-layout-column rvo-text--bold rvo-layout-gap--sm">
+                        <div>{% trans %}Search{% endtrans %}</div>
+                    <div class="form-input-container">
+                        <input id="algorithm-search-input"
+                               onkeyup="amt.searchInputChanged()"
+                               type="text"
+                               class="utrecht-textbox utrecht-textbox--html-input form-input-search"
+                               dir="auto"
+                               value="{{ search }}"
+                               name="search"
+                               hx-get="{{ base_href }}?skip=0"
+                               hx-trigger="input changed delay:500ms, search"
+                               autocomplete="off"
+                               onfocus="this.value=''" />
+                        <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--lg form-input-clear {% if search == "" %}display-none{% endif %}"
+                              role="img"
+                              aria-label="Kruis"
+                              hx-trigger="click"
+                              hx-get="{{ base_href }}?skip=0"
+                              hx-swap="innerHTML"
+                              onclick="amt.resetSearchInput()"></span>
                     </div>
                 </div>
+                <div class="rvo-layout-column rvo-text--bold rvo-layout-gap--sm">
+                    <div>{% trans %}Lifecycle{% endtrans %}</div>
+                <div class="rvo-select-wrapper">
+                    <select id="add-lifecycle"
+                            name="add-filter-lifecycle"
+                            class="utrecht-select utrecht-select--html-select">
+                        <option value=""></option>
+                        {% for lifecycle in lifecycles %}
+                            <option {% if "lifecycle" in filters and lifecycle.value == filters["lifecycle"].value %}selected="selected"{% endif %}
+                                    value="{{ lifecycle.value }}">{{ lifecycle.display_value | safe }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
             </div>
-        </fieldset>
-    </div>
-    <div class="rvo-layout-row rvo-layout-gap--sm rvo-alert--padding-xs"
-         style="display: flex;
-                justify-content: flex-end">
-        <div class="rvo-text--bold" style="white-space: nowrap">{% trans %}Group by{% endtrans %}</div>
-        <div class="rvo-select-wrapper">
-            <select id="display_type"
-                    name="display_type"
-                    class="utrecht-select utrecht-select--html-select">
-                <option value=""></option>
-                {% for group_by_category in group_by_categories %}
-                    <option {% if "group-by-category" in filters and group_by_category.value == filters["group-by-category"].value %}selected="selected"{% endif %}
-                            value="{{ group_by_category.value }}">{{ group_by_category.display_value | safe }}</option>
-                {% endfor %}
-            </select>
+            <div class="rvo-layout-column rvo-text--bold rvo-layout-gap--sm">
+                <div>{% trans %}Category{% endtrans %}</div>
+            <div class="rvo-select-wrapper">
+                <select id="add-risk-group"
+                        name="add-filter-risk-group"
+                        class="utrecht-select utrecht-select--html-select">
+                    <option value=""></option>
+                    {% for risk_group in risk_groups %}
+                        <option {% if "risk-group" in filters and risk_group.value==filters["risk-group"].value %}selected="selected" {% endif
+                            %} value="{{ risk_group.value }}">{{ risk_group.display_value }}</option>
+                    {% endfor %}
+                </select>
+            </div>
         </div>
     </div>
+</div>
+</div>
+</fieldset>
+</div>
+<div class="rvo-layout-row rvo-layout-gap--sm rvo-alert--padding-xs"
+     style="display: flex;
+            justify-content: flex-end">
+    <div class="rvo-text--bold" style="white-space: nowrap">{% trans %}Group by{% endtrans %}</div>
+<div class="rvo-select-wrapper">
+    <select id="display_type"
+            name="display_type"
+            class="utrecht-select utrecht-select--html-select">
+        <option value=""></option>
+        {% for group_by_category in group_by_categories %}
+            <option {% if "group-by-category" in filters and group_by_category.value == filters["group-by-category"].value %}selected="selected"{% endif %}
+                    value="{{ group_by_category.value }}">{{ group_by_category.display_value | safe }}</option>
+        {% endfor %}
+    </select>
+</div>
+</div>
 </form>
 {#53px = 45px (from the select wrapper) + an xs rvo alert padding of 8px#}
 <div id="algorithm-search-results" style="margin-top: -53px">{% include 'parts/filter_list.html.j2' %}</div>

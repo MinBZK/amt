@@ -14,106 +14,106 @@
         </span>
         {% if search or filters %}
             <span>{% trans %}for{% endtrans %}</span>
-            {% if search %}<span><em>'{{ search }}'</em></span>{% endif %}
-        {% endif %}
-        <form name="htmx-remove-tags"
-              hx-target="#search-algorithm-container"
-              hx-include="this"
-              hx-swap="innerHTML"
-              style="display: inline-block">
-            <input type="hidden" name="search" value="{{ search }}">
-            {% for key, localized_value in filters.items() %}
-                <span target="_self"
-                      class="rvo-tag rvo-tag--default"
-                      hx-trigger="click"
-                      hx-get="{{ base_href }}?skip=0&drop-filter-={{ key }}"
-                      hx-swap="innerHTML"
-                      style="cursor: pointer;
-                             display: inline-block">
-                    <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--sm form-input-clear"
-                          role="img"
-                          aria-label="Kruis"></span>
-                    {{ localized_value.display_value | safe }}
-                    <input type="hidden"
-                           name="active-filter-{{ key }}"
-                           value="{{ localized_value.value }}">
-                </span>
-            {% endfor %}
-        </form>
-    </div>
+        {% if search %}<span><em>'{{ search }}'</em></span>{% endif %}
+    {% endif %}
+    <form name="htmx-remove-tags"
+          hx-target="#search-algorithm-container"
+          hx-include="this"
+          hx-swap="innerHTML"
+          style="display: inline-block">
+        <input type="hidden" name="search" value="{{ search }}">
+        {% for key, localized_value in filters.items() %}
+            <span target="_self"
+                  class="rvo-tag rvo-tag--default"
+                  hx-trigger="click"
+                  hx-get="{{ base_href }}?skip=0&drop-filter-={{ key }}"
+                  hx-swap="innerHTML"
+                  style="cursor: pointer;
+                         display: inline-block">
+                <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--sm form-input-clear"
+                      role="img"
+                      aria-label="Kruis"></span>
+                {{ localized_value.display_value | safe }}
+                <input type="hidden"
+                       name="active-filter-{{ key }}"
+                       value="{{ localized_value.value }}">
+            </span>
+        {% endfor %}
+    </form>
+</div>
 </div>
 {% if algorithms|length == 0 %}
     <div class="margin-top-large">
         {% trans %}No Algorithm match your selected filters. Try adjusting your filters or clearing them to
         see more
         algorithms.{% endtrans %}
-    </div>
+</div>
 {% else %}
-    {% if display_type == "" %}
-        <form name="htmx-sort-form"
-              hx-include="this"
-              hx-target="#algorithm-search-results"
-              hx-swap="innerHTML">
-            <input type="hidden" name="search" value="{{ search }}">
-            {% for key, localized_value in filters.items() %}
-                <input type="hidden"
-                       name="active-filter-{{ key }}"
-                       value="{{ localized_value.value }}">
-            {% endfor %}
-            <table id="search-results-table" class="rvo-table margin-top-large">
-                <thead class="rvo-table-head">
-                    <tr class="rvo-table-row">
-                        <th style="width: 60%" scope="col" class="rvo-table-header">
-                            {% trans %}Algorithm name{% endtrans %}
-                            {{ table_row.sort_button('name', sort_by, base_href) }}
-                        </th>
-                        <th scope="col" class="rvo-table-header">
-                            {% trans %}Lifecycle{% endtrans %}
-                            {{ table_row.sort_button('lifecycle', sort_by, base_href) }}
-                        </th>
-                        <th scope="col" class="rvo-table-header" style="white-space: nowrap">
-                            {% trans %}Last updated{% endtrans %}
-                            {{ table_row.sort_button('last_update', sort_by, base_href) }}
-                        </th>
-                    </tr>
-                </thead>
-                {% for algorithm in algorithms %}{{ table_row.item(loop, algorithm, true) }}{% endfor %}
-            </table>
-        </form>
-    {% elif display_type == "LIFECYCLE" %}
-        <table id="search-results-table"
-               class="rvo-table margin-top-large"
-               style="width: 100%;
-                      table-layout: fixed">
+{% if display_type == "" %}
+    <form name="htmx-sort-form"
+          hx-include="this"
+          hx-target="#algorithm-search-results"
+          hx-swap="innerHTML">
+        <input type="hidden" name="search" value="{{ search }}">
+        {% for key, localized_value in filters.items() %}
+            <input type="hidden"
+                   name="active-filter-{{ key }}"
+                   value="{{ localized_value.value }}">
+        {% endfor %}
+        <table id="search-results-table" class="rvo-table margin-top-large">
             <thead class="rvo-table-head">
                 <tr class="rvo-table-row">
-                    <th style="width: 81%;
-                               padding-left: var(--rvo-card-padding-xl-padding-block-start)"
-                        scope="col"
-                        class="rvo-table-header">{% trans %}Algorithm name{% endtrans %}</th>
-                    <th scope="col"
-                        class="rvo-table-header"
-                        style="white-space: nowrap;
-                               width: 19%">{% trans %}Last updated{% endtrans %}</th>
-                </tr>
-            </thead>
-        </table>
-        <form name="htmx-sort-form"
-              hx-include="this"
-              hx-target="#algorithm-search-results"
-              hx-swap="innerHTML">
-            <input type="hidden" name="search" value="{{ search }}">
-            {% for key, localized_value in filters.items() %}
-                <input type="hidden"
-                       name="active-filter-{{ key }}"
-                       value="{{ localized_value.value }}">
-            {% endfor %}
-            <div class="rvo-layout-column" style="padding: 0px">
-                {% for lifecycle in lifecycles %}{{ render.row(algorithms[lifecycle.value], lifecycle) }}{% endfor %}
-            </div>
-        </form>
-    {% else %}
-        {% trans %}Does not exist{% endtrans %}
-    {% endif %}
+                    <th style="width: 60%" scope="col" class="rvo-table-header">
+                        {% trans %}Algorithm name{% endtrans %}
+                    {{ table_row.sort_button('name', sort_by, base_href) }}
+                </th>
+                <th scope="col" class="rvo-table-header">
+                    {% trans %}Lifecycle{% endtrans %}
+                {{ table_row.sort_button('lifecycle', sort_by, base_href) }}
+            </th>
+            <th scope="col" class="rvo-table-header" style="white-space: nowrap">
+                {% trans %}Last updated{% endtrans %}
+            {{ table_row.sort_button('last_update', sort_by, base_href) }}
+        </th>
+    </tr>
+</thead>
+{% for algorithm in algorithms %}{{ table_row.item(loop, algorithm, true) }}{% endfor %}
+</table>
+</form>
+{% elif display_type == "LIFECYCLE" %}
+<table id="search-results-table"
+       class="rvo-table margin-top-large"
+       style="width: 100%;
+              table-layout: fixed">
+    <thead class="rvo-table-head">
+        <tr class="rvo-table-row">
+            <th style="width: 81%;
+                       padding-left: var(--rvo-card-padding-xl-padding-block-start)"
+                scope="col"
+                class="rvo-table-header">{% trans %}Algorithm name{% endtrans %}</th>
+        <th scope="col"
+            class="rvo-table-header"
+            style="white-space: nowrap;
+                   width: 19%">{% trans %}Last updated{% endtrans %}</th>
+</tr>
+</thead>
+</table>
+<form name="htmx-sort-form"
+      hx-include="this"
+      hx-target="#algorithm-search-results"
+      hx-swap="innerHTML">
+    <input type="hidden" name="search" value="{{ search }}">
+    {% for key, localized_value in filters.items() %}
+        <input type="hidden"
+               name="active-filter-{{ key }}"
+               value="{{ localized_value.value }}">
+    {% endfor %}
+    <div class="rvo-layout-column" style="padding: 0px">
+        {% for lifecycle in lifecycles %}{{ render.row(algorithms[lifecycle.value], lifecycle) }}{% endfor %}
+    </div>
+</form>
+{% else %}
+{% trans %}Does not exist{% endtrans %}
+{% endif %}
 {% endif %}
 {% endif %}
