@@ -4,62 +4,62 @@
     <div class="amt-layout-grid rvo-layout-gap--md amt-layout-grid-columns--two rvo-margin-block-start--lg">
         <div>
             <h1 class="utrecht-heading-1">{% trans %}Members{% endtrans %}</h1>
-        </div>
-        {% if permission(permission_path, 'Update', permissions) == True %}
-            <div style="margin-left: auto">
-                <button class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
-                        hx-trigger="click"
-                        hx-target="#dynamic-modal-content"
-                        hx-get="{{ base_href }}/members/form"
-                        hx-swap="innerHTML"
-                        onclick="amt.openModal('modal')"
-                        type="button">{% trans %}Add member{% endtrans %}</button>
-            {% endif %}
-        </div>
     </div>
-    {% if 1 == 0 %}
-        {# disabled search on request from Ruben #}
-        <form id="search-members-form"
-              hx-get="{{ base_href }}/members?skip=0"
-              hx-target="#members-search-results"
-              hx-include="this"
-              hx-swap="innerHTML">
-            <div class="utrecht-form-fieldset rvo-form-fieldset rvo-margin-block-start--lg">
-                <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
-                    <div class="rvo-inline-form">
-                        <div class="rvo-layout-grid-container margin-bottom-none">
-                            <div class="rvo-layout-grid rvo-layout-gap--sm">
-                                <div class="rvo-layout-column rvo-text--bold rvo-layout-gap--sm">
-                                    <div>{% trans %}Search{% endtrans %}</div>
-                                    <div class="form-input-container">
-                                        <input id="members-search-input"
-                                               onkeyup="amt.searchInputChanged()"
-                                               type="text"
-                                               class="utrecht-textbox utrecht-textbox--html-input form-input-search"
-                                               dir="auto"
-                                               value="{{ search }}"
-                                               placeholder=""
-                                               name="search"
-                                               hx-get="{{ base_href }}/members?skip=0"
-                                               hx-trigger="input changed delay:500ms, search"
-                                               autocomplete="off"
-                                               onfocus="this.value=''" />
-                                        <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--lg form-input-clear {% if search == "" %}display-none{% endif %}"
-                                              role="img"
-                                              aria-label="Kruis"
-                                              hx-trigger="click"
-                                              hx-get="{{ base_href }}//members?skip=0"
-                                              hx-swap="innerHTML"
-                                              onclick="amt.resetSearchInput()"></span>
-                                    </div>
-                                </div>
+    {% if permission(permission_path, 'Update', permissions) == True %}
+        <div style="margin-left: auto">
+            <button class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
+                    hx-trigger="click"
+                    hx-target="#dynamic-modal-content"
+                    hx-get="{{ base_href }}/members/form"
+                    hx-swap="innerHTML"
+                    onclick="amt.openModal('modal')"
+                    type="button">{% trans %}Add member{% endtrans %}</button>
+    {% endif %}
+</div>
+</div>
+{% if 1 == 0 %}
+    {# disabled search on request from Ruben #}
+    <form id="search-members-form"
+          hx-get="{{ base_href }}/members?skip=0"
+          hx-target="#members-search-results"
+          hx-include="this"
+          hx-swap="innerHTML">
+        <div class="utrecht-form-fieldset rvo-form-fieldset rvo-margin-block-start--lg">
+            <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
+                <div class="rvo-inline-form">
+                    <div class="rvo-layout-grid-container margin-bottom-none">
+                        <div class="rvo-layout-grid rvo-layout-gap--sm">
+                            <div class="rvo-layout-column rvo-text--bold rvo-layout-gap--sm">
+                                <div>{% trans %}Search{% endtrans %}</div>
+                            <div class="form-input-container">
+                                <input id="members-search-input"
+                                       onkeyup="amt.searchInputChanged()"
+                                       type="text"
+                                       class="utrecht-textbox utrecht-textbox--html-input form-input-search"
+                                       dir="auto"
+                                       value="{{ search }}"
+                                       placeholder=""
+                                       name="search"
+                                       hx-get="{{ base_href }}/members?skip=0"
+                                       hx-trigger="input changed delay:500ms, search"
+                                       autocomplete="off"
+                                       onfocus="this.value=''" />
+                                <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--lg form-input-clear {% if search == "" %}display-none{% endif %}"
+                                      role="img"
+                                      aria-label="Kruis"
+                                      hx-trigger="click"
+                                      hx-get="{{ base_href }}//members?skip=0"
+                                      hx-swap="innerHTML"
+                                      onclick="amt.resetSearchInput()"></span>
                             </div>
                         </div>
                     </div>
-                </fieldset>
+                </div>
             </div>
-        </form>
-    {% endif %}
+        </fieldset>
+    </div>
+</form>
+{% endif %}
 {% endif %}
 {% if start > 0 %}
     {% for user, authorization, role, _ in members %}
@@ -73,78 +73,78 @@
                     {% trans members_length %}{{ members_length }} result
                 {% pluralize %}
                     {{ members_length }} results{% endtrans %}
-                </span>
-                {% if search or filters %}
-                    <span>{% trans %}for{% endtrans %}</span>
-                    {% if search %}<span><em>'{{ search }}'</em></span>{% endif %}
-                {% endif %}
-                <form name="htmx-remove-tags"
-                      hx-target="#search-members-container"
-                      hx-include="this"
-                      hx-swap="innerHTML"
-                      style="display: inline-block">
-                    <input type="hidden" name="search" value="{{ search }}">
-                    {% for key, localized_value in filters.items() %}
-                        <span target="_self"
-                              class="rvo-tag rvo-tag--default"
-                              hx-trigger="click"
-                              hx-get="{{ base_href }}/members?skip=0&drop-filter-={{ key }}"
-                              hx-swap="innerHTML"
-                              style="cursor: pointer;
-                                     display: inline-block">
-                            <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--sm form-input-clear"
-                                  role="img"
-                                  aria-label="Kruis"></span>
-                            {{ localized_value.display_value | safe }}
-                            <input type="hidden"
-                                   name="active-filter-{{ key }}"
-                                   value="{{ localized_value.value }}">
-                        </span>
-                    {% endfor %}
-                </form>
-            </div>
-        </div>
-        <form name="htmx-sort-form"
+            </span>
+            {% if search or filters %}
+                <span>{% trans %}for{% endtrans %}</span>
+            {% if search %}<span><em>'{{ search }}'</em></span>{% endif %}
+        {% endif %}
+        <form name="htmx-remove-tags"
+              hx-target="#search-members-container"
               hx-include="this"
-              hx-target="#members-search-results"
-              hx-swap="innerHTML">
+              hx-swap="innerHTML"
+              style="display: inline-block">
             <input type="hidden" name="search" value="{{ search }}">
             {% for key, localized_value in filters.items() %}
-                <input type="hidden"
-                       name="active-filter-{{ key }}"
-                       value="{{ localized_value.value }}">
+                <span target="_self"
+                      class="rvo-tag rvo-tag--default"
+                      hx-trigger="click"
+                      hx-get="{{ base_href }}/members?skip=0&drop-filter-={{ key }}"
+                      hx-swap="innerHTML"
+                      style="cursor: pointer;
+                             display: inline-block">
+                    <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--sm form-input-clear"
+                          role="img"
+                          aria-label="Kruis"></span>
+                    {{ localized_value.display_value | safe }}
+                    <input type="hidden"
+                           name="active-filter-{{ key }}"
+                           value="{{ localized_value.value }}">
+                </span>
             {% endfor %}
-            {% if members|length > 0 %}
-                <table id="search-results-table" class="rvo-table margin-top-large">
-                    <colgroup>
-                        {% if permission(permission_path, 'Update', permissions) == True %}
-                            <col style="width: 25%" />
-                            <col style="width: 45%" />
-                            <col style="width: 30%" />
-                        {% else %}
-                            <col style="width: 40%" />
-                            <col style="width: 60%" />
-                        {% endif %}
-                    </colgroup>
-                    <thead class="rvo-table-head">
-                        <tr class="rvo-table-row">
-                            <th scope="col" class="rvo-table-header">
-                                {% trans %}Name{% endtrans %}
-                                {{ table_row.sort_button('name', sort_by, base_href + "/members") }}
-                            </th>
-                            <th scope="col" class="rvo-table-header">{% trans %}Role{% endtrans %}</th>
-                            {% if permission(permission_path, 'Update', permissions) == True %}
-                                <th scope="col" class="rvo-table-header">{#                                    {% trans %}Action{% endtrans %}#}</th>
-                            {% endif %}
-                        </tr>
-                    </thead>
-                    <tbody id="search-results-table-body">
-                        {% for user, authorization, role, _ in members %}
-                            {{ macros.overview_table_row_member(loop, user, authorization, role, permission_path) }}
-                        {% endfor %}
-                    </tbody>
-                </table>
-            {% endif %}
         </form>
     </div>
+</div>
+<form name="htmx-sort-form"
+      hx-include="this"
+      hx-target="#members-search-results"
+      hx-swap="innerHTML">
+    <input type="hidden" name="search" value="{{ search }}">
+    {% for key, localized_value in filters.items() %}
+        <input type="hidden"
+               name="active-filter-{{ key }}"
+               value="{{ localized_value.value }}">
+    {% endfor %}
+    {% if members|length > 0 %}
+        <table id="search-results-table" class="rvo-table margin-top-large">
+            <colgroup>
+                {% if permission(permission_path, 'Update', permissions) == True %}
+                    <col style="width: 25%" />
+                    <col style="width: 45%" />
+                    <col style="width: 30%" />
+                {% else %}
+                    <col style="width: 40%" />
+                    <col style="width: 60%" />
+                {% endif %}
+            </colgroup>
+            <thead class="rvo-table-head">
+                <tr class="rvo-table-row">
+                    <th scope="col" class="rvo-table-header">
+                        {% trans %}Name{% endtrans %}
+                    {{ table_row.sort_button('name', sort_by, base_href + "/members") }}
+                </th>
+                <th scope="col" class="rvo-table-header">{% trans %}Role{% endtrans %}</th>
+            {% if permission(permission_path, 'Update', permissions) == True %}
+                <th scope="col" class="rvo-table-header">{#                                    {% trans %}Action{% endtrans %}#}</th>
+        {% endif %}
+    </tr>
+</thead>
+<tbody id="search-results-table-body">
+    {% for user, authorization, role, _ in members %}
+        {{ macros.overview_table_row_member(loop, user, authorization, role, permission_path) }}
+    {% endfor %}
+</tbody>
+</table>
+{% endif %}
+</form>
+</div>
 {% endif %}

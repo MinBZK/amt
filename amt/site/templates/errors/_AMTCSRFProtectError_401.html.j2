@@ -9,18 +9,18 @@
                 {{ message }}
             {% else %}
                 {% trans %}An error occurred. Please try again later{% endtrans %}
-            {% endif %}
-        </div>
+        {% endif %}
     </div>
-    <button onclick="document.getElementById('general-error-content').remove()"
-            class="utrecht-button utrecht-button--subtle rvo-button__close utrecht-button--rvo-md"
-            type="button"
-            aria-label="Sluiten">
-        <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--md rvo-icon--zwart"
-              role="img"
-              aria-label="Kruis"></span>
-    </button>
-    <script type="text/javascript">
+</div>
+<button onclick="document.getElementById('general-error-content').remove()"
+        class="utrecht-button utrecht-button--subtle rvo-button__close utrecht-button--rvo-md"
+        type="button"
+        aria-label="Sluiten">
+    <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--md rvo-icon--zwart"
+          role="img"
+          aria-label="Kruis"></span>
+</button>
+<script type="text/javascript">
         window.setTimeout(function () {
             try {
                 document.getElementById('general-error-content').remove()
@@ -33,5 +33,5 @@
             block: "end",
             inline: "nearest"
         });
-    </script>
+</script>
 </div>

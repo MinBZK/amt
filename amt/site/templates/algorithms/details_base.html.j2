@@ -12,45 +12,45 @@
                         width: auto">
                 <div class="amt-flex-container">
                     <h3 class="utrecht-heading-3 rvo-heading--no-margins">{% trans %}Delete algoritmic system{% endtrans %}</h3>
-                </div>
-                <hr class="rvo-hr" />
-                <p style="padding-block: 0.5em 0.4em;">
-                    <strong>{% trans %}Are you sure you want to delete your algoritmic system {% endtrans %} {{ algorithm.name }}?</strong>
-                </p>
-                <p style="padding-block: 0.0em 1.25em;">
-                    {% trans %}Data will be stored for at least 45 days before permanent deletion.{% endtrans %}
-                </p>
-                <p class="utrecht-button-group">
-                    <button hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
-                            hx-delete="/algorithm/{{ algorithm.id }}"
-                            class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
-                            type="button">{% trans %}Yes{% endtrans %}</button>
-                    <button class="utrecht-button utrecht-button--secondary-action utrecht-button--rvo-md"
-                            onclick="amt.closeModal('delete-modal')"
-                            type="button">{% trans %}No{% endtrans %}</button>
-                </p>
             </div>
-        </div>
+            <hr class="rvo-hr" />
+            <p style="padding-block: 0.5em 0.4em;">
+                <strong>{% trans %}Are you sure you want to delete your algoritmic system {% endtrans %} {{ algorithm.name }}?</strong>
+        </p>
+        <p style="padding-block: 0.0em 1.25em;">
+            {% trans %}Data will be stored for at least 45 days before permanent deletion.{% endtrans %}
+    </p>
+    <p class="utrecht-button-group">
+        <button hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
+                hx-delete="/algorithm/{{ algorithm.id }}"
+                class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
+                type="button">{% trans %}Yes{% endtrans %}</button>
+    <button class="utrecht-button utrecht-button--secondary-action utrecht-button--rvo-md"
+            onclick="amt.closeModal('delete-modal')"
+            type="button">{% trans %}No{% endtrans %}</button>
+</p>
+</div>
+</div>
+</div>
+<div class="rvo-max-width-layout rvo-max-width-layout--lg rvo-max-width-layout-inline-padding--none">
+    <!-- algorithm header -->
+    {{ tabs.show_algorithm_header() }}
+    <!-- tabs container -->
+    <div>
+        <ul class="rvo-tabs rvo-ul rvo-ul--no-margin rvo-ul--no-padding rvo-ul--icon rvo-ul--icon-option-2"
+            role="tablist"
+            aria-label="Tabs">
+            {% for tab_item in tab_items %}
+                <li role="presentation" class="rvo-tabs__item">
+                    <a data-navigation="tab:{{ tab_item.get_url() }}"
+                       class="rvo-link rvo-tabs__item-link rvo-link--no-underline {% if tab_item.active %}rvo-tabs__item-link--active rvo-link--active{% else %}rvo-link--normal{% endif %}"
+                       role="tab"
+                       aria-selected="true"
+                       href="{{ tab_item.get_url() }}">{{ tab_item.display_text }}</a>
+                </li>
+            {% endfor %}
+        </ul>
     </div>
-    <div class="rvo-max-width-layout rvo-max-width-layout--lg rvo-max-width-layout-inline-padding--none">
-        <!-- algorithm header -->
-        {{ tabs.show_algorithm_header() }}
-        <!-- tabs container -->
-        <div>
-            <ul class="rvo-tabs rvo-ul rvo-ul--no-margin rvo-ul--no-padding rvo-ul--icon rvo-ul--icon-option-2"
-                role="tablist"
-                aria-label="Tabs">
-                {% for tab_item in tab_items %}
-                    <li role="presentation" class="rvo-tabs__item">
-                        <a data-navigation="tab:{{ tab_item.get_url() }}"
-                           class="rvo-link rvo-tabs__item-link rvo-link--no-underline {% if tab_item.active %}rvo-tabs__item-link--active rvo-link--active{% else %}rvo-link--normal{% endif %}"
-                           role="tab"
-                           aria-selected="true"
-                           href="{{ tab_item.get_url() }}">{{ tab_item.display_text }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="margin-top-large">{% block detail_content %}Placeholder{% endblock %}</div>
-    </div>
+    <div class="margin-top-large">{% block detail_content %}Placeholder{% endblock %}</div>
+</div>
 {% endblock %}

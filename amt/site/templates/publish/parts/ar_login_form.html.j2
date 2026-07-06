@@ -1,9 +1,9 @@
 {% if login_error is defined and login_error %}
     <c-alert kind="error" class="rvo-layout-margin-vertical--xl">
     <c-p class="rvo-layout-margin-vertical--sm">{% trans %}A connection could not be established with the Algorithm Register.{% endtrans %}
-    </c-p>
-    <c-p>{% trans %}Check the entered data and try again.{% endtrans %}</c-p>
-    </c-alert>
+</c-p>
+<c-p>{% trans %}Check the entered data and try again.{% endtrans %}</c-p>
+</c-alert>
 {% endif %}
 <c-card outline="true">
 <c-alert style="margin-top: 0;" kind="warning" heading="{% trans %}Login to Algorithm Register{% endtrans %}" class="rvo-layout-margin-vertical--xl">
@@ -23,16 +23,11 @@
         <img src="/static/images/logo_register.png"
              style="mix-blend-mode: multiply" />
     </div>
-    <c-text-input-field id="username" name="username" label="{% trans %}Name{% endtrans %}" required="true"
-    {% if values is defined and values.get('username') %}value="{{ values.get('username') }}"{% endif %}
-    {% if errors is defined and errors.get('username') %}errorText="{{ errors.get('username') }}"{% endif %}
-    />
-    <c-text-input-field type="password" id="password" name="password" label="{% trans %}Password{% endtrans %}" required="true"
-    {% if errors is defined and errors.get('password') %}errorText="{{ errors.get('password') }}"{% endif %}
-    />
-    <c-button type="submit" hx-disabled-elt="this">
-    {% trans %}Login to Algorithm Register{% endtrans %}
-    </c-button>
+    <c-text-input-field id="username" name="username" label="{% trans %}Name{% endtrans %}" required="true" {% if values is defined and values.get('username') %}value="{{ values.get('username') }}"{% endif %} {% if errors is defined and errors.get('username') %}errorText="{{ errors.get('username') }}"{% endif %} />
+<c-text-input-field type="password" id="password" name="password" label="{% trans %}Password{% endtrans %}" required="true" {% if errors is defined and errors.get('password') %}errorText="{{ errors.get('password') }}"{% endif %} />
+<c-button type="submit" hx-disabled-elt="this">
+{% trans %}Login to Algorithm Register{% endtrans %}
+</c-button>
 </form>
 </c-form-fieldset>
 </c-card>

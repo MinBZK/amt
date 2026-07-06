@@ -31,16 +31,16 @@
                          id="dropdown-content"
                          onclick="amt.download_as_yaml('{{ algorithm.id }}', '{{ algorithm.name }}')">
                         <a>{% trans %}Download as YAML{% endtrans %}</a>
-                    </div>
                 </div>
-                {% if permission("algorithm/" ~ algorithm.id, 'Delete', permissions) == True %}
-                    <a onclick="amt.openModal('delete-modal')">
-                        <span class="utrecht-icon rvo-icon rvo-icon-verwijderen rvo-icon--xl rvo-icon--hemelblauw rvo-link__icon--before"
-                              role="img"
-                              aria-label="Home"></span>
-                    </a>
-                {% endif %}
             </div>
+            {% if permission("algorithm/" ~ algorithm.id, 'Delete', permissions) == True %}
+                <a onclick="amt.openModal('delete-modal')">
+                    <span class="utrecht-icon rvo-icon rvo-icon-verwijderen rvo-icon--xl rvo-icon--hemelblauw rvo-link__icon--before"
+                          role="img"
+                          aria-label="Home"></span>
+                </a>
+            {% endif %}
         </div>
     </div>
+</div>
 {% endmacro %}

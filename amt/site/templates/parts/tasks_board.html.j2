@@ -3,33 +3,33 @@
     <div class="margin-top-large rvo-layout-row rvo-layout-justify-content-space-between">
         <div>
             <span>{% trans %}Results for{% endtrans %}</span>
-            {% if search %}<span><em>'{{ search }}'</em></span>{% endif %}
-            <form name="htmx-remove-tags"
-                  hx-target="#search-tasks-container"
-                  hx-include="this"
-                  hx-swap="innerHTML"
-                  style="display: inline-block">
-                <input type="hidden" name="search" value="{{ search }}">
-                {% for key, localized_value in filters.items() %}
-                    <span target="_self"
-                          class="rvo-tag rvo-tag--default"
-                          hx-trigger="click"
-                          hx-get="{{ base_href }}?skip=0&drop-filter-={{ key }}"
-                          hx-swap="innerHTML"
-                          style="cursor: pointer;
-                                 display: inline-block">
-                        <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--sm form-input-clear"
-                              role="img"
-                              aria-label="Kruis"></span>
-                        {{ localized_value.display_value | safe }}
-                        <input type="hidden"
-                               name="active-filter-{{ key }}"
-                               value="{{ localized_value.value }}">
-                    </span>
-                {% endfor %}
-            </form>
-        </div>
+        {% if search %}<span><em>'{{ search }}'</em></span>{% endif %}
+        <form name="htmx-remove-tags"
+              hx-target="#search-tasks-container"
+              hx-include="this"
+              hx-swap="innerHTML"
+              style="display: inline-block">
+            <input type="hidden" name="search" value="{{ search }}">
+            {% for key, localized_value in filters.items() %}
+                <span target="_self"
+                      class="rvo-tag rvo-tag--default"
+                      hx-trigger="click"
+                      hx-get="{{ base_href }}?skip=0&drop-filter-={{ key }}"
+                      hx-swap="innerHTML"
+                      style="cursor: pointer;
+                             display: inline-block">
+                    <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--sm form-input-clear"
+                          role="img"
+                          aria-label="Kruis"></span>
+                    {{ localized_value.display_value | safe }}
+                    <input type="hidden"
+                           name="active-filter-{{ key }}"
+                           value="{{ localized_value.value }}">
+                </span>
+            {% endfor %}
+        </form>
     </div>
+</div>
 {% endif %}
 <div class="container margin-top-large">
     <form id="cardMovedForm"
