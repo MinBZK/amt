@@ -68,8 +68,8 @@
                         class="utrecht-select utrecht-select--html-select">
                     <option value=""></option>
                     {% for risk_group in risk_groups %}
-                        <option {% if "risk-group" in filters and risk_group.value==filters["risk-group"].value %}selected="selected" {% endif
-                            %} value="{{ risk_group.value }}">{{ risk_group.display_value }}</option>
+                        <option {% if "risk-group" in filters and risk_group.value==filters["risk-group"].value %}selected="selected"{% endif %}
+                                value="{{ risk_group.value }}">{{ risk_group.display_value }}</option>
                     {% endfor %}
                 </select>
             </div>
