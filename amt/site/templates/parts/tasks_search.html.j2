@@ -54,8 +54,8 @@
                             class="utrecht-select utrecht-select--html-select">
                         <option value=""></option>
                         {% for assignee in assignees %}
-                            <option {% if "assignee" in filters and assignee.value==filters["assignee"].value %}selected="selected" {% endif
-                                %} value="{{ assignee.value }}">{{ assignee.display_value }}</option>
+                            <option {% if "assignee" in filters and assignee.value==filters["assignee"].value %}selected="selected"{% endif %}
+                                    value="{{ assignee.value }}">{{ assignee.display_value }}</option>
                         {% endfor %}
                     </select>
                 </div>
