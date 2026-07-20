@@ -1,113 +1,113 @@
 {% import "macros/form_macros.html.j2" as macros with context %}
 {% macro column(algorithm, status, translations, tasks_service) -%}
-    <div>
-        <h5 class="utrecht-heading-5 amt-task-heading"
-            style="color: var(--rvo-color-logoblauw)">
-            {# code below is not nice, sorry, there doesn't seem to be a better way though #}
-            {% if status == 1 %}
-                <div class="rvo-layout-row rvo-max-width-layout-inline-padding--sm">
-                    <span class="utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--lg"
-                          role="img"
-                          aria-label="todo-icon"></span>
-                    <a class="rvo-max-width-layout-inline-padding--sm">{% trans %}To do{% endtrans %}</a>
-            </div>
-        {% elif status == 2 %}
-            <div class="rvo-layout-row rvo-max-width-layout-inline-padding--sm">
-                <span class="utrecht-icon rvo-icon rvo-icon-refresh rvo-icon--lg"
-                      role="img"
-                      aria-label="doing-icon"></span>
-                <a class="rvo-max-width-layout-inline-padding--sm">{% trans %}In progress{% endtrans %}</a>
-        </div>
-    {% elif status == 3 %}
+  <div>
+    <h5 class="utrecht-heading-5 amt-task-heading"
+        style="color: var(--rvo-color-logoblauw)">
+      {# code below is not nice, sorry, there doesn't seem to be a better way though #}
+      {% if status == 1 %}
         <div class="rvo-layout-row rvo-max-width-layout-inline-padding--sm">
-            <span class="utrecht-icon rvo-icon rvo-icon-let-op-met-loep rvo-icon--lg"
-                  role="img"
-                  aria-label="reviewing-icon"></span>
-            <a class="rvo-max-width-layout-inline-padding--sm">{% trans %}In review{% endtrans %}</a>
-    </div>
-{% elif status == 4 %}
-    <div class="rvo-layout-row rvo-max-width-layout-inline-padding--sm">
-        <span class="utrecht-icon rvo-icon rvo-icon-vinkje rvo-icon--lg"
-              role="img"
-              aria-label="reviewing-icon"></span>
-        <a class="rvo-max-width-layout-inline-padding--sm">{% trans %}Done{% endtrans %}</a>
-</div>
-{% elif status == 5 %}
-<div class="rvo-layout-row rvo-max-width-layout-inline-padding--sm">
-    <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--lg"
-          role="img"
-          aria-label="reviewing-icon"></span>
-    <a class="rvo-max-width-layout-inline-padding--sm">{% trans %}Not implemented{% endtrans %}</a>
-</div>
-{% else %}
-{% trans %}Unknown{% endtrans %}
-{% endif %}
-</h5>
-{% if permission(permission_path, 'Update', permissions) == True %}
-    {% set column_class = "progress-cards-container sortable" %}
-{% else %}
-    {% set column_class = "progress-cards-container" %}
-{% endif %}
-<div class="{{ column_class }}"
-     data-id="{{ status.value }}"
-     id="column-{{ status.value }}">
-    {% if algorithm is defined %}
-        {% for task in tasks_by_status[status] %}{{ render_task_card_full(task) }}{% endfor %}
+          <span class="utrecht-icon rvo-icon rvo-icon-pijl-naar-rechts rvo-icon--lg"
+                role="img"
+                aria-label="todo-icon"></span>
+          <a class="rvo-max-width-layout-inline-padding--sm">{% trans %}To do{% endtrans %}</a>
+        </div>
+      {% elif status == 2 %}
+        <div class="rvo-layout-row rvo-max-width-layout-inline-padding--sm">
+          <span class="utrecht-icon rvo-icon rvo-icon-refresh rvo-icon--lg"
+                role="img"
+                aria-label="doing-icon"></span>
+          <a class="rvo-max-width-layout-inline-padding--sm">{% trans %}In progress{% endtrans %}</a>
+        </div>
+      {% elif status == 3 %}
+        <div class="rvo-layout-row rvo-max-width-layout-inline-padding--sm">
+          <span class="utrecht-icon rvo-icon rvo-icon-let-op-met-loep rvo-icon--lg"
+                role="img"
+                aria-label="reviewing-icon"></span>
+          <a class="rvo-max-width-layout-inline-padding--sm">{% trans %}In review{% endtrans %}</a>
+        </div>
+      {% elif status == 4 %}
+        <div class="rvo-layout-row rvo-max-width-layout-inline-padding--sm">
+          <span class="utrecht-icon rvo-icon rvo-icon-vinkje rvo-icon--lg"
+                role="img"
+                aria-label="reviewing-icon"></span>
+          <a class="rvo-max-width-layout-inline-padding--sm">{% trans %}Done{% endtrans %}</a>
+        </div>
+      {% elif status == 5 %}
+        <div class="rvo-layout-row rvo-max-width-layout-inline-padding--sm">
+          <span class="utrecht-icon rvo-icon rvo-icon-kruis rvo-icon--lg"
+                role="img"
+                aria-label="reviewing-icon"></span>
+          <a class="rvo-max-width-layout-inline-padding--sm">{% trans %}Not implemented{% endtrans %}</a>
+        </div>
+      {% else %}
+        {% trans %}Unknown{% endtrans %}
+      {% endif %}
+    </h5>
+    {% if permission(permission_path, 'Update', permissions) == True %}
+      {% set column_class = "progress-cards-container sortable" %}
     {% else %}
-        {% for task in tasks_by_status[status] %}{{ render_task_card_full(task) }}{% endfor %}
+      {% set column_class = "progress-cards-container" %}
     {% endif %}
-</div>
-</div>
+    <div class="{{ column_class }}"
+         data-id="{{ status.value }}"
+         id="column-{{ status.value }}">
+      {% if algorithm is defined %}
+        {% for task in tasks_by_status[status] %}{{ render_task_card_full(task) }}{% endfor %}
+      {% else %}
+        {% for task in tasks_by_status[status] %}{{ render_task_card_full(task) }}{% endfor %}
+      {% endif %}
+    </div>
+  </div>
 {% endmacro -%}
 {% macro render_task_card_full(task) -%}
-    <div {% if permission(permission_path, 'Update', permissions) == True %}draggable="true"{% endif %}
-         class="progress-card-container"
-         data-target-id="card-content-{{ task.id }}"
-         id="card-container-{{ task.id }}"
-         data-id="{{ task.id }}">{{ render_task_card_content(algorithm_id, task) }}</div>
+  <div {% if permission(permission_path, 'Update', permissions) == True %}draggable="true"{% endif %}
+       class="progress-card-container"
+       data-target-id="card-content-{{ task.id }}"
+       id="card-container-{{ task.id }}"
+       data-id="{{ task.id }}">{{ render_task_card_content(algorithm_id, task) }}</div>
 {% endmacro %}
 {% macro render_task_card_content(algorithm_id, task) -%}
-    <div id="card-content-{{ task.id }}" data-id="{{ task.id }}">
-        <div class="rvo-label--md">
-            {{ task.title | truncate(100) }}
-            {% if hasattr(task, "type_object") and task.type == "measure" %}
-                <div class="margin-top-middle">
-                    <div class="rvo-layout-row rvo-layout--wrap rvo-layout-gap--xs">
-                        {% for lifecycle in task.type_object.lifecycle %}
-                            <span class="rvo-text--subtle rvo-tag rvo-tag--with-icon rvo-tag--active rvo-tag--info"
-                                  style="gap: 0.5em;
-                                         word-break: break-word;
-                                         font-size: 0.75em;
-                                         padding-block-start: 0;
-                                         padding-block-end: 0">
-                                <span class="utrecht-icon rvo-icon rvo-icon-refresh rvo-icon--md rvo-link__icon--before"
-                                      role="img"
-                                      aria-label="{% trans %}Lifecycle{% endtrans %}"></span>
-                            {{ get_localized_value("lifecycle", lifecycle, request).display_value | safe }}
-                        </span>
-                    {% endfor %}
-                </div>
-                <div class="margin-top-middle amt-clear-float">
-                    {% if hasattr(task, "type_object.users") and task.type_object.users | length > 0 %}
-                        {{ macros.user_avatars(task.type_object.users) }}
-                    {% endif %}
-                    {% if permission(permission_path, 'Update', permissions) == True %}
-                        <div style="float: right; margin-top: 0.4em;">
-                            <a class="rvo-link rvo-link--normal rvo-link--with-icon"
-                               hx-trigger="click"
-                               hx-target="#dynamic-modal-content"
-                               hx-get="/algorithm/{{ algorithm_id }}/measure/{{ task.type_object.urn }}"
-                               hx-swap="innerHTML"
-                               onclick="amt.openModal('modal')">
-                                <span class="utrecht-icon rvo-icon rvo-icon-bewerken rvo-icon--lg rvo-icon--hemelblauw rvo-link__icon--before"
-                                      role="img"
-                                      aria-label="{% trans %}Edit{% endtrans %}"></span>
-                        </a>
-                    </div>
-                {% endif %}
-            </div>
+  <div id="card-content-{{ task.id }}" data-id="{{ task.id }}">
+    <div class="rvo-label--md">
+      {{ task.title | truncate(100) }}
+      {% if hasattr(task, "type_object") and task.type == "measure" %}
+        <div class="margin-top-middle">
+          <div class="rvo-layout-row rvo-layout--wrap rvo-layout-gap--xs">
+            {% for lifecycle in task.type_object.lifecycle %}
+              <span class="rvo-text--subtle rvo-tag rvo-tag--with-icon rvo-tag--active rvo-tag--info"
+                    style="gap: 0.5em;
+                           word-break: break-word;
+                           font-size: 0.75em;
+                           padding-block-start: 0;
+                           padding-block-end: 0">
+                <span class="utrecht-icon rvo-icon rvo-icon-refresh rvo-icon--md rvo-link__icon--before"
+                      role="img"
+                      aria-label="{% trans %}Lifecycle{% endtrans %}"></span>
+                {{ get_localized_value("lifecycle", lifecycle, request).display_value | safe }}
+              </span>
+            {% endfor %}
+          </div>
+          <div class="margin-top-middle amt-clear-float">
+            {% if hasattr(task, "type_object.users") and task.type_object.users | length > 0 %}
+              {{ macros.user_avatars(task.type_object.users) }}
+            {% endif %}
+            {% if permission(permission_path, 'Update', permissions) == True %}
+              <div style="float: right; margin-top: 0.4em;">
+                <a class="rvo-link rvo-link--normal rvo-link--with-icon"
+                   hx-trigger="click"
+                   hx-target="#dynamic-modal-content"
+                   hx-get="/algorithm/{{ algorithm_id }}/measure/{{ task.type_object.urn }}"
+                   hx-swap="innerHTML"
+                   onclick="amt.openModal('modal')">
+                  <span class="utrecht-icon rvo-icon rvo-icon-bewerken rvo-icon--lg rvo-icon--hemelblauw rvo-link__icon--before"
+                        role="img"
+                        aria-label="{% trans %}Edit{% endtrans %}"></span>
+                </a>
+              </div>
+            {% endif %}
+          </div>
         </div>
-    {% endif %}
-</div>
-</div>
+      {% endif %}
+    </div>
+  </div>
 {% endmacro %}

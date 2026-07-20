@@ -1,61 +1,61 @@
 {% extends 'algorithms/details_base.html.j2' %}
 {% import 'macros/cards.html.j2' as render with context %}
 {% block detail_content %}
-    <div class="rvo-layout-column rvo-layout-gap--md">
-        <h2 class="utrecht-heading-2 rvo-heading--no-margins">Model card</h2>
-        <span class="rvo-text">{% trans %}Last updated{% endtrans %}: {{ last_edited | time_ago(language) }}
+  <div class="rvo-layout-column rvo-layout-gap--md">
+    <h2 class="utrecht-heading-2 rvo-heading--no-margins">Model card</h2>
+    <span class="rvo-text">{% trans %}Last updated{% endtrans %}: {{ last_edited | time_ago(language) }}
     {% trans %}ago{% endtrans %}</span>
-<div class="rvo-table--responsive">
-    <table class="rvo-table">
+    <div class="rvo-table--responsive">
+      <table class="rvo-table">
         <thead class="rvo-table-head">
-            <tr class="rvo-table-row">
-                <th scope="col" class="rvo-table-header">{% trans %}Attribute{% endtrans %}</th>
+          <tr class="rvo-table-row">
+            <th scope="col" class="rvo-table-header">{% trans %}Attribute{% endtrans %}</th>
             <th scope="col" class="rvo-table-header">{% trans %}Value{% endtrans %}</th>
-    </tr>
-</thead>
-{% for key, value in model_card %}
-    {% if key != "model_index" %}
-        <tbody class="rvo-table-body">
-            <tr class="rvo-table-row">
+          </tr>
+        </thead>
+        {% for key, value in model_card %}
+          {% if key != "model_index" %}
+            <tbody class="rvo-table-body">
+              <tr class="rvo-table-row">
                 <td class="rvo-table-cell">
-                    <strong>{{ key.capitalize().replace("_", " ") }}</strong>
+                  <strong>{{ key.capitalize().replace("_", " ") }}</strong>
                 </td>
                 {# TODO: the base path should be the name of the assessment probably.. like system_card/assessments/iama #}
                 <td class="rvo-table-cell">
-                    {{ render.render_value(key, value, 0, "algorithm/" + algorithm_id|string + "/FIXME", "/system_card") }}
+                  {{ render.render_value(key, value, 0, "algorithm/" + algorithm_id|string + "/FIXME", "/system_card") }}
                 </td>
-            </tr>
-        {% endif %}
-    {% endfor %}
-</tbody>
-</table>
-</div>
-{% for model in model_card["model_index"] %}
+              </tr>
+          {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% for model in model_card["model_index"] %}
     <h3 class="utrecht-heading-3">{{ model["name"] }}</h3>
     <div class="rvo-table--responsive">
-        <table class="rvo-table">
-            <thead class="rvo-table-head">
-                <tr class="rvo-table-row">
-                    <th scope="col" class="rvo-table-header">{% trans %}Attribute{% endtrans %}</th>
-                <th scope="col" class="rvo-table-header">{% trans %}Value{% endtrans %}</th>
-        </tr>
-    </thead>
-    {% for key, value in model %}
-        {% if key != "name" %}
+      <table class="rvo-table">
+        <thead class="rvo-table-head">
+          <tr class="rvo-table-row">
+            <th scope="col" class="rvo-table-header">{% trans %}Attribute{% endtrans %}</th>
+            <th scope="col" class="rvo-table-header">{% trans %}Value{% endtrans %}</th>
+          </tr>
+        </thead>
+        {% for key, value in model %}
+          {% if key != "name" %}
             <tbody class="rvo-table-body">
-                <tr class="rvo-table-row">
-                    <td class="rvo-table-cell">
-                        <strong>{{ key.capitalize().replace("_", " ") }}</strong>
-                    </td>
-                    <td class="rvo-table-cell">
-                        {{ render.render_value(key, value, 0, "algorithm/" + algorithm_id|string + "/FIXME", "/system_card/models/FIXME") }}
-                    </td>
-                </tr>
-            {% endif %}
+              <tr class="rvo-table-row">
+                <td class="rvo-table-cell">
+                  <strong>{{ key.capitalize().replace("_", " ") }}</strong>
+                </td>
+                <td class="rvo-table-cell">
+                  {{ render.render_value(key, value, 0, "algorithm/" + algorithm_id|string + "/FIXME", "/system_card/models/FIXME") }}
+                </td>
+              </tr>
+          {% endif %}
         {% endfor %}
-    </tbody>
-</table>
-</div>
-</div>
-{% endfor %}
+      </tbody>
+    </table>
+    </div>
+    </div>
+  {% endfor %}
 {% endblock %}

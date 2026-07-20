@@ -1,71 +1,71 @@
 {% from "macros/editable_macros.html.j2" import editable with context %}
 {% macro render_include_path(path) -%}
-    {{ path.urlpath.split("/")[-1] .split(".")[0] }}
+  {{ path.urlpath.split("/")[-1] .split(".")[0] }}
 {%- endmacro %}
 {% macro render_attribute(attribute) -%}
-    {{ attribute.capitalize().replace("_", " ") }}
+  {{ attribute.capitalize().replace("_", " ") }}
 {%- endmacro %}
 {% macro render_value(key, value, depth, base_resource_path, path) -%}
-    {% set has_permission = permission(permission_path, 'Update', permissions) %}
-    {% if key is defined and key != "" %}
-        {% set relative_resource_path = path + "/" + key %}
+  {% set has_permission = permission(permission_path, 'Update', permissions) %}
+  {% if key is defined and key != "" %}
+    {% set relative_resource_path = path + "/" + key %}
+  {% else %}
+    {% set relative_resource_path = path %}
+  {% endif %}
+  {% set full_resource_path = base_resource_path + relative_resource_path %}
+  {% if isinstance(value, 'IterMixin') or isinstance(value, 'dict') %}
+    <div class="{% if depth == 1 %}margin-bottom-large{% endif %}">
+      {% if is_editable_resource(full_resource_path, editables) %}
+        {{ editable(algorithm, relative_resource_path, full_resource_path, None, has_permission) }}
+      {% else %}
+        {% if value.__class__.__name__ == 'dict' %}
+          {% set value = value.items() %}
+        {% endif %}
+        {% for subkey, subvalue in value %}
+          <strong>{{ render_attribute(subkey) }}</strong>:
+          {% if is_editable_resource(full_resource_path + "/" + subkey, editables) %}
+            {{ editable(algorithm, relative_resource_path + "/" + subkey, full_resource_path + "/" + subkey, None, has_permission) }}
+          {% else %}
+            {{ render_value(subkey, subvalue, depth+1, base_resource_path, path) }}
+          {% endif %}
+          {% if not loop.last %}<br />{% endif %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  {% elif isinstance(value, 'list') %}
+    {% if key == "assessments" %}
+      <ul>
+        {% for assessment in value %}
+          <li>
+            <a class="rvo-link rvo-link--normal"
+               href="/algorithm/{{ algorithm_id }}/details/system_card/assessments/{{ assessment['name'].lower() }}">
+              {{ assessment['name'] }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% elif key == "models" %}
+      {% for model in value %}{{ model["name"] }}{% endfor %}
     {% else %}
-        {% set relative_resource_path = path %}
-    {% endif %}
-    {% set full_resource_path = base_resource_path + relative_resource_path %}
-    {% if isinstance(value, 'IterMixin') or isinstance(value, 'dict') %}
-        <div class="{% if depth == 1 %}margin-bottom-large{% endif %}">
-            {% if is_editable_resource(full_resource_path, editables) %}
-                {{ editable(algorithm, relative_resource_path, full_resource_path, None, has_permission) }}
-            {% else %}
-                {% if value.__class__.__name__ == 'dict' %}
-                    {% set value = value.items() %}
-                {% endif %}
-                {% for subkey, subvalue in value %}
-                    <strong>{{ render_attribute(subkey) }}</strong>:
-                    {% if is_editable_resource(full_resource_path + "/" + subkey, editables) %}
-                        {{ editable(algorithm, relative_resource_path + "/" + subkey, full_resource_path + "/" + subkey, None, has_permission) }}
-                    {% else %}
-                        {{ render_value(subkey, subvalue, depth+1, base_resource_path, path) }}
-                    {% endif %}
-                    {% if not loop.last %}<br />{% endif %}
-                {% endfor %}
-            {% endif %}
+      {% if is_editable_resource(full_resource_path + "[*]", editables) %}
+        <div class="amt-blocks-with-vertical-spacing">
+          {% for item in value %}
+            {{ editable(algorithm, relative_resource_path + "[" + (loop.index-1) | string + "]", full_resource_path + "[" + (loop.index-1) | string + "]", None, has_permission) }}
+          {% endfor %}
         </div>
-    {% elif isinstance(value, 'list') %}
-        {% if key == "assessments" %}
-            <ul>
-                {% for assessment in value %}
-                    <li>
-                        <a class="rvo-link rvo-link--normal"
-                           href="/algorithm/{{ algorithm_id }}/details/system_card/assessments/{{ assessment['name'].lower() }}">
-                            {{ assessment['name'] }}
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% elif key == "models" %}
-            {% for model in value %}{{ model["name"] }}{% endfor %}
-        {% else %}
-            {% if is_editable_resource(full_resource_path + "[*]", editables) %}
-                <div class="amt-blocks-with-vertical-spacing">
-                    {% for item in value %}
-                        {{ editable(algorithm, relative_resource_path + "[" + (loop.index-1) | string + "]", full_resource_path + "[" + (loop.index-1) | string + "]", None, has_permission) }}
-                    {% endfor %}
-                </div>
-            {% else %}
-                <div style="margin-left: {{ depth * 10 }}px;">
-                    {% for item in value %}
-                        {{ render_value("", item, depth+1, base_resource_path, path + "/" + key + "[" + (loop.index-1) |string + "]") }}
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endif %}
-    {% else %}
-        {% if is_editable_resource(full_resource_path, editables) %}
-            {{ editable(algorithm, relative_resource_path, full_resource_path, None, has_permission) }}
-        {% else %}
-            {{ value }}
-        {% endif %}
+      {% else %}
+        <div style="margin-left: {{ depth * 10 }}px;">
+          {% for item in value %}
+            {{ render_value("", item, depth+1, base_resource_path, path + "/" + key + "[" + (loop.index-1) |string + "]") }}
+          {% endfor %}
+        </div>
+      {% endif %}
     {% endif %}
+  {% else %}
+    {% if is_editable_resource(full_resource_path, editables) %}
+      {{ editable(algorithm, relative_resource_path, full_resource_path, None, has_permission) }}
+    {% else %}
+      {{ value }}
+    {% endif %}
+  {% endif %}
 {%- endmacro %}
