@@ -1,188 +1,188 @@
 {% import "macros/form_macros.html.j2" as macros with context %}
 {% extends "layouts/base.html.j2" %}
 {% block content %}
-    <div class="rvo-max-width-layout rvo-max-width-layout--lg rvo-max-width-layout-inline-padding--none margin-bottom-large">
-        <div class="rvo-form">
-            <div class="rvo-layout-column rvo-layout-gap--sm">
-                <div class="rvo-form-intro">
-                    <h1 class="utrecht-heading-1">{% trans %}Add an algorithm{% endtrans %}</h1>
-            </div>
-            <form class="rvo-layout-column rvo-layout-gap--sm"
-                  hx-ext="json-enc"
-                  hx-post="/algorithms/new"
-                  hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
-                  hx-target-error="#errorContainer"
-                  hx-swap="innerHTML"
-                  hx-disabled-elt="#button-new-algorithm-create"
-                  method="post"
-                  autocomplete="off"
-                  id="form-new-algorithm">
-                <!-- TODO: hidden field below probably will become a template select field in the future -->
-                <input type="hidden" name="template_id" value="0" />
-                <div class="utrecht-form-fieldset rvo-form-fieldset">
-                    <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
-                        <div role="group"
-                             aria-labelledby="fieldId-label"
-                             class="utrecht-form-field utrecht-form-field--text rvo-form-field">
-                            <div class="rvo-form-field__label">
-                                <label class="rvo-label rvo-label--required">{% trans %}Algorithm name{% endtrans %}</label>
-                        </div>
-                        <div id="error-name" class="htmx-error-oob"></div>
-                        <input id="name"
-                               placeholder="{% trans %}Name of the algorithm{% endtrans %}"
-                               name="name"
-                               type="text"
-                               class="utrecht-textbox utrecht-textbox--html-input"
-                               dir="auto"
-                               value="" />
+  <div class="rvo-max-width-layout rvo-max-width-layout--lg rvo-max-width-layout-inline-padding--none margin-bottom-large">
+    <div class="rvo-form">
+      <div class="rvo-layout-column rvo-layout-gap--sm">
+        <div class="rvo-form-intro">
+          <h1 class="utrecht-heading-1">{% trans %}Add an algorithm{% endtrans %}</h1>
+        </div>
+        <form class="rvo-layout-column rvo-layout-gap--sm"
+              hx-ext="json-enc"
+              hx-post="/algorithms/new"
+              hx-headers='{"X-CSRF-Token": "{{ csrftoken }}"}'
+              hx-target-error="#errorContainer"
+              hx-swap="innerHTML"
+              hx-disabled-elt="#button-new-algorithm-create"
+              method="post"
+              autocomplete="off"
+              id="form-new-algorithm">
+          <!-- TODO: hidden field below probably will become a template select field in the future -->
+          <input type="hidden" name="template_id" value="0" />
+          <div class="utrecht-form-fieldset rvo-form-fieldset">
+            <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
+              <div role="group"
+                   aria-labelledby="fieldId-label"
+                   class="utrecht-form-field utrecht-form-field--text rvo-form-field">
+                <div class="rvo-form-field__label">
+                  <label class="rvo-label rvo-label--required">{% trans %}Algorithm name{% endtrans %}</label>
                 </div>
+                <div id="error-name" class="htmx-error-oob"></div>
+                <input id="name"
+                       placeholder="{% trans %}Name of the algorithm{% endtrans %}"
+                       name="name"
+                       type="text"
+                       class="utrecht-textbox utrecht-textbox--html-input"
+                       dir="auto"
+                       value="" />
+              </div>
+              <div role="group"
+                   aria-labelledby="fieldId-label"
+                   class="utrecht-form-field utrecht-form-field--text rvo-form-field">
+                <div class="rvo-form-field__label">
+                  <label class="rvo-label rvo-label--required">{% trans %}Lifecycle{% endtrans %}</label>
+                  <div id="error-lifecycle" class="htmx-error-oob"></div>
+                  <p>
+                    {% trans %}Select the lifecycle your algorithm is currently in.{% endtrans %}
+                    {% trans %}For more information on lifecycle, read the{% endtrans %}
+                    <a class="rvo-link"
+                       href="https://minbzk.github.io/Algoritmekader/levenscyclus/"
+                       target="_blank">{% trans %}Algorithm Framework{% endtrans %}</a>.
+                  </p>
+                </div>
+                {% for lifecycle in lifecycles %}
+                  <div class="rvo-radio-button__group">
+                    <label class="rvo-radio-button" for="{{ lifecycle.value }}">
+                      <input id="lifecycle-{{ lifecycle.value }}"
+                             name="lifecycle"
+                             value="{{ lifecycle.value }}"
+                             type="radio"
+                             class="utrecht-radio-button" />
+                      {{ lifecycle.display_value | safe }}
+                    </label>
+                  </div>
+                {% endfor %}
+              </div>
+              {{ macros.form_field(form.id, form.fields[0]) }}
+            </fieldset>
+          </div>
+          <h2 class="utrecht-heading-2 rvo-heading--no-margins">{% trans %}AI Act Profile{% endtrans %}</h2>
+          <p class="rvo-text rvo-text--no-margins">
+            {% trans %}The AI Act profile provides insight into, among other things, the type of AI system and the associated obligations from the European AI Act. If you already know the type of AI system you can fill in the below fields. Otherwise, you can find your AI Act Profile with the AI Act Support Tool.{% endtrans %}
+          </p>
+          <div class="utrecht-form-fieldset rvo-form-fieldset">
+            <button id="ai-act-support-tool-modal-button"
+                    class="utrecht-button utrecht-button--secondary-action utrecht-button--rvo-md utrecht-button-group__align-right"
+                    onclick="amt.openDynamicModal('ai-act-support-tool')"
+                    type="button"
+                    style="float: right">{% trans %}Find your AI Act profile{% endtrans %}</button>
+            <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
+              {% for item in ai_act_profile.multiple_select %}
                 <div role="group"
                      aria-labelledby="fieldId-label"
                      class="utrecht-form-field utrecht-form-field--text rvo-form-field">
-                    <div class="rvo-form-field__label">
-                        <label class="rvo-label rvo-label--required">{% trans %}Lifecycle{% endtrans %}</label>
-                    <div id="error-lifecycle" class="htmx-error-oob"></div>
-                    <p>
-                        {% trans %}Select the lifecycle your algorithm is currently in.{% endtrans %}
-                    {% trans %}For more information on lifecycle, read the{% endtrans %}
-                <a class="rvo-link"
-                   href="https://minbzk.github.io/Algoritmekader/levenscyclus/"
-                   target="_blank">{% trans %}Algorithm Framework{% endtrans %}</a>.
-        </p>
-    </div>
-    {% for lifecycle in lifecycles %}
-        <div class="rvo-radio-button__group">
-            <label class="rvo-radio-button" for="{{ lifecycle.value }}">
-                <input id="lifecycle-{{ lifecycle.value }}"
-                       name="lifecycle"
-                       value="{{ lifecycle.value }}"
-                       type="radio"
-                       class="utrecht-radio-button" />
-                {{ lifecycle.display_value | safe }}
-            </label>
-        </div>
-    {% endfor %}
-</div>
-{{ macros.form_field(form.id, form.fields[0]) }}
-</fieldset>
-</div>
-<h2 class="utrecht-heading-2 rvo-heading--no-margins">{% trans %}AI Act Profile{% endtrans %}</h2>
-<p class="rvo-text rvo-text--no-margins">
-    {% trans %}The AI Act profile provides insight into, among other things, the type of AI system and the associated obligations from the European AI Act. If you already know the type of AI system you can fill in the below fields. Otherwise, you can find your AI Act Profile with the AI Act Support Tool.{% endtrans %}
-</p>
-<div class="utrecht-form-fieldset rvo-form-fieldset">
-    <button id="ai-act-support-tool-modal-button"
-            class="utrecht-button utrecht-button--secondary-action utrecht-button--rvo-md utrecht-button-group__align-right"
-            onclick="amt.openDynamicModal('ai-act-support-tool')"
-            type="button"
-            style="float: right">{% trans %}Find your AI Act profile{% endtrans %}</button>
-<fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
-    {% for item in ai_act_profile.multiple_select %}
-        <div role="group"
-             aria-labelledby="fieldId-label"
-             class="utrecht-form-field utrecht-form-field--text rvo-form-field">
-            <div class="rvo-form-field__label">
-                <label class="rvo-label">{{ item.display_name }}</label>
-            </div>
-            {% for option in item.options %}
-                <div class="rvo-checkbox__group">
-                    <label class="rvo-checkbox rvo-checkbox--not-checked" for="{{ option }}">
+                  <div class="rvo-form-field__label">
+                    <label class="rvo-label">{{ item.display_name }}</label>
+                  </div>
+                  {% for option in item.options %}
+                    <div class="rvo-checkbox__group">
+                      <label class="rvo-checkbox rvo-checkbox--not-checked" for="{{ option }}">
                         <input id="{{ item.target_name }}-{{ option }}"
                                name="{{ item.target_name }}"
                                class="rvo-checkbox__input"
                                type="checkbox"
                                value="{{ option }}" />
                         {{ option }}
-                    </label>
+                      </label>
+                    </div>
+                  {% endfor %}
                 </div>
-            {% endfor %}
-        </div>
-    {% endfor %}
-    {% for item in ai_act_profile.dropdown_select %}
-        <div style="min-inline-size: max-content;
-                    max-inline-size: clamp(20rem, 40%, 50rem)"
-             role="group"
-             aria-labelledby="fieldId-label"
-             class="utrecht-form-field utrecht-form-field--text rvo-form-field">
-            <div class="rvo-form-field__label">
-                <label class="rvo-label" id="fieldId-label" for="fieldId">{{ item.display_name }}</label>
-            </div>
-            <div class="rvo-select-wrapper">
-                <select id="{{ item.target_name }}"
-                        name="{{ item.target_name }}"
-                        class="utrecht-select utrecht-select--html-select">
-                    <option value="" hidden>{% trans %}Select Option{% endtrans %}</option>
-                {% for option in item.options %}
-                    <option value="{{ option }}">{{ option }}</option>
-                {% endfor %}
-            </select>
-        </div>
+              {% endfor %}
+              {% for item in ai_act_profile.dropdown_select %}
+                <div style="min-inline-size: max-content;
+                            max-inline-size: clamp(20rem, 40%, 50rem)"
+                     role="group"
+                     aria-labelledby="fieldId-label"
+                     class="utrecht-form-field utrecht-form-field--text rvo-form-field">
+                  <div class="rvo-form-field__label">
+                    <label class="rvo-label" id="fieldId-label" for="fieldId">{{ item.display_name }}</label>
+                  </div>
+                  <div class="rvo-select-wrapper">
+                    <select id="{{ item.target_name }}"
+                            name="{{ item.target_name }}"
+                            class="utrecht-select utrecht-select--html-select">
+                      <option value="" hidden>{% trans %}Select Option{% endtrans %}</option>
+                      {% for option in item.options %}
+                        <option value="{{ option }}">{{ option }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+              {% endfor %}
+              {% for item in ai_act_profile.radio_select %}
+                <div role="group"
+                     aria-labelledby="fieldId-label"
+                     class="utrecht-form-field utrecht-form-field--text rvo-form-field">
+                  <div class="rvo-form-field__label">
+                    <label class="rvo-label">{{ item.display_name }}</label>
+                  </div>
+                  {% for option in item.options %}
+                    <div class="rvo-radio-button__group">
+                      <label class="rvo-radio-button" for="{{ option }}">
+                        <input id="{{ item.target_name }}-{{ option }}"
+                               name="{{ item.target_name }}"
+                               value="{{ option }}"
+                               type="radio"
+                               class="utrecht-radio-button" />
+                        {{ option }}
+                      </label>
+                    </div>
+                  {% endfor %}
+                </div>
+              {% endfor %}
+              {% for item in ai_act_profile.binary_select %}
+                <div role="group"
+                     aria-labelledby="fieldId-label"
+                     class="utrecht-form-field utrecht-form-field--text rvo-form-field">
+                  <div class="rvo-form-field__label">
+                    <label class="rvo-label">{{ item.display_name }}</label>
+                  </div>
+                  <div class="rvo-radio-button__group">
+                    <label class="rvo-radio-button" for="{{ item.options[0] }}">
+                      <input id="{{ item.target_name }}-{{ item.options[0] }}"
+                             name="{{ item.target_name }}"
+                             value="{{ item.options[0] }}"
+                             type="radio"
+                             class="utrecht-radio-button" />
+                      {% trans %}Yes{% endtrans %}
+                    </label>
+                  </div>
+                  <div class="rvo-radio-button__group">
+                    <label class="rvo-radio-button" for="{{ item.options[1] }}">
+                      <input id="{{ item.target_name }}-{{ item.options[1] }}"
+                             name="{{ item.target_name }}"
+                             value="{{ item.options[1] }}"
+                             type="radio"
+                             class="utrecht-radio-button" />
+                      {% trans %}No{% endtrans %}
+                    </label>
+                  </div>
+                </div>
+              {% endfor %}
+            </fieldset>
+          </div>
+          <div id="errorContainer"></div>
+          <p class="utrecht-button-group">
+            <button class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
+                    type="submit"
+                    id="button-new-algorithm-create"
+                    hx-on:click="document.querySelectorAll('div.htmx-error-oob').forEach(e => e.innerHTML = '')">
+              {% trans %}Add algorithm{% endtrans %}
+            </button>
+          </p>
+        </form>
+      </div>
     </div>
-{% endfor %}
-{% for item in ai_act_profile.radio_select %}
-    <div role="group"
-         aria-labelledby="fieldId-label"
-         class="utrecht-form-field utrecht-form-field--text rvo-form-field">
-        <div class="rvo-form-field__label">
-            <label class="rvo-label">{{ item.display_name }}</label>
-        </div>
-        {% for option in item.options %}
-            <div class="rvo-radio-button__group">
-                <label class="rvo-radio-button" for="{{ option }}">
-                    <input id="{{ item.target_name }}-{{ option }}"
-                           name="{{ item.target_name }}"
-                           value="{{ option }}"
-                           type="radio"
-                           class="utrecht-radio-button" />
-                    {{ option }}
-                </label>
-            </div>
-        {% endfor %}
-    </div>
-{% endfor %}
-{% for item in ai_act_profile.binary_select %}
-    <div role="group"
-         aria-labelledby="fieldId-label"
-         class="utrecht-form-field utrecht-form-field--text rvo-form-field">
-        <div class="rvo-form-field__label">
-            <label class="rvo-label">{{ item.display_name }}</label>
-        </div>
-        <div class="rvo-radio-button__group">
-            <label class="rvo-radio-button" for="{{ item.options[0] }}">
-                <input id="{{ item.target_name }}-{{ item.options[0] }}"
-                       name="{{ item.target_name }}"
-                       value="{{ item.options[0] }}"
-                       type="radio"
-                       class="utrecht-radio-button" />
-                {% trans %}Yes{% endtrans %}
-        </label>
-    </div>
-    <div class="rvo-radio-button__group">
-        <label class="rvo-radio-button" for="{{ item.options[1] }}">
-            <input id="{{ item.target_name }}-{{ item.options[1] }}"
-                   name="{{ item.target_name }}"
-                   value="{{ item.options[1] }}"
-                   type="radio"
-                   class="utrecht-radio-button" />
-            {% trans %}No{% endtrans %}
-    </label>
-</div>
-</div>
-{% endfor %}
-</fieldset>
-</div>
-<div id="errorContainer"></div>
-<p class="utrecht-button-group">
-    <button class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
-            type="submit"
-            id="button-new-algorithm-create"
-            hx-on:click="document.querySelectorAll('div.htmx-error-oob').forEach(e => e.innerHTML = '')">
-        {% trans %}Add algorithm{% endtrans %}
-</button>
-</p>
-</form>
-</div>
-</div>
-</div>
-</div>
+  </div>
+  </div>
 {% endblock content %}
