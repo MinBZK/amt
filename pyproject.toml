@@ -19,7 +19,9 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.12"
-fastapi = "^0.141.1"
+# fastapi pinned < 0.140: from 0.140 onward, combined with prometheus-fastapi-instrumentator 8.1.0, it leaks
+# asyncpg connections in the test suite (see https://github.com/MinBZK/amt/pull/806)
+fastapi = ">=0.136.3,<0.140"
 alembic = "^1.19.1"
 pydantic = "2.13.4"
 jinja2 = "^3.1.6"
@@ -173,6 +175,7 @@ authorized_licenses = [
     "GNU General Public License (GPL)",
     "GNU Library or Lesser General Public License (LGPL)",
     "MIT",
+    "MIT-0",
     "MIT AND Python-2.0",
     "PSF-2.0",
     "The Unlicense (Unlicense)",
