@@ -17,14 +17,14 @@ repos:
       - id: check-toml
       - id: detect-private-key
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.22
+    rev: v0.16.5
     hooks:
       - id: ruff
         args: [--config, pyproject.toml]
       - id: ruff-format
         args: [--config, pyproject.toml]
   - repo: https://github.com/djlint/djLint
-    rev: v1.42.0
+    rev: v1.44.2
     hooks:
       - id: djlint-reformat-jinja
   - repo: local
