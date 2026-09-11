@@ -25,7 +25,7 @@ See [build docs](BUILD.md)
 ## Quick start with Docker Compose
 
 ```shell
-docker compose up
+docker compose up --build
 ```
 
 This starts the full product locally, including a self-contained Keycloak dev server for authentication (single

@@ -67,8 +67,14 @@ docker compose build
 To run the application you use this command:
 
 ```shell
-docker compose up
+docker compose up --build
 ```
+
+`--build` rebuilds the AMT image from your checkout. Without it, compose reuses an existing `ghcr.io/minbzk/amt:latest`
+image; if that image is older than the database migrations in your checkout, AMT fails to start with an alembic
+`Can't locate revision identified by ...` error. If your local database volume was migrated by a different branch or
+image than the one you are running, rebuild alone is not enough: reset the database with `docker compose down -v`
+(this deletes all local data, including users and algorithms) and start again.
 
 ### Suggested development ENVIRONMENT settings
 
@@ -84,8 +90,8 @@ When started with `docker compose up`, AMT runs fully locally, including its own
 contains a Keycloak service in dev mode (`start-dev`) which uses an embedded H2 database, so it runs as a single
 container without an external database or external Keycloak. On startup it imports the realm from
 `keycloak/realms/tad.json`, which contains the client `amt-local` and a test user (`demo` / `demo`). The state is
-ephemeral: every restart starts from a clean import. The admin console is available at http://keycloak:8180/admin
-(`admin` / `admin`).
+ephemeral: every restart starts from a clean import. After startup, open http://localhost:8070 and log in with
+`demo` / `demo`. The admin console is available at http://keycloak:8180/admin (`admin` / `admin`).
 
 Because the login flow runs in the browser while the token exchange runs inside the container, the Keycloak hostname
 must resolve identically on both sides. Add the following line once to `/etc/hosts`:
