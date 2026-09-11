@@ -10,6 +10,8 @@ services:
         condition: service_healthy
       keycloak:
         condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
     env_file:
       - path: prod.env
         required: true
@@ -64,8 +66,10 @@ services:
     healthcheck:
       test: ["CMD", "wget", "-O", "-", "http://localhost:8080/misc/ping"]
 
-  # Local dev identity provider (demo/demo). The hostname must resolve identically in the browser and in the
-  # container network: lvh.me resolves to 127.0.0.1 for any client, the alias makes it work in compose too.
+  # Local dev identity provider (demo/demo). --hostname is the public issuer and front-channel URL, which the
+  # browser reaches on the published port. --hostname-backchannel-dynamic makes Keycloak advertise the token and
+  # JWKS endpoints on the host the request came in on, so the amt container uses http://keycloak:8180 for those.
+  # Browser and container therefore agree on one issuer without a shared hostname or an /etc/hosts entry.
   keycloak:
     image: quay.io/keycloak/keycloak:26.7
     restart: unless-stopped
@@ -74,7 +78,8 @@ services:
         "start-dev",
         "--import-realm",
         "--http-port=8180",
-        "--hostname=http://keycloak.lvh.me:8180",
+        "--hostname=http://localhost:8180",
+        "--hostname-backchannel-dynamic=true",
       ]
     environment:
       - KC_BOOTSTRAP_ADMIN_USERNAME=admin
@@ -83,10 +88,6 @@ services:
       - ./keycloak/realms:/opt/keycloak/data/import:ro
     ports:
       - 8180:8180
-    networks:
-      default:
-        aliases:
-          - keycloak.lvh.me
     healthcheck:
       test: ["CMD-SHELL", "bash -c '</dev/tcp/127.0.0.1/8180'"]
       interval: 5s
@@ -94,5 +95,43 @@ services:
       retries: 30
       start_period: 20s
 
+  # Local dev object storage. AMT stores measure attachments here; without it every
+  # measure page fails in ObjectStorageService._ensure_bucket_exists.
+  minio:
+    image: minio/minio:RELEASE.2025-09-07T16-13-09Z
+    restart: unless-stopped
+    command: server /data
+    env_file:
+      - path: prod.env
+        required: true
+    volumes:
+      - app-object-data:/data
+    ports:
+      - 9000:9000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 5s
+
+  # One-shot: the bucket must exist before amt starts, otherwise _ensure_bucket_exists raises.
+  minio-init:
+    image: minio/minio:RELEASE.2025-09-07T16-13-09Z
+    restart: "no"
+    depends_on:
+      minio:
+        condition: service_healthy
+    env_file:
+      - path: prod.env
+        required: true
+    entrypoint:
+      - sh
+      - -c
+      - |
+        mc alias set local http://minio:9000 "$$MINIO_ROOT_USER" "$$MINIO_ROOT_PASSWORD" &&
+        mc mb --ignore-existing local/"$$OBJECT_STORE_BUCKET_NAME"
+
 volumes:
   app-db-data:
+  app-object-data:

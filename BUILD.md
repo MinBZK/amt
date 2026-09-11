@@ -89,18 +89,40 @@ export AUTO_CREATE_SCHEMA=true
 When started with `docker compose up`, AMT runs fully locally, including its own identity provider. The compose file
 contains a Keycloak service in dev mode (`start-dev`) which uses an embedded H2 database, so it runs as a single
 container without an external database or external Keycloak. On startup it imports the realm from
-`keycloak/realms/tad.json`, which contains the client `amt-local` and a test user (`demo` / `demo`). The state is
-ephemeral: every restart starts from a clean import. After startup, open http://localhost:8070 and log in with
-`demo` / `demo`; no extra configuration is needed. The admin console is available at
-http://keycloak.lvh.me:8180/admin (`admin` / `admin`).
+`keycloak/realms/tad.json`, which contains the client `amt-local` and a test user (`demo` / `demo`). After startup,
+open http://localhost:8070 and log in with `demo` / `demo`; no extra configuration is needed. The admin console is
+available at http://localhost:8180/admin (`admin` / `admin`).
 
-The Keycloak hostname (`keycloak.lvh.me`) must resolve identically in the browser and inside the container
-network, because the login redirect runs in the browser while the token exchange runs inside the AMT container.
-`lvh.me` is a wildcard DNS service that always resolves to 127.0.0.1, and a network alias in the compose file makes
-the same name point to the Keycloak container inside the compose network, so it works out of the box in every
-browser without touching `/etc/hosts`. (If DNS for lvh.me is unreachable, add `127.0.0.1 keycloak.lvh.me` to
-`/etc/hosts` as a fallback.) For production deployments, override `OIDC_CLIENT_ID`, `OIDC_CLIENT_SECRET` and
-`OIDC_DISCOVERY_URL` to point to the platform Keycloak instead.
+The realm is imported only into an empty database. Keycloak keeps its H2 database in the container layer, which
+survives `docker compose restart` and `stop`/`start`, so a running setup keeps whatever you changed in the admin
+console. To pick up an edit to `keycloak/realms/tad.json`, or to get back to a clean `demo` / `demo`, recreate the
+container with `docker compose down` followed by `docker compose up`. This does not touch the AMT database, which
+lives in the `app-db-data` volume; only `docker compose down -v` clears that.
+
+Authentication involves two parties that reach Keycloak over different paths: the browser follows the login redirect
+from outside the compose network, while AMT fetches discovery, tokens and JWKS from inside it. Both must end up with
+the same issuer. Keycloak solves this itself, so no shared hostname, DNS trick or `/etc/hosts` entry is needed:
+`--hostname=http://localhost:8180` fixes the issuer and the front-channel URLs at the published port that the browser
+uses, and `--hostname-backchannel-dynamic=true` makes Keycloak advertise the token and JWKS endpoints on whichever
+host the request arrived on. AMT therefore reads its discovery document from `http://keycloak:8180` over the compose
+network and gets back-channel endpoints on that same name, while `issuer` and the authorization endpoint stay on
+`http://localhost:8180` for the browser.
+
+For production deployments, override `OIDC_CLIENT_ID`, `OIDC_CLIENT_SECRET` and `OIDC_DISCOVERY_URL` to point to the
+platform Keycloak instead.
+
+### Local object storage with MinIO
+
+AMT stores files that users attach to measures in S3-compatible object storage, so `docker compose up` also starts a
+MinIO container with a `minio-init` one-shot next to it that creates the `amt` bucket. The bucket has to exist before
+AMT starts: `ObjectStorageService` checks for it on construction and raises otherwise, which previously made every
+measure page fail with a generic error. Files live in the `app-object-data` volume and survive `docker compose down`;
+`docker compose down -v` clears them.
+
+The image is pinned to a release tag. The MinIO community image is only meant as a local dev dependency here, never
+as the production backend, and recent community builds no longer ship the web console, so there is no browser UI on
+port 9000 - it serves the S3 API only. For production deployments, override `OBJECT_STORE_URL`, `OBJECT_STORE_USER`,
+`OBJECT_STORE_PASSWORD` and `OBJECT_STORE_BUCKET_NAME` to point to the platform object storage.
 
 ## Database
 
