@@ -1,8 +1,10 @@
+import logging
 from typing import Any
 
 import pytest
+from amt.api.deps import templates
 from amt.core.exception_handlers import general_exception_handler, translate_pydantic_exception
-from amt.core.exceptions import AMTStorageError
+from amt.core.exceptions import AMTRepositoryError, AMTStorageError
 from amt.schema.algorithm import AlgorithmNew
 from babel.support import NullTranslations
 from fastapi import status
@@ -114,3 +116,30 @@ async def test_htmx_error_without_own_template_renders_the_alert():
     assert response.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR
     assert 'id="general-error-content"' in body
     assert "rvo-alert--error" in body
+
+
+@pytest.mark.asyncio
+async def test_broken_error_template_falls_back_and_is_logged_as_an_error(
+    monkeypatch: pytest.MonkeyPatch, caplog: pytest.LogCaptureFixture
+):
+    """A template that exists but fails to render is a bug, not a missing file.
+
+    It must still produce a response, and it must be logged as an exception rather
+    than as the debug line used for templates that were never meant to exist.
+    """
+    original = templates.TemplateResponse
+
+    def explode_on_the_first_template(request: Request, name: str, *args: Any, **kwargs: Any) -> Any:  # noqa: ANN401
+        if name == "errors/_AMTRepositoryError_500.html.j2":
+            raise ValueError("template is broken")
+        return original(request, name, *args, **kwargs)
+
+    monkeypatch.setattr(templates, "TemplateResponse", explode_on_the_first_template)
+
+    with caplog.at_level(logging.ERROR, logger="amt.core.exception_handlers"):
+        response = await general_exception_handler(_htmx_request(), AMTRepositoryError())
+    body = await _render(response)
+
+    assert response.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR
+    assert "rvo-alert--error" in body
+    assert any("failed to render" in record.message for record in caplog.records)

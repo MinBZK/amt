@@ -96,34 +96,21 @@ async def general_exception_handler(request: Request, exc: Exception) -> HTMLRes
     else:
         fallback_template_name = "errors/_Exception.html.j2"
 
-    response: HTMLResponse | None = None
+    def render(name: str) -> HTMLResponse:
+        return templates.TemplateResponse(
+            request, name, {"message": message}, status_code=status_code, headers=response_headers
+        )
 
     try:
-        response = templates.TemplateResponse(
-            request, template_name, {"message": message}, status_code=status_code, headers=response_headers
-        )
+        return render(template_name)
     except TemplateNotFound:
         # Expected for every exception without a bespoke template, which is most of them:
         # the fallback is the intended result, not a misconfiguration.
         logger.debug("No error template %s, using fallback %s", template_name, fallback_template_name)
-        response = templates.TemplateResponse(
-            request,
-            fallback_template_name,
-            {"message": message},
-            status_code=status_code,
-            headers=response_headers,
-        )
     except Exception:
         logger.exception("Error template %s exists but failed to render, using fallback", template_name)
-        response = templates.TemplateResponse(
-            request,
-            fallback_template_name,
-            {"message": message},
-            status_code=status_code,
-            headers=response_headers,
-        )
 
-    return response
+    return render(fallback_template_name)
 
 
 async def redirect_exception_handler(request: Request, exc: AMTRedirectError) -> RedirectResponse:
