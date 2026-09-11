@@ -78,6 +78,26 @@ To use a development environment during local development, you can use the follo
 export AUTO_CREATE_SCHEMA=true
 ```
 
+### Local authentication with Keycloak
+
+When started with `docker compose up`, AMT runs fully locally, including its own identity provider. The compose file
+contains a Keycloak service in dev mode (`start-dev`) which uses an embedded H2 database, so it runs as a single
+container without an external database or external Keycloak. On startup it imports the realm from
+`keycloak/realms/tad.json`, which contains the client `amt-local` and a test user (`demo` / `demo`). The state is
+ephemeral: every restart starts from a clean import. The admin console is available at http://keycloak:8180/admin
+(`admin` / `admin`).
+
+Because the login flow runs in the browser while the token exchange runs inside the container, the Keycloak hostname
+must resolve identically on both sides. Add the following line once to `/etc/hosts`:
+
+```shell
+127.0.0.1 keycloak
+```
+
+The compose setup publishes Keycloak on port 8180 and lets it listen on 8180 inside the container network as well, so
+`http://keycloak:8180` works both in your browser and from the AMT container. For production deployments, override
+`OIDC_CLIENT_ID`, `OIDC_CLIENT_SECRET` and `OIDC_DISCOVERY_URL` to point to the platform Keycloak instead.
+
 ## Database
 
 We support most SQL database types. You can use the variable `APP_DATABASE_SCHEME` to change the database. The default
