@@ -98,7 +98,7 @@ services:
         volumes:
             - ./keycloak/realms:/opt/keycloak/data/import:ro
         ports:
-            - 8180:8180
+            - 127.0.0.1:8180:8180
         healthcheck:
             test: ["CMD-SHELL", "bash -c '</dev/tcp/127.0.0.1/8180'"]
             interval: 5s
@@ -116,7 +116,7 @@ services:
         volumes:
             - app-object-data:/data
         ports:
-            - 9000:9000
+            - 127.0.0.1:9000:9000
         healthcheck:
             test:
                 ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]

@@ -29,10 +29,10 @@
       "secret": "devsecret",
       "standardFlowEnabled": true,
       "directAccessGrantsEnabled": false,
-      "redirectUris": ["http://localhost:8070/*"],
-      "webOrigins": ["http://localhost:8070"],
+      "redirectUris": ["http://localhost:8070/*", "http://127.0.0.1:8070/*"],
+      "webOrigins": ["http://localhost:8070", "http://127.0.0.1:8070"],
       "attributes": {
-        "post.logout.redirect.uris": "http://localhost:8070/*"
+        "post.logout.redirect.uris": "http://localhost:8070/*##http://127.0.0.1:8070/*"
       }
     }
   ]
