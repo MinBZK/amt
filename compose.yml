@@ -66,10 +66,8 @@ services:
     healthcheck:
       test: ["CMD", "wget", "-O", "-", "http://localhost:8080/misc/ping"]
 
-  # Local dev identity provider (demo/demo). --hostname is the public issuer and front-channel URL, which the
-  # browser reaches on the published port. --hostname-backchannel-dynamic makes Keycloak advertise the token and
-  # JWKS endpoints on the host the request came in on, so the amt container uses http://keycloak:8180 for those.
-  # Browser and container therefore agree on one issuer without a shared hostname or an /etc/hosts entry.
+  # Local dev identity provider (demo/demo). --hostname fixes the issuer for the browser,
+  # --hostname-backchannel-dynamic points the amt container at http://keycloak:8180. See BUILD.md.
   keycloak:
     image: quay.io/keycloak/keycloak:26.7
     restart: unless-stopped
@@ -95,8 +93,7 @@ services:
       retries: 30
       start_period: 20s
 
-  # Local dev object storage. AMT stores measure attachments here; without it every
-  # measure page fails in ObjectStorageService._ensure_bucket_exists.
+  # Local dev object storage for measure attachments. See BUILD.md.
   minio:
     image: minio/minio:RELEASE.2025-09-07T16-13-09Z
     restart: unless-stopped
@@ -115,7 +112,7 @@ services:
       retries: 20
       start_period: 5s
 
-  # One-shot: the bucket must exist before amt starts, otherwise _ensure_bucket_exists raises.
+  # The bucket must exist before amt starts, otherwise ObjectStorageService raises on construction.
   minio-init:
     image: minio/minio:RELEASE.2025-09-07T16-13-09Z
     restart: "no"
