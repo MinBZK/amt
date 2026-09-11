@@ -1,8 +1,8 @@
 # This repository adheres to the publiccode.yml standard by including this
 # metadata file that makes public software easily discoverable.
-# More info at https://github.com/italia/publiccode.yml
+# More info at https://github.com/publiccodeyml/publiccode.yml
 
-publiccodeYmlVersion: "0.2"
+publiccodeYmlVersion: "0.7"
 categories:
   - it-development
 description:
@@ -12,7 +12,6 @@ description:
       - Validation
       - Transparency
       - Algorithm
-    genericName: amt
     longDescription: |
       AMT is the acronym for Algorithm Management Toolkit. The goal is to make algorithmic systems more transparent. It achieves this by generating standardized reports. These reports consist of both technical aspects as well as descriptive information about the system and regulatory assessments. For both the system and the model the lifecycle is important, so this is incorporated in both the tool as well as the reports. The definition for an algorithm is derived from the Algoritmeregister.
 
@@ -28,8 +27,8 @@ localisation:
   localisationReady: false
 maintenance:
   contacts:
-    - name: AI Validatie
-      email: ai-validatie@minbzk.nl
+    - name: Digi Gilde
+      email: digigilde@rijksoverheid.nl
   type: community
 name: amt
 platforms:

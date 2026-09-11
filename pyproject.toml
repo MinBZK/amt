@@ -2,7 +2,7 @@
 name = "amt"
 version = "0.1.0"
 description = ""
-authors = ["ai-validatie-team <ai-validatie@minbzk.nl>"]
+authors = ["Digi Gilde <digigilde@rijksoverheid.nl>"]
 readme = "README.md"
 license = "EUPL-1.2"
 repository = "https://github.com/MinBZK/amt"

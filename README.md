@@ -12,7 +12,7 @@ for algorithms.
 
 A demo of the tool is deployed here: https://amt.rijksapp.nl/.
 
-The tool is built by the [AI Validation Team](https://minbzk.github.io/ai-validation/).
+The tool is built by the [Digi Gilde](https://digigilde.github.io/handboek/).
 
 ## How to contribute
 

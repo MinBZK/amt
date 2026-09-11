@@ -10,7 +10,7 @@ ARG NVM_VERSION=0.40.0
 FROM  --platform=$BUILDPLATFORM python:${PYTHON_VERSION} AS project-base
 ARG NVM_VERSION
 
-LABEL maintainer=ai-validatie@minbzk.nl \
+LABEL maintainer=digigilde@rijksoverheid.nl \
     organization=MinBZK \
     license=EUPL-1.2 \
     org.opencontainers.image.description="Algoritm Management Toolkit" \
@@ -113,7 +113,7 @@ RUN poetry install --without dev,test --no-root
 
 FROM python:${PYTHON_VERSION} AS production
 
-LABEL maintainer=ai-validatie@minbzk.nl \
+LABEL maintainer=digigilde@rijksoverheid.nl \
     organization=MinBZK \
     license=EUPL-1.2 \
     org.opencontainers.image.description="Algoritm Management Toolkit" \
