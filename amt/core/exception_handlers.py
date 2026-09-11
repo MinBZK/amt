@@ -7,6 +7,7 @@ from babel.support import NullTranslations
 from fastapi import Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import HTMLResponse, RedirectResponse
+from jinja2 import TemplateNotFound
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from amt.api.deps import templates
@@ -86,7 +87,14 @@ async def general_exception_handler(request: Request, exc: Exception) -> HTMLRes
         else f"errors/{exception_name}_{status_code}.html.j2"
     )
 
-    fallback_template_name = "errors/_Exception.html.j2" if request.state.htmx else "errors/Exception.html.j2"
+    if not request.state.htmx:
+        fallback_template_name = "errors/Exception.html.j2"
+    elif response_headers.get("HX-Retarget") == "#general-error-container":
+        # This response is swapped into the alert container, so it has to render the alert
+        # itself; the plain paragraph fallback would land there unstyled.
+        fallback_template_name = "errors/_Alert.html.j2"
+    else:
+        fallback_template_name = "errors/_Exception.html.j2"
 
     response: HTMLResponse | None = None
 
@@ -94,10 +102,19 @@ async def general_exception_handler(request: Request, exc: Exception) -> HTMLRes
         response = templates.TemplateResponse(
             request, template_name, {"message": message}, status_code=status_code, headers=response_headers
         )
-    except Exception:
-        logger.warning(
-            "Can not display error template " + template_name + " as it does not exist, using fallback template"
+    except TemplateNotFound:
+        # Expected for every exception without a bespoke template, which is most of them:
+        # the fallback is the intended result, not a misconfiguration.
+        logger.debug("No error template %s, using fallback %s", template_name, fallback_template_name)
+        response = templates.TemplateResponse(
+            request,
+            fallback_template_name,
+            {"message": message},
+            status_code=status_code,
+            headers=response_headers,
         )
+    except Exception:
+        logger.exception("Error template %s exists but failed to render, using fallback", template_name)
         response = templates.TemplateResponse(
             request,
             fallback_template_name,
