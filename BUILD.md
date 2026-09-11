@@ -91,18 +91,16 @@ contains a Keycloak service in dev mode (`start-dev`) which uses an embedded H2 
 container without an external database or external Keycloak. On startup it imports the realm from
 `keycloak/realms/tad.json`, which contains the client `amt-local` and a test user (`demo` / `demo`). The state is
 ephemeral: every restart starts from a clean import. After startup, open http://localhost:8070 and log in with
-`demo` / `demo`. The admin console is available at http://keycloak:8180/admin (`admin` / `admin`).
+`demo` / `demo`; no extra configuration is needed. The admin console is available at
+http://keycloak.lvh.me:8180/admin (`admin` / `admin`).
 
-Because the login flow runs in the browser while the token exchange runs inside the container, the Keycloak hostname
-must resolve identically on both sides. Add the following line once to `/etc/hosts`:
-
-```shell
-127.0.0.1 keycloak
-```
-
-The compose setup publishes Keycloak on port 8180 and lets it listen on 8180 inside the container network as well, so
-`http://keycloak:8180` works both in your browser and from the AMT container. For production deployments, override
-`OIDC_CLIENT_ID`, `OIDC_CLIENT_SECRET` and `OIDC_DISCOVERY_URL` to point to the platform Keycloak instead.
+The Keycloak hostname (`keycloak.lvh.me`) must resolve identically in the browser and inside the container
+network, because the login redirect runs in the browser while the token exchange runs inside the AMT container.
+`lvh.me` is a wildcard DNS service that always resolves to 127.0.0.1, and a network alias in the compose file makes
+the same name point to the Keycloak container inside the compose network, so it works out of the box in every
+browser without touching `/etc/hosts`. (If DNS for lvh.me is unreachable, add `127.0.0.1 keycloak.lvh.me` to
+`/etc/hosts` as a fallback.) For production deployments, override `OIDC_CLIENT_ID`, `OIDC_CLIENT_SECRET` and
+`OIDC_DISCOVERY_URL` to point to the platform Keycloak instead.
 
 ## Database
 

@@ -22,9 +22,8 @@ docker compose up --build
 
 Use `--build` so the image is rebuilt from your checkout; without it, a previously built or pulled image may be reused
 that does not match the code (see [BUILD.md](BUILD.md#building-amt-with-containers)). Once all services started (can
-take 1 minute) you can reach the site at http://localhost:8070. Add `127.0.0.1 keycloak` to your `/etc/hosts` once and
-log in with `demo` / `demo`. See [BUILD.md](BUILD.md#local-authentication-with-keycloak) for how the local Keycloak
-works.
+take 1 minute) you can reach the site at http://localhost:8070 and log in with `demo` / `demo`. See
+[BUILD.md](BUILD.md#local-authentication-with-keycloak) for how the local Keycloak works.
 
 For your own deployment you can create a compose.yml based on the repository
 [compose.yml](./compose.yml). AMT authenticates users through OIDC: either include the local Keycloak service from the
@@ -51,7 +50,7 @@ services:
             - APP_DATABASE_DB=postgres
             - OIDC_CLIENT_ID=amt-local
             - OIDC_CLIENT_SECRET=devsecret
-            - OIDC_DISCOVERY_URL=http://keycloak:8180/realms/tad/.well-known/openid-configuration
+            - OIDC_DISCOVERY_URL=http://keycloak.lvh.me:8180/realms/tad/.well-known/openid-configuration
         ports:
             - 8070:8000
         healthcheck:
@@ -73,7 +72,7 @@ services:
             - POSTGRES_PASSWORD=changethis
         healthcheck:
             test: ["CMD", "pg_isready", "-q", "-d", "amt", "-U", "amt"]
-    # Local dev identity provider (demo/demo), requires '127.0.0.1 keycloak' in /etc/hosts.
+    # Local dev identity provider (demo/demo), see BUILD.md.
     keycloak:
         image: quay.io/keycloak/keycloak:26.7
         restart: unless-stopped
@@ -82,7 +81,7 @@ services:
                 "start-dev",
                 "--import-realm",
                 "--http-port=8180",
-                "--hostname=http://keycloak:8180",
+                "--hostname=http://keycloak.lvh.me:8180",
             ]
         environment:
             - KC_BOOTSTRAP_ADMIN_USERNAME=admin
@@ -91,6 +90,10 @@ services:
             - ./keycloak/realms:/opt/keycloak/data/import:ro
         ports:
             - 8180:8180
+        networks:
+            default:
+                aliases:
+                    - keycloak.lvh.me
         healthcheck:
             test: ["CMD-SHELL", "bash -c '</dev/tcp/127.0.0.1/8180'"]
             interval: 5s

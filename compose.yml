@@ -64,7 +64,8 @@ services:
     healthcheck:
       test: ["CMD", "wget", "-O", "-", "http://localhost:8080/misc/ping"]
 
-  # Local dev identity provider (demo/demo), requires '127.0.0.1 keycloak' in /etc/hosts. See BUILD.md.
+  # Local dev identity provider (demo/demo). The hostname must resolve identically in the browser and in the
+  # container network: lvh.me resolves to 127.0.0.1 for any client, the alias makes it work in compose too.
   keycloak:
     image: quay.io/keycloak/keycloak:26.7
     restart: unless-stopped
@@ -73,7 +74,7 @@ services:
         "start-dev",
         "--import-realm",
         "--http-port=8180",
-        "--hostname=http://keycloak:8180",
+        "--hostname=http://keycloak.lvh.me:8180",
       ]
     environment:
       - KC_BOOTSTRAP_ADMIN_USERNAME=admin
@@ -82,6 +83,10 @@ services:
       - ./keycloak/realms:/opt/keycloak/data/import:ro
     ports:
       - 8180:8180
+    networks:
+      default:
+        aliases:
+          - keycloak.lvh.me
     healthcheck:
       test: ["CMD-SHELL", "bash -c '</dev/tcp/127.0.0.1/8180'"]
       interval: 5s
