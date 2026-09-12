@@ -8,6 +8,10 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      keycloak:
+        condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
     env_file:
       - path: prod.env
         required: true
@@ -44,13 +48,13 @@ services:
       retries: 10
       start_period: 2s
     ports:
-      - 5432:5432
+      - 127.0.0.1:5432:5432
 
   db-admin:
     image: dpage/pgadmin4:8.6
     restart: unless-stopped
     ports:
-      - 8080:8080
+      - 127.0.0.1:8080:8080
     environment:
       - PGADMIN_LISTEN_PORT=${PGADMIN_LISTEN_PORT:-8080}
     env_file:
@@ -62,5 +66,69 @@ services:
     healthcheck:
       test: ["CMD", "wget", "-O", "-", "http://localhost:8080/misc/ping"]
 
+  # Local dev identity provider (demo/demo). --hostname fixes the issuer for the browser,
+  # --hostname-backchannel-dynamic points the amt container at http://keycloak:8180. See BUILD.md.
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.7
+    restart: unless-stopped
+    command:
+      [
+        "start-dev",
+        "--import-realm",
+        "--http-port=8180",
+        "--hostname=http://localhost:8180",
+        "--hostname-backchannel-dynamic=true",
+      ]
+    environment:
+      - KC_BOOTSTRAP_ADMIN_USERNAME=admin
+      - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
+    volumes:
+      - ./keycloak/realms:/opt/keycloak/data/import:ro
+    ports:
+      - 127.0.0.1:8180:8180
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c '</dev/tcp/127.0.0.1/8180'"]
+      interval: 5s
+      timeout: 2s
+      retries: 30
+      start_period: 20s
+
+  # Local dev object storage for measure attachments. See BUILD.md.
+  minio:
+    image: minio/minio:RELEASE.2025-09-07T16-13-09Z
+    restart: unless-stopped
+    command: server /data
+    env_file:
+      - path: prod.env
+        required: true
+    volumes:
+      - app-object-data:/data
+    ports:
+      - 127.0.0.1:9000:9000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 5s
+
+  # The bucket must exist before amt starts, otherwise ObjectStorageService raises on construction.
+  minio-init:
+    image: minio/minio:RELEASE.2025-09-07T16-13-09Z
+    restart: "no"
+    depends_on:
+      minio:
+        condition: service_healthy
+    env_file:
+      - path: prod.env
+        required: true
+    entrypoint:
+      - sh
+      - -c
+      - |
+        mc alias set local http://minio:9000 "$$MINIO_ROOT_USER" "$$MINIO_ROOT_PASSWORD" &&
+        mc mb --ignore-existing local/"$$OBJECT_STORE_BUCKET_NAME"
+
 volumes:
   app-db-data:
+  app-object-data:

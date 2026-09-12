@@ -27,6 +27,10 @@ ENV PYTHONUNBUFFERED=1 \
     POETRY_HOME='/usr/local' \
     NVM_DIR=/usr/local/nvm
 
+# Fail a RUN when a piped download fails. Under the default /bin/sh a broken "curl | bash"
+# still exits 0, which turns a network error into a confusing "not found" several lines later.
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 # Upgrade OS packages so base-image CVEs are patched on every rebuild,
 # not frozen at the digest the python:slim tag pointed to.
 RUN apt-get update \
@@ -99,6 +103,10 @@ ENV PYTHONUNBUFFERED=1 \
     POETRY_VIRTUALENVS_IN_PROJECT=true \
     POETRY_NO_INTERACTION=1 \
     POETRY_HOME='/usr/local'
+
+# Fail a RUN when a piped download fails. Under the default /bin/sh a broken "curl | bash"
+# still exits 0, which turns a network error into a confusing "not found" several lines later.
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 RUN apt-get update \
     && apt-get upgrade -y \
