@@ -1,0 +1,39 @@
+{
+  "realm": "tad",
+  "enabled": true,
+  "displayName": "AMT lokaal",
+  "users": [
+    {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "username": "demo",
+      "enabled": true,
+      "firstName": "Demo",
+      "lastName": "Gebruiker",
+      "email": "demo@example.com",
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "demo",
+          "temporary": false
+        }
+      ]
+    }
+  ],
+  "clients": [
+    {
+      "clientId": "amt-local",
+      "name": "AMT (local development)",
+      "enabled": true,
+      "publicClient": false,
+      "secret": "devsecret",
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "redirectUris": ["http://localhost:8070/*", "http://127.0.0.1:8070/*"],
+      "webOrigins": ["http://localhost:8070", "http://127.0.0.1:8070"],
+      "attributes": {
+        "post.logout.redirect.uris": "http://localhost:8070/*##http://127.0.0.1:8070/*"
+      }
+    }
+  ]
+}

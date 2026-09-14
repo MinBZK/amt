@@ -67,8 +67,14 @@ docker compose build
 To run the application you use this command:
 
 ```shell
-docker compose up
+docker compose up --build
 ```
+
+`--build` rebuilds the AMT image from your checkout. Without it, compose reuses an existing `ghcr.io/minbzk/amt:latest`
+image; if that image is older than the database migrations in your checkout, AMT fails to start with an alembic
+`Can't locate revision identified by ...` error. If your local database volume was migrated by a different branch or
+image than the one you are running, rebuild alone is not enough: reset the database with `docker compose down -v`
+(this deletes all local data, including users and algorithms) and start again.
 
 ### Suggested development ENVIRONMENT settings
 
@@ -77,6 +83,31 @@ To use a development environment during local development, you can use the follo
 ```shell
 export AUTO_CREATE_SCHEMA=true
 ```
+
+### Local authentication with Keycloak
+
+`docker compose up` starts a Keycloak in dev mode that imports `keycloak/realms/tad.json`: realm `tad`, client
+`amt-local`, user `demo` / `demo`. Open http://localhost:8070 and log in; nothing else needs configuring. The admin
+console is at http://localhost:8180/admin (`admin` / `admin`).
+
+The realm is only imported into an empty database and Keycloak's H2 survives a restart, so run `docker compose down`
+to re-import after editing the realm file or to undo changes made in the admin console. That leaves the AMT database
+alone; only `docker compose down -v` clears it.
+
+Browser and container reach Keycloak under different names, so `--hostname` pins the issuer to the published port and
+`--hostname-backchannel-dynamic` lets AMT use `http://keycloak:8180` for tokens and JWKS. No `/etc/hosts` entry needed.
+
+For production, override `OIDC_CLIENT_ID`, `OIDC_CLIENT_SECRET` and `OIDC_DISCOVERY_URL`.
+
+### Local object storage with MinIO
+
+AMT stores files attached to measures in S3-compatible storage, so compose also starts MinIO with a `minio-init`
+one-shot that creates the `amt` bucket before AMT starts. Files live in the `app-object-data` volume and are cleared
+by `docker compose down -v`.
+
+MinIO is a local dev dependency only. Recent community builds ship no web console, so port 9000 serves the S3 API
+only. For production, override `OBJECT_STORE_URL`, `OBJECT_STORE_USER`, `OBJECT_STORE_PASSWORD` and
+`OBJECT_STORE_BUCKET_NAME`.
 
 ## Database
 

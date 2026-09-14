@@ -22,6 +22,15 @@ See [contributing docs](CONTRIBUTING.md)
 
 See [build docs](BUILD.md)
 
+## Quick start with Docker Compose
+
+```shell
+docker compose up --build
+```
+
+This starts the full product locally, including a self-contained Keycloak dev server for authentication (single
+container, no external database). Open http://localhost:8070 and log in with `demo` / `demo`. See [build docs](BUILD.md#local-authentication-with-keycloak) for details.
+
 ## How to run AMT
 
 See [usage docs](USAGE.md)
