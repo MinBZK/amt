@@ -107,7 +107,7 @@ services:
             start_period: 20s
     # Local dev object storage for measure attachments, see BUILD.md.
     minio:
-        image: minio/minio:RELEASE.2025-09-07T16-13-09Z
+        image: quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z
         restart: unless-stopped
         command: server /data
         environment:
@@ -122,7 +122,7 @@ services:
                 ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
     # One-shot: the bucket must exist before amt starts.
     minio-init:
-        image: minio/minio:RELEASE.2025-09-07T16-13-09Z
+        image: quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z
         restart: "no"
         depends_on:
             minio:
