@@ -1,3 +1,4 @@
+import asyncio
 import json
 import logging
 import sys
@@ -67,8 +68,8 @@ class AlgorithmsService(BaseService):
         if algorithm_new.template_id:
             template_files = get_template_files()
             if algorithm_new.template_id in template_files:
-                with open(Path(template_path) / Path(template_files[algorithm_new.template_id]["value"])) as f:
-                    system_card_from_template = json.load(f)
+                template_file = Path(template_path) / Path(template_files[algorithm_new.template_id]["value"])
+                system_card_from_template = json.loads(await asyncio.to_thread(template_file.read_text))
             else:
                 raise AMTNotFound()
 

@@ -1,5 +1,7 @@
+import asyncio
+
 import pytest
-from amt.server import create_app
+from amt.server import cleanup_sessions_task, create_app
 from fastapi import Request, Response
 from fastapi.exceptions import RequestValidationError
 from pytest_mock import MockerFixture
@@ -105,3 +107,21 @@ async def test_app_lifespan(mocker: MockerFixture) -> None:
         # then
         mock_check_db.assert_called_once()
         mock_init_db.assert_called_once()
+
+
+@pytest.mark.asyncio
+async def test_cleanup_sessions_task_propagates_cancellation(mocker: MockerFixture) -> None:
+    """Cancelling the background task must surface as CancelledError.
+
+    The lifespan cancels it and awaits it inside contextlib.suppress(CancelledError),
+    which only works if the task lets the cancellation through instead of returning.
+    """
+    session_store = mocker.Mock()
+    task = asyncio.create_task(cleanup_sessions_task(session_store, interval=3600))
+    await asyncio.sleep(0)  # let the task reach its first await
+
+    task.cancel()
+
+    with pytest.raises(asyncio.CancelledError):
+        await task
+    assert task.cancelled()
