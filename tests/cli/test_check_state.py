@@ -66,6 +66,7 @@ def test_cli(capsys: pytest.CaptureFixture[str], system_card: SystemCard, mocker
     with capsys.disabled() as _:
         result = runner.invoke(get_tasks_by_priority, ["urn:instrument:assessment", "example/system_test_card.yaml"])  # type: ignore
         assert "urn:instrument:assessment:task2" in result.output
+        assert result.exit_code == 0
 
 
 def test_cli_with_exception(capsys: pytest.CaptureFixture[str], system_card: SystemCard, mocker: MockerFixture):
@@ -75,6 +76,7 @@ def test_cli_with_exception(capsys: pytest.CaptureFixture[str], system_card: Sys
     with capsys.disabled() as _:
         result = runner.invoke(get_tasks_by_priority, ["urn:instrument:assessment", "example/system_test_card.yaml"])  # type: ignore
         assert "Sorry, an error occurred" in result.output
+        assert result.exit_code != 0
 
 
 def test_cli_with_exception_yaml(capsys: pytest.CaptureFixture[str], system_card: SystemCard, mocker: MockerFixture):
@@ -84,3 +86,4 @@ def test_cli_with_exception_yaml(capsys: pytest.CaptureFixture[str], system_card
     with capsys.disabled() as _:
         result = runner.invoke(get_tasks_by_priority, ["urn:instrument:assessment", "example/system_test_card.yaml"])  # type: ignore
         assert "Sorry, an error occurred; yaml could not be parsed:" in result.output
+        assert result.exit_code != 0
