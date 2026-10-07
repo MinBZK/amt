@@ -47,7 +47,7 @@ python-multipart = "^0.0.32"
 minio = "^7.2.20"
 poetry = "^2.4.1"
 vcrpy = "^8.3.0"
-urllib3 = "^2.7.0"
+urllib3 = "^2.8.0"
 jinja-roos-components = {git = "https://github.com/RijksICTGilde/jinja-roos-components.git", branch = "table-and-more-conversion"}
 aenum = "^3.1.17"
 python-dateutil = "^2.9.0.post0"
