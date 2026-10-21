@@ -77,19 +77,3 @@ jobs:
           deployment-name: productie
           component: component-1
           image: ghcr.io/minbzk/amt:${{ inputs.image_tag }}@${{ steps.get_package_hash.outputs.container_id }}
-
-  notifyMattermost:
-    runs-on: ubuntu-latest
-    needs: [deploy]
-    if: ${{ success() && inputs.environment == 'production' }}
-    steps:
-      - uses: mattermost/action-mattermost-notify@v2.1.0
-        with:
-          MATTERMOST_WEBHOOK_URL: ${{ secrets.MM_WEBHOOK_RELEASES }}
-          TEXT: |
-            :sparkles: A new version of AMT has been released on production by ${{ github.triggering_actor }} :sparkles:.
-
-            It will be available within a few minutes on:
-            - https://amt.rijksapp.nl/
-            - https://amt.bzk.rijksapp.nl/
-          MATTERMOST_USERNAME: ${{ github.triggering_actor }}

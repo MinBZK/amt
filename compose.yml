@@ -10,8 +10,8 @@ services:
         condition: service_healthy
       keycloak:
         condition: service_healthy
-      minio-init:
-        condition: service_completed_successfully
+      minio:
+        condition: service_healthy
     env_file:
       - path: prod.env
         required: true
@@ -94,10 +94,17 @@ services:
       start_period: 20s
 
   # Local dev object storage for measure attachments. See BUILD.md.
+  # The Rijks ICT Gilde mirror, because docker.io/minio and quay.io/minio refuse pulls.
+  # It is amd64-only and ships neither curl, grep nor mc, hence the pure-bash healthcheck and the
+  # bucket created as a directory before the server starts (AMT needs it on startup).
   minio:
-    image: quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z
+    image: ghcr.io/minbzk/base-images/minio:RELEASE.2025-07-23T15-54-02Z
+    platform: linux/amd64
     restart: unless-stopped
-    command: server /data
+    entrypoint:
+      - bash
+      - -c
+      - mkdir -p /data/"$$OBJECT_STORE_BUCKET_NAME" && exec minio server /data
     env_file:
       - path: prod.env
         required: true
@@ -106,28 +113,16 @@ services:
     ports:
       - 127.0.0.1:9000:9000
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      test:
+        - CMD-SHELL
+        - >-
+          bash -c 'exec 3<>/dev/tcp/127.0.0.1/9000 &&
+          printf "GET /minio/health/live HTTP/1.1\r\nHost: localhost\r\nConnection: close\r\n\r\n" >&3 &&
+          read -r _ code _ <&3 && [ "$$code" = 200 ]'
       interval: 5s
       timeout: 3s
       retries: 20
       start_period: 5s
-
-  # The bucket must exist before amt starts, otherwise ObjectStorageService raises on construction.
-  minio-init:
-    image: quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z
-    restart: "no"
-    depends_on:
-      minio:
-        condition: service_healthy
-    env_file:
-      - path: prod.env
-        required: true
-    entrypoint:
-      - sh
-      - -c
-      - |
-        mc alias set local http://minio:9000 "$$MINIO_ROOT_USER" "$$MINIO_ROOT_PASSWORD" &&
-        mc mb --ignore-existing local/"$$OBJECT_STORE_BUCKET_NAME"
 
 volumes:
   app-db-data:
