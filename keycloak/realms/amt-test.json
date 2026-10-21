@@ -1,0 +1,38 @@
+{
+  "realm": "amt-test",
+  "enabled": true,
+  "displayName": "AMT e2e tests",
+  "users": [
+    {
+      "id": "8eacad1c-594f-4507-bbd1-b162340d5984",
+      "username": "default",
+      "enabled": true,
+      "firstName": "Default",
+      "lastName": "User",
+      "email": "default@amt.nl",
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "default",
+          "temporary": false
+        }
+      ]
+    }
+  ],
+  "clients": [
+    {
+      "clientId": "AMT",
+      "name": "AMT (e2e tests)",
+      "enabled": true,
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "redirectUris": ["http://127.0.0.1:3462/*"],
+      "webOrigins": ["http://127.0.0.1:3462"],
+      "attributes": {
+        "post.logout.redirect.uris": "http://127.0.0.1:3462/*"
+      }
+    }
+  ]
+}
