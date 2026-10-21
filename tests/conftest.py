@@ -3,6 +3,8 @@ import hashlib
 import logging
 import os
 import re
+import signal
+import sys
 from collections.abc import AsyncIterator, Callable, Generator
 from multiprocessing import Process
 from pathlib import Path
@@ -43,6 +45,14 @@ logging.getLogger("httpcore").setLevel(logging.WARNING)
 # ONCE mode plays back existing cassettes but blocks new unrecorded requests (safer for CI)
 amt_vcr = vcr.VCR(ignore_hosts=["127.0.0.1", "localhost", "testserver"], record_mode=RecordMode.ONCE)
 
+# The e2e server replays the Task Registry, because the runners often cannot reach it. Only that host
+# is recorded: before_record_request returns None for anything else, so the login stays live.
+E2E_CASSETTE = "tests/fixtures/vcr_cassettes/e2e_task_registry.yml"
+e2e_vcr = vcr.VCR(
+    record_mode=RecordMode.ONCE,
+    before_record_request=lambda request: request if request.host == "task-registry.rijksapp.nl" else None,  # pyright: ignore[reportUnknownLambdaType, reportUnknownMemberType]
+)
+
 global_e2e_engine: AsyncEngine | None = None
 
 
@@ -62,7 +72,10 @@ def run_server_uvicorn(database_file: Path, host: str = "127.0.0.1", port: int =
 
     reset_engine()
     app = create_app()
-    uvicorn.run(app, host=host, port=port, loop="asyncio")
+    # uvicorn re-raises SIGTERM after its graceful shutdown; exiting through Python lets the cassette save
+    signal.signal(signal.SIGTERM, lambda *_: sys.exit(0))  # pyright: ignore[reportUnknownLambdaType]
+    with e2e_vcr.use_cassette(E2E_CASSETTE, allow_playback_repeats=True):  # pyright: ignore[reportUnknownMemberType]
+        uvicorn.run(app, host=host, port=port, loop="asyncio")
 
 
 @pytest.fixture(scope="session")
@@ -86,6 +99,7 @@ async def setup_db_and_server(
     process.start()
     yield "http://127.0.0.1:3462"
     process.terminate()
+    process.join(timeout=10)  # let uvicorn shut down so the cassette gets written
 
     async with engine.begin() as conn:
         await conn.run_sync(metadata.drop_all)
