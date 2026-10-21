@@ -59,7 +59,7 @@ async def cleanup_sessions_task(session_store: SessionStore, interval: int) -> N
             active_count = await session_store.count()
             logger.info(f"Session stats: {active_count} active, {expired_count} expired and removed")
         except asyncio.CancelledError:
-            break
+            raise
         except Exception:
             logger.exception("Error during session cleanup")
 
