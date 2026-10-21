@@ -29,7 +29,7 @@ For your own deployment you can create a compose.yml based on the repository
 [compose.yml](./compose.yml). AMT authenticates users through OIDC: either include the local Keycloak service from the
 repository compose file (it imports the realm from `keycloak/realms/tad.json`, so copy that directory too), or set
 `OIDC_CLIENT_ID`, `OIDC_CLIENT_SECRET` and `OIDC_DISCOVERY_URL` to your own identity provider. It also
-needs S3-compatible object storage for measure attachments: include the `minio` and `minio-init` services
+needs S3-compatible object storage for measure attachments: include the `minio` service
 from the repository compose file, or point `OBJECT_STORE_*` at your own.
 
 Example of a compose.yml file for a local run (this is not a secure example)
@@ -44,8 +44,8 @@ services:
                 condition: service_healthy
             keycloak:
                 condition: service_healthy
-            minio-init:
-                condition: service_completed_successfully
+            minio:
+                condition: service_healthy
         environment:
             - ENVIRONMENT=local
             - APP_DATABASE_SCHEME=postgresql
@@ -107,9 +107,12 @@ services:
             start_period: 20s
     # Local dev object storage for measure attachments, see BUILD.md.
     minio:
-        image: quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z
+        image: ghcr.io/minbzk/base-images/minio:RELEASE.2025-07-23T15-54-02Z
+        platform: linux/amd64
         restart: unless-stopped
-        command: server /data
+        # The bucket must exist before amt starts; MinIO serves a top-level directory as a bucket.
+        entrypoint:
+            ["bash", "-c", "mkdir -p /data/amt && exec minio server /data"]
         environment:
             - MINIO_ROOT_USER=amt
             - MINIO_ROOT_PASSWORD=changeme
@@ -119,20 +122,10 @@ services:
             - 127.0.0.1:9000:9000
         healthcheck:
             test:
-                ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
-    # One-shot: the bucket must exist before amt starts.
-    minio-init:
-        image: quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z
-        restart: "no"
-        depends_on:
-            minio:
-                condition: service_healthy
-        entrypoint:
-            [
-                "sh",
-                "-c",
-                "mc alias set local http://minio:9000 amt changeme && mc mb --ignore-existing local/amt",
-            ]
+                [
+                    "CMD-SHELL",
+                    "bash -c 'exec 3<>/dev/tcp/127.0.0.1/9000 && printf \"GET /minio/health/live HTTP/1.1\\r\\nHost: localhost\\r\\nConnection: close\\r\\n\\r\\n\" >&3 && read -r _ code _ <&3 && [ \"$$code\" = 200 ]'",
+                ]
 
 volumes:
     app-db-data:
