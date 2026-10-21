@@ -253,10 +253,14 @@ async def create_db(new_db: str) -> str:
     logger.info(f"Creating database {new_db}")
     user = os.getenv("APP_DATABASE_USER", "amt")
 
-    async with engine.connect() as conn:
-        await conn.execute(text(f"DROP DATABASE IF EXISTS {new_db};"))  # type: ignore
-        await conn.execute(text(f"CREATE DATABASE {new_db} OWNER {user};"))  # type: ignore
-        await conn.commit()
+    try:
+        async with engine.connect() as conn:
+            await conn.execute(text(f"DROP DATABASE IF EXISTS {new_db};"))  # type: ignore
+            await conn.execute(text(f"CREATE DATABASE {new_db} OWNER {user};"))  # type: ignore
+            await conn.commit()
+    finally:
+        # Every test creates a database, so a pooled connection left open here fills max_connections
+        await engine.dispose()
 
     path = Path(url)
     return str(path.parent / new_db).replace("postgresql+asyncpg:/", "postgresql+asyncpg://")
@@ -304,6 +308,7 @@ async def db(
         db = DatabaseTestUtils(session, database_file)
         yield db
         await db.close()
+    await engine.dispose()
 
 
 def do_e2e_login(page: Page):

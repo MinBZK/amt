@@ -169,6 +169,7 @@ authorized_licenses = [
     "Artistic",
     "BSD",
     "BSD-3-Clause",
+    "BSD-2-Clause AND Unlicense",
     "GPL-2.0-or-later",
     "GNU General Public License v2 or later (GPLv2+)",
     "GNU General Public License v3 or later (GPLv3+)",
