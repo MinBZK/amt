@@ -101,8 +101,9 @@ For production, override `OIDC_CLIENT_ID`, `OIDC_CLIENT_SECRET` and `OIDC_DISCOV
 
 ### Local object storage with MinIO
 
-AMT stores files attached to measures in S3-compatible storage, so compose also starts MinIO with a `minio-init`
-one-shot that creates the `amt` bucket before AMT starts. Files live in the `app-object-data` volume and are cleared
+AMT stores files attached to measures in S3-compatible storage, so compose also starts MinIO and creates the `amt`
+bucket before AMT starts. The image comes from the Rijks ICT Gilde mirror `ghcr.io/minbzk/base-images/minio`, because
+MinIO no longer serves pulls from Docker Hub or quay.io. Files live in the `app-object-data` volume and are cleared
 by `docker compose down -v`.
 
 MinIO is a local dev dependency only. Recent community builds ship no web console, so port 9000 serves the S3 API
