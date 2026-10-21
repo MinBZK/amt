@@ -8,6 +8,7 @@ import sys
 from collections.abc import AsyncIterator, Callable, Generator
 from multiprocessing import Process
 from pathlib import Path
+from types import FrameType
 from typing import Any
 
 import httpx
@@ -56,6 +57,10 @@ e2e_vcr = vcr.VCR(
 global_e2e_engine: AsyncEngine | None = None
 
 
+def _exit_on_sigterm(signum: int, frame: FrameType | None) -> None:
+    sys.exit(0)
+
+
 def run_server_uvicorn(database_file: Path, host: str = "127.0.0.1", port: int = 3462) -> None:
     os.environ["APP_DATABASE_FILE"] = "/" + str(database_file)
     os.environ["AUTO_CREATE_SCHEMA"] = "true"
@@ -73,7 +78,7 @@ def run_server_uvicorn(database_file: Path, host: str = "127.0.0.1", port: int =
     reset_engine()
     app = create_app()
     # uvicorn re-raises SIGTERM after its graceful shutdown; exiting through Python lets the cassette save
-    signal.signal(signal.SIGTERM, lambda *_: sys.exit(0))  # pyright: ignore[reportUnknownLambdaType]
+    signal.signal(signal.SIGTERM, _exit_on_sigterm)
     with e2e_vcr.use_cassette(E2E_CASSETTE, allow_playback_repeats=True):  # pyright: ignore[reportUnknownMemberType]
         uvicorn.run(app, host=host, port=port, loop="asyncio")
 
