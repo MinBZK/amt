@@ -47,7 +47,7 @@ async def general_exception_handler(request: Request, exc: Exception) -> HTMLRes
     if isinstance(exc, StarletteHTTPException) and exc.status_code == status.HTTP_404_NOT_FOUND:
         logger.warning("general_exception_handler %s: %s %s", exception_name, exc, request.url.path)
     else:
-        logger.exception("general_exception_handler %s: %s %s", exception_name, exc, request.url.path)
+        logger.error("general_exception_handler %s: %s %s", exception_name, exc, request.url.path, exc_info=exc)
 
     translations = get_current_translation(request)
 

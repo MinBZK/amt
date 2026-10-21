@@ -24,7 +24,7 @@ repos:
       - id: ruff-format
         args: [--config, pyproject.toml]
   - repo: https://github.com/djlint/djLint
-    rev: v1.46.6
+    rev: v1.42.0 # 1.46 reindents trans blocks, which changes the msgids
     hooks:
       - id: djlint-reformat-jinja
   - repo: local

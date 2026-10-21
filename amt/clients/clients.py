@@ -52,7 +52,7 @@ class TaskRegistryAPIClient(APIClient):
     async def get_task_by_urn(self, task_type: TaskType, urn: str, version: str = "latest") -> dict[str, Any]:
         response_data = await self._make_request(f"{task_type.value}/urn/{urn}", params={"version": version})
         if "urn" not in response_data:
-            logger.exception(f"Invalid task {task_type.value} fetched: key 'urn' must occur in task {task_type.value}.")
+            logger.error(f"Invalid task {task_type.value} fetched: key 'urn' must occur in task {task_type.value}.")
             raise AMTInstrumentError()
         return response_data
 

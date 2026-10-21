@@ -78,7 +78,7 @@ class ObjectStorageService:
         Validate bucket existence, raising an error if not found.
         """
         if not self.client.bucket_exists(self.bucket_name):
-            logger.exception("Bucket in object storage does not exist.")
+            logger.error("Bucket in object storage does not exist.")
             raise AMTStorageError()
 
     def _generate_destination_path(
@@ -123,7 +123,7 @@ class ObjectStorageService:
         where the file is stored.
         """
         if not file.size:
-            logger.exception("User provided upload file is empty.")
+            logger.error("User provided upload file is empty.")
             raise AMTStorageError()
 
         destination_path = self._generate_destination_path(organization_id, algorithm_id)

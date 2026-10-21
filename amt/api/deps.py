@@ -52,7 +52,7 @@ def get_request_permissions(request: Request) -> dict[str, list[AuthorizationVer
 
 def custom_context_processor(
     request: Request,
-) -> dict[str, str | None | list[str] | dict[str, str] | list[NavigationItem] | type[WebFormFieldType]]:
+) -> dict[str, str | list[str] | dict[str, str] | list[NavigationItem] | type[WebFormFieldType] | None]:
     lang = get_requested_language(request)
     translations = get_current_translation(request)
     permissions = getattr(request.state, "permissions", {})

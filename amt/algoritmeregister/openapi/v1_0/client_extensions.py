@@ -30,9 +30,9 @@ class ActiesApiExtensions:
         organisation_id: StrictStr,
         algorithm_id: StrictStr,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
