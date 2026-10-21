@@ -205,8 +205,19 @@ jobs:
         run: |
           npm run build
 
+      # The e2e login against the shared test Keycloak timed out from the runners, so it gets its own.
+      - name: Start Keycloak for the e2e login
+        run: |
+          docker run -d --name keycloak -p 127.0.0.1:8180:8180 \
+            -v "$PWD/keycloak/realms:/opt/keycloak/data/import:ro" \
+            quay.io/keycloak/keycloak:26.7 start-dev --import-realm --http-port=8180
+          timeout 180 bash -c 'until curl -sf http://127.0.0.1:8180/realms/amt-test/.well-known/openid-configuration >/dev/null; do sleep 2; done' \
+            || { docker logs keycloak; exit 1; }
+
       - name: Run pytest
         run: TZ=UTC poetry run coverage run -m pytest
+        env:
+          E2E_OIDC_DISCOVERY_URL: http://127.0.0.1:8180/realms/amt-test/.well-known/openid-configuration
 
       - name: Upload playwright tracing
         if: failure()
