@@ -33,7 +33,7 @@
             <a>{% trans %}Download as YAML{% endtrans %}</a>
           </div>
         </div>
-        {% if permission("algorithm/" ~ algorithm.id, 'Delete', permissions) == True %}
+        {% if permission("algorithm/" ~ algorithm.id, "Delete", permissions) == True %}
           <a onclick="amt.openModal('delete-modal')">
             <span class="utrecht-icon rvo-icon rvo-icon-verwijderen rvo-icon--xl rvo-icon--hemelblauw rvo-link__icon--before"
                   role="img"

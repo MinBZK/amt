@@ -13,12 +13,12 @@
     {% set relative_resource_path = path %}
   {% endif %}
   {% set full_resource_path = base_resource_path + relative_resource_path %}
-  {% if isinstance(value, 'IterMixin') or isinstance(value, 'dict') %}
+  {% if isinstance(value, "IterMixin") or isinstance(value, "dict") %}
     <div class="{% if depth == 1 %}margin-bottom-large{% endif %}">
       {% if is_editable_resource(full_resource_path, editables) %}
         {{ editable(algorithm, relative_resource_path, full_resource_path, None, has_permission) }}
       {% else %}
-        {% if value.__class__.__name__ == 'dict' %}
+        {% if value.__class__.__name__ == "dict" %}
           {% set value = value.items() %}
         {% endif %}
         {% for subkey, subvalue in value %}
@@ -32,7 +32,7 @@
         {% endfor %}
       {% endif %}
     </div>
-  {% elif isinstance(value, 'list') %}
+  {% elif isinstance(value, "list") %}
     {% if key == "assessments" %}
       <ul>
         {% for assessment in value %}

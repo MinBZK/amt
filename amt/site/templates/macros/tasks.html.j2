@@ -43,7 +43,7 @@
         {% trans %}Unknown{% endtrans %}
       {% endif %}
     </h5>
-    {% if permission(permission_path, 'Update', permissions) == True %}
+    {% if permission(permission_path, "Update", permissions) == True %}
       {% set column_class = "progress-cards-container sortable" %}
     {% else %}
       {% set column_class = "progress-cards-container" %}
@@ -91,7 +91,7 @@
             {% if hasattr(task, "type_object.users") and task.type_object.users | length > 0 %}
               {{ macros.user_avatars(task.type_object.users) }}
             {% endif %}
-            {% if permission(permission_path, 'Update', permissions) == True %}
+            {% if permission(permission_path, "Update", permissions) == True %}
               <div style="float: right; margin-top: 0.4em;">
                 <a class="rvo-link rvo-link--normal rvo-link--with-icon"
                    hx-trigger="click"

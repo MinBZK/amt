@@ -5,7 +5,7 @@
     <div>
       <h1 class="utrecht-heading-1">{% trans %}Members{% endtrans %}</h1>
     </div>
-    {% if permission(permission_path, 'Update', permissions) == True %}
+    {% if permission(permission_path, "Update", permissions) == True %}
       <div style="margin-left: auto">
         <button class="utrecht-button utrecht-button--primary-action utrecht-button--rvo-md"
                 hx-trigger="click"
@@ -117,7 +117,7 @@
     {% if members|length > 0 %}
       <table id="search-results-table" class="rvo-table margin-top-large">
         <colgroup>
-          {% if permission(permission_path, 'Update', permissions) == True %}
+          {% if permission(permission_path, "Update", permissions) == True %}
             <col style="width: 25%" />
             <col style="width: 45%" />
             <col style="width: 30%" />
@@ -133,8 +133,9 @@
               {{ table_row.sort_button('name', sort_by, base_href + "/members") }}
             </th>
             <th scope="col" class="rvo-table-header">{% trans %}Role{% endtrans %}</th>
-            {% if permission(permission_path, 'Update', permissions) == True %}
-              <th scope="col" class="rvo-table-header">{#                                    {% trans %}Action{% endtrans %}#}</th>
+            {% if permission(permission_path, "Update", permissions) == True %}
+              <th scope="col"
+                  class="rvo-table-header">{#                                    {% trans %}Action{% endtrans %}#}</th>
             {% endif %}
           </tr>
         </thead>

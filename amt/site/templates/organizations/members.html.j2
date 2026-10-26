@@ -6,7 +6,7 @@
     {% if algorithm is defined %}{{ tabs.show_algorithm_header() }}{% endif %}
     {{ tabs.show_tabs(tab_items) }}
     <div class="rvo-content" id="search-members-container">
-      {% include 'organizations/parts/members_results.html.j2' %}
+      {% include "organizations/parts/members_results.html.j2" %}
     </div>
   </div>
   <template id="confirm-modal-template">

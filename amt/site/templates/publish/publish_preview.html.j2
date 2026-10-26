@@ -1,11 +1,12 @@
-{% extends 'algorithms/details_base.html.j2' %}
+{% extends "algorithms/details_base.html.j2" %}
 {% from "macros/editable_macros.html.j2" import editable with context %}
 {% block detail_content %}
   <c-max-width-layout size="lg">
     <c-grid columns="two" division="1fr 4fr">
       <c-progress-tracker :steps="steps" />
       <div>
-        <c-heading type="h2" class="rvo-layout-margin-vertical--xl">{% trans %}Preview & verify{% endtrans %}</c-heading>
+        <c-heading type="h2"
+                   class="rvo-layout-margin-vertical--xl">{% trans %}Preview & verify{% endtrans %}</c-heading>
         <c-form-fieldset>
           <c-p>
             {% trans %}Below you can see the complete preview of the publication.{% endtrans %}
