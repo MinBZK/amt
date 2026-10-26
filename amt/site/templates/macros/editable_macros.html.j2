@@ -60,7 +60,7 @@
   {% endif %}
 {% endmacro %}
 {% macro display_value(key, value) %}
-  {% if isinstance(value, 'WebFormOption') %}
+  {% if isinstance(value, "WebFormOption") %}
     {% set value = value.display_value %}
   {% endif %}
   {% if key == "uri" or key == "link" or key == "upl" %}
@@ -73,7 +73,7 @@
   {% elif key == "urn" %}
     <a class="rvo-link rvo-link--normal"
        href="https://task-registry.rijksapp.nl/urns/?version=latest&urn={{ value }}">{{ value }}</a>
-  {% elif value is string and value.startswith('http') %}
+  {% elif value is string and value.startswith("http") %}
     <a href="{{ value }}" target="_blank" rel="noopener noreferrer">{{ value }}</a>
   {% elif value is iterable and value is not string %}
     {{ value|join(", ") }}

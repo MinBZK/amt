@@ -8,7 +8,7 @@
     <div>
       <h1 class="utrecht-heading-1">{% trans %}Algorithms{% endtrans %}</h1>
     </div>
-    {% if permission(permission_path, 'Create', permissions) == True %}
+    {% if permission(permission_path, "Create", permissions) == True %}
       <div style="margin-left: auto">
         <a data-navigation="button:/algorithms/new"
            href="/algorithms/new{% if organization_id is defined %}?organization_id={{ organization_id }}{% endif %}">
@@ -97,5 +97,5 @@
   </div>
 </form>
 {#53px = 45px (from the select wrapper) + an xs rvo alert padding of 8px#}
-<div id="algorithm-search-results" style="margin-top: -53px">{% include 'parts/filter_list.html.j2' %}</div>
+<div id="algorithm-search-results" style="margin-top: -53px">{% include "parts/filter_list.html.j2" %}</div>
 <div id="errorContainer"></div>

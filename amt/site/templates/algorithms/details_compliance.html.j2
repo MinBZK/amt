@@ -1,4 +1,4 @@
-{% extends 'algorithms/details_base.html.j2' %}
+{% extends "algorithms/details_base.html.j2" %}
 {% import "macros/form_macros.html.j2" as macros with context %}
 {% block detail_content %}
   <div class="rvo-accordion">
@@ -17,7 +17,7 @@
             {{ requirement.name }}
           </h3>
           <div class="rvo-accordion-teaser">
-            <div class="rvo-layout rvo-margin-block-start--sm rvo-margin-block-end--sm ">{{ requirement.description }}</div>
+            <div class="rvo-layout rvo-margin-block-start--sm rvo-margin-block-end--sm">{{ requirement.description }}</div>
             <div class="rvo-layout-row rvo-layout-gap--sm">
               {% if completed_measures_count == 0 %}
                 <div class="rvo-status-indicator rvo-status-indicator--hemelblauw"></div>
@@ -50,7 +50,7 @@
               <div class="rvo-layout-column">
                 <h4 class="utrecht-heading-4 rvo-heading--no-margins">{{ loop.index }}. {{ measure.name }}</h4>
                 <p class="rvo-text">{{ measure.value }}</p>
-                {% if permission(permission_path, 'Update', permissions) == True %}
+                {% if permission(permission_path, "Update", permissions) == True %}
                   <a class="rvo-link rvo-link--normal rvo-link--with-icon"
                      hx-trigger="click"
                      hx-target="#dynamic-modal-content"
@@ -71,5 +71,5 @@
       </details>
     {% endfor %}
   </div>
-  <script type="text/javascript">amt.showRequirementDetails();</script>
+  <script>amt.showRequirementDetails();</script>
 {% endblock %}

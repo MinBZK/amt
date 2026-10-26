@@ -67,13 +67,13 @@
       {{ user.name }}
     </td>
     <td class="rvo-table-cell">
-      {% if permission(permission_path, 'Update', permissions) == True %}
+      {% if permission(permission_path, "Update", permissions) == True %}
         {{ editable_macro.editable_from_path("authorization/" + authorization.id|string + "/role_id", {"authorization_id": authorization.id}, True) }}
       {% else %}
         {{ ExternalFieldsTranslations.translate(role.name, request) }}
       {% endif %}
     </td>
-    {% if permission(permission_path, 'Update', permissions) == True %}
+    {% if permission(permission_path, "Update", permissions) == True %}
       <td class="rvo-table-cell">
         <span class="rvo-link rvo-link--hover rvo-link--with-icon amt-edit-link"
               onclick="amt.openConfirmModal('{% trans %}Remove member{% endtrans %} {{ user.name }}','{% trans %}Are you sure you want to remove {% endtrans %} {{ user.name }}{% trans %}?{% endtrans %}', 'hx-delete','{{ base_href }}/members/{{ user.id }}')"
@@ -100,7 +100,7 @@
       onkeyup="amt.add_field_on_enter()"
       onclick="amt.add_field(this)"
       data-value="{{ value }}"
-      class="rvo-item-list__item amt-item-list__item_as_select ">
+      class="rvo-item-list__item amt-item-list__item_as_select">
     <span style="padding-inline-start: 1em">{{ display_value }}</span>
   </li>
 {% endmacro %}
@@ -282,7 +282,7 @@
     </div>
     <div id="error-{{ field.name }}" class="htmx-error-oob"></div>
     <div id="{{ prefix }}{{ field.name }}-container" class="rvo-padding--none">
-      {% if isinstance(field.default_value, 'list') and field.default_value %}
+      {% if isinstance(field.default_value, "list") and field.default_value %}
         {% for value in field.default_value %}
           <div class="rvo-margin-block-end--md">
             <div class="rvo-layout-row rvo-layout-justify-content-space-between rvo-layout-gap--md">
@@ -426,12 +426,12 @@
     {% set vars = {'last_group': '', 'fieldset_closed': False} %}
     {% for field in form.fields %}
       {% if vars.last_group != "" and vars.last_group != field.group %}
-        {% if vars.update({'fieldset_closed': True}) %}{% endif %}
+        {% if vars.update({"fieldset_closed": True}) %}{% endif %}
         </fieldset>
         </div>
       {% endif %}
       {% if vars.last_group == "" or vars.last_group != field.group %}
-        {% if vars.update({'fieldset_closed': False}) %}{% endif %}
+        {% if vars.update({"fieldset_closed": False}) %}{% endif %}
         <div class="utrecht-form-fieldset rvo-form-fieldset rvo-layout-gap--0">
           <fieldset class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset">
             {% if form.legend %}
@@ -439,7 +439,7 @@
             {% endif %}
       {% endif %}
       {{ form_field(form.id, field) }}
-      {% if vars.update({'last_group': field.group}) %}{% endif %}
+      {% if vars.update({"last_group": field.group}) %}{% endif %}
     {% endfor %}
     {% if not vars.fieldset_closed %}
       </fieldset>

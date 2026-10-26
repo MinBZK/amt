@@ -1,4 +1,4 @@
-{% extends 'algorithms/details_base.html.j2' %}
+{% extends "algorithms/details_base.html.j2" %}
 {% from "macros/editable_macros.html.j2" import editable with context %}
 {% block detail_content %}
   {% set status_types = {
@@ -11,7 +11,8 @@
     <c-alert kind="warning" class="rvo-layout-margin-vertical--sm">
       <c-p>{% trans %}The algorithm cannot be found in the register but was previously published via AMT. It may have been removed from the register.{% endtrans %}</c-p>
       <c-p>{% trans %}The publication has now also been removed from AMT.{% endtrans %}</c-p>
-      <c-button @click="window.location='./explanation'" kind="primary">{% trans %}Publish again{% endtrans %}</c-button>
+      <c-button @click="window.location='./explanation'"
+                kind="primary">{% trans %}Publish again{% endtrans %}</c-button>
     </c-alert>
   {% endif %}
   <c-card outline="true" padding="sm">
@@ -83,11 +84,13 @@
             {% trans %}A new version of the algorithm has been submitted to the Algorithm Register and released. It still needs to be definitively published by the Algorithm Register.{% endtrans %}
           </c-alert>
         {% elif not publication %}
-          <c-button @click="window.location='./explanation'" kind="primary">{% trans %}Start publishing{% endtrans %}</c-button>
+          <c-button @click="window.location='./explanation'"
+                    kind="primary">{% trans %}Start publishing{% endtrans %}</c-button>
         {% endif %}
         {% if publication %}
           <div>
-            <c-button @click="window.location='./prepare'" kind="secondary">{% trans %}Modify publication{% endtrans %}</c-button>
+            <c-button @click="window.location='./prepare'"
+                      kind="secondary">{% trans %}Modify publication{% endtrans %}</c-button>
           </div>
         {% endif %}
       </c-layout-flow>

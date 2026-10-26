@@ -1,4 +1,4 @@
-{% extends 'layouts/base.html.j2' %}
+{% extends "layouts/base.html.j2" %}
 {% block content %}
   <div class="rvo-max-width-layout rvo-max-width-layout--lg rvo-hero">
     <div class="rvo-hero__image-container">
@@ -113,7 +113,7 @@
          style="padding: 1.5em">
       <div class="rvo-snel-naar rvo-margin-block-end--2xl">
         <h2 class="utrecht-heading-2">{% trans %}Start documenting your algorithms today{% endtrans %}</h2>
-        <div class="rvo-layout-column rvo-layout-gap--xs rvo-layout--wrap ">
+        <div class="rvo-layout-column rvo-layout-gap--xs rvo-layout--wrap">
           <span class="rvo-layout-column rvo-layout-align-content-center rvo-layout-row rvo-layout-gap--2xs">
             <span class="utrecht-icon rvo-icon rvo-icon-bevestiging rvo-icon--md rvo-status-icon-bevestiging rvo-icon--hemelblauw rvo-link__icon--before"
                   role="img"
@@ -130,7 +130,8 @@
             <span class="utrecht-icon rvo-icon rvo-icon-bevestiging rvo-icon--md rvo-status-icon-bevestiging rvo-icon--hemelblauw rvo-link__icon--before"
                   role="img"
                   aria-label="Pijl naar rechts"></span>
-            {% trans %}Mail us:{% endtrans %} <a href="mailto:digigilde@rijksoverheid.nl" class="rvo-link">digigilde@rijksoverheid.nl</a>
+            {% trans %}Mail us:{% endtrans %} <a href="mailto:digigilde@rijksoverheid.nl"
+    class="rvo-link">digigilde@rijksoverheid.nl</a>
           </span>
           <span class="rvo-layout-column rvo-layout-align-content-center rvo-layout-row rvo-layout-gap--2xs">
             <span class="utrecht-icon rvo-icon rvo-icon-bevestiging rvo-icon--md rvo-status-icon-bevestiging rvo-icon--hemelblauw rvo-link__icon--before"
