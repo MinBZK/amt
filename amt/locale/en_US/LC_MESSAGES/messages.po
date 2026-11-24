@@ -994,11 +994,11 @@ msgstr "Start documenting your algorithms today"
 
 #: amt/site/templates/pages/landingpage.html.j2:121
 msgid ""
-"Get started in 5 minutes with direct access via Single Sign On Rijk, "
-"Github or email"
+"Get started in 5 minutes with direct access via Single Sign On Rijk or "
+"email"
 msgstr ""
-"Get started in 5 minutes with direct access via Single Sign On Rijk, "
-"Github or email"
+"Get started in 5 minutes with direct access via Single Sign On Rijk or "
+"email"
 
 #: amt/site/templates/pages/landingpage.html.j2:127
 msgid "Personal demo available"

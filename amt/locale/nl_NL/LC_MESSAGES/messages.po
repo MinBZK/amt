@@ -1016,11 +1016,11 @@ msgstr "Begin vandaag nog met het documenteren van je algoritmes"
 
 #: amt/site/templates/pages/landingpage.html.j2:121
 msgid ""
-"Get started in 5 minutes with direct access via Single Sign On Rijk, "
-"Github or email"
+"Get started in 5 minutes with direct access via Single Sign On Rijk or "
+"email"
 msgstr ""
-"Start binnen 5 minuten met directe toegang via Single Sign On Rijk, "
-"Github of e-mail"
+"Start binnen 5 minuten met directe toegang via Single Sign On Rijk of "
+"e-mail"
 
 #: amt/site/templates/pages/landingpage.html.j2:127
 msgid "Personal demo available"
